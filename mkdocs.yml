@@ -1,0 +1,67 @@
+pages:
+  - Home: 'index.md'
+  - Demo:
+      - 'Example': 'demo/demo.md'
+  - Data:
+      - 'Analytics': 'data/analytics/analytics.md'
+      - 'Management': 'data/management/management.md'
+      - 'Transfer': 'data/transfer/transfer.md'
+      - 'Visualization': 'data/visualization/visualization.md'
+  - Performance:      
+      - 'case-studies': 'performance/case-studies/case-studies.md'
+      - 'optimization': 'performance/optimization/optimization.md'
+      - 'variability': 'performance/variability/variability.md'
+  - Services:
+      - 'jupyter': 'services/jupyter.md'
+      - 'nx': 'services/nx.md'
+      - 'science-gateways': 'services/science-gateways.md'
+      - 'API': 'services/api.md'
+  - Software:
+      - 'analytics': 'software/analytics/analytics.md'
+      - Applications:
+          - 'NAMD': 'software/applications/namd/namd.md'
+      - 'environment': 'software/environment/environment.md'
+      - 'tools': 'software/tools/tools.md'
+  - Systems:
+      - 'cori': 'systems/cori/cori.md'
+      - 'edison': 'systems/edison/edison.md'
+      - 'slurm': 'systems/slurm/slurm.md'
+      - 'storage': 'systems/storage/storage.md'
+  - Tutorials:
+      - 'getting-started': 'tutorials/getting-started/getting-started.md'
+          
+site_name: NERSC Technical Documentation
+site_favicon: 'img/favicon.ico'
+site_description: NERSC Technical Documentation
+site_author: NERSC
+markdown_extensions:
+  - admonition
+  - codehilite(guess_lang=false)
+  - toc(permalink=true)
+  - pymdownx.arithmatex
+  - pymdownx.betterem(smart_enable=all)
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:pymdownx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols(fractions=false)
+  - pymdownx.superfences
+  - pymdownx.tasklist(custom_checkbox=true)
+  - pymdownx.tilde
+  - markdown_include.include:
+      base_path: docs
+theme: 'material'
+theme_dir: custom_theme
+extra:
+  feature:
+    tabs: true
+  palette:
+    primary: 'cyan'
+    accent: 'green'
+  logo: 'img/logo.png'
+extra_javascript:
+  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+strict: true
