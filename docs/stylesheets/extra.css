@@ -1,0 +1,7 @@
+.md-nav {
+    background: rgb(247,247,247);
+}
+
+.md-nav__link.md-nav__link--active {
+    font-weight: bold;
+}	       
