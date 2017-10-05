@@ -2,6 +2,7 @@ pages:
   - Home: 'index.md'
   - Demo:
       - 'Example': 'demo/demo.md'
+      - 'Example 2': 'demo/demo2.md'
   - Data:
       - 'Analytics': 'data/analytics/analytics.md'
       - 'Management': 'data/management/management.md'
@@ -60,8 +61,10 @@ extra:
     tabs: true
   palette:
     primary: 'cyan'
-    accent: 'green'
+    accent: 'cyan'
   logo: 'img/logo.png'
 extra_javascript:
   - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+extra_css:
+  - 'stylesheets/extra.css'
 strict: true
