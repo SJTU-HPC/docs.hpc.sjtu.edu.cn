@@ -1,4 +1,4 @@
 mkdocs==0.16.3
-mkdocs-material==1.10.1
+mkdocs-material==1.10.2
 markdown-include==0.5.1
 pymdown-extensions==3.5
