@@ -1,4 +1,4 @@
 mkdocs==0.16.3
-mkdocs-material==1.10.2
+-e git://github.com/NERSC/mkdocs-material.git@nersc-customization#egg=mkdocs-material
 markdown-include==0.5.1
 pymdown-extensions==3.5
