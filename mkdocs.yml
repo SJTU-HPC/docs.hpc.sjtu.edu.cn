@@ -55,13 +55,12 @@ markdown_extensions:
   - markdown_include.include:
       base_path: docs
 theme: 'material'
-theme_dir: custom_theme
 extra:
   feature:
     tabs: true
   palette:
-    primary: 'cyan'
-    accent: 'cyan'
+    primary: 'mute-turquoise'
+    accent: 'orange'
   logo: 'img/logo.png'
 extra_javascript:
   - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
