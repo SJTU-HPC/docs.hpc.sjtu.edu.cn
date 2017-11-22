@@ -32,7 +32,6 @@ pages:
       - 'getting-started': 'tutorials/getting-started/getting-started.md'
           
 site_name: NERSC Technical Documentation
-site_favicon: 'img/favicon.ico'
 site_description: NERSC Technical Documentation
 site_author: NERSC
 markdown_extensions:
@@ -54,8 +53,8 @@ markdown_extensions:
   - pymdownx.tilde
   - markdown_include.include:
       base_path: docs
-theme: 'material'
-extra:
+theme:
+  name: 'material'
   feature:
     tabs: true
   palette:
