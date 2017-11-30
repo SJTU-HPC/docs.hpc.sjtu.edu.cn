@@ -1,35 +1,110 @@
 pages:
   - Home: 'index.md'
-  - Demo:
-      - 'Example': 'demo/demo.md'
-      - 'Example 2': 'demo/demo2.md'
+  - Accounts:
+      - 'Accounts' : 'accounts/accounts.md'
   - Data:
-      - 'Analytics': 'data/analytics/analytics.md'
-      - 'Management': 'data/management/management.md'
-      - 'Transfer': 'data/transfer/transfer.md'
-      - 'Visualization': 'data/visualization/visualization.md'
-  - Performance:      
-      - 'case-studies': 'performance/case-studies/case-studies.md'
-      - 'optimization': 'performance/optimization/optimization.md'
-      - 'variability': 'performance/variability/variability.md'
+      - 'Analytics' : 'data/analytics.md'
+      - 'Management' : 'data/management.md'
+      - 'Transfer' : 'data/transfer.md'
+      - 'Visualization' : 'data/visualization.md'
+      - Storage:
+          - 'Best Practices' : 'data/storage/best-practices.md'
+          - 'Filesystems' : 'data/storage/filesystems.md'
+          - 'Formats' : 'data/storage/formats.md'
+  - Performance:
+    - 'Optimization strategy' : 'performance/optimization-strategy.md'
+    - 'Vectorization' : 'performance/vectorization.md'
+    - 'Profiling' : 'performance/profiling.md'
+    - 'IO' : 'performance/io.md'
+    - 'Portability': 'performance/portability.md'
+    - Case Studies:
+        - 'MFDn' : 'performance/case-studies/mfdn.md'
   - Services:
-      - 'jupyter': 'services/jupyter.md'
-      - 'nx': 'services/nx.md'
-      - 'science-gateways': 'services/science-gateways.md'
-      - 'API': 'services/api.md'
+      - 'Science Gateways' : 'services/science-gateways.md'
+      - 'NEWT' : 'services/newt.md'
+      - 'Jupyter' : 'services/jupyter.md'
+      - 'NX' : 'services/NX.md'
+  - Slurm Jobs:
+    - 'Batch' : 'jobs/batch.md'
+    - 'Interactive' : 'jobs/interactive.md'
+    - 'Best Practices' : 'jobs/best-practices.md'
+    - 'Serial Jobs' : 'jobs/serial.md'      
   - Software:
-      - 'analytics': 'software/analytics/analytics.md'
-      - Applications:
-          - 'NAMD': 'software/applications/namd/namd.md'
-      - 'environment': 'software/environment/environment.md'
-      - 'tools': 'software/tools/tools.md'
+    - 'Environment' : 'software/environment.md'
+    - 'Shifter' : 'software/shifter.md'
+    - Applications:
+        - 'VASP' : 'software/applications/vasp.md'
+        - 'NAMD' : 'software/applications/namd.md'
+    - 'Developer Tools' : 'software/developer-tools.md'
+    - 'Workflow Tools' : 'software/workflow-tools.md'
+    - 'Analytics' : 'software/analytics.md'
+    - 'Compilers' : 'software/compilers.md'
+    - High-level Programming Environments:
+        - 'Python' : 'software/high-level-environments/python.md'
+        - 'Julia' : 'software/high-level-environments/julia.md'
+        - 'Matlab' : 'software/high-level-environments/matlab.md'
+    - Programming Models:
+        - 'MPI' : 'software/programming-models/mpi.md'
+        - 'OpenMP' : 'software/programming-models/openmp.md'
+        - 'UPC++' : 'software/programming-models/upcxx.md'
+        - 'Chapel' : 'software/programming-models/chapel.md'
+        - 'Kokkos' : 'software/programming-models/kokkos.md'
+        - 'Raja' : 'software/programming-models/raja.md'
+        - 'Coarrays' : 'software/programming-models/coarrays.md'        
+    - Libraries:      
+        - 'MKL' : 'software/libraries/mkl.md'
+        - 'FFTW' : 'software/libraries/fftw.md'
+        - 'LibSci' : 'software/libraries/libsci.md'
   - Systems:
-      - 'cori': 'systems/cori/cori.md'
-      - 'edison': 'systems/edison/edison.md'
-      - 'slurm': 'systems/slurm/slurm.md'
-      - 'storage': 'systems/storage/storage.md'
+      - 'Cori' : 'systems/cori.md'
+      - 'Edison' : 'systems/edison.md'
+      - 'PDSF' : 'systems/pdsf.md'        
+      - 'Genepool' : 'systems/genepool.md'
+  - Community:
+    - PDSF:        
+        - 'credentials' : 'pdsf/credentials.md'
+    - JGI:
+        - 'Pipelines' : 'jgi/pipelines.md'
   - Tutorials:
-      - 'getting-started': 'tutorials/getting-started/getting-started.md'
+    - 'Demo' : 'demo/demo.md'  
+    
+#  - Accounts: 'accounts/password-reset.md'
+#  - Data:
+#    - 'Management' : 'data/management/management.md'
+#    - 'Demo' : 'demo/demo.md'
+#  - Home:
+#      - 'index.md'
+#      - 'Example2': 'demo/demo2.md'
+#  - Demo:
+#      - 'Example': 'demo/demo.md'
+#      - 'Example 2': 'demo/demo2.md'
+#  - Data:
+#      - 'Analytics': 'data/analytics/analytics.md'
+#      - 'Management': 'data/management/management.md'
+#      - 'Transfer': 'data/transfer/transfer.md'
+#      - 'Visualization': 'data/visualization/visualization.md'
+#  - Performance:      
+#      - 'case-studies': 'performance/case-studies/case-studies.md'
+#      - 'optimization': 'performance/optimization/optimization.md'
+#      - 'variability': 'performance/variability/variability.md'
+#  - Services:
+#      - 'jupyter': 'services/jupyter.md'
+#      - 'nx': 'services/nx.md'
+#      - 'science-gateways': 'services/science-gateways.md'
+#      - 'API': 'services/api.md'
+#  - Software:
+#      - 'analytics': 'software/analytics/analytics.md'
+#      - Applications:
+#          - 'NAMD': 'software/applications/namd/namd.md'
+#      - 'environment': 'software/environment/environment.md'
+#      - 'tools': 'software/tools/tools.md'
+#  - Systems:
+#      - 'cori': 'systems/cori/cori.md'
+#      - 'edison': 'systems/edison/edison.md'
+#      - 'slurm': 'systems/slurm/slurm.md'
+#      - 'storage': 'systems/storage/storage.md'
+#  - Tutorials:
+#      - 'getting-started': 'tutorials/getting-started/getting-started.md'
           
 site_name: NERSC Technical Documentation
 site_description: NERSC Technical Documentation
