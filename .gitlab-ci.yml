@@ -5,9 +5,11 @@ pages:
   script:
   - pip install -r requirements.txt
   - mkdocs --verbose build
-  - gzip -k -6 -r public/assets/stylesheets
-  - gzip -k -6 -r public/assets/javascript
   - ls -l public
+  - pwd  
+  - "gzip -k -6 -r public/assets/stylesheets"
+  - gzip -k -6 -r public/assets/javascript
+
   artifacts:
     paths:
     - public
