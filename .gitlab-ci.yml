@@ -9,9 +9,9 @@ pages:
   - ls -l public/assets
   - gzip -k -6 -r public/assets/stylesheets
   - gzip -k -6 -r public/assets/javascripts
-  - find public -type file -name "*.html"
-  - find public -type file -name "*.html" -exec htmlmin {} {} \;
-  - find public -type file -name "*.html" -exec gzip --keep --verbose {} \;
+  - find public -type f -name "*.html"
+  - find public -type f -name "*.html" -exec htmlmin {} {} \;
+  - find public -type f -name "*.html" -exec gzip --keep --verbose {} \;
   artifacts:
     paths:
     - public
