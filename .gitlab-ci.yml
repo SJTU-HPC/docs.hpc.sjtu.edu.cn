@@ -6,8 +6,8 @@ pages:
   - pip install -r requirements.txt
   - mkdocs --verbose build
   - ls -l public
-  - pwd  
-  - "gzip -k -6 -r public/assets/stylesheets"
+  - ls -l public/assets
+  - gzip -k -6 -r public/assets/stylesheets
   - gzip -k -6 -r public/assets/javascript
 
   artifacts:
