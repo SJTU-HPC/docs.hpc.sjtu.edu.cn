@@ -8,7 +8,7 @@ pages:
   - ls -l public
   - ls -l public/assets
   - gzip -k -6 -r public/assets/stylesheets
-  - gzip -k -6 -r public/assets/javascript
+  - gzip -k -6 -r public/assets/javascripts
 
   artifacts:
     paths:
