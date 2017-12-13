@@ -23,7 +23,7 @@ pages:
       - 'Science Gateways' : 'services/science-gateways.md'
       - 'NEWT' : 'services/newt.md'
       - 'Jupyter' : 'services/jupyter.md'
-      - 'NX' : 'services/NX.md'
+      - 'NX' : 'services/nx.md'
   - Slurm Jobs:
     - 'Batch' : 'jobs/batch.md'
     - 'Interactive' : 'jobs/interactive.md'
