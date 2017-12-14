@@ -1,23 +1,24 @@
 image: python:2.7
 
 stages:
-  - build
+  - test
   - deploy
-
-
-build_pages:
+  
+test:
   stage: build
   script:
     - pip install -r requirements.txt
     - mkdocs --verbose build
+    - ls -l public
+  except:
+    - master
   
-deploy_pages:
+pages:
   stage: deploy
   script:
-#  - pip install -r requirements.txt
-#  - mkdocs --verbose build
+  - pip install -r requirements.txt
+  - mkdocs --verbose build
   - ls -l public
-  - ls -l public/assets
   - gzip -k -6 -r public/assets/stylesheets
   - gzip -k -6 -r public/assets/javascripts
   - find public -type f -name "*.html"
