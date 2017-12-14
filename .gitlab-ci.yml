@@ -1,10 +1,21 @@
 image: python:2.7
 
-pages:
+stages:
+  - build
+  - deploy
+
+
+build_pages:
+  stage: build
+  script:
+    - pip install -r requirements.txt
+    - mkdocs --verbose build
+  
+deploy_pages:
   stage: deploy
   script:
-  - pip install -r requirements.txt
-  - mkdocs --verbose build
+#  - pip install -r requirements.txt
+#  - mkdocs --verbose build
   - ls -l public
   - ls -l public/assets
   - gzip -k -6 -r public/assets/stylesheets
