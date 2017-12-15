@@ -195,13 +195,14 @@ DDT has a memory debugging tool that can show heap memory usage across processor
 To access the memory debugging feature, you must first build your code for memory debugging. On Edison and Cori, you have to follow certain steps. Below is a table showing steps for building a static executable using different compilers for memory debugging on Edison and Cori. For the compilers other than PGI, the linking step is made of two parts. The first is to run in verbose mode using the -v flag to show all the linking steps taken. The second step is to rerun the last linker line after inserting some more options.
 
 | Compiler	| For static linking |
+|---------------|:------------------:|
 | GNU	|
 ```bash
 % ftn -g -c prog.f
 % ftn -v -o prog prog.o          # -v to get the last linker line
-```
+``` <br>
 
-Rerun the last linker line after inserting '-zmuldefs' right after the command and putting ${DDT_LINK_DMALLOC} just before -lc:
+Rerun the last linker line after inserting '-zmuldefs' right after the command and putting ${DDT_LINK_DMALLOC} just before -lc: <br>
 
 ```bash
 % /opt/gcc/4.7.1/snos/libexec/gcc/x86_64-suse-linux/4.7.1/collect2 -zmuldefs ... ${DDT_LINK_DMALLOC} -lc ...
@@ -262,12 +263,18 @@ Below is a table showing how to prepare your code using dyanmic linking on Ediso
 
 Compiler	For dynamic linking
 PGI, Cray	
+
+```bash
 % ftn -g -c prog.f
 % ftn -dyanmic -o prog prog.o ${DDT_LINK_DMALLOC} --Wl,--allow-multiple-definition
+```
 
 GNU, Intel	
+
+```bash
 % ftn -g -c prog.f
 % ftn -dynamic -o prog.o ${DDT_LINK_DMALLOC} -zmuldefs
+```
 
 For multi-threaded codes, ${DDT_LINK_DMALLOCTH} or ${DDT_LINK_DMALLOCTHCXX} should be used instead.
 
@@ -416,3 +423,6 @@ ddt --offline -o offline.html --np=4 --trace-at=sub,i,a\(1\) --break-at=offline.
 ```
 
 The output file is broken into three sections: Messages (showing process activities such as startup and termination etc., as well as call backtrace at breakpoints), Tracepoints (showing output from activated tracepoints), and Output (program output).
+
+## Introductory Video Tutorial
+
