@@ -1,7 +1,8 @@
-# Lorem
+# Python
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a
-liquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu
-m dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
- officia deserunt mollit anim id est laborum.
+Python is an interpreted, general-purpose high-level programming language. Python is available to Cori and Edison users through the Anaconda distribution. 
+Using Python at NERSC requires at least one "module load" command. 
+Using the system-provided Python (from /usr/bin) is strongly discouraged except for the simplest tasks, as it can be a much older version of Python than that provided by NERSC for users.
+
+Python users may also be interested in the experimental IPython/Jupyter notebook web application service.
+
