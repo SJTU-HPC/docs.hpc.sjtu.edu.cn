@@ -1,44 +1,25 @@
-# NERSC User Environment
+# Environment and Modules
 
-## Home Directories, Shells and Dotfiles 
+## NERSC User Enviroment
+### Home Directories, Shells and Dotfiles 
 
 All NERSC systems use global home directories, which are are pre-populated 
 with shell initialization files (also known as dotfiles) for all available 
 shells. NERSC fully supports `bash`, `csh`, and `tcsh` as login shells. Other shells 
 (`ksh`, `sh`, and `zsh`) are also available. The default shell at NERSC is bash.  
 
-## Dotfiles 
+### Dotfiles 
 The "standard" dotfiles are symbolic links to read-only files that NERSC 
 controls. For each standard dotfile, there is a user-writeable ".ext" file.
-For example, C-shell users are generall concerned with the files .login and
+For example, C-shell users are generally concerned with the files .login and
 .cshrc, which are read-only NERSC. These users should put their customizations 
 in .login.ext and .cshrc.ext.  
 
-Users may have certain customizations that are appropriate for one NERSC platform,
-but not for others. This can be accomplished by testing the value of the
-environment variable `$NERSC_HOST`. For example, on Edison and Cori the default 
-programming environment is Intel (PrgEnv-Intel). A C-shell user who wants to
-use the `GNU` programming environment should include the following module 
-command in their `.cshrc.ext` file:  
-
-### Edison version  
-```bash
-if ($NERSC_HOST == "edison") then
-  module swap PrgEnv-intel PrgEnv-gnu
-endif
-```
-
-### Cori version
-```bash
-if ($NERSC_HOST == "cori") then
-  module swap PrgEnv-intel PrgEnv-gnu
-endif
-```
 
 ### Fixing Dotfiles  
-Ocassionally, a user will accidentally delete the symbolic links to the standard
-dotfiles, or otherwise damange the dotfiles to the point that it becomes
-difficult to do anything. In this case, the user should runt he command
+Occasionally, a user will accidentally delete the symbolic links to the standard
+dotfiles, or otherwise damage the dotfiles to the point that it becomes
+difficult to do anything. In this case, the user should run the command
 `fixdots`. This will recreate the original dotfile configuration, after first
 saving the current configuration in the directory `$HOME/KeepDots.timestamp`
 is a string that includes the current date and time. After running `fixdots`,
@@ -52,15 +33,18 @@ from the **Actions** pull-down menu.
 ## NERSC Modules Environment
 NERSC uses the module utility to manage nearly all software. There are two
 huge advantages of the module approach:  
-1. NERSC can provide many different versions and/or installations of a single
-software pacakge on a given machine, including a default version as well as 
-several older and newer version.
 
+1. NERSC can provide many different versions and/or installations of a single
+software package on a given machine, including a default version as well as 
+several older and newer version.  
 2. Users can easily switch to different versions or installations without
 having to explicitly specify different paths. With modules, the `MANPATH` and
 related environment variables are automatically managed. 
 
 ### Module Command 
+The following is a list of commands available in the Modules Environment tool
+available on Cori and Edison.
+
 #### module help  
 To get a usage list of module options type the following (listing is abbreviated):  
 ```bash
@@ -84,5 +68,78 @@ To get a usage list of module options type the following (listing is abbreviated
 
 #### module avail
 ```bash
+   # To get all available packages
    module avail
+
+   # To know the availability of a specific software
+   module avail netcdf
+
+   # To know all packages that contain a substring, use -S flag.
+   module avail -S netcdf
+```
+
+#### module display
+To see what changes are made to your environment when a module is loaded:  
+```bash
+    module display [modulefile]
+
+    # Synonymous with the following command
+    module show [modulefile]
+``` 
+
+#### module load
+This command will add one or more modulefiles to your current environment.
+It does so silently, but will throw errors if there are any problems with
+the modulefile. If you load the generic name of a module, you will get the
+default version. To load a specific version, load the modulefile using
+the full specification.  
+```bash
+   module load [modulefile1][modulefile2]
+
+   # Load visit
+   module load visit
+
+   # Load visit version 2.1.2
+   module load visit/2.1.2
+```
+
+#### module unload
+Unloads the specified modulefile from the user's environment. This command
+will fail silently if the modulefile you specify is not already loaded.  
+```bash
+   module unload [modulefile]
+```
+
+#### module swap
+The modules environment allows you to *swap* between versions of packages
+```bash
+   module swap [old modulefile] [new modulefile]
+```
+
+### Creating a Custom Environment
+You can modify your environment so that certain modules are loaded whenever
+you log in. Put changes in one of the following files, depending on your shell:
+
+- `.cshrc.ext` or `.tcshrc.ext`
+- `.bashrc.ext`  
+
+Users may have certain customizations that are appropriate for one NERSC platform,
+but not for others. This can be accomplished by testing the value of the
+environment variable `$NERSC_HOST`. For example, on Edison and Cori the default 
+programming environment is Intel (PrgEnv-Intel). A C-shell user who wants to
+use the `GNU` programming environment should include the following module 
+command in their `.cshrc.ext` file:  
+
+**Edison version**
+```bash
+if ($NERSC_HOST == "edison") then
+  module swap PrgEnv-intel PrgEnv-gnu
+endif
+```
+
+**Cori version**
+```bash
+if ($NERSC_HOST == "cori") then
+  module swap PrgEnv-intel PrgEnv-gnu
+endif
 ```
