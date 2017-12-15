@@ -50,7 +50,7 @@ the project PI or one of their proxies must add you. In this case, you cannot
 add yourself to the project.
 
 
-## Resetting Passwords
+## Resetting passwords
 
 If you forget your password or if it has recently expired, and you have
 previously answered your NIM security questions, you can reset your password
