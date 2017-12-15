@@ -30,6 +30,7 @@ G09 can be used on Cori Phase 1 by utilizing Cray Compatibility Mode and Shifter
 
 Use the following syntax in your batch script:
 
+```
 #!/bin/bash -l
 #SBATCH -p debug
 #SBATCH -N 2
@@ -40,11 +41,13 @@ cd $SLURM_SUBMIT_DIR
 module load g09
 
 g09launch < test.com > test.out
+```
 
 Each Cori Phase 1 node has 32 cores. In general, choose nproclinda to the number of nodes you want to run on, and nprocshared to 32. Please run all your calculations out of a sub-folder under your $SCRATCH directory. Please do not run calculations in your home directory area.
 
 Gaussian 16 is now available on Cori as well. It should be used as follows:
 
+```
 #!/bin/bash -l
 #SBATCH -p debug
 #SBATCH -N 2
@@ -55,13 +58,14 @@ cd $SLURM_SUBMIT_DIR
 module load g16
 
 g16launch < test.com > test.out
-
+```
  
 
 # Using Gaussian 09 on Edison
 
 A similar batch script to Cori is required. However, pay attention to the "--ccm" line and the need to load the shifter module.
 
+```
 #!/bin/bash -l
 #SBATCH -p debug
 #SBATCH -N 2
@@ -72,7 +76,7 @@ cd $SLURM_SUBMIT_DIR
 module load g09 shifter
 
 g09launch < test.com > test.out
-
+```
  
 
 # Notes on Memory and Storage:
@@ -83,13 +87,18 @@ Using shared memory parallel execution can save a lot of disk space usage (rough
 
 For a one-node job (eight cores) use, for example, something like:
 
+```
 %mem=16gb
 %nprocshared=8
 and for multiple nodes job (for example, two nodes), use something like:
+```
 
+```
 %mem=16gb
 %NProcShared=8
 %NProcLinda=2
+```
+
 The parameter NProcLinda should equal the number of nodes used for your job. The total number of the processors used to run the g09 job is NProcLinda X NProcShared.
 
 For very large jobs, you might consider setting two Gaussian09 parameters, %Mem and %MaxDisk, that affect the amount of memory and disk, respectively, in order to produce good general performance. For the types of calculations that obey %MaxDisk, the disk usage will be kept below this value. See the Gaussian Efficiency Considerations web page for details. There are some examples in the directory $g09root/g09/tests/com.
@@ -98,17 +107,6 @@ When using multiple processors with shared memory, a good estimate of the memory
 
 When setting %mem, remember that some memory will be used by the operating system. Also Gaussian needs some memory on top of what you reserve for data with %mem. So for example on Edison, of 64GB memory on the node, about 61GB is available to jobs. Gaussian will use a few GB more, so if you set %mem much higher than about 55GB, it may fail due to being unable to allocate memory.
 
-Special Memory Notes for Carver:
-
-We have set memory limits (soft limit 2.5Gb, hard 20Gb) on Carver compute nodes to protect the nodes from crashes due to using too much memory.  As a result, g09 jobs that request more than 2.5Gb memory through the %mem key word will fail. The error message you will see is "galloc: could not allocate memory."
-
-The workaround, if you use bash or if your gaussian job script uses the bash shell, is to add the following in your batch script (submit file):
-
-ulimit -v 20971520
-If you use a csh job script, put the following in your batch script (submit file):
-
-limit vmemoryuse unlimited
-Make sure to put the above IF blocks after the NERSC_HOST is set in your dot files.
 
 # Documentation
 
