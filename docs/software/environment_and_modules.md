@@ -49,7 +49,7 @@ newly-created .ext files.
 Use **NIM** to change your default login shell. Login, then select **Change Shell**
 from the **Actions** pull-down menu.  
 
-# NERSC Modules Environment
+## NERSC Modules Environment
 NERSC uses the module utility to manage nearly all software. There are two
 huge advantages of the module approach:  
 1. NERSC can provide many different versions and/or installations of a single
@@ -60,8 +60,8 @@ several older and newer version.
 having to explicitly specify different paths. With modules, the `MANPATH` and
 related environment variables are automatically managed. 
 
-## Module Command 
-### module help  
+### Module Command 
+#### module help  
 To get a usage list of module options type the following (listing is abbreviated):  
 ```bash
   module help
@@ -77,17 +77,12 @@ To get a usage list of module options type the following (listing is abbreviated
      + help            modulefile [modulefile …]
 ```
 
-### module list
+#### module list
 ```bash
    module list
 ```
 
-### module avail
+#### module avail
 ```bash
    module avail
 ```
-
-
-### Using Modules to Manage Access to Software
-Access to much NERSC software is provided by the modules environments. Simply
-`module load` and `module unload` modules for the software you need.
