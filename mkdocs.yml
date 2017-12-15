@@ -55,6 +55,10 @@ pages:
         - 'MKL' : 'software/libraries/mkl.md'
         - 'FFTW' : 'software/libraries/fftw.md'
         - 'LibSci' : 'software/libraries/libsci.md'
+    - Performance and Debugging Tools:
+        - 'DDT' :
+        - 'TotalView' :
+        - 'GDB' :
   - Systems:
       - 'Cori' : 'systems/cori.md'
       - 'Edison' : 'systems/edison.md'
