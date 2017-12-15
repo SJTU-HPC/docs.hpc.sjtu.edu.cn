@@ -194,6 +194,8 @@ DDT has a memory debugging tool that can show heap memory usage across processor
 
 To access the memory debugging feature, you must first build your code for memory debugging. On Edison and Cori, you have to follow certain steps. Below is a table showing steps for building a static executable using different compilers for memory debugging on Edison and Cori. For the compilers other than PGI, the linking step is made of two parts. The first is to run in verbose mode using the -v flag to show all the linking steps taken. The second step is to rerun the last linker line after inserting some more options.
 
+NEED TO WORK ON TABLES!!!
+
 | Compiler	| For static linking |
 |---------------|:------------------:|
 | GNU	|
