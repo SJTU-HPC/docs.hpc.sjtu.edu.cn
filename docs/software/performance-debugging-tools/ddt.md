@@ -374,19 +374,19 @@ ddt --offline -o filename      --np=4 myprogram arg1 ... # to get plain text out
 $ sbatch runit
 ```
 
-Please note that we are using 'ddt -offline ...' in place of 'srun' or 'mpirun' for launching an application. Output of the debugging session is saved in the specified file ('filename.html' or 'filename' in the above example).
+Please note that we are using '`ddt -offline ...`' in place of '`srun`' or '`mpirun`' for launching an application. Output of the debugging session is saved in the specified file ('`filename.html`' or '`filename`' in the above example).
 
 Some options can be used for the ddt command:
 
-- --session=sessionfile: run using settings saved using the Save Session option during a previous GUI run session
+- `--session=sessionfile`: run using settings saved using the Save Session option during a previous GUI run session
 
-- --np=numTasks: run with numTasks (MPI) tasks
+- `--np=numTasks`: run with numTasks (MPI) tasks
 
-- --mem-debug: enable memory debugging
+- `--mem-debug`: enable memory debugging
 
-- --trace-at=LOCATION[,N:M,P],VAR1,VAR2,... [if CONDITION]: set a tracepoint at location LOCATION (given by either 'filename:linenumber' or 'functionname' as in 'main.c:22' or 'myfunction'), beginning recording after the N-th visit of each process to the location, and recording every M-th subsequent pass until it has been triggered P times; record the value of variable VAR1, VAR2, ...; the if clause allows to specify a boolean CONDITION that must be satisfied to trigger the tracepoint
+- `--trace-at=LOCATION[,N:M,P],VAR1,VAR2,... [if CONDITION]`: set a tracepoint at location `LOCATION` (given by either '`filename:linenumber`' or '`functionname`' as in '`main.c:22`' or '`myfunction`'), beginning recording after the N-th visit of each process to the location, and recording every M-th subsequent pass until it has been triggered P times; record the value of variable `VAR1`, `VAR2`, ...; the if clause allows to specify a boolean `CONDITION` that must be satisfied to trigger the tracepoint
 
-- --break-at=LOCATION[,N:M:P] [if CONDITION]: set a breakpoint at a location using the format explained above; the stack back traces of pausing processes will be recorded at the breakpoint before they are then made to continue
+- `--break-at=LOCATION[,N:M:P] [if CONDITION]`: set a breakpoint at a location using the format explained above; the stack back traces of pausing processes will be recorded at the breakpoint before they are then made to continue
 
 An example using the following simple code is shown below:
 
