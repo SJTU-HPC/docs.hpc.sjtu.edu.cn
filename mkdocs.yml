@@ -19,6 +19,7 @@ pages:
     - 'Portability': 'performance/portability.md'
     - Case Studies:
         - 'MFDn' : 'performance/case-studies/mfdn.md'
+        - 'EMGeo' : 'performance/case-studies/emgeo/emgeo.md'
   - Services:
       - 'Science Gateways' : 'services/science-gateways.md'
       - 'NEWT' : 'services/newt.md'
