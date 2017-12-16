@@ -18,8 +18,9 @@ pages:
     - 'IO' : 'performance/io.md'
     - 'Portability': 'performance/portability.md'
     - Case Studies:
-        - 'MFDn' : 'performance/case-studies/mfdn.md'
         - 'EMGeo' : 'performance/case-studies/emgeo/emgeo.md'
+        - 'MFDn' : 'performance/case-studies/mfdn.md'
+        - 'Quantum ESPRESSO Exact Exchange' : 'performance/case-studies/quantum-espresso/quantum-espresso.md'
   - Services:
       - 'Science Gateways' : 'services/science-gateways.md'
       - 'NEWT' : 'services/newt.md'
