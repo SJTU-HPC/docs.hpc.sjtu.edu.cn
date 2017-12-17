@@ -92,7 +92,8 @@ markdown_extensions:
   - markdown_include.include:
       base_path: docs
 theme:
-  name: 'material'
+  name: material
+  custom_dir: material
   feature:
     tabs: false
   palette:
