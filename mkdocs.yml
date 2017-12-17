@@ -94,6 +94,7 @@ markdown_extensions:
 theme:
   name: material
   custom_dir: material
+  favicon: img/favicon.ico
   feature:
     tabs: false
   palette:
