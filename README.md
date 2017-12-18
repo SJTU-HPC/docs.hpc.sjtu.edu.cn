@@ -2,7 +2,7 @@
 
 ## About
 
-This repository contains NERSC technical documentation written in Markdown which is converted to html/css/js with the [mkdocs](http://www.mkdocs.org) static site generator. This file mainly describes how to contribute.
+This repository contains NERSC technical documentation written in Markdown which is converted to html/css/js with the [mkdocs](http://www.mkdocs.org) static site generator. The [theme](https://gitlab.com/NERSC/mkdocs-material) is a fork of [mkdocs-material](https://github.com/squidfunk/mkdocs-material) with NERSC customizations such as the colors.
 
 ## Rules
 
@@ -13,33 +13,76 @@ This repository contains NERSC technical documentation written in Markdown which
 
 ## Setup 
 
-Instructions to setup your local environment to allow for a live-reloading local server for development.
+### Prerequisites
 
-1.  Clone this repo
-1.  Create a new conda env/ virtualenv
-1.  `cd nersc-docs`
-1.  `pip install -r requirements.txt`
+1. Anaconda or Python virtual env
+2. git
+3. gitlab account
 
+### Clone the repo and install dependencies
 
-### Run a local server for a live preview of changes
+```shell
+git clone git@gitlab.com:NERSC/documentation.git
+cd documentation
+conda create -n docs pip
+source activate docs
+pip install -r requirements.txt
+```
 
-In the root directory of the repository run `mkdocs serve` and navigate your browser to the displayed address. Edits to source files will automatically trigger rebuilds of the site as needed.
+## How to
+
+### Edit with live preview
+
+Open a terminal session with the appropriate conda environment activated, navigate to the root directory of the repository (where `mkdocs.yml` is located) and run the command `mkdocs serve`. This will start a live-reloading local web server. You can then open [http://127.0.0.1:8000](http://127.0.0.1:8000) in a web browser to see your local copy of the site.
+
+In another terminal (or with a GUI editor) edit existing files, add new pages to `mkdocs.yml`, etc. As you save your changes the local web serve will automatically rerender and reload the site.
 
 ### Output a static site
 
 To build a self-contained directory containing the full html/css/js of the site:
 
-`mkdocs build`
+```
+mkdocs build
+```
 
-## How to make a new page
+### Contribute to the repo
 
-1.  Create a new branch `git checkout master && git branch my-new-page`
-1.  Create/edit your content
-1.  Edit the `mkdocs.yml` file to include your content in the site
-1.  Check that your new content is built properly and without errors
+#### Option 1
+
+Work with a branch of the main repo.
+
+1.  Make a new branch and call it something descriptive.
+
     ```shell
-	mkdocs build --clean --strict
-	```
-1.  Commit your changes
-1.  Submit a pull request for review
+    git checkout -b username/what_you_are_doing
+    ```
 
+2.  Create/edit your content
+3.  Commit your changes
+
+    ```
+    git commit -m 'describe what I did'
+    ```
+
+4.  Push your changes to gitlab
+
+    ```shell
+    git push
+    ```
+
+    Or if the branch doesn't exist on the gitlab repository yet
+
+    ```shell
+    git push --set-upstream origin username/my-new-feature
+    ```
+
+5.  Check if the continuous integration of your changes was successful
+6.  Submit a merge request to the master branch with your changes
+
+#### Option 2
+
+Make a fork of the repository and do all of your work on the fork. Submit a merge request through gitlab when you have made your changes.
+
+#### Option 3
+
+For some changes you do not need the full environment. It is possible to edit Markdown files directly on gitlab. This work should be in a private fork or branch and submitted as a merge request.
