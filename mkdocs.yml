@@ -68,10 +68,29 @@ pages:
     - JGI:
         - 'Pipelines' : 'jgi/pipelines.md'
   - Tutorials:
-    - 'Demo' : 'demo/demo.md'  
-site_name: NERSC Technical Documentation
-site_description: NERSC Technical Documentation
-site_author: NERSC
+    - 'Demo' : 'demo/demo.md'
+
+# Project Information    
+site_name: 'NERSC Documentation'
+site_description: 'NERSC Documentation'
+site_author: 'NERSC'
+site_dir: 'public'
+repo_name: 'NERSC/documentation'
+repo_url: 'https://gitlab.com/NERSC/documentation'
+
+# Configuration
+strict: true
+
+theme:
+  name: 'material'
+  custom_dir: 'material'
+  favicon: 'img/favicon.ico'
+  palette:
+    primary: 'mute-turquoise'
+    accent: 'orange'
+  logo: 'img/logo.png'
+
+# Extensions
 markdown_extensions:
   - admonition
   - codehilite(guess_lang=false)
@@ -90,20 +109,11 @@ markdown_extensions:
   - pymdownx.tasklist(custom_checkbox=true)
   - pymdownx.tilde
   - markdown_include.include:
-      base_path: docs
-theme:
-  name: material
-  custom_dir: material
-  favicon: img/favicon.ico
-  feature:
-    tabs: false
-  palette:
-    primary: 'mute-turquoise'
-    accent: 'orange'
-  logo: 'img/logo.png'
+      base_path: 'docs'
+
 extra_javascript:
   - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
 extra_css:
   - 'stylesheets/extra.css'
-strict: true
-site_dir: public
+
+
