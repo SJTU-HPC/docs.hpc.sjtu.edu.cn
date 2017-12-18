@@ -8,7 +8,7 @@ with shell initialization files (also known as dotfiles) for all available
 shells. NERSC fully supports `bash`, `csh`, and `tcsh` as login shells. Other shells 
 (`ksh`, `sh`, and `zsh`) are also available. The default shell at NERSC is bash.  
 
-### Dotfiles 
+#### Dotfiles 
 The "standard" dotfiles are symbolic links to read-only files that NERSC 
 controls. For each standard dotfile, there is a user-writeable ".ext" file.
 For example, C-shell users are generally concerned with the files .login and
@@ -16,7 +16,7 @@ For example, C-shell users are generally concerned with the files .login and
 in .login.ext and .cshrc.ext.  
 
 
-### Fixing Dotfiles  
+##### Fixing Dotfiles  
 Occasionally, a user will accidentally delete the symbolic links to the standard
 dotfiles, or otherwise damage the dotfiles to the point that it becomes
 difficult to do anything. In this case, the user should run the command
@@ -143,3 +143,37 @@ if ($NERSC_HOST == "cori") then
   module swap PrgEnv-intel PrgEnv-gnu
 endif
 ```
+
+### Install Your Own Customized Modules
+You can create and install your own modules for your convenience or for sharing
+software among collaborators. The module definition files can be placed in the 
+following locations:   
+
+  - project directory
+  - your home directory
+  - available file system.  
+
+Make sure the **UNIX** file permissions grant access to all users who want to
+use the software.  
+
+!!!warning
+Do not give write permissions to your home directory to anyone else.
+
+As an example, we have modulefile named *myzlb* located in
+
+`/global/project/projectdirs/mpccc/usg/modulefiles/cori`  
+
+To register this modulefile with our modules environment we run the following commands:  
+
+```bash
+   module use /global/project/projectdirs/mpccc/usg/modulefiles/cori
+   module load myzlib/1.2.7
+```
+Note that the `module use` command adds this new directory before other
+module search paths (defined as `$MODULEPATH`), so modules defined in this
+custom directory will have precedence if there are other modules with the 
+same name in the module search paths. If you prefer to have the new directory
+added at the end of `$MODULEPATH`, use `module use -a` instead of `module use`. 
+
+Please contact **NERSC consultants** if you need further help in creating your
+own modules.  
