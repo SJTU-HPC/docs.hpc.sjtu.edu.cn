@@ -1,80 +1,102 @@
 pages:
-  - Home: 'index.md'
+  - Home: index.md
   - Accounts:
-      - 'Accounts' : 'accounts/accounts.md'
+      - Accounts : accounts/accounts.md
   - Data:
-      - 'Analytics' : 'data/analytics.md'
-      - 'Management' : 'data/management.md'
-      - 'Transfer' : 'data/transfer.md'
-      - 'Visualization' : 'data/visualization.md'
+      - Analytics : data/analytics.md
+      - Management : data/management.md
+      - Transfer : data/transfer.md
+      - Visualization : data/visualization.md
       - Storage:
-          - 'Best Practices' : 'data/storage/best-practices.md'
-          - 'Filesystems' : 'data/storage/filesystems.md'
-          - 'Formats' : 'data/storage/formats.md'
+          - Best Practices : data/storage/best-practices.md
+          - Filesystems : data/storage/filesystems.md
+          - Formats : data/storage/formats.md
   - Performance:
-    - 'Optimization strategy' : 'performance/optimization-strategy.md'
-    - 'Vectorization' : 'performance/vectorization.md'
-    - 'Profiling' : 'performance/profiling.md'
-    - 'IO' : 'performance/io.md'
-    - 'Portability': 'performance/portability.md'
+    - Optimization strategy : performance/optimization-strategy.md
+    - Vectorization : performance/vectorization.md
+    - Profiling : performance/profiling.md
+    - IO : performance/io.md
+    - Portability: performance/portability.md
     - Case Studies:
-        - 'EMGeo' : 'performance/case-studies/emgeo/emgeo.md'
-        - 'MFDn' : 'performance/case-studies/mfdn.md'
-        - 'Quantum ESPRESSO Exact Exchange' : 'performance/case-studies/quantum-espresso/quantum-espresso.md'
+        - EMGeo : performance/case-studies/emgeo/emgeo.md
+        - MFDn : performance/case-studies/mfdn.md
+        - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/quantum-espresso.md
   - Services:
-      - 'Science Gateways' : 'services/science-gateways.md'
-      - 'NEWT' : 'services/newt.md'
-      - 'Jupyter' : 'services/jupyter.md'
-      - 'NX' : 'services/nx.md'
+      - Science Gateways : services/science-gateways.md
+      - NEWT : services/newt.md
+      - Jupyter : services/jupyter.md
+      - NX : services/nx.md
   - Slurm Jobs:
-    - 'Batch' : 'jobs/batch.md'
-    - 'Interactive' : 'jobs/interactive.md'
-    - 'Best Practices' : 'jobs/best-practices.md'
-    - 'Serial Jobs' : 'jobs/serial.md'      
+    - Batch : jobs/batch.md
+    - Interactive : jobs/interactive.md
+    - Best Practices : jobs/best-practices.md
+    - Serial Jobs : jobs/serial.md
   - Software:
-    - 'Environment' : 'software/environment.md'
-    - 'Shifter': 
-        - 'Overview' : 'software/shifter/overview.md'
-        - 'How to use' : 'software/shifter/how-to-use.md'
-        - 'Examples' : 'software/shifter/examples.md'
+    - Environment: software/environment.md
+    - Shifter:
+        - Overview : software/shifter/overview.md
+        - How to use : software/shifter/how-to-use.md
+        - Examples : software/shifter/examples.md
     - Applications:
-        - 'VASP' : 'software/applications/vasp.md'
-        - 'NAMD' : 'software/applications/namd.md'
-    - 'Developer Tools' : 'software/developer-tools.md'
-    - 'Workflow Tools' : 'software/workflow-tools.md'
-    - 'Analytics' : 'software/analytics.md'
-    - 'Compilers' : 'software/compilers.md'
+        - VASP : software/applications/vasp.md
+        - NAMD : software/applications/namd.md
+    - Developer Tools:
+        - DDT : software/performance-debugging-tools/ddt.md
+        - TotalView : software/performance-debugging-tools/totalview.md
+        - GDB : software/performance-debugging-tools/gdb.md
+    - Workflow Tools : software/workflow-tools.md
+    - Analytics : software/analytics.md
+    - Compilers : software/compilers.md
     - High-level Programming Environments:
-        - 'Python' : 'software/high-level-environments/python.md'
-        - 'Julia' : 'software/high-level-environments/julia.md'
-        - 'Matlab' : 'software/high-level-environments/matlab.md'
+        - Python : software/high-level-environments/python.md
+        - Julia : software/high-level-environments/julia.md
+        - Matlab : software/high-level-environments/matlab.md
     - Programming Models:
-        - 'MPI' : 'software/programming-models/mpi.md'
-        - 'OpenMP' : 'software/programming-models/openmp.md'
-        - 'UPC++' : 'software/programming-models/upcxx.md'
-        - 'Chapel' : 'software/programming-models/chapel.md'
-        - 'Kokkos' : 'software/programming-models/kokkos.md'
-        - 'Raja' : 'software/programming-models/raja.md'
-        - 'Coarrays' : 'software/programming-models/coarrays.md'        
-    - Libraries:      
-        - 'MKL' : 'software/libraries/mkl.md'
-        - 'FFTW' : 'software/libraries/fftw.md'
-        - 'LibSci' : 'software/libraries/libsci.md'
+        - MPI : software/programming-models/mpi.md
+        - OpenMP : software/programming-models/openmp.md
+        - UPC++ : software/programming-models/upcxx.md
+        - Chapel : software/programming-models/chapel.md
+        - Kokkos : software/programming-models/kokkos.md
+        - Raja : software/programming-models/raja.md
+        - Coarrays : software/programming-models/coarrays.md
+    - Libraries:
+        - MKL : software/libraries/mkl.md
+        - FFTW : software/libraries/fftw.md
+        - LibSci : software/libraries/libsci.md
   - Systems:
-      - 'Cori' : 'systems/cori.md'
-      - 'Edison' : 'systems/edison.md'
-      - 'PDSF' : 'systems/pdsf.md'        
-      - 'Genepool' : 'systems/genepool.md'
+      - Cori : systems/cori.md
+      - Edison : systems/edison.md
+      - PDSF : systems/pdsf.md
+      - Genepool : systems/genepool.md
   - Community:
-    - PDSF:        
-        - 'credentials' : 'pdsf/credentials.md'
+    - PDSF:
+        - credentials : pdsf/credentials.md
     - JGI:
-        - 'Pipelines' : 'jgi/pipelines.md'
+        - Pipelines : jgi/pipelines.md
   - Tutorials:
-    - 'Demo' : 'demo/demo.md'  
-site_name: NERSC Technical Documentation
-site_description: NERSC Technical Documentation
+    - Demo : demo/demo.md
+
+# Project Information
+site_name: NERSC Documentation
+site_description: NERSC Documentation
 site_author: NERSC
+site_dir: public
+repo_name: NERSC/documentation
+repo_url: https://gitlab.com/NERSC/documentation
+
+# Configuration
+strict: true
+
+theme:
+  name: material
+  custom_dir: material
+  favicon: img/favicon.ico
+  palette:
+    primary: mute-turquoise
+    accent: orange
+  logo: img/logo.png
+
+# Extensions
 markdown_extensions:
   - admonition
   - codehilite(guess_lang=false)
@@ -94,19 +116,8 @@ markdown_extensions:
   - pymdownx.tilde
   - markdown_include.include:
       base_path: docs
-theme:
-  name: material
-  custom_dir: material
-  favicon: img/favicon.ico
-  feature:
-    tabs: false
-  palette:
-    primary: 'mute-turquoise'
-    accent: 'orange'
-  logo: 'img/logo.png'
+
 extra_javascript:
-  - 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML'
+  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
 extra_css:
-  - 'stylesheets/extra.css'
-strict: true
-site_dir: public
+  - stylesheets/extra.css
