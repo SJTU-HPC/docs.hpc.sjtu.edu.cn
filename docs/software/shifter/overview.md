@@ -5,6 +5,7 @@ For more information about using Shifter, please consult the [documentation](#ho
 ##Background
 
 NERSC is working to increase flexibility and usability of its HPC systems by enabling [Docker](https://www.docker.com/)-like Linux container technology. Linux containers allow an application to be packaged with its entire software stack - including some portions of the base OS files - as well defining needed user environment variables and application "entry point.".  Containers may provide an abstract way of deploying portable applications and even automating the execution without requiring detailed tuning or modification to operate them.
+<img style="float: right;" alt="shifter-logo" src="../images/shifter-logo.png" width="190">
 
 Shifter is a prototype implementation that NERSC is developing and experimenting with as a scalable way of deploying containers in an HPC environment. It works by converting user or staff generated images in Docker, Virtual Machines, or CHOS (another method for delivering flexible environments) to a common format. This common format then provides a tunable point to allow images to be scalably distributed on the Cray supercomputers at NERSC. The user interface to shifter enables a user to select an image from their dockerhub account and then submit jobs which run entirely within the container.
 
