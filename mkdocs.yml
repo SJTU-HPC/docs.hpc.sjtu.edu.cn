@@ -57,6 +57,10 @@ pages:
         - MKL : software/libraries/mkl.md
         - FFTW : software/libraries/fftw.md
         - LibSci : software/libraries/libsci.md
+    - Performance and Debugging Tools:
+        - DDT : software/performance-debugging-tools/ddt.md
+        - TotalView : software/performance-debugging-tools/totalview.md
+        - GDB : software/performance-debugging-tools/gdb.md
   - Systems:
       - Cori : systems/cori.md
       - Edison : systems/edison.md
