@@ -11,7 +11,7 @@ test:
     - mkdocs --verbose build
     - ls -l public
   except:
-    - master
+    - master@NERSC/documentation
   
 pages:
   stage: deploy
@@ -28,4 +28,4 @@ pages:
     paths:
     - public
   only:
-  - master
+    - master@NERSC/documentation
