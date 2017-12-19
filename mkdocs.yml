@@ -38,8 +38,9 @@ pages:
         - How to use : software/shifter/how-to-use.md
         - Examples : software/shifter/examples.md
     - Applications:
-        - VASP : software/applications/vasp.md
+        - Quantum ESPRESSO : software/applications/quantum-espresso.md
         - NAMD : software/applications/namd.md
+        - VASP : software/applications/vasp.md
     - Developer Tools:
         - DDT : software/performance-debugging-tools/ddt.md
         - TotalView : software/performance-debugging-tools/totalview.md
