@@ -21,6 +21,8 @@ pages:
         - EMGeo : performance/case-studies/emgeo/emgeo.md
         - MFDn : performance/case-studies/mfdn.md
         - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/quantum-espresso.md
+        - WARP: performance/case-studies/warp/warp.md
+        - XGC1: performance/case-studies/xgc1/xgc1.md
   - Services:
       - Science Gateways : services/science-gateways.md
       - NEWT : services/newt.md
