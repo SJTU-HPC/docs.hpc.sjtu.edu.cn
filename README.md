@@ -85,4 +85,29 @@ Make a fork of the repository and do all of your work on the fork. Submit a merg
 
 #### Option 3
 
-For some changes you do not need the full environment. It is possible to edit Markdown files directly on gitlab. This work should be in a private fork or branch and submitted as a merge request.
+For some changes you do not need the full environment. It is possible to edit Markdown files directly on gitlab. This work should be in a private fork or branch and submitted as a merge request. A new branch can be created by clicking the "+" button next to the repository name.
+
+### Review a Merge Request from a private fork
+
+1.  Modify `.git/config` so merge requests are visible
+
+    ```text
+    ...
+    [remote "origin"]
+	        url = git@gitlab.com:NERSC/documentation.git
+	        fetch = +refs/heads/*:refs/remotes/origin/*
+	        fetch = +refs/merge-requests/*/head:refs/remotes/origin/pr/*
+	...
+	```
+	
+2.  Check for any Merge Requests
+
+    ```shell
+    git fetch
+    ```
+    
+3.  Checkout a specific Merge Request for review (merge request `N` in this example)
+
+    ```shell
+    git checkout origin/pr/N
+    ```
