@@ -10,6 +10,8 @@ test:
     - pip install -r requirements.txt
     - mkdocs --verbose build
     - ls -l public
+    - pip install -r util/requirements.txt
+    - python util/scrape_urls.py public
   except:
     - master@NERSC/documentation
   
