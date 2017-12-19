@@ -20,7 +20,11 @@ def get_url(this_page):
     :param this_page: html of web page
     :return: urls in that page
     """
-    start_link = this_page.find("a href")
+
+    # Validate only external URLs, not internal ones. (mkdocs can validate
+    # internal links itself.) External URLs have the "http" prefix, whereas
+    # internal links user relative paths.
+    start_link = this_page.find('a href="http')
     if start_link == -1:
         return None, 0
     start_quote = this_page.find('"', start_link)
