@@ -43,20 +43,11 @@ expired, you will need to call NERSC Account Support at 1-800-666-3772 menu 2,
 or 510-486-8612, to obtain a temporary password. You can call at any time, 24 x
 7, and somebody will be here to assist you.
 
-Note: If you are an existing NERSC user and need to be added to a new project,
-the project PI or one of their proxies must add you. In this case, you cannot
-add yourself to the project.
+!!! note
+    If you are an existing NERSC user and need to be added to a new project,
+    the project PI or one of their proxies must add you. In this case, you cannot
+    add yourself to the project.
 
+## Managing Accounts
 
-## Resetting passwords
-
-If you forget your password or if it has recently expired, and you have
-previously answered your NIM security questions, you can reset your password
-using the Self-Service Password reset link on the [NIM login page ("Forgot your
-NIM password?")](https://nim.nersc.gov). See "Managing Your User Account With
-NIM" in the NIM User's Guide.  If you haven't answered the Security Questions,
-you will need to call Operations at 800-666-3772, menu option 1, or
-510-486-6821 to get a new temporary password (we do not send passwords via
-email).  The temporary password is good for only 24 hours.  You should login to
-NIM with this temporary password, and immediately choose a new password. After
-about 10 minutes, this new password may be used to login to any NERSC computer.
+Merge with NIM user guide...
