@@ -2,6 +2,8 @@ pages:
   - Home: index.md
   - Accounts:
       - Accounts : accounts/accounts.md
+      - Passwords : accounts/passwords.md
+      - Policy : accounts/policy.md
   - Data:
       - Analytics : data/analytics.md
       - Management : data/management.md
