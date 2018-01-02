@@ -11,6 +11,7 @@ import requests
 from bs4 import BeautifulSoup
 import validators
 
+whitelist = ["https://www.lbl.gov/disclaimers/"]
 
 def get_url(this_page):
     """Print out the URL
@@ -42,7 +43,12 @@ def check_url(page):
             if not validators.url(url):
                 print("ERROR: INVALID URL")
             try:
-                requests.get(url)
+                if url in whitelist:
+                    print("WHITELIST: {}".format(url))
+                else:
+                    print(url)
+                    requests.get(url)
+
             except requests.exceptions.ConnectionError:
                 print("Bad URL: ", url)
                 raise
@@ -66,7 +72,7 @@ def main():
         for each_file in filenames:
             if each_file.endswith(".html"):
                 filepath = root + os.sep + each_file
-                print("   ", filepath, "...", end=' ', flush=True)
+                print("   ", filepath, "...")
                 filehandle = open(filepath, "r")
                 mypage = filehandle.read()
                 page = str(BeautifulSoup(mypage, "html.parser"))

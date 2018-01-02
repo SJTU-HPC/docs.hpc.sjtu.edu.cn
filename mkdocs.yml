@@ -2,6 +2,8 @@ pages:
   - Home: index.md
   - Accounts:
       - Accounts : accounts/accounts.md
+      - Passwords : accounts/passwords.md
+      - Policy : accounts/policy.md
   - Data:
       - Analytics : data/analytics.md
       - Management : data/management.md
@@ -14,12 +16,13 @@ pages:
   - Performance:
     - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
+    - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
     - IO : performance/io.md
     - Portability: performance/portability.md
     - Case Studies:
         - EMGeo : performance/case-studies/emgeo/emgeo.md
-        - MFDn : performance/case-studies/mfdn.md
+        - MFDn : performance/case-studies/mfdn/mfdn.md
         - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/quantum-espresso.md
         - WARP: performance/case-studies/warp/warp.md
         - XGC1: performance/case-studies/xgc1/xgc1.md
