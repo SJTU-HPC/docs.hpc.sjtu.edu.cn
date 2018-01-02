@@ -78,6 +78,7 @@ pages:
         - Pipelines : jgi/pipelines.md
   - Tutorials:
     - Demo : demo/demo.md
+    - Tables : demo/table.md
 
 # Project Information
 site_name: NERSC Documentation
