@@ -6,7 +6,7 @@
  1. [Building Software](https://www.google.com)
  1. [Running Jobs](https://www.google.com)
  1. [Managing Data](https://www.google.com)
- 1. [Reset my password](https://nim.nersc.gov)
+ 1. [Reset my password](accounts/accounts/index.html#resetting-passwords)
 
 !!!warning
 	Under construction! Should not be considered an official source of any information.
