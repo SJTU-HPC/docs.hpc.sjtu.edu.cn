@@ -16,6 +16,7 @@ pages:
   - Performance:
     - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
+    - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
     - IO : performance/io.md
     - Portability: performance/portability.md
