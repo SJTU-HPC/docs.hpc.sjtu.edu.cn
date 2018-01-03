@@ -11,6 +11,9 @@ import requests
 from bs4 import BeautifulSoup
 import validators
 
+# Known good pages that do not need to be validated. More are appended to this
+# list as the script crawls the docs website so that we do not re-validate the
+# same pages.
 whitelist = ["https://www.lbl.gov/disclaimers/"]
 
 def get_url(this_page):
