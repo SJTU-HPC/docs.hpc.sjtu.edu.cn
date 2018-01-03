@@ -11,7 +11,8 @@ import requests
 from bs4 import BeautifulSoup
 import validators
 
-whitelist = ["https://www.lbl.gov/disclaimers/"]
+whitelist = ["https://www.lbl.gov/disclaimers/",
+             "https://nxcloud01.nersc.gov"]
 
 def get_url(this_page):
     """Print out the URL

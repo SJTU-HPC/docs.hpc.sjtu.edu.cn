@@ -17,4 +17,4 @@ NX gives users a virtual desktop that's running at NERSC. You can customize the 
 
 ## Connecting
 
-You can connect to NX via the NX Client or by pointing your browser at https://nxcloud01.nersc.gov. The browser interface is still experimental and can sometimes be slower than connecting via the client. Please let us know by opening a ticket if you encounter any issues with it.
+You can connect to NX via the NX Client or by pointing your browser at [nxcloud01](https://nxcloud01.nersc.gov). The browser interface is still experimental and can sometimes be slower than connecting via the client. Please let us know by opening a ticket if you encounter any issues with it.
