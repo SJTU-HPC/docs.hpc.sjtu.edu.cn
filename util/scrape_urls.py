@@ -51,6 +51,9 @@ def check_url(page):
                 else:
                     print(url)
                     requests.get(url)
+                    # After a URL has been validated once, add it to the
+                    # whitelist so it gets skipped if encountered again.
+                    whitelist.append(url)
 
             except requests.exceptions.ConnectionError:
                 print("Bad URL: ", url)
