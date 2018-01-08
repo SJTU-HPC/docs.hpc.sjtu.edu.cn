@@ -31,7 +31,7 @@ pages:
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
       - NX : services/nx.md
-  - Slurm Jobs:
+  - Running Jobs:
     - Overview: jobs/overview.md
     - Batch jobs: jobs/batch.md
     - Interactive work: jobs/interactive.md
