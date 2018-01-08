@@ -1,7 +1,9 @@
-# Lorem
+# Data visualization
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a
-liquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu
-m dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
- officia deserunt mollit anim id est laborum.
+Scientific Visualization is the process of creating visual imagery from raw scientific data. NERSC supports the VisIt and Paraview tools for visualizing and interacting with generic scientific datasets. NCAR Graphics Library is provided (as a specialized package) for climate data. 
+
+The field of information visualization deals with rendering datasets that do not necessarily map onto a natural 2D or 3D co-ordinate system. R (ggplot2) and python (matplotlib) provide capabilities for information visualization. 
+
+* Paraview
+* Visit
+* NCAR Graphics
