@@ -1,4 +1,4 @@
-# NERSC Techincal Documentation
+# NERSC Technical Documentation
 
 ## Quick links/ FAQ
 

@@ -31,11 +31,12 @@ pages:
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
       - NX : services/nx.md
-  - Slurm Jobs:
-    - Batch : jobs/batch.md
-    - Interactive : jobs/interactive.md
-    - Best Practices : jobs/best-practices.md
-    - Serial Jobs : jobs/serial.md
+  - Running Jobs:
+    - Overview: jobs/overview.md
+    - Batch jobs: jobs/batch.md
+    - Interactive work: jobs/interactive.md
+    - Best Practices: jobs/best-practices.md
+    - Serial Jobs: jobs/serial.md
   - Software:
     - Environment: software/environment.md
     - Shifter:
