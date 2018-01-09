@@ -82,6 +82,7 @@ pages:
   - Tutorials:
     - Demo : demo/demo.md
     - Tables : demo/table.md
+    - Dropdown: demo/dropdown.md
 
 # Project Information
 site_name: NERSC Documentation
@@ -119,8 +120,10 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols(fractions=false)
   - pymdownx.superfences
+  - pymdownx.details
   - pymdownx.tasklist(custom_checkbox=true)
   - pymdownx.tilde
+  - pymdownx.snippets
   - markdown_include.include:
       base_path: docs
 
