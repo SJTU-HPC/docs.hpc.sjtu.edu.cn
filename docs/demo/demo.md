@@ -15,18 +15,22 @@ A table
 ## Basic example
 
 !!!warning
-	Include paths are specified relative to the base `docs` directory.
+	Include paths are specified relative to the base directory (where `mkdocs.yml` is located).
+
+
+The full syntax for includes is available [here](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/). Includes are done via ASCII scissors (`--8<--`) followed by the filename in quotes. See the source of this page for examples.
+
 
 A useful code for checking thread and process affinity.
 
 ```C
-{!demo/example/xthi.c!}
+--8<-- "docs/demo/example/xthi.c"
 ```
 
 ### Compilation
 
 ```makefile
-{!demo/example/Makefile!}
+--8<-- "docs/demo/example/Makefile"
 ```
 
 ### Running the executable
@@ -34,7 +38,7 @@ A useful code for checking thread and process affinity.
 Submit the script with the `sbatch` command:
 
 ```shell
-{!demo/example/run-edison.sh!}
+--8<-- "docs/demo/example/run-edison.sh"
 ```
 
 !!!warning

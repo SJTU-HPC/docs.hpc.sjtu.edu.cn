@@ -124,8 +124,6 @@ markdown_extensions:
   - pymdownx.tasklist(custom_checkbox=true)
   - pymdownx.tilde
   - pymdownx.snippets
-  - markdown_include.include:
-      base_path: docs
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML
