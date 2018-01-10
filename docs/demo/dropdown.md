@@ -10,12 +10,12 @@ available from the dropdowns.
 --8<-- "docs/demo/example/run-cori-knl.sh"
 ```
 
-??? note "Edison"
+??? example "Edison"
     ```shell
     --8<-- "docs/demo/example/run-edison.sh"
     ```
 
-??? note "Cori Haswell"
+??? example "Cori Haswell"
     ```shell
     --8<-- "docs/demo/example/run-cori.sh"
     ```
