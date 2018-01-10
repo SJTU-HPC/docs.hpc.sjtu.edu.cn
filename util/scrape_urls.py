@@ -14,7 +14,8 @@ import validators
 # Known good pages that do not need to be validated. More are appended to this
 # list as the script crawls the docs website so that we do not re-validate the
 # same pages.
-whitelist = ["https://www.lbl.gov/disclaimers/"]
+whitelist = ["https://www.lbl.gov/disclaimers/",
+             "https://nxcloud01.nersc.gov"]
 
 def get_url(this_page):
     """Print out the URL
