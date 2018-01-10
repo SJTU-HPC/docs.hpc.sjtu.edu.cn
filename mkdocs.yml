@@ -31,11 +31,12 @@ pages:
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
       - NX : services/nx.md
-  - Slurm Jobs:
-    - Batch : jobs/batch.md
-    - Interactive : jobs/interactive.md
-    - Best Practices : jobs/best-practices.md
-    - Serial Jobs : jobs/serial.md
+  - Running Jobs:
+    - Overview: jobs/overview.md
+    - Batch jobs: jobs/batch.md
+    - Interactive work: jobs/interactive.md
+    - Best Practices: jobs/best-practices.md
+    - Serial Jobs: jobs/serial.md
   - Software:
     - Environment: software/environment.md
     - Shifter:
@@ -82,6 +83,7 @@ pages:
   - Tutorials:
     - Demo : demo/demo.md
     - Tables : demo/table.md
+    - Dropdown: demo/dropdown.md
 
 # Project Information
 site_name: NERSC Documentation
@@ -119,10 +121,10 @@ markdown_extensions:
   - pymdownx.mark
   - pymdownx.smartsymbols(fractions=false)
   - pymdownx.superfences
+  - pymdownx.details
   - pymdownx.tasklist(custom_checkbox=true)
   - pymdownx.tilde
-  - markdown_include.include:
-      base_path: docs
+  - pymdownx.snippets
 
 extra_javascript:
   - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML

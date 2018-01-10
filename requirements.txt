@@ -4,7 +4,6 @@ htmlmin==0.1.11
 Jinja2==2.10
 livereload==2.5.1
 Markdown==2.6.10
-markdown-include==0.5.1
 MarkupSafe==1.0
 mkdocs==0.17.2
 mkdocs-material==2.2.3
