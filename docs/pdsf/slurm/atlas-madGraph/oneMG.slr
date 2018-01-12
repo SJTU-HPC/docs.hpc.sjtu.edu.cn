@@ -1,0 +1,53 @@
+#!/bin/bash
+
+#SBATCH -t 225:00   
+
+# Pick one of the following lines to toggle: chos or shifter or Cori
+# (toggle  '#-SBATCH' is OFF vs. '#SBATCH' is ON  )
+
+#SBATCH -J jan-shift -p shared --image=custom:pdsf-chos-sl64:v4 --ntasks=6 
+#-SBATCH -J atlas-chos -p shared-chos   --ntasks=6 
+#-SBATCH -J jan-cori -p debug -N1 --image=custom:pdsf-chos-sl64:v2  -C haswell
+# the Python (merge step) task requires 10GB of RAM,  the swap space is not protecting nodes from OOM, 
+# soo we need --mem flag, it will consume 6 vCores (aka 1/10 of the Haswell node) 
+#SBATCH --mem 10G  
+
+#tasks to be executed
+job_sh=runMad.sh
+export NUM_EVE=${1-200100}
+export NUM_CORE=$SLURM_CPUS_ON_NODE
+export DATA_STORE=/global/project/projectdirs/atlas/kkrizka/madStoreJan3
+export CODE_DIR=`pwd`
+#env|grep SLURM
+
+startSkew=300 # (seconds), random delay for each pilot
+nsleep=$(($RANDOM % $startSkew)) 
+
+# use local scratch
+export WORKDIR=${SLURM_TMP}
+# OR use global scratch on project (never cleand up)
+#export WORKDIR=/global/project/projectdirs/atlas/kkrizka/janTmp/job${SLURM_JOBID}
+
+echo "start-A "`hostname`"  NUM_CORE="$NUM_CORE"  nEve="$NUM_EVE
+echo 'nproc='`nproc`' nsleep='$nsleep'   WORKDIR='$WORKDIR
+sleep $nsleep
+date
+ls -l  $CODE_DIR/${job_sh}
+
+if [[ $SLURM_JOB_PARTITION == *"-chos" ]]
+then
+  echo  run-in-chos CODE_DIR=$CODE_DIR
+  CHOS=sl64 chos  $CODE_DIR/${job_sh}  
+else
+ echo  run-in-shifter
+ shifter  --volume=/global/project:/project  /bin/bash $CODE_DIR/${job_sh}
+fi
+echo end-A
+date
+mkdir -p logs/
+if [ -z ${SLURM_ARRAY_JOB_ID+x} ]; then
+  mv slurm-${SLURM_JOB_ID}.out logs/
+else
+  mv slurm-${SLURM_ARRAY_JOB_ID}_${SLURM_ARRAY_TASK_ID}.out  logs/
+fi
+    
