@@ -75,11 +75,13 @@ pages:
       - Edison : systems/edison.md
       - PDSF : systems/pdsf.md
       - Genepool : systems/genepool.md
-  - Community:
-    - PDSF:
-        - credentials : pdsf/credentials.md
-    - JGI:
-        - Pipelines : jgi/pipelines.md
+  - PDSF community:
+    - slurm :
+      - overview : 'pdsf/slurm/README.md'
+      - 'LZ pulseFinder CVMFS' : pdsf/slurm/lz-pulseFinder/Readme.md
+      - 'Atlas madGraph multi-core' : pdsf/slurm/atlas-madGraph/Readme.md
+  - JGI community:
+      - Pipelines : jgi/pipelines.md
   - Tutorials:
     - Demo : demo/demo.md
     - Tables : demo/table.md

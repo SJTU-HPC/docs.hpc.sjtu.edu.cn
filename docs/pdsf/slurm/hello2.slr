@@ -1,0 +1,10 @@
+#!/bin/bash
+
+#SBATCH -p shared
+#SBATCH --ntasks=1
+#SBATCH -J test-abc
+#SBATCH -t 1:00
+#SBATCH -A lz 
+
+echo done-jan0-lz
+
