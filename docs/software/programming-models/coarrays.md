@@ -126,18 +126,9 @@ ftn -fcoarray=single my_coarray_code.ex my_coarray_code.f90
 
 For multi-image support, one must link the coarray code to the OpenCoarrays
 library via the `-fcoarray=lib` flag, along with the appropriate linker flags
-to the OpenCoarrays libraries, e.g.,
-```bash
-module load PrgEnv-gnu
-ftn -fcoarray=lib my_coarray_code.ex my_coarray_code.f90 \
-    -L/path/to/OpenCoarrays/installation/lib -lcaf_mpi
-```
-where the above example assumes that OpenCoarrays has been compiled using MPI.
-OpenCoarrays also supports a GASNet backend.
-
-NERSC provides OpenCoarrays as a module (called `opencoarrays`), built on top
-of Cray MPI. One can link a GCC-compiled coarray code to this module via the
-`OPENCOARRAYS_LIB` environment variable:
+to the OpenCoarrays libraries. NERSC provides OpenCoarrays as a module (called
+`opencoarrays`), built on top of Cray MPI. One can link a GCC-compiled coarray
+code to this module via the `OPENCOARRAYS_LIB` environment variable:
 ```bash
 module load PrgEnv-gnu
 ftn -fcoarray=lib my_coarray_code.ex my_coarray_code.f90 \
