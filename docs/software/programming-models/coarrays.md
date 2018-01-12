@@ -2,7 +2,7 @@
 
 The Fortran 2008 standard introduced "coarrays," which provide a new model for
 parallel programming integrated directly into the Fortran language. Coarrays
-allow an application developer can write parallel programs using only a Fortran
+allow an application developer to write parallel programs using only a Fortran
 compiler - no external APIs such as MPI or OpenMP are necessary. The Fortran
 2018 standard (formerly called "Fortran 2015") extends coarrays further to
 include "teams" and other coarray collective procedures. Prior to becoming a
