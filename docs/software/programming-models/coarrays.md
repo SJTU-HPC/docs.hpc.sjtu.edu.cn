@@ -65,8 +65,8 @@ message passing.
 
 In addition to the ease of use, due to the PGAS-style semantics of coarrays in
 Fortran, applications can achieve high performance at extremely high
-concurrency; tests at NERSC have shown that coarray program scale efficiently
-to >100,000 cores.
+concurrency; tests at NERSC have shown that coarray programs can scale
+efficiently to >100,000 cores.
 
 ## Compiler support on NERSC systems
 
