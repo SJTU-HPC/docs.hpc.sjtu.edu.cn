@@ -80,6 +80,7 @@ pages:
       - overview : 'pdsf/slurm/README.md'
       - 'LZ pulseFinder CVMFS' : pdsf/slurm/lz-pulseFinder/Readme.md
       - 'Atlas madGraph multi-core' : pdsf/slurm/atlas-madGraph/Readme.md
+      - 'DayaBay NuWa' : pdsf/slurm/dyb-nuwa/Readme.md
   - JGI community:
       - Pipelines : jgi/pipelines.md
   - Tutorials:

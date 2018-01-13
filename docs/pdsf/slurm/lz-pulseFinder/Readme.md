@@ -1,17 +1,18 @@
-##**Interactive LZ session**  using Shifter on PDSF
+##**Interactive  session**  using Shifter on PDSF in SL6.4
 
 !!!warning
       This instruction works only for user=afan,  use it as a guidance only.
 
 ```bash
 ssh afan@pdsf
-cd forJan/PhotonDetection/
-salloc -n 1 -p shared  -t 50:00 --image=custom:pdsf-chos-sl64:v4 -A lz --volume=/global/project:/project
+
+salloc -n 1 -p shared  -t 50:00 --image=custom:pdsf-chos-sl64:v4  --volume=/global/project:/project
 
 shifter /bin/bash
 export CHOS=sl64
 source ~/.bash_profile.ext
 
+cd forJan/PhotonDetection/
 source /global/project/projectdirs/lz/releases/physics/latest/Physics/setup.sh
 lzap_project
 time lzap scripts/validations/PulseFinderValidation.py
@@ -23,7 +24,7 @@ Note2: The TCling error from lzap is expected for now.
 
 <hr>
 
-## How to start LZ SLURM+Shifter+CVMFS job 
+## How to start LZ **Slurm+Shifter+CVMFS** job 
 
 
 ```bash
@@ -31,7 +32,7 @@ ssh -A -Y afan@pdsf
 $ sbatch lzOne.slr
 
 $ cat hello2.slr
-{!pdsf/slurm/lz-pulseFinder/lzOne.slr!}
+--8<-- "docs/pdsf/slurm/lz-pulseFinder/lzOne.slr"
 ```
 
 where 'lzOne.slr' informs SLURM what resources will you need and launches the bash script running the actuall task 'lzReco.sh'. Note, the lzOne.slr is setup to run on all 3 slurm partitions: PDSF+Chos, PDSF+Shifter, Cori+Shifter - you need only to toggle the '-' in front of SBATCH.
@@ -39,7 +40,7 @@ where 'lzOne.slr' informs SLURM what resources will you need and launches the ba
 The bash task script 'lzReco.sh' requires sourcing of your envirement - if you use Shifter
 ```bash
 $cat lzReco.sh
-{!pdsf/slurm/lz-pulseFinder/lzReco.sh!}
+--8<-- "docs/pdsf/slurm/lz-pulseFinder/lzReco.sh"
 ```
 
 The output file for this job was:

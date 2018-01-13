@@ -1,0 +1,11 @@
+#!/bin/bash 
+#SBATCH -N 1   --account=m2811  
+#SBATCH -C haswell --image=custom:pdsf-chos-sl64:v2 
+#-SBATCH --image=custom:pdsf-chos-sl64:v4  # Edison
+#SBATCH  --partition debug -t 00:10:00
+#SBATCH -J oneNuwa
+
+echo  this example uses external DB and writes output in the starting dir
+#export DBCONF_PATH=/global/homes/b/balewski/.my.cnf
+
+shifter  --volume=/global/project:/project  --volume=/global/projecta:/projecta ./run1DayabayShifter.sh 
