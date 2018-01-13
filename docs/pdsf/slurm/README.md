@@ -14,7 +14,7 @@ Note 1:  your default chos will be used to run  jobscript.sh , the default run t
 The simplest slurm job  looks like this:
 ```shell
 $cat hello2.slr
-{!pdsf/slurm/hello2.slr!}
+--8<-- "docs/pdsf/slurm/hello2.slr"
 ```
 The slumr job is submitted with command
 ```shell
