@@ -11,16 +11,34 @@ sbatch -p shared-chos   jobscript.sh
 
 Note 1:  your default chos will be used to run  jobscript.sh , the default run time is set to 24h, default RAM is set to 4 GB<br>
 
-The simplest slurm job  looks like this:
+The simplest slurm job, charged to LZ account,  looks like this:
 ```shell
 $cat hello2.slr
 --8<-- "docs/pdsf/slurm/hello2.slr"
 ```
-The slumr job is submitted with command
+The slumr job is submitted with command below 
 ```shell
 $sbatch hello2.slr
 ```
-and it will produce the stdout/err as one file: 'slurm-3726343.out', where job id is the big number.
+it will produce the stdout/err as one file: 'slurm-3726343.out', where job id is the big number.
+
+**Interactive  session**  using Shifter on PDSF in SL6.4
+
+
+```bash
+ssh -Y pdsf.nersc.gov
+
+salloc -n 1 -p shared  -t 50:00 --image=custom:pdsf-chos-sl64:v4 --volume=/global/project:/project
+shifter /bin/bash
+
+echo inShifter:`env|grep  SHIFTER_RUNTIME`
+export CHOS=sl64
+source ~/.bash_profile.ext
+
+cd abc/
+```
+Note, you can't put all of the above in to one script (you would need 2 scripts). See majorana-shifter example to see how to launch arbitrary command inside a shifter from PDSF login node.
+
 
 Submit a job array of size 100:
 ```bash
@@ -32,9 +50,9 @@ Submit a job array of size 100 but run up to 10 tasks at once
 $ sbatch -p shared-chos  -t 24:00:00  --array=1-100%10 jobscript.sh
 ```
 
-Submit one task running on 32 vCores and use 50 GB of RAM
+Submit one task running on 32 vCores and use 50.1 GB of RAM
 ```bash
-$ sbatch -p shared-chos --mem 50000M -n32  jobscript.sh
+$ sbatch -p shared-chos --mem 50100M -n32  jobscript.sh
 ```
 
 Start **interactive session** on a SLURM worker node with
@@ -157,6 +175,10 @@ rhstar                                 736    0.276796   611072852      0.335279
 Examples of intaractive and SLURM batch jobs for all PDSF experiments, updated June, 2017.
 
 
+**Slurm job script generator** (designed for Cori) seems like it can answer most of your SBATCH questions: 
+https://my.nersc.gov/script_generator.php
+
+
 ### How can I get code for the examples ?
 ```bash
 ssh pdsf
@@ -164,9 +186,6 @@ git clone https://bitbucket.org/balewski/tutorNersc
 cd tutorNersc/2017-05-pdsf3.0
 ls
 ```
-
-!!!warning
-	if your default shell is tcsh - this tutorial will not work on Cori.
 
 
 ### Table 1 

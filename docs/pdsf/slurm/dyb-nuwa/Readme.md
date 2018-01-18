@@ -1,25 +1,10 @@
-##**Interactive  session**  using Shifter on PDSF in SL6.4
-
-
-```bash
-ssh pdsf
-
-salloc -n 1 -p shared  -t 50:00 --image=custom:pdsf-chos-sl64:v4  --volume=/global/project:/project
-
-shifter /bin/bash
-export CHOS=sl64
-source ~/.bash_profile.ext
-
-cd abc/
-```
-
 ##How to start DayaBay  **Slurm+Shifter**  job
 
 
 ```bash
 ssh pdsf.nersc.gov
 $sbatch run1Dyb.slr
-$  cat oneMG.slr
+$  cat  run1Dyb.slr
 --8<-- "docs/pdsf/slurm/dyb-nuwa/run1Dyb.slr"
 ```
 This example will use precopiled NuWa code by Matt - it is avaliable to everyone<br>
