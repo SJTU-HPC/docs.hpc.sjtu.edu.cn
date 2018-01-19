@@ -37,39 +37,40 @@ pages:
     - Interactive work: jobs/interactive.md
     - Best Practices: jobs/best-practices.md
     - Serial Jobs: jobs/serial.md
-  - Software:
-    - Environment: software/environment.md
     - Shifter:
-        - Overview : software/shifter/overview.md
-        - How to use : software/shifter/how-to-use.md
-        - Examples : software/shifter/examples.md
-    - Applications:
-        - Quantum ESPRESSO : software/applications/quantum-espresso.md
-        - NAMD : software/applications/namd.md
-        - VASP : software/applications/vasp.md
+      - Overview : jobs/shifter/overview.md
+      - How to use : jobs/shifter/how-to-use.md
+      - Examples : jobs/shifter/examples.md
+    - Workflow Tools : jobs/workflow-tools.md
+
+  - Applications:
+    - Quantum ESPRESSO : applications/quantum-espresso.md
+    - NAMD : applications/namd.md
+    - VASP : applications/vasp.md
+  - Analytics : analytics/analytics.md
+  - Development:
     - Developer Tools:
-        - DDT : software/performance-debugging-tools/ddt.md
-        - TotalView : software/performance-debugging-tools/totalview.md
-        - GDB : software/performance-debugging-tools/gdb.md
-    - Workflow Tools : software/workflow-tools.md
-    - Analytics : software/analytics.md
-    - Compilers : software/compilers.md
+        - DDT : development/performance-debugging-tools/ddt.md
+        - TotalView : development/performance-debugging-tools/totalview.md
+        - GDB : development/performance-debugging-tools/gdb.md          
+    - Compilers : development/compilers.md
     - High-level Programming Environments:
-        - Python : software/high-level-environments/python.md
-        - Julia : software/high-level-environments/julia.md
-        - Matlab : software/high-level-environments/matlab.md
+        - Python : development/high-level-environments/python.md
+        - Julia : development/high-level-environments/julia.md
+        - Matlab : development/high-level-environments/matlab.md
     - Programming Models:
-        - MPI : software/programming-models/mpi.md
-        - OpenMP : software/programming-models/openmp.md
-        - UPC++ : software/programming-models/upcxx.md
-        - Chapel : software/programming-models/chapel.md
-        - Kokkos : software/programming-models/kokkos.md
-        - Raja : software/programming-models/raja.md
-        - Coarrays : software/programming-models/coarrays.md
+        - MPI : development/programming-models/mpi.md
+        - OpenMP : development/programming-models/openmp.md
+        - UPC++ : development/programming-models/upcxx.md
+        - Chapel : development/programming-models/chapel.md
+        - Kokkos : development/programming-models/kokkos.md
+        - Raja : development/programming-models/raja.md
+        - Coarrays : development/programming-models/coarrays.md
     - Libraries:
-        - MKL : software/libraries/mkl.md
-        - FFTW : software/libraries/fftw.md
-        - LibSci : software/libraries/libsci.md
+        - MKL : development/libraries/mkl.md
+        - FFTW : development/libraries/fftw.md
+        - LibSci : development/libraries/libsci.md
+  - Environment: environment/environment.md
   - Systems:
       - Cori : systems/cori.md
       - Edison : systems/edison.md

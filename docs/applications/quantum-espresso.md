@@ -13,7 +13,7 @@ module load espresso/<version>
 
 where the available versions can be found by using `module avail espresso`.
 
-Recently, we have optimized the hybrid DFT calculations in Quantum ESPRESSO (pw.x) for hybrid OpenMP+MPI applications. These changes are described in our [Quantum ESPRESSO case study](../../performance/case-studies/quantum-espresso/quantum-espresso.md) and available in the module version 6.1 we provide. In order to maximize the pw.x performance, you should use the following example script:
+Recently, we have optimized the hybrid DFT calculations in Quantum ESPRESSO (pw.x) for hybrid OpenMP+MPI applications. These changes are described in our [Quantum ESPRESSO case study](../performance/case-studies/quantum-espresso/quantum-espresso.md) and available in the module version 6.1 we provide. In order to maximize the pw.x performance, you should use the following example script:
 
 ```Shell
 #!/bin/bash
