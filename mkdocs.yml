@@ -76,7 +76,7 @@ pages:
       - Edison : systems/edison.md
       - PDSF : systems/pdsf.md
       - Genepool : systems/genepool.md
-  - PDSF community:
+  - PDSF:
     - slurm :
       - overview : 'pdsf/slurm/README.md'
       - 'LZ pulseFinder CVMFS' : pdsf/slurm/lz-pulseFinder/Readme.md
@@ -85,7 +85,7 @@ pages:
       - 'Majorana skim' : pdsf/slurm/majorana-skim/Readme.md
       - 'STAR root4star' :  pdsf/slurm/star-bfc/Readme.md
       - 'STAR interactive' :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
-  - JGI community:
+  - JGI:
       - Pipelines : jgi/pipelines.md
   - Tutorials:
     - Demo : demo/demo.md
