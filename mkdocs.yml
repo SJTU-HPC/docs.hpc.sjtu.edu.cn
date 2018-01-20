@@ -45,7 +45,7 @@ pages:
 
   - Applications:
     - Quantum ESPRESSO : applications/quantum-espresso.md
-    - NAMD : applications/namd.md
+    - NAMD : applications/namd/namd.md
     - VASP : applications/vasp.md
   - Analytics : analytics/analytics.md
   - Development:
