@@ -2,10 +2,10 @@
 
 ## Quick links/ FAQ
 
- 1. [Getting Started](https://www.google.com)
- 1. [Building Software](https://www.google.com)
- 1. [Running Jobs](https://www.google.com)
- 1. [Managing Data](https://www.google.com)
+ 1. [Obtaining an Account](accounts/accounts.md#obtaining-an-account)
+ 1. [Building Software](development/compilers.md)
+ 1. [Running Jobs](jobs/overview.md)
+ 1. [Managing Data](data/management.md)
  1. [Reset my password](accounts/passwords/index.html#forgotten-passwords)
 
 !!!warning
