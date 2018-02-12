@@ -168,7 +168,8 @@ To register this modulefile with our modules environment we run the following co
 ```bash
    module use /global/project/projectdirs/mpccc/usg/modulefiles/cori
    module load myzlib/1.2.7
-```
+``` 
+
 Note that the `module use` command adds this new directory before other
 module search paths (defined as `$MODULEPATH`), so modules defined in this
 custom directory will have precedence if there are other modules with the
