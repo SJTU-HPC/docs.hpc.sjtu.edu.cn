@@ -97,8 +97,8 @@ site_name: NERSC Documentation
 site_description: NERSC Documentation
 site_author: NERSC
 site_dir: public
-repo_name: NERSC/documentation
-repo_url: https://gitlab.com/NERSC/documentation
+#repo_name: NERSC/documentation
+#repo_url: https://gitlab.com/NERSC/documentation
 
 # Configuration
 strict: true
