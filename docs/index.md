@@ -9,4 +9,4 @@
  1. [Reset my password](accounts/passwords/index.html#forgotten-passwords)
 
 !!!warning
-	Under construction! Should not be considered an official source of any information.
+	Migration of content from [http://www.nersc.gov/users/](http://www.nersc.gov/users/) is underway.
