@@ -13,7 +13,7 @@ test:
     - pip install -r util/requirements.txt
     - python util/scrape_urls.py public
   except:
-    - master@NERSC/documentation
+    - master@NERSC/nersc.gitlab.io
   
 pages:
   stage: deploy
@@ -30,4 +30,4 @@ pages:
     paths:
     - public
   only:
-    - master@NERSC/documentation
+    - master@NERSC/nersc.gitlab.io
