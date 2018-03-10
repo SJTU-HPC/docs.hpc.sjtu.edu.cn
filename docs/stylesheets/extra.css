@@ -5,3 +5,48 @@
 .md-nav__link.md-nav__link--active {
     font-weight: bold;
 }	       
+
+.nersc-foot-col-3 {
+    float: left;
+    width: 33.33%;
+    padding: 2rem;
+}
+
+.nersc-foot-col-2 {
+    float: left;
+    width: 50.00%;
+    padding: 2rem;
+}
+
+.nersc-foot-cell {
+    display: table;
+    margin: 0 auto;
+}
+
+.nersc-foot-row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.nersc-foot-title {
+    color:hsla(0,0%,100%,.7);
+    font-weight:bold;   
+}
+
+
+@media (max-width: 720px) {
+    .nersc-foot-col-2 {
+        width: 100%;	
+    }
+
+    .nersc-foot-col-3 {
+        width: 100%;	
+    }
+    .nersc-foot-cell {
+	display: table;
+	margin: 0 auto;
+	float: left
+    }
+}
+    

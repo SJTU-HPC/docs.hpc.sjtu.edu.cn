@@ -38,11 +38,53 @@
   {% endif %}
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">	
-        <div class="md-footer-copyright__highlight">
-	  <a href="https://www.lbl.gov/disclaimers/" title="Privacy and Security Notice">Privacy and Security Notice</a>
-        </div>
+      
+      <div class="nersc-foot-row">
+	<div class="nersc-foot-col-3">
+	  <div class="nersc-foot-cell">
+	    <div class="nersc-foot-title">Site Links</div>
+	    <a href="https://www.nersc.gov/" title="NERSC Main Site">NERSC Main Site</a><br>
+	    <a href="https://docs.nersc.gov/" title="User Documentation">User Documentation</a><br>
+	    <a href="https://my.nesc.gov/"  title="MyNERSC">MyNERSC</a><br><br>
+	    <img src="{{ base_url }}/img/lbl_logo.png" height=50>
+	  </div>
+	</div><!-- nersc foot col -->
+	
+	<div class="nersc-foot-col-3">
+	  <div class="nersc-foot-cell">	    
+	    <div class="nersc-foot-title">Quick Links</div>
+	    <a href="">Obtaining an Account</a><br>
+	    <a href="">Building Software</a><br>
+	    <a href="">Running Jobs</a><br>
+	    <a href="">Managing Data</a><br>
+	    <a href="">Reset Password</a>
+	  </div>
+	</div><!-- nersc foot col -->
+
+	<div class="nersc-foot-col-3">
+	  <div class="nersc-foot-cell">
+	    <div class="nersc-foot-title">About</div>
+	    <a href="https://www.lbl.gov/disclaimers/" title="Acknowledge NERSC">Acknowledge NERSC</a><br>
+	    <a href="https://www.lbl.gov/disclaimers/" title="Contact Us">Contact Us</a><br>
+	    <a href="https://www.lbl.gov/disclaimers/" title="Privacy and Security Notice">Privacy and Security Notice</a><br><br>
+	    <img src="{{ base_url }}/img/doe_logo.png">
+	  </div> <!-- table display ...-->
+	</div> <!-- nersc foot col -->
+      </div> <!-- nersc foot row -->
+
+
+
+      <!--
+      <div class="nersc-foot-row">
+	<div class="nersc-foot-col-2">
+	  <img src="{{ base_url }}/img/lbl_logo.png">
+	</div>
+	<div class="nersc-foot-col-2">
+	  <img src="{{ base_url }}/img/doe_logo.png" align="right">
+	</div>
       </div>
+      -->
+      
       {% block social %}
         {% include "partials/social.html" %}
       {% endblock %}
