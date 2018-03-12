@@ -15,6 +15,8 @@ import validators
 # list as the script crawls the docs website so that we do not re-validate the
 # same pages.
 whitelist = ["https://www.lbl.gov/disclaimers/",
+             "https://science.energy.gov",
+             "https://www.lbl.gov",
              "https://nxcloud01.nersc.gov",
              "http://epsi.pppl.gov/xgc-users/how-to-become-an-xgc-user"]
 
