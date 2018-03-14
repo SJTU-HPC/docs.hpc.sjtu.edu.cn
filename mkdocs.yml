@@ -9,10 +9,15 @@ pages:
       - Management : data/management.md
       - Transfer : data/transfer.md
       - Visualization : data/visualization.md
-      - Storage:
-          - Best Practices : data/storage/best-practices.md
-          - Filesystems : data/storage/filesystems.md
-          - Formats : data/storage/formats.md
+      - Formats : data/formats.md
+      - Filesystems:
+          - Overview: data/filesystems/index.md
+          - 'Global Home': data/filesystems/global-home.md
+          - 'Global Common': data/filesystems/global-common.md
+          - Project: data/filesystems/project.md
+          - 'Edison Scratch': data/filesystems/edison-scratch.md
+          - 'Cori Scratch': data/filesystems/cori-scratch.md
+          - 'Cori Burst Buffer': data/filesystems/cori-burst-buffer.md
   - Performance:
     - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
