@@ -38,9 +38,9 @@ pages:
       - Jupyter : services/jupyter.md
       - NX : services/nx.md
   - Running Jobs:
-    - Overview: jobs/overview.md
+    - Overview: jobs/index.md
     - Batch jobs: jobs/batch.md
-    - Interactive work: jobs/interactive.md
+    - Interactive jobs: jobs/interactive.md
     - Best Practices: jobs/best-practices.md
     - Serial Jobs: jobs/serial.md
     - Shifter:
@@ -93,10 +93,10 @@ pages:
       - 'STAR interactive' :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
   - JGI:
       - Pipelines : jgi/pipelines.md
-  - Tutorials:
-    - Demo : demo/demo.md
-    - Tables : demo/table.md
-    - Dropdown: demo/dropdown.md
+#  - Tutorials:
+#    - Demo : demo/demo.md
+#    - Tables : demo/table.md
+#    - Dropdown: demo/dropdown.md
 
 # Project Information
 site_name: NERSC Documentation
