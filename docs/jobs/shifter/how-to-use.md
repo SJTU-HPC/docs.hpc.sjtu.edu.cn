@@ -34,7 +34,7 @@ Here's an example batch script showing how to run on two nodes:
 ```Shell
 #!/bin/bash
 #SBATCH --image=docker:image_name:latest
-#SBATCH --partition=regular
+#SBATCH --qos=regular
 #SBATCH -N 2
 
 srun -n 64 shifter python ~/hello.py
@@ -95,19 +95,19 @@ Here's the syntax for a basic Shifter script:
 #!/bin/bash
 #SBATCH --image=docker:image_name:latest
 #SBATCH --nodes=1
-#SBATCH --partition=regular
+#SBATCH --qos=regular
  
 srun -n 32 shifter python myPythonScript.py args
 ```
 
-This will invoke 32 instances of your image and run the `myPythonScript.py` in each one. If you are running in the jgi partition, you will need to add ``#SBATCH --exclusive`` for spark to work.
+This will invoke 32 instances of your image and run the `myPythonScript.py` in each one. If you are running in the jgi qos, you will need to add ``#SBATCH --exclusive`` for spark to work.
 
 For serial jobs (aka shared or single-node jobs), you can leave off the srun since it runs on a single core by default:
 
 ```Shell
 #!/bin/bash
 #SBATCH --image=docker:image_name:latest
-#SBATCH --partition=shared
+#SBATCH --qos=shared
  
 shifter python myPythonScript.py args
 ```
