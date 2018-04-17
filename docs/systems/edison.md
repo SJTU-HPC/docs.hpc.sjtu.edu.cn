@@ -1,7 +1,4 @@
-# Lorem
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a
-liquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu
-m dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
- officia deserunt mollit anim id est laborum.
+Edison is a Cray XC30 with a peak performance of more than 2
+petaflops. Edison features the Cray Aries high-speed interconnect,
+fast Intel Xeon processors, 64 GB of memory per node, and a 6.6
+petabyte scratch file system.

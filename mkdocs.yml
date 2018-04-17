@@ -51,19 +51,19 @@ pages:
 
   - Applications:
     - Quantum ESPRESSO : applications/quantum-espresso.md
-    - NAMD : applications/namd/namd.md
-    - VASP : applications/vasp.md
+    - NAMD : applications/namd/index.md
+    - VASP : applications/vasp/index.md
   - Analytics : analytics/analytics.md
   - Development:
-    - Developer Tools:
-        - DDT : development/performance-debugging-tools/ddt.md
-        - TotalView : development/performance-debugging-tools/totalview.md
-        - GDB : development/performance-debugging-tools/gdb.md          
+#    - Developer Tools:
+#        - DDT : development/performance-debugging-tools/ddt.md
+#        - TotalView : development/performance-debugging-tools/totalview.md
+#        - GDB : development/performance-debugging-tools/gdb.md
     - Compilers : development/compilers.md
     - High-level Programming Environments:
         - Python : development/high-level-environments/python.md
-        - Julia : development/high-level-environments/julia.md
-        - Matlab : development/high-level-environments/matlab.md
+#        - Julia : development/high-level-environments/julia.md
+#        - Matlab : development/high-level-environments/matlab.md
     - Programming Models:
         - MPI : development/programming-models/mpi.md
         - OpenMP : development/programming-models/openmp.md
@@ -81,7 +81,7 @@ pages:
       - Cori : systems/cori.md
       - Edison : systems/edison.md
       - PDSF : systems/pdsf.md
-      - Genepool : systems/genepool.md
+#      - Genepool : systems/genepool.md
   - PDSF:
     - slurm :
       - overview : 'pdsf/slurm/README.md'
@@ -91,8 +91,8 @@ pages:
       - 'Majorana skim' : pdsf/slurm/majorana-skim/Readme.md
       - 'STAR root4star' :  pdsf/slurm/star-bfc/Readme.md
       - 'STAR interactive' :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
-  - JGI:
-      - Pipelines : jgi/pipelines.md
+#  - JGI:
+#      - Pipelines : jgi/pipelines.md
 #  - Tutorials:
 #    - Demo : demo/demo.md
 #    - Tables : demo/table.md
