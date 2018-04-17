@@ -1,7 +1,6 @@
-# Lorem
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut a
-liquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillu
-m dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
- officia deserunt mollit anim id est laborum.
+Cori is a Cray XC40 with a peak performance of about 30 petaflops.
+The system is named in honor of American biochemist Gerty Cori, the
+first American woman to win a Nobel Prize and the first woman to be
+awarded the prize in Physiology or Medicine. Cori is comprised of
+2,388 Intel Xeon "Haswell" processor nodes, 9,688 Intel Xeon Phi
+"Knight's Landing" nodes, and a 1.8 PB Cray Data Warp Burst Buffer.
