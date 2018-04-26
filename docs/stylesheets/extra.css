@@ -46,7 +46,10 @@
     .nersc-foot-cell {
 	display: table;
 	margin: 0 auto;
-	float: left
+	float: left;
     }
 }
-    
+
+.md-typeset table:not([class]) th {
+    min-width: 1px;
+}
