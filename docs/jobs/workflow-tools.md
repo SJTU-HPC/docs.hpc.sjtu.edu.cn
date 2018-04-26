@@ -4,7 +4,7 @@ technologies can improve the productivity and efficiency of
 data-centric science by orchestrating and automating these
 steps. NERSC provides support for the TaskFarmer, Swift and Fireworks
 tools. We also maintain other packages like Tigres that can help users
-build workflows. 
+build workflows.
 
 ## TaskFarmer
 
@@ -15,7 +15,7 @@ have a queueing system. Some features that distinguish FireWorks are
 dynamic workflows, failure-detection routines, and built-in tools and
 execution modes for running high-throughput computations at large
 computing centers. It uses a centralized server model, where the
-server manages the workflows and workers run the jobs. 
+server manages the workflows and workers run the jobs.
 
 ## Swift
 
@@ -39,4 +39,4 @@ have a queueing system. Some features that distinguish FireWorks are
 dynamic workflows, failure-detection routines, and built-in tools and
 execution modes for running high-throughput computations at large
 computing centers. It uses a centralized server model, where the
-server manages the workflows and workers run the jobs. 
+server manages the workflows and workers run the jobs.
