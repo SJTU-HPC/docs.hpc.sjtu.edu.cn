@@ -1,3 +1,10 @@
 site
 public
 src
+*.pdf
+*.xml
+*.ps
+*.tar.gz
+*.tar
+*.tgz
+*.zip
