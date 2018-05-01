@@ -1,8 +1,12 @@
 
 # Anaconda Python
 
-Anaconda is a distribution of Python for large-scale data processing, predictive analytics, and scientific computing.
-It includes a collection of about 200 open source packages and includes Intel MKL optimizations throughout the scientific Python stack.
+Python is an interpreted general-purpose high-level programming language.
+NERSC provides Anaconda Python on Cori and Edison as software modules.
+Using system-provided Python (from `/usr/bin`) is strongly discouraged.
+
+Anaconda Python is a platform for large-scale data processing, predictive analytics, and scientific computing.
+It includes hundreds of open source packages and Intel MKL optimizations throughout the scientific Python stack.
 Additional packages are available through contributed channels or through installation with pip.
 The Anaconda distribution also exposes access to the Intel Distribution for Python (instructions here).
 
@@ -21,13 +25,13 @@ The Anaconda distribution provides access to conda, an open source package manag
 
 When you load an Anaconda Python module, you are placed into the default Anaconda "root" environment.
 For many users the packages provided by the root environment are sufficient for their needs.
-NERSC can install Anaconda packages into the root environment upon request, subject to a quick review concerning broad utility and maintainability. 
+NERSC can install Anaconda packages into the root environment upon request, subject to a quick review concerning broad utility and maintainability.
 Contact us to find out about specific packages.
 The list of packages in a given environment can be obtained by entering at the prompt:
 
     conda list
 
-You can create a "spec list" to be used to construct an identical environment across different systems or share environments with collaborators by typing "conda list -e."  
+You can create a "spec list" to be used to construct an identical environment across different systems or share environments with collaborators by typing "conda list -e."
 Using "conda create --file" with the output spec-list generates a copy of the original environment.
 There are several ways to share/replicate environments with the conda tool.
 For more information, see the conda documentation.
@@ -83,8 +87,8 @@ For assistance, contact NERSC consulting.
 NOTE: The "pip" included with the python modules at NERSC installs packages into the default conda environment in /usr/common/software, so you will see "permission denied" messages.
 The solution is to first install pip in your conda environment, with:
 
-    conda install pip 
-  
+    conda install pip
+
 NOTE: Conda environments replace virtualenv and the two should not be used together, see this chart for a comparison of conda, pip, and virtualenv commands.
 
 ## User-Managed Installation
@@ -100,7 +104,7 @@ For instance:
     [installation messages, default path is $HOME/miniconda3]
     source miniconda3/bin/activate
 
-This installs a root Miniconda Python 3 environment to the default path "$HOME/miniconda3." 
+This installs a root Miniconda Python 3 environment to the default path "$HOME/miniconda3."
 The path can be changed through a "-p" argument.
 Note that to activate the root environment, technically you should use the "source" shell command (not "source activate," that is for environments).
 Environments under this install can be created as with the NERSC-maintained module.
