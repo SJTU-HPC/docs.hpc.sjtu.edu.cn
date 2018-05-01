@@ -77,8 +77,8 @@ Storing the Dockerfile, docker-compose.yml (if it exists), and any other files a
 
 * https://bitbucket.org academic account - Academic users are upgraded to an account with unlimited public and private repositories. The upgrade is automatic and based on the email address used to register the account.
 * https://gitlab.com - Comes with comprehensive CI/CD features; it is a common choice for JGI projects
-* https://stash.nersc.gov - The local Bitbucket server (licensed for NERSC staff only)
 * https://github.com - Less commonly used as the free account tier doesn’t include private repositories, and the academic accounts are more limited and without the automatic upgrade feature of Bitbucket.
+* NERSC Staff can also use the internal Bitbucket service.
 
 Regardless of which system is being used, avoid storing secrets such as database passwords or private keys in files that get pushed to a repo; instead the [Secrets](#secrets) feature should be utilized.
 
