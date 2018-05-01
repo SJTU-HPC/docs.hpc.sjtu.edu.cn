@@ -8,3 +8,7 @@ src
 *.tar
 *.tgz
 *.zip
+*~
+*.o
+*.so
+\#*\#
