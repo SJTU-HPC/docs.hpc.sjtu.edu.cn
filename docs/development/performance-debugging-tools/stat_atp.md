@@ -32,7 +32,7 @@ One way to collect backtraces under SLURM is explained below.
 3. Run the stat-cl command on this process. You may want to use the -i flag to gather source line numbers, too:
 
 ```shell
-$ stat-cl -i 95298
+nersc$ stat-cl -i 95298
 STAT started at 2016-11-30-07:33:37
 Attaching to job launcher (null):95298 and launching tool daemons...
 Tool daemons launched and connected!
@@ -57,7 +57,7 @@ stat-cl takes several backtrace samples after attaching to the running processes
 4. Then, run the GUI command, 'stat-view', with the file above to visualize the generated *.dot files for stack backtrace information.
 
 ```shell
-$ stat-view stat_results/jacobi_mpi.0004/00_jacobi_mpi.0004.3D.dot
+nersc$ stat-view stat_results/jacobi_mpi.0004/00_jacobi_mpi.0004.3D.dot
 ```
 
 Please note that, if you're running on Cori KNL nodes, you have to go to a login node for this step (after loading the stat module there). Otherwise, fonts will not be shown correctly.
@@ -101,10 +101,10 @@ More information can be found in the man page: type 'man intro_atp' or, simply, 
 The following is to test ATP using an example code available in the ATP distribution package:
 
 ```shell
-$ cp $ATP_HOME/demos/testMPIApp.c .
-$ cc -o testMPIApp testMPIApp.c
+nersc$ cp $ATP_HOME/demos/testMPIApp.c .
+nersc$ cc -o testMPIApp testMPIApp.c
 
-$ cat runit
+nersc$ cat runit
 #!/bin/csh
 #SBATCH -N 1
 #SBATCH -t 5:00
@@ -143,8 +143,8 @@ srun: Force Terminated job step 3044170.0
 ATP creates a merged backtrace files in DOT fomat in atpMergedBT.dot and atpMergedBT_line.dot. The latter shows source line numbers, too. To view the collected backtrace result, you need to load the 'stat' module and run 'STATview':
 
 ```shell
-$ module load stat
-$ stat-view atpMergedBT.dot
+nersc$ module load stat
+nersc$ stat-view atpMergedBT.dot
 ```
 
 
@@ -154,7 +154,7 @@ Note: The following feature doesn't work at the moment (as of March 22, 2018). C
 ATP can be a useful tool in debugging a hung application, too. You can force ATP to generate backtraces for a hung application by killing the application. To do that, you should have done necessary preparational work such as setting the ATP_ENABLED environment variable, etc. in the batch script for the job in question.
 
 ```shell
-$ sacct -j 3169879                # find job step id for the application - it's 3169879.0
+nersc$ sacct -j 3169879                # find job step id for the application - it's 3169879.0
        JobID    JobName  Partition    Account  AllocCPUS      State ExitCode 
 ------------ ---------- ---------- ---------- ---------- ---------- -------- 
 3169879           runit        knl      mpccc        544    RUNNING      0:0 
@@ -163,13 +163,13 @@ $ sacct -j 3169879                # find job step id for the application - it's 
 3169879.1    cti_dlaun+                 mpccc          2    RUNNING      0:0
 
 
-$ ssh cmom02                      # You have to be on a MOM node
+nersc$ ssh cmom02                      # You have to be on a MOM node
 
-$ scancel -s ABRT 3169879.0       # Kill the application
+nersc$ scancel -s ABRT 3169879.0       # Kill the application
 
-$ exit                            # Back to the login node
+nersc$ exit                            # Back to the login node
 
-$ cat slurm-3169879.out
+nersc$ cat slurm-3169879.out
 Application 3169879 is crashing. ATP analysis proceeding...
 
 ATP Stack walkback for Rank 0 starting:
@@ -182,7 +182,7 @@ Process died with signal 6: 'Aborted'
 View application merged backtrace tree with: stat-view atpMergedBT.dot
 You may need to: module load stat
 ...
-$ stat-view atpMergedBT_line.dot
+nersc$ stat-view atpMergedBT_line.dot
 ```
 
 Note that Edison has 6 MOM nodes: edimom01 through edimom06. Cori's MOM node names are cmom02 and cmom05.

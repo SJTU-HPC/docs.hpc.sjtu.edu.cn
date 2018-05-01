@@ -24,13 +24,13 @@ After the major OS upgrade on Edison in July, 2017, the old name is simply a sym
 To use DDT at NERSC, first load the 'allinea-forge' module to set the correct environment settings:
 
 ```Shell
-$ module load allinea-forge
+nersc$ module load allinea-forge
 ```
 
 Note that the name of the module has changed. The old module name 'allineatools' still works:
 
 ```Shell
-$ module load allineatools
+nersc$ module load allineatools
 ```
 
 Again, we encourage users to use the new module name.
@@ -42,13 +42,13 @@ In order to use DDT, code must be compiled with the -g option. Add the -O0 flag 
 A Fortran example:
 
 ```Shell
-$ ftn -g -O0 -o testDDT_ex testDDT.f             # on Edison or Cori
+nersc$ ftn -g -O0 -o testDDT_ex testDDT.f             # on Edison or Cori
 ```
 
 A C example:
 
 ```Shell
-$ cc -g -O0 -o testDDT_ex testDDT.c             # on Edison or Cori
+nersc$ cc -g -O0 -o testDDT_ex testDDT.c             # on Edison or Cori
 ```
 
 ## Starting a Job with DDT
@@ -58,25 +58,25 @@ Running an X window GUI application can be painfully slow when it is launched fr
 You can also start Be sure to log in with an X window forwarding enabled. This could mean using the `-X` or `-Y` option to ssh. The `-Y` option often works better for Mac OSX.
 
 ```Shell
-$ ssh -Y username@edison.nersc.gov
+nersc$ ssh -Y username@edison.nersc.gov
 ```
 
 After loading the allinea-forge module and compiling with the -g option, request an interactive session on Edison or Cori.
 
 ```Shell
-$ salloc -p debug -N numNodes 
+nersc$ salloc -p debug -N numNodes 
 ```
 
 Then launch the debugger with the ddt command followed by the name of the executable to debug:
 
 ```Shell
-$ ddt ./testDDT_ex
+nersc$ ddt ./testDDT_ex
 ```
 
 or, starting from the 5.x version,
 
 ```Shell
-$ forge ./testDDT_ex
+nersc$ forge ./testDDT_ex
 ```
 
 The Allinea Forge GUI will pop up, showing a start up menu for you to select what to do. For basic debugging choose the option Run with the 'allinea DDT' tool. A user can also choose *ATTACH* to attach DDT to an already running program, or *OPEN CORE* to view a core dump file from a previous job.
@@ -120,12 +120,12 @@ You'll be prompted to enter the password even when you have set up passwordless 
 Starting with release 6.x, Allinea recommends to use the Reverse Connection method with the remote client. To do this, put aside the remote client window that you have been working with, and login to the corresponding machine from a window on your local machine, as you would normally do. Then, start an interactive batch session there, and run ddt with with the option '--connect' as follows:
 
 ```Shell
-$ ssh edison.nersc.gov
+nersc$ ssh edison.nersc.gov
 ...
-$ salloc -N 1 -t 30:00 -p debug
+nersc$ salloc -N 1 -t 30:00 -p debug
 ...
-$ module load alline-forge
-$ ddt --connect srun -n 24 ./jacobi_mpi
+nersc$ module load alline-forge
+nersc$ ddt --connect srun -n 24 ./jacobi_mpi
 ```
 
 The remote client will ask you whether to accept a Reverse Connect request. Click 'Accept'.
@@ -141,25 +141,25 @@ If you are having trouble launching DDT try these steps.
 Make sure you have the most recent version of the system.config configuration file. The first time you run DDT, you pick up a master template which then gets stored locally in your home directory in `~/.allinea/${NERSC_HOST}/system.config` where `${NERSC_HOST}` is the machine name: edison or cori. If you are having problems launching DDT you could be using an older verion of the system.config file and you may want to remove the entire directory:
 
 ```Shell
-$ rm -rf ~/.allinea/${NERSC_HOST}  
+nersc$ rm -rf ~/.allinea/${NERSC_HOST}  
 ```
 
 Remove any stale processes that may have been left by DDT.
 
 ```Shell
-$ rm -rf $TMPDIR/allinea-$USER 
+nersc$ rm -rf $TMPDIR/allinea-$USER 
 ```
 
 In case of a font problem where every character is displayed as a square, please delete the .fontconfig directory in your home directory and restart ddt.
 
 ```Shell
-$ rm -rf ~/.fontconfig
+nersc$ rm -rf ~/.fontconfig
 ```
 
 Make sure you are requesting an interactive batch session on Edison or Cori. NERSC has configured DDT to run from the interactive batch jobs.
 
 ```Shell
-$ salloc -p debug -N numNodes 
+nersc$ salloc -p debug -N numNodes 
 ```
 
 Finally make sure you have compiled your code with -g. A large number of users who are having trouble running with parallel debuggers forget to compile their codes with debugging flags turned on. If none of these tips help, please contact the [consulting services](mailto:consult@nersc.gov)
@@ -236,10 +236,10 @@ The example commands are shown for a Fortran case. cc and CC should be used simi
 A simple script, static_linking_ddt_md, is provided in your $PATH to help you complete the somewhat complicated steps shown above.
 
 ```Shell
-$ module load allinea-forge
-$ ftn -g -c prog.f
-$ static_linking_ddt_md ftn -o prog prog.o          # instead of 'ftn -o prog prog.o'
-$ ls -l prog
+nersc$ module load allinea-forge
+nersc$ ftn -g -c prog.f
+nersc$ static_linking_ddt_md ftn -o prog prog.o          # instead of 'ftn -o prog prog.o'
+nersc$ ls -l prog
 -rwx------ 1 wyang wyang 6701908 2012-10-15 15:19 prog
 ```
 
@@ -252,7 +252,7 @@ You need to separate the compile and link stages. That is, you need to create `*
  For multi-threaded codes, DDT_LINK_DMALLOCTH and DDT_LINK_DMALLOCTHCXX are used in place of DDT_LINK_DMALLOC and DDT_LINK_DMALLOCXX, respectively. Again, a utility script, static_linking_ddt_md_th, is provided to help with linking:
 
 ```Shell
-$ static_linking_ddt_md_th ftn -mp -o prog prog.o   # instead of 'ftn -mp -o prog prog.o' 
+nersc$ static_linking_ddt_md_th ftn -mp -o prog prog.o   # instead of 'ftn -mp -o prog prog.o' 
 ```
 
 Below is a table showing how to prepare your code using dyanmic linking on Edison and Cori. The example is provided for a Fortran code case. Adjustments should be made for C and C++ codes as above. Again, in case of a C++ code, `${DDT_LINK_DMALLOC}` must be repalced with `${DDT_LINK_DMALLOCXX}`.
@@ -357,7 +357,7 @@ Offline debugging is to run DDT in a command-line mode, without using GUI. This 
 To run DDT in this mode, you submit a batch job using a batch script that looks like:
 
 ```Shell
-$ cat runit
+nersc$ cat runit
 #!/bin/bash
 #SBATCH ...
 
@@ -365,7 +365,7 @@ module load allinea-forge
 ddt --offline -o filename.html --np=4 myprogram arg1 ... # to get HTML output file
 ddt --offline -o filename      --np=4 myprogram arg1 ... # to get plain text output file
 
-$ sbatch runit
+nersc$ sbatch runit
 ```
 
 Please note that we are using `ddt -offline ...` in place of `srun` or `mpirun` for launching an application. Output of the debugging session is saved in the specified file ('`filename.html`' or '`filename`' in the above example).

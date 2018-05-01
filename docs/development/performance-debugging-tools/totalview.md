@@ -15,13 +15,13 @@ In order to use TotalView, code must be compiled with the -g option. With the In
 A Fortran example:
 
 ```shell
-$ ftn -g -O0 -o testTV_ex testTV.f
+nersc$ ftn -g -O0 -o testTV_ex testTV.f
 ```
 
 A C example:
 
 ```
-$ cc -g -O0 -o testTV_ex testTV.c
+nersc$ cc -g -O0 -o testTV_ex testTV.c
 ```
 
 ## Starting a Job with TotalView
@@ -29,31 +29,31 @@ $ cc -g -O0 -o testTV_ex testTV.c
 Be sure to log in with an X window forwarding enabled. This could mean using the `-X` or `-Y` option to ssh. The `-Y` option often works better for Mac OSX.
 
 ```shell
-$ ssh -Y username@cori.nersc.gov
+nersc$ ssh -Y username@cori.nersc.gov
 ```
 
 If you don't have the files, please run the 'setup_batchmode_key' command:
 
 ```shell
-$ setup_batchmode_key
+nersc$ setup_batchmode_key
 ```
 
 Then start an interactive batch session on Cori or Edison.
 
 ```shell
-$ salloc -N numNodes -t 30:00 -q debug               # on Cori or Edison
+nersc$ salloc -N numNodes -t 30:00 -q debug               # on Cori or Edison
 ```
 
 where 'numNodes' is the number of compute nodes that you need to use. To use TotalView, first load the TotalView modulefile to set the correct environment settings with the following command:
 
 ```shell
-$ module load totalview
+nersc$ module load totalview
 ```
 
 With most of the versions available on the systems, you will be able to launch the debugger with a totalview command followed by the name of the executable to debug, as you normally did before NERSC switched to SLURM for batch scheduling.:
 
 ```shell
-$ totalview srun -a -n numTasks ./testTV_ex
+nersc$ totalview srun -a -n numTasks ./testTV_ex
 ```
 
 The TotalView startup GUI will pop up and show debugging startup parameters. After reviewing them, click OK.
@@ -72,7 +72,7 @@ Sometimes, you may find that a certain TotalView version (often the most recent 
 Just type 'totalview' at a Unix prompt. A window titled 'TotalView Debugger' will open.
 
 ```shell
-$ totalview
+nersc$ totalview
 ```
 
 

@@ -7,13 +7,13 @@ GDB can be used to quickly and easily examine a core file that was produced when
 GDB is available on all NERSC production systems in the default path. Run gdb with the following syntax:
 
 ```shell
-$ gdb executable-file core-file
+nersc$ gdb executable-file core-file
 ```
 
 After gdb starts use the "backtrace" command.  For example:
 
 ```shell
-$ gdb mpi-hello core
+nersc$ gdb mpi-hello core
 GNU gdb 6.6
 Copyright (C) 2006 Free Software Foundation, Inc.
 GDB is free software, covered by the GNU General Public License, and you are welcome to change it and/or distribute copies of it under certain conditions.
