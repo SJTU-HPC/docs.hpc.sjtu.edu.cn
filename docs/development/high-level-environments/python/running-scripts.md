@@ -40,7 +40,7 @@ To run it on the Haswell nodes on Cori, we could create the following batch scri
     #SBATCH --constraint=haswell
     #SBATCH --nodes=3
     #SBATCH --time=5
-    
+
     module load python/2.7-anaconda
     srun -n 96 -c 2 python mympi.py
 

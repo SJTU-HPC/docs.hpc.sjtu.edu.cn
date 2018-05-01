@@ -11,7 +11,7 @@ Users sometimes contact NERSC to ask if a Python package could be installed with
  We consider three broad guidelines in making a decision:
 
 * General utility.  It makes sense for NERSC to focus support on packages that are broadly useful to the most users. At the same time we are happy to help individual users install more specialized packages for their own use.  (See below.)
-* Maintenance activity. We prefer to install packages that are actively maintained by community-engaged developers. This way, if we run into problems we can engage with developers to arrive at a solution quickly. Abandoned projects may also pose a security risk and we discourage users from such packages altogether. 
+* Maintenance activity. We prefer to install packages that are actively maintained by community-engaged developers. This way, if we run into problems we can engage with developers to arrive at a solution quickly. Abandoned projects may also pose a security risk and we discourage users from such packages altogether.
 * Ease of installation. Python packages are usually straightforward to install, but in cases where the build system is effectively broken and we cannot debug the problem, we may need to wait quite some time for the developer to address the issue.
 
 Actively maintained, easy to install packages that a large number of users will find useful are the most likely candidates for NERSC support.
@@ -45,7 +45,7 @@ For example, to see channels providing AstroPy:
     module load python
     anaconda search -t conda astropy
 
-Be sure to look for builds for the "linux-64" platform. 
+Be sure to look for builds for the "linux-64" platform.
 
 ## Can I use "pip" to install my own packages?
 
@@ -56,7 +56,7 @@ The other alternative is to try a different channel (see also).
 
 Users of the pip command may want to use the "--user" flag for per-user site-package installation following the PEP370 standard.
 On Linux systems this defaults to `$HOME/.local`, and packages can be installed to this path with "pip install --user package_name."
-This can be overridden by defining the PYTHONUSERBASE environment variable. 
+This can be overridden by defining the PYTHONUSERBASE environment variable.
 
 NOTE: To prevent per-user site-package installations from conflicting across machines and module versions, at NERSC we have configured our Python modules so that PYTHONUSERBASE is set to `$HOME/.local/$NERSC_HOST/version` where "version" corresponds to the version of the Python module loaded.
 

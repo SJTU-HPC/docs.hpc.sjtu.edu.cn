@@ -2,7 +2,7 @@
 # Scaling Up
 
 Many scientists appreciate Python's power for prototyping and developing scientific computing and data-intensive applications.
-  However, creating parallel Python applications that scale well in modern high-performance computing environments can be challenging for a variety of reasons.  
+  However, creating parallel Python applications that scale well in modern high-performance computing environments can be challenging for a variety of reasons.
 
 Approaches to parallel processing in Python at NERSC are described on this page.
  Here we outline various approaches to scaling parallel Python applications at NERSC so that users may select the solution that best suits their performance needs, development practices, and preferences.
@@ -46,7 +46,7 @@ Using Shifter results in tremendous speed-ups for launching Python applications.
 There are a few other interventions that we are aware of that can help users scale their Python applications at NERSC.
 One is to bundle up Python and the dependency stack and broadcast it to the compute nodes where it is placed into /dev/shm.
 This has been implemented in the python-mpi-bcast library, developed at BIDS by Yu Feng.
-Detailed instructions for using python-mpi-bcast at NERSC are available here. 
+Detailed instructions for using python-mpi-bcast at NERSC are available here.
 
 ## Combining MPI4PY and Subprocess
 
@@ -54,4 +54,4 @@ Combining mpi4py and the Python subprocess module may be a suitable way to manag
 
 ## H5py
 
-Basic usage and best practice of serial/parallel H5py. 
+Basic usage and best practice of serial/parallel H5py.
