@@ -1,4 +1,4 @@
-# CCDB and LGDB
+# LGDB and CCDB
 
 ## Parallel Debugging with lgdb
 
@@ -87,7 +87,4 @@ have the same values between the applications, at line 418 of
 HPL_pdtest.c. It shows that resid0 and XmormI have different values
 between the applications and therefore both applications have stopped
 at line 418.
-
-
-
 
