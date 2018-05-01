@@ -18,7 +18,9 @@ whitelist = ["https://www.lbl.gov/disclaimers/",
              "https://science.energy.gov",
              "https://www.lbl.gov",
              "https://nxcloud01.nersc.gov",
-             "http://epsi.pppl.gov/xgc-users/how-to-become-an-xgc-user"]
+             "http://epsi.pppl.gov/xgc-users/how-to-become-an-xgc-user",
+             "https://stash.nersc.gov",
+             "https://stash.nersc.gov:8443"]
 
 def get_url(this_page):
     """Print out the URL

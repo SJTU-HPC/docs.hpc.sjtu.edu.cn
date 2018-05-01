@@ -44,6 +44,7 @@ pages:
       - Spin :
         - services/spin/index.md
         - services/spin/getting_started_guide.md
+        - services/spin/implementation_guide.md
       - Science Gateways : services/science-gateways.md
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
