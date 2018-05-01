@@ -159,7 +159,7 @@ NERSC runs a private registry that can be used to store images that may include 
 
 Since the registry is blocked at the border, pushing images to the NERSC registry must be routed through a proxy. Below are instructions on how to push an image to the NERSC registry for a Mac system running Docker4Mac. Please adjust the instructions for other environments.
 
-1. Determine your local IP address. You can do this by running `ifconfig | grep inet | grep broad` and using the first IP address. In our example, the address is 192.168.99.1.
+1. Determine your local IP address. You can do this by running (macOS) `ipconfig getifaddr $(route get nersc.gov | grep 'interface:' | awk '{print $NF}')` or (linux) `ip route ls | tail -n 1 | awk '{print $NF}'`. In our example, the address is 192.168.99.1.
 2. Add this address plus a random port to the list of *Insecure registries* that your Docker instance will use. This is accessed by clicking on the Docker Icon in the tool bar, selecting *Preferences*, then selecting *Advanced*. Click on the plus button and add the address and port separated by a colon. In our example this would be 192.168.99.1:5000. Be sure to apply the change and restart docker by clicking the *Apply & Restart* button. Establish an ssh tunnel from your system to NERSC to the registry. Preface the local port with the IP address so it listens on the appropriate interface. In our example we do 
 ```Shell 
 ssh -L 192.168.99.1:5000:registry.services.nersc.gov:443 <your_nersc_user_name>@edison.nersc.gov
@@ -181,4 +181,323 @@ docker push 192.168.99.1:5000/myusername/myimage:latest
 shifterimg pull 
 registry.services.nersc.gov/myusername/myimage:latest
 
+```
+
+## Using NERSC's Intel Docker Containers
+
+### Overview
+
+-   Intel Parallel Studio XE 2018 Docker containers are now available at
+    [registry.services.nersc.gov](https://registry.services.nersc.gov)
+    in the “nersc” directory
+
+-   Access to the NERSC private registry is required
+
+    -   Follow instructions from [Using NERSC's Private Registry](#using-nerscs-private-registry)
+
+-   Template for variants: <span style="color:red">registry.services.nersc.gov/nersc/intel_{toolset}_{image}:{tag}</span>
+
+-   7 toolset variants (all cxx include TBB and PSTL, mpi has libfabric)
+
+    -    cxx
+
+    -    fort
+
+    -    cxx_fort
+
+    -    cxx_mpi
+
+    -    cxx_fort_mpi
+
+    -    cxx_fort_mpi_mkl
+
+    -    cxx_fort_mpi_mkl_ipp
+
+-   E.g., <span style="color:red">registry.services.nersc.gov/nersc/intel_cxx_devel</span>
+
+### Intel Docker Tags
+
+-   Each tool + image variant pair has 6 available tags
+
+    -   latest
+
+    -   2018
+
+    -   2018.1
+
+    -   2018.2
+
+    -   2018.1.163
+
+    -   2018.2.199
+
+- E.g., <span style="color:red">registry.services.nersc.gov/nersc/intel_cxx_mpi_devel:2018.2</span>
+
+### Intel Docker “devel” Image Variants
+
+-   These images are relatively large and contain all the components for
+    the set of Intel tools
+
+-   Intended for compiling codes (approx. size)
+
+    -   nersc/intel\_cxx\_devel --> 1.3 GB
+
+    -   nersc/intel\_fort\_devel --> 1.2 GB
+
+    -   nersc/intel\_cxx\_fort\_devel --> 1.4 GB
+
+    -   nersc/intel\_cxx\_mpi\_devel --> 2.9 GB
+
+    -   nersc/intel\_cxx\_fort\_mpi\_devel --> 2.9 GB
+
+    -   nersc/intel\_cxx\_fort\_mpi\_mkl\_devel --> 4.7 GB
+
+    -   nersc/intel\_cxx\_fort\_mpi\_mkl\_ipp\_devel --> 7 GB
+
+### Intel Docker “runtime” Image Variants
+
+-   These images contain only the shared libraries
+
+    -   All bin directories and static libraries have been removed
+
+-   Use with a staged Docker build
+
+-   Intended for runtime (approx. size)
+
+    -   nersc/intel\_cxx\_runtime --> 0.7 GB
+
+    -   nersc/intel\_fort\_runtime --> 0.7 GB
+
+    -   nersc/intel\_cxx\_fort\_runtime --> 0.7 GB
+
+    -   nersc/intel\_cxx\_mpi\_runtime --> 1.2 GB
+
+    -   nersc/intel\_cxx\_fort\_mpi\_runtime --> 1.2 GB
+
+    -   nersc/intel\_cxx\_fort\_mpi\_mkl\_runtime --> 2.0 GB
+
+    -   nersc/intel\_cxx\_fort\_mpi\_mkl\_ipp\_runtime --> 2.8 GB
+
+### NERSC License Server
+
+#### Using the Intel Compilers
+
+-   The “devel” docker images require a valid Intel license to use the
+    compilers
+
+-   If the Intel compilers are not required, there is no need to connect
+    to the NERSC license server
+
+-   Intel compilers in docker are configured to seek license at
+    [intel.licenses.nersc.gov](intel.licenses.nersc.gov) @ port 28519
+
+-   Steps:
+
+    1.  Configure docker to resolve [intel.licenses.nersc.gov](intel.licenses.nersc.gov) to your local IP address
+
+    2.  Configure local SSH connection to:
+
+        -   allow remote hosts (i.e., docker container) to connect to local forwarded ports
+
+        -   forward local port 28519 requests to port 28519 @ [cori.nersc.gov](cori.nersc.gov)
+
+#### SSH session
+
+-   Obtain local IP address (macOS)
+
+    ```
+    $ ipconfig getifaddr `route get nersc.gov | grep 'interface:' | awk '{print $NF}'`
+    ```
+
+-   Obtain local IP address (Linux)
+
+    ```
+    $ ip route ls | tail -n 1 | awk '{print $NF}'
+    ```
+
+-   SSH command
+
+    ```
+    $ ssh -g -L 28519:intel.licenses.nersc.gov:28519 <username>@cori.nersc.gov
+    ```
+
+-   SSH config
+
+    ```
+    Host intel-docker-cori
+      Hostname cori.nersc.gov
+      user <username>
+      Port 22
+      GatewayPorts yes
+      LocalForward <ip_addr>:28519 intel.licenses.nersc.gov:28519
+    ```
+
+#### Docker build flag
+
+-   Run docker build with flag “–add-host” flag that directs
+    [intel.licenses.nersc.gov](intel.licenses.nersc.gov) to your IP
+    address
+
+```Shell
+#!/bin/bash
+build-intel-docker()
+{
+  if [ "$(uname)" = "Darwin" ]; then
+    LOCAL_IP=$(ipconfig getifaddr $(route get nersc.gov | grep 'interface:' | awk '{print $NF}'))
+  else
+    LOCAL_IP=$(ip route ls | tail -n 1 | awk '{print $NF}')
+  fi
+
+  local BUILD_TAG=""
+  local DOCKERFILE=""
+  if [ ! -z "${1}" ]; then BUILD_TAG=${1}; else BUILD_TAG=$(basename ${PWD}); fi
+  if [ ! -z "${2}" ]; then DOCKERFILE=${2}; else DOCKERFILE=Dockerfile; fi
+
+  docker build -f ${DOCKERFILE} --tag=${BUILD_TAG} \
+      --add-host intel.licenses.nersc.gov:${LOCAL_IP} ${PWD}
+}
+```
+
+### Docker Build Stages
+
+#### Build Staging
+
+-   Use first “FROM” statement with “devel” image variant and label with
+    “as” keyword
+
+-   Use second “FROM” statement with “runtime” image variant and copy
+    from first image
+
+-   Note: Multiple “as” images can be used
+
+#### Build Staging Examples
+
+##### Using NERSC's Intel Docker containers
+
+```Shell
+######## Stage 1 ########
+FROM registry.services.nersc.gov/nersc/intel_cxx_mpi_devel as builder
+# ... build your code with "devel" image variant ...
+# ... recommended to use a common install prefix, such as "/opt/local", e.g.
+#
+
+ENV CC /opt/intel/bin/icc
+ENV CXX /opt/intel/bin/icpc
+
+RUN cd ${HOME}/package_a && \
+    ./configure --prefix=/opt/local && \
+    make install -j8 && \
+    cd ${HOME}/package_b && \
+    mkdir build_package_b && \
+    cd build_package_b && \
+    cmake -DCMAKE_INSTALL_PREFIX=/opt/local .. && \
+    make install -j8
+
+######## Stage 2 ########
+# ... don't have to clean above, just copy over installation
+FROM registry.services.nersc.gov/nersc/intel_cxx_mpi_runtime
+COPY --from=builder /opt/local/ /opt/local
+RUN echo '/opt/local/lib' > /etc/ld.so.conf.d/package-libs.conf
+```
+
+##### How intel_{tool}_runtime containers are built
+
+```Shell
+#################################################################
+# Stage 1 from image with compilers
+#################################################################
+FROM devel_psxe_2018_cxx as builder
+
+WORKDIR /root
+USER root
+ENV HOME /root
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US
+ENV LC_ALL C
+ENV SHELL /bin/bash
+ENV BASH_ENV /etc/bash.bashrc
+ENV DEBIAN_FRONTEND noninteractive
+
+# funcs defined in /etc/bash.bashrc
+#   configs link paths and deletes static libs
+RUN write-ld-config intel-libs.conf && \
+    intel-runtime-cleanup
+
+#################################################################
+# Stage 2 from base image
+#################################################################
+FROM debian:latest
+
+COPY --from=builder /usr /usr/
+COPY --from=builder /etc /etc/
+COPY --from=builder /opt/intel/ /opt/intel
+
+WORKDIR /root
+USER root
+ENV HOME /root
+ENV LANG en_US.UTF-8
+ENV LANGUAGE en_US
+ENV LC_ALL C
+ENV SHELL /bin/bash
+ENV BASH_ENV /etc/bash.bashrc
+ENV DEBIAN_FRONTEND noninteractive
+
+RUN apt-get update --fix-missing && \
+    apt-get -y --no-install-recommends install --reinstall \
+        libc6 libcc1-0 libgcc1 libgmp10 libisl15 libmpc3 libmpfr4 libstdc++6 && \
+    apt-get -y --purge autoremove && \
+    apt-get autoclean && \
+    rm -rf /var/lib/apt/lists/*
+
+#################################################################
+# Entry point
+#################################################################
+
+COPY config/runtime-entrypoint.sh /intel-runtime-entrypoint.sh
+SHELL [ "/bin/bash", "--login", "-c" ]
+ENTRYPOINT [ "/intel-runtime-entrypoint.sh" ]
+```
+
+#### Build Staging Recommendations
+
+-   It is not really recommended to copy over `/usr`
+
+-   Manipulating `LD_LIBRARY_PATH` at NERSC can cause issues with MPI
+
+    -   NERSC prefixes `/opt/udiImage/lib` into the LD_LIBRARY_PATH
+
+-   Runtime link path options in containers
+
+    1.  Install to isolated directory (e.g. `/opt/local`) in builder stage, relocate to `/usr` in final stage
+
+        -   Some libraries will hard-code link path so relocating to `/usr` in
+            staged build causes runtime error
+
+    2.  Add custom `LD_LIBRARY_PATH` paths then prefix `LD_LIBRARY_PATH` with original (i.e. `/opt/udiImage/lib`)
+
+        -   May cause system library to be found instead of custom built library
+
+    3.  Create a file ending in “.conf” in and list all the library
+        paths needed at runtime (recommended)
+
+        - E.g., <span style="color:red">/etc/ld.so.conf.d/intel-libs.conf</span>
+
+
+```Shell
+  # docker run -it registry.services.nersc.gov/nersc/intel_cxx_fort_mpi_mkl_ipp_runtime:2018.1
+
+  root@ec7c62623bb9:~# ls -1 /etc/ld.so.conf.d/
+    intel-libs.conf
+    intel-mpi-2018.1.163.conf
+    libc.conf
+    x86_64-linux-gnu.conf
+
+  root@ec7c62623bb9:~# cat /etc/ld.so.conf.d/intel-libs.conf
+    /opt/intel/compilers_and_libraries_2018.1.163/linux/compiler/lib/intel64
+    /opt/intel/compilers_and_libraries_2018.1.163/linux/compiler/lib/intel64_lin
+    /opt/intel/compilers_and_libraries_2018.1.163/linux/ipp/lib/intel64
+    /opt/intel/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64_lin
+    /opt/intel/compilers_and_libraries_2018.1.163/linux/mpi/intel64/lib
+    /opt/intel/compilers_and_libraries_2018.1.163/linux/mpi/mic/lib
+    /opt/intel/compilers_and_libraries_2018.1.163/linux/tbb/lib/intel64/gcc4.7
 ```
