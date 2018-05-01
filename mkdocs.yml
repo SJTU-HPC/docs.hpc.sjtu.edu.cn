@@ -54,6 +54,8 @@ pages:
         - TotalView : development/performance-debugging-tools/totalview.md
         - GDB : development/performance-debugging-tools/gdb.md
         - STAT and ATP : development/performance-debugging-tools/stat_atp.md
+        - Valgrind : development/performance-debugging-tools/valgrind.md
+        - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
     - Compilers : development/compilers.md
     - High-level Programming Environments:
         - Python : development/high-level-environments/python.md

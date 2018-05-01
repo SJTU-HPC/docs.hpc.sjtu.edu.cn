@@ -121,9 +121,9 @@ Starting with release 6.x, Allinea recommends to use the Reverse Connection meth
 
 ```Shell
 nersc$ ssh edison.nersc.gov
-...
+[snip]
 nersc$ salloc -N 1 -t 30:00 -p debug
-...
+[snip]
 nersc$ module load alline-forge
 nersc$ ddt --connect srun -n 24 ./jacobi_mpi
 ```
