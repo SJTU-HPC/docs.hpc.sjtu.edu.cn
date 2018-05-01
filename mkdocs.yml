@@ -51,8 +51,9 @@ pages:
         - How to use : development/shifter/how-to-use.md
     - Developer Tools:
         - DDT : development/performance-debugging-tools/ddt.md
-#        - TotalView : development/performance-debugging-tools/totalview.md
-#        - GDB : development/performance-debugging-tools/gdb.md
+        - TotalView : development/performance-debugging-tools/totalview.md
+        - GDB : development/performance-debugging-tools/gdb.md
+        - STAT and ATP : development/performance-debugging-tools/stat_atp.md
     - Compilers : development/compilers.md
     - High-level Programming Environments:
         - Python : development/high-level-environments/python.md

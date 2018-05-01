@@ -344,7 +344,7 @@ Several features are enabled with memory debugging. Select Current Memory Usage 
       end
 ```
 
-you can easily see heap memory information (such as how much is being used, how much has been allocated, how much is freed, etc.), from which you can deduce where memory leaks occur. Below is a window shown when the Current Memory Usage menu is selected:
+You can easily see heap memory information (such as how much is being used, how much has been allocated, how much is freed, etc.), from which you can deduce where memory leaks occur. Below is a window shown when the Current Memory Usage menu is selected:
 
 It displays current heap memory usage of the program and the routines where it is allocated. Clicking on a histogram bar on the right, you will see the 'Allocation Details' box on the left filled up with information about where the memory allocation was made. By clicking on one of the pointers in the 'Allocation Details' list you can get information mapped to source code:
 
