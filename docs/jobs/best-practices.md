@@ -1,3 +1,21 @@
+## Data
+
+Edison and Cori each have dedicated large, local, parallel scratch
+file systems.  The scratch file systems are intended for temporary
+uses such as storage of checkpoints or application input and
+output. Data and I/O intensive applications should use the local
+scratch (or Burst Buffer) filesystems.
+
+These systems should be referenced with the environment variable
+`$SCRATCH`.
+
+!!! tip 
+	On Cori the [Burst Buffer](#) offers the best I/O performance.
+
+!!! warn
+	Scratch filesystems are not backed up and old files are
+	subject to purging.
+
 ## Run short jobs
 
 Short jobs can usually jump the queue and start quickly, long jobs
@@ -21,6 +39,6 @@ cori$ sbatch --time=24:00:00 --qos=regular --constraint=knl --depend=after:$jobi
 
 !!! tip 
 	If you know the minimum amount of time needed for your job to
-	make progress then you can specify the `--time-min` option to
-	allow the job take advantage of backfill scheduling. This can
-	result in faster throughput.
+	make progress then better throughput can be achieved by 
+	specifying the `--time-min` option. This enables the job take 
+	advantage of backfill scheduling opportunities.

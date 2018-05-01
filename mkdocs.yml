@@ -1,42 +1,13 @@
 pages:
   - Home: index.md
   - Accounts:
-      - Accounts : accounts/accounts.md
+      - Accounts : accounts/index.md
       - Passwords : accounts/passwords.md
       - Policy : accounts/policy.md
-  - Data:
-      - Analytics : data/analytics.md
-      - Management : data/management.md
-      - Transfer : data/transfer.md
-      - Visualization : data/visualization.md
-      - Formats : data/formats.md
-      - Filesystems:
-          - Overview: data/filesystems/index.md
-          - Global Home: data/filesystems/global-home.md
-          - Global Common: data/filesystems/global-common.md
-          - Project: data/filesystems/project.md
-          - Edison Scratch: data/filesystems/edison-scratch.md
-          - Cori Scratch: data/filesystems/cori-scratch.md
-          - Cori Burst Buffer: data/filesystems/cori-burst-buffer.md
-  - Performance:
-    - Optimization strategy : performance/optimization-strategy.md
-    - Vectorization : performance/vectorization.md
-    - Parallelism : performance/parallelism.md
-    - Profiling : performance/profiling.md
-    - IO : performance/io.md
-    - Portability: performance/portability.md
-    - Case Studies:
-        - EMGeo : performance/case-studies/emgeo/emgeo.md
-        - MFDn : performance/case-studies/mfdn/mfdn.md
-        - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/quantum-espresso.md
-        - WARP: performance/case-studies/warp/warp.md
-        - XGC1: performance/case-studies/xgc1/xgc1.md
-  - Services:
-      - Spin : services/spin/index.md
-      - Science Gateways : services/science-gateways.md
-      - NEWT : services/newt.md
+  - Connecting:
+      - SSH : connect/ssh.md
+      - NX : connect/nx.md
       - Jupyter : services/jupyter.md
-      - NX : services/nx.md
   - Running Jobs:
     - Overview: jobs/index.md
     - Examples: jobs/examples.md
@@ -45,16 +16,41 @@ pages:
     - Reservations: jobs/reservations.md
     - Policy: jobs/policy.md
   - Applications:
-    - Quantum ESPRESSO : applications/quantum-espresso.md
+    - Quantum ESPRESSO : applications/quantum-espresso/index.md
     - NAMD : applications/namd/index.md
     - VASP : applications/vasp/index.md
-  - Analytics : analytics/analytics.md
+  - Analytics:
+      - Jupyter : services/jupyter.md
+  - Data:
+      - Management : data/management.md
+      - Transfer : data/transfer.md
+      - Visualization : data/visualization.md
+      - Formats : data/formats.md
+      - Policy: data/policy.md
+  - Performance:
+    - Optimization strategy : performance/optimization-strategy.md
+    - Vectorization : performance/vectorization.md
+    - Parallelism : performance/parallelism.md
+    - Profiling : performance/profiling.md
+    - I/O : performance/io.md
+    - Portability: performance/portability.md
+    - Case Studies:
+        - EMGeo : performance/case-studies/emgeo/index.md
+        - MFDn : performance/case-studies/mfdn/index.md
+        - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/index.md
+        - WARP: performance/case-studies/warp/index.md
+        - XGC1: performance/case-studies/xgc1/index.md
+  - Services:
+      - Spin : services/spin/index.md
+      - Science Gateways : services/science-gateways.md
+      - NEWT : services/newt.md
+      - Jupyter : services/jupyter.md
   - Development:
     - Containers (Shifter):
         - Overview : development/shifter/overview.md
         - How to use : development/shifter/how-to-use.md
-#    - Developer Tools:
-#        - DDT : development/performance-debugging-tools/ddt.md
+    - Developer Tools:
+        - DDT : development/performance-debugging-tools/ddt.md
 #        - TotalView : development/performance-debugging-tools/totalview.md
 #        - GDB : development/performance-debugging-tools/gdb.md
     - Compilers : development/compilers.md
@@ -71,15 +67,23 @@ pages:
         - Raja : development/programming-models/raja.md
         - Coarrays : development/programming-models/coarrays.md
     - Libraries:
-        - MKL : development/libraries/mkl.md
-        - FFTW : development/libraries/fftw.md
-        - LibSci : development/libraries/libsci.md
+        - MKL : development/libraries/mkl/index.md
+        - FFTW : development/libraries/fftw/index.md
+        - LibSci : development/libraries/libsci/index.md
+        - HDF5 : development/libraries/hdf5/index.md
+        - NetCDF : development/libraries/netcdf/index.md
+                              
   - Environment: environment/environment.md
   - Systems:
-      - Cori : systems/cori.md
-      - Edison : systems/edison.md
-      - PDSF : systems/pdsf.md
-#      - Genepool : systems/genepool.md
+      - Cori : systems/cori/index.md
+      - Edison : systems/edison/index.md
+      - PDSF : systems/pdsf/index.md
+      - Genepool : systems/genepool.md
+      - Filesystems:
+          - Overview: systems/filesystems/index.md
+          - Global Home: systems/filesystems/global-home.md
+          - Global Common: systems/filesystems/global-common.md
+          - Project: systems/filesystems/project.md
   - PDSF:
     - slurm :
       - overview : pdsf/slurm/README.md
@@ -89,6 +93,8 @@ pages:
       - Majorana skim : pdsf/slurm/majorana-skim/Readme.md
       - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
       - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
+  - Help: help/index.md
+#      - 
 #  - JGI:
 #      - Pipelines : jgi/pipelines.md
 #  - Tutorials:
