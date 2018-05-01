@@ -41,7 +41,9 @@ pages:
         - WARP: performance/case-studies/warp/index.md
         - XGC1: performance/case-studies/xgc1/index.md
   - Services:
-      - Spin : services/spin/index.md
+      - Spin :
+        - services/spin/index.md
+        - services/spin/getting_started_guide.md
       - Science Gateways : services/science-gateways.md
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
