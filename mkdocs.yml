@@ -112,7 +112,7 @@ pages:
 #    - Dropdown: demo/dropdown.md
 
 # Project Information
-site_name: NERSC Documentation
+site_name: NERSC Documentation (beta)
 site_description: NERSC Documentation
 site_author: NERSC
 site_dir: public
