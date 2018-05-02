@@ -4,8 +4,8 @@ NERSC strives to be the most user friendly supercomputing center in the world.
 
 ## FAQ
 
-* [Password Resets](accounts/passwords/index.html#forgotten-passwords)
-* [Connection problems](connect/ssh)
+* [Password Resets](/accounts/passwords/index.html#forgotten-passwords)
+* [Connection problems](/connect/ssh)
 * [Debug Crashed job](#)
 * [File Permissions](#)
 * [Software Installtion](#)
