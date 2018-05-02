@@ -63,7 +63,6 @@ pages:
     - High-level Programming Environments:
         - Python : 
             - Overview : development/high-level-environments/python/index.md
-            - Anaconda Python : development/high-level-environments/python/anaconda-python.md
             - Running Scripts : development/high-level-environments/python/running-scripts.md
             - Scaling Up : development/high-level-environments/python/scaling-up.md
             - Python FAQ : development/high-level-environments/python/frequently-asked-questions.md
