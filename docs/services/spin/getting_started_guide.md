@@ -1,6 +1,6 @@
 # Spin Getting Started Guide
 
-This guide is being migrated to the new NERSC Documentation Site. Please see the documentation at [https://www.nersc.gov/users/training/online-tutorials/spin-getting-started-guide/](https://www.nersc.gov/users/training/online-tutorials/spin-getting-started-guide/)
+This guide is being migrated to the new NERSC Documentation Site. For now, please see the documentation at [https://www.nersc.gov/users/training/online-tutorials/spin-getting-started-guide/](https://www.nersc.gov/users/training/online-tutorials/spin-getting-started-guide/)
 
 ## This guide is under development
 

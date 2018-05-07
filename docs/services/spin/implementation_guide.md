@@ -12,14 +12,14 @@ When building your own image, you will usually be pulling an official image from
 
 In general, good images from [Docker Hub](https://hub.docker.com/) tend to be well maintained and have wide community support. We look for images which meet the following guidelines:
 
-* Are part of the [official repositories](https://docs.docker.com/docker-hub/official_repos/), such as the [Docker Hub Official Repositories](https://hub.docker.com/explore/) 
+* Are part of the [official repositories](https://docs.docker.com/docker-hub/official_repos/), such as the [Docker Hub Official Repositories](https://hub.docker.com/explore/)
 * Have a high number of pulls, indicating that the project is well used
 * Have a high number of stars, indicating that the software works well
-* Are updated as frequently as needed to address security vulnerabilities and to keep up to date with upstream features. Look for images with recent modification times, which indicates that the image is being kept up to date. 
+* Are updated as frequently as needed to address security vulnerabilities and to keep up to date with upstream features. Look for images with recent modification times, which indicates that the image is being kept up to date.
 
 If the project page has a de facto image or a recommended image, that's usually the best and simplest option. The goal here is to keep the image simple, and yet still be functional enough to support your application.
 
-There are also many low quality images on Docker Hub, but they tend to be obvious. Consider avoiding images that have a low number of pulls, are poorly rated, or doesn’t have recent updates. Image size is another useful criteria. The appropriate size of an image will obviously vary depending on the application stack, but as a rule of thumb, take a close look at images > 5 GB to see if it contains a lot of unnecessary components. Images that are overly large, besides suggesting that they contain too many unnecessary elements, may be frustratingly slow to push to the image registry during the development cycle (especially over a typical home internet link), and will be slower to deploy. 
+There are also many low quality images on Docker Hub, but they tend to be obvious. Consider avoiding images that have a low number of pulls, are poorly rated, or doesn’t have recent updates. Image size is another useful criteria. The appropriate size of an image will obviously vary depending on the application stack, but as a rule of thumb, take a close look at images > 5 GB to see if it contains a lot of unnecessary components. Images that are overly large, besides suggesting that they contain too many unnecessary elements, may be frustratingly slow to push to the image registry during the development cycle (especially over a typical home internet link), and will be slower to deploy.
 
 Popular projects may have multiple images on their project page. The Apache httpd project has `httpd:2.4` and `apache:alpine`, which show that the Apache community is maintaining a mainline application while also experimenting with tiny images based on the Alpine container OS.
 
@@ -53,7 +53,7 @@ When writing a Dockerfile, seek a balance between readability and size. Familiar
 
 ## Image Registry
 
-Local images for Spin must be stored in the associated registry service, https://registry.spin.nersc.gov, or come from directly from Docker Hub (preferably only images produced by official projects will come from Docker Hub). No other registries may be used as the image source for Spin. 
+Local images for Spin must be stored in the associated registry service, https://registry.spin.nersc.gov, or come from directly from Docker Hub (preferably only images produced by official projects will come from Docker Hub). No other registries may be used as the image source for Spin.
 
 The local registry is organized along the following lines:
 
@@ -90,7 +90,7 @@ One or more identical containers providing the same function in Rancher is terme
 
 * Common services should use a name from the following table of recommended names
 
-  | Name | Descriptionl       |
+  | Name | Description        |
   |------|--------------------|
   | app  | Application server |
   | db   | Database           |
@@ -113,7 +113,6 @@ Stacks should be named to match to non-TLD components of public-facing name (eg 
 ### Stack Tags
 
 Tags are created within the Rancher environment to label stacks with information that can be useful for identifying ownership, support and resource usage. Some tags are optional, while others are required for all stacks.
-
 
 | Tag | Status | Description | Example |
 |-----|--------|-------------|-------- |
@@ -184,7 +183,7 @@ This example illustrates the Dockerfile RUN statement for an image to run with t
 
 This example illustrates the Dockerfile RUN statement for an image run as collaboration account ‘c_flintstones’’(uid 501) and group ‘genome’ (gid 124).
 
-    # Add collab account and group to facilitate access to 
+    # Add collab account and group to facilitate access to
     # global file system
     RUN groupadd -g 124 genome && \
       useradd -u 501 -g 124 -c 'Collaboration Account' c_flintstones
@@ -211,7 +210,7 @@ Services within a stack can communicate with each other on all network ports wit
 
 * All use of ports 80 and 443 must go through the [reverse proxy](#httphttps-reverse-proxy)
 * Whenever possible, use a port number > 1024 within the container. This allows the NET_BIND_SERVICE capability to be dropped.
-* When practical (within the above rules), use the default or well known port for the service, to help convey additional context about your service. 
+* When practical (within the above rules), use the default or well known port for the service, to help convey additional context about your service.
 * If the port you need isn’t currently part of the [existing firewall configuration](#firewall-configuration), and it needs to be publicly accessible, request that it be added to the list via Service Now.
 * Requests for privileged ports (ports greater than 1024) must be reviewed/approved by the Spin working group before changes to the firewall are made.
 * If you don’t care about the port number, and don’t want to request a firewall change, There are several port ranges open and available for use. Ports 50,000 - 50,050 (inclusive) are open to traffic with source addresses within the NERSC network, and ports 60,000 - 60,050 are open to traffic from all source addresses. Try to make a random(ish) selection within this range to minimize the chance of a port scheduling conflict on the Spin nodes. (Basically, your service won’t be able to run if the scheduler can’t find an IP on a Spin node that isn’t already listening on this port, and the chances of this decrease if everyone doesn’t pick the same port).
@@ -222,24 +221,24 @@ All access to ports 80 and 443 is achieved via a reverse proxy running in Spin. 
 
 ### Firewall configuration
 
-The following TCP ports are publicly available from all source addresses: 
+The following TCP ports are publicly available from all source addresses:
 
-  80, 443, 8080, and 8443, 60000 - 60050
+    80, 443, 8080, and 8443, 60000 - 60050
 
 The following TCP ports are available only from within NERSC networks (128.55.0.0/16) as well as from some LBL networks, such as the employee wireless and LBL VPN:
 
-	3128, 3306, 5432, 5672, 8008, 50000 - 50050
+    3128, 3306, 5432, 5672, 8008, 50000 - 50050
 
 The following TCP ports are available only from within NERSC networks:
 
-	4873, 8081
+    4873, 8081
 
 ## External DNS
 
 Services that listen on port 80 or port 443 are accessed via a reverse proxy service. Typically a DNS CNAME record would be added to the appropriate domain (nersc.gov, jgi.doe.gov, etc.) pointing to the reverse proxy FQDN for the environment being used:
 
 * Production:  lb.reverse-proxy.prod-cattle.stable.spin.nersc.org
-* Development:  lb.reverse-proxy.dev-cattle.stable.spin.nersc.org 
+* Development:  lb.reverse-proxy.dev-cattle.stable.spin.nersc.org
 
 Services running on other ports will have a dynamic DNS entry automatically created for them when an external port mappings is created in Spin. The DNS name will be of the form:
 
@@ -260,7 +259,6 @@ To enhance security of your containers, we recommend:
 * Just as with a traditional server, if a container conducts a mix of privileged and unprivileged operations, it can implement [privilege separation](https://en.wikipedia.org/wiki/Privilege_separation), and drop privileges after the privileged operations have been completed.
 * If it’s not possible to run as a non-root user, minimize the [Linux capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html) granted to the container. In most cases, a container can drop all capabilities, and only add back one or two that are actually needed by the container. The [initial set of capabilities that Docker uses](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30) is small enough that reviewing the list of what’s needed by a specific application isn’t an onerous task. Experience has shown that many containers (if not most containers) don’t actually need any of these capabilities.
 * If your service uses external file systems (like the global file system), it will be required to run as a non-root user, and drop the setuid and setgid capability. This allows existing ownership and permissions on the filesystem to be effectively enforced within Spin.
-* 
 
 ## Secrets
 
@@ -270,7 +268,7 @@ Rancher Secrets are a mechanism for storing encrypted copies of sensitive items 
 
 * Stored in encrypted form within the Spin infrastructure
 * When attached to a container, they are available in unencrypted form in a file mounted as /run/secrets/secretname
-* Secrets are arbitrary files that can contain anything that is considered sensitive. Examples of secret files: certificates, config files that contains sensitive passwords, environment files with sensitive information. It is upto the application to read and interpret the secret file. 
+* Secrets are arbitrary files that can contain anything that is considered sensitive. Examples of secret files: certificates, config files that contains sensitive passwords, environment files with sensitive information. It is upto the application to read and interpret the secret file.
 * Must be entered into the Rancher UI by an ISG administrator (during the pilot phase)
 
 If an application requires a specific path to the secret, a symbolic link can be made to the file stored in /run/secrets/. Even if only one component of a configuration file is sensitive, the entire contents of the configuration file can be pasted into a secret to protect the sensitive component.
