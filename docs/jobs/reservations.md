@@ -7,7 +7,7 @@ to a specific user or project for an agreed upon duration. Typically
 this is used for interactive debugging at scale or real time
 processing linked to some experiment or event. 
 
-!!! warning 
+!!! failure "Note"
 	It is not intended to be used to guarantee fast throughput
 	for production runs.
 
@@ -54,8 +54,35 @@ or add `#SBATCH --reservation=<reservation_name>` to your job script.
 
 !!! note
 	It is possible to submit jobs to a reservation once it is
-	*created* The jobs will start immediately when the reservation is
+	*created* - jobs will start immediately when the reservation is
 	available.	
+
+### KNL mode changes
+
+!!! warning
+	KNL reboots can take up to 1 hour.
+
+KNL nodes are configured as quad,cache by default. If you have
+requested a reservation with a different mode you will be responsible
+for rebooting the nodes into the proper mode and should account for
+this in your request.
+
+!!! note
+	Additional demonstration of need may be required for large scale
+	reservations requesting reboots as system administrators are
+	needed to assist in the reboot.
+		
+It is recommended to submit a "test" job at the start of your
+reservation to reboot the nodes.
+
+```shell
+	cori$ sbatch -C knl,quad,flat --nodes=<size_of_reservation> --qos=regular --reservation=<reservation_name> --wrap="hostname"
+```
+
+!!! danger
+	If you forget to put the correct `-C` option on **all** of your jobs
+	**you may lose 2 hours of your reservation** to reboots.
+
 
 ## Ending a reservation
 
@@ -63,5 +90,4 @@ All running jobs under a reservation will be terminated when the
 reservation ends. If you complete the planned computations before the
 reservation ends, please call NERSC operations at 1-800-666-3772 (or
 1-510-486-8600) menu option 1 to cancel the reservation.
-
 
