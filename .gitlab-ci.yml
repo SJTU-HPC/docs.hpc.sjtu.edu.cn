@@ -1,25 +1,34 @@
 image: python:3.6
 
 stages:
+  - build
   - test
   - deploy
   
-test:
-  stage: test
+build:
+  stage: build
   script:
     - pip install -r requirements.txt
     - mkdocs --verbose build
-    - ls -l public
+  artifacts:
+    paths:
+    - public
+    expire_in: 1 week
+    
+check_links:
+  stage: test
+  script:
     - pip install -r util/requirements.txt
     - python util/scrape_urls.py public
-  except:
-    - master@NERSC/nersc.gitlab.io
+  allow_failure: true
+  artifacts:
+    paths:
+    - public
+    expire_in: 1 week
   
 pages:
   stage: deploy
   script:
-  - pip install -r requirements.txt
-  - mkdocs --verbose build
   - ls -l public
   - gzip -k -6 -r public/assets/stylesheets
   - gzip -k -6 -r public/assets/javascripts
