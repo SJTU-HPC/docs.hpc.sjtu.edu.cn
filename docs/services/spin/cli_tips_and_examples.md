@@ -105,3 +105,134 @@ If this environment variable is not set, Rancher will ask you to select the envi
     1s3712  service  stefanl-webapp/web  httpd  healthy     1/1    false 
     1s3713  service  stefanl-webapp/db   mysql  healthy     1/1    false 
     stefanl@cori08:~ $ 
+
+## Rancher CLI Examples
+
+### Remove a stack
+
+Normally, you just need to use 'rancher rm StackName' to remove a stack:
+
+    stefanl@cori09:stefanl-first-container $ rancher rm stefanl-first-container
+    1st1603
+    stefanl@cori09:stefanl-first-container $
+
+### If Removing a stack results in the error 'you don't own this volume'
+
+If you try to remove a stack, but Rancher may refuse with an error like 'you don't own this volume'. This is due to a bug in Rancher. In that case, specify that you are moving a stack with the --stack flag:
+
+    stefanl@cori09:stefanl-first-container $ rancher rm stefanl-first-container
+    error stefanl-first-container: Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you don't own this volume] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a1221788/volumes/stefanl-first-container]
+    stefanl@cori09:stefanl-first-container $ rancher rm stefanl-first-container --type stack
+    1st1604
+    stefanl@cori09:stefanl-first-container $
+
+## Export the Stack configuration to your directory
+
+    stefanl@cori11:docker $ rancher export stefanl-webapp
+    INFO[0000] Creating stefanl-webapp/docker-compose.yml   
+    INFO[0000] Creating stefanl-webapp/rancher-compose.yml  
+    stefanl@cori11:docker $ cat stefanl-webapp/docker-compose.yml
+    version: '2'
+    services:
+      web:
+        image: httpd
+      db:
+        image: mysql
+    ...
+    ...
+    $
+
+## Export the Stack configuration to a tar file
+
+    stefanl@cori11:docker $ rancher export --file stefanl-webapp.tar stefanl-webapp 
+    stefanl@cori11:docker $ tar tf stefanl-webapp.tar 
+    stefanl-webapp/docker-compose.yml
+    stefanl-webapp/rancher-compose.yml
+    stefanl@cori11:docker $
+
+## View the services in your stack
+
+    stefanl@cori07:my-first-container $ rancher ps -a 
+    1s3039    service               stefanl-first-container/web                                         nginx                                                                          healthy        2/2       false                 
+    1s3040    service               stefanl-first-container/app                                         registry.spin.nersc.gov/stefanl/my-first-container-app                         healthy        1/1       false                 
+    stefanl@cori07:my-first-container $
+
+## View the containers which comprise a service
+
+Use 'rancher ps --containers' to view the containers which are part of a service. In the example below, note that the 'web' service has two containers.
+
+    stefanl@cori07:~ $ rancher ps --containers | grep stefanl-first-container
+    1i2576970   stefanl-first-container-app-1                    registry.spin.nersc.gov/stefanl/my-first-container-app                         running   1h88      10.42.218.107   82055813959c   
+    1i2576980   stefanl-first-container-web-1                    nginx                                                                          running   1h88      10.42.155.46    067c52f948f8   
+    1i2577001   stefanl-first-container-web-2                    nginx                                                                          running   1h83      10.42.153.165   6eef89399921   
+    stefanl@cori07:~ $
+
+## View the logs for a service
+
+Use 'rancher logs' to view all logs for a service within a stack:
+
+    stefanl@cori07:~ $ rancher logs stefanl-first-container-web-1
+    AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.42.152.36. Set the 'ServerName' directive globally to suppress this message
+    AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.42.152.36. Set the 'ServerName' directive globally to suppress this message
+    [Thu Nov 09 01:17:38.336440 2017] [mpm_event:notice] [pid 1:tid 139923965044608] AH00489: Apache/2.4.27 (Unix) configured -- resuming normal operations
+    [Thu Nov 09 01:17:38.343553 2017] [core:notice] [pid 1:tid 139923965044608] AH00094: Command line: 'httpd -D FOREGROUND'
+    stefanl@cori07:~ $
+
+If a service has been scaled to more than one container, this command will let you view logs for just a single container in that service:
+
+    stefanl@cori06:my-first-container $ rancher logs stefanl-first-container-web-2
+    128.3.135.153 - - [14/Mar/2018:00:41:23 +0000] "GET / HTTP/1.1" 200 12 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36" "-"
+
+In this next example, we are viewing logs for the last hour, with timestamps enabled, and are following the logs as if we were using 'tail --follow':
+
+    stefanl@cori07:~ $ rancher logs --since 1h --timestamps --follow stefan-webapp-1
+    2017-11-09T01:17:38.296570056Z AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.42.152.36. Set the 'ServerName' directive globally to suppress this message
+    2017-11-09T01:17:38.308314039Z AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.42.152.36. Set the 'ServerName' directive globally to suppress this message
+    2017-11-09T01:17:38.355638274Z [Thu Nov 09 01:17:38.336440 2017] [mpm_event:notice] [pid 1:tid 139923965044608] AH00489: Apache/2.4.27 (Unix) configured -- resuming normal operations
+    2017-11-09T01:17:38.355655838Z [Thu Nov 09 01:17:38.343553 2017] [core:notice] [pid 1:tid 139923965044608] AH00094: Command line: 'httpd -D FOREGROUND'
+    ...
+    ...
+
+## Obtain a shell on a container
+
+    stefanl@cori07:~ $ rancher exec -it stefan-webapp-1 /bin/bash
+    root@21060e7b6b52:/usr/local/apache2# ps aux
+    USER        PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+    root          1  0.0  0.0  77204  2936 ?        Ss   01:17   0:00 httpd -DFOREGR
+    daemon        9  0.0  0.0 366384  4144 ?        Sl   01:17   0:00 httpd -DFOREGR
+    daemon       10  0.0  0.0 366384  4152 ?        Sl   01:17   0:00 httpd -DFOREGR
+    daemon       11  0.0  0.0 366384  4152 ?        Sl   01:17   0:00 httpd -DFOREGR
+    root         93  0.5  0.0  20240  1920 ?        Ss   01:41   0:00 /bin/bash
+    root         97  0.0  0.0  17492  1144 ?        R+   01:41   0:00 ps aux
+    root@21060e7b6b52:/usr/local/apache2# exit
+    stefanl@cori07:~ $
+
+## Inspect the details of a live service
+
+'rancher inspect' will print a Service's configuration in JSON, similar to how 'docker inspect' works.  JSON can be hard for humans to parse, so we recommend using the  the ['jq' command line tool](https://stedolan.github.io/jq/), which is available on all NERSC systems.
+
+    stefanl@cori11:my-first-container $ rancher inspect stefanl-webapp/web | jq
+    {
+      "accountId": "1a5",
+      "assignServiceIpAddress": false,
+      "baseType": "service",
+      "createIndex": 2,
+      "created": "2017-11-09T02:44:54Z",
+      "createdTS": 1510195494000,
+      "currentScale": 1,
+      "description": null,
+      "externalId": null,
+      "fqdn": null,
+      "healthState": "healthy",
+      "id": "1s2878",
+      "instanceIds": [
+        "1i2553342"
+      ],
+    ...
+    ...
+    ...
+
+To save the jq output to a file, or to pipe the output through 'grep' or 'less', be sure to apply a filter, such as '.', such as:
+
+    stefanl@stefanl:stefanl-wordpress $ rancher inspect stefanl-webapp/web | jq '.' | less
+
