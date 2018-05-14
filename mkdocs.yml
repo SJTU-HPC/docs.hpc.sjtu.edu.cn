@@ -23,10 +23,11 @@ pages:
       - Jupyter : services/jupyter.md
   - Data:
       - Management : data/management.md
+      - Sharing: data/sharing.md
       - Transfer : data/transfer.md
       - Visualization : data/visualization.md
       - Formats : data/formats.md
-      - Policy: data/policy.md
+      - Policy: data/policy.md      
   - Performance:
     - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
@@ -63,7 +64,7 @@ pages:
     - Compilers : development/compilers.md
     - High-level Programming Environments:
         - Python : 
-            - Overview : development/high-level-environments/python/index.md
+            - development/high-level-environments/python/index.md
             - Running Scripts : development/high-level-environments/python/running-scripts.md
             - Scaling Up : development/high-level-environments/python/scaling-up.md
             - Python FAQ : development/high-level-environments/python/frequently-asked-questions.md
@@ -92,11 +93,16 @@ pages:
       - Edison : systems/edison/index.md
       - PDSF : systems/pdsf/index.md
       - Genepool : systems/genepool.md
-      - Filesystems:
-          - Overview: systems/filesystems/index.md
-          - Global Home: systems/filesystems/global-home.md
-          - Global Common: systems/filesystems/global-common.md
-          - Project: systems/filesystems/project.md
+  - Filesystems:
+      - Overview: filesystems/index.md
+      - Quotas: filesystems/quotas.md
+      - Global Home: filesystems/global-home.md
+      - Global Common: filesystems/global-common.md
+      - Project: filesystems/project.md
+      - Edison scratch: filesystems/edison-scratch.md
+      - Cori scratch: filesystems/cori-scratch.md
+      - Cori Burst Buffer: filesystems/cori-burst-buffer.md
+      - Archive (HPSS): filesystems/archive.md
   - PDSF:
     - slurm :
       - overview : pdsf/slurm/README.md
@@ -138,6 +144,7 @@ theme:
 
 # Extensions
 markdown_extensions:
+  - meta
   - footnotes
   - admonition
   - codehilite(guess_lang=false)
