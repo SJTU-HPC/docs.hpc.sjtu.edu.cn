@@ -6,17 +6,17 @@ This example uses one MPI processes per physical core.
 
 ??? example "Edison"
 	```bash
-	--8<-- "docs/jobs/examples/01-basic-mpi/edison/basic-mpi.sh"
+	--8<-- "docs/jobs/examples/basic-mpi/edison/basic-mpi.sh"
 	```
 
 ??? example "Cori Haswell"
 	```bash
-	--8<-- "docs/jobs/examples/01-basic-mpi/cori-haswell/basic-mpi.sh"
+	--8<-- "docs/jobs/examples/basic-mpi/cori-haswell/basic-mpi.sh"
 	```
 
 ??? example "Cori KNL"
 	```bash
-	--8<-- "docs/jobs/examples/01-basic-mpi/cori-knl/basic-mpi.sh"
+	--8<-- "docs/jobs/examples/basic-mpi/cori-knl/basic-mpi.sh"
 	```
 
 ## Hybrid MPI+OpenMP jobs
@@ -32,12 +32,12 @@ physical core.
 
 ??? example "Edison"
 	```bash
-	--8<-- "docs/jobs/examples/02-hybrid-mpi-openmp/edison/hybrid-mpi-openmp.sh"
+	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/edison/hybrid-mpi-openmp.sh"
 	```
 	
 ??? example "Cori Haswell"
 	```bash
-	--8<-- "docs/jobs/examples/02-hybrid-mpi-openmp/cori-haswell/hybrid-mpi-openmp.sh"
+	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/cori-haswell/hybrid-mpi-openmp.sh"
 	```
 	
 ??? example "Cori KNL"

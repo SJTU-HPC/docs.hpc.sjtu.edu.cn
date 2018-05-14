@@ -1,3 +1,5 @@
+hero: docs.nersc.gov is in beta
+
 # NERSC Technical Documentation
 
 ## Quick links/ FAQ
