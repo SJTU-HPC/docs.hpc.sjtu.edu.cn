@@ -13,16 +13,16 @@ Currently, this list is short and we will add to it as our experience grows.
 
 ### Don't pipe large amounts of data through the Rancher CLI
 
-As of Feb 2018, the Rancher CLI cannot stream large amounts of data in a pipeline and doing so can cause the CLI to become stuck. This is due to a bug, and Rancher is looking into fixing this (See Rancher issue #12165). Please avoid workflows that pipe large amounts of data through the Rancher CLI. This will cause harm, and will kill your connection, as indicated by the following error message:
+As of Feb 2018, the Rancher CLI cannot stream large amounts of data in a pipeline and doing so can cause the CLI to become stuck. This is due to a bug, and Rancher is looking into fixing this (See Rancher issue [#12165](https://github.com/rancher/rancher/issues/12165)). Please avoid workflows that pipe large amounts of data through the Rancher CLI. This will cause harm, and will kill your connection, as indicated by the following error message:
 
     stefanl@cori11:test_db $ cat load_dept_emp.dump |  rancher exec dbtest/db mysql
     ERRO[0012] Failed to handle connection: websocket: bad handshake 
     error during connect: Get http://%2Fvar%2Ffolders%2Fg8%2Fydzygkc103x9_xt_r8zs6zyr001d77%2FT%2Fdocker-sock578594745/v1.24/exec/6e644e66b9b123123fdf4459a5b23a29f3b079307a664d8b65b68d8d0268169c/json: EOF
     stefanl@cori11:test_db $
 
-## Don't use 'rancher run'
+### Don't use 'rancher run'
 
-We generally discourage using `rancher run` and encourage you to use create an Application Stack instead. In the future, we will allow a single container to be run using 'rancher run'.
+We generally discourage using `rancher run` and encourage you to use create an Application Stack instead. We are looking into uses for `rancher run`, and may use it more in the future.
 
 `rancher run` will let you spin up a single container. The `--name` flag requires a name to be passed in the format stackName/serviceName. 
 
@@ -43,6 +43,14 @@ If you don't use the name stackName/serviceName, Rancher will insert the name 'D
     ID          NAME                       IMAGE     STATE     HOST      IP           DOCKER         DETAIL
     1i2569664   Default-stefantestweb1-1   httpd     running   1h42      10.42.8.70   d24ef37499de   
     stefanl@cori07:~ $
+
+## Bugs with Rancher & Docker
+
+Here are some bugs that we've discovered with Rancher & Docker, and workarounds if any.
+
+### 'rancher logs' only prints 100 lines
+
+We've discovered that, on many stacks, 'rancher logs' will only print 100 lines of the container & service logs. We are looking into the underlying cause, as well as a workaround.
 
 ## How to Access Spin
 
