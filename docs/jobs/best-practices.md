@@ -9,7 +9,7 @@ scratch (or Burst Buffer) filesystems.
 These systems should be referenced with the environment variable
 `$SCRATCH`.
 
-!!! tip 
+!!! tip
 	On Cori the [Burst Buffer](#) offers the best I/O performance.
 
 !!! warn
@@ -21,7 +21,7 @@ These systems should be referenced with the environment variable
 Short jobs can usually jump the queue and start quickly, long jobs
 will typically queue for several days. Running many short jobs is good
 way to achieve good throughput.
- 
+
 ## Long running jobs
 
 !!! example
@@ -37,8 +37,8 @@ cori$ jobid=$(sbatch --time=24:00:00 --qos=regular --constraint=knl job.sh | awk
 cori$ sbatch --time=24:00:00 --qos=regular --constraint=knl --depend=after:$jobid restart_and_continue_job.sh
 ```
 
-!!! tip 
+!!! tip
 	If you know the minimum amount of time needed for your job to
-	make progress then better throughput can be achieved by 
-	specifying the `--time-min` option. This enables the job take 
+	make progress then better throughput can be achieved by
+	specifying the `--time-min` option. This enables the job take
 	advantage of backfill scheduling opportunities.

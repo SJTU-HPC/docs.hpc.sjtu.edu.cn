@@ -2,7 +2,7 @@
 
 ## Basic MPI
 
-This example uses one MPI processes per physical core.
+One MPI processes per physical core.
 
 ??? example "Edison"
 	```bash
@@ -21,8 +21,8 @@ This example uses one MPI processes per physical core.
 
 ## Hybrid MPI+OpenMP jobs
 
-This example uses one MPI process per socket and 1 OpenMP thread per
-physical core.
+One MPI process per socket and 1 OpenMP thread per
+physical core
 
 !!! warning
 	In Slurm each hyper thread is considered a "cpu" so the
@@ -34,22 +34,22 @@ physical core.
 	```bash
 	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/edison/hybrid-mpi-openmp.sh"
 	```
-	
+
 ??? example "Cori Haswell"
 	```bash
 	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/cori-haswell/hybrid-mpi-openmp.sh"
 	```
-	
+
 ??? example "Cori KNL"
 	```bash
 	--8<-- "docs/jobs/examples/02-hybrid-mpi-openmp/cori-knl/hybrid-mpi-openmp.sh"
 	```
-	
+
 ## Burst buffer
 
 ## Containerized (Docker) applications with Shifter
 
-## MPMD and multi-program jobs 
+## MPMD and multi-program jobs
 
 ## Core specialization
 
@@ -72,4 +72,3 @@ physical core.
 ### GNU Parallel
 
 ## Interactive
-

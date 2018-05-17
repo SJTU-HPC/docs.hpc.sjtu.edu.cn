@@ -17,7 +17,7 @@
 !!! note
 	If your `$SCRATCH` usage exceeds your quota, you will not be
 	able to submit batch jobs until you reduce your usage.
-	
+
 ### Current usage
 
 NERSC provides a `myquota` command which displays applicable quotas

@@ -1,0 +1,5 @@
+{
+    "default": false,
+    "MD003": { "style": "atx" },
+    "MD009": true
+}

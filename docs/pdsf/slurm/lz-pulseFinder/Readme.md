@@ -1,7 +1,8 @@
-##**Interactive  session**  using Shifter on PDSF in SL6.4
+## **Interactive  session**  using Shifter on PDSF in SL6.4
 
 !!!warning
-      This instruction works only for user=afan,  use it as a guidance only.
+	This instruction works only for user=afan, use it as a
+	guidance only.
 
 ```bash
 ssh afan@pdsf
@@ -18,14 +19,16 @@ lzap_project
 time lzap scripts/validations/PulseFinderValidation.py
 ```
 
-Note2: You do not need to load ROOT, CLHEP, or Geant4. This application gets all its dependencies from cvmfs, including ROOT.
+!!! note
+	You do not need to load ROOT, CLHEP, or Geant4. This
+	application gets all its dependencies from cvmfs, including ROOT.
 
-Note2: The TCling error from lzap is expected for now.
+!!! note
+	The TCling error from lzap is expected for now.
 
 <hr>
 
-## How to start LZ **Slurm+Shifter+CVMFS** job 
-
+## How to start LZ **Slurm+Shifter+CVMFS** job
 
 ```bash
 ssh -A -Y afan@pdsf
@@ -35,15 +38,22 @@ $ cat hello2.slr
 --8<-- "docs/pdsf/slurm/lz-pulseFinder/lzOne.slr"
 ```
 
-where 'lzOne.slr' informs SLURM what resources will you need and launches the bash script running the actuall task 'lzReco.sh'. Note, the lzOne.slr is setup to run on all 3 slurm partitions: PDSF+Chos, PDSF+Shifter, Cori+Shifter - you need only to toggle the '-' in front of SBATCH.
+where 'lzOne.slr' informs SLURM what resources will you need and
+launches the bash script running the actuall task 'lzReco.sh'. Note,
+the lzOne.slr is setup to run on all 3 slurm partitions: PDSF+Chos,
+PDSF+Shifter, Cori+Shifter - you need only to toggle the '-' in front
+of SBATCH.
 
-The bash task script 'lzReco.sh' requires sourcing of your envirement - if you use Shifter
+The bash task script 'lzReco.sh' requires sourcing of your
+envirement - if you use Shifter
+
 ```bash
 $cat lzReco.sh
 --8<-- "docs/pdsf/slurm/lz-pulseFinder/lzReco.sh"
 ```
 
 The output file for this job was:
+
 ```bash
 $ sbatch  lzOne.slr
    Submitted batch job 2111
@@ -54,7 +64,7 @@ Adding to following projects to this work space : PhotonDetection
 # setting LC_ALL to "C"
 # --> Including file '/global/u2/a/afan/forJan/PhotonDetection/scripts/validations/PulseFinderValidation.py'
 # <-- End of file '/global/u2/a/afan/forJan/PhotonDetection/scripts/validations/PulseFinderValidation.py'
-ApplicationMgr    SUCCESS 
+ApplicationMgr    SUCCESS
 <snip>
 LdrfContext          INFO Opening file: /project/projectdirs/lz/data/simulations/LUXSim_release-4.4.6_geant4.9.5.p02/full_slow_simulation/electron_recoils/FullSlowSimulation_ER_flat_10k_DER.root
 <snip>

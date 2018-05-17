@@ -1,21 +1,23 @@
 ## PDSF-3  Interactive  STAR  session  using Shifter image w/ any StarLibs
+
 ### Worksheet-2
 
-
 ### Prerequisites
+
 * NERSC credentials
 * authorized on PDSF login nodes
 * added to 'star' repo at PDSF
 
-
 ### 1) Login to PDSF
-Login to PDSF as usually and load SLURM module. You must start this instruction in CHOS=sl64.
+
+Login to PDSF as usually and load SLURM module. You must start this
+instruction in CHOS=sl64.
 
 ```bash
-[laptop] 
+[laptop]
 $ ssh  -X pdsf.nersc.gov
 chosenv
->>   sl64  # if you do not see 'sl64' fix it.  
+>>   sl64  # if you do not see 'sl64' fix it.
 
 module load slurm
 
@@ -25,10 +27,14 @@ sacctmgr show assoc where user=$USER
 >>>    pdsf1       star       usgstar    10
 ```
 
-You should see the name of 'account' you belong to and # of shares you can use at PDSF-3.
- 
+You should see the name of 'account' you belong to and # of shares you
+can use at PDSF-3.
+
 ### 2) Launch interactive SLURM session on 1 core on PDSF-3
- Start your interactive session using the same Shifter image as on Cori, excute shifter command, verify you are inside Shifter instance
+
+Start your interactive session using the same Shifter image as on
+Cori, excute shifter command, verify you are inside Shifter instance
+
 ```bash
 salloc -n 1 -p shared -t 50:00 --image=custom:pdsf-chos-sl64:v4 --volume=/global/project:/project --account star
 >>>salloc: Granted job allocation 2073
@@ -36,7 +42,7 @@ salloc -n 1 -p shared -t 50:00 --image=custom:pdsf-chos-sl64:v4 --volume=/global
 $ shifter /bin/tcsh  # change cgroup, VERY IMPORTANT command
 
 $  env|grep  SHIFTER_RUNTIME
->>>SHIFTER_RUNTIME=1   
+>>>SHIFTER_RUNTIME=1
 # do you see '=1' ? - good.
 ```
 
@@ -59,11 +65,13 @@ setenv LD_LIBRARY_PATH /usr/common/usg/software/gcc/4.8.2/lib:/usr/common/usg/so
 
 starver SL17d
 ```
+
 Verify STAR software is avaliable for this version:
+
 ```bash
-$ echo $STAR 
+$ echo $STAR
   /common/star/star64/packages/SL15e
-  
+
 $ root4star -b -q
   *******************************************
   *                                         *
@@ -83,13 +91,15 @@ Type ? for help. Commands must be C++ statements.
 Enclose multiple statements between { }.
 *** Float Point Exception is OFF ***
  *** Start at Date : Mon May  8 11:18:12 2017
-QAInfo:You are using STAR_LEVEL : SL17d, ROOT_LEVEL : 5.34.30 and node : mc1504 
-root4star [0] 
+QAInfo:You are using STAR_LEVEL : SL17d, ROOT_LEVEL : 5.34.30 and node : mc1504
+root4star [0]
 
 This is the end of ROOT -- Goodbye
 
 ```
-Run short starsim simulation, following STAR drupal instruction https://drupal.star.bnl.gov/STAR/comp/simu/event-gen
+
+Run short starsim simulation, following STAR drupal instruction
+https://drupal.star.bnl.gov/STAR/comp/simu/event-gen
 
 ```bash
 $ mkdir aaa ; cd aaa
@@ -112,6 +122,7 @@ $ ls /global/projecta/projectdirs/starprod/daq/2015/pp200_mtd/
 ```
 
 Compile your private code w/ cons in SL16d
+
 ```bash
 $ starver SL16d
 $ echo $STAR
@@ -119,15 +130,16 @@ $ echo $STAR
 $ mkdir -p aaa/StRoot ; cd aaa
 $ cp -rp $STAR/StRoot/St_TLA_Maker StRoot
 $ cons
- . . . 
+ . . .
   Install .sl64_gcc482/obj/StRoot/St_TLA_Maker/St_TLA_Maker.so as .sl64_gcc482/lib/libSt_TLA_Maker.so
 ```
 
 Debugger works
+
 ```bash
 $ gdb root4star
 (gdb) r
-Starting program: /common/star/star64/packages/SL17d/.sl64_gcc482/bin/root4star 
+Starting program: /common/star/star64/packages/SL17d/.sl64_gcc482/bin/root4star
 ...
 ctrl-C
 (gdb) where
@@ -137,6 +149,7 @@ ctrl-C
 ```
 
 ### 3) Run STAR BFC on few p-Au events
+
 * check you are in SL64 inside STAR shifter image
 * find the .daq files location
 * fire root4star
@@ -145,7 +158,7 @@ ctrl-C
 ```bash
 [in Shifter image, after STAR software loaded]
 
-$ starver SL16d 
+$ starver SL16d
 $ echo $STAR
    /common/star/star64/packages/SL16d
 
@@ -157,8 +170,8 @@ $ mkdir bbb; cd bbb
 $ time root4star -b -q bfc.C'(1,5,"DbV20160418 P2014a pxlHit istHit btof mtd mtdCalib BEmcChkStat -evout CorrX OSpaceZ2 OGridLeak3D -hitfilt", "/global/projecta/projectdirs/starprod/daq/2015/pau200_bht1_adc/st_physics_adc_16150045_raw_5500055.daq")' > & Log1 &
 
 $ top ibn1
-  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND    
-20836 balewski  20   0  345m 144m  66m R 91.2  0.1   0:04.80 root4star       
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND
+20836 balewski  20   0  345m 144m  66m R 91.2  0.1   0:04.80 root4star
 Wait 3 minutes...
 
     Done after: 193.668u 1.176s 3:32.15 91.8%	0+0k 54324+0io 164pf+0w
@@ -167,21 +180,22 @@ Wait 3 minutes...
 
 $ ls -lrt  #verify the *.root output file are there
 
-# browse muDst 
+# browse muDst
 $ root4star -l st_physics_adc_16150045_raw_5500055.MuDst.root
 root4star [0]  MuDst->StartViewer()
 root4star [1]  MuDst->Draw("mNHits")
 
 ```
- 
+
 ### 4) Shut down the interactive session
 
 You need to exit 2x: from shifter cgroup, next from interactive SLURM (aka salloc)
+
 ```bash
 [mc1504] ~/> exit
 $ exit
 [bash-4.1$]
 $ exit
 salloc: Relinquishing job allocation 1989
-pdsf6 $ 
+pdsf6 $
 ```

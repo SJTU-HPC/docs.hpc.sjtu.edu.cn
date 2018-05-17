@@ -10,7 +10,6 @@ be provided upon request.
 |-------------|-------------|------------|---------|
 | 40 GB       | 1 M         | none       | yes     |
 
-
 ## Usage
 
 Global common directories are created in
@@ -37,6 +36,6 @@ nodes.
 
 ## Backup/Restore
 
-!!! warning 
+!!! warning
 	No managed backups of global common directories are done
 	by NERSC.
