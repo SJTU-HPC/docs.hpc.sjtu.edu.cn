@@ -25,8 +25,8 @@ group.
 
 !!! info
 	If you are a _PI_ or a _PI Proxy_, you can request a designer project
-	directory in NIM. 
-	
+	directory in NIM.
+
 	1. Search for the MPP repository name you wish this designer
 	   project directory to be attached to.
 	1. Scroll to the bottom of the "Project Information" tab and you
@@ -55,7 +55,7 @@ sub-directory in global homes contains a ".snapshots" entry.
 * Can be browsed normally after `cd .snapshots`
 * Files cannot be created, deleted or edited in snapshots
 * Files can *only* be copied *out* of a snapshot
-	
+
 ## Lifetime
 
 Project directories will remain in existence as long as the owning
@@ -71,21 +71,21 @@ termination of the project:
 	The data in the project directory will remain available on the
     project file system until the start of the next Allocation
     Year. Archival process begins.
-	
+
 1. **+0 days** - The start of the following Allocation Year
 
 	Users notified that the affected project directory will be
     archived, and then removed from the file system in 90 days.
-	
+
 1. **+30 days**
 
 	The project directory will become read-only.
 
 1. **+60 days**
-   
+
     The full pathname to the project directory will be
     modified. Automated scripts will likely fail.
-   
+
 1. **+90 days**
 
 	User access to the directory will be terminated. The directory

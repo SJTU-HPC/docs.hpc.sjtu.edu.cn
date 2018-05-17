@@ -16,7 +16,7 @@ whenever possible. The absolute path may change, but the value of
 
 ## Quotas
 
-!!! warning 
+!!! warning
 	Quota increases in global homes are approved only in
 	*extremely* unusual circumstances.
 
@@ -49,7 +49,7 @@ of their home directories. Every directory and sub-directory in
 
 ### Archive
 
-Global homes are backed up to [HPSS](archive.md) monthly. 
+Global homes are backed up to [HPSS](archive.md) monthly.
 
 If the snapshot capability does not meet your need
 contact [NERSC Consulting](/help/index.md) with pathnames and
