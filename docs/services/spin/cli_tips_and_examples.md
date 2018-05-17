@@ -4,6 +4,9 @@ The Rancher CLI is used to manage your Rancher applications. The CLI is availabl
 
 More information on the Rancher CLI can be found at [Rancher Command Line Interface (CLI)](http://rancher.com/docs/rancher/v1.6/en/cli/) on [rancher.com](http://rancher.com). Note that NERSC provides a modified version of the Rancher CLI, and not all commands shown in the Rancher documentation are available to NERSC users.
 
+## This guide is under development
+
+Spin is in a Pilot phase for NERSC staff and users in early 2018. During this development period, the content of thees page may be updated, and some docs may be incomplete. We are working to convert all Spin documentation to this new system.
 
 ## Practices to avoid
 

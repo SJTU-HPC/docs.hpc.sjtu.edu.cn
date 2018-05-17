@@ -1,3 +1,4 @@
 TODO items for the Spin docs:
 
 * Follow some of the docs standards, like changing the CLI prompt. See https://gitlab.com/NERSC/nersc.gitlab.io/blob/master/CONTRIBUTING.md#content-standards
+* Remove 'This guide is under development' disclaimer when the docs are stable.
