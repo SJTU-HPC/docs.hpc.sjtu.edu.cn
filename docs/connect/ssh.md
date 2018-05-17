@@ -16,24 +16,24 @@ secure ftp client (sftp). Additionally, SSH allows secure X Window
 connections.
 
 !!! example
-	```bash
-	$ ssh elivis@edison.nersc.gov
-	elvis@edison.nersc.gov's password: [enter NIM password for user elvis]
-	edison$ 
-	```
-	
+    ```bash
+    $ ssh elivis@edison.nersc.gov
+    elvis@edison.nersc.gov's password: [enter NIM password for user elvis]
+	edison$
+    ```
+
 ### Passwordless logins and transfers
 
 !!! warning
 	All public keys must be stored in [NIM](https://nim.nersc.gov).
-	
+
 ## Troubleshooting
 
 ### "Access Denied" or "Permission Denied"
 
-This is likely a username or password problem. 
+This is likely a username or password problem.
 
-1. Make sure you are using the proper NERSC user name. 
+1. Make sure you are using the proper NERSC user name.
 1. Log into [NIM](https://nim.nersc.gov) to clear login failures.
 
 !!! note
@@ -44,7 +44,7 @@ This is likely a username or password problem.
 
 ```
 The authenticity of host 'edison.nersc.gov' can't be established.
-RSA key fingerprint is <omitted> 
+RSA key fingerprint is <omitted>
 Are you sure you want to continue connecting (yes/no)?
 ```
 
@@ -90,5 +90,5 @@ R/3/gDoGanY42U7I0echn8lTNk6Una40FipL5CElGKjcBOS9PMp2NkGXy5So0xRDrWYP2TRo2ED5r/8v
 PtbbJxh/jvN34GWgj3qGLE6HKLcgj8gi2tHx5pBgoo6bLqEbgDlwz1E2ObVuOnSRuXvfdvwUTJ0SZVyt
 8gHMETaKpj4Ah3ylEBGtF++x+7W9N3QF37zX2kkFoaOGQBhLvOKhyNoO+Ak0rNmuTZQAa8QBB9p8VpaY
 FwEpn+dU37iroNWtXXkaqCC5ke9kkB89U1S0L9AEIZTvwlkndcldMq6MN3Q+PrVBqQDO9Tmmm1384f7w
-SHkp5b1LTxtqICFe7FQ== 
+SHkp5b1LTxtqICFe7FQ==
 ```

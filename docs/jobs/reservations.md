@@ -5,7 +5,7 @@ their jobs have special needs that cannot be accommodated through the
 regular batch system. A reservation brings some portion of the machine
 to a specific user or project for an agreed upon duration. Typically
 this is used for interactive debugging at scale or real time
-processing linked to some experiment or event. 
+processing linked to some experiment or event.
 
 !!! failure "Note"
 	It is not intended to be used to guarantee fast throughput
@@ -16,7 +16,7 @@ processing linked to some experiment or event.
 For normal batch jobs, charging against a project's allocation is done
 on a per job basis. For scheduled reservations the entire block of
 reserved time is charged regardless of the number of nodes used or
-time spent running jobs. 
+time spent running jobs.
 
 ## Requesting a reservation
 
@@ -55,7 +55,7 @@ or add `#SBATCH --reservation=<reservation_name>` to your job script.
 !!! note
 	It is possible to submit jobs to a reservation once it is
 	*created* - jobs will start immediately when the reservation is
-	available.	
+	available.
 
 ### KNL mode changes
 
@@ -71,7 +71,7 @@ this in your request.
 	Additional demonstration of need may be required for large scale
 	reservations requesting reboots as system administrators are
 	needed to assist in the reboot.
-		
+
 It is recommended to submit a "test" job at the start of your
 reservation to reboot the nodes.
 
@@ -83,11 +83,9 @@ reservation to reboot the nodes.
 	If you forget to put the correct `-C` option on **all** of your jobs
 	**you may lose 2 hours of your reservation** to reboots.
 
-
 ## Ending a reservation
 
 All running jobs under a reservation will be terminated when the
 reservation ends. If you complete the planned computations before the
 reservation ends, please call NERSC operations at 1-800-666-3772 (or
 1-510-486-8600) menu option 1 to cancel the reservation.
-

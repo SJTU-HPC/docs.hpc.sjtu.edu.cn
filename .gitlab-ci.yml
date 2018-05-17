@@ -1,5 +1,13 @@
 image: python:3.6
 
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache"
+
+cache:
+  paths:
+    - "$CI_PROJECT_DIR/.cache"
+  key: "$CI_PROJECT_ID"
+  
 stages:
   - build
   - test
@@ -25,7 +33,15 @@ check_links:
     paths:
     - public
     expire_in: 1 week
-  
+
+markdown_lint:
+  image: node
+  stage: test
+  script:
+    - npm install -g markdownlint-cli
+    - markdownlint docs
+  allow_failure: true
+    
 pages:
   stage: deploy
   script:

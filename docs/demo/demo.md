@@ -1,6 +1,12 @@
 # Lorem
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquip ex ea commodo consequat. Duis aute irure dolor in
+reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+culpa qui officia deserunt mollit anim id est laborum.
 
 ## Cori performance
 
@@ -14,12 +20,16 @@ A table
 
 ## Basic example
 
-!!!warning
-	Include paths are specified relative to the base directory (where `mkdocs.yml` is located).
+!!! warning
+    Include paths are specified relative to the base directory
+    (where `mkdocs.yml` is located).
 
 
-The full syntax for includes is available [here](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/). Includes are done via ASCII scissors (`--8<--`) followed by the filename in quotes. See the source of this page for examples.
-
+The full syntax for includes is
+available
+[here](https://facelessuser.github.io/pymdown-extensions/extensions/snippets/). Includes
+are done via ASCII scissors (`--8<--`) followed by the filename in
+quotes. See the source of this page for examples.
 
 A useful code for checking thread and process affinity.
 
@@ -41,10 +51,11 @@ Submit the script with the `sbatch` command:
 --8<-- "docs/demo/example/run-edison.sh"
 ```
 
-!!!warning
-	The `-c ` and `--cpu_bind=` options for `srun` are **required** for hybrid jobs or jobs which do not utilize all physical cores	
+!!! warning
+    The `-c ` and `--cpu_bind=` options for `srun` are
+    **required** for hybrid jobs or jobs which do not utilize all
+    physical cores
 
-	
 ## Some source code
 
 Instrumented C code to measure AI

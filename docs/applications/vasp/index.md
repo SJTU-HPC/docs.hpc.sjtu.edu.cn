@@ -22,7 +22,7 @@ It may take several business days from the date when your confirmation
 request is sent to the VASP support at Vienna to you actually gain the
 access to the VASP binaries provided at NERSC. If the confirmation
 takes longer than 5 business days, please let us know by updating the
-same email thread. 
+same email thread.
 
 When your VASP license is confirmed, NERSC will add you to a unix file
 group: vasp5 for VASP 5 and vasp for VASP 4. You can check if you have
@@ -35,7 +35,7 @@ only at NERSC.
 
 To see what versions of vasp are available:
 ```shell
-	module avail vasp
+nersc$ module avail vasp
 ```
 
 The vasp modules generally define two important environment variables
@@ -70,7 +70,6 @@ However, some older versions of vasp provide:
 #### Cori Haswell
 
 !!!note
-
 	The additional `--constraint=haswell` option is needed because
 	Cori contains both Haswell and KNL nodes.
 
@@ -81,17 +80,13 @@ However, some older versions of vasp provide:
 #### Cori KNL
 
 !!! note
-
 	A different module is needed besides the default for the KNL
 	optimized code.
-	
-	
-!!! note
 
+!!! note
 	The code will run with 66 MPI ranks per node. The final two cores
 	will be dedicated to the operating system (`--core-spec=2`) to
 	improve efficiency.
-	
 
 ```bash
 --8<-- "docs/applications/vasp/examples/cori-knl-simple.sh"

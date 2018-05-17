@@ -1,6 +1,7 @@
 # NERSC Help and Support
 
-NERSC strives to be the most user friendly supercomputing center in the world. 
+NERSC strives to be the most user friendly supercomputing center in
+the world.
 
 ## FAQ
 
@@ -20,7 +21,7 @@ method for contacting NERSC.
 	year. In order to ensure efficient timely resolution of issues
 	include **as much of the following as possible** when making a
 	request:
-	
+
 	* error messages
 	* jobids
 	* location of relevant files

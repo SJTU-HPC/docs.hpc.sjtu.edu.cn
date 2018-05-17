@@ -8,9 +8,11 @@
 
 ## How complicated is the data you want to show?
 
-The output of a datebase join operation is probably better displayed as two seperate tables.
+The output of a datebase join operation is probably better displayed
+as two seperate tables.
 
-Example: [Cori configuration](http://www.nersc.gov/users/computational-systems/cori/configuration/)
+Example:
+[Cori configuration](http://www.nersc.gov/users/computational-systems/cori/configuration/)
 
 | Category            | Quantity | Description                                                                    |
 |---------------------|:--------:|--------------------------------------------------------------------------------|
@@ -20,7 +22,6 @@ Example: [Cori configuration](http://www.nersc.gov/users/computational-systems/c
 | DVS Nodes           | 32       |                                                                                |
 | Lustre Router Nodes | 130      |                                                                                |
 | RSIP Nodes          | 10       |                                                                                |
-
 
 This table could be much more clear as multiple tables.
 
@@ -60,14 +61,15 @@ This table could be much more clear as multiple tables.
 | L2      | 8.192 MB | 256 KB per core                           |
 | L1      | 2.048 MB | 64 KB per core (32 KB iCache, 32 KB data) |
 
-
 ## How do make your your tables look nice in plain text?
 
-Try an [online formatter](http://markdowntable.com) to cleanup when you have finished entering the content.
+Try an [online formatter](http://markdowntable.com) to cleanup when
+you have finished entering the content.
 
 ## Inline HTML
 
-Inline HTML is supported, but should be used sparingly as it harms the plaintext legibility of the document.
+Inline HTML is supported, but should be used sparingly as it harms the
+plaintext legibility of the document.
 
 <table>
   <tr>
@@ -96,7 +98,6 @@ Inline HTML is supported, but should be used sparingly as it harms the plaintext
     <td>$50</td>
   </tr>
 </table>
-
 
 ## Line break in a table
 
