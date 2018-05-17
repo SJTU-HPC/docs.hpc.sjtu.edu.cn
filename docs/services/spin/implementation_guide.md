@@ -1,5 +1,9 @@
 # Spin Implementation Guide
 
+## This guide is under development
+
+Spin is in a Pilot phase for NERSC staff and users in early 2018. During this development period, the content of thees page may be updated, and some docs may be incomplete. We are working to convert all Spin documentation to this new system.
+
 ## Spin Overview & Steps to Get Started
 
 For an overview of Spin and short tutorials to get started, please see the [Spin Getting Started Guide](getting_started_guide.md)

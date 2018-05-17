@@ -4,5 +4,5 @@ This guide is being migrated to the new NERSC Documentation Site. For now, pleas
 
 ## This guide is under development
 
-Spin is in a Pilot phase for NERSC staff and users in early 2018. The content of this page may be updated during this development period.
+Spin is in a Pilot phase for NERSC staff and users in early 2018. During this development period, the content of thees page may be updated, and some docs may be incomplete. We are working to convert all Spin documentation to this new system.
 
