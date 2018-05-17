@@ -86,7 +86,9 @@ pages:
         - LibSci : development/libraries/libsci/index.md
         - HDF5 : development/libraries/hdf5/index.md
         - NetCDF : development/libraries/netcdf/index.md
-                              
+    - Version Control:
+        - git : development/version-control/git/index.md
+        - Subversion : development/version-control/subversion/index.md
   - Environment: environment/environment.md
   - Systems:
       - Cori : systems/cori/index.md
