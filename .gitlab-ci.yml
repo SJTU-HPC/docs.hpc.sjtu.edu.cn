@@ -1,13 +1,5 @@
 image: python:3.6
 
-variables:
-  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache"
-
-cache:
-  paths:
-    - "$CI_PROJECT_DIR/.cache"
-  key: "$CI_PROJECT_ID"
-  
 stages:
   - build
   - test
@@ -16,24 +8,30 @@ stages:
 build:
   stage: build
   script:
-    - pip install -r requirements.txt
+    - mkdir -p .build_cache
+    - pip install --cache-dir=.build_cache -r requirements.txt
     - mkdocs --verbose build
   artifacts:
     paths:
     - public
     expire_in: 1 week
+  cache:
+    paths:
+      - .build_cache
+    key: "build-$CI_COMMIT_REF_SLUG"
     
 check_links:
   stage: test
   script:
-    - pip install -r util/requirements.txt
+    - mkdir -p .links_cache
+    - pip install --cache-dir=.links_cache -r util/requirements.txt
     - python util/scrape_urls.py public
   allow_failure: true
-  artifacts:
+  cache:
     paths:
-    - public
-    expire_in: 1 week
-
+      - .links_cache
+    key: "links-$CI_COMMIT_REF_SLUG"
+  
 markdown_lint:
   image: node
   stage: test
@@ -41,7 +39,7 @@ markdown_lint:
     - npm install -g markdownlint-cli
     - markdownlint docs
   allow_failure: true
-    
+            
 pages:
   stage: deploy
   script:
