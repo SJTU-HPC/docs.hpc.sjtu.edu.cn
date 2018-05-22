@@ -4,10 +4,9 @@ The Rancher CLI is used to manage your Rancher applications. The CLI
 is available on Cori & Edison to allow NERSC users to manage their
 containers, and will soon be available on Genepool.
 
-More information on the Rancher CLI can be found
-at
-[Rancher Command Line Interface (CLI)](http://rancher.com/docs/rancher/v1.6/en/cli/) on
-[rancher.com](http://rancher.com).
+More information on the Rancher CLI can be found at
+[Rancher Command Line Interface (CLI)](http://rancher.com/docs/rancher/v1.6/en/cli/)
+on [rancher.com](http://rancher.com).
 
 !!! note
 	NERSC provides a modified version of the Rancher CLI,
@@ -55,8 +54,7 @@ flag requires a name to be passed in the format stackName/serviceName.
     1i2553342   stefan-webapp-1   registry.spin.nersc.gov/stefanl/stefanl-test-container   running   1h2       10.42.201.186   271efe4936a4
     $
 
-!!! note
-	the command spits out the ID of the Rancher Stack, in this
+Note the command spits out the ID of the Rancher Stack, in this
 	case '1s2872'. We can use that ID to query the status of the Stack.
 
 If you don't use the name stackName/serviceName, Rancher will insert
@@ -294,9 +292,160 @@ available on all NERSC systems.
     ...
     ...
     ...
+    }
 
 To save the jq output to a file, or to pipe the output through 'grep'
 or 'less', be sure to apply a filter, such as '.', such as:
 
     stefanl@stefanl:stefanl-wordpress $ rancher inspect stefanl-webapp/web | jq '.' | less
+
+## Rancher CLI Examples
+
+### Remove a stack
+
+Use `rancher rm StackName` to remove a stack that you own:
+
+    stefanl@cori12:~ $ rancher ps
+    ID        TYPE      NAME                      IMAGE                                                             STATE     SCALE     SYSTEM    ENDPOINTS   DETAIL
+    1s4146    service   stefanl-first-stack/app   registry.spin.nersc.gov/stefanl/my-first-container-app:latest     healthy   1/1       false
+    1s4147    service   stefanl-first-stack/web   registry.spin.nersc.gov/stefanl/my-first-container-nginx:latest   healthy   2/2       false
+    stefanl@cori12:~ $ rancher rm stefanl-first-stack
+    1st1909
+    stefanl@cori12:~ $ rancher ps
+    ID        TYPE      NAME      IMAGE     STATE     SCALE     SYSTEM    ENDPOINTS   DETAIL
+    stefanl@cori12:~ $
+
+### If Removing a stack results in the error 'you don't own this volume'
+
+If you try to remove a stack and Rancher refuses with an error like 'you don't own this volume', try again and specify the name of the stack with the `--stack` flag. This error is due to an ordering bug in Rancher, and the `--stack` flag will force Rancher to look for the stack.
+
+    stefanl@cori09:stefanl-first-container $ rancher rm stefanl-first-container
+    error stefanl-first-container: Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you don't own this volume] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a1221788/volumes/stefanl-first-container]
+    stefanl@cori09:stefanl-first-container $ rancher rm stefanl-first-container --type stack
+    1st1604
+    stefanl@cori09:stefanl-first-container $
+
+### Remove unused services in your stack
+
+This will remove services which are not listed in the docker-compose.yml file in your current working directory. Be careful with this one.
+
+    rancher prune --stack stefanl-webapp
+
+## Docker CLI examples
+
+### Build an image and pull the latest parent images
+
+When building an image on your laptop, use the --pull flag to ensure that your image will pull the latest parent images, if any:
+
+    stefanl@stefanl:app $ docker image build --pull --tag spin-flask-demo-app .
+
+### On your laptop, copy a file from inside a container with 'docker container cp'
+
+To copy files from a local container on your laptop to your working directory, you can use this trick which we borrowed from Nginx. Start a temporary container on your laptop, and copy files using 'docker container cp' to your working directory:
+
+    stefanl@cori11:~ $ docker container run --rm --detach --name tmp-nginx-container nginx
+    Unable to find image 'nginx:latest' locally
+    latest: Pulling from library/nginx
+    e7bb522d92ff: Pull complete 
+    6edc05228666: Pull complete 
+    cd866a17e81f: Pull complete 
+    Digest: sha256:285b49d42c703fdf257d1e2422765c4ba9d3e37768d6ea83d7fe2043dad6e63d
+    Status: Downloaded newer image for nginx:latest
+    df0716ebbca6692f88a6ad70d1b3476edcb864fce71827c907b4a9443dbf65bc
+    stefanl@cori11:~ $ docker container cp tmp-nginx-container:/etc/nginx/nginx.conf nginx.conf
+    stefanl@cori11:~ $ ls -l nginx.conf 
+    -rw-r--r--  1 stefanl  staff  643 Dec 26 03:11 nginx.conf
+    stefanl@cori11:~ $
+
+Since the container was started with the '--rm' flag, the container will remove itself after you have stopped it.
+
+### On Spin, copy a text file from a running container using 'cat'
+
+    stefanl@cori11:docker $ rancher exec -it stefan-webapp-1 cat /etc/nginx/nginx.conf > nginx.conf.copy 
+    stefanl@cori11:docker $ ls -ld nginx.conf.copy 
+    -rw-r--r--  1 stefanl  staff  1085 Dec 11 15:05 nginx.conf.copy
+    stefanl@cori11:docker $
+
+## Troubleshooting
+
+### Stack won't upgrade because of an error like 'Failed to start: web : Service web must be state=active'
+
+Sometimes you'll start a stack, and it won't start all of the way because of an error with one of the services in the stack.
+
+You might try to fix it in the Compose file, and then upgrade the Stack. Suppose that upgrade fails with an error like the following:
+
+    stefanl@cori05:stefanl-flask-demo $ rancher up --upgrade --stack stefanl-flask-demo --file ~stefanl/docker/stefanl-flask-demo/docker-compose.yml
+    INFO[0000] Secret db.stefanl-flask-demo.mongo-initdb-password already exists 
+    INFO[0000] [db]: Creating                               
+    INFO[0000] [app]: Creating                              
+    INFO[0000] [web]: Creating                              
+    INFO[0000] [web]: Created                               
+    INFO[0000] [app]: Created                               
+    INFO[0000] [db]: Created                                
+    INFO[0000] Secret db.stefanl-flask-demo.mongo-initdb-password already exists 
+    INFO[0000] [web]: Starting                              
+    INFO[0000] [db]: Starting                               
+    INFO[0000] [app]: Starting                              
+    1s3597
+    ERRO[0000] Failed Starting web : Service web must be state=active or inactive to upgrade, currently: state=updating-active 
+    INFO[0000] [db]: Started                                
+    INFO[0000] [app]: Started                               
+    1s3596
+    1s3595
+    ERRO[0000] Failed to start: web : Service web must be state=active or inactive to upgrade, currently: state=updating-active 
+    FATA[0000] Service web must be state=active or inactive to upgrade, currently: state=updating-active 
+    stefanl@cori05:stefanl-flask-demo $
+
+The solution here is to Stop or the problematic service, and then try the upgrade again. You may need to wait 10+ seconds, or longer, for the service to actually stop correctly.
+
+    stefanl@cori05:stefanl-flask-demo $ rancher stop stefanl-flask-demo/web
+    1s3595
+    stefanl@cori05:stefanl-flask-demo $ rancher up --upgrade --stack stefanl-flask-demo --file ~stefanl/docker/stefanl-flask-demo/docker-compose.yml
+    INFO[0000] Secret db.stefanl-flask-demo.mongo-initdb-password already exists 
+    INFO[0000] [app]: Creating                              
+    INFO[0000] [db]: Creating                               
+    INFO[0000] [web]: Creating                              
+    INFO[0000] [web]: Created                               
+    INFO[0000] [app]: Created                               
+    INFO[0000] [db]: Created                                
+    INFO[0000] Secret db.stefanl-flask-demo.mongo-initdb-password already exists 
+    INFO[0000] [web]: Starting                              
+    INFO[0000] [app]: Starting                              
+    INFO[0000] [db]: Starting                               
+    1s3595
+    INFO[0001] Upgrading web                                
+    INFO[0001] [db]: Started                                
+    INFO[0001] [app]: Started                               
+    INFO[0029] [web]: Started                               
+    1s3597
+    1s3596
+    stefanl-flask-demo-app-1 | 2018-04-10T23:41:04.364630881Z [2018-04-10 23:41:04 +0000] [1] [DEBUG] Current configuration:
+    stefanl-flask-demo-app-1 | 2018-04-10T23:41:04.364688315Z   config: None
+    ...
+
+### Is your directory set to o+x?
+
+    stefanl@cori11:stefanl-flask-demo $ rancher logs --service --follow --tail 10 stefanl-flask-demo/web
+    2018-04-12T22:51:19Z   0s 41599f54 ERROR stefanl-flask-demo/web(1s3680) 1i2589840 service.activate.exception: Expected state running but got error: Error response from daemon: error while creating mount source path '/global/project/projectdirs/isguser/spin/stefanl-flask-demo/web/nginx-proxy.conf': mkdir /global/project/projectdirs/isguser/spin/stefanl-flask-demo/web/nginx-proxy.conf: permission denied
+
+What's happening here? The Docker daemon cannot access your directory because the o+x bit is not set. Notice the part which says `mkdir /global/… permission denied`? Docker cannot see the file on the host, therefore it believes that file does not exist. By default, Docker will try to create a directory using the path provided, but does not have permission to do so.
+
+The real cause of this error is the lack of the 'o+x' bit on the directory. Notice how the bit is missing on the web directory?
+
+    stefanl@cori08:spin $ ls -ld /project/projectdirs/isguser/spin /project/projectdirs/isguser/spin/stefanl-flask-demo/ /project/projectdirs/isguser/spin/stefanl-flask-demo/web/
+    drwxrwx--x 7 stefanl isguser 512 Apr 12 14:40 /project/projectdirs/isguser/spin
+    drwxrwx--x 7 stefanl isguser 512 Apr 12 14:40 /project/projectdirs/isguser/spin
+    drwxrwx--x 5 stefanl stefanl 512 Apr 12 15:06 /project/projectdirs/isguser/spin/stefanl-flask-demo/
+    drwxrwx--- 3 stefanl stefanl 512 Apr 12 14:41 /project/projectdirs/isguser/spin/stefanl-flask-demo/web/
+    stefanl@cori08:spin $ 
+
+The fix is:
+
+    stefanl@cori08:spin $ chmod o+x /project/projectdirs/isguser/spin/stefanl-flask-demo/web/
+    stefanl@cori08:spin $ ls -ld /project/projectdirs/isguser/spin /project/projectdirs/isguser/spin/stefanl-flask-demo/ /project/projectdirs/isguser/spin/stefanl-flask-demo/web/
+    drwxrwx--x 7 stefanl isguser 512 Apr 12 14:40 /project/projectdirs/isguser/spin
+    drwxrwx--x 7 stefanl isguser 512 Apr 12 14:40 /project/projectdirs/isguser/spin
+    drwxrwx--x 5 stefanl stefanl 512 Apr 12 15:06 /project/projectdirs/isguser/spin/stefanl-flask-demo/
+    drwxrwx--x 3 stefanl stefanl 512 Apr 12 14:41 /project/projectdirs/isguser/spin/stefanl-flask-demo/web/
+
 

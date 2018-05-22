@@ -1,4 +1,4 @@
-# Spin Implementation Guide
+# Spin Best Practies Guide
 
 ## This guide is under development
 
