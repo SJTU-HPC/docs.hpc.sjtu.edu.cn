@@ -1,3 +1,5 @@
+# git
+
 _Note: This functionality is not formally supported by NERSC. These features
 should be considered self-serve. We cannot offer any guarantees in terms of
 functionality and availability moving forward._
