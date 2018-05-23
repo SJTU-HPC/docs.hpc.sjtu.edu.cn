@@ -9,9 +9,9 @@ More information on the Rancher CLI can be found at
 on [rancher.com](http://rancher.com).
 
 !!! note
-	NERSC provides a modified version of the Rancher CLI,
-	and not all commands shown in the Rancher documentation are
-	available to NERSC users.
+  NERSC provides a modified version of the Rancher CLI,
+  and not all commands shown in the Rancher documentation are
+  available to NERSC users.
 
 ## Practices to avoid
 
@@ -219,7 +219,7 @@ This will remove services which are not listed in the docker-compose.yml file in
 
 ### View all services in your stack, including stopped containers
 
-`rancher ps --all` will show all services in a stack. However, the stopped containers are not very obvious. The following example was taken after upgrading a service. Note that the 'SCALE' column says `2/1` which means that two containers exist, but only one is running. 
+`rancher ps --all` will show all services in a stack. However, the stopped containers are not very obvious. The following example was taken after upgrading a service. Note that the 'SCALE' column says `2/1` which means that two containers exist, but only one is running.
 
     nersc$ rancher ps --all
     ID      TYPE     NAME                  IMAGE                                                          STATE     SCALE  SYSTEM  ENDPOINTS  DETAIL
@@ -344,14 +344,14 @@ To copy files from a local container on your laptop to your working directory, y
     laptop$ docker container run --rm --detach --name tmp-nginx-container nginx
     Unable to find image 'nginx:latest' locally
     latest: Pulling from library/nginx
-    e7bb522d92ff: Pull complete 
-    6edc05228666: Pull complete 
-    cd866a17e81f: Pull complete 
+    e7bb522d92ff: Pull complete
+    6edc05228666: Pull complete
+    cd866a17e81f: Pull complete
     Digest: sha256:285b49d42c703fdf257d1e2422765c4ba9d3e37768d6ea83d7fe2043dad6e63d
     Status: Downloaded newer image for nginx:latest
     df0716ebbca6692f88a6ad70d1b3476edcb864fce71827c907b4a9443dbf65bc
     laptop$ docker container cp tmp-nginx-container:/etc/nginx/nginx.conf nginx.conf
-    laptop$ ls -l nginx.conf 
+    laptop$ ls -l nginx.conf
     -rw-r--r--  1 elvis staff  643 Dec 26 03:11 nginx.conf
     laptop$
 
@@ -360,8 +360,8 @@ Since the container was started with the '--rm' flag, the container will remove 
 ### On Spin, copy a text file from a running container using 'cat'
 
     nersc:~ $ cd ~/docker/my-project
-    nersc:my-project $ rancher exec -it elvis-webapp-1 cat /etc/nginx/nginx.conf > nginx.conf.copy 
-    nersc:my-project $ ls -ld nginx.conf.copy 
+    nersc:my-project $ rancher exec -it elvis-webapp-1 cat /etc/nginx/nginx.conf > nginx.conf.copy
+    nersc:my-project $ ls -ld nginx.conf.copy
     -rw-r--r--  1 elvis staff  1085 Dec 11 15:05 nginx.conf.copy
     nersc:my-project $
 
@@ -374,25 +374,25 @@ Sometimes you'll start a stack, and it won't start all of the way because of an 
 You might try to fix it in the Compose file, and then upgrade the Stack. Suppose that upgrade fails with an error like the following:
 
     nersc:elvis-flask-demo $ rancher up --upgrade
-    INFO[0000] Secret db.elvis-flask-demo.mongo-initdb-password already exists 
-    INFO[0000] [db]: Creating                               
-    INFO[0000] [app]: Creating                              
-    INFO[0000] [web]: Creating                              
-    INFO[0000] [web]: Created                               
-    INFO[0000] [app]: Created                               
-    INFO[0000] [db]: Created                                
-    INFO[0000] Secret db.elvis-flask-demo.mongo-initdb-password already exists 
-    INFO[0000] [web]: Starting                              
-    INFO[0000] [db]: Starting                               
-    INFO[0000] [app]: Starting                              
+    INFO[0000] Secret db.elvis-flask-demo.mongo-initdb-password already exists
+    INFO[0000] [db]: Creating
+    INFO[0000] [app]: Creating
+    INFO[0000] [web]: Creating
+    INFO[0000] [web]: Created
+    INFO[0000] [app]: Created
+    INFO[0000] [db]: Created
+    INFO[0000] Secret db.elvis-flask-demo.mongo-initdb-password already exists
+    INFO[0000] [web]: Starting
+    INFO[0000] [db]: Starting
+    INFO[0000] [app]: Starting
     1s3597
-    ERRO[0000] Failed Starting web : Service web must be state=active or inactive to upgrade, currently: state=updating-active 
-    INFO[0000] [db]: Started                                
-    INFO[0000] [app]: Started                               
+    ERRO[0000] Failed Starting web : Service web must be state=active or inactive to upgrade, currently: state=updating-active
+    INFO[0000] [db]: Started
+    INFO[0000] [app]: Started
     1s3596
     1s3595
-    ERRO[0000] Failed to start: web : Service web must be state=active or inactive to upgrade, currently: state=updating-active 
-    FATA[0000] Service web must be state=active or inactive to upgrade, currently: state=updating-active 
+    ERRO[0000] Failed to start: web : Service web must be state=active or inactive to upgrade, currently: state=updating-active
+    FATA[0000] Service web must be state=active or inactive to upgrade, currently: state=updating-active
     nersc:elvis-flask-demo $
 
 The solution here is to Stop or the problematic service, and then try the upgrade again. You may need to wait 10+ seconds, or longer, for the service to actually stop correctly.
@@ -400,22 +400,22 @@ The solution here is to Stop or the problematic service, and then try the upgrad
     nersc:elvis-flask-demo $ rancher stop elvis-flask-demo/web
     1s3595
     nersc:elvis-flask-demo $ rancher up --upgrade --stack elvis-flask-demo --file ~elvis/docker/elvis-flask-demo/docker-compose.yml
-    INFO[0000] Secret db.elvis-flask-demo.mongo-initdb-password already exists 
-    INFO[0000] [app]: Creating                              
-    INFO[0000] [db]: Creating                               
-    INFO[0000] [web]: Creating                              
-    INFO[0000] [web]: Created                               
-    INFO[0000] [app]: Created                               
-    INFO[0000] [db]: Created                                
-    INFO[0000] Secret db.elvis-flask-demo.mongo-initdb-password already exists 
-    INFO[0000] [web]: Starting                              
-    INFO[0000] [app]: Starting                              
-    INFO[0000] [db]: Starting                               
+    INFO[0000] Secret db.elvis-flask-demo.mongo-initdb-password already exists
+    INFO[0000] [app]: Creating
+    INFO[0000] [db]: Creating
+    INFO[0000] [web]: Creating
+    INFO[0000] [web]: Created
+    INFO[0000] [app]: Created
+    INFO[0000] [db]: Created
+    INFO[0000] Secret db.elvis-flask-demo.mongo-initdb-password already exists
+    INFO[0000] [web]: Starting
+    INFO[0000] [app]: Starting
+    INFO[0000] [db]: Starting
     1s3595
-    INFO[0001] Upgrading web                                
-    INFO[0001] [db]: Started                                
-    INFO[0001] [app]: Started                               
-    INFO[0029] [web]: Started                               
+    INFO[0001] Upgrading web
+    INFO[0001] [db]: Started
+    INFO[0001] [app]: Started
+    INFO[0029] [web]: Started
     1s3597
     1s3596
     elvis-flask-demo-app-1 | 2018-04-10T23:41:04.364630881Z [2018-04-10 23:41:04 +0000] [1] [DEBUG] Current configuration:
@@ -438,7 +438,7 @@ The real cause of this error is the lack of the 'o+x' bit on the directory. Noti
     drwxrwx--x 7 elvis myteam 512 Apr 12 14:40 /project/projectdirs/myteam/spin
     drwxrwx--x 5 elvis elvis 512 Apr 12 15:06 /project/projectdirs/myteam/spin/elvis-flask-demo/
     drwxrwx--- 3 elvis elvis 512 Apr 12 14:41 /project/projectdirs/myteam/spin/elvis-flask-demo/web/
-    nersc$ 
+    nersc$
 
 The fix is:
 
