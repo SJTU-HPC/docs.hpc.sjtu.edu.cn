@@ -9,9 +9,7 @@ More information on the Rancher CLI can be found at
 on [rancher.com](http://rancher.com).
 
 !!! note
-  NERSC provides a modified version of the Rancher CLI,
-  and not all commands shown in the Rancher documentation are
-  available to NERSC users.
+	NERSC provides a modified version of the Rancher CLI, and not all commands shown in the Rancher documentation are available to NERSC users.
 
 ## Practices to avoid
 
