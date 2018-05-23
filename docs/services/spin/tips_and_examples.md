@@ -154,24 +154,33 @@ select the environment for most commands:
 
 ### Remove a stack
 
-Normally, you just need to use 'rancher rm StackName' to remove a
-stack:
+Use `rancher rm StackName` to remove a stack that you own:
 
+    nersc$ rancher ps
+    ID        TYPE      NAME                      IMAGE                                                             STATE     SCALE     SYSTEM    ENDPOINTS   DETAIL
+    1s4146    service   elvis-first-stack/app   registry.spin.nersc.gov/elvis/my-first-container-app:latest     healthy   1/1       false
+    1s4147    service   elvis-first-stack/web   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   healthy   2/2       false
     nersc$ rancher rm elvis-first-stack
-    1st1603
+    1st1909
+    nersc$ rancher ps
+    ID        TYPE      NAME      IMAGE     STATE     SCALE     SYSTEM    ENDPOINTS   DETAIL
     nersc$
 
-### If Removing a stack results in the error 'you don't own this volume'
+#### If Removing a stack results in the error 'you don't own this volume'
 
-If you try to remove a stack, but Rancher may refuse with an error
-like 'you don't own this volume'. This is due to a bug in Rancher. In
-that case, specify that you are moving a stack with the --stack flag:
+If you try to remove a stack and Rancher refuses with an error like 'you don't own this volume', try again and specify the name of the stack with the `--stack` flag. This error is due to an ordering bug in Rancher, and the `--stack` flag will force Rancher to do the right thing in the right order.
 
     nersc$ rancher rm elvis-first-stack
     error elvis-first-stack: Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you don't own this volume] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a1221788/volumes/elvis-first-stack]
     nersc$ rancher rm elvis-first-stack --type stack
     1st1604
     nersc$
+
+### Remove unused services in your stack
+
+This will remove services which are not listed in the docker-compose.yml file in your current working directory. We don't use this very often. Be careful with this.
+
+    rancher prune --stack elvis-webapp
 
 ### Export the Stack configuration to your directory
 
@@ -319,38 +328,6 @@ To save the jq output to a file, or to pipe the output through 'grep'
 or 'less', be sure to apply a filter, such as '.', such as:
 
     nersc$ rancher inspect elvis-webapp/web | jq '.' | less
-
-## Rancher CLI Examples
-
-### Remove a stack
-
-Use `rancher rm StackName` to remove a stack that you own:
-
-    nersc$ rancher ps
-    ID        TYPE      NAME                      IMAGE                                                             STATE     SCALE     SYSTEM    ENDPOINTS   DETAIL
-    1s4146    service   elvis-first-stack/app   registry.spin.nersc.gov/elvis/my-first-container-app:latest     healthy   1/1       false
-    1s4147    service   elvis-first-stack/web   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   healthy   2/2       false
-    nersc$ rancher rm elvis-first-stack
-    1st1909
-    nersc$ rancher ps
-    ID        TYPE      NAME      IMAGE     STATE     SCALE     SYSTEM    ENDPOINTS   DETAIL
-    nersc$
-
-### If Removing a stack results in the error 'you don't own this volume'
-
-If you try to remove a stack and Rancher refuses with an error like 'you don't own this volume', try again and specify the name of the stack with the `--stack` flag. This error is due to an ordering bug in Rancher, and the `--stack` flag will force Rancher to look for the stack.
-
-    nersc$ rancher rm elvis-first-stack
-    error elvis-first-stack: Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you don't own this volume] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a1221788/volumes/elvis-first-stack]
-    nersc$ rancher rm elvis-first-stack --type stack
-    1st1604
-    nersc$
-
-### Remove unused services in your stack
-
-This will remove services which are not listed in the docker-compose.yml file in your current working directory. We don't use this very often. Be careful with this.
-
-    rancher prune --stack elvis-webapp
 
 ## Docker CLI examples
 
