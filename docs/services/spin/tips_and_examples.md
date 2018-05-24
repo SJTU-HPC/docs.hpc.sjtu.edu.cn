@@ -216,7 +216,7 @@ containers.
 
 The fields are:
 
-* Instance ID of the service, prefixed with a '1i', where 'i' stands for 'instance' 
+* Instance ID of the service, prefixed with a '1i', where 'i' stands for 'instance'
 * Name of the container in the format of '[stack name]-[service name]-[instance]', where the instance is the numerical instance of the service. The example below shows two instances, 'web-1' and 'web-2'
 * The internal IP of the services on the internal Spin network
 * The ID of the Spin host which is serving your containers
@@ -250,8 +250,8 @@ The `rancher start`, `rancher stop` and `rancher restart` commands use a similar
 
 !!!Warning
     After upgrading a service or stack, the `rancher stop` `start` and `restart` commands cannot be used until the you have verified the upgrade and removed the old containers using the `rancher up --confirm-upgrade` command. If you do not remove the old containers, the command will fail with this error:
-       
-        $ rancher stop elvis-flask-demo    
+
+        $ rancher stop elvis-flask-demo
         error 1st1969: Bad response statusCode [422]. Status [422 status code 422]. Body: [baseType=error, code=InvalidState, fieldName=Service app is not in valid state to be deactivated: upgraded] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a1221788/stacks/1st1969/?action=deactivateservices]
         1st1969
         $
