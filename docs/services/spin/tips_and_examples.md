@@ -1,15 +1,17 @@
-# Tips & Examples with the Rancher CLI & Docker CLI
+# CLI Tips & Examples
 
 The Rancher CLI is used to manage your Rancher applications. The CLI
 is available on Cori & Edison to allow NERSC users to manage their
-containers, and will soon be available on Genepool.
+containers, and will soon be available on Denovo.
 
 More information on the Rancher CLI can be found at
 [Rancher Command Line Interface (CLI)](http://rancher.com/docs/rancher/v1.6/en/cli/)
 on [rancher.com](http://rancher.com).
 
+The Docker CLI is not used to manage your services in Spin, as it is not possible for Docker to provide a secure, multi-user container enviornment suitable for NERSC. The Docker CLI is used to manage containers on your laptop.
+
 !!! note
-	NERSC provides a modified version of the Rancher CLI, and not all commands shown in the Rancher documentation are available to NERSC users.
+    NERSC provides a modified version of the Rancher CLI, and not all commands shown in the Rancher documentation are available to NERSC users.
 
 ## Practices to avoid
 
@@ -43,7 +45,7 @@ create an Application Stack instead. We are looking into uses for
 `rancher run`, and may use it more in the future.
 
 `rancher run` will let you spin up a single container. The `--name`
-flag requires a name to be passed in the format stackName/serviceName.
+flag requires a name to be passed in the format '[stack name]/[service name]'.
 
     nersc$ rancher run --name elvis-webapp/web registry.spin.nersc.gov/elvis/nginx-myteam
     1s2872
@@ -150,14 +152,153 @@ select the environment for most commands:
 
 ## Rancher CLI Examples
 
+### Rancher CLI Naming conventions
+
+(This section will be updated shortly)
+
+* Stacks accept any alphabetical name.
+* Services, which are part of a Stack, are referred to as '[stack name]/[service name]'
+* A Service may have multiple instances of itself, which are called 'containers', and have the name '[stack name]-[service name]-[instance #]', where 'instance #' is the number of that container instance.
+
+### Listing stacks
+
+`rancher stack ls` will list all stacks.
+
+    nersc$ rancher stack ls
+    ID       NAME               STATE      CATALOG  SERVICES  SYSTEM  DETAIL  AVAILABLE  UPGRADES
+    1st1967  elvis-first-stack  unhealthy  2        false
+    1st1969  elvis-flask-demo   healthy    3        false
+    nersc$
+
+The fields are:
+
+* Stack ID of your stack, prefixed with '1st', where 'st' stands for 'stack'
+* Stack Name
+* Stack State (Health)
+* The other fields are rarely used
+
+### Listing services in your stacks
+
+`rancher ps` will display information about active services in your stacks:
+
+    nersc$ rancher ps --all
+    ID      TYPE     NAME                  IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
+    1s4204  service  elvis-flask-demo/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  2/2    false
+    1s4205  service  elvis-flask-demo/app  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v2           healthy  1/1    false
+    1s4206  service  elvis-flask-demo/db   mongo:latest                                                   healthy  1/1    false
+    nersc$
+
+The fields are:
+
+* Service ID of your service, prefixed with a '1s', where 's' stands for 'service'
+* Service Name in the format '[stack name]/[service name]'
+* Image used for the Service
+* Service State (Health)
+* The Scale of a service, or the number of instances (a container is an instance of a service)
+* The other fields are rarely used
+
+### Listing the container instances for all your services
+
+!!! tip
+    Remember that a **container** is an instance of a **service**. A **service** may have one or more container instances.
+
+`rancher ps --containers` will list the containers which are part of
+a service. In the example below, note that the 'web' service has two
+containers.
+
+    nersc$ rancher ps --containers
+    ID              NAME                    IMAGE                                                          STATE    HOST  IP             DOCKER        DETAIL
+    1i2599531       elvis-flask-demo-web-1  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  running  1h86  10.42.254.136  1256439e5462
+    1i2599534       elvis-flask-demo-web-2  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  running  1h87  10.42.8.181    0aa996c01835
+    1i2599532       elvis-flask-demo-app-1  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v2           running  1h85  10.42.210.63   14b0a7e5dee1
+    1i2599533       elvis-flask-demo-db-1   mongo:latest                                                   running  1h85  10.42.252.24   f019fedea11d
+    nersc$
+
+The fields are:
+
+* Instance ID of the service, prefixed with a '1i', where 'i' stands for 'instance' 
+* Name of the container in the format of '[stack name]-[service name]-[instance]', where the instance is the numerical instance of the service. The example below shows two instances, 'web-1' and 'web-2'
+* The internal IP of the services on the internal Spin network
+* The ID of the Spin host which is serving your containers
+* The Docker ID of your running container
+
+### Listing all services in your stack, including inactive servics
+
+`rancher ps --all` will show services in a stack, including services which are stopped, inactive or recently removed. However, the stopped containers are a bit hidden in this display. In the following example  notice that the 'SCALE' column says `2/1` which means that two containers exist, but only one is running.
+
+    nersc$ rancher ps --all
+    ID      TYPE     NAME                  IMAGE                                                          STATE     SCALE  SYSTEM  ENDPOINTS  DETAIL
+    1s3939  service  elvis-flask-demo/db   mongo:latest                                                   healthy   1/1    false
+    1s3940  service  elvis-flask-demo/app  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v1           upgraded  2/1    false
+    1s3941  service  elvis-flask-demo/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy   1/1    false
+    nersc$
+
+Adding the `--containers` flag will make the stopped containers more obvious:
+
+    nersc$ rancher ps --all --containers
+    ID         NAME                    IMAGE                                                          STATE    HOST  IP             DOCKER        DETAIL
+    1i2596137  elvis-flask-demo-app-1  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v1           running  1h83  10.42.183.166  065asd9e0a
+    1i2596138  elvis-flask-demo-db-1   mongo:latest                                                   stopped  1h83  10.42.87.90    1f6920d6a1e9
+    1i2596146  elvis-flask-demo-web-1  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  running  1h82  10.42.44.155   66f48c9e36ee
+    1i2596160  elvis-flask-demo-db-1   mongo:latest                                                   running  1h83  10.42.90.251   065fe407ae58
+    1i2596161  elvis-flask-demo-app-1  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v1           running  1h83  10.42.183.175  16faa310be0a
+    nersc$
+
+### Stopping, Starting, Restarting
+
+The `rancher start`, `rancher stop` and `rancher restart` commands use a similar syntax. Stacks are stopped by specifying the stack name. Individual containers and services are stopped by specifying the name of the service or container.
+
+!!!Warning
+    After upgrading a service or stack, the `rancher stop` `start` and `restart` commands cannot be used until the you have verified the upgrade and removed the old containers using the `rancher up --confirm-upgrade` command. If you do not remove the old containers, the command will fail with this error:
+       
+        $ rancher stop elvis-flask-demo    
+        error 1st1969: Bad response statusCode [422]. Status [422 status code 422]. Body: [baseType=error, code=InvalidState, fieldName=Service app is not in valid state to be deactivated: upgraded] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a1221788/stacks/1st1969/?action=deactivateservices]
+        1st1969
+        $
+
+    A similar error appears when stopping a service or container which has not completed upgrading:
+
+        $ rancher stop elvis-flask-demo/app
+        error 1s4205: stop/deactivate/deactivateservices not currently available on service 1s4205
+        1s4205
+        $
+
+### Stopping, Starting, Restarting Stacks
+
+After stoping a stack using `rancher stop`, the stopped containers may be seen by adding the `--all` flag to the `rancher ps` command.
+
+    nersc$ rancher stop elvis-first-stack
+    1st1443
+    nersc$ rancher ps --all
+    ID      TYPE     NAME                   IMAGE                                                          STATE     SCALE  SYSTEM  ENDPOINTS  DETAIL
+    1s3748  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    inactive  1/1    false
+    1s3749  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  inactive  1/1    false
+    nersc$
+
+### Stopping, Starting, Restarting Services
+
+Services and containers may also be stopped using `rancher stop` and specifying the Service Name or Container Name.
+
+Stopping a service, using the name 'Stack/Service':
+
+    nersc$ rancher stop stefanl-flask-demo/app
+    1s4205
+    nersc$
+
+Stopping a container, using the name 'stack-service-#':
+
+    nersc$ rancher stop stefanl-flask-demo-web-1
+    1i2599531
+    nersc$
+
 ### Remove a stack
 
-Use `rancher rm StackName` to remove a stack that you own:
+`rancher rm StackName` will remove a stack if you are the owner:
 
     nersc$ rancher ps
-    ID        TYPE      NAME                      IMAGE                                                             STATE     SCALE     SYSTEM    ENDPOINTS   DETAIL
-    1s4146    service   elvis-first-stack/app   registry.spin.nersc.gov/elvis/my-first-container-app:latest     healthy   1/1       false
-    1s4147    service   elvis-first-stack/web   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   healthy   2/2       false
+    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
+    1s4146  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy  1/1    false
+    1s4147  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  2/2    false
     nersc$ rancher rm elvis-first-stack
     1st1909
     nersc$ rancher ps
@@ -206,48 +347,6 @@ This will remove services which are not listed in the docker-compose.yml file in
     elvis-webapp/rancher-compose.yml
     nersc:docker $
 
-### View the services in your stack
-
-    nersc$ rancher ps
-    ID      TYPE     NAME                  IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    1s4204  service  elvis-flask-demo/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  2/2    false
-    1s4205  service  elvis-flask-demo/app  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v2           healthy  1/1    false
-    1s4206  service  elvis-flask-demo/db   mongo:latest                                                   healthy  1/1    false
-    nersc$
-
-### View all services in your stack, including stopped containers
-
-`rancher ps --all` will show all services in a stack. However, the stopped containers are not very obvious. The following example was taken after upgrading a service. Note that the 'SCALE' column says `2/1` which means that two containers exist, but only one is running.
-
-    nersc$ rancher ps --all
-    ID      TYPE     NAME                  IMAGE                                                          STATE     SCALE  SYSTEM  ENDPOINTS  DETAIL
-    1s3939  service  elvis-flask-demo/db   mongo:latest                                                   healthy   1/1    false
-    1s3940  service  elvis-flask-demo/app  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v1           upgraded  2/1    false
-    1s3941  service  elvis-flask-demo/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy   1/1    false
-    nersc$
-
-Adding the `--containers` flag will make the stopped containers more obvious:
-
-    nersc$ rancher ps --all --containers
-    ID         NAME                    IMAGE                                                          STATE    HOST  IP             DOCKER        DETAIL
-    1i2596137  elvis-flask-demo-app-1  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v1           running  1h83  10.42.183.166  065asd9e0a
-    1i2596138  elvis-flask-demo-db-1   mongo:latest                                                   stopped  1h83  10.42.87.90    1f6920d6a1e9
-    1i2596146  elvis-flask-demo-web-1  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  running  1h82  10.42.44.155   66f48c9e36ee
-    1i2596160  elvis-flask-demo-db-1   mongo:latest                                                   running  1h83  10.42.90.251   065fe407ae58
-    1i2596161  elvis-flask-demo-app-1  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v1           running  1h83  10.42.183.175  16faa310be0a
-    nersc$
-
-### View the containers which comprise a service
-
-Use 'rancher ps --containers' to view the containers which are part of
-a service. In the example below, note that the 'web' service has two
-containers.
-
-    nersc$ rancher ps --containers | grep elvis-first-stack
-    1i2576970   elvis-first-stack-app-1                    registry.spin.nersc.gov/elvis/my-first-container-app                         running   1h88      10.42.218.107   82055813959c
-    1i2576980   elvis-first-stack-web-1                    nginx                                                                          running   1h88      10.42.155.46    067c52f948f8
-    1i2577001   elvis-first-stack-web-2                    nginx                                                                          running   1h83      10.42.153.165   6eef89399921
-    nersc$
 
 ### View the logs for services and containers
 
