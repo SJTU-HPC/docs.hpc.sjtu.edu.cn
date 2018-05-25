@@ -4,14 +4,14 @@ The Rancher CLI is used to manage your Rancher applications. The CLI
 is available on Cori & Edison to allow NERSC users to manage their
 containers, and will soon be available on Denovo.
 
-More information on the Rancher CLI can be found at
+For more information on using the Rancher CLI, see
 [Rancher Command Line Interface (CLI)](http://rancher.com/docs/rancher/v1.6/en/cli/)
 on [rancher.com](http://rancher.com).
 
-The Docker CLI is not used to manage your services in Spin, as it is not possible for Docker to provide a secure, multi-user container enviornment suitable for NERSC. The Docker CLI is used to manage containers on your laptop.
-
-!!! note
+!!! Note
     NERSC provides a modified version of the Rancher CLI, and not all commands shown in the Rancher documentation are available to NERSC users.
+
+The Docker CLI is not used to manage your Spin services from NERSC systems, as it is not yet possible for Docker to provide a secure, multi-user container infrastructure suitable for the NERSC systems. The Docker CLI is used to manage containers on your laptop.
 
 ## Practices to avoid
 
@@ -56,7 +56,7 @@ flag requires a name to be passed in the format **[Stack Name]/[Service Name]**.
 
 Note the command spits out the ID of the Rancher Stack, in this case '1s2872'. We can use that ID to query the status of the Stack.
 
-If you don't use the name stackName/serviceName, Rancher will insert
+If you don't use the name **[stack name]/[service name]**, Rancher will insert
 the name 'Default' for you, which will cause confusion. Don't do this.
 
     nersc$ rancher run --name elvistestweb1 httpd
@@ -136,7 +136,7 @@ All applications sent to Spin are automatically audited at the API to ensure tha
 
 ## Working with different environments
 
-A Spin **Environment** is a set of servers which run the Spin containers. Each environment is isolated and seperate from the other environments. Spin has two main environments for NERSC users:
+A Spin **Environment** is a set of servers which run the Spin containers. Each environment is isolated and separate from the other environments. Spin has two main environments for NERSC users:
 
 * 'dev-cattle' is for use with applications which are under development
 * 'prod-cattle' is used for production services.
@@ -172,13 +172,18 @@ To simplify your workflow, use the **RANCHER_ENVIRONMENT** variable to specify t
 
 ## Rancher CLI Examples
 
-### Rancher Stack, Service & Container naming
+### Working with Stacks, Services and Containers
 
 (This section will be updated shortly)
+Names of Stacks, Services & Containers:
 
 * Stacks accept any alphabetical name.
 * Services, which are part of a Stack, are referred to as **[Stack Name]/[Service Name]**
 * A Service may have multiple instances of itself, which are called 'containers', and have the name **[Stack Name]-[Service Name]-[Instance #]**, where 'Instance #' is the number of that container instance.
+
+Many commands can be used on a service or a container. Remember that a **service** may have one or more **containers**. To put it another way, **containers** are *'instances'* of a **service**.
+
+TODO: Add some examples here.
 
 ### Listing stacks
 
@@ -219,7 +224,7 @@ The fields are:
 
 ### Listing the container instances for all your services
 
-!!! tip
+!!! Tip "Services and Containers"
     Remember that a **container** is an instance of a **service**. A **service** may have one or more container instances.
 
 `rancher ps --containers` will list the containers which are part of
@@ -287,7 +292,7 @@ The `rancher start`, `rancher stop` and `rancher restart` commands share a commo
 
 #### Stopping, Starting, Restarting Stacks
 
-After stoping a stack using `rancher stop`, the stopped containers may be seen by adding the `--all` flag to the `rancher ps` command.
+After stopping a stack using `rancher stop`, the stopped containers may be seen by adding the `--all` flag to the `rancher ps` command.
 
     nersc$ rancher stop elvis-first-stack
     1st1443
@@ -375,9 +380,7 @@ This will remove services which are not listed in the docker-compose.yml file in
 
 ### View the logs for services and containers
 
-Logs may be viewed using the `rancher logs` command. The command may use the *service* name, like `elvis-first-stack/web`, or the *container* name, like 'elvis-first-stack-web-1'.
-
-  * Remember that a service may have one or more containers (Containers are 'instances' of a service). Calling this command via the service name will show you logs for all containers in that service, if you have more than one. The individual services in the logs are noted by the presence of `01`, `02` at the beginning of the line. In the example below, notice how the line begins with a `01` or a `02` which indicates which container owns that log line.
+Logs may be viewed using the `rancher logs` command. The command may use the service name, like `elvis-first-stack/web`, or the container name, like 'elvis-first-stack-web-1'. If your service has more than one container (Remember, a container is an instance of a service), the individual containers logs will show the number of the container at the beginning. In the example below, the 'web' service has two containers. Notice how the line begins with a '01' or a '02' which indicates which container owns that log line.
 
     nersc$ rancher logs elvis-flask-demo/web
     01 2018-05-23T00:15:26.486199100Z 128.3.135.223 - - [23/May/2018:00:15:26 +0000] "GET /static/CPvalid1_nodsRNA_40x_Tiles_p1745DAPI.png HTTP/1.1" 200 82055 "http://128.55.206.22:60000/fields/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36" "-"
@@ -421,7 +424,7 @@ Use `rancher exec -it NAME /bin/bash` to start a bash shell on a container. The 
 
 'rancher inspect' will print a Service's configuration in JSON,
 similar to how 'docker inspect' works.  JSON can be hard for humans to
-parse, so we recommend using the the ['jq' command line tool](https://stedolan.github.io/jq/), which is
+parse, so we recommend using the ['jq' command line tool](https://stedolan.github.io/jq/), which is
 available on all NERSC systems.
 
     nersc$ rancher inspect elvis-webapp/web | jq
@@ -459,7 +462,7 @@ When building an image on your laptop, use the --pull flag to ensure that your i
 
     elvis@laptop:app $ docker image build --pull --tag spin-flask-demo-app .
 
-### On your laptop, copy a file from inside a container with 'docker container cp'
+### On your laptop, copy a file from inside a container with `docker container cp`
 
 To copy files from a local container on your laptop to your working directory, you can use this trick which we borrowed from Nginx. Start a temporary container on your laptop, and copy files using 'docker container cp' to your working directory:
 
