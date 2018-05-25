@@ -111,7 +111,7 @@ use your NERSC username & password.
     nersc$
 
 The Rancher CLI stores its configuration file under your home
-fdirectory, at `~/.rancher/cli.json`. If you would like to view your login information, at any time, run `rancher config --print`, like so:
+directory, at `~/.rancher/cli.json`. If you would like to view your login information, at any time, run `rancher config --print`, like so:
 
     nersc$ rancher config --print
     {"accessKey":"ABCDEFG123456","secretKey":"ZYXWVUT098765","url":"https://rancher.spin.nersc.gov/","environment":"","path":"/global/homes/e/elvis/.rancher/cli.json"}
@@ -372,7 +372,6 @@ This will remove services which are not listed in the docker-compose.yml file in
     elvis-webapp/docker-compose.yml
     elvis-webapp/rancher-compose.yml
     nersc:docker $
-
 
 ### View the logs for services and containers
 
