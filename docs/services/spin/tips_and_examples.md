@@ -83,7 +83,7 @@ Spin is accessed from Cori, Edison & Denovo.
 
 ### Load the Spin module to access the CLI
 
-If you have an API key to access Spin, then simply load the Spin module like so. Running a non-intrusive command like `rancher environment` will test that the connection is good by printing out our current Rancher environment.
+If you have an API key to access Spin, then simply load the Spin module like so. Running a non-intrusive command like `rancher environment` will connect to the server using your credentials, test that the connection is good and print out a result.
 
     nersc$ module load spin
     nersc$ rancher environment
@@ -152,7 +152,7 @@ select the environment for most commands:
 
 ## Rancher CLI Examples
 
-### Rancher CLI Naming conventions
+### Rancher Stack, Service & Container naming
 
 (This section will be updated shortly)
 
@@ -217,12 +217,12 @@ containers.
 The fields are:
 
 * Instance ID of the service, prefixed with a '1i', where 'i' stands for 'instance'
-* Name of the container in the format of '[stack name]-[service name]-[instance]', where the instance is the numerical instance of the service. The example below shows two instances, 'web-1' and 'web-2'
+* Name of the container in the format of '[stack name]-[service name]-[instance #]', where the instance is the numerical instance of the service. The example below shows two instances, 'web-1' and 'web-2'.
 * The internal IP of the services on the internal Spin network
 * The ID of the Spin host which is serving your containers
 * The Docker ID of your running container
 
-### Listing all services in your stack, including inactive servics
+### Listing all services in your stack, including inactive services
 
 `rancher ps --all` will show services in a stack, including services which are stopped, inactive or recently removed. However, the stopped containers are a bit hidden in this display. In the following example  notice that the 'SCALE' column says `2/1` which means that two containers exist, but only one is running.
 
@@ -246,7 +246,7 @@ Adding the `--containers` flag will make the stopped containers more obvious:
 
 ### Stopping, Starting, Restarting
 
-The `rancher start`, `rancher stop` and `rancher restart` commands use a similar syntax. Stacks are stopped by specifying the stack name. Individual containers and services are stopped by specifying the name of the service or container.
+The `rancher start`, `rancher stop` and `rancher restart` commands share a common syntax. Stacks are started/restarted/stopped by specifying the stack name. Individual containers and services are stopped by specifying the name of the service or container.
 
 !!!Warning
     After upgrading a service or stack, the `rancher stop` `start` and `restart` commands cannot be used until the you have verified the upgrade and removed the old containers using the `rancher up --confirm-upgrade` command. If you do not remove the old containers, the command will fail with this error:
@@ -281,13 +281,13 @@ Services and containers may also be stopped using `rancher stop` and specifying 
 
 Stopping a service, using the name 'Stack/Service':
 
-    nersc$ rancher stop stefanl-flask-demo/app
+    nersc$ rancher stop elvis-flask-demo/app
     1s4205
     nersc$
 
-Stopping a container, using the name 'stack-service-#':
+Stopping a container, using the name '[stack name]-[service name]-[instance #]':
 
-    nersc$ rancher stop stefanl-flask-demo-web-1
+    nersc$ rancher stop elvis-flask-demo-web-1
     1i2599531
     nersc$
 
