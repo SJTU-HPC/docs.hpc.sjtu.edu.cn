@@ -7,6 +7,11 @@
 
 For an overview of Spin and short tutorials to get started, please see the [Spin Getting Started Guide](getting_started_guide.md)
 
+## Security Audit
+
+All applications sent to Spin are automatically audited at the API to ensure that they follow our security requirements, which are outlined in the Spin Implementation Guide. The Rancher CLI will print an error if an application breaks one of the security requirements.
+
+
 ## Using Images & Creating Containers
 
 ### Choosing the best image source

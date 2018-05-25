@@ -38,7 +38,7 @@ by the following error message:
     error during connect: Get http://%2Fvar%2Ffolders%2Fg8%2Fydzygkc103x9_xt_r8zs6zyr001d77%2FT%2Fdocker-sock578594745/v1.24/exec/6e644e66b9b123123fdf4459a5b23a29f3b079307a664d8b65b68d8d0268169c/json: EOF
     nersc:test_db $
 
-### Don't use 'rancher run'
+### Don't use `rancher run`
 
 We generally discourage using `rancher run` and encourage you to use
 create an Application Stack instead. We are looking into uses for
@@ -71,7 +71,7 @@ the name 'Default' for you, which will cause confusion. Don't do this.
 Here are some bugs that we've discovered with Rancher & Docker, and
 workarounds if any.
 
-### 'rancher logs' only prints 100 lines
+### `rancher logs` only prints 100 lines
 
 We've discovered that, on many stacks, `rancher logs` will only print
 100 lines of the container & service logs. We are looking into the
@@ -130,10 +130,6 @@ Your account is tied to one key which has access to all environments, Prod, Dev 
     1a1221788  sandbox      cattle         active  2018-03-12T21:25:22Z
     nersc$
 
-### Security Audit
-
-All applications sent to Spin are automatically audited at the API to ensure that they follow our security requirements, which are outlined in the Spin Implementation Guide. The Rancher CLI will print an error if an application breaks one of the security requirements.
-
 ## Working with different environments
 
 A Spin **Environment** is a set of servers which run the Spin containers. Each environment is isolated and separate from the other environments. Spin has two main environments for NERSC users:
@@ -172,7 +168,7 @@ To simplify your workflow, use the **RANCHER_ENVIRONMENT** variable to specify t
 
 ## Rancher CLI Examples
 
-### Working with Stacks, Services and Containers
+### Working with Stacks, Services & Containers
 
 (This section will be updated shortly)
 Names of Stacks, Services & Containers:
@@ -185,7 +181,9 @@ Many commands can be used on a service or a container. Remember that a **service
 
 TODO: Add some examples here.
 
-### Listing stacks
+### Listing Stacks & Services
+
+#### Listing stacks
 
 `rancher stack ls` will list all stacks.
 
@@ -202,7 +200,7 @@ The fields are:
 * Stack State (Health)
 * The other fields are rarely used
 
-### Listing services in your stacks
+#### Listing services in your stacks
 
 `rancher ps` will display information about active services in your stacks:
 
@@ -222,7 +220,7 @@ The fields are:
 * The Scale of a service, or the number of instances (a container is an instance of a service)
 * The other fields are rarely used
 
-### Listing the container instances for all your services
+#### Listing the container instances for all your services
 
 !!! Tip "Services and Containers"
     Remember that a **container** is an instance of a **service**. A **service** may have one or more container instances.
@@ -247,7 +245,7 @@ The fields are:
 * The ID of the Spin host which is serving your containers
 * The Docker ID of your running container
 
-### Listing all services in your stack, including inactive services
+#### Listing all services in your stack, including inactive services
 
 `rancher ps --all` will show services in a stack, including services which are stopped, inactive or recently removed. However, the stopped containers are a bit hidden in this display. In the following example  notice that the 'SCALE' column says `2/1` which means that two containers exist, but only one is running.
 
@@ -269,7 +267,7 @@ Adding the `--containers` flag will make the stopped containers more obvious:
     1i2596161  elvis-flask-demo-app-1  registry.spin.nersc.gov/elvis/spin-flask-demo-app:v1           running  1h83  10.42.183.175  16faa310be0a
     nersc$
 
-### Stopping, Starting, Restarting
+### Stopping, Starting Stacks & Services
 
 The `rancher start`, `rancher stop` and `rancher restart` commands share a common syntax. Stacks are started/restarted/stopped by specifying the stack name. Individual services and containers are stopped by specifying the name of the service or container.
 
@@ -380,7 +378,9 @@ This will remove services which are not listed in the docker-compose.yml file in
 
 ### View the logs for services and containers
 
-Logs may be viewed using the `rancher logs` command. The command may use the service name, like `elvis-first-stack/web`, or the container name, like 'elvis-first-stack-web-1'. If your service has more than one container (Remember, a container is an instance of a service), the individual containers logs will show the number of the container at the beginning. In the example below, the 'web' service has two containers. Notice how the line begins with a '01' or a '02' which indicates which container owns that log line.
+Logs may be viewed using the `rancher logs` command. The command may use the service name, like **elvis-first-stack/web**, or the container name, like **elvis-first-stack-web-1**.
+
+If your service has more than one container (Remember, a container is an instance of a service), the individual containers logs will show the number of the container at the beginning. In the example below, the 'web' service has two containers. Notice how the line begins with a '01' or a '02' which indicates which container owns that log line.
 
     nersc$ rancher logs elvis-flask-demo/web
     01 2018-05-23T00:15:26.486199100Z 128.3.135.223 - - [23/May/2018:00:15:26 +0000] "GET /static/CPvalid1_nodsRNA_40x_Tiles_p1745DAPI.png HTTP/1.1" 200 82055 "http://128.55.206.22:60000/fields/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36" "-"
@@ -394,7 +394,7 @@ To view the logs for just a single container, print the container name instead o
 
 In this next example, we are viewing logs for the last hour, with
 timestamps enabled, and are following the logs as if we were using
-'tail --follow':
+`tail --follow`:
 
     nersc$ rancher logs --since 1h --timestamps --follow elvis-webapp-1
     2017-11-09T01:17:38.296570056Z AH00558: httpd: Could not reliably determine the server's fully qualified domain name, using 10.42.152.36. Set the 'ServerName' directive globally to suppress this message
@@ -422,8 +422,8 @@ Use `rancher exec -it NAME /bin/bash` to start a bash shell on a container. The 
 
 ### Inspect the details of a live service
 
-'rancher inspect' will print a Service's configuration in JSON,
-similar to how 'docker inspect' works.  JSON can be hard for humans to
+`rancher inspect` will print a Service's configuration in JSON,
+similar to how `docker inspect` works.  JSON can be hard for humans to
 parse, so we recommend using the ['jq' command line tool](https://stedolan.github.io/jq/), which is
 available on all NERSC systems.
 
@@ -449,8 +449,8 @@ available on all NERSC systems.
     ...
     }
 
-To save the jq output to a file, or to pipe the output through 'grep'
-or 'less', be sure to apply a filter, such as '.', such as:
+To save the jq output to a file, or to pipe the output through `grep`
+or `less`, be sure to apply a filter, such as '.', such as:
 
     nersc$ rancher inspect elvis-webapp/web | jq '.' | less
 
@@ -458,7 +458,7 @@ or 'less', be sure to apply a filter, such as '.', such as:
 
 ### Build an image and pull the latest parent images
 
-When building an image on your laptop, use the --pull flag to ensure that your image will pull the latest parent images, if any:
+When building an image on your laptop, use the `--pull` flag to ensure that your image will pull the latest parent images, if any:
 
     elvis@laptop:app $ docker image build --pull --tag spin-flask-demo-app .
 
@@ -549,7 +549,7 @@ The solution here is to Stop or the problematic service, and then try the upgrad
 
 ### Is your directory set to o+x?
 
-Let's imagine that you started your stack, but the stack isn't working correctly. To troubleshoot, you use the 'rancher logs' command and discover the following errori which says `permission denied`.
+Let's imagine that you started your stack, but the stack isn't working correctly. To troubleshoot, you use the `rancher logs` command and discover the following errori which says `permission denied`.
 
     nersc$ rancher logs --service --follow --tail 10 elvis-flask-demo/web
     2018-04-12T22:51:19Z   0s 41599f54 ERROR elvis-flask-demo/web(1s3680) 1i2589840 service.activate.exception: Expected state running but got error: Error response from daemon: error while creating mount source path '/global/project/projectdirs/myteam/spin/elvis-flask-demo/web/nginx-proxy.conf': mkdir /global/project/projectdirs/myteam/spin/elvis-flask-demo/web/nginx-proxy.conf: permission denied
