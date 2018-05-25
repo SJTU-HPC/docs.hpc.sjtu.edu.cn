@@ -83,7 +83,7 @@ The **Rancher CLI** is used to manage services and stacks in Spin.  The Rancher 
 
 The Rancher CLI must be used from a NERSC system and cannot be used from your laptop, as we maintain a modified version of the Rancher CLI which is optimized to work with NERSC systems. While Rancher also provides a Web Interface, it is currently only available to NERSC Administrators.
 
-All Rancher commands communicate with the Spin infrastructure using an API key. You will generate an API key below.  
+All Rancher commands communicate with the Spin infrastructure using an API key. You will generate an API key below.
 
 ### Load the Spin module to access the CLI
 
@@ -144,7 +144,7 @@ A Spin **Environment** is a set of servers which run the Spin containers. Each e
 A third environment named 'sandbox' will be used exclusively if you are taking the SpinUp sessions.
 
 !!!Info
-    The name 'cattle' refers to the container 'Orchestrator' which we use to manage containers and is part of Rancher. Rancher names many of their components with 'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information on Rancher, please read the Spin Getting Started Guide overview. 
+    The name 'cattle' refers to the container 'Orchestrator' which we use to manage containers and is part of Rancher. Rancher names many of their components with 'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information on Rancher, please read the Spin Getting Started Guide overview.
 
 During normal development, you will first deploy your application to the development environments, and will copy it to production when ready. **Currently, ISG must approve all applications before they run in the production environment**.
 
@@ -269,8 +269,8 @@ Adding the `--containers` flag will make the stopped containers more obvious:
 The `rancher start`, `rancher stop` and `rancher restart` commands share a common syntax. Stacks are started/restarted/stopped by specifying the stack name. Individual services and containers are stopped by specifying the name of the service or container.
 
 !!!Warning
-    After upgrading a service or stack, the `rancher stop` `start` and `restart` commands cannot be used until the you have verified the upgrade and removed the old containers using the `rancher up --confirm-upgrade` command. **Always remove containers after a successful upgrade.** 
-    
+    After upgrading a service or stack, the `rancher stop` `start` and `restart` commands cannot be used until the you have verified the upgrade and removed the old containers using the `rancher up --confirm-upgrade` command. **Always remove containers after a successful upgrade.**
+
     If you do not remove the old containers, the command will fail with this error:
 
         $ rancher stop elvis-flask-demo
@@ -303,7 +303,7 @@ Services and containers may also be stopped using `rancher stop` and specifying 
 
 * Stopping a service, using the name **[Stack Name]/[Service Name]**:
 
-    ``` 
+    ```
     nersc$ rancher stop elvis-flask-demo/app
     1s4205
     nersc$
