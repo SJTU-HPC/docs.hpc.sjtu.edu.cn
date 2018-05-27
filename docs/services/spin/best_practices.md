@@ -1,4 +1,4 @@
-# Spin Best Practies Guide
+# Spin Best Practices Guide
 
 !!!info "This guide is under development"
 	Spin is in a Pilot phase for NERSC staff and users in early 2018. During this development period, the content of thees page may be updated, and some docs may be incomplete. We are working to convert all Spin documentation to this new system.
@@ -6,6 +6,11 @@
 ## Spin Overview & Steps to Get Started
 
 For an overview of Spin and short tutorials to get started, please see the [Spin Getting Started Guide](getting_started_guide.md)
+
+## Security Audit
+
+All applications sent to Spin are automatically audited at the API to ensure that they follow our security requirements, which are outlined in the Spin Implementation Guide. The Rancher CLI will print an error if an application breaks one of the security requirements.
+
 
 ## Using Images & Creating Containers
 
@@ -22,7 +27,7 @@ In general, good images from [Docker Hub](https://hub.docker.com/) tend to be we
 
 If the project page has a de facto image or a recommended image, that's usually the best and simplest option. The goal here is to keep the image simple, and yet still be functional enough to support your application.
 
-There are also many low quality images on Docker Hub, but they tend to be obvious. Consider avoiding images that have a low number of pulls, are poorly rated, or doesn’t have recent updates. Image size is another useful criteria. The appropriate size of an image will obviously vary depending on the application stack, but as a rule of thumb, take a close look at images > 5 GB to see if it contains a lot of unnecessary components. Images that are overly large, besides suggesting that they contain too many unnecessary elements, may be frustratingly slow to push to the image registry during the development cycle (especially over a typical home internet link), and will be slower to deploy.
+There are also many low quality images on Docker Hub, but they tend to be obvious. Consider avoiding images that have a low number of pulls, are poorly rated, or lacks recent updates. Image size is another useful criteria. The appropriate size of an image will obviously vary depending on the application stack, but as a rule of thumb, take a close look at images > 5 GB to see if it contains a lot of unnecessary components. Images that are overly large, besides suggesting that they contain too many unnecessary elements, may be frustratingly slow to push to the image registry during the development cycle (especially over a typical home internet link), and will be slower to deploy.
 
 Popular projects may have multiple images on their project page. The Apache httpd project has `httpd:2.4` and `apache:alpine`, which show that the Apache community is maintaining a mainline application while also experimenting with tiny images based on the Alpine container OS.
 
@@ -30,7 +35,7 @@ Examples of official projects that have provided a selection of images for diffe
 
 * [Apache](https://hub.docker.com/_/httpd/) (httpd)
 * [Ubuntu](https://hub.docker.com/_/ubuntu/)
-* [nginx](https://hub.docker.com/_/nginx/)
+* [Nginx](https://hub.docker.com/_/nginx/)
 
 ### Operating Systems
 
@@ -41,7 +46,7 @@ OS Considerations:
 * Utilizes a package manager and/or is a distribution that is familiar to you
 * [Alpine](https://hub.docker.com/_/alpine/) ([Recommended by Docker](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#the-dockerfile-instructions), starts as a very small base image)
 * [Debian](https://hub.docker.com/_/debian/) (Commonly used in the Docker community. Balances size with usability.)
-* [CentOS](https://hub.docker.com/_/centos/) (for an RPM based distribution, and as a replacement for Scientific Linux, which doesn’t currently have an official Docker image)
+* [CentOS](https://hub.docker.com/_/centos/) (for an RPM based distribution, and as a replacement for Scientific Linux, which does not currently have an official Docker image)
 * [OpenSUSE](https://hub.docker.com/_/opensuse/) (if similarity to the super computer environment is a consideration)
 
 ### Dockerfile
@@ -51,7 +56,7 @@ When writing a Dockerfile, seek a balance between readability and size. Familiar
 * Containers should be ephemeral
 * Each container should have only one concern
 * Avoid installing unnecessary packages
-* Keep the image small by reducing the number of layers. This can be accomplished by condensing operations into a single step (e.g. single yum command with multiple packages vs. multiple yum commands), by chaining commands with ‘&&’. Consider using [Docker multi-stage](https://docs.docker.com/develop/develop-images/multistage-build/) builds with Docker 17.05 or higher.
+* Keep the image small by reducing the number of layers. This can be accomplished by condensing operations into a single step (e.g. Single yum command with multiple packages vs. multiple yum commands), by chaining commands with ‘&&’. Consider using [Docker multi-stage](https://docs.docker.com/develop/develop-images/multistage-build/) builds with Docker 17.05 or higher.
 * Improve caching and shorten build time by ordering statements such that the stable parts of the Dockerfile are at the beginning, and the more frequently changed statements are at the end
 
 ## Image Registry
@@ -70,7 +75,7 @@ The process of tagging and pushing an image to the registry is described in the 
 
 ### Versioning and tags
 
-TODO Someone should explain this. Be ware of 'latest', because 'latest' is ambigous, and may actually be 'latest' from the last time you downloaded the code, 18 months ago.
+TODO Someone should explain this. Be ware of 'latest', because 'latest' is ambiguous, and may actually be 'latest' from the last time you downloaded the code, 18 months ago.
 
 (e.g. :latest versus :v1.2.3)
 
@@ -136,7 +141,7 @@ A number of different types of storage are available to containers running in th
 * **Auto-created** - Is the source directory auto-created by Spin, or must it pre-exist to be mounted
 * **Externally Accessible** - Is the data available outside of the Spin environment
 
-    TOOD insert table here
+    TODO insert table here
 
 ### Container Storage
 
@@ -168,8 +173,8 @@ Permissions set on the global file systems must be respected and enforced when f
 * Using a collaboration account with the necessary file system access is an effective way to ensure data access while also avoiding issues that occur when the owner of a personal account leaves a group or project.
 * When a container can’t easily be modified to run as a non-root user, the container can often be run with the group set in a manner that provides access. For example, a container running as root:genome will successfully read files in a directory with the following restrictive permissions:
 
-    dino@genepool13:~$ ls -ld scratch/dino
-    drwxr-x--- 5 dino genome 512 Sep  8 12:00 scratch/dino
+        dino@genepool13:~$ ls -ld scratch/dino
+        drwxr-x--- 5 dino genome 512 Sep  8 12:00 scratch/dino
 
 * The Linux setuid and setgid capabilities will be dropped for containers accessing the global file system as discussed in the [Security](#security) section
 * Configuring the user or group that the containers will run as, and configuring capabilities will be performed by ISG administrators during the Spin pilot phase as part of the initial stack setup.
@@ -202,7 +207,7 @@ The ampersands (&&) in this example minimize the layers created in the docker im
 
 * Logging strategies for container-based services may need to be modified for applications developed in a more traditional environment.  Files written to the container’s file system aren’t easily accessible, and also aren’t persistent across container restarts or upgrades. There are several approaches that have proven useful in Spin:
 * Log to stdout and stderr rather than writing to a file in the file system. If the service needs just one log, it can write to stdout. If it needs two logically separate log streams, it can write to stdout and stderr. In cases where more than one log stream, the container should be started without the -i or -t flag so that stdout and stderr are not combined. These logs will be persistent, but as they can only be accessed via Rancher or a docker command on the Spin hosts, access to the logs must be coordinated with ISG staff  during the pilot phase.
-* Write to a persistent log volume hosted outside of the Spin environment (e.g. a global project directory). This will facilitate direct access to log information.
+* Write to a persistent log volume hosted outside of the Spin environment (e.g. A global project directory). This will facilitate direct access to log information.
 * Log to central logging system (future capability)
 
 ## Networking
@@ -270,8 +275,8 @@ Rancher Secrets are a mechanism for storing encrypted copies of sensitive items 
 ### Properties of Secrets
 
 * Stored in encrypted form within the Spin infrastructure
-* When attached to a container, they are available in unencrypted form in a file mounted as /run/secrets/secretname
-* Secrets are arbitrary files that can contain anything that is considered sensitive. Examples of secret files: certificates, config files that contains sensitive passwords, environment files with sensitive information. It is upto the application to read and interpret the secret file.
+* When attached to a container, they are available in unencrypted form in a file mounted as `/run/secrets/secretname`
+* Secrets are arbitrary files that can contain anything that is considered sensitive. Examples of secret files: certificates, config files that contains sensitive passwords, environment files with sensitive information. It is up to the application to read and interpret the secret file.
 * Must be entered into the Rancher UI by an ISG administrator (during the pilot phase)
 
 If an application requires a specific path to the secret, a symbolic link can be made to the file stored in /run/secrets/. Even if only one component of a configuration file is sensitive, the entire contents of the configuration file can be pasted into a secret to protect the sensitive component.
