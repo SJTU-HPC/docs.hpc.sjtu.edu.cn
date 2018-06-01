@@ -42,11 +42,15 @@ pages:
         - WARP: performance/case-studies/warp/index.md
         - XGC1: performance/case-studies/xgc1/index.md
   - Services:
-      - Spin :
+      - Spin Containers :
         - services/spin/index.md
-        - services/spin/getting_started_guide.md
         - services/spin/best_practices.md
         - services/spin/tips_and_examples.md
+        - Spin Getting Started Guide:
+            - services/spin/getting_started/index.md
+            - services/spin/getting_started/lesson-1.md
+            - services/spin/getting_started/lesson-2.md
+            - services/spin/getting_started/lesson-3.md
       - Science Gateways : services/science-gateways.md
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
@@ -118,10 +122,10 @@ pages:
 #      - 
 #  - JGI:
 #      - Pipelines : jgi/pipelines.md
-#  - Tutorials:
-#    - Demo : demo/demo.md
-#    - Tables : demo/table.md
-#    - Dropdown: demo/dropdown.md
+  - Tutorials:
+    - Demo : demo/demo.md
+    - Tables : demo/table.md
+    - Dropdown: demo/dropdown.md
 
 # Project Information
 site_name: NERSC Documentation (beta)
