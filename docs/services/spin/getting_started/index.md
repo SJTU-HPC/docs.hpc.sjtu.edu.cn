@@ -1,4 +1,4 @@
-# Getting Started Guide Overview
+# Spin Getting Started Guide Overview
 
 !!! info "This guide is under development"
     Spin is in a Pilot phase for NERSC staff and users in early 2018. The content of this page may be updated during this development period.
