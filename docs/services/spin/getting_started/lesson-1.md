@@ -368,7 +368,7 @@ configure Nginx to behave as a function as a standard 'reverse proxy' listening
 on the internal port of 8080. The reverse proxy will forward all traffic to an
 backend application server named **"app"** listening on an internal port 5000.
 These ports are only available internally, and won't be exposed to the outside
-world. 
+world.
 
     server {
         listen 8080;
@@ -378,7 +378,7 @@ world.
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Host $server_name;
           proxy_set_header X-Real-IP $remote_addr;
-        } 
+        }
     }
 
 How does Nginx know about the hostname **app**? We define it in our Docker
@@ -427,7 +427,7 @@ The configuration will define an application stack with two services:
     * The Nginx container will provide a reverse proxy to our backend 'app' application. The **./web/nginx-proxy.conf** file is mounted from the host directory into the container using a Docker "Bind Mount".
     * There are other ways to get files into a container, such as using the 'COPY' or 'ADD' statements in the Dockerfile. Normally you want to build all application code into your image when it's complete, as that reduces dependencies on outside resources. During development, it can be simpler to mount a file into the container to allow quick and easy modifications.
 * Within a container, each service will be able to refer to the other services using a hostname like 'app' or 'web'. These hostnames are available inside the containers because of an internal DNS service provided by Docker.
-* The web service will listen publicly on port 80 for now, which maps to Nginx's internal port of 8080. 
+* The web service will listen publicly on port 80 for now, which maps to Nginx's internal port of 8080.
 
 !!!Note
     If you are familiar with Docker Compose, note that Rancher only supports Docker Compose v2. Do not use Docker Compose v3.

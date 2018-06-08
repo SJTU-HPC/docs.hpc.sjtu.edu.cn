@@ -563,7 +563,7 @@ all of your stacks.
     1s4784    service   elvis-first-stack/app   registry.spin.nersc.gov/elvis/my-first-container-app:latest     healthy   1/1       false
     elvis@nersc:elvis-first-stack $
 
-!!! tip 
+!!! tip
     Stacks can also be created using the `rancher stack create StackName` command.
     Unlike `rancher up`, `rancher stack create` requires you to specify the name of
     the stack. We use `rancher up` in our lessons.

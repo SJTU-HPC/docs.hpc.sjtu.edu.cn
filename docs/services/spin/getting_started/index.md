@@ -52,7 +52,7 @@ You and your team are responsible for:
 
 Before reading the Spin Getting Started Guides, please familiarize yourself with Docker itself and review the Docker documentation. In particular, read the following guides:
 
-* Start with *Docker Get Started Tutorial*, [Part 1: Orientation and setup](https://docs.docker.com/get-started/), followed by [Part 2: Containers](https://docs.docker.com/get-started/part2/). These guides cover Docker installation, Dockerfiles and show how containerize basic applications. 
+* Start with *Docker Get Started Tutorial*, [Part 1: Orientation and setup](https://docs.docker.com/get-started/), followed by [Part 2: Containers](https://docs.docker.com/get-started/part2/). These guides cover Docker installation, Dockerfiles and show how containerize basic applications.
     * While you are free to read Part 3 - 6 of the *Docker Get Started Tutorial*, keep in mind that those guides are specific to the Docker-specific solutions, and much of the container community doesn't use all of those solutions. Concepts at NERSC & Spin, which use Rancher and will soon use Kubernetes, are a little different.
 * The [Docker overview](https://docs.docker.com/engine/docker-overview/) provides a good, 10 minute overview of Docker containers.
 * While reading these docs, note that NERSC uses "Docker CE (Community Edition)".
@@ -61,7 +61,7 @@ Once you understand the basics of Docker, you will need the following to proceed
 
 * Read through the Spin Getting Started Guide hands-on lessons, mentioned below.
 * Have a basic plan to implement your software, including:
-    * A rough sense of how you will be organizing services following a Microservices or related structure. 
+    * A rough sense of how you will be organizing services following a Microservices or related structure.
         * A diagram, or a similar written description, can really help with the design process. The diagram doesn't have to be detailed.
     * A DNS name for any public-facing services. Examples could be 'service.lbl.gov', 'service.jgi.doe.gov, 'service.nersc.gov', or even 'www.service.org'.
 * A list of public and private ports required by your software.
@@ -73,7 +73,7 @@ To run your application in Spin, it must first be converted to one or more Docke
 
 The NERSC Spin project aims to follow the Docker motto, "Build, Ship & Run." This means you will normally **Build** the image on your workstation, **Ship** it to an image registry and then **Run** the container on Spin. At a high level, the process looks like this:
 
-1. **Build** a Docker container-based application. This may include using existing Docker images or building custom images, and assembling them into an application stack using Docker Compose. 
+1. **Build** a Docker container-based application. This may include using existing Docker images or building custom images, and assembling them into an application stack using Docker Compose.
 1. **Ship** the image to registry.spin.nersc.gov for private images or the Dockerhub for public images.
 1. **Run** the application stack in the Spin Development environment. ISG will work with you to resolve any NERSC-specific issues, such as access to files on the NERSC Global Filesystem. (performed by ISG during pilot phase).
 1. **Copy** your application stack from the Spin development environment to the Spin production environment (performed by ISG during pilot phase).
@@ -114,4 +114,4 @@ There are many good resources for learning [Docker](https://docs.docker.com/get-
 
 ## Follow the Spin Getting Started hands-on lessons
 
-To help get you started with Spin, we've provided several hands on lessons to help learn the essentials of Spin & Docker. See those lessons in the navigation bar to the left. After completing these guides, see the [Spin Best Practices](../best_practices.md) guide for a FAQ and best practices on implementing containers on Spin. 
+To help get you started with Spin, we've provided several hands on lessons to help learn the essentials of Spin & Docker. See those lessons in the navigation bar to the left. After completing these guides, see the [Spin Best Practices](../best_practices.md) guide for a FAQ and best practices on implementing containers on Spin.
