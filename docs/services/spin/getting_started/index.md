@@ -63,7 +63,7 @@ Once you understand the basics of Docker, you will need the following to proceed
 * Have a basic plan to implement your software, including:
     * A rough sense of how you will be organizing services following a Microservices or related structure.
         * A diagram, or a similar written description, can really help with the design process. The diagram doesn't have to be detailed.
-    * A DNS name for any public-facing services. Examples could be 'service.lbl.gov', 'service.jgi.doe.gov, 'service.nersc.gov', or even 'www.service.org'.
+    * A DNS name for any public-facing service. Examples could be 'example.lbl.gov', 'example.jgi.doe.gov, 'example.nersc.gov', or even 'www.example.org'.
 * A list of public and private ports required by your software.
 * Apply for an upcoming [SpinUp workshop](..).
 

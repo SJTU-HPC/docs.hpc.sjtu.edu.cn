@@ -576,7 +576,7 @@ first. In our classroom environment, we will use a temporary URL instead.
 !!! info
     In Production, web services will normally be served from behind the Spin
     reverse-proxy service, and you would normally create a proper friendly
-    hostname such as **mystack.nersc.gov** and **mystack-dev.nersc.gov** (or
+    hostname such as **example.nersc.gov** and **example-dev.nersc.gov** (or
     another domain, such as **lbl.gov**) and use a DNS alias (a CNAME) to point
     to the Spin loadbalancer. We'll cover that more later.
 
