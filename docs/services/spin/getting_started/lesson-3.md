@@ -196,11 +196,9 @@ like we did in lesson 2.
 
 In the following example, I'm inspecting the 'web' container in the
 'elvis-flask-demo' stack. From this output, I know my web service is available
-at http://web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org:8080/ . The
+at `http://web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org:8080/`. The
 web service is also available at an IP address, but note that the IP address may
 change from time to time.
-
-TODO fix intenting
 
     elvis@nersc:elvis-flask-demo $ rancher inspect elvis-flask-demo/web | jq '.fqdn'
     "web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org"
