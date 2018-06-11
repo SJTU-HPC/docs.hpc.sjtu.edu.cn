@@ -1,11 +1,16 @@
-# Spin Best Practices Guide
+# Spin Best Practices
 
 !!!info "This guide is under development"
 	Spin is in a Pilot phase for NERSC staff and users in early 2018. During this development period, the content of thees page may be updated, and some docs may be incomplete. We are working to convert all Spin documentation to this new system.
 
 ## Spin Overview & Steps to Get Started
 
-For an overview of Spin and short tutorials to get started, please see the [Spin Getting Started Guide](getting_started_guide.md)
+For an overview of Spin and short tutorials to get started, please see the [Spin Getting Started Guide](getting_started)
+
+## Security Audit
+
+All applications sent to Spin are automatically audited at the API to ensure that they follow our security requirements, which are outlined in the Spin Implementation Guide. The Rancher CLI will print an error if an application breaks one of the security requirements.
+
 
 ## Security Audit
 
@@ -71,7 +76,7 @@ The local registry is organized along the following lines:
 
 Everyone with access to the Spin interface also has access to registry.spin.nersc.gov. If a Team and Namespace hasn’t yet been set up for your group, make a request via Service Now.
 
-The process of tagging and pushing an image to the registry is described in the [Spin Getting Started Guide](getting_started_guide.md).
+The process of tagging and pushing an image to the registry is described in the [Spin Getting Started Guide](getting_started).
 
 ### Versioning and tags
 

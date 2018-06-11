@@ -20,7 +20,10 @@ whitelist = ["https://www.lbl.gov/disclaimers/",
              "https://nxcloud01.nersc.gov",
              "http://epsi.pppl.gov/xgc-users/how-to-become-an-xgc-user",
              "https://stash.nersc.gov",
-             "https://stash.nersc.gov:8443"]
+             "https://stash.nersc.gov:8443",
+             "http://localhost/",
+             "https://localhost/",
+             "http://localhost:5000/"]
 
 def get_url(this_page):
     """Print out the URL
