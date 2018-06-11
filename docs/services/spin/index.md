@@ -1,4 +1,4 @@
-# Spin
+# Spin Containers Overview
 
 ## Overview
 
@@ -20,7 +20,7 @@ See the following video for a live demonstration of a service being built in Spi
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/U2jkCORlEfc" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-Want to prepare for using Spin? Read the [Spin Getting Started Guide](getting_started_guide.md).
+Want to prepare for using Spin? Read the [Spin Getting Started Guide](getting_started).
 
 ## SpinUp Instructional Program
 
