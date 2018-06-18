@@ -19,7 +19,7 @@ TODO
 The Rancher CLI must be used from a NERSC system, such as Cori, Edison or
 Denovo.  NERSC provides a modified version of the Rancher CLI, and some
 subcommands have been removed. For detailed documentation about using the
-Rancher CLI at NERSC, see [tips_and_examples/](Spin Tips & Examples). 
+Rancher CLI at NERSC, see [tips_and_examples/](Spin Tips & Examples).
 
 Rancher official CLI documentation can be found at
 https://rancher.com/docs/rancher/v1.6/en/cli/ & a detailed list of CLI commands
