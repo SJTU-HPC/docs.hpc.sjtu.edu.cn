@@ -20,14 +20,15 @@ The Rancher CLI must be used from a NERSC system, such as Cori, Edison or
 Denovo.  NERSC provides a modified version of the Rancher CLI which is
 optimized for the NERSC environment, and some subcommands have been removed.
 For detailed documentation about using the Rancher CLI at NERSC, see
-[tips_and_examples/](Spin Tips & Examples).
+[Spin Tips & Examples](tips_and_examples).
 
 Rancher official CLI documentation can be found at
 https://rancher.com/docs/rancher/v1.6/en/cli/ & a detailed list of CLI commands
 can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 
-| Command                                   |  Description  |
-| ----------------------                    | ------------- |
+| Command                                   | Description                    |
+| ----------------------------------------- | ------------------------------- |
+| **Getting Started**                       |
 | `module load spin`                        | Load the module to access the Spin CLI tools, such as `rancher` |
 | `export RANCHER_ENVIRONMENT=dev-cattle`   | Specify the Rancher environment to be used |
 | `rancher environment`                     | Print all environments that your account has access too |
@@ -50,12 +51,13 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher up --upgrade --confirm-ugrade`   | Confirm that the upgrade was success and delete old containers |
 | `rancher up --upgrade --rollback`         | Rollback to the previous version of the containers |
 | `rancher up --render`                     | Render the `docker-compose.yml` file & print output if successful. Useful for syntax checking. |
-| `rancher export`                          | Exports the `docker-compose.yml` & `rancher-compose.yml` for a stack |
-| `rancher export --file file.tar`          | Exports the `docker-compose.yml` & `rancher-compose.yml` for a stack to a tar file |
+| `rancher export [stack name]`                 | Exports the stack's `docker-compose.yml` & `rancher-compose.yml` to a subdirectory named `./[stack name]/` |
+| `rancher export [stack name] --file file.tar` | Exports the stack's `docker-compose.yml` & `rancher-compose.yml` to a tar file |
 | `rancher secret ls`                       | List all secrets owned by you |
-| `rancher secret create [secret name] file-with-secret` | Create a secret named [secret name] using the value read from the file `file-with-secret` |
+| `rancher secret create [secret name] file-with-secret`    | Create a secret named [secret name] using the value read from the file `file-with-secret` |
+| `echo MyPassword | rancher secret create [secret name] -` | Create a secret named [secret name], read from standard input |
+| `rancher secret create [secret name] - <<< MyPassword`    | Create a secret named [secret name], read from standard input |
 | `rancher secret rm [secret name]`         | Remove the secret `[secret name]` if owned by you |
-| `echo MyPassword | rancher secret create [secret name] -` | Create a secret named [secret name], read from standard input. |
 | `rancher volume ls`                       | List all volumes owned by you |
 | `rancher volume create --driver rancher-nfs [service name].[stack name]` | Create a volume on the Rancher NFS server named [service name].[stack name] |
 | `rancher volume rm [service name].[stack name]` | Remove a volume owned by you |
@@ -69,12 +71,12 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher ps --containers --all`           | List all active & inactive containers in your stacks |
 | `rancher logs [stack name]/[service name]` | View logs for a service (all container instances) |
 | `rancher logs [stack name]-[service name]-[instance #]` | View logs for a single container instance of service. The *instance #* can be seen using `rancher ps --containers` |
-| `rancher logs --since 1h --timestamps --follow [stack name]/[service name]` | View logs & follow the output, similar to `tail --follow`, and print timestamps. |
-| `rancher exec -it [stack name]/[service name] /bin/bash` | Obtain a shell on a container. If the service has more than one container instance, Rancher will ask which instance |
+| `rancher logs --since 1h --timestamps --follow [stack name]/[service name]` | View logs & follow the output, similar to `tail --follow`, and print timestamps. a
+| `rancher exec -it [stack name]/[service name] /bin/bash`              | Obtain a shell on a container. If the service has more than one container instance, Rancher will ask which instance |
 | `rancher exec -it [stack name]-[service name]-[instance #] /bin/bash` | Obtain a shell on a specific container instance of a service. |
-| `rancher inspect [stack name]/[service name] | jq '.'` | Print the configuration for a service in JSON, and use `jq` to convert the output to human-friendly format |
-| `rancher scale [stack name]/[service name]=2` | Set number of containers to run for a service |
-
+| `rancher inspect [stack name]/[service name] | jq`                    | Print the configuration for a service in JSON, and use `jq` to convert the output to human-friendly format |
+| `rancher inspect [stack name]/[service name] | jq '.' | grep 'value'` | Print the configuration for a service in JSON, use `jq` to apply the filter `'.'`, and search for a value using `grep` |
+| `rancher scale [stack name]/[service name]=2` | Set number of containers to run for a service. In this case, the service is scaled to two containers. |
 
 ## Common approaches when all all fails
 
