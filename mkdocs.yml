@@ -51,6 +51,7 @@ pages:
           - "Lesson 1" : services/spin/getting_started/lesson-1.md
           - "Lesson 2" : services/spin/getting_started/lesson-2.md
           - "Lesson 3" : services/spin/getting_started/lesson-3.md
+        - services/spin/cheatsheet.md
       - Science Gateways : services/science-gateways.md
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
