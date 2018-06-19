@@ -17,9 +17,10 @@ TODO
 ## CLI commands
 
 The Rancher CLI must be used from a NERSC system, such as Cori, Edison or
-Denovo.  NERSC provides a modified version of the Rancher CLI, and some
-subcommands have been removed. For detailed documentation about using the
-Rancher CLI at NERSC, see [tips_and_examples/](Spin Tips & Examples).
+Denovo.  NERSC provides a modified version of the Rancher CLI which is
+optimized for the NERSC environment, and some subcommands have been removed.
+For detailed documentation about using the Rancher CLI at NERSC, see
+[tips_and_examples/](Spin Tips & Examples).
 
 Rancher official CLI documentation can be found at
 https://rancher.com/docs/rancher/v1.6/en/cli/ & a detailed list of CLI commands
@@ -27,12 +28,15 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 
 | Command                                   |  Description  |
 | ----------------------                    | ------------- |
-| `module load spin`                        | Load module to access Rancher CLI |
-| `export RANCHER_ENVIRONMENT=dev-cattle`   | Specify the environment to be used |
+| `module load spin`                        | Load the module to access the Spin CLI tools, such as `rancher` |
+| `export RANCHER_ENVIRONMENT=dev-cattle`   | Specify the Rancher environment to be used |
+| `rancher environment`                     | Print all environments that your account has access too |
 | `spin-keygen.sh`                          | Generate your API keys to connect to Spin. Usually only done once. |
 | `rancher config`                          | Configure the Rancher CLI. Usually only done once. |
 | `rancher help`                            | Show a list of commands |
-| `rancher help command`                    | Show help for one command |
+| `rancher help [command]`                  | Show help for one command |
+| `rancher [command] --help`                | Show help for one command |
+| `rancher --config .../cli.json`           | Specify an alternate CLI client configuration file |
 | **Operations on stacks**                  |
 | `rancher start|stop|restart [stack name]` | Start, Stop or Restart an entire stack |
 | `rancher stack ls`                        | List all active & inactive stacks belonging to you |
@@ -48,9 +52,18 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher up --render`                     | Render the `docker-compose.yml` file & print output if successful. Useful for syntax checking. |
 | `rancher export`                          | Exports the `docker-compose.yml` & `rancher-compose.yml` for a stack |
 | `rancher export --file file.tar`          | Exports the `docker-compose.yml` & `rancher-compose.yml` for a stack to a tar file |
+| `rancher secret ls`                       | List all secrets owned by you |
+| `rancher secret create [secret name] file-with-secret` | Create a secret named [secret name] using the value read from the file `file-with-secret` |
+| `rancher secret rm [secret name]`         | Remove the secret `[secret name]` if owned by you |
+| `echo MyPassword | rancher secret create [secret name] -` | Create a secret named [secret name], read from standard input. |
+| `rancher volume ls`                       | List all volumes owned by you |
+| `rancher volume create --driver rancher-nfs [service name].[stack name]` | Create a volume on the Rancher NFS server named [service name].[stack name] |
+| `rancher volume rm [service name].[stack name]` | Remove a volume owned by you |
 | **Operations on services & containers**   |
 | `rancher start|stop|restart [stack name]/[service name]` | Start, Stop or Restart one service in your stack |
-| `rancher ps`                              | List active services in your stacks |
+| `rancher ps`                              | List active services in all of your stacks |
+| `rancher ps | grep [stack name]`          | List active services in one stack, using `grep` to limit the output |
+| `rancher ps --format '{{.Service.Id}} {{.Service.Name}}/{{.Service.Name}}'` | Format the output of `rancher ps` to only print the ID and name of the services |
 | `rancher ps --all`                        | List all active & inactive services in your stacks |
 | `rancher ps --containers`                 | List active containers in your stacks |
 | `rancher ps --containers --all`           | List all active & inactive containers in your stacks |
@@ -60,6 +73,7 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher exec -it [stack name]/[service name] /bin/bash` | Obtain a shell on a container. If the service has more than one container instance, Rancher will ask which instance |
 | `rancher exec -it [stack name]-[service name]-[instance #] /bin/bash` | Obtain a shell on a specific container instance of a service. |
 | `rancher inspect [stack name]/[service name] | jq '.'` | Print the configuration for a service in JSON, and use `jq` to convert the output to human-friendly format |
+| `rancher scale [stack name]/[service name]=2` | Set number of containers to run for a service |
 
 
 ## Common approaches when all all fails
