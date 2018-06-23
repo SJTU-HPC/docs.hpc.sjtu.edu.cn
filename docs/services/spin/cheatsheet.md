@@ -1,4 +1,4 @@
-# Spin CLI Cheatsheet
+# Spin Cheatsheet
 
 ## Naming conventions
 
@@ -14,7 +14,7 @@
 
 TODO
 
-## CLI commands
+## Rancher CLI Cheatsheet
 
 The Rancher CLI must be used from a NERSC system, such as Cori, Edison or
 Denovo.  NERSC provides a modified version of the Rancher CLI which is
@@ -26,7 +26,7 @@ Rancher official CLI documentation can be found at
 https://rancher.com/docs/rancher/v1.6/en/cli/ & a detailed list of CLI commands
 can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 
-### Getting Started
+### Global commands
 
 | Command                                   | Description                     |
 | ----------------------------------------- | ------------------------------- |
