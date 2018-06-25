@@ -10,7 +10,7 @@ pages:
       - Jupyter : services/jupyter.md
   - Running Jobs:
     - Overview: jobs/index.md
-    - Examples: jobs/examples.md
+    - Examples: jobs/examples/index.md
     - Best Practices: jobs/best-practices.md
     - Workflow Tools : jobs/workflow-tools.md
     - Reservations: jobs/reservations.md
