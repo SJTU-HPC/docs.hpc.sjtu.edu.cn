@@ -20,7 +20,7 @@ Images and Containers:
       includes everything needed to run a piece of software.
   * A ***Container*** is a runnable instance of an image.
 
-## Stacks vs. Services vs. Containers vs. Images
+## Naming conventions for Stacks, Services, Secrets & Volumes
 
 More information on naming conventions for Services, Stacks, Secrets & Volumes, can be found in the [Best Practices Guide](best_practices).
 
