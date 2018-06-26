@@ -15,7 +15,7 @@
 
 ## Naming conventions
 
-More information on naming conventions for Services, Stacks, Secrets & Volumes, can be found in the [Best Practices Guide](best_practices). 
+More information on naming conventions for Services, Stacks, Secrets & Volumes, can be found in the [Best Practices Guide](best_practices).
 
 ### Services
 
@@ -49,7 +49,7 @@ foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
 ### Secrets
 
 **Secrets** should be named after the service where the secret is set. `<filename>`
-can be used to provide a descriptive name, such as `mongo-initdb-password`. 
+can be used to provide a descriptive name, such as `mongo-initdb-password`.
 
     <service name>.<stack name>.<filename>
 
@@ -80,7 +80,7 @@ More information on Network, Ports and Firewall considerations can be found in t
 
 Services which listen on port 80 or 443 are attached to the Spin reverse proxy
 using a CNAME pointing to the Reverse Proxy service in either the Production or
-Development environments: 
+Development environments:
 * Production:  lb.reverse-proxy.prod-cattle.stable.spin.nersc.org
 * Development:  lb.reverse-proxy.dev-cattle.stable.spin.nersc.org
 
