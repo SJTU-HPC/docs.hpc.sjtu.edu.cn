@@ -78,7 +78,7 @@ The NERSC Spin project aims to follow the Docker motto, "Build, Ship & Run." Thi
 1. **Run** the application stack in the Spin Development environment. ISG will work with you to resolve any NERSC-specific issues, such as access to files on the NERSC Global Filesystem. (performed by ISG during pilot phase).
 1. **Copy** your application stack from the Spin development environment to the Spin production environment (performed by ISG during pilot phase).
 
-![Build Ship Run workflow](../images/Rancher-Build-Ship-Run.png)
+![Build Ship Run workflow](/services/spin/images/Rancher-Build-Ship-Run.png)
 
 ## How it all fits together
 
@@ -99,7 +99,7 @@ Let's take an example of a web app that consists of a front-end, a database, and
 
 Here's a diagram showing the relation between Stacks, Services and Containers:
 
-![An Application Stack in Spin](../images/Spin-Rancher-Application-Stack-Diagram.png)
+![An Application Stack in Spin](/services/spin/images/Spin-Rancher-Application-Stack-Diagram.png)
 
 ## Tips to keep in mind
 
@@ -114,4 +114,8 @@ There are many good resources for learning [Docker](https://docs.docker.com/get-
 
 ## Follow the Spin Getting Started hands-on lessons
 
-To help get you started with Spin, we've provided several hands on lessons to help learn the essentials of Spin & Docker. See those lessons in the navigation bar to the left. After completing these guides, see the [Spin Best Practices](../best_practices.md) guide for a FAQ and best practices on implementing containers on Spin.
+To help get you started with Spin, we've provided several hands on lessons to
+help learn the essentials of Spin & Docker. See those lessons in the navigation
+bar to the left. After completing these guides, see the [Spin Best
+Practices](/services/spin/best_practices/) guide for a FAQ and best practices on
+implementing containers on Spin.
