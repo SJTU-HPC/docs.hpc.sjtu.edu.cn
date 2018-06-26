@@ -9,7 +9,9 @@
   Containers are named as **[Stack Name]-[Service Name]-[Instance #]** where
   ***Instance #*** is the number of that container
   instance, such as **sciencestack-web-1** and **sciencestack-web-2**.
-
+* An ***Image*** is a lightweight, stand-alone, read-only template that
+  includes everything needed to run a piece of software.
+* A ***Container*** is a runnable instance of an image.
 
 ## Naming conventions
 
