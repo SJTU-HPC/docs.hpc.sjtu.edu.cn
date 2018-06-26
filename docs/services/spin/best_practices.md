@@ -232,7 +232,7 @@ The following TCP ports are publicly available from all source addresses:
 
     80, 443, 8080, and 8443, 60000 - 60050
 
-The following TCP ports are available only from within NERSC networks (128.55.0.0/16) as well as from some LBL networks, such as the employee wireless and LBL VPN:
+The following TCP ports are available only from within NERSC networks (128.55.0.0/16) as well as from LBL networks that are secure and authenticated, such as the employee wireless and LBL VPN.
 
     3128, 3306, 5432, 5672, 8008, 50000 - 50050
 
@@ -249,7 +249,7 @@ Services that listen on port 80 or port 443 are accessed via a reverse proxy ser
 
 Services running on other ports will have a dynamic DNS entry automatically created for them when an external port mappings is created in Spin. The DNS name will be of the form:
 
-    {service}.{stack}.{environment}.stable.spin.nersc.org.
+    <service name>.<stack name>.<environment>.stable.spin.nersc.org.
 
 For example, a database service in the stack named ‘mystack’ in the production environment would get the name db.mystack.prod-cattle.stable.spin.nersc.org. Similarly to web services, a CNAME record would be added to nersc.gov or jgi.doe.gov domains to point to to the dynamically created FQDN to provide a more convenient or memorable name for accessing the service.
 
