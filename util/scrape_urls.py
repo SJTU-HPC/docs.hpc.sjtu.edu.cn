@@ -23,7 +23,10 @@ whitelist = ["https://www.lbl.gov/disclaimers/",
              "https://stash.nersc.gov:8443",
              "http://localhost/",
              "https://localhost/",
-             "http://localhost:5000/"]
+             "http://localhost:5000/",
+             "https://registry.services.nersc.gov"]
+
+badlist = []
 
 def get_url(this_page):
     """Print out the URL
@@ -66,7 +69,7 @@ def check_url(page):
 
             except requests.exceptions.ConnectionError:
                 print("Bad URL: ", url)
-                raise
+                badlist.append(url)
         else:
             break
     print("OK")
@@ -92,5 +95,12 @@ def main():
                 mypage = filehandle.read()
                 page = str(BeautifulSoup(mypage, "html.parser"))
                 check_url(page)
+    print("SUMMARY:")
+    if len(badlist) > 0:
+        print("Failed urls:")
+        for url in badlist:
+            print(url)
+    else:
+        print("No bad urls!")
 
 main()
