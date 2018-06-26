@@ -1,25 +1,37 @@
 # Spin Cheat Sheet
 
-## Stacks vs. Services vs. Containers vs. Images
+## Stacks, Services, Containers, Images
 
-* An ***Application Stack*** contains one or more ***services***, each
-  performing a distinct function. Services are named as **[Stack
-  Name]/[Service Name]**, such as **sciencestack/web** or **sciencestack/db**.
-* ***Services*** contain one or more instances of itself, called ***containers***.
-  Containers are named as **[Stack Name]-[Service Name]-[Instance #]** where
-  ***Instance #*** is the number of that container
-  instance, such as **sciencestack-web-1** and **sciencestack-web-2**.
-* An ***Image*** is a lightweight, stand-alone, read-only template that
-  includes everything needed to run a piece of software.
-* A ***Container*** is a runnable instance of an image.
+Stacks and Services:
+
+  * An ***Application Stack*** contains one or more ***services***, each
+    performing a distinct function.
+  * ***Services*** are named as **[Stack Name]/[Service Name]**, such as
+    **sciencestack/web** or **sciencestack/db**.
+  * An instance of a service is called a ***Container***. Containers are
+    automatically named after the service, and have a name like **[Stack
+    Name]-[Service Name]-[Instance #]** where ***Instance #*** is the number of
+    that container instance, such as **sciencestack-web-1** and
+    **sciencestack-web-2**.
+
+Images and Containers:
+
+  * An ***Image*** is a lightweight, stand-alone, read-only template that
+      includes everything needed to run a piece of software.
+  * A ***Container*** is a runnable instance of an image.
 
 ## Naming conventions
 
 More information on naming conventions for Services, Stacks, Secrets & Volumes, can be found in the [Best Practices Guide](best_practices).
 
-### Services
+### Stack Names
 
-Common services should use a name from the following table of recommended names
+**Stacks** should be named to match to non-TLD components of public-facing name (eg
+foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
+
+### Service Names
+
+Common services should use a name from the following table of recommended names:
 
     | Name | Description        |
     |------|--------------------|
@@ -33,7 +45,7 @@ Unique services should use a descriptive name for the service they provide. It
 should be a general description of the functionality, rather than the specific
 name of the implementation (e.g. web rather than apache)
 
-### Images
+### Image Names
 
 **Image** names are largely up to you. We recommend that images name be
 descriptive, or be named after the program or daemon being run. A custom image
@@ -41,19 +53,14 @@ that is based off of the official `nginx` image should be named
 `nginx-scienceapp`, not `web-scienceapp`. `web` is ambiguous and obscures the
 actual software used in the image.
 
-### Stacks
-
-**Stacks** should be named to match to non-TLD components of public-facing name (eg
-foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
-
-### Secrets
+### Secret Names
 
 **Secrets** should be named after the service where the secret is set. `<filename>`
 can be used to provide a descriptive name, such as `mongo-initdb-password`.
 
     <service name>.<stack name>.<filename>
 
-### Volumes
+### Volume Names
 
 **Rancher NFS volumes** should also be named after the service which mounts the
 data:
