@@ -1,20 +1,96 @@
-# Spin Cheatsheet
+# Spin Cheat Sheet
 
-## Naming conventions
+## Stacks vs. Services vs. Containers vs. Images
 
 * An ***Application Stack*** contains one or more ***services***, each
   performing a distinct function. Services are named as **[Stack
   Name]/[Service Name]**, such as **sciencestack/web** or **sciencestack/db**.
-* Services contain one or more instances of itself, called ***containers***.
+* ***Services*** contain one or more instances of itself, called ***containers***.
   Containers are named as **[Stack Name]-[Service Name]-[Instance #]** where
   ***Instance #*** is the number of that container
   instance, such as **sciencestack-web-1** and **sciencestack-web-2**.
 
-## List of ports and ranges
 
-TODO
+## Naming conventions
 
-## Rancher CLI Cheatsheet
+More information on naming conventions for Services, Stacks, Secrets & Volumes, can be found in the [Best Practices Guide](best_practices). 
+
+### Services
+
+Common services should use a name from the following table of recommended names
+
+    | Name | Description        |
+    |------|--------------------|
+    | app  | Application server |
+    | db   | Database           |
+    | lb   | Load Balancer      |
+    | web  | Web Server         |
+    | kv   | Key Value store    |
+
+Unique services should use a descriptive name for the service they provide. It
+should be a general description of the functionality, rather than the specific
+name of the implementation (e.g. web rather than apache)
+
+### Images
+
+**Image** names are largely up to you. We recommend that images name be
+descriptive, or be named after the program or daemon being run. A custom image
+that is based off of the official `nginx` image should be named
+`nginx-scienceapp`, not `web-scienceapp`. `web` is ambiguous and obscures the
+actual software used in the image.
+
+### Stacks
+
+**Stacks** should be named to match to non-TLD components of public-facing name (eg
+foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
+
+### Secrets
+
+**Secrets** should be named after the service where the secret is set. `<filename>`
+can be used to provide a descriptive name, such as `mongo-initdb-password`. 
+
+    <service name>.<stack name>.<filename>
+
+### Volumes
+
+**Rancher NFS volumes** should also be named after the service which mounts the
+data:
+
+    <service name>.<stack name>
+
+## Network
+
+More information on Network, Ports and Firewall considerations can be found in the [Best Practices Guide: Networking](best_practices/#networking).
+
+### List of ports and ranges
+
+* Ports 80 & 443 are reserved for the Spin [reverse proxy](#httphttps-reverse-proxy)
+* TCP Ports publicly available to all source addresses:
+    * 8080, 8443
+    * Ports for testing: 60000 - 60050
+* TCP Ports restricted to the NERSC Network (128.55.0.0/16), the lbnl-employee wireless network & the LBL VPN
+    * 3128, 3306, 5432, 5672, 8008
+    * Ports for testing: 50000 - 50050
+* TCP Ports restricted to NERSC networks only:
+    * 4873, 8081
+
+### External DNS names
+
+Services which listen on port 80 or 443 are attached to the Spin reverse proxy
+using a CNAME pointing to the Reverse Proxy service in either the Production or
+Development environments: 
+* Production:  lb.reverse-proxy.prod-cattle.stable.spin.nersc.org
+* Development:  lb.reverse-proxy.dev-cattle.stable.spin.nersc.org
+
+Other services listening on a port will have a DNS name in the form of:
+
+    <service name>.<stack name>.<environment>.stable.spin.nersc.org.
+
+For example, a MySQL service would be available at:
+
+    db.mystack.prod-cattle.stable.spin.nersc.org
+
+## Rancher CLI Cheat Sheet
 
 The Rancher CLI must be used from a NERSC system, such as Cori, Edison or
 Denovo.  NERSC provides a modified version of the Rancher CLI which is
@@ -94,10 +170,12 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 
 TODO Stop the service, remove the containers. Don't remove the service or stack.
 
-footnotes:
+## Footnotes
+
 [^1]: `rancher up` has several default behaviors. See the chart above to override these behaviors.
 
-    * `docker-compose.yml` is required. `rancher-compose.yml` is optional, and rarely used.
+    * `docker-compose.yml` is required.
+    * `rancher-compose.yml` is optional, and rarely used.
     * `rancher up` reads the stack configuration from `docker-compose.yml` in
       the current working directory.
     * Rancher will name the stack after the current working directory.
