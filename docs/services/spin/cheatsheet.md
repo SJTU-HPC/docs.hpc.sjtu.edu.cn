@@ -151,7 +151,8 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher secret create [secret name] - <<< MyPassword`    | Create a secret named [secret name], read from standard input |
 | `rancher secret rm [secret name]`         | Remove the secret `[secret name]` if owned by you |
 | **Rancher Volumes**                       |
-| `rancher volume ls`                       | List all volumes owned by you |
+| `rancher volume ls`                       | List all *active* volumes owned by you |
+| `rancher volume ls --all`                 | List all volumes owned by you, regardless of their state. Volumes are inactive until a Stack actually uses it. |
 | `rancher volume create --driver rancher-nfs [service name].[stack name]` | Create a volume on the Rancher NFS server named [service name].[stack name] |
 | `rancher volume rm [service name].[stack name]` | Remove a volume owned by you |
 
