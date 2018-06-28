@@ -161,26 +161,117 @@ cori$ cat bbf.conf
 cori$ salloc --qos=interactive -C haswell -t 00:30:00 --bbf=bbf.conf
 ```
 
-## Containerized (Docker) applications with Shifter
-
-## MPMD and multi-program jobs
-
-## Core specialization
-
 ## Job Arrays
+
+Job arrays offer a mechanism for submitting and managing collections
+of similar jobs quickly and easily.
+
+This example submits 3 jobs. Each job uses 1 node and has the same
+time limit and QOS. The `SLURM_ARRAY_TASK_ID` environment variable is
+set to the array index value.
+
+!!! example "Cori KNL"
+	```bash
+	--8<-- "docs/jobs/examples/job-array/cori-knl/job-array.sh"
+	```
+
+!!! info "Additional examples and details"
+	* [Slurm job array documentation](https://slurm.schedmd.com/job_array.html)
+	* Manual pages via `man sbatch` on NERSC systems
 
 ## Dependencies
 
-## OpenMPI
+Job depedencies can be used to construct complex pipelines or chain
+together long simulations requiring multiple steps.
 
-## IntelMPI
+!!! note
+	The `--parseable` option to `sbatch` can simplify working with job
+	dependencies.
+
+!!! example
+	```bash
+	$ jobid=$(sbatch --parseable first_job.sh)
+	$ sbatch --dependency=afterok:$jobid second_job.sh
+	```
+
+!!! example
+	```bash
+	$ jobid1=$(sbatch --parseable first_job.sh)
+    $ jobid2=$(sbatch --parseable --dependency=afterok:$jobid1 second_job.sh)
+	$ jobid3=$(sbatch --parseable --dependency=afterok:$jobid1 third_job.sh)
+	$ sbatch --dependency=afterok:$jobid2,afterok:$jobid3 last_job.sh
+	```
+
+!!! info "Additional examples and details"
+	* [Bash command substitution](https://www.gnu.org/software/bash/manual/bashref.html#Command-Substitution)
+	* [sbatch documentation](https://slurm.schedmd.com/sbatch.html)
+	* Manual pages via `man sbatch` on NERSC systems
 
 ## Network topology
 
-## Serial
+Slurm has a concept of "switches" which on Cori and Edison are
+configured to map to Aries electrical groups. Since this places an
+additional constraint on the scheduler a maximum time to wait for the
+requested topology can be specified.
 
-### Shared QOS
+!!! example
+	Wait up to 60 minutes
+	```bash
+	$ sbatch --switches=1@60 job.sh
+	```
 
-### TaskFarmer
+!!! info "Additional details and information"
+	* [Cray XC Series Network (pdf)](https://www.cray.com/sites/default/files/resources/CrayXCNetwork.pdf)
+	* [sbatch documentation](https://slurm.schedmd.com/sbatch.html)
+    * Manual pages via `man sbatch` on NERSC systems
 
-### GNU Parallel
+## Shared
+
+Unlike other QOS's in the shared QOS a single node can be shared by
+multiple users or jobs. Jobs in the shared QOS are charged for each
+*physical core* in allocated to the job.
+
+The number of physical cores allocated to a job by Slurm is
+controlled by three parameters:
+
+ * `-n` (`--ntasks`)
+ * `-c` (`--cpus-per-task`)
+ * `--mem` - Total memory available to the job (`MemoryRequested`)
+
+!!! note
+	In Slurm a "cpu" corresponds to a *hyperthread*. So there are 2
+	cpus per *physical core*.
+
+The memory on a node is divided evenly among the "cpus" (or
+hyperthreads):
+
+| System | MemoryPerCpu (megabytes)     |
+|--------|------------------------------|
+| Edison | 1300                         |
+| Cori   | 1952                         |
+
+The number of physical cores used by a job is computed by
+
+$$
+\text{physical cores} =
+\Bigl\lceil
+\frac{1}{2}
+\text{max} \left(
+\Bigl\lceil
+\frac{\mathrm{MemoryRequested}}{\mathrm{MemoryPerCpu}}
+\Bigr\rceil,
+\mathrm{ntasks} * \mathrm{CpusPerTask}
+\right) \Bigr\rceil
+$$
+
+!!! example "Cori-Haswell"
+	A four rank MPI job which utilizes 4 physical cores (and 8
+	hyperthreads) of a Haswell node.
+
+	```bash
+	#!/bin/bash
+	#SBATCH --qos=shared
+	#SBATCH --time=5
+	#SBATCH --ntasks=1
+	#SBATCH --cpus-per-task=8
+	```
