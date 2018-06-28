@@ -178,7 +178,7 @@ set to the array index value.
 	```bash
 	--8<-- "docs/jobs/examples/job-array/cori-knl/job-array.sh"
 	```
-	
+
 !!! info "Additional examples and details"
 	* [Slurm job array documentation](https://slurm.schedmd.com/job_array.html)
 	* Manual pages via `man sbatch` on NERSC systems
@@ -190,14 +190,14 @@ together long simulations requiring multiple steps.
 
 !!! note
 	The `--parseable` option to `sbatch` can simplify working with job
-	dependencies. 
-	
+	dependencies.
+
 !!! example
 	```bash
 	$ jobid=$(sbatch --parseable first_job.sh)
 	$ sbatch --dependency=afterok:$jobid second_job.sh
 	```
-	
+
 !!! example
 	```bash
 	$ jobid1=$(sbatch --parseable first_job.sh)
@@ -205,12 +205,12 @@ together long simulations requiring multiple steps.
 	$ jobid3=$(sbatch --parseable --dependency=afterok:$jobid1 third_job.sh)
 	$ sbatch --dependency=afterok:$jobid2,afterok:$jobid3 last_job.sh
 	```
-	
+
 !!! info "Additional examples and details"
 	* [Bash command substitution](https://www.gnu.org/software/bash/manual/bashref.html#Command-Substitution)
 	* [sbatch documentation](https://slurm.schedmd.com/sbatch.html)
 	* Manual pages via `man sbatch` on NERSC systems
-	
+
 ## Network topology
 
 Slurm has a concept of "switches" which on Cori and Edison are
@@ -233,7 +233,7 @@ requested topology can be specified.
 
 Unlike other QOS's in the shared QOS a single node can be shared by
 multiple users or jobs. Jobs in the shared QOS are charged for each
-*physical core* in allocated to the job. 
+*physical core* in allocated to the job.
 
 The number of physical cores allocated to a job by Slurm is
 controlled by three parameters:
@@ -245,7 +245,7 @@ controlled by three parameters:
 !!! note
 	In Slurm a "cpu" corresponds to a *hyperthread*. So there are 2
 	cpus per *physical core*.
-	
+
 The memory on a node is divided evenly among the "cpus" (or
 hyperthreads):
 
@@ -254,15 +254,15 @@ hyperthreads):
 | Edison | 1300                         |
 | Cori   | 1952                         |
 
-The number of physical cores used by a job is computed by 
+The number of physical cores used by a job is computed by
 
 $$
-\text{physical cores} = 
-\Bigl\lceil 
+\text{physical cores} =
+\Bigl\lceil
 \frac{1}{2}
 \text{max} \left(
 \Bigl\lceil
-\frac{\mathrm{MemoryRequested}}{\mathrm{MemoryPerCpu}} 
+\frac{\mathrm{MemoryRequested}}{\mathrm{MemoryPerCpu}}
 \Bigr\rceil,
 \mathrm{ntasks} * \mathrm{CpusPerTask}
 \right) \Bigr\rceil
@@ -271,7 +271,7 @@ $$
 !!! example "Cori-Haswell"
 	A four rank MPI job which utilizes 4 physical cores (and 8
 	hyperthreads) of a Haswell node.
-	
+
 	```bash
 	#!/bin/bash
 	#SBATCH --qos=shared
