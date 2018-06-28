@@ -161,10 +161,6 @@ cori$ cat bbf.conf
 cori$ salloc --qos=interactive -C haswell -t 00:30:00 --bbf=bbf.conf
 ```
 
-## Containerized (Docker) applications with Shifter
-
-## MPMD and multi-program jobs
-
 ## Job Arrays
 
 Job arrays offer a mechanism for submitting and managing collections
