@@ -29,7 +29,7 @@ pages:
       - Formats : data/formats.md
       - Policy: data/policy.md      
   - Performance:
-    - Optimization strategy : performance/optimization-strategy.md
+#    - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
@@ -81,7 +81,6 @@ pages:
         - MPI : development/programming-models/mpi.md
         - OpenMP : development/programming-models/openmp.md
         - UPC++ : development/programming-models/upcxx.md
-        - Chapel : development/programming-models/chapel.md
         - Kokkos : development/programming-models/kokkos.md
         - Raja : development/programming-models/raja.md
         - Coarrays : development/programming-models/coarrays.md
@@ -94,7 +93,7 @@ pages:
     - Version Control:
         - git : development/version-control/git/index.md
         - Subversion : development/version-control/subversion/index.md
-  - Environment: environment/environment.md
+  - Environment: environment/index.md
   - Systems:
       - Cori : systems/cori/index.md
       - Edison : systems/edison/index.md

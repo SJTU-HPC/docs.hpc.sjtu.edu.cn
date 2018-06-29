@@ -6,17 +6,20 @@
 
 All NERSC systems use global home directories, which are are
 pre-populated with shell initialization files (also known as dotfiles)
-for all available shells. NERSC fully supports `bash`, `csh`, and
+for all available shells. NERSC supports `bash`, `csh`, and
 `tcsh` as login shells. Other shells (`ksh`, `sh`, and `zsh`) are also
 available. The default shell at NERSC is bash.
 
 #### Dotfiles
 
-The "standard" dotfiles are symbolic links to read-only files that
+The standard dotfiles are symbolic links to read-only files that
 NERSC controls. For each standard dotfile, there is a user-writeable
-".ext" file.  For example, C-shell users are generally concerned with
-the files .login and .cshrc, which are read-only NERSC. These users
-should put their customizations in .login.ext and .cshrc.ext.
+".ext" file.
+
+!!! example
+	For `csh` users `~/.login` and `~/.cshrc` are
+	read-only. Customizations should be put in
+	`~/.login.ext` and`~/.cshrc.ext`.
 
 ##### Fixing Dotfiles
 

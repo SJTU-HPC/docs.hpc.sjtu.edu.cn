@@ -62,13 +62,13 @@ run with optimization turned on, flags such as -fast.
 ### Fortran
 
 ```Shell
-nersc$ ftn -g -O0 -o testDDT_ex testDDT.f             # on Edison or Cori
+nersc$ ftn -g -O0 -o testDDT_ex testDDT.f
 ```
 
 ### C
 
 ```Shell
-nersc$ cc -g -O0 -o testDDT_ex testDDT.c             # on Edison or Cori
+nersc$ cc -g -O0 -o testDDT_ex testDDT.c
 ```
 
 ## Starting a Job with DDT
@@ -85,7 +85,7 @@ enabled. This could mean using the `-X` or `-Y` option to ssh. The
 `-Y` option often works better for Mac OSX.
 
 ```Shell
-nersc$ ssh -Y username@edison.nersc.gov
+$ ssh -Y username@edison.nersc.gov
 ```
 
 After loading the allinea-forge module and compiling with the -g
@@ -154,10 +154,10 @@ whether or not you use the old module name:
 
 allinea forge remote launch settings edison
 
-Note that in the Host Name field, we need enter two account entries
-for the Cray machines, one with the machine name itself and the other
-with one of its MOM nodes ('wyang@cmom02.nersc.gov' in the above
-example).
+!!! note
+	In the Host Name field, we need enter two account entries for the Cray
+	machines, one with the machine name itself and the other with one of
+	its MOM nodes ('wyang@cmom02.nersc.gov' in the above example).
 
 Edison has 6 MOM nodes: edimom01, edison02, ..., and edimom06.
 
@@ -208,7 +208,7 @@ configurations and debugging options. Click 'Run'.
 
 Now, you can start debugging in the remote client:
 
-## Trouble Shooting
+## Troubleshooting
 
 If you are having trouble launching DDT try these steps.
 
@@ -306,65 +306,53 @@ the top of the GUI.
 DDT has a memory debugging tool that can show heap memory usage across
 processors.
 
+### Static linking
+
 To access the memory debugging feature, you must first build your code
 for memory debugging. On Edison and Cori, you have to follow certain
 steps. Below is a table showing steps for building a static executable
-using different compilers for memory debugging on Edison and Cori. For
-the compilers other than PGI, the linking step is made of two
-parts. The first is to run in verbose mode using the -v flag to show
-all the linking steps taken. The second step is to rerun the last
-linker line after inserting some more options.
+using different compilers for memory debugging on Edison and Cori. The
+linking step is made of two parts. The first is to run in verbose mode
+using the `-v` flag to show all the linking steps taken. The second step
+is to rerun the last linker line after inserting some more options.
 
-!!! note
-	Tables are work in progress
+ *  GNU
+	```Shell
+	nersc$ ftn -g -c prog.f
+	nersc$ ftn -v -o prog prog.o          # -v to get the last linker line
+	```
+	Rerun the last linker line after inserting `-zmuldefs` right after the command and putting `${DDT_LINK_DMALLOC}` just before `-lc:`
+   	```Shell
+	nersc$ /opt/gcc/4.7.1/snos/libexec/gcc/x86_64-suse-linux/4.7.1/collect2 -zmuldefs ... ${DDT_LINK_DMALLOC} -lc ...
+	```
+ *  Cray
+	```Shell
+	nersc$ ftn -g -c prog.f
+	nersc$ ftn -v -o prog prog.o
+	```
+	Do similarly as with GNU:
 
-| Compiler	| For static linking |
-|---------------|:------------------:|
-| GNU	|
-```Shell
-% ftn -g -c prog.f
-% ftn -v -o prog prog.o          # -v to get the last linker line
-``` <br>
+	```Shell
+	nersc$ /opt/cray/cce/8.0.7/cray-binutils/x86_64-unknown-linux-gnu/bin/ld -zmuldefs ... ${DDT_LINK_DMALLOC} -lc ...
+	```
 
-Rerun the last linker line after inserting `-zmuldefs` right after the command and putting `${DDT_LINK_DMALLOC}` just before `-lc: <br>`
+ *  Intel
+	```Shell
+	nersc$ ftn -g -c prog.f
+	nersc$ ftn -v -o prog prog.o
+	```
+	There are two locations to put `${DDT_LINK_DMALLOC}` as there are two `-lc`'s:
+	```Shell
+	nersc$ ld -zmuldefs ... ${DDT_LINK_DMALLOC} -lc ... ${DDT_LINK_DMALLOC} -lc ...
+	```
 
-```Shell
-% /opt/gcc/4.7.1/snos/libexec/gcc/x86_64-suse-linux/4.7.1/collect2 -zmuldefs ... ${DDT_LINK_DMALLOC} -lc ...
-```
-|
+!!! notes
+	The example commands are shown for a Fortran case. `cc` and `CC` should be
+	used for C and C++ codes. In case of a C++ code,
+	`${DDT_LINK_DMALLOCXX}` is to be used instead of
+	`${DDT_LINK_DMALLOC}`.
 
-Cray
-
-```Shell
-% ftn -g -c prog.f
-% ftn -v -o prog prog.o
-```
-
-Do similarly as above:
-
-```Shell
-% /opt/cray/cce/8.0.7/cray-binutils/x86_64-unknown-linux-gnu/bin/ld -zmuldefs ... ${DDT_LINK_DMALLOC} -lc ...
-```
-
-Intel
-
-```Shell
-% ftn -g -c prog.f
-% ftn -v -o prog prog.o
-```
-
-Do similary as above. There are two locations to put ${DDT_LINK_DMALLOC} as there are two -lc's:
-
-```Shell
-% ld -zmuldefs ... ${DDT_LINK_DMALLOC} -lc ... ${DDT_LINK_DMALLOC} -lc ...
-```
-
-The example commands are shown for a Fortran case. cc and CC should be
-used similarly for C and C++ codes. In case of a C++ code,
-`${DDT_LINK_DMALLOCXX}` is to be used instead of
-`${DDT_LINK_DMALLOC}`.
-
-A simple script, static_linking_ddt_md, is provided in your $PATH to
+A simple script, `static_linking_ddt_md`, is provided in your $PATH to
 help you complete the somewhat complicated steps shown above.
 
 ```Shell
@@ -392,28 +380,26 @@ provided to help with linking:
 nersc$ static_linking_ddt_md_th ftn -mp -o prog prog.o   # instead of 'ftn -mp -o prog prog.o'
 ```
 
-Below is a table showing how to prepare your code using dyanmic
-linking on Edison and Cori. The example is provided for a Fortran code
-case. Adjustments should be made for C and C++ codes as above. Again,
-in case of a C++ code, `${DDT_LINK_DMALLOC}` must be repalced with
-`${DDT_LINK_DMALLOCXX}`.
+### Dynamic linking
 
-Compiler For dynamic linking PGI, Cray
+The example is provided for a Fortran code case. Adjustments should be
+made for C and C++ codes as above. Again, in case of a C++ code,
+`${DDT_LINK_DMALLOC}` must be repalced with `${DDT_LINK_DMALLOCXX}`.
 
-```Shell
-% ftn -g -c prog.f
-% ftn -dyanmic -o prog prog.o ${DDT_LINK_DMALLOC} --Wl,--allow-multiple-definition
-```
+ *  Cray
+	```Shell
+	nersc$ ftn -g -c prog.f
+	nersc$ ftn -dyanmic -o prog prog.o ${DDT_LINK_DMALLOC} --Wl,--allow-multiple-definition
+	```
 
-GNU, Intel
+ *  GNU/Intel
+	```Shell
+	nersc$ ftn -g -c prog.f
+	nersc$ ftn -dynamic -o prog.o ${DDT_LINK_DMALLOC} -zmuldefs
+	```
 
-```Shell
-% ftn -g -c prog.f
-% ftn -dynamic -o prog.o ${DDT_LINK_DMALLOC} -zmuldefs
-```
-
-For multi-threaded codes, ${DDT_LINK_DMALLOCTH} or
-${DDT_LINK_DMALLOCTHCXX} should be used instead.
+For multi-threaded codes, `${DDT_LINK_DMALLOCTH}` or
+`${DDT_LINK_DMALLOCTHCXX}` should be used instead.
 
 Next, when DDT starts, you must click the "Memory Debugging" checkbox
 in the DDT run menu that first comes up
@@ -434,6 +420,8 @@ executable unchecked on the Cray machines if a C++ version of
 Allinea's dmalloc library was used (that is, when
 `$DDT_LINK_DMALLOCXX` or `$DDT_LINK_DMALLOCTHCXX` was
 used). Otherwise, ddt hangs during startup.
+
+### Usage
 
 Several features are enabled with memory debugging. Select Current
 Memory Usage or Memory Statistics under the Tools menu. With the
