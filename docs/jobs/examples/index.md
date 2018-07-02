@@ -87,24 +87,24 @@ set to the array index value.
 
 ## Dependencies
 
-Job depedencies can be used to construct complex pipelines or chain
+Job dependencies can be used to construct complex pipelines or chain
 together long simulations requiring multiple steps.
 
 !!! note
-	The `--parseable` option to `sbatch` can simplify working with job
+	The `--parsable` option to `sbatch` can simplify working with job
 	dependencies.
 
 !!! example
 	```bash
-	$ jobid=$(sbatch --parseable first_job.sh)
+	$ jobid=$(sbatch --parsable first_job.sh)
 	$ sbatch --dependency=afterok:$jobid second_job.sh
 	```
 
 !!! example
 	```bash
-	$ jobid1=$(sbatch --parseable first_job.sh)
-    $ jobid2=$(sbatch --parseable --dependency=afterok:$jobid1 second_job.sh)
-	$ jobid3=$(sbatch --parseable --dependency=afterok:$jobid1 third_job.sh)
+	$ jobid1=$(sbatch --parsable first_job.sh)
+    $ jobid2=$(sbatch --parsable --dependency=afterok:$jobid1 second_job.sh)
+	$ jobid3=$(sbatch --parsable --dependency=afterok:$jobid1 third_job.sh)
 	$ sbatch --dependency=afterok:$jobid2,afterok:$jobid3 last_job.sh
 	```
 
@@ -212,7 +212,7 @@ the same files.
 
 !!! warning
 	* Reservations must be deleted when no longer in use.
-	* There are no guaruntees of data integrity over long periods of
+	* There are no guarantees of data integrity over long periods of
 	time.
 
 !!! note
