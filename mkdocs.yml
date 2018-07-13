@@ -18,6 +18,7 @@ pages:
   - Applications:
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
     - NAMD : applications/namd/index.md
+    - TensorFlow: applications/tensorflow/index.md
     - VASP : applications/vasp/index.md
   - Analytics:
       - Jupyter : services/jupyter.md
