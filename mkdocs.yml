@@ -98,7 +98,22 @@ pages:
       - Cori : systems/cori/index.md
       - Edison : systems/edison/index.md
       - PDSF : systems/pdsf/index.md
-      - Genepool : systems/genepool.md
+      - Genepool: 
+        - Genepool System: systems/genepool.md
+        - Getting Started : systems/genepool/genepool-getting-started.md
+        - Denovo, the Replacement for Old Genepool : systems/genepool/genepool-denovo-the-replacement-for-genepool.md
+        - Configuration : systems/genepool/genepool-configuration.md
+        - User Environment : systems/genepool/genepool-user-environment.md
+        - Programming : systems/genepool/genepool-programming.md
+        - Software : systems/genepool/genepool-software.md
+        - Queues and Policies : systems/genepool/genepool-queues-and-policies.md
+        - Running Jobs : systems/genepool/genepool-running-jobs.md
+        - Cluster Statistics : systems/genepool/genepool-cluster-statistics.md
+        - File Storage and I/O : systems/genepool/genepool-file-storage-and-io.md
+        - Data Managment : systems/genepool/genepool-data-management.md
+        - Training and Tutorials : systems/genepool/genepool-training-and-tutorials.md
+        - Websites, Databases and Cluster Services : systems/genepool/genepool-websites-databases-and-cluster-services.md
+        - Cori for JGI users : systems/genepool/genepool-cori-for-jgi.md
   - Filesystems:
       - Overview: filesystems/index.md
       - Quotas: filesystems/quotas.md
