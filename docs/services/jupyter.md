@@ -126,3 +126,26 @@ corresponding kernel specification might be:
   }
 }
 ```
+
+### Custom Kernels using Shifter Containers
+
+You can even leverage Shifter containers pulled to Cori on jupyter-dev.
+Here is an example of how to set up a kernel.json kernel-spec to use a Shifter container.
+The example uses the stock Anaconda Python 3 image from Docker hub.
+The important part is to ensure the path to the Python executable is the one you want in the container.
+
+```json
+{
+    "argv": [
+        "shifter",
+        "--image=continuumio/anaconda3:latest",
+        "/opt/conda/bin/python",
+        "-m",
+        "ipykernel_launcher",
+        "-f",
+        "{connection_file}"
+    ],
+    "display_name": "my-shifter-kernel",
+    "language": "python"
+}
+```

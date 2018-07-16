@@ -113,6 +113,16 @@ There doesn't yet appear to be a viable non-GPL alternative at this point in tim
 We suggest that for the most part users may find that Anaconda Python provides the best of both worlds, but that Anaconda Python may lag slightly behind the Intel Distribution in terms of performance for short periods.
 The two companies have a very strong relationship and we think this greatly benefits Python users in the long term.
 
+## Unexpected error while saving and disk I/O error in Jupyter
+
+If you try to save or create a new notebook and you see an error like `Unexpected error while saving file: <path-to-notebook> disk I/O error`
+you may just be over quota.
+Use ssh to log into Cori and run `myquota` to check.
+
+## Can I use a Shifter image in a Jupyter kernel?
+
+Yes.  See the instructions [here.](../../../services/jupyter.md#custom-kernels-using-shifter-containers)
+
 ## Coming Soon
 
 How can I profile my Python code's performance?
