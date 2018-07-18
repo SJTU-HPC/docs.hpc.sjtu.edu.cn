@@ -71,6 +71,7 @@ pages:
         - STAT and ATP : development/performance-debugging-tools/stat_atp.md
         - Valgrind : development/performance-debugging-tools/valgrind.md
         - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
+        - VTune : development/performance-debugging-tools/vtune.md
     - Compilers : development/compilers.md
     - High-level Programming Environments:
         - Python :
