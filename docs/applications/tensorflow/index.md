@@ -12,7 +12,7 @@ module load tensorflow/intel-<version>
 ```
 where `<version>` should be replaced with the version string you are trying to load. To see which ones are available use `module avail tensorflow`.
 
-Running TensorFlow on a single node is the same as on a local machine, just invoke the script with 
+Running TensorFlow on a single node is the same as on a local machine, just invoke the script with
 ```bash
 python my_tensorflow_program.py
 ```
@@ -32,7 +32,7 @@ which initializes the MPI runtime. Then, the user needs to wrap the optimizers f
 ```python
 opt = hvd.DistributedOptimizer(opt)
 ```
-To keep track of the global step a global step object has to be created via `tf.train.get_or_create_global_step()` and passed to the `minimize` (or `apply_gradients`) member functions of the optimizer instance. 
+To keep track of the global step a global step object has to be created via `tf.train.get_or_create_global_step()` and passed to the `minimize` (or `apply_gradients`) member functions of the optimizer instance.
 Furthermore, to ensure model consistency on all nodes it is mandatory to register a broadcast hook via
 ```python
 bcast_hook = [hvd.BroadcastGlobalVariablesHook(0)]
@@ -111,7 +111,7 @@ It is important to note that splitting the data among the nodes is up to the use
 ##Frequently Asked Questions
 
 ###I/O Performance and Data Feeding Pipeline
-For performance reasons, we recommend storing the data on the scratch directory, accessible via the `SCRATCH` environment variable. At high concurrency, i.e. when many nodes need to read the files we recommend [staging them into burst buffer](). For efficient data feeding we recommend using the `TFRecord` data format and using the [`dataset` API](https://www.tensorflow.org/programmers_guide/datasets) to feed data to the CPU. Especially, please note that the `TFRecordDataset` constructor takes `buffer_size` and `num_parallel_reads` options which allow for prefetching and multi-threaded reads. Those should be tuned for good performance, but please note that a thread is dispatched for every independent read. Therefore, the number of inter-threads needs to be adjusted accordingly (see below). The `buffer_size` parameter is meant to be in bytes and should be an integer multiple of the node-local batch size for optimal performance. 
+For performance reasons, we recommend storing the data on the scratch directory, accessible via the `SCRATCH` environment variable. At high concurrency, i.e. when many nodes need to read the files we recommend [staging them into burst buffer](). For efficient data feeding we recommend using the `TFRecord` data format and using the [`dataset` API](https://www.tensorflow.org/programmers_guide/datasets) to feed data to the CPU. Especially, please note that the `TFRecordDataset` constructor takes `buffer_size` and `num_parallel_reads` options which allow for prefetching and multi-threaded reads. Those should be tuned for good performance, but please note that a thread is dispatched for every independent read. Therefore, the number of inter-threads needs to be adjusted accordingly (see below). The `buffer_size` parameter is meant to be in bytes and should be an integer multiple of the node-local batch size for optimal performance.
 
 ###Potential Issues
 For best MKL-DNN performance, the module already sets a set of OpenMP environment variables and we encourage the user not changing those, especially not changing the `OMP_NUM_THREADS` variable. Setting this variable incorrectly can cause a resource starvation error which manifests in TensorFlow telling the user that too many threads are spawned. If that happens, we encourage to adjust the inter- and intra-task parallelism by changing the `NUM_INTER_THREADS` and `NUM_INTRA_THREADS` environment variables. Those parameters can also be changed in the TensorFlow python script as well by creating a session configs object via
