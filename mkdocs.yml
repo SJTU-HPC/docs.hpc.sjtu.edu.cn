@@ -28,7 +28,7 @@ pages:
       - Transfer : data/transfer.md
       - Visualization : data/visualization.md
       - Formats : data/formats.md
-      - Policy: data/policy.md      
+      - Policy: data/policy.md
   - Performance:
 #    - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
@@ -69,7 +69,7 @@ pages:
         - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
     - Compilers : development/compilers.md
     - High-level Programming Environments:
-        - Python : 
+        - Python :
             - development/high-level-environments/python/index.md
             - Running Scripts : development/high-level-environments/python/running-scripts.md
             - Scaling Up : development/high-level-environments/python/scaling-up.md
@@ -99,7 +99,7 @@ pages:
       - Cori : systems/cori/index.md
       - Edison : systems/edison/index.md
       - PDSF : systems/pdsf/index.md
-      - Genepool: 
+      - Genepool:
         - Genepool System: systems/genepool.md
         - Getting Started : systems/genepool/genepool-getting-started.md
         - Denovo, the Replacement for Old Genepool : systems/genepool/genepool-denovo-the-replacement-for-genepool.md
@@ -135,7 +135,7 @@ pages:
       - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
       - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
   - Help: help/index.md
-#      - 
+#      -
 #  - JGI:
 #      - Pipelines : jgi/pipelines.md
   - Tutorials:
