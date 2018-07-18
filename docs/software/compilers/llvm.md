@@ -18,12 +18,12 @@ module load llvm/<version>
 
 where `module avail llvm` displays which versions are currently installed.
 
-LLVM does not only provide a compiler infrastructure, it also provides a language independent instruction set and type system. When code is compiled with clang, it is first translated into a powerful intermediate representation, similar to assembly code but architecture independent. 
-That way, LLVM is for example able to translate all object files and libraries of a large project into the intermediate representation and then perform an optimization step at link time across modules, also known as link-time-optimization (LTO). 
+LLVM does not only provide a compiler infrastructure, it also provides a language independent instruction set and type system. When code is compiled with clang, it is first translated into a powerful intermediate representation, similar to assembly code but architecture independent.
+That way, LLVM is for example able to translate all object files and libraries of a large project into the intermediate representation and then perform an optimization step at link time across modules, also known as link-time-optimization (LTO).
 
 ###Hints for Building Applications
 The plain use of the clang compiler is not much different from using the GNU or Intel compilers.
-For optimizations, the common compiler flags such as `-On` can be used, where $n=0,1,2,3$ is the optimization level. 
+For optimizations, the common compiler flags such as `-On` can be used, where $n=0,1,2,3$ is the optimization level.
 
 The clang compiler/llvm framework also supports a variety of other linker flags which can help debugging code:
 
@@ -34,7 +34,7 @@ When the above mentioned options are enabled, make sure to use clang/clang++ as 
 For all mentioned options, in order to enable a nicer stack trace, add `-fno-omit-frame-pointer`. For enabling a complete stack trace, add `-fno-optimize-sibling-calls` and avoid using optimization levels higher than `-O1`.
 
 ##Fortran Support with Flang
-The module `llvm/5.0.0-gnu-flang` contains `flang` in addition to `clang`. This compiler is supposed to compile fortran code and does support OpenMP. However, please note that this compiler is even more experimental than `clang` itself. Furthermore, it does not find the standard headers and fortran modules by default. Therefore, those need to be added manually to the compilation flags using `-I`. Please use `module show llvm/5.0.0-gnu-flang` to find the corresponding include paths. 
+The module `llvm/5.0.0-gnu-flang` contains `flang` in addition to `clang`. This compiler is supposed to compile fortran code and does support OpenMP. However, please note that this compiler is even more experimental than `clang` itself. Furthermore, it does not find the standard headers and fortran modules by default. Therefore, those need to be added manually to the compilation flags using `-I`. Please use `module show llvm/5.0.0-gnu-flang` to find the corresponding include paths.
 
 ##Documentation
 For questions about using the Intel compilers at NERSC contact the [consulting services](consult@nersc.gov).
