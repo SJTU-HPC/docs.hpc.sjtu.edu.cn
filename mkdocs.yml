@@ -56,6 +56,10 @@ pages:
       - Science Gateways : services/science-gateways.md
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
+      - CDash :
+        - Overview : services/cdash/index.md
+        - CTest/CDash with CMake : services/cdash/with_cmake.md
+        - CTest/CDash without CMake : services/cdash/without_cmake.md
   - Development:
     - Containers (Shifter):
         - Overview : development/shifter/overview.md
