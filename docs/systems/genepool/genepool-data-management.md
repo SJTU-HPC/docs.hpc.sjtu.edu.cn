@@ -148,14 +148,14 @@ As with the standard unix tar utility the "-c" "-x" and "-t" options respectivel
 	``` bash
 	# Create an archive with directory "nova" and file "simulator"
 	% htar -cvf nova.tar nova simulator
-	HTAR: a   nova/                                                                   
+	HTAR: a   nova/
 	HTAR: a   nova/sn1987a
 	HTAR: a   nova/sn1993j
 	HTAR: a   nova/sn2005e
 	HTAR: a   simulator
 	HTAR: a   /scratch/scratchdirs/joeuser/HTAR_CF_CHK_61406_1285375012
 	HTAR Create complete for nova.tar. 28,396,544 bytes written for 4 member files, max threads: 4 Transfer time: 0.420 seconds (67.534 MB/s)
-	HTAR: HTAR SUCCESSFUL       
+	HTAR: HTAR SUCCESSFUL
 
 	# Now List the contents
 	% htar -tf nova.tar
@@ -175,13 +175,13 @@ As with the standard unix tar utility the "-c" "-x" and "-t" options respectivel
 
 	# Now try to list the archive contents without the index file:
 	% htar -tf nova.tar
-	ERROR: No such file: nova.tar.idx           
+	ERROR: No such file: nova.tar.idx
 	ERROR: Fatal error opening index file: nova.tar.idx
 	HTAR: HTAR FAILED
 
 	# Here is how we can rebuild the index file if it is accidently deleted
 	% htar -Xvf nova.tar
-	HTAR: i nova                         
+	HTAR: i nova
 	HTAR: i nova/sn1987a
 	HTAR: i nova/sn1993j
 	HTAR: i nova/sn2005e

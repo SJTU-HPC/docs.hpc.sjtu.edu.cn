@@ -1,10 +1,10 @@
-# Genepool 
+# Genepool
 
 <img style="float: right;" alt="Genepool logo" src="../../img/Genepool-logo.jpg">
 The Genepool is a "metacluster" of computing resources dedicated to the DOE Joint Genome
 Institute's bioinformatics needs.
 
-Currently, "Genepool" includes resources from two clusters: The Denovo system, which runs on the Mendel cluster, and a dedicated partition on Cori. The name "genepool" also refers to a no-longer-used system that ran on Mendel. 
+Currently, "Genepool" includes resources from two clusters: The Denovo system, which runs on the Mendel cluster, and a dedicated partition on Cori. The name "genepool" also refers to a no-longer-used system that ran on Mendel.
 
 ## [Getting started](genepool/genepool-getting-started.md)
 Learn how to log in and get started with Genepool

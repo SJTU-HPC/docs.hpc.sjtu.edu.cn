@@ -12,10 +12,10 @@ Instead you should modify a file called .bashrc.ext or .cshrc.ext.
 ## Environment Variables  
 
 - `$HOME`
-points to the location of your home directory in the filesystem             
+points to the location of your home directory in the filesystem
 
 - `$BSCRATCH`
-points to the location of your projectb scratch directory in the filesystem 
+points to the location of your projectb scratch directory in the filesystem
 
 - `$SCRATCH`
 points to the "best" scratch directory you have access to
@@ -58,7 +58,7 @@ modules:
 - `$LD_LIBRARY_PATH`: the directories where shared libraries can be located.
 - `$MANPATH`: to find manual pages.
 - `$PYTHONPATH`: search paths for python packages.
-- `$PERL5DIR`: search paths for perl packages. 
+- `$PERL5DIR`: search paths for perl packages.
 - `$PKG_CONFIG_PATH`: the pkgconfig system enables automated discovery of libraries by autconf and automake tools.
 - `<MODULENAME>_DIR`: the location of a given package.
 
@@ -68,8 +68,8 @@ you environment, please use the module instead (ie module load <package>). There
 installed in this location, and the proper way to access it depends on your current context.  
 
 If you need to refer to a path in the module, use **[MODULENAME]_DIR** environment variable. You can see all the
-settings of a module by entering: `module show <modulename>`. 
- 
+settings of a module by entering: `module show <modulename>`.
+
 Loading modules can have additional effects. The Genepool modules are
 interconnected to ease the loading of dependencies. Frequently, when you load
 a module, swap a module, or remove modules other modules may be loaded, swapped,
@@ -102,7 +102,7 @@ Transmitting the full environment through qsub (using the `-V`) flag is not
 recommended because it is implicitly context-dependent and potentially leads
 to non-reproducible calculations.
 
-!!!warning 
+!!!warning
 	module purge does not currently work on Cori and Edison. If you plan on moving your script to Cori or Edison do **not** use module purge.
 
 ### Loading Modules by Default in the dotfiles
@@ -110,8 +110,8 @@ For common tasks in an interactive environment it can be convenient to load
 certain modules by default for all interactive sessions.  If this is needed,
 the recommended mechanism is to embed the module commands into your
 .bashrc.ext or .tcshrc.ext (depending on if you are a bash or tcsh user).  
-Each NERSC system has different modules, for this reason, but your dotfiles 
-are evaluated by all systems.  Thus, you should check to make sure that 
+Each NERSC system has different modules, for this reason, but your dotfiles
+are evaluated by all systems.  Thus, you should check to make sure that
 `$NERSC_HOST` is `genepool`, when loading genepool modules.
 
 **bash**
@@ -166,13 +166,13 @@ cronjob into a script, and call the script from your crontab.
 #!/bin/bash -l
 module load python
 module load hdf5
-… 
+…
 
 *** crontab entry
 07 04 * * * /path/to/myScript
 ```
 
-The key with both of these methods is the `bash -l` which is ensuring that a 
+The key with both of these methods is the `bash -l` which is ensuring that a
 new environment is initialized for the shell which will be complete (including
 modules).
 
@@ -196,9 +196,9 @@ execute other code (e.g. from the subprocess package of python), and not
 necessarily for loading additional packages for python to use.  This is
 because the python process is already running and changing its environment
 won't necessarily give expected results.  For example, changes to `PYTHONPATH`
-and `LD_LIBRARY_PATH` are not immediately accepted.  `LD_LIBRARY_PATH` is 
+and `LD_LIBRARY_PATH` are not immediately accepted.  `LD_LIBRARY_PATH` is
 only evaluated at process start-up time, and won't be re-evaluated later.  
-Thus if you load any python packages which rely on dynamically linked C-code, 
+Thus if you load any python packages which rely on dynamically linked C-code,
 you should load those modules before python (oracle_client, for example).
 
 ### Problems with LD_LIBRARY_PATH
@@ -223,16 +223,16 @@ Type "help", "copyright" or "license" for more information
 
 This is happening because the cx_Oracle python package relies on the
 dynamically linked library libclntsh.so.11.1, which is found by the
-operating system by setting the correct path in `LD_LIBRARY_PATH`. Since 
-`LD_LIBRARY_PATH` is only evaluated when python starts, the oracle_client 
-modulefile (which sets `LD_LIBRARY_PATH` for oracle), needs to be loaded 
-before python is started.  For some applications, it may be easier to 
+operating system by setting the correct path in `LD_LIBRARY_PATH`. Since
+`LD_LIBRARY_PATH` is only evaluated when python starts, the oracle_client
+modulefile (which sets `LD_LIBRARY_PATH` for oracle), needs to be loaded
+before python is started.  For some applications, it may be easier to
 bootstrap the scripting session with a scriptEnv.
 
 
 ### Workaround for PYTHONPATH
 The `PYTHONPATH` environment variable is set to sys.path when python starts.
-There is an opportunity to adjust sys.path and still take advantage to 
+There is an opportunity to adjust sys.path and still take advantage to
 changes to `PYTHONPATH` if you need this functionality:
 
 ```python
@@ -262,19 +262,19 @@ use EnvironmentModules;
 module("load blast+");
 ```  
 
-Please note that the similar to python, loading modules which manipulate 
-`LD_LIBRARY_PATH` or `PERL5DIR` will not work as expected.  It is generally 
+Please note that the similar to python, loading modules which manipulate
+`LD_LIBRARY_PATH` or `PERL5DIR` will not work as expected.  It is generally
 recommended to load the modules before entering into perl or python instances.
-Another popular method, loading the module in system() immediately before 
-running an executable should always be avoided.  This is not portable, and 
+Another popular method, loading the module in system() immediately before
+running an executable should always be avoided.  This is not portable, and
 will only work if your users are using the bash shell:
 
 ```perl
 #!/usr/bin/env perl
 
 ### DO NOT DO THIS!
-system("module load blast+"; blastn …"); 
-``` 
+system("module load blast+"; blastn …");
+```
  When you call `system()`, perl forks it as `/bin/sh -c '<your command'>`.  
  `/bin/sh` does not get a new module environment loaded, so, the instance of
  `/bin/sh` will be relying on the shell operating perl to get the module
@@ -324,11 +324,11 @@ direct password access.  If you have a legacy collaboration account which
 does allow password access, please expect us to contact you about converting
 it to a modernized and secure collaboration account.  If you do have password
 access to a legacy collaboration account, please remember that it not
-permissible for users to share passwords for NERSC accounts, nor is it 
+permissible for users to share passwords for NERSC accounts, nor is it
 permissible to hold multiple NERSC accounts.
 
-The policy for running `collabsu` is set by system, so you will be permitted 
-to run `collabsu` on any genepool/gpweb system, but not on other NERSC 
+The policy for running `collabsu` is set by system, so you will be permitted
+to run `collabsu` on any genepool/gpweb system, but not on other NERSC
 platforms.
 
 Collaboration accounts are afforded the same privileges as other NERSC-user
