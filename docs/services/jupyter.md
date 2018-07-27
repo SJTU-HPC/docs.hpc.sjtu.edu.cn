@@ -44,13 +44,13 @@ servers. At NERSC, JupyterHub itself is run as a science gateway
 application. Users authenticate to JupyterHub using their NERSC
 credentials. Jupyter is available at NERSC through two services:
 
-* The original Jupyter installation https://jupyter.nersc.gov/ runs as
+* The original Jupyter installation <https://jupyter.nersc.gov/> runs as
   a science gateway application and is thus external to NERSC's Cray
   systems. Notebooks spawned by this service have access to the NERSC
   Global File System, in particular the /project and global $HOME file
   systems. They also use Python software environments and kernels that
   run on the science gateway hardware (not on e.g. Cori).
-* The newer Jupyter installation at https://jupyter-dev.nersc.gov/
+* The newer Jupyter installation at <https://jupyter-dev.nersc.gov/>
   actually spawns Jupyter notebooks on a reserved large-memory node of
   Cori. This means that these notebooks not only can access /project
   and global home directories, but also Cori $SCRATCH. The Python
@@ -64,6 +64,11 @@ credentials. Jupyter is available at NERSC through two services:
   well-defined service level guarantee. Ultimately we envision a
   single Jupyter URL at NERSC that will provide a variety of service
   levels to users.
+
+!!! tip
+    The large-memory login node used by <https://jupyter-dev.nersc.gov/>
+    is a shared resource, so please be careful not to use too many CPUs
+    or too much memory
 
 ### Customizing Kernels
 
@@ -132,7 +137,8 @@ corresponding kernel specification might be:
 You can even leverage Shifter containers pulled to Cori on jupyter-dev.
 Here is an example of how to set up a kernel.json kernel-spec to use a Shifter container.
 The example uses the stock Anaconda Python 3 image from Docker hub.
-The important part is to ensure the path to the Python executable is the one you want in the container.
+The important part is to ensure the path to the Python executable is the one you
+want in the container.
 
 ```json
 {
