@@ -12,7 +12,10 @@ pages:
     - Overview: jobs/index.md
     - Examples: jobs/examples/index.md
     - Best Practices: jobs/best-practices.md
-    - Workflow Tools : jobs/workflow-tools.md
+    - Workflow Tools:
+      - Overview: jobs/workflow-tools.md
+      - Taskfarmer: jobs/workflow/taskfarmer.md
+      - Fireworks: jobs/workflow/fireworks.md
     - Reservations: jobs/reservations.md
     - Policy: jobs/policy.md
   - Applications:
