@@ -1,52 +1,40 @@
 # Vectorization
 
-Vectorization is actually another form of on-node parallelism. Modern
-CPUs have Vector Processing Units (VPUs) that allow the processor to
-do the same instruction on multiple data (SIMD) per cycle. Consider
-the figure below. The loop can be written in "vector" notation:
+Modern CPUs have Vector Processing Units (VPUs) that allow the
+processor to do the same instruction on multiple
+data, [SIMD](https://en.wikipedia.org/wiki/SIMD) per cycle.
 
-```fortran
-do i=1, n
-	a(i) = b(i) + c(i)
-end do
-```
+| System | microarchitecture | Instruction Set | SIMD width |
+|--|--|--|--|
+| Edison | IvyBridge | AVX | 128 bits |
+| Cori   | Haswell   | AVX2 | 256 bits |
+| Cori | KNL | AVX-512 | 512 bits |
 
-$$
-\vec{a} = \vec{b} + \vec{c}
-$$
+!!! tip
+	On KNL with 512 bit vector operations 8 double precision
+	operations can be done with each instruction. A code which takes
+	advantage of that can potentially achieve an 8x speedup!
 
-On KNL, the VPU will be capable of computing the operation on 8 rows
-of the vector concurrently. This is equivalent to computing 8
-iterations of the loop at a time.
+## Auto-vectorization
 
-The compilers on Cori want to give you this 8x speedup whenever
-possible. However some things commonly found in codes stump the
-compiler and prevent it from vectorizing. The following figure shows
-examples of code the compiler won't generally choose to vectorize
+In many cases a compiler is able to transform sequential code into
+vector operations automatically - a process known
+as
+[automatic vectorization](https://en.wikipedia.org/wiki/Automatic_vectorization).
 
-## Loop Dependency
-
-Compilers are unable to give you vector code because the $i^{th}$
-iteration of the loop depends on the $(i-1)^{th}$ iteration.  In other
-words, it is not possible to compute both these iterations at once.
-
-```fortran
-do i = 1, n
-	a(i) = a(i-1) + b(i)
-end do
-```
-
-## Task Forking
-
-An example where the execution of the loop forks based on an if
-statement. Depending on the exact situation, the compiler may or may
-not vectorize the loop. Compilers typically use heuristics to decide
-if they can execute both paths and achieve a speedup over the
-sequential code.
-
-```fortran
-do i = 1, n
-	if (a(i) < x) cycle
-	if (a(i) > x) a(i) = a(i) + 1
-end do
-```
+!!! example
+	```fortran
+	do i = 1, n
+		c(i) = a(i) + b(i)
+	end do
+	```
+	Could be transformed by the compiler such that blocks of 4
+	elements are processed at a time:
+	```fortran
+	do i = 1, n, 4
+		c(i) = a(i) + b(i)
+		c(i+1) = a(i+1) + b(i+1)
+		c(i+2) = a(i+2) + b(i+2)
+		c(i+3) = a(i+3) + b(i+3)
+	end do
+	```

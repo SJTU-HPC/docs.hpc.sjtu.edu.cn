@@ -14,22 +14,25 @@ information to the VASP support at Vienna at
 vasp.materialphysik@univie.ac.at (and copy vasp_licensing@nersc.gov)
 requesting that they confirm your VASP license to NERSC staff at
 vasp_licensing@nersc.gov in order to gain access to the VASP binaries
-at NERSC. Please note, VASP 5 requires a separate license. The VASP
-4.6 users will NOT be automatically upgraded to VASP 5. Therefore, you
-need to confirm your VASP 5 license separately.
+at NERSC.
+
+!!! note
+	VASP 5 requires a separate license. The VASP 4.6 users will
+	**not** be automatically upgraded to VASP 5. You need to
+	confirm your VASP 5 license separately.
 
 It may take several business days from the date when your confirmation
 request is sent to the VASP support at Vienna to you actually gain the
 access to the VASP binaries provided at NERSC. If the confirmation
-takes longer than 5 business days, please let us know by updating the
-same email thread.
+takes longer than 5 business days update the initial email thread with
+the license information.
 
 When your VASP license is confirmed, NERSC will add you to a unix file
-group: vasp5 for VASP 5 and vasp for VASP 4. You can check if you have
-the VASP access at NERSC or not by typing the "groups" command. If you
-are in the vasp5 file group, then you can access both VASP 5 and VASP
-4; if you are in the vasp file group, then you can access the VASP 4
-only at NERSC.
+group: `vasp5` for VASP 5 and `vasp` for VASP 4. You can check if you have
+the VASP access at NERSC or not by typing the `groups` command. If you
+are in the `vasp5` file group, then you can access both VASP 5 and VASP
+4; if you are in the `vasp` file group, then you can access the VASP 4
+only.
 
 ## Modules
 
@@ -51,7 +54,7 @@ Where possible each version provides:
 * `vasp_ncl` - non-collinear spin
 * `vasp_std` - the standard binary
 
-However, some older versions of vasp provide:
+However, some older versions of the vasp module provide:
 
 * `gvasp` - gamma point only build
 * `vasp_ncl` - non-collinear spin

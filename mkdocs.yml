@@ -12,12 +12,16 @@ pages:
     - Overview: jobs/index.md
     - Examples: jobs/examples/index.md
     - Best Practices: jobs/best-practices.md
-    - Workflow Tools : jobs/workflow-tools.md
+    - Workflow Tools:
+      - Overview: jobs/workflow-tools.md
+      - Taskfarmer: jobs/workflow/taskfarmer.md
+      - Fireworks: jobs/workflow/fireworks.md
     - Reservations: jobs/reservations.md
     - Policy: jobs/policy.md
   - Applications:
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
     - NAMD : applications/namd/index.md
+    - TensorFlow: applications/tensorflow/index.md
     - VASP : applications/vasp/index.md
   - Analytics:
       - Jupyter : services/jupyter.md
@@ -27,9 +31,9 @@ pages:
       - Transfer : data/transfer.md
       - Visualization : data/visualization.md
       - Formats : data/formats.md
-      - Policy: data/policy.md      
+      - Policy: data/policy.md
   - Performance:
-    - Optimization strategy : performance/optimization-strategy.md
+#    - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
@@ -55,6 +59,10 @@ pages:
       - Science Gateways : services/science-gateways.md
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
+      - CDash :
+        - Overview : services/cdash/index.md
+        - CTest/CDash with CMake : services/cdash/with_cmake.md
+        - CTest/CDash without CMake : services/cdash/without_cmake.md
   - Development:
     - Containers (Shifter):
         - Overview : development/shifter/overview.md
@@ -66,9 +74,10 @@ pages:
         - STAT and ATP : development/performance-debugging-tools/stat_atp.md
         - Valgrind : development/performance-debugging-tools/valgrind.md
         - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
+        - VTune : development/performance-debugging-tools/vtune.md
     - Compilers : development/compilers.md
     - High-level Programming Environments:
-        - Python : 
+        - Python :
             - development/high-level-environments/python/index.md
             - Running Scripts : development/high-level-environments/python/running-scripts.md
             - Scaling Up : development/high-level-environments/python/scaling-up.md
@@ -81,7 +90,6 @@ pages:
         - MPI : development/programming-models/mpi.md
         - OpenMP : development/programming-models/openmp.md
         - UPC++ : development/programming-models/upcxx.md
-        - Chapel : development/programming-models/chapel.md
         - Kokkos : development/programming-models/kokkos.md
         - Raja : development/programming-models/raja.md
         - Coarrays : development/programming-models/coarrays.md
@@ -94,12 +102,27 @@ pages:
     - Version Control:
         - git : development/version-control/git/index.md
         - Subversion : development/version-control/subversion/index.md
-  - Environment: environment/environment.md
+  - Environment: environment/index.md
   - Systems:
       - Cori : systems/cori/index.md
       - Edison : systems/edison/index.md
       - PDSF : systems/pdsf/index.md
-      - Genepool : systems/genepool.md
+      - Genepool:
+        - Genepool System: systems/genepool.md
+        - Getting Started : systems/genepool/genepool-getting-started.md
+        - Denovo, the Replacement for Old Genepool : systems/genepool/genepool-denovo-the-replacement-for-genepool.md
+        - Configuration : systems/genepool/genepool-configuration.md
+        - User Environment : systems/genepool/genepool-user-environment.md
+        - Programming : systems/genepool/genepool-programming.md
+        - Software : systems/genepool/genepool-software.md
+        - Queues and Policies : systems/genepool/genepool-queues-and-policies.md
+        - Running Jobs : systems/genepool/genepool-running-jobs.md
+        - Cluster Statistics : systems/genepool/genepool-cluster-statistics.md
+        - File Storage and I/O : systems/genepool/genepool-file-storage-and-io.md
+        - Data Managment : systems/genepool/genepool-data-management.md
+        - Training and Tutorials : systems/genepool/genepool-training-and-tutorials.md
+        - Websites, Databases and Cluster Services : systems/genepool/genepool-websites-databases-and-cluster-services.md
+        - Cori for JGI users : systems/genepool/genepool-cori-for-jgi.md
   - Filesystems:
       - Overview: filesystems/index.md
       - Quotas: filesystems/quotas.md
@@ -120,7 +143,7 @@ pages:
       - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
       - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
   - Help: help/index.md
-#      - 
+#      -
 #  - JGI:
 #      - Pipelines : jgi/pipelines.md
   - Tutorials:
