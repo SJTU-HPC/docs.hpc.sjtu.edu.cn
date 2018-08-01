@@ -657,6 +657,15 @@ volume, use the `rancher volume create` command, like so:
     1v2795790
     elvis@nersc:elvis-flask-demo $
 
+The volume is created, but will remain inactive until the a service starts
+using it. To see the volume, call `docker volume ls` with the `--all` flag. The
+`--all` flag lists all volumes owned by you, active or not:
+
+    elvis@nersc:elvis-flask-demo $ rancher volume ls --all
+    ID         NAME                 STATE     DRIVER       DETAIL
+    1v2795790  db.elvis-flask-demo  inactive  rancher-nfs
+    elvis@nersc:elvis-flask-demo $
+
 Now start the example stack, and watch the magic. Notice the line which says
 'Creating volume template db.elvis-flask-demo':
 
