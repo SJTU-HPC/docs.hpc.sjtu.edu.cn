@@ -149,7 +149,7 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher secret create [secret name] file-with-secret`    | Create a secret named [secret name] using the value read from the file `file-with-secret` |
 | `echo MyPassword | rancher secret create [secret name] -` | Create a secret named [secret name], read from standard input |
 | `rancher secret create [secret name] - <<< MyPassword`    | Create a secret named [secret name], read from standard input |
-| `rancher secret rm [secret name]`         | Remove the secret `[secret name]` if owned by you |
+| `rancher rm --type secret [secret name]`  | Remove the secret `[secret name]` if owned by you |
 | **Rancher Volumes**                       |
 | `rancher volume ls`                       | List all *active* volumes owned by you |
 | `rancher volume ls --all`                 | List all volumes owned by you, regardless of their state. Volumes are inactive until a Stack actually uses it. |
