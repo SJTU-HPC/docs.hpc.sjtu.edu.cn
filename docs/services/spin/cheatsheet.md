@@ -71,7 +71,7 @@ data:
 
 More information on Network, Ports and Firewall considerations can be found in the [Best Practices Guide: Networking](best_practices/#networking).
 
-### List of ports and ranges
+### Network Ports and Firewall Restrictions
 
 * Ports 80 & 443 are reserved for the Spin [reverse proxy](#httphttps-reverse-proxy)
 * TCP Ports publicly available to all source addresses:
@@ -83,7 +83,7 @@ More information on Network, Ports and Firewall considerations can be found in t
 * TCP Ports restricted to NERSC networks only:
     * 4873, 8081
 
-### External DNS names
+### External DNS Names
 
 Services which listen on port 80 or 443 are attached to the Spin reverse proxy
 using a CNAME pointing to the Reverse Proxy service in either the Production or
@@ -111,7 +111,7 @@ Rancher official CLI documentation can be found at
 https://rancher.com/docs/rancher/v1.6/en/cli/ & a detailed list of CLI commands
 can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 
-### Global commands
+### Global Commands
 
 | Command                                     | Description                     |
 | -----------------------------------------   | ------------------------------- |
@@ -125,14 +125,14 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher [command] --help`                  | Show help for one command |
 | `rancher [command] --config .../cli.json`   | Specify an alternate CLI client configuration file before running `command`. |
 
-### Operations on stacks
+### Stack Operations
 
 | Command                                   | Description                     |
 | ----------------------------------------- | ------------------------------- |
 | `rancher start|stop|restart [stack name]` | Start, Stop or Restart an entire stack |
 | `rancher stack ls`                        | List all active & inactive stacks belonging to you |
 | `rancher rm [stack name] --type stack`    | Remove an entire stack. **USE WITH CAUTION** |
-| **Creating and upgrading stacks** <br> - See footnote [^1] for `rancher up`'s default behavior |
+| **Creating and Upgrading Stacks** <br> - `rancher up` has many options. The default behavior is described in footnote [^1]. |
 | `rancher up`                              | Create & start the stack. Requires `docker-compose.yml`. |
 | `rancher up -d`                           | Create & start the stack. Send logs to the background. |
 | `rancher up --file .../docker-compose.yml.dev` | Create & start the stack, specifying an alternate Docker Compose file |
@@ -156,7 +156,7 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher volume create --driver rancher-nfs [service name].[stack name]` | Create a volume on the Rancher NFS server named [service name].[stack name] |
 | `rancher volume rm [service name].[stack name]` | Remove a volume owned by you |
 
-### Operations on services & containers
+### Service and Container Operations
 
 | Command                                   | Description                     |
 | ----------------------------------------- | ------------------------------- |
