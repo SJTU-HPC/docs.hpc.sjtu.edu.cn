@@ -8,8 +8,8 @@ build workflows.
 
 ## TaskFarmer
 
-[TaskFarmer](workflow/taskfarmer.md) is a utility developed at NERSC to distribute single-node tasks across 
-a set of compute nodes - these can be single- or multi-core tasks. TaskFarmer tracks which 
+[TaskFarmer](workflow/taskfarmer.md) is a utility developed at NERSC to distribute single-node tasks across
+a set of compute nodes - these can be single- or multi-core tasks. TaskFarmer tracks which
 tasks have completed successfully, and allows straightforward re-submission of failed or un-run jobs from a checkpoint file.
 
 ## Swift
