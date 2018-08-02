@@ -814,24 +814,26 @@ Global Filesystem (shown above) and will provide other options in the future.
 
 ### Removing your stack
 
-Use `rancher rm --type stack` to remove your stack.
+Use `rancher rm --type stack [stack name]` to remove your stack.
 
     nersc$ rancher ps
     ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
     1s3971  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy  1/1    false
     1s3972  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  1/1    false
 
-    nersc$ rancher rm elvis-first-stack --type stack
+    nersc$ rancher rm --type stack elvis-first-stack
     1st1668
 
     nersc$ rancher ps
     ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
     nersc
 
-If you forget the `--type stack` flag, Rancher may complain with an error like
-*'You don't own volume your-stack-here'** This is an ordering problem within
-Rancher which only occurs sometimes. Using the `--type stack` forces Rancher to
-do the correct thing.
+!!! Warning
+    If you forget the `--type stack` flag, Rancher may complain with an error like
+    *'You don't own volume elvis-first-stack'**. This error happens occasionally
+    because Rancher is uncertain if you are referring to stack, volume or another
+    thing, due to an internal ordering bug. Using the `--type stack` forces
+    Rancher to do the correct thing.
 
 ## Other useful command line tasks
 
