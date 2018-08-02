@@ -25,28 +25,31 @@ You will generate an API key below.
 
 ### Spin Environments
 
-Spin has two main environments for NERSC users:
+Projects in Spin are hosted in a Spin **Environment**, which is a collection of
+nodes and other resources run the Services.
+
+Spin has two main environments and one learning environment for NERSC users:
 
 * **dev-cattle** is for use with applications which are under development
 * **prod-cattle** is used for production services
+* A third environment named **sandbox** will be used exclusively if you are taking
+the SpinUp sessions
 
-During normal development, you will first deploy your application to the
-development environments, and will copy it to production when ready. Currently,
-NERSC's Infrastructure Services Group (ISG) must approve all applications
-before they run in the production environment.
+During normal development, you will use the Rancher CLI to first deploy your
+application to the development environments, and will copy it to production
+when ready. Currently, NERSC's Infrastructure Services Group (ISG) must approve
+all applications before they run in the production environment.
 
-A third environment named **sandbox** will be used exclusively if you are taking
-the SpinUp sessions.
-
-The name **cattle** refers to the container *Orchestrator* which we use to manage
-containers and is part of Rancher. Rancher names many of their components with
-'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information
-on Rancher, please read the [Spin Getting Started Guide overview](/services/spin/getting_started).
+!!! info
+    The name **cattle** refers to the container *Orchestrator* which we use to manage
+    containers and is part of Rancher. Rancher names many of their components with
+    'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information
+    on Rancher, please read the [Spin Getting Started Guide overview](/services/spin/getting_started).
 
 ### Security Requirements
 
 Note that all applications sent to Spin must follow the NERSC security requirements,
-which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices). If
+which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices).  If
 the application breaks one of the security requirements, Spin will refuse to
 run the application and will print an error, such as in the following example:
 
