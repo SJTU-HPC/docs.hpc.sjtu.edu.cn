@@ -58,6 +58,41 @@ run the application and will print an error, such as in the following example:
     INFO[0002] Creating service app
     ERRO[0002] Failed Creating web : Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you cannot run a stack with your user: elvis] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a5/scripts/transform]
 
+### Removing your stack if you get stuck
+
+If you hit a problem with these examples and cannot figure out how to resolve
+it easily, the simplest solution is sometimes to simply delete the entire stack
+and start over. You can do that with the `rancher rm --type stack [stack name]`
+command, like so:
+
+    nersc$ rancher ps
+    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
+    1s3971  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy  1/1    false
+    1s3972  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  1/1    false
+
+    nersc$ rancher rm --type stack elvis-first-stack
+    1st1668
+
+    nersc$ rancher ps
+    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
+    nersc$
+
+!!! Caution
+    **Use caution when running this command**, especially when running it in
+    production, as this command is destructive and cannot be undone. For
+    example, removing a stack that contains a database service will remove that
+    database permanently. Be sure you have the Docker Compose file available before
+    deleting the stack.
+
+!!! Notice
+    If you forget the `--type stack` flag, Rancher may complain with an error like
+    *'You don't own volume elvis-first-stack'**. This error happens occasionally
+    because Rancher is uncertain if you are referring to stack, volume or another
+    thing, due to an internal ordering bug. Using the `--type stack` forces
+    Rancher to do the correct thing.
+
+    rancher rm --type stack elvis-first-stack
+
 ## Prerequisites for Lesson 2
 
 Before you review lesson 2, be sure to understand the concepts of [Spin Getting
@@ -814,26 +849,7 @@ Global Filesystem (shown above) and will provide other options in the future.
 
 ### Removing your stack
 
-Use `rancher rm --type stack [stack name]` to remove your stack.
-
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    1s3971  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy  1/1    false
-    1s3972  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  1/1    false
-
-    nersc$ rancher rm --type stack elvis-first-stack
-    1st1668
-
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    nersc
-
-!!! Warning
-    If you forget the `--type stack` flag, Rancher may complain with an error like
-    *'You don't own volume elvis-first-stack'**. This error happens occasionally
-    because Rancher is uncertain if you are referring to stack, volume or another
-    thing, due to an internal ordering bug. Using the `--type stack` forces
-    Rancher to do the correct thing.
+See the topic [#removing-your-stack-if-you-get-stuck] above.
 
 ## Other useful command line tasks
 
