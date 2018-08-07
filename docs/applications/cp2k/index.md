@@ -13,7 +13,6 @@ nersc$ module avail cp2k
 *  [Reference Manual](https://manual.cp2k.org/)
 *  [Forum](http://groups.google.com/group/cp2k)
 *  [FAQ](https://www.cp2k.org/faq)
-
-If you believe there is an error with the installation of cp2k on a
-NERSC please provide the scripts, input files, and steps to reproduce
-the issue by creating a [support ticket](https://help.nersc.gov).
+*  If *after* consulting with the above you believe there is an issue
+   with the NERSC module file
+   a [support ticket](https://help.nersc.gov).
