@@ -22,5 +22,5 @@ nersc$ module avail abinit
 
 !!! tip
 	If *after* consulting with the above you believe there is an issue
-	with the NERSC module file please open a
+	with the NERSC module, please file a
 	[support ticket](https://help.nersc.gov).
