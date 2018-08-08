@@ -70,7 +70,7 @@ variability.
    check affinity settings
 
 ```bash
-user@nid01041:~> srun -n 8 -c 4 --cpu_bind=cores check-mpi.intel.cori|sort -nk 4 
+user@nid01041:~> srun -n 8 -c 4 --cpu_bind=cores check-mpi.intel.cori|sort -nk 4
 Hello from rank 0, on nid07208. (core affinity = 0,68,136,204)
 Hello from rank 1, on nid07208. (core affinity = 1,69,137,205)
 Hello from rank 2, on nid07208. (core affinity = 2,70,138,206)
