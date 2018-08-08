@@ -23,6 +23,7 @@ pages:
     - NAMD : applications/namd/index.md
     - TensorFlow: applications/tensorflow/index.md
     - VASP : applications/vasp/index.md
+    - Abinit: applications/abinit/index.md
   - Analytics:
       - Jupyter : services/jupyter.md
   - Data:
