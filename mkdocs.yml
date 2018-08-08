@@ -19,11 +19,12 @@ pages:
     - Reservations: jobs/reservations.md
     - Policy: jobs/policy.md
   - Applications:
-    - Quantum ESPRESSO : applications/quantum-espresso/index.md
-    - NAMD : applications/namd/index.md
+    - Quantum ESPRESSO: applications/quantum-espresso/index.md
+    - NAMD: applications/namd/index.md
     - TensorFlow: applications/tensorflow/index.md
     - VASP : applications/vasp/index.md
     - Abinit: applications/abinit/index.md
+    - CP2K: applications/cp2k/index.md
   - Analytics:
       - Jupyter : services/jupyter.md
   - Data:
