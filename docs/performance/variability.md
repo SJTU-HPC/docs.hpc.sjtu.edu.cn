@@ -6,8 +6,8 @@ variability and improve application performance.
 
 ## hugepages
 
-Use of hugepages can reduce the cost of access memory, especially in
-the case of many `MPI_Alltoall` operations.
+Use of hugepages can reduce the cost of accessing memory, especially
+in the case of many `MPI_Alltoall` operations.
 
 1. load the hugepages module (`module load craype-hugepages2M`)
 1. recompile your code
@@ -29,7 +29,7 @@ reduce run-time variability in some cases:
 
 ```bash
 sbcast -f --compress ./my_program.x /tmp/my_program.x
-srun -n 1024 -c 2 --cpu_bind=cores /tmp/my_program.x
+srun -n 1024 -c 2 --cpu-bind=cores /tmp/my_program.x
 ```
 
 For applications with dynamic executables and many libraries
@@ -70,7 +70,7 @@ variability.
    check affinity settings
 
 ```bash
-user@nid01041:~> srun -n 8 -c 4 --cpu_bind=cores check-mpi.intel.cori|sort -nk 4
+user@nid01041:~> srun -n 8 -c 4 --cpu-bind=cores check-mpi.intel.cori|sort -nk 4
 Hello from rank 0, on nid07208. (core affinity = 0,68,136,204)
 Hello from rank 1, on nid07208. (core affinity = 1,69,137,205)
 Hello from rank 2, on nid07208. (core affinity = 2,70,138,206)
@@ -90,7 +90,7 @@ the OS and the other 64 for the application.
 
 ```bash
 #SBATCH -S 4
-srun -n 128 -c 4 --cpu_bind=cores /tmp/my_program.x
+srun -n 128 -c 4 --cpu-bind=cores /tmp/my_program.x
 ```
 
 ## Combined example
@@ -111,6 +111,6 @@ This example is for Cori KNL.
 module load craype-hugepages2M
 
 sbcast -f  --compress ./my_program.x /tmp/my_program.x
-srun --cpu_bind=cores /tmp/my_program.x
+srun --cpu-bind=cores /tmp/my_program.x
 ```
 
