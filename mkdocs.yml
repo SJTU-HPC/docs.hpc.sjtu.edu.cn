@@ -41,6 +41,7 @@ pages:
     - Profiling : performance/profiling.md
     - I/O : performance/io.md
     - Portability: performance/portability.md
+    - Variability: performance/variability.md
     - Case Studies:
         - EMGeo : performance/case-studies/emgeo/index.md
         - MFDn : performance/case-studies/mfdn/index.md
