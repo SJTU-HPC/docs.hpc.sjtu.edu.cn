@@ -145,6 +145,10 @@ pages:
       - Majorana skim : pdsf/slurm/majorana-skim/Readme.md
       - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
       - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
+    - shifter :
+      - recipes : pdsf/shifter/README.md
+      - Clone STAR DB : pdsf/shifter/clone_starDB.md
+      
   - Help: help/index.md
 #      -
 #  - JGI:
