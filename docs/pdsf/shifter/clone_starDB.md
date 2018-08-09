@@ -2,7 +2,7 @@ This instruction shows how to **transfer tables from a live STAR DB into static 
 
 The key instruction doing the trick is:
 ```bash
- mysqldump -h liveStarDB  --all-databases  |   mysql -h staticDB 
+ mysqldump -h liveStarDB  --all-databases  |   mysql -h staticDB
 ```
 
 The main challange is transfer of about 40GB of data thrugh this pipe. The instruction below describes how to execute it in a stable, reproducible fashion.
@@ -60,10 +60,10 @@ COMMAND   PID     USER   FD   TYPE    DEVICE SIZE/OFF NODE NAME
 mysqld  32034 balewski    3u  IPv4 192470244      0t0  TCP *:3306 (LISTEN)
 cori12$ kill -9 32034
 cori12$ lsof -i -P -n
-cori12$ 
+cori12$
 ```
 
-**Start new Shifter image under screen** 
+**Start new Shifter image under screen**
 ```bash
 cori12$ screen -S janStar
 cori12$ shifter  --volume=/global/cscratch1/sd/balewski/starDB-master/mysql51Vault-2018-08-08:/mysqlVault  --image=balewski/mysql51-balewski:c bash
@@ -72,7 +72,7 @@ cori12$ shifter  --volume=/global/cscratch1/sd/balewski/starDB-master/mysql51Vau
 cori12$ /usr/bin/mysqld_safe  --defaults-file=/mysqlVault/my.cnf &
 180809 12:27:55 mysqld_safe mysqld process hanging, pid 41466 - killed
 180809 12:27:55 mysqld_safe mysqld restarted
-bash-4.1$ 
+bash-4.1$
 
 ### this is good output:
 bash-4.1$ ps
@@ -82,7 +82,7 @@ bash-4.1$ ps
 44684 pts/42   00:00:00 mysqld_safe
 44790 pts/42   00:00:00 mysqld
 45533 pts/42   00:00:00 ps
-bash-4.1$ 
+bash-4.1$
 ```
 
 Verify you can talk to this DB
@@ -118,8 +118,8 @@ bash-4.1$ mysql -u balewski --socket=/mysqlVault/mysql.sock -pjan -e 'show datab
 | Calibrations_epd           |
 
 ### shutdown the daemon
-bash-4.1$ pkill -9 mysqld 
-[1]+  Killed                  /usr/bin/mysqld_safe 
+bash-4.1$ pkill -9 mysqld
+[1]+  Killed                  /usr/bin/mysqld_safe
 bash-4.1$ ps
   PID TTY          TIME CMD
  8791 pts/42   00:00:00 ps
@@ -134,7 +134,7 @@ balewski@cori12:~>
 
 **Archive your new DB-valut** so it is not flusshed from Cori-scratch after 12 weeks.
 ``` bash
-@cori12:~> du -hs /global/cscratch1/sd/balewski/starDB-master/mysql51Vault-2018-08-08 
+@cori12:~> du -hs /global/cscratch1/sd/balewski/starDB-master/mysql51Vault-2018-08-08
 33G	/global/cscratch1/sd/balewski/starDB-master/mysql51Vault-2018-08-08
 
 cori12:~> cp -rp /global/cscratch1/sd/balewski/starDB-master/mysql51Vault-2018-08-08 /project/projectdirs/mpccc/balewski/myStarDB/
