@@ -48,6 +48,7 @@ pages:
         - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/index.md
         - WARP: performance/case-studies/warp/index.md
         - XGC1: performance/case-studies/xgc1/index.md
+    - KNL Cache Mode: performance/knl/cache-mode.md
   - Services:
       - Spin Containers :
         - services/spin/index.md
