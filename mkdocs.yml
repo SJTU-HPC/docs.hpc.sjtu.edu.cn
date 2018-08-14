@@ -8,7 +8,7 @@ pages:
       - Login Nodes: connect/login-nodes.md
       - SSH : connect/ssh.md
       - NX : connect/nx.md
-      - Jupyter : services/jupyter.md      
+      - Jupyter : services/jupyter.md
   - Running Jobs:
     - Overview: jobs/index.md
     - Examples: jobs/examples/index.md
