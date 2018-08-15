@@ -5,6 +5,7 @@ pages:
       - Passwords : accounts/passwords.md
       - Policy : accounts/policy.md
   - Connecting:
+      - Login Nodes: connect/login-nodes.md
       - SSH : connect/ssh.md
       - NX : connect/nx.md
       - Jupyter : services/jupyter.md
