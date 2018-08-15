@@ -15,7 +15,7 @@ the previous connection.
 	processes which are having negative impacts on other users or the
 	systems.
 
-* compile codes (limit to `ncores / 2`)
+* compile codes (limit to e.g. `make -j 8`)
 * edit files
 * submit [jobs](/jobs/index.md)
 
@@ -35,7 +35,8 @@ xfer queue.
 
 ### Guidelines
 
-*  do not use more than 50% of the cores (command: `ncores`)
+*  do not use more than 50% of the cores (command: `lstopo -p --only
+   core | wc -l`)
 *  do not use more than 25% of the memory (command: `free -m`)
 *  avoid the `watch` command
 *  avoid long running commands
