@@ -23,7 +23,7 @@ several different perspectives. Listed below are a few such efforts.
 
 In most AMReX codes, the majority of the computational expense lies in either
 "vertical" (point-wise) evaluations, e.g.,
-```
+```fortran
 do k = lo(3), hi(3)
   do j = lo(2), hi(2)
     do i = lo(1), hi(1)
@@ -36,7 +36,7 @@ end do
 
 or "horizontal" (stencil) evaluations:
 
-```
+```fortran
 do k = lo(3), hi(3)
   do j = lo(2), hi(2)
     do i = lo(1), hi(1)
@@ -76,7 +76,7 @@ collapsing teams of threads each time an MPI process iterates over a new Box,
 which can lead to significant overhead. For example, updating the 3-D heat
 equation at a new time step might look like:
 
-```
+```fortran
 !$omp parallel private (i, j, k)
 
 !$omp do collapse(2)
@@ -119,7 +119,7 @@ operate on a pool of 256x2 = 512 tiles in total. If each MPI process can spawn
 
 Code featuring loop tiling in AMReX would look something like the following:
 
-```
+```fortran
 !$omp parallel private(i,mfi,tilebox,tlo,thi,pp_old,pp_new,lo,hi)
 
 call mfiter_build(mfi, phi_old, tiling= .true., tilesize= tsize)
@@ -355,7 +355,7 @@ code bottleneck, we can turn to the code itself to see what options are
 available to remedy this problem. The pseudo-code for the Riemann solver in Nyx
 takes the following form:
 
-```
+```fortran
 subroutine riemannus()
 
   ! declare lots of scalar temporary variables to save temporary values for
@@ -391,7 +391,7 @@ to if/then/else's which are used to ensure the Riemann solver uses physically
 consistent values. The `analriem` routine is also complicated, although it is
 smaller than `riemannus`:
 
-```
+```fortran
 subroutine analriem(gas_velocities, misc_gas_data)
 
   ! set up lots of auxiliary variables derived from gas velocity, pressure, etc.
@@ -432,7 +432,7 @@ analyze, may be more difficult for a (human) developer to interpret.
 The pseudo-code for the vectorized version of the Riemann solver looks like the
 following:
 
-```
+```fortran
 subroutine riemannus()
 
   ! replace scalar temporary variables which are overwritten after each
@@ -506,7 +506,7 @@ if they remain scalar. The loop which we do want to vectorize is `analriem`,
 which is no longer called inside an `(i,j,k)` loop, but rather has absorbed the
 loop inside itself:
 
-```
+```fortran
 subroutine analriem(gas_velocities, misc_gas_data)
 
   do k = klo, khi
@@ -533,7 +533,7 @@ called inside an outer `(i, j, k)` loop.
 We applied similar loop fissioning techniques to the PPM advection algorithm.
 The original pseudo-code had the following form:
 
-```
+```fortran
 subroutine ppm_type1()
 
   ! x-direction
@@ -558,7 +558,7 @@ end subroutine ppm_type1
 After replacing several temporary scalar variables with temporary arrays, we
 were able to fission these loops as follows:
 
-```
+```fortran
 subroutine ppm_type1()
 
   ! x-direction
