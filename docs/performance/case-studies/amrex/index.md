@@ -688,7 +688,7 @@ now than it did prior to the start of the NESAP program.
 
 One of the major challenges in applied mathematics for HPC is the [scalability
 of linear
-solvers](http://crd.lbl.gov/departments/applied-mathematics/scalable-solvers-group/).
+solvers](https://crd.lbl.gov/departments/applied-mathematics/scalable-solvers-group/).
 This challenge affects many AMReX codes, since they encounter a variety of
 elliptic problems which must be solved at each time step. AMReX itself provides
 two elliptic solvers (one in C++, the other in Fortran), both of which use
@@ -718,7 +718,7 @@ forthcoming.
 Although the majority of application readiness efforts for manycore
 architectures are focused on floating-point performance, node-level
 parallelism, and tireless pursuit of the
-[roofline](http://crd.lbl.gov/departments/computer-science/PAR/research/roofline/),
+[roofline](https://crd.lbl.gov/departments/computer-science/PAR/research/roofline/),
 data-centric challenges in HPC are emerging as well. In particular, simulations
 with AMReX codes can generate terabytes to petabytes of data in a single run,
 rendering parameter studies unfeasible. One may address this problem in several
@@ -727,7 +727,7 @@ ways:
 1. Assume that the generation of huge data sets is unavoidable. The problem
 then becomes one first of storage, and second of making sense of the data after
 the simulation is complete. This is the charge of [data
-analytics](http://www.nersc.gov/users/data-analytics/).
+analytics](https://www.nersc.gov/users/data-analytics/).
 
 2. Preempt the generation of huge data sets by performing the data analysis
 (and hopefully reduction) while the simulation is running.
