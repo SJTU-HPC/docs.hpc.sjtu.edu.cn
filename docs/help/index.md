@@ -5,7 +5,7 @@ the world.
 
 ## FAQ
 
-* [Password Resets](/accounts/passwords/index.html#forgotten-passwords)
+* [Password Resets](/accounts/passwords.md#forgotten-passwords)
 * [Connection problems](/connect/ssh)
 * [Debug Crashed job](#)
 * [File Permissions](#)

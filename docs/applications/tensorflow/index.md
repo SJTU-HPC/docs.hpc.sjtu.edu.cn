@@ -32,7 +32,9 @@ which initializes the MPI runtime. Then, the user needs to wrap the optimizers f
 ```python
 opt = hvd.DistributedOptimizer(opt)
 ```
+
 To keep track of the global step a global step object has to be created via `tf.train.get_or_create_global_step()` and passed to the `minimize` (or `apply_gradients`) member functions of the optimizer instance.
+
 Furthermore, to ensure model consistency on all nodes it is mandatory to register a broadcast hook via
 ```python
 bcast_hook = [hvd.BroadcastGlobalVariablesHook(0)]

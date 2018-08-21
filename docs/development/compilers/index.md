@@ -1,4 +1,4 @@
-# Compilers
+# Cray Compiler Wrappers
 
 Cray provides a convenient set of wrapper commands that should be used
 in almost all cases for compiling and linking parallel

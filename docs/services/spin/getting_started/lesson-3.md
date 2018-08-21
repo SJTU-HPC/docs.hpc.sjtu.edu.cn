@@ -57,7 +57,7 @@ Secrets are only available to Stacks which are owned by you or your group.
 ## Our example stack
 
 The examples below will use an example stack provided by NERSC, which is similar
-to the stack used in our video demonstration on the [Spin page](/services/spin).
+to the stack used in our video demonstration on the [Spin page](../index.md).
 
 [Lesson 2](lesson-2.md) already showed you how to build a simple application
 for Spin, so we don't cover that here too much. The purpose of this stack is to
@@ -217,7 +217,7 @@ change from time to time.
 
 If everything went well, you should see a screen similar to the following:
 
-![web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org.png](/services/spin/images/web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org.png)
+![web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org.png](../Images/web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org.png)
 
 ## Upgrading your stack with the "Build, Ship, Run" workflow
 
