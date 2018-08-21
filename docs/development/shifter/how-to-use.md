@@ -41,8 +41,7 @@ that's done you can pull the image down onto Cori or
 Edison. Alternatively, you can use our private image registry if you
 do not want to upload your image to a public repository. If your image
 is too large to comfortably go through Docker Hub or our private
-repository (> 20GB), please contact
-our [consulting service](mailto:consult@nersc.gov).
+repository (> 20GB), please see our [support page](https://help.nersc.gov).
 
 Shifter images have a naming scheme that follows
 `source:image_name:image_version`. Typically the image source will be
@@ -149,7 +148,7 @@ shifterimg images
 In the future, pulling Shifter images from private repositories or
 sources other than Docker will be enabled. If you have a specific need
 for this now, please
-email [consulting services](mailto:consult@nersc.gov).
+see our [support page](https://help.nersc.gov).
 
 ## Running Jobs in Shifter Images
 
@@ -424,12 +423,12 @@ Docker4Mac. Please adjust the instructions for other environments.
     to the NERSC license server
 
 -   Intel compilers in docker are configured to seek license at
-    [intel.licenses.nersc.gov](intel.licenses.nersc.gov) @ port 28519
+    [intel.licenses.nersc.gov](mailto:intel.licenses.nersc.gov) @ port 28519
 
 -   Steps:
 
     1.  Configure docker to
-        resolve [intel.licenses.nersc.gov](intel.licenses.nersc.gov)
+        resolve [intel.licenses.nersc.gov](mailto:intel.licenses.nersc.gov)
         to your local IP address
 
     2.  Configure local SSH connection to:
@@ -438,7 +437,7 @@ Docker4Mac. Please adjust the instructions for other environments.
             local forwarded ports
 
         -   forward local port 28519 requests to port 28519
-            @ [cori.nersc.gov](cori.nersc.gov)
+            @ cori.nersc.gov
 
 #### SSH session
 
@@ -474,7 +473,7 @@ Docker4Mac. Please adjust the instructions for other environments.
 #### Docker build flag
 
 -   Run docker build with flag “–add-host” flag that directs
-    [intel.licenses.nersc.gov](intel.licenses.nersc.gov) to your IP
+    [intel.licenses.nersc.gov](mailto:intel.licenses.nersc.gov) to your IP
     address
 
 ```Shell

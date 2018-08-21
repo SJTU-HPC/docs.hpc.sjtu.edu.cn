@@ -20,8 +20,8 @@ pages:
     - Reservations: jobs/reservations.md
     - Policy: jobs/policy.md
   - Applications:
-    - Quantum ESPRESSO: applications/quantum-espresso/index.md
-    - NAMD: applications/namd/index.md
+    - Quantum ESPRESSO : applications/quantum-espresso/index.md
+    - NAMD : applications/namd/index.md
     - TensorFlow: applications/tensorflow/index.md
     - VASP : applications/vasp/index.md
     - Abinit: applications/abinit/index.md
@@ -81,7 +81,9 @@ pages:
         - Valgrind : development/performance-debugging-tools/valgrind.md
         - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
         - VTune : development/performance-debugging-tools/vtune.md
-    - Compilers : development/compilers.md
+    - Compilers : 
+        - Cray Compiler Wrappers: development/compilers/index.md
+        - LLVM : development/compilers/llvm.md
     - High-level Programming Environments:
         - Python :
             - development/high-level-environments/python/index.md

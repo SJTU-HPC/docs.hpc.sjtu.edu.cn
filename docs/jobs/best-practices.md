@@ -14,7 +14,7 @@ Simulations which must run for a long period of time achieve the best
 throughput when composed of main small jobs utilizing
 checkpoint/restart chained together.
 
-* [Example: job chaining](./examples/index.html#dependencies)
+* [Example: job chaining](./examples/index.md#dependencies)
 
 ## I/O performance
 
@@ -73,4 +73,4 @@ For jobs which are sensitive to interconnect (MPI) performance and
 utilize less than ~300 nodes it is possible to request that all nodes
 are in a single Aries dragonfly group.
 
-* [Example](examples/index.html#network-topology)
+* [Example](examples/index.md#network-topology)
