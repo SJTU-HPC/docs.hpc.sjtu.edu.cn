@@ -45,6 +45,7 @@ pages:
     - Variability: performance/variability.md
     - Case Studies:
         - AMReX : performance/case-studies/amrex/index.md
+        - Chombo-Crunch : performance/case-studies/chombo-crunch/index.md
         - EMGeo : performance/case-studies/emgeo/index.md
         - MFDn : performance/case-studies/mfdn/index.md
         - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/index.md
