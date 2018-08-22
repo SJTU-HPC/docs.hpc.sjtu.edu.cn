@@ -245,3 +245,6 @@ Kurth T. et al. (2017) Analyzing Performance of Selected NESAP Applications on
 the Cori HPC System. In: Kunkel J., Yokota R., Taufer M., Shalf J. (eds) High
 Performance Computing. ISC High Performance 2017. Lecture Notes in Computer
 Science, vol 10524. Springer, Cham https://doi.org/10.1007/978-3-319-67630-2_25
+
+[Talk given at NERSC application readiness meeting on 02/14/2018 by T. Koskela
+(PDF)](http://www.nersc.gov/assets/Uploads/tkoskela-appReadiness-0214-public.pdf)
