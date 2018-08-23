@@ -1,4 +1,4 @@
-pages:
+nav:
   - Home: index.md
   - Accounts:
       - Accounts : accounts/index.md
