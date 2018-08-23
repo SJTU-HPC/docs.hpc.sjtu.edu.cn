@@ -1,4 +1,4 @@
-image: python:3.6
+image: python:3.7
 
 stages:
   - build
@@ -9,8 +9,12 @@ stages:
 build:
   stage: build
   script:
+    - pwd
+    - find .
     - mkdir -p .build_cache
     - pip install --cache-dir=.build_cache -r requirements.txt
+    - python --version
+    - mkdocs --version
     - mkdocs --verbose build
   artifacts:
     paths:
