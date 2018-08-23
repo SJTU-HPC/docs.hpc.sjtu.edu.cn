@@ -4,7 +4,8 @@ stages:
   - build
   - test
   - deploy
-  
+  - post-deploy
+
 build:
   stage: build
   script:
@@ -52,5 +53,18 @@ pages:
   artifacts:
     paths:
     - public
+  only:
+    - master@NERSC/nersc.gitlab.io
+
+update-search-api:
+  stage: post-deploy
+  image: ubuntu:18.04
+  before_script:
+    - apt-get update; apt-get -y install curl
+  script:
+    - "curl --request POST \
+    --url https://nersc-docs-search-app-214117.appspot.com/reindex \
+    --header 'content-type: application/json' \
+    --data '{\"source\":\"docs\"}'"
   only:
     - master@NERSC/nersc.gitlab.io
