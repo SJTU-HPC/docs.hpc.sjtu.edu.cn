@@ -1,4 +1,4 @@
-certifi==2018.8.13
+certifi>=2018.8.13
 click==6.7
 htmlmin==0.1.12
 Jinja2==2.10
