@@ -67,6 +67,28 @@ Interactive jobs are launched with the `salloc` command.
 	cori$ salloc --qos=interactive -C knl --time=60 --nodes=2
 	```
 
+## Running Multiple Parallel Jobs Sequentially
+
+Multiple sruns can be executed one after another in a single batch script. Be sure to specify the total walltime needed to run all jobs.
+
+??? example "Cori Haswell"
+	```bash
+	--8<-- "docs/jobs/examples/multiple-parallel-jobs/cori-haswell/sequential-parallel-jobs.sh"
+	```
+
+## Running Multiple Parallel Jobs Simultaneously
+
+Multiple sruns can be executed simultaneously in a single batch script. Be sure to specify the total number of nodes needed to run all jobs at the same time. By default, multiple concurrent srun executions cannot share compute nodes under Slurm in the non-shared QOSs.  
+
+In the following example, a total of 192 cores are required, which would hypothetically fit on 192 / 32 = 6 Haswell nodes. However, because sruns cannot share nodes by default, we instead have to dedicate 2 nodes to the first execution (44 cores), 4 to the second (108 cores), and again 2 to the third (40 cores).   For all three executables, the node is not fully packed, and number of MPI tasks per node is not a divisor of 64, so both -c and --cpu_bind flags are used in srun commands.
+
+Notice the "&" at the end of each srun command.  Also the "wait" command at the end of the script is very important.  It makes sure the batch job won't exit before all the simultaneous sruns are completed.
+
+??? example "Cori Haswell"
+	```bash
+	--8<-- "docs/jobs/examples/multiple-parallel-jobs/cori-haswell/simultaneous-parallel-jobs.sh"
+	```
+
 ## Job Arrays
 
 Job arrays offer a mechanism for submitting and managing collections
