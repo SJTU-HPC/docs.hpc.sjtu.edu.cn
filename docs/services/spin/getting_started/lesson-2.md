@@ -133,6 +133,29 @@ tied to that account. Follow the steps below to generate an API key.
 
 If everything ran successfully, you are ready to proceed.
 
+### If you get stuck, remove the stack
+
+If you run into unresolvable problems while following these lessons, the
+quickest action is to simply delete the entire stack and start over. Deleting
+a stack will not delete the Docker Compose file, or any files stored on the
+global filesystems.
+
+Delete the stack using `rancher rm --type stack YourStackName`, like so:
+
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME                STATE      CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    1st4644   elvis-first-stack   degraded             2          false
+    elvis@cori09:elvis-first-stack $ rancher rm --type stack  elvis-first-stack
+    1st4644
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME      STATE     CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    elvis@cori09:elvis-first-stack $
+
+!!! Warning
+    When deleting in production, use caution. Deleting a stack will delete all
+    containers, volumes and the Load Balancer (ingress) configuration. Data on
+    the Global Filesystem will not be removed.
+
 ## Part 1: Ship your image from your laptop to the Spin Registry
 
 The Application Stack in Lesson 1 used a custom image named
@@ -357,28 +380,31 @@ The stack name can also be specified using the `--stack` flag.
 
 Add the following text to your docker-compose.yml file, but replace the
 following values with your specific information:
+
 * *YOURUSERNAME*
 * *YOUR_COLLAB_DIRECTORY*
-* *YOUR_NERSC_UID:YOUR_NERSC_GID* (Hint: Find your UID & GID with the `id` command)
+* *YOUR_NERSC_UID:YOUR_NERSC_GID* (Hint: Find your UID & GID with the commands `id -u` & `id -g` command)
 
-    version: '2'
-    services:
-      app:
-        image: registry.spin.nersc.gov/YOURUSERNAME/my-first-container-app:latest
-        retain_ip: true
-        cap_drop:
-        - ALL
-      web:
-        image: registry.spin.nersc.gov/YOURUSERNAME/my-first-container-nginx:latest
-        ports:
-        - "60000:8080"
-        volumes:
-        - /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/YOURUSERNAME-first-stack/web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
-        user: YOUR_NERSC_UID:YOUR_NERSC_GID
-        group_add:
-        - nginx
-        cap_drop:
-        - ALL
+```
+version: '2'
+services:
+  app:
+    image: registry.spin.nersc.gov/YOURUSERNAME/my-first-container-app:latest
+    retain_ip: true
+    cap_drop:
+    - ALL
+  web:
+    image: registry.spin.nersc.gov/YOURUSERNAME/my-first-container-nginx:latest
+    ports:
+    - "60000:8080"
+    volumes:
+    - /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/YOURUSERNAME-first-stack/web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+    user: YOUR_NERSC_UID:YOUR_NERSC_GID
+    group_add:
+    - nginx
+    cap_drop:
+    - ALL
+```
 
 Compare this Docker Compose file to the version on your laptop, and note the
 major differences:
@@ -588,7 +614,9 @@ with the [`jq` tool](https://stedolan.github.io/jq/) tool. `rancher inspect`
 will print information about your stack in JSON, and `jq` makes the output
 friendlier.
 
-The example below shows how to obtain the FQDN for the stack, as well as the **ipAddress** which is part of the **publicEndpoints** array.
+The example below shows how to obtain the FQDN for the stack, as well as the
+**port** which is part of the **publicEndpoints** array. The port will match
+the port that you specified in your Compose file earlier.
 
     nersc$ rancher inspect elvis-first-stack/web | jq '.fqdn'
     "web.elvis-first-stack.sandbox.stable.spin.nersc.org"
@@ -641,7 +669,7 @@ like follows:
     version: '2'
     services:
       app:
-        image: registry.spin.nersc.gov/stefanl/my-first-container-app:latest
+        image: registry.spin.nersc.gov/elvis/my-first-container-app:latest
         cap_drop:
         - ALL
         retain_ip: true
@@ -679,41 +707,40 @@ replaced with your custom values.
 
 ### Confirming the upgrade
 
-[comment]: <> (TODO: update here)
-[comment]: <> (TODO: replace web with app)
+[//]: # (TODO: Move upgrade explanation here)
 
 The app service was upgraded. However, the old version of the container is
 still there in case you want to roll back to that version. You must remove the
 old containers as soon as you are happy with the new version.
 
-!!! Warning "Required step: Confirming the upgrade"
+!!! Notice "Required step: Confirming the upgrade"
     The step to confirm an upgrade is required.  Certain commands, such as
     `rancher stop`, will not function until you remove the old containers.  We
     will cover this more in Lesson 3.
 
 First, let's look at your stack in more detail.
 
-`rancher ps --containers` will show the both sets of containers: The new
+`rancher ps --containers --all` will show the both sets of containers: The new
 upgraded containers, and the previous non-upgraded containers. Run this
-command now. Notice how there are two containers named 'something-web-1'. One is
+command now. Notice how there are two containers named 'something-app-1'. One is
 running, and one is stopped:
 
-    elvis@nersc:elvis-first-stack $ rancher ps --containers
+    elvis@cori09:elvis-first-stack $ rancher ps --containers --all
     ID         NAME                     IMAGE                                                          STATE    HOST  IP             DOCKER        DETAIL
-    1i2599342  elvis-first-stack-app-1  registry.spin.nersc.gov/elvis/my-first-container-app:latest    running  1h84  10.42.165.210  c099b99d60d2
-    1i2599346  elvis-first-stack-web-1  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  stopped  1h87  10.42.14.161   843972812e3b
-    1i2599347  elvis-first-stack-web-1  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  running  1h85  10.42.66.5     bf128471d412
-    elvis@nersc:elvis-first-stack $
+    1i2618389   elvis-first-stack-web-1   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   running   1h85      10.42.96.135    87a4cc3a17cc
+    1i2618390   elvis-first-stack-app-1   registry.spin.nersc.gov/elvis/my-first-container-app:latest     stopped   1h86      10.42.147.192   a9946d2a415b
+    1i2618391   elvis-first-stack-app-1   registry.spin.nersc.gov/elvis/my-first-container-app:latest     running   1h85      10.42.147.192   ff22e8adf0e5
+    elvis@cori09:elvis-first-stack $
 
 `rancher ps` without the `--containers` flag will subtlely show your running
-and stopped containers. Run that command now. For the web service, notice that
+and stopped containers. Run that command now. For the app service, notice that
 the **STATE** column says `upgraded`, and the **SCALE** column says `2/1`
 which means 'Two containers exist. One is in use.'
 
     elvis@nersc:elvis-first-stack $ rancher ps
     ID      TYPE     NAME                   IMAGE                                                          STATE     SCALE  SYSTEM  ENDPOINTS  DETAIL
-    1s4146  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy   1/1    false
-    1s4147  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  upgraded  2/1    false
+    1s5545    service               elvis-first-stack/app   registry.spin.nersc.gov/elvis/my-first-container-app:latest     upgraded   2/1       false
+    1s5546    service               elvis-first-stack/web   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   healthy    1/1       false
     elvis@nersc:elvis-first-stack $
 
 Now that we've seen the new and old containers, and we're satisified that the
@@ -736,10 +763,10 @@ containers.
 After running this command, note that the container previously marked as
 'stopped' is gone.
 
-    elvis@nersc:elvis-first-stack $ rancher ps --containers
+    elvis@nersc:elvis-first-stack $ rancher ps --containers --all
     ID         NAME                     IMAGE                                                          STATE    HOST  IP             DOCKER        DETAIL
-    1i2599342  elvis-first-stack-app-1  registry.spin.nersc.gov/elvis/my-first-container-app:latest    running  1h84  10.42.165.210  c099b99d60d2
-    1i2599347  elvis-first-stack-web-1  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  running  1h85  10.42.66.5     bf128471d412
+    1i2618389  elvis-first-stack-web-1   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   running   1h85      10.42.96.135    87a4cc3a17cc
+    1i2618391  elvis-first-stack-app-1   registry.spin.nersc.gov/elvis/my-first-container-app:latest     running   1h85      10.42.147.192   ff22e8adf0e5
     elvis@nersc:elvis-first-stack $
 
 ## Other ways to work with your stack
