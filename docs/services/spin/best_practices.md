@@ -72,11 +72,35 @@ Everyone with access to the Spin interface also has access to registry.spin.ners
 
 The process of tagging and pushing an image to the registry is described in the [Spin Getting Started Guide](getting_started).
 
-### Versioning and tags
+### Be careful using the `:latest` tag
 
-TODO Someone should explain this. Be ware of 'latest', because 'latest' is ambiguous, and may actually be 'latest' from the last time you downloaded the code, 18 months ago.
+Be careful when using the `:latest` tag, as it confuses many new (and
+experienced!) users, and may not work the way you expect.
 
-(e.g. :latest versus :v1.2.3)
+Contrary to the name, the label `:latest` is ambiguous, and may actually be
+'latest' from the last time you downloaded the code, 18 months ago.
+
+For example, if you run a service based on `someimage:latest`, the Docker
+daemon will only download that image if it's not present in the local image
+cache.
+
+If a new version of `someimage:latest` is uploaded to Dockerhub or the Spin
+registry, Docker has no way to know that the image was updated on the remote
+registry. As far as the Docker daemon on the node is concerned, it already had
+the `:latest` image stored on the node, and therefore doesn’t need to check the
+registry.
+
+Furthermore, if your service has replicas on multiple Docker hosts, one replica
+may be running `:latest` from September, while a second node may be running
+`:latest` from July.
+
+We recommend using explict version numbers, such as `:v1.2.3` or a date format
+such as `:v20180809` instead of `:latest`.
+
+If you do use `:latest`: in your service, you can also use the label
+`io.rancher.container.pull_image: always` to tell Docker to always pull the
+latest version your `:latest` image. Note that a download will add a short
+delay to upgrade operations.
 
 ## Version Control
 

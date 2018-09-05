@@ -179,8 +179,6 @@ Names of Stacks, Services & Containers:
 
 Many commands can be used on a service or a container. Remember that a **service** may have one or more **containers**. To put it another way, **containers** are *'instances'* of a **service**.
 
-TODO: Add some examples here.
-
 ### Listing Stacks & Services
 
 #### Listing stacks
