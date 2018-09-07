@@ -33,13 +33,13 @@ foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
 
 Common services should use a name from the following table of recommended names:
 
-    | Name | Description        |
-    |------|--------------------|
-    | app  | Application server |
-    | db   | Database           |
-    | lb   | Load Balancer      |
-    | web  | Web Server         |
-    | kv   | Key Value store    |
+| Name | Description        |
+|------|--------------------|
+| app  | Application server |
+| db   | Database           |
+| lb   | Load Balancer      |
+| web  | Web Server         |
+| kv   | Key Value store    |
 
 Unique services should use a descriptive name for the service they provide. It
 should be a general description of the functionality, rather than the specific

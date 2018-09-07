@@ -287,9 +287,40 @@ To enhance security of your containers, we recommend:
 
 * When possible, run services in the container as a non-root user. Many of the reasons that a process would need escalated privileges (direct access to hardware, writing to a particular directory, binding to a low numbered port) don’t apply in a or can be avoided in a containerized environment. For example, a service can bind to a high numbered port, and then let docker map the privileged port on the docker host to the unprivileged port on the container. Similarly, volume mounts to a persistent volume with the desired permissions can avoid some of the permission hurdles.
 
-* Just as with a traditional server, if a container conducts a mix of privileged and unprivileged operations, it can implement [privilege separation](https://en.wikipedia.org/wiki/Privilege_separation), and drop privileges after the privileged operations have been completed.
-* If it’s not possible to run as a non-root user, minimize the [Linux capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html) granted to the container. In most cases, a container can drop all capabilities, and only add back one or two that are actually needed by the container. The [initial set of capabilities that Docker uses](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30) is small enough that reviewing the list of what’s needed by a specific application isn’t an onerous task. Experience has shown that many containers (if not most containers) don’t actually need any of these capabilities.
-* If your service uses external file systems (like the global file system), it will be required to run as a non-root user, and drop the setuid and setgid capability. This allows existing ownership and permissions on the filesystem to be effectively enforced within Spin.
+* Just as with a traditional server, if a container conducts a mix of
+  privileged and unprivileged operations, it can implement [privilege
+  separation](https://en.wikipedia.org/wiki/Privilege_separation), and drop
+  privileges after the privileged operations have been completed.
+* If it’s not possible to run as a non-root user, minimize the [Linux
+  capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html)
+  granted to the container. In most cases, a container can drop all
+  capabilities, and only add back one or two that are actually needed by the
+  container. The [initial set of capabilities that Docker
+  uses](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30) is
+  small enough that reviewing the list of what’s needed by a specific
+  application isn’t an onerous task. Experience has shown that many containers
+  (if not most containers) don’t actually need any of these capabilities.
+* If your service uses external file systems (like the global file system), it
+  will be required to run as a non-root user, and drop many Kernel capabilities.
+  This allows existing ownership and permissions on the filesystem to be
+  effectively enforced within Spin.
+
+### Allowed Kernel privileges
+
+The following chart shows which capabilities are allowed for Spin containers,
+and Spin containers which uses the NERSC Global Filesystem:
+
+| Permission    | No External Filesystem | External Filesystem | Description |
+|---------------|------------------------|---------------------|-------------|
+| CHOWN         | Yes | No | Make arbitrary changes to file UIDs and GIDs (see chown(2)). |
+| DAC_OVERRIDE  | Yes | No | Bypass file read, write, and execute permission checks |
+| FOWNER        | Yes | No | Bypass permission checks on operations that normally require the file system UID of the process to match the UID of the file |
+| KILL          | Yes | No | Bypass permission checks for sending signals |
+| SETGID        | Yes | No | Make arbitrary manipulations of process GIDs and supplementary GID list |
+| SETUID        | Yes | No | Make arbitrary manipulations of process UIDs. |
+| NET_BIND_SERVICE | Yes | Yes | Bind a socket to internet domain privileged ports (port numbers less than 1024). |
+
+* Detailed desciption of each capabilities can be found at http://man7.org/linux/man-pages/man7/capabilities.7.html
 
 ## Secrets
 

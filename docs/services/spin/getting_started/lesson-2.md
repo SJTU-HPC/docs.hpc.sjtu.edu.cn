@@ -133,7 +133,7 @@ tied to that account. Follow the steps below to generate an API key.
 
 If everything ran successfully, you are ready to proceed.
 
-### If you get stuck, remove the stack
+## If you get stuck, remove the stack
 
 If you run into unresolvable problems while following these lessons, the
 quickest action is to simply delete the entire stack and start over. Deleting
