@@ -14,6 +14,25 @@ Use the `module avail` command to see what versions are available:
 nersc$ module avail abinit
 ```
 
+## Example
+
+See the [example jobs page](/jobs/examples/) for additional
+examples and infortmation about jobs.
+
+### Edison
+
+```
+#!/bin/bash
+#SBATCH --qos=regular
+#SBATCH --time=01:00:00
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=24
+#SBATCH --cpus-per-task=2
+
+module load abinit
+srun abinit < example.in
+```
+
 ## Support
 
 *  [Forum](https://forum.abinit.org)
