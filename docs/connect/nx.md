@@ -1,6 +1,6 @@
 # NX / NoMachine
 
-NX (aka NoMachine) is a computer program that handles remote X Window 
+NX (aka NoMachine) is a computer program that handles remote X Window
 System connections which offers several benefits over traditional X
 forwarding.
 
@@ -32,12 +32,12 @@ customize the desktop according to your work requirement.
 #### DEB Package for Debian/Ubuntu: ([Download](http://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2_amd64.deb))
 #### RPM Package for Centos/Redhat/Fedora ([Download](http://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2_x86_64.rpm))
 
-To configure open the NX player and click on the box in the 
-upper left that says "New". Use "SSH" for protocol, 
-"nxcloud01.nersc.gov" for host, "password" for authentication, 
-"Don't use a proxy" for proxy. Alternatively you can [download 
-the configuration 
-file](http://portal.nersc.gov/project/mpccc/nx/Connection_to_NERSC_NX_service.nxs.gz) 
+To configure open the NX player and click on the box in the
+upper left that says "New". Use "SSH" for protocol,
+"nxcloud01.nersc.gov" for host, "password" for authentication,
+"Don't use a proxy" for proxy. Alternatively you can [download
+the configuration
+file](http://portal.nersc.gov/project/mpccc/nx/Connection_to_NERSC_NX_service.nxs.gz)
 (you'll need to unzip it and open it with the NX Client).
 
 ## Connecting
@@ -69,9 +69,9 @@ If you've tried these steps and still cannot connect, please open a help ticket.
 
 #### Font size is too big or too small
 
-To change the font size inside your terminal: In the menu of Konsole Application, choose "Settings"->"Manage Profiles", then click "Edit Profile...", now you can change the font size in the "Appearance" tab, after changing, click "OK" until you are back to the terminal. Now every new terminal window you open will have the new font size. 
+To change the font size inside your terminal: In the menu of Konsole Application, choose "Settings"->"Manage Profiles", then click "Edit Profile...", now you can change the font size in the "Appearance" tab, after changing, click "OK" until you are back to the terminal. Now every new terminal window you open will have the new font size.
 
-To change the font size of your menu bars/window titles: Right click on an empty desktop then choose "Konsole", inside the Konsole, type "kcmshell4 fonts". Then you have a dialog box to change your font size. 
+To change the font size of your menu bars/window titles: Right click on an empty desktop then choose "Konsole", inside the Konsole, type "kcmshell4 fonts". Then you have a dialog box to change your font size.
 
 #### Resizing the NX screen
 
