@@ -119,7 +119,7 @@ variables. This has two important consequences:
 | Option     | Cori       | Edison     |
 |------------|------------|------------|
 | nodes      | 1          | 1          |
-| time       | 5minutes   | 5minutes   |
+| time       | 10minutes   | 10minutes   |
 | qos        | debug      | debug      |
 | constraint | haswell    | ivybridge  |
 | account    | set in NIM | set in NIM |
