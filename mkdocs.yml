@@ -171,8 +171,9 @@ site_description: NERSC Documentation
 site_author: NERSC
 site_dir: public
 site_url: "https://docs.nersc.gov"
-#repo_name: NERSC/documentation
-#repo_url: https://gitlab.com/NERSC/documentation
+repo_name: GitLab/NERSC/docs
+repo_url: https://gitlab.com/NERSC/nersc.gitlab.io
+edit_uri: blob/master/docs/
 
 # Configuration
 strict: true
