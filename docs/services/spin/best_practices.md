@@ -72,11 +72,38 @@ Everyone with access to the Spin interface also has access to registry.spin.ners
 
 The process of tagging and pushing an image to the registry is described in the [Spin Getting Started Guide](getting_started).
 
-### Versioning and tags
+### Be careful using the `:latest` tag
 
-TODO Someone should explain this. Be ware of 'latest', because 'latest' is ambiguous, and may actually be 'latest' from the last time you downloaded the code, 18 months ago.
+Be careful when using the `:latest` tag, as it confuses many new (and
+experienced!) users, and may not work the way you expect.
 
-(e.g. :latest versus :v1.2.3)
+Contrary to the name, the label `:latest` is ambiguous, and may actually be
+'latest' from the last time you downloaded the code, 18 months ago.
+
+For example, if you run a service based on `someimage:latest`, the Docker
+daemon will only download that image if it's not present in the local image
+cache.
+
+If a new version of `someimage:latest` is uploaded to Dockerhub or the Spin
+registry, Docker has no way to know that the image was updated on the remote
+registry. As far as the Docker daemon on the node is concerned, it already had
+the `:latest` image cached on the node, and therefore doesn’t need to check the
+registry.
+
+Note that if you update an image, and re-use a version tag, Docker will also use
+the cached image on the node.
+
+Furthermore, rememeber that `:latest` changes over time. If your service has
+replicas on multiple Docker hosts, one replica may be running `:latest` from
+September, while a second node may be running `:latest` from July. 
+
+We recommend using explict version numbers, such as `:v1.2.3` or a date format
+such as `:v20180809` instead of `:latest`, an that you update the tag for any changes.
+
+If you do use `:latest`: in your service, you can also use the label
+`io.rancher.container.pull_image: always` to tell Docker to always pull the
+latest version your `:latest` image. Note that a download will add a short
+delay to upgrade operations.
 
 ## Version Control
 
@@ -263,9 +290,40 @@ To enhance security of your containers, we recommend:
 
 * When possible, run services in the container as a non-root user. Many of the reasons that a process would need escalated privileges (direct access to hardware, writing to a particular directory, binding to a low numbered port) don’t apply in a or can be avoided in a containerized environment. For example, a service can bind to a high numbered port, and then let docker map the privileged port on the docker host to the unprivileged port on the container. Similarly, volume mounts to a persistent volume with the desired permissions can avoid some of the permission hurdles.
 
-* Just as with a traditional server, if a container conducts a mix of privileged and unprivileged operations, it can implement [privilege separation](https://en.wikipedia.org/wiki/Privilege_separation), and drop privileges after the privileged operations have been completed.
-* If it’s not possible to run as a non-root user, minimize the [Linux capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html) granted to the container. In most cases, a container can drop all capabilities, and only add back one or two that are actually needed by the container. The [initial set of capabilities that Docker uses](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30) is small enough that reviewing the list of what’s needed by a specific application isn’t an onerous task. Experience has shown that many containers (if not most containers) don’t actually need any of these capabilities.
-* If your service uses external file systems (like the global file system), it will be required to run as a non-root user, and drop the setuid and setgid capability. This allows existing ownership and permissions on the filesystem to be effectively enforced within Spin.
+* Just as with a traditional server, if a container conducts a mix of
+  privileged and unprivileged operations, it can implement [privilege
+  separation](https://en.wikipedia.org/wiki/Privilege_separation), and drop
+  privileges after the privileged operations have been completed.
+* If it’s not possible to run as a non-root user, minimize the [Linux
+  capabilities](http://man7.org/linux/man-pages/man7/capabilities.7.html)
+  granted to the container. In most cases, a container can drop all
+  capabilities, and only add back one or two that are actually needed by the
+  container. The [initial set of capabilities that Docker
+  uses](https://github.com/moby/moby/blob/master/oci/defaults.go#L14-L30) is
+  small enough that reviewing the list of what’s needed by a specific
+  application isn’t an onerous task. Experience has shown that many containers
+  (if not most containers) don’t actually need any of these capabilities.
+* If your service uses external file systems (like the global file system), it
+  will be required to run as a non-root user, and drop many Kernel capabilities.
+  This allows existing ownership and permissions on the filesystem to be
+  effectively enforced within Spin.
+
+### Allowed Kernel privileges
+
+The following chart shows which capabilities are allowed for Spin containers,
+and Spin containers which uses the NERSC Global Filesystem:
+
+| Permission    | No External Filesystem | External Filesystem | Description |
+|---------------|------------------------|---------------------|-------------|
+| CHOWN         | Yes | No | Make arbitrary changes to file UIDs and GIDs (see chown(2)). |
+| DAC_OVERRIDE  | Yes | No | Bypass file read, write, and execute permission checks |
+| FOWNER        | Yes | No | Bypass permission checks on operations that normally require the file system UID of the process to match the UID of the file |
+| KILL          | Yes | No | Bypass permission checks for sending signals |
+| SETGID        | Yes | No | Make arbitrary manipulations of process GIDs and supplementary GID list |
+| SETUID        | Yes | No | Make arbitrary manipulations of process UIDs. |
+| NET_BIND_SERVICE | Yes | Yes | Bind a socket to internet domain privileged ports (port numbers less than 1024). |
+
+* Detailed desciption of each capabilities can be found at http://man7.org/linux/man-pages/man7/capabilities.7.html
 
 ## Secrets
 
