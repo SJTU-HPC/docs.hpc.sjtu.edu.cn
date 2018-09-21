@@ -28,6 +28,7 @@ nav:
     - Abinit: applications/abinit/index.md
     - CP2K: applications/cp2k/index.md
   - Analytics:
+      - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
   - Data:
       - Management : data/management.md
