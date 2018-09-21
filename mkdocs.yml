@@ -30,6 +30,10 @@ nav:
   - Analytics:
       - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
+      - Machine Learning:
+        - Overview: analytics/machinelearning/overview.md
+        - TensorFlow: applications/tensorflow/index.md
+        - PyTorch: analytics/machinelearning/pytorch.md
   - Data:
       - Management : data/management.md
       - Sharing: data/sharing.md
