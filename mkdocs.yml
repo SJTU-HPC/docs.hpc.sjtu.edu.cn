@@ -23,7 +23,6 @@ nav:
   - Applications:
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
     - NAMD : applications/namd/index.md
-    - TensorFlow: applications/tensorflow/index.md
     - VASP : applications/vasp/index.md
     - Abinit: applications/abinit/index.md
     - CP2K: applications/cp2k/index.md
@@ -32,7 +31,7 @@ nav:
       - Jupyter : services/jupyter.md
       - Machine Learning:
         - Overview: analytics/machinelearning/overview.md
-        - TensorFlow: applications/tensorflow/index.md
+        - TensorFlow: analytics/machinelearning/tensorflow/index.md
         - PyTorch: analytics/machinelearning/pytorch.md
   - Data:
       - Management : data/management.md
