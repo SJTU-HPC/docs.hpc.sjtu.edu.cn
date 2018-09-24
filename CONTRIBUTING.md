@@ -18,7 +18,7 @@ NERSC customizations such as the colors.
 1.  Do not commit large files 
 	(e.g. very high-res images, binary data, executables)
 	* [Image optimization](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization)
-1.  Do not commit directly to master branch
+1.  No commits directly to the master branch
 
 ## Setup 
 
@@ -108,6 +108,11 @@ to edit Markdown files directly on gitlab. This work should be in a
 private fork or branch and submitted as a merge request. A new branch
 can be created by clicking the "+" button next to the repository name.
 
+### Add a new page
+
+For a newly added page to appear in the navigation edit the top-level
+`mkdocs.yml` file.
+
 ### Review a Merge Request from a private fork
 
 1.  Modify `.git/config` so merge requests are visible
@@ -171,6 +176,11 @@ can be created by clicking the "+" button next to the repository name.
     
 ## Writing Style
 
+When adding a page think about your audience. 
+
+* Are they new or advanced expert users?
+* What is the goal of this content?
+
 * [Grammatical Person](https://en.wikiversity.org/wiki/Technical_writing_style#Grammatical_person)
 * [Active Voice](https://en.wikiversity.org/wiki/Technical_writing_style#Use_active_voice)
 
@@ -185,5 +195,5 @@ can be created by clicking the "+" button next to the repository name.
 ## Slurm options
 
 * Show both long and short option when introducing an option in text
-* Use the short version (where possible) in scripts
+* Use the long version (where possible) in scripts
 
