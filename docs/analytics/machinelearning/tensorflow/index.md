@@ -1,11 +1,11 @@
-#TensorFlow
+# TensorFlow
 
-##Description
+## Description
 
 TensorFlow is a deep learning framework developed by Google in 2015. It is maintained and continuously updated by implementing results of recent deep learning research. Therefore, TensorFlow supports a large variety of state-of-the-art neural network layers, activation functions, optimizers and tools for analyzing, profiling and debugging deep neural networks. In order to deliver good performance, the TensorFlow installation at NERSC utlizes the optimized MKL-DNN library from Intel.
 Explaining the full framework is beyond the scope of this website. For users who want to get started we recommend reading the TensorFlow [getting started page](https://www.tensorflow.org/get_started/). The TensorFlow page also provides a complete [API documentation](https://www.tensorflow.org/api_docs/).
 
-##TensorFlow at NERSC
+## TensorFlow at NERSC
 In order to use TensorFlow at NERSC load the TensorFlow module via
 ```bash
 module load tensorflow/intel-<version>
@@ -17,7 +17,7 @@ Running TensorFlow on a single node is the same as on a local machine, just invo
 python my_tensorflow_program.py
 ```
 
-##Distributed TensorFlow
+## Distributed TensorFlow
 By default, TensorFlow supports GRPC for distributed training. However, this framework is tedious to use and very slow on tightly couple HPC systems. Therefore, we recommend using [Uber Horovod](https://github.com/uber/horovod) and thus also pack it together with the TensorFlow module we provide. The version of Horovod we provide is compiled against the optimized Cray MPI and thus integrates well with SLURM. We will give a brief overview of how to make an existing TensorFlow code multi-node ready but we recommend inspecting the [examples on the Horovod page](https://github.com/uber/horovod/tree/master/examples). We recommend using pure TensorFlow instead of Keras as it shows better performance and the Horovod integration is more smooth.
 
 In order to use TensorFlow, one needs to import the horovod module by doing
@@ -45,7 +45,6 @@ stop_hook = [tf.train.StopAtStepHook(last_step=num_steps_total)]
 ```
 
 For example, a training code like
-
 ```python
 import tensorflow as tf
 
@@ -86,7 +85,7 @@ opt = hvd.DistributedOptimizer(opt)
 # initialization.
 hooks = [hvd.BroadcastGlobalVariablesHook(0)]
 
-#Add session stop hook
+# Add session stop hook
 global_step = tf.train.get_or_create_global_step()
 hooks.append(tf.train.StopAtStepHook(last_step=num_steps_total))
 
@@ -107,15 +106,15 @@ with tf.train.MonitoredTrainingSession(checkpoint_dir=checkpoint_dir,
 ```
 It is important to use `MonitoredTrainingSession` instead of the regular `Session` because it keeps track of the number of global steps and knows when to stop the training process when a correspondig hook is installed. For more fine grained control over checkpointing, a [`CheckpointSaverHook`](https://www.tensorflow.org/api_docs/python/tf/train/CheckpointSaverHook) can be registered as well. Note that the graph has to be finalized before the monitored training session context is entered. In case of the regular session object, this is a limitation and can cause some trouble with summary writers. Please see the [distributed training recommendations](https://www.tensorflow.org/deploy/distributed) for how to handle these cases.
 
-##Splitting Data
+## Splitting Data
 It is important to note that splitting the data among the nodes is up to the user and needs to be done besides the modifications stated above. Here, utility functions can be used to determine the number of independent ranks via `hvd.size()` and the local rank id via `hvd.rank()`. If multiple ranks are employed per node, `hvd.local_rank()` and `hvd.local_size()` return the node-local rank-id's and number of ranks. If the [dataset API](https://www.tensorflow.org/programmers_guide/datasets) is being used we recommend using the `dataset.shard` option to split the dataset. In other cases, the data sharding needs to be done manually and is application dependent.
 
-##Frequently Asked Questions
+## Frequently Asked Questions
 
-###I/O Performance and Data Feeding Pipeline
+### I/O Performance and Data Feeding Pipeline
 For performance reasons, we recommend storing the data on the scratch directory, accessible via the `SCRATCH` environment variable. At high concurrency, i.e. when many nodes need to read the files we recommend [staging them into burst buffer](). For efficient data feeding we recommend using the `TFRecord` data format and using the [`dataset` API](https://www.tensorflow.org/programmers_guide/datasets) to feed data to the CPU. Especially, please note that the `TFRecordDataset` constructor takes `buffer_size` and `num_parallel_reads` options which allow for prefetching and multi-threaded reads. Those should be tuned for good performance, but please note that a thread is dispatched for every independent read. Therefore, the number of inter-threads needs to be adjusted accordingly (see below). The `buffer_size` parameter is meant to be in bytes and should be an integer multiple of the node-local batch size for optimal performance.
 
-###Potential Issues
+### Potential Issues
 For best MKL-DNN performance, the module already sets a set of OpenMP environment variables and we encourage the user not changing those, especially not changing the `OMP_NUM_THREADS` variable. Setting this variable incorrectly can cause a resource starvation error which manifests in TensorFlow telling the user that too many threads are spawned. If that happens, we encourage to adjust the inter- and intra-task parallelism by changing the `NUM_INTER_THREADS` and `NUM_INTRA_THREADS` environment variables. Those parameters can also be changed in the TensorFlow python script as well by creating a session configs object via
 ```python
 sess_config=tf.ConfigProto(inter_op_parallelism_threads=num_inter_threads,
