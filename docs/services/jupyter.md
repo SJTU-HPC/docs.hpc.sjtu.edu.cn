@@ -181,9 +181,9 @@ Create the following kernel spec (you'll need to make the $SCRATCH/tmpfiles, $SC
 "{connection_file}"],
 "env": {
 "SPARK_HOME": "/usr/local/bin/spark-2.3.0/",
-"PYSPARK_SUBMIT_ARGS": "--master local[1] pyspark-shell 
---conf spark.eventLog.enabled=true 
---conf spark.eventLog.dir=file:///global/cscratch1/sd/<your_dir>/spark/event_logs 
+"PYSPARK_SUBMIT_ARGS": "--master local[1] pyspark-shell
+--conf spark.eventLog.enabled=true
+--conf spark.eventLog.dir=file:///global/cscratch1/sd/<your_dir>/spark/event_logs
 --conf spark.history.fs.logDirectory=file:///global/cscratch1/sd/<your_dir>/spark/event_logs pyspark-shell",
 "PYTHONSTARTUP": "/usr/local/bin/spark-2.3.0/python/pyspark/shell.py",
 "PYTHONPATH": "/usr/local/bin/spark-2.3.0/python/lib/py4j-0.10.6-src.zip:/usr/local/bin/spark-2.3.0/python/",
