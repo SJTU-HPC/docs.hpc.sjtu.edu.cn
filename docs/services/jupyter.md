@@ -160,3 +160,36 @@ Here's an example of how to set it up:
     "language": "python"
 }
 ```
+
+## Spark on Jupyter-dev
+
+You can run small instances (< 4 cores) of Spark on jupyter-dev.
+Create the following kernel spec (you'll need to make the $SCRATCH/tmpfiles, $SCRATCH/spark/event_logs directories first):
+
+```shell
+{
+"display_name": "shifter pyspark",
+"language": "python",
+"argv": [
+"shifter",
+"--image=nersc/spark-2.3.0:v1",
+"--volume=\"/global/cscratch1/sd/<your_dir>/tmpfiles:/tmp:perNodeCache=size=200G\"",
+"/root/anaconda3/bin/python",
+"-m",
+"ipykernel",
+"-f",
+"{connection_file}"],
+"env": {
+"SPARK_HOME": "/usr/local/bin/spark-2.3.0/",
+"PYSPARK_SUBMIT_ARGS": "--master local[1] pyspark-shell
+--conf spark.eventLog.enabled=true
+--conf spark.eventLog.dir=file:///global/cscratch1/sd/<your_dir>/spark/event_logs
+--conf spark.history.fs.logDirectory=file:///global/cscratch1/sd/<your_dir>/spark/event_logs pyspark-shell",
+"PYTHONSTARTUP": "/usr/local/bin/spark-2.3.0/python/pyspark/shell.py",
+"PYTHONPATH": "/usr/local/bin/spark-2.3.0/python/lib/py4j-0.10.6-src.zip:/usr/local/bin/spark-2.3.0/python/",
+"PYSPARK_PYTHON": "/root/anaconda3/bin/python",
+"PYSPARK_DRIVER_PYTHON": "ipython3",
+"JAVA_HOME":"/usr"
+}
+}
+```
