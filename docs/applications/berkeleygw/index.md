@@ -30,7 +30,7 @@ examples and information about jobs.
 #SBATCH --ntasks-per-node=24
 #SBATCH --cpus-per-task=2
 
-module load abinit
+module load berkeleygw
 srun -n 24 epsilon.cplx.x
 ```
 
