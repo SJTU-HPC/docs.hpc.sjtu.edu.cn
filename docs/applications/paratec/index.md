@@ -25,7 +25,7 @@ examples and information about jobs.
 #SBATCH --ntasks-per-node=24
 #SBATCH --cpus-per-task=2
 
-module load abinit
+module load paratec
 srun -n 24 paratec.mpi
 ```
 
