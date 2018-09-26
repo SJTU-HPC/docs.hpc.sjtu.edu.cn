@@ -1,4 +1,4 @@
-# BerkeleyGW
+# Wannier90
 
 The BerkeleyGW Package is a set of computer codes that calculates the quasiparticle 
 properties and the optical responses of a large variety of materials from bulk periodic 
