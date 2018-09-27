@@ -76,9 +76,10 @@ nav:
         - CTest/CDash with CMake : services/cdash/with_cmake.md
         - CTest/CDash without CMake : services/cdash/without_cmake.md
   - Development:
-    - Containers (Shifter):
+    - Running Containers with Shifter:
         - Overview : development/shifter/overview.md
-        - How to use : development/shifter/how-to-use.md
+        - How to use Shifter: development/shifter/how-to-use.md
+        - Using Intel Compilers with Docker Images: development/shifter/intel.md
     - Developer Tools:
         - DDT : development/performance-debugging-tools/ddt.md
         - TotalView : development/performance-debugging-tools/totalview.md
@@ -87,7 +88,7 @@ nav:
         - Valgrind : development/performance-debugging-tools/valgrind.md
         - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
         - VTune : development/performance-debugging-tools/vtune.md
-    - Compilers : 
+    - Compilers :
         - Cray Compiler Wrappers: development/compilers/index.md
         - LLVM : development/compilers/llvm.md
     - High-level Programming Environments:
@@ -159,7 +160,7 @@ nav:
     - shifter :
       - recipes : pdsf/shifter/README.md
       - Clone STAR DB : pdsf/shifter/clone_starDB.md
-      
+
   - Help: help/index.md
 #      -
 #  - JGI:
