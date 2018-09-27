@@ -261,59 +261,35 @@ the job and mount it at `/tmp` in the image.
 
 ## Using NERSC's Private Registry
 
-NERSC runs a private registry that can be used to store images that
-may include proprietary software or other files that users may not
-wish to store in a public registry like DockerHub. External access to
-the registry is blocked at the NERSC border.  Note that other NERSC
-users still have access to all images in the NERSC registry and can
-run the images via Shifter (the functionality to limit image access to
-a set of users is on the development road map, but not yet
-available). The NERSC registry should not be used to store images with
-sensitive private applications or data. NERSC is working on
-enhancements to Shifter to support this in future releases.
+NERSC runs a private registry that can be used to store images that may include proprietary software or other files that users may not wish to store in a public registry like DockerHub. This is an authenticated registry so users must login with the NERSC username and password in order to access the registry and images can be marked public to limit access. Users can use a special version of the shifterimg tool to pull the images into Shifter and limit access.  Here are the basic steps to using the registry.
 
-Since the registry is blocked at the border, pushing images to the
-NERSC registry must be routed through a proxy. Below are instructions
-on how to push an image to the NERSC registry for a Mac system running
-Docker4Mac. Please adjust the instructions for other environments.
+1. Using a web browser, log into https://registry.services.nersc.gov. Use your NERSC username and password to authenticate.
 
-1. Determine your local IP address. You can do this by running (macOS)
-   `ipconfig getifaddr $(route get nersc.gov | grep 'interface:' | awk
-   '{print $NF}')` or (linux) `ip route ls | tail -n 1 | awk '{print
-   $NF}'`. In our example, the address is 192.168.99.1.
-2. Add this address plus a random port to the list of *Insecure
-   registries* that your Docker instance will use. This is accessed by
-   clicking on the Docker Icon in the tool bar, selecting *Preferences*,
-   then selecting *Advanced*. Click on the plus button and add the
-   address and port separated by a colon. In our example this would be
-   192.168.99.1:5000. Be sure to apply the change and restart docker by
-   clicking the *Apply & Restart* button. Establish an ssh tunnel from
-   your system to NERSC to the registry. Preface the local port with the
-   IP address so it listens on the appropriate interface. In our example
-   we do
-   ```shell
-   ssh -L 192.168.99.1:5000:registry.services.nersc.gov:443
-   <your_nersc_user_name>@edison.nersc.gov
-   ```
+2. Click on your username in the upper right corner and select "Create new token" in the application tokens section.  It will prompt you for a name, this is used to identify the token if you need to remove it later.  Give it a meaningful name (e.g. shifter2018).  A string will be shown towards the top of the page, save that string for later use.  It will only be shown this once, so record it in a secure place.  You will use this password in lieu of your regular NERSC password when interacting with the registry to avoid storing your NERSC password in your Docker keyfile or Shifter credential store.
 
-![docker-registry-screenshot](images/docker-registry-screenshot.png)
+3. On your Docker system (e.g. laptop or workstation), user the docker tool to log into the NERSC registry.  When prompted, enter your regular username and the application password generated above.   You should only have to do this once on a given Docker system.
+```Shell
+docker login registry.services.nersc.gov
+```
 
-3. Tag the image and prepend it with the IP address and port number. Please preface the image with your username to avoid conflicts. For example:
-   ```shell
-   docker tag <imageid> 192.168.99.1:5000/myusername/myimage:latest
-   ```
-4. Push the image using the tag that was used:
+4. Build or tag an image prefacing the NERSC registry in the tag name.
+```SHELL
+docker build -t registry.services.nersc.gov/<NERSC username>/<my image name>:latest .
+# or
+docker tag <imageid> registry.services.nersc.gov/<NERSC username>/<my image name>:latest
+```
+
+5. Push the image that was tagged:
+```Shell
+docker push registry.services.nersc.gov/<NERSC username>/<my image name>:latest
+```
+
+6. The image should now be available in the NERSC registry. To use the image in Shifter, use the shifterimg command to login and pull the image.  **Again, use the Application token generated above for the password not your regular NERSC password.**
    ```Shell
-   docker push 192.168.99.1:5000/myusername/myimage:latest
-   ```
-5. The image should now be available in the NERSC registry. To use the
-   image in Shifter, use the shifterimg pull command but replace the
-   IP and port number from the previous step with
-   `registry.services.nersc.gov`:
-
-   ```Shell
-   shifterimg pull
-   registry.services.nersc.gov/myusername/myimage:latest
+   # shifterimg login registry.services.nersc.gov
+   registry.services.nersc.gov username: <NERSC username>
+   registry.services.nersc.gov password: <Application Token>
+   # shifterimg pull registry.services.nersc.gov/<NERSC username>/myimage:latest
    ```
 
 ## Using NERSC's Intel Docker Containers
@@ -329,119 +305,92 @@ Docker4Mac. Please adjust the instructions for other environments.
 
     -   Follow instructions from [Using NERSC's Private Registry](#using-nerscs-private-registry)
 
--   Template for variants: <span style="color:red">registry.services.nersc.gov/nersc/intel_{toolset}_{image}:{tag}</span>
+### Image Naming Convention
 
--   7 toolset variants (all cxx include TBB and PSTL, mpi has libfabric)
+NERSC has built a number of images to support building and running applications
+using Intel Compiler suite.  The images have a number of combinations of components,
+versions, and image use.
 
-    -    cxx
+-   The image follow the following naming scheme.: <span style="color:red">registry.services.nersc.gov/nersc/intel_{toolset}_{image}:{tag}</span>
+-   The toolset defines the components included in the image.
+-   The Image defines whether the image is intended for building and compiling
+    applications or running applications.
+-   The tag defines the version of the Intel compiler suite to use.
+-   The table below shows the different options for each portion.  All combinations
+    are availble (7x2x6)
+-   Like all docker images, if a tag(version) is supplied it defaults to latest.
 
-    -    fort
+| Toolset Variants (7)    | Image     | Version/tag |
+|---                      |---        |---        |
+| cxx                     |devel    |latest     |
+| fort                    |runtime    |2018       |
+| cxx_fort                |           |2018.1     |
+| cxx_mpi                 |           |2018.2     |
+| cxx_fort_mpi            |           |2018.1.163 |
+| cxx_fort_mpi_mkl        |           |2018.2.199 |
+| cxx_fort_mpi_mkl_ipp    |           |           |
 
-    -    cxx_fort
+Note:
 
-    -    cxx_mpi
+-   All cxx include TBB and PSTL
+-   mpi has libfabric)
+-   Each tool + image variant pair has 6 available tags based on the version
 
-    -    cxx_fort_mpi
+Here are examples of a full image name:
 
-    -    cxx_fort_mpi_mkl
+-   *registry.services.nersc.gov/nersc/intel_cxx_devel* (the latest version of the devel image with the cxx compiler)
+-   *registry.services.nersc.gov/nersc/intel_cxx_mpi_devel:2018.2* (the 2018.2 version of the devel image with cxx and MPI)
 
-    -    cxx_fort_mpi_mkl_ipp
+#### “devel” Image versus "runtime" Images
 
--   E.g., <span style="color:red">registry.services.nersc.gov/nersc/intel_cxx_devel</span>
+-   The devel images are relatively large and contain all the components for
+    the set of Intel tools.  These are intended for compiling codes.
+-   The runtime images are much smaller and optimized for running previously compiled
+    applications.  These images contain only the shared libraries.  All bin directories and static libraries have been removed.  They can be used with a staged Docker build (described below) to create compact images that can be pushed to public registries
+    without violating the Intel License since the libraries can be distributed.
 
-### Intel Docker Tags
-
--   Each tool + image variant pair has 6 available tags
-
-    -   latest
-
-    -   2018
-
-    -   2018.1
-
-    -   2018.2
-
-    -   2018.1.163
-
-    -   2018.2.199
-
-- E.g., <span style="color:red">registry.services.nersc.gov/nersc/intel_cxx_mpi_devel:2018.2</span>
-
-### Intel Docker “devel” Image Variants
-
--   These images are relatively large and contain all the components for
-    the set of Intel tools
-
--   Intended for compiling codes (approx. size)
-
-    -   nersc/intel\_cxx\_devel --> 1.3 GB
-
-    -   nersc/intel\_fort\_devel --> 1.2 GB
-
-    -   nersc/intel\_cxx\_fort\_devel --> 1.4 GB
-
-    -   nersc/intel\_cxx\_mpi\_devel --> 2.9 GB
-
-    -   nersc/intel\_cxx\_fort\_mpi\_devel --> 2.9 GB
-
-    -   nersc/intel\_cxx\_fort\_mpi\_mkl\_devel --> 4.7 GB
-
-    -   nersc/intel\_cxx\_fort\_mpi\_mkl\_ipp\_devel --> 7 GB
-
-### Intel Docker “runtime” Image Variants
-
--   These images contain only the shared libraries
-
-    -   All bin directories and static libraries have been removed
-
--   Use with a staged Docker build
-
--   Intended for runtime (approx. size)
-
-    -   nersc/intel\_cxx\_runtime --> 0.7 GB
-
-    -   nersc/intel\_fort\_runtime --> 0.7 GB
-
-    -   nersc/intel\_cxx\_fort\_runtime --> 0.7 GB
-
-    -   nersc/intel\_cxx\_mpi\_runtime --> 1.2 GB
-
-    -   nersc/intel\_cxx\_fort\_mpi\_runtime --> 1.2 GB
-
-    -   nersc/intel\_cxx\_fort\_mpi\_mkl\_runtime --> 2.0 GB
-
-    -   nersc/intel\_cxx\_fort\_mpi\_mkl\_ipp\_runtime --> 2.8 GB
+| Image | Devel Size | Runtime Size |
+|--- |--- :|--- :|
+| nersc/intel\_cxx\_{devel,runtime}   | 1.3 GB | 0.7 GB|
+| nersc/intel\_fort\_{devel,runtime}  | 1.2 GB | 0.7 GB|
+| nersc/intel\_cxx\_fort\_{devel,runtime}       | 1.4 GB | 0.7 GB|
+| nersc/intel\_cxx\_mpi\_{devel,runtime}        | 2.9 GB | 1.2 GB|
+| nersc/intel\_cxx\_fort\_mpi\_{devel,runtime}  | 2.9 GB | 1.2 GB|
+| nersc/intel\_cxx\_fort\_mpi\_mkl\_{devel,runtime} | 4.7 GB | 2.0 GB|
+| nersc/intel\_cxx\_fort\_mpi\_mkl\_ipp\_{devel,runtime} | 7 GB | 2.8 GB|
 
 ### NERSC License Server
+
+Using the Intel compiler tools requires a license.  The NERSC license server can
+be used to support this, but the License server is reserved for NERSC users and
+is not publicly accessible.
 
 #### Using the Intel Compilers
 
 -   The “devel” docker images require a valid Intel license to use the
     compilers
-
 -   If the Intel compilers are not required, there is no need to connect
     to the NERSC license server
-
--   Intel compilers in docker are configured to seek license at
+-   Intel compilers in the NERSC provided images are configured to seek license at
     [intel.licenses.nersc.gov](mailto:intel.licenses.nersc.gov) @ port 28519
 
--   Steps:
+Here are the basic steps to use the NERSC License server remotely.
 
-    1.  Configure docker to
+1.  Configure docker to
         resolve [intel.licenses.nersc.gov](mailto:intel.licenses.nersc.gov)
         to your local IP address
 
-    2.  Configure local SSH connection to:
+2.  Configure local SSH connection to:
 
-        -   allow remote hosts (i.e., docker container) to connect to
-            local forwarded ports
+    -   allow remote hosts (i.e., docker container) to connect to
+        local forwarded ports
 
-        -   forward local port 28519 requests to port 28519
-            @ cori.nersc.gov
+    -   forward local port 28519 requests to port 28519
+        @ cori.nersc.gov
 
 #### SSH session
 
--   Obtain local IP address (macOS)
+-   Obtain the local IP address of your system (macOS)
 
     ```
     $ ipconfig getifaddr `route get nersc.gov | grep 'interface:' | awk '{print $NF}'`
@@ -476,6 +425,8 @@ Docker4Mac. Please adjust the instructions for other environments.
     [intel.licenses.nersc.gov](mailto:intel.licenses.nersc.gov) to your IP
     address
 
+Here is a BASH script that be used to automate these steps.
+
 ```Shell
 #!/bin/bash
 build-intel-docker()
@@ -496,7 +447,12 @@ build-intel-docker()
 }
 ```
 
-### Docker Build Stages
+### Using Multistage Docker Builds
+
+Multistage builds can be used to create more compact images optimized for running
+applications.  Smaller images can be pulled and converted more quickly by Shifter.
+The images also remove binaries that require an Intel license which means that they
+can be distributed without violating the License terms of the compilers.
 
 #### Build Staging
 
@@ -598,27 +554,29 @@ ENTRYPOINT [ "/intel-runtime-entrypoint.sh" ]
 
 #### Build Staging Recommendations
 
--   It is not really recommended to copy over `/usr`
+-   It is not recommended to copy over `/usr`
 
--   Manipulating `LD_LIBRARY_PATH` at NERSC can cause issues with MPI
-
-    -   NERSC prefixes `/opt/udiImage/lib` into the LD_LIBRARY_PATH
+-   Manipulating `LD_LIBRARY_PATH` at NERSC can cause issues with MPI since Shifter
+    must manipulate the LD_LIBRARY_PATH at runtime to inject the optimized MPI libraries.
+    Avoid changing the LD_LIBRARY_PATH after image launch.
 
 -   Runtime link path options in containers
 
-    1.  Install to isolated directory (e.g. `/opt/local`) in builder stage, relocate to `/usr` in final stage
+    1.  Install compiled binaries into an isolated directory (e.g. `/opt/local`) in the builder stage and relocate this to `/usr` in final stage
 
-        -   Some libraries will hard-code link path so relocating to `/usr` in
+        -   Note some libraries will hard-code link path so relocating to `/usr` in
             staged build causes runtime error
 
     2.  Add custom `LD_LIBRARY_PATH` paths then prefix `LD_LIBRARY_PATH` with original (i.e. `/opt/udiImage/lib`)
 
         -   May cause system library to be found instead of custom built library
 
-    3.  Create a file ending in “.conf” in and list all the library
-        paths needed at runtime (recommended)
+    3.  Create a file ending in “.conf” in the dynamic linker configuration directory and list all the library paths needed at runtime (recommended).  This can furhter
+    help optimize loading required libraries at runtime.
 
         - E.g., <span style="color:red">/etc/ld.so.conf.d/intel-libs.conf</span>
+        - Add a RUN /sbin/ldconfig at the end of the Dockerfile to refresh the
+          cache used by the loader
 
 ```Shell
   # docker run -it registry.services.nersc.gov/nersc/intel_cxx_fort_mpi_mkl_ipp_runtime:2018.1
