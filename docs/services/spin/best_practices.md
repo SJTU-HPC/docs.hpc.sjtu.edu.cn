@@ -72,9 +72,7 @@ Everyone with access to the Spin interface also has access to registry.spin.ners
 
 The process of tagging and pushing an image to the registry is described in the [Spin Getting Started Guide](getting_started).
 
-### Test
-
-### Be careful using the `:latest` tag
+### Be careful when reusing image tags, or when using the `:latest` tag
 
 Be careful when using the `:latest` tag, as it confuses many new (and
 experienced!) users, and may not work the way you expect. Below, we describe
