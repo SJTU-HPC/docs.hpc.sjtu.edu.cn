@@ -25,28 +25,31 @@ You will generate an API key below.
 
 ### Spin Environments
 
-Spin has two main environments for NERSC users:
+Projects in Spin are hosted in a Spin **Environment**, which is a collection of
+nodes and other resources run the Services.
+
+Spin has two main environments and one learning environment for NERSC users:
 
 * **dev-cattle** is for use with applications which are under development
 * **prod-cattle** is used for production services
+* A third environment named **sandbox** will be used exclusively if you are taking
+the SpinUp sessions
 
-During normal development, you will first deploy your application to the
-development environments, and will copy it to production when ready. Currently,
-NERSC's Infrastructure Services Group (ISG) must approve all applications
-before they run in the production environment.
+During normal development, you will use the Rancher CLI to first deploy your
+application to the development environments, and will copy it to production
+when ready. Currently, NERSC's Infrastructure Services Group (ISG) must approve
+all applications before they run in the production environment.
 
-A third environment named **sandbox** will be used exclusively if you are taking
-the SpinUp sessions.
-
-The name **cattle** refers to the container *Orchestrator* which we use to manage
-containers and is part of Rancher. Rancher names many of their components with
-'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information
-on Rancher, please read the [Spin Getting Started Guide overview](/services/spin/getting_started).
+!!! info
+    The name **cattle** refers to the container *Orchestrator* which we use to manage
+    containers and is part of Rancher. Rancher names many of their components with
+    'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information
+    on Rancher, please read the [Spin Getting Started Guide overview](/services/spin/getting_started).
 
 ### Security Requirements
 
 Note that all applications sent to Spin must follow the NERSC security requirements,
-which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices). If
+which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices).  If
 the application breaks one of the security requirements, Spin will refuse to
 run the application and will print an error, such as in the following example:
 
@@ -57,6 +60,41 @@ run the application and will print an error, such as in the following example:
     INFO[0002] Creating service web
     INFO[0002] Creating service app
     ERRO[0002] Failed Creating web : Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you cannot run a stack with your user: elvis] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a5/scripts/transform]
+
+### Removing your stack if you get stuck
+
+If you hit a problem with these examples and cannot figure out how to resolve
+it easily, the simplest solution is sometimes to simply delete the entire stack
+and start over. You can do that with the `rancher rm --type stack [stack name]`
+command, like so:
+
+    nersc$ rancher ps
+    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
+    1s3971  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy  1/1    false
+    1s3972  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  1/1    false
+
+    nersc$ rancher rm --type stack elvis-first-stack
+    1st1668
+
+    nersc$ rancher ps
+    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
+    nersc$
+
+!!! Caution
+    **Use caution when running this command**, especially when running it in
+    production, as this command is destructive and cannot be undone. For
+    example, removing a stack that contains a database service will remove that
+    database permanently. Be sure you have the Docker Compose file available before
+    deleting the stack.
+
+!!! Notice
+    If you forget the `--type stack` flag, Rancher may complain with an error like
+    *'You don't own volume elvis-first-stack'**. This error happens occasionally
+    because Rancher is uncertain if you are referring to stack, volume or another
+    thing, due to an internal ordering bug. Using the `--type stack` forces
+    Rancher to do the correct thing.
+
+    rancher rm --type stack elvis-first-stack
 
 ## Prerequisites for Lesson 2
 
@@ -436,7 +474,7 @@ major differences:
     * The secondary group 'nginx' is added to the account, so the account can
       access files inside the container.
 * Security:
-    * All Linux kernel capabilities are dropped with the **cap_add: ALL** parameter to improve the security of the application.
+    * All Linux kernel capabilities are dropped with the **cap_drop: ALL** parameter to improve the security of the application.
 
 !!! info "Linux Kernel 'capabilities'"
     Linux Kernel 'capabilities' are fine-grained controls over superuser
@@ -858,24 +896,7 @@ Global Filesystem (shown above) and will provide other options in the future.
 
 ### Removing your stack
 
-Use `rancher rm --type stack` to remove your stack.
-
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    1s3971  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy  1/1    false
-    1s3972  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  1/1    false
-
-    nersc$ rancher rm elvis-first-stack --type stack
-    1st1668
-
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    nersc
-
-If you forget the `--type stack` flag, Rancher may complain with an error like
-*'You don't own volume your-stack-here'** This is an ordering problem within
-Rancher which only occurs sometimes. Using the `--type stack` forces Rancher to
-do the correct thing.
+See the topic [#removing-your-stack-if-you-get-stuck] above.
 
 ## Other useful command line tasks
 
