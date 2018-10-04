@@ -308,7 +308,7 @@ To enhance security of your containers, we recommend:
   This allows existing ownership and permissions on the filesystem to be
   effectively enforced within Spin.
 
-### Allowed Kernel privileges
+### Allowed Kernel Capabilities
 
 The following chart shows which capabilities are allowed for Spin containers,
 and Spin containers which uses the NERSC Global Filesystem:
