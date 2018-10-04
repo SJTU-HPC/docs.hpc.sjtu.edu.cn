@@ -72,38 +72,36 @@ Everyone with access to the Spin interface also has access to registry.spin.ners
 
 The process of tagging and pushing an image to the registry is described in the [Spin Getting Started Guide](getting_started).
 
+### Test
+
 ### Be careful using the `:latest` tag
 
 Be careful when using the `:latest` tag, as it confuses many new (and
-experienced!) users, and may not work the way you expect.
+experienced!) users, and may not work the way you expect. Below, we describe
+two common issues with the `:latest` tag. Note that the same behavior will
+happen for any tag that is reused, including explicit version tags.
 
-Contrary to the name, the label `:latest` is ambiguous, and may actually be
+1\. Contrary to the name, the label `:latest` is ambiguous, and may actually be
 'latest' from the last time you downloaded the code, 18 months ago.
 
-For example, if you run a service based on `someimage:latest`, the Docker
-daemon will only download that image if it's not present in the local image
-cache.
+If your service is based on the `someimage:latest` image, the
+Docker daemon will first look for the image in the local image cache on the
+node. If the cache contains an image that matches, Docker will use that.
+Docker will not look for a new image on the registry by default, so if you
+uploaded a new version of `someimage:latest` to Dockerhub or the Spin registry,
+Docker will not see it. Docker can also be told to pull down an image (See below).
 
-If a new version of `someimage:latest` is uploaded to Dockerhub or the Spin
-registry, Docker has no way to know that the image was updated on the remote
-registry. As far as the Docker daemon on the node is concerned, it already had
-the `:latest` image cached on the node, and therefore doesn’t need to check the
-registry.
-
-Note that if you update an image, and re-use a version tag, Docker will still use
-the cached image on the node.
-
-Furthermore, remember that `:latest` changes over time. If your service has
+2\. Furthermore, remember that `:latest` changes over time. If your service has
 replicas on multiple Docker hosts, one replica may be running `:latest` from
 September, while a second node may be running `:latest` from July.
 
-We recommend using explict version numbers, such as `:v1.2.3` or a date format
-such as `:v20180809` instead of `:latest`, an that you update the tag for any changes.
+We recommend using **explict version numbers**, such as `:v1.2.3` or a date format
+such as `:v20180809` instead of `:latest`, an that you **update the tag for any changes**.
 
 If you do use `:latest`: in your service, you can also use the label
 `io.rancher.container.pull_image: always` to tell Docker to always pull the
-latest version your `:latest` image. Note that a download will add a short
-delay to upgrade operations.
+latest version your `:latest` image. This will add a short delay to upgrade
+operations.
 
 ## Version Control
 
