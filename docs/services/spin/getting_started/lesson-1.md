@@ -159,18 +159,20 @@ store your application code:
 Open a file named 'app.py' in your favorite editor and add content similar to
 the following. Note that the indenting in this file is important.
 
+    import os
     from flask import Flask
     app = Flask(__name__)
     @app.route('/')
     def hello_world():
-      return 'Hello World!'
+        return 'Hello %s!' % (os.environ.get('WHO', 'WORLD'))
 
     if __name__ == '__main__':
-      app.run(debug=True,host='0.0.0.0')
+        app.run(debug=True,host='0.0.0.0')
 
-This simple Flask application will listen on the TCP port 5000 (the default) and
-will print 'Hello World!' when called. Flask will print debug information to the
-log.
+This simple Flask application will listen on the TCP port 5000 (the default)
+and will print 'Hello WORLD!' when called normally. The app will instead print
+the contents of the `WHO` environment variable if it's defined (more on that
+later). Flask will also print debug information to the log.
 
 ### Step 3: Build the image
 
@@ -358,10 +360,7 @@ software that we're using.
 The next step is to customize the Nginx container a little bit more so it works
 with our app.
 
-We'll do this by creating a custom Nginx configuration file on the host, and in
-**Part 3** below, will **'bind mount'** this file from your host into your
-container at **/etc/nginx/conf.d/default.conf**, which is read by Nginx by
-default.
+We'll do this by creating a custom Nginx configuration file on the host which will be used in **Part 3** below.
 
 Create a file named **nginx-proxy.conf**, and add the following text. This will
 configure Nginx to behave as a function as a standard 'reverse proxy' listening
@@ -424,9 +423,10 @@ The configuration will define an application stack with two services:
 
 * An 'app' service, which is based on the 'my-first-container-app' image created above. This service has no public ports and is instead hidden away behind the Nginx proxy (which improves secuirity).
 * A 'web' service, which is based on the 'my-first-container-nginx' image created above.
-    * The Nginx container will provide a reverse proxy to our backend 'app' application. The **./web/nginx-proxy.conf** file is mounted from the host directory into the container using a Docker "Bind Mount".
+    * The Nginx container will provide a reverse proxy to our backend 'app' application. The **./web/nginx-proxy.conf** file is mounted from the host directory into the container at **/etc/nginx/conf.d/default.conf** using a Docker "Bind Mount", which is read by Nginx by default.
     * There are other ways to get files into a container, such as using the 'COPY' or 'ADD' statements in the Dockerfile. Normally you want to build all application code into your image when it's complete, as that reduces dependencies on outside resources. During development, it can be simpler to mount a file into the container to allow quick and easy modifications.
-* Within a container, each service will be able to refer to the other services using a hostname like 'app' or 'web'. These hostnames are available inside the containers because of an internal DNS service provided by Docker.
+* The hostnames 'app' and 'web' are created within the application Stack, and
+  are available within any containers that are a part of this stack.
 * The web service will listen publicly on port 80 for now, which maps to Nginx's internal port of 8080.
 
 !!!Note
@@ -467,10 +467,9 @@ You should now have the following files in your working directory:
     2 directories, 5 files
     elvis@laptop:my-first-container $
 
-Now, start the application server with 'docker-compose up', and point your
+Now, start the application server with `docker-compose up`, and point your
 browser to [http://localhost/](http://localhost/) (port 80). Your browser should
-show yo the "Hello World!" screen as it did in the previous example. Docker
-should print log output similar to the following:
+show yo the "Hello World!" screen as it did in the previous example. Docker should print log output similar to the following:
 
     elvis@laptop:my-first-container $ docker-compose up
     Creating myfirstcontainer_web_1 ... done
@@ -488,6 +487,28 @@ should print log output similar to the following:
 As before, hit **Control-C** to exit.
 
 Congratulations, you built and ran a multi-service application stack composed of two Docker images.
+
+## Extra credit - Environment variables
+
+Our flask app accepts environment variables. To change the value away from the
+default on the shell, open up the Docker Compose file, and under the `app`
+definition, add an environment stanza as in the following example:
+
+    version: '2'
+    services:
+      app:
+        image: my-first-container-app
+        environment:
+          - WHO=elvis
+      web:
+        image: my-first-container-nginx
+        ports:
+        - "80:8080"
+        volumes:
+        - ./web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+
+Now, run `docker-compose up` again, and browse to http://localhost/ . The app
+will say 'Hello elvis!' instead of 'Hello WORLD!'
 
 ## Next Steps: Lesson 2
 

@@ -33,13 +33,13 @@ foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
 
 Common services should use a name from the following table of recommended names:
 
-    | Name | Description        |
-    |------|--------------------|
-    | app  | Application server |
-    | db   | Database           |
-    | lb   | Load Balancer      |
-    | web  | Web Server         |
-    | kv   | Key Value store    |
+| Name | Description        |
+|------|--------------------|
+| app  | Application server |
+| db   | Database           |
+| lb   | Load Balancer      |
+| web  | Web Server         |
+| kv   | Key Value store    |
 
 Unique services should use a descriptive name for the service they provide. It
 should be a general description of the functionality, rather than the specific
@@ -175,10 +175,6 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher inspect [stack name]/[service name] | jq`                    | Print the configuration for a service in JSON, and use `jq` to convert the output to human-friendly format |
 | `rancher inspect [stack name]/[service name] | jq '.' | grep 'value'` | Print the configuration for a service in JSON, use `jq` to apply the filter `'.'`,<br>and search for a value using `grep`. The filter is required when passing to standard out. |
 | `rancher scale [stack name]/[service name]=2` | Set number of containers to run for a service. In this case, the service is scaled to two containers. |
-
-## Common approaches when all else fails
-
-TODO Stop the service, remove the containers. Don't remove the service or stack.
 
 ## Footnotes
 

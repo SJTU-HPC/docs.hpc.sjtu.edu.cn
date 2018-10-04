@@ -114,10 +114,14 @@ select what to do. For basic debugging choose the option Run with the
 an already running program, or *OPEN CORE* to view a core dump file
 from a previous job.
 
+![afwelcomeddt](images/afwelcomeddt.png)
+
 Then a submission window will appear with a prefilled path to the
 executable to debug. Select the number of processors on which to run
 and press run. To pass command line arguments to a program enter them
 in the aprun arguments box.
+
+![afddtwelcome](images/afddtwelcome.png)
 
 !!! note
 	UPC users: The current version (6.0.1-46365) has a
@@ -142,15 +146,23 @@ First, we need to configure the client for running a debugging session
 on a NERSC machine. Start the client, and select 'Configure...' in the
 'Remote Launch' pull-down menu.
 
+![allinea-remoteclient1](images/allinea-remoteclient1.png)
+
 That will open the 'Configure Remote Connections' window.
+
+![allinearcddtconfig02](images/allinearcddtconfig02.png)
 
 Using the *Add*, *Edit* and other buttons, create configuration for
 Cori, as shown in the following example.
+
+![allinea-forge-remote-launch-settings-cori](images/allinea-forge-remote-launch-settings-cori.png)
 
 After the major OS upgrade on Edison in July, 2017, Allinea tools are
 installed with Spack and their installation path has changed. As a
 result, the configuration settings for Edison should be as follows,
 whether or not you use the old module name:
+
+![allinea-forge-remote-launch-settings-edison](images/allinea-forge-remote-launch-settings-edison.png)
 
 allinea forge remote launch settings edison
 
@@ -181,8 +193,12 @@ To start a debugging session on a machine, you need to login to the
 corresponding machine. This choose the configuration for the machine
 from the same 'Remote Launch' menu.
 
+![allinea-remoteclient3](images/allinea-remoteclient3.png)
+
 You'll be prompted to enter the password even when you have set up
 passwordless connections by storing your ssh public key in NIM.
+
+![allinea-remoteclient4](images/allinea-remoteclient4.png)
 
 Starting with release 6.x, Allinea recommends to use the Reverse
 Connection method with the remote client. To do this, put aside the
@@ -203,10 +219,16 @@ nersc$ ddt --connect srun -n 24 ./jacobi_mpi
 The remote client will ask you whether to accept a Reverse Connect
 request. Click 'Accept'.
 
+![allinea-reverseconnect1](images/allinea-reverseconnect1.png)
+
 The usual Run window will appear where you can change or set run
 configurations and debugging options. Click 'Run'.
 
+![allinea-reverseconnect2](images/allinea-reverseconnect2.png)
+
 Now, you can start debugging in the remote client:
+
+![allinea-reverseconnect3](images/allinea-reverseconnect3.png)
 
 ## Troubleshooting
 
@@ -270,6 +292,8 @@ then the entire group of processors will advance when stepping forward
 in a program and a breakpoint will be set for all processors in a
 group.
 
+![ddtprocesscontrol](images/ddtprocesscontrol.jpg)
+
 Similary, when Focus on current Thread is chosen, then all actions are
 for an OpenMP thread. DDT doesn't allow to create a thread
 group. However, one can click the Step Threads Together box to make
@@ -287,6 +311,8 @@ image shows 3 different groups of processors, the default All group, a
 group with only a single master processor Master and a group with the
 remaining Workers processors.
 
+![ddtprocessgroups](images/ddtprocessgroups.jpg)
+
 ### Parallel Stack View
 
 A feature which should help users debug at high concurrencies is DDT's
@@ -300,6 +326,8 @@ easily allows users to identify stray processes. Users can also create
 sub-groups of processors from a branch of the tree by right clicking
 on the branch. A new group will appear in the Process Group Window at
 the top of the GUI.
+
+![ddt-parallelstack_2](images/ddt-parallelstack_2.png)
 
 ## Memory Debugging
 
@@ -404,12 +432,16 @@ For multi-threaded codes, `${DDT_LINK_DMALLOCTH}` or
 Next, when DDT starts, you must click the "Memory Debugging" checkbox
 in the DDT run menu that first comes up
 
+![afddtrunmemorydebugging](images/afddtrunmemorydebugging.png)
+
 To set detailed memory debugging options, click the 'Details...'
 button on the far right side, which will open the 'Memory Debugging
 Options' window. There you can set the heap debugging level, the
 number of guard pages before or after arrays (but not both) for
 detection of heap overflow or underflow in the program, etc. The
 default page size is 4 KB.
+
+![afddtrunmemorydebuggingdetails](images/afddtrunmemorydebuggingdetails.png)
 
 When running ddt with a statically built code, please deselect the
 *Preload the memory debugging library* item. Otherwise, ddt can hang
@@ -492,12 +524,16 @@ used, how much has been allocated, how much is freed, etc.), from
 which you can deduce where memory leaks occur. Below is a window shown
 when the Current Memory Usage menu is selected:
 
+![afddtcurrentmemoryusage](images/afddtcurrentmemoryusage.png)
+
 It displays current heap memory usage of the program and the routines
 where it is allocated. Clicking on a histogram bar on the right, you
 will see the 'Allocation Details' box on the left filled up with
 information about where the memory allocation was made. By clicking on
 one of the pointers in the 'Allocation Details' list you can get
 information mapped to source code:
+
+![afddtpointerdetails](images/afddtpointerdetails.png)
 
 It shows how much It is known that memory debugging can fail with the
 error message *A tree node closed prematurely. One or more proceses
@@ -601,6 +637,8 @@ The output file is broken into three sections: Messages (showing
 process activities such as startup and termination etc., as well as
 call backtrace at breakpoints), Tracepoints (showing output from
 activated tracepoints), and Output (program output).
+
+![afddtoffline](images/afddtoffline.png)
 
 ## Introductory Video Tutorial
 

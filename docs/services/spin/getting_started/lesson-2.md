@@ -171,6 +171,29 @@ tied to that account. Follow the steps below to generate an API key.
 
 If everything ran successfully, you are ready to proceed.
 
+## If you get stuck, remove the stack
+
+If you run into unresolvable problems while following these lessons, the
+quickest action is to simply delete the entire stack and start over. Deleting
+a stack will not delete the Docker Compose file, or any files stored on the
+global filesystems.
+
+Delete the stack using `rancher rm --type stack YourStackName`, like so:
+
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME                STATE      CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    1st4644   elvis-first-stack   degraded             2          false
+    elvis@cori09:elvis-first-stack $ rancher rm --type stack  elvis-first-stack
+    1st4644
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME      STATE     CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    elvis@cori09:elvis-first-stack $
+
+!!! Warning
+    When deleting in production, use caution. Deleting a stack will delete all
+    containers, volumes and the Load Balancer (ingress) configuration. Data on
+    the Global Filesystem will not be removed.
+
 ## Part 1: Ship your image from your laptop to the Spin Registry
 
 The Application Stack in Lesson 1 used a custom image named
@@ -287,7 +310,9 @@ In this part, we'll prepare your application to run in Spin by copying required
 files to your Project directory on the NERSC Global Filesystem, and modifying
 your Docker Compose file to work with Spin.
 
-Files stored on the NERSC Global Filesystem must be made available to Spin, and there are, some important considerations & groups to keep in mind:
+Files stored on the NERSC Global Filesystem must be made available to Spin,
+which means that the container must run as your account, or your collaboration
+account. We'll cover that here. Keep in mind the following:
 
 * **Running as root is not allowed for any container which uses the NERSC
   Global Filesystem.** Containers which mount directories from the NERSC Global
@@ -297,9 +322,10 @@ Files stored on the NERSC Global Filesystem must be made available to Spin, and 
 * Many containers in the Docker community run as 'root' by default, even though
   this practice goes against security recommendations and [Docker's
   recommendations](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user).
-* It is also possible to run the Spin containers under your own Unix username
-  and group instead of a UID & GID.  We'll cover how to do this in the [Spin
-  Best Practices Guide](/services/spin/best_practices).
+* We prefer UIDs & GIDs because they are simpler to use then a
+  username & group. If you wish to run the Spin containers under your own Unix
+  username and group instead of a UID & GID.  We'll cover how to do this in the
+  [Spin Best Practices Guide](/services/spin/best_practices).
 * The permissions for all files used by your Spin application must be readable
   by this account.
 * We are looking into ways to improve this experience, and are waiting for
@@ -315,14 +341,14 @@ Docker **bind mount**. This means that you must set the permissions of your
 Project directory to be available to Spin as follows:
 
 * **All directories and subdirectories used by your Spin application must have
-  the 'executable' bit set to allow 'other'users to browse the directory.**
+  the 'executable' bit set to allow 'other' users to browse the directory.**
   (o+x) so that the Docker daemons can successfully mount your directory. For
   example permission mode 0741 would work on a parent directory, but 0740 would
   not.
-* The directories do not need to be world readable. The Docker daemon has no
- need for the 'read' or 'write' bit to be set on any directories. It only needs
- the 'executable' bit set.
 * Spin will be accessing these directories as the special system user 'nobody'.
+* The directories do not need to be world readable. The Docker daemon has no
+  need for the 'read' or 'write' bit to be set on any directories. It only needs
+  the 'executable' bit set.
 * Any files in these directories need to be readable as the user & group which
   is used within the container. In production, we encourage you to run the
   application as your NERSC Collaboration User. For these lessons, you can
@@ -378,11 +404,10 @@ with Spin.
 
 In your project directory on Cori (e.g.
 `/global/project/projectdirs/YOUR_COLLAB_DIRECTORY/YOURUSERNAME-first-stack`,
-create a new Docker Compose file.  The name of the directory matters. By
-default, Rancher will name the stack after your directory name. In these
-exercises we make sure that the directory name and the stack name match just to
-keep things simple. You can also specify the stack name using the `--stack`
-flag.
+create a new Docker Compose file. **The name of the directory is important**,
+because by default, the stack will be named after the directory name. In
+these exercises we make sure that the directory name and the stack name match.
+The stack name can also be specified using the `--stack` flag.
 
 !!! info
     Technically, the Docker Compose file can live elsewhere on the filesystem,
@@ -391,29 +416,33 @@ flag.
     the configuration of an application separate from the application directory
     itself.
 
-Add the following text to your docker-compose.yml file, but replace the values
-such as *YOURUSERNAME*, *YOUR_COLLAB_DIRECTORY*, and
-*YOUR_NERSC_UID:YOUR_NERSC_GID* with your specific information.
+Add the following text to your docker-compose.yml file, but replace the
+following values with your specific information:
 
-TODO fix indenting
+* *YOURUSERNAME*
+* *YOUR_COLLAB_DIRECTORY*
+* *YOUR_NERSC_UID:YOUR_NERSC_GID* (Hint: Find your UID & GID with the commands `id -u` & `id -g` command)
 
-    version: '2'
-    services:
-      app:
-        image: registry.spin.nersc.gov/YOURUSERNAME/my-first-container-app:latest
-        cap_drop:
-        - ALL
-      web:
-        image: registry.spin.nersc.gov/YOURUSERNAME/my-first-container-nginx:latest
-        ports:
-        - "60000:8080"
-        volumes:
-        - /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/YOURUSERNAME-first-stack/web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
-        user: YOUR_NERSC_UID:YOUR_NERSC_GID
-        group_add:
-        - nginx
-        cap_drop:
-        - ALL
+```
+version: '2'
+services:
+  app:
+    image: registry.spin.nersc.gov/YOURUSERNAME/my-first-container-app:latest
+    retain_ip: true
+    cap_drop:
+    - ALL
+  web:
+    image: registry.spin.nersc.gov/YOURUSERNAME/my-first-container-nginx:latest
+    ports:
+    - "60000:8080"
+    volumes:
+    - /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/YOURUSERNAME-first-stack/web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
+    user: YOUR_NERSC_UID:YOUR_NERSC_GID
+    group_add:
+    - nginx
+    cap_drop:
+    - ALL
+```
 
 Compare this Docker Compose file to the version on your laptop, and note the
 major differences:
@@ -426,7 +455,7 @@ major differences:
 * Ports
     * The application will expose the external port 60000 and will map that to
       the private port of 8080, which is used by Nginx as mentioned in the
-     Dockerfile from Lesson 1.
+      Dockerfile from Lesson 1.
     * The port range 60000-60050 are made available for Spin development, and
       you may use any port in that range for the exercise here. These ports are
       open to the world, and bots may start scanning your app.
@@ -437,6 +466,7 @@ major differences:
       restricted to NERSC & LBL networks only.
     * A detailed list of Ports and their accessibility can be found in the
       [Spin Best Practices Guide](/services/spin/best_practices), under "Networking".
+* The `retain_ip` parameter helps a service to keep the same IP address during upgrades.
 * Users and groups
     * The application runs as your UID & GID account, so it can access files
       outside the container. In Linux terms, this is your primary UID and the
@@ -461,8 +491,6 @@ Let's verify our config file before proceeding using `rancher up --render`. If
 the file is free from validation errors, Docker Compose will print out the
 contents of the file, like so:
 
-TODO fix indent
-
     elvis@nersc:elvis-first-stack $ ls -ld docker-compose.yml
     -rw-rw---- 1 elvis elvis 455 May 15 11:58 docker-compose.yml
     elvis@nersc:elvis-first-stack $ rancher up --render
@@ -472,13 +500,14 @@ TODO fix indent
         image: registry.spin.nersc.gov/elvis/my-first-container-app:latest
         cap_drop:
         - ALL
+        retain_ip: true
       web:
         image: registry.spin.nersc.gov/elvis/my-first-container-nginx:latest
         ports:
-        - "60050:8080"
+        - "60000:8080"
         volumes:
         - /global/project/projectdirs/isguser/spin/elvis-first-stack/web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
-        user: 46311:71216
+        user: 46311:75137
         group_add:
         - nginx
         cap_drop:
@@ -505,7 +534,7 @@ docker-compose.yml , and make sure they match:
 
     grep /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/elvis-first-stack/web/nginx-proxy.conf docker-compose.yml
 
-!!! info rancher-compose.yml
+!!! info "rancher-compose.yml"
     Note that Rancher also supports a second configuration file named
     rancher-compose.yml, but that is for advanced use cases such as scaling. We may
     cover it in a future lesson.
@@ -513,11 +542,11 @@ docker-compose.yml , and make sure they match:
 ## Part 3: Start the stack
 
 Now that your Docker compose files are available, and all required files are
-available on the NERSC Global Filesystem, it's time to start your stack, with
-this command. By default, Rancher will create a stack named after your current
-working directory, which should be named like **USERNAME-first-stack**. If you
-want to name the stack something different, use the `--stack` flag to specify
-the name.
+available on the NERSC Global Filesystem, it's time to start your stack with
+the command below.  By default, Rancher will create a stack named after your
+current working directory, which should be named like **USERNAME-first-stack**.
+If you want to name the stack something different, use the `--stack` flag to
+specify the name.
 
 !!! Tip "Tip: Simplify your workflow with `RANCHER_ENVIRONMENT`"
 
@@ -563,7 +592,7 @@ first application.
 
     elvis@nersc:elvis-first-stack $ export RANCHER_ENVIRONMENT=sandbox
     elvis@nersc:elvis-first-stack $ rancher up -d
-    INFO[0001] Creating stack stefanl-first-stack
+    INFO[0001] Creating stack elvis-first-stack
     INFO[0001] [app]: Creating
     INFO[0001] [web]: Creating
     INFO[0001] Creating service web
@@ -578,7 +607,7 @@ first application.
     1s4784
     elvis@nersc:elvis-first-stack $
 
-!!! tip
+!!! tip "Send logs to the background using `-d`"
     We used the `-d` flag to send our logs to the background. To send the
     application logs to the foreground instead, omit the `-d` flag. Use
     **Control-C** to stop viewing the logs and send the logs to the background.
@@ -623,22 +652,24 @@ with the [`jq` tool](https://stedolan.github.io/jq/) tool. `rancher inspect`
 will print information about your stack in JSON, and `jq` makes the output
 friendlier.
 
-The example below shows how to obtain the FQDN for the stack, as well as the **ipAddress** which is part of the **publicEndpoints** array.
+The example below shows how to obtain the FQDN for the stack, as well as the
+**port** which is part of the **publicEndpoints** array. The port will match
+the port that you specified in your Compose file earlier.
 
-        nersc$ rancher inspect elvis-first-stack/web | jq '.fqdn'
-        "web.elvis-first-stack.sandbox.stable.spin.nersc.org"
-        nersc$ rancher inspect elvis-first-stack/web | jq '.publicEndpoints'
-        [
-          {
-            "hostId": "1h83",
-            "instanceId": "1i2601738",
-            "ipAddress": "128.55.206.19",
-            "port": 60000,
-            "serviceId": "1s4783",
-            "type": "publicEndpoint"
-          }
-        ]
-        nersc$
+    nersc$ rancher inspect elvis-first-stack/web | jq '.fqdn'
+    "web.elvis-first-stack.sandbox.stable.spin.nersc.org"
+    nersc$ rancher inspect elvis-first-stack/web | jq '.publicEndpoints'
+    [
+      {
+        "hostId": "1h83",
+        "instanceId": "1i2601738",
+        "ipAddress": "128.55.206.19",
+        "port": 60000,
+        "serviceId": "1s4783",
+        "type": "publicEndpoint"
+      }
+    ]
+    nersc$
 
 Notice two important points here:
 
@@ -659,21 +690,30 @@ In this example, we will perform a very simple upgrade just to show how it's
 done. Upgrading a stack has two mandatory steps:
 
 1. Upgrading the stack
-2. Confirming that the upgrade was successful
+2. Confirming that the upgrade was successful, and rolling back if the upgrade
+   was unsuccessful.
 
-We'll show Upgrading & confirming here, and will discuss more advanced upgrades
-and rolling back the stack, later.
+We'll discuss Upgrading & Confirming here, and will discuss more advanced
+upgrades and rolling back the stack later.
 
-Change your application to listen on 60040 instead of port 60000. Edit the
-Docker Compose file, scroll to the 'web' service and change the ports from 60000:
+Remember that in Lesson 1 we built the Flask app to support an environment
+variable named `WHO`, which will override the default value of `WORLD`. We'll
+use that variable here.
 
-    ports:
-    - "60000:8080"
+Open up the Docker Compose file, navigate to the `app:` service definition, and
+add a subsection titled `environment`, then add the environment variable `WHO`,
+like follows:
 
-To 60040:
-
-    ports:
-    - "60040:8080"
+    version: '2'
+    services:
+      app:
+        image: registry.spin.nersc.gov/elvis/my-first-container-app:latest
+        cap_drop:
+        - ALL
+        retain_ip: true
+        environment:
+          - WHO=santa
+    ...
 
 Use `rancher up --upgrade` to upgrade your stack. Be sure that the directory
 name matches the name of your stack, or specify your stack here using `--stack
@@ -681,12 +721,11 @@ YOURUSERNAME-first-stack`:
 
     rancher up --upgrade -d
 
-Notice that we're using the '-d' flag here to send the logs to the background,
+Notice that we're using the `-d` flag here to send the logs to the background,
 like we did in ‘Part 3: Start the stack’ above.
 
-When the stack is up, browse to your service on the new por that you used above.
-The command will print output like the following. Look for the line
-which says **Upgrading web**, which shows that the web service was upgraded.
+The command will print output like the following. Look for the line which says
+**Upgrading app**, which shows that the app service was upgraded.
 
     elvis@nersc:elvis-first-stack $ rancher up --upgrade -d
     INFO[0000] [app]: Creating
@@ -697,44 +736,49 @@ which says **Upgrading web**, which shows that the web service was upgraded.
     INFO[0000] [app]: Starting
     1s3042
     INFO[0000] [app]: Started
-    INFO[0000] Upgrading web
+    INFO[0000] Upgrading app
     1s3041
     INFO[0008] [web]: Started
 
+Visit your website again, and confirm that the words 'Hello WORLD!' have been
+replaced with your custom values.
+
 ### Confirming the upgrade
 
-The web service was upgraded. However, the old version of the container is
+[//]: # (TODO: Move upgrade explanation here)
+
+The app service was upgraded. However, the old version of the container is
 still there in case you want to roll back to that version. You must remove the
 old containers as soon as you are happy with the new version.
 
-!!! Warning "Required step: Confirming the upgrade"
+!!! Notice "Required step: Confirming the upgrade"
     The step to confirm an upgrade is required.  Certain commands, such as
     `rancher stop`, will not function until you remove the old containers.  We
     will cover this more in Lesson 3.
 
 First, let's look at your stack in more detail.
 
-`rancher ps --containers` will show the both sets of containers: The new
+`rancher ps --containers --all` will show the both sets of containers: The new
 upgraded containers, and the previous non-upgraded containers. Run this
-command now. Notice how there are two containers named 'something-web-1'. One is
+command now. Notice how there are two containers named 'something-app-1'. One is
 running, and one is stopped:
 
-    elvis@nersc:elvis-first-stack $ rancher ps --containers
+    elvis@cori09:elvis-first-stack $ rancher ps --containers --all
     ID         NAME                     IMAGE                                                          STATE    HOST  IP             DOCKER        DETAIL
-    1i2599342  elvis-first-stack-app-1  registry.spin.nersc.gov/elvis/my-first-container-app:latest    running  1h84  10.42.165.210  c099b99d60d2
-    1i2599346  elvis-first-stack-web-1  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  stopped  1h87  10.42.14.161   843972812e3b
-    1i2599347  elvis-first-stack-web-1  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  running  1h85  10.42.66.5     bf128471d412
-    elvis@nersc:elvis-first-stack $
+    1i2618389   elvis-first-stack-web-1   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   running   1h85      10.42.96.135    87a4cc3a17cc
+    1i2618390   elvis-first-stack-app-1   registry.spin.nersc.gov/elvis/my-first-container-app:latest     stopped   1h86      10.42.147.192   a9946d2a415b
+    1i2618391   elvis-first-stack-app-1   registry.spin.nersc.gov/elvis/my-first-container-app:latest     running   1h85      10.42.147.192   ff22e8adf0e5
+    elvis@cori09:elvis-first-stack $
 
 `rancher ps` without the `--containers` flag will subtlely show your running
-and stopped containers. Run that command now. For the web service, notice that
+and stopped containers. Run that command now. For the app service, notice that
 the **STATE** column says `upgraded`, and the **SCALE** column says `2/1`
 which means 'Two containers exist. One is in use.'
 
     elvis@nersc:elvis-first-stack $ rancher ps
     ID      TYPE     NAME                   IMAGE                                                          STATE     SCALE  SYSTEM  ENDPOINTS  DETAIL
-    1s4146  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy   1/1    false
-    1s4147  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  upgraded  2/1    false
+    1s5545    service               elvis-first-stack/app   registry.spin.nersc.gov/elvis/my-first-container-app:latest     upgraded   2/1       false
+    1s5546    service               elvis-first-stack/web   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   healthy    1/1       false
     elvis@nersc:elvis-first-stack $
 
 Now that we've seen the new and old containers, and we're satisified that the
@@ -757,10 +801,10 @@ containers.
 After running this command, note that the container previously marked as
 'stopped' is gone.
 
-    elvis@nersc:elvis-first-stack $ rancher ps --containers
+    elvis@nersc:elvis-first-stack $ rancher ps --containers --all
     ID         NAME                     IMAGE                                                          STATE    HOST  IP             DOCKER        DETAIL
-    1i2599342  elvis-first-stack-app-1  registry.spin.nersc.gov/elvis/my-first-container-app:latest    running  1h84  10.42.165.210  c099b99d60d2
-    1i2599347  elvis-first-stack-web-1  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  running  1h85  10.42.66.5     bf128471d412
+    1i2618389  elvis-first-stack-web-1   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   running   1h85      10.42.96.135    87a4cc3a17cc
+    1i2618391  elvis-first-stack-app-1   registry.spin.nersc.gov/elvis/my-first-container-app:latest     running   1h85      10.42.147.192   ff22e8adf0e5
     elvis@nersc:elvis-first-stack $
 
 ## Other ways to work with your stack

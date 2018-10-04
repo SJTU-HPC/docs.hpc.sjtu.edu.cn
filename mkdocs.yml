@@ -1,11 +1,13 @@
-pages:
+nav:
   - Home: index.md
   - Accounts:
       - Accounts : accounts/index.md
       - Passwords : accounts/passwords.md
       - Policy : accounts/policy.md
   - Connecting:
+      - Login Nodes: connect/login-nodes.md
       - SSH : connect/ssh.md
+      - MFA : connect/mfa.md
       - NX : connect/nx.md
       - Jupyter : services/jupyter.md
   - Running Jobs:
@@ -21,10 +23,16 @@ pages:
   - Applications:
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
     - NAMD : applications/namd/index.md
-    - TensorFlow: applications/tensorflow/index.md
     - VASP : applications/vasp/index.md
+    - Abinit: applications/abinit/index.md
+    - CP2K: applications/cp2k/index.md
   - Analytics:
+      - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
+      - Machine Learning:
+        - Overview: analytics/machinelearning/overview.md
+        - TensorFlow: analytics/machinelearning/tensorflow/index.md
+        - PyTorch: analytics/machinelearning/pytorch.md
   - Data:
       - Management : data/management.md
       - Sharing: data/sharing.md
@@ -39,12 +47,16 @@ pages:
     - Profiling : performance/profiling.md
     - I/O : performance/io.md
     - Portability: performance/portability.md
+    - Variability: performance/variability.md
     - Case Studies:
+        - AMReX : performance/case-studies/amrex/index.md
+        - Chombo-Crunch : performance/case-studies/chombo-crunch/index.md
         - EMGeo : performance/case-studies/emgeo/index.md
         - MFDn : performance/case-studies/mfdn/index.md
         - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/index.md
         - WARP: performance/case-studies/warp/index.md
         - XGC1: performance/case-studies/xgc1/index.md
+    - KNL Cache Mode: performance/knl/cache-mode.md
   - Services:
       - Spin Containers :
         - services/spin/index.md
@@ -64,9 +76,10 @@ pages:
         - CTest/CDash with CMake : services/cdash/with_cmake.md
         - CTest/CDash without CMake : services/cdash/without_cmake.md
   - Development:
-    - Containers (Shifter):
+    - Running Containers with Shifter:
         - Overview : development/shifter/overview.md
-        - How to use : development/shifter/how-to-use.md
+        - How to use Shifter: development/shifter/how-to-use.md
+        - Using Intel Compilers with Docker Images: development/shifter/intel.md
     - Developer Tools:
         - DDT : development/performance-debugging-tools/ddt.md
         - TotalView : development/performance-debugging-tools/totalview.md
@@ -75,7 +88,9 @@ pages:
         - Valgrind : development/performance-debugging-tools/valgrind.md
         - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
         - VTune : development/performance-debugging-tools/vtune.md
-    - Compilers : development/compilers.md
+    - Compilers :
+        - Cray Compiler Wrappers: development/compilers/index.md
+        - LLVM : development/compilers/llvm.md
     - High-level Programming Environments:
         - Python :
             - development/high-level-environments/python/index.md
@@ -142,6 +157,10 @@ pages:
       - Majorana skim : pdsf/slurm/majorana-skim/Readme.md
       - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
       - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
+    - shifter :
+      - recipes : pdsf/shifter/README.md
+      - Clone STAR DB : pdsf/shifter/clone_starDB.md
+
   - Help: help/index.md
 #      -
 #  - JGI:
@@ -157,8 +176,9 @@ site_description: NERSC Documentation
 site_author: NERSC
 site_dir: public
 site_url: "https://docs.nersc.gov"
-#repo_name: NERSC/documentation
-#repo_url: https://gitlab.com/NERSC/documentation
+repo_name: GitLab/NERSC/docs
+repo_url: https://gitlab.com/NERSC/nersc.gitlab.io
+edit_uri: blob/master/docs/
 
 # Configuration
 strict: true

@@ -65,7 +65,7 @@ Once you understand the basics of Docker, you will need the following to proceed
         * A diagram, or a similar written description, can really help with the design process. The diagram doesn't have to be detailed.
     * A DNS name for any public-facing service. Examples could be 'example.lbl.gov', 'example.jgi.doe.gov, 'example.nersc.gov', or even 'www.example.org'.
 * A list of public and private ports required by your software.
-* Apply for an upcoming [SpinUp workshop](..).
+* Apply for an upcoming SpinUp workshop.
 
 ## Creating an application for Spin
 
@@ -78,7 +78,7 @@ The NERSC Spin project aims to follow the Docker motto, "Build, Ship & Run." Thi
 1. **Run** the application stack in the Spin Development environment. ISG will work with you to resolve any NERSC-specific issues, such as access to files on the NERSC Global Filesystem. (performed by ISG during pilot phase).
 1. **Copy** your application stack from the Spin development environment to the Spin production environment (performed by ISG during pilot phase).
 
-![Build Ship Run workflow](/services/spin/images/Rancher-Build-Ship-Run.png)
+![Build Ship Run workflow](../Images/Rancher-Build-Ship-Run.png)
 
 ## How it all fits together
 
@@ -95,11 +95,11 @@ While working with Docker & Spin, you will be using Docker images & containers t
 * An **Application Stack** is comprised of application services.
     * Different containers (Like, a web container, application container, and a database container) can be connected to each other to form a multi-tier Application Stack.
 
-Let's take an example of a web app that consists of a front-end, a database, and an key-value service. This stack would consists of three services.  Each of these services would be provided by their own container.  And each would likely use a different image.  For example, the front-end might use an image based on Apache, the database may be a MySQL image, and the key-value service could be based on MongoDB.
+Let's take an example of a web app that consists of a front-end, a database, and an key-value service. This stack would consists of three services.  Each of these services would be provided by their own container.  And each would likely use a different image. For example, the front-end might use an image based on Apache, the database may be a MySQL image, and the key-value service could be based on MongoDB.
 
 Here's a diagram showing the relation between Stacks, Services and Containers:
 
-![An Application Stack in Spin](/services/spin/images/Spin-Rancher-Application-Stack-Diagram.png)
+![An Application Stack in Spin](../Images/Spin-Rancher-Application-Stack-Diagram.png)
 
 ## Tips to keep in mind
 
@@ -117,5 +117,5 @@ There are many good resources for learning [Docker](https://docs.docker.com/get-
 To help get you started with Spin, we've provided several hands on lessons to
 help learn the essentials of Spin & Docker. See those lessons in the navigation
 bar to the left. After completing these guides, see the [Spin Best
-Practices](/services/spin/best_practices/) guide for a FAQ and best practices on
+Practices](../best_practices.md) guide for a FAQ and best practices on
 implementing containers on Spin.
