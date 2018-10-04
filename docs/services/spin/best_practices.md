@@ -90,10 +90,10 @@ registry. As far as the Docker daemon on the node is concerned, it already had
 the `:latest` image cached on the node, and therefore doesn’t need to check the
 registry.
 
-Note that if you update an image, and re-use a version tag, Docker will also use
+Note that if you update an image, and re-use a version tag, Docker will still use
 the cached image on the node.
 
-Furthermore, rememeber that `:latest` changes over time. If your service has
+Furthermore, remember that `:latest` changes over time. If your service has
 replicas on multiple Docker hosts, one replica may be running `:latest` from
 September, while a second node may be running `:latest` from July. 
 
