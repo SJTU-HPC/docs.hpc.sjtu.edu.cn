@@ -95,7 +95,7 @@ the cached image on the node.
 
 Furthermore, remember that `:latest` changes over time. If your service has
 replicas on multiple Docker hosts, one replica may be running `:latest` from
-September, while a second node may be running `:latest` from July. 
+September, while a second node may be running `:latest` from July.
 
 We recommend using explict version numbers, such as `:v1.2.3` or a date format
 such as `:v20180809` instead of `:latest`, an that you update the tag for any changes.
