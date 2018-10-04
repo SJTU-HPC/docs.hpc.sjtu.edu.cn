@@ -444,7 +444,7 @@ major differences:
     * The secondary group 'nginx' is added to the account, so the account can
       access files inside the container.
 * Security:
-    * All Linux kernel capabilities are dropped with the **cap_add: ALL** parameter to improve the security of the application.
+    * All Linux kernel capabilities are dropped with the **cap_drop: ALL** parameter to improve the security of the application.
 
 !!! info "Linux Kernel 'capabilities'"
     Linux Kernel 'capabilities' are fine-grained controls over superuser
