@@ -1,7 +1,10 @@
 # Spin Best Practices
 
 !!!info "This guide is under development"
-	Spin is in a Pilot phase for NERSC staff and users in early 2018. During this development period, the content of thees page may be updated, and some docs may be incomplete. We are working to convert all Spin documentation to this new system.
+  Spin is in a Pilot phase for NERSC staff and users in early 2018. During this
+  development period, the content of thees page may be updated, and some docs
+  may be incomplete. We are working to convert all Spin documentation to this
+  new system.
 
 ## Spin Overview & Steps to Get Started
 
@@ -11,22 +14,41 @@ For an overview of Spin and short tutorials to get started, please see the [Spin
 
 ### Choosing the best image source
 
-When building your own image, you will usually be pulling an official image from a major, reputable project.
+When building your own image, you will usually be pulling an official image
+from a major, reputable project.
 
-In general, good images from [Docker Hub](https://hub.docker.com/) tend to be well maintained and have wide community support. We look for images which meet the following guidelines:
+In general, good images from [Docker Hub](https://hub.docker.com/) tend to be
+well maintained and have wide community support. We look for images which meet
+the following guidelines:
 
 * Are part of the [official repositories](https://docs.docker.com/docker-hub/official_repos/), such as the [Docker Hub Official Repositories](https://hub.docker.com/explore/)
 * Have a high number of pulls, indicating that the project is well used
 * Have a high number of stars, indicating that the software works well
-* Are updated as frequently as needed to address security vulnerabilities and to keep up to date with upstream features. Look for images with recent modification times, which indicates that the image is being kept up to date.
+* Are updated as frequently as needed to address security vulnerabilities and
+  to keep up to date with upstream features. Look for images with recent
+  modification times, which indicates that the image is being kept up to date.
 
-If the project page has a de facto image or a recommended image, that's usually the best and simplest option. The goal here is to keep the image simple, and yet still be functional enough to support your application.
+If the project page has a de facto image or a recommended image, that's usually
+the best and simplest option. The goal here is to keep the image simple, and
+yet still be functional enough to support your application.
 
-There are also many low quality images on Docker Hub, but they tend to be obvious. Consider avoiding images that have a low number of pulls, are poorly rated, or lacks recent updates. Image size is another useful criteria. The appropriate size of an image will obviously vary depending on the application stack, but as a rule of thumb, take a close look at images > 5 GB to see if it contains a lot of unnecessary components. Images that are overly large, besides suggesting that they contain too many unnecessary elements, may be frustratingly slow to push to the image registry during the development cycle (especially over a typical home internet link), and will be slower to deploy.
+There are also many low quality images on Docker Hub, but they tend to be
+obvious. Consider avoiding images that have a low number of pulls, are poorly
+rated, or lacks recent updates. Image size is another useful criteria. The
+appropriate size of an image will obviously vary depending on the application
+stack, but as a rule of thumb, take a close look at images > 5 GB to see if it
+contains a lot of unnecessary components. Images that are overly large, besides
+suggesting that they contain too many unnecessary elements, may be
+frustratingly slow to push to the image registry during the development cycle
+(especially over a typical home internet link), and will be slower to deploy.
 
-Popular projects may have multiple images on their project page. The Apache httpd project has `httpd:2.4` and `apache:alpine`, which show that the Apache community is maintaining a mainline application while also experimenting with tiny images based on the Alpine container OS.
+Popular projects may have multiple images on their project page. The Apache
+httpd project has `httpd:2.4` and `apache:alpine`, which show that the Apache
+community is maintaining a mainline application while also experimenting with
+tiny images based on the Alpine container OS.
 
-Examples of official projects that have provided a selection of images for different use cases are:
+Examples of official projects that have provided a selection of images for
+different use cases are:
 
 * [Apache](https://hub.docker.com/_/httpd/) (httpd)
 * [Ubuntu](https://hub.docker.com/_/ubuntu/)
@@ -34,7 +56,11 @@ Examples of official projects that have provided a selection of images for diffe
 
 ### Operating Systems
 
-There are official images available on Docker Hub for nearly every popular Linux distribution. If you are basing your image on a prebuilt container, such as Apache httpd, your choice will be made by the original image developers. If you are building your own image, there are a number of criteria that can be helpful in guiding your choice.
+There are official images available on Docker Hub for nearly every popular
+Linux distribution. If you are basing your image on a prebuilt container, such
+as Apache httpd, your choice will be made by the original image developers. If
+you are building your own image, there are a number of criteria that can be
+helpful in guiding your choice.
 
 OS Considerations:
 
@@ -46,7 +72,10 @@ OS Considerations:
 
 ### Dockerfile
 
-When writing a Dockerfile, seek a balance between readability and size. Familiarize yourself with Docker's [Best practices for writing Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/). Some general rules:
+When writing a Dockerfile, seek a balance between readability and size.
+Familiarize yourself with Docker's [Best practices for writing
+Dockerfiles](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/).
+Some general rules:
 
 * Containers should be ephemeral
 * Each container should have only one concern
@@ -56,7 +85,10 @@ When writing a Dockerfile, seek a balance between readability and size. Familiar
 
 ## Image Registry
 
-Local images for Spin must be stored in the associated registry service, https://registry.spin.nersc.gov, or come from directly from Docker Hub (preferably only images produced by official projects will come from Docker Hub). No other registries may be used as the image source for Spin.
+Local images for Spin must be stored in the associated registry service,
+https://registry.spin.nersc.gov, or come from directly from Docker Hub
+(preferably only images produced by official projects will come from Docker
+Hub). No other registries may be used as the image source for Spin.
 
 The local registry is organized along the following lines:
 
@@ -64,9 +96,12 @@ The local registry is organized along the following lines:
 * **Namespaces** are analogous to directories, and contain sets of related repositories. They are owned by teams, and team membership and roles define who can view and write to them. By convention, the default namespace should use the team name.
 * **Repositories** are where the docker images are actually stored.
 
-Everyone with access to the Spin interface also has access to registry.spin.nersc.gov. If a Team and Namespace hasn’t yet been set up for your group, make a request via Service Now.
+Everyone with access to the Spin interface also has access to
+registry.spin.nersc.gov. If a Team and Namespace hasn’t yet been set up for
+your group, make a request via Service Now.
 
-The process of tagging and pushing an image to the registry is described in the [Spin Getting Started Guide](getting_started).
+The process of tagging and pushing an image to the registry is described in the
+[Spin Getting Started Guide](getting_started).
 
 ### Be careful when reusing image tags, or when using the `:latest` tag
 
@@ -99,14 +134,21 @@ operations.
 
 ## Version Control
 
-Storing the Dockerfile, docker-compose.yml (if it exists), and any other files associated with a container-based application is helpful for all of the same reasons that version control is useful for other projects. In addition, during the pilot phase, container application developers frequently work with the Spin administrators to migrate their projects into this environment. Version control systems facilitate these collaborations. Frequently used systems include:
+Storing the Dockerfile, docker-compose.yml (if it exists), and any other files
+associated with a container-based application is helpful for all of the same
+reasons that version control is useful for other projects. In addition, during
+the pilot phase, container application developers frequently work with the Spin
+administrators to migrate their projects into this environment. Version control
+systems facilitate these collaborations. Frequently used systems include:
 
 * https://bitbucket.org academic account - Academic users are upgraded to an account with unlimited public and private repositories. The upgrade is automatic and based on the email address used to register the account.
 * https://gitlab.com - Comes with comprehensive CI/CD features; it is a common choice for JGI projects
 * https://github.com - Less commonly used as the free account tier doesn’t include private repositories, and the academic accounts are more limited and without the automatic upgrade feature of Bitbucket.
 * NERSC Staff can also use the internal Bitbucket service.
 
-Regardless of which system is being used, avoid storing secrets such as database passwords or private keys in files that get pushed to a repo; instead the [Secrets](#secrets) feature should be utilized.
+Regardless of which system is being used, avoid storing secrets such as
+database passwords or private keys in files that get pushed to a repo; instead
+the [Secrets](#secrets) feature should be utilized.
 
 ## Services
 
@@ -134,11 +176,14 @@ The collection of services that comprise an application within Rancher is termed
 
 ### Naming Convention for Stacks
 
-Stacks should be named to match to non-TLD components of public-facing name (eg foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
+Stacks should be named to match to non-TLD components of public-facing name (eg
+foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
 
 ### Stack Tags
 
-Tags are created within the Rancher environment to label stacks with information that can be useful for identifying ownership, support and resource usage. Some tags are optional, while others are required for all stacks.
+Tags are created within the Rancher environment to label stacks with
+information that can be useful for identifying ownership, support and resource
+usage. Some tags are optional, while others are required for all stacks.
 
 | Tag | Status | Description | Example |
 |-----|--------|-------------|-------- |
@@ -151,7 +196,11 @@ Tags are created within the Rancher environment to label stacks with information
 
 ## Storage
 
-A number of different types of storage are available to containers running in the Spin environment. Docker concepts such as Volumes, Bind Mounts and tmpfs volumes are explained at https://docs.docker.com/storage/ . A brief summary of the different types of storage and their properties is presented in the table below, with the following column headings and their meanings:
+A number of different types of storage are available to containers running in
+the Spin environment. Docker concepts such as Volumes, Bind Mounts and tmpfs
+volumes are explained at https://docs.docker.com/storage/ . A brief summary of
+the different types of storage and their properties is presented in the table
+below, with the following column headings and their meanings:
 
 * **Persistent** - Is the data in the volume preserved when the container is destroyed & recreated
 * **Portable** - Is the data in the volume available when the container is restarted on a different node
@@ -163,19 +212,35 @@ A number of different types of storage are available to containers running in th
 
 ### Container Storage
 
-Storing data to the container file system should only be used for small amounts of ephemeral data. The data is lost whenever the container is restarted with a fresh image, which can happen in a number of scenarios (container restarted on different node, container upgraded with new image, etc.)
+Storing data to the container file system should only be used for small amounts
+of ephemeral data. The data is lost whenever the container is restarted with a
+fresh image, which can happen in a number of scenarios (container restarted on
+different node, container upgraded with new image, etc.)
 
 ### Local Node Storage
 
-Each node within Spin has 1.7 TB of storage available to containers. Because it is provisioned on SSD, this storage is relatively fast. Because it is local to a node, any data previously written will not be available to a container if it’s restarted on a different node. Therefore, this storage is most useful for applications that read/write lots of data that is considered transient or disposable (for example an application cache).
+Each node within Spin has 1.7 TB of storage available to containers. Because it
+is provisioned on SSD, this storage is relatively fast. Because it is local to
+a node, any data previously written will not be available to a container if
+it’s restarted on a different node. Therefore, this storage is most useful for
+applications that read/write lots of data that is considered transient or
+disposable (for example an application cache).
 
 ### Rancher NFS
 
-Rancher NFS is a storage class residing on NFS servers and available only from within the Spin environment. It is appropriate when an application needs persistent storage, that will be available to containers even if restarted on a different node. The storage is not available from outside of Spin, so it’s not a good choice when data needs to be part of a pipeline that has components outside of Spin, or when users expect to have direct access to the data files from login nodes. Rancher NFS does have nice built-in lifecycle features that can optionally create/destroy data directories to match the life cycle of an application stack.
+Rancher NFS is a storage class residing on NFS servers and available only from
+within the Spin environment. It is appropriate when an application needs
+persistent storage, that will be available to containers even if restarted on a
+different node. The storage is not available from outside of Spin, so it’s not
+a good choice when data needs to be part of a pipeline that has components
+outside of Spin, or when users expect to have direct access to the data files
+from login nodes. Rancher NFS does have nice built-in lifecycle features that
+can optionally create/destroy data directories to match the life cycle of an
+application stack.
 
 ### Global File System / GPFS
 
-General guidelines for using GPFS within Spin
+General guidelines for using GPFS within Spin:
 
 * The mount point should be as deep in directory structure as possible
 * e.g. /global/project/scratch/username/project/application rather than /global/project/scratch
@@ -184,7 +249,11 @@ General guidelines for using GPFS within Spin
 
 ### Permissions, UID and GID Considerations
 
-Permissions set on the global file systems must be respected and enforced when files are accessed from within a container. This is accomplished through a combination of container configuration and external controls enforced by the docker daemon. This leads to several considerations when using the global file system within Spin.
+Permissions set on the global file systems must be respected and enforced when
+files are accessed from within a container. This is accomplished through a
+combination of container configuration and external controls enforced by the
+docker daemon. This leads to several considerations when using the global file
+system within Spin.
 
 * The user ‘root’ in a container maps to user ‘nobody’ on the global file systems, which places significant restrictions on the data that can be accessed from a container in a default configuration.
 * Setting the container to run as a non-root account with the appropriate file system access is an effective way to address these permission constraints.
@@ -200,21 +269,25 @@ Permissions set on the global file systems must be respected and enforced when f
 
 #### Dockerfile Statements for setting a container group using useradd & groupadd
 
-This example illustrates the Dockerfile RUN statement for an image to run with the group ‘genome’ (gid 124).
+This example illustrates the Dockerfile RUN statement for an image to run with
+the group ‘genome’ (gid 124).
 
     # Add a genome group to facilitate access to global file system
     RUN groupadd -g 124 genome
 
 #### Dockerfile Statements for setting a container user and group
 
-This example illustrates the Dockerfile RUN statement for an image run as collaboration account ‘c_flintstones’’(uid 501) and group ‘genome’ (gid 124).
+This example illustrates the Dockerfile RUN statement for an image run as
+collaboration account ‘c_flintstones’’(uid 501) and group ‘genome’ (gid 124).
 
     # Add collab account and group to facilitate access to
     # global file system
     RUN groupadd -g 124 genome && \
       useradd -u 501 -g 124 -c 'Collaboration Account' c_flintstones
 
-The ampersands (&&) in this example minimize the layers created in the docker image. The cases would be configured to run as “root:genome” and “c_flintstones:genome”, respectively, during the initial stacks configuration.
+The ampersands (&&) in this example minimize the layers created in the docker
+image. The cases would be configured to run as “root:genome” and
+“c_flintstones:genome”, respectively, during the initial stacks configuration.
 
 ### Read-Only vs. Read-Write
 
@@ -232,7 +305,11 @@ The ampersands (&&) in this example minimize the layers created in the docker im
 
 ### Ports
 
-Services within a stack can communicate with each other on all network ports without mapping ports or modifying [firewall rules](#firewall-configuration). If a port is to be available outside of a stack, a mapping of a public Spin host port to the private container port must be created. Recommendations on port usage include:
+Services within a stack can communicate with each other on all network ports
+without mapping ports or modifying [firewall rules](#firewall-configuration).
+If a port is to be available outside of a stack, a mapping of a public Spin
+host port to the private container port must be created. Recommendations on
+port usage include:
 
 * All use of ports 80 and 443 must go through the [reverse proxy](#httphttps-reverse-proxy)
 * Whenever possible, use a port number > 1024 within the container. This allows the NET_BIND_SERVICE capability to be dropped.
@@ -243,7 +320,12 @@ Services within a stack can communicate with each other on all network ports wit
 
 ### HTTP/HTTPS reverse proxy
 
-All access to ports 80 and 443 is achieved via a reverse proxy running in Spin. This simplifies applications, as the SSL certificates and TLS configurations are centrally managed, and it also conserves IP address space.  All incoming HTTPS connections terminate at this proxy rather than at the endpoint service. As part of the initial stack configuration, ISG staff will configure the reverse proxy stack to direct the appropriate traffic to your web service.
+All access to ports 80 and 443 is achieved via a reverse proxy running in Spin.
+This simplifies applications, as the SSL certificates and TLS configurations
+are centrally managed, and it also conserves IP address space.  All incoming
+HTTPS connections terminate at this proxy rather than at the endpoint service.
+As part of the initial stack configuration, ISG staff will configure the
+reverse proxy stack to direct the appropriate traffic to your web service.
 
 ### Firewall configuration
 
@@ -251,7 +333,9 @@ The following TCP ports are publicly available from all source addresses:
 
     80, 443, 8080, and 8443, 60000 - 60050
 
-The following TCP ports are available only from within NERSC networks (128.55.0.0/16) as well as from LBL networks that are secure and authenticated, such as the employee wireless and LBL VPN.
+The following TCP ports are available only from within NERSC networks
+(128.55.0.0/16) as well as from LBL networks that are secure and authenticated,
+such as the employee wireless and LBL VPN.
 
     3128, 3306, 5432, 5672, 8008, 50000 - 50050
 
@@ -261,16 +345,25 @@ The following TCP ports are available only from within NERSC networks:
 
 ## External DNS
 
-Services that listen on port 80 or port 443 are accessed via a reverse proxy service. Typically a DNS CNAME record would be added to the appropriate domain (nersc.gov, jgi.doe.gov, etc.) pointing to the reverse proxy FQDN for the environment being used:
+Services that listen on port 80 or port 443 are accessed via a reverse proxy
+service. Typically a DNS CNAME record would be added to the appropriate domain
+(nersc.gov, jgi.doe.gov, etc.) pointing to the reverse proxy FQDN for the
+environment being used:
 
 * Production:  lb.reverse-proxy.prod-cattle.stable.spin.nersc.org
 * Development:  lb.reverse-proxy.dev-cattle.stable.spin.nersc.org
 
-Services running on other ports will have a dynamic DNS entry automatically created for them when an external port mappings is created in Spin. The DNS name will be of the form:
+Services running on other ports will have a dynamic DNS entry automatically
+created for them when an external port mappings is created in Spin. The DNS
+name will be of the form:
 
     <service name>.<stack name>.<environment>.stable.spin.nersc.org.
 
-For example, a database service in the stack named ‘mystack’ in the production environment would get the name db.mystack.prod-cattle.stable.spin.nersc.org. Similarly to web services, a CNAME record would be added to nersc.gov or jgi.doe.gov domains to point to to the dynamically created FQDN to provide a more convenient or memorable name for accessing the service.
+For example, a database service in the stack named ‘mystack’ in the production
+environment would get the name db.mystack.prod-cattle.stable.spin.nersc.org.
+Similarly to web services, a CNAME record would be added to nersc.gov or
+jgi.doe.gov domains to point to to the dynamically created FQDN to provide a
+more convenient or memorable name for accessing the service.
 
 ## Security
 
@@ -285,13 +378,27 @@ For example, a database service in the stack named ‘mystack’ in the producti
 
 ### Security Recomendations
 
-Docker containers are fairly secure by default. This security is achieved through the use of Linux kernel 'namespaces', isolated network stacks, Control Groups, and whitelisting the Linux kernel 'capabilities' to only those needed. Docker security is a big topic. For a good summary explaining the current security features of Docker, read [Docker security](https://docs.docker.com/engine/security/security/) in the Docker manual.
+Docker containers are fairly secure by default. This security is achieved
+through the use of Linux kernel 'namespaces', isolated network stacks, Control
+Groups, and whitelisting the Linux kernel 'capabilities' to only those needed.
+Docker security is a big topic. For a good summary explaining the current
+security features of Docker, read [Docker
+security](https://docs.docker.com/engine/security/security/) in the Docker
+manual.
 
-AppArmor and SELinux security policies on Ubuntu & CentOS will be enabled on Spin in the future.
+AppArmor and SELinux security policies on Ubuntu & CentOS will be enabled on
+Spin in the future.
 
 To enhance security of your containers, we recommend:
 
-* When possible, run services in the container as a non-root user. Many of the reasons that a process would need escalated privileges (direct access to hardware, writing to a particular directory, binding to a low numbered port) don’t apply in a or can be avoided in a containerized environment. For example, a service can bind to a high numbered port, and then let docker map the privileged port on the docker host to the unprivileged port on the container. Similarly, volume mounts to a persistent volume with the desired permissions can avoid some of the permission hurdles.
+* When possible, run services in the container as a non-root user. Many of the
+  reasons that a process would need escalated privileges (direct access to
+  hardware, writing to a particular directory, binding to a low numbered port)
+  don’t apply in a or can be avoided in a containerized environment. For
+  example, a service can bind to a high numbered port, and then let docker map
+  the privileged port on the docker host to the unprivileged port on the
+  container. Similarly, volume mounts to a persistent volume with the desired
+  permissions can avoid some of the permission hurdles.
 
 * Just as with a traditional server, if a container conducts a mix of
   privileged and unprivileged operations, it can implement [privilege
@@ -330,7 +437,13 @@ and Spin containers which uses the NERSC Global Filesystem:
 
 ## Secrets
 
-Rancher Secrets are a mechanism for storing encrypted copies of sensitive items such as database passwords and SSH keys that are needed by a container at runtime. Storing them as Rancher secrets obviates the need to store sensitive information as a file in your Docker development directory or as an environment variable (which is exposed in the docker-compose.yml file), and helps prevent the information from ending up in the image registry or in a source code revision control repository.
+Rancher Secrets are a mechanism for storing encrypted copies of sensitive items
+such as database passwords and SSH keys that are needed by a container at
+runtime. Storing them as Rancher secrets obviates the need to store sensitive
+information as a file in your Docker development directory or as an environment
+variable (which is exposed in the docker-compose.yml file), and helps prevent
+the information from ending up in the image registry or in a source code
+revision control repository.
 
 ### Properties of Secrets
 
@@ -343,7 +456,8 @@ If an application requires a specific path to the secret, a symbolic link can be
 
 ### Naming Convention for Secrets
 
-Following the Spin naming convention will help identify secrets related to your stack, and also aid in the overall stack lifecycle management.
+Following the Spin naming convention will help identify secrets related to your
+stack, and also aid in the overall stack lifecycle management.
 
 #### Single Service Secret Naming
 
@@ -351,17 +465,20 @@ Secrets used for a single service should be named:
 
     <service name>.<stack name>.<filename>
 
-Wherever possible, the filename should indicate how the secret is used. For example, a MySQL password within a stack named ‘My Portal’ would be:
+Wherever possible, the filename should indicate how the secret is used. For
+example, a MySQL password within a stack named ‘My Portal’ would be:
 
     db.myportal.mysql_password
 
 #### Multi-Service Secret Naming
 
-If the secret is used by a number of services within the stack, the service part of the name can be dropped. Leaving the secret name as:
+If the secret is used by a number of services within the stack, the service
+part of the name can be dropped. Leaving the secret name as:
 
     <stack name>.<filename>
 
-For example an SSH private key that is used for multiple components within a stack named ‘My Portal’ would be:
+For example an SSH private key that is used for multiple components within a
+stack named ‘My Portal’ would be:
 
     myportal.private_key
 
@@ -380,7 +497,13 @@ When adding a secret to a container in the ‘Secrets’ tab:
 
 ### User Interface
 
-A current limitation of the Spin environment is a lack of access to the Rancher environment for service developers. This is necessary for the time being, because the existing version of Rancher does not provide true multi-tenancy, and therefore would provide root-equivalent privileges to anyone with access to the interface to all containers running in the environment. Until Rancher provides an acceptable multi-tenant, an alternative interface is being provided to that enables the following operations on stacks that they own:
+A current limitation of the Spin environment is a lack of access to the Rancher
+environment for service developers. This is necessary for the time being,
+because the existing version of Rancher does not provide true multi-tenancy,
+and therefore would provide root-equivalent privileges to anyone with access to
+the interface to all containers running in the environment. Until Rancher
+provides an acceptable multi-tenant, an alternative interface is being provided
+to that enables the following operations on stacks that they own:
 
 * Stop services
 * Restart services
@@ -390,17 +513,24 @@ A current limitation of the Spin environment is a lack of access to the Rancher 
 
 ### CI / CD Pipeline
 
-A continuous integration / continuous deployment pipeline that would automate some of the steps involved in building images, pushing them to the registry and deploying them in Spin is in the early planning stages.
+A continuous integration / continuous deployment pipeline that would automate
+some of the steps involved in building images, pushing them to the registry and
+deploying them in Spin is in the early planning stages.
 
 ### External Service Access
 
-Streamlining and standardizing the interfaces to Slurm, HPSS and other NERSC resources is recognized as a commonly desired feature, and will be added to Spin in the future.
+Streamlining and standardizing the interfaces to Slurm, HPSS and other NERSC
+resources is recognized as a commonly desired feature, and will be added to
+Spin in the future.
 
 ## Rancher Idiosyncrasies
 
 ### Differences between Rancher and laptop Docker environment
 
-Although the ‘build, ship, run’ paradigm maps very well to developing a service on your laptop and shipping it to the Spin environment, there are some differences between the environments. These are typically fairly straightforward to address, but it’s helpful to be aware of their existence.
+Although the ‘build, ship, run’ paradigm maps very well to developing a service
+on your laptop and shipping it to the Spin environment, there are some
+differences between the environments. These are typically fairly
+straightforward to address, but it’s helpful to be aware of their existence.
 
 * There is no direct analogy for Rancher Secrets in a laptop Docker environment
 * It can be difficult to simulate the global filesystem and/or copy data when prototyping on a laptop
@@ -408,7 +538,11 @@ Although the ‘build, ship, run’ paradigm maps very well to developing a serv
 
 ### Pulling an updated image from registry on restart - (Stefan’s container crash example)
 
-When a container is restarted in Spin, it may or may not first pull the image from the registry. If developers aren’t mindful of how they update their images in the registry, they might inadvertently be in a situation where their image is deployed into production before they intended. Observed behavior in the Spin environment:
+When a container is restarted in Spin, it may or may not first pull the image
+from the registry. If developers aren’t mindful of how they update their images
+in the registry, they might inadvertently be in a situation where their image
+is deployed into production before they intended. Observed behavior in the Spin
+environment:
 
 * If a container is restarted (due to a failed health check or manual operation) and Rancher chooses to schedule it on the same Spin node, a fresh copy of the image is not necessarily pulled from the registry
 * If a container is restarted and Rancher chooses to schedule it on a different Spin node, a fresh copy of the image will be pulled from the repository
