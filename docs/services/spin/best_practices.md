@@ -367,14 +367,15 @@ more convenient or memorable name for accessing the service.
 
 ## Security
 
-### Security Audit
-  All applications sent to Spin are automatically audited at the API to ensure
-  that they follow our security requirements, which are outlined below.  If an
-  application breaks one of our security standards, the Rancher CLI will print
-  an error such as the following:
-
+!!!info "Security Audit"
+    All applications sent to Spin are automatically audited at the API to ensure
+    that they follow our security requirements, which are outlined below.  If an
+    application breaks one of our security standards, the Rancher CLI will print
+    an error such as the following:
+    ```
     $ rancher stop NotMyStack
     error NotMyStack: Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you don't own stack NotMyStack] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a5/services/NotMyStack]
+    ```
 
 ### Security Recomendations
 
