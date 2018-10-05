@@ -1,10 +1,10 @@
 # Spin Best Practices
 
 !!!info "This guide is under development"
-  Spin is in a Pilot phase for NERSC staff and users in early 2018. During this
-  development period, the content of thees page may be updated, and some docs
-  may be incomplete. We are working to convert all Spin documentation to this
-  new system.
+    Spin is in a Pilot phase for NERSC staff and users in early 2018. During this
+    development period, the content of thees page may be updated, and some docs
+    may be incomplete. We are working to convert all Spin documentation to this
+    new system.
 
 ## Spin Overview & Steps to Get Started
 
@@ -367,14 +367,15 @@ more convenient or memorable name for accessing the service.
 
 ## Security
 
-### Security Audit
-  All applications sent to Spin are automatically audited at the API to ensure
-  that they follow our security requirements, which are outlined below.  If an
-  application breaks one of our security standards, the Rancher CLI will print
-  an error such as the following:
-
+!!!info "Security Audit"
+    All applications sent to Spin are automatically audited at the API to ensure
+    that they follow our security requirements, which are outlined below.  If an
+    application breaks one of our security standards, the Rancher CLI will print
+    an error such as the following:
+    ```
     $ rancher stop NotMyStack
     error NotMyStack: Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you don't own stack NotMyStack] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a5/services/NotMyStack]
+    ```
 
 ### Security Recomendations
 
