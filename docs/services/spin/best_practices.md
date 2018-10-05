@@ -7,10 +7,6 @@
 
 For an overview of Spin and short tutorials to get started, please see the [Spin Getting Started Guide](getting_started)
 
-## Security Audit
-
-All applications sent to Spin are automatically audited at the API to ensure that they follow our security requirements, which are outlined in the Spin Implementation Guide. The Rancher CLI will print an error if an application breaks one of the security requirements.
-
 ## Using Images & Creating Containers
 
 ### Choosing the best image source
@@ -277,6 +273,18 @@ Services running on other ports will have a dynamic DNS entry automatically crea
 For example, a database service in the stack named ‘mystack’ in the production environment would get the name db.mystack.prod-cattle.stable.spin.nersc.org. Similarly to web services, a CNAME record would be added to nersc.gov or jgi.doe.gov domains to point to to the dynamically created FQDN to provide a more convenient or memorable name for accessing the service.
 
 ## Security
+
+### Security Audit
+  All applications sent to Spin are automatically audited at the API to ensure
+  that they follow our security requirements, which are outlined in the Spin
+  Implementation Guide. The Rancher CLI will print an error if an application
+  breaks one of the security requirements, which will look similar to the
+  following error:
+
+    $ rancher stop NotMyStack
+    error NotMyStack: Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you don't own stack NotMyStack] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a5/services/NotMyStack]
+
+### Security Recomendations
 
 Docker containers are fairly secure by default. This security is achieved through the use of Linux kernel 'namespaces', isolated network stacks, Control Groups, and whitelisting the Linux kernel 'capabilities' to only those needed. Docker security is a big topic. For a good summary explaining the current security features of Docker, read [Docker security](https://docs.docker.com/engine/security/security/) in the Docker manual.
 
