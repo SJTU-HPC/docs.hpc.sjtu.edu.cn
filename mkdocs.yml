@@ -21,11 +21,14 @@ nav:
     - Reservations: jobs/reservations.md
     - Policy: jobs/policy.md
   - Applications:
-    - Quantum ESPRESSO : applications/quantum-espresso/index.md
-    - NAMD : applications/namd/index.md
-    - VASP : applications/vasp/index.md
     - Abinit: applications/abinit/index.md
+    - BerkeleyGW: applications/berkeleygw/index.md
     - CP2K: applications/cp2k/index.md
+    - NAMD : applications/namd/index.md
+    - PARATEC: applications/paratec/index.md
+    - Quantum ESPRESSO : applications/quantum-espresso/index.md
+    - Wannier90: applications/wannier90/index.md
+    - VASP : applications/vasp/index.md
   - Analytics:
       - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
