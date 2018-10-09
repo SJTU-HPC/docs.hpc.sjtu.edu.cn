@@ -62,6 +62,7 @@ Fig. 2 shows an example job submission script to execute an MPMD hmmsearch with 
 
 An experiment was performed to demonstrate the possible configurations and performance consequences of using hmmsearch with split input files. The ten input file pairs used in the thread scaling experiment were reused, with the modification that sets of divided input sequence files were created to distribute their total content between 2, 4, 8, 16, and 32 files. The number of input sequence files determined the number of hmmsearch processes used and the number of threads allocated to each that would fully utilize 32 Haswell cores. Fig. 3 shows the speedup achieved by various ratios of threads to split files along with a theoretical ceiling based on perfect scaling of single thread performance to the full node. Amusingly, ignoring the hmmsearch thread implementation completely and only using the file system to parallelize achieves the best performance.
 
+```
 Slurm Batch Script
 #SBATCH -N 1
 #SBATCH -t 00:30:00
@@ -71,6 +72,7 @@ srun -n 16 -c 4 --cpu_bind=cores --multi-prog –k
 mpmd_16.conf
 0-15 ./hmmsearch --cpu 1 -o out%t.txt
 	pfam/input.%t.hmm sequence.fasta
+```
 
 Note that splitting input file contents by round robin assignment of an entire sequence or HMM to each shard is not the most equal distribution of work available. Sequence length and HMM size are among factors determining needed run time so a method which distributes shard content balancing amino acid residues or model positions would reduce load imbalance between processes. The load imbalance able to be reclaimed by implementing this strategy relative to the labor needed to devise, debug, and incorporate it into a workflow is poor. I have yet to encounter an end user employing this method and it will not be considered further.
 
