@@ -1,766 +1,203 @@
-# AMReX
+# HMMER3 
+
+## Summary
+
+HMMER3 is biological sequence search suite used in significant volume on systems hosted at the National Energy Research Scientific Computing Center. This heavy usage has revealed ways that HMMER3 underutilizes the resources available in an HPC environment such as the Manycore architecture Knights Landing processors available in the Cori supercomputer. After rigorous performance analysis it was determined that the thread architecture of HMMER3 is the most promising optimization target to increase throughput and efficiency. A refactoring effort introduced an OpenMP task based threading design, the ability to respond to imbalanced computation with work stealing, and input buffering to eliminate a large amount of redundant parsing. These efforts have been implemented and in production on Cori for over a year. In that time they have simplified the best practice for use of HMMER3 in workflows and conserved hundreds of thousands of CPU hours.
+
+## Introduction
+
+HMMER3 [1] is a bioinformatics application used to search a protein sequence database for contents which are statistically similar to a profile Hidden Markov Model (HMM) [2]. This application is heavily used on National Energy Research Scientific Computing Center (NERSC) systems by users from the Joint Genome Institute (JGI) for purposes such as DNA sequencing quality assurance, as a component in workflows that automatically annotate newly sequenced genomes, and novel research projects. JGI uses approximately 7 million CPU hours annually to run HMMER3 on NERSC systems.
+
+HMMER3 is heavily optimized for the personal computing hardware of ten years ago. Data movement is organized such that very low working set memory usage has been achieved at the cost of increased file access. The application is arranged as a pipeline of filters using SSE intrinsic vector instructions to implement dynamic programming (DP) with a complex striping pattern [3]. Threading support uses pthreads via a master to worker queue dispatch that distributes sequence data to individual threads for processing. An MPI implementation is also provided in the HMMER3 distribution that does not support threading and decomposes data with the same pattern and performance as the pthread implementation.
+
+A significant literature exists discussing the optimization of the HMMER lineage of applications. One common theme is a focus on porting low-level filter kernels to less standard platforms such as GPU accelerators [4, 5, 6], FPGA accelerators [7, 8, 9, 10], and the Cell processor architecture [11, 12]. Another pattern is adaptation of HMMER to better utilize more sophisticated HPC support systems such as better-organized network communication via MPI [13] and parallel file systems [14].
+
+In distinction, this work describes a case study modifying HMMER3 to improve performance at a production facility with established user base, workload characteristics, hardware availability, and operational support systems. Priorities extend beyond generic speed benchmarks to include efficient utilization of allocated resources, compatibility with specific hardware and systems, consideration for labor needed to implement changes, user demanded invariance with standard HMMER3 results, ease of adoption by user base, and simplicity of integration into existing workflows and pipelines.
+
+This project bolsters the list of example OpenMP tasking systems. Working, useful, performant, and visible (able to be found with a reasonable Google search) code using task directives is a rarity. Existing examples tend towards two types: Either a toy implementation of the Fibonacci sequence using nested tasks to perform the recursion, or walking through a linked data structure. The code implemented for this project demonstrates a useful and succinct example of OpenMP tasking achieving goals that are difficult in other threading patterns such as overlapping independent compute blocks with I/O and balancing load between units of work with divergent or unpredictable computational demands.
 
 ## Background
 
-AMReX is a publicly available software framework for building massively
-parallel block-structured AMR applications. It combines elements of both the
-BoxLib and Chombo AMR frameworks. Key features of AMReX include
-
-- Support for block-structured AMR with optional subcycling in time
-- Support for cell-centered, face-centered and node-centered data
-- Support for hyperbolic, parabolic, and elliptic solves on hierarchical grid
-  structure
-- Support for hybrid parallelism model with MPI and OpenMP
-- Basis of mature applications in combustion, astrophysics, cosmology, and
-  porous media
-- Demonstrated scaling to over 200,000 processors
-- Source code [freely available](https://amrex-codes.github.io/amrex/index.html)
-
-We have approached the problem of optimization for manycore architectures from
-several different perspectives. Listed below are a few such efforts.
-
-## Loop tiling with OpenMP
-
-In most AMReX codes, the majority of the computational expense lies in either
-"vertical" (point-wise) evaluations, e.g.,
-```fortran
-do k = lo(3), hi(3)
-  do j = lo(2), hi(2)
-    do i = lo(1), hi(1)
-      phi_new(i, j, k) = phi_old(i, j, k) + &
-                         dt * (flux_x(i, j, k) + flux_y(i, j, k) + flux_z(i, j, k))
-    end do
-  end do
-end do
-```
-
-or "horizontal" (stencil) evaluations:
-
-```fortran
-do k = lo(3), hi(3)
-  do j = lo(2), hi(2)
-    do i = lo(1), hi(1)
-      val(i, j, k) = (p_old(i-1, j, k) - p_old(i+1, j, k)) + &
-                     (p_old(i, j-1, k) - p_old(i, j+1, k)) + &
-                     (p_old(i, j, k-1) - p_old(i, j, k+1))
-    end do
-  end do
-end do
-```
-
-where `lo` and `hi` represent the lower and upper coordinates of the
-computational grid. To parallelize this calculation, AMReX divides the domain
-into smaller "Boxes" and distributes these Boxes across MPI processes. Each MPI
-process then iterates through each Box that it "owns," applying the same
-operator to each Box and exchanging ghost cells between Boxes as necessary.
-Within a Box, `lo` and `hi` represent the lower and upper coordinates of the
-Box, not the entire domain.
-
-Traditionally, iterating over distributed data sets contained in Boxes has been
-the task of flat MPI code. However, emerging HPC architectures require more
-explicit on-node parallelism, for example using threads via OpenMP, in order to
-use the machine resources effectively. There are several possible ways to
-express on-node parallelism in AMReX with OpenMP:
-
-- Thread over Boxes, with each entire Box being assigned to a thread. This is
-straightforward to implement and is noninvasive to the existing code base.
-However it is highly susceptible to load imbalance, e.g., if an MPI process
-owns 5 boxes but has 8 threads, 3 of those threads will be idle. This kind of
-imbalance occurs frequently in AMR simulations, so we did not pursue this
-option.
-
-- Thread within each Box. Rather than assign an entire Box to a thread, we
-stripe the data within each Box among different threads. This approach is less
-susceptible to load imbalance than option #1. However, it requires spawning and
-collapsing teams of threads each time an MPI process iterates over a new Box,
-which can lead to significant overhead. For example, updating the 3-D heat
-equation at a new time step might look like:
-
-```fortran
-!$omp parallel private (i, j, k)
-
-!$omp do collapse(2)
-do k = lo(3), hi(3)
-  do j = lo(2), hi(2)
-    do i = lo(1), hi(1)
-      f_x(i, j, k) = (p_old(i-1, j, k) - p_old(i, j, k)) * dx_inv
-    end do
-  end do
-end do
-
-!$omp do collapse(2)
-do k = lo(3), hi(3)
-  do j = lo(2), hi(2)
-    do i = lo(1), hi(1)
-      f_y(i, j, k) = (p_old(i, j-1, k) - p_old(i, j, k)) * dx_inv
-    end do
-  end do
-end do
-
-!$omp do collapse(2)
-do k = lo(3), hi(3)
-  do j = lo(2), hi(2)
-    do i = lo(1), hi(1)
-      f_z(i, j, k) = (p_old(i, j, k-1) - p_old(i, j, k)) * dx_inv
-    end do
-  end do
-end do
-
-!$omp end parallel
-```
-
-- Tile the iteration space over all Boxes owned by a process. Rather than a
-group of threads operating on each Box, divide each Box owned by a given MPI
-process into smaller tiles, and assign a complete tile to a single thread. For
-example, if an MPI process owns 2 Boxes, each of size 643, and if we use tiles
-which are of size 64x4x4, then each Box yields 256 tiles, and that process will
-operate on a pool of 256x2 = 512 tiles in total. If each MPI process can spawn
-16 threads, then each thread works on 32 tiles.
-
-Code featuring loop tiling in AMReX would look something like the following:
-
-```fortran
-!$omp parallel private(i,mfi,tilebox,tlo,thi,pp_old,pp_new,lo,hi)
-
-call mfiter_build(mfi, phi_old, tiling= .true., tilesize= tsize)
-
-do while(next_tile(mfi,i))
-
-   tilebox = get_tilebox(mfi)
-   tlo = lwb(tilebox)
-   thi = upb(tilebox)
-
-   pp_old => dataptr(phi_old,i)
-   pp_new => dataptr(phi_new,i)
-   lo = lwb(get_box(phi_old,i))
-   hi = upb(get_box(phi_old,i))
-
-   call advance_phi(pp_old(:,:,:,1), pp_new(:,:,:,1), &
-        ng_p, lo, hi, dx, dt, tlo, thi)
-
-end do
-!$omp end parallel
-
-
-subroutine advance_phi(phi_old, phi_new, ng_p, glo, ghi, dx, dt, tlo, thi)
-
-! variable declarations ...
-
-  do k = tlo(3), thi(3)
-    do j = tlo(2), thi(2)
-      do i = tlo(1), thi(1)
-        phi_new(i, j, k) = phi_old(i, j, k) + dt * (flux_x + flux_y + flux_z)
-      end do
-    end do
-  end do
-end subroutine do work
-```
-
-We tested outer-loop-level threading as well as tiling in AMReX codes and found
-the latter to be significantly faster, especially for large numbers of threads.
-As an example, we implemented the threading strategies discussed in options #2
-and #3 above in a simple 3-D heat equation solver with explicit time-stepping
-in AMReX. The domain was a 1283 grid spanned by a single Box (for flat MPI
-codes we would generally use smaller and more numerous Boxes, typically of size
-323). We then ran the heat solver for 1000 time steps using a single MPI task
-with 16 threads spanning one 16-core Haswell CPU on a dual-socket system node.
-
-Before analyzing the code with VTune, we executed both threaded codes 5 times
-consecutively and measured the wall time for each run. (OS noise and other
-"ambient" factors in a computational system may cause a single run of a
-threaded code may run abnormally quickly or slowly; a statistical sample of run
-times is therefore crucial for obtaining a reliable timing measurement.) The
-timings reported were as follows:
-
-| Iteration # | Outer-loop-level threading | Loop tiling |
-|:-----------:|:--------------------------:|:-----------:|
-|      1      |           3.76             |    0.58     |
-|      2      |           3.87             |    0.69     |
-|      3      |           3.86             |    0.70     |
-|      4      |           3.86             |    0.69     |
-|      5      |           3.84             |    0.68     |
-
-We see that in all 5 iterations, the tiled code ran about 5.6x faster than the
-outer-loop-level threaded code. Now we turn to VTune to find out exactly what
-lead to such an enormous speedup. We will focus first on the outer-loop-level
-threaded code, and next on the tiled code.
-
-### Outer-loop-level threading: General exploration
-
-We first turn to the "general exploration" analysis, which provides a
-high-level overview of the code's characteristics (open the image in a new
-window to view in full size):
-
-![No tiling: VTune General Exploration Summary][no-tiling-vtune-ge-summary]
-![no-tiling-vtune-ge-summary]: no-tiling-ge-summary.png "No tiling: VTune General Exploration Summary"
-
-We see that the code is almost entirely (93%) back-end bound. This is typical
-for HPC codes using compiled languages (as opposed to JIT codes). Within the
-"back end", we see further that 78% of the code instructions are memory bound,
-and only 15% core bound. This is typical of stencil-based codes. Since memory
-access seems to be the bottleneck in this code, we can run a "memory access"
-analysis within VTune to find more information about how exactly the code
-accesses data in memory.
-
-### Outer-loop-level threading: Memory access
-
-Below is shown the summary page from the memory access analysis in VTune:
-
-![No tiling: VTune Memory Access Summary][no-tiling-vtune-ma-summary]
-![no-tiling-vtune-ma-summary]: no-tiling-ge-summary.png "No tiling: VTune Memory Access Summary"
-
-We see first that the "elapsed time" according to this analysis is
-significantly higher than both the raw wall clock time we measured ourselves
-(see the above table) and the wall time according to the general exploration
-analysis. It is likely that VTune's detailed sampling and tracing interfere
-with its wall clock measurements. This is not a problem for us since we are
-much more interested in VTune's sampling and tracing data than in its wall
-clock measurements.
-
-The summary page shows that a large fraction of memory loads come all the way
-from DRAM, as opposed to cache. The latency to access DRAM is slow, so we want
-to minimize this as much as possible. In particular, the bottom-up view (see
-figure below) shows that in the `advance_3d` routine (which comprises the bulk
-of the code's run time), every micro-operation instruction stalls for an
-average of 144 CPU cycles while it waits for the memory controller to fetch
-data from DRAM. This highlights the fundamental flaw of outer-loop-level
-threading in our heat equation solver: it makes extremely poor use of local
-caches; only about 1/3 of the code is bound by latency to access L1 (private)
-or L3 (shared) cache, while most of the remainder is spent waiting for DRAM
-accesses.
-
-The reason that DRAM latency is the fundamental bottleneck of this code is
-because the 3-D heat stencil loads data from non-contiguous locations in
-memory, i.e., it reads elements `i` and `i-1`, as well as `j` and `j-1` and `k`
-and `k-1`. When we collapse the loop iteration space, each thread will load
-element `i` and several of its neighbors (e.g., `i-2`, `i-1`, `i+1`, `i+2`) in
-a single cache line, since the data are contiguous along the x-direction.
-However, the `j` and `j-1` and `k` and `k-1` elements will likely not be
-located in the same cache line as well (unless the total problem domain is
-extremely small). So every evaluation of elements `j-1` and `k-1` requires
-loading a new cache line from DRAM. This leads to extremely large DRAM
-bandwidth and, more importantly, the huge latency we see in the memory access
-analysis. We can see the huge bandwidth usage in the "bottom-up" view:
-
-![No tiling: VTune Memory Access Bottom-Up][no-tiling-vtune-ma-bottom-up]
-![no-tiling-vtune-ma-bottom-up]: no-tiling-ma-bottom-up.png "No tiling: VTune Memory Access Bottom-Up"
-
-The memory bandwidth throughout the code execution is about 56 GB/sec, which is
-nearly the limit for the entire socket. This is due to the frequent cache line
-loads to access non-contiguous data elements for the heat stencil evaluation,
-as discussed earlier.
-
-We now turn to the tiled code to explore how it solves these problems.
-
-### Tiling: General exploration
-
-Shown below is the summary page in the general exploration analysis of the
-tiled code:
-
-![With tiling: VTune General Exploration Summary][with-tiling-vtune-ge-summary]
-![with-tiling-vtune-ge-summary]: with-tiling-ge-summary.png "With tiling: VTune General Exploration Summary"
-
-As with the outer-loop-level threaded code, the tiled code is still primarily
-back-end bound, although this component is reduced from 93% to 76%.
-Interesting, within the "back end," whereas the previous code was almost
-entirely memory bound, the tiled code is split between being core-bound and
-memory-bound. This indicates that we have relieved much of the pressure that
-the previous code placed on the memory controller, presumably by requesting
-fewer accesses to DRAM. We turn to the memory access analysis for more details.
-
-### Tiling: Memory access
-
-The summary page of the memory access analysis of the tiled code is as follows:
-
-![With tiling: VTune Memory Access Summary][with-tiling-vtune-ma-summary]
-![with-tiling-vtune-ma-summary]: with-tiling-ma-summary.png "With tiling: VTune Memory Access Summary"
-
-From this analysis we see that the the L1 cache usage is roughly the same as
-with the previous code. The L3 cache behavior is somewhat improved. However,
-the crucial difference is that the number of DRAM accesses has been reduced by
-a factor of almost 4. This in turn has reduced the average latency per
-instruction in the `advance_3d` routine from 144 cycles in the previous example
-to just 29 in the tiled code.
-
-The bottom-up view sheds additional light on the memory access patterns of the
-tiled code:
-
-![With tiling: VTune Memory Access Bottom-Up][with-tiling-vtune-ma-bottom-up]
-![with-tiling-vtune-ma-bottom-up]: with-tiling-ma-bottom-up.png "With tiling: VTune Memory Access Bottom-Up"
-
-As expected, the DRAM bandwidth is much lower, averaging around 10 GB/sec. This
-is because far fewer cache lines need to be loaded to evaluate each stencil in
-the tiled iteration space.
-
-We see now that the overwhelming benefit of loop tiling over outer-loop-level
-threading is the reduction in memory bandwidth and latency by reducing accesses
-to DRAM. The reason for this reduction is that each tile of the iteration space
-contains nearby neighbors in all 3 directions from point `(i, j, k)`. So each
-load of elements `j-1` and `k-1` is likely now to come from a layer of cache,
-rather than all the way from DRAM.
-
-We emphasize that the tiling technique is most useful for horizontal (stencil)
-calculations, in that it gathers non-contiguous data elements into cache. For
-vertical (point-wise) calculations which depend only on point `(i, j, k)` and
-not on any of its neighbors, tiling has little effect on performance. For these
-types of calculations, vectorization is a much more fruitful endeavor.
-
-## Vectorization of compressible gasdynamics algorithms
-
-AMReX-powered codes spend the majority of their execution time applying a
-series of operators to a hierarchy of structured Cartesian grids. Such
-operators generally take one of two forms: "horizontal" operations on several
-neighboring grid points to produce a result at a single point (e.g., stencils);
-and "vertical" or "point-wise" operators, which require only data at a single
-grid point in order to produce a new result at that point (e.g., reaction
-networks, equations of state, etc.). As we have seen above, horizontal
-operators benefit significantly from loop tiling, because it gathers
-neighboring points of grids (which are non-contiguous in memory) into cache,
-requiring fewer DRAM accesses during each grid point update. However, vertical
-operators see less benefit from loop tiling, because they do not require access
-to data at neighboring points.
-
-The performance of point-wise operators is of critical importance in
-compressible gasdynamics codes such as
-[Nyx](https://amrex-astro.github.io/Nyx/) and
-[Castro](https://github.com/AMReX-Astro/Castro). The reason for this is that
-these two codes use computationally expensive advection schemes (based on the
-piecewise-parabolic method, or "PPM"), and Nyx also uses an exact Riemann
-solver, which far more expensive than the approximate Riemann solvers used in
-many other gasdynamics codes. In fact, the PPM and Riemann solver are the two
-most expensive kernels in the entire Nyx code; we can see this in VTune using
-its "general exploration" feature, shown below:
-
-![Nyx without vectorization: VTune General Exploration Bottom-Up][nyx-novec-ge-bottom-up]
-![nyx-novec-ge-bottom-up]: Nyx-VTune-general-exploration-bottom-up-novec.png "Nyx without vectorization: VTune General Exploration Bottom-Up"
-
-We see in the "bottom-up" view that the routines `analriem` and `riemannus`
-(both components of the analytic Riemann solver), and `ppm_type1` are the
-hottest kernels in the code, and together comprise 1/3 of the total
-instructions retired, as well as more than 1/3 of the entire code run time. All
-of these routines contain point-wise operations on each `(x, y, z)` grid point
-on the problem domain. We see that the routine `analriem` is heavily L1
-cache-bound, makes frequent use of divider instructions, and also rarely
-exploits more than 1 of the 8 available execution ports on the Haswell
-processor. (A description of the different execution ports is provided in
-Chapter 2 of the [Intel 64 and IA-32 Architectures Optimization Reference
-Manual](https://www-ssl.intel.com/content/dam/www/public/us/en/documents/manuals/64-ia-32-architectures-optimization-manual.pdf).
-See also [this Intel page](https://software.intel.com/en-us/node/544476) for a
-description of the functions mapped to each port.) All of these characteristics
-indicate that the Riemann solver is making poor use of vector instructions, and
-also that its performance would increase significantly via loop vectorization.
-
-Now that we have confirmed that a lack of vectorization is the cause of this
-code bottleneck, we can turn to the code itself to see what options are
-available to remedy this problem. The pseudo-code for the Riemann solver in Nyx
-takes the following form:
-
-```fortran
-subroutine riemannus()
-
-  ! declare lots of scalar temporary variables to save temporary values for
-  ! each complete iteration of the i loop
-
-  do k = klo, khi
-    do j = jlo, jhi
-      do i = ilo, ihi
-
-        ! calculate left and right gas velocities
-
-        ! lots of sanity checks for gas pressure and internal energy
-
-        ! lots of if/then/else's to make sure we use sane values
-
-        call analriem(gas_velocities, misc_gas_data) ! returns new pressure and velocity from analytic Riemann solver
-
-        ! lots of post-processing if/then/else's
-
-        ! calculate shock velocity
-
-        ! calculate fluxes
-
-      end do
-    end do
-  end do
-
-end subroutine riemannus
-```
-
-This loop is hundreds of line long, and contains a great deal of branching due
-to if/then/else's which are used to ensure the Riemann solver uses physically
-consistent values. The `analriem` routine is also complicated, although it is
-smaller than `riemannus`:
-
-```fortran
-subroutine analriem(gas_velocities, misc_gas_data)
-
-  ! set up lots of auxiliary variables derived from gas velocity, pressure, etc.
-
-  do i = 1, 3,
-    ! iterate on the new values of pressure and density 3 times to ensure they've converged
-  end do
-
-end subroutine analriem
-```
-
-As a result of this code complexity, compilers are unable to vectorize any
-layer of the outer `(i, j, k)` loop in `riemannus`, even though the Riemann
-solver does not require values from any grid points other than `(i, j, k)`
-itself. The entire Riemann solver, then, is executed serially, leading to a
-severe bottleneck in the overall execution of the Nyx code. Additionally, even
-if a compiler was smart enough to generate vectorized versions of this loop,
-the heavy use of if/then/else inside the loop would inhibit performance due to
-a high degree of branch mispredicts. Furthermore, many compilers are extremely
-cautious or unwilling entirely to vectorize function calls inside loops, such
-as the call to `analriem` inside the loop in `riemannus`.
-
-One way to vectorize the outer loop of the Riemann solver is to use the `omp
-simd` directive [introduced in OpenMP
-4.0](https://software.intel.com/en-us/articles/enabling-simd-in-program-using-openmp40).
-However, this approach generates vector instructions only if we compile the
-code with OpenMP support; if instead we use pure MPI or another framework to
-express intra-node parallelism, the compiler ignores the `omp` directives and
-the generated instructions will remain serial. A more portable solution is to
-write the loops in such a way that compilers' static analysis can easily detect
-that the loops have no dependencies and are vectorizable. In the case of this
-Riemann solver, we can combine the introduction of some temporary arrays with
-loop fissioning techniques to generate a series of much simpler loops. We
-caution that, although we have had great success with these techniques, they
-can result is more obfuscated code which, although easy for a compiler to
-analyze, may be more difficult for a (human) developer to interpret.
-
-The pseudo-code for the vectorized version of the Riemann solver looks like the
-following:
-
-```fortran
-subroutine riemannus()
-
-  ! replace scalar temporary variables which are overwritten after each
-  ! iteration of the i loop with arrays which save temporary values for all
-  ! values of (i, j, k)
-
-  do k = klo, khi
-    do j = jlo, jhi
-      do i = ilo, ihi
-
-        ! calculate left and right gas velocities
-
-      end do
-    end do
-  end do
-
-  do k = klo, khi
-    do j = jlo, jhi
-      do i = ilo, ihi
-
-        ! lots of sanity checks for gas pressure and internal energy
-
-        ! lots of if/then/else's to make sure we use sane values
-      end do
-    end do
-  end do
-
-  call analriem(gas_velocities, misc_gas_data) ! returns new pressure and velocity from analytic Riemann solver
-
-  do k = klo, khi
-    do j = jlo, jhi
-      do i = ilo, ihi
-
-        ! lots of post-processing if/then/else's
-
-      end do
-    end do
-  end do
-
-  do k = klo, khi
-    do j = jlo, jhi
-      do i = ilo, ihi
-
-        ! calculate shock velocity
-
-        ! calculate fluxes
-
-      end do
-    end do
-  end do
-
-end subroutine riemannus
-```
-
-We have replaced the scalar temporary variables in `riemannus` with arrays of
-temporaries which endure throughout the multiple `(i, j, k)` loops in
-`riemannus`. This increases the memory footprint of the algorithm, but also
-yields shorter loops which are easier for compilers to vectorize. We note that,
-if the compiler generates purely scalar instructions for these refactored
-loops, the overall execution time will be the same as the original loop,
-although the memory footprint will still be larger. However, since we have had
-success with several different compilers vectorizing these loops, the
-performance of `riemannus` has increased significantly. We note a few features
-of these new, shorter loops:
-
-Some loops still do not easily vectorize, or if they do, their vector
-performance is not much faster than the original scalar code. These loops are
-chiefly the ones which contain all the if/else logic. Happily, these are not
-particularly expensive loops, and so it does not hurt performance a great deal
-if they remain scalar. The loop which we do want to vectorize is `analriem`,
-which is no longer called inside an `(i,j,k)` loop, but rather has absorbed the
-loop inside itself:
-
-```fortran
-subroutine analriem(gas_velocities, misc_gas_data)
-
-  do k = klo, khi
-    do j = jlo, jhi
-      do i = ilo, ihi
-
-        ! set up lots of auxiliary variables derived from gas velocity, pressure, etc.
-
-        do ii = 1, 3,
-          ! iterate on the new values of pressure and density 3 times to ensure they've converged
-        end do
-
-      end do
-    end do
-  end do
-
-end subroutine analriem
-```
-
-In this form, compilers are much more willing to vectorize the analytic Riemann
-solver (and unroll the small innermost loop as well), since it is no longer
-called inside an outer `(i, j, k)` loop.
-
-We applied similar loop fissioning techniques to the PPM advection algorithm.
-The original pseudo-code had the following form:
-
-```fortran
-subroutine ppm_type1()
-
-  ! x-direction
-
-  do k = klo, khi
-    do j = jlo, jhi
-      do i = ilo, ihi
-
-        ! lots of if/else to calculate temporary variables
-
-        ! use temporary value to calculate characteristic wave speeds
-
-      end do
-    end do
-  end do
-
-  ! similar triply-nested loops for y- and z-directions
-
-end subroutine ppm_type1
-```
-
-After replacing several temporary scalar variables with temporary arrays, we
-were able to fission these loops as follows:
-
-```fortran
-subroutine ppm_type1()
-
-  ! x-direction
-
-  do k = klo, khi
-    do j = jlo, jhi
-      do i = ilo, ihi
-
-        ! lots of if/else to calculate temporary variables
-
-      end do
-    end do
-  end do
-
-  do k = klo, khi
-    do j = jlo, jhi
-      do i = ilo, ihi
-
-        ! use temporary value to calculate characteristic wave speeds
-      end do
-    end do
-  end do
-
-  ! similar triply-nested loops for y- and z-directions
-
-end subroutine ppm_type1
-```
-
-The first of these new, shorter loops absorbs all of the myriad boolean logic
-encountered in the PPM algorithm, and although several compilers do vectorize
-it, its performance suffers from masking and branch mispredicts. The second
-short loop, however, has no logic, and it generates highly vectorizable code.
-
-The results of these loop fissioning techniques is a significant increase in
-performance of the entire code. We can see the effects in both Intel VTune and
-in Intel Advisor. Starting with VTune, we see that the memory-bound portions of
-the code (and especially the L1 cache-bound portions) have been reduced by
-almost 10%. In addition, the code has become almost 10% more core-bound, which
-indicates that these changes have moved the Nyx code higher toward the roofline
-performance of the Haswell architecture on Cori Phase 1.
-
-Turning to the "bottom-up" view in VTune, we see that, whereas the original
-Riemann solver was 62% L1 cache-bound, the new solver is only 22% bound. Also,
-the number of cycles with multiple ports used has increased significantly in
-the vector code, indicating that the vector instructions are making more
-efficient use of all of the execution ports available on Haswell.
-
-![Nyx with vectorization: VTune General Exploration Bottom-Up][nyx-vec-ge-bottom-up]
-![nyx-vec-ge-bottom-up]: Nyx-VTune-general-exploration-bottom-up-vec.png "Nyx with vectorization: VTune General Exploration Bottom-Up"
-
-Intel Advisor shows similar results to the VTune data. The vector efficiency of
-many of the newly fissioned loops in the PPM and Riemann solver routines is
-nearly optimal, although a few do suffer (not surprisingly, the ones which
-absorbed all of the complex boolean logic).
-
-Because the Nyx and Castro codes use nearly identical advection schemes and
-Riemann solvers, porting these changes to Castro will be straightforward, and
-should yield a similar performance boost. We anticipate that the performance of
-the vectorized version of this code will increase even further on Knights
-Landing since it has even wider vector units than Haswell.
-
-## Vectorization of ODE integration in each cell
-
-When simulating problems with radiation in Nyx, the most expensive kernel in
-the code is the one which integrates an ordinary differential equation (ODE) in
-each cell, which computes the effects of the radiation over the course of the
-time step being taken. This ODE is sensitive to the state of the cell -
-density, temperature, etc. - and can exhibit sharp, nearly discontinuous
-behavior when crossing certain physical thresholds. Consequently, one must
-integrate the ODE with an explicit method using many narrow time steps to
-resolve the sudden changes, or with an implicit method, which can take larger
-time steps. Nyx uses the latter approach, specifically using the
-[CVODE](https://computation.llnl.gov/projects/sundials/cvode) solver from the
-[SUNDIALS](https://computation.llnl.gov/projects/sundials) software suite.
-
-This integration is expensive to compute because it requires several
-evaluations of the right-hand side (RHS) of the ODE; each evaluation of the RHS
-requires solving a non-linear equation via Newton-Raphson; and each
-Newton-Raphson iteration requires evaluating multiple transcendental functions,
-which are highly latency-bound operations. Each of these ODE integrations is
-done per cell, and in its original form in Nyx, this was an entirely scalar
-evaluation, leading to poor performance, especially compared with older Xeon
-processors which exhibit shorter latency for these types of function
-evaluations.
-
-To improve the performance of this kernel, we rewrote this integration step
-such that CVODE treated multiple cells as part of a single system of ODEs.
-Typically implicit solvers such as CVODE require computing a Jacobian matrix of
-the ODE system during the integration; however, because these cells are in this
-case independent, the Jacobian matrix is diagonal. This allows us to use a
-diagonal solver for the Jacobian matrix, resulting in far fewer RHS evaluations
-than would be required if the Jacobian matrix was full. Finally, by grouping
-cells together as a single system, we rewrote the RHS evaluation as a SIMD
-function, computing the RHS for all cells in the system simultaneously.
-
-SIMD evaluation of multiple Newton-Raphsons is challenging due to the differing
-number of iterations which are required to converge in the RHS evaluation in
-each cell. To address this, we require that, within a group of cells, the
-Newton-Raphson iterations for their RHSs continues until all cells achieve an
-error which is within the specified tolerance. This generally results in a few
-cells within the group iterating more than the minimum number of times required
-for convergence, which they wait for the slowest-converging cell to converge.
-However, while they may perform some unnecessary work, the overall speedup due
-to SIMD evaluation of the transcendental functions more than compensates for
-the extra work, and the result is significantly faster code, on both Xeon and
-Xeon Phi.
-
-## AMReX code performance on Intel Xeon Phi
-
-In the figure below is a high-level summary of the performance improvement of
-vectorization and tiling on Nyx, a hybrid compressible gasdynamics/N-body code
-for cosmological simulations, which is based on the AMReX framework. The code
-was run on a pre-production version of the Intel Xeon Phi CPU 7210 ("Knights
-Landing"), which has 64 cores running at 1.30 GHz. The node was configured in
-"quadrant" mode (a single NUMA domain for the entire socket) and with the
-high-bandwidth memory in "cache" mode. The problem was a 128^3 domain spanned
-by a single 128^3 Box. We used a single MPI process and strong scaled from 1 to
-64 OpenMP threads, using a single hardware thread per core (our codes see
-relatively little benefit from using multiple threads per core on Xeon Phi). We
-see that when we use all 64 cores, Nyx runs nearly an order of magnitude faster
-now than it did prior to the start of the NESAP program.
-
-![Nyx performance before and after NESAP][nyx-before-after]
-![nyx-before-after]: ResizedImage600370-Nyx-LyA-OpenMP-strong-scaling-before-vs-after-NESAP.png "Nyx performance before and after NESAP"
-
-## Tuning geometric multigrid solvers
-
-One of the major challenges in applied mathematics for HPC is the [scalability
-of linear
-solvers](https://crd.lbl.gov/departments/applied-mathematics/scalable-solvers-group/).
-This challenge affects many AMReX codes, since they encounter a variety of
-elliptic problems which must be solved at each time step. AMReX itself provides
-two elliptic solvers (one in C++, the other in Fortran), both of which use
-geometric multigrid methods.
-
-In order to evaluate the performance of various algorithmic choices made in the
-two AMReX multigrid solvers, we recently ported the emergent geometric
-multigrid benchmark code [HPGMG](https://hpgmg.org/) to AMReX. HPGMG provides
-compile-time parameters for choosing many different algorithms for the
-different steps of the multigrid method, including
-
-- cycle types (pure F-cycles, pure V-cycles, or one F-cycle followed by V-cycles)
-- smoothers (Gauss-Seidel red-black, Chebyshev, Jacobi, etc.)
-- successive over-relaxation (SOR) parameters
-- Helmholtz/Poisson operator discretizations (7-point and 27-point cell-centered; 2nd-order and 4th-order finite-volume; constant- or variable-coefficient)
-- prolongation operators (piecewise-constant, piecewise-linear, piecewise-parabolic, 2nd-order and 4th-order finite-volume)
-- bottom solvers (conjugate-gradient, BiCGSTAB, etc.)
-- box agglomeration strategies during the restriction phase
-
-By comparing these different algorithms with those in the AMReX multigrid
-solvers, we are able to see which are the most performant for the various types
-of elliptic problems encountered in AMReX codes. The results of this study are
-forthcoming.
-
-## In situ and in-transit data analysis
-
-Although the majority of application readiness efforts for manycore
-architectures are focused on floating-point performance, node-level
-parallelism, and tireless pursuit of the
-[roofline](https://crd.lbl.gov/departments/computer-science/PAR/research/roofline/),
-data-centric challenges in HPC are emerging as well. In particular, simulations
-with AMReX codes can generate terabytes to petabytes of data in a single run,
-rendering parameter studies unfeasible. One may address this problem in several
-ways:
-
-1. Assume that the generation of huge data sets is unavoidable. The problem
-then becomes one first of storage, and second of making sense of the data after
-the simulation is complete. This is the charge of [data
-analytics](https://www.nersc.gov/users/data-analytics/).
-
-2. Preempt the generation of huge data sets by performing the data analysis
-(and hopefully reduction) while the simulation is running.
-
-We have focused on the 2nd approach. This option is sensible if one knows
-beforehand which features of the simulation data set are "interesting." Such a
-luxury is not always the case; exploratory calculations are a critical
-component of simulations, and in those cases this option is not useful.
-However, many data stewardship problems arise during parameter studies, where
-the same simulation is run with varying sets of parameters.
-
-This type of on-the-fly data post-processing can be implemented in two
-different ways:
-
-1. In situ: All compute processes pause the simulation and execute
-post-processing tasks on the data that they own.
-
-2. In-transit: A separate partition of processes is tasked purely with
-performing post-processing, while the remaining processes continue with the
-simulation. This is a heterogeneous workflow and is therefore more complicated
-to implement, as well as more complicated optimize.
-
-We recently implemented both of these data post-processing techniques in Nyx, a
-compressible gasdynamics/N-body code for cosmology based on the AMReX
-framework. Specifically, we focused on two sets of commonly used
-post-processing algorithms:
-
-1. Finding dark matter "halos" by calculating topological merge trees based on
-level sets of the density field.
-
-2. Calculating probability distribution functions (PDFs) and power spectra of
-various state variables.
-
-The results of this work are
-[published](https://doi.org/10.1186/s40668-016-0017-2) in the open-access
-journal Computational Astrophysics and Cosmology.
+### The HMMER3 Algorithm
+
+HMMER3 uses DP to solve a sequence alignment problem in similar manner to the Smith-Waterman algorithm. Profile HMMs are constructed to describe noteworthy protein sequence features, and candidate sequences are searched against these models up to the scale of millions of sequences and tens of thousands of HMMs.
+
+The HMMER3 core pipeline is composed of a series of filters that discard non-matching searches quickly and cheaply. This behavior minimizes time spent in the expensive full precision DP table calculations. Initially, each sequence is processed with the Single Segment Viterbi (SSV) filter, which only considers high scoring diagonals in the DP table at 8-bit precision; a similar Multiple Segment Viterbi (MSV) filter allowing mismatches is sometimes included when SSV scores are near the threshold. If that SSV/MSV score exceeds a statistical boundary then the sequence will be passed to the more complex Viterbi filter. The Viterbi filter considers a wider range of possible sequence perturbations such as insertions and deletions, and uses 16-bit precision. A sequence passing the Viterbi filter is sent to the Forward-Backward algorithm. This final step builds and traverses the full DP table in 32-bit precision and sums score over multiple alignment paths to generate the final output.
+
+The layer of abstraction which separates the HMMER3 core pipeline from it’s top-level drivers is very well designed and facilitates a wide flexibility of parallelization. A single pipeline call requires five data structures: a protein sequence which will not be modified and can be shared with other pipelines, a HMM which can also be shared, read-only and sharable storage of background residue probabilities, a private pipeline structure which stores reusable working set memory, and a top-hits object which gathers search results for a single HMM and must only be accessed by one pipeline at a time. A parallel driver for a HMMER3 tool need only concern itself with accepting command line parameters, performing I/O, supplying these five data structures to core pipeline calls with appropriate synchronization, and organizing pipeline calls to guide search coverage of the entire input space.
+
+### The Cori supercomputer
+
+Cori is the primary production machine operated by NERSC; it is ranked as the #8 fastest supercomputer worldwide as of March 2018.  Cori is a Cray XC40 machine containing 2,388 32-core Xeon E5-2698 (Haswell) nodes with 128GB RAM and 9,688 68-core Xeon Phi 7250 (Knights Landing or KNL) nodes with 96GB RAM. Cori uses a Cray Aries interconnect with dragonfly topology, a Cray Sonexion 2000 Lustre file system, and includes 288 DataWarp nodes that mount high speed and high capacity SSD storage inside the Aries network. A Slurm workload manager controls resource allocation and job scheduling on Cori.
+
+The unit of economic account on Cori is an allocation hour, corresponding to the use of one compute node for one hour scaled by factors including total job size, relative performance of node types and platforms, or a prorate by cores when a job is run using the shared queue. NERSC services support over 6,000 users leading to wide fluctuations in utilization and availability of system resources. The wait times and throughput of the various job queues are the main expression of this demand variation. A user not limited to small shared jobs but also able to effectively run hmmsearch on the full 32 or 68 cores of a node can more flexibly request a job submission that minimizes time until completion or obtains the most science possible from each precious allocation hour.
+
+### Usage of HMMER3 at NERSC
+
+HMMER3 includes a number of applications related to the creation, manipulation, and searching of profile HMMs. High volume use of HMMER3 at NERSC is exclusively in the form of hmmsearch, which searches all pairs of model against protein via an outer loop over HMMs and an inner loop over sequences. For this reason, the work described here focuses only on analysis and optimization of hmmsearch. Use of HMMER3 on NERSC systems most resembles a High Throughput Computing model: The pairwise searching of a very large number of sequences against a large number of HMMs in hmmsearch is trivial to decompose with effectively no interdependencies. The active memory needed by the core pipeline for a single pair search is minuscule1 relative to the RAM available on each node, even when permitting hundreds of threads.
+
+The Integrated Microbial Genomes and Metagenomes database (IMG) [15] hosted by JGI is a common source of protein sequence data for HMMER3 usage at NERSC. At the time of writing, the IMG database contains 45,865,548,268 candidate protein sequences extracted from metagenome data sets. A full hmmsearch of IMG against the Pfam HMM database [16] using a naïve HMMER3 configuration would require more than 600,000 Haswell node hours to complete.
+
+The needs, demands, and behaviors of NERSC users, and available systems, preclude the use of existing research on the optimization of HMMER3. There is no user demand at NERSC for any MPI implementation of hmmsearch; waiting a few hours for one or more single node jobs with better throughput is chosen in lieu of the user perceived mental overhead of dealing with MPI. This rules out the use of optimization projects such as MPI-HMMER [14] that target parallel file systems via an MPI layer. It further hinders MPI-HMMER that it is a port of the less powerful HMMER2 algorithm and it’s source and documentation website is dead. NERSC possesses no production scale GPU or FPGA accelerated nodes so those categories of existing research are also not applicable.
+
+Performance of Manycore architecture KNL processors depends dominantly on the need for very efficient thread implementations. This is a gap in HMMER3 optimization literature as it currently stands; a highly optimized thread implementation would be most appropriate for NERSC users and systems but has not been a development of preceding papers. The most direct comparison available to this project, and what the users originally used, is the baseline parallel code provided with the HMMER3.1b2 release.
+
+## Initial Performance Evaluation
+
+### Thread Scaling
+
+A first experiment was conducted to measure thread scaling of baseline HMMER3.1b2 hmmsearch.  One hundred HMMs were sampled from the Pfam 31.0 database and 100,000 sequences from the UniProt/Swiss-Prot [17] database to create an input file pair; ten pairs in total were created. Each input pair was passed to hmmsearch for execution on a Haswell node of Cori. Additional runs used the same input while progressively increasing the number of threads from 1 to 16. The strong scaling speedups determined by this experiment are presented in Fig. 1. Average wall time of a one-thread job was used to scale the speedup of each replicate; these single thread times ranged from 35.7 to 126.1 seconds with the ten replicate average being 69.4 seconds.
+
+Results show naïve use of hmmsearch obtains performance benefit only from the first four to five threads and any additional have minimal positive impact. Though not shown, this trend continues with consistently flat speedup and even degradation when utilizing more than 16 threads on a Haswell node. The same scaling pattern appears when running on a KNL node but with significantly longer wall times due to lack of L3 cache and the core-per-core weakness of KNL relative to Haswell.
+
+It is well established in the literature that the length of sequences and HMMs given to hmmsearch affects performance and scaling [1, 5, 6, 7, 12]. For all experiments conducted in this work a large number of sampled HMMs (100 or more) and sequences (100,000 or more) are used for experiments, along with replications of unique samples (usually 10); these large samplings are intended to reasonably emulate the distribution of input sequence and model lengths as they would occur during productive use.
+
+### Inconvenience as Best Practice
+
+Given the poor performance of only using threads to scale HMMER3, many users have adapted a mitigation strategy that reclaims modest performance at the expense of an obnoxious but endurable amount of added complexity. This method uses the file system as an additional layer of parallel decomposition: split input files into shards, run multiple hmmsearch processes simultaneously, and then join the outputs. This idea is similar to methods devised in earlier works, though implemented purely with file manipulation instead of MPI, parallel file system, or source code modification.
+
+Using the file system to parallelize hmmsearch is not trivial to implement on Cori. Slurm support for concurrent background execution of multiple processes on a single reserved compute node is currently not correct, so a workaround must be used which employs Multiple Program Multiple Data (MPMD) mode. Designed to connect multiple, unique, and concurrent programs to the same MPI communicator, MPMD allows the assignment of multiple process executions with unique command line parameters to disjoint sets of cores on a node. In this case the user simply ignores the MPI support.
+
+Fig. 2 shows an example job submission script to execute an MPMD hmmsearch with multiple shards of an input file. A number of details in this configuration are notable. The srun flags –n and –c determine the total number of processes and the number of cores allocated to each, but notice their product is 64 and not the expected 32. This is because Haswell processors possess Hyper-Threading (HT) that, for resource allocation purposes, is treated as two logical cores per single physical core. Those two logical cores compete for shared resources to the extreme degree that using HT results in only a 5-10% performance gain with most applications; for the remainder of this writing HT will be avoided as not worth the trouble. It’s unlikely the file split will perfectly balance load so the –k flag is used to disable the default MPMD behavior of ending a job when any one of its processes first exits. Note the ability to use the %t symbol in an MPMD configuration script to access the unique index of each task for use in parameters. Finally, outside of the scripting, there is an additional complexity for any pipeline or workflow using sharded input file hmmsearch, as it must assume the responsibility to divide inputs, store intermediate files, and merge output files.
+
+An experiment was performed to demonstrate the possible configurations and performance consequences of using hmmsearch with split input files. The ten input file pairs used in the thread scaling experiment were reused, with the modification that sets of divided input sequence files were created to distribute their total content between 2, 4, 8, 16, and 32 files. The number of input sequence files determined the number of hmmsearch processes used and the number of threads allocated to each that would fully utilize 32 Haswell cores. Fig. 3 shows the speedup achieved by various ratios of threads to split files along with a theoretical ceiling based on perfect scaling of single thread performance to the full node. Amusingly, ignoring the hmmsearch thread implementation completely and only using the file system to parallelize achieves the best performance.
+
+Slurm Batch Script
+#SBATCH -N 1
+#SBATCH -t 00:30:00
+#SBATCH -C haswell
+srun -n 16 -c 4 --cpu_bind=cores --multi-prog –k 
+	mpmd_16.conf
+mpmd_16.conf
+0-15 ./hmmsearch --cpu 1 -o out%t.txt
+	pfam/input.%t.hmm sequence.fasta
+
+Note that splitting input file contents by round robin assignment of an entire sequence or HMM to each shard is not the most equal distribution of work available. Sequence length and HMM size are among factors determining needed run time so a method which distributes shard content balancing amino acid residues or model positions would reduce load imbalance between processes. The load imbalance able to be reclaimed by implementing this strategy relative to the labor needed to devise, debug, and incorporate it into a workflow is poor. I have yet to encounter an end user employing this method and it will not be considered further.
+
+### Performance Analysis
+
+It has been accepted among HMMER experts that application performance in the parallel context is I/O bound. This claim was tested on Cori by staging all input files in on-node RAM, completely bypassing the file system, and measuring the wall time of a large search. Results indicated performance did not change in any measurable manner relative to use of the file system. Though at a point in the past the HMMER3 performance bottleneck may have indeed been disk access, when exposed to our usage on Cori it is not.
+
+A second experiment was performed to determine if memory bandwidth is a factor that limits performance. It is an option on Cori to reduce the CPU clock frequency of a processor while leaving all other node systems unchanged. If the clock speed is reduced 50% and the run time doubles then the application is compute bound. If the run time increases by less than double, such as when less frequent access can be served by the memory system with fewer stalls, then it suggests memory bandwidth or latency is indeed a limit on performance. Experiments running hmmsearch with modified clock speed suggest less than 4% of the running time can be attributed to memory performance limitations.
+
+The thread implementation of hmmsearch poses a curious difficulty for all modern performance analysis tools. Each input HMM causes the master thread to fork a number of child threads equal to the --cpu flag. When computation is complete these threads are discarded, the next HMM is read, and a new set of threads are forked. Threading analysis tools shown this behavior cannot track the relationship between subsequent groups of forked threads and instead report thousands of independent and temporally disjoint threads each with a tiny fraction of the total compute. Any rigorous analysis of hmmsearch thread performance must employ a manual aggregation of this information into comprehensible form.
+
+The CrayPat performance analysis tool was used to collect performance data while running hmmsearch.  The executable was augmented with pat_build to collect function call sampling data. Functions were sorted into four categories: input sequence I/O and parsing, thread creation and destruction, thread blocking, and computation. Large sampling reports of thread behavior were manually manipulated in a spreadsheet to aggregate behavior by category and distinguish master and worker threads.
+
+Understanding these results requires a detailed explanation of the threading model and data structure used to parallelize hmmsearch. Threads are organized around a single master that reads and parses all input, maintains a synchronized queue and loads units of work into it, spawns and destroys worker threads, removes completed work from the queue, and writes output to file. A team of worker threads is created for each input HMM and the synchronized queue distributes sequences to the workers in this team for search against the HMM. When all searches against that HMM are complete the worker team is destroyed. The process is repeated until all HMMs have been searched.
+
+Function sampling results presented in Table I. demonstrate the full range of pathology when hmmsearch master and worker threads distribute work amongst themselves.
+
+Choosing no worker threads activates the serial version of hmmsearch and incurs no thread overhead or load balance problem; the ratio of I/O to compute is 1:6, which is conspicuously close to the empirically determined ideal number of worker threads.
+
+When one worker thread is present the master thread performs essentially the same amount of I/O work as it does in the serial case, but fills all time previously used for compute with thread blocking, yielding a very similar total wall time. The unimpressive speed gain can be explained as the master thread filling the work queue faster than one worker can empty it. A maximum queue capacity is quickly reached where the master blocks as it waits for additional input space to become available.
+
+TABLE
+
+An experiment with fifteen worker threads demonstrates in extremis the opposite imbalance relative to one fully loaded worker thread. In this second case, the master thread has increased it’s fraction of time spent performing I/O by a factor of three and significantly reduced the amount of queue related blocking, but replaced that queue spinning with thread fork and join overhead. The average worker thread spends only 25% of execution performing search while the rest is lost blocking on the synchronized queue as it waits for new data to become available. This behavior is a result of the single master thread being unable to supply sequence at a rate comparable to the rate at which workers consume it. Additionally, the master is burdened by thread creation and destruction overhead. This further explains why split input file hmmsearch scales so much more effectively: having more than one master thread in different processes both reduces thread overhead for each and enables sequence parsing to occur in parallel. The overall effect is the rate of input preparation increases and more worker threads can be effectively supplied with data.
+
+Results from CrayPat experiments also aggregate to suggest a target for optimization. Less than 2% of the sampled time attributed to I/O is spent in system buffered blocking read calls; the rest is in sqascii_Read() and header_fasta(), both of which are input parsing functions. This glut is a direct consequence of the data access pattern in the hmmsearch top-level application. A small overhead is needed to read, parse, and error check one sequence from disk, but all such work is discarded and duplicated for each new model. These parsing functions are a primary factor limiting the rate new sequences can be added to the thread-dispatching queue and thus total application throughput.
+
+## Modifications
+
+### New hpc_hmmsearch Driver
+
+All of the following optimizations have been implemented by duplicating and then modifying only the top-level hmmsearch driver (hmmsearch.c) into a new driver (hpc_hmmsearch.c) while leaving the core pipeline intact. Code implementing the pthread or MPI use of the synchronized work queue was removed and replaced with a system based on OpenMP task directives. Restricting the scope of modification to only the top-level driver significantly reduced the analysis, engineering, quality assurance, and time necessary to complete the project. The new driver application will be referred to as hpc_hmmsearch.
+
+### Input Data Buffers
+
+The first major modification was to change data access such that parsed sequence input data is retained in memory buffers. These buffers store sequences and models such that each traversal through an input file provides data to perform multiple core pipeline calls. An attractive tradeoff is introduced where using a modest amount of additional memory significantly reduces the number of times entire input files must be loaded and parsed.
+
+With the expense of a few hundred extra megabytes of RAM, which is abundantly available on Cori hardware, the amount of CPU used to parse and error check sequence file data can be reduced by a factor of 20 or more. This eliminates 25% of the total application computation off the top before considering any other configuration decisions or optimizations.
+
+### Concurrent HMM searches
+
+The distribution of HMMs amongst worker threads has been changed in hpc_hmmsearch. The original decomposition reads a single HMM, copies it to each worker, divides input sequences between all threads, synchronizes threads, and aggregates results when all searches against that model are complete. This arrangement minimizes the time to search a single model but introduces one thread synchronization and the potential manifestation of load imbalance for each additional model. The modified driver distributes a unique HMM to each thread such that threads do not need to sync and collectively aggregate reports for output. Individual threads completing their assigned searches can immediately output results and accept a new HMM without dependency on other threads or reducing data structures. The result is a more efficient packing of compute and fewer global synchronization points, at the expense of reduced performance when the number of HMMs is small relative to the number of CPU cores (a situation which does not fit our usage).
+
+### Overlapping I/O and Compute Using OpenMP Tasking
+
+All pthread code has been replaced with an OpenMP implementation based on task directives. At the top level of behavior, hmmsearch input file contents define an all-against-all search area. The total area of this search can be arbitrarily subdivided and the resulting rectangles streamed to teams of worker tasks while I/O tasks execute alongside but on input required during the next rectangle of work in the stream. The change was implemented as follows:
+
+Two pairs of buffers are created: a pair storing HMMs and a pair storing sequence data; elements of each pair are referred to as “flip” and “flop”. A top-level loop contains all the tasks needed for a rectangle of work within a taskgroup directive and iterates until all models in the HMM file have been fully searched. I/O tasks write the HMM flop buffer to output if it contains complete results and read sequence or HMM data needed by the next taskgroup into flop buffers. Concurrently, worker tasks perform core pipeline searches of sequences and HMMs in the flip buffers, and deposit their results into top-hits structs in the HMM flip buffer. When all tasks in the taskgroup are complete the content of the sequence flip and flop buffers are exchanged. This swap moves the next rectangle of unprocessed searches to where they will be accessed by worker tasks during the next taskgroup. After a full scan through the sequence database file, the flip and flop HMM buffers are swapped and the sequence file is rewound.
+
+With this organization, and reasonable configuration of buffer sizes, workers do not need to wait for disk access, parsing, or thread synchronization events. When a file access task finishes before overall processing is complete it will automatically convert itself to an additional worker thread.
+
+### Dynamic Load Balancing
+
+Load balancing hmmsearch is a challenge due to the highly conditional nature of its control flow. Though it is simple enough to dispatch equal amounts of sequence to each worker or balance the number of residues, uneven concentrations of search hits advancing deeper into the pipeline and consuming disproportionate resources cannot be anticipated and lead to significant risk of imbalance. This effect has been modestly mitigated using OpenMP taskgroup to implement a work stealing mechanism in hpc_hmmsearch.
+
+All worker tasks are issued within a taskgroup directive and the number of outstanding tasks is tracked; when that number falls below the number of cores available then tasks with a sufficient amount of unprocessed sequence will create a new child task and pass half their remaining work to it. The child task is then immediately scheduled to execute by the runtime and occupies the empty core. The taskgroup directive is needed to guarantee all child tasks spawned by the work stealing mechanism have finished before finalizing a rectangle of work and swapping buffers (a taskwait directive would only collect all tasks at the same depth before releasing, ignoring any child tasks that may remain outstanding).
+
+## Results
+
+n initial performance experiment is included to directly contrast the thread-scaling difference between the original hmmsearch driver and hpc_hmmsearch. Fig. 4 presents data obtained by running both hmmsearch drivers on the Edison system with the same configuration as used to create Fig. 1 (Edison is architecturally analogous to Cori Haswell, but one generation older with 24 cores per node instead of 32).
+
+Best practice performance has been evaluated by running both hpc_hmmsearch and sharded file hmmsearch with a new larger set of sampled input files on both types of Cori nodes. The entire Pfam-A database was used for each experimental search by creating sets of divisions that round-robin distribute all Pfam HMMs between 2, 4, 8, 16, 32, and 64 files. Note that this division of the HMM database is different from earlier file shard experiments which divided the sequence database (A minor experiment confirmed that either division is equivalent in terms of performance, though in practice, dividing the HMM database is preferred because it is more convenient to implement in a workflow). Sequence files for this experiment were created via sampling one million protein sequences from the UniProtKB/TrEMBL database.
+
+Fig. 5 shows scaling performance results when running the most effective Pfam file decompositions with hmmsearch and hpc_hmmsearch on a Haswell Cori node. Reported speedup is scaled against the wall time of running one single threaded hmmsearch job with the same input. The best performing hmmsearch among the available configurations, using 32 serial processes, yields an average of 17.4 speedup.  Average speedup of hpc_hmmsearch is 26.4, a 51% improvement and 61% closer to the theoretical maximum throughput.
+
+Fig. 6 displays Knights Landing node scaling performance results for a range of hmmsearch file decompositions and hpc_hmmsearch. The same series of Pfam input files were used as the Haswell performance experiment, but the number of sequences sampled was reduced by 80% to 200,000. The reported speedup is scaled to the projected time needed to run one single thread hmmsearch on a KNL node. A dashed line marks an upper bounded speedup of 136, corresponding to the full utilization of two hardware threads on each KNL core. Of several reasonable decompositions, the best performing hmmsearch configuration is 32 input file shards with 4 threads each, producing an average speedup factor of 57.5. The KNL hpc_hmmsearch running with 136 threads yields an average speedup factor of 116.1; this is a 101% improvement above hmmsearch best practice on the KNL platform and almost 4x closer to the theoretical maximum. Though KNL speedup gains are much better than Haswell, the base performance of KNL is handicapped enough that the shortest wall times using the best configurations are still obtained using a Haswell node.
+
+## Discussion
+
+One important point is examination of the performance discrepancy between running HMMER3 on Haswell vs. KNL nodes. Optimally configured and everything else being equal, a HMMER3 job will always run faster on a Haswell node than on a KNL node. Haswell completes a single-thread hmmsearch job 3.9x faster than the same single-thread job on KNL, a well-configured split file job 1.2x faster, and an hpc_hmmsearch job 1.45x faster. The flexibility to run either is, however, still valuable as being able to run HMMER3 well on KNL can still benefit users when balancing allocation charge factors, queue demand differences, and the fact that over four times as many KNL nodes are available on Cori.
+
+What characteristics of these systems make Haswell more suitable to run HMMER3 than KNL? The primary suspects are the core filter kernels implemented using SSE vector instructions. Each KNL core operates at half the frequency of a Haswell and only has one vector-processing unit (VPU) able to execute legacy vector instructions. Any possible gains from the 4x wider AVX-512 vectors or the 4 hardware threads per core can’t be realized through the VPU bottleneck as the HMMER3 core is currently implemented.
+
+What consideration has been given to improving core pipeline components? The ratio of effort to reward when considering a vector modernization of HMMER3 pipeline kernels offers an intimidating calculus. Most potential upside for NERSC users is cut off at the knee because HMMER3 core components use byte and word sized instructions, but KNL silicon does not support the AVX-512BW instruction set which implements them. Upgrading software to AVX2 (256 bit vector width instructions) could theoretically offer up to 2x speedup but that would break compatibility with Edison (NERSC’s previous generation production system), KNL performance would still be limited to the single legacy VPU per core, and the modifications would incur an enormous labor effort to manually convert, debug, and verify every pipeline component, data structure, and post-processing routine in the entire software stack. Furthermore, the HMMER4 development team has claimed and finished implementing support for all modern vector instruction sets; any work in that direction would be redundant. This does not only apply to vectorization porting; all work on HMMER3 will become obsolete when HMMER4 is released. To be successful this project needed to be completed and enter production well before then.
+
+A revised calculation of the estimated time needed to search IMG against Pfam quantifies the benefit to NERSC users since hpc_hmmsearch has entered production. I must concede the initial 600,000 CPU hour estimate was incendiary; a real power user would not use the naïve decomposition but instead split Pfam into 8 parts, IMG into 2,500 fasta files, and submit 2,500 jobs each packing 8 hmmsearch with 4 threads. The total allocation would use approximately 60,000 CPU hours, be throttled by the policy limit of 200 queued jobs per user, and take 25 days to pass entirely through the queue. A second researcher generating the same data using hpc_hmmsearch could split 1,000 fasta files, queue 1,000 jobs, consume 23,000 CPU hours, and fully clear the queue in 10 days.
+
+Collaboration with a FICUS JGI-NERSC [18] project provides a detailed real world anecdote of the performance gained using hpc_hmmsearch. A component in the project workflow required a HMMER3 search of 2.2 billion IMG protein sequences against 229 curated HMMs. Basic use of hmmsearch for this task is estimated to be almost 60,000 CPU hours while split file configuration would consume approximately 7,500 hours. These usage numbers are overestimates because they are calculated with scaling factors derived from our earlier experiments; the distribution of the project’s metagenomic data contains fewer search hits and thus spends a smaller fraction of time in deeper pipeline stages. We worked with the project to integrate hpc_hmmsearch into their workflow. The resulting work split the input sequence into 184 parts of 12 million sequences each and consumed only 130 CPU hours.
+
+The pattern of OpenMP tasking demonstrated in this project is applicable and beneficial to a wider and more general set of applications appearing in the bioinformatics toolbox. Such applications follow a pattern of reusing one or more well-abstracted core kernels that do not induce side effects or data dependencies on other kernel calls. In these cases some tasks can perform I/O and prepare future data buffers while other tasks issue the kernel calls on prepared data or empty completed buffers to output. Throughput limited reductions, local filters, or all-against-all algorithms such as string or similarity searches can directly mimic this design. The pattern can also accommodate methods that require large and shared read-only data structures such as an FM-index or k-mer table. All worker tasks can trivially share a single copy of that data structure in the OpenMP shared memory environment.
+
+## Conclusion
+
+This work describes in detail the process of adapting HMMER3 to better conform to the needs of the NERSC user community and the Cori supercomputer. Performance analysis indicated that data processing in the top level driver of hmmsearch was the best target for optimization efforts. Only a modest amount of labor was necessary to refactor the threading architecture to use OpenMP tasking, overlap I/O and computation activity, automatically load balance between tasks, reduce I/O overhead by buffering input sequence, and simplify the best practice use of hmmsearch in a workflow context. The hpc_hmmsearch driver has been in production on NERSC systems for over a year at the time of this publication and has cumulatively reduced system-load by hundreds of thousands of CPU hours.
+
+## Source Code
+
+The hpc_hmmsearch driver can be obtained at https://github.com/Larofeticus/hpc_hmmsearch along with instructions for installation and usage.
+
+## References
+
+[1]	S. Eddy, “Accelerated profile HMM searches,” PLoS Computational Biology, vol. 7, no. 10, 2011. doi:10.1371/journal.pcbi.1002195
+
+[2]	S. Eddy, “Profile hidden markov models,” Bioinformatics, vol. 14, pp. 755-763, 1998.
+
+[3]	M. Farrar, “Striped Smith-Waterman speeds database searches six times over other SIMD implementations,” Bioinformatics, vol. 23, pp. 156-161, 2007.
+
+[4]	D. Horn, M. Houston, and P. Hanrahan, “ClawHMMER: A streaming HMMer-search implementation,” in Proceedings of ACM/IEEE Supercomputing Conference, 2005.
+
+[5]	X. Li, W. Han, G. Liu, H. An, M. Xu, W. Zhou, and Q. Li, “A speculative HMMER search implementation on GPU,” in IEEE 26th IPDPS Workshop and PhD Forum, 2012, pp. 73-74.
+
+[6]	H. Jiang and N. Ganesan, “Fine-grained acceleration of hmmer 3.0 via architecture-aware optimization on massively parallel processors,” in Parallel and Distributed Processing Symposium Workshop (IPDPSW), 2015 IEEE International. IEEE, 2015, pp. 375-383.
+
+[7]	T. Oliver, L. Y. Yeow and B. Schmidt, “High Performance Database Searching with HMMer on FPGAs,” Parallel and Distributed Processing Symposium, Mar. 2007, pp. 1-7. doi:10.1109/IPDPS.2007.370448
+
+[8]	S. Derrien and P. Quinton, “Parallelizing HMMER for Hardware Acceleration on FPGAs,” in IEEE ASAP, 2007, pp. 10-17.
+
+[9]	Y. Sun, P. Li, G. Gu, Y. Wen, Y. Liu and D. Liu, “Accelerating HMMer on FPGAs Using Systolic Array Based Architecture,” in IEEE IPDPS, 2009, pp. 1-8.
+
+[10]	T. Takagi and T. Maruyama, “Accelerating HMMER Search Using FPGA,” in Proceedings of the 19th International Conference on Field-Programmable Logic and Applications, No. T3C1, 2009.
+
+[11]	J. Lu, M. Perrone, K. Albayraktaroglu, and M. Franklin. “HMMer-Cell : High Performance Protein Profile Searching on the Cell/B.E. Processor.” IEEE International Symposium on Performance Analysis of Systems and software, 2008, pp. 223-232.
+
+[12]	S. Isaza, E. Houtgast and G. Gaydadjiev, "HMMER Performance Model for Multicore Architectures," 14th Euromicro Conference on Digital System Design, Oulu, 2011, pp. 257-261.
+
+doi: 10.1109/DSD.2011.111
+
+[13]	J. P. Walters, B. Qudah and V. Chaudhary, "Accelerating the HMMER sequence analysis suite using conventional processors," 20th International Conference on Advanced Information Networking and Applications – Vol. 1, 2006, pp. 6. doi: 10.1109/AINA.2006.68
+
+[14]	J. P. Walters, R. Darole and V. Chaudhary, "Improving MPI-HMMER's scalability with parallel I/O," 2009 IEEE International Symposium on Parallel & Distributed Processing, Rome, 2009, pp. 1-11.
+
+doi: 10.1109/IPDPS.2009.5161074
+
+[15]	V. M. Markowitz, I. A. Chen, K. Palaniappan, K. Chu, E. Szeto, Y. Grechkin, and A. Ratner. “IMG: the Integrated Microbial Genomes database and comparative analysis system.” Nucleic Acids Research, Database Issue 40, 2012, D115-D122.
+
+[16]	R.D. Finn, P. Coggill, R.Y. Eberhardt, S.R. Eddy, J. Mistry, and A.L. Mitchell. “The Pfam protein families database: towards a more sustainable future.” Nucleic Acids Research, Database Issue 44, 2016, D279-D285.
+
+[17]	The UniProt Consortium. “UniProt: the universal protein knowledgebase.” Nucleic Acids Research, Database Issue 45, 2017, D158-D169.
+
+[18]	https://jgi.doe.gov/user-program-info/community-science-program/how-to-propose-a-csp-project/ficus-jgi-nersc/
