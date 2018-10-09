@@ -259,7 +259,7 @@ recommend installing them into the shifter image.
 #SBATCH -N 2
 #SBATCH -t 00:10:00
 #SBATCH -C haswell
-#SBATCH -L scratch
+#SBATCH -L SCRATCH
 #SBATCH --image=lgerhardt/openmpi_2.1.1:v1 (or your openmpi image)
 
 #populate the node list
