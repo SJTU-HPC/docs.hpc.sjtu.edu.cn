@@ -13,7 +13,7 @@ This guide is broken into multiple lessons.
 
 * Lesson 1, presented here, will show you how to run applications using Docker on your laptop and can done at home or in a lab with an internet connection. If you are already familiar with Docker, we encourage you to at least read the section below about running containers as a non-root user.
 * [Lesson 2: Running Your Application in Spin](lesson-2.md) shows how to migrate your application from your laptop to Spin and is intended to be run as a NERSC Hands-On lesson with access to the NERSC systems.
-* [Lesson 3: Storage, Secrets & Managing your services](lesson-3.md) shows upgrading, using Rancher NFS for persistant storage, and using Rancher Secrets to store sensitive data.
+* [Lesson 3: Storage, Secrets & Managing your services](lesson-3.md) shows upgrading, using Rancher NFS for persistent storage, and using Rancher Secrets to store sensitive data.
 
 These lessons are written with Mac users in mind. While the guide does not cover
 Microsoft Windows, Windows users should be able to use similar concepts to
