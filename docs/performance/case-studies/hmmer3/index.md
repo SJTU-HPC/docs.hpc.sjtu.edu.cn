@@ -360,37 +360,82 @@ data.
   <colgroup span="1"></colgroup>
   <tr>
     <td colspan="2"></td>
-    <th colspan="3">Master</th>
+    <th colspan="3" align="center">Master</th>
     <td colspan="1"></td>
-    <th colspan="2">Each Worker</th>
+    <th colspan="2" align="center">Each Worker</th>
     <td colspan="2"> </td>
   </tr>
   <tr>
-    <td>Worker Threads</td>
+    <td align="center">Worker Threads</td>
     <td></td>
-    <td>I/O</td>
-    <td>Join</td>
-    <td>Wait</td>
+    <td align="center">I/O</td>
+    <td align="center">Join</td>
+    <td align="center">Wait</td>
     <td></td>
-    <td>Compute</td>
-    <td>Wait</td>
+    <td align="center">Compute</td>
+    <td align="center">Wait</td>
     <td></td>
-    <td>Time (seconds)</td>
+    <td align="center">Time (seconds)</td>
   </tr>
   <tr>
-    <td>0</td><td></td><td>14%</td><td></td><td></td><td></td><td>83%</td><td></td><td></td><td>127</td>
+    <td align="center">0</td>
+    <td></td>
+    <td align="center">14%</td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td align="center">83%</td>
+    <td></td>
+    <td></td>
+    <td align="center">127</td>
   </tr>
   <tr>
-    <td>1</td><td></td><td>17%</td><td></td><td>81%</td><td></td><td>99%</td><td></td><td></td><td>114</td>
+    <td align="center">1</td>
+    <td></td>
+    <td align="center">17%</td>
+    <td></td>
+    <td align="center">81%</td>
+    <td></td>
+    <td align="center">99%</td>
+    <td></td>
+    <td></td>
+    <td align="center">114</td>
   </tr>
   <tr>
-    <td>3</td><td></td><td>41%</td><td>20%</td><td>37%</td><td></td><td>71%</td><td>28%</td><td></td><td>54</td>
+    <td align="center">3</td>
+    <td></td>
+    <td align="center">41%</td>
+    <td align="center">20%</td>
+    <td align="center">37%</td>
+    <td></td>
+    <td align="center">71%</td>
+    <td align="center">28%</td>
+    <td></td>
+    <td align="center">54</td>
   </tr>
   <tr>
-    <td>7</td><td></td><td>50%</td><td>32%</td><td>15%</td><td></td><td>44%</td><td>55%</td><td></td><td>47</td>
+    <td align="center">7</td>
+    <td></td>
+    <td align="center">50%</td>
+    <td align="center">32%</td>
+    <td align="center">15%</td>
+    <td></td>
+    <td align="center">44%</td>
+    <td align="center">55%</td>
+    <td></td>
+    <td align="center">47</td>
   </tr>
   <tr>
-    <td>15</td><td></td><td>46%</td><td>41%</td><td>9%</td><td></td><td>27%</td><td>72%</td><td></td><td>51</td>
+    <td align="center">15</td>
+    <td></td>
+    <td align="center">46%</td>
+    <td align="center">41%</td>
+    <td align="center">9%</td>
+    <td></td>
+    <td align="center">27%</td>
+    <td align="center">72%</td>
+    <td></td>
+    <td align="center">51</td>
   </tr>
 </table>
 
