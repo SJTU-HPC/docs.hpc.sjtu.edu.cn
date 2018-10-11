@@ -151,6 +151,7 @@ nav:
       - Cori scratch: filesystems/cori-scratch.md
       - Cori Burst Buffer: filesystems/cori-burst-buffer.md
       - Archive (HPSS): filesystems/archive.md
+      - Unix File Permissions: filesystems/unix-file-permissions.md
   - PDSF:
     - slurm :
       - overview : pdsf/slurm/README.md
