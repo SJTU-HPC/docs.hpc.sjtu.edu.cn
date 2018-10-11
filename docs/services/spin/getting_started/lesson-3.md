@@ -196,7 +196,7 @@ like we did in lesson 2.
 
 In the following example, I'm inspecting the 'web' container in the
 'elvis-flask-demo' stack. From this output, I know my web service is available
-at `http://web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org:8080/`. The
+at `https://web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org:8080/`. The
 web service is also available at an IP address, but note that the IP address may
 change from time to time.
 
@@ -259,7 +259,7 @@ below. Some steps are not necessary every single time, and may be skipped.
 
 !!! info
     For details on the Rancher upgrade commands, see the Rancher documentation at
-    http://rancher.com/docs/rancher/v1.6/en/cattle/upgrading/ . Note that the
+    https://rancher.com/docs/rancher/v1.6/en/cattle/upgrading/ . Note that the
     Rancher documentation often refers to `rancher-compose`, which is an older
     command. Spin uses the `rancher` command instead, which is newer but has most of
     the same options. The Rancher documentation mentions 'in-service upgrades' and

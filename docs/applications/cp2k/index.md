@@ -15,7 +15,7 @@ nersc$ module avail cp2k
 ## Support
 
 *  [Reference Manual](https://manual.cp2k.org/)
-*  [Forum](http://groups.google.com/group/cp2k)
+*  [Forum](https://groups.google.com/group/cp2k)
 *  [FAQ](https://www.cp2k.org/faq)
 
 !!! tip

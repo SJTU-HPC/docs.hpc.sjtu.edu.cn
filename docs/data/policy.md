@@ -5,7 +5,7 @@ Project Principal Investigators are responsible for meeting OSTP
 data management requirements for long-term data sharing and
 preservation. The OSTP has issued a memorandum on Increasing Access to
 the Results of Federally Funded Scientific Research
-(http://www.whitehouse.gov/sites/default/files/microsites/ostp/ostp_public_access_memo_2013.pdf)
+(https://www.whitehouse.gov/sites/default/files/microsites/ostp/ostp_public_access_memo_2013.pdf)
 and the DOE has issued a Statement on Digital Data Management.
 
 NERSC resources are intended for users with active allocations, and as

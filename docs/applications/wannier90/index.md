@@ -1,13 +1,14 @@
 # Wannier90
 
-The BerkeleyGW Package is a set of computer codes that calculates the quasiparticle 
-properties and the optical responses of a large variety of materials from bulk periodic 
-crystals to nanostructures such as slabs, wires and molecules. The package takes as
-input the mean-field results from various electronic structure codes such as the 
-Kohn-Sham DFT eigenvalues and eigenvectors computed with Quantum ESPRESSO, PARATEC,
-PARSEC, Octopus, Abinit, Siesta etc.
+The BerkeleyGW Package is a set of computer codes that calculates the
+quasiparticle properties and the optical responses of a large variety
+of materials from bulk periodic crystals to nanostructures such as
+slabs, wires and molecules. The package takes as input the mean-field
+results from various electronic structure codes such as the Kohn-Sham
+DFT eigenvalues and eigenvectors computed with Quantum ESPRESSO,
+PARATEC, PARSEC, Octopus, Abinit, Siesta etc.
 
-NERSC provides modules for [Wannier90](https://www.wanier.org).
+NERSC provides modules for [Wannier90](http://www.wannier.org).
 
 Use the `module avail` command to see what versions are available:
 

@@ -29,7 +29,7 @@ This script requires that `${INPUT_FILE}` be specified.
 
 ## Support
 
- * [User's Guide](http://www.ks.uiuc.edu/Research/namd/current/ug/)
- * [Problem with NAMD?](http://www.ks.uiuc.edu/Research/namd/bugreport.html)
+ * [User's Guide](https://www.ks.uiuc.edu/Research/namd/current/ug/)
+ * [Problem with NAMD?](https://www.ks.uiuc.edu/Research/namd/bugreport.html)
  * **IF** after the above you believe there is an issue with the NERSC
    module file a ticket with our [help desk](https://help.nersc.gov)

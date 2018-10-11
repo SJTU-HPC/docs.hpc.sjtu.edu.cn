@@ -5,8 +5,8 @@ is available on Cori & Edison to allow NERSC users to manage their
 containers, and will soon be available on Denovo.
 
 For more information on using the Rancher CLI, see
-[Rancher Command Line Interface (CLI)](http://rancher.com/docs/rancher/v1.6/en/cli/)
-on [rancher.com](http://rancher.com).
+[Rancher Command Line Interface (CLI)](https://rancher.com/docs/rancher/v1.6/en/cli/)
+on [rancher.com](https://rancher.com).
 
 !!! Note
     NERSC provides a modified version of the Rancher CLI, and not all commands shown in the Rancher documentation are available to NERSC users.
@@ -35,7 +35,7 @@ by the following error message:
 
     nersc:test_db $ cat load_dept_emp.dump |  rancher exec dbtest/db mysql
     ERRO[0012] Failed to handle connection: websocket: bad handshake
-    error during connect: Get http://%2Fvar%2Ffolders%2Fg8%2Fydzygkc103x9_xt_r8zs6zyr001d77%2FT%2Fdocker-sock578594745/v1.24/exec/6e644e66b9b123123fdf4459a5b23a29f3b079307a664d8b65b68d8d0268169c/json: EOF
+    error during connect: Get https://%2Fvar%2Ffolders%2Fg8%2Fydzygkc103x9_xt_r8zs6zyr001d77%2FT%2Fdocker-sock578594745/v1.24/exec/6e644e66b9b123123fdf4459a5b23a29f3b079307a664d8b65b68d8d0268169c/json: EOF
     nersc:test_db $
 
 ### Don't use `rancher run`
@@ -381,8 +381,8 @@ Logs may be viewed using the `rancher logs` command. The command may use the ser
 If your service has more than one container (Remember, a container is an instance of a service), the individual containers logs will show the number of the container at the beginning. In the example below, the 'web' service has two containers. Notice how the line begins with a '01' or a '02' which indicates which container owns that log line.
 
     nersc$ rancher logs elvis-flask-demo/web
-    01 2018-05-23T00:15:26.486199100Z 128.3.135.223 - - [23/May/2018:00:15:26 +0000] "GET /static/CPvalid1_nodsRNA_40x_Tiles_p1745DAPI.png HTTP/1.1" 200 82055 "http://128.55.206.22:60000/fields/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36" "-"
-    02 2018-05-23T00:17:21.196355808Z 128.3.135.223 - - [23/May/2018:00:17:21 +0000] "GET /fields/ HTTP/1.1" 200 19322 "http://128.55.206.22:60000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/53
+    01 2018-05-23T00:15:26.486199100Z 128.3.135.223 - - [23/May/2018:00:15:26 +0000] "GET /static/CPvalid1_nodsRNA_40x_Tiles_p1745DAPI.png HTTP/1.1" 200 82055 "https://128.55.206.22:60000/fields/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36" "-"
+    02 2018-05-23T00:17:21.196355808Z 128.3.135.223 - - [23/May/2018:00:17:21 +0000] "GET /fields/ HTTP/1.1" 200 19322 "https://128.55.206.22:60000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/53
     nersc$
 
 To view the logs for just a single container, print the container name instead of the service name. The container name can be found using `rancher ps --containers` as shown above.

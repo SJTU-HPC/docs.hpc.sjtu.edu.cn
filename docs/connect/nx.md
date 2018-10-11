@@ -27,17 +27,17 @@ customize the desktop according to your work requirement.
 ## Installing
 
 ### Download latest NX Client
-#### Windows XP/Windows 7/Windows 8 ([Download](http://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.80_1.exe))
-#### Mac OS X 10.5 or later on an Intel Mac ([Download](http://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2.dmg))
-#### DEB Package for Debian/Ubuntu: ([Download](http://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2_amd64.deb))
-#### RPM Package for Centos/Redhat/Fedora ([Download](http://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2_x86_64.rpm))
+#### Windows XP/Windows 7/Windows 8 ([Download](https://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.80_1.exe))
+#### Mac OS X 10.5 or later on an Intel Mac ([Download](https://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2.dmg))
+#### DEB Package for Debian/Ubuntu: ([Download](https://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2_amd64.deb))
+#### RPM Package for Centos/Redhat/Fedora ([Download](https://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2_x86_64.rpm))
 
 To configure open the NX player and click on the box in the
 upper left that says "New". Use "SSH" for protocol,
 "nxcloud01.nersc.gov" for host, "password" for authentication,
 "Don't use a proxy" for proxy. Alternatively you can [download
 the configuration
-file](http://portal.nersc.gov/project/mpccc/nx/Connection_to_NERSC_NX_service.nxs.gz)
+file](https://portal.nersc.gov/project/mpccc/nx/Connection_to_NERSC_NX_service.nxs.gz)
 (you'll need to unzip it and open it with the NX Client).
 
 ## Connecting
@@ -56,7 +56,7 @@ at [nxcloud01](https://nxcloud01.nersc.gov).
 If you are having trouble connecting to NX, please can try these steps:
 
 1. Log into [NIM](https://nim.nersc.gov) to clear any login failures. Access to NX uses your NERSC user name and password. If your password is mistyped five times, NERSC will lock you out of their systems. Logging into NIM will automatically clear these failures. This will also let you know if your password is expired (which would prevent you from accessing NX, among many other things).
-2. Re-download the [NX configuration file](http://portal.nersc.gov/project/mpccc/nx/Connection_to_NERSC_NX_service.nxs.gz). NX will often "update" the configuration file to try to save your settings and sometimes this file can get some bad settings. You must have the new NX player AND the new configuration file to connect to the NX service.
+2. Re-download the [NX configuration file](https://portal.nersc.gov/project/mpccc/nx/Connection_to_NERSC_NX_service.nxs.gz). NX will often "update" the configuration file to try to save your settings and sometimes this file can get some bad settings. You must have the new NX player AND the new configuration file to connect to the NX service.
 3. Try to ssh directly to the NX server. You can do this with the command "ssh <nersc_username>@nxcloud01.nersc.gov" and your NERSC user name and password. If your access to the NX server is blocked by a local firewall or something else and you can't connect via ssh, you will also not be able to connect with the NX client.
 
 If you've tried these steps and still cannot connect, please open a help ticket. In this ticket, please include the following information:

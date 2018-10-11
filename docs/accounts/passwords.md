@@ -76,7 +76,7 @@ Department of Energy guidelines regarding passwords.  The following
 requirements conform to the Department of Energy guidelines regarding
 passwords, namely DOE Order 205.3 and to Lawrence Berkeley National
 Laboratory's
-[RPM §9.02 Operational Procedures for Computing and Communications](http://www.lbl.gov/Workplace/RPM/R9.02.html).
+[RPM §9.02 Operational Procedures for Computing and Communications](https://www.lbl.gov/Workplace/RPM/R9.02.html).
 
 When users are selecting their own passwords for use at NERSC, the
 following requirements must be used.

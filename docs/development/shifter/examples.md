@@ -10,7 +10,7 @@ will discuss some examples in more details.
 
 ### DESI
 
-[DESI](http://desi.lbl.gov/) jobs use community standard publicly
+[DESI](https://desi.lbl.gov/) jobs use community standard publicly
 available software, it is independent of the Linux distro flavor. We
 show below how to build a Docker image with Ubuntu base.
 
@@ -94,7 +94,7 @@ RUN wget https://github.com/GalSim-developers/GalSim/archive/v1.4.2.tar.gz -O Ga
 
 ### STAR
 
-The [STAR](http://www.star.bnl.gov/) experiment software stack is
+The [STAR](https://www.star.bnl.gov/) experiment software stack is
 typically built and run on Scientific Linux.
 
 There are two ways we can build the STAR image, the first is to
@@ -124,7 +124,7 @@ RUN yum -y install libxml2 tcsh libXpm.i686 libc.i686 libXext.i686 \
                    wget make libxml2.so.2 gdb libXtst.{i686,x86_64} \
                    libXt.{i686,x86_64} glibc glibc-devel gcc-c++# Dev Tools
 RUN wget -O /etc/yum.repos.d/slc6-devtoolset.repo \
-     http://linuxsoft.cern.ch/cern/devtoolset/slc6-devtoolset.repo && \
+     https://linuxsoft.cern.ch/cern/devtoolset/slc6-devtoolset.repo && \
  yum -y install devtoolset-2-toolchain
 COPY enable_scl /usr/local/star/group/templates/
 
@@ -160,7 +160,7 @@ COPY checkProduction.C /usr/local/star//packages/SL16d/StRoot/macros/
 # Special RPMs for production at Cori; OpenMpi, mysql-server
 RUN yum -y install libibverbs.x86_64 environment-modules infinipath-psm-devel.x86_64 \
  librdmacm.x86_64 opensm.x86_64 papi.x86_64 && \
- wget http://mirror.centos.org/centos/6.8/os/x86_64/Packages/openmpi-1.10-1.10.2-2.el6.x86_64.rpm && \
+ wget https://mirror.centos.org/centos/6.8/os/x86_64/Packages/openmpi-1.10-1.10.2-2.el6.x86_64.rpm && \
  rpm -i openmpi-1.10-1.10.2-2.el6.x86_64.rpm && \
  rm -f openmpi-1.10-1.10.2-2.el6.x86_64.rpm && \
  yum -y install glibc-devel devtoolset-2-libstdc++-devel.i686 && \

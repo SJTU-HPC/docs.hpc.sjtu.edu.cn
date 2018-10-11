@@ -10,20 +10,23 @@ import argparse
 import requests
 from bs4 import BeautifulSoup
 import validators
+import sys
 
 # Known good pages that do not need to be validated. More are appended to this
 # list as the script crawls the docs website so that we do not re-validate the
 # same pages.
-whitelist = ["https://www.lbl.gov/disclaimers/",
+whitelist = ["https://www.lbl.gov/disclaimers",
              "https://science.energy.gov",
              "https://www.lbl.gov",
              "https://nxcloud01.nersc.gov",
              "http://epsi.pppl.gov/xgc-users/how-to-become-an-xgc-user",
              "https://stash.nersc.gov",
              "https://stash.nersc.gov:8443",
-             "http://localhost/",
-             "https://localhost/",
-             "http://localhost:5000/",
+             "https://www.nersc.gov",
+             "http://localhost",
+             "https://localhost",
+             "http://localhost:5000",
+             "https://localhost:5000",
              "https://registry.services.nersc.gov"]
 
 badlist = []
@@ -52,15 +55,14 @@ def get_url(this_page):
 def check_url(page):
     """Function that checks the validity of a URL."""
     while True:
-        url, end_quote = get_url(page)
+        url_raw, end_quote = get_url(page)
         page = page[end_quote:]
-        if url:
+        if url_raw:
+            url = url_raw.rstrip("/")
             if not validators.url(url):
                 print("ERROR: INVALID URL")
             try:
-                if url in whitelist:
-                    print("WHITELIST: {}".format(url))
-                else:
+                if url not in whitelist:
                     print(url)
                     requests.get(url)
                     # After a URL has been validated once, add it to the
@@ -100,7 +102,9 @@ def main():
         print("Failed urls:")
         for url in badlist:
             print(url)
+            return 1
     else:
         print("No bad urls!")
+        return 0
 
-main()
+sys.exit(main())

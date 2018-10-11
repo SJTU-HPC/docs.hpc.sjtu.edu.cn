@@ -105,7 +105,7 @@ RUN cd /build && wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz
   && tar xvzf Python-2.7.13.tgz && cd /build/Python-2.7.13 \
   && ./configure && make -j4 && make install && make clean && rm /build/Python-2.7.13.tgz
 
-RUN cd /build && wget http://www.mpich.org/static/downloads/3.2/mpich-3.2.tar.gz \
+RUN cd /build && wget https://www.mpich.org/static/downloads/3.2/mpich-3.2.tar.gz \
   && tar xvzf mpich-3.2.tar.gz && cd /build/mpich-3.2 \
   && ./configure && make -j4 && make install && make clean && rm /build/mpich-3.2.tar.gz
 

@@ -133,7 +133,7 @@ ln -s /project/projectdirs/<project>/<svn_location> /var/www/svn/<symlink_name>
 Once the symlink is setup then checking out a project from the svn repo can be
 completed by using the Subversion client:
 ```
-svn co http://portal.nersc.gov/svn/<project>
+svn co https://portal.nersc.gov/svn/<project>
 ```
 
 ## Authenticated access to SVN

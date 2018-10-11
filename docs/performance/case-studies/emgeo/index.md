@@ -251,7 +251,7 @@ solver.
    25-27, 2010. Proceedings, chap. Automatically Tuning Sparse
    Matrix-Vector Multiplication for GPU Architectures,
    pp. 111–125. Springer Berlin Heidelberg, Berlin, Heidelberg (2010),
-   http://dx.doi.org/10.1007/978-3-642-11515-8_10
+   https://dx.doi.org/10.1007/978-3-642-11515-8_10
 2. <a name="ref2"></a> Datta, K.: Auto-tuning Stencil Codes for
    Cache-Based Multicore Platforms. Ph.D. thesis, EECS Department,
    University of California, Berkeley (Dec 2009), http: //www.eecs.b
@@ -259,7 +259,7 @@ solver.
 3. <a name="ref3"></a> Haase, G., Reitzinger, S.: Cache issues of
    algebraic multigrid methods for linear systems with multiple
    right-hand sides. SIAM Journal on Scientific Computing 27(1), 1–18
-   (2005), http://dx.doi.org/10.1137/S1064827502405112
+   (2005), https://dx.doi.org/10.1137/S1064827502405112
 4. <a name="ref4"></a> Williams, S.: Auto-tuning Performance on
    Multicore Computers. Ph.D. thesis, EECS Department, University of
    California, Berkeley (December 2008)
@@ -269,6 +269,6 @@ solver.
    (April 2009)
 6. <a name="ref6"></a> Williams, S., Stralen, B.V., Ligocki, T.,
    Oliker, L., Cordery, M., Lo, L.: Roofline performance model,
-   http://crd.lbl.gov/departments/computerscience/PAR/research/roofline/
+   https://crd.lbl.gov/departments/computerscience/PAR/research/roofline/
 7. <a name="ref7"></a> Tal, A.: Intel software development emulator,
    https://software.intel.com/en-us/articles/intel-software-development-emulator
