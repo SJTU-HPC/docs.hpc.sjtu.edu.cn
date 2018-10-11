@@ -25,16 +25,16 @@ as a component in workflows that automatically annotate newly sequenced
 genomes, and novel research projects. JGI uses approximately 7 million CPU
 hours annually to run HMMER3 on NERSC systems.
 
-HMMER3 is heavily optimized for the personal computing hardware of ten years
-ago. Data movement is organized such that very low working set memory usage
-has been achieved at the cost of increased file access. The application is
-arranged as a pipeline of filters using SSE intrinsic vector instructions to
-implement dynamic programming (DP) with a complex striping pattern [3].
-Threading support uses pthreads via a master to worker queue dispatch that
-distributes sequence data to individual threads for processing. An MPI
-implementation is also provided in the HMMER3 distribution that does not
-support threading and decomposes data with the same pattern and performance as
-the pthread implementation.
+HMMER3 is heavily optimized for the personal computing hardware of 2008. Data 
+movement is organized such that very low working set memory usage has been
+achieved at the cost of increased file access. The application is arranged as a
+pipeline of filters using SSE intrinsic vector instructions to implement
+dynamic programming (DP) with a complex striping pattern [3]. Threading support
+uses pthreads via a master to worker queue dispatch that distributes sequence
+data to individual threads for processing. An MPI implementation is also
+provided in the HMMER3 distribution that does not support threading and
+decomposes data with the same pattern and performance as the pthread
+implementation.
 
 A significant literature exists discussing the optimization of the HMMER
 lineage of applications. One common theme is a focus on porting low-level
@@ -118,7 +118,7 @@ when a job is run using the shared queue. NERSC services support over 6,000
 users leading to wide fluctuations in utilization and availability of system
 resources. The wait times and throughput of the various job queues are the
 main expression of this demand variation. A user not limited to small shared
-jobs but also able to effectively run hmmsearch on the full 32 or 68 cores of
+jobs but also able to effectively run `hmmsearch` on the full 32 or 68 cores of
 a node can more flexibly request a job submission that minimizes time until
 completion or obtains the most science possible from each precious allocation
 hour.
@@ -127,58 +127,65 @@ hour.
 
 HMMER3 includes a number of applications related to the creation, manipulation,
 and searching of profile HMMs. High volume use of HMMER3 at NERSC is
-exclusively in the form of hmmsearch, which searches all pairs of model against
-protein via an outer loop over HMMs and an inner loop over sequences. For this
-reason, the work described here focuses only on analysis and optimization of
-hmmsearch. Use of HMMER3 on NERSC systems most resembles a High Throughput
-Computing model: The pairwise searching of a very large number of sequences
-against a large number of HMMs in hmmsearch is trivial to decompose with
-effectively no interdependencies. The active memory needed by the core pipeline
-for a single pair search is minuscule1 relative to the RAM available on each
-node, even when permitting hundreds of threads.
+exclusively in the form of `hmmsearch`, which searches all pairs of model
+against protein via an outer loop over HMMs and an inner loop over sequences.
+For this reason, the work described here focuses only on analysis and
+optimization of `hmmsearch`. Use of HMMER3 on NERSC systems most resembles a
+High Throughput Computing model: The pairwise searching of a very large number
+of sequences against a large number of HMMs in `hmmsearch` is trivial to
+decompose with effectively no interdependencies. The active memory needed by
+the core pipeline for a single pair search is minuscule relative to the RAM
+available on each node, even when permitting hundreds of threads.
 
 The Integrated Microbial Genomes and Metagenomes database (IMG) [15] hosted by
 JGI is a common source of protein sequence data for HMMER3 usage at NERSC. At
 the time of writing, the IMG database contains 45,865,548,268 candidate protein
-sequences extracted from metagenome data sets. A full hmmsearch of IMG against
-the Pfam HMM database [16] using a naïve HMMER3 configuration would require
-more than 600,000 Haswell node hours to complete.
+sequences extracted from metagenome data sets. A full `hmmsearch` of IMG
+against the Pfam HMM database [16] using a naïve HMMER3 configuration would
+require more than 600,000 Haswell node hours to complete.
 
 The needs, demands, and behaviors of NERSC users, and available systems,
 preclude the use of existing research on the optimization of HMMER3. There is
-no user demand at NERSC for any MPI implementation of hmmsearch; waiting a few
-hours for one or more single node jobs with better throughput is chosen in lieu
-of the user perceived mental overhead of dealing with MPI. This rules out the
-use of optimization projects such as MPI-HMMER [14] that target parallel file
-systems via an MPI layer. It further hinders MPI-HMMER that it is a port of the
-less powerful HMMER2 algorithm and it’s source and documentation website is
-dead. NERSC possesses no production scale GPU or FPGA accelerated nodes so
+no user demand at NERSC for any MPI implementation of `hmmsearch`; waiting a
+few hours for one or more single node jobs with better throughput is chosen in 
+lieu of the user perceived mental overhead of dealing with MPI. This rules out 
+the use of optimization projects such as MPI-HMMER [14] that target parallel
+file systems via an MPI layer. It further hinders MPI-HMMER that it is a port
+of the less powerful HMMER2 algorithm and it’s source and documentation website
+is dead. NERSC possesses no production scale GPU or FPGA accelerated nodes so
 those categories of existing research are also not applicable.
 
-Performance of Manycore architecture KNL processors depends dominantly on the
-need for very efficient thread implementations. This is a gap in HMMER3
-optimization literature as it currently stands; a highly optimized thread
-implementation would be most appropriate for NERSC users and systems but has
-not been a development of preceding papers. The most direct comparison
-available to this project, and what the users originally used, is the baseline
-parallel code provided with the HMMER3.1b2 release.
+Performance of Manycore architecture KNL processors depends dominantly on very 
+efficient thread implementations. This is a gap in HMMER3 optimization
+literature as it currently stands; a highly optimized thread implementation
+would be most appropriate for NERSC users and systems but has not been a
+development of preceding papers. The most direct comparison available to this
+project, and what the users originally used, is the baseline parallel code
+provided with the HMMER3.1b2 release.
 
 ## Initial Performance Evaluation
 
 ### Thread Scaling
 
 A first experiment was conducted to measure thread scaling of baseline 
-HMMER3.1b2 hmmsearch.  One hundred HMMs were sampled from the Pfam 31.0
+HMMER3.1b2 `hmmsearch`.  One hundred HMMs were sampled from the Pfam 31.0
 database and 100,000 sequences from the UniProt/Swiss-Prot [17] database to
 create an input file pair; ten pairs in total were created. Each input pair was
-passed to hmmsearch for execution on a Haswell node of Cori. Additional runs
+passed to `hmmsearch` for execution on a Haswell node of Cori. Additional runs
 used the same input while progressively increasing the number of threads from
-1 to 16. The strong scaling speedups determined by this experiment are
-presented in Fig. 1. Average wall time of a one-thread job was used to scale
-the speedup of each replicate; these single thread times ranged from 35.7 to
-126.1 seconds with the ten replicate average being 69.4 seconds.
+1 to 16. Average wall time of a one-thread job was used to scale the speedup of
+each replicate; these single thread times ranged from 35.7 to 126.1 seconds
+with the ten replicate average being 69.4 seconds.
 
-Results show naïve use of hmmsearch obtains performance benefit only from the
+![Unmodified HMMER3 thread scaling](hmmer3_thread.png)
+
+Fig. 1. shows speedup achieved by thread scaling `hmmsearch` on one Cori
+Haswell node. Whisker plots show the aggregate speedup factor of 10 different
+input combinations taken from Swiss-Prot and Pfam databases. The dotted line
+shows the theoretical perfect scaling trendline and is intentionally cut off to
+preserve detail in the whisker plot.
+
+Results show naïve use of `hmmsearch` obtains performance benefit only from the
 first four to five threads and any additional have minimal positive impact.
 Though not shown, this trend continues with consistently flat speedup and even
 degradation when utilizing more than 16 threads on a Haswell node. The same
@@ -187,7 +194,7 @@ longer wall times due to lack of L3 cache and the core-per-core weakness of KNL
 relative to Haswell.
 
 It is well established in the literature that the length of sequences and HMMs
-given to hmmsearch affects performance and scaling [1, 5, 6, 7, 12]. For all
+given to `hmmsearch` affects performance and scaling [1, 5, 6, 7, 12]. For all
 experiments conducted in this work a large number of sampled HMMs (100 or more)
 and sequences (100,000 or more) are used for experiments, along with
 replications of unique samples (usually 10); these large samplings are intended
@@ -200,12 +207,12 @@ Given the poor performance of only using threads to scale HMMER3, many users
 have adapted a mitigation strategy that reclaims modest performance at the
 expense of an obnoxious but endurable amount of added complexity. This method
 uses the file system as an additional layer of parallel decomposition: split
-input files into shards, run multiple hmmsearch processes simultaneously, and
+input files into shards, run multiple `hmmsearch` processes simultaneously, and
 then join the outputs. This idea is similar to methods devised in earlier
 works, though implemented purely with file manipulation instead of MPI,
 parallel file system, or source code modification.
 
-Using the file system to parallelize hmmsearch is not trivial to implement on
+Using the file system to parallelize `hmmsearch` is not trivial to implement on
 Cori. Slurm support for concurrent background execution of multiple processes
 on a single reserved compute node is currently not correct, so a workaround
 must be used which employs Multiple Program Multiple Data (MPMD) mode. Designed
@@ -214,48 +221,58 @@ communicator, MPMD allows the assignment of multiple process executions with
 unique command line parameters to disjoint sets of cores on a node. In this
 case the user simply ignores the MPI support.
 
-Fig. 2 shows an example job submission script to execute an MPMD hmmsearch with
-multiple shards of an input file. A number of details in this configuration are
-notable. The srun flags –n and –c determine the total number of processes and
-the number of cores allocated to each, but notice their product is 64 and not
-the expected 32. This is because Haswell processors possess Hyper-Threading
-(HT) that, for resource allocation purposes, is treated as two logical cores
-per single physical core. Those two logical cores compete for shared resources
-to the extreme degree that using HT results in only a 5-10% performance gain
-with most applications; for the remainder of this writing HT will be avoided
-as not worth the trouble. It’s unlikely the file split will perfectly balance
-load so the –k flag is used to disable the default MPMD behavior of ending a
-job when any one of its processes first exits. Note the ability to use the %t
-symbol in an MPMD configuration script to access the unique index of each task
-for use in parameters. Finally, outside of the scripting, there is an
-additional complexity for any pipeline or workflow using sharded input file
-hmmsearch, as it must assume the responsibility to divide inputs, store
-intermediate files, and merge output files.
-
-An experiment was performed to demonstrate the possible configurations and
-performance consequences of using hmmsearch with split input files. The ten
-input file pairs used in the thread scaling experiment were reused, with the
-modification that sets of divided input sequence files were created to
-distribute their total content between 2, 4, 8, 16, and 32 files. The number of
-input sequence files determined the number of hmmsearch processes used and the
-number of threads allocated to each that would fully utilize 32 Haswell cores.
-Fig. 3 shows the speedup achieved by various ratios of threads to split files
-along with a theoretical ceiling based on perfect scaling of single thread
-performance to the full node. Amusingly, ignoring the hmmsearch thread
-implementation completely and only using the file system to parallelize
-achieves the best performance.
-
-```
 Slurm Batch Script
+```
 #SBATCH -N 1
 #SBATCH -t 00:30:00
 #SBATCH -C haswell
-srun -n 16 -c 4 --cpu_bind=cores --multi-prog –k 
-	mpmd_16.conf
-mpmd_16.conf
-0-15 ./hmmsearch --cpu 1 -o out%t.txt
-	pfam/input.%t.hmm sequence.fasta
+srun -n 16 -c 4 --cpu_bind=cores --multi-prog –k mpmd_16.conf
 ```
+mpmd_16.conf
+```
+0-15 ./hmmsearch --cpu 1 -o out%t.txt pfam/input.%t.hmm sequence.fasta
+```
+
+Fig. 2 shows an example job submission script to execute an MPMD `hmmsearch`
+with multiple shards of an input file. A number of details in this
+configuration are notable. The `srun` flags `–n` and `–c` determine the total
+number of processes and the number of cores allocated to each, but notice their
+product is 64 and not the expected 32. This is because Haswell processors
+possess Hyper-Threading (HT) that, for resource allocation purposes, is treated
+as two logical cores per single physical core. Those two logical cores compete
+for shared resources to the extreme degree that using HT results in only a
+5-10% performance gain with most applications; for the remainder of this
+writing HT will be avoided as not worth the trouble. It’s unlikely the file
+split will perfectly balance load so the `–k` flag is used to disable the
+default MPMD behavior of ending a job when any one of its processes first
+exits. Note the ability to use the `%t` symbol in an MPMD configuration script
+to access the unique index of each task for use in parameters. Finally, outside
+of the scripting, there is an additional complexity for any pipeline or
+workflow using sharded input file `hmmsearch`, as it must assume the
+responsibility to divide inputs, store intermediate files, and merge output
+files.
+
+An experiment was performed to demonstrate the possible configurations and
+performance consequences of using `hmmsearch` with split input files. The ten
+input file pairs used in the thread scaling experiment were reused, with the
+modification that sets of divided input sequence files were created to
+distribute their total content between 2, 4, 8, 16, and 32 files. The number of
+input sequence files determined the number of `hmmsearch` processes used and
+the number of threads allocated to each that would fully utilize 32 Haswell
+cores.
+
+![Unmodified HMMER3 exploring multi-processing ratios](hmmer3_file.png)
+
+Fig. 3 shows the speedup achieved by various ratios of threads to split files
+along with a theoretical ceiling based on perfect scaling of single thread
+performance to the full node. Cori Haswell node `hmmsearch` speedup achieved by
+combining thread scaling with split input file scaling. A single whisker column
+shows the aggregate speedup factor of 10 different input combinations taken
+from UniProtKB/Swiss-Prot and Pfam databases. The dotted line shows a ceiling 
+calculated from theoretical perfect scaling. Six different combinations of 
+input shard number and threads per process are shown. Amusingly, ignoring the 
+`hmmsearch` thread implementation completely and only using the file system to
+parallelize achieves the best performance.
 
 Note that splitting input file contents by round robin assignment of an entire
 sequence or HMM to each shard is not the most equal distribution of work
@@ -287,19 +304,19 @@ suggests memory bandwidth or latency is indeed a limit on performance.
 Experiments running hmmsearch with modified clock speed suggest less than 4% of
 the running time can be attributed to memory performance limitations.
 
-The thread implementation of hmmsearch poses a curious difficulty for all
+The thread implementation of `hmmsearch` poses a curious difficulty for all
 modern performance analysis tools. Each input HMM causes the master thread to
-fork a number of child threads equal to the --cpu flag. When computation is
+fork a number of child threads equal to the `--cpu` flag. When computation is
 complete these threads are discarded, the next HMM is read, and a new set of
 threads are forked. Threading analysis tools shown this behavior cannot track
 the relationship between subsequent groups of forked threads and instead report
 thousands of independent and temporally disjoint threads each with a tiny
-fraction of the total compute. Any rigorous analysis of hmmsearch thread
+fraction of the total compute. Any rigorous analysis of `hmmsearch` thread
 performance must employ a manual aggregation of this information into
 comprehensible form.
 
 The CrayPat performance analysis tool was used to collect performance data
-while running hmmsearch.  The executable was augmented with pat_build to
+while running `hmmsearch`. The executable was augmented with `pat_build` to
 collect function call sampling data. Functions were sorted into four
 categories: input sequence I/O and parsing, thread creation and destruction,
 thread blocking, and computation. Large sampling reports of thread behavior
@@ -307,7 +324,7 @@ were manually manipulated in a spreadsheet to aggregate behavior by category
 and distinguish master and worker threads.
 
 Understanding these results requires a detailed explanation of the threading
-model and data structure used to parallelize hmmsearch. Threads are organized
+model and data structure used to parallelize `hmmsearch`. Threads are organized
 around a single master that reads and parses all input, maintains a
 synchronized queue and loads units of work into it, spawns and destroys worker
 threads, removes completed work from the queue, and writes output to file. A
@@ -316,39 +333,9 @@ distributes sequences to the workers in this team for search against the HMM.
 When all searches against that HMM are complete the worker team is destroyed.
 The process is repeated until all HMMs have been searched.
 
-Function sampling results presented in Table I. demonstrate the full range of
-pathology when hmmsearch master and worker threads distribute work amongst
-themselves.
-
-Choosing no worker threads activates the serial version of hmmsearch and
-incurs no thread overhead or load balance problem; the ratio of I/O to compute
-is 1:6, which is conspicuously close to the empirically determined ideal number
-of worker threads.
-
-When one worker thread is present the master thread performs essentially the
-same amount of I/O work as it does in the serial case, but fills all time
-previously used for compute with thread blocking, yielding a very similar total
-wall time. The unimpressive speed gain can be explained as the master thread
-filling the work queue faster than one worker can empty it. A maximum queue
-capacity is quickly reached where the master blocks as it waits for additional
-input space to become available.
-
-An experiment with fifteen worker threads demonstrates in extremis the opposite
-imbalance relative to one fully loaded worker thread. In this second case, the
-master thread has increased it’s fraction of time spent performing I/O by a
-factor of three and significantly reduced the amount of queue related blocking,
-but replaced that queue spinning with thread fork and join overhead. The
-average worker thread spends only 25% of execution performing search while the
-rest is lost blocking on the synchronized queue as it waits for new data to
-become available. This behavior is a result of the single master thread being
-unable to supply sequence at a rate comparable to the rate at which workers
-consume it. Additionally, the master is burdened by thread creation and
-destruction overhead. This further explains why split input file hmmsearch
-scales so much more effectively: having more than one master thread in
-different processes both reduces thread overhead for each and enables sequence
-parsing to occur in parallel. The overall effect is the rate of input
-preparation increases and more worker threads can be effectively supplied with
-data.
+Function sampling results presented in the following table demonstrate the full
+range of pathology when `hmmsearch` master and worker threads distribute work
+amongst themselves.
 
 <table>
   <colgroup span="1"></colgroup>
@@ -439,11 +426,41 @@ data.
   </tr>
 </table>
 
+Choosing no worker threads activates the serial version of `hmmsearch` and
+incurs no thread overhead or load balance problem; the ratio of I/O to compute
+is 1:6, which is conspicuously close to the empirically determined ideal number
+of worker threads.
+
+When one worker thread is present the master thread performs essentially the
+same amount of I/O work as it does in the serial case, but fills all time
+previously used for compute with thread blocking, yielding a very similar total
+wall time. The unimpressive speed gain can be explained as the master thread
+filling the work queue faster than one worker can empty it. A maximum queue
+capacity is quickly reached where the master blocks as it waits for additional
+input space to become available.
+
+An experiment with fifteen worker threads demonstrates in extremis the opposite
+imbalance relative to one fully loaded worker thread. In this second case, the
+master thread has increased it’s fraction of time spent performing I/O by a
+factor of three and significantly reduced the amount of queue related blocking,
+but replaced that queue spinning with thread fork and join overhead. The
+average worker thread spends only 25% of execution performing search while the
+rest is lost blocking on the synchronized queue as it waits for new data to
+become available. This behavior is a result of the single master thread being
+unable to supply sequence at a rate comparable to the rate at which workers
+consume it. Additionally, the master is burdened by thread creation and
+destruction overhead. This further explains why split input file `hmmsearch`
+scales so much more effectively: having more than one master thread in
+different processes both reduces thread overhead for each and enables sequence
+parsing to occur in parallel. The overall effect is the rate of input
+preparation increases and more worker threads can be effectively supplied with
+data.
+
 Results from CrayPat experiments also aggregate to suggest a target for
 optimization. Less than 2% of the sampled time attributed to I/O is spent in
-system buffered blocking read calls; the rest is in sqascii_Read() and
-header_fasta(), both of which are input parsing functions. This glut is a
-direct consequence of the data access pattern in the hmmsearch top-level
+system buffered blocking read calls; the rest is in `sqascii_Read()` and
+`header_fasta()`, both of which are input parsing functions. This glut is a
+direct consequence of the data access pattern in the `hmmsearch` top-level
 application. A small overhead is needed to read, parse, and error check one
 sequence from disk, but all such work is discarded and duplicated for each new
 model. These parsing functions are a primary factor limiting the rate new
@@ -452,16 +469,16 @@ application throughput.
 
 ## Modifications
 
-### New hpc_hmmsearch Driver
+### New `hpc_hmmsearch` Driver
 
 All of the following optimizations have been implemented by duplicating and
-then modifying only the top-level hmmsearch driver (hmmsearch.c) into a new
-driver (hpc_hmmsearch.c) while leaving the core pipeline intact. Code
+then modifying only the top-level hmmsearch driver (`hmmsearch.c`) into a new
+driver (`hpc_hmmsearch.c`) while leaving the core pipeline intact. Code
 implementing the pthread or MPI use of the synchronized work queue was removed
 and replaced with a system based on OpenMP task directives. Restricting the
 scope of modification to only the top-level driver significantly reduced the
 analysis, engineering, quality assurance, and time necessary to complete the
-project. The new driver application will be referred to as hpc_hmmsearch.
+project. The new driver application will be referred to as `hpc_hmmsearch`.
 
 ### Input Data Buffers
 
@@ -481,9 +498,9 @@ other configuration decisions or optimizations.
 ### Concurrent HMM searches
 
 The distribution of HMMs amongst worker threads has been changed in
-hpc_hmmsearch. The original decomposition reads a single HMM, copies it to each
-worker, divides input sequences between all threads, synchronizes threads, and
-aggregates results when all searches against that model are complete. This
+`hpc_hmmsearch`. The original decomposition reads a single HMM, copies it to
+each worker, divides input sequences between all threads, synchronizes threads,
+and aggregates results when all searches against that model are complete. This
 arrangement minimizes the time to search a single model but introduces one
 thread synchronization and the potential manifestation of load imbalance for
 each additional model. The modified driver distributes a unique HMM to each
@@ -498,8 +515,8 @@ cores (a situation which does not fit our usage).
 ### Overlapping I/O and Compute Using OpenMP Tasking
 
 All pthread code has been replaced with an OpenMP implementation based on task
-directives. At the top level of behavior, hmmsearch input file contents define
-an all-against-all search area. The total area of this search can be
+directives. At the top level of behavior, `hmmsearch` input file contents
+define an all-against-all search area. The total area of this search can be
 arbitrarily subdivided and the resulting rectangles streamed to teams of worker
 tasks while I/O tasks execute alongside but on input required during the next
 rectangle of work in the stream. The change was implemented as follows:
@@ -526,13 +543,13 @@ automatically convert itself to an additional worker thread.
 
 ### Dynamic Load Balancing
 
-Load balancing hmmsearch is a challenge due to the highly conditional nature
+Load balancing `hmmsearch` is a challenge due to the highly conditional nature
 of its control flow. Though it is simple enough to dispatch equal amounts of
 sequence to each worker or balance the number of residues, uneven
 concentrations of search hits advancing deeper into the pipeline and consuming
 disproportionate resources cannot be anticipated and lead to significant risk
 of imbalance. This effect has been modestly mitigated using OpenMP taskgroup to
-implement a work stealing mechanism in hpc_hmmsearch.
+implement a work stealing mechanism in `hpc_hmmsearch`.
 
 All worker tasks are issued within a taskgroup directive and the number of
 outstanding tasks is tracked; when that number falls below the number of cores
@@ -548,43 +565,56 @@ that may remain outstanding).
 ## Results
 
 An initial performance experiment is included to directly contrast the
-thread-scaling difference between the original hmmsearch driver and
-hpc_hmmsearch. Fig. 4 presents data obtained by running both hmmsearch drivers
-on the Edison system with the same configuration as used to create Fig. 1
-(Edison is architecturally analogous to Cori Haswell, but one generation older
-with 24 cores per node instead of 32).
+thread-scaling difference between the original `hmmsearch` driver and
+`hpc_hmmsearch`. 
 
-Best practice performance has been evaluated by running both hpc_hmmsearch and
-sharded file hmmsearch with a new larger set of sampled input files on both
-types of Cori nodes. The entire Pfam-A database was used for each experimental
-search by creating sets of divisions that round-robin distribute all Pfam HMMs
-between 2, 4, 8, 16, 32, and 64 files. Note that this division of the HMM
-database is different from earlier file shard experiments which divided the
-sequence database (A minor experiment confirmed that either division is
+![thread scaling of hmmsearch and hpc_hmmsearch](old_vs_new_thread.png )
+
+Fig. 4 presents data obtained by running both drivers on the Edison system with
+the same configuration as used to create Fig. 1 (Edison is architecturally
+analogous to Cori Haswell, but one generation older with 24 cores per node
+instead of 32). Speedup is measured by thread scaling `hmmsearch` (light) and
+`hpc_hmmsearch` (dark) on one Edison Ivy Bridge node with 24 cores. Whisker
+plots show the aggregate speedup factor of 10 different input combinations
+taken from Swiss-Prot and Pfam databases. The dotted line shows the theoretical
+perfect scaling trendline of the runs. The solid line shows the theoretical
+perfect scaling trendline of `hpc_hmmsearch` progression.
+
+Best practice performance has been evaluated by running both `hpc_hmmsearch`
+and sharded file `hmmsearch` with a new larger set of sampled input files on
+both types of Cori nodes. The entire Pfam-A database was used for each
+experimental search by creating sets of divisions that round-robin distribute
+all Pfam HMMs between 2, 4, 8, 16, 32, and 64 files. Note that this division of
+the HMM database is different from earlier file shard experiments which divided
+the sequence database (A minor experiment confirmed that either division is
 equivalent in terms of performance, though in practice, dividing the HMM
 database is preferred because it is more convenient to implement in a
 workflow). Sequence files for this experiment were created via sampling one
 million protein sequences from the UniProtKB/TrEMBL database.
 
+![thread scaling of hpc_hmmsearch on Haswell](hmmer3_hpc.png)
+
 Fig. 5 shows scaling performance results when running the most effective Pfam
-file decompositions with hmmsearch and hpc_hmmsearch on a Haswell Cori node.
+file decompositions with `hmmsearch` and `hpc_hmmsearch` on a Haswell Cori node.
 Reported speedup is scaled against the wall time of running one single threaded
-hmmsearch job with the same input. The best performing hmmsearch among the
+`hmmsearch` job with the same input. The best performing hmmsearch among the
 available configurations, using 32 serial processes, yields an average of 17.4
-speedup.  Average speedup of hpc_hmmsearch is 26.4, a 51% improvement and 61%
+speedup.  Average speedup of `hpc_hmmsearch` is 26.4, a 51% improvement and 61%
 closer to the theoretical maximum throughput.
 
+![thread scaling of hpc_hmmsearch on KNL](hmmer3_knl_hpc.png)
+
 Fig. 6 displays Knights Landing node scaling performance results for a range of
-hmmsearch file decompositions and hpc_hmmsearch. The same series of Pfam input
-files were used as the Haswell performance experiment, but the number of
+`hmmsearch` file decompositions, and `hpc_hmmsearch`. The same series of Pfam
+input files were used as the Haswell performance experiment, but the number of
 sequences sampled was reduced by 80% to 200,000. The reported speedup is scaled
 to the projected time needed to run one single thread hmmsearch on a KNL node.
 A dashed line marks an upper bounded speedup of 136, corresponding to the full
 utilization of two hardware threads on each KNL core. Of several reasonable
-decompositions, the best performing hmmsearch configuration is 32 input file
+decompositions, the best performing `hmmsearch` configuration is 32 input file
 shards with 4 threads each, producing an average speedup factor of 57.5. The
-KNL hpc_hmmsearch running with 136 threads yields an average speedup factor of
-116.1; this is a 101% improvement above hmmsearch best practice on the KNL
+KNL `hpc_hmmsearch` running with 136 threads yields an average speedup factor
+of 116.1; this is a 101% improvement above `hmmsearch` best practice on the KNL
 platform and almost 4x closer to the theoretical maximum. Though KNL speedup
 gains are much better than Haswell, the base performance of KNL is handicapped
 enough that the shortest wall times using the best configurations are still
@@ -595,9 +625,9 @@ obtained using a Haswell node.
 One important point is examination of the performance discrepancy between
 running HMMER3 on Haswell vs. KNL nodes. Optimally configured and everything
 else being equal, a HMMER3 job will always run faster on a Haswell node than on
-a KNL node. Haswell completes a single-thread hmmsearch job 3.9x faster than
+a KNL node. Haswell completes a single-thread `hmmsearch` job 3.9x faster than
 the same single-thread job on KNL, a well-configured split file job 1.2x
-faster, and an hpc_hmmsearch job 1.45x faster. The flexibility to run either
+faster, and an `hpc_hmmsearch` job 1.45x faster. The flexibility to run either
 is, however, still valuable as being able to run HMMER3 well on KNL can still
 benefit users when balancing allocation charge factors, queue demand
 differences, and the fact that over four times as many KNL nodes are available
@@ -630,27 +660,27 @@ obsolete when HMMER4 is released. To be successful this project needed to be
 completed and enter production well before then.
 
 A revised calculation of the estimated time needed to search IMG against Pfam
-quantifies the benefit to NERSC users since hpc_hmmsearch has entered
+quantifies the benefit to NERSC users since `hpc_hmmsearch` has entered
 production. I must concede the initial 600,000 CPU hour estimate was
 incendiary; a real power user would not use the naïve decomposition but instead
 split Pfam into 8 parts, IMG into 2,500 fasta files, and submit 2,500 jobs each
-packing 8 hmmsearch with 4 threads. The total allocation would use
+packing 8 `hmmsearch` with 4 threads. The total allocation would use
 approximately 60,000 CPU hours, be throttled by the policy limit of 200 queued
 jobs per user, and take 25 days to pass entirely through the queue. A second
-researcher generating the same data using hpc_hmmsearch could split 1,000 fasta
-files, queue 1,000 jobs, consume 23,000 CPU hours, and fully clear the queue in
-10 days.
+researcher generating the same data using `hpc_hmmsearch` could split 1,000
+fasta files, queue 1,000 jobs, consume 23,000 CPU hours, and fully clear the
+queue in 10 days.
 
 Collaboration with a FICUS JGI-NERSC [18] project provides a detailed real
-world anecdote of the performance gained using hpc_hmmsearch. A component in
+world anecdote of the performance gained using `hpc_hmmsearch`. A component in
 the project workflow required a HMMER3 search of 2.2 billion IMG protein
-sequences against 229 curated HMMs. Basic use of hmmsearch for this task is
+sequences against 229 curated HMMs. Basic use of `hmmsearch` for this task is
 estimated to be almost 60,000 CPU hours while split file configuration would
 consume approximately 7,500 hours. These usage numbers are overestimates
 because they are calculated with scaling factors derived from our earlier
 experiments; the distribution of the project’s metagenomic data contains fewer
 search hits and thus spends a smaller fraction of time in deeper pipeline
-stages. We worked with the project to integrate hpc_hmmsearch into their
+stages. We worked with the project to integrate `hpc_hmmsearch` into their
 workflow. The resulting work split the input sequence into 184 parts of 12
 million sequences each and consumed only 130 CPU hours.
 
@@ -672,18 +702,18 @@ single copy of that data structure in the OpenMP shared memory environment.
 This work describes in detail the process of adapting HMMER3 to better conform
 to the needs of the NERSC user community and the Cori supercomputer.
 Performance analysis indicated that data processing in the top level driver of
-hmmsearch was the best target for optimization efforts. Only a modest amount of
-labor was necessary to refactor the threading architecture to use OpenMP
+`hmmsearch` was the best target for optimization efforts. Only a modest amount
+of labor was necessary to refactor the threading architecture to use OpenMP
 tasking, overlap I/O and computation activity, automatically load balance
 between tasks, reduce I/O overhead by buffering input sequence, and simplify
-the best practice use of hmmsearch in a workflow context. The hpc_hmmsearch
+the best practice use of `hmmsearch` in a workflow context. The `hpc_hmmsearch`
 driver has been in production on NERSC systems for over a year at the time of
 this publication and has cumulatively reduced system-load by hundreds of
 thousands of CPU hours.
 
 ## Source Code
 
-The hpc_hmmsearch driver can be obtained at
+The `hpc_hmmsearch` driver can be obtained at
 https://github.com/Larofeticus/hpc_hmmsearch
 along with instructions for installation and usage.
 
