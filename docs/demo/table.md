@@ -12,7 +12,7 @@ The output of a datebase join operation is probably better displayed
 as two seperate tables.
 
 Example:
-[Cori configuration](http://www.nersc.gov/users/computational-systems/cori/configuration/)
+[Cori configuration](https://www.nersc.gov/users/computational-systems/cori/configuration/)
 
 | Category            | Quantity | Description                                                                    |
 |---------------------|:--------:|--------------------------------------------------------------------------------|

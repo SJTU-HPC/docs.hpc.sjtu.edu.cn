@@ -11,4 +11,4 @@ hero: docs.nersc.gov is in beta
  1. [Reset my password](accounts/index.md#forgotten-passwords)
 
 !!!warning "BETA"
-	Migration of content from [http://www.nersc.gov/users/](http://www.nersc.gov/users/) is underway.
+	Migration of content from [https://www.nersc.gov/users/](https://www.nersc.gov/users/) is underway.

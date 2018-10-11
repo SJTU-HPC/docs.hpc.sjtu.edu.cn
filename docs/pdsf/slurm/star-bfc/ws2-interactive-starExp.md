@@ -80,7 +80,7 @@ $ root4star -b -q
   *   Version   5.34/30     23 April 2015   *
   *                                         *
   *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
+  *          https://root.cern.ch            *
   *                                         *
   *******************************************
 

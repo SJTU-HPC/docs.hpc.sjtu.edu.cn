@@ -235,7 +235,7 @@ can print a large amount of logs, and we removed some here for brevity.
     ---> 72ef1cf971d1
     Step 2/6 : RUN apt-get update --quiet -y && apt-get install --quiet -y python-flask
     ---> Running in b64e4f148838
-    Ign:1 http://deb.debian.org/debian stretch InRelease
+    Ign:1 https://deb.debian.org/debian stretch InRelease
     ...
     ...
     Removing intermediate container b64e4f148838
@@ -372,7 +372,7 @@ world.
     server {
         listen 8080;
         location / {
-          proxy_pass http://app:5000;
+          proxy_pass https://app:5000;
           proxy_set_header Host $host:$server_port;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Host $server_name;

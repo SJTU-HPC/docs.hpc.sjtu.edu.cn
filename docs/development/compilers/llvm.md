@@ -39,4 +39,4 @@ The module `llvm/5.0.0-gnu-flang` contains `flang` in addition to `clang`. This 
 ##Documentation
 For questions about using the Intel compilers at NERSC file a support ticket under [consulting services](https://help.nersc.gov).
 
-For more information, see [LLVM](http://llvm.org/) and [Clang](http://clang.llvm.org/) websites.
+For more information, see [LLVM](https://llvm.org/) and [Clang](https://clang.llvm.org/) websites.

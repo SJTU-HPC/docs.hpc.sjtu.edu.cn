@@ -140,7 +140,7 @@ Denovo currently supports running images on the login nodes. Cori and Edison do 
 ```bash
 denovo> shifter --image=registry.services.nersc.gov/jgi/hmmer:latest hmmscan -h
 # hmmscan :: search sequence(s) against a profile database
-# HMMER 3.1b2 (February 2015); http://hmmer.org/
+# HMMER 3.1b2 (February 2015); https://hmmer.org/
 # Copyright (C) 2015 Howard Hughes Medical Institute.
 # Freely distributed under the GNU General Public License (GPLv3).
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -158,7 +158,7 @@ denovo> salloc
 salloc: Granted job allocation 33066
 bash-4.1$ shifter --image=registry.services.nersc.gov/jgi/hmmer:latest hmmscan -h
 # hmmscan :: search sequence(s) against a profile database
-# HMMER 3.1b2 (February 2015); http://hmmer.org/
+# HMMER 3.1b2 (February 2015); https://hmmer.org/
 # Copyright (C) 2015 Howard Hughes Medical Institute.
 # Freely distributed under the GNU General Public License (GPLv3).
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -189,8 +189,8 @@ NAME="Alpine Linux"
 ID=alpine
 VERSION_ID=3.5.2
 PRETTY_NAME="Alpine Linux v3.5"
-HOME_URL="http://alpinelinux.org"
-BUG_REPORT_URL="http://bugs.alpinelinux.org"
+HOME_URL="https://alpinelinux.org"
+BUG_REPORT_URL="https://bugs.alpinelinux.org"
 ```
 
 So, in this example we specified the image in the #SBATCH directive, and just used `shifter` in the script body to run a command from that container. That's a bit cleaner than having `shifter --image=...` sprinkled throughout the batch script, but we can go one step further. By specifying the image on the `sbatch` submit command, and not in the script, we can make a script that works with several different versions of the container without change. This example simply tells you what OS the container thinks its running, and we can tell the script to run different containers at submit-time:
@@ -211,8 +211,8 @@ NAME="Alpine Linux"
 ID=alpine
 VERSION_ID=3.5.2
 PRETTY_NAME="Alpine Linux v3.5"
-HOME_URL="http://alpinelinux.org"
-BUG_REPORT_URL="http://bugs.alpinelinux.org"
+HOME_URL="https://alpinelinux.org"
+BUG_REPORT_URL="https://bugs.alpinelinux.org"
 ```
 
  now run the same script with a different image:
@@ -231,9 +231,9 @@ ID=ubuntu
 ID_LIKE=debian
 PRETTY_NAME="Ubuntu 16.04.2 LTS"
 VERSION_ID="16.04"
-HOME_URL="http://www.ubuntu.com/"
-SUPPORT_URL="http://help.ubuntu.com/"
-BUG_REPORT_URL="http://bugs.launchpad.net/ubuntu/"
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
 VERSION_CODENAME=xenial
 UBUNTU_CODENAME=xenial
 ```

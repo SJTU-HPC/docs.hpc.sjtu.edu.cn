@@ -53,4 +53,4 @@ and on the highest likelihood of a successful, working implementation.
 
 Both local and remote participants are welcome.
 
-To see the schedule of the next SpinUp program, please see http://www.nersc.gov/users/data-analytics/spin/
+To see the schedule of the next SpinUp program, please see https://www.nersc.gov/users/data-analytics/spin/

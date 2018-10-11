@@ -110,7 +110,7 @@ read-only basis. The following command will allow anyone to get a `clone` of
 your SG-repository:
 ```
 HTTP_REPO=portal.nersc.gov/project/<project>/git/<git_repository_name>.git
-git clone http://${HTTP_REPO} <git_repository_name>
+git clone https://${HTTP_REPO} <git_repository_name>
 Initialized empty Git repository in .../<git_repository_name>/.git/
 ```
 You now have an L-repository that is a local, read-only clone of the
@@ -141,7 +141,7 @@ That operation will require authentication via NERSC's LDAP service.
 Authenticated access is via the host `portal-auth.nersc.gov`. Your
 SG-repository is in the same relative location on `portal-auth` as on `portal`.
 ```
-http://portal-auth.nersc.gov/project/<project>/git/<git_repository_name>.git
+https://portal-auth.nersc.gov/project/<project>/git/<git_repository_name>.git
 ```
 The following puts content into a previously empty SG-repository. Updating the
 SG-repository with subsequent new content proceeds in the same way. In order to
@@ -269,7 +269,7 @@ public ones anyway.
 
 You can then access your repositories anonymously via the web at
 ```
-http://portal.nersc.gov/project/<project>/gitweb/gitweb.cgi
+https://portal.nersc.gov/project/<project>/gitweb/gitweb.cgi
 ```
 
 ## Troubleshooting
