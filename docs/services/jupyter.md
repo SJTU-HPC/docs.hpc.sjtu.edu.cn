@@ -1,67 +1,195 @@
-NERSC provides Jupyter (formerly known as IPython) services for exploratory data analytics over the web. At NERSC, we view services and others like them as the way to create new and exciting paths to high-performance computing for interactive data analytics.
+Jupyter is an essential component of NERSC's Data and Analytics Services ecosystem.
+Use Jupyter at NERSC to:
 
-Currently, we are developing strategies and building infrastructure that helps us provide services like these to users in a scalable way. This effort requires a good deal of R&D on our part, so for the time being we label these services as experimental.  For example, we caution users not to consider Jupyter or RStudio as mission-critical infrastructure for a new experiment or project without consulting with NERSC staff first. But making this easier in the near future is our plan.
+* Perform exploratory data analytics and visualization of data stored on the NERSC Global Filesystem (NGF) or in databases,
+* Guide machine learning through distributed training, hyperparameter optimization, model validation, prediction, and inference,
+* Manage workflows involving complex simulations and data analytics through the Cori batch queue,
+* ... or do other things we haven't thought of yet.
 
-At the same time, we do encourage users to experiment with these services and give us feedback on how we can make them better. Please report any issues to NERSC consultants at "consult at nersc dot gov."
+[Jupyter](https://jupyter.readthedocs.io/en/latest/)
+is a flexible, popular literate-computing web application for creating notebooks containing code, equations, visualization, and text.
+Notebooks are documents that contain both computer code and rich text elements (paragraphs, equations, figures, widgets, links).
+They are human-readable documents containing analysis descriptions and results but are also executable data analytics artifacts.
+Notebooks are associated with *kernels*, processes that actually execute code.
+Notebooks can be shared or converted into static HTML documents.
+They are a powerful tool for reproducible research and teaching.
 
-## Jupyter
+## JupyterHub
 
-Jupyter (formerly IPython) is a flexible, popular literate-computing web application for creating notebooks containing code, equations, visualization, and text. Notebooks are documents that contain both computer code and rich text elements (paragraphs, equations, figures, widgets, links). They are human-readable documents containing analysis descriptions and results but are also executable documents for data analysis. Notebooks can be shared between researchers, or even converted into static HTML documents. As such they are a powerful tool for reproducible research and teaching.
+[JupyterHub](https://jupyterhub.readthedocs.io/en/stable/)
+provides a multi-user hub for spawning, managing, and proxying multiple instances of single-user Jupyter notebook servers.
+At NERSC, you authenticate to a JupyterHub instance using your NERSC credentials.
+There are currently two such hubs at NERSC.
+Eventually these two hubs will be merged and an options form will allow you to select how and where your notebook will spawn.
+The two existing hubs are:
 
-A notebook is associated with one or more computational engines called kernels. These kernels execute code passed to them from a notebook process. When the Jupyter project was spun off from IPython, IPython itself became one of many such kernels. A large number of kernels for a number of languages and programming environments have been developed to work with Jupyter.
+* https://jupyter.nersc.gov/
+    * Runs as a [Spin](/services/spin/) service and is thus external to NERSC's Cray systems
+    * Notebooks spawned by this service have access to GPFS (e.g. `/project`, `$HOME`)
+    * Python software environments and kernels run in the Spin service, not on Cori
+* https://jupyter-dev.nersc.gov/
+    * Spawns Jupyter notebooks on a special-purpose large-memory node of Cori
+    * Exposes GPFS and Cori `$SCRATCH` though not Edison `$SCRATCH`
+    * Default Python software environment is the same as one of the modules found on Cori
+    * Notebooks can submit jobs to Cori batch queues via simple Slurm Magic commands
 
-On a laptop or workstation, a user typically starts up the Jupyter notebook server application from the command line and uses a web browser on the same system to author notebooks. JupyterHub is a web application that enables a multi-user hub for spawning, managing, and proxying multiple instances of single-user Jupyter notebook servers. At NERSC, JupyterHub itself is run as a science gateway application. Users authenticate to JupyterHub using their NERSC credentials. Jupyter is available at NERSC through two services:
+!!! tip
+    The large-memory login node used by <https://jupyter-dev.nersc.gov/>
+    is a shared resource, so please be careful not to use too many CPUs
+    or too much memory
 
-* The original Jupyter installation https://jupyter.nersc.gov/ runs as a science gateway application and is thus external to NERSC's Cray systems. Notebooks spawned by this service have access to the NERSC Global File System, in particular the /project and global $HOME file systems. They also use Python software environments and kernels that run on the science gateway hardware (not on e.g. Cori).
-* The newer Jupyter installation at https://jupyter-dev.nersc.gov/ actually spawns Jupyter notebooks on a reserved large-memory node of Cori. This means that these notebooks not only can access /project and global home directories, but also Cori $SCRATCH. The Python software environment used in these notebooks matches that found on Cori (Anaconda Python). Notebooks run on jupyter-dev can also submit jobs to the batch queues via simple Slurm Magic commands developed by NERSC staff. Users who have custom kernels that rely on code compiled on Cori will likely find that their kernels only work on jupyter-dev.
-As we develop supporting infrastructure we plan to expand Jupyter offerings, make them more reliable, and create a well-defined service level guarantee. Ultimately we envision a single Jupyter URL at NERSC that will provide a variety of service levels to users.
+## JupyterLab
 
-### Customizing Kernels
-You can customize your notebook experience to incorporate software you have already installed at NERSC.  The following example demonstrates starting up a local IPython kernel when `PATH` and `LD_LIBRARY_PATH` need to be modified. This JSON file, a kernel spec should be placed into `$HOME/.ipython/kernels/mykernel/kernel.json`:
+[JupyterLab](https://jupyterlab.readthedocs.io/en/stable/)
+is the next generation of Jupyter.
+It provides a way to use notebooks, text editors, terminals, and custom components together.
+Documents and activities can be arranged in the interface side-by-side, and integrate with each other.
+
+JupyterLab is new but [ready for use](https://blog.jupyter.org/jupyterlab-is-ready-for-users-5a6f039b8906) now.
+With release 0.33 we have made JupyterLab the default interface to Jupyter on both hubs.
+If you prefer to work with the "classic" interface select "Launch Classic Notebook" from the JupyterLab Help menu.
+Alternatively you can also change the URL from `/lab` to `/tree`.
+
+## Conda Environments as Kernels
+
+You can use one of our default Python 2, Python 3, or R kernels.
+If you have a Conda environment, depending on how it is installed, it may just show up in the list of kernels you can use.
+If not, use the following procedure to enable a custom kernel based on a Conda environment.
+Let's start by assuming you are a user with username `user` who wants to create a Conda environment on Cori and use it from Jupyter.
+
+    cori$ module load python/3.6-anaconda-5.2
+    cori$ conda create -n myenv python=3.6 ipykernel <further-packages-to-install>
+    <... installation messages ...>
+    cori$ source activate myenv
+    cori$ python -m ipykernel install --user --name myenv --display-name MyEnv
+    Installed kernelspec myenv52 in /global/u1/u/user/.local/share/jupyter/kernels/myenv52
+    cori$
+
+Be sure to specify what version of Python interpreter you want installed.
+This will create and install a JSON file called a "kernel spec" in `kernel.json` at the path described in the install command output.
 
 ```json
 {
-  "display_name": "mykernel",
-  "language": "python",
-  "argv": [
-    "/global/homes/u/user/anaconda/bin/python",
-    "-m",
-    "ipykernel",
-    "-f",
-    "{connection_file}"
-  ],
-  "env": {
-    "PATH": 
-    "/global/homes/u/user/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin",
-    "LD_LIBRARY_PATH": 
-    "/global/project/projectdirs/myproject/lib/:/global/homes/u/user/mylib"
-  }
+	"argv": [
+  		"/global/homes/u/user/.conda/envs/myenv52/bin/python",
+  		"-m",
+  		"ipykernel_launcher",
+  		"-f",
+  		"{connection_file}"
+ 	],
+ 	"display_name": "MyEnv52",
+ 	"language": "python"
 }
 ```
 
-The argv field of the kernel specification can point to basically any executable. So if setting up your kernel requires a number of settings to be made to the environment or modules to be loaded, you might want to place all that configuration in a shell script. Here is a further example of how to do this. Create a shell script like:
+## Customizing Kernels
 
-```shell
-#/bin/bash
-module load ...
-export SOMETHING=12345
-/global/homes/u/user/anaconda/bin/python -m ipykernel $@
-```
-
-Suppose you call the above script "kernel-helper.sh."  This script configures your environment and then launches the IPython kernel and forwards along whatever arguments are passed to the script. Then a corresponding kernel specification might be:
+Here is an example kernel spec where the user needs other executables from a custom `PATH` and shared libraries in `LD_LIBRARY_PATH`.
+These are just included in an `env` dictionary:
 
 ```json
 {
-  "display_name": "mykernel",
-  "language": "python",
-  "argv": [
-    "/global/homes/u/user/kernel-helper.sh",
-    "-f",
-    "{connection_file}"
-  ],
-  "env": {
-    "PATH": 
-    "/global/homes/u/user/anaconda/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-  }
+	"argv": [
+  		"/global/homes/u/user/.conda/envs/myenv52/bin/python",
+  		"-m",
+  		"ipykernel_launcher",
+  		"-f",
+  		"{connection_file}"
+ 	],
+ 	"display_name": "MyEnv52",
+ 	"language": "python",
+	"env": {
+    	"PATH":
+			"/global/homes/u/user/other/bin:/usr/local/bin:/usr/bin:/bin",
+    	"LD_LIBRARY_PATH":
+			"/global/project/projectdirs/myproject/lib:/global/homes/u/user/lib"
+  	}
+}
+```
+
+Note however that these environment variables do not prepend or append to existing `PATH` or `LD_LIBRARY_PATH` settings.
+To use them you probably have to copy your entire path or library path, which is quite inconvenient.
+Instead you can use this trick that takes advantage of a helper shell script:
+
+```json
+{
+	"argv": [
+    	"/global/homes/u/user/kernel-helper.sh",
+  		"-f",
+  		"{connection_file}"
+ 	],
+ 	"display_name": "Custom Env",
+ 	"language": "python"
+}
+```
+
+The `kernel-helper.sh` script should be made executable (`chmod u+x kernel-helper.sh`).
+The helper could be like:
+
+```shell
+#/bin/bash
+module load <some-module>
+module load <some-other-module>
+export SOME_VALUE=987654321
+exec /global/homes/u/user/.conda/envs/myenv52/bin/python \
+	-m ipykernel_launcher "$@"
+```
+
+You can put anything you want to configure your environment in the helper script.
+Just make sure it ends with the `ipykernel_launcher` command.
+
+## Shifter Kernels on Jupyter-dev
+
+Shifter works on jupyter-dev.
+To make use of it, create a kernel spec and edit it to run `shifter`.
+The path to Python in your image should be used as the executable.
+Here's an example of how to set it up:
+
+```shell
+{
+	"argv": [
+    	"shifter",
+        "--image=continuumio/anaconda3:latest",
+        "/opt/conda/bin/python",
+        "-m",
+		"ipykernel_launcher",
+        "-f",
+		"{connection_file}"
+	],
+    "display_name": "my-shifter-kernel",
+    "language": "python"
+}
+```
+
+## Spark on Jupyter-dev
+
+You can run small instances (< 4 cores) of Spark on jupyter-dev.
+Create the following kernel spec (you'll need to make the $SCRATCH/tmpfiles, $SCRATCH/spark/event_logs directories first):
+
+```shell
+{
+"display_name": "shifter pyspark",
+"language": "python",
+"argv": [
+"shifter",
+"--image=nersc/spark-2.3.0:v1",
+"--volume=\"/global/cscratch1/sd/<your_dir>/tmpfiles:/tmp:perNodeCache=size=200G\"",
+"/root/anaconda3/bin/python",
+"-m",
+"ipykernel",
+"-f",
+"{connection_file}"],
+"env": {
+"SPARK_HOME": "/usr/local/bin/spark-2.3.0/",
+"PYSPARK_SUBMIT_ARGS": "--master local[1] pyspark-shell
+--conf spark.eventLog.enabled=true
+--conf spark.eventLog.dir=file:///global/cscratch1/sd/<your_dir>/spark/event_logs
+--conf spark.history.fs.logDirectory=file:///global/cscratch1/sd/<your_dir>/spark/event_logs pyspark-shell",
+"PYTHONSTARTUP": "/usr/local/bin/spark-2.3.0/python/pyspark/shell.py",
+"PYTHONPATH": "/usr/local/bin/spark-2.3.0/python/lib/py4j-0.10.6-src.zip:/usr/local/bin/spark-2.3.0/python/",
+"PYSPARK_PYTHON": "/root/anaconda3/bin/python",
+"PYSPARK_DRIVER_PYTHON": "ipython3",
+"JAVA_HOME":"/usr"
+}
 }
 ```

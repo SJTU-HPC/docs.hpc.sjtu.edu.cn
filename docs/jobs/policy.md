@@ -1,7 +1,7 @@
 # Policies
 
 This page details the charging and usage policies for Edison and
-Cori. [Examples](examples.md) for each type of job are available.
+Cori. [Examples](examples/index.md) for each type of job are available.
 
 ## Edison
 
@@ -62,15 +62,15 @@ can share nodes.
 
 Jobs are charged by the node-hour.
 
-!!! example 
+!!! example
 	A job which ran for 35 minutes on 3 nodes on Edison with
-	the regular qos would be charged:	
+	the regular qos would be charged:
 	$$ (35/60)\\ \text{hours}*3\\ \text{nodes} * 48 = 84\\ \text{NERSC hours} $$
 
-!!! example 
+!!! example
 	A job which ran for 12 hours on 4 physical cores (each core has 2 hyperthreads)
 	on Edison with the shared qos would be charged:
-	$$ 12\\ \text{hours} * (2*4\\ \text{cores}/48) * 48 = 96\\ \text{NERSC hours} $$	
+	$$ 12\\ \text{hours} * (2*4\\ \text{cores}/48) * 48 = 96\\ \text{NERSC hours} $$
 
 ## Intended use
 
@@ -96,20 +96,20 @@ The scavenger QOS is not available for jobs submitted against
 a repository with a positive balance. The charging rate for this QOS
 is 0 and it has the lowest priority on all systems.
 
-!!! note 
+!!! note
 	It is *not* possible to directly submit to the scavenger QOS.
 	Jobs will automatically be placed into this QOS if they meet
 	the appropriate criteria.
 
-[^1]: 
+[^1]:
 	The "realtime" QOS is only available via
     [special request](https://nersc.service-now.com/catalog_home.do?sysparm_view=catalog_default).
-	
+
 [^2]:
 	The "scavenger" QOS is *only* available when running a job would
     cause the *repository* (not only the user's allowed fraction)
     balance to go negative.
-   
+
 [^3]:
 	Jobs in the "shared" QOS are only charged for the fraction of the
 	node used.

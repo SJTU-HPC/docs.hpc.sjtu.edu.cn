@@ -1,6 +1,6 @@
 beautifulsoup4==4.6.0
 bs4==0.0.1
-certifi==2017.11.5
+certifi>=2017.11.5
 chardet==3.0.4
 decorator==4.1.2
 idna==2.6

@@ -1,25 +1,53 @@
-image: python:3.6
+image: python:3.7
 
 stages:
+  - build
   - test
   - deploy
-  
-test:
+  - post-deploy
+
+build:
+  stage: build
+  script:
+    - pwd
+    - find .
+    - mkdir -p .build_cache
+    - pip install --cache-dir=.build_cache -r requirements.txt
+    - python --version
+    - mkdocs --version
+    - mkdocs --verbose build
+  artifacts:
+    paths:
+    - public
+    expire_in: 1 week
+  cache:
+    paths:
+      - .build_cache
+    key: "build-$CI_COMMIT_REF_SLUG"
+    
+check_links:
   stage: test
   script:
-    - pip install -r requirements.txt
-    - mkdocs --verbose build
-    - ls -l public
-    - pip install -r util/requirements.txt
+    - mkdir -p .links_cache
+    - pip install --cache-dir=.links_cache -r util/requirements.txt
     - python util/scrape_urls.py public
-  except:
-    - master@NERSC/nersc.gitlab.io
+  allow_failure: true
+  cache:
+    paths:
+      - .links_cache
+    key: "links-$CI_COMMIT_REF_SLUG"
   
+markdown_lint:
+  image: node
+  stage: test
+  script:
+    - npm install -g markdownlint-cli
+    - markdownlint docs
+  allow_failure: true
+            
 pages:
   stage: deploy
   script:
-  - pip install -r requirements.txt
-  - mkdocs --verbose build
   - ls -l public
   - gzip -k -6 -r public/assets/stylesheets
   - gzip -k -6 -r public/assets/javascripts
@@ -29,5 +57,18 @@ pages:
   artifacts:
     paths:
     - public
+  only:
+    - master@NERSC/nersc.gitlab.io
+
+update-search-api:
+  stage: post-deploy
+  image: ubuntu:18.04
+  before_script:
+    - apt-get update; apt-get -y install curl
+  script:
+    - "curl --request POST \
+    --url https://nersc-docs-search-app-214117.appspot.com/reindex \
+    --header 'content-type: application/json' \
+    --data '{\"source\":\"docs\"}'"
   only:
     - master@NERSC/nersc.gitlab.io

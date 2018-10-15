@@ -8,14 +8,9 @@ build workflows.
 
 ## TaskFarmer
 
-FireWorks is a free, open-source code for defining, managing, and
-executing scientific workflows. It can be used to automate
-calculations over arbitrary computing resources, including those that
-have a queueing system. Some features that distinguish FireWorks are
-dynamic workflows, failure-detection routines, and built-in tools and
-execution modes for running high-throughput computations at large
-computing centers. It uses a centralized server model, where the
-server manages the workflows and workers run the jobs.
+[TaskFarmer](workflow/taskfarmer.md) is a utility developed at NERSC to distribute single-node tasks across
+a set of compute nodes - these can be single- or multi-core tasks. TaskFarmer tracks which
+tasks have completed successfully, and allows straightforward re-submission of failed or un-run jobs from a checkpoint file.
 
 ## Swift
 
@@ -27,12 +22,12 @@ general, and is in use in domains ranging from earth systems to
 bioinformatics to molecular modeling.
 
 ```bash
-	module load swift
+module load swift
 ```
 
 ## Fireworks
 
-FireWorks is a free, open-source code for defining, managing, and
+[FireWorks](workflow/fireworks.md) is a free, open-source code for defining, managing, and
 executing scientific workflows. It can be used to automate
 calculations over arbitrary computing resources, including those that
 have a queueing system. Some features that distinguish FireWorks are

@@ -1,18 +1,19 @@
 # NERSC Help and Support
 
-NERSC strives to be the most user friendly supercomputing center in the world. 
+NERSC strives to be the most user friendly supercomputing center in
+the world.
 
 ## FAQ
 
-* [Password Resets](accounts/passwords/index.html#forgotten-passwords)
-* [Connection problems](connect/ssh)
+* [Password Resets](/accounts/passwords.md#forgotten-passwords)
+* [Connection problems](/connect/ssh)
 * [Debug Crashed job](#)
 * [File Permissions](#)
 * [Software Installtion](#)
 
 ## Help Desk
 
-The [online help desk](http://help.nersc.gov/) is the **preferred**
+The [online help desk](https://help.nersc.gov/) is the **preferred**
 method for contacting NERSC.
 
 !!! attention
@@ -20,7 +21,7 @@ method for contacting NERSC.
 	year. In order to ensure efficient timely resolution of issues
 	include **as much of the following as possible** when making a
 	request:
-	
+
 	* error messages
 	* jobids
 	* location of relevant files
@@ -34,7 +35,7 @@ method for contacting NERSC.
 
 ### Phone support
 
-The [ticketing system](http://help.nersc.gov/) is the prefered method
+The [ticketing system](https://help.nersc.gov/) is the prefered method
 of contacting NERSC. NERSC staff can be reached at 1-800-66-NERSC
 (USA) or 510-486-8600 (local and international). Consulting and
 account support are only available during NERSC business hours (8-5 US

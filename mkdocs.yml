@@ -1,69 +1,117 @@
-pages:
+nav:
   - Home: index.md
   - Accounts:
       - Accounts : accounts/index.md
       - Passwords : accounts/passwords.md
       - Policy : accounts/policy.md
   - Connecting:
+      - Login Nodes: connect/login-nodes.md
       - SSH : connect/ssh.md
+      - MFA : connect/mfa.md
       - NX : connect/nx.md
-      - Jupyter : services/jupyter.md
+      - Jupyter : connect/jupyter.md
   - Running Jobs:
     - Overview: jobs/index.md
-    - Examples: jobs/examples.md
+    - Examples: jobs/examples/index.md
+    - Interactive: jobs/interactive.md
     - Best Practices: jobs/best-practices.md
-    - Workflow Tools : jobs/workflow-tools.md
+    - Workflow Tools:
+      - Overview: jobs/workflow-tools.md
+      - Taskfarmer: jobs/workflow/taskfarmer.md
+      - Fireworks: jobs/workflow/fireworks.md
     - Reservations: jobs/reservations.md
     - Policy: jobs/policy.md
+    - Running Jobs with Containers:
+        - Overview : development/shifter/overview.md
+        - How to use Shifter: development/shifter/how-to-use.md
+        - Using Intel Compilers with Docker Images: development/shifter/intel.md
+        - Examples: development/shifter/examples.md
   - Applications:
-    - Quantum ESPRESSO : applications/quantum-espresso/index.md
+    - Abinit: applications/abinit/index.md
+    - BerkeleyGW: applications/berkeleygw/index.md
+    - CP2K: applications/cp2k/index.md
     - NAMD : applications/namd/index.md
+    - PARATEC: applications/paratec/index.md
+    - Quantum ESPRESSO : applications/quantum-espresso/index.md
+    - Wannier90: applications/wannier90/index.md
     - VASP : applications/vasp/index.md
     - MATLAB : applications/matlab/index.md    
   - Analytics:
+      - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
+      - Machine Learning:
+        - Overview: analytics/machinelearning/overview.md
+        - TensorFlow: analytics/machinelearning/tensorflow/index.md
+        - PyTorch: analytics/machinelearning/pytorch.md
   - Data:
       - Management : data/management.md
+      - Sharing: data/sharing.md
       - Transfer : data/transfer.md
       - Visualization : data/visualization.md
       - Formats : data/formats.md
       - Policy: data/policy.md
   - Performance:
-    - Optimization strategy : performance/optimization-strategy.md
+#    - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
     - I/O : performance/io.md
     - Portability: performance/portability.md
+    - Variability: performance/variability.md
     - Case Studies:
+        - AMReX : performance/case-studies/amrex/index.md
+        - Chombo-Crunch : performance/case-studies/chombo-crunch/index.md
         - EMGeo : performance/case-studies/emgeo/index.md
         - MFDn : performance/case-studies/mfdn/index.md
         - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/index.md
         - WARP: performance/case-studies/warp/index.md
         - XGC1: performance/case-studies/xgc1/index.md
+    - KNL Cache Mode: performance/knl/cache-mode.md
   - Services:
-      - Spin : services/spin/index.md
+      - Spin Containers :
+        - services/spin/index.md
+        - services/spin/best_practices.md
+        - services/spin/tips_and_examples.md
+        - Spin Getting Started Guide:
+          - "Overview" : services/spin/getting_started/index.md
+          - "Lesson 1" : services/spin/getting_started/lesson-1.md
+          - "Lesson 2" : services/spin/getting_started/lesson-2.md
+          - "Lesson 3" : services/spin/getting_started/lesson-3.md
+        - services/spin/cheatsheet.md
       - Science Gateways : services/science-gateways.md
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
+      - CDash :
+        - Overview : services/cdash/index.md
+        - CTest/CDash with CMake : services/cdash/with_cmake.md
+        - CTest/CDash without CMake : services/cdash/without_cmake.md
   - Development:
-    - Containers (Shifter):
-        - Overview : development/shifter/overview.md
-        - How to use : development/shifter/how-to-use.md
     - Developer Tools:
         - DDT : development/performance-debugging-tools/ddt.md
-#        - TotalView : development/performance-debugging-tools/totalview.md
-#        - GDB : development/performance-debugging-tools/gdb.md
-    - Compilers : development/compilers.md
+        - TotalView : development/performance-debugging-tools/totalview.md
+        - GDB : development/performance-debugging-tools/gdb.md
+        - STAT and ATP : development/performance-debugging-tools/stat_atp.md
+        - Valgrind : development/performance-debugging-tools/valgrind.md
+        - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
+        - VTune : development/performance-debugging-tools/vtune.md
+    - Compilers :
+        - Cray Compiler Wrappers: development/compilers/index.md
+        - LLVM : development/compilers/llvm.md
     - High-level Programming Environments:
-        - Python : development/high-level-environments/python.md
+        - Python :
+            - development/high-level-environments/python/index.md
+            - Running Scripts : development/high-level-environments/python/running-scripts.md
+            - Scaling Up : development/high-level-environments/python/scaling-up.md
+            - Python FAQ : development/high-level-environments/python/frequently-asked-questions.md
+            - Best Practices : development/high-level-environments/python/best-practices.md
+            - Python on Cori KNL : development/high-level-environments/python/python-on-cori-knl.md
+            - Profiling Python : development/high-level-environments/python/profiling-python.md
 #        - Julia : development/high-level-environments/julia.md
 #        - Matlab : development/high-level-environments/matlab.md
     - Programming Models:
         - MPI : development/programming-models/mpi.md
         - OpenMP : development/programming-models/openmp.md
         - UPC++ : development/programming-models/upcxx.md
-        - Chapel : development/programming-models/chapel.md
         - Kokkos : development/programming-models/kokkos.md
         - Raja : development/programming-models/raja.md
         - Coarrays : development/programming-models/coarrays.md
@@ -73,18 +121,41 @@ pages:
         - LibSci : development/libraries/libsci/index.md
         - HDF5 : development/libraries/hdf5/index.md
         - NetCDF : development/libraries/netcdf/index.md
-                              
-  - Environment: environment/environment.md
+    - Version Control:
+        - git : development/version-control/git/index.md
+        - Subversion : development/version-control/subversion/index.md
+  - Environment: environment/index.md
   - Systems:
       - Cori : systems/cori/index.md
       - Edison : systems/edison/index.md
       - PDSF : systems/pdsf/index.md
-      - Genepool : systems/genepool.md
-      - Filesystems:
-          - Overview: systems/filesystems/index.md
-          - Global Home: systems/filesystems/global-home.md
-          - Global Common: systems/filesystems/global-common.md
-          - Project: systems/filesystems/project.md
+      - Genepool:
+        - Genepool System: systems/genepool.md
+        - Getting Started : systems/genepool/genepool-getting-started.md
+        - Denovo, the Replacement for Old Genepool : systems/genepool/genepool-denovo-the-replacement-for-genepool.md
+        - Configuration : systems/genepool/genepool-configuration.md
+        - User Environment : systems/genepool/genepool-user-environment.md
+        - Programming : systems/genepool/genepool-programming.md
+        - Software : systems/genepool/genepool-software.md
+        - Queues and Policies : systems/genepool/genepool-queues-and-policies.md
+        - Running Jobs : systems/genepool/genepool-running-jobs.md
+        - Cluster Statistics : systems/genepool/genepool-cluster-statistics.md
+        - File Storage and I/O : systems/genepool/genepool-file-storage-and-io.md
+        - Data Managment : systems/genepool/genepool-data-management.md
+        - Training and Tutorials : systems/genepool/genepool-training-and-tutorials.md
+        - Websites, Databases and Cluster Services : systems/genepool/genepool-websites-databases-and-cluster-services.md
+        - Cori for JGI users : systems/genepool/genepool-cori-for-jgi.md
+  - Filesystems:
+      - Overview: filesystems/index.md
+      - Quotas: filesystems/quotas.md
+      - Global Home: filesystems/global-home.md
+      - Global Common: filesystems/global-common.md
+      - Project: filesystems/project.md
+      - Edison scratch: filesystems/edison-scratch.md
+      - Cori scratch: filesystems/cori-scratch.md
+      - Cori Burst Buffer: filesystems/cori-burst-buffer.md
+      - Archive (HPSS): filesystems/archive.md
+      - Unix File Permissions: filesystems/unix-file-permissions.md
   - PDSF:
     - slurm :
       - overview : pdsf/slurm/README.md
@@ -94,23 +165,28 @@ pages:
       - Majorana skim : pdsf/slurm/majorana-skim/Readme.md
       - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
       - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
+    - shifter :
+      - recipes : pdsf/shifter/README.md
+      - Clone STAR DB : pdsf/shifter/clone_starDB.md
+
   - Help: help/index.md
-#      - 
+#      -
 #  - JGI:
 #      - Pipelines : jgi/pipelines.md
-#  - Tutorials:
-#    - Demo : demo/demo.md
-#    - Tables : demo/table.md
-#    - Dropdown: demo/dropdown.md
+  - Tutorials:
+    - Demo : demo/demo.md
+    - Tables : demo/table.md
+    - Dropdown: demo/dropdown.md
 
 # Project Information
-site_name: NERSC Documentation
+site_name: NERSC Documentation (beta)
 site_description: NERSC Documentation
 site_author: NERSC
 site_dir: public
 site_url: "https://docs.nersc.gov"
-#repo_name: NERSC/documentation
-#repo_url: https://gitlab.com/NERSC/documentation
+repo_name: GitLab/NERSC/docs
+repo_url: https://gitlab.com/NERSC/nersc.gitlab.io
+edit_uri: blob/master/docs/
 
 # Configuration
 strict: true
@@ -126,6 +202,7 @@ theme:
 
 # Extensions
 markdown_extensions:
+  - meta
   - footnotes
   - admonition
   - codehilite(guess_lang=false)

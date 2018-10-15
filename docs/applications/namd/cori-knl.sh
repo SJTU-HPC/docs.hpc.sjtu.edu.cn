@@ -1,8 +1,12 @@
 #!/bin/bash
-#SBATCH -q regular
-#SBATCH -t 02:00:00
-#SBATCH -N 100
-#SBATCH -C knl
+#SBATCH --qos=regular
+#SBATCH --time=02:00:00
+#SBATCH --nodes=100
+#SBATCH --constraint=knl
+#SBATCH --ntasks-per-node=66
+#SBATCH --cpus-per-task=4
+#SBATCH --core-spec=2
+#SBATCH --switches=1@20
 
 # make sure KNL environment is loaded
 module unload ${CRAY_CPU_TARGET}
@@ -15,4 +19,4 @@ module load namd
 export HUGETLB_DEFAULT_PAGE_SIZE=8M
 export HUGETLB_MORECORE=no
 
-srun -n $((SLURM_NNODES*68)) -c 4 namd2 ${INPUT_FILE} 
+srun namd2 ${INPUT_FILE}

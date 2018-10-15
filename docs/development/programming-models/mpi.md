@@ -5,4 +5,4 @@ The Message Passing Interface Standard (MPI) is a message passing library standa
 ## Resources
 
 * [LLNL Tutorials](https://computing.llnl.gov/tutorials/mpi/)
-* [MPI Forum (standards body)](http://mpi-forum.org)
+* [MPI Forum (standards body)](https://mpi-forum.org)

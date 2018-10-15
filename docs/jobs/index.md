@@ -45,12 +45,19 @@ nersc$ sbatch first-job.sh
 Submitted batch job 864933
 ```
 
-#### srun 
+#### srun
 
 `srun` is used to submit a job for execution or initiate job steps in
 real time. A job can contain multiple job steps executing sequentially
 or in parallel on independent or shared resources within the job's
 node allocation.
+
+#### salloc
+
+`salloc` is used to allocate resources for a job in real
+time. Typically this is used to allocate resources and spawn a
+shell. The shell is then used to execute srun commands to launch
+parallel tasks.
 
 #### sqs
 
@@ -113,13 +120,13 @@ variables. This has two important consequences:
    that if your job script does certain tricky things, such as using
    ssh to launch a command on another node, the environment might not
    be propagated and your job may not behave correctly
-   
+
 #### Defaults
 
 | Option     | Cori       | Edison     |
 |------------|------------|------------|
 | nodes      | 1          | 1          |
-| time       | 5minutes   | 5minutes   |
+| time       | 10minutes   | 10minutes   |
 | qos        | debug      | debug      |
 | constraint | haswell    | ivybridge  |
 | account    | set in NIM | set in NIM |
