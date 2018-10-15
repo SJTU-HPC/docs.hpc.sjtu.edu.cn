@@ -1,8 +1,8 @@
-#Bringing Linux containers to HPC
+#Shifter
 
 For more information about using Shifter, please consult the [documentation](how-to-use.md).
 
-##Background
+##Bringing Containers to HPC
 
 <img style="float: right;" alt="shifter-logo" src="../images/shifter-logo-2018.png" width="190">Containers provide a powerful method to increase flexibility, reproducibility
 and usability for running scientific applications.  NERSC has developed and supports Shifter to enable users to securely
