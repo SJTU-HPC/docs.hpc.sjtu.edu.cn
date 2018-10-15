@@ -83,14 +83,14 @@ matrix, setting the width to the largest row width and pads smaller
 rows with zeroes. Most of the rows in $D_\tau$ matrix contain 12
 NNZ/row, so the padding overhead of the rows is minimal. However, half
 of the rows in $D_v$ matrix contain 8 NNZ/row, so we use the SELLPack
-format proposed in [<a href="#ref1">1</a>]. SELLPack format allows
+format proposed in [^1]. SELLPack format allows
 defining different number of NNZ/row in different sections of the same
 matrix. We reorder $D_v$ matrix, as shown in <a
 href="#fig2">Fig. 2</a>, to have 12 NNZ/row in the first half of the
 matrix and 8 NNZ/row in the second half of the matrix. This
 effectively saves 17% of $D_v$ SpMV product operations.
 
-We apply SB techniques [<a href="#ref2">2</a>,<a href="#ref3">3</a>]
+We apply SB techniques [^2], [^3]
 to reduce the main memory data traffic of the multiplied vector. In
 the regular update order of the SpMV product, the elements of the
 multiplied vector are accessed several times. As the vectors are
@@ -116,7 +116,7 @@ evaluated first, then the next row, etc..
 EMGeo solves the Equation above for multiple independent sources
 (RHS). In the RHS cache blocking approach we perform the SpMV product
 over several RHS’s while a block of the matrix is in the cache memory,
-similar to [<a href="#ref3">3</a>]. RHS blocking amortizes the cost of
+similar to [^3]. RHS blocking amortizes the cost of
 loading the matrix from main memory, which is the dominant contributor
 of the main memory data traffic. The RHS blocking update order,
 combined with SB, is illustrated in <a
@@ -170,10 +170,9 @@ respectively. KNL is faster than a single socket Haswell processor by
 over a factor of 3x, which is mainly attributed to the higher memory
 bandwidth.
 
-The roofline analysis [<a href="#ref4">4</a>,<a href="#ref5">5</a>,<a
-href="#ref6">6</a>] of the $D_v$ benchmark results is shown in <a
+The roofline analysis [^4], [^5], []^6] of the $D_v$ benchmark results is shown in <a
 href="#fig4">Fig. 4</a>, where we used the techniques described here
-using Intel Software Development Emulator [<a href="#ref7">7</a>] to
+using Intel Software Development Emulator [^7] to
 prepare these results. The roofline model shows that our RHS blocking
 technique significantly improves the AI. The code is still memory
 bandwidth-bound, so it cannot benefit from vectorization
@@ -243,32 +242,37 @@ signi cant performance improvements and prepares the code to use block
 IDR algorithm and overlap computations with communication in the
 solver.
 
-# References
-
-1. <a name="ref1"></a> Monakov, A., Lokhmotov, A., Avetisyan, A.: High
+[^1]:
+   Monakov, A., Lokhmotov, A., Avetisyan, A.: High
    Performance Embedded Architectures and Compilers: 5th International
    Conference, HiPEAC 2010, Pisa, Italy, Jan- uary
    25-27, 2010. Proceedings, chap. Automatically Tuning Sparse
    Matrix-Vector Multiplication for GPU Architectures,
    pp. 111–125. Springer Berlin Heidelberg, Berlin, Heidelberg (2010),
    https://dx.doi.org/10.1007/978-3-642-11515-8_10
-2. <a name="ref2"></a> Datta, K.: Auto-tuning Stencil Codes for
+[^2]:
+   Datta, K.: Auto-tuning Stencil Codes for
    Cache-Based Multicore Platforms. Ph.D. thesis, EECS Department,
    University of California, Berkeley (Dec 2009), http: //www.eecs.b
    erkeley.edu/Pubs/TechRpts/2009/EECS-2009-177.html
-3. <a name="ref3"></a> Haase, G., Reitzinger, S.: Cache issues of
+[^3]:
+   Haase, G., Reitzinger, S.: Cache issues of
    algebraic multigrid methods for linear systems with multiple
    right-hand sides. SIAM Journal on Scientific Computing 27(1), 1–18
    (2005), https://dx.doi.org/10.1137/S1064827502405112
-4. <a name="ref4"></a> Williams, S.: Auto-tuning Performance on
+[^4]:
+   Williams, S.: Auto-tuning Performance on
    Multicore Computers. Ph.D. thesis, EECS Department, University of
    California, Berkeley (December 2008)
-5. <a name="ref5"></a> Williams, S., Watterman, A., Patterson, D.:
+[^5]:
+   Williams, S., Watterman, A., Patterson, D.:
    Roofline: An insightful visual performance model for floating-point
    programs and multicore architectures. Communications of the ACM
    (April 2009)
-6. <a name="ref6"></a> Williams, S., Stralen, B.V., Ligocki, T.,
+[^6]:
+   Williams, S., Stralen, B.V., Ligocki, T.,
    Oliker, L., Cordery, M., Lo, L.: Roofline performance model,
    https://crd.lbl.gov/departments/computerscience/PAR/research/roofline/
-7. <a name="ref7"></a> Tal, A.: Intel software development emulator,
+[^7]:
+   Tal, A.: Intel software development emulator,
    https://software.intel.com/en-us/articles/intel-software-development-emulator
