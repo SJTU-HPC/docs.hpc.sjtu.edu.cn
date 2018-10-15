@@ -1,4 +1,4 @@
-# HMMER3 
+# HMMER3
 
 HMMER3 is biological sequence search suite used in significant volume on
 systems hosted at the National Energy Research Scientific Computing Center.
