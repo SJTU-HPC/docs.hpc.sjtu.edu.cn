@@ -9,7 +9,7 @@ nav:
       - SSH : connect/ssh.md
       - MFA : connect/mfa.md
       - NX : connect/nx.md
-      - Jupyter : services/jupyter.md
+      - Jupyter : connect/jupyter.md
   - Running Jobs:
     - Overview: jobs/index.md
     - Examples: jobs/examples/index.md
