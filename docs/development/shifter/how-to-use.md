@@ -150,6 +150,26 @@ sources other than Docker will be enabled. If you have a specific need
 for this now, please
 see our [support page](https://help.nersc.gov).
 
+## Shifter Modules
+
+Shifter has functionality that can be toggled on or off using modules
+flags. By default, the "mpich" module is enabled at NERSC which allows
+communication between nodes using the high-speed
+interconnect. However, you can override this default by invoking
+shifter with the "--modules" flag. Currently, the only allowable
+values for modules are:
+
+| Module Name | Function  |
+|-------------|-----------|
+|mpich	|Allows communication between nodes using the high-speed interconnect|
+|cvmfs 	|Makes access to DVS shared CVMFS software stack available at /cvmfs in the image|
+|none 	|Turns off all modules|
+
+Modules can be used together. So if you wanted MPI functionality and
+access to cvmfs, use "shifter --modules=mpich,cvmfs". Using the flag
+"none" will disable all modules (even if you list others in the
+command line).
+
 ## Running Jobs in Shifter Images
 
 Shifter images can only be accessed via the batch system. For each of

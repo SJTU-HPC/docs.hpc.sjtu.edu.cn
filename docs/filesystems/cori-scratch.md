@@ -4,7 +4,7 @@ filesystem designed for high performance temporary storage of large
 files. It contains 10000+ disks and 248 I/O servers (OSSs/OSTs).
 
 The `/global/cscratch1` file system should always be referenced using
-the environment variable `$SCRATCH` (which expands to 
+the environment variable `$SCRATCH` (which expands to
 `/global/cscratch1/sd/YourUserName`). The scratch file system is available
 from all nodes (login, MOM, and compute nodes) and is tuned for high
 performance. We recommend that you run your jobs, especially data
@@ -27,4 +27,4 @@ Instructions for HPSS are [here](https://docs.nersc.gov/filesystems/archive/).
 
 To restore deleted or purged files, please refer to
 [Backup/Restore on Home directory](https://docs.nersc.gov/filesystems/global-home/#backups)
-or [Projects directory](https://docs.nersc.gov/filesystems/project/). 
+or [Projects directory](https://docs.nersc.gov/filesystems/project/).
