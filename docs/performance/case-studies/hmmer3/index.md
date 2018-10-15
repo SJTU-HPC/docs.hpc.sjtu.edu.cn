@@ -10,15 +10,21 @@ is the most promising optimization target to increase throughput and
 efficiency. A refactoring effort introduced an OpenMP task based threading
 design, the ability to respond to imbalanced computation with work stealing,
 and input buffering to eliminate a large amount of redundant parsing. These
-efforts have been implemented and in production on Cori for over a year. In
-that time they have simplified the best practice for use of HMMER3 in
-orkflows and conserved hundreds of thousands of CPU hours.
+efforts have been implemented and in production on Cori, have simplified the
+best practice for use of HMMER3 in workflows, and conserve hundreds of
+thousands of CPU hours.
+
+This work was first published in the [2018 IEEE International Parallel and
+Distributed Processing Symposium Workshops][1].
+
+[1]: https://ieeexplore.ieee.org/document/8425415
 
 ## Introduction
 
-HMMER3 [1] is a bioinformatics application used to search a protein sequence
-database for contents which are statistically similar to a profile Hidden
-Markov Model (HMM) [2]. This application is heavily used on National Energy
+HMMER3 \[[1](#references)\]
+is a bioinformatics application used to search a protein sequence database for
+contents which are statistically similar to a profile Hidden Markov Model (HMM)
+\[[2](#references)\]. This application is heavily used on National Energy
 Research Scientific Computing Center (NERSC) systems by users from the Joint
 Genome Institute (JGI) for purposes such as DNA sequencing quality assurance,
 as a component in workflows that automatically annotate newly sequenced
@@ -29,20 +35,21 @@ HMMER3 is heavily optimized for the personal computing hardware of 2008. Data
 movement is organized such that very low working set memory usage has been
 achieved at the cost of increased file access. The application is arranged as a
 pipeline of filters using SSE intrinsic vector instructions to implement
-dynamic programming (DP) with a complex striping pattern [3]. Threading support
-uses pthreads via a master to worker queue dispatch that distributes sequence
-data to individual threads for processing. An MPI implementation is also
-provided in the HMMER3 distribution that does not support threading and
-decomposes data with the same pattern and performance as the pthread
-implementation.
+dynamic programming (DP) with a complex striping pattern
+\[[3](#references)\]. Threading support uses
+pthreads via a master to worker queue dispatch that distributes sequence data
+to individual threads for processing. An MPI implementation is also provided in
+the HMMER3 distribution that does not support threading and decomposes data
+with the same pattern and performance as the pthread implementation.
 
 A significant literature exists discussing the optimization of the HMMER
 lineage of applications. One common theme is a focus on porting low-level
-filter kernels to less standard platforms such as GPU accelerators [4, 5, 6],
-FPGA accelerators [7, 8, 9, 10], and the Cell processor architecture [11, 12].
+filter kernels to less standard platforms such as GPU accelerators 
+\[[4, 5, 6, 7, 8, 9, 10](#references)\], and the Cell processor
+architecture \[[11, 12](#references)\].
 Another pattern is adaptation of HMMER to better utilize more sophisticated HPC
-support systems such as better-organized network communication via MPI [13] and
-parallel file systems [14].
+support systems such as better-organized network communication via MPI
+\[[13](#references)\] and parallel file systems \[[14](#references)\].
 
 In distinction, this work describes a case study modifying HMMER3 to improve
 performance at a production facility with established user base, workload
@@ -137,12 +144,13 @@ decompose with effectively no interdependencies. The active memory needed by
 the core pipeline for a single pair search is minuscule relative to the RAM
 available on each node, even when permitting hundreds of threads.
 
-The Integrated Microbial Genomes and Metagenomes database (IMG) [15] hosted by
-JGI is a common source of protein sequence data for HMMER3 usage at NERSC. At
-the time of writing, the IMG database contains 45,865,548,268 candidate protein
-sequences extracted from metagenome data sets. A full `hmmsearch` of IMG
-against the Pfam HMM database [16] using a naïve HMMER3 configuration would
-require more than 600,000 Haswell node hours to complete.
+The Integrated Microbial Genomes and Metagenomes database (IMG)
+\[[15](#references)\] hosted by JGI is a common source of protein sequence data
+for HMMER3 usage at NERSC. At the time of writing, the IMG database contains
+45,865,548,268 candidate protein sequences extracted from metagenome data sets.
+A full `hmmsearch` of IMG against the Pfam HMM database \[[16](#references)\]
+using a naïve HMMER3 configuration would require more than 600,000 Haswell node
+hours to complete.
 
 The needs, demands, and behaviors of NERSC users, and available systems,
 preclude the use of existing research on the optimization of HMMER3. There is
@@ -169,21 +177,22 @@ provided with the HMMER3.1b2 release.
 
 A first experiment was conducted to measure thread scaling of baseline 
 HMMER3.1b2 `hmmsearch`.  One hundred HMMs were sampled from the Pfam 31.0
-database and 100,000 sequences from the UniProt/Swiss-Prot [17] database to
-create an input file pair; ten pairs in total were created. Each input pair was
-passed to `hmmsearch` for execution on a Haswell node of Cori. Additional runs
-used the same input while progressively increasing the number of threads from
-1 to 16. Average wall time of a one-thread job was used to scale the speedup of
-each replicate; these single thread times ranged from 35.7 to 126.1 seconds
-with the ten replicate average being 69.4 seconds.
+database and 100,000 sequences from the UniProt/Swiss-Prot
+\[[17](#references)\] database to create an input file pair; ten pairs in total
+were created. Each input pair was passed to `hmmsearch` for execution on a
+Haswell node of Cori. Additional runs used the same input while progressively
+increasing the number of threads from 1 to 16. Average wall time of a
+one-thread job was used to scale the speedup of each replicate; these single
+thread times ranged from 35.7 to 126.1 seconds with the ten replicate average
+being 69.4 seconds.
 
 ![Unmodified HMMER3 thread scaling](hmmer3_thread.png)
 
 Fig. 1. shows speedup achieved by thread scaling `hmmsearch` on one Cori
 Haswell node. Whisker plots show the aggregate speedup factor of 10 different
 input combinations taken from Swiss-Prot and Pfam databases. The dotted line
-shows the theoretical perfect scaling trendline and is intentionally cut off to
-preserve detail in the whisker plot.
+shows the theoretical perfect scaling trendline and is intentionally truncated
+to preserve detail in the whisker plot.
 
 Results show naïve use of `hmmsearch` obtains performance benefit only from the
 first four to five threads and any additional have minimal positive impact.
@@ -671,12 +680,12 @@ researcher generating the same data using `hpc_hmmsearch` could split 1,000
 fasta files, queue 1,000 jobs, consume 23,000 CPU hours, and fully clear the
 queue in 10 days.
 
-Collaboration with a FICUS JGI-NERSC [18] project provides a detailed real
-world anecdote of the performance gained using `hpc_hmmsearch`. A component in
-the project workflow required a HMMER3 search of 2.2 billion IMG protein
-sequences against 229 curated HMMs. Basic use of `hmmsearch` for this task is
-estimated to be almost 60,000 CPU hours while split file configuration would
-consume approximately 7,500 hours. These usage numbers are overestimates
+Collaboration with a FICUS JGI-NERSC \[[18](#references)\] project provides a
+detailed real world anecdote of the performance gained using `hpc_hmmsearch`. A
+component in the project workflow required a HMMER3 search of 2.2 billion IMG
+protein sequences against 229 curated HMMs. Basic use of `hmmsearch` for this
+task is estimated to be almost 60,000 CPU hours while split file configuration
+would consume approximately 7,500 hours. These usage numbers are overestimates
 because they are calculated with scaling factors derived from our earlier
 experiments; the distribution of the project’s metagenomic data contains fewer
 search hits and thus spends a smaller fraction of time in deeper pipeline
@@ -719,72 +728,88 @@ along with instructions for installation and usage.
 
 ## References
 
-1.  S. Eddy, “Accelerated profile HMM searches,” PLoS Computational Biology,
+1.  S. Eddy, “[Accelerated profile HMM searches,](
+    https://doi.org/10.1371/journal.pcbi.1002195)” PLoS Computational Biology,
     vol. 7, no. 10, 2011. doi:10.1371/journal.pcbi.1002195
+ 
+2.  S. Eddy, “[Profile hidden markov models,](
+    https://doi.org/10.1093/bioinformatics/14.9.755)” Bioinformatics, vol. 14,
+    pp. 755-763, 1998.
 
-2.  S. Eddy, “Profile hidden markov models,” Bioinformatics, vol. 14, pp.
-    755-763, 1998.
+3.  M. Farrar, “[Striped Smith-Waterman speeds database searches six times over
+    other SIMD implementations,](
+    https://doi.org/10.1093/bioinformatics/btl582)” Bioinformatics, vol. 23,
+    pp. 156-161, 2007.
 
-3.  M. Farrar, “Striped Smith-Waterman speeds database searches six times over
-    other SIMD implementations,” Bioinformatics, vol. 23, pp. 156-161, 2007.
-
-4.  D. Horn, M. Houston, and P. Hanrahan, “ClawHMMER: A streaming HMMer-search
-    implementation,” in Proceedings of ACM/IEEE Supercomputing Conference, 
-    2005.
+4.  D. Horn, M. Houston, and P. Hanrahan, 
+    “[ClawHMMER: A streaming HMMer-search implementation,](
+    https://ieeexplore.ieee.org/document/1559963)” in Proceedings of ACM/IEEE
+    Supercomputing Conference, 2005.
 
 5.  X. Li, W. Han, G. Liu, H. An, M. Xu, W. Zhou, and Q. Li, “A speculative
     HMMER search implementation on GPU,” in IEEE 26th IPDPS Workshop and PhD
     Forum, 2012, pp. 73-74.
 
-6.  H. Jiang and N. Ganesan, “Fine-grained acceleration of hmmer 3.0 via
-    architecture-aware optimization on massively parallel processors,” in
-    Parallel and Distributed Processing Symposium Workshop (IPDPSW), 2015 IEEE
-    International. IEEE, 2015, pp. 375-383.
+6.  H. Jiang and N. Ganesan, “[Fine-grained acceleration of hmmer 3.0 via
+    architecture-aware optimization on massively parallel processors,](
+    https://ieeexplore.ieee.org/document/7284335)” in Parallel and Distributed
+    Processing Symposium Workshop (IPDPSW), 2015 IEEE International. IEEE,
+    2015, pp. 375-383.
 
-7.  T. Oliver, L. Y. Yeow and B. Schmidt, “High Performance Database Searching
-    with HMMer on FPGAs,” Parallel and Distributed Processing Symposium, Mar.
-    2007, pp. 1-7. doi:10.1109/IPDPS.2007.370448
+7.  T. Oliver, L. Y. Yeow and B. Schmidt, “[High Performance Database Searching
+    with HMMer on FPGAs,](https://ieeexplore.ieee.org/document/4228176/)”
+    Parallel and Distributed Processing Symposium, Mar. 2007, pp. 1-7.
+    doi:10.1109/IPDPS.2007.370448
 
-8.  S. Derrien and P. Quinton, “Parallelizing HMMER for Hardware Acceleration
-    on FPGAs,” in IEEE ASAP, 2007, pp. 10-17.
+8.  S. Derrien and P. Quinton, “[Parallelizing HMMER for Hardware Acceleration
+    on FPGAs,](https://ieeexplore.ieee.org/document/4429951)” in IEEE ASAP,
+    2007, pp. 10-17.
 
 9.  Y. Sun, P. Li, G. Gu, Y. Wen, Y. Liu and D. Liu, “Accelerating HMMer on
     FPGAs Using Systolic Array Based Architecture,” in IEEE IPDPS, 2009, pp.
     1-8.
 
-10. T. Takagi and T. Maruyama, “Accelerating HMMER Search Using FPGA,” in
-    Proceedings of the 19th International Conference on Field-Programmable
-    Logic and Applications, No. T3C1, 2009.
+10. T. Takagi and T. Maruyama, “[Accelerating HMMER Search Using FPGA,](
+    https://ieeexplore.ieee.org/document/5272276)” in Proceedings of the 19th
+    International Conference on Field-Programmable Logic and Applications, No.
+    T3C1, 2009.
 
 11. J. Lu, M. Perrone, K. Albayraktaroglu, and M. Franklin. “HMMer-Cell : High
     Performance Protein Profile Searching on the Cell/B.E. Processor.” IEEE
     International Symposium on Performance Analysis of Systems and software,
     2008, pp. 223-232.
 
-12. S. Isaza, E. Houtgast and G. Gaydadjiev, "HMMER Performance Model for
-    Multicore Architectures," 14th Euromicro Conference on Digital System
-    Design, Oulu, 2011, pp. 257-261. doi: 10.1109/DSD.2011.111
+12. S. Isaza, E. Houtgast and G. Gaydadjiev, "[HMMER Performance Model for
+    Multicore Architectures,](https://ieeexplore.ieee.org/document/6037417/)"
+    14th Euromicro Conference on Digital System Design, Oulu, 2011, pp.
+    257-261. doi:10.1109/DSD.2011.111
  
-13. J. P. Walters, B. Qudah and V. Chaudhary, "Accelerating the HMMER sequence
-    analysis suite using conventional processors," 20th International
+13. J. P. Walters, B. Qudah and V. Chaudhary, "[Accelerating the HMMER sequence
+    analysis suite using conventional processors,](
+    http://ieeexplore.ieee.org/document/1620206/)" 20th International
     Conference on Advanced Information Networking and Applications – Vol. 1,
-    2006, pp. 6. doi: 10.1109/AINA.2006.68
+    2006, pp. 6. doi:10.1109/AINA.2006.68
 
-14. J. P. Walters, R. Darole and V. Chaudhary, "Improving MPI-HMMER's
-    scalability with parallel I/O," 2009 IEEE International Symposium on
-    Parallel & Distributed Processing, Rome, 2009, pp. 1-11.
-    doi: 10.1109/IPDPS.2009.5161074
+14. J. P. Walters, R. Darole and V. Chaudhary, "[Improving MPI-HMMER's
+    scalability with parallel I/O,](
+    https://ieeexplore.ieee.org/document/5161074)" 2009 IEEE International
+    Symposium on Parallel & Distributed Processing, Rome, 2009, pp. 1-11.
+    doi:10.1109/IPDPS.2009.5161074
  
 15. V. M. Markowitz, I. A. Chen, K. Palaniappan, K. Chu, E. Szeto, Y. Grechkin,
-    and A. Ratner. “IMG: the Integrated Microbial Genomes database and
-    comparative analysis system.” Nucleic Acids Research, Database Issue 40,
-    2012, D115-D122.
+    and A. Ratner. “[IMG: the Integrated Microbial Genomes database and
+    comparative analysis system.](https://doi.org/10.1093/nar/gkr1044)”
+    Nucleic Acids Research, Database Issue 40, 2012, D115-D122.
 
 16. R.D. Finn, P. Coggill, R.Y. Eberhardt, S.R. Eddy, J. Mistry, and A.L.
-    Mitchell. “The Pfam protein families database: towards a more sustainable
-    future.” Nucleic Acids Research, Database Issue 44, 2016, D279-D285.
+    Mitchell. “[The Pfam protein families database: towards a more sustainable
+    future.](https://doi.org/10.1093/nar/gkv1344)” Nucleic Acids Research,
+    Database Issue 44, 2016, D279-D285.
 
-17. The UniProt Consortium. “UniProt: the universal protein knowledgebase.”
-    Nucleic Acids Research, Database Issue 45, 2017, D158-D169.
+17. The UniProt Consortium. “[UniProt: the universal protein knowledgebase.](
+    https://www.uniprot.org/)” Nucleic Acids Research, Database Issue 45, 2017,
+    D158-D169.
 
-18. https://jgi.doe.gov/user-program-info/community-science-program/how-to-propose-a-csp-project/ficus-jgi-nersc/
+18. [FICUS project](
+    https://jgi.doe.gov/user-program-info/community-science-program/
+ficus-overview/)
