@@ -52,6 +52,13 @@ real time. A job can contain multiple job steps executing sequentially
 or in parallel on independent or shared resources within the job's
 node allocation.
 
+#### salloc
+
+`salloc` is used to allocate resources for a job in real
+time. Typically this is used to allocate resources and spawn a
+shell. The shell is then used to execute srun commands to launch
+parallel tasks.
+
 #### sqs
 
 `sqs` is used to view job information for jobs managed by Slurm. This
