@@ -2,12 +2,12 @@
 
 Here we will describe several tools and strategies for profiling Python code.
 These are generally in order from simplest to most complex, and we recommend
-that you also profile your application in a similar order. 
+that you also profile your application in a similar order.
 
-!!! tip "Keep it simple" 
+!!! tip "Keep it simple"
     Often a simple tool
     can provide almost as much information as a complex tool with far less
-    headache. 
+    headache.
 
 ##cProfile
 
@@ -24,7 +24,7 @@ cProfile can be used to collect data for a single process or many processes
 We will start with an example to profile a single process. In this example, we
 will profile a Python application on Cori and transfer the results to our local
 machine to visualize. This example will generate a .prof file which contains
-the data we ultimately want. 
+the data we ultimately want.
 
 !!! tip "Don't forget"
     Make sure you have done `module load python` or otherwise sourced Python in
@@ -37,7 +37,7 @@ Now you can run you application and collect data using cProfile:
 
 Once your application is done running you can use scp or
 [Globus](http://www.nersc.gov/users/storage-and-file-systems/transferring-data/globus-online/)
-to transfer the output.prof file to your local machine. 
+to transfer the output.prof file to your local machine.
 
 Now let's examine a more complex case in which we profile several processes
 from a Python program using mpi4py based on this
@@ -54,7 +54,7 @@ You will need to modify the beginning of your script by adding:
     import cProfile, sys
     from mpi4py.MPI import COMM_WORLD
 
-You will also need to surround the part of your script that calls the main 
+You will also need to surround the part of your script that calls the main
 function with:
 
     pr = cProfile.Profile()
@@ -92,7 +92,7 @@ You can install SnakeViz using pip:
 
 `pip install snakeviz`
 
-Then in a command line, navigate to the directory where your .prof file is 
+Then in a command line, navigate to the directory where your .prof file is
 located, and type:
 
 `snakeviz output.prof`
@@ -110,7 +110,7 @@ Data can also be displayed in an icicle plot:
 
 ![snakeviz_sunburst](snakeviz_icicle.png)
 
-SnakeViz also creates a table listing the most expensive functions in the 
+SnakeViz also creates a table listing the most expensive functions in the
 call-stack in descending order:
 
 ![snakeviz_sunburst](snakeviz_list.png)
@@ -121,7 +121,7 @@ Another option for visualizing data in a .prof file is
 [gprof2dot](https://github.com/jrfonseca/gprof2dot). gprof2dot differs from
 SnakeViz in that it writes static image files (usually .png) which are perhaps
 easier to view and share than their browswer-based cousins, but they are also
-not interactive. 
+not interactive.
 
 gprof2dot displays the data in dot-graph format. Embedded in this graph is also
 the call-stack information. With gprof2dot it is easier to visualize the
@@ -141,15 +141,15 @@ Then you can install gprof2dot using pip install:
 
 !!! tip "If you're on Cori"
     If you are installing these on Cori, rather than your own machine, don't
-    forget to append `--user` to the end of your install commands. Note that 
-    you should NOT do this if you're using your own Conda environment. 
+    forget to append `--user` to the end of your install commands. Note that
+    you should NOT do this if you're using your own Conda environment.
 
 Note that for gprof2dot to work correctly, you should have also run your
 application with Python 3 instead of Python 2. (You could also run with both in
 Python 2, but don't do that, Python 2 support is going to expire in 2020!) Note
 that you also need to either copy the gprof2dot.py file to the directory in
 which you will run the command, or you will need to add it to your search path
-through something like: 
+through something like:
 
 `export PYTHONPATH=/path/to/where/pip/installed/gprof2dot:$PYTHONPATH`
 
@@ -163,10 +163,10 @@ somehow sourced Python in your environment.
 A typical gprof2dot image created from the same .prof data used in the SnakeViz
 section above is shown below.
 
-![gprof2dot_ex](gprof2dot_ex.jpg) 
+![gprof2dot_ex](gprof2dot_ex.jpg)
 
-If you have an MPI application and have created many .prof files, 
-you can use shell script magic to gprof2dot your data in a single command. 
+If you have an MPI application and have created many .prof files,
+you can use shell script magic to gprof2dot your data in a single command.
 Navigate to the directory in which your .prof files are located and:
 
 ```
@@ -228,7 +228,7 @@ You'll need one more step before you get nice, human-readable output:
 
 !!! tip "Blank file?"
     If you get a blank file as an output, it's most likely because you forgot
-    to decorate any functions. 
+    to decorate any functions.
 
 Here is the line_profiler output for our expensive function _xypix:
 
@@ -260,11 +260,11 @@ using heftier tools like Vtune and Tau (described in the next section).
 
 Vtune shines in that it can tell if you memory access problems are slowing
 you down, where your MPI overhead is coming from, and if any MPI functions that
-have an explicit (or implicit) barrier are causing unnecessary waiting in your 
-application. 
+have an explicit (or implicit) barrier are causing unnecessary waiting in your
+application.
 
 
-!!! attention "Vtune has limited Python support" 
+!!! attention "Vtune has limited Python support"
     Unfortunately Vtune has limited functionality for Python applications: only three
     types of collection modes are currently supported:
 
@@ -293,22 +293,22 @@ srun -n 32 -c 2 amplxe-cl -collect hotspots -r results_dir -trace-mpi -search-di
 
 !!! tip "Vtune may complain but don't panic"
     You may see various warnings and complaints from Vtune but as long as it
-    prints `amplxe: Collection started` you should most likely be collecting 
-    data. 
+    prints `amplxe: Collection started` you should most likely be collecting
+    data.
 
 Some further explanation for why we use these arguments:
 
 1. -collect hotspots tells Vtune which of the 3 possible collection modes to
-use 
+use
 2. -trace-mpi asks to collect MPI data. If you don't have an MPI
 application, don't add this flag.
-3. -r results_dir tells Vtune to write results to the specified directory 
-(which doesn't have to exist). Note also that Vtune will append the 
+3. -r results_dir tells Vtune to write results to the specified directory
+(which doesn't have to exist). Note also that Vtune will append the
 Cori node number to the end of your directory, i.e. results_dir.nid00058.
 4. -search-dir is important for Python
 applications in particular because it instructs Vtune where to look for the
 scripts or binary files you are using. If you don't specify search-dir and have
-trouble getting call-stack information, this might be the issue.  
+trouble getting call-stack information, this might be the issue.
 5. -finalization-mode=none instructs Vtune to skip the finalization step
 (especially good for KNL)
 
@@ -316,8 +316,8 @@ Once you have collected your data, you can finalize:
 
 `amplxe-cl -finalize -r <results_dir.nid00058>`
 
-!!! tip "Save yourself some trouble and use NX" 
-    At this point we recommend logging on to Cori via 
+!!! tip "Save yourself some trouble and use NX"
+    At this point we recommend logging on to Cori via
     [NX](http://www.nersc.gov/users/connecting-to-nersc/using-nx/) to view the results in the
     Vtune GUI. You can also use -X or -Y for ssh forwarding, but it will be very
     frustratingly slow. As a result we highly reccomend NX for the next steps in
@@ -329,7 +329,7 @@ Log onto Cori via NX. Then
 
 then
 
-`amplxe-gui` 
+`amplxe-gui`
 
 to start the Vtune Amplifier GUI. Use the file browser to navigate to the
 .amplxe file written in your results_dir.nid00058 directory and click open.  An
@@ -346,14 +346,14 @@ You can also try selecting the Caller/Callee tab which will display call-stack
 information about your application. Sometimes it can be difficult to find what
 you are looking for, especially for Python calls which are often intermixed
 with much lower-level functions. This is why we recommend profiling with a
-simpler tool first so you have an idea of what information you are looking for.  
+simpler tool first so you have an idea of what information you are looking for.
 
 ![vtune_callercallee](vtune_callercallee.jpg)
 
 ## Tau
 
 [Tau](https://www.cs.uoregon.edu/research/tau/home.php) is probably the most
-complex profiler described on this page, but also the most useful. 
+complex profiler described on this page, but also the most useful.
 
 !!! tip "If you can, build your own Tau"
     NERSC does offer a pre-built Tau module that you can access using
@@ -364,13 +364,12 @@ complex profiler described on this page, but also the most useful.
     great deal of information about how your Python code performs.
 
 In this example, we will build Tau to profile the same DESI code we have been
-investigating throughout this page. Because this is a Python and MPI
-application, we will build Tau with the flags
+investigating throughout this page.
 
 !!! attention "Keep things constant when you build Tau"
-    You must configure Tau with exactly the version of Python you will use! 
+    You must configure Tau with exactly the version of Python you will use!
 
-First [download](https://www.cs.uoregon.edu/research/tau/downloads.php) 
+First [download](https://www.cs.uoregon.edu/research/tau/downloads.php)
 and configure Tau with the options that match your needs:
 
 ```
@@ -387,16 +386,16 @@ are building Tau to use on Cori we specify -arch=craycnl since Cori is a Cray
 machine. Then we configure Tau with these options. The -j specifies to use 8
 processors to configure Tau, but please don't exceed this number (doing so will
 really make things miserable for other users on your login node-- don't be that
-person). 
+person).
 
 Once we have successfully configured Tau, we need to set some very important
 environment variables:
 
 ```
 export LD_LIBRARY_PATH=/path/to/your/conda/lib:$LD_LIBRARY_PATH
-export PATH=/global/cscratch1/sd/elvis/tau-2.27.1/craycnl/bin:$PATH 
+export PATH=/global/cscratch1/sd/elvis/tau-2.27.1/craycnl/bin:$PATH
 
-``` 
+```
 LD_LIBRARY_PATH should point to the Python distribution you are using on Cori.
 In our case it is to the DESI conda version. PATH should point to the location
 in which you installed and configured Tau.
@@ -408,17 +407,17 @@ script (or specify the full path to your script) and try:
 time srun -u -n 32 -c 2 tau_python ./desi_extract_spectra_test.py arg1 arg2
 ```
 
-!!! attention "Tau prefers scripts" 
+!!! attention "Tau prefers scripts"
     Tau doesn't seem to be able to execute Python binaries so we used a
     script instead of our usual binary.
 
 !!! tip "Tau may complain, don't panic"
-    Tau may print some error messages like "Error in python later" 
+    Tau may print some error messages like "Error in python later"
     but seems to successfully profile your application anyway.
 
 Once your application is done running, Tau should have written one (or many, in
 the case of MPI) profile.0.0.0 files in the directory where you executed your
-run command. 
+run command.
 
 !!! tip "Use the Tau Paraprof GUI on your local machine"
     We recommend moving these files to your local machine to use the
@@ -438,12 +437,12 @@ point to your Tau installation. On my mac it looks like:
 
 `export PATH=/Applications/tau-2.27.1./apple/bin:$PATH`
 
-Once you have configured Tau on your local machine you can now unpack the 
+Once you have configured Tau on your local machine you can now unpack the
 files we transferred from Cori:
 
 `paraprof --dump datafile.ppk`
 
-Once you have unpacked the files you can type 
+Once you have unpacked the files you can type
 
 `paraprof` in your command prompt in the directory with your unpacked files.
 This should start the Tau Paraprof GUI. It should open a window that looks
@@ -461,7 +460,7 @@ You can also click on a node number (but really, this should be labelled as
 rank number) and it will open another window which shows a top-down list of
 time spent in functions for this rank. It should look something like:
 
-![tau_rank](tau_rank.png) 
+![tau_rank](tau_rank.png)
 
 Using the custom-built Tau functionality makes it easy to see exactly what your
 Python program is doing, particularly if it is an MPI program. In our case we
