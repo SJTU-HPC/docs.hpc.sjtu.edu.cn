@@ -83,6 +83,7 @@ nav:
         - Overview : development/shifter/overview.md
         - How to use Shifter: development/shifter/how-to-use.md
         - Using Intel Compilers with Docker Images: development/shifter/intel.md
+        - Examples: development/shifter/examples.md
     - Developer Tools:
         - DDT : development/performance-debugging-tools/ddt.md
         - TotalView : development/performance-debugging-tools/totalview.md
