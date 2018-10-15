@@ -104,6 +104,7 @@ nav:
             - Python FAQ : development/high-level-environments/python/frequently-asked-questions.md
             - Best Practices : development/high-level-environments/python/best-practices.md
             - Python on Cori KNL : development/high-level-environments/python/python-on-cori-knl.md
+            - Profiling Python : development/high-level-environments/python/profiling-python.md
 #        - Julia : development/high-level-environments/julia.md
 #        - Matlab : development/high-level-environments/matlab.md
     - Programming Models:
