@@ -31,7 +31,7 @@ as a component in workflows that automatically annotate newly sequenced
 genomes, and novel research projects. JGI uses approximately 7 million CPU
 hours annually to run HMMER3 on NERSC systems.
 
-HMMER3 is heavily optimized for the personal computing hardware of 2008. Data 
+HMMER3 is heavily optimized for the personal computing hardware of 2008. Data
 movement is organized such that very low working set memory usage has been
 achieved at the cost of increased file access. The application is arranged as a
 pipeline of filters using SSE intrinsic vector instructions to implement
@@ -44,7 +44,7 @@ with the same pattern and performance as the pthread implementation.
 
 A significant literature exists discussing the optimization of the HMMER
 lineage of applications. One common theme is a focus on porting low-level
-filter kernels to less standard platforms such as GPU accelerators 
+filter kernels to less standard platforms such as GPU accelerators
 \[[4, 5, 6, 7, 8, 9, 10](#references)\], and the Cell processor
 architecture \[[11, 12](#references)\].
 Another pattern is adaptation of HMMER to better utilize more sophisticated HPC
@@ -68,7 +68,7 @@ tasks to perform the recursion, or walking through a linked data structure.
 The code implemented for this project demonstrates a useful and succinct
 example of OpenMP tasking achieving goals that are difficult in other
 threading patterns such as overlapping independent compute blocks with I/O and
-balancing load between units of work with divergent or unpredictable 
+balancing load between units of work with divergent or unpredictable
 computational demands.
 
 ## Background
@@ -155,15 +155,15 @@ hours to complete.
 The needs, demands, and behaviors of NERSC users, and available systems,
 preclude the use of existing research on the optimization of HMMER3. There is
 no user demand at NERSC for any MPI implementation of `hmmsearch`; waiting a
-few hours for one or more single node jobs with better throughput is chosen in 
-lieu of the user perceived mental overhead of dealing with MPI. This rules out 
+few hours for one or more single node jobs with better throughput is chosen in
+lieu of the user perceived mental overhead of dealing with MPI. This rules out
 the use of optimization projects such as MPI-HMMER [14] that target parallel
 file systems via an MPI layer. It further hinders MPI-HMMER that it is a port
 of the less powerful HMMER2 algorithm and it’s source and documentation website
 is dead. NERSC possesses no production scale GPU or FPGA accelerated nodes so
 those categories of existing research are also not applicable.
 
-Performance of Manycore architecture KNL processors depends dominantly on very 
+Performance of Manycore architecture KNL processors depends dominantly on very
 efficient thread implementations. This is a gap in HMMER3 optimization
 literature as it currently stands; a highly optimized thread implementation
 would be most appropriate for NERSC users and systems but has not been a
@@ -175,7 +175,7 @@ provided with the HMMER3.1b2 release.
 
 ### Thread Scaling
 
-A first experiment was conducted to measure thread scaling of baseline 
+A first experiment was conducted to measure thread scaling of baseline
 HMMER3.1b2 `hmmsearch`.  One hundred HMMs were sampled from the Pfam 31.0
 database and 100,000 sequences from the UniProt/Swiss-Prot
 \[[17](#references)\] database to create an input file pair; ten pairs in total
@@ -277,9 +277,9 @@ along with a theoretical ceiling based on perfect scaling of single thread
 performance to the full node. Cori Haswell node `hmmsearch` speedup achieved by
 combining thread scaling with split input file scaling. A single whisker column
 shows the aggregate speedup factor of 10 different input combinations taken
-from UniProtKB/Swiss-Prot and Pfam databases. The dotted line shows a ceiling 
-calculated from theoretical perfect scaling. Six different combinations of 
-input shard number and threads per process are shown. Amusingly, ignoring the 
+from UniProtKB/Swiss-Prot and Pfam databases. The dotted line shows a ceiling
+calculated from theoretical perfect scaling. Six different combinations of
+input shard number and threads per process are shown. Amusingly, ignoring the
 `hmmsearch` thread implementation completely and only using the file system to
 parallelize achieves the best performance.
 
@@ -568,14 +568,14 @@ task is then immediately scheduled to execute by the runtime and occupies the
 empty core. The taskgroup directive is needed to guarantee all child tasks
 spawned by the work stealing mechanism have finished before finalizing a
 rectangle of work and swapping buffers (a taskwait directive would only
-collect all tasks at the same depth before releasing, ignoring any child tasks 
+collect all tasks at the same depth before releasing, ignoring any child tasks
 that may remain outstanding).
 
 ## Results
 
 An initial performance experiment is included to directly contrast the
 thread-scaling difference between the original `hmmsearch` driver and
-`hpc_hmmsearch`. 
+`hpc_hmmsearch`.
 
 ![thread scaling of hmmsearch and hpc_hmmsearch](old_vs_new_thread.png )
 
@@ -731,7 +731,7 @@ along with instructions for installation and usage.
 1.  S. Eddy, “[Accelerated profile HMM searches,](
     https://doi.org/10.1371/journal.pcbi.1002195)” PLoS Computational Biology,
     vol. 7, no. 10, 2011. doi:10.1371/journal.pcbi.1002195
- 
+
 2.  S. Eddy, “[Profile hidden markov models,](
     https://doi.org/10.1093/bioinformatics/14.9.755)” Bioinformatics, vol. 14,
     pp. 755-763, 1998.
@@ -741,7 +741,7 @@ along with instructions for installation and usage.
     https://doi.org/10.1093/bioinformatics/btl582)” Bioinformatics, vol. 23,
     pp. 156-161, 2007.
 
-4.  D. Horn, M. Houston, and P. Hanrahan, 
+4.  D. Horn, M. Houston, and P. Hanrahan,
     “[ClawHMMER: A streaming HMMer-search implementation,](
     https://ieeexplore.ieee.org/document/1559963)” in Proceedings of ACM/IEEE
     Supercomputing Conference, 2005.
@@ -783,7 +783,7 @@ along with instructions for installation and usage.
     Multicore Architectures,](https://ieeexplore.ieee.org/document/6037417/)"
     14th Euromicro Conference on Digital System Design, Oulu, 2011, pp.
     257-261. doi:10.1109/DSD.2011.111
- 
+
 13. J. P. Walters, B. Qudah and V. Chaudhary, "[Accelerating the HMMER sequence
     analysis suite using conventional processors,](
     http://ieeexplore.ieee.org/document/1620206/)" 20th International
@@ -795,7 +795,7 @@ along with instructions for installation and usage.
     https://ieeexplore.ieee.org/document/5161074)" 2009 IEEE International
     Symposium on Parallel & Distributed Processing, Rome, 2009, pp. 1-11.
     doi:10.1109/IPDPS.2009.5161074
- 
+
 15. V. M. Markowitz, I. A. Chen, K. Palaniappan, K. Chu, E. Szeto, Y. Grechkin,
     and A. Ratner. “[IMG: the Integrated Microbial Genomes database and
     comparative analysis system.](https://doi.org/10.1093/nar/gkr1044)”
