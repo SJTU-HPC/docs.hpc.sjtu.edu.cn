@@ -67,6 +67,10 @@ Interactive jobs are launched with the `salloc` command.
 	cori$ salloc --qos=interactive -C knl --time=60 --nodes=2
 	```
 
+!!! note
+	[Additional details](../interactive.md) on Cori's interactive
+	QOS
+
 ## Running Multiple Parallel Jobs Sequentially
 
 Multiple sruns can be executed one after another in a single batch script. Be sure to specify the total walltime needed to run all jobs.

@@ -56,7 +56,7 @@ are using it. To see who in your allocation is using the interactive
 queue you can use
 
 ```
-cori$ squeue -q interactive -A <reponame> -O jobid,username,starttime,timelimit,maxnodes,account
+cori$ squeue --qos=interactive --account=<reponame> -O jobid,username,starttime,timelimit,maxnodes,account
 ```
 
 If the number of nodes in use by your repo sums up to 64 nodes, please

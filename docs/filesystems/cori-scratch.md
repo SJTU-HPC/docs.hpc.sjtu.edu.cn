@@ -8,7 +8,7 @@ the environment variable `$SCRATCH` (which expands to
 `/global/cscratch1/sd/YourUserName`). The scratch file system is available
 from all nodes (login, MOM, and compute nodes) and is tuned for high
 performance. We recommend that you run your jobs, especially data
-intensive ones, from the burst buffer or the scratch file system.  
+intensive ones, from the burst buffer or the scratch file system.
 
 All users have 20 TB of quota for the scratch file system. If your
 `$SCRATCH` usage exceeds your quota, you will not be able to submit batch
