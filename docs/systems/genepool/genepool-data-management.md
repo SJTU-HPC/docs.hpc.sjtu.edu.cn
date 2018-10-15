@@ -33,7 +33,7 @@ projectb "Scratch" and "Sandbox" space is intended for staging and running JGI c
 The Sandbox areas were allocated by program.  If you have questions about your program's space, please see your group lead. New Sandbox space must be allocated with JGI management approval.
 
 ###DnA (Data n' Archive)
-DnA is a 1PB GPFS based file system for the JGI's archive, shared databases and project directories.  
+DnA is a 1PB GPFS based file system for the JGI's archive, shared databases and project directories.
 
 | 	|DnA Projects|DnA Shared|DnA DM Archive|
 |---|---|---|---|
@@ -42,7 +42,7 @@ DnA is a 1PB GPFS based file system for the JGI's archive, shared databases and 
 |Backups|Daily, only for projectdirs with quota <= 5TB|Backed up by JAMO|Backed up by JAMO|
 |Files are not automatically purged|Files are not automatically purged|Purge policy set by users of the JAMO system|Files are not automatically purged|
 
-The intention of the DnA "Project" and "Shared" space is to be a place for data that is needed by multiple people collaborating on a project to allow for easy access for data sharing. The "Project" space is owned and managed by the JGI.  The "Shared" space is a collaborative effort between the JGI and NERSC.  
+The intention of the DnA "Project" and "Shared" space is to be a place for data that is needed by multiple people collaborating on a project to allow for easy access for data sharing. The "Project" space is owned and managed by the JGI.  The "Shared" space is a collaborative effort between the JGI and NERSC.
 
 If you would like a project directory, please use the [Project Directory Request Form](https://www.nersc.gov/users/storage-and-file-systems/file-systems/project-directory-request-form/).
 
@@ -60,7 +60,7 @@ Scratch environment variables:
 \$BSCRATCH|/global/projectb/scratch/$username|Denovo only|
 \$CSCRATCH|/global/cscratch[1,2,3]/sd/$username|Cori and Edison|
 
-\$BSCRATCH points to your projectb scratch space if you have a BSCRATCH allocation.  \$SCRATCH will always point to the best-connected scratch space available for the NERSC machine you are accessing.  For example, on Denovo \$SCRATCH will point to \$BSCRATCH, whereas on Cori \$SCRATCH will point to \$CSCRATCH.  
+\$BSCRATCH points to your projectb scratch space if you have a BSCRATCH allocation.  \$SCRATCH will always point to the best-connected scratch space available for the NERSC machine you are accessing.  For example, on Denovo \$SCRATCH will point to \$BSCRATCH, whereas on Cori \$SCRATCH will point to \$CSCRATCH.
 
 The intention of scratch space is for staging, running, and completing your calculations on NERSC systems.  Thus these filesystems are designed to allow wide-scale file reading and writing from many compute nodes.  The scratch filesystems are not intended for long-term file storage or archival, and thus data is not backed-up, and files not accessed for 90 days will be automatically purged.
 
