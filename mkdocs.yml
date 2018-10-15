@@ -21,7 +21,7 @@ nav:
       - Fireworks: jobs/workflow/fireworks.md
     - Reservations: jobs/reservations.md
     - Policy: jobs/policy.md
-    - Running Jobs with Containers:
+    - Containers:
         - Overview : development/shifter/overview.md
         - How to use Shifter: development/shifter/how-to-use.md
         - Using Intel Compilers with Docker Images: development/shifter/intel.md
