@@ -65,7 +65,7 @@ group elvis.  It is readable and writable by the owner, but is not accessible
 to any other user.
 
 ```
--rwx------ 2 elvis elvis 12040 Apr  9 2012  a.out 
+-rwx------ 2 elvis elvis 12040 Apr  9 2012  a.out
 ```
 
 This is a normal file named "a.out", owned by user elvis and associated with

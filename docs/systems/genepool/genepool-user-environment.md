@@ -9,7 +9,7 @@ NOT modify the .bashrc or .cshrc files.  These are set to read-only on NERSC
 systems and specify system specific customizations.
 Instead you should modify a file called .bashrc.ext or .cshrc.ext.
 
-## Environment Variables  
+## Environment Variables
 
 - `$HOME`
 points to the location of your home directory in the filesystem
@@ -65,7 +65,7 @@ modules:
 ## Tips and Best Practices
 If you are considering manually encoding a path with `/global/common/` or `/usr/common/` into your software or into
 you environment, please use the module instead (ie module load <package>). There are multiple paths to the software
-installed in this location, and the proper way to access it depends on your current context.  
+installed in this location, and the proper way to access it depends on your current context.
 
 If you need to refer to a path in the module, use **[MODULENAME]_DIR** environment variable. You can see all the
 settings of a module by entering: `module show <modulename>`.
@@ -73,7 +73,7 @@ settings of a module by entering: `module show <modulename>`.
 Loading modules can have additional effects. The Genepool modules are
 interconnected to ease the loading of dependencies. Frequently, when you load
 a module, swap a module, or remove modules other modules may be loaded, swapped,
-or removed.  
+or removed.
 
 ###  Working with Modules for Production-Level Batch Scripts
 When writing a batch script which you may share with another genepool user,
@@ -109,7 +109,7 @@ to non-reproducible calculations.
 For common tasks in an interactive environment it can be convenient to load
 certain modules by default for all interactive sessions.  If this is needed,
 the recommended mechanism is to embed the module commands into your
-.bashrc.ext or .tcshrc.ext (depending on if you are a bash or tcsh user).  
+.bashrc.ext or .tcshrc.ext (depending on if you are a bash or tcsh user).
 Each NERSC system has different modules, for this reason, but your dotfiles
 are evaluated by all systems.  Thus, you should check to make sure that
 `$NERSC_HOST` is `genepool`, when loading genepool modules.
@@ -132,7 +132,7 @@ fi
 if ($NERSC_HOST == "genepool") then
   # make user-specific changes to PATH
   setenv PATH $HOME/scripts:$PATH
-  
+
   # then load modules
   module load blast+
 endif
@@ -146,7 +146,7 @@ be incorrect and you may experience unexpected side effects.
 It is recommended to make any manual modifications to `PATH`,
 `LD_LIBRARY_PATH`, and others earlier in the dotfiles than the module commands.
 
-### Using Modules in Cron Jobs  
+### Using Modules in Cron Jobs
 The cron environment on genepool does not have a complete environment setup.
 In particular important environment variables like `$SCRATCH`, `$HOME`,
 `$BSCRATCH`, `$NERSC_HOST` may not be setup.
@@ -157,7 +157,7 @@ For a simple job this can be done like:
 ```sh
 # crontab
 07 04 * * * bash -l -c "module load python; python /path/to/myScript.py"
-```  
+```
 If you need a more extensive environment setup, you can simply put the entire
 cronjob into a script, and call the script from your crontab.
 
@@ -190,14 +190,14 @@ list of arguments, like `'load','<modulename>'`; or `'unload','<modulename>'`.
 ```python
 import EnvironmentModules as EnvMod
 EnvMod.module(['load', 'blast+'])
-```  
+```
 It is important to understand that this is most effective for scripts which
 execute other code (e.g. from the subprocess package of python), and not
 necessarily for loading additional packages for python to use.  This is
 because the python process is already running and changing its environment
 won't necessarily give expected results.  For example, changes to `PYTHONPATH`
 and `LD_LIBRARY_PATH` are not immediately accepted.  `LD_LIBRARY_PATH` is
-only evaluated at process start-up time, and won't be re-evaluated later.  
+only evaluated at process start-up time, and won't be re-evaluated later.
 Thus if you load any python packages which rely on dynamically linked C-code,
 you should load those modules before python (oracle_client, for example).
 
@@ -260,7 +260,7 @@ before you can access `EnvironmentModules.pm`.
 #!/usr/bin/env perl
 use EnvironmentModules;
 module("load blast+");
-```  
+```
 
 Please note that the similar to python, loading modules which manipulate
 `LD_LIBRARY_PATH` or `PERL5DIR` will not work as expected.  It is generally
@@ -275,7 +275,7 @@ will only work if your users are using the bash shell:
 ### DO NOT DO THIS!
 system("module load blast+"; blastn …");
 ```
- When you call `system()`, perl forks it as `/bin/sh -c '<your command'>`.  
+ When you call `system()`, perl forks it as `/bin/sh -c '<your command'>`.
  `/bin/sh` does not get a new module environment loaded, so, the instance of
  `/bin/sh` will be relying on the shell operating perl to get the module
  functionality.  It turns out that the module functionality provided by bash
