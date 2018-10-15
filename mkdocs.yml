@@ -62,6 +62,7 @@ nav:
         - Chombo-Crunch : performance/case-studies/chombo-crunch/index.md
         - EMGeo : performance/case-studies/emgeo/index.md
         - MFDn : performance/case-studies/mfdn/index.md
+        - QPhiX : performance/case-studies/qphix/index.md
         - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/index.md
         - WARP: performance/case-studies/warp/index.md
         - XGC1: performance/case-studies/xgc1/index.md
