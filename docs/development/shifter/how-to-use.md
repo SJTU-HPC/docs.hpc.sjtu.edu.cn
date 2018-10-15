@@ -166,7 +166,7 @@ values for modules are:
 |none 	|Turns off all modules|
 
 Modules can be used together. So if you wanted MPI functionality and
-access to cvmfs, use "shifter --modules=mpi,cvmfs". Using the flag
+access to cvmfs, use "shifter --modules=mpich,cvmfs". Using the flag
 "none" will disable all modules (even if you list others in the
 command line).
 
