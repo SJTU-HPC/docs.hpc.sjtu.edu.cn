@@ -197,3 +197,15 @@ When adding a page think about your audience.
 * Show both long and short option when introducing an option in text
 * Use the long version (where possible) in scripts
 
+## Markdown lint
+
+Install the markdown linter (requires node/npm) locally
+```shell
+npm install markdownlint-cli
+```
+
+Run the linter from the base directory of the repository
+
+```shell
+./node_modules/markdownlint-cli/markdownlint.js docs
+```
