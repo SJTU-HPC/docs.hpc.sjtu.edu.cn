@@ -35,6 +35,7 @@ nav:
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
     - Wannier90: applications/wannier90/index.md
     - VASP : applications/vasp/index.md
+    - MATLAB : applications/matlab/index.md    
   - Analytics:
       - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
