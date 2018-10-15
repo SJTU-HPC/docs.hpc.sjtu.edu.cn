@@ -11,9 +11,9 @@ that you also profile your application in a similar order.
 
 ##cProfile
 
-Python has a nice, built-in statistical profiler called 
-[cProfile](https://docs.python.org/3.2/library/profile.html).  You can
-use it to collect data from your program without having to manually add any
+Python has a nice, built-in statistical profiler called
+[cProfile](https://docs.python.org/3.2/library/profile.html).  You can use it
+to collect data from your program without having to manually add any
 instrumentation. You can then visualize the data you collected with several
 tools. Two in particular, SnakeViz and gprof2dot, will be described in later
 sections.
@@ -35,19 +35,19 @@ Now you can run you application and collect data using cProfile:
 
 `python -m cProfile -o output.prof path/to/your/script arg1 arg2`
 
-Once your application is done running you can use scp or globus to transfer the
-output.prof file to your local machine. 
+Once your application is done running you can use scp or
+[Globus](http://www.nersc.gov/users/storage-and-file-systems/transferring-data/globus-online/)
+to transfer the output.prof file to your local machine. 
 
 Now let's examine a more complex case in which we profile several processes
-from a Python program using mpi4py based on this 
-[page](https://fbpic.github.io/advanced/profiling.html#profiling-mpi-simulations-cpu-side-only). 
-We might want to do this to check that we
-are adequately load-balancing among the MPI ranks, for example. This example
-will write many `cpu_0.prof` files; one for each mpi rank. To avoid making a
-mess we recommend creating a new directory for your results and cd into this
-directory before running your application. This will also write some
-human-readable `cpu_0.txt` files (which are nice as a sanity-check but
-ultimately not as useful).
+from a Python program using mpi4py based on this
+[page](https://fbpic.github.io/advanced/profiling.html#profiling-mpi-simulations-cpu-side-only).
+We might want to do this to check that we are adequately load-balancing among
+the MPI ranks, for example. This example will write many `cpu_0.prof` files;
+one for each MPI rank. To avoid making a mess we recommend creating a new
+directory for your results and cd into this directory before running your
+application. This will also write some human-readable `cpu_0.txt` files (which
+are nice as a sanity-check but ultimately not as useful).
 
 You will need to modify the beginning of your script by adding:
 
@@ -78,14 +78,15 @@ required):
 
 `python /path/to/your/script arg1 arg2`
 
-This modification will make your appliation write results to both a .prof file
+This modification will make your application write results to both a .prof file
 and a .txt file for each mpi rank. Then you can use scp or globus to transfer
 the output files to your local machine for further analysis.
 
 ## SnakeViz
 
 Now that we have created a .prof file (or files) it's time to visualize the
-data.  One browser-based option for this is [SnakeViz](https://jiffyclub.github.io/snakeviz/).
+data.  One browser-based option for this is
+[SnakeViz](https://jiffyclub.github.io/snakeviz/).
 
 You can install SnakeViz using pip:
 
@@ -96,7 +97,7 @@ located, and type:
 
 `snakeviz output.prof`
 
-This should open an interactive window in your default broswer that displays
+This should open an interactive window in your default browser that displays
 the data in your .prof file. By default data are displayed in a sunburst plot:
 
 ![snakeviz_sunburst](snakeviz_sunburst_expand.jpg)
@@ -116,11 +117,11 @@ call-stack in descending order:
 
 ## gprof2dot
 
-Another option for visualizing data in a .prof file is 
-[gprof2dot](https://github.com/jrfonseca/gprof2dot). gprof2dot
-differs from SnakeViz in that it writes static image files (usually .png) which
-are perhaps easier to view and share than their browswer-based cousins, but
-they are also not interactive. 
+Another option for visualizing data in a .prof file is
+[gprof2dot](https://github.com/jrfonseca/gprof2dot). gprof2dot differs from
+SnakeViz in that it writes static image files (usually .png) which are perhaps
+easier to view and share than their browswer-based cousins, but they are also
+not interactive. 
 
 gprof2dot displays the data in dot-graph format. Embedded in this graph is also
 the call-stack information. With gprof2dot it is easier to visualize the
@@ -140,14 +141,15 @@ Then you can install gprof2dot using pip install:
 
 !!! tip "If you're on Cori"
     If you are installing these on Cori, rather than your own machine, don't
-    forget to append `--user` to the end of your install commands.
+    forget to append `--user` to the end of your install commands. Note that 
+    you should NOT do this if you're using your own Conda environment. 
 
 Note that for gprof2dot to work correctly, you should have also run your
 application with Python 3 instead of Python 2. (You could also run with both in
-Python 2, but don't do othat, Python 2 support is going to expire in 2020!)
-Note that you also need to either copy the gprof2dot.py file to the directory
-in which you will run the command, or you will need to add it to your search
-path through something like: 
+Python 2, but don't do that, Python 2 support is going to expire in 2020!) Note
+that you also need to either copy the gprof2dot.py file to the directory in
+which you will run the command, or you will need to add it to your search path
+through something like: 
 
 `export PYTHONPATH=/path/to/where/pip/installed/gprof2dot:$PYTHONPATH`
 
@@ -179,15 +181,15 @@ for i in `seq 0 67`; do python3 gprof2dot.py -f pstats cpu_$i.prof | dot -Tpng -
 ## line_profiler
 
 Once you have discovered where the expensive parts of your application are, it
-is probably time for another tool called 
-[line_profiler](https://github.com/rkern/line_profiler). This is a
-particularly handly tool because it gives line-by-line performance information
-for a selected function.
+is probably time for another tool called
+[line_profiler](https://github.com/rkern/line_profiler). This is a particularly
+handy tool because it gives line-by-line performance information for a selected
+function.
 
 !!! tip "Don't get ahead of yourself"
-    We reccomend not starting with line_profiler right away, however, because the
+    We recommend not starting with line_profiler right away, however, because the
     user must decorate the functions for which he or she would like to profile to
-    get information.  It is usually both slow and impractical to manunally decorate
+    get information. It is usually both slow and impractical to manually decorate
     all functions of interest. It is better to know already which functions are
     the most expensive (like _xypix is in our examples above).
 
@@ -200,8 +202,8 @@ to your PYTHONPATH:
 
 `export PYTHONPATH=/path/to/where/pip/installed/kernprof.py`
 
-Then you must manaully decorate the function you would like profiling
-information for.  In our case we will decorate the function _xypix:
+Then you must manually decorate the function you would like profiling
+information for. In our case we will decorate the function _xypix:
 
 ```
 @profile
@@ -224,7 +226,7 @@ You'll need one more step before you get nice, human-readable output:
 
 `python -m line_profiler script_to_profile.lprof > line_profiler_out.txt`
 
-!!! tip "Blank files?"
+!!! tip "Blank file?"
     If you get a blank file as an output, it's most likely because you forgot
     to decorate any functions. 
 
@@ -247,17 +249,18 @@ for i in `seq 0 31`; do python -m line_profiler script_to_profile.lprof$i > line
 
 ## Intel Vtune
 
-[Intel Vtune](https://software.intel.com/en-us/vtune-amplifier-help-python-code-analysis) 
-is best used after other types of profiling have been able to give
-you some idea what your problem (or problems) are. For example, do you have
-some lines of code that are slow for reasons you don't understand? Do you spend
-a lot of time in MPI calls? Do you have a load-imbalance problem (i.e. one of
-your MPI ranks is working much harder than the others)? If so it is likely time
-to start using heftier tools like Vtune and Tau (desribed in the next section).
+[Intel
+Vtune](https://software.intel.com/en-us/vtune-amplifier-help-python-code-analysis)
+is best used after other types of profiling have been able to give you some
+idea what your problem (or problems) are. For example, do you have some lines
+of code that are slow for reasons you don't understand? Do you spend a lot of
+time in MPI calls? Do you have a load-imbalance problem (i.e. one of your MPI
+ranks is working much harder than the others)? If so it is likely time to start
+using heftier tools like Vtune and Tau (described in the next section).
 
 Vtune shines in that it can tell if you memory access problems are slowing
 you down, where your MPI overhead is coming from, and if any MPI functions that
-have an explicit (or implicit) barrier are causing unncessary waiting in your 
+have an explicit (or implicit) barrier are causing unnecessary waiting in your 
 application. 
 
 
@@ -273,15 +276,15 @@ To use Vtune on Cori, first
 `module load vtune`
 
 Note that Vtune can be split into two parts: collection mode and finalization
-mode.  Cori Haswell nodes are fast enough so that usually there's no need to
+mode. Cori Haswell nodes are fast enough so that usually there's no need to
 separate these steps. However, Cori KNL nodes can be very slow during the
 finalization step, so in some cases it may make sense to collect data on KNL
 but finalize later on Haswell.
 
 The example we will show is for Haswell. Is is broken into two steps, so for
-KNL, just perform the collection on KNL but finalize on Haswell. In this example
-our Python binary file is desi_extract_spectra. The Vtune flags we have chosen
-to use are explained below.
+KNL, just perform the collection on KNL but finalize on Haswell. In this
+example our Python binary file is desi_extract_spectra. The Vtune flags we have
+chosen to use are explained below.
 
 To start collecting data with Vtune, request an interactive node, and try:
 ```
@@ -295,7 +298,7 @@ srun -n 32 -c 2 amplxe-cl -collect hotspots -r results_dir -trace-mpi -search-di
 
 Some further explanation for why we use these arguments:
 
-1. -collect hotspots tells Vtune which of the 3 possible colleciton modes to
+1. -collect hotspots tells Vtune which of the 3 possible collection modes to
 use 
 2. -trace-mpi asks to collect MPI data. If you don't have an MPI
 application, don't add this flag.
@@ -314,7 +317,7 @@ Once you have collected your data, you can finalize:
 `amplxe-cl -finalize -r <results_dir.nid00058>`
 
 !!! tip "Save yourself some trouble and use NX" 
-    At this point we reccomend logging on to Cori via 
+    At this point we recommend logging on to Cori via 
     [NX](http://www.nersc.gov/users/connecting-to-nersc/using-nx/) to view the results in the
     Vtune GUI. You can also use -X or -Y for ssh forwarding, but it will be very
     frustratingly slow. As a result we highly reccomend NX for the next steps in
@@ -328,9 +331,9 @@ then
 
 `amplxe-gui` 
 
-to start the Vtune Amplifier GUI. Use the file broswer to navigate to the
-.amplxe file written in your results_dir.nid00058 directory and click open.
-An overview tab will display some high level results. For more specific 
+to start the Vtune Amplifier GUI. Use the file browser to navigate to the
+.amplxe file written in your results_dir.nid00058 directory and click open.  An
+overview tab will display some high level results. For more specific
 information, try selecting the Bottom-up tab. It should look something like:
 
 ![vtune_bottomup](vtune_bottomup.jpg)
@@ -340,30 +343,28 @@ This is something that would have been hard to figure out using other methods
 of profiling.
 
 You can also try selecting the Caller/Callee tab which will display call-stack
-information about your application. Sometimes it can be difficult to find
-what you are looking for, especially for Python calls which are often
-intermixed with much lower-level functions. This is why we reccomend profiling
-with a simpler tool first so you have an idea of what information you are
-looking for.  
+information about your application. Sometimes it can be difficult to find what
+you are looking for, especially for Python calls which are often intermixed
+with much lower-level functions. This is why we recommend profiling with a
+simpler tool first so you have an idea of what information you are looking for.  
 
 ![vtune_callercallee](vtune_callercallee.jpg)
 
 ## Tau
 
-[Tau](https://www.cs.uoregon.edu/research/tau/home.php) 
-is probably the most complex profiler described on this page, but also the
-most useful. 
+[Tau](https://www.cs.uoregon.edu/research/tau/home.php) is probably the most
+complex profiler described on this page, but also the most useful. 
 
 !!! tip "If you can, build your own Tau"
     NERSC does offer a pre-built Tau module that you can access using
-    `module load tau` but we don't reccomend this approach for Python. Tau works
+    `module load tau` but we don't recommend this approach for Python. Tau works
     best when it is built from scratch under exactly the conditions your
     application will use. This may sound like a difficult task, but if done
     carefully, it will produce excellent Tau functionality that will give you a
     great deal of information about how your Python code performs.
 
-In this example, we will build Tau to profile the same DESI code we have 
-been investigating throughout this page. Because this is a Python and MPI
+In this example, we will build Tau to profile the same DESI code we have been
+investigating throughout this page. Because this is a Python and MPI
 application, we will build Tau with the flags
 
 !!! attention "Keep things constant when you build Tau"
@@ -408,19 +409,19 @@ time srun -u -n 32 -c 2 tau_python ./desi_extract_spectra_test.py arg1 arg2
 ```
 
 !!! attention "Tau prefers scripts" 
-    Tau doesn't seem to be able to execute Python binarnies so we used a
+    Tau doesn't seem to be able to execute Python binaries so we used a
     script instead of our usual binary.
 
 !!! tip "Tau may complain, don't panic"
     Tau may print some error messages like "Error in python later" 
-    but seems to succesfully profile your application anyway.
+    but seems to successfully profile your application anyway.
 
 Once your application is done running, Tau should have written one (or many, in
 the case of MPI) profile.0.0.0 files in the directory where you executed your
 run command. 
 
-!!! tip "Use the Tau GUI on your local machine"
-    We reccomend moving these files to your local machine to use the
+!!! tip "Use the Tau Paraprof GUI on your local machine"
+    We recommend moving these files to your local machine to use the
     Tau analysis GUI. (The Tau GUI uses so much memory it will crash NX, so just
     move the files to your local system. The GUI response will also be much
     faster.)
@@ -432,14 +433,13 @@ To do this we must first pack the files on Cori:
 and then use scp or Globus to transfer the files to your local machine.
 
 You should install and configure Tau on whichever machine you will use to view
-the results. You must also set an enviroment variable
-on your local machine to point to your Tau installation. On my mac it looks
-like:
+the results. You must also set an environment variable on your local machine to
+point to your Tau installation. On my mac it looks like:
 
 `export PATH=/Applications/tau-2.27.1./apple/bin:$PATH`
 
 Once you have configured Tau on your local machine you can now unpack the 
-files we transfered from Cori:
+files we transferred from Cori:
 
 `paraprof --dump datafile.ppk`
 
@@ -457,9 +457,9 @@ each MPI rank. It also displays the max, min, and standard deviation.
 
 ![tau_xypix](tau_xypix.png)
 
-You can also click on a node number (but really, this should be labled as rank
-number) and it will open another window which shows a top-down list of time
-spent in functions for this rank. It should look something like:
+You can also click on a node number (but really, this should be labelled as
+rank number) and it will open another window which shows a top-down list of
+time spent in functions for this rank. It should look something like:
 
 ![tau_rank](tau_rank.png) 
 
@@ -467,15 +467,15 @@ Using the custom-built Tau functionality makes it easy to see exactly what your
 Python program is doing, particularly if it is an MPI program. In our case we
 can see that only 20 of the 32 ranks are actually doing any work, which leads
 to a lot of wasted execution time. (Note that Vtune also indicated this, but it
-was much more diffcult to understand why exactly this was happening.) For the
+was much more difficult to understand why exactly this was happening.) For the
 ranks that are doing some work, it is good to see that they are relatively
 load-balanced. If they were not, this would be an easy way to see that their
 workload needs to be distributed more effectively.
 
-Tau has many additional features and functionality which are not described
-here (including tracing, which shows the performance of your application as a
-function of time). These may be worth investigating depending on your particular Python
-profiling needs.
+Tau has many additional features and functionality which are not described here
+(including tracing, which shows the performance of your application as a
+function of time). These may be worth investigating depending on your
+particular Python profiling needs.
 
 Hopefully at this point you have a better understanding of where your Python
 program is spending its time and why. Happy troubleshooting!
