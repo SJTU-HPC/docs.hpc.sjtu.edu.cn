@@ -45,11 +45,13 @@ check_links:
 
 pages:
   stage: deploy
+  before_script:
+    - pip install htmlmin
   script:
-  - gzip -k -6 -r public/assets/stylesheets
-  - gzip -k -6 -r public/assets/javascripts
-  - find public -type f -name "*.html" -exec htmlmin {} {} \;
-  - find public -type f -name "*.html" -exec gzip --keep --verbose {} \;
+    - gzip -k -6 -r public/assets/stylesheets
+    - gzip -k -6 -r public/assets/javascripts
+    - find public -type f -name "*.html" -exec htmlmin {} {} \;
+    - find public -type f -name "*.html" -exec gzip --keep --verbose {} \;
   artifacts:
     paths:
     - public
