@@ -46,13 +46,6 @@ better for Mac OSX.
 nersc$ ssh -Y username@cori.nersc.gov
 ```
 
-If you don't have the files, please run the 'setup_batchmode_key'
-command:
-
-```shell
-nersc$ setup_batchmode_key
-```
-
 Then start an interactive batch session on Cori or Edison.
 
 ```shell
@@ -79,11 +72,17 @@ nersc$ totalview srun -a -n numTasks ./testTV_ex
 The TotalView startup GUI will pop up and show debugging startup
 parameters. After reviewing them, click OK.
 
+![tv-startupparameters-edison](images/tv-startupparameters-edison.png)
+
 Then, click 'Go' button in the process window (the big window showing
 navigation buttons).
 
+![tv-processwindow-start1-edison](images/tv-processwindow-start1-edison.png)
+
 A small window appears telling that Process srun is a parallel job and
 asking if you want to stop it. Click Yes.
+
+![tv-question-edison](images/tv-question-edison.png)
 
 Then, the process window will show the source code of your program.
 
@@ -98,14 +97,21 @@ at a Unix prompt. A window titled 'TotalView Debugger' will open.
 nersc$ totalview
 ```
 
+![totalview-debugger](images/totalview-debugger.png)
+
+
 Click on 'A new parallel program'. This will open the 'Parallel
 Program Session' window. Select 'SLURM' for the Parallel System Name,
 and set the number of MPI tasks and the number of compute nodes
 used. The example below is to start a 16 MPI task (`-n 16`)
 application running using 2 compute nodes (`-N 2`).
 
+![totalview-parallel-program-session](images/totalview-parallel-program-session.png)
+
 Click Next. In the next window (the PROGRAM DETAILS tab), provide the
 executable file name and, if any, command line arguments.
+
+![totalview-session](images/totalview-session.png)
 
 Click the 'Start Session' button.
 
@@ -120,10 +126,14 @@ To start debugging, create a break point by clicking on a line number
 in the source pane, and click 'Go'. After that, you can use other
 buttons ('Next', 'Step', 'Out', etc.).
 
+![tvprocessingwindow](images/tvprocessingwindow.png)
+
 There is a smaller window called the 'root window' beside the process
 window, displaying all the (MPI) processes and threads created for the
 debugging application. You can see MPI task id (rank) and its status
 for each process or thread from the window.
+
+![tvrootwindow](images/tvrootwindow.png)
 
 You will want to check the value of variables from time to time in
 order to see whether your program is running as expected. If you want
@@ -131,9 +141,15 @@ to check a local variable, you can simply look up the 'Stack Frame'
 section in the process window. For any variable, right-click on the
 variable in the source pane and select 'Dive'.
 
+![tvdive1](images/tvdive1.png)
+
+![tvdive2](images/tvdive2.png)
+
 Select 'Across Processes' to view the value across processes. If you
 are in a threaded region and want to view the value across threads,
 then select the 'Across Threads' menu.
+
+![tvacrossp](images/tvacrossp.png)
 
 ## Known Limitations
 
