@@ -1,6 +1,6 @@
 # MATLAB
 
-![MATLAB logo](./images/matlablogo.png)<br/> 
+![MATLAB logo](./images/matlablogo.png)<br/>
 [MATLAB](https://www.mathworks.com/products/matlab.html) is a high-performance language for technical computing. It integrates computation, visualization, and programming in an easy-to-use environment where problems and solutions are expressed in familiar mathematical notation. MATLAB features a family of add-on application-specific solutions called toolboxes. Toolboxes are comprehensive collections of MATLAB functions (M-files) that extend the MATLAB environment to solve particular classes of problems. These are the toolboxes installed in NERSC MATLAB, along with the number of licenses.
 
 * Image Processing (2)
@@ -50,7 +50,7 @@ cd $SLURM_SUBMIT_DIR   # optional, since this is the default behavior
 module load matlab
 matlab -nodisplay -r < myjob -logfile myjob.log
 ```
-Where `myjob.m` is your MATLAB script. 
+Where `myjob.m` is your MATLAB script.
 
 ### Parallelism in MATLAB
 
@@ -71,7 +71,7 @@ The following program illustrates how MATLAB parallel commands can be used on Co
 % hello-world.m
 pc = parcluster('local');
 parpool(pc, 32);
- 
+
 spmd
   rank = labindex;
   fprintf(1,'Hello %d\n',rank);
