@@ -31,6 +31,8 @@ nav:
     - Abinit: applications/abinit/index.md
     - BerkeleyGW: applications/berkeleygw/index.md
     - CP2K: applications/cp2k/index.md
+    - Mathematica : applications/mathematica/index.md
+    - MATLAB : applications/matlab/index.md
     - NAMD : applications/namd/index.md
     - PARATEC: applications/paratec/index.md
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
