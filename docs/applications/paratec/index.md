@@ -1,6 +1,11 @@
 # PARATEC
 
-PARATEC is a parallel, plane-wave basis, density functional theory (DFT) code developed at Berkeley.  PARATEC is one of the DFT packages supported by the BerkeleyGW code. PARATEC supports many traditional DFT features and exchange-correlation functionals. PARATEC uses norm-conserving pseudopotentials that can be generated with the FHI pseudopotential program.
+PARATEC is a parallel, plane-wave basis, density functional theory
+(DFT) code developed at Berkeley.  PARATEC is one of the DFT packages
+supported by the BerkeleyGW code. PARATEC supports many traditional
+DFT features and exchange-correlation functionals. PARATEC uses
+norm-conserving pseudopotentials that can be generated with the FHI
+pseudopotential program.
 
 NERSC provides modules for PARATEC.
 

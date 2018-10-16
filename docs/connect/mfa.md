@@ -1,4 +1,4 @@
-## Introduction
+# Introduction to MFA
 
 NERSC provides users with the ability to use __Multi-Factor
 Authentication__ (__MFA__) for logging into NERSC resources.  MFA
@@ -469,9 +469,7 @@ status of MFA on NERSC systems and services.
 </tbody>
 </table>
 
-
 #### MFA Available in September, 2018
-
 
 [comment]: <> (| Authentication | Host |)
 [comment]: <> (|:---:|:---:|)
@@ -501,7 +499,8 @@ status of MFA on NERSC systems and services.
 <td style="text-align: center;"><a title="https://my.nersc.gov" href="https://my.nersc.gov">My NERSC</a></td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="https://portal.nersc.gov">Science gateways</a> accepting NIM passwords not displaying the&nbsp; NERSC (Shibboleth)&nbsp; login banner</td>
+<td style="text-align: center;">
+<a href="https://portal.nersc.gov">Science gateways</a> accepting NIM passwords not displaying the&nbsp; NERSC (Shibboleth)&nbsp; login banner</td>
 </tr>
 <tr>
 <td style="text-align: center; vertical-align: middle;" rowspan="3">Others</td>
@@ -515,7 +514,6 @@ status of MFA on NERSC systems and services.
 </tr>
 </tbody>
 </table>
-
 
 #### MFA Coming Soon
 

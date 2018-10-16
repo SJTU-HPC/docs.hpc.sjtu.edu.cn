@@ -1,3 +1,5 @@
+# Marjorana
+
 ## How to start Majorana  **Slurm+Shifter**  job executing arbitrary MJD code
 
 ```bash

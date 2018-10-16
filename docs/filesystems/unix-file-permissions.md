@@ -1,4 +1,6 @@
-## Brief Overview of Unix File Permissions
+# Unix File Permissions
+
+## Brief Overview
 
 Every file (and directory) has an owner, an associated Unix group, and a set of
 permission flags that specify separate read, write, and execute permissions for

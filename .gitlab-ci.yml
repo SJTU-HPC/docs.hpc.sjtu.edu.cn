@@ -11,13 +11,9 @@ markdown_lint:
   image: node
   stage: lint
   script:
-    - npm install markdownlint-cli
-    - ./node_modules/markdownlint-cli/markdownlint.js docs
+    - npm install -g markdownlint-cli
+    - markdownlint docs
   allow_failure: true
-  cache:
-    key: markdownlint
-    paths:
-      - node_modules/
 
 mkdocs_build:
   stage: build

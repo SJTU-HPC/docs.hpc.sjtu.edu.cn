@@ -3,7 +3,7 @@
     "first-heading-h1": true,
     "heading-style": { "style": "atx" },
     "no-trailing-spaces": true,
-    "line-length": { "line_length": 80, "code_blocks": false, "tables": false},
+    "line-length": { "line_length": 130, "code_blocks": false, "tables": false},
     "no-missing-space-atx": true,
     "no-multiple-space-atx": true
 }

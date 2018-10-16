@@ -120,7 +120,7 @@ def main():
         print("Failed urls:")
         for url in badlist:
             print(url)
-            return 1
+        return 1
     else:
         print("No bad urls!")
         return 0

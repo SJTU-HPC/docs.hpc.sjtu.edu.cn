@@ -1,3 +1,5 @@
+# Edison SCRATCH
+
 Edison has three local scratch file systems named /scratch1,
 /scratch2, and /scratch3. Users are assigned to either /scratch1 or
 /scratch2 in a round-robin fashion, so a user will be able to use one

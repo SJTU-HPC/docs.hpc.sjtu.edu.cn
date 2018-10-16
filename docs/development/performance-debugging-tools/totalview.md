@@ -63,7 +63,7 @@ nersc$ module load totalview
 With most of the versions available on the systems, you will be able
 to launch the debugger with a totalview command followed by the name
 of the executable to debug, as you normally did before NERSC switched
-to SLURM for batch scheduling.:
+to Slurm for batch scheduling.:
 
 ```shell
 nersc$ totalview srun -a -n numTasks ./testTV_ex
