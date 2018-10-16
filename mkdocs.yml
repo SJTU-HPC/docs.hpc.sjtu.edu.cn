@@ -13,6 +13,7 @@ nav:
   - Running Jobs:
     - Overview: jobs/index.md
     - Examples: jobs/examples/index.md
+    - Affinity: jobs/affinity/index.md
     - Interactive: jobs/interactive.md
     - Best Practices: jobs/best-practices.md
     - Workflow Tools:
@@ -35,7 +36,7 @@ nav:
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
     - Wannier90: applications/wannier90/index.md
     - VASP : applications/vasp/index.md
-    - MATLAB : applications/matlab/index.md    
+    - MATLAB : applications/matlab/index.md
   - Analytics:
       - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
