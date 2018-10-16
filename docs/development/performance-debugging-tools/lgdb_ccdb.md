@@ -49,16 +49,17 @@ and CCDB know the name of the variable, and the location where a
 comparison is to be made, and how the data is distributed over MPI
 processes. For these, lgdb and CCDB use 3 entities:
 
-- __PE set__: A set of MPI processes
-- __Decomposition__: How a variable is distributed over the MPI processes in a PE set
-- __Assertion script__: A collection of mathematical relationships (e.g. equality) to be tested
+-   __PE set__: A set of MPI processes
+-   __Decomposition__: How a variable is distributed over the MPI processes in a PE set
+-   __Assertion script__: A collection of mathematical relationships
+    (e.g., equality) to be tested
 
-Please see the man page "man lgdb" for usage information about
-lgdb's comparative debugging feature. Cray also has a manual that
-documents lgdb's comparative debugging feature. The tutorial manual
-uses example codes that are provided in the lgdb distribution
-package. You can build executables using the provided script as
-follows:
+Please see the man page `man lgdb` for usage information about
+lgdb's comparative debugging feature. Cray's 'XC Series Programming
+Environment User Guide,' available from [here]((https://pubs.cray.com/))
+provides info on how to use the tool.  The tutorial manual uses
+example codes that are provided in the lgdb distribution package.
+You can build executables using the provided script as follows:
 
 ```shell
 nersc$ module load cray-lgdb
@@ -68,7 +69,7 @@ nersc$ module swap PrgEnv-intel PrgEnv-cray    # its Makefile uses the Cray comp
 nersc$ ./build_demo.sh
 ```
 
-This will build two binaries, 'hpcc_working' and 'hpcc_broken'.
+This will build two binaries, `hpcc_working` and `hpcc_broken`.
 
 ### CCDB Example
 
@@ -84,7 +85,8 @@ Then, launch two applications from the CCDB window.
 
 Below is an assertion script which tests whether the 6 variables
 have the same values between the applications, at line 418 of
-HPL_pdtest.c. It shows that resid0 and XmormI have different values
+`HPL_pdtest.c`. It shows that `resid0` and `XmormI` have different values
 between the applications and therefore both applications have stopped
 at line 418.
 
+![ccdbpass1assertresid12](images/ccdbpass1assertresid12.png)
