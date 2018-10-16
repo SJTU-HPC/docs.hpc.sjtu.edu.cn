@@ -19,6 +19,7 @@ of performance, permanence and available space.
 | Cori scratch    | 20 TB | 10 M   | 12 weeks   | no        | no     | user            |
 | Edison scratch  | 10 TB | 5 M    | 12 weeks   | no        | no     | user            |
 | Edison scratch3 | -     | -      | 8 weeks    | no        | no     | special request |
+| HPSS            | -     | -      | -          | no        | no     | user            |
 
 ## Global storage
 

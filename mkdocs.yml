@@ -159,7 +159,9 @@ nav:
       - Edison scratch: filesystems/edison-scratch.md
       - Cori scratch: filesystems/cori-scratch.md
       - Cori Burst Buffer: filesystems/cori-burst-buffer.md
-      - Archive (HPSS): filesystems/archive.md
+      - Archive (HPSS): 
+        - Intro: filesystems/archive.md
+        - Accessing HPSS: filesystems/archive_access.md
       - Backups: filesystems/backups.md
       - Unix File Permissions: filesystems/unix-file-permissions.md
   - PDSF:
