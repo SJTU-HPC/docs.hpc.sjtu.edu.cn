@@ -577,7 +577,7 @@ An initial performance experiment is included to directly contrast the
 thread-scaling difference between the original `hmmsearch` driver and
 `hpc_hmmsearch`.
 
-![thread scaling of hmmsearch and hpc_hmmsearch](old_vs_new_thread.png )
+![thread scaling of hmmsearch and hpc_hmmsearch](old_vs_new_thread.png)
 
 Fig. 4 presents data obtained by running both drivers on the Edison system with
 the same configuration as used to create Fig. 1 (Edison is architecturally
@@ -811,5 +811,4 @@ along with instructions for installation and usage.
     D158-D169.
 
 18. [FICUS project](
-    https://jgi.doe.gov/user-program-info/community-science-program/
-ficus-overview/)
+    https://jgi.doe.gov/user-program-info/community-science-program/ficus-overview/)

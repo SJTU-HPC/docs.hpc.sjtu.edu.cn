@@ -31,6 +31,7 @@ goodlist = ["https://www.lbl.gov/disclaimers",
             "http://localhost:5000",
             "https://localhost:5000",
             "https://registry.services.nersc.gov"]
+skiplist = ["https://doi.org/"]
 
 def get_url(this_page):
     """Print out the URL
@@ -59,14 +60,18 @@ def check_url(page):
         url_raw, end_quote = get_url(page)
         page = page[end_quote:]
         if url_raw:
+
             url = url_raw.rstrip("/")
+            
+            if any(suburl in url for suburl in skiplist):
+                print("SKIP: {}".format(url))
+                continue
+
             if not validators.url(url):
-                print("INVALID: {}".format(url))
-                
+                print("INVALID: {}".format(url))                
+                continue
+            
             try:
-#                if url in goodlist:
-#                    print("SKIP: {}".format(url))
-#                else:
                 if url not in goodlist:
                     requests.get(url, timeout=32)
                     goodlist.append(url)
