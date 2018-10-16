@@ -1,4 +1,4 @@
-## Jobs
+# Jobs
 
 A **job** is an allocation of resources such as compute nodes assigned
 to a user for an ammount of time. Jobs can be interactive or batch

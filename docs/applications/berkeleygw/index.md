@@ -1,11 +1,12 @@
 # BerkeleyGW
 
-The BerkeleyGW Package is a set of computer codes that calculates the quasiparticle
-properties and the optical responses of a large variety of materials from bulk periodic
-crystals to nanostructures such as slabs, wires and molecules. The package takes as
-input the mean-field results from various electronic structure codes such as the
-Kohn-Sham DFT eigenvalues and eigenvectors computed with Quantum ESPRESSO, PARATEC,
-PARSEC, Octopus, Abinit, Siesta etc.
+The BerkeleyGW Package is a set of computer codes that calculates the
+quasiparticle properties and the optical responses of a large variety
+of materials from bulk periodic crystals to nanostructures such as
+slabs, wires and molecules. The package takes as input the mean-field
+results from various electronic structure codes such as the Kohn-Sham
+DFT eigenvalues and eigenvectors computed with Quantum ESPRESSO,
+PARATEC, PARSEC, Octopus, Abinit, Siesta etc.
 
 NERSC provides modules for [BerkeleyGW](https://www.berkeleygw.org).
 

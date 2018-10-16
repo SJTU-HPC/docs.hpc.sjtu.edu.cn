@@ -4,14 +4,19 @@ The Rancher CLI is used to manage your Rancher applications. The CLI
 is available on Cori & Edison to allow NERSC users to manage their
 containers, and will soon be available on Denovo.
 
-For more information on using the Rancher CLI, see
-[Rancher Command Line Interface (CLI)](https://rancher.com/docs/rancher/v1.6/en/cli/)
+For more information on using the Rancher CLI,
+see [Rancher Command Line Interface (CLI)](https://rancher.com/docs/rancher/v1.6/en/cli/)
 on [rancher.com](https://rancher.com).
 
 !!! Note
-    NERSC provides a modified version of the Rancher CLI, and not all commands shown in the Rancher documentation are available to NERSC users.
+	NERSC provides a modified version of the Rancher CLI, and not
+    all commands shown in the Rancher documentation are available to
+    NERSC users.
 
-The Docker CLI is not used to manage your Spin services from NERSC systems, as it is not yet possible for Docker to provide a secure, multi-user container infrastructure suitable for the NERSC systems. The Docker CLI is used to manage containers on your laptop.
+The Docker CLI is not used to manage your Spin services from NERSC
+systems, as it is not yet possible for Docker to provide a secure,
+multi-user container infrastructure suitable for the NERSC
+systems. The Docker CLI is used to manage containers on your laptop.
 
 ## Practices to avoid
 
@@ -54,10 +59,14 @@ flag requires a name to be passed in the format **[Stack Name]/[Service Name]**.
     1i2553342   elvis-webapp-1   registry.spin.nersc.gov/elvis/nginx-myteam   running   1h2       10.42.201.186   271efe4936a4
     nersc$
 
-Note the command spits out the ID of the Rancher Stack, in this case '1s2872'. We can use that ID to query the status of the Stack.
+!!! note
+	The command spits out the ID of the Rancher Stack, in this
+	case '1s2872'. We can use that ID to query the status of the
+	Stack.
 
-If you don't use the name **[stack name]/[service name]**, Rancher will insert
-the name 'Default' for you, which will cause confusion. Don't do this.
+If you don't use the name **[stack name]/[service name]**, Rancher
+will insert the name 'Default' for you, which will cause
+confusion. Don't do this.
 
     nersc$ rancher run --name elvistestweb1 httpd
     1s3027
@@ -79,15 +88,25 @@ underlying cause, as well as a workaround.
 
 ## Accessing Spin
 
-The **Rancher CLI** is used to manage services and stacks in Spin.  The Rancher CLI is loaded from the Spin module on all major NERSC systems, and activated with the command `rancher`.
+The **Rancher CLI** is used to manage services and stacks in Spin.
+The Rancher CLI is loaded from the Spin module on all major NERSC
+systems, and activated with the command `rancher`.
 
-The Rancher CLI must be used from a NERSC system and cannot be used from your laptop, as we maintain a modified version of the Rancher CLI which is optimized to work with NERSC systems. While Rancher also provides a Web Interface, it is currently only available to NERSC Administrators.
+The Rancher CLI must be used from a NERSC system and cannot be used
+from your laptop, as we maintain a modified version of the Rancher CLI
+which is optimized to work with NERSC systems. While Rancher also
+provides a Web Interface, it is currently only available to NERSC
+Administrators.
 
-All Rancher commands communicate with the Spin infrastructure using an API key. You will generate an API key below.
+All Rancher commands communicate with the Spin infrastructure using an
+API key. You will generate an API key below.
 
 ### Load the Spin module to access the CLI
 
-If you have an API key to access Spin, then simply load the Spin module like so. Running a non-intrusive command like `rancher environment` will connect to the server using your credentials, test that the connection is good and print out a result.
+If you have an API key to access Spin, then simply load the Spin
+module like so. Running a non-intrusive command like `rancher
+environment` will connect to the server using your credentials, test
+that the connection is good and print out a result.
 
     nersc$ module load spin
     nersc$ rancher environment
@@ -111,7 +130,8 @@ use your NERSC username & password.
     nersc$
 
 The Rancher CLI stores its configuration file under your home
-directory, at `~/.rancher/cli.json`. If you would like to view your login information, at any time, run `rancher config --print`, like so:
+directory, at `~/.rancher/cli.json`. If you would like to view your
+login information, at any time, run `rancher config --print`, like so:
 
     nersc$ rancher config --print
     {"accessKey":"ABCDEFG123456","secretKey":"ZYXWVUT098765","url":"https://rancher.spin.nersc.gov/","environment":"","path":"/global/homes/e/elvis/.rancher/cli.json"}
@@ -119,9 +139,15 @@ directory, at `~/.rancher/cli.json`. If you would like to view your login inform
 
 ### Test that the Rancher CLI is working
 
-Validate that you account is working correctly by running the command `rancher environment`. This command will communicate to the Rancher Server API using your API key. If `rancher environment` returns a list of environments, your account is working correctly. If the command prints an error such as **'401 Unauthorized'**, your account is not functioning. Please contact us for help.
+Validate that you account is working correctly by running the command
+`rancher environment`. This command will communicate to the Rancher
+Server API using your API key. If `rancher environment` returns a list
+of environments, your account is working correctly. If the command
+prints an error such as **'401 Unauthorized'**, your account is not
+functioning. Please contact us for help.
 
-Your account is tied to one key which has access to all environments, Prod, Dev & Sandbox.
+Your account is tied to one key which has access to all environments,
+Prod, Dev & Sandbox.
 
     nersc$ rancher environment
     ID         NAME         ORCHESTRATION  STATE   CREATED
@@ -132,19 +158,32 @@ Your account is tied to one key which has access to all environments, Prod, Dev 
 
 ## Working with different environments
 
-A Spin **Environment** is a set of servers which run the Spin containers. Each environment is isolated and separate from the other environments. Spin has two main environments for NERSC users:
+A Spin **Environment** is a set of servers which run the Spin
+containers. Each environment is isolated and separate from the other
+environments. Spin has two main environments for NERSC users:
 
 * 'dev-cattle' is for use with applications which are under development
 * 'prod-cattle' is used for production services.
 
-A third environment named 'sandbox' will be used exclusively if you are taking the SpinUp sessions.
+A third environment named 'sandbox' will be used exclusively if you
+are taking the SpinUp sessions.
 
 !!!Info
-    The name 'cattle' refers to the container 'Orchestrator' which we use to manage containers and is part of Rancher. Rancher names many of their components with 'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information on Rancher, please read the Spin Getting Started Guide overview.
+	The name 'cattle' refers to the container 'Orchestrator' which
+    we use to manage containers and is part of Rancher. Rancher names
+    many of their components with 'Ranch'-themed names, such as
+    'Longhorn' or 'Wagyu'. To read more information on Rancher, please
+    read the Spin Getting Started Guide overview.
 
-During normal development, you will first deploy your application to the development environments, and will copy it to production when ready. **Currently, ISG must approve all applications before they run in the production environment**.
+During normal development, you will first deploy your application to
+the development environments, and will copy it to production when
+ready. **Currently, ISG must approve all applications before they run
+in the production environment**.
 
-Most Rancher commands only operate on stacks & services within one environment, and will need to be told which environment to use. If you simply run a command now, Rancher will ask you to select the environment for most commands. This can be a hassle:
+Most Rancher commands only operate on stacks & services within one
+environment, and will need to be told which environment to use. If you
+simply run a command now, Rancher will ask you to select the
+environment for most commands. This can be a hassle:
 
     nersc$ rancher ps
     Environments:
@@ -157,7 +196,9 @@ Most Rancher commands only operate on stacks & services within one environment, 
     1s3713  service  elvis-webapp/db   mysql  healthy     1/1    false
     nersc$
 
-To simplify your workflow, use the **RANCHER_ENVIRONMENT** variable to specify the environment to be used. The following example shows that I have two services running in the dev-cattle environment.
+To simplify your workflow, use the **RANCHER_ENVIRONMENT** variable to
+specify the environment to be used. The following example shows that I
+have two services running in the dev-cattle environment.
 
     nersc$ export RANCHER_ENVIRONMENT=dev-cattle
     nersc$ rancher ps
@@ -174,10 +215,16 @@ To simplify your workflow, use the **RANCHER_ENVIRONMENT** variable to specify t
 Names of Stacks, Services & Containers:
 
 * Stacks accept any alphabetical name.
-* Services, which are part of a Stack, are referred to as **[Stack Name]/[Service Name]**
-* A Service may have multiple instances of itself, which are called 'containers', and have the name **[Stack Name]-[Service Name]-[Instance #]**, where 'Instance #' is the number of that container instance.
+* Services, which are part of a Stack, are referred to as **[Stack
+  Name]/[Service Name]**
+* A Service may have multiple instances of itself, which are called
+  'containers', and have the name **[Stack Name]-[Service
+  Name]-[Instance #]**, where 'Instance #' is the number of that
+  container instance.
 
-Many commands can be used on a service or a container. Remember that a **service** may have one or more **containers**. To put it another way, **containers** are *'instances'* of a **service**.
+Many commands can be used on a service or a container. Remember that a
+**service** may have one or more **containers**. To put it another
+way, **containers** are *'instances'* of a **service**.
 
 ### Listing Stacks & Services
 
@@ -193,14 +240,16 @@ Many commands can be used on a service or a container. Remember that a **service
 
 The fields are:
 
-* Stack ID of your stack, prefixed with '1st', where 'st' stands for 'stack'
+* Stack ID of your stack, prefixed with '1st', where 'st' stands for
+  'stack'
 * Stack Name
 * Stack State (Health)
 * The other fields are rarely used
 
 #### Listing services in your stacks
 
-`rancher ps` will display information about active services in your stacks:
+`rancher ps` will display information about active services in your
+stacks:
 
     nersc$ rancher ps --all
     ID      TYPE     NAME                  IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
@@ -211,20 +260,24 @@ The fields are:
 
 The fields are:
 
-* Service ID of your service, prefixed with a '1s', where 's' stands for 'service'
+* Service ID of your service, prefixed with a '1s', where 's' stands
+  for 'service'
 * Service Name in the format **[Stack Name]/[Service Name]**
 * Image used for the Service
 * Service State (Health)
-* The Scale of a service, or the number of instances (a container is an instance of a service)
+* The Scale of a service, or the number of instances (a container is
+  an instance of a service)
 * The other fields are rarely used
 
 #### Listing the container instances for all your services
 
 !!! Tip "Services and Containers"
-    Remember that a **container** is an instance of a **service**. A **service** may have one or more container instances.
+	Remember that a **container** is an
+    instance of a **service**. A **service** may have one or more
+    container instances.
 
-`rancher ps --containers` will list the containers which are part of
-a service. In the example below, note that the 'web' service has two
+`rancher ps --containers` will list the containers which are part of a
+service. In the example below, note that the 'web' service has two
 containers.
 
     nersc$ rancher ps --containers
@@ -237,15 +290,23 @@ containers.
 
 The fields are:
 
-* Instance ID of the service, prefixed with a '1i', where 'i' stands for 'instance'
-* Name of the container in the format of **[Stack Name]-[Service Name]-[Instance #]**, where the instance is the numerical instance of the service. The example below shows two instances, 'web-1' and 'web-2'.
+* Instance ID of the service, prefixed with a '1i', where 'i' stands
+  for 'instance'
+* Name of the container in the format of **[Stack Name]-[Service
+  Name]-[Instance #]**, where the instance is the numerical instance
+  of the service. The example below shows two instances, 'web-1' and
+  'web-2'.
 * The internal IP of the services on the internal Spin network
 * The ID of the Spin host which is serving your containers
 * The Docker ID of your running container
 
 #### Listing all services in your stack, including inactive services
 
-`rancher ps --all` will show services in a stack, including services which are stopped, inactive or recently removed. However, the stopped containers are a bit hidden in this display. In the following example  notice that the 'SCALE' column says `2/1` which means that two containers exist, but only one is running.
+`rancher ps --all` will show services in a stack, including services
+which are stopped, inactive or recently removed. However, the stopped
+containers are a bit hidden in this display. In the following example
+notice that the 'SCALE' column says `2/1` which means that two
+containers exist, but only one is running.
 
     nersc$ rancher ps --all
     ID      TYPE     NAME                  IMAGE                                                          STATE     SCALE  SYSTEM  ENDPOINTS  DETAIL
@@ -254,7 +315,8 @@ The fields are:
     1s3941  service  elvis-flask-demo/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy   1/1    false
     nersc$
 
-Adding the `--containers` flag will make the stopped containers more obvious:
+Adding the `--containers` flag will make the stopped containers more
+obvious:
 
     nersc$ rancher ps --all --containers
     ID         NAME                    IMAGE                                                          STATE    HOST  IP             DOCKER        DETAIL
@@ -267,10 +329,17 @@ Adding the `--containers` flag will make the stopped containers more obvious:
 
 ### Stopping, Starting Stacks & Services
 
-The `rancher start`, `rancher stop` and `rancher restart` commands share a common syntax. Stacks are started/restarted/stopped by specifying the stack name. Individual services and containers are stopped by specifying the name of the service or container.
+The `rancher start`, `rancher stop` and `rancher restart` commands
+share a common syntax. Stacks are started/restarted/stopped by
+specifying the stack name. Individual services and containers are
+stopped by specifying the name of the service or container.
 
 !!!Warning
-    After upgrading a service or stack, the `rancher stop` `start` and `restart` commands cannot be used until the you have verified the upgrade and removed the old containers using the `rancher up --confirm-upgrade` command. **Always remove containers after a successful upgrade.**
+	After upgrading a service or stack, the `rancher stop`
+    `start` and `restart` commands cannot be used until the you have
+    verified the upgrade and removed the old containers using the
+    `rancher up --confirm-upgrade` command. **Always remove containers
+    after a successful upgrade.**
 
     If you do not remove the old containers, the command will fail with this error:
 
@@ -288,7 +357,8 @@ The `rancher start`, `rancher stop` and `rancher restart` commands share a commo
 
 #### Stopping, Starting, Restarting Stacks
 
-After stopping a stack using `rancher stop`, the stopped containers may be seen by adding the `--all` flag to the `rancher ps` command.
+After stopping a stack using `rancher stop`, the stopped containers
+may be seen by adding the `--all` flag to the `rancher ps` command.
 
     nersc$ rancher stop elvis-first-stack
     1st1443
@@ -300,7 +370,8 @@ After stopping a stack using `rancher stop`, the stopped containers may be seen 
 
 #### Stopping, Starting, Restarting Services
 
-Services and containers may also be stopped using `rancher stop` and specifying the Service Name or Container Name.
+Services and containers may also be stopped using `rancher stop` and
+specifying the Service Name or Container Name.
 
 * Stopping a service, using the name **[Stack Name]/[Service Name]**:
 
@@ -310,7 +381,8 @@ Services and containers may also be stopped using `rancher stop` and specifying 
     nersc$
     ```
 
-* Stopping a container, using the name **[Stack Name]-[Service Name]-[Instance #]**:
+* Stopping a container, using the name **[Stack Name]-[Service
+  Name]-[Instance #]**:
 
     ```
     nersc$ rancher stop elvis-flask-demo-web-1
@@ -334,7 +406,11 @@ Services and containers may also be stopped using `rancher stop` and specifying 
 
 #### If Removing a stack results in the error 'you don't own this volume'
 
-If you try to remove a stack and Rancher refuses with an error like 'you don't own this volume', try again and specify the name of the stack with the `--stack` flag. This error is due to an ordering bug in Rancher, and the `--stack` flag will force Rancher to do the right thing in the right order.
+If you try to remove a stack and Rancher refuses with an error like
+'you don't own this volume', try again and specify the name of the
+stack with the `--stack` flag. This error is due to an ordering bug in
+Rancher, and the `--stack` flag will force Rancher to do the right
+thing in the right order.
 
     nersc$ rancher rm elvis-first-stack
     error elvis-first-stack: Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you don't own this volume] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a1221788/volumes/elvis-first-stack]
@@ -344,7 +420,9 @@ If you try to remove a stack and Rancher refuses with an error like 'you don't o
 
 ### Remove unused services in your stack
 
-This will remove services which are not listed in the docker-compose.yml file in your current working directory. We don't use this very often. Be careful with this.
+This will remove services which are not listed in the
+docker-compose.yml file in your current working directory. We don't
+use this very often. Be careful with this.
 
     rancher prune --stack elvis-webapp
 
@@ -376,16 +454,24 @@ This will remove services which are not listed in the docker-compose.yml file in
 
 ### View the logs for services and containers
 
-Logs may be viewed using the `rancher logs` command. The command may use the service name, like **elvis-first-stack/web**, or the container name, like **elvis-first-stack-web-1**.
+Logs may be viewed using the `rancher logs` command. The command may
+use the service name, like **elvis-first-stack/web**, or the container
+name, like **elvis-first-stack-web-1**.
 
-If your service has more than one container (Remember, a container is an instance of a service), the individual containers logs will show the number of the container at the beginning. In the example below, the 'web' service has two containers. Notice how the line begins with a '01' or a '02' which indicates which container owns that log line.
+If your service has more than one container (Remember, a container is
+an instance of a service), the individual containers logs will show
+the number of the container at the beginning. In the example below,
+the 'web' service has two containers. Notice how the line begins with
+a '01' or a '02' which indicates which container owns that log line.
 
     nersc$ rancher logs elvis-flask-demo/web
     01 2018-05-23T00:15:26.486199100Z 128.3.135.223 - - [23/May/2018:00:15:26 +0000] "GET /static/CPvalid1_nodsRNA_40x_Tiles_p1745DAPI.png HTTP/1.1" 200 82055 "https://128.55.206.22:60000/fields/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.181 Safari/537.36" "-"
     02 2018-05-23T00:17:21.196355808Z 128.3.135.223 - - [23/May/2018:00:17:21 +0000] "GET /fields/ HTTP/1.1" 200 19322 "https://128.55.206.22:60000/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/53
     nersc$
 
-To view the logs for just a single container, print the container name instead of the service name. The container name can be found using `rancher ps --containers` as shown above.
+To view the logs for just a single container, print the container name
+instead of the service name. The container name can be found using
+`rancher ps --containers` as shown above.
 
     nersc$ rancher logs elvis-flask-demo-web-2
     128.3.135.153 - - [14/Mar/2018:00:41:23 +0000] "GET / HTTP/1.1" 200 12 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36" "-"
@@ -404,7 +490,9 @@ timestamps enabled, and are following the logs as if we were using
 
 ### Obtain a shell on a container
 
-Use `rancher exec -it NAME /bin/bash` to start a bash shell on a container. The NAME may be the service name, or an individual container name.
+Use `rancher exec -it NAME /bin/bash` to start a bash shell on a
+container. The NAME may be the service name, or an individual
+container name.
 
     nersc$ rancher exec -it elvis-webapp-1 /bin/bash
     root@21060e7b6b52:/usr/local/apache2# ps aux
@@ -422,7 +510,8 @@ Use `rancher exec -it NAME /bin/bash` to start a bash shell on a container. The 
 
 `rancher inspect` will print a Service's configuration in JSON,
 similar to how `docker inspect` works.  JSON can be hard for humans to
-parse, so we recommend using the ['jq' command line tool](https://stedolan.github.io/jq/), which is
+parse, so we recommend using
+the ['jq' command line tool](https://stedolan.github.io/jq/), which is
 available on all NERSC systems.
 
     nersc$ rancher inspect elvis-webapp/web | jq
@@ -456,13 +545,17 @@ or `less`, be sure to apply a filter, such as '.', such as:
 
 ### Build an image and pull the latest parent images
 
-When building an image on your laptop, use the `--pull` flag to ensure that your image will pull the latest parent images, if any:
+When building an image on your laptop, use the `--pull` flag to ensure
+that your image will pull the latest parent images, if any:
 
     elvis@laptop:app $ docker image build --pull --tag spin-flask-demo-app .
 
 ### On your laptop, copy a file from inside a container with `docker container cp`
 
-To copy files from a local container on your laptop to your working directory, you can use this trick which we borrowed from Nginx. Start a temporary container on your laptop, and copy files using 'docker container cp' to your working directory:
+To copy files from a local container on your laptop to your working
+directory, you can use this trick which we borrowed from Nginx. Start
+a temporary container on your laptop, and copy files using 'docker
+container cp' to your working directory:
 
     laptop$ docker container run --rm --detach --name tmp-nginx-container nginx
     Unable to find image 'nginx:latest' locally
@@ -478,7 +571,8 @@ To copy files from a local container on your laptop to your working directory, y
     -rw-r--r--  1 elvis staff  643 Dec 26 03:11 nginx.conf
     laptop$
 
-Since the container was started with the '--rm' flag, the container will remove itself after you have stopped it.
+Since the container was started with the '--rm' flag, the container
+will remove itself after you have stopped it.
 
 ### On Spin, copy a text file from a running container using 'cat'
 
@@ -490,11 +584,16 @@ Since the container was started with the '--rm' flag, the container will remove 
 
 ## Troubleshooting
 
-### Stack won't upgrade because of an error like 'Failed to start: web : Service web must be state=active'
+### Stack won't upgrade
 
-Sometimes you'll start a stack, and it won't start all of the way because of an error with one of the services in the stack.
+!!! error
+	'Failed to start: web : Service web must be state=active'
 
-You might try to fix it in the Compose file, and then upgrade the Stack. Suppose that upgrade fails with an error like the following:
+Sometimes you'll start a stack, and it won't start all of the way
+because of an error with one of the services in the stack.
+
+You might try to fix it in the Compose file, and then upgrade the
+Stack. Suppose that upgrade fails with an error like the following:
 
     nersc:elvis-flask-demo $ rancher up --upgrade
     INFO[0000] Secret db.elvis-flask-demo.mongo-initdb-password already exists
@@ -518,7 +617,9 @@ You might try to fix it in the Compose file, and then upgrade the Stack. Suppose
     FATA[0000] Service web must be state=active or inactive to upgrade, currently: state=updating-active
     nersc:elvis-flask-demo $
 
-The solution here is to Stop or the problematic service, and then try the upgrade again. You may need to wait 10+ seconds, or longer, for the service to actually stop correctly.
+The solution here is to Stop or the problematic service, and then try
+the upgrade again. You may need to wait 10+ seconds, or longer, for
+the service to actually stop correctly.
 
     nersc:elvis-flask-demo $ rancher stop elvis-flask-demo/web
     1s3595
@@ -547,14 +648,24 @@ The solution here is to Stop or the problematic service, and then try the upgrad
 
 ### Is your directory set to o+x?
 
-Let's imagine that you started your stack, but the stack isn't working correctly. To troubleshoot, you use the `rancher logs` command and discover the following errori which says `permission denied`.
+Let's imagine that you started your stack, but the stack isn't working
+correctly. To troubleshoot, you use the `rancher logs` command and
+discover the following errori which says `permission denied`.
 
     nersc$ rancher logs --service --follow --tail 10 elvis-flask-demo/web
     2018-04-12T22:51:19Z   0s 41599f54 ERROR elvis-flask-demo/web(1s3680) 1i2589840 service.activate.exception: Expected state running but got error: Error response from daemon: error while creating mount source path '/global/project/projectdirs/myteam/spin/elvis-flask-demo/web/nginx-proxy.conf': mkdir /global/project/projectdirs/myteam/spin/elvis-flask-demo/web/nginx-proxy.conf: permission denied
 
-What's happening here? The Docker daemon cannot access your directory because the o+x bit is not set. Notice the part which says `mkdir /global/… permission denied`? Docker cannot see the file on the host, therefore it believes that file does not exist. By default, Docker will try to create a directory using the path provided, but does not have permission to do so. We don't actually want Docker to create anything. We just want it to use what exists already.
+What's happening here? The Docker daemon cannot access your directory
+because the o+x bit is not set. Notice the part which says `mkdir
+/global/… permission denied`? Docker cannot see the file on the host,
+therefore it believes that file does not exist. By default, Docker
+will try to create a directory using the path provided, but does not
+have permission to do so. We don't actually want Docker to create
+anything. We just want it to use what exists already.
 
-The real cause of this error is the lack of the 'o+x' bit on the directory. Notice how the bit is missing on the `.../elvis-flask-demo/web` subdirectory?
+The real cause of this error is the lack of the 'o+x' bit on the
+directory. Notice how the bit is missing on the
+`.../elvis-flask-demo/web` subdirectory?
 
     nersc$ ls -ld /project/projectdirs/myteam/spin /project/projectdirs/myteam/spin/elvis-flask-demo/ /project/projectdirs/myteam/spin/elvis-flask-demo/web/
     drwxrwx--x 7 elvis myteam 512 Apr 12 14:40 /project/projectdirs/myteam/spin
@@ -572,5 +683,3 @@ The fix is:
     drwxrwx--x 5 elvis elvis 512 Apr 12 15:06 /project/projectdirs/myteam/spin/elvis-flask-demo/
     drwxrwx--x 3 elvis elvis 512 Apr 12 14:41 /project/projectdirs/myteam/spin/elvis-flask-demo/web/
     nersc$
-
-

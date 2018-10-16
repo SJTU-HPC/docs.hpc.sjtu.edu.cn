@@ -1,4 +1,4 @@
-## OSTP/Office of Science Data Management Requirements
+# OSTP/Office of Science Data Management Requirements
 
 Project Principal Investigators are responsible for meeting OSTP
 (Office of Science and Technology Policy) and DOE Office of Science

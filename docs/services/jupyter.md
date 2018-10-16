@@ -1,3 +1,5 @@
+# Jupyter
+
 Jupyter is an essential component of NERSC's Data and Analytics Services ecosystem.
 Use Jupyter at NERSC to:
 

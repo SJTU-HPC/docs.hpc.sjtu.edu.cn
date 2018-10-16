@@ -1,4 +1,4 @@
-## Summary
+# Global HOME
 
 Home directories provide a convenient means for a user to have
 access to files such as dotfiles, source files, input files,

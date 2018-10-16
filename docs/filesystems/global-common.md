@@ -1,4 +1,4 @@
-## Summary
+# Global common
 
 The global common file system is a global file system available on all
 NERSC computational systems. It offers a performant platform to

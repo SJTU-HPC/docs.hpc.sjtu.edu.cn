@@ -73,7 +73,8 @@ Interactive jobs are launched with the `salloc` command.
 
 ## Running Multiple Parallel Jobs Sequentially
 
-Multiple sruns can be executed one after another in a single batch script. Be sure to specify the total walltime needed to run all jobs.
+Multiple sruns can be executed one after another in a single batch
+script. Be sure to specify the total walltime needed to run all jobs.
 
 ??? example "Cori Haswell"
 	```bash
@@ -82,11 +83,23 @@ Multiple sruns can be executed one after another in a single batch script. Be su
 
 ## Running Multiple Parallel Jobs Simultaneously
 
-Multiple sruns can be executed simultaneously in a single batch script. Be sure to specify the total number of nodes needed to run all jobs at the same time. By default, multiple concurrent srun executions cannot share compute nodes under Slurm in the non-shared QOSs.
+Multiple sruns can be executed simultaneously in a single batch
+script. Be sure to specify the total number of nodes needed to run all
+jobs at the same time. By default, multiple concurrent srun executions
+cannot share compute nodes under Slurm in the non-shared QOSs.
 
-In the following example, a total of 192 cores are required, which would hypothetically fit on 192 / 32 = 6 Haswell nodes. However, because sruns cannot share nodes by default, we instead have to dedicate 2 nodes to the first execution (44 cores), 4 to the second (108 cores), and again 2 to the third (40 cores).   For all three executables, the node is not fully packed, and number of MPI tasks per node is not a divisor of 64, so both -c and --cpu_bind flags are used in srun commands.
+In the following example, a total of 192 cores are required, which
+would hypothetically fit on 192 / 32 = 6 Haswell nodes. However,
+because sruns cannot share nodes by default, we instead have to
+dedicate 2 nodes to the first execution (44 cores), 4 to the second
+(108 cores), and again 2 to the third (40 cores).  For all three
+executables, the node is not fully packed, and number of MPI tasks per
+node is not a divisor of 64, so both -c and --cpu_bind flags are used
+in srun commands.
 
-Notice the "&" at the end of each srun command.  Also the "wait" command at the end of the script is very important.  It makes sure the batch job won't exit before all the simultaneous sruns are completed.
+Notice the "&" at the end of each srun command.  Also the "wait"
+command at the end of the script is very important.  It makes sure the
+batch job won't exit before all the simultaneous sruns are completed.
 
 ??? example "Cori Haswell"
 	```bash
@@ -192,25 +205,48 @@ $$
 
 ## Variable-time jobs
 
-The variable-time jobs are for the users who wish to get a better queue turnaround or need to run long running jobs, including jobs longer than 48 hours, the max wall-clock time allowed on Cori and Edison. The variable-time jobs are the jobs submitted with the minimum and maximum time limits. Jobs specifying the minimum time can start execution earlier than otherwise with a time limit anywhere between the minimum and maximum time limits. The pre-terminated jobs are automatically requeued to resume from where the previous executions left off, until the cumulative execution time reaches the requested maximum time limit or the job completes before the requested time limit. The variable-time jobs enable users to run jobs with any length, e.g., one week or even longer. Note that to use the variable-time jobs applications are required to be able to checkpoint/restart by themselves.
+The variable-time jobs are for the users who wish to get a better
+queue turnaround or need to run long running jobs, including jobs
+longer than 48 hours, the max wall-clock time allowed on Cori and
+Edison. The variable-time jobs are the jobs submitted with the minimum
+and maximum time limits. Jobs specifying the minimum time can start
+execution earlier than otherwise with a time limit anywhere between
+the minimum and maximum time limits. The pre-terminated jobs are
+automatically requeued to resume from where the previous executions
+left off, until the cumulative execution time reaches the requested
+maximum time limit or the job completes before the requested time
+limit. The variable-time jobs enable users to run jobs with any
+length, e.g., one week or even longer. Note that to use the
+variable-time jobs applications are required to be able to
+checkpoint/restart by themselves.
 
-In the following example, the --comment option is used to request the user desired maximum time limit, which could be longer than maximum time limit allowed by the batch system. In addition to the time limit (--time option), the --time-min option is used to request the minimum amount of time the job should run. The variable ckpt_overhead is used to specify the amount of time (in seconds) needed for checkpointing. The --signal=B:USR1@<sig-time> option is used to send signal USR1 to the job within sig-time seconds of its end time to terminate the job after checkpointing. The sig-time should match the checkpoint overhead time, ckpt_overhead. The ata module defines the bash functions used in the scripti, and users may need to modify the scripts (get a copy) for their use.
+In the following example, the --comment option is used to request the
+user desired maximum time limit, which could be longer than maximum
+time limit allowed by the batch system. In addition to the time limit
+(--time option), the --time-min option is used to request the minimum
+amount of time the job should run. The variable ckpt_overhead is used
+to specify the amount of time (in seconds) needed for
+checkpointing. The --signal=B:USR1@<sig-time> option is used to send
+signal USR1 to the job within sig-time seconds of its end time to
+terminate the job after checkpointing. The sig-time should match the
+checkpoint overhead time, ckpt_overhead. The ata module defines the
+bash functions used in the scripti, and users may need to modify the
+scripts (get a copy) for their use.
 
 ??? example "Edison"
-        ```bash
-        --8<-- "docs/jobs/examples/variable-time-jobs/edison/variable-time-jobs.sh"
-        ```
+    ```bash
+    --8<-- "docs/jobs/examples/variable-time-jobs/edison/variable-time-jobs.sh"
+    ```
 
 ??? example "Cori Haswell"
-        ```bash
-        --8<-- "docs/jobs/examples/variable-time-jobs/cori-haswell/variable-time-jobs.sh"
-        ```
+    ```bash
+    --8<-- "docs/jobs/examples/variable-time-jobs/cori-haswell/variable-time-jobs.sh"
+     ```
 
 ??? example "Cori KNL"
-        ```bash
-        --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/variable-time-jobs.sh"
-        ```
-
+    ```bash
+    --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/variable-time-jobs.sh"
+    ```
 
 ## Burst buffer
 
@@ -323,4 +359,3 @@ requested topology can be specified.
 	* [Cray XC Series Network (pdf)](https://www.cray.com/sites/default/files/resources/CrayXCNetwork.pdf)
 	* [sbatch documentation](https://slurm.schedmd.com/sbatch.html)
     * Manual pages via `man sbatch` on NERSC systems
-

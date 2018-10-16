@@ -1,4 +1,4 @@
-## Backups
+# Backups
 
 !!! danger
 	All NERSC users should back up important files to HPSS on

@@ -1,3 +1,5 @@
+# LZ PulseFinder
+
 ## **Interactive  session**  using Shifter on PDSF in SL6.4
 
 !!!warning
@@ -38,7 +40,7 @@ $ cat hello2.slr
 --8<-- "docs/pdsf/slurm/lz-pulseFinder/lzOne.slr"
 ```
 
-where 'lzOne.slr' informs SLURM what resources will you need and
+where 'lzOne.slr' informs Slurm what resources will you need and
 launches the bash script running the actuall task 'lzReco.sh'. Note,
 the lzOne.slr is setup to run on all 3 slurm partitions: PDSF+Chos,
 PDSF+Shifter, Cori+Shifter - you need only to toggle the '-' in front
