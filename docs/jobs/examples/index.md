@@ -207,12 +207,13 @@ $$
 
 The intended use of the xfer queue is to transfer data between Cori or
 Edison and HPSS. The xfer jobs run on one of the login nodes and are
-free of charge. If you want to transfer data to the HPSS
-archive system at the end of a regular job, you can submit an xfer job at the
+free of charge. If you want to transfer data to the HPSS archive
+system at the end of a regular job, you can submit an xfer job at the
 end of your batch job script via ```sbatch -M escori hsi put
-<my_files>``` (use esedison on Edison), so that you will not get charged for the duration of the
-data transfer.  The xfer jobs can be monitored via “squeue -M
-escori”. 
+<my_files>``` (use esedison on Edison), so that you will not get
+charged for the duration of the data transfer. The xfer jobs can be
+monitored via “squeue -M escori”. The number of running jobs for each
+user is limited to the number of concurrent HPSS sessions (15).
 
 !!! warn 
     Do not run computational jobs in the xfer queue.

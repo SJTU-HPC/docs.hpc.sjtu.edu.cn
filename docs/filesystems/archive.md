@@ -147,6 +147,14 @@ encounter problems due to firewalls at the client site. Often you will
 have to configure your client firewall to allow connections to
 HPSS. See the HPSS firewall page for more details.
 
+#### Use the Xfer Queue
+
+User the dedicated [xfer queue](../../jobs/examples/#xfer-queue) for
+long-running transfers to / from HPSS. You can also submit jobs to the
+xfer queue after your computations are done. The xfer queue is
+configured to limit the number of running jobs per user to the same
+number as the limit of HPSS sessions.
+
 ### Session Limits
 
 Each HPSS user is limited to no more than 15 concurrent HPSS sessions.
