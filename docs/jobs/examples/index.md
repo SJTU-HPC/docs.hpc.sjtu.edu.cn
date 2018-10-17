@@ -203,6 +203,55 @@ $$
 	#SBATCH --cpus-per-task=8
 	```
 
+## Xfer queue
+
+The intended use of the xfer queue is to transfer data between Cori or
+Edison and HPSS. The xfer jobs run on one of the login nodes and are
+free of charge. If you want to transfer data to the HPSS
+archive system at the end of a regular job, you can submit an xfer job at the
+end of your batch job script via ```sbatch -M escori hsi put
+<my_files>``` (use esedison on Edison), so that you will not get charged for the duration of the
+data transfer.  The xfer jobs can be monitored via “squeue -M
+escori”. 
+
+!!! warn 
+    Do not run computational jobs in the xfer queue.
+
+??? example "Edison transfer job"
+    ```bash
+    #!/bin/bash -l
+    #SBATCH -M esedison
+    #SBATCH -q xfer
+    #SBATCH -t 12:00:00
+    #SBATCH -J my_transfer
+    #SBATCH -L SCRATCH
+
+    #Archive run01 to HPSS
+    htar -cvf run01.tar run01
+    ```
+??? example "Cori transfer job"
+    ```bash
+    #!/bin/bash -l
+    #SBATCH -M escori
+    #SBATCH -q xfer
+    #SBATCH -t 12:00:00
+    #SBATCH -J my_transfer
+    #SBATCH -L SCRATCH
+
+    #Archive run01 to HPSS
+    htar -cvf run01.tar run01
+    ```
+
+Xfer jobs specifying "-N nodes" will be rejected at submission
+time. Also "-C haswell" is not needed since the job does not run on
+compute nodes. By default, xfer jobs get ~2GB of memory allocated. If
+you're archiving larger files, you'll need to request more memory. You
+can do this by adding "#SBATCH --mem=XGB" to the above script (5 - 10
+GB is a good starting point for large files).
+
+To monitor your xfer jobs, please use the "squeue -M escori" command,
+or "scontrol -M escori show job job_id".
+
 ## Variable-time jobs
 
 The variable-time jobs are for the users who wish to get a better
