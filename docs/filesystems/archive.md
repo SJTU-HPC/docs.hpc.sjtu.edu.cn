@@ -71,7 +71,7 @@ retieved in a single pass in the order they are on the tape. NERSC has
 a script to help you generate an ordered list for retrieval called
 ```hpss_file_sorter.script```.
 
-??? tip "Generating a sorted list for retrieval" 
+??? tip "Generating a sorted list for retrieval"
       To use the script, you first need a list of fully qualified
       file path names and/or directory path names. If you do not
       already have such a list, you can query HPSS using the
@@ -80,7 +80,7 @@ a script to help you generate an ordered list for retrieval called
       ```
       hsi -q 'ls -1 <HPSS_files_or_directories_you_want_to_retrieve>' 2> temp.txt
       ```
-    
+
       (for csh replace "2>" with ">&"). Once you have the list of files, feed it to the sorting script:
 
       ```
@@ -123,7 +123,7 @@ and lead to longer transfer times, increasing the possibility
 of transfer interruptions. Generally it's best to aim for file
 sizes in the 100 - 500 GB range. You can use "tar" and "split"
 to break up large aggregates or large files into 500 GB sized
-chunks: 
+chunks:
 
 ```tar cvf - myfiles* | split -d --bytes=500G -
 my_output_tarname.tar.```

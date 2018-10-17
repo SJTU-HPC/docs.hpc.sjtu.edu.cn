@@ -215,7 +215,7 @@ charged for the duration of the data transfer. The xfer jobs can be
 monitored via “squeue -M escori”. The number of running jobs for each
 user is limited to the number of concurrent HPSS sessions (15).
 
-!!! warn 
+!!! warn
     Do not run computational jobs in the xfer queue.
 
 ??? example "Edison transfer job"
