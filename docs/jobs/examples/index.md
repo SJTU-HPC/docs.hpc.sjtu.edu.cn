@@ -84,22 +84,34 @@ script. Be sure to specify the total walltime needed to run all jobs.
 ## Running Multiple Parallel Jobs Simultaneously
 
 Multiple sruns can be executed simultaneously in a single batch
-script. Be sure to specify the total number of nodes needed to run all
-jobs at the same time. By default, multiple concurrent srun executions
-cannot share compute nodes under Slurm in the non-shared QOSs.
+script.
+
+!!! tip
+	Be sure to specify the total number of nodes needed to run all
+	jobs at the same time.
+
+!!! note
+	By default, multiple concurrent srun executions cannot share
+	compute nodes under Slurm in the non-shared QOSs.
 
 In the following example, a total of 192 cores are required, which
 would hypothetically fit on 192 / 32 = 6 Haswell nodes. However,
 because sruns cannot share nodes by default, we instead have to
-dedicate 2 nodes to the first execution (44 cores), 4 to the second
-(108 cores), and again 2 to the third (40 cores).  For all three
-executables, the node is not fully packed, and number of MPI tasks per
-node is not a divisor of 64, so both -c and --cpu_bind flags are used
-in srun commands.
+dedicate:
 
-Notice the "&" at the end of each srun command.  Also the "wait"
-command at the end of the script is very important.  It makes sure the
-batch job won't exit before all the simultaneous sruns are completed.
+* 2 nodes to the first execution (44 cores)
+* 4 to the second (108 cores)
+* 2 to the third (40 cores)
+
+For all three executables the node is not fully packed and number of
+MPI tasks per node is not a divisor of 64, so both `-c` and `--cpu-bind`
+flags are used in `srun` commands.
+
+!!! note
+	The "`&`" at the end of each `srun` command and the `wait`
+	command at the end of the script are very important to ensure the
+	jobs are run in parallel and the batch job will not exit before
+	all the simultaneous sruns are completed.
 
 ??? example "Cori Haswell"
 	```bash
@@ -135,22 +147,17 @@ together long simulations requiring multiple steps.
 
 !!! example
 	```bash
-	$ jobid=$(sbatch --parsable first_job.sh)
-	$ sbatch --dependency=afterok:$jobid second_job.sh
+	jobid=$(sbatch --parsable first_job.sh)
+	sbatch --dependency=afterok:$jobid second_job.sh
 	```
 
 !!! example
 	```bash
-	$ jobid1=$(sbatch --parsable first_job.sh)
-    $ jobid2=$(sbatch --parsable --dependency=afterok:$jobid1 second_job.sh)
-	$ jobid3=$(sbatch --parsable --dependency=afterok:$jobid1 third_job.sh)
-	$ sbatch --dependency=afterok:$jobid2,afterok:$jobid3 last_job.sh
+	jobid1=$(sbatch --parsable first_job.sh)
+    jobid2=$(sbatch --parsable --dependency=afterok:$jobid1 second_job.sh)
+	jobid3=$(sbatch --parsable --dependency=afterok:$jobid1 third_job.sh)
+	sbatch --dependency=afterok:$jobid2,afterok:$jobid3 last_job.sh
 	```
-
-!!! info "Additional examples and details"
-	* [Bash command substitution](https://www.gnu.org/software/bash/manual/bashref.html#Command-Substitution)
-	* [sbatch documentation](https://slurm.schedmd.com/sbatch.html)
-	* Manual pages via `man sbatch` on NERSC systems
 
 ## Shared
 
@@ -209,13 +216,13 @@ The intended use of the xfer queue is to transfer data between Cori or
 Edison and HPSS. The xfer jobs run on one of the login nodes and are
 free of charge. If you want to transfer data to the HPSS archive
 system at the end of a regular job, you can submit an xfer job at the
-end of your batch job script via ```sbatch -M escori hsi put
-<my_files>``` (use esedison on Edison), so that you will not get
+end of your batch job script via `sbatch -M escori hsi put
+<my_files>` (use esedison on Edison), so that you will not get
 charged for the duration of the data transfer. The xfer jobs can be
-monitored via “squeue -M escori”. The number of running jobs for each
+monitored via `squeue -M escori`. The number of running jobs for each
 user is limited to the number of concurrent HPSS sessions (15).
 
-!!! warn
+!!! warning
     Do not run computational jobs in the xfer queue.
 
 ??? example "Edison transfer job"
@@ -230,6 +237,7 @@ user is limited to the number of concurrent HPSS sessions (15).
     #Archive run01 to HPSS
     htar -cvf run01.tar run01
     ```
+
 ??? example "Cori transfer job"
     ```bash
     #!/bin/bash -l
@@ -243,45 +251,49 @@ user is limited to the number of concurrent HPSS sessions (15).
     htar -cvf run01.tar run01
     ```
 
-Xfer jobs specifying "-N nodes" will be rejected at submission
-time. Also "-C haswell" is not needed since the job does not run on
+Xfer jobs specifying `-N nodes` will be rejected at submission
+time. Also `-C haswell` is not needed since the job does not run on
 compute nodes. By default, xfer jobs get ~2GB of memory allocated. If
 you're archiving larger files, you'll need to request more memory. You
-can do this by adding "#SBATCH --mem=XGB" to the above script (5 - 10
+can do this by adding `#SBATCH --mem=XGB` to the above script (5 - 10
 GB is a good starting point for large files).
 
-To monitor your xfer jobs, please use the "squeue -M escori" command,
-or "scontrol -M escori show job job_id".
+To monitor your xfer jobs, please use the `squeue -M escori` command,
+or `scontrol -M escori show job job_id`.
 
 ## Variable-time jobs
 
-The variable-time jobs are for the users who wish to get a better
+Variable-time jobs are for the users who wish to get a better
 queue turnaround or need to run long running jobs, including jobs
 longer than 48 hours, the max wall-clock time allowed on Cori and
-Edison. The variable-time jobs are the jobs submitted with the minimum
-and maximum time limits. Jobs specifying the minimum time can start
-execution earlier than otherwise with a time limit anywhere between
-the minimum and maximum time limits. The pre-terminated jobs are
-automatically requeued to resume from where the previous executions
-left off, until the cumulative execution time reaches the requested
-maximum time limit or the job completes before the requested time
-limit. The variable-time jobs enable users to run jobs with any
-length, e.g., one week or even longer. Note that to use the
-variable-time jobs applications are required to be able to
-checkpoint/restart by themselves.
+Edison.
 
-In the following example, the --comment option is used to request the
-user desired maximum time limit, which could be longer than maximum
-time limit allowed by the batch system. In addition to the time limit
-(--time option), the --time-min option is used to request the minimum
-amount of time the job should run. The variable ckpt_overhead is used
-to specify the amount of time (in seconds) needed for
-checkpointing. The --signal=B:USR1@<sig-time> option is used to send
-signal USR1 to the job within sig-time seconds of its end time to
-terminate the job after checkpointing. The sig-time should match the
-checkpoint overhead time, ckpt_overhead. The ata module defines the
-bash functions used in the scripti, and users may need to modify the
-scripts (get a copy) for their use.
+Variable-time jobs are submitted with minimum and maximum time limits.
+Jobs specifying a minimum time can start execution earlier than
+otherwise with a time limit anywhere between the minimum and maximum
+time limits. Pre-terminated jobs are automatically requeued to
+resume from where the previous executions left off, until the
+cumulative execution time reaches the requested maximum time limit or
+the job completes before the requested time limit. Variable-time
+jobs enable users to run jobs with any length, e.g., one week or even
+longer.
+
+!!! note
+	Variable-time jobs applications are required to be able to
+	checkpoint/restart by themselves.
+
+In the following example, the `--comment` option is used to request
+the user desired maximum time limit, which could be longer than
+maximum time limit allowed by the batch system. In addition to the
+time limit (`--time` option), the `--time-min` option is used to
+request the minimum amount of time the job should run. The variable
+ckpt_overhead is used to specify the amount of time (in seconds)
+needed for checkpointing. The `--signal=B:USR1@<sig-time>` option is
+used to send signal `USR1` to the job within sig-time seconds of its
+end time to terminate the job after checkpointing. The sig-time should
+match the checkpoint overhead time, ckpt_overhead. The ata module
+defines the bash functions used in the scripti, and users may need to
+modify the scripts (get a copy) for their use.
 
 ??? example "Edison"
     ```bash
@@ -291,7 +303,7 @@ scripts (get a copy) for their use.
 ??? example "Cori Haswell"
     ```bash
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-haswell/variable-time-jobs.sh"
-     ```
+    ```
 
 ??? example "Cori KNL"
     ```bash
@@ -301,7 +313,7 @@ scripts (get a copy) for their use.
 ## Burst buffer
 
 All examples for the burst buffer are shown with Cori Haswell
-nodes. Options related to the burst buffer do not depend on Hawell or
+nodes. Options related to the burst buffer do not depend on Haswell or
 KNL node choice.
 
 !!! note
@@ -402,10 +414,13 @@ requested topology can be specified.
 !!! example
 	Wait up to 60 minutes
 	```bash
-	$ sbatch --switches=1@60 job.sh
+	sbatch --switches=1@60 job.sh
 	```
 
 !!! info "Additional details and information"
 	* [Cray XC Series Network (pdf)](https://www.cray.com/sites/default/files/resources/CrayXCNetwork.pdf)
-	* [sbatch documentation](https://slurm.schedmd.com/sbatch.html)
-    * Manual pages via `man sbatch` on NERSC systems
+
+## Additional information
+
+* [sbatch documentation](https://slurm.schedmd.com/sbatch.html)
+* Manual pages (`man sbatch` on NERSC systems)
