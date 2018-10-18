@@ -28,6 +28,7 @@ nav:
         - Using Intel Compilers with Docker Images: development/shifter/intel.md
         - Examples: development/shifter/examples.md
   - Applications:
+    - Overview: applications/index.md
     - Abinit: applications/abinit/index.md
     - BerkeleyGW: applications/berkeleygw/index.md
     - CP2K: applications/cp2k/index.md
@@ -62,6 +63,7 @@ nav:
     - Portability: performance/portability.md
     - Variability: performance/variability.md
     - Case Studies:
+        - Overview : performance/case-studies/index.md
         - AMReX : performance/case-studies/amrex/index.md
         - Chombo-Crunch : performance/case-studies/chombo-crunch/index.md
         - EMGeo : performance/case-studies/emgeo/index.md
