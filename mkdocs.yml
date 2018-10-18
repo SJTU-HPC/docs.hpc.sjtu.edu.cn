@@ -93,6 +93,7 @@ nav:
       - CVMFS : services/cvmfs.md
   - Development:
     - Developer Tools:
+        - development/performance-debugging-tools/index.md
         - DDT : development/performance-debugging-tools/ddt.md
         - TotalView : development/performance-debugging-tools/totalview.md
         - GDB : development/performance-debugging-tools/gdb.md
@@ -101,6 +102,9 @@ nav:
         - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
         - MAP : development/performance-debugging-tools/map.md
         - VTune : development/performance-debugging-tools/vtune.md
+        - Advisor : development/performance-debugging-tools/advisor.md
+        - Inspector : development/performance-debugging-tools/inspector.md
+        - Reveal : development/performance-debugging-tools/reveal.md
     - Compilers :
         - Cray Compiler Wrappers: development/compilers/index.md
         - LLVM : development/compilers/llvm.md
@@ -117,7 +121,11 @@ nav:
 #        - Matlab : development/high-level-environments/matlab.md
     - Programming Models:
         - MPI : development/programming-models/mpi.md
-        - OpenMP : development/programming-models/openmp.md
+        - OpenMP : 
+          - About: development/programming-models/openmp/openmp.md
+          - OpenMP Resources : development/programming-models/openmp/openmp-resources.md
+          - Tools for OpenMP : development/programming-models/openmp/openmp-tools.md
+          - False Sharing Detection using VTune Amplifier : development/programming-models/openmp/sharing-vtune.md
         - UPC++ : development/programming-models/upcxx.md
         - Kokkos : development/programming-models/kokkos.md
         - Raja : development/programming-models/raja.md
