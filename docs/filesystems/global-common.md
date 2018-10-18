@@ -8,7 +8,10 @@ be provided upon request.
 
 | space	quota | inode quota | purge time | backups |
 |-------------|-------------|------------|---------|
-| 40 GB       | 1 M         | none       | yes     |
+| 10 GB       | 1 M         | none       | yes     |
+
+Your groups usage can be viewed with the ```cmnquota <proj_name>```
+command.
 
 ## Usage
 
@@ -23,8 +26,13 @@ stacks into separate subdirectories depending on the system or the
 processing architecture. For some general programs you can use the
 same installs across all systems, but for best performance, we
 recommend separate installs for each system and architecture (e.g. for
-edison vs. for Cori KNL). Since it's mounted read-only on the compute
-nodes, software installs should be done on the login nodes.
+edison vs. for Cori KNL).
+
+!!! warning 
+     Global common is mounted read-only on the computes to
+     improve performance. Software installs should be done on the
+     login nodes.
+
 
 ## Performance
 
@@ -32,7 +40,9 @@ The global common system is optimized for software installation. It
 has a smaller block size and is mounted read-only on the
 computes. This allows us to turn on client-side caching which
 dramatically increases the read time of shared libraries across many
-nodes.
+nodes. The cache expires after five minutes, so it is not recommended
+you compute against code that is being actively (i.e. within five
+minutes) changed.
 
 ## Backup/Restore
 
