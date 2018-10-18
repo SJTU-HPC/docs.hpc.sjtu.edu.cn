@@ -19,9 +19,9 @@ particular client.
 
 By ssh'ing to denovo.nersc.gov, you will access one of the two denovo
 login nodes. The Denovo system is dedicated solely to JGI use, and
-will generally be the most common choice of system until its'
-decommission in 2018. Cori is a much larger cluster, with 12 login
-nodes, but has a very little bioinformatics software available as
+will generally be the most common choice of system until its
+decommission in 2019. Cori is a much larger cluster, with 12 login
+nodes, but has very little bioinformatics software available as
 modules.
 
 These login nodes are situated behind a load balancer, so you may
@@ -41,5 +41,5 @@ consultant to identify which gp/dints you may access.
 
 To begin running jobs on Denovo or Cori, you should begin learning
 about the Slurm batch scheduler system, and look at
-the [example batch scripts](genepool-software.md) before submitting
+the [example batch scripts](../../jobs/examples/index.md) before submitting
 your first job.

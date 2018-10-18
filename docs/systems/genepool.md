@@ -10,23 +10,11 @@ system, which runs on the Mendel cluster, and a dedicated partition on
 Cori. The name "genepool" also refers to a no-longer-used system that
 ran on Mendel.
 
-## [Getting started](genepool/genepool-getting-started.md)
+## [Getting started](genepool/getting-started.md)
 
-Learn how to log in and get started with Genepool
-
-## [Configuration](genepool/genepool-configuration.md)
-
-The Genepool system will be made up of a heterogeneous collection of
-nodes to serve the diverse workload of the JGI users.
-
-## [User Environment](genepool/genepool-user-environment.md)
-
-Your home directory organization, stuff like that...
-
-## [Programming](genepool/genepool-programming.md)
-
-The Genepool system has a rich set of software development tools and
-build environments.
+Learn how to log in and get started with Genepool. The Genepool system will be
+made up of a heterogeneous collection of nodes to serve the diverse workload
+of the JGI users.
 
 ## [Software](genepool/genepool-software.md)
 
@@ -38,11 +26,6 @@ found here.
 
 Learn about the fair share batch scheduler and queues used on
 Genepool.
-
-## [Running Jobs](genepool/genepool-running-jobs.md)
-
-UGE (Formerly Sun Grid Engine) is the batch system used on Genepool,
-this section will tell you how to run jobs using this system.
 
 ## [Cluster Statistics](genepool/genepool-cluster-statistics.md)
 
@@ -68,9 +51,13 @@ have been given at the JGI.
 
 Regulations and best practices for running and using network services.
 
+## [Collaboration Accounts](genepool/collab-accounts.md)
+
+Information about using collaboration accounts.
+
 ## [Denovo, the replacement for Genepool](genepool/genepool-denovo-the-replacement-for-genepool.md)
 
-Denovo is the upgraded version of Genepool, and isin production use
+Denovo is the upgraded version of Genepool, and is in production use
 now.
 
 ## [Cori for JGI](genepool/genepool-cori-for-jgi.md)

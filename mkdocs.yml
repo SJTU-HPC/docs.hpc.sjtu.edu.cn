@@ -146,11 +146,8 @@ nav:
       - PDSF : systems/pdsf/index.md
       - Genepool:
         - Genepool System: systems/genepool.md
-        - Getting Started : systems/genepool/genepool-getting-started.md
+        - Getting Started : systems/genepool/getting-started.md
         - Denovo, the Replacement for Old Genepool : systems/genepool/genepool-denovo-the-replacement-for-genepool.md
-        - Configuration : systems/genepool/genepool-configuration.md
-        - User Environment : systems/genepool/genepool-user-environment.md
-        - Programming : systems/genepool/genepool-programming.md
         - Software : systems/genepool/genepool-software.md
         - Queues and Policies : systems/genepool/genepool-queues-and-policies.md
         - Running Jobs : systems/genepool/genepool-running-jobs.md
@@ -159,6 +156,7 @@ nav:
         - Data Managment : systems/genepool/genepool-data-management.md
         - Training and Tutorials : systems/genepool/genepool-training-and-tutorials.md
         - Websites, Databases and Cluster Services : systems/genepool/genepool-websites-databases-and-cluster-services.md
+        - Collaboration Accounts : systems/genepool/collab-accounts.md
         - Cori for JGI users : systems/genepool/genepool-cori-for-jgi.md
   - Filesystems:
       - Overview: filesystems/index.md
