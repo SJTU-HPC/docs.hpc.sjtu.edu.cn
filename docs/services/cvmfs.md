@@ -11,7 +11,6 @@ At NERSC CVMFS is mounted on Cori and Edison compute nodes as an NFS mount via D
 It is also mounted on Cori and Edison login nodes. The NFS servers themselves mount cvmfs using FUSE in the normal way and we have dedicated local squid caches. 
 We believe this setup to now be stable and perform well enough but users should please contact us if you see any problems, 
 or if you need a new repository that is not currently available, via the [online help desk](https://help.nersc.gov/) or email to consult@nersc.gov. 
- .
 PDSF systems also provide CVMFS though via its 'normal' mechanism.
 
 ## Using CVMFS at NERSC

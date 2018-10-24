@@ -162,7 +162,7 @@ values for modules are:
 | Module Name | Function  |
 |-------------|-----------|
 |mpich	|Allows communication between nodes using the high-speed interconnect|
-|cvmfs 	|Makes access to DVS shared CVMFS software stack available at /cvmfs in the image|
+|cvmfs 	|Makes access to DVS shared [CVMFS software stack](/services/cvmfs.md) available at /cvmfs in the image|
 |none 	|Turns off all modules|
 
 Modules can be used together. So if you wanted MPI functionality and
