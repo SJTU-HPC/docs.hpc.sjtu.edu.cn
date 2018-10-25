@@ -47,10 +47,6 @@ account, please remember that it not permissible for users to share
 passwords for NERSC accounts, nor is it permissible to hold multiple
 NERSC accounts.
 
-The policy for running `collabsu` is set by system, so you will be
-permitted to run `collabsu` on any genepool/gpweb system, but not on
-other NERSC platforms.
-
 Collaboration accounts are afforded the same privileges as other
 NERSC-user accounts, including the same quota limits on /global/homes
 and scratch directories. It is important to be careful that the
