@@ -4,6 +4,7 @@ nav:
       - Accounts : accounts/index.md
       - Passwords : accounts/passwords.md
       - Policy : accounts/policy.md
+      - Collaboration Accounts : accounts/collaboration_accounts.md
   - Connecting:
       - Login Nodes: connect/login-nodes.md
       - SSH : connect/ssh.md
