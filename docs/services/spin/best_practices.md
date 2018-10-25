@@ -260,7 +260,7 @@ system within Spin.
 * Using a collaboration account with the necessary file system access is an effective way to ensure data access while also avoiding issues that occur when the owner of a personal account leaves a group or project.
 * When a container can’t easily be modified to run as a non-root user, the container can often be run with the group set in a manner that provides access. For example, a container running as root:genome will successfully read files in a directory with the following restrictive permissions:
 
-        dino@genepool13:~$ ls -ld scratch/dino
+        dino@denovo:~$ ls -ld scratch/dino
         drwxr-x--- 5 dino genome 512 Sep  8 12:00 scratch/dino
 
 * The Linux setuid and setgid capabilities will be dropped for containers accessing the global file system as discussed in the [Security](#security) section
