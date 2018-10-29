@@ -1,5 +1,3 @@
-# HPSS
-
 The High Performance Storage System (HPSS) is a modern, flexible,
 performance-oriented mass storage system. It has been used at NERSC
 for archival storage since 1998. HPSS is intended for long term
