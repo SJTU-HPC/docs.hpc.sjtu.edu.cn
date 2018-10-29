@@ -12,7 +12,7 @@ markdown_lint:
   stage: lint
   script:
     - npm install -g markdownlint-cli
-    - markdownlint docs
+    - bash util/lint-changes.sh
   allow_failure: true
 
 mkdocs_build:
