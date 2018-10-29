@@ -2,6 +2,7 @@ image: python:3.7
 
 stages:
   - lint
+  - filesize
   - build
   - test
   - deploy
@@ -17,7 +18,9 @@ markdown_lint:
 
 filesize:
   image: ubuntu:latest
-  stage: lint
+  stage: filesize
+  before_script:
+    - apt-get update && apt-get install -y git
   script:
     - bash util/filesize.sh
   allow_failure: true
