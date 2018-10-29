@@ -2,6 +2,7 @@ image: python:3.7
 
 stages:
   - lint
+  - filesize
   - build
   - test
   - deploy
@@ -13,6 +14,15 @@ markdown_lint:
   script:
     - npm install -g markdownlint-cli
     - markdownlint docs
+  allow_failure: true
+
+filesize:
+  image: ubuntu:latest
+  stage: filesize
+  before_script:
+    - apt-get update && apt-get install -y git
+  script:
+    - bash util/filesize.sh
   allow_failure: true
 
 mkdocs_build:
