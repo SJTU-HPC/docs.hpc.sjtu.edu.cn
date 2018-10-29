@@ -15,6 +15,13 @@ markdown_lint:
     - markdownlint docs
   allow_failure: true
 
+filesize:
+  image: ubuntu:latest
+  stage: lint
+  script:
+    - bash util/filesize.sh
+  allow_failure: true
+
 mkdocs_build:
   stage: build
   script:
