@@ -129,7 +129,7 @@ The `kernel-helper.sh` script should be made executable (`chmod u+x kernel-helpe
 The helper could be like:
 
 ```shell
-#/bin/bash
+#!/bin/bash
 module load <some-module>
 module load <some-other-module>
 export SOME_VALUE=987654321
