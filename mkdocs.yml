@@ -108,6 +108,12 @@ nav:
         - Advisor : development/performance-debugging-tools/advisor.md
         - Inspector : development/performance-debugging-tools/inspector.md
         - Reveal : development/performance-debugging-tools/reveal.md
+        - APS : development/performance-debugging-tools/aps.md
+        - CrayPat : development/performance-debugging-tools/craypat.md
+        - darshan : development/performance-debugging-tools/darshan.md
+        - IPM : development/performance-debugging-tools/ipm.md
+        - Trace Analyzer and Collector: development/performance-debugging-tools/itac.md
+        - LIKWID : development/performance-debugging-tools/likwid.md
     - Compilers :
         - Cray Compiler Wrappers: development/compilers/index.md
         - LLVM : development/compilers/llvm.md
