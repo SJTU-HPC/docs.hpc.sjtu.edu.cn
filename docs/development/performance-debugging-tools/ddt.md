@@ -126,6 +126,9 @@ in the 'srun arguments' box.
 
 ## Reverse Connect Using Remote Client
 
+Note: Using the remote client of version 18.3 on a Mac can generate
+a segmentation fault.
+
 Arm provides remote clients for Windows, macOS and Linux that can
 run on your local desktop to connect via SSH to NERSC systems to
 debug, profile, edit and compile files directly on the remote NERSC
