@@ -148,9 +148,19 @@ That will open the 'Configure Remote Connections' window.
 Using the 'Add', 'Edit' and other buttons, create configuration for
 Cori, as shown in the following example.
 
-![allinea-forge-remote-launch-settings-cori](images/allinea-forge-remote-launch-settings-cori.png)
+![arm_forge_remote_client_cori_183](images/arm_forge_remote_client_cori_183.png)
+
+Make sure that you uncheck the 'Proxy through login node' box.
 
 The configuration settings for Edison should be as follows:
+
+![arm_forge_remote_client_edison_183](images/arm_forge_remote_client_edison_183.png)
+
+For versions prior to 18.3:
+
+![allinea-forge-remote-launch-settings-cori](images/allinea-forge-remote-launch-settings-cori.png)
+
+and
 
 ![allinea-forge-remote-launch-settings-edison](images/allinea-forge-remote-launch-settings-edison.png)
 
