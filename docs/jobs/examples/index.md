@@ -198,16 +198,64 @@ $$
 \right) \Bigr\rceil
 $$
 
-!!! example "Cori-Haswell"
-	A four rank MPI job which utilizes 4 physical cores (and 8
+!!! example "Cori-Haswell MPI"
+	A two rank MPI job which utilizes 2 physical cores (and 4
 	hyperthreads) of a Haswell node.
 
 	```bash
 	#!/bin/bash
 	#SBATCH --qos=shared
+	#SBATCH --constraint=haswell
+	#SBATCH --time=5
+	#SBATCH --ntasks=2
+	#SBATCH --cpus-per-task=2
+
+	srun --cpu-bind=cores ./a.out
+	```
+
+??? example "Cori-Haswell MPI/OpenMP"
+	A two rank MPI job which utilizes 4 physical cores (and 8
+	hyperthreads) of a Haswell node.
+
+	```bash
+	#!/bin/bash
+	#SBATCH --qos=shared
+	#SBATCH --constraint=haswell
+	#SBATCH --time=5
+	#SBATCH --ntasks=2
+	#SBATCH --cpus-per-task=4
+	export OMP_NUM_THREADS=2
+	srun --cpu-bind=cores ./a.out
+	```
+
+??? example "Cori-Haswell OpenMP"
+	An OpenMP only code which utilizes 6 physical cores.
+
+	```bash
+	#!/bin/bash
+	#SBATCH --qos=shared
+	#SBATCH --constraint=haswell
 	#SBATCH --time=5
 	#SBATCH --ntasks=1
-	#SBATCH --cpus-per-task=8
+	#SBATCH --cpus-per-task=12
+	export OMP_NUM_THREADS=6
+	./my_openmp_code.exe
+	```
+
+??? example "Cori-Haswell serial"
+	A serial job should start by requesting a single slot and
+	increase the amount of memory required only as needed to
+	maximize thoughput and minimize charge and wait time.
+
+	```bash
+	#!/bin/bash
+	#SBATCH --qos=shared
+	#SBATCH --constraint=haswell
+	#SBATCH --time=5
+	#SBATCH --ntasks=1
+	#SBATCH --mem=1GB
+
+	./serial.exe
 	```
 
 ## Xfer queue
