@@ -2,7 +2,7 @@
 
 ## Basic MPI
 
-One MPI processes per physical core.
+One MPI process per physical core.
 
 ??? example "Edison"
 	```bash
