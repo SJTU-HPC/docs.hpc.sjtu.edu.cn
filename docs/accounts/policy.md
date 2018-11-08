@@ -20,7 +20,7 @@ username, then "sharing" has occurred and all usernames associated
 with the owner of the shared username will be disabled.
 
 If a user is disabled due to account sharing, the PI or an authorized
-project manager must send a memo to consult@nersc.gov explaining why
+project manager must send a memo to accounts@nersc.gov explaining why
 the sharing occurred and assuring that it will not occur again. NERSC
 will then determine if the user should be re-enabled.
 

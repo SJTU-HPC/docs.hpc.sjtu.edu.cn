@@ -31,8 +31,9 @@ advantage of the system's available bandwidth but striping over too
 many will cause unnecessary overhead and lead to a loss in
 performance.  NERSC has provided striping command shortcuts based on
 file size to simplify optimization on both Edison and Cori.  Users who
-want more detail should read the sections below or contact the
-consultants at consult@nersc.gov.
+want more detail should read the sections below and open a ticket
+with [NERSC Consulting](https://help.nersc.gov) if there are
+additional questions.
 
 Striping must be set on a file before is written. For example, one
 could simultaneously create an empty file which will later be 10-100
@@ -97,8 +98,9 @@ srun -n 10 ./a.out
 
 ### File per processing element
 
-If files are larger than 100GB contact consult@nersc.gov otherwise use
-the default settings.
+If files are larger than 100GB open a ticket
+with [NERSC Consulting](https://help.nersc.gov) otherwise use the
+default settings.
 
 ## Burst Buffer
 
