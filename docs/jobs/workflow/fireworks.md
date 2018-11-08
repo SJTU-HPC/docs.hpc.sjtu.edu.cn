@@ -14,11 +14,11 @@ and is also being evaluated by several other projects. For more
 information on Fireworks visit:
 https://materialsproject.github.io/fireworks/index.html
 
-Please contact consult@nersc.gov if you are interested in using
-Fireworks. The following is a quick example for running at NERSC based
-on the Fireworks tutorial. Note that you will need access to a
-mongoDB - you can request one to be set up for you at NERSC using this
-form.
+Please open a ticket with [NERSC Consulting](https://help.nersc.gov)
+if you are interested in using Fireworks. The following is a quick
+example for running at NERSC based on the Fireworks tutorial. Note
+that you will need access to a mongoDB - you can request one to be set
+up for you at NERSC using this form.
 
 ## Terminology
 

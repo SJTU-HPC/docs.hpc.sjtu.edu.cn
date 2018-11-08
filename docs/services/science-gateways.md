@@ -21,8 +21,8 @@ deployment, accepts feedback, and tries to recycle successful
 approaches into methods that other science teams can benefit
 from. Below you will find links to current projects and details about
 the building blocks available to NERSC users. If you would like to
-participate, or if you have questions, please contact
-consult@nersc.gov.
+participate, or if you have questions, please open a ticket with
+[NERSC Consulting](https://help.nersc.gov).
 
 ## Science Gateway Availability and Support
 
@@ -102,8 +102,8 @@ deployment, accepts feedback, and tries to recycle successful
 approaches into methods that other science teams can benefit
 from. Below you will find links to current projects and details about
 the building blocks available to NERSC users. If you would like to
-participate, or if you have questions, please contact
-consult@nersc.gov.
+participate, or if you have questions, please open a ticket with
+[NERSC Consulting](https://help.nersc.gov)
 
 NERSC Resource | Path On NERSC Resource | URL on the Web
 --- | --- | ---
@@ -212,9 +212,7 @@ tape archives via a science gateway should only be reserved for
 infrequent accesses from a data pool that is too large to be
 practically kept on the "project" filesystem. If you need to serve
 very large files very frequently via a science gateway, please
-contact
-[NERSC consulting](https://www.nersc.gov/users/getting-help/online-help-desk/) for
-assistance.
+contact [NERSC Consulting](https:help.nersc.gov) for assistance.
 
 Retrieving data from HPSS via a science gateway can be very slow. If
 files have not been accessed in some time they will have to be
@@ -283,6 +281,7 @@ found at [https://newt.nersc.gov/api](https://newt.nersc.gov/api).
 ## Moving Beyond Simple Gateway Functions
 
 If you are building a web gateway to your science at NERSC, please
-contact us at consult@nersc.gov. We are interested in engagaing
-directly with science teams so that you can build a gateway that meets
-your specific needs.
+contact us by opening a ticket
+with [NERSC Consulting](https://help.nersc.gov). We are interested in
+engagaing directly with science teams so that you can build a gateway
+that meets your specific needs.
