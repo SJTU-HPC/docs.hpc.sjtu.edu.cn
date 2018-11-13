@@ -116,6 +116,7 @@ nav:
         - LIKWID : development/performance-debugging-tools/likwid.md
     - Compilers :
         - Cray Compiler Wrappers: development/compilers/index.md
+        - Intel Compiler Wrappers: development/compilers/intel_mpi.md
         - LLVM : development/compilers/llvm.md
     - High-level Programming Environments:
         - Python :
