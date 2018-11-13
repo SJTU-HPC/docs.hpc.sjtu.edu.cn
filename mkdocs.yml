@@ -140,8 +140,9 @@ nav:
         - Raja : development/programming-models/raja.md
         - Coarrays : development/programming-models/coarrays.md
     - Libraries:
-        - MKL : development/libraries/mkl/index.md
         - FFTW : development/libraries/fftw/index.md
+        - LAPACK : development/libraries/lapack/index.md
+        - MKL : development/libraries/mkl/index.md
         - LibSci : development/libraries/libsci/index.md
         - HDF5 : development/libraries/hdf5/index.md
         - NetCDF : development/libraries/netcdf/index.md
