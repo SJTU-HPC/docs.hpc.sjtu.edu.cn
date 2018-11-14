@@ -1,3 +1,4 @@
+# Accessing HPSS
 You can access NERSC's HPSS in a variety of different ways. HSI and
 HTAR are the best ways to transfer data in and out of HPSS within
 NERSC. Globus is recommended for transfers to or from outside
@@ -20,9 +21,7 @@ temporarily reduced if a user is impacting system usability for others.
 
 
 
-## Access Methods
-
-### HSI
+## HSI
 HSI is a flexible and powerful command-line utility to access
 the NERSC HPSS storage systems. You can use it to store and
 retrieve files and it has a large set of commands for listing
@@ -36,7 +35,7 @@ The HSI utility is available on all NERSC production computer systems
 and it has been configured on these systems to use high-bandwidth
 parallel transfers.
 
-#### HSI Usage Examples
+### HSI Usage Examples
 All of the NERSC computational
 systems available to users have the hsi client already
 installed. To access the Archive storage system you can type hsi
@@ -87,7 +86,29 @@ non-HPSS side of things:
 | lpwd | Print current local directory |
 | command | Issue shell command |
 
-### HTAR
+#### Removing Older Files
+
+You can find and remove older files in HPSS using the ```hsi find```
+command. This may be useful if you're doing periodic backups of
+directories (this is not recommended for software version control,
+instead use a versioning system like git) and want to delete older
+backups. Since you can't use a linux pipe ("|") in hsi, you need a
+multi-step process. The example below will find files older than 10
+days and delete them from HPSS.
+
+```
+hsi -q "find . -ctime 10" > temp.txt 2>&1
+cat temp.txt | awk '{print "rm -R",$0}' > temp1.txt
+hsi in temp1.txt
+```
+
+#### Removing Entire Directories
+
+To recursively remove a directory and all of its contained
+sub-directories and files, use ```rm -R <directory_name>```.
+
+
+## HTAR
 
 HTAR is a command line utility that creates and manipulates
 HPSS-resident tar-format archive files. It is ideal for storing groups
@@ -140,7 +161,7 @@ one or two small member files, you may find faster retrieval rates by
 skipping staging the file to the HPSS disk cache by adding the
 "-Hnostage" option to your htar command.
 
-#### HTAR Usage Examples
+### HTAR Usage Examples
 
 Create an archive with directory "nova" and file "simulator"
 
@@ -209,7 +230,7 @@ Here is how we extract a single file from a htar file
 
 ```htar -xvf simulator nova.tar```
 
-##### Using ListFiles to Create an HTAR Archive
+#### Using ListFiles to Create an HTAR Archive
 
 Rather than specifying the list of files and directories on the
 command line when creating an HTAR archive, you can place the list of
@@ -236,7 +257,7 @@ HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1987a
 HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1993j
 ```
 
-##### Soft Delete and Undelete
+#### Soft Delete and Undelete
 
 The "-D" option can be used to "soft delete" one or more member files
 or directories from an HTAR archive. The files are not really
@@ -275,7 +296,7 @@ htar -tf nova.tar nova/sn1993j
 HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1993j
 ```
 
-#### HTAR Archive Verification
+### HTAR Archive Verification
 
 You can request that HTAR compute and save checksum values for each
 member file during archive creation. The checksums are saved in the
@@ -299,30 +320,30 @@ HTAR: x nova/sn1987a, 9331200 bytes, 18226 media blocks
 HTAR: x nova/sn1993j, 9331200 bytes, 18226 media blocks
 ```
 
-#### HTAR Limitations
+### HTAR Limitations
 
 HTAR has several limitations to be aware of:
 
-##### Member File Path Length
+#### Member File Path Length
 
 File path names within an HTAR aggregate of the form prefix/name are
 limited to 154 characters for the prefix and 99 characters for the
 file name. Link names cannot exceed 99 characters.
 
-##### Member File Size
+#### Member File Size
 
 The maximum file size the NERSC archive will support is approximately
 20 TB. However, we recommend you aim for HTAR aggregate sizes of
 several hundred GBs. Member files within an HTAR aggregate are limited
 to approximately 68GB.
 
-##### Member File Limit
+#### Member File Limit
 
 HTAR aggregates have a default soft limit of 1,000,000 (1 million)
 member files. Users can increase this limit to a maximum hard limit of
 5,000,000 member file.
 
-#### Globus
+## Globus
 
 Globus is recommended for transfers between sites (i.e. non-NERSC to NERSC).
 
@@ -341,7 +362,7 @@ instructions on how to best order files using HSI and then retrieve
 files using the command line interace for Globus Online in tape
 order.
 
-#### GridFTP, pftp, and ftp
+## GridFTP, pftp, and ftp
 
 Files can be transferred between HPSS and remote sites via the
 standard internet protocol ftp, however, being non-parallel the
