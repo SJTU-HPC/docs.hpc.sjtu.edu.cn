@@ -115,9 +115,8 @@ nav:
         - Trace Analyzer and Collector: development/performance-debugging-tools/itac.md
         - LIKWID : development/performance-debugging-tools/likwid.md
     - Compilers :
-        - Cray Compiler Wrappers: development/compilers/index.md
-        - Intel Compiler Wrappers: development/compilers/intel_mpi.md
-        - LLVM : development/compilers/llvm.md
+        - Native Compilers : development/compilers/native.md
+        - Compiler Wrappers (recommended) : development/compilers/wrappers.md
     - High-level Programming Environments:
         - Python :
             - development/high-level-environments/python/index.md
