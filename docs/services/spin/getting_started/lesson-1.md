@@ -413,7 +413,7 @@ available internally, and won't be exposed to the outside world.
     server {
         listen 8080;
         location / {
-          proxy_pass https://app:5000;
+          proxy_pass http://app:5000;
           proxy_set_header Host $host:$server_port;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Host $server_name;
