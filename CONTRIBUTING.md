@@ -5,22 +5,34 @@ which should be observed when adding to this repositiory.
 
 ## About
 
-This repository contains NERSC technical documentation written in 
-Markdown which is converted to html/css/js with the 
-[mkdocs](http://www.mkdocs.org) static site generator. The 
-[theme](https://gitlab.com/NERSC/mkdocs-material) is a fork of 
-[mkdocs-material](https://github.com/squidfunk/mkdocs-material) with 
+This repository contains NERSC technical documentation written in
+Markdown which is converted to html/css/js with the
+[mkdocs](http://www.mkdocs.org) static site generator. The
+[theme](https://gitlab.com/NERSC/mkdocs-material) is a fork of
+[mkdocs-material](https://github.com/squidfunk/mkdocs-material) with
 NERSC customizations such as the colors.
 
 ## Rules
 
 1.  Follow this [Markdown styleguide](https://github.com/google/styleguide/blob/3591b2e540cbcb07423e02d20eee482165776603/docguide/style.md).
-1.  Do not commit large files 
+1.  Do not commit large files
 	(e.g. very high-res images, binary data, executables)
 	* [Image optimization](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization)
-1.  Do not commit directly to master branch
+1.  No commits directly to the master branch
 
-## Setup 
+### Merge Requests
+
+NERSC staff who have submited a succesful Merge Request are added to
+the list of the approvers.
+
+Self-approval of Merge Requests is allowed if the change is *minor*.
+That is typos, spelling corrections, etc.
+
+When there is a change in the _meaning_ of the content then one should
+wait for a peer review. Consider "assigning" the Merge Request to a
+relevant approver.
+
+## Setup
 
 ### Prerequisites
 
@@ -42,20 +54,20 @@ pip install -r requirements.txt
 
 ### Edit with live preview
 
-Open a terminal session with the appropriate conda environment 
-activated, navigate to the root directory of the repository (where 
+Open a terminal session with the appropriate conda environment
+activated, navigate to the root directory of the repository (where
 `mkdocs.yml` is located) and run the command `mkdocs serve`. This will
-start a live-reloading local web server. You can then open 
-[http://127.0.0.1:8000](http://127.0.0.1:8000) in a web browser to 
+start a live-reloading local web server. You can then open
+[http://127.0.0.1:8000](http://127.0.0.1:8000) in a web browser to
 see your local copy of the site.
 
-In another terminal (or with a GUI editor) edit existing files, add 
-new pages to `mkdocs.yml`, etc. As you save your changes the local 
+In another terminal (or with a GUI editor) edit existing files, add
+new pages to `mkdocs.yml`, etc. As you save your changes the local
 web serve will automatically rerender and reload the site.
 
 ### Output a static site
 
-To build a self-contained directory containing the full html/css/js 
+To build a self-contained directory containing the full html/css/js
 of the site:
 
 ```
@@ -98,15 +110,20 @@ Work with a branch of the main repo.
 
 #### Option 2
 
-Make a fork of the repository and do all of your work on the fork. 
+Make a fork of the repository and do all of your work on the fork.
 Submit a merge request through gitlab when you have made your changes.
 
 #### Option 3
 
 For some changes you do not need the full environment. It is possible
-to edit Markdown files directly on gitlab. This work should be in a 
+to edit Markdown files directly on gitlab. This work should be in a
 private fork or branch and submitted as a merge request. A new branch
 can be created by clicking the "+" button next to the repository name.
+
+### Add a new page
+
+For a newly added page to appear in the navigation edit the top-level
+`mkdocs.yml` file.
 
 ### Review a Merge Request from a private fork
 
@@ -120,14 +137,14 @@ can be created by clicking the "+" button next to the repository name.
 	        fetch = +refs/merge-requests/*/head:refs/remotes/origin/pr/*
 	...
 	```
-	
+
 2.  Check for any Merge Requests
 
     ```shell
     git fetch
     ```
-    
-3.  Checkout a specific Merge Request for review (merge request `N` 
+
+3.  Checkout a specific Merge Request for review (merge request `N`
 	in this example)
 
     ```shell
@@ -138,7 +155,7 @@ can be created by clicking the "+" button next to the repository name.
 
 ## Command prompts
 
-1. when showing a command and sample result, include a prompt 
+1. when showing a command and sample result, include a prompt
    indicating where the command is run, eg for a command valid on any
    NERSC system, use `nersc$`:
 
@@ -154,7 +171,7 @@ can be created by clicking the "+" button next to the repository name.
     Submitted batch job 864933
     ```
 
-2. Where possible, replace the username with `elvis` 
+2. Where possible, replace the username with `elvis`
 (i.e. a clearly-arbitrary-but-fake user name)
 
 3. If pasting a snippet of a long output, indicate cuts with `[snip]`:
@@ -168,8 +185,13 @@ can be created by clicking the "+" button next to the repository name.
     -rw-rw---- 1 elvis elvis  407 Jan  9 15:35 index.md
     [snip]
     ```
-    
+
 ## Writing Style
+
+When adding a page think about your audience.
+
+* Are they new or advanced expert users?
+* What is the goal of this content?
 
 * [Grammatical Person](https://en.wikiversity.org/wiki/Technical_writing_style#Grammatical_person)
 * [Active Voice](https://en.wikiversity.org/wiki/Technical_writing_style#Use_active_voice)
@@ -185,5 +207,17 @@ can be created by clicking the "+" button next to the repository name.
 ## Slurm options
 
 * Show both long and short option when introducing an option in text
-* Use the short version (where possible) in scripts
+* Use the long version (where possible) in scripts
 
+## Markdown lint
+
+Install the markdown linter (requires node/npm) locally
+```shell
+npm install markdownlint-cli
+```
+
+Run the linter from the base directory of the repository
+
+```shell
+./node_modules/markdownlint-cli/markdownlint.js docs
+```

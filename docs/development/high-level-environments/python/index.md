@@ -151,7 +151,7 @@ The `build_exe` and `install_exe` steps install `python2.7-mpi` which
 can easily be relinked to `python-mpi` if the user prefers.  The
 MPI-enabled Python interpreter is not required
 (see
-[this page](http://mpi4py.scipy.org/docs/usrman/appendix.html#mpi-enabled-python-interpreter) in
+[this page](https://mpi4py.readthedocs.io/en/stable/appendix.html#mpi-enabled-python-interpreter) in
 the mpi4py documentation) to use `mpi4py`.
 
 ### `h5py` with MPI-IO

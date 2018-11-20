@@ -96,5 +96,5 @@ This page is based on the "Valgrind Quick Start Page". For more
 information about valgrind, please refer to
 [http://valgrind.org/](http://valgrind.org/).
 
-For questions on using Valgrind at NERSC contact the consultants
-at consult@nersc.gov.
+For questions on using Valgrind at NERSC
+contact [NERSC Consulting](https://help.nersc.gov).

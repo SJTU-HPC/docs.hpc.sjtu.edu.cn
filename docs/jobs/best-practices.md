@@ -1,3 +1,5 @@
+# Best practices for jobs
+
 ## Time Limits
 
 Due to backfill scheduling short and variable length jobs generally
@@ -67,6 +69,23 @@ filesystem is detected.
 * `seqfs`
 * `cvmfs`
 
+## Running Large Jobs (over 1500 MPI tasks)
+
+Large jobs may take a longer to start up, especially on KNL nodes. The
+srun option --bcast=<destination_path> is recommended for large jobs
+requesting over 1500 MPI tasks. By default Slurm loads the executable
+to the allocated compute nodes from the current working directory,
+this may take long time when the file system (where the executable
+resides) is slow. With the --bcast=/tmp/myjob, the executable will be
+copied to the /tmp/myjob directory. Since /tmp is part of the memory
+on the compute nodes, it can speed up the job startup time.
+
+```bash
+% sbcast --compress=lz4 ./mycode.exe /tmp/mycode.exe     # here -C is to compress first
+% srun <srun options> /tmp/mycode.exe
+# or in the case of when numactl is not needed: % srun --bcast=/tmp/mycode.exe --compress=lz4 <srun options> ./mycode.exe
+```
+
 ## Network locality
 
 For jobs which are sensitive to interconnect (MPI) performance and
@@ -74,3 +93,18 @@ utilize less than ~300 nodes it is possible to request that all nodes
 are in a single Aries dragonfly group.
 
 * [Example](examples/index.md#network-topology)
+
+## Core Specialization
+
+Core specialization is a feature designed to isolate system overhead
+(system interrupts, etc.) to designated cores on a compute node. It is
+generally helpful for running on KNL, especially if the application
+does not plan to use all physical cores on a 68-core compute node. Set
+aside 2 or 4 cores for core specialization is recommended.
+
+The srun flag for core specialization is "-S" or "--core-spec".  It
+only works in a batch script with sbatch.  It can not be requested as
+a flag with salloc for interactive batch, since salloc is already a
+wrapper script for srun.
+
+* [Example](examples/index.md#core-specialization)

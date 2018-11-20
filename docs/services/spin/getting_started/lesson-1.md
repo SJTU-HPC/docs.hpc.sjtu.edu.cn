@@ -11,14 +11,25 @@ guides, we'll explain how to do that.
 
 This guide is broken into multiple lessons.
 
-* Lesson 1, presented here, will show you how to run applications using Docker on your laptop and can done at home or in a lab with an internet connection. If you are already familiar with Docker, we encourage you to at least read the section below about running containers as a non-root user.
-* [Lesson 2: Running Your Application in Spin](lesson-2.md) shows how to migrate your application from your laptop to Spin and is intended to be run as a NERSC Hands-On lesson with access to the NERSC systems.
-* [Lesson 3: Storage, Secrets & Managing your services](lesson-3.md) shows upgrading, using Rancher NFS for persistant storage, and using Rancher Secrets to store sensitive data.
+* Lesson 1, presented here, will show you how to run applications
+  using Docker on your laptop and can done at home or in a lab with an
+  internet connection. If you are already familiar with Docker, we
+  encourage you to at least read the section below about running
+  containers as a non-root user.
+* [Lesson 2: Running Your Application in Spin](lesson-2.md) shows how
+  to migrate your application from your laptop to Spin and is intended
+  to be run as a NERSC Hands-On lesson with access to the NERSC
+  systems.
+* [Lesson 3: Storage, Secrets & Managing your services](lesson-3.md)
+  shows upgrading, using Rancher NFS for persistent storage, and using
+  Rancher Secrets to store sensitive data.
 
-These lessons are written with Mac users in mind. While the guide does not cover
-Microsoft Windows, Windows users should be able to use similar concepts to
-accomplish the goals. After finishing these lessons, be sure to consult the
-[Spin Best Practices Guide](../best_practices.md) if you have more questions.
+These lessons are written with Mac users in mind. While the guide does
+not cover Microsoft Windows, Windows users should be able to use
+similar concepts to accomplish the goals. After finishing these
+lessons, be sure to consult
+the [Spin Best Practices Guide](../best_practices.md) if you have more
+questions.
 
 ### Docker command syntax
 
@@ -39,7 +50,7 @@ Started Guide overview](index.md). This will help you learn the requirements for
 running in Spin, and will direct you to Docker's own Getting Started Guide to
 become familiar with Docker.
 
-### Get account on Spin, and a Project directory on the NERSC Global Filesystem for Lesson 2
+### Get account on Spin, and a Project directory for Lesson 2
 
 The next lesson, [Spin Getting Started Guide: Lesson 2: Running Your Image in
 Spin](lesson-2.md), requires an account on Spin. To do that, please see the
@@ -60,10 +71,15 @@ and setup](https://docs.docker.com/get-started/).
 
 Download Docker Community Edition (Docker CE) from https://www.docker.com/community-edition:
 
-* Mac users, please see https://docs.docker.com/docker-for-mac/install/ and install "Docker for Mac (stable)".
-* Windows users, please see https://docs.docker.com/docker-for-windows/install/ and install "Docker for Windows".
+* Mac users, please see
+  https://docs.docker.com/docker-for-mac/install/ and install "Docker
+  for Mac (stable)".
+* Windows users, please see
+  https://docs.docker.com/docker-for-windows/install/ and install
+  "Docker for Windows".
 
-Now that Docker is installed, run a quick test to ensure that it's working. Run this command:
+Now that Docker is installed, run a quick test to ensure that it's
+working. Run this command:
 
     docker container run hello-world
 
@@ -97,8 +113,10 @@ Docker is now installed on your laptop, and you are ready to proceed.
 
 ## About Our Application
 
-In the examples below, we will be building a simple application stack consisting
-of two services: An **application service** based on Python Flask to serve dynamic data, and a **web service** based on Nginx which sits in front of the application service.
+In the examples below, we will be building a simple application stack
+consisting of two services: An **application service** based on Python
+Flask to serve dynamic data, and a **web service** based on Nginx
+which sits in front of the application service.
 
 Docker recommends building the stack so that each service be stored in it's own
 container, following a software design principal called "separation of
@@ -123,25 +141,29 @@ we will use that image to run a **container**.
 The steps to build an image include:
 
 * Create the working directory to store your files.
-* Create a Dockerfile to define the image. You might download a file from GitHub using `git clone`.
-* Add any prerequisites & content for your image, such as files, images or application code required for your web app.
+* Create a Dockerfile to define the image. You might download a file
+  from GitHub using `git clone`.
+* Add any prerequisites & content for your image, such as files,
+  images or application code required for your web app.
 * Build the image.
 * Test the image by running a container based on your image.
 
-For this example, we will build an image named 'my-first-container', which will
-install a simple Python Flask app and is based on [Docker's own Flask
-tutorial](https://github.com/docker/labs/blob/master/beginner/chapters/webapps.md).
-We will install Flask and add some simple code. Later we will rename this image
-using Docker 'tags' and will ship it to the Spin Image Registry where it can be
-deployed as a container on Spin. If you have your own application, you can try
-to build it by following the general instructions here. At this point, we
-encourage you to keep it simple.
+For this example, we will build an image named 'my-first-container',
+which will install a simple Python Flask app and is based
+on
+[Docker's own Flask tutorial](https://github.com/docker/labs/blob/master/beginner/chapters/webapps.md).
+We will install Flask and add some simple code. Later we will rename
+this image using Docker 'tags' and will ship it to the Spin Image
+Registry where it can be deployed as a container on Spin. If you have
+your own application, you can try to build it by following the general
+instructions here. At this point, we encourage you to keep it simple.
 
 ### Step 1: Create the parent working directory
 
-First, we need to create a parent working directory to store your files. These
-lessons will use '~/docker/my-first-container' in your home directory, but you
-can place it whereever you prefer. Open a terminal and create these directories:
+First, we need to create a parent working directory to store your
+files. These lessons will use '~/docker/my-first-container' in your
+home directory, but you can place it whereever you prefer. Open a
+terminal and create these directories:
 
 
     mkdir ~/docker
@@ -150,14 +172,15 @@ can place it whereever you prefer. Open a terminal and create these directories:
 
 ### Step 2: Add Application Code
 
-Next, we want to add a custom Flask application to this image. Create a place to
-store your application code:
+Next, we want to add a custom Flask application to this image. Create
+a place to store your application code:
 
     mkdir app
     cd app
 
-Open a file named 'app.py' in your favorite editor and add content similar to
-the following. Note that the indenting in this file is important.
+Open a file named 'app.py' in your favorite editor and add content
+similar to the following. Note that the indenting in this file is
+important.
 
     import os
     from flask import Flask
@@ -169,21 +192,22 @@ the following. Note that the indenting in this file is important.
     if __name__ == '__main__':
         app.run(debug=True,host='0.0.0.0')
 
-This simple Flask application will listen on the TCP port 5000 (the default)
-and will print 'Hello WORLD!' when called normally. The app will instead print
-the contents of the `WHO` environment variable if it's defined (more on that
-later). Flask will also print debug information to the log.
+This simple Flask application will listen on the TCP port 5000 (the
+default) and will print 'Hello WORLD!' when called normally. The app
+will instead print the contents of the `WHO` environment variable if
+it's defined (more on that later). Flask will also print debug
+information to the log.
 
 ### Step 3: Build the image
 
-In this step, we will create a Dockerfile and use that Dockerfile to build a
-Docker image.
+In this step, we will create a Dockerfile and use that Dockerfile to
+build a Docker image.
 
 #### Create the Dockerfile
 
-You should already be in the 'app' subdirectory, which will be the working
-directory for this image. Open a file called "Dockerfile" using your favorite
-editor.
+You should already be in the 'app' subdirectory, which will be the
+working directory for this image. Open a file called "Dockerfile"
+using your favorite editor.
 
     vi Dockerfile
 
@@ -201,11 +225,16 @@ from top to bottom, and will do the following:
 
 1. Create your image from the Debian:latest base image.
 1. Update all packages in the image, in case they are out of date.
-    * Note that the output from `apt-get` will be very verbose here. The `--quiet` flag reduces the noise a bit.
+    * Note that the output from `apt-get` will be very verbose
+      here. The `--quiet` flag reduces the noise a bit.
 1. Install python-flask and any dependencies.
-    * Note that we run this command on the same line as `apt-get` to reduce the number of image layers. Image layers are discussed more in the [Spin Best Practices Guide](../best_practices.md).
-1. Copy the contents of the ./app/ directory from your laptop into the image at the location /app.
-1. Instruct the container to run the app.py application, out of the /app directory, using Python when the container is started.
+    * Note that we run this command on the same line as `apt-get` to
+      reduce the number of image layers. Image layers are discussed
+      more in the [Spin Best Practices Guide](../best_practices.md).
+1. Copy the contents of the ./app/ directory from your laptop into the
+   image at the location /app.
+1. Instruct the container to run the app.py application, out of the
+   /app directory, using Python when the container is started.
 
 You should now have a simple set of files for your application:
 
@@ -219,15 +248,17 @@ You should now have a simple set of files for your application:
 
 #### Build the image from the Dockerfile
 
-Now that your application is in place, and the Dockerfile is ready, we can build
-the image and save the copy on our laptop. Run the following command, which will
-build an image using the Dockerfile in the current working directory ".", and
-will 'tag' the container with the name "app:latest".
+Now that your application is in place, and the Dockerfile is ready, we
+can build the image and save the copy on our laptop. Run the following
+command, which will build an image using the Dockerfile in the current
+working directory ".", and will 'tag' the container with the name
+"app:latest".
 
     docker image build --tag my-first-container-app .
 
-The command will produce output similar to the following. 'docker image build'
-can print a large amount of logs, and we removed some here for brevity.
+The command will produce output similar to the following. 'docker
+image build' can print a large amount of logs, and we removed some
+here for brevity.
 
     elvis@laptop:app $ docker image build --tag my-first-container-app .
     Sending build context to Docker daemon 4.096kB
@@ -235,7 +266,7 @@ can print a large amount of logs, and we removed some here for brevity.
     ---> 72ef1cf971d1
     Step 2/6 : RUN apt-get update --quiet -y && apt-get install --quiet -y python-flask
     ---> Running in b64e4f148838
-    Ign:1 http://deb.debian.org/debian stretch InRelease
+    Ign:1 https://deb.debian.org/debian stretch InRelease
     ...
     ...
     Removing intermediate container b64e4f148838
@@ -256,16 +287,17 @@ can print a large amount of logs, and we removed some here for brevity.
     Successfully built c4f1cd0eb01c
     Successfully tagged my-first-container-app:latest
 
-(If you re-run the command in the future, you may see a less output and messages
-showing that Docker is using a cache to rebuild).
+(If you re-run the command in the future, you may see a less output
+and messages showing that Docker is using a cache to rebuild).
 
-Now, list your Docker images using the command `docker image list my-first-container-app`
-and you'll see your container. Note how your image is
-named "app" (The Docker CLI also calls this a 'Repository'), followed by a a
-Docker version 'Tag' of :latest. We'll cover Repositories & Docker Tags more
-later. For most projects, we recommend that you give your image a name. If you
-don't specify the name, all future commands must refer to the image by it's
-Image ID ('c4f1cd0eb01c' below) instead of the name.
+Now, list your Docker images using the command `docker image list
+my-first-container-app` and you'll see your container. Note how your
+image is named "app" (The Docker CLI also calls this a 'Repository'),
+followed by a a Docker version 'Tag' of :latest. We'll cover
+Repositories & Docker Tags more later. For most projects, we recommend
+that you give your image a name. If you don't specify the name, all
+future commands must refer to the image by it's Image ID
+('c4f1cd0eb01c' below) instead of the name.
 
     elvis@laptop:app $ docker image list my-first-container-app
     REPOSITORY              TAG     IMAGE         ID  CREATED  SIZE
@@ -274,18 +306,23 @@ Image ID ('c4f1cd0eb01c' below) instead of the name.
 
 ### Step 4: Run a container based on the image
 
-Before you use your container in a real environment, such as Spin, it's always a
-good idea to test this locally on your laptop.
+Before you use your container in a real environment, such as Spin,
+it's always a good idea to test this locally on your laptop.
 
-Run the following command to start a container based on your new image. The flag
-`--publish 5000:5000` will map the containers internal port of '5000' (Flask's
-default port number) to port '5000' on your machine for testing from a web
-browser. The `--rm` flag will remove the container completely when we stop the
-container so that there aren't stale containers left behind during testing.
+Run the following command to start a container based on your new
+image. The flag `--publish 5000:5000` will map the containers internal
+port of '5000' (Flask's default port number) to port '5000' on your
+machine for testing from a web browser. The `--rm` flag will remove
+the container completely when we stop the container so that there
+aren't stale containers left behind during testing.
 
     docker container run --rm --publish 5000:5000 my-first-container-app
 
-Open up a web browser, and browse to [http://localhost:5000/](http://localhost:5000/) . The browser should display the text "Hello World!" from your Flask code above. Docker will print logs similar the following. The container startup logs are shown first, followed by the application logs:
+Open up a web browser, and browse
+to [http://localhost:5000/](http://localhost:5000/) . The browser
+should display the text "Hello World!" from your Flask code
+above. Docker will print logs similar the following. The container
+startup logs are shown first, followed by the application logs:
 
     elvis@laptop:app $ docker container run --rm --publish 5000:5000 my-first-container-app
     * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
@@ -296,44 +333,47 @@ Open up a web browser, and browse to [http://localhost:5000/](http://localhost:5
 
 Hit **"Control C"** to exit & stop this container.
 
-Congratulations, you built your first container using your own custom content!
+Congratulations, you built your first container using your own custom
+content!
 
 ## Part 2: Extend the Nginx image to run as a non-root user
 
-The next step is to create a webserver to sit in front of the web application.
-We generally recommend that you place a robust webserver in front of your
-application server, as a webserver is generally going to handle the complexities
-of web connections better than a custom application.
+The next step is to create a webserver to sit in front of the web
+application.  We generally recommend that you place a robust webserver
+in front of your application server, as a webserver is generally going
+to handle the complexities of web connections better than a custom
+application.
 
-For this image, we'll use the official Nginx image from Docker Hub, which is a
-widely used, well respected, and robust service.  Since we're using a
-preexisting image provided by the community, we only need to concern ourselves
-with a few details about the webserver, and that saves us time. We don't need to
-build a webserver from scratch.
+For this image, we'll use the official Nginx image from Docker Hub,
+which is a widely used, well respected, and robust service.  Since
+we're using a preexisting image provided by the community, we only
+need to concern ourselves with a few details about the webserver, and
+that saves us time. We don't need to build a webserver from scratch.
 
-In Lesson 2, we will be reading from the NERSC Global Filesystem. For security
-reasons, any container which uses the NERSC Global Filesystem must run as a
-non-root user. The Nginx image by default runs as the 'root' user by default,
-and we need to change this.
+In Lesson 2, we will be reading from the NERSC Global Filesystem. For
+security reasons, any container which uses the NERSC Global Filesystem
+must run as a non-root user. The Nginx image by default runs as the
+'root' user by default, and we need to change this.
 
-There are a couple methods to modify a container as non-root. We show one method
-here, and discuss a few others in the [Spin Best Practices
-Guide.](../best_practices.md) The Docker & Linux communities are working on
-alternative ways to run stock images without modification, and we're keeping an
-eye on that.
+There are a couple methods to modify a container as non-root. We show
+one method here, and discuss a few others in
+the [Spin Best Practices Guide.](../best_practices.md) The Docker &
+Linux communities are working on alternative ways to run stock images
+without modification, and we're keeping an eye on that.
 
-Switch back to the parent directory, and create a new working directory for web
-container.
+Switch back to the parent directory, and create a new working
+directory for web container.
 
     cd ~/docker/my-first-container
     mkdir web
     cd web
 
-Add the following Dockerfile. Notice how we make a few changes to allow a
-non-root user to run the service, including listening on port **8080** (Port 80
-is only available to privileged users, such as 'root'. Unprivileged users can
-listen on any port above 1024), changing the ownership of '/var/cache/nginx' and
-writing the Nginx PID file to a different location.
+Add the following Dockerfile. Notice how we make a few changes to
+allow a non-root user to run the service, including listening on port
+**8080** (Port 80 is only available to privileged users, such as
+'root'. Unprivileged users can listen on any port above 1024),
+changing the ownership of '/var/cache/nginx' and writing the Nginx PID
+file to a different location.
 
     FROM nginx:latest
 
@@ -349,30 +389,31 @@ writing the Nginx PID file to a different location.
     # Write the PID file to a location where regular users have write access.
     RUN sed --regexp-extended --in-place=.bak 's%^pid\s+/var/run/nginx.pid;%pid /var/tmp/nginx.pid;%' /etc/nginx/nginx.conf
 
-Build the image, similar to what we did above with the 'app' image. We're
-keeping the 'nginx' in the name here to help distinguish the kind of web
-software that we're using.
+Build the image, similar to what we did above with the 'app'
+image. We're keeping the 'nginx' in the name here to help distinguish
+the kind of web software that we're using.
 
     docker image build --tag my-first-container-nginx .
 
 #### Create configuration files for the Nginx container
 
-The next step is to customize the Nginx container a little bit more so it works
-with our app.
+The next step is to customize the Nginx container a little bit more so
+it works with our app.
 
-We'll do this by creating a custom Nginx configuration file on the host which will be used in **Part 3** below.
+We'll do this by creating a custom Nginx configuration file on the
+host which will be used in **Part 3** below.
 
-Create a file named **nginx-proxy.conf**, and add the following text. This will
-configure Nginx to behave as a function as a standard 'reverse proxy' listening
-on the internal port of 8080. The reverse proxy will forward all traffic to an
-backend application server named **"app"** listening on an internal port 5000.
-These ports are only available internally, and won't be exposed to the outside
-world.
+Create a file named **nginx-proxy.conf**, and add the following
+text. This will configure Nginx to behave as a function as a standard
+'reverse proxy' listening on the internal port of 8080. The reverse
+proxy will forward all traffic to an backend application server named
+**"app"** listening on an internal port 5000.  These ports are only
+available internally, and won't be exposed to the outside world.
 
     server {
         listen 8080;
         location / {
-          proxy_pass http://app:5000;
+          proxy_pass https://app:5000;
           proxy_set_header Host $host:$server_port;
           proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
           proxy_set_header X-Forwarded-Host $server_name;
@@ -380,25 +421,27 @@ world.
         }
     }
 
-How does Nginx know about the hostname **app**? We define it in our Docker
-Compose files, as you'll see in the next step.
+How does Nginx know about the hostname **app**? We define it in our
+Docker Compose files, as you'll see in the next step.
 
 ## Part 3: Create an Application Stack using Both Images
 
-To combine multiple container services into a single, cohesive application, you will use a **Docker Compose** file to assemble the containers together into an
-"Application Stack". The Docker Compose file will define **services** named
-**web** and **app**, their published (public) ports, and any files which are
-mounted from the host into the container.
+To combine multiple container services into a single, cohesive
+application, you will use a **Docker Compose** file to assemble the
+containers together into an "Application Stack". The Docker Compose
+file will define **services** named **web** and **app**, their
+published (public) ports, and any files which are mounted from the
+host into the container.
 
-Here, we'll combine our custom Nginx image and with the custom Flask app that we
-built above into a single application stack.
+Here, we'll combine our custom Nginx image and with the custom Flask
+app that we built above into a single application stack.
 
 !!! Note "Terminology: Containers vs. Services"
-    Note the change in terminology here. When using `docker container run`
-    above, we created a **container**. However, in a Docker Compose file, we are
-    defining a **service**. A **service** may have one or more instances of
-    itself, called **containers**. **Containers** are 'instances' of a
-    **service**.
+	Note the change in terminology here. When using `docker container run`
+	above, we created a **container**. However, in a Docker Compose file, 
+	we are defining a **service**. A **service** may have one or more
+    instances of itself, called **containers**. **Containers** are
+    'instances' of a **service**.
 
 ### Define your application stack using docker-compose.yml
 
@@ -406,7 +449,8 @@ Switch back to the working directory:
 
     cd ~/docker/my-first-container
 
-Create a file named docker-compose.yml and add the following content. Again, the indenting in this file is important.
+Create a file named docker-compose.yml and add the following
+content. Again, the indenting in this file is important.
 
     version: '2'
     services:
@@ -421,29 +465,49 @@ Create a file named docker-compose.yml and add the following content. Again, the
 
 The configuration will define an application stack with two services:
 
-* An 'app' service, which is based on the 'my-first-container-app' image created above. This service has no public ports and is instead hidden away behind the Nginx proxy (which improves secuirity).
-* A 'web' service, which is based on the 'my-first-container-nginx' image created above.
-    * The Nginx container will provide a reverse proxy to our backend 'app' application. The **./web/nginx-proxy.conf** file is mounted from the host directory into the container at **/etc/nginx/conf.d/default.conf** using a Docker "Bind Mount", which is read by Nginx by default.
-    * There are other ways to get files into a container, such as using the 'COPY' or 'ADD' statements in the Dockerfile. Normally you want to build all application code into your image when it's complete, as that reduces dependencies on outside resources. During development, it can be simpler to mount a file into the container to allow quick and easy modifications.
-* The hostnames 'app' and 'web' are created within the application Stack, and
-  are available within any containers that are a part of this stack.
-* The web service will listen publicly on port 80 for now, which maps to Nginx's internal port of 8080.
+* An 'app' service, which is based on the 'my-first-container-app'
+  image created above. This service has no public ports and is instead
+  hidden away behind the Nginx proxy (which improves secuirity).
+* A 'web' service, which is based on the 'my-first-container-nginx'
+  image created above.
+    * The Nginx container will provide a reverse proxy to our backend
+      'app' application. The **./web/nginx-proxy.conf** file is
+      mounted from the host directory into the container at
+      **/etc/nginx/conf.d/default.conf** using a Docker "Bind Mount",
+      which is read by Nginx by default.
+    * There are other ways to get files into a container, such as
+      using the 'COPY' or 'ADD' statements in the Dockerfile. Normally
+      you want to build all application code into your image when it's
+      complete, as that reduces dependencies on outside
+      resources. During development, it can be simpler to mount a file
+      into the container to allow quick and easy modifications.
+* The hostnames 'app' and 'web' are created within the application
+  Stack, and are available within any containers that are a part of
+  this stack.
+* The web service will listen publicly on port 80 for now, which maps
+  to Nginx's internal port of 8080.
 
 !!!Note
-    If you are familiar with Docker Compose, note that Rancher only supports Docker Compose v2. Do not use Docker Compose v3.
+	If you are familiar with Docker Compose, note that Rancher
+    only supports Docker Compose v2. Do not use Docker Compose v3.
 
 ### Validate your Docker Compose file
 
-Typos in a Docker Compose file can cause major headaches. So before proceeding, let's validate the Docker Compose file using this command, which by default will check the file 'docker-compose.yml' in your current directory.
+Typos in a Docker Compose file can cause major headaches. So before
+proceeding, let's validate the Docker Compose file using this command,
+which by default will check the file 'docker-compose.yml' in your
+current directory.
 
     docker-compose config --quiet
 
-If the Compose file contains no validation errors, the command will print no output, like so:
+If the Compose file contains no validation errors, the command will
+print no output, like so:
 
     elvis@laptop:my-first-container $ docker-compose config --quiet
     elvis@laptop:my-first-container $
 
-If there are validation errors, this command will print an error. Here's what happens if my indenting is wrong, for example:
+If there are validation errors, this command will print an
+error. Here's what happens if my indenting is wrong, for example:
 
     elvis@laptop:my-first-container $ docker-compose config --quiet
     ERROR: yaml.scanner.ScannerError: mapping values are not allowed here
@@ -467,9 +531,11 @@ You should now have the following files in your working directory:
     2 directories, 5 files
     elvis@laptop:my-first-container $
 
-Now, start the application server with `docker-compose up`, and point your
-browser to [http://localhost/](http://localhost/) (port 80). Your browser should
-show yo the "Hello World!" screen as it did in the previous example. Docker should print log output similar to the following:
+Now, start the application server with `docker-compose up`, and point
+your browser to [http://localhost/](http://localhost/) (port 80). Your
+browser should show yo the "Hello World!" screen as it did in the
+previous example. Docker should print log output similar to the
+following:
 
     elvis@laptop:my-first-container $ docker-compose up
     Creating myfirstcontainer_web_1 ... done
@@ -486,13 +552,15 @@ show yo the "Hello World!" screen as it did in the previous example. Docker shou
 
 As before, hit **Control-C** to exit.
 
-Congratulations, you built and ran a multi-service application stack composed of two Docker images.
+Congratulations, you built and ran a multi-service application stack
+composed of two Docker images.
 
 ## Extra credit - Environment variables
 
-Our flask app accepts environment variables. To change the value away from the
-default on the shell, open up the Docker Compose file, and under the `app`
-definition, add an environment stanza as in the following example:
+Our flask app accepts environment variables. To change the value away
+from the default on the shell, open up the Docker Compose file, and
+under the `app` definition, add an environment stanza as in the
+following example:
 
     version: '2'
     services:
@@ -507,9 +575,14 @@ definition, add an environment stanza as in the following example:
         volumes:
         - ./web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
 
-Now, run `docker-compose up` again, and browse to http://localhost/ . The app
-will say 'Hello elvis!' instead of 'Hello WORLD!'
+Now, run `docker-compose up` again, and browse to http://localhost/
+. The app will say 'Hello elvis!' instead of 'Hello WORLD!'
 
 ## Next Steps: Lesson 2
 
-The next lesson, [Spin Getting Started Guide: Lesson 2: Running Your Application in Spin](lesson-2.md) will show you how to push your application images into the Spin registry, run that application in Spin, as well as how to do other administrative tasks.
+The next
+lesson,
+[Spin Getting Started Guide: Lesson 2: Running Your Application in Spin](lesson-2.md) will
+show you how to push your application images into the Spin registry,
+run that application in Spin, as well as how to do other
+administrative tasks.

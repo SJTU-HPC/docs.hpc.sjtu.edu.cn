@@ -1,29 +1,44 @@
 image: python:3.7
 
 stages:
+  - lint
+  - filesize
   - build
   - test
   - deploy
   - post-deploy
 
-build:
+markdown_lint:
+  image: node
+  stage: lint
+  script:
+    - npm install -g markdownlint-cli
+    - bash util/lint-changes.sh
+  allow_failure: true
+
+filesize:
+  image: ubuntu:latest
+  stage: filesize
+  before_script:
+    - apt-get update && apt-get install -y git
+  script:
+    - bash util/filesize.sh
+  allow_failure: true
+
+mkdocs_build:
   stage: build
   script:
-    - pwd
-    - find .
     - mkdir -p .build_cache
-    - pip install --cache-dir=.build_cache -r requirements.txt
-    - python --version
-    - mkdocs --version
+    - pip install --upgrade --cache-dir=.build_cache -r requirements.txt
     - mkdocs --verbose build
   artifacts:
     paths:
     - public
     expire_in: 1 week
   cache:
+    key: ${CI_JOB_NAME}
     paths:
       - .build_cache
-    key: "build-$CI_COMMIT_REF_SLUG"
     
 check_links:
   stage: test
@@ -33,27 +48,20 @@ check_links:
     - python util/scrape_urls.py public
   allow_failure: true
   cache:
+    key: ${CI_JOB_NAME}
     paths:
       - .links_cache
-    key: "links-$CI_COMMIT_REF_SLUG"
-  
-markdown_lint:
-  image: node
-  stage: test
-  script:
-    - npm install -g markdownlint-cli
-    - markdownlint docs
-  allow_failure: true
-            
+      - good-urls-cache.txt
+
 pages:
   stage: deploy
+  before_script:
+    - pip install htmlmin
   script:
-  - ls -l public
-  - gzip -k -6 -r public/assets/stylesheets
-  - gzip -k -6 -r public/assets/javascripts
-  - find public -type f -name "*.html"
-  - find public -type f -name "*.html" -exec htmlmin {} {} \;
-  - find public -type f -name "*.html" -exec gzip --keep --verbose {} \;
+    - gzip -k -6 -r public/assets/stylesheets
+    - gzip -k -6 -r public/assets/javascripts
+    - find public -type f -name "*.html" -exec htmlmin {} {} \;
+    - find public -type f -name "*.html" -exec gzip --keep --verbose {} \;
   artifacts:
     paths:
     - public

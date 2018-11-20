@@ -1,4 +1,4 @@
-## Introduction
+# Introduction to MFA
 
 NERSC provides users with the ability to use __Multi-Factor
 Authentication__ (__MFA__) for logging into NERSC resources.  MFA
@@ -249,7 +249,7 @@ edison
 ## SSH Control Master
 
 Unlike using [passphraseless ssh with
-ssh-agent](http://www.nersc.gov/users/connecting-to-nersc/connecting-with-ssh/),
+ssh-agent](https://www.nersc.gov/users/connecting-to-nersc/connecting-with-ssh/),
 with MFA, users must enter password + OTP for each ssh connection.
 NERSC will be providing tools to allow for single-sign-on type
 logins in the near future (see the 'Coming in September, 2018'
@@ -469,17 +469,15 @@ status of MFA on NERSC systems and services.
 </tbody>
 </table>
 
-
 #### MFA Available in September, 2018
-
 
 [comment]: <> (| Authentication | Host |)
 [comment]: <> (|:---:|:---:|)
 [comment]: <> (| Shibboleth | Online Help Desk ([https://help.nersc.gov/](https://help.nersc.gov)) |)
-[comment]: <> (|            | [Science gateways](http://portal.nersc.gov/) with NERSC (Shibboleth) login banner |)
+[comment]: <> (|            | [Science gateways](https://portal.nersc.gov/) with NERSC (Shibboleth) login banner |)
 [comment]: <> (| NEWT       | [My NERSC](https://my.nersc.gov/) |)
-[comment]: <> (|            | [Science gateways](http://portal.nersc.gov/) accepting NIM passwords not displaying the  NERSC (Shibboleth)  login banner |)
-[comment]: <> (| Others     | JupyterHubs ([Jupyter](https://ipython.nersc.gov/) and [Jupyter-dev](https://jupyter-dev.nersc.gov/)) |)
+[comment]: <> (|            | [Science gateways](https://portal.nersc.gov/) accepting NIM passwords not displaying the  NERSC (Shibboleth)  login banner |)
+[comment]: <> (| Others     | JupyterHubs ([Jupyter](https://jupyter.nersc.gov/) and [Jupyter-dev](https://jupyter-dev.nersc.gov/)) |)
 [comment]: <> (|            | [RStudio](https://rstudio.nersc.gov/) |)
 [comment]: <> (|            | NX and [NX-cloud](https://nxcloud01.nersc.gov/) |)
 
@@ -494,28 +492,28 @@ status of MFA on NERSC systems and services.
 <td style="text-align: center;">Online Help Desk (<a href="https://help.nersc.gov">https://help.nersc.gov</a>)</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="http://portal.nersc.gov/">Science gateways</a> with NERSC (Shibboleth) login banner</td>
+<td style="text-align: center;"><a href="https://portal.nersc.gov">Science gateways</a> with NERSC (Shibboleth) login banner</td>
 </tr>
 <tr>
 <td style="text-align: center; vertical-align: middle;" rowspan="2">NEWT</td>
 <td style="text-align: center;"><a title="https://my.nersc.gov" href="https://my.nersc.gov">My NERSC</a></td>
 </tr>
 <tr>
-<td style="text-align: center;"><a href="http://portal.nersc.gov/">Science gateways</a> accepting NIM passwords not displaying the&nbsp; NERSC (Shibboleth)&nbsp; login banner</td>
+<td style="text-align: center;">
+<a href="https://portal.nersc.gov">Science gateways</a> accepting NIM passwords not displaying the&nbsp; NERSC (Shibboleth)&nbsp; login banner</td>
 </tr>
 <tr>
 <td style="text-align: center; vertical-align: middle;" rowspan="3">Others</td>
-<td style="text-align: center;">JupyterHubs (<a title="https://jupyter.nersc.gov" href="https://ipython.nersc.gov">Jupyter</a>&nbsp;and&nbsp;<a title="https://jupyter-dev.nersc.gov" href="https://jupyter-dev.nersc.gov">Jupyter-dev</a>)</td>
+<td style="text-align: center;">JupyterHubs (<a title="https://jupyter.nersc.gov" href="https://jupyter.nersc.gov">Jupyter</a>&nbsp;and&nbsp;<a title="https://jupyter-dev.nersc.gov" href="https://jupyter-dev.nersc.gov">Jupyter-dev</a>)</td>
 </tr>
 <tr>
-<td style="text-align: center;"><a title="https://rstudio.nersc.gov/" href="https://rstudio.nersc.gov/">RStudio</a></td>
+<td style="text-align: center;"><a title="https://rstudio.nersc.gov" href="https://rstudio.nersc.gov">RStudio</a></td>
 </tr>
 <tr>
-<td style="text-align: center;">NX and <a title="https://nxcloud01.nersc.gov/" href="https://nxcloud01.nersc.gov/">NX-cloud</a></td>
+<td style="text-align: center;">NX and <a title="https://nxcloud01.nersc.gov" href="https://nxcloud01.nersc.gov">NX-cloud</a></td>
 </tr>
 </tbody>
 </table>
-
 
 #### MFA Coming Soon
 
@@ -531,7 +529,7 @@ status of MFA on NERSC systems and services.
 </tr>
 <tr>
 <td style="text-align: center; vertical-align: middle;">-</td>
-<td style="text-align: center;"><a title="https://registry.spin.nersc.gov/" href="https://registry.spin.nersc.gov/">NERSC Spin Registry</a></td>
+<td style="text-align: center;"><a title="https://registry.spin.nersc.gov" href="https://registry.spin.nersc.gov">NERSC Spin Registry</a></td>
 </tr>
 </tbody>
 </table>
@@ -540,7 +538,7 @@ status of MFA on NERSC systems and services.
 
 [comment]: <> (| Authentication | Host |)
 [comment]: <> (|:---:|:---:|)
-[comment]: <> (| -   | Other science gateways hosted on [portal.nersc.gov](http://portal.nersc.gov/) |)
+[comment]: <> (| -   | Other science gateways hosted on [portal.nersc.gov](https://portal.nersc.gov/) |)
 [comment]: <> (|     | GRDC |)
 [comment]: <> (|     | WeFold |)
 [comment]: <> (|     | CRCNS |)
@@ -555,7 +553,7 @@ status of MFA on NERSC systems and services.
 </tr>
 <tr>
 <td style="text-align: center; vertical-align: middle;" rowspan="6">-</td>
-<td style="text-align: center;">Other science gateways hosted on <a href="http://portal.nersc.gov/">portal.nersc.gov</a></td>
+<td style="text-align: center;">Other science gateways hosted on <a href="https://portal.nersc.gov/">portal.nersc.gov</a></td>
 </tr>
 <tr>
 <td style="text-align: center;">GRDC</td>

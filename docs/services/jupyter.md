@@ -1,3 +1,5 @@
+# Jupyter
+
 Jupyter is an essential component of NERSC's Data and Analytics Services ecosystem.
 Use Jupyter at NERSC to:
 
@@ -127,7 +129,7 @@ The `kernel-helper.sh` script should be made executable (`chmod u+x kernel-helpe
 The helper could be like:
 
 ```shell
-#/bin/bash
+#!/bin/bash
 module load <some-module>
 module load <some-other-module>
 export SOME_VALUE=987654321

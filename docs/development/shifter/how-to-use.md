@@ -105,7 +105,7 @@ RUN cd /build && wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz
   && tar xvzf Python-2.7.13.tgz && cd /build/Python-2.7.13 \
   && ./configure && make -j4 && make install && make clean && rm /build/Python-2.7.13.tgz
 
-RUN cd /build && wget http://www.mpich.org/static/downloads/3.2/mpich-3.2.tar.gz \
+RUN cd /build && wget https://www.mpich.org/static/downloads/3.2/mpich-3.2.tar.gz \
   && tar xvzf mpich-3.2.tar.gz && cd /build/mpich-3.2 \
   && ./configure && make -j4 && make install && make clean && rm /build/mpich-3.2.tar.gz
 
@@ -149,6 +149,26 @@ In the future, pulling Shifter images from private repositories or
 sources other than Docker will be enabled. If you have a specific need
 for this now, please
 see our [support page](https://help.nersc.gov).
+
+## Shifter Modules
+
+Shifter has functionality that can be toggled on or off using modules
+flags. By default, the "mpich" module is enabled at NERSC which allows
+communication between nodes using the high-speed
+interconnect. However, you can override this default by invoking
+shifter with the "--modules" flag. Currently, the only allowable
+values for modules are:
+
+| Module Name | Function  |
+|-------------|-----------|
+|mpich	|Allows communication between nodes using the high-speed interconnect|
+|cvmfs 	|Makes access to DVS shared [CVMFS software stack](/services/cvmfs.md) available at /cvmfs in the image|
+|none 	|Turns off all modules|
+
+Modules can be used together. So if you wanted MPI functionality and
+access to cvmfs, use "shifter --modules=mpich,cvmfs". Using the flag
+"none" will disable all modules (even if you list others in the
+command line).
 
 ## Running Jobs in Shifter Images
 

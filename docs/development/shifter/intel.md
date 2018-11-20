@@ -70,7 +70,7 @@ Here are examples of a full image name:
 
 Using the Intel compiler tools requires a license.  The NERSC license server can
 be used to support this, but the NERSC License server is reserved for NERSC users and
-is not publicly accessible.  
+is not publicly accessible.
 
 -   The “devel” docker images require a valid Intel license to use the
     compilers

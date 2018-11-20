@@ -1,6 +1,6 @@
 # Quantum ESPRESSO/PWSCF
 
-[Quantum ESPRESSO](http://www.quantum-espresso.org) is an integrated
+[Quantum ESPRESSO](https://www.quantum-espresso.org) is an integrated
 suite of computer codes for electronic structure calculations and
 materials modeling at the nanoscale. It builds on the electronic
 structure codes PWscf, PHONON, CP90, FPMD, and Wannier.  It is based

@@ -120,25 +120,28 @@ files to be read via http.
 ```
 chmod -R o+rx /project/projectdirs/<project_name>/<svn_repository_path>/<svn_repository_name>
 ```
-A symlink will have to be created by NERSC staff in order for your svn repo to
-be accessible via http. You can request for a symlink to be created by sending
-an email to `consult@nersc.gov`. Please include the full path to the SVN repo
-in your request to expedite the process. A NERSC staff member will have to
-create a symlink in `/var/www/svn` and will have to point to the location of
-the svn repo (i.e.,
-`/project/projectdirs/<project_name>/<svn_repository_name>`).
+
+A symlink will have to be created by NERSC staff in order for your svn
+repo to be accessible via http. You can request for a symlink to be
+created by [opening a ticket](https://help.nersc.gov). Please include
+the full path to the SVN repo in your request to expedite the
+process. A NERSC staff member will have to create a symlink in
+`/var/www/svn` and will have to point to the location of the svn repo
+(i.e., `/project/projectdirs/<project_name>/<svn_repository_name>`).
+
 ```
 ln -s /project/projectdirs/<project>/<svn_location> /var/www/svn/<symlink_name>
 ```
 Once the symlink is setup then checking out a project from the svn repo can be
 completed by using the Subversion client:
 ```
-svn co http://portal.nersc.gov/svn/<project>
+svn co https://portal.nersc.gov/svn/<project>
 ```
 
 ## Authenticated access to SVN
 
-Setting the `REPO_PATH` variable may be necessary if it's not already set.
+Setting the `REPO_PATH` variable may be necessary if it's not already
+set.
 
 bash:
 ```
