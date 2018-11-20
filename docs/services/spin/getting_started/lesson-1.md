@@ -437,9 +437,9 @@ Here, we'll combine our custom Nginx image and with the custom Flask
 app that we built above into a single application stack.
 
 !!! Note "Terminology: Containers vs. Services"
-	Note the change in terminology here. When using `docker container run`
-	above, we created a **container**. However, in a Docker Compose file, 
-	we are defining a **service**. A **service** may have one or more
+    Note the change in terminology here. When using `docker container run`
+    above, we created a **container**. However, in a Docker Compose file,
+    we are defining a **service**. A **service** may have one or more
     instances of itself, called **containers**. **Containers** are
     'instances' of a **service**.
 
@@ -488,7 +488,7 @@ The configuration will define an application stack with two services:
   to Nginx's internal port of 8080.
 
 !!!Note
-	If you are familiar with Docker Compose, note that Rancher
+    If you are familiar with Docker Compose, note that Rancher
     only supports Docker Compose v2. Do not use Docker Compose v3.
 
 ### Validate your Docker Compose file
@@ -575,14 +575,12 @@ following example:
         volumes:
         - ./web/nginx-proxy.conf:/etc/nginx/conf.d/default.conf:ro
 
-Now, run `docker-compose up` again, and browse to http://localhost/
-. The app will say 'Hello elvis!' instead of 'Hello WORLD!'
+Now, run `docker-compose up` again, and browse to http://localhost/ . The app
+will say 'Hello elvis!' instead of 'Hello WORLD!'
 
 ## Next Steps: Lesson 2
 
-The next
-lesson,
-[Spin Getting Started Guide: Lesson 2: Running Your Application in Spin](lesson-2.md) will
-show you how to push your application images into the Spin registry,
-run that application in Spin, as well as how to do other
-administrative tasks.
+The next lesson, [Spin Getting Started Guide: Lesson 2: Running Your
+Application in Spin](lesson-2.md) will show you how to push your application
+images into the Spin registry, run that application in Spin, as well as how to
+do other administrative tasks.
