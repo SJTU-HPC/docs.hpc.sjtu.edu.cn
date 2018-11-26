@@ -17,12 +17,12 @@ This script requires that `${INPUT_FILE}` be specified.
 	--8<-- "docs/applications/namd/cori-knl.sh"
 	```
 
-??? example "Edison"
+??? example "Cori Haswell"
     ```shell
     --8<-- "docs/applications/namd/cori-hsw.sh"
     ```
 
-??? example "Cori Haswell"
+??? example "Edison"
     ```shell
     --8<-- "docs/applications/namd/edison.sh"
     ```
