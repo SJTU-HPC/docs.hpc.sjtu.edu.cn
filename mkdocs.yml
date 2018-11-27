@@ -95,6 +95,8 @@ nav:
         - CTest/CDash without CMake : services/cdash/without_cmake.md
       - CVMFS : services/cvmfs.md
   - Development:
+    - Build Tools:
+        - development/build-tools/index.md
     - Developer Tools:
         - development/performance-debugging-tools/index.md
         - DDT : development/performance-debugging-tools/ddt.md
