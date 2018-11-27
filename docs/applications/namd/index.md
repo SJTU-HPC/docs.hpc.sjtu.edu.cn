@@ -10,7 +10,8 @@ dissipatitve dynamics).
 
 ## Example run script
 
-This script requires that `${INPUT_FILE}` be specified.
+This script requires that `${INPUT_FILE}` be specified. The script is written
+such that *only* the number of nodes needs to be changed.
 
 !!! example "Cori KNL"
 	```bash
