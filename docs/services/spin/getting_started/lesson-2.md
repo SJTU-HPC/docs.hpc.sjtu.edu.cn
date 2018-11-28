@@ -65,34 +65,33 @@ run the application and will print an error, such as in the following example:
 
 If you hit a problem with these examples and cannot figure out how to resolve
 it easily, the simplest solution is sometimes to simply delete the entire stack
-and start over. You can do that with the `rancher rm --type stack [stack name]`
-command, like so:
+and start over. Deleting a stack will not delete the Docker Compose file, or any files stored on the
+global filesystems.
 
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    1s3971  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy  1/1    false
-    1s3972  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  1/1    false
+Delete the stack using `rancher rm --type stack YourStackName`, like so:
 
-    nersc$ rancher rm --type stack elvis-first-stack
-    1st1668
-
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    nersc$
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME                STATE      CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    1st4644   elvis-first-stack   degraded             2          false
+    elvis@cori09:elvis-first-stack $ rancher rm --type stack elvis-first-stack
+    1st4644
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME      STATE     CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    elvis@cori09:elvis-first-stack $
 
 !!! Caution
-    **Use caution when running this command**, especially when running it in
-    production, as this command is destructive and cannot be undone. For
-    example, removing a stack that contains a database service will remove that
-    database permanently. Be sure you have the Docker Compose file available before
-    deleting the stack.
+    When deleting in production, use caution. Deleting a stack will delete all
+    containers, volumes and the Load Balancer (ingress) configuration.
+    Removing a stack that contains a database will remove that database
+    permanently if the data files are stored within the container.  Data on the
+    Global Filesystem will not be removed.
 
 !!! Notice
     If you forget the `--type stack` flag, Rancher may complain with an error like
     *'You don't own volume elvis-first-stack'**. This error happens occasionally
     because Rancher is uncertain if you are referring to stack, volume or another
     thing, due to an internal ordering bug. Using the `--type stack` forces
-    Rancher to do the correct thing.
+    Rancher to do the correct thing:
 
     rancher rm --type stack elvis-first-stack
 
@@ -170,29 +169,6 @@ tied to that account. Follow the steps below to generate an API key.
             nersc$
 
 If everything ran successfully, you are ready to proceed.
-
-## If you get stuck, remove the stack
-
-If you run into unresolvable problems while following these lessons, the
-quickest action is to simply delete the entire stack and start over. Deleting
-a stack will not delete the Docker Compose file, or any files stored on the
-global filesystems.
-
-Delete the stack using `rancher rm --type stack YourStackName`, like so:
-
-    elvis@cori09:elvis-first-stack $ rancher stack ls
-    ID        NAME                STATE      CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
-    1st4644   elvis-first-stack   degraded             2          false
-    elvis@cori09:elvis-first-stack $ rancher rm --type stack  elvis-first-stack
-    1st4644
-    elvis@cori09:elvis-first-stack $ rancher stack ls
-    ID        NAME      STATE     CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
-    elvis@cori09:elvis-first-stack $
-
-!!! Warning
-    When deleting in production, use caution. Deleting a stack will delete all
-    containers, volumes and the Load Balancer (ingress) configuration. Data on
-    the Global Filesystem will not be removed.
 
 ## Part 1: Ship your image from your laptop to the Spin Registry
 
