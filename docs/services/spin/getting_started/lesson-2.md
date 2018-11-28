@@ -22,7 +22,7 @@ You will also need:
 * Access to a Project directory on the NERSC Global Filesystem, and the ability
   to run `chmod o+x` on that directory to allow the user 'nobody' to read files
   in that directory. This requirement is explained in detail below in [Part 3:
-  Prepare your application to run in Spin](#part-2-prepare-your-application-to-run-in-spin).
+  Prepare your application to run in Spin](#part-3-prepare-your-application-to-run-in-spin).
 
 ## Before you begin
 
