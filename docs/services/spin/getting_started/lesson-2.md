@@ -8,6 +8,24 @@ Docker Hub, and your own custom image named 'app'. Both of these images are
 stored on your laptop. Lesson 2 will show you how to migrate this application
 from your laptop to Spin.
 
+## Prerequisites for Lesson 2
+
+Before you review lesson 2, be sure to understand the concepts of [Spin Getting
+Started Guide: Lesson 1: Building your first application on your laptop](lesson-1.md).
+
+You will also need:
+
+* An account on Spin. Any user who wants an account in Spin must first complete
+  a hands on Spin workshop. For more information, see [Spin Getting Started
+  Guide: How do I get started?](index.md)
+* SSH access on a NERSC Login node, such as cori.nersc.gov or edison.nersc.gov.
+* Access to a Project directory on the NERSC Global Filesystem, and the ability
+  to run `chmod o+x` on that directory to allow the user 'nobody' to read files
+  in that directory. This requirement is explained in detail below in [Part 3:
+  Prepare your application to run in Spin](#part-2-prepare-your-application-to-run-in-spin).
+
+## Before you begin
+
 Here are some things to know beforehand:
 
 ### The Rancher CLI
@@ -46,10 +64,10 @@ all applications before they run in the production environment.
     'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information
     on Rancher, please read the [Spin Getting Started Guide overview](/services/spin/getting_started).
 
-### Security Requirements
+### Follow the NERSC Security Requirements
 
 Note that all applications sent to Spin must follow the NERSC security requirements,
-which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices).  If
+which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices). If
 the application breaks one of the security requirements, Spin will refuse to
 run the application and will print an error, such as in the following example:
 
@@ -95,22 +113,16 @@ Delete the stack using `rancher rm --type stack YourStackName`, like so:
 
     rancher rm --type stack elvis-first-stack
 
-## Prerequisites for Lesson 2
+## Part 1: Test your account and generate an API key
 
-Before you review lesson 2, be sure to understand the concepts of [Spin Getting
-Started Guide: Lesson 1: Building your first application on your laptop](lesson-1.md).
-
-You need also need:
-
-* SSH access on a NERSC Login node, such as cori.nersc.gov or edison.nersc.gov.
-* An account on Spin. To do that, please see the [Spin Getting Started Guide: How do I get started?](index.md) Test your Spin account by quickly logging into the Spin Registry from your laptop. You will see the message 'Login Succeeded':
+If you have an account, test your Spin account by quickly logging into the Spin Registry from your laptop. You will see the message 'Login Succeeded':
 
         elvis@laptop:~ $ docker login https://registry.spin.nersc.gov/
         Username: elvis
         Password:
         Login Succeeded
         elvis@laptop:~
-* Access to a Project directory on the NERSC Global Filesystem, and the ability to run `chmod o+x` on that directory to allow the user 'nobody' to read files in that directory. This requirement is explained in detail below in [Part 2: Prepare your application to run in Spin](#part-2-prepare-your-application-to-run-in-spin).
+
 
 ### Generate API keys on a system such as Cori or Edison
 
@@ -170,7 +182,7 @@ tied to that account. Follow the steps below to generate an API key.
 
 If everything ran successfully, you are ready to proceed.
 
-## Part 1: Ship your image from your laptop to the Spin Registry
+## Part 2: Ship your image from your laptop to the Spin Registry
 
 The Application Stack in Lesson 1 used a custom image named
 'my-first-container-app' which is currently stored on your laptop. Before you
@@ -299,7 +311,7 @@ Each push command will print output like the following:
 Now the images are available in the Spin Registry and can be pulled
 into the Rancher environment.
 
-## Part 2: Prepare your application to run in Spin
+## Part 3: Prepare your application to run in Spin
 
 In this part, we'll prepare your application to run in Spin by copying
 required files to your Project directory on the NERSC Global
@@ -551,7 +563,7 @@ the path from docker-compose.yml , and make sure they match:
 	for advanced use cases such as scaling. We may cover it in a
 	future lesson.
 
-## Part 3: Start the stack
+## Part 4: Start the stack
 
 Now that your Docker compose files are available, and all required
 files are available on the NERSC Global Filesystem, it's time to start
@@ -696,7 +708,7 @@ Go ahead and plug the FQDN & port number into your browser to view the stack.
 If the URL does not work, it's likely that the DNS records have not propogated
 yet. Wait a few minutes and try again, or try the IP address instead.
 
-## Part 4: A simple upgrade to your stack
+## Part 5: A simple upgrade to your stack
 
 In this example, we will perform a very simple upgrade just to show how it's
 done. Upgrading a stack has two mandatory steps:
@@ -734,7 +746,7 @@ YOURUSERNAME-first-stack`:
     rancher up --upgrade -d
 
 Notice that we're using the `-d` flag here to send the logs to the background,
-like we did in ‘Part 3: Start the stack’ above.
+like we did in ‘Part 4: Start the stack’ above.
 
 The command will print output like the following. Look for the line which says
 **Upgrading app**, which shows that the app service was upgraded.

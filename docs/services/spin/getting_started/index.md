@@ -49,7 +49,9 @@ You and your team are responsible for:
 
 ## How do I get started?
 
-Before reading the Spin Getting Started Guides, please familiarize yourself with Docker itself and review the Docker documentation. In particular, read the following guides:
+Before reading the Spin Getting Started Guides, please familiarize yourself
+with Docker itself and review the Docker documentation. In particular, read the
+following guides:
 
 * Start with *Docker Get Started Tutorial*, [Part 1: Orientation and setup](https://docs.docker.com/get-started/), followed by [Part 2: Containers](https://docs.docker.com/get-started/part2/). These guides cover Docker installation, Dockerfiles and show how containerize basic applications.
     * While you are free to read Part 3 - 6 of the *Docker Get Started Tutorial*, keep in mind that those guides are specific to the Docker-specific solutions, and much of the container community doesn't use all of those solutions. Concepts at NERSC & Spin, which use Rancher and will soon use Kubernetes, are a little different.
@@ -58,13 +60,15 @@ Before reading the Spin Getting Started Guides, please familiarize yourself with
 
 Once you understand the basics of Docker, you will need the following to proceed with Spin:
 
+* *An account on Spin*. Any user who wants an account in Spin must first complete
+  a hands on Spin workshop. To do that, please see the workshop schedule at
+  https://www.nersc.gov/users/data-analytics/spin/ .
 * Read through the Spin Getting Started Guide hands-on lessons, mentioned below.
 * Have a basic plan to implement your software, including:
     * A rough sense of how you will be organizing services following a Microservices or related structure.
         * A diagram, or a similar written description, can really help with the design process. The diagram doesn't have to be detailed.
     * A DNS name for any public-facing service. Examples could be 'example.lbl.gov', 'example.jgi.doe.gov, 'example.nersc.gov', or even 'www.example.org'.
-* A list of public and private ports required by your software.
-* Apply for an upcoming SpinUp workshop.
+* A list of public and private TCP or UDP ports required by your software.
 
 ## Creating an application for Spin
 
