@@ -427,7 +427,7 @@ directory name. In these exercises we make sure that the directory
 name and the stack name match.  The stack name can also be specified
 using the `--stack` flag.
 
-!!! info 
+!!! info
 	Technically, the Docker Compose file can live elsewhere on
     the filesystem, such as in your home directory under
     `~/docker/`. The Project directory is just a convenient place to
@@ -497,7 +497,7 @@ major differences:
     * All Linux kernel capabilities are dropped with the **cap_drop:
       ALL** parameter to improve the security of the application.
 
-!!! info "Linux Kernel 'capabilities'" 
+!!! info "Linux Kernel 'capabilities'"
 	Linux Kernel 'capabilities' are
     fine-grained controls over superuser capabilities. Docker ships
     with a [small, restricted set of Kernel capabilities by default,](https://docs.docker.com/engine/security/security/#linux-kernel-capabilities)
@@ -557,7 +557,7 @@ the path from docker-compose.yml , and make sure they match:
 
     grep /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/elvis-first-stack/web/nginx-proxy.conf docker-compose.yml
 
-!!! info "rancher-compose.yml" 
+!!! info "rancher-compose.yml"
 	Note that Rancher also supports a
 	second configuration file named rancher-compose.yml, but that is
 	for advanced use cases such as scaling. We may cover it in a
