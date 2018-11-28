@@ -8,6 +8,24 @@ Docker Hub, and your own custom image named 'app'. Both of these images are
 stored on your laptop. Lesson 2 will show you how to migrate this application
 from your laptop to Spin.
 
+## Prerequisites for Lesson 2
+
+Before you review lesson 2, be sure to understand the concepts of [Spin Getting
+Started Guide: Lesson 1: Building your first application on your laptop](lesson-1.md).
+
+You will also need:
+
+* An account on Spin. Any user who wants an account in Spin must first complete
+  a hands on Spin workshop. For more information, see [Spin Getting Started
+  Guide: How do I get started?](index.md)
+* SSH access on a NERSC Login node, such as cori.nersc.gov or edison.nersc.gov.
+* Access to a Project directory on the NERSC Global Filesystem, and the ability
+  to run `chmod o+x` on that directory to allow the user 'nobody' to read files
+  in that directory. This requirement is explained in detail below in [Part 3:
+  Prepare your application to run in Spin](#part-3-prepare-your-application-to-run-in-spin).
+
+## Before you begin
+
 Here are some things to know beforehand:
 
 ### The Rancher CLI
@@ -46,10 +64,10 @@ all applications before they run in the production environment.
     'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information
     on Rancher, please read the [Spin Getting Started Guide overview](/services/spin/getting_started).
 
-### Security Requirements
+### Follow the NERSC Security Requirements
 
 Note that all applications sent to Spin must follow the NERSC security requirements,
-which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices).  If
+which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices). If
 the application breaks one of the security requirements, Spin will refuse to
 run the application and will print an error, such as in the following example:
 
@@ -65,53 +83,46 @@ run the application and will print an error, such as in the following example:
 
 If you hit a problem with these examples and cannot figure out how to resolve
 it easily, the simplest solution is sometimes to simply delete the entire stack
-and start over. You can do that with the `rancher rm --type stack [stack name]`
-command, like so:
+and start over. Deleting a stack will not delete the Docker Compose file, or any files stored on the
+global filesystems.
 
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    1s3971  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy  1/1    false
-    1s3972  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  1/1    false
+Delete the stack using `rancher rm --type stack YourStackName`, like so:
 
-    nersc$ rancher rm --type stack elvis-first-stack
-    1st1668
-
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    nersc$
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME                STATE      CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    1st4644   elvis-first-stack   degraded             2          false
+    elvis@cori09:elvis-first-stack $ rancher rm --type stack elvis-first-stack
+    1st4644
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME      STATE     CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    elvis@cori09:elvis-first-stack $
 
 !!! Caution
-    **Use caution when running this command**, especially when running it in
-    production, as this command is destructive and cannot be undone. For
-    example, removing a stack that contains a database service will remove that
-    database permanently. Be sure you have the Docker Compose file available before
-    deleting the stack.
+    When deleting in production, use caution. Deleting a stack will delete all
+    containers, volumes and the Load Balancer (ingress) configuration.
+    Removing a stack that contains a database will remove that database
+    permanently if the data files are stored within the container.  Data on the
+    Global Filesystem will not be removed.
 
 !!! Notice
     If you forget the `--type stack` flag, Rancher may complain with an error like
     *'You don't own volume elvis-first-stack'**. This error happens occasionally
     because Rancher is uncertain if you are referring to stack, volume or another
     thing, due to an internal ordering bug. Using the `--type stack` forces
-    Rancher to do the correct thing.
+    Rancher to do the correct thing:
 
     rancher rm --type stack elvis-first-stack
 
-## Prerequisites for Lesson 2
+## Part 1: Test your account and generate an API key
 
-Before you review lesson 2, be sure to understand the concepts of [Spin Getting
-Started Guide: Lesson 1: Building your first application on your laptop](lesson-1.md).
-
-You need also need:
-
-* SSH access on a NERSC Login node, such as cori.nersc.gov or edison.nersc.gov.
-* An account on Spin. To do that, please see the [Spin Getting Started Guide: How do I get started?](index.md) Test your Spin account by quickly logging into the Spin Registry from your laptop. You will see the message 'Login Succeeded':
+If you have an account, test your Spin account by quickly logging into the Spin Registry from your laptop. You will see the message 'Login Succeeded':
 
         elvis@laptop:~ $ docker login https://registry.spin.nersc.gov/
         Username: elvis
         Password:
         Login Succeeded
         elvis@laptop:~
-* Access to a Project directory on the NERSC Global Filesystem, and the ability to run `chmod o+x` on that directory to allow the user 'nobody' to read files in that directory. This requirement is explained in detail below in [Part 2: Prepare your application to run in Spin](#part-2-prepare-your-application-to-run-in-spin).
+
 
 ### Generate API keys on a system such as Cori or Edison
 
@@ -171,30 +182,7 @@ tied to that account. Follow the steps below to generate an API key.
 
 If everything ran successfully, you are ready to proceed.
 
-## If you get stuck, remove the stack
-
-If you run into unresolvable problems while following these lessons, the
-quickest action is to simply delete the entire stack and start over. Deleting
-a stack will not delete the Docker Compose file, or any files stored on the
-global filesystems.
-
-Delete the stack using `rancher rm --type stack YourStackName`, like so:
-
-    elvis@cori09:elvis-first-stack $ rancher stack ls
-    ID        NAME                STATE      CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
-    1st4644   elvis-first-stack   degraded             2          false
-    elvis@cori09:elvis-first-stack $ rancher rm --type stack  elvis-first-stack
-    1st4644
-    elvis@cori09:elvis-first-stack $ rancher stack ls
-    ID        NAME      STATE     CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
-    elvis@cori09:elvis-first-stack $
-
-!!! Warning
-    When deleting in production, use caution. Deleting a stack will delete all
-    containers, volumes and the Load Balancer (ingress) configuration. Data on
-    the Global Filesystem will not be removed.
-
-## Part 1: Ship your image from your laptop to the Spin Registry
+## Part 2: Ship your image from your laptop to the Spin Registry
 
 The Application Stack in Lesson 1 used a custom image named
 'my-first-container-app' which is currently stored on your laptop. Before you
@@ -323,7 +311,7 @@ Each push command will print output like the following:
 Now the images are available in the Spin Registry and can be pulled
 into the Rancher environment.
 
-## Part 2: Prepare your application to run in Spin
+## Part 3: Prepare your application to run in Spin
 
 In this part, we'll prepare your application to run in Spin by copying
 required files to your Project directory on the NERSC Global
@@ -439,13 +427,20 @@ directory name. In these exercises we make sure that the directory
 name and the stack name match.  The stack name can also be specified
 using the `--stack` flag.
 
-!!! info 
-	Technically, the Docker Compose file can live elsewhere on
+!!! info "Where should the Docker Compose file live?"
+    Technically, the Docker Compose file can live elsewhere on
     the filesystem, such as in your home directory under
     `~/docker/`. The Project directory is just a convenient place to
     store this file. Some people would prefer to keep the
     configuration of an application separate from the application
-    directory itself.
+    directory itself. Others prefer to keep the Configuration in one directory,
+    and the Application Data in another directory. The choice is up to you.
+
+!!! info "rancher-compose.yml"
+    Note that Rancher also supports a
+    second configuration file named rancher-compose.yml, but that is
+    for advanced use cases such as scaling. We may cover it in a
+    future lesson.
 
 Add the following text to your docker-compose.yml file, but replace the
 following values with your specific information:
@@ -509,7 +504,7 @@ major differences:
     * All Linux kernel capabilities are dropped with the **cap_drop:
       ALL** parameter to improve the security of the application.
 
-!!! info "Linux Kernel 'capabilities'" 
+!!! info "Linux Kernel 'capabilities'"
 	Linux Kernel 'capabilities' are
     fine-grained controls over superuser capabilities. Docker ships
     with a [small, restricted set of Kernel capabilities by default,](https://docs.docker.com/engine/security/security/#linux-kernel-capabilities)
@@ -528,6 +523,8 @@ will print out the contents of the file, like so:
 
     elvis@nersc:elvis-first-stack $ ls -ld docker-compose.yml
     -rw-rw---- 1 elvis elvis 455 May 15 11:58 docker-compose.yml
+    
+    elvis@nersc:elvis-first-stack $ export RANCHER_ENVIRONMENT=dev-cattle
     elvis@nersc:elvis-first-stack $ rancher up --render
     version: '2'
     services:
@@ -569,21 +566,6 @@ the path from docker-compose.yml , and make sure they match:
 
     grep /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/elvis-first-stack/web/nginx-proxy.conf docker-compose.yml
 
-!!! info "rancher-compose.yml" 
-	Note that Rancher also supports a
-	second configuration file named rancher-compose.yml, but that is
-	for advanced use cases such as scaling. We may cover it in a
-	future lesson.
-
-## Part 3: Start the stack
-
-Now that your Docker compose files are available, and all required
-files are available on the NERSC Global Filesystem, it's time to start
-your stack with the command below.  By default, Rancher will create a
-stack named after your current working directory, which should be
-named like **USERNAME-first-stack**.  If you want to name the stack
-something different, use the `--stack` flag to specify the name.
-
 !!! Tip "Tip: Simplify your workflow with `RANCHER_ENVIRONMENT`"
 
     Most Rancher commands only operate on stacks & services within one environment,
@@ -614,6 +596,15 @@ something different, use the `--stack` flag to specify the name.
         1s3712  service  elvis-webapp/web  httpd  healthy  1/1    false
         1s3713  service  elvis-webapp/db   mysql  healthy  1/1    false
         nersc$
+
+## Part 4: Start the stack
+
+Now that your Docker compose files are available, and all required
+files are available on the NERSC Global Filesystem, it's time to start
+your stack with the command below.  By default, Rancher will create a
+stack named after your current working directory, which should be
+named like **USERNAME-first-stack**.  If you want to name the stack
+something different, use the `--stack` flag to specify the name.
 
 ### Start the stack with `rancher up`
 
@@ -720,7 +711,7 @@ Go ahead and plug the FQDN & port number into your browser to view the stack.
 If the URL does not work, it's likely that the DNS records have not propogated
 yet. Wait a few minutes and try again, or try the IP address instead.
 
-## Part 4: A simple upgrade to your stack
+## Part 5: A simple upgrade to your stack
 
 In this example, we will perform a very simple upgrade just to show how it's
 done. Upgrading a stack has two mandatory steps:
@@ -758,7 +749,7 @@ YOURUSERNAME-first-stack`:
     rancher up --upgrade -d
 
 Notice that we're using the `-d` flag here to send the logs to the background,
-like we did in ‘Part 3: Start the stack’ above.
+like we did in ‘Part 4: Start the stack’ above.
 
 The command will print output like the following. Look for the line which says
 **Upgrading app**, which shows that the app service was upgraded.
