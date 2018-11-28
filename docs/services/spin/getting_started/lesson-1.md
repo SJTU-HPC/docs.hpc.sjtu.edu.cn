@@ -31,15 +31,14 @@ lessons, be sure to consult
 the [Spin Best Practices Guide](../best_practices.md) if you have more
 questions.
 
-### Docker command syntax
-
-These tutorials make use the Rancher and Docker command line (CLI) tools. The
-[Docker 1.13 CLI introduced a newer
-syntax](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/#h.yuluxi90h1om)
-in the form of **`docker [object] [verb]`**, such as `docker image list`,
-`docker image build` and `docker container start`. This guide uses the newer
-style of commands for clarity. The legacy style of commands, such as
-`docker rmi` and `docker stop`, will also work.
+!!! Note "Note: Docker command syntax"
+    These tutorials make use the Rancher and Docker command line (CLI) tools. The
+    [Docker 1.13 CLI introduced a newer
+    syntax](https://blog.docker.com/2017/01/whats-new-in-docker-1-13/#h.yuluxi90h1om)
+    in the form of **`docker [object] [verb]`**, such as `docker image list`,
+    `docker image build` and `docker container start`. This guide uses the newer
+    style of commands for clarity. The legacy style of commands, such as
+    `docker rmi` and `docker stop`, will also work.
 
 ## Prerequisites for the Spin Getting Started Guide
 
