@@ -5,10 +5,9 @@
 
     The goal of the Spin project is ultimately to provide a self service platform, but during the pilot phase NERSC ISG (Infrastructure Services Group) acts as an intermediary to this service while we improve the service and wait for vendor to provide a more complete multi-tenant system.
 
-
 !!! bug "Known bugs in the Getting Started Guide"
     * **To report bugs with this documentation during the Pilot Phase**, please contact us via the Slack channel or the email address that we provided to you when you began the lessons.
-    * The indentation may be incorrect In some code examples. This is caused by a bug in our web authoring software, and we are trying to fix it.
+    * The indentation may be incorrect in some code examples. This is caused by a bug in our web authoring software, and we are trying to fix it.
 
 ## Is Spin right for your project?
 
@@ -28,7 +27,7 @@ Spin is not a good fit for services like the following:
 * Not a replacement for login nodes or gpints
 * Services used for Authentication & Security providers cannot be run in Spin currently
 
-##Roles and Responsibilities
+## Roles and Responsibilities
 
 NERSC is responsible for:
 
