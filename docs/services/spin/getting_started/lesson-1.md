@@ -52,12 +52,8 @@ become familiar with Docker.
 ### Get account on Spin, and a Project directory for Lesson 2
 
 The next lesson, [Spin Getting Started Guide: Lesson 2: Running Your Image in
-Spin](lesson-2.md), requires an account on Spin. To do that, please see the
-[Spin Getting Started Guide: How do I get started](index.md)? You will also need
-SSH access on a NERSC Login node, such as cori.nersc.gov, and access to a
-Project directory. You will need the ability to modify the permissions on that
-Project directory (Specifically, you will need to run `chmod o+x` on that
-directory as described in Lesson 2.)
+Spin](lesson-2.md), requires an account on Spin, SSH access to a NERSC Login Node, and access
+to a Project directory. For more information on those Prerequisites, see Lesson 2.
 
 If you are waiting for your NERSC account to be set up, note that Lesson 1 can
 be completed on your laptop without a NERSC account.
