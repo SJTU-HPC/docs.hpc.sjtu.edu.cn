@@ -427,13 +427,20 @@ directory name. In these exercises we make sure that the directory
 name and the stack name match.  The stack name can also be specified
 using the `--stack` flag.
 
-!!! info
-	Technically, the Docker Compose file can live elsewhere on
+!!! info "Where should the Docker Compose file live?"
+    Technically, the Docker Compose file can live elsewhere on
     the filesystem, such as in your home directory under
     `~/docker/`. The Project directory is just a convenient place to
     store this file. Some people would prefer to keep the
     configuration of an application separate from the application
-    directory itself.
+    directory itself. Others prefer to keep the Configuration in one directory,
+    and the Application Data in another directory. The choice is up to you.
+
+!!! info "rancher-compose.yml"
+    Note that Rancher also supports a
+    second configuration file named rancher-compose.yml, but that is
+    for advanced use cases such as scaling. We may cover it in a
+    future lesson.
 
 Add the following text to your docker-compose.yml file, but replace the
 following values with your specific information:
@@ -516,6 +523,8 @@ will print out the contents of the file, like so:
 
     elvis@nersc:elvis-first-stack $ ls -ld docker-compose.yml
     -rw-rw---- 1 elvis elvis 455 May 15 11:58 docker-compose.yml
+    
+    elvis@nersc:elvis-first-stack $ export RANCHER_ENVIRONMENT=dev-cattle
     elvis@nersc:elvis-first-stack $ rancher up --render
     version: '2'
     services:
@@ -557,21 +566,6 @@ the path from docker-compose.yml , and make sure they match:
 
     grep /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/elvis-first-stack/web/nginx-proxy.conf docker-compose.yml
 
-!!! info "rancher-compose.yml"
-	Note that Rancher also supports a
-	second configuration file named rancher-compose.yml, but that is
-	for advanced use cases such as scaling. We may cover it in a
-	future lesson.
-
-## Part 4: Start the stack
-
-Now that your Docker compose files are available, and all required
-files are available on the NERSC Global Filesystem, it's time to start
-your stack with the command below.  By default, Rancher will create a
-stack named after your current working directory, which should be
-named like **USERNAME-first-stack**.  If you want to name the stack
-something different, use the `--stack` flag to specify the name.
-
 !!! Tip "Tip: Simplify your workflow with `RANCHER_ENVIRONMENT`"
 
     Most Rancher commands only operate on stacks & services within one environment,
@@ -602,6 +596,15 @@ something different, use the `--stack` flag to specify the name.
         1s3712  service  elvis-webapp/web  httpd  healthy  1/1    false
         1s3713  service  elvis-webapp/db   mysql  healthy  1/1    false
         nersc$
+
+## Part 4: Start the stack
+
+Now that your Docker compose files are available, and all required
+files are available on the NERSC Global Filesystem, it's time to start
+your stack with the command below.  By default, Rancher will create a
+stack named after your current working directory, which should be
+named like **USERNAME-first-stack**.  If you want to name the stack
+something different, use the `--stack` flag to specify the name.
 
 ### Start the stack with `rancher up`
 
