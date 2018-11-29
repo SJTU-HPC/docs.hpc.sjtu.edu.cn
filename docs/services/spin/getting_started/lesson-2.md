@@ -505,10 +505,10 @@ major differences:
       ALL** parameter to improve the security of the application.
 
 !!! info "Linux Kernel 'capabilities'"
-	Linux Kernel 'capabilities' are
+    Linux Kernel 'capabilities' are
     fine-grained controls over superuser capabilities. Docker ships
     with a [small, restricted set of Kernel capabilities by default,](https://docs.docker.com/engine/security/security/#linux-kernel-capabilities)
-	and is fairly secure out of the box. By dropping all remaining
+    and is fairly secure out of the box. By dropping all remaining
     capabilities, we're taking it a step further to make our container
     even more secure. If you needed to add specific capabilities back
     to the container, you can add them with the **cap_add:**
@@ -523,7 +523,7 @@ will print out the contents of the file, like so:
 
     elvis@nersc:elvis-first-stack $ ls -ld docker-compose.yml
     -rw-rw---- 1 elvis elvis 455 May 15 11:58 docker-compose.yml
-    
+
     elvis@nersc:elvis-first-stack $ export RANCHER_ENVIRONMENT=dev-cattle
     elvis@nersc:elvis-first-stack $ rancher up --render
     version: '2'
