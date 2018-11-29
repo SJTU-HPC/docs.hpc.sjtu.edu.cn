@@ -73,8 +73,8 @@ thus the documentation of this stack is light. If you already have
 your own custom stack, or want to build your own stack, feel free to
 simply use this stack as a reference for your own application.
 
-!!! Important 
-	The examples below will use one of the four Docker
+!!! Important
+    The examples below will use one of the four Docker
     Compose files provided in the directory. To use one of these
     files, use the Rancher CLI with the `--file` flag, like so:
 
@@ -125,19 +125,19 @@ three services:
       container. Example 3 shows how to upgrade the service to use
       Rancher NFS.
 * **web** A webserver service which serves static images from the
-  filesystem. This Web service uses the 'my-first-container-nginx'
+  filesystem. This Web service uses the `my-first-container-nginx`
   image which we built in the previous exercise, which still uses the
   Project filesystem.
     * The Web service mounts two volumes from the NERSC Global
       Filesystem.
         * The first volume places a custom Nginx configuration file to
           `/etc/nginx/conf.d/default.conf`. This configuration file
-          sets up a simple Reverse Proxy to the 'app' container.
+          sets up a simple Reverse Proxy to the `app` container.
         * The second volume mounts a set of images stored on the
           Global Filesystem into the container at `/srv` . Nginx
           serves the images from this directory.
     * This image runs with your UID & GID so that it can read the
-      files from the Global Filesystem. The 'nginx' group is added as
+      files from the Global Filesystem. The `nginx` group is added as
       a secondary group so that your user has permissions to do things
       inside the container.
 * Each service drops as many capabilities as possible to improve the
@@ -211,8 +211,8 @@ Before you open a browser and check out the end result, you'll need to
 find the FQDN & port number for your stack using the `rancher inspect`
 & `jq` utilities like we did in lesson 2.
 
-In the following example, I'm inspecting the 'web' container in the
-'elvis-flask-demo' stack. From this output, I know my web service is
+In the following example, we are inspecting the `web` container in the
+`elvis-flask-demo` stack. From this output, I know my web service is
 available at
 `https://web.elvis-flask-demo.dev-cattle.stable.spin.nersc.org:8080/`. The
 web service is also available at an IP address, but note that the IP
@@ -241,7 +241,7 @@ following:
 ## Upgrading your stack with the "Build, Ship, Run" workflow
 
 Most changes to your application stack will be applied using a concept
-called 'upgrading', which follows the Docker workflow of **"Build,
+called **upgrading**, which follows the Docker workflow of **"Build,
 Ship, Run"** with a few steps in between. Reasons for upgrading tasks
 could include:
 
@@ -280,22 +280,22 @@ may be skipped.
         * If the application is not working well, you can **rollback**
           to the old containers to restore the old working version.
 
-!!! info 
-	For details on the Rancher upgrade commands, see the Rancher
+!!! info
+    For details on the Rancher upgrade commands, see the Rancher
     documentation at
     https://rancher.com/docs/rancher/v1.6/en/cattle/upgrading/ . Note
     that the Rancher documentation often refers to `rancher-compose`,
     which is an older command. Spin uses the `rancher` command
     instead, which is newer but has most of the same options. The
-    Rancher documentation mentions 'in-service upgrades' and 'rolling
-    upgrades. 'Rolling upgrades' are rarely used, and are not covered
+    Rancher documentation mentions *in-service upgrades* and *rolling
+    upgrades*. Rolling upgrades are rarely used, and are not covered
     in these lessons.
 
 ## Example 2: Use "Build, Ship, Run" to use Secrets
 
 Earlier we mentioned that it's a bad idea to store plain text
 passwords in a Docker Compose file. We'll rectify that problem here by
-converting our passwords into Rancher 'Secrets'. Secrets should be
+converting our passwords into Rancher **Secrets**. Secrets should be
 used to store any sensitive data, such as passwords or private keys,
 and explained further in
 the [Spin Best Practices Guide](/docs/services/spin/best_practices/).
@@ -338,76 +338,75 @@ in a subdirectory which is named after the stack.
 #### Modify
 
 In this example, we'll update our image to use Rancher Secrets. Take a
-look at the file named docker-compose.yml.example2 and compare it to
-example1. Notice how the 'web' container is the same, but the 'app'
-and 'db' services now have changed. Both the App and DB containers use
-Rancher 'secrets' to store the password.
+look at the file named `docker-compose.yml.example2` and compare it to
+example1. Notice how the `web` container is the same, but the `app`
+and `db` services now have changed. Both the App and DB containers use
+Rancher **secrets** to store the password.
 
 * Scroll to the bottom of the file and look at the section labeled
-  'secrets'.  This section will read your secret from a local file off
+  `secrets`.  This section will read your secret from a local file off
   of the filesystem, and will store it as a secret named
-  'db.YOUR_STACK_NAME.mongo-initdb-password'. We'll create this file
+  `db.YOUR_STACK_NAME.mongo-initdb-password`. We'll create this file
   in the next step.
 
         secrets:
         db.elvis-flask-demo.mongo-initdb-password:
         file: mongo-initdb-password
 
-* The 'app' and 'db' containers each contain the following section,
+* The `app` and `db` containers each contain the following section,
   which mounts the secret into each container as a special volume with
-  the filename of '/run/secrets/mongodb-initdb-password, which strict
+  the filename of `/run/secrets/mongodb-initdb-password`, which strict
   ownership & permissions:
 
         secrets:
         - mode: '0444'
-        uid: '0'
-        gid: '0'
-        source: db.elvis-flask-demo.mongo-initdb-password
-        target: mongo-initdb-password
+          uid: '0'
+          gid: '0'
+          source: db.elvis-flask-demo.mongo-initdb-password
+          target: mongo-initdb-password
 
 * The Flask and Mongo software will each read the environment variable
-  'MONGO_INITDB_ROOT_PASSWORD_FILE'. The variable ends in '_FILE',
+  `MONGO_INITDB_ROOT_PASSWORD_FILE`. The variable ends in `_FILE`,
   which informs the container to look for a file with that name, and
   then read it into the application. Without secrets, you would
   normally store the password in an environment variable named
-  'MONGO_INITDB_ROOT_PASSWORD'.
-* Secrets must be created in the format 'Like Rancher Secrets, Rancher
-  NFS volumes must be named in the format '[service name].[stack
-  name].[filename]', which would be
-  'db.elvis-flask-demo.mongodb-initdb-password' here.
+  `MONGO_INITDB_ROOT_PASSWORD`.
+* Secrets must be named in the in the format `[service name].[stack
+  name].[filename]`, which would be
+  `db.elvis-flask-demo.mongodb-initdb-password` here.
 
-        ... (top of file removed for brevity)
-        ...
+        #... (top of file removed for brevity)
+        #...
         app:
-        image: registry.spin.nersc.gov/USERNAME/spin-flask-demo-app:v1
-        environment:
-        MONGO_INITDB_ROOT_USERNAME: mongouser
-        MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-initdb-password
-        cap_drop:
-        - ALL
-        secrets:
-        - mode: '0444'
-        uid: '0'
-        gid: '0'
-        source: db.USERNAME-flask-demo.mongo-initdb-password
-        target: mongo-initdb-password
+          image: registry.spin.nersc.gov/USERNAME/spin-flask-demo-app:v1
+          environment:
+            MONGO_INITDB_ROOT_USERNAME: mongouser
+            MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-initdb-password
+          cap_drop:
+          - ALL
+          secrets:
+          - mode: '0444'
+            uid: '0'
+            gid: '0'
+            source: db.USERNAME-flask-demo.mongo-initdb-password
+            target: mongo-initdb-password
         db:
-        image: mongo:latest
-        environment:
-        MONGO_INITDB_ROOT_USERNAME: mongouser
-        MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-initdb-password
-        cap_drop:
-        - ALL
-        cap_add:
-        - CHOWN
-        - SETGID
-        - SETUID
-        secrets:
-        - mode: '0444'
-        uid: '0'
-        gid: '0'
-        source: db.USERNAME-flask-demo.mongo-initdb-password
-        target: mongo-initdb-password
+          image: mongo:latest
+          environment:
+            MONGO_INITDB_ROOT_USERNAME: mongouser
+            MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-initdb-password
+          cap_drop:
+          - ALL
+          cap_add:
+          - CHOWN
+          - SETGID
+          - SETUID
+          secrets:
+          - mode: '0444'
+            uid: '0'
+            gid: '0'
+            source: db.USERNAME-flask-demo.mongo-initdb-password
+            target: mongo-initdb-password
 
 To use the secret, we first need to create a file which holds the
 Secret. This file will be read when the Docker Compose file called.
@@ -421,7 +420,7 @@ Be sure that the permissions on the file are strict.
 
 ### Ship
 
-The second stage of 'Build, Ship, Run' is often to ship the image to
+The second stage of *Build, Ship, Run* is often to ship the image to
 the registry. However, We didn't change the Docker image here, and
 we're skipping this step.
 
@@ -436,11 +435,11 @@ running stack using `rancher up --upgrade`, like so:
 
 You will see output like the following.
 
-* The command will print lines like 'Creating', 'Created', 'Starting',
-  'Started' even though the service was already started earlier. These
+* The command will print lines like `Creating`, `Created`, `Starting`,
+  `Started` even though the service was already started earlier. These
   messages are a little confusing, but are simply indicating that
   Rancher is inspecting the stack to see what needs to be upgraded.
-* Notice the lines which say 'Upgrading app' and 'Upgrading db'.
+* Notice the lines which say `Upgrading app` and `Upgrading db`.
 * For each service in your stack, Spin will determine if an upgrade is
   necessary. If so, it will shut down the old containers in that
   service, and spawn new containers with the changes. The old
@@ -469,7 +468,7 @@ You will see output like the following.
         1s3683
 
 If this upgrade didn't work, you can try forcing it with the `--force`
-flag, like so. --force-upgrade will stop the old containers and spawn
+flag, like so. `--force-upgrade` will stop the old containers and spawn
 new containers, regardless if there was a change or not.
 
     rancher up -d --upgrade --force-upgrade --file docker-compose.yml.example2
@@ -511,8 +510,8 @@ the containers. Keep the following in mind:
 ##### View the old and new containers
 
 The old containers can be seen using the `rancher ps --all`
-command. Note how the 'app' and 'db' service each are in the state of
-'upgraded', and that the scale says '2/1' which indicates that there
+command. Note how the `app` and `db` service each are in the state of
+`upgraded`, and that the scale says `2/1` which indicates that there
 are two containers, but only the new one is running.
 
     nersc$ rancher ps --all
@@ -573,7 +572,7 @@ command to clear out the old containers.
 
 ##### Rolling back to the old version (Optional exercise)
 
-If something went wrong with the upgrade, you can 'roll back' to the
+If something went wrong with the upgrade, you can **roll back** to the
 previous version of your service.
 
 To actually test the rollback feature, we will need to do some extra
@@ -606,9 +605,9 @@ will be used in the exercise below.
 
 The stack now has one set of running containers, and a second set of
 stopped containers. Notice how the new containers have the same name,
-but the 'ID' is newer. For instance, the 'elvis-flask-demo-db-1'
-service has one stopped container with the ID of '1i2596321' and a new
-running container with the ID of '1i2596330'.
+but the `ID` is newer. For instance, the `elvis-flask-demo-db-1`
+service has one stopped container with the ID of `1i2596321` and a new
+running container with the ID of `1i2596330`.
 
     elvis@nersc:elvis-flask-demo $ rancher ps --all --containers
     ID NAME IMAGE STATE HOST IP DOCKER DETAIL
@@ -622,9 +621,9 @@ running container with the ID of '1i2596330'.
 
 Issue the `--rollback` flag, and then view the containers
 again. Notice how the new containers were removed, and the old
-containers were restored. The 'elvis-flask-demo-db-1' service only has
-one container, with the ID of '1i2596321'. The other, newer instance
-with ID '1i2596330' was removed.
+containers were restored. The `elvis-flask-demo-db-1` service only has
+one container, with the ID of `1i2596321`. The other, newer instance
+with ID `1i2596330` was removed.
 
     elvis@nersc:elvis-flask-demo $ rancher up --upgrade -d --rollback --file docker-compose.yml.example2
     INFO[0002] Secret db.elvis-flask-demo.mongo-initdb-password already exists
@@ -660,27 +659,27 @@ Rancher NFS is a high-performance filesystem dedicated to Spin, and
 provides a persistent storage alternative to the NERSC Project
 Directories. Usage of Rancher NFS is fairly straightforward. In
 docker-compose.yml.example3, we show you how to use Rancher NFS for
-your MongoDB service. Open up the file and notice the 'volume:'
+your MongoDB service. Open up the file and notice the `volume:`
 section at the bottom:
 
     volumes:
       db.USERNAME-flask-demo:
         driver: rancher-nfs
 
-This section defines a 'volumes:' section in the YAML. Notice that
-'volumes:', 'secrets:' and 'services:' are all defined at the same
+This section defines a `volumes:` section in the YAML. Notice that
+`volumes:`, `secrets:` and `services:` are all defined at the same
 level (They are all indented). The whitespace here is important.
 
-This section defines a volume named 'USERNAME-flask-demo' which is
+This section defines a volume named `USERNAME-flask-demo` which is
 created using the Rancher NFS driver.
 
 In order to use Rancher NFS volumes, you must map it to a path inside
 the container where the service expects to find the
 information. You'll generally find this information in the
-documentation for the image. For example, according to 'Where to Store
-Data' at https://hub.docker.com/_/mongo/, MongoDB stores it's data at
+documentation for the image. For example, according to *Where to Store
+Data* at https://hub.docker.com/_/mongo/, MongoDB stores it's data at
 /data/db. Therefore, in the Docker Compose file, we inform the service
-to mount a volume named 'USERNAME-flask-demo', and mount it into the
+to mount a volume named `USERNAME-flask-demo`, and mount it into the
 container at /data/db:
 
     volumes:
@@ -689,7 +688,7 @@ container at /data/db:
 But wait! Before you use the new volume, you must actually create it.
 
 Like Rancher Secrets, Rancher NFS volumes must be named in the format
-'[service name].[stack name]', which would be 'db.USERNAME-flask-demo'
+`[service name].[stack name]`, which would be `db.USERNAME-flask-demo`
 here. To create the volume, use the `rancher volume create` command,
 like so:
 
@@ -708,7 +707,7 @@ or not:
     elvis@nersc:elvis-flask-demo $
 
 Now start the example stack, and watch the magic. Notice the line
-which says 'Creating volume template db.elvis-flask-demo':
+which says `Creating volume template db.elvis-flask-demo`:
 
     elvis@nersc:elvis-flask-demo $ rancher up -d --upgrade --file docker-compose.yml.example3
     INFO[0001] Creating volume template db.elvis-flask-demo
@@ -739,7 +738,7 @@ If everything worked, your stack should now be running with Rancher NFS.
 
 In Example 2 & 3, we upgraded the entire stack through Docker
 Compose. Here, in example 3, we'll make a simple change to the image
-used by the 'app' service, and will push it out to our live stack.
+used by the `app` service, and will push it out to our live stack.
 
 Upgrading a container image used in your stack follows the same Build,
 Ship, Run workflow shown above.
@@ -761,7 +760,7 @@ to demonstrate how to upgrade an image.
 
 ### Ship to the Registry
 
-Rebuild the image, assign the new version tag of ':v2' to the image,
+Rebuild the image, assign the new version tag of `:v2` to the image,
 and push it to the Spin Registry. Remember to replace **YOURUSERNAME**
 with your NERSC username.
 
@@ -796,7 +795,7 @@ You should see output like this:
     v2: digest: sha256:af48d9c343d88f27f3fd69088b612bbb344aff5d847163ffffc0000268fb3bd9 size: 2616
     elvis@elvis:app $
 
-If everything was successful, the new image with the ':v2' flag should
+If everything was successful, the new image with the `:v2` flag should
 exist in the Spin repository.
 
 ### Run the new image on Spin
