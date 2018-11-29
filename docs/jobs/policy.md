@@ -72,6 +72,11 @@ Jobs are charged by the node-hour.
 	on Edison with the shared qos would be charged:
 	$$ 12\\ \text{hours} * (2*4\\ \text{cores}/48) * 48 = 96\\ \text{NERSC hours} $$
 
+!!! note
+    Jobs are only charged for the actual walltime used. That is, if a job uses less
+    time than requested, the corresponding account is charged only for the actual job
+    duration.
+
 ## Intended use
 
 ### Debug
