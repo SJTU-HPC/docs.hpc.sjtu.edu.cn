@@ -360,10 +360,10 @@ Rancher 'secrets' to store the password.
 
         secrets:
         - mode: '0444'
-        uid: '0'
-        gid: '0'
-        source: db.elvis-flask-demo.mongo-initdb-password
-        target: mongo-initdb-password
+          uid: '0'
+          gid: '0'
+          source: db.elvis-flask-demo.mongo-initdb-password
+          target: mongo-initdb-password
 
 * The Flask and Mongo software will each read the environment variable
   'MONGO_INITDB_ROOT_PASSWORD_FILE'. The variable ends in '_FILE',
@@ -376,38 +376,38 @@ Rancher 'secrets' to store the password.
   name].[filename]', which would be
   'db.elvis-flask-demo.mongodb-initdb-password' here.
 
-        ... (top of file removed for brevity)
-        ...
+        #... (top of file removed for brevity)
+        #...
         app:
-        image: registry.spin.nersc.gov/USERNAME/spin-flask-demo-app:v1
-        environment:
-        MONGO_INITDB_ROOT_USERNAME: mongouser
-        MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-initdb-password
-        cap_drop:
-        - ALL
-        secrets:
-        - mode: '0444'
-        uid: '0'
-        gid: '0'
-        source: db.USERNAME-flask-demo.mongo-initdb-password
-        target: mongo-initdb-password
+          image: registry.spin.nersc.gov/USERNAME/spin-flask-demo-app:v1
+          environment:
+            MONGO_INITDB_ROOT_USERNAME: mongouser
+            MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-initdb-password
+          cap_drop:
+          - ALL
+          secrets:
+          - mode: '0444'
+            uid: '0'
+            gid: '0'
+            source: db.USERNAME-flask-demo.mongo-initdb-password
+            target: mongo-initdb-password
         db:
-        image: mongo:latest
-        environment:
-        MONGO_INITDB_ROOT_USERNAME: mongouser
-        MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-initdb-password
-        cap_drop:
-        - ALL
-        cap_add:
-        - CHOWN
-        - SETGID
-        - SETUID
-        secrets:
-        - mode: '0444'
-        uid: '0'
-        gid: '0'
-        source: db.USERNAME-flask-demo.mongo-initdb-password
-        target: mongo-initdb-password
+          image: mongo:latest
+          environment:
+            MONGO_INITDB_ROOT_USERNAME: mongouser
+            MONGO_INITDB_ROOT_PASSWORD_FILE: /run/secrets/mongo-initdb-password
+          cap_drop:
+          - ALL
+          cap_add:
+          - CHOWN
+          - SETGID
+          - SETUID
+          secrets:
+          - mode: '0444'
+            uid: '0'
+            gid: '0'
+            source: db.USERNAME-flask-demo.mongo-initdb-password
+            target: mongo-initdb-password
 
 To use the secret, we first need to create a file which holds the
 Secret. This file will be read when the Docker Compose file called.
