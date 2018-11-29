@@ -139,7 +139,7 @@ can be found at https://rancher.com/docs/rancher/v1.6/en/cli/commands/ .
 | `rancher up --name [stack name]`          | Create & start the stack, specifying an alternative project name |
 | `rancher up --upgrade`                    | Upgrade the stack if a service in `docker-compose.yml` has changed |
 | `rancher up --force-upgrade`              | Force the stack regardless if a service has changed |
-| `rancher up --upgrade --confirm-ugrade`   | Confirm that the upgrade was success and delete old containers |
+| `rancher up --upgrade --confirm-upgrade`   | Confirm that the upgrade was success and delete old containers |
 | `rancher up --upgrade --rollback`         | Rollback to the previous version of the containers |
 | `rancher up --render`                     | Read your `docker-compose.yml` file & print output if successful.<br>Useful for syntax checking and for variable interpolation. |
 | `rancher export [stack name]`                 | Export the stack's Docker & Rancher Compose files to a subdirectory named `[stack name]` |
