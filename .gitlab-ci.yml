@@ -62,6 +62,8 @@ pages:
     - gzip -k -6 -r public/assets/javascripts
     - find public -type f -name "*.html" -exec htmlmin {} {} \;
     - find public -type f -name "*.html" -exec gzip --keep --verbose {} \;
+    - mkdir -p public/.well-known/pki-validation/
+    - echo 1ulpvnf7n6o5idmfdlk4aa2e87 > public/.well-known/pki-validation/godaddy.html
   artifacts:
     paths:
     - public
