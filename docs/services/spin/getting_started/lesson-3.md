@@ -73,8 +73,8 @@ thus the documentation of this stack is light. If you already have
 your own custom stack, or want to build your own stack, feel free to
 simply use this stack as a reference for your own application.
 
-!!! Important 
-	The examples below will use one of the four Docker
+!!! Important
+    The examples below will use one of the four Docker
     Compose files provided in the directory. To use one of these
     files, use the Rancher CLI with the `--file` flag, like so:
 
@@ -280,8 +280,8 @@ may be skipped.
         * If the application is not working well, you can **rollback**
           to the old containers to restore the old working version.
 
-!!! info 
-	For details on the Rancher upgrade commands, see the Rancher
+!!! info
+    For details on the Rancher upgrade commands, see the Rancher
     documentation at
     https://rancher.com/docs/rancher/v1.6/en/cattle/upgrading/ . Note
     that the Rancher documentation often refers to `rancher-compose`,
