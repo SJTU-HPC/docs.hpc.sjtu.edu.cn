@@ -9,7 +9,7 @@ see [Rancher Command Line Interface (CLI)](https://rancher.com/docs/rancher/v1.6
 on [rancher.com](https://rancher.com).
 
 !!! Note
-	NERSC provides a modified version of the Rancher CLI, and not
+    NERSC provides a modified version of the Rancher CLI, and not
     all commands shown in the Rancher documentation are available to
     NERSC users.
 
@@ -60,9 +60,9 @@ flag requires a name to be passed in the format **[Stack Name]/[Service Name]**.
     nersc$
 
 !!! note
-	The command spits out the ID of the Rancher Stack, in this
-	case '1s2872'. We can use that ID to query the status of the
-	Stack.
+    The command spits out the ID of the Rancher Stack, in this
+    case '1s2872'. We can use that ID to query the status of the
+    Stack.
 
 If you don't use the name **[stack name]/[service name]**, Rancher
 will insert the name 'Default' for you, which will cause
@@ -169,7 +169,7 @@ A third environment named 'sandbox' will be used exclusively if you
 are taking the SpinUp sessions.
 
 !!!Info
-	The name 'cattle' refers to the container 'Orchestrator' which
+    The name 'cattle' refers to the container 'Orchestrator' which
     we use to manage containers and is part of Rancher. Rancher names
     many of their components with 'Ranch'-themed names, such as
     'Longhorn' or 'Wagyu'. To read more information on Rancher, please
@@ -272,7 +272,7 @@ The fields are:
 #### Listing the container instances for all your services
 
 !!! Tip "Services and Containers"
-	Remember that a **container** is an
+    Remember that a **container** is an
     instance of a **service**. A **service** may have one or more
     container instances.
 
@@ -335,7 +335,7 @@ specifying the stack name. Individual services and containers are
 stopped by specifying the name of the service or container.
 
 !!!Warning
-	After upgrading a service or stack, the `rancher stop`
+    After upgrading a service or stack, the `rancher stop`
     `start` and `restart` commands cannot be used until the you have
     verified the upgrade and removed the old containers using the
     `rancher up --confirm-upgrade` command. **Always remove containers
@@ -587,7 +587,7 @@ will remove itself after you have stopped it.
 ### Stack won't upgrade
 
 !!! error
-	'Failed to start: web : Service web must be state=active'
+    'Failed to start: web : Service web must be state=active'
 
 Sometimes you'll start a stack, and it won't start all of the way
 because of an error with one of the services in the stack.
