@@ -144,6 +144,19 @@ packages
 module swap [old modulefile] [new modulefile]
 ```
 
+### Accessing old Cray PE Software
+
+Old Cray Developer Toolkits (CDT's) are removed after they are made
+available on the system for one year. We encourage users to use the
+new CDT's available on the system. However, if your workload depends
+on a specific old CDT version, you can continuously access these
+older CDT's from the archived copy at  `/global/common` by doing the
+following:
+
+```bash
+module load pe_archive
+```
+
 ### Creating a Custom Environment
 
 You can modify your environment so that certain modules are loaded
