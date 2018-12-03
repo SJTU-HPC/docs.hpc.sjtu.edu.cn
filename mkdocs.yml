@@ -170,6 +170,7 @@ nav:
         - Websites, Databases and Cluster Services : systems/genepool/genepool-websites-databases-and-cluster-services.md
         - Collaboration Accounts : systems/genepool/collab-accounts.md
         - Cori for JGI users : systems/genepool/genepool-cori-for-jgi.md
+      - Data Transfer Nodes : systems/dtn/index.md
   - Filesystems:
       - Overview: filesystems/index.md
       - Quotas: filesystems/quotas.md
