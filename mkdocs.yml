@@ -155,7 +155,19 @@ nav:
   - Systems:
       - Cori : systems/cori/index.md
       - Edison : systems/edison/index.md
-      - PDSF : systems/pdsf/index.md
+      - PDSF: 
+           - PDSF System: systems/pdsf/index.md
+           - Slurm :
+              - Overview : pdsf/slurm/README.md
+              - LZ pulseFinder CVMFS : pdsf/slurm/lz-pulseFinder/Readme.md
+              - Atlas madGraph multi-core : pdsf/slurm/atlas-madGraph/Readme.md
+              - DayaBay NuWa : pdsf/slurm/dyb-nuwa/Readme.md
+              - Majorana skim : pdsf/slurm/majorana-skim/Readme.md
+              - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
+              - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
+           - Shifter :
+              - Recipes : pdsf/shifter/README.md
+              - Clone STAR DB : pdsf/shifter/clone_starDB.md
       - Genepool:
         - Genepool System: systems/genepool.md
         - Getting Started : systems/genepool/getting-started.md
@@ -186,19 +198,6 @@ nav:
         - Storage Statistics : http://www.nersc.gov/users/storage-and-file-systems/hpss/storage-statistics/
       - Backups: filesystems/backups.md
       - Unix File Permissions: filesystems/unix-file-permissions.md
-  - PDSF:
-    - slurm :
-      - overview : pdsf/slurm/README.md
-      - LZ pulseFinder CVMFS : pdsf/slurm/lz-pulseFinder/Readme.md
-      - Atlas madGraph multi-core : pdsf/slurm/atlas-madGraph/Readme.md
-      - DayaBay NuWa : pdsf/slurm/dyb-nuwa/Readme.md
-      - Majorana skim : pdsf/slurm/majorana-skim/Readme.md
-      - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
-      - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
-    - shifter :
-      - recipes : pdsf/shifter/README.md
-      - Clone STAR DB : pdsf/shifter/clone_starDB.md
-
   - Help: help/index.md
 #      -
 #  - JGI:
