@@ -340,7 +340,7 @@ needed for checkpointing. The `--signal=B:USR1@<sig-time>` option is
 used to send signal `USR1` to the job within sig-time seconds of its
 end time to terminate the job after checkpointing. The sig-time should
 match the checkpoint overhead time, ckpt_overhead. The ata module
-defines the bash functions used in the scripti, and users may need to
+defines the bash functions used in the script, and users may need to
 modify the scripts (get a copy) for their use.
 
 ??? example "Edison"
