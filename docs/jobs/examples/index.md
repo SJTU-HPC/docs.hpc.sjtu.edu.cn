@@ -311,52 +311,50 @@ or `scontrol -M escori show job job_id`.
 
 ## Variable-time jobs
 
-Variable-time jobs are for the users who wish to get a better
-queue turnaround or need to run long running jobs, including jobs
-longer than 48 hours, the max wall-clock time allowed on Cori and
-Edison.
-
-Variable-time jobs are submitted with minimum and maximum time limits.
-Jobs specifying a minimum time can start execution earlier than
-otherwise with a time limit anywhere between the minimum and maximum
-time limits. Pre-terminated jobs are automatically requeued to
-resume from where the previous executions left off, until the
-cumulative execution time reaches the requested maximum time limit or
-the job completes before the requested time limit. Variable-time
-jobs enable users to run jobs with any length, e.g., one week or even
-longer.
+Variable-time jobs are for users who wish to get a better queue turnaround and/or need to run long running jobs, including jobs longer than 48 hours, the maximum wall-clock time allowed on Cori and Edison. Variable-time jobs are jobs submitted with a minimum time (using the **#SBATCH –time-min** option) in addition to the maximum time (#SBATCH –time). Jobs specifying the minimum time can start execution earlier than they would otherwise with a time limit anywhere between the minimum and maximum time requests. The pre-terminated jobs can be requeued (using the scontrol requeue command) to resume from where the previous executions left off, until the cumulative execution time reaches the desired time limit or the job completes. This process can be automated, enabling users to run jobs of any length, e.g., one week or even longer, regardless of the maximum wall-clock limit imposed by the batch system.
 
 !!! note
-	Variable-time jobs applications are required to be able to
-	checkpoint/restart by themselves.
+        To use variable-time jobs, applications are required to be able to checkpoint and restart by themselves.
 
-In the following example, the `--comment` option is used to request
-the user desired maximum time limit, which could be longer than
-maximum time limit allowed by the batch system. In addition to the
-time limit (`--time` option), the `--time-min` option is used to
-request the minimum amount of time the job should run. The variable
-ckpt_overhead is used to specify the amount of time (in seconds)
-needed for checkpointing. The `--signal=B:USR1@<sig-time>` option is
-used to send signal `USR1` to the job within sig-time seconds of its
-end time to terminate the job after checkpointing. The sig-time should
-match the checkpoint overhead time, ckpt_overhead. The ata module
-defines the bash functions used in the script, and users may need to
-modify the scripts (get a copy) for their use.
+Here is a sample job script for variable-time jobs, which automates the process of executing, pre-terminating, requeuing and restarting the job repeatedly until it runs for the desired amount of time or the job completes.
 
 ??? example "Edison"
-    ```bash
-    --8<-- "docs/jobs/examples/variable-time-jobs/edison/variable-time-jobs.sh"
-    ```
+        ```bash
+        --8<-- "docs/jobs/examples/variable-time-jobs/edison/variable-time-jobs.sh"
+        ```
 
-??? example "Cori Haswell"
-    ```bash
-    --8<-- "docs/jobs/examples/variable-time-jobs/cori-haswell/variable-time-jobs.sh"
-    ```
+!!! example "Cori Haswell"
+        ```bash
+        --8<-- "docs/jobs/examples/variable-time-jobs/cori-haswell/variable-time-jobs.sh"
+        ```
 
 ??? example "Cori KNL"
-    ```bash
-    --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/variable-time-jobs.sh"
-    ```
+        ```bash
+        --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/variable-time-jobs.sh"
+        ```
+
+In the above example, the **--comment** option is used to enter the user’s desired maximum wall-clock time, which could be longer than the maximum time limit allowed by the batch system (96 hours in this example). In addition to the time limit (--time), the **--time-min** option is used to specify the minimum amount of time the job should run (2 hours).
+
+The ata (adaptive time allocation) module used in the job script defines a few bash functions (e.g., requeue_job, func_trap) that are used to automate the process.
+The "requeue_job func_trap USR1" command executes the func_trap function, which contains a list of actions to checkpoint and requeue the job, upon trapping the USR1 signal.
+More detail about these functions can be found in the $ATA_DIR/etc/ATA_setup.sh file after loading the ata module.
+Users may want to modify the scripts (get a copy) as needed, although they should work for most applications as they are now.
+
+The job script works as follows:
+
+1. User submits the above job script.
+2. The batch system looks for a backfill opportunity for the job. If it can allocate the requested number of nodes for this job for any duration (e.g., 3 hours) between the specified minimum time (2 hours) and  the time limit (48 hours) before those nodes are used for other higher priority jobs, the job starts execution.
+3. The job runs until it receives a signal USR1 (**--signal=B:USR1@&lt;sig_time&gt;**) 60 seconds (sig_time=60 in this example) before it hits the allocated time limit (3 hours).
+4. Upon receiving the signal, the job checkpoints and requeues itself with the remaining max time limit before it gets terminated. The variable ckpt_overhead is used to specify the amount of time (in seconds) needed for checkpointing and requeuing the job. It should match the sig_time in the –signal option.
+5. The steps 2-4 repeat until the job runs for the desired amount of time (96 hours) or the job completes.
+
+!!! note
+        * If your application requires external triggers or commands to do checkpointing, you need to provide the checkpoint commands using the variable, **ckpt_command**. It could be a script containing several commands to be executed within the specified checkpoint overhead time (**ckpt_overhead**).
+        * Additionally, if you need to change the job input files to resume the job, you can do so within the ckpt_command.
+
+        * If your application does checkpointing periodically, like most of the molecular dynamics codes do, you don’t need the ckpt_command (just leave it blank).
+        * The srun command must execute in the background (notice the **&amp;** at the end of the srun command line and the **wait** command at the end of the job script), so to catch the signal (USR1) on the wait command instead of srun, allow srun to run for a bit longer (up to sig_time seconds) to complete the checkpointing.
+
 
 ## Burst buffer
 
