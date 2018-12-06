@@ -72,6 +72,12 @@ nav:
         - CTest/CDash with CMake : services/cdash/with_cmake.md
         - CTest/CDash without CMake : services/cdash/without_cmake.md
   - Development:
+    - Checkpoint/Restart : 
+        - Overview : development/checkpoint-restart/index.md
+        - DMTCP : development/checkpoint-restart/dmtcp/index.md 
+    - Compilers : 
+        - Cray Compiler Wrappers: development/compilers/index.md
+        - LLVM : development/compilers/llvm.md
     - Containers (Shifter):
         - Overview : development/shifter/overview.md
         - How to use : development/shifter/how-to-use.md
@@ -83,9 +89,6 @@ nav:
         - Valgrind : development/performance-debugging-tools/valgrind.md
         - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
         - VTune : development/performance-debugging-tools/vtune.md
-    - Compilers : 
-        - Cray Compiler Wrappers: development/compilers/index.md
-        - LLVM : development/compilers/llvm.md
     - High-level Programming Environments:
         - Python :
             - development/high-level-environments/python/index.md
