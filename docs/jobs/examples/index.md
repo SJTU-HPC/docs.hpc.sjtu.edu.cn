@@ -351,9 +351,9 @@ The job script works as follows:
 !!! note
         * If your application requires external triggers or commands to do checkpointing, you need to provide the checkpoint commands using the variable, **ckpt_command**. It could be a script containing several commands to be executed within the specified checkpoint overhead time (**ckpt_overhead**).
         * Additionally, if you need to change the job input files to resume the job, you can do so within the ckpt_command.
-
         * If your application does checkpointing periodically, like most of the molecular dynamics codes do, you don’t need the ckpt_command (just leave it blank).
-        * The srun command must execute in the background (notice the **&amp;** at the end of the srun command line and the **wait** command at the end of the job script), so to catch the signal (USR1) on the wait command instead of srun, allow srun to run for a bit longer (up to sig_time seconds) to complete the checkpointing.
+	* You can send the USR1 signal outside the job script any time using the "scancel -b -s USR1 &lt;jobid&gt;" command to terminate the currently running job. The job still checkpoints and requeues itself before it gets terminated.  
+	* The srun command must execute in the background (notice the **&amp;** at the end of the srun command line and the **wait** command at the end of the job script), so to catch the signal (USR1) on the wait command instead of srun, allow srun to run for a bit longer (up to sig_time seconds) to complete the checkpointing.
 
 
 ## Burst buffer
