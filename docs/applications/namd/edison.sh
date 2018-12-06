@@ -1,8 +1,7 @@
 #!/bin/bash
 #SBATCH --qos=regular
 #SBATCH --time=02:00:00
-#SBATCH --nodes=100
-#SBATCH --constraint=haswell
+#SBATCH --nodes=10
 #SBATCH --ntasks-per-node=24
 #SBATCH --cpus-per-task=2
 #SBATCH --switches=1@20

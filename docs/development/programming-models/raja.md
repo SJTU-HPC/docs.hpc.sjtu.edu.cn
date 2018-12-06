@@ -35,4 +35,4 @@ To use RAJA at NERSC please consult the project's documentation for
 the latest information.
 
  * https://github.com/LLNL/RAJA
- * [RAJA User Guide](http://raja.readthedocs.io/en/master/)
+ * [RAJA User Guide](https://raja.readthedocs.io/en/master/)

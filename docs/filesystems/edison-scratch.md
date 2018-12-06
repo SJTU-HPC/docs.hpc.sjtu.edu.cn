@@ -1,10 +1,12 @@
+# Edison SCRATCH
+
 Edison has three local scratch file systems named /scratch1,
 /scratch2, and /scratch3. Users are assigned to either /scratch1 or
 /scratch2 in a round-robin fashion, so a user will be able to use one
 or the other but not both. The third file system is reserved for users
 who need large IO bandwidth, and the access is granted
 by
-[request](http://www.nersc.gov/users/computational-systems/edison/file-storage-and-i-o/edison-scratch3-directory-request-form/).
+[request](https://www.nersc.gov/users/computational-systems/edison/file-storage-and-i-o/edison-scratch3-directory-request-form/).
 
 | Filesystem | Total disk space | Bandwidth |
 |------------|:----------------:|:---------:|

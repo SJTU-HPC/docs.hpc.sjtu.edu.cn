@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -qos=debug
+#SBATCH --qos=debug
 #SBATCH --time=00:30:00
 #SBATCH --nodes=2
 #SBATCH --tasks-per-node=32

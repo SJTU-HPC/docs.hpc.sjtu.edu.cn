@@ -15,74 +15,88 @@ further for more detailed analysis.
 It supports distributed-memory parallel programming only such as MPI,
 Coarray Fortran and UPC (Unified Parallel C).
 
-One way to collect backtraces under SLURM is explained below.
+One way to collect backtraces under Slurm is explained below.
 
-1. Start an interactive batch job and launch an application in
-  background. Keep the process ID (PID).  ```shell $ salloc -N 1 -t
-  30:00 -q debug ...  $ srun -n 4 ./jacobi_mpi & [1] 95298 ``` You can
-  also see the PID by running the 'ps' command:
+1.  Start an interactive batch job and launch an application in
+    background. Keep the process ID (PID).
 
-  ```shell
-  $ ps
-     PID TTY          TIME CMD
-   95018 pts/0    00:00:00 bash
-   95298 pts/0    00:00:00 srun
-   95302 pts/0    00:00:00 srun
-   95325 pts/0    00:00:00 ps
-  ```
-2. Load the module stat
+    ```shell
+    nersc$ salloc -N 1 -t
+    30:00 -q debug ...  $ srun -n 4 ./jacobi_mpi &
+    [1] 95298
+    ```
 
-3. Run the stat-cl command on this process. You may want to use the -i
-   flag to gather source line numbers, too:
+    You can also see the PID by running the 'ps' command:
 
-```shell
-nersc$ stat-cl -i 95298
-STAT started at 2016-11-30-07:33:37
-Attaching to job launcher (null):95298 and launching tool daemons...
-Tool daemons launched and connected!
-Attaching to application...
-Attached!
-Application already paused... ignoring request to pause
-Sampling traces...
-Traces sampled!
-...
-Resuming the application...
-Resumed!
-Merging traces...
-Traces merged!
-Detaching from application...
-Detached!
+    ```shell
+    nersc$ ps
+       PID TTY          TIME CMD
+     95018 pts/0    00:00:00 bash
+     95298 pts/0    00:00:00 srun
+     95302 pts/0    00:00:00 srun
+     95325 pts/0    00:00:00 ps
+    ```
 
-Results written to /global/cscratch1/sd/wyang/parallel_jacobi/stat_results/jacobi_mpi.0004
-```
+2.  Load the module stat
 
-stat-cl takes several backtrace samples after attaching to the running
-processes. The result file is created in the 'stat_results'
-subdirectory under the current working directory. This subdirectory
-contains another subdirectory whose name is based on your parallel
-application's executable name that contains the merged stack trace
-file in DOT format.
+    ```shell
+    nersc$ module load stat
+    ```
 
-4. Then, run the GUI command, 'stat-view', with the file above to
-   visualize the generated *.dot files for stack backtrace
-   information.
+3.  Run the `stat-cl` command on this process. You may want to use the `-i`
+    flag to gather source line numbers, too:
 
-```shell
-nersc$ stat-view stat_results/jacobi_mpi.0004/00_jacobi_mpi.0004.3D.dot
-```
+    ```shell
+    nersc$ stat-cl -i 95298
+    STAT started at 2016-11-30-07:33:37
+    Attaching to job launcher (null):95298 and launching tool daemons...
+    Tool daemons launched and connected!
+    Attaching to application...
+    Attached!
+    Application already paused... ignoring request to pause
+    Sampling traces...
+    Traces sampled!
+    ...
+    Resuming the application...
+    Resumed!
+    Merging traces...
+    Traces merged!
+    Detaching from application...
+    Detached!
 
-Please note that, if you're running on Cori KNL nodes, you have to go
-to a login node for this step (after loading the stat module
-there). Otherwise, fonts will not be shown correctly.
+    Results written to /global/cscratch1/sd/wyang/parallel_jacobi/stat_results/jacobi_mpi.0004
+    ```
 
-The above call tree diagram reveals that rank 0 is in the
-'init_fields' routine (line 172 of jacobi_mpi.f90), rank 3 in the
-'set_bc' routine (line 214 of the same source file), and the other
-ranks (1 and 2) are in the MPI_Sendrecv function. If this pattern
-persists, it means that the code hangs in these locations. With this
-information, you may want to use a full-fledged parallel debugger such
-as DDT or TotalView to find out why your code is stuck in these
-places.
+    `stat-cl` takes several backtrace samples after attaching to the running
+    processes. The result file is created in the `stat_results`
+    subdirectory under the current working directory. This subdirectory
+    contains another subdirectory whose name is based on your parallel
+    application's executable name that contains the merged stack trace
+    file in DOT format.
+
+
+4.  Then, run the GUI command, `stat-view`, with the file above to
+    visualize the generated `*.dot` files for stack backtrace
+    information.
+
+    ```shell
+    nersc$ stat-view stat_results/jacobi_mpi.0004/00_jacobi_mpi.0004.3D.dot
+    ```
+
+    Please note that, if you're running on Cori KNL nodes, you have to go
+    to a login node for this step (after loading the stat module
+    there). Otherwise, fonts will not be shown correctly.
+
+    ![stathunglinenum](images/stathunglinenum.png)
+
+    The above call tree diagram reveals that rank 0 is in the
+    'init_fields' routine (line 172 of jacobi_mpi.f90), rank 3 in the
+    'set_bc' routine (line 214 of the same source file), and the other
+    ranks (1 and 2) are in the MPI_Sendrecv function. If this pattern
+    persists, it means that the code hangs in these locations. With this
+    information, you may want to use a full-fledged parallel debugger such
+    as DDT or TotalView to find out why your code is stuck in these
+    places.
 
 ## ATP
 
@@ -101,7 +115,7 @@ setenv ATP_ENABLED 1          # for csh/tcsh
 export ATP_ENABLED=1          # for bash/sh/ksh
 ```
 
-In addition, you need to set the 'FOR_IGNORE_EXCEPTIONS' environment
+In addition, you need to set the `FOR_IGNORE_EXCEPTIONS` environment
 variable if you're using Fortran and you have built with the Intel
 compiler:
 
@@ -112,10 +126,10 @@ export FOR_IGNORE_EXCEPTIONS=true   # for bash/sh/ksh
 ```
 
 If your Fortran code is built with the GNU compiler, you will need to
-link with the '-fno-backtrace' option.
+link with the `-fno-backtrace` option.
 
 When atp is loaded no core file will be generated. However, you can
-get core dumps (core.atp.<apid>.<rank>) if you set coredumpsize to
+get core dumps (`core.atp.<apid>.<rank>`) if you set coredumpsize to
 unlimited:
 
 ```shell
@@ -124,8 +138,8 @@ unlimit coredumpsize   # for csh/tcsh
 ulimit -c unlimited    # for bash/sh/ksh
 ```
 
-More information can be found in the man page: type 'man intro_atp'
-or, simply, 'man atp'.
+More information can be found in the man page: type `man intro_atp`
+or, simply, `man atp`.
 
 The following is to test ATP using an example code available in the
 ATP distribution package:
@@ -135,19 +149,19 @@ nersc$ cp $ATP_HOME/demos/testMPIApp.c .
 nersc$ cc -o testMPIApp testMPIApp.c
 
 nersc$ cat runit
-#!/bin/csh
+#!/bin/bash
 #SBATCH -N 1
 #SBATCH -t 5:00
 #SBATCH -q debug
 
-setenv ATP_ENABLED 1
+export ATP_ENABLED=1
 srun -n 8 ./testMPIApp 1 4
 
-% sbatch runit
+nersc$ sbatch runit
 Submitted batch job 3044170
 
-% cat slurm-3044710.out
-…
+nersc$ cat slurm-3044710.out
+[snip]
 testApp: (31929) starting up...
 testApp: (31932) starting up...
 testApp: (31930) starting up...
@@ -167,18 +181,20 @@ You may need to: module load stat
 srun: error: nid00009: tasks 0-3: Killed
 srun: Terminating job step 3044170.0
 srun: Force Terminated job step 3044170.0
-...
+[snip]
 ```
 
-ATP creates a merged backtrace files in DOT fomat in atpMergedBT.dot
-and atpMergedBT_line.dot. The latter shows source line numbers,
+ATP creates a merged backtrace files in DOT fomat in `atpMergedBT.dot`
+and `atpMergedBT_line.dot`. The latter shows source line numbers,
 too. To view the collected backtrace result, you need to load the
-'stat' module and run 'STATview':
+`stat` module and run `STATview`:
 
 ```shell
 nersc$ module load stat
 nersc$ stat-view atpMergedBT.dot
 ```
+
+![atp](images/atp.png)
 
 !!! note
 	The following feature doesn't work at the moment (as of March
@@ -187,7 +203,7 @@ nersc$ stat-view atpMergedBT.dot
 ATP can be a useful tool in debugging a hung application, too. You can
 force ATP to generate backtraces for a hung application by killing the
 application. To do that, you should have done necessary preparational
-work such as setting the ATP_ENABLED environment variable, etc. in the
+work such as setting the `ATP_ENABLED` environment variable, etc. in the
 batch script for the job in question.
 
 ```shell
@@ -218,13 +234,16 @@ ATP Stack walkback for Rank 0 done
 Process died with signal 6: 'Aborted'
 View application merged backtrace tree with: stat-view atpMergedBT.dot
 You may need to: module load stat
-...
+[snip]
+
 nersc$ stat-view atpMergedBT_line.dot
 ```
 
 !!! note
 	Edison has 6 MOM nodes: edimom01 through
 	edimom06. Cori's MOM node names are cmom02 and cmom05.
+
+![atp-hungapplication](images/atp-hungapplication.png)
 
 The above example is to use SIGABRT in killing the application. There
 are other signals accepted by ATP. For info, please read the atp man

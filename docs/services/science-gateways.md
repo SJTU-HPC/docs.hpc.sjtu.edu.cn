@@ -21,8 +21,8 @@ deployment, accepts feedback, and tries to recycle successful
 approaches into methods that other science teams can benefit
 from. Below you will find links to current projects and details about
 the building blocks available to NERSC users. If you would like to
-participate, or if you have questions, please contact
-consult@nersc.gov.
+participate, or if you have questions, please open a ticket with
+[NERSC Consulting](https://help.nersc.gov).
 
 ## Science Gateway Availability and Support
 
@@ -102,15 +102,15 @@ deployment, accepts feedback, and tries to recycle successful
 approaches into methods that other science teams can benefit
 from. Below you will find links to current projects and details about
 the building blocks available to NERSC users. If you would like to
-participate, or if you have questions, please contact
-consult@nersc.gov.
+participate, or if you have questions, please open a ticket with
+[NERSC Consulting](https://help.nersc.gov)
 
 NERSC Resource | Path On NERSC Resource | URL on the Web
 --- | --- | ---
-NGF (project filesystem) | /global/project/projectdirs/myproj/www | http://portal.nersc.gov/project/myproj/
-NGF (dna filesystem) | /global/dna/projectdirs/myproj/mysubproj/www | http://portal.nersc.gov/dna/myproj/mysubproj/
-HPSS archive (home) | /home/m/myuser/www | http://portal.nersc.gov/archive/home/m/myuser/www/
-HPSS archive (project) | /home/projects/myproj/www | http://portal.nersc.gov/archive/projects/myproj/www/
+NGF (project filesystem) | /global/project/projectdirs/myproj/www | https://portal.nersc.gov/project/myproj/
+NGF (dna filesystem) | /global/dna/projectdirs/myproj/mysubproj/www | https://portal.nersc.gov/dna/myproj/mysubproj/
+HPSS archive (home) | /home/m/myuser/www | https://portal.nersc.gov/archive/home/m/myuser/www/
+HPSS archive (project) | /home/projects/myproj/www | https://portal.nersc.gov/archive/projects/myproj/www/
 
 ### Web Methods for Computing
 
@@ -159,7 +159,7 @@ the
 
 Science gateways that have moved from development to providing
 services to broader communities are listed on
-the [Science Gateways index page](http://portal.nersc.gov/).
+the [Science Gateways index page](https://portal.nersc.gov/).
 
 Nagios monitoring and service level checks of gateway functions are
 available.
@@ -197,7 +197,7 @@ Copy your data to this www directory. Any public data will need to be
 world readable. Add PHP and HTML files to this directory to build
 custom gateway interfaces to the data. Any data under
 `/global/project/projectdirs/yourproject/www` will be publicly
-accessible through `http://portal.nersc.gov/project/yourproject/`.
+accessible through `https://portal.nersc.gov/project/yourproject/`.
 
 #### How to publish data in HPSS to the web:
 
@@ -212,9 +212,7 @@ tape archives via a science gateway should only be reserved for
 infrequent accesses from a data pool that is too large to be
 practically kept on the "project" filesystem. If you need to serve
 very large files very frequently via a science gateway, please
-contact
-[NERSC consulting](http://www.nersc.gov/users/getting-help/online-help-desk/) for
-assistance.
+contact [NERSC Consulting](https:help.nersc.gov) for assistance.
 
 Retrieving data from HPSS via a science gateway can be very slow. If
 files have not been accessed in some time they will have to be
@@ -242,7 +240,7 @@ the owner of each of them will need to change its permissions:
 
 The data in the www directory will now be available at a URL of the
 form
-http://portal.nersc.gov/archive/home/projects/DIRNAME/www/{FILE|DIR}
+https://portal.nersc.gov/archive/home/projects/DIRNAME/www/{FILE|DIR}
 where DIRNAME is the project directory and FILE|DIR is the name of a
 file.
 
@@ -251,7 +249,7 @@ listing. Note that all files and directories in the path must be world
 readable.
 
 Here is an example:
-http://portal.nersc.gov/archive/home/projects/incite11/www/1935
+https://portal.nersc.gov/archive/home/projects/incite11/www/1935
 
 !!! note
     The time to download files from tape may take some time to
@@ -269,8 +267,8 @@ information, NIM accounting information and object storage.
 To get started, insert the following in your HTML files to give you
 access to all NERSC compute and data resources through NEWT:
 
-    <script src="[http://newt.nersc.gov/js/jquery-1.7.2.js](http://newt.nersc.gov/js/jquery-1.7.2.js)" />
-    <script src="[http://newt.nersc.gov/js/newt.js](http://newt.nersc.gov/js/newt.js)" />
+    <script src="[https://newt.nersc.gov/js/jquery-1.7.2.js](https://newt.nersc.gov/js/jquery-1.7.2.js)" />
+    <script src="[https://newt.nersc.gov/js/newt.js](https://newt.nersc.gov/js/newt.js)" />
 
 Follow the "Hello World" example
 at [https://newt.nersc.gov/](https://newt.nersc.gov/), or work through
@@ -283,6 +281,7 @@ found at [https://newt.nersc.gov/api](https://newt.nersc.gov/api).
 ## Moving Beyond Simple Gateway Functions
 
 If you are building a web gateway to your science at NERSC, please
-contact us at consult@nersc.gov. We are interested in engagaing
-directly with science teams so that you can build a gateway that meets
-your specific needs.
+contact us by opening a ticket
+with [NERSC Consulting](https://help.nersc.gov). We are interested in
+engagaing directly with science teams so that you can build a gateway
+that meets your specific needs.

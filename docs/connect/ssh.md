@@ -1,8 +1,8 @@
+# SSH
+
 All NERSC computers (except HPSS) are reached using either the Secure
 Shell (SSH) communication and encryption protocol (version 2) or by
 Grid tools that use trusted certificates.
-
-## SSH
 
 SSH (Secure Shell) is an encryted network protocol used to log into
 computers over an unsecured network. On UNIX/LINUX/BSD type sytems,
@@ -22,12 +22,12 @@ connections.
 	edison$
     ```
 
-### Passwordless logins and transfers
+## Passwordless logins and transfers
 
 !!! warning
 	All public keys must be stored in [NIM](https://nim.nersc.gov).
 
-### Key fingerprints
+## Key fingerprints
 
  *  Cori
 	```
@@ -44,11 +44,11 @@ connections.
 	1024 3d:28:24:53:66:de:30:9e:eb:25:3b:03:b0:24:1c:77
 	```
 
-### Host Keys
+## Host Keys
 
 These are the entries in `~/.ssh/known_hosts`.
 
-#### Cori
+### Cori
 
 ```
 cori.nersc.gov ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCvoau+F7fGIHuvcDZZSG7dD2J7hgo3RupUL6Jaw978mb
@@ -58,7 +58,7 @@ c0NoEs9IzyK2N4ywExwljpMs7vKwasz8qyjHB2aYaj6cHjV2ShCp+aevPdp1jfBtIgJUMkjMEa
 +0K4zWM0aDzZEaj7vIlKpUCDAdQf/DsPoj808KOKLw0+Bs0qamX+D7+aXsPVG/jfBY5wSCgjlhqn
 ```
 
-#### Edison
+### Edison
 
 ```
 edison.nersc.gov ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDpzjkAkaxZS7dCRQeGCDxcdJd

@@ -8,6 +8,24 @@ Docker Hub, and your own custom image named 'app'. Both of these images are
 stored on your laptop. Lesson 2 will show you how to migrate this application
 from your laptop to Spin.
 
+## Prerequisites for Lesson 2
+
+Before you review lesson 2, be sure to understand the concepts of [Spin Getting
+Started Guide: Lesson 1: Building your first application on your laptop](lesson-1.md).
+
+You will also need:
+
+* An account on Spin. Any user who wants an account in Spin must first complete
+  a hands on Spin workshop. For more information, see [Spin Getting Started
+  Guide: How do I get started?](index.md)
+* SSH access on a NERSC Login node, such as cori.nersc.gov or edison.nersc.gov.
+* Access to a Project directory on the NERSC Global Filesystem, and the ability
+  to run `chmod o+x` on that directory to allow the user 'nobody' to read files
+  in that directory. This requirement is explained in detail below in [Part 3:
+  Prepare your application to run in Spin](#part-3-prepare-your-application-to-run-in-spin).
+
+## Before you begin
+
 Here are some things to know beforehand:
 
 ### The Rancher CLI
@@ -25,25 +43,28 @@ You will generate an API key below.
 
 ### Spin Environments
 
-Spin has two main environments for NERSC users:
+Projects in Spin are hosted in a Spin **Environment**, which is a collection of
+nodes and other resources run the Services.
+
+Spin has two main environments and one learning environment for NERSC users:
 
 * **dev-cattle** is for use with applications which are under development
 * **prod-cattle** is used for production services
+* A third environment named **sandbox** will be used exclusively if you are taking
+the SpinUp sessions
 
-During normal development, you will first deploy your application to the
-development environments, and will copy it to production when ready. Currently,
-NERSC's Infrastructure Services Group (ISG) must approve all applications
-before they run in the production environment.
+During normal development, you will use the Rancher CLI to first deploy your
+application to the development environments, and will copy it to production
+when ready. Currently, NERSC's Infrastructure Services Group (ISG) must approve
+all applications before they run in the production environment.
 
-A third environment named **sandbox** will be used exclusively if you are taking
-the SpinUp sessions.
+!!! info
+    The name **cattle** refers to the container *Orchestrator* which we use to manage
+    containers and is part of Rancher. Rancher names many of their components with
+    'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information
+    on Rancher, please read the [Spin Getting Started Guide overview](/services/spin/getting_started).
 
-The name **cattle** refers to the container *Orchestrator* which we use to manage
-containers and is part of Rancher. Rancher names many of their components with
-'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information
-on Rancher, please read the [Spin Getting Started Guide overview](/services/spin/getting_started).
-
-### Security Requirements
+### Follow the NERSC Security Requirements
 
 Note that all applications sent to Spin must follow the NERSC security requirements,
 which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices). If
@@ -58,22 +79,50 @@ run the application and will print an error, such as in the following example:
     INFO[0002] Creating service app
     ERRO[0002] Failed Creating web : Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you cannot run a stack with your user: elvis] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a5/scripts/transform]
 
-## Prerequisites for Lesson 2
+### Removing your stack if you get stuck
 
-Before you review lesson 2, be sure to understand the concepts of [Spin Getting
-Started Guide: Lesson 1: Building your first application on your laptop](lesson-1.md).
+If you hit a problem with these examples and cannot figure out how to resolve
+it easily, the simplest solution is sometimes to simply delete the entire stack
+and start over. Deleting a stack will not delete the Docker Compose file, or any files stored on the
+global filesystems.
 
-You need also need:
+Delete the stack using `rancher rm --type stack YourStackName`, like so:
 
-* SSH access on a NERSC Login node, such as cori.nersc.gov or edison.nersc.gov.
-* An account on Spin. To do that, please see the [Spin Getting Started Guide: How do I get started?](index.md) Test your Spin account by quickly logging into the Spin Registry from your laptop. You will see the message 'Login Succeeded':
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME                STATE      CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    1st4644   elvis-first-stack   degraded             2          false
+    elvis@cori09:elvis-first-stack $ rancher rm --type stack elvis-first-stack
+    1st4644
+    elvis@cori09:elvis-first-stack $ rancher stack ls
+    ID        NAME      STATE     CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
+    elvis@cori09:elvis-first-stack $
+
+!!! Caution
+    When deleting in production, use caution. Deleting a stack will delete all
+    containers, volumes and the Load Balancer (ingress) configuration.
+    Removing a stack that contains a database will remove that database
+    permanently if the data files are stored within the container.  Data on the
+    Global Filesystem will not be removed.
+
+!!! Notice
+    If you forget the `--type stack` flag, Rancher may complain with an error like
+    *'You don't own volume elvis-first-stack'**. This error happens occasionally
+    because Rancher is uncertain if you are referring to stack, volume or another
+    thing, due to an internal ordering bug. Using the `--type stack` forces
+    Rancher to do the correct thing:
+
+    rancher rm --type stack elvis-first-stack
+
+## Part 1: Test your account and generate an API key
+
+If you have an account, test your Spin account by quickly logging into the Spin Registry from your laptop. You will see the message 'Login Succeeded':
 
         elvis@laptop:~ $ docker login https://registry.spin.nersc.gov/
         Username: elvis
         Password:
         Login Succeeded
         elvis@laptop:~
-* Access to a Project directory on the NERSC Global Filesystem, and the ability to run `chmod o+x` on that directory to allow the user 'nobody' to read files in that directory. This requirement is explained in detail below in [Part 2: Prepare your application to run in Spin](#part-2-prepare-your-application-to-run-in-spin).
+
 
 ### Generate API keys on a system such as Cori or Edison
 
@@ -133,30 +182,7 @@ tied to that account. Follow the steps below to generate an API key.
 
 If everything ran successfully, you are ready to proceed.
 
-## If you get stuck, remove the stack
-
-If you run into unresolvable problems while following these lessons, the
-quickest action is to simply delete the entire stack and start over. Deleting
-a stack will not delete the Docker Compose file, or any files stored on the
-global filesystems.
-
-Delete the stack using `rancher rm --type stack YourStackName`, like so:
-
-    elvis@cori09:elvis-first-stack $ rancher stack ls
-    ID        NAME                STATE      CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
-    1st4644   elvis-first-stack   degraded             2          false
-    elvis@cori09:elvis-first-stack $ rancher rm --type stack  elvis-first-stack
-    1st4644
-    elvis@cori09:elvis-first-stack $ rancher stack ls
-    ID        NAME      STATE     CATALOG   SERVICES   SYSTEM    DETAIL    AVAILABLE UPGRADES
-    elvis@cori09:elvis-first-stack $
-
-!!! Warning
-    When deleting in production, use caution. Deleting a stack will delete all
-    containers, volumes and the Load Balancer (ingress) configuration. Data on
-    the Global Filesystem will not be removed.
-
-## Part 1: Ship your image from your laptop to the Spin Registry
+## Part 2: Ship your image from your laptop to the Spin Registry
 
 The Application Stack in Lesson 1 used a custom image named
 'my-first-container-app' which is currently stored on your laptop. Before you
@@ -177,15 +203,22 @@ https://docs.docker.com/registry/introduction/.
 Here, we will use a Docker image 'tag' to create a new name for your image to
 be used in Spin. Docker image tags are used for a few purposes, such as:
 
-* Create a friendly name for your image. If there was no name for an image, we would have to refer to it by an image ID like **ecc5b5995f8b** which isn't very friendly.
-* Provide versioning information to an image, such as a version number or a date help track development versions.
-* Help to locating your images on a shared, multi-user environment such as Spin. Remember that Spin is a shared resource. If everyone named their containers "my-first-container", it will be difficult for administrators to locate your specific container in Spin.
+* Create a friendly name for your image. If there was no name for an
+  image, we would have to refer to it by an image ID like
+  **ecc5b5995f8b** which isn't very friendly.
+* Provide versioning information to an image, such as a version number
+  or a date help track development versions.
+* Help to locating your images on a shared, multi-user environment
+  such as Spin. Remember that Spin is a shared resource. If everyone
+  named their containers "my-first-container", it will be difficult
+  for administrators to locate your specific container in Spin.
 * Set a URL to a private image registry, such as the Spin Registry.
 
 Images stored in the Spin registry will be named following a format of
-**registry.spin.nersc.gov/[project]/[container name]**, where *project*
-is the name of your NERSC project for collaborative projects, or your NERSC
-username for individual project. We'll use your NERSC username as part of these lessons.
+**registry.spin.nersc.gov/[project]/[container name]**, where
+*project* is the name of your NERSC project for collaborative
+projects, or your NERSC username for individual project. We'll use
+your NERSC username as part of these lessons.
 
 On your laptop, list your custom image which are stored locally:
 
@@ -209,26 +242,36 @@ List the images again. You will see output like the following:
 
 Notice a few things about the list now:
 
-* Your image has an "Image ID" like **ecc5b5995f8b**, but now has two names: One local, and a second one ready for the remote registry. The Image ID is the same for both, which means that both tags refer to the exact same image. An image ID is unique.
-* The name for an image is technically called a 'Repository' in the Docker CLI.
-* The URL for the Spin Registry, registry.spin.nersc.gov, is now part of the image name. For a public repository like the Docker Hub, the URL is not printed, but is set to 'docker.io' (e.g. Docker Hub).
-* We didn't explicitly give this image a version tag, so Docker defaulted to the version of 'latest'. For more advanced projects, we recommend that you avoid 'latest' and instead set a version number as part of the tag.
+* Your image has an "Image ID" like **ecc5b5995f8b**, but now has two
+  names: One local, and a second one ready for the remote
+  registry. The Image ID is the same for both, which means that both
+  tags refer to the exact same image. An image ID is unique.
+* The name for an image is technically called a 'Repository' in the
+  Docker CLI.
+* The URL for the Spin Registry, registry.spin.nersc.gov, is now part
+  of the image name. For a public repository like the Docker Hub, the
+  URL is not printed, but is set to 'docker.io' (e.g. Docker Hub).
+* We didn't explicitly give this image a version tag, so Docker
+  defaulted to the version of 'latest'. For more advanced projects, we
+  recommend that you avoid 'latest' and instead set a version number
+  as part of the tag.
 
 ### Step 2: Tag your 'my-first-container-nginx' image
 
-Now, do the same thing for your 'nginx' image, replacing *[project]* with your
-NERSC username. The output will be similar to the above.
+Now, do the same thing for your 'nginx' image, replacing *[project]*
+with your NERSC username. The output will be similar to the above.
 
     docker image tag my-first-container-nginx registry.spin.nersc.gov/[project]/my-first-container-nginx
 
 ### Step 3: Log into the Spin Registry
 
-You need to authenticate to the private registry before using it. Usually, it's
-simplest to log in to the Spin Registry before working with it. You can skip
-this step, but you will asked to authenticate later while pushing the image.
+You need to authenticate to the private registry before using
+it. Usually, it's simplest to log in to the Spin Registry before
+working with it. You can skip this step, but you will asked to
+authenticate later while pushing the image.
 
-From your laptop, log in to the Spin registry using your NERSC username &
-password:
+From your laptop, log in to the Spin registry using your NERSC
+username & password:
 
     elvis@laptop:~ $ docker login https://registry.spin.nersc.gov/
     Username (elvis):
@@ -236,18 +279,19 @@ password:
     Login Succeeded
     elvis@laptop:~ $
 
-While some portions of Spin are restricted to NERSC & LBL networks, the Spin
-Registry is available from the public Internet. This allows all NERSC users to
-build and collaborate with other NERSC users.
+While some portions of Spin are restricted to NERSC & LBL networks,
+the Spin Registry is available from the public Internet. This allows
+all NERSC users to build and collaborate with other NERSC users.
 
-If you cannot log into the Spin Registry, it may mean that you do not have an
-account in Spin yet. If this is the case, please see the [Spin Getting Started
-Guide: How do I get started?](index.md)
+If you cannot log into the Spin Registry, it may mean that you do not
+have an account in Spin yet. If this is the case, please see
+the [Spin Getting Started Guide: How do I get started?](index.md)
 
 ### Step 4: Push your images to the Spin Registry from your laptop
 
-Once you have logged into the Spin Registry, push your image to the registry
-with the following commands, replacing *[project]* with your NERSC username:
+Once you have logged into the Spin Registry, push your image to the
+registry with the following commands, replacing *[project]* with your
+NERSC username:
 
     docker image push registry.spin.nersc.gov/[project]/my-first-container-app
 
@@ -264,65 +308,75 @@ Each push command will print output like the following:
     latest: digest: sha256:2daa3fa3c0bf26b25d4a9f393f2cdcff8065248fd279f6c4e23e7593fc295246 size: 1154
     elvis@laptop:~ $
 
-Now the images are available in the Spin Registry and can be pulled into the Rancher environment.
+Now the images are available in the Spin Registry and can be pulled
+into the Rancher environment.
 
-## Part 2: Prepare your application to run in Spin
+## Part 3: Prepare your application to run in Spin
 
-In this part, we'll prepare your application to run in Spin by copying required
-files to your Project directory on the NERSC Global Filesystem, and modifying
-your Docker Compose file to work with Spin.
+In this part, we'll prepare your application to run in Spin by copying
+required files to your Project directory on the NERSC Global
+Filesystem, and modifying your Docker Compose file to work with Spin.
 
-Files stored on the NERSC Global Filesystem must be made available to Spin,
-which means that the container must run as your account, or your collaboration
-account. We'll cover that here. Keep in mind the following:
+Files stored on the NERSC Global Filesystem must be made available to
+Spin, which means that the container must run as your account, or your
+collaboration account. We'll cover that here. Keep in mind the
+following:
 
-* **Running as root is not allowed for any container which uses the NERSC
-  Global Filesystem.** Containers which mount directories from the NERSC Global
-  Filesystem must run under the Linux UID or UID/GID of a NERSC User Account or
-  a NERSC Collaboration Account, and will need a few other security enhancements.
-  This policy will be enforced by the Spin software.
-* Many containers in the Docker community run as 'root' by default, even though
-  this practice goes against security recommendations and [Docker's
-  recommendations](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user).
+* **Running as root is not allowed for any container which uses the
+  NERSC Global Filesystem.** Containers which mount directories from
+  the NERSC Global Filesystem must run under the Linux UID or UID/GID
+  of a NERSC User Account or a NERSC Collaboration Account, and will
+  need a few other security enhancements.  This policy will be
+  enforced by the Spin software.
+* Many containers in the Docker community run as 'root' by default,
+  even though this practice goes against security recommendations
+  and
+  [Docker's recommendations](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user).
 * We prefer UIDs & GIDs because they are simpler to use then a
-  username & group. If you wish to run the Spin containers under your own Unix
-  username and group instead of a UID & GID.  We'll cover how to do this in the
-  [Spin Best Practices Guide](/services/spin/best_practices).
-* The permissions for all files used by your Spin application must be readable
-  by this account.
-* We are looking into ways to improve this experience, and are waiting for
-  improvements in the Linux Kernel and in Docker itself.
+  username & group. If you wish to run the Spin containers under your
+  own Unix username and group instead of a UID & GID.  We'll cover how
+  to do this in
+  the [Spin Best Practices Guide](/services/spin/best_practices).
+* The permissions for all files used by your Spin application must be
+  readable by this account.
+* We are looking into ways to improve this experience, and are waiting
+  for improvements in the Linux Kernel and in Docker itself.
 
 ### Step 1: Make your Project directory available to Spin
 
-We will be creating some subdirectories within your Project directory which
-will store your Docker Compose file, as well as files used by your application.
+We will be creating some subdirectories within your Project directory
+which will store your Docker Compose file, as well as files used by
+your application.
 
-The application subdirectories will be mounted inside the container by way of a
-Docker **bind mount**. This means that you must set the permissions of your
-Project directory to be available to Spin as follows:
+The application subdirectories will be mounted inside the container by
+way of a Docker **bind mount**. This means that you must set the
+permissions of your Project directory to be available to Spin as
+follows:
 
-* **All directories and subdirectories used by your Spin application must have
-  the 'executable' bit set to allow 'other' users to browse the directory.**
-  (o+x) so that the Docker daemons can successfully mount your directory. For
-  example permission mode 0741 would work on a parent directory, but 0740 would
-  not.
-* Spin will be accessing these directories as the special system user 'nobody'.
-* The directories do not need to be world readable. The Docker daemon has no
-  need for the 'read' or 'write' bit to be set on any directories. It only needs
-  the 'executable' bit set.
-* Any files in these directories need to be readable as the user & group which
-  is used within the container. In production, we encourage you to run the
-  application as your NERSC Collaboration User. For these lessons, you can
-  instead run as your own account, using your own UID & GID.
+* **All directories and subdirectories used by your Spin application
+  must have the 'executable' bit set to allow 'other' users to browse
+  the directory.** (o+x) so that the Docker daemons can successfully
+  mount your directory. For example permission mode 0741 would work on
+  a parent directory, but 0740 would not.
+* Spin will be accessing these directories as the special system user
+  'nobody'.
+* The directories do not need to be world readable. The Docker daemon
+  has no need for the 'read' or 'write' bit to be set on any
+  directories. It only needs the 'executable' bit set.
+* Any files in these directories need to be readable as the user &
+  group which is used within the container. In production, we
+  encourage you to run the application as your NERSC Collaboration
+  User. For these lessons, you can instead run as your own account,
+  using your own UID & GID.
 * Since this application will be running as your own UID & GID, make
   sure that your account can read the files.
-* The Docker Compose file simply needs to be readable by your account, or
-  whomever is running the `rancher` command.
-* All other permissions on these directories are up to you and your team.
+* The Docker Compose file simply needs to be readable by your account,
+  or whomever is running the `rancher` command.
+* All other permissions on these directories are up to you and your
+  team.
 
-Head back your session on Cori, and create the Spin Project directory with a
-command similar to this:
+Head back your session on Cori, and create the Spin Project directory
+with a command similar to this:
 
     SPIN_DIRECTORY=/global/project/projectdirs/YOUR_COLLAB_DIRECTORY/YOURUSERNAME-first-stack
     mkdir $SPIN_DIRECTORY
@@ -330,17 +384,18 @@ command similar to this:
     chmod o+x $SPIN_DIRECTORY $SPIN_DIRECTORY/web
 
 And now, we copy the Nginx configuration file from your laptop to this
-directory. For your own future projects, you can do this step by hand, using
-Git, or whatever method your team chooses.
+directory. For your own future projects, you can do this step by hand,
+using Git, or whatever method your team chooses.
 
     cd $SPIN_DIRECTORY/web
     vim nginx-proxy.conf
     ...
 
-In the following example, I created these files as the user **elvis**, and my
-default group is **superscience**. Notice how the directories
-*elvis-first-stack* and *elvis-first-stack/web* have the executable bit set for
-**other**, while *nginx-proxy.conf* is only readable by me and my group.
+In the following example, I created these files as the user **elvis**,
+and my default group is **superscience**. Notice how the directories
+*elvis-first-stack* and *elvis-first-stack/web* have the executable
+bit set for **other**, while *nginx-proxy.conf* is only readable by me
+and my group.
 
     elvis@nersc:~ $ cd /global/project/projectdirs/superscience/spin/elvis-first-stack
     elvis@nersc:elvis-first-stack $ find . -ls
@@ -349,7 +404,7 @@ default group is **superscience**. Notice how the directories
     507571673 1 -rw-r----- 1 elvis superscience 299 Mar 14 17:52 ./web/nginx-proxy.conf
     elvis@nersc:elvis-first-stack $
 
-!!! Warning "Security reminder about public & private web services and the NERSC Global Filesystems"
+!!! Warning "Security reminder"
     NERSC's security policy requires the following for any services which read
     and write to the NERSC Global Filesystems: Unauthenticated services, such as a
     Public webserver, are permitted to read from the Global Filesystems, but be
@@ -366,24 +421,34 @@ with Spin.
 
 In your project directory on Cori (e.g.
 `/global/project/projectdirs/YOUR_COLLAB_DIRECTORY/YOURUSERNAME-first-stack`,
-create a new Docker Compose file. **The name of the directory is important**,
-because by default, the stack will be named after the directory name. In
-these exercises we make sure that the directory name and the stack name match.
-The stack name can also be specified using the `--stack` flag.
+create a new Docker Compose file. **The name of the directory is
+important**, because by default, the stack will be named after the
+directory name. In these exercises we make sure that the directory
+name and the stack name match.  The stack name can also be specified
+using the `--stack` flag.
 
-!!! info
-    Technically, the Docker Compose file can live elsewhere on the filesystem,
-    such as in your home directory under `~/docker/`. The Project directory is
-    just a convenient place to store this file. Some people would prefer to keep
-    the configuration of an application separate from the application directory
-    itself.
+!!! info "Where should the Docker Compose file live?"
+    Technically, the Docker Compose file can live elsewhere on
+    the filesystem, such as in your home directory under
+    `~/docker/`. The Project directory is just a convenient place to
+    store this file. Some people would prefer to keep the
+    configuration of an application separate from the application
+    directory itself. Others prefer to keep the Configuration in one directory,
+    and the Application Data in another directory. The choice is up to you.
+
+!!! info "rancher-compose.yml"
+    Note that Rancher also supports a
+    second configuration file named rancher-compose.yml, but that is
+    for advanced use cases such as scaling. We may cover it in a
+    future lesson.
 
 Add the following text to your docker-compose.yml file, but replace the
 following values with your specific information:
 
 * *YOURUSERNAME*
 * *YOUR_COLLAB_DIRECTORY*
-* *YOUR_NERSC_UID:YOUR_NERSC_GID* (Hint: Find your UID & GID with the commands `id -u` & `id -g` command)
+* *YOUR_NERSC_UID:YOUR_NERSC_GID* (Hint: Find your UID & GID with the
+  commands `id -u` & `id -g` command)
 
 ```
 version: '2'
@@ -436,25 +501,30 @@ major differences:
     * The secondary group 'nginx' is added to the account, so the account can
       access files inside the container.
 * Security:
-    * All Linux kernel capabilities are dropped with the **cap_add: ALL** parameter to improve the security of the application.
+    * All Linux kernel capabilities are dropped with the **cap_drop:
+      ALL** parameter to improve the security of the application.
 
 !!! info "Linux Kernel 'capabilities'"
-    Linux Kernel 'capabilities' are fine-grained controls over superuser
-    capabilities. Docker ships with a [small, restricted set of Kernel capabilities by default,](https://docs.docker.com/engine/security/security/#linux-kernel-capabilities)
+    Linux Kernel 'capabilities' are
+    fine-grained controls over superuser capabilities. Docker ships
+    with a [small, restricted set of Kernel capabilities by default,](https://docs.docker.com/engine/security/security/#linux-kernel-capabilities)
     and is fairly secure out of the box. By dropping all remaining
-    capabilities, we're taking it a step further to make our container even
-    more secure. If you needed to add specific capabilities back to the
-    container, you can add them with the **cap_add:** parameter, which is
-    discussed more in the [Spin Best Practices Guide](/services/spin/best_practices).
+    capabilities, we're taking it a step further to make our container
+    even more secure. If you needed to add specific capabilities back
+    to the container, you can add them with the **cap_add:**
+    parameter, which is discussed more in
+    the [Spin Best Practices Guide](/services/spin/best_practices).
 
 ### Step 3: Sanity checks
 
-Let's verify our config file before proceeding using `rancher up --render`. If
-the file is free from validation errors, Docker Compose will print out the
-contents of the file, like so:
+Let's verify our config file before proceeding using `rancher up
+--render`. If the file is free from validation errors, Docker Compose
+will print out the contents of the file, like so:
 
     elvis@nersc:elvis-first-stack $ ls -ld docker-compose.yml
     -rw-rw---- 1 elvis elvis 455 May 15 11:58 docker-compose.yml
+
+    elvis@nersc:elvis-first-stack $ export RANCHER_ENVIRONMENT=dev-cattle
     elvis@nersc:elvis-first-stack $ rancher up --render
     version: '2'
     services:
@@ -477,38 +547,24 @@ contents of the file, like so:
 
     elvis@nersc:elvis-first-stack $
 
-If the file contained any validation errors, Rancher will complain with an
-error similar to the following:
+If the file contained any validation errors, Rancher will complain
+with an error similar to the following:
 
     elvis@nersc:elvis-first-stack $ rancher up --render
     ERRO[0001] Could not parse config for project elvis-first-stack : yaml: line 4: mapping values are not allowed in this context
     FATA[0001] Failed to read project: yaml: line 4: mapping values are not allowed in this context
     elvis@nersc:elvis-first-stack $
 
-Note that `rancher up --render` won't catch **all** errors, but it will catch
-most syntax errors.
+Note that `rancher up --render` won't catch **all** errors, but it
+will catch most syntax errors.
 
-While you're at it, quickly verify that the path to the Nginx file matches the
-path specified in the Compose file. List the file, grep the path from
-docker-compose.yml , and make sure they match:
+While you're at it, quickly verify that the path to the Nginx file
+matches the path specified in the Compose file. List the file, grep
+the path from docker-compose.yml , and make sure they match:
 
     ls /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/elvis-first-stack/web/nginx-proxy.conf/web/nginx-proxy.conf
 
     grep /global/project/projectdirs/YOUR_COLLAB_DIRECTORY/elvis-first-stack/web/nginx-proxy.conf docker-compose.yml
-
-!!! info "rancher-compose.yml"
-    Note that Rancher also supports a second configuration file named
-    rancher-compose.yml, but that is for advanced use cases such as scaling. We may
-    cover it in a future lesson.
-
-## Part 3: Start the stack
-
-Now that your Docker compose files are available, and all required files are
-available on the NERSC Global Filesystem, it's time to start your stack with
-the command below.  By default, Rancher will create a stack named after your
-current working directory, which should be named like **USERNAME-first-stack**.
-If you want to name the stack something different, use the `--stack` flag to
-specify the name.
 
 !!! Tip "Tip: Simplify your workflow with `RANCHER_ENVIRONMENT`"
 
@@ -541,11 +597,20 @@ specify the name.
         1s3713  service  elvis-webapp/db   mysql  healthy  1/1    false
         nersc$
 
+## Part 4: Start the stack
+
+Now that your Docker compose files are available, and all required
+files are available on the NERSC Global Filesystem, it's time to start
+your stack with the command below.  By default, Rancher will create a
+stack named after your current working directory, which should be
+named like **USERNAME-first-stack**.  If you want to name the stack
+something different, use the `--stack` flag to specify the name.
+
 ### Start the stack with `rancher up`
 
-Start your stack with the `rancher up` command, using the `-d` flag to send all
-logs to the background.  Make sure you use the 'sandbox' environment for this
-first application.
+Start your stack with the `rancher up` command, using the `-d` flag to
+send all logs to the background.  Make sure you use the 'sandbox'
+environment for this first application.
 
     export RANCHER_ENVIRONMENT=sandbox
     rancher up -d
@@ -646,7 +711,7 @@ Go ahead and plug the FQDN & port number into your browser to view the stack.
 If the URL does not work, it's likely that the DNS records have not propogated
 yet. Wait a few minutes and try again, or try the IP address instead.
 
-## Part 4: A simple upgrade to your stack
+## Part 5: A simple upgrade to your stack
 
 In this example, we will perform a very simple upgrade just to show how it's
 done. Upgrading a stack has two mandatory steps:
@@ -684,7 +749,7 @@ YOURUSERNAME-first-stack`:
     rancher up --upgrade -d
 
 Notice that we're using the `-d` flag here to send the logs to the background,
-like we did in ‘Part 3: Start the stack’ above.
+like we did in ‘Part 4: Start the stack’ above.
 
 The command will print output like the following. Look for the line which says
 **Upgrading app**, which shows that the app service was upgraded.
@@ -858,24 +923,7 @@ Global Filesystem (shown above) and will provide other options in the future.
 
 ### Removing your stack
 
-Use `rancher rm --type stack` to remove your stack.
-
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    1s3971  service  elvis-first-stack/app  registry.spin.nersc.gov/elvis/my-first-container-app:latest    healthy  1/1    false
-    1s3972  service  elvis-first-stack/web  registry.spin.nersc.gov/elvis/my-first-container-nginx:latest  healthy  1/1    false
-
-    nersc$ rancher rm elvis-first-stack --type stack
-    1st1668
-
-    nersc$ rancher ps
-    ID      TYPE     NAME                   IMAGE                                                          STATE    SCALE  SYSTEM  ENDPOINTS  DETAIL
-    nersc
-
-If you forget the `--type stack` flag, Rancher may complain with an error like
-*'You don't own volume your-stack-here'** This is an ordering problem within
-Rancher which only occurs sometimes. Using the `--type stack` forces Rancher to
-do the correct thing.
+See the topic [#removing-your-stack-if-you-get-stuck] above.
 
 ## Other useful command line tasks
 

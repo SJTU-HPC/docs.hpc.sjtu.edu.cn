@@ -24,7 +24,7 @@ Modeling of Magnetically Confined Fusion Plasma. The code is version
 controlled under git and hosted in bitbucket. For access to the
 repository,
 please
-[contact the main developers](http://epsi.pppl.gov/xgc-users/how-to-become-an-xgc-user).
+[contact the main developers](https://epsi.pppl.gov/xgc-users/how-to-become-an-xgc-user).
 
 The XGC1 code has five main kernels:
 
@@ -247,4 +247,4 @@ Performance Computing. ISC High Performance 2017. Lecture Notes in Computer
 Science, vol 10524. Springer, Cham https://doi.org/10.1007/978-3-319-67630-2_25
 
 [Talk given at NERSC application readiness meeting on 02/14/2018 by T. Koskela
-(PDF)](http://www.nersc.gov/assets/Uploads/tkoskela-appReadiness-0214-public.pdf)
+(PDF)](https://www.nersc.gov/assets/Uploads/tkoskela-appReadiness-0214-public.pdf)

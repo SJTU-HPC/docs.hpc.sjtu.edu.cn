@@ -10,26 +10,27 @@ dissipatitve dynamics).
 
 ## Example run script
 
-This script requires that `${INPUT_FILE}` be specified.
+This script requires that `${INPUT_FILE}` be specified. The script is written
+such that *only* the number of nodes needs to be changed.
 
 !!! example "Cori KNL"
 	```bash
 	--8<-- "docs/applications/namd/cori-knl.sh"
 	```
 
-??? example "Edison"
+??? example "Cori Haswell"
     ```shell
     --8<-- "docs/applications/namd/cori-hsw.sh"
     ```
 
-??? example "Cori Haswell"
+??? example "Edison"
     ```shell
     --8<-- "docs/applications/namd/edison.sh"
     ```
 
 ## Support
 
- * [User's Guide](http://www.ks.uiuc.edu/Research/namd/current/ug/)
- * [Problem with NAMD?](http://www.ks.uiuc.edu/Research/namd/bugreport.html)
+ * [User's Guide](https://www.ks.uiuc.edu/Research/namd/current/ug/)
+ * [Problem with NAMD?](https://www.ks.uiuc.edu/Research/namd/bugreport.html)
  * **IF** after the above you believe there is an issue with the NERSC
    module file a ticket with our [help desk](https://help.nersc.gov)

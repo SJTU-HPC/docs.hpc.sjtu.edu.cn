@@ -4,15 +4,18 @@ nav:
       - Accounts : accounts/index.md
       - Passwords : accounts/passwords.md
       - Policy : accounts/policy.md
+      - Collaboration Accounts : accounts/collaboration_accounts.md
   - Connecting:
       - Login Nodes: connect/login-nodes.md
       - SSH : connect/ssh.md
       - MFA : connect/mfa.md
       - NX : connect/nx.md
-      - Jupyter : services/jupyter.md
+      - Jupyter : connect/jupyter.md
   - Running Jobs:
     - Overview: jobs/index.md
     - Examples: jobs/examples/index.md
+    - Affinity: jobs/affinity/index.md
+    - Interactive: jobs/interactive.md
     - Best Practices: jobs/best-practices.md
     - Workflow Tools:
       - Overview: jobs/workflow-tools.md
@@ -20,15 +23,31 @@ nav:
       - Fireworks: jobs/workflow/fireworks.md
     - Reservations: jobs/reservations.md
     - Policy: jobs/policy.md
+    - Containers:
+        - Overview : development/shifter/overview.md
+        - How to use Shifter: development/shifter/how-to-use.md
+        - Using Intel Compilers with Docker Images: development/shifter/intel.md
+        - Examples: development/shifter/examples.md
   - Applications:
-    - Quantum ESPRESSO : applications/quantum-espresso/index.md
-    - NAMD : applications/namd/index.md
-    - TensorFlow: applications/tensorflow/index.md
-    - VASP : applications/vasp/index.md
+    - Overview: applications/index.md
     - Abinit: applications/abinit/index.md
+    - BerkeleyGW: applications/berkeleygw/index.md
     - CP2K: applications/cp2k/index.md
+    - Mathematica : applications/mathematica/index.md
+    - MATLAB : applications/matlab/index.md
+    - NAMD : applications/namd/index.md
+    - PARATEC: applications/paratec/index.md
+    - Quantum ESPRESSO : applications/quantum-espresso/index.md
+    - Wannier90: applications/wannier90/index.md
+    - VASP : applications/vasp/index.md
+    - MATLAB : applications/matlab/index.md
   - Analytics:
+      - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
+      - Machine Learning:
+        - Overview: analytics/machinelearning/overview.md
+        - TensorFlow: analytics/machinelearning/tensorflow/index.md
+        - PyTorch: analytics/machinelearning/pytorch.md
   - Data:
       - Management : data/management.md
       - Sharing: data/sharing.md
@@ -45,10 +64,13 @@ nav:
     - Portability: performance/portability.md
     - Variability: performance/variability.md
     - Case Studies:
+        - Overview : performance/case-studies/index.md
         - AMReX : performance/case-studies/amrex/index.md
         - Chombo-Crunch : performance/case-studies/chombo-crunch/index.md
         - EMGeo : performance/case-studies/emgeo/index.md
+        - HMMER3 : performance/case-studies/hmmer3/index.md
         - MFDn : performance/case-studies/mfdn/index.md
+        - QPhiX : performance/case-studies/qphix/index.md
         - Quantum ESPRESSO Exact Exchange : performance/case-studies/quantum-espresso/index.md
         - WARP: performance/case-studies/warp/index.md
         - XGC1: performance/case-studies/xgc1/index.md
@@ -71,24 +93,32 @@ nav:
         - Overview : services/cdash/index.md
         - CTest/CDash with CMake : services/cdash/with_cmake.md
         - CTest/CDash without CMake : services/cdash/without_cmake.md
+      - CVMFS : services/cvmfs.md
   - Development:
-    - Checkpoint/Restart : 
-        - Overview : development/checkpoint-restart/index.md
-        - DMTCP : development/checkpoint-restart/dmtcp/index.md 
-    - Compilers : 
-        - Cray Compiler Wrappers: development/compilers/index.md
-        - LLVM : development/compilers/llvm.md
-    - Containers (Shifter):
-        - Overview : development/shifter/overview.md
-        - How to use : development/shifter/how-to-use.md
+    - Build Tools:
+        - development/build-tools/index.md
     - Developer Tools:
+        - development/performance-debugging-tools/index.md
         - DDT : development/performance-debugging-tools/ddt.md
         - TotalView : development/performance-debugging-tools/totalview.md
         - GDB : development/performance-debugging-tools/gdb.md
         - STAT and ATP : development/performance-debugging-tools/stat_atp.md
         - Valgrind : development/performance-debugging-tools/valgrind.md
         - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
+        - MAP : development/performance-debugging-tools/map.md
         - VTune : development/performance-debugging-tools/vtune.md
+        - Advisor : development/performance-debugging-tools/advisor.md
+        - Inspector : development/performance-debugging-tools/inspector.md
+        - Reveal : development/performance-debugging-tools/reveal.md
+        - APS : development/performance-debugging-tools/aps.md
+        - CrayPat : development/performance-debugging-tools/craypat.md
+        - darshan : development/performance-debugging-tools/darshan.md
+        - IPM : development/performance-debugging-tools/ipm.md
+        - Trace Analyzer and Collector: development/performance-debugging-tools/itac.md
+        - LIKWID : development/performance-debugging-tools/likwid.md
+    - Compilers :
+        - Native Compilers : development/compilers/native.md
+        - Compiler Wrappers (recommended) : development/compilers/wrappers.md
     - High-level Programming Environments:
         - Python :
             - development/high-level-environments/python/index.md
@@ -97,18 +127,24 @@ nav:
             - Python FAQ : development/high-level-environments/python/frequently-asked-questions.md
             - Best Practices : development/high-level-environments/python/best-practices.md
             - Python on Cori KNL : development/high-level-environments/python/python-on-cori-knl.md
+            - Profiling Python : development/high-level-environments/python/profiling-python.md
 #        - Julia : development/high-level-environments/julia.md
 #        - Matlab : development/high-level-environments/matlab.md
     - Programming Models:
         - MPI : development/programming-models/mpi.md
-        - OpenMP : development/programming-models/openmp.md
+        - OpenMP : 
+          - About: development/programming-models/openmp/openmp.md
+          - OpenMP Resources : development/programming-models/openmp/openmp-resources.md
+          - Tools for OpenMP : development/programming-models/openmp/openmp-tools.md
+          - False Sharing Detection using VTune Amplifier : development/programming-models/openmp/sharing-vtune.md
         - UPC++ : development/programming-models/upcxx.md
         - Kokkos : development/programming-models/kokkos.md
         - Raja : development/programming-models/raja.md
         - Coarrays : development/programming-models/coarrays.md
     - Libraries:
-        - MKL : development/libraries/mkl/index.md
         - FFTW : development/libraries/fftw/index.md
+        - LAPACK : development/libraries/lapack/index.md
+        - MKL : development/libraries/mkl/index.md
         - LibSci : development/libraries/libsci/index.md
         - HDF5 : development/libraries/hdf5/index.md
         - NetCDF : development/libraries/netcdf/index.md
@@ -119,14 +155,23 @@ nav:
   - Systems:
       - Cori : systems/cori/index.md
       - Edison : systems/edison/index.md
-      - PDSF : systems/pdsf/index.md
+      - PDSF: 
+           - PDSF System: systems/pdsf/index.md
+           - Slurm :
+              - Overview : pdsf/slurm/README.md
+              - LZ pulseFinder CVMFS : pdsf/slurm/lz-pulseFinder/Readme.md
+              - Atlas madGraph multi-core : pdsf/slurm/atlas-madGraph/Readme.md
+              - DayaBay NuWa : pdsf/slurm/dyb-nuwa/Readme.md
+              - Majorana skim : pdsf/slurm/majorana-skim/Readme.md
+              - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
+              - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
+           - Shifter :
+              - Recipes : pdsf/shifter/README.md
+              - Clone STAR DB : pdsf/shifter/clone_starDB.md
       - Genepool:
         - Genepool System: systems/genepool.md
-        - Getting Started : systems/genepool/genepool-getting-started.md
+        - Getting Started : systems/genepool/getting-started.md
         - Denovo, the Replacement for Old Genepool : systems/genepool/genepool-denovo-the-replacement-for-genepool.md
-        - Configuration : systems/genepool/genepool-configuration.md
-        - User Environment : systems/genepool/genepool-user-environment.md
-        - Programming : systems/genepool/genepool-programming.md
         - Software : systems/genepool/genepool-software.md
         - Queues and Policies : systems/genepool/genepool-queues-and-policies.md
         - Running Jobs : systems/genepool/genepool-running-jobs.md
@@ -135,7 +180,9 @@ nav:
         - Data Managment : systems/genepool/genepool-data-management.md
         - Training and Tutorials : systems/genepool/genepool-training-and-tutorials.md
         - Websites, Databases and Cluster Services : systems/genepool/genepool-websites-databases-and-cluster-services.md
+        - Collaboration Accounts : systems/genepool/collab-accounts.md
         - Cori for JGI users : systems/genepool/genepool-cori-for-jgi.md
+      - Data Transfer Nodes : systems/dtn/index.md
   - Filesystems:
       - Overview: filesystems/index.md
       - Quotas: filesystems/quotas.md
@@ -145,20 +192,12 @@ nav:
       - Edison scratch: filesystems/edison-scratch.md
       - Cori scratch: filesystems/cori-scratch.md
       - Cori Burst Buffer: filesystems/cori-burst-buffer.md
-      - Archive (HPSS): filesystems/archive.md
-  - PDSF:
-    - slurm :
-      - overview : pdsf/slurm/README.md
-      - LZ pulseFinder CVMFS : pdsf/slurm/lz-pulseFinder/Readme.md
-      - Atlas madGraph multi-core : pdsf/slurm/atlas-madGraph/Readme.md
-      - DayaBay NuWa : pdsf/slurm/dyb-nuwa/Readme.md
-      - Majorana skim : pdsf/slurm/majorana-skim/Readme.md
-      - STAR root4star :  pdsf/slurm/star-bfc/Readme.md
-      - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
-    - shifter :
-      - recipes : pdsf/shifter/README.md
-      - Clone STAR DB : pdsf/shifter/clone_starDB.md
-      
+      - Archive (HPSS): 
+        - Intro: filesystems/archive.md
+        - Accessing HPSS: filesystems/archive_access.md
+        - Storage Statistics : http://www.nersc.gov/users/storage-and-file-systems/hpss/storage-statistics/
+      - Backups: filesystems/backups.md
+      - Unix File Permissions: filesystems/unix-file-permissions.md
   - Help: help/index.md
 #      -
 #  - JGI:
@@ -174,8 +213,9 @@ site_description: NERSC Documentation
 site_author: NERSC
 site_dir: public
 site_url: "https://docs.nersc.gov"
-#repo_name: NERSC/documentation
-#repo_url: https://gitlab.com/NERSC/documentation
+repo_name: GitLab/NERSC/docs
+repo_url: https://gitlab.com/NERSC/nersc.gitlab.io
+edit_uri: blob/master/docs/
 
 # Configuration
 strict: true

@@ -1,8 +1,8 @@
-## Minimal overview of SLURM at PDSF
+# Minimal overview of Slurm at PDSF
 
-(see any generic SLURM tutorial for more details)
+(see any generic Slurm tutorial for more details)
 
-To submit in SLURM the equivalent of 'qsub  jobscript.sh' is:
+To submit in Slurm the equivalent of 'qsub  jobscript.sh' is:
 ```bash
 [laptop]
 $ ssh  -X pdsf.nersc.gov
@@ -65,14 +65,14 @@ Submit one task running on 32 vCores and use 50.1 GB of RAM
 ```bash
 $ sbatch -p shared-chos --mem 50100M -n32  jobscript.sh
 ```
-Start **interactive session** on a SLURM worker node with
+Start **interactive session** on a Slurm worker node with
 ```bash
 $ salloc  -p shared-chos  -t 1:00:00
     salloc: Granted job allocation 93574
 ```
 
-**Licenses**: optional constraint informing SLURM about resources your
-job needs. If speciffied will all SLURM to protect ( e.g. not start)
+**Licenses**: optional constraint informing Slurm about resources your
+job needs. If speciffied will all Slurm to protect ( e.g. not start)
 your job in the case given resource is not avaliable. Typically, users
 who need /project(a) should add this line to the slurm job description
 
@@ -167,7 +167,7 @@ List all Slurm jobs from all PDSF users (former sgeusers)
 ```bash
 $ slusers
 
-Current SLURM usage summed over all PDSF users
+Current Slurm usage summed over all PDSF users
    Rjob     Rcpu   Rcpu*h    PDjob    PDcpu      user:account:partition
       5       15     17.3        0        0      balewski nstaff shared
      10       10     15.2        0        0      balewski nstaff shared-cho
@@ -200,7 +200,7 @@ pdtheory                                 2    0.000752           0      0.000000
 rhstar                                 736    0.276796   611072852      0.335279
 ```
 
-Examples of intaractive and SLURM batch jobs for all PDSF experiments,
+Examples of intaractive and Slurm batch jobs for all PDSF experiments,
 updated June, 2017.
 
 **Slurm job script generator** (designed for Cori) seems like it can

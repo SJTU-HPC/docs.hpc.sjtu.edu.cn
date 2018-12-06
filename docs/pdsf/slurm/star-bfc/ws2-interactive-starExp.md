@@ -1,3 +1,5 @@
+# STAR
+
 ## PDSF-3  Interactive  STAR  session  using Shifter image w/ any StarLibs
 
 ### Worksheet-2
@@ -10,7 +12,7 @@
 
 ### 1) Login to PDSF
 
-Login to PDSF as usually and load SLURM module. You must start this
+Login to PDSF as usually and load Slurm module. You must start this
 instruction in CHOS=sl64.
 
 ```bash
@@ -30,7 +32,7 @@ sacctmgr show assoc where user=$USER
 You should see the name of 'account' you belong to and # of shares you
 can use at PDSF-3.
 
-### 2) Launch interactive SLURM session on 1 core on PDSF-3
+### 2) Launch interactive Slurm session on 1 core on PDSF-3
 
 Start your interactive session using the same Shifter image as on
 Cori, excute shifter command, verify you are inside Shifter instance
@@ -80,7 +82,7 @@ $ root4star -b -q
   *   Version   5.34/30     23 April 2015   *
   *                                         *
   *  You are welcome to visit our Web site  *
-  *          http://root.cern.ch            *
+  *          https://root.cern.ch            *
   *                                         *
   *******************************************
 
@@ -189,7 +191,7 @@ root4star [1]  MuDst->Draw("mNHits")
 
 ### 4) Shut down the interactive session
 
-You need to exit 2x: from shifter cgroup, next from interactive SLURM (aka salloc)
+You need to exit 2x: from shifter cgroup, next from interactive Slurm (aka salloc)
 
 ```bash
 [mc1504] ~/> exit

@@ -1,3 +1,5 @@
+# VASP
+
 VASP is a package for performing ab initio quantum-mechanical
 molecular dynamics (MD) using pseudopotentials and a plane wave basis
 set. The approach implemented in VASP is based on a finite-temperature
