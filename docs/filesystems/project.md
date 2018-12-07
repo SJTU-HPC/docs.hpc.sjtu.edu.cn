@@ -36,10 +36,9 @@ group.
 
 ## Quotas
 
-| Type   | Quota |
-|--------|:-----:|
-| Space  | 1 TB  |
-| inodes | 1 M   |
+| space quota | inode quota | purge time | backups       |
+|-------------|-------------|------------|---------------|
+| 1 TB        | 1 M         | none       | snapshots     |
 
 ## Performance
 
