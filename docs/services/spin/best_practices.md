@@ -130,7 +130,22 @@ such as `:v20180809` instead of `:latest`, an that you **update the tag for any 
 If you do use `:latest`: in your service, you can also use the label
 `io.rancher.container.pull_image: always` to tell Docker to always pull the
 latest version your `:latest` image. This will add a short delay to upgrade
-operations.
+operations. Here is an example with a custom Nginx service:
+
+    version: '2'
+    services:
+      web:
+        image: registry.spin.nersc.gov/elvis/elvis-nginx-proxy:latest
+        volumes:
+        - /global/project/projectdirs/sciencegroup/elvis_project/web/images:/srv:ro
+        cap_drop:
+        - ALL
+        user: 1000:1000
+        group_add:
+        - nginx
+        labels:
+          io.rancher.container.pull_image: always
+        retain_ip: true
 
 ## Version Control
 
