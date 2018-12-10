@@ -167,6 +167,7 @@ nav:
               - STAR interactive :  pdsf/slurm/star-bfc/ws2-interactive-starExp.md
            - Shifter :
               - Recipes : pdsf/shifter/README.md
+              - Interactive : pdsf/shifter/interactive_shifter_atlas.md
               - Clone STAR DB : pdsf/shifter/clone_starDB.md
       - Genepool:
         - Genepool System: systems/genepool.md
