@@ -184,6 +184,7 @@ One or more identical containers providing the same function in Rancher is terme
 * Unique services should use a descriptive name for the service they provide. It should be a general description of the functionality, rather than the specific name of the implementation (e.g. web rather than apache)
 * As new service types become common, they will be added to this table of recommended names.
 * Standardizing service names has the benefit of clearly communicating the purpose of each service. This is beneficial when collaborating with others, when revisiting a service created in the past, and when enlisting the help of NERSC staff during troubleshooting.
+* If more than one service in your stack logically should use the same name like `app` then you can suffix the service name to make them unique: `app-reader` and `app-writer` for example are fine.  However the service name can only have *one* dash in it at most.  So `app-file-reader` is *not* allowed. 
 
 ## Stacks
 
