@@ -151,6 +151,31 @@ For a newly added page to appear in the navigation edit the top-level
     git checkout origin/pr/N
     ```
 
+### Install and run markdown lint
+
+In the base directory of the repository run `npm install
+markdownlint-cli`. (You may need to
+install [nodejs](https://nodejs.org/en/)).
+
+```
+git clone git@gitlab.com:NERSC/nersc.gitlab.io.git
+cd nersc.gitlab.io
+npm install markdownlint-cli
+```
+
+The linter is now installed locally and can be run
+
+```
+$ ./node_modules/markdownlint-cli/markdownlint.js docs/index.md
+docs/index.md: 8: MD009/no-trailing-spaces Trailing spaces [Expected: 0 or 2; Actual: 1]
+docs/index.md: 9: MD009/no-trailing-spaces Trailing spaces [Expected: 0 or 2; Actual: 1]
+```
+
+!!! note
+	It is important to run the linter from the base directory so
+	that the correct configutation file (`.markdownlint.json`) is
+	used.
+
 # Content standards
 
 ## Command prompts
