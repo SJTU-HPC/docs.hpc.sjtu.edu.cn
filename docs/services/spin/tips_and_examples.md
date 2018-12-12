@@ -139,7 +139,7 @@ login information, at any time, run `rancher config --print`, like so:
 
 ### Test that the Rancher CLI is working
 
-Validate that you account is working correctly by running the command
+Validate that your account is working correctly by running the command
 `rancher environment`. This command will communicate to the Rancher
 Server API using your API key. If `rancher environment` returns a list
 of environments, your account is working correctly. If the command
@@ -617,7 +617,7 @@ Stack. Suppose that upgrade fails with an error like the following:
     FATA[0000] Service web must be state=active or inactive to upgrade, currently: state=updating-active
     nersc:elvis-flask-demo $
 
-The solution here is to Stop or the problematic service, and then try
+The solution here is to stop the problematic service, and then try
 the upgrade again. You may need to wait 10+ seconds, or longer, for
 the service to actually stop correctly.
 
