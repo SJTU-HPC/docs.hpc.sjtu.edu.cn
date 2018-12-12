@@ -43,7 +43,7 @@ frustratingly slow to push to the image registry during the development cycle
 (especially over a typical home internet link), and will be slower to deploy.
 
 Popular projects may have multiple images on their project page. The Apache
-httpd project has `httpd:2.4` and `apache:alpine`, which show that the Apache
+httpd project has `httpd:2.4` and `httpd:alpine`, which show that the Apache
 community is maintaining a mainline application while also experimenting with
 tiny images based on the Alpine container OS.
 
@@ -298,7 +298,7 @@ image. The cases would be configured to run as “root:genome” and
 ## Logging
 
 * Logging strategies for container-based services may need to be modified for applications developed in a more traditional environment.  Files written to the container’s file system aren’t easily accessible, and also aren’t persistent across container restarts or upgrades. There are several approaches that have proven useful in Spin:
-* Log to stdout and stderr rather than writing to a file in the file system. If the service needs just one log, it can write to stdout. If it needs two logically separate log streams, it can write to stdout and stderr. In cases where more than one log stream, the container should be started without the -i or -t flag so that stdout and stderr are not combined. These logs will be persistent, but as they can only be accessed via Rancher or a docker command on the Spin hosts, access to the logs must be coordinated with ISG staff  during the pilot phase.
+* Log to stdout and stderr rather than writing to a file in the file system. If the service needs just one log, it can write to stdout. If it needs two logically separate log streams, it can write to stdout and stderr. In cases where more than one log stream, the container should be started without the -i or -t flag so that stdout and stderr are not combined. Recent log entries can be viewed with the `rancher logs` command. There is a current limitation in the CLI that restricts the output to the most recent 100-500 lines.
 * Write to a persistent log volume hosted outside of the Spin environment (e.g. A global project directory). This will facilitate direct access to log information.
 * Log to central logging system (future capability)
 
@@ -316,7 +316,7 @@ port usage include:
 * Whenever possible, use a port number > 1024 within the container. This allows the NET_BIND_SERVICE capability to be dropped.
 * When practical (within the above rules), use the default or well known port for the service, to help convey additional context about your service.
 * If the port you need isn’t currently part of the [existing firewall configuration](#firewall-configuration), and it needs to be publicly accessible, request that it be added to the list via Service Now.
-* Requests for privileged ports (ports greater than 1024) must be reviewed/approved by the Spin working group before changes to the firewall are made.
+* Requests for privileged ports (ports less than 1024) must be reviewed/approved by the Spin working group before changes to the firewall are made.
 * If you don’t care about the port number, and don’t want to request a firewall change, There are several port ranges open and available for use. Ports 50,000 - 50,050 (inclusive) are open to traffic with source addresses within the NERSC network, and ports 60,000 - 60,050 are open to traffic from all source addresses. Try to make a random(ish) selection within this range to minimize the chance of a port scheduling conflict on the Spin nodes. (Basically, your service won’t be able to run if the scheduler can’t find an IP on a Spin node that isn’t already listening on this port, and the chances of this decrease if everyone doesn’t pick the same port).
 
 ### HTTP/HTTPS reverse proxy
