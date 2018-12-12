@@ -278,8 +278,7 @@ system within Spin.
         dino@denovo:~$ ls -ld scratch/dino
         drwxr-x--- 5 dino genome 512 Sep  8 12:00 scratch/dino
 
-* The Linux setuid and setgid capabilities will be dropped for containers accessing the global file system as discussed in the [Security](#security) section
-* Configuring the user or group that the containers will run as, and configuring capabilities will be performed by ISG administrators during the Spin pilot phase as part of the initial stack setup.
+* The Linux setuid and setgid capabilities will be dropped for containers accessing the global file system as discussed in the [Security](#security) section.
 * Images that will be run as a different user or group will need RUN statements as shown in the following example to prepare the image with the necessary group and user definitions.
 
 #### Dockerfile Statements for setting a container group using useradd & groupadd
