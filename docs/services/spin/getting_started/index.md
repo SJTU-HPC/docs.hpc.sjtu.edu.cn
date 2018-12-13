@@ -1,7 +1,7 @@
 # Spin Getting Started Guide Overview
 
 !!! info "This guide is under development"
-    Spin is in a Pilot phase for NERSC staff and users in early 2018. The content of this page may be updated during this development period.
+    Spin is currently in a Pilot phase for NERSC staff and users. The content of this page may be updated during this development period.
 
     The goal of the Spin project is ultimately to provide a self service platform, but during the pilot phase NERSC ISG (Infrastructure Services Group) acts as an intermediary to this service while we improve the service and wait for vendor to provide a more complete multi-tenant system.
 
