@@ -7,7 +7,7 @@ configuration is referred to as "Old Genepool".
 ## Logging into Denovo
 
 Logging into Denovo is as simple as typing `ssh denovo` if logged into
-another NERSC system. Genepool users are all enabled there by default,
+another NERSC system. JGI users are all enabled there by default,
 and because your $HOME is on a global filesystem, your files are in
 the same place as they were on Old Genepool and on Cori. However,
 Denovo does not have all the same software modules installed that Old
@@ -17,11 +17,11 @@ possible. There are tutorials on Shifter and Anaconda on
 the [Training & Tutorials page](training.md),
 as well as tutorials on Slurm.
 
-## Using Slurm on Denovo/Genepool
+## Using Slurm on Denovo
 
 Like all NERSC systems, Denovo exclusively uses the open-source Slurm
 scheduler for its job scheduling. You can view NERSC's pages on Slurm,
-and the complete documentation for Slurm here.
+and the complete documentation for Slurm [here](https://slurm.schedmd.com/).
 
 |Genepool UGE command|	Slurm equivalent|	Description|
 |---|---|---|
@@ -95,6 +95,9 @@ UGE, so jobs that attempt to use more memory or CPUs than they have
 been allocated will be killed by the scheduler. Using `--exclusive`
 overrides the number of CPUs requested and the amount of memory, of
 course.
+
+Jobs on Denovo have a 7-day walltime limit. There is no limit to the number of
+jobs that may be submitted at a given time.
 
 ## Memory
 
@@ -179,36 +182,6 @@ mapped to the global filesystems.
 
 You can find more information on Shifter on the Using Shifter and
 Docker page, here are a few simple example commands:
-
-### Pulling an image from Dockerhub to NERSC:
-
-```bash
-denovo> shifterimg pull bioboxes/velvet
-2017-09-27T14:24:59 Pulling Image: docker:bioboxes/velvet, status: READY
-```
-
-### Listing the images which have been pulled already:
-
-You can list the images which have been pulled to NERSC already with
-the `shifterimg images` command. E.g. to find images built by the JGI
-container project so far and available on Denovo, use this command:
-
-```bash
-denovo2> shifterimg images | grep jgi
-mendel     docker     READY    b6ba49b95b   2017-05-15T15:46:02 registry.services.nersc.gov/jgi/bwa:latest
-mendel     docker     READY    a4c075bcfe   2017-05-11T09:47:48 registry.services.nersc.gov/jgi/checkm:latest
-mendel     docker     READY    ea246c6191   2017-07-26T11:24:50 registry.services.nersc.gov/jgi/hmmer:latest
-mendel     docker     READY    1cd8629c3e   2017-05-15T16:28:46 registry.services.nersc.gov/jgi/macs2:latest
-mendel     docker     READY    1a8159327b   2017-05-16T14:43:13 registry.services.nersc.gov/jgi/picard:latest
-mendel     docker     READY    b2cf3f787e   2017-09-11T09:30:52 registry.services.nersc.gov/jgi/prodege:latest
-mendel     docker     READY    efddc3487b   2017-09-15T10:38:03 registry.services.nersc.gov/jgi/prodigal:latest
-mendel     docker     READY    d3de678de9   2017-08-21T16:49:22 registry.services.nersc.gov/jgi/smrtanalysis:2.3.0_p5
-mendel     docker     READY    6a8ee03bf2   2017-09-15T10:42:27 registry.services.nersc.gov/jgi/smrtlink:4.0.0.190159
-mendel     docker     READY    36b07a3f2d   2017-05-11T11:10:03 registry.services.nersc.gov/jgi/tony-sandbox:latest
-mendel     docker     READY    00b175aab6   2017-05-10T12:32:30 registry.services.nersc.gov/jgi/trinity:latest
-mendel     docker     READY    22891d8b91   2017-05-05T12:09:38 registry.services.nersc.gov/jgi/usearch:gitlab
-mendel     docker     READY    6c728db34a   2017-05-15T15:58:43 registry.services.nersc.gov/jgi/wgsim:latest
-```
 
 ### Running an image interactively
 
@@ -315,29 +288,6 @@ VERSION_ID=3.5.2
 PRETTY_NAME="Alpine Linux v3.5"
 HOME_URL="https://alpinelinux.org"
 BUG_REPORT_URL="https://bugs.alpinelinux.org"
-```
-
-now run the same script with a different image:
-
-```bash
-wildish@mc1218: default:~> sbatch --image=ubuntu:16.04 shifter.sh
-Submitted batch job 89
-[...]
-
-denovo> cat slurm-89.out
-premount hook
-CAP_LAST_CAP: 37, possibleMaxCap: 37
-NAME="Ubuntu"
-VERSION="16.04.2 LTS (Xenial Xerus)"
-ID=ubuntu
-ID_LIKE=debian
-PRETTY_NAME="Ubuntu 16.04.2 LTS"
-VERSION_ID="16.04"
-HOME_URL="https://www.ubuntu.com/"
-SUPPORT_URL="https://help.ubuntu.com/"
-BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
-VERSION_CODENAME=xenial
-UBUNTU_CODENAME=xenial
 ```
 
 ### Interactive nodes, 'gpint' replacements
