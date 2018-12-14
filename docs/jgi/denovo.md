@@ -14,8 +14,7 @@ Denovo does not have all the same software modules installed that Old
 Genepool did, since we expect you to use tools like Shifter or
 Anaconda to manage software in a more robust manner, whenever
 possible. There are tutorials on Shifter and Anaconda on
-the
-[Genepool Training & Tutorials page](genepool-training-and-tutorials.md),
+the [Training & Tutorials page](training.md),
 as well as tutorials on Slurm.
 
 ## Using Slurm on Denovo/Genepool

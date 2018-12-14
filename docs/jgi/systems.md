@@ -1,4 +1,6 @@
-# Getting started on Genepool
+# Computational Systems
+
+## Getting Started
 
 You can log in to Genepool using SSH (Secure Shell) with the following
 command from any UNIX, Linux, FreeBSD, etc. command shell or terminal:
@@ -41,5 +43,5 @@ consultant to identify which gp/dints you may access.
 
 To begin running jobs on Denovo or Cori, you should begin learning
 about the Slurm batch scheduler system, and look at
-the [example batch scripts](../../jobs/examples/index.md) before submitting
+the [example batch scripts](../jobs/examples/index.md) before submitting
 your first job.

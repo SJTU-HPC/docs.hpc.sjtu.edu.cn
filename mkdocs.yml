@@ -169,20 +169,6 @@ nav:
               - Recipes : pdsf/shifter/README.md
               - Interactive : pdsf/shifter/interactive_shifter_atlas.md
               - Clone STAR DB : pdsf/shifter/clone_starDB.md
-      - Genepool:
-        - Genepool System: systems/genepool.md
-        - Getting Started : systems/genepool/getting-started.md
-        - Denovo, the Replacement for Old Genepool : systems/genepool/genepool-denovo-the-replacement-for-genepool.md
-        - Software : systems/genepool/genepool-software.md
-        - Queues and Policies : systems/genepool/genepool-queues-and-policies.md
-        - Running Jobs : systems/genepool/genepool-running-jobs.md
-        - Cluster Statistics : systems/genepool/genepool-cluster-statistics.md
-        - File Storage and I/O : systems/genepool/genepool-file-storage-and-io.md
-        - Data Managment : systems/genepool/genepool-data-management.md
-        - Training and Tutorials : systems/genepool/genepool-training-and-tutorials.md
-        - Websites, Databases and Cluster Services : systems/genepool/genepool-websites-databases-and-cluster-services.md
-        - Collaboration Accounts : systems/genepool/collab-accounts.md
-        - Cori for JGI users : systems/genepool/genepool-cori-for-jgi.md
       - Data Transfer Nodes : systems/dtn/index.md
   - Filesystems:
       - Overview: filesystems/index.md
@@ -199,10 +185,17 @@ nav:
         - Storage Statistics : http://www.nersc.gov/users/storage-and-file-systems/hpss/storage-statistics/
       - Backups: filesystems/backups.md
       - Unix File Permissions: filesystems/unix-file-permissions.md
+  - JGI Resources:
+     - Overview: jgi/index.md
+     - Systems:
+        - Overview: jgi/systems.md
+        - Cori Genepool: jgi/cori-genepool.md
+        - Denovo: jgi/denovo.md
+     - Filesystems: jgi/filesystems.md
+     - Software: jgi/software.md
+     - Training and Tutorials: jgi/training.md
+     - Databases and Web Services: jgi/services.md
   - Help: help/index.md
-#      -
-#  - JGI:
-#      - Pipelines : jgi/pipelines.md
   - Tutorials:
     - Demo : demo/demo.md
     - Tables : demo/table.md
