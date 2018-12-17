@@ -39,4 +39,10 @@ JGI-specific "quality of service" (QOS).
 ## [Denovo](denovo.md)
 
 Denovo is the name of the system available exclusively to JGI users on the
-NERSC Mendel cluster. It is scheduled for retirement in July 2019.
+NERSC Mendel cluster. **It is scheduled for retirement in July 2019.**
+
+!!! warning "Deprecation"
+     Although we provide documentation
+     on usage of Denovo we **highly** recommend that most of your work be done
+     on Cori genepool (the QOS dedicated for JGI workloads).
+

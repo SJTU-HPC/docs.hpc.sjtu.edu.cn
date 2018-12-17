@@ -103,7 +103,7 @@ management team.
 ### $SCRATCH
 
 Each user has a "scratch" directory.  Scratch directories are NOT
-backed up and file are purged if they have not been accessed for 90
+backed up and files are purged if they have not been accessed for 90
 days.  Access your scratch directory with the environment variable
 "$SCRATCH" for example:
 
