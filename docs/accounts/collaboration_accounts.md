@@ -16,31 +16,13 @@ Collaboration Account" under the blue "Actions" tab.
 
 ## Logging Into Collaboration Accounts
 
-To access your collaboration account on Cori or Edison, login to any
-interactive node:
+To access your collaboration account on Cori, Edison or any DTN node,
+login to any interactive node:
 
 ```
 collabsu <collaboration account name>
 <enter nersc password at the prompt>
 ```
-
-On the DTN nodes, you must still use the old method using your NERSC
-grid certificate. You can also do this on from any PDSF interactive
-node, edisongrid, or corigrid (to access corigrid, you must first log
-into cori.nersc.gov) as yourself and then do the following commands:
-
-```
-module load globus
-myproxy-logon -s nerscca.nersc.gov
-gsissh localhost -l <project account name>
-```
-
-If you're setting the port to 22 in your .ssh/config file, you may also
-need to add a "-p 2222" flag to the gsissh command.
-
-Alternatively you can get a proxy using grid-proxy-init instead of
-myproxy-logon. In this case you use your GRID pass phrase instead of
-your NIM password.
 
 ## Controlling Collaboration Account Access
 
@@ -50,15 +32,6 @@ group. Each collaboration account has a linux file group associated
 with it with the name c_<collaboration account\>. You can add users to
 the corresponding group following the instructions
 [here](https://www.nersc.gov/users/accounts/nim/nim-guide-for-pis/#toc-anchor-8).
-
-To use the old gsissh method, you must associate their grid
-certificate with the account. Log into nim.nersc.gov and click on the
-repo with the collaboration account you wish to change. Then click on
-the "Project Access" tab in the yellow bar partway down the page. This
-will bring you to a page with a pull down menu where you can select
-project account and the user you wish to give access to it. If you
-encounter any errors with this, please open a ticket with NERSC
-consulting.  
 
 ## Use Cases
 
