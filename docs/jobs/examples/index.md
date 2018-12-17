@@ -335,10 +335,8 @@ Here is a sample job script for variable-time jobs, which automates the process 
 
 In the above example, the **--comment** option is used to enter the user’s desired maximum wall-clock time, which could be longer than the maximum time limit allowed by the batch system (96 hours in this example). In addition to the time limit (--time), the **--time-min** option is used to specify the minimum amount of time the job should run (2 hours).
 
-The ata (adaptive time allocation) module used in the job script defines a few bash functions (e.g., requeue_job, func_trap) that are used to automate the process.
-The "requeue_job func_trap USR1" command executes the func_trap function, which contains a list of actions to checkpoint and requeue the job, upon trapping the USR1 signal.
-More detail about these functions can be found in the $ATA_DIR/etc/ATA_setup.sh file after loading the ata module.
-Users may want to modify the scripts (get a copy) as needed, although they should work for most applications as they are now.
+The script setup.sh defines a few bash functions (e.g., requeue_job, func_trap) that are used to automate the process.
+The "requeue_job func_trap USR1" command executes the func_trap function, which contains a list of actions to checkpoint and requeue the job, upon trapping the USR1 signal. Users may want to modify the scripts (get a copy) as needed, although they should work for most applications as they are now.
 
 The job script works as follows:
 

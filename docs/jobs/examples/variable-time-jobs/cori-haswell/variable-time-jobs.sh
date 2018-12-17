@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH -J ata 
+#SBATCH -J vtj 
 #SBATCH -q regular
 #SBATCH -C haswell
 #SBATCH -N 2
 #SBATCH --comment=96:00:00
 #SBATCH --time-min=2:00:00 #the minimum amount of time the job should run
 #SBATCH --time=48:00:00
-#SBATCH --error=ata-%j.err
-#SBATCH --output=ata-%j.out
+#SBATCH --error=vtj-%j.err
+#SBATCH --output=vtj-%j.out
 #SBATCH --mail-user=elvis@nersc.gov
 #
 #SBATCH --signal=B:USR1@60
@@ -22,8 +22,7 @@ ckpt_overhead=60         # should match the time in the #SBATCH --signal option
 ckpt_command=
 
 # requeueing the job if reamining time >0 (do not change the following 3 lines )
-module load ata
-. $ATA_DIR/etc/ATA_setup.sh
+. /usr/common/software/variable-time-job/setup.sh
 requeue_job func_trap USR1
 #
 
