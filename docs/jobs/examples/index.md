@@ -353,6 +353,12 @@ The job script works as follows:
 	* You can send the USR1 signal outside the job script any time using the "scancel -b -s USR1 &lt;jobid&gt;" command to terminate the currently running job. The job still checkpoints and requeues itself before it gets terminated.  
 	* The srun command must execute in the background (notice the **&amp;** at the end of the srun command line and the **wait** command at the end of the job script), so to catch the signal (USR1) on the wait command instead of srun, allow srun to run for a bit longer (up to sig_time seconds) to complete the checkpointing.
 
+###Examples of Variable-time-jobs
+
+!!! example "VASP atomic relaxation jobs for Cori KNL"
+        ```bash
+        --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/vasp-relaxation-job.sh"
+        ```
 
 ## Burst buffer
 
