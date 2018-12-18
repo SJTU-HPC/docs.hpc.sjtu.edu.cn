@@ -26,7 +26,7 @@ login node you started it on.
 
 To begin running jobs on Cori or Denovo, you should begin learning
 about the Slurm batch scheduler system, and look at
-the [example batch scripts](../jobs/examples/index.md) before submitting
+the [example batch scripts](../../jobs/examples/index.md) before submitting
 your first job.
 
 ## [Cori Genepool](cori-genepool.md)

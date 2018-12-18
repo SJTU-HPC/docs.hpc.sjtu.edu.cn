@@ -185,16 +185,17 @@ nav:
         - Storage Statistics : http://www.nersc.gov/users/storage-and-file-systems/hpss/storage-statistics/
       - Backups: filesystems/backups.md
       - Unix File Permissions: filesystems/unix-file-permissions.md
-  - JGI Resources:
-     - Overview: jgi/index.md
-     - Systems:
-        - Overview: jgi/systems.md
-        - Cori Genepool: jgi/cori-genepool.md
-        - Denovo: jgi/denovo.md
-     - Filesystems: jgi/filesystems.md
-     - Software: jgi/software.md
-     - Training and Tutorials: jgi/training.md
-     - Databases and Web Services: jgi/services.md
+  - Science Partners: 
+    - Joint Genome Institute (JGI):
+      - science-partners/jgi/index.md
+      - Systems:
+        - Overview: science-partners/jgi/systems.md
+        - Cori Genepool: science-partners/jgi/cori-genepool.md
+        - Denovo: science-partners/jgi/denovo.md
+      - Filesystems: science-partners/jgi/filesystems.md
+      - Software: science-partners/jgi/software.md
+      - Training and Tutorials: science-partners/jgi/training.md
+      - Databases and Web Services: science-partners/jgi/services.md
   - Help: help/index.md
   - Tutorials:
     - Demo : demo/demo.md

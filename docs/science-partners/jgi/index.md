@@ -1,7 +1,7 @@
 # JGI Resources
 
 <img style="float: right;" alt="Genepool logo"
-src="../img/Genepool-logo.jpg"> 
+src="../../img/Genepool-logo.jpg"> 
 
 NERSC offers various resources for the
 [DOE Joint Genome Institute](https://jgi.doe.gov/).
