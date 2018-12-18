@@ -16,8 +16,8 @@ Collaboration Account" under the blue "Actions" tab.
 
 ## Logging Into Collaboration Accounts
 
-To access your collaboration account on Cori, Edison or any DTN node,
-login to any interactive node:
+To access your collaboration account on any Cori or Edison login node
+or on any data transfer node (DTN), use:
 
 ```
 collabsu <collaboration account name>
