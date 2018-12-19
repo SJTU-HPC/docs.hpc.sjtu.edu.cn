@@ -68,17 +68,18 @@ def check_url(page):
                 continue
 
             if not validators.url(url):
-                print("INVALID: {}".format(url))                
+                print("INVALID: {}".format(url))
                 continue
             
             try:
                 if url not in goodlist:
-                    requests.get(url, timeout=32)
+                    requests.get(url, timeout=60)
                     goodlist.append(url)
                     print("OK: {}".format(url))
                     
-            except requests.exceptions.ConnectionError:
+            except requests.exceptions.ConnectionError as ex:
                 print("BAD: ", url)
+                print("INFO:", ex)
                 badlist.append(url)
         else:
             break
