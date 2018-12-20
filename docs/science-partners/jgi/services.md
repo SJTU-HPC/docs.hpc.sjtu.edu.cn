@@ -6,7 +6,7 @@ Any long-lived process or process listening to a network socket to communicate
 requires some special attention and care to ensure that the service is
 accessible to the appropriate audience, is properly monitored, and maintained
 correctly. The rules and guidlines presented here are intended to strike a
-balance between convenience of running and developing services with thee need
+balance between convenience of running and developing services with the need
 for system maintenance, distribution of resources, appropriate security, and
 monitoring of each service.
 
