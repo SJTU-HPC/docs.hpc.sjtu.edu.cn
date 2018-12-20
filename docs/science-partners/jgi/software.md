@@ -1,16 +1,11 @@
 # Software
 
-## Programming Environments
-
-## Important Environment Variables
-
 ## Modules and Bioinformatics Software
 
-Unlike Genepool, very few NERSC software modules are available for
-user software. We encourage users to use alternatives wherever
-possible, which will be more maintainable and portable to other
-platforms. If you have Genepool module software that is critical to
-migrating your workflow to Cori, please talk to a consultant.
+Unlike on the now-retired Genepool system, very few NERSC software modules are
+available for JGI user software on Cori or Denovo. We encourage users to use
+alternatives wherever possible, which will be more maintainable and portable to
+other platforms.
 
 ### Alternatives to using software modules are:
 
@@ -26,7 +21,8 @@ migrating your workflow to Cori, please talk to a consultant.
 ## Shifter
 
 Shifter is Docker-like software for running containers on NERSC
-systems. More information on Shifter is available here, and Shifter
+systems. More information on Shifter is available
+[here](../../development/shifter/how-to-use/), and Shifter
 training slides are also available. The main advantages of using
 Shifter are:
 
@@ -49,12 +45,10 @@ roughly as follows:
 1. use Docker on a laptop or desktop machine to build a Docker
    container for your software
 2. push that container to Dockerhub or another Docker container
-registry use Shifter on Cori, Edison or Denovo to pull that image to
-the NERSC Shifter registry
+   registry use Shifter on Cori, Edison or Denovo to pull that image to
+   the NERSC Shifter registry
 3. use Shifter on a batch node to run that container, and perform
-useful work.  Note that Shifter is not available on Genepool, the
-kernel version there is too old to support containers. This is just
-one reason why we're commissioning Denovo.
+   useful work
 
 !!! note
 	The JGI has a containerization project, intended to provide
