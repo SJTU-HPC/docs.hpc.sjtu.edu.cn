@@ -38,12 +38,24 @@ group.
 
 | space quota | inode quota | purge time | backups       |
 |-------------|-------------|------------|---------------|
-| 1 TB        | 1 M         | none       | none          |
+| 1 TB        | 1 M         | none       | snapshots     |
 
 ## Performance
 
 The system has a peak aggregate bandwidth of 130 GB/sec bandwidth for
 streaming I/O.
+
+## Snapshots
+
+Project directories use a *snapshot* capability to provide users a seven-day
+history of their project directories. Every directory and
+sub-directory in a project directory contains a ".snapshots" entry.
+
+* `.snapshots` is invisble to `ls`, `ls -a`, `find` and similar commands
+* Contents are visible through `ls -F .snapshots`
+* Can be browsed normally after `cd .snapshots`
+* Files cannot be created, deleted or edited in snapshots
+* Files can *only* be copied *out* of a snapshot
 
 ## Lifetime
 
