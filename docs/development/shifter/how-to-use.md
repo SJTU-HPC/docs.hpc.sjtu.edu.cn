@@ -90,7 +90,7 @@ srun -n 64 shifter python ~/hello.py
 ```
 
 Currently this functionality is only available for images where MPICH
-is installed in user space (i.e. **not** with `apt-get install
+is installed manually (i.e. **not** with `apt-get install
 mpich-dev`). Below is a sample Dockerfile that shows how to build a
 basic image with `mpi4py` in it:
 
@@ -281,22 +281,44 @@ the job and mount it at `/tmp` in the image.
 
 ## Using NERSC's Private Registry
 
-NERSC runs a private registry that can be used to store images that may include proprietary software or other files that users may not wish to store in a public registry like DockerHub. This is an authenticated registry so users must login with the NERSC username and password in order to access the registry and images can be marked public to limit access. Users can use a special version of the shifterimg tool to pull the images into Shifter and limit access.  Here are the basic steps to using the registry.
+NERSC runs a private registry that can be used to store images that
+may include proprietary software or other files that users may not
+wish to store in a public registry like DockerHub. This is an
+authenticated registry so users must login with the NERSC username and
+password in order to access the registry and images can be marked
+public to limit access. Users can use a special version of the
+shifterimg tool to pull the images into Shifter and limit access.
+Here are the basic steps to using the registry.
 
-1. Using a web browser, log into https://registry.services.nersc.gov. Use your NERSC username and password to authenticate.
+1. Using a web browser, log into
+https://registry.services.nersc.gov. Use your NERSC username and
+password to authenticate.
 
-2. Click on your username in the upper right corner and select "Create new token" in the application tokens section.  It will prompt you for a name, this is used to identify the token if you need to remove it later.  Give it a meaningful name (e.g. shifter2018).  A string will be shown towards the top of the page, save that string for later use.  It will only be shown this once, so record it in a secure place.  You will use this password in lieu of your regular NERSC password when interacting with the registry to avoid storing your NERSC password in your Docker keyfile or Shifter credential store.
+2. Click on your username in the upper right corner and select "Create
+new token" in the application tokens section.  It will prompt you for
+a name, this is used to identify the token if you need to remove it
+later.  Give it a meaningful name (e.g. shifter2018).  A string will
+be shown towards the top of the page, save that string for later use.
+It will only be shown this once, so record it in a secure place.  You
+will use this password in lieu of your regular NERSC password when
+interacting with the registry to avoid storing your NERSC password in
+your Docker keyfile or Shifter credential store.
 
-3. On your Docker system (e.g. laptop or workstation), user the docker tool to log into the NERSC registry.  When prompted, enter your regular username and the application password generated above.   You should only have to do this once on a given Docker system.
+3. On your Docker system (e.g. laptop or workstation), user the docker
+tool to log into the NERSC registry.  When prompted, enter your
+regular username and the application password generated above.  You
+should only have to do this once on a given Docker system.
 ```Shell
 docker login registry.services.nersc.gov
 ```
 
 4. Build or tag an image prefacing the NERSC registry in the tag name.
 ```SHELL
-docker build -t registry.services.nersc.gov/<NERSC username>/<my image name>:latest .
+docker build -t registry.services.nersc.gov/<NERSC
+username>/<my image name>:latest .  
 # or
-docker tag <imageid> registry.services.nersc.gov/<NERSC username>/<my image name>:latest
+docker tag <imageid>
+registry.services.nersc.gov/<NERSC username>/<my image name>:latest
 ```
 
 5. Push the image that was tagged:
@@ -304,10 +326,13 @@ docker tag <imageid> registry.services.nersc.gov/<NERSC username>/<my image name
 docker push registry.services.nersc.gov/<NERSC username>/<my image name>:latest
 ```
 
-6. The image should now be available in the NERSC registry. To use the image in Shifter, use the shifterimg command to login and pull the image.  **Again, use the Application token generated above for the password not your regular NERSC password.**
-   ```Shell
-   # shifterimg login registry.services.nersc.gov
-   registry.services.nersc.gov username: <NERSC username>
-   registry.services.nersc.gov password: <Application Token>
-   # shifterimg pull registry.services.nersc.gov/<NERSC username>/myimage:latest
-   ```
+6. The image should now be available in the NERSC registry. To use the
+image in Shifter, use the shifterimg command to login and pull the
+image.  **Again, use the Application token generated above for the
+password not your regular NERSC password.**
+```Shell
+# shifterimg login registry.services.nersc.gov
+registry.services.nersc.gov username: <NERSC username>
+registry.services.nersc.gov password: <Application Token>
+# shifterimg pull registry.services.nersc.gov/<NERSC username>/myimage:latest
+```
