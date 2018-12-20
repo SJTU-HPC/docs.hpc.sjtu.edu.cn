@@ -38,7 +38,7 @@ group.
 
 | space quota | inode quota | purge time | backups       |
 |-------------|-------------|------------|---------------|
-| 1 TB        | 1 M         | none       | snapshots     |
+| 1 TB        | 1 M         | none       | none          |
 
 ## Performance
 
