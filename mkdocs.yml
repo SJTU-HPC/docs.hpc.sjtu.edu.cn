@@ -22,7 +22,7 @@ nav:
       - Taskfarmer: jobs/workflow/taskfarmer.md
       - Fireworks: jobs/workflow/fireworks.md
     - Reservations: jobs/reservations.md
-    - Policy: jobs/policy.md
+    - Queue Policy: jobs/policy.md
     - Containers:
         - Overview : development/shifter/overview.md
         - How to use Shifter: development/shifter/how-to-use.md

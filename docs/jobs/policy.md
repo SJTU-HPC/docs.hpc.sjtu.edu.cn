@@ -1,4 +1,4 @@
-# Policies
+# Queue Policies
 
 This page details the charging and usage policies for Edison and
 Cori. [Examples](examples/index.md) for each type of job are available.
