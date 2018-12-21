@@ -47,9 +47,9 @@ streaming I/O.
 
 ## Snapshots
 
-Global homes use a *snapshot* capability to provide users a seven-day
-history of their global home directories. Every directory and
-sub-directory in global homes contains a ".snapshots" entry.
+Project directories use a *snapshot* capability to provide users a seven-day
+history of their project directories. Every directory and
+sub-directory in a project directory contains a ".snapshots" entry.
 
 * `.snapshots` is invisble to `ls`, `ls -a`, `find` and similar commands
 * Contents are visible through `ls -F .snapshots`
