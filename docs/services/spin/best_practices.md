@@ -21,7 +21,8 @@ In general, good images from [Docker Hub](https://hub.docker.com/) tend to be
 well maintained and have wide community support. We look for images which meet
 the following guidelines:
 
-* Are part of the [official repositories](https://docs.docker.com/docker-hub/official_repos/), such as the [Docker Hub Official Repositories](https://hub.docker.com/explore/)
+* Are part of the [official repositories](https://docs.docker.com/docker-hub/official_repos/),
+such as the [Docker Hub Official Repositories](https://hub.docker.com/explore/)
 * Have a high number of pulls, indicating that the project is well used
 * Have a high number of stars, indicating that the software works well
 * Are updated as frequently as needed to address security vulnerabilities and
@@ -65,10 +66,14 @@ helpful in guiding your choice.
 OS Considerations:
 
 * Utilizes a package manager and/or is a distribution that is familiar to you
-* [Alpine](https://hub.docker.com/_/alpine/) ([Recommended by Docker](https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#the-dockerfile-instructions), starts as a very small base image)
+* [Alpine](https://hub.docker.com/_/alpine/) ([Recommended by Docker]
+(https://docs.docker.com/engine/userguide/eng-image/dockerfile_best-practices/#the-dockerfile-instructions),
+starts as a very small base image)
 * [Debian](https://hub.docker.com/_/debian/) (Commonly used in the Docker community. Balances size with usability.)
-* [CentOS](https://hub.docker.com/_/centos/) (for an RPM based distribution, and as a replacement for Scientific Linux, which does not currently have an official Docker image)
-* [OpenSUSE](https://hub.docker.com/_/opensuse/) (if similarity to the super computer environment is a consideration)
+* [CentOS](https://hub.docker.com/_/centos/) (for an RPM based distribution, and as a replacement for Scientific Linux,
+which does not currently have an official Docker image)
+* [OpenSUSE](https://hub.docker.com/_/opensuse/) (if similarity to the
+super computer environment is a consideration)
 
 ### Dockerfile
 
@@ -80,8 +85,13 @@ Some general rules:
 * Containers should be ephemeral
 * Each container should have only one concern
 * Avoid installing unnecessary packages
-* Keep the image small by reducing the number of layers. This can be accomplished by condensing operations into a single step (e.g. Single yum command with multiple packages vs. multiple yum commands), by chaining commands with ‘&&’. Consider using [Docker multi-stage](https://docs.docker.com/develop/develop-images/multistage-build/) builds with Docker 17.05 or higher.
-* Improve caching and shorten build time by ordering statements such that the stable parts of the Dockerfile are at the beginning, and the more frequently changed statements are at the end
+* Keep the image small by reducing the number of layers. This can be accomplished by condensing
+operations into a single step (e.g. Single yum command with multiple packages vs. multiple yum commands),
+by chaining commands with ‘&&’. Consider using
+[Docker multi-stage](https://docs.docker.com/develop/develop-images/multistage-build/)
+builds with Docker 17.05 or higher.
+* Improve caching and shorten build time by ordering statements such that
+the stable parts of the Dockerfile are at the beginning, and the more frequently changed statements are at the end
 
 ## Image Registry
 
@@ -92,8 +102,11 @@ Hub). No other registries may be used as the image source for Spin.
 
 The local registry is organized along the following lines:
 
-* **Teams** are used to group people that are working on the same project. Although the registry doesn’t yet use LDAP to define these, team names should match a group name in LDAP.
-* **Namespaces** are analogous to directories, and contain sets of related repositories. They are owned by teams, and team membership and roles define who can view and write to them. By convention, the default namespace should use the team name.
+* **Teams** are used to group people that are working on the same project.
+Although the registry doesn’t yet use LDAP to define these, team names should match a group name in LDAP.
+* **Namespaces** are analogous to directories, and contain sets of related repositories.
+They are owned by teams, and team membership and roles define who can view and write to them.
+By convention, the default namespace should use the team name.
 * **Repositories** are where the docker images are actually stored.
 
 Everyone with access to the Spin interface also has access to
@@ -156,9 +169,13 @@ the pilot phase, container application developers frequently work with the Spin
 administrators to migrate their projects into this environment. Version control
 systems facilitate these collaborations. Frequently used systems include:
 
-* https://bitbucket.org academic account - Academic users are upgraded to an account with unlimited public and private repositories. The upgrade is automatic and based on the email address used to register the account.
+* https://bitbucket.org academic account - Academic users are upgraded to an account with
+unlimited public and private repositories. The upgrade is automatic and based on the email
+address used to register the account.
 * https://gitlab.com - Comes with comprehensive CI/CD features; it is a common choice for JGI projects
-* https://github.com - Less commonly used as the free account tier doesn’t include private repositories, and the academic accounts are more limited and without the automatic upgrade feature of Bitbucket.
+* https://github.com - Less commonly used as the free account tier doesn’t
+include private repositories, and the academic accounts are more limited and
+without the automatic upgrade feature of Bitbucket.
 * NERSC Staff can also use the internal Bitbucket service.
 
 Regardless of which system is being used, avoid storing secrets such as
@@ -181,10 +198,13 @@ One or more identical containers providing the same function in Rancher is terme
   | web  | Web Server         |
   | kv   | Key Value store    |
 
-* Unique services should use a descriptive name for the service they provide. It should be a general description of the functionality, rather than the specific name of the implementation (e.g. web rather than apache)
+* Unique services should use a descriptive name for the service they provide. It should be a
+general description of the functionality, rather than the specific name of the
+implementation (e.g. web rather than apache)
 * As new service types become common, they will be added to this table of recommended names.
-* Standardizing service names has the benefit of clearly communicating the purpose of each service. This is beneficial when collaborating with others, when revisiting a service created in the past, and when enlisting the help of NERSC staff during troubleshooting.
-* If more than one service in your stack logically should use the same name like `app` then you can suffix the service name to make them unique: `app-reader` and `app-writer` for example are fine.  However the service name can only have *one* dash in it at most.  So `app-file-reader` is *not* allowed. 
+* Standardizing service names has the benefit of clearly communicating the purpose of each
+service. This is beneficial when collaborating with others, when revisiting a
+service created in the past, and when enlisting the help of NERSC staff during troubleshooting.
 
 ## Stacks
 
@@ -194,6 +214,21 @@ The collection of services that comprise an application within Rancher is termed
 
 Stacks should be named to match to non-TLD components of public-facing name (eg
 foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
+
+### Stack Tags
+
+Tags are created within the Rancher environment to label stacks with
+information that can be useful for identifying ownership, support and resource
+usage. Some tags are optional, while others are required for all stacks.
+
+| Tag | Status | Description | Example |
+|-----|--------|-------------|-------- |
+| owner: | Required | Developer or primary user of stack. Must be in the form of a NIM username | owner:fred |
+| staff-owner: | Required | NERSC staff member that is most familiar with or contact person for application (similar semantics to staff-owner in Service Now). Must be in the form of a NIM username | staff-owner:wilma |
+| group: | Recommended | Group that owns the stack. All members of group have permission to update or restart services in stack. Should be an LDAP group | group:csg |
+| staff-group: | Recommended | NERSC group most familiar with or contact for application | staff-group:isg |
+| fqdn: | Recommended | Public facing DNS Name | fqdn:foo.nersc.gov |
+| requires: | Optional | Specifies dependencies of the stack, for example external file systems | requires:gpfs |
 
 ## Storage
 
@@ -246,7 +281,9 @@ General guidelines for using GPFS within Spin:
 * The mount point should be as deep in directory structure as possible
 * e.g. /global/project/scratch/username/project/application rather than /global/project/scratch
 * The volume should be mounted read-only, unless the container actually writes to the global file system.
-* The filesystem must have the execution bit set for ‘other’ (o+x) on parent directories all of the way down to the mount point for the docker daemon to successfully mount the directory. For example permission mode 0741 would work on a parent directory, but 0740 would not.
+* The filesystem must have the execution bit set for ‘other’ (o+x) on parent directories all of the way
+down to the mount point for the docker daemon to successfully mount the directory.
+For example permission mode 0741 would work on a parent directory, but 0740 would not.
 
 ### Permissions, UID and GID Considerations
 
@@ -256,16 +293,29 @@ combination of container configuration and external controls enforced by the
 docker daemon. This leads to several considerations when using the global file
 system within Spin.
 
-* The user ‘root’ in a container maps to user ‘nobody’ on the global file systems, which places significant restrictions on the data that can be accessed from a container in a default configuration.
-* Setting the container to run as a non-root account with the appropriate file system access is an effective way to address these permission constraints.
-* Using a collaboration account with the necessary file system access is an effective way to ensure data access while also avoiding issues that occur when the owner of a personal account leaves a group or project.
-* When a container can’t easily be modified to run as a non-root user, the container can often be run with the group set in a manner that provides access. For example, a container running as root:genome will successfully read files in a directory with the following restrictive permissions:
+* The user ‘root’ in a container maps to user ‘nobody’ on the global file systems,
+which places significant restrictions on the data that can be accessed from
+a container in a default configuration.
+* Setting the container to run as a non-root account with the appropriate file
+system access is an effective way to address these permission constraints.
+* Using a collaboration account with the necessary file system access is
+an effective way to ensure data access while also avoiding issues that occur
+when the owner of a personal account leaves a group or project.
+* When a container can’t easily be modified to run as a non-root user,
+the container can often be run with the group set in a manner that provides access.
+For example, a container running as root:genome will successfully read files
+in a directory with the following restrictive permissions:
 
         dino@denovo:~$ ls -ld scratch/dino
         drwxr-x--- 5 dino genome 512 Sep  8 12:00 scratch/dino
 
-* The Linux setuid and setgid capabilities will be dropped for containers accessing the global file system as discussed in the [Security](#security) section.
-* Images that will be run as a different user or group will need RUN statements as shown in the following example to prepare the image with the necessary group and user definitions.
+* The Linux setuid and setgid capabilities will be dropped for containers accessing
+the global file system as discussed in the [Security](#security) section
+* Configuring the user or group that the containers will run as, and
+configuring capabilities will be performed by ISG administrators during the
+Spin pilot phase as part of the initial stack setup.
+* Images that will be run as a different user or group will need RUN statements as
+shown in the following example to prepare the image with the necessary group and user definitions.
 
 #### Dockerfile Statements for setting a container group using useradd & groupadd
 
@@ -292,13 +342,27 @@ image. The cases would be configured to run as “root:genome” and
 ### Read-Only vs. Read-Write
 
 * Public (unauthenticated) services must mount the global file systems read-only
-* Authenticated services are allowed to mount the global file systems read-write. The authenticated application must include the capability of tracking the username responsible for creating/modifying/deleting data on the global file system. Writes need to be traceable to the user doing the writing
+* Authenticated services are allowed to mount the global file systems read-write.
+The authenticated application must include the capability of tracking the
+username responsible for creating/modifying/deleting data on the global file system.
+Writes need to be traceable to the user doing the writing
 
 ## Logging
 
-* Logging strategies for container-based services may need to be modified for applications developed in a more traditional environment.  Files written to the container’s file system aren’t easily accessible, and also aren’t persistent across container restarts or upgrades. There are several approaches that have proven useful in Spin:
-* Log to stdout and stderr rather than writing to a file in the file system. If the service needs just one log, it can write to stdout. If it needs two logically separate log streams, it can write to stdout and stderr. In cases where more than one log stream, the container should be started without the -i or -t flag so that stdout and stderr are not combined. Recent log entries can be viewed with the `rancher logs` command. There is a current limitation in the CLI that restricts the output to the most recent 100-500 lines.
-* Write to a persistent log volume hosted outside of the Spin environment (e.g. A global project directory). This will facilitate direct access to log information.
+* Logging strategies for container-based services may need to be modified
+for applications developed in a more traditional environment.
+Files written to the container’s file system aren’t easily accessible,
+and also aren’t persistent across container restarts or upgrades.
+There are several approaches that have proven useful in Spin:
+* Log to stdout and stderr rather than writing to a file in the file system.
+If the service needs just one log, it can write to stdout.
+If it needs two logically separate log streams, it can write to stdout and stderr.
+In cases where more than one log stream, the container should be started without
+the -i or -t flag so that stdout and stderr are not combined. These logs will
+be persistent, but as they can only be accessed via Rancher or a docker command
+on the Spin hosts, access to the logs must be coordinated with ISG staff  during the pilot phase.
+* Write to a persistent log volume hosted outside of the Spin environment
+(e.g. A global project directory). This will facilitate direct access to log information.
 * Log to central logging system (future capability)
 
 ## Networking
@@ -312,11 +376,23 @@ host port to the private container port must be created. Recommendations on
 port usage include:
 
 * All use of ports 80 and 443 must go through the [reverse proxy](#httphttps-reverse-proxy)
-* Whenever possible, use a port number > 1024 within the container. This allows the NET_BIND_SERVICE capability to be dropped.
-* When practical (within the above rules), use the default or well known port for the service, to help convey additional context about your service.
-* If the port you need isn’t currently part of the [existing firewall configuration](#firewall-configuration), and it needs to be publicly accessible, request that it be added to the list via Service Now.
-* Requests for privileged ports (ports less than 1024) must be reviewed/approved by the Spin working group before changes to the firewall are made.
-* If you don’t care about the port number, and don’t want to request a firewall change, There are several port ranges open and available for use. Ports 50,000 - 50,050 (inclusive) are open to traffic with source addresses within the NERSC network, and ports 60,000 - 60,050 are open to traffic from all source addresses. Try to make a random(ish) selection within this range to minimize the chance of a port scheduling conflict on the Spin nodes. (Basically, your service won’t be able to run if the scheduler can’t find an IP on a Spin node that isn’t already listening on this port, and the chances of this decrease if everyone doesn’t pick the same port).
+* Whenever possible, use a port number > 1024 within the container. This allows
+the NET_BIND_SERVICE capability to be dropped.
+* When practical (within the above rules), use the default or well known port
+for the service, to help convey additional context about your service.
+* If the port you need isn’t currently part of the [existing firewall
+configuration](#firewall-configuration), and it needs to be publicly accessible,
+request that it be added to the list via Service Now.
+* Requests for privileged ports (ports greater than 1024) must be reviewed/approved by
+the Spin working group before changes to the firewall are made.
+* If you don’t care about the port number, and don’t want to request a firewall change.
+There are several port ranges open and available for use. Ports 50,000 - 50,050 (inclusive)
+are open to traffic with source addresses within the NERSC network, and ports 60,000 - 60,050
+are open to traffic from all source addresses. Try to make a random(ish) selection within
+this range to minimize the chance of a port scheduling conflict on the Spin nodes.
+(Basically, your service won’t be able to run if the scheduler can’t find an IP on a
+Spin node that isn’t already listening on this port, and the chances of this decrease
+if everyone doesn’t pick the same port).
 
 ### HTTP/HTTPS reverse proxy
 
@@ -374,7 +450,9 @@ more convenient or memorable name for accessing the service.
     an error such as the following:
     ```
     $ rancher stop NotMyStack
-    error NotMyStack: Bad response statusCode [401]. Status [401 Unauthorized]. Body: [message=you don't own stack NotMyStack] from [https://rancher.spin.nersc.gov/v2-beta/projects/1a5/services/NotMyStack]
+    error NotMyStack: Bad response statusCode [401]. Status [401 Unauthorized].
+Body: [message=you don't own stack NotMyStack] from
+[https://rancher.spin.nersc.gov/v2-beta/projects/1a5/services/NotMyStack]
     ```
 
 ### Security Recomendations
@@ -449,11 +527,17 @@ revision control repository.
 ### Properties of Secrets
 
 * Stored in encrypted form within the Spin infrastructure
-* When attached to a container, they are available in unencrypted form in a file mounted as `/run/secrets/secretname`
-* Secrets are arbitrary files that can contain anything that is considered sensitive. Examples of secret files: certificates, config files that contains sensitive passwords, environment files with sensitive information. It is up to the application to read and interpret the secret file.
+* When attached to a container, they are available in unencrypted form in a file
+mounted as `/run/secrets/secretname`
+* Secrets are arbitrary files that can contain anything that is considered sensitive.
+Examples of secret files: certificates, config files that contains sensitive passwords,
+environment files with sensitive information. It is up to the application to read and interpret the secret file.
 * Must be entered into the Rancher UI by an ISG administrator (during the pilot phase)
 
-If an application requires a specific path to the secret, a symbolic link can be made to the file stored in /run/secrets/. Even if only one component of a configuration file is sensitive, the entire contents of the configuration file can be pasted into a secret to protect the sensitive component.
+If an application requires a specific path to the secret, a symbolic link
+can be made to the file stored in /run/secrets/. Even if only one component of
+a configuration file is sensitive, the entire contents of the configuration file
+can be pasted into a secret to protect the sensitive component.
 
 ### Naming Convention for Secrets
 
@@ -485,14 +569,19 @@ stack named ‘My Portal’ would be:
 
 ### Secret Description
 
-When creating a secret, the description should always indicate the secret’s owner, by adding owner:<nersc username> to the description field.
+When creating a secret, the description should always indicate the secret’s owner,
+by adding owner:<nersc username> to the description field.
 
 ### Adding Secret to Container
 
 When adding a secret to a container in the ‘Secrets’ tab:
 
-* Set ‘As Name’ to the filename component of the secret name. In the above multi-service secret example, the ‘As Name’ field would be set to ‘mysql_password’, and the secret would be available in the file /run/secrets/mysql_password.
-* Customize the file ownership and permissions to restrict read permissions within the running container. In general the file owner should match the UID that the service is running as, and the mode should be set to 400.
+* Set ‘As Name’ to the filename component of the secret name. In the above multi-service
+secret example, the ‘As Name’ field would be set to ‘mysql_password’, and the
+secret would be available in the file /run/secrets/mysql_password.
+* Customize the file ownership and permissions to restrict read permissions within
+the running container. In general the file owner should match the UID that the service
+is running as, and the mode should be set to 400.
 
 ## Future Directions
 
@@ -545,6 +634,10 @@ in the registry, they might inadvertently be in a situation where their image
 is deployed into production before they intended. Observed behavior in the Spin
 environment:
 
-* If a container is restarted (due to a failed health check or manual operation) and Rancher chooses to schedule it on the same Spin node, a fresh copy of the image is not necessarily pulled from the registry
-* If a container is restarted and Rancher chooses to schedule it on a different Spin node, a fresh copy of the image will be pulled from the repository
-* If the ‘Upgrade’ operation is performed, Rancher will pull a fresh copy of the image from the registry even if no properties have changed.
+* If a container is restarted (due to a failed health check or manual operation)
+and Rancher chooses to schedule it on the same Spin node, a fresh copy of the
+image is not necessarily pulled from the registry
+* If a container is restarted and Rancher chooses to schedule it on a different Spin node,
+a fresh copy of the image will be pulled from the repository
+* If the ‘Upgrade’ operation is performed, Rancher will pull a fresh copy of the
+image from the registry even if no properties have changed.
