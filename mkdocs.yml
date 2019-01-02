@@ -60,7 +60,13 @@ nav:
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
-    - I/O : performance/io.md
+    - I/O: 
+        - Overview : performance/io/index.md
+        - Lustre: performance/io/lustre/index.md
+        - I/O libraries: performance/io/library/index.md
+        - Burst Buffer: performance/io/bb/index.md
+#        - GPFS: performance/io/gpfs/index.md
+        - KNL: performance/io/knl/index.md
     - Portability: performance/portability.md
     - Variability: performance/variability.md
     - Case Studies:
@@ -186,6 +192,7 @@ nav:
       - Data Transfer Nodes : systems/dtn/index.md
   - Filesystems:
       - Overview: filesystems/index.md
+      - Schematic: filesystems/schematic.md
       - Quotas: filesystems/quotas.md
       - Global Home: filesystems/global-home.md
       - Global Common: filesystems/global-common.md
