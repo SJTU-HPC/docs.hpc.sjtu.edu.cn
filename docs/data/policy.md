@@ -47,8 +47,13 @@ data analysis.
 
 Our two primary computational systems, Edison and Cori, have dedicated
 parallel file systems based on Lustre that are optimized for
-short-term storage of application output and checkpoints.  Burst
-Buffer
+short-term storage of application output and checkpoints.
+ 
+!!! warning "Purging on Scratch File Systems"
+    Running commands with the intent of circumventing purge policies 
+    on scratch filesystems is **not allowed**.
+
+### Burst Buffer
 
 Cori has a Burst Buffer, an additional layer of high-performance SSD
 storage, that is available to users on a per-job or short-term basis.
@@ -339,9 +344,13 @@ and PI Proxies can request a special directory by contacting NERSC consulting.
 Cori and Edison each have large, local, parallel scratch file systems
 dedicated to the users of those systems. The scratch file systems are
 intended for temporary uses such as storage of checkpoints or
-appliOBcation result output. If you need to retain files longer than
+application result output. If you need to retain files longer than
 the purge period (see below), the files should be copied to the
 project or home file systems, or to HPPS.
+
+!!! warning "Purging on Scratch File Systems"
+    Running commands with the intent of circumventing purge policies 
+    on scratch filesystems is **not allowed**.
 
 #### Stability:
 

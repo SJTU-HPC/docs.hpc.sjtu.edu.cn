@@ -132,6 +132,8 @@ compute nodes.  The scratch filesystems are not intended for long-term
 file storage or archival, and thus data is not backed-up, and files
 not accessed for 90 days will be automatically purged.
 
+Policies for \$SCRATCH are described at [NERSC Data Management Policy](../../data/policy.md#scratch-file-systems).
+
 ### Other file systems
 Other file systems used by JGI may also be mounted on NERSC systems:
 
