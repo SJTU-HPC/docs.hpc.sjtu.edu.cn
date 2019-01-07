@@ -228,7 +228,7 @@ HTAR: HTAR SUCCESSFUL
 
 Here is how we extract a single file from a htar file
 
-```htar -xvf simulator nova.tar```
+```htar -xvf nova.tar simulator```
 
 #### Using ListFiles to Create an HTAR Archive
 
