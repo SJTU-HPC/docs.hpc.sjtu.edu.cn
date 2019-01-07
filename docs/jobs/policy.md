@@ -101,10 +101,19 @@ The scavenger QOS is not available for jobs submitted against
 a repository with a positive balance. The charging rate for this QOS
 is 0 and it has the lowest priority on all systems.
 
-!!! note
-	It is *not* possible to directly submit to the scavenger QOS.
-	Jobs will automatically be placed into this QOS if they meet
-	the appropriate criteria.
+If you meet the above criteria, you can access the scavenger queue by
+submitting with `-q scavenger` (`-q shared_scavenger` for the shared
+queue). In addition, you must specify a minimum running time for this
+job of 2 hours or less with the `--time-min` flag. This means that the
+job could potentially be interrupted by a higher priority
+(i.e. non-scavenger job) after the minimum time has elapsed. Because
+of this, we recommend you implement checkpointing in your scavenger
+jobs. Jobs submitted without these flags will be automatically
+rejected by the batch system.
+
+!!! example
+        A scavenger job requesting a minimum time of 1.5 hours:
+	`sbatch -q scavenger --time-min=01:30:00 my_batch_script.sl`
 
 [^1]:
 	Jobs in the "shared" QOS are only charged for the fraction of the
