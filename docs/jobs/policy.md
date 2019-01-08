@@ -46,6 +46,9 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 !!! tip
 	Jobs using 1024 or more KNL nodes receive a 20% discount!
 
+!!! note
+	User held jobs that were submitted more than 12 weeks ago will be deleted.
+
 ### JGI Accounts
 
 There are 192 Haswell nodes reserved for the "genepool" and
@@ -139,6 +142,3 @@ rejected by the batch system.
 [^6]:
 	The "regular" and "premium" QOS charges on Cori KNL are discounted
     by 20% if the job uses 1024 or more nodes.
-
-[^7]:
-        User held jobs that were submitted more than 12 weeks before will be deleted.
