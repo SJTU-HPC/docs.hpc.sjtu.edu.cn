@@ -24,14 +24,9 @@ resources to users, providing a framework for starting, executing and
 monitoring work on allocated resources and scheduling work for future
 execution.
 
-### Commands
+## Submitting jobs
 
-#### sacct
-
-`sacct` is used to report job or job step accounting information about
-active or completed jobs.
-
-#### sbatch
+### sbatch
 
 `sbatch` is used to submit a job script for later execution. The
 script will typically contain one or more srun commands to launch
@@ -45,31 +40,21 @@ nersc$ sbatch first-job.sh
 Submitted batch job 864933
 ```
 
-#### srun
-
-`srun` is used to submit a job for execution or initiate job steps in
-real time. A job can contain multiple job steps executing sequentially
-or in parallel on independent or shared resources within the job's
-node allocation.
-
-#### salloc
+### salloc
 
 `salloc` is used to allocate resources for a job in real
 time. Typically this is used to allocate resources and spawn a
 shell. The shell is then used to execute srun commands to launch
 parallel tasks.
 
-#### sqs
+### srun
 
-`sqs` is used to view job information for jobs managed by Slurm. This
-is a custom script provided by NERSC which incorportates information
-from serveral sources.
-
-```
-nersc$ sqs
-JOBID   ST  USER   NAME         NODES REQUESTED USED  SUBMIT               PARTITION SCHEDULED_START      REASON
-864933  PD  elvis  first-job.*  2     10:00     0:00  2018-01-06T14:14:23  regular   avail_in_~48.0_days  None
-```
+`srun` is used to submit a job for execution or initiate job steps in
+real time. A job can contain multiple job steps executing sequentially
+or in parallel on independent or shared resources within the job's
+node allocation. This command is typically executed within a script
+which is submitted with `sbatch` or from an interactive prompt on a
+compute node obtained via `salloc`.
 
 ### Options
 
@@ -131,10 +116,84 @@ variables. This has two important consequences:
 | constraint | haswell    | ivybridge  |
 | account    | set in NIM | set in NIM |
 
+## Monitoring jobs
 
-#### Email notification
+### sacct
+
+`sacct` is used to report job or job step accounting information about
+active or completed jobs.
+
+
+### sqs
+
+`sqs` is used to view job information for jobs managed by Slurm. This
+is a custom script provided by NERSC which incorportates information
+from serveral sources.
+
+!!! note
+	See `man sqs` for details about all available options.
+
+```
+nersc$ sqs
+JOBID   ST  USER   NAME         NODES REQUESTED USED  SUBMIT               PARTITION SCHEDULED_START      REASON
+864933  PD  elvis  first-job.*  2     10:00     0:00  2018-01-06T14:14:23  regular   avail_in_~48.0_days  None
+```
+
+### Email notification
 
 ```bash
 #SBATCH --mail-type=begin,end,fail
 #SBATCH --mail-user=user@domain.com
 ```
+
+## Updating jobs
+
+The `scontrol` command allows certain charactistics of a job to be
+updated while it is still **queued**. Once the job is running most
+changes will not be applied.
+
+### Change timelimit
+
+```
+nersc$ scontrol update jobid=$jobid timelimit=$new_timelimit
+```
+
+### Change QOS
+
+```
+nersc$ scontrol update jobid=$jobid qos=$new_qos
+```
+
+### Hold jobs
+
+Prevent a pending job from being started:
+
+```
+nersc$ scontrol hold $jobid
+```
+
+### Release held jobs
+
+Allow a held job to accrue priority and run:
+
+```
+nersc$ scontrol release $jobid
+```
+
+### Cancel jobs
+
+Cancel a specific job:
+
+```
+nersc$ scancel $jobid
+```
+
+Cancel all jobs owned by a user
+
+```
+nersc$ scancel -u $USER
+```
+
+!!! note
+	This only applies to jobs which are associated with your
+	accounts.
