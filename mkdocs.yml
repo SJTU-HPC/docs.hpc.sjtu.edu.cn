@@ -159,7 +159,10 @@ nav:
         - Subversion : development/version-control/subversion/index.md
   - Environment: environment/index.md
   - Systems:
-      - Cori : systems/cori/index.md
+      - Cori: 
+           - Cori System: systems/cori/index.md
+           - Interconnect : systems/cori/interconnect/index.md
+           - KNL Modes : systems/cori/knl_modes/index.md
       - Edison : systems/edison/index.md
       - PDSF: 
            - PDSF System: systems/pdsf/index.md
