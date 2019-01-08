@@ -414,6 +414,36 @@ The job script works as follows:
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/vasp-relaxation-job.sh"
     ```
 
+
+## MPMD (Multiple Program Multiple Data) jobs
+
+To run MPMD Jobs under SLURM, we use the option --multi-prog and a 
+configuration file, per specifications and example below:
+
+### --multi-prog
+Run a job with different programs and different arguments for each task. In this case, the executable program specified is actually a configuration file specifying the executable and arguments for each task.
+Comments in the configuration file must have a "#" in column one. The configuration file contains the following fields separated by white space:
+
+#### Task rank
+One or more task ranks to use this configuration. Multiple values may be comma separated. Ranges may be indicated with two numbers separated with a '-' with the smaller number first (e.g. "0-4" and not "4-0"). To indicate all tasks not otherwise specified, specify a rank of '*' as the last line of the file. If an attempt is made to initiate a task for which no executable program is defined, the following error message will be produced "No executable program specified for this task".
+
+#### Executable
+The name of the program to execute. May be fully qualified pathname if desired.
+
+#### Arguments
+Program arguments. The expression "%t" will be replaced with the task's number. The expression "%o" will be replaced with the task's offset within this range (e.g. a configured task rank value of "1-5" would have offset values of "0-4"). Single quotes may be used to avoid having the enclosed values interpreted. This field is optional. Any arguments for the program entered on the command line will be added to the arguments specified in the configuration file.
+
+
+
+### Example
+
+Here is a sample job script for MPMD jobs. You need to create a configuration 
+file with format described above, and a batch script which passes this configuration file via "--multi-prog" flag in the srun command.
+
+??? example "Cori-Haswell"
+        --8<-- "docs/jobs/examples/mpmd/cori-haswell/mpmd"
+
+
 ## Burst buffer
 
 All examples for the burst buffer are shown with Cori Haswell

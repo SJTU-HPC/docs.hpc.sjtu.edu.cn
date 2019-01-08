@@ -1,0 +1,17 @@
+# Config file:
+
+% cat mpmd.conf
+0-35 ./a.out
+36-96 ./b.out
+
+# Batch Script:
+
+#!/bin/bash -l
+
+#SBATCH -q regular
+#SBATCH -N 5
+#SBATCH -n 97  # total of 97 tasks
+#SBATCH -t 02:00:00
+#SBATCH -C haswell
+
+srun --multi-prog ./mpmd.conf
