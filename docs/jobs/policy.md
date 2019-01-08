@@ -7,10 +7,10 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 
 | QOS           | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
 |---------------|-----------|----------------|--------------|-----------|----------|--------|
-| regular       | 5586      | 48             | 5000         | -         | 3        | 48     |
-| shared[^1]    | 0.5       | 48             | 10000        | -         | 3        | 48     |
-| debug         | 512       | 0.5            | 5            | 2         | 2        | 48     |
-| premium       | 5586      | 48             | 5            | -         | 2        | 96     |
+| regular       | 5586      | 48             | 5000         | -         | 3        | 64     |
+| shared[^1]    | 0.5       | 48             | 10000        | -         | 3        | 64     |
+| debug         | 512       | 0.5            | 5            | 2         | 2        | 64     |
+| premium       | 5586      | 48             | 5            | -         | 2        | 128    |
 | scavenger[^2] | 5586      | 48             | 5000         | -         | 4        | 0      |
 | xfer          | 1 (login) | 48             | 100          | 15        | -        | 0      |
 | realtime[^3]  | custom    | custom         | custom       | custom    | 1        | custom |
@@ -21,11 +21,11 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 
 | QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
 |-----------------|-----------|----------------|--------------|-----------|----------|--------|
-| regular         | 1932      | 48             | 5000         | -         | 4        | 80     |
-| shared[^1]      | 0.5       | 48             | 10000        | -         | 4        | 80     |
-| interactive[^4] | 64        | 4              | 1            | 1         | -        | 80     |
-| debug           | 64        | 0.5            | 5            | 2         | 3        | 80     |
-| premium         | 1932      | 48             | 5            | -         | 2        | 160    |
+| regular         | 1932      | 48             | 5000         | -         | 4        | 90     |
+| shared[^1]      | 0.5       | 48             | 10000        | -         | 4        | 90     |
+| interactive[^4] | 64        | 4              | 1            | 1         | -        | 90     |
+| debug           | 64        | 0.5            | 5            | 2         | 3        | 90     |
+| premium         | 1932      | 48             | 5            | -         | 2        | 180    |
 | scavenger[^2]   | 1932      | 48             | 5000         | -         | 5        | 0      |
 | xfer            | 1 (login) | 48             | 100          | 15        | -        | 0      |
 | bigmem          | 1 (login) | 48             | 100          | 1         | -        | 0      |
@@ -36,10 +36,10 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 
 | QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
 |-----------------|-----------|----------------|--------------|-----------|----------|--------|
-| regular         | 8991      | 48             | 5000         | -         | 4        | 96[^6] |
-| interactive[^5] | 64        | 4              | 1            | 1         | -        | 96     |
-| debug           | 512       | 0.5            | 5            | 2         | 3        | 96     |
-| premium         | 8991      | 48             | 5            | -         | 2        | 192[^6]|
+| regular         | 8991      | 48             | 5000         | -         | 4        | 90[^6] |
+| interactive[^5] | 64        | 4              | 1            | 1         | -        | 90     |
+| debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
+| premium         | 8991      | 48             | 5            | -         | 2        | 180[^6]|
 | scavenger[^2]   | 8991      | 48             | 5000         | -         | 5        | 0      |
 | special[^4]     | custom    | custom         | custom       | custom    | -        | custom |
 
@@ -55,8 +55,8 @@ can share nodes.
 
 | QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
 |-----------------|-----------|----------------|--------------|-----------|----------|--------|
-| genepool        | 192       | 72             | 500          | -         | 3        | 80     |
-| genepool_shared | 0.5       | 72             | 500          | -         | 3        | 80     |
+| genepool        | 192       | 72             | 500          | -         | 3        | 90     |
+| genepool_shared | 0.5       | 72             | 500          | -         | 3        | 90     |
 
 ## Charging
 
@@ -65,12 +65,12 @@ Jobs are charged by the node-hour.
 !!! example
 	A job which ran for 35 minutes on 3 nodes on Edison with
 	the regular qos would be charged:
-	$$ (35/60)\\ \text{hours}*3\\ \text{nodes} * 48 = 84\\ \text{NERSC hours} $$
+	$$ (35/60)\\ \text{hours}*3\\ \text{nodes} * 64 = 112\\ \text{NERSC hours} $$
 
 !!! example
 	A job which ran for 12 hours on 4 physical cores (each core has 2 hyperthreads)
-	on Edison with the shared qos would be charged:
-	$$ 12\\ \text{hours} * (2*4\\ \text{cores}/48) * 48 = 96\\ \text{NERSC hours} $$
+	on Cori Haswell with the shared qos would be charged:
+	$$ 12\\ \text{hours} * (2*4\\ \text{cores}/64) * 90 = 135\\ \text{NERSC hours} $$
 
 !!! note
     Jobs are only charged for the actual walltime used. That is, if a job uses less
@@ -139,3 +139,6 @@ rejected by the batch system.
 [^6]:
 	The "regular" and "premium" QOS charges on Cori KNL are discounted
     by 20% if the job uses 1024 or more nodes.
+
+[^7]:
+        User held jobs that were submitted more than 12 weeks before will be deleted.
