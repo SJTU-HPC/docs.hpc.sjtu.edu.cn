@@ -24,6 +24,9 @@ collabsu <collaboration account name>
 <enter nersc password at the prompt>
 ```
 
+!!! tip
+    Only your NERSC password is required for collabsu. You do not need your one-time password.
+
 ## Controlling Collaboration Account Access
 
 PIs and PI Proxies can give users in their repo access to the
