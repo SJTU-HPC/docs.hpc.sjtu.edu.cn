@@ -47,17 +47,31 @@ to confirm the current fingerprints.
 
  *  Cori
 	```
-	4096 SHA256:35yiNfemgwzHCHFrPGWrJBCCqERqLtOVSrR36s1DaPc
+	4096 SHA256:35yiNfemgwzHCHFrPGWrJBCCqERqLtOVSrR36s1DaPc cori.nersc.gov (RSA)
 	```
 
  *  Edison
 	```
-	4096 SHA256:riR+3TGNnPs0uqJxJBbvPU+JR3e/Z0xUzBRsip3ZOJ8
+	4096 SHA256:riR+3TGNnPs0uqJxJBbvPU+JR3e/Z0xUzBRsip3ZOJ8 edison.nersc.gov (RSA)
 	```
 
  *  PDSF
 	```
-	1024 3d:28:24:53:66:de:30:9e:eb:25:3b:03:b0:24:1c:77
+	2048 SHA256:4JGbnhiMkJ5kv1S5+UI5ggTY+Z6DzdEeBQvoFRfN9lw pdsf.nersc.gov (RSA)
+	```
+
+ *  DTN[01-04]
+	All of the dtn nodes should have the same fingerprints:
+	```
+	2048 SHA256:/cIQwTFd8zgeZKVdzE5Jqscu3IX3mRBn7ikaAGH5h6k dtn01.nersc.gov (RSA)
+	256 SHA256:tIO6fLqc2dHa1o3IGmWA5mtxqOURTlxHm3E6lV9zIGg dtn01.nersc.gov (ECDSA)
+	256 SHA256:wirBRUHXris8lXH856CnJMg6JFO2zSWqogXsDmZnZo8 dtn01.nersc.gov (ED25519)
+	```
+
+!!! note
+	The ssh fingerprints can be obtained via:
+	```
+	ssh-keygen -lf <(ssh-keyscan -t rsa,ed25519,ecdsa $hostname 2>/dev/null)
 	```
 
 ## Host Keys
