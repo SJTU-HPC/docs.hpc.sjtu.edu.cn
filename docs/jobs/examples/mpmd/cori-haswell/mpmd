@@ -1,13 +1,9 @@
-# Config file:
-
-% cat mpmd.conf
+cori$ cat mpmd.conf
 0-35 ./a.out
 36-96 ./b.out
 
-# Batch Script:
-
-#!/bin/bash -l
-
+cori$ cat batch_script.sh
+#!/bin/bash
 #SBATCH -q regular
 #SBATCH -N 5
 #SBATCH -n 97  # total of 97 tasks

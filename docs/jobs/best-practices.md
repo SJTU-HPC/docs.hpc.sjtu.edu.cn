@@ -92,7 +92,19 @@ For jobs which are sensitive to interconnect (MPI) performance and
 utilize less than ~300 nodes it is possible to request that all nodes
 are in a single Aries dragonfly group.
 
-* [Example](examples/index.md#network-topology)
+Slurm has a concept of "switches" which on Cori and Edison are
+configured to map to Aries electrical groups. Since this places an
+additional constraint on the scheduler a maximum time to wait for the
+requested topology can be specified.
+
+!!! example
+	Wait up to 60 minutes
+	```bash
+	sbatch --switches=1@60 job.sh
+	```
+
+!!! info "Additional details and information"
+	* [Cray XC Series Network (pdf)](https://www.cray.com/sites/default/files/resources/CrayXCNetwork.pdf)
 
 ## Core Specialization
 
@@ -181,3 +193,12 @@ tells Cray MPI to read the `MPICH_RANK_ORDER` file to set the MPI task
 placement. For more information, please see the man page `man
 grid_order` (available when the `perftools-base` module is loaded) on
 Cori and Edison.
+
+## Serial jobs
+
+Users requiring large numbers of serial jobs have several options at
+NERSC.
+
+* [shared qos](/jobs/examples/index.md#shared)
+* [job arrays](/jobs/examples/index.md/#job-arrays)
+* [workflow tools](/jobs/workflow-tools.md)

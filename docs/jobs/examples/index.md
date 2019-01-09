@@ -417,32 +417,53 @@ The job script works as follows:
 
 ## MPMD (Multiple Program Multiple Data) jobs
 
-To run MPMD Jobs under SLURM, we use the option --multi-prog and a 
-configuration file, per specifications and example below:
+Run a job with different programs and different arguments for each
+task.  To run MPMD jobs under Slurm use `--multi-prog
+<config_file_name>`.
 
-### --multi-prog
-Run a job with different programs and different arguments for each task. In this case, the executable program specified is actually a configuration file specifying the executable and arguments for each task.
-Comments in the configuration file must have a "#" in column one. The configuration file contains the following fields separated by white space:
+```
+srun -n 8 --multi-prog myrun.conf
+```
 
-#### Task rank
-One or more task ranks to use this configuration. Multiple values may be comma separated. Ranges may be indicated with two numbers separated with a '-' with the smaller number first (e.g. "0-4" and not "4-0"). To indicate all tasks not otherwise specified, specify a rank of '*' as the last line of the file. If an attempt is made to initiate a task for which no executable program is defined, the following error message will be produced "No executable program specified for this task".
+### Configuration file format
 
-#### Executable
-The name of the program to execute. May be fully qualified pathname if desired.
+ *  Task rank
 
-#### Arguments
-Program arguments. The expression "%t" will be replaced with the task's number. The expression "%o" will be replaced with the task's offset within this range (e.g. a configured task rank value of "1-5" would have offset values of "0-4"). Single quotes may be used to avoid having the enclosed values interpreted. This field is optional. Any arguments for the program entered on the command line will be added to the arguments specified in the configuration file.
+    One or more task ranks to use this configuration. Multiple values
+    may be comma separated. Ranges may be indicated with two numbers
+    separated with a '-' with the smaller number first (e.g. "0-4" and
+    not "4-0"). To indicate all tasks not otherwise specified, specify
+    a rank of '*' as the last line of the file. If an attempt is made
+    to initiate a task for which no executable program is defined, the
+    following error message will be produced "No executable program
+    specified for this task".
 
+ *  Executable
 
+    The name of the program to execute. May be fully qualified pathname
+    if desired.
+
+ *  Arguments
+
+    Program arguments. The expression "%t" will be replaced with the
+    task's number. The expression "%o" will be replaced with the
+    task's offset within this range (e.g. a configured task rank value
+    of "1-5" would have offset values of "0-4"). Single quotes may be
+    used to avoid having the enclosed values interpreted. This field
+    is optional. Any arguments for the program entered on the command
+    line will be added to the arguments specified in the configuration
+    file.
 
 ### Example
 
-Here is a sample job script for MPMD jobs. You need to create a configuration 
-file with format described above, and a batch script which passes this configuration file via "--multi-prog" flag in the srun command.
+Sample job script for MPMD jobs. You need to create a configuration
+file with format described above, and a batch script which passes this
+configuration file via `--multi-prog` flag in the srun command.
 
-??? example "Cori-Haswell"
-        --8<-- "docs/jobs/examples/mpmd/cori-haswell/mpmd"
-
+!!! example "Cori-Haswell"
+	```
+    --8<-- "docs/jobs/examples/mpmd/cori-haswell/mpmd"
+    ```
 
 ## Burst buffer
 
@@ -566,21 +587,93 @@ this, add `#SBATCH --exclusive` and add the `-c 32` flag to your
 	srun -n 1 ./my_big_executable
 	```
 
-## Network topology
+## Realtime
 
-Slurm has a concept of "switches" which on Cori and Edison are
-configured to map to Aries electrical groups. Since this places an
-additional constraint on the scheduler a maximum time to wait for the
-requested topology can be specified.
+The "realtime" QOS is used for running jobs with the need of getting
+realtime turnaround time.
+
+!!! note
+	Use of this QOS requires special approval.
+
+	["realtime" QOS Request Form](https://nersc.service-now.com/com.glideapp.servicecatalog_cat_item_view.do?v=1&sysparm_id=d4757aa66fc8d2008ca9d15eae3ee45b&sysparm_link_parent=e15706fc0a0a0aa7007fc21e1ab70c2f&sysparm_catalog=e0d08b13c3330100c8b837659bba8fb4&sysparm_catalog_view=catalog_default)
+
+The realtime QOS is a user-selective shared QOS, meaning you can
+request either exclusive node access (with the `#SBATCH --exclusive`
+flag) or allow multiple applications to share a node (with the
+`#SBATCH --share` flag).
+
+!!! tip
+	It is recommended to allow sharing the nodes so more jobs can
+	be scheduled in the allocated nodes.  Sharing a node is the
+	default setting, and using `#SBATCH --share` is optional.
 
 !!! example
-	Wait up to 60 minutes
-	```bash
-	sbatch --switches=1@60 job.sh
+	Uses two full nodes
+	```
+	#!/bin/bash
+	#SBATCH --qos=realtime
+	#SBATCH --constraint=haswell
+	#SBATCH --nodes=2
+	#SBATCH --ntasks-per-node=32
+	#SBATCH --cpus-per-task=2
+	#SBATCH --time=01:00:00
+	#SBATCH --job-name=my_job
+	#SBATCH --licenses=project
+	#SBATCH --exclusive
+
+	srun --cpu-bind=cores ./mycode.exe   # pure MPI, 64 MPI tasks
 	```
 
-!!! info "Additional details and information"
-	* [Cray XC Series Network (pdf)](https://www.cray.com/sites/default/files/resources/CrayXCNetwork.pdf)
+If you are requesting only a portion of a single node, please add
+`--gres=craynetwork:0` as follows to allow more jobs on the
+node. Similar to using the "shared" QOS, you can request number of
+slots on the node (total of 64 CPUs, or 64 slots) by specifying the
+`-ntasks` and/or `--mem`. The rules are the same as the shared QOS.
+
+!!! example
+	Two MPI ranks running with 4 OpenMP threads each.  The job
+	is using in total 8 physical cores (8 "cpus" or hyperthreads per
+	"task") and 10GB of memory.
+
+	```
+	#!/bin/bash
+	#SBATCH --qos=realtime
+    #SBATCH --constraint=haswell
+    #SBATCH --nodes=1
+    #SBATCH --ntasks=2
+	#SBATCH --gres=craynetwork:0
+    #SBATCH --cpus-per-task=8
+	#SBATCH --mem=10GB
+    #SBATCH --time=01:00:00
+    #SBATCH --job-name=my_job2
+    #SBATCH --licenses=project
+    #SBATCH --shared
+
+	export OMP_NUM_THREADS=4
+	srun --cpu-bind=cores ./mycode.exe
+	```
+
+!!! example
+	OpenMP only code running with 6 threads. Note that `srun`
+	is not required in this case.
+
+	```
+    #!/bin/bash
+    #SBATCH --qos=realtime
+    #SBATCH --constraint=haswell
+    #SBATCH --nodes=1
+    #SBATCH --ntasks=1
+    #SBATCH --gres=craynetwork:0
+    #SBATCH --cpus-per-task=12
+	#SBATCH --mem=16GB
+    #SBATCH --time=01:00:00
+    #SBATCH --job-name=my_job3
+    #SBATCH --licenses=project,SCRATCH
+    #SBATCH --shared
+
+    export OMP_NUM_THREADS=6
+    ./mycode.exe
+    ```
 
 ## Additional information
 
