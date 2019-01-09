@@ -4,8 +4,8 @@ All NERSC computers (except HPSS) are reached using either the Secure
 Shell (SSH) communication and encryption protocol (version 2) or by
 Grid tools that use trusted certificates.
 
-SSH (Secure Shell) is an encryted network protocol used to log into
-computers over an unsecured network. On UNIX/LINUX/BSD type sytems,
+SSH (Secure Shell) is an encrypted network protocol used to log into
+computers over an unsecured network. On UNIX/LINUX/BSD type systems,
 SSH is also the name of a suite of software applications for
 connecting via the SSH protocol. The SSH applications can execute
 commands on a remote machine and transfer files from one machine to
@@ -22,12 +22,28 @@ connections.
 	edison$
     ```
 
-## Passwordless logins and transfers
+## Password-less logins and transfers
 
-!!! warning
-	All public keys must be stored in [NIM](https://nim.nersc.gov).
+Consult the documentation on using the
+[SSH Proxy](../mfa/#mfa-for-ssh-keys-sshproxy) service in the MFA
+documentation section for ways to connect to NERSC systems without reentering
+your password and one-time password.  
+
+## SSH certificate authority
+
+NERSC generates SSH certificates for the primary login nodes using a NERSC
+SSH certificate authority.  Most recent ssh clients support these certificates.
+You can add the following entry to the `known_hosts` file to make use of
+this certificate.
+
+```
+@cert-authority *.nersc.gov ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA2yKBpvRbdD9MWiu+7wg17vBsKy46AjjuL27DmdpDYiCqRE2mN0om9b0jn4eI91RGykbcRa9wUKJ2qaD0zsD08A8HM+R14H4UsZ5hi7S+xGqscJH7uTmXy5Igo5xEOahS9Z+ecgonDCgWKJnbd/FRu4vITYXrvTlIIGHGRBYj0GzbgLHBzedoMaGNRwhVyadH2SGRaZCgbH+Swevzy0GwYfZJA9zd7EX0jiAClkSYcflIOsygmI3gHv+b35mrvXcHDeQOR/wg8knfpSiFLCkVDpfgnj27Lemzxe6k61Brhv9CUiq+t7WApVDBovhdXZn6pBg+OKeDk1G1OLvRbxJ2bw==
+```
 
 ## Key fingerprints
+
+NERSC may occasionally update the host keys on the major systems.  Check here
+to confirm the current fingerprints.
 
  *  Cori
 	```
@@ -89,7 +105,7 @@ Are you sure you want to continue connecting (yes/no)?
 1. If they match accept
 1. If they do not match [let us know](https://help.nersc.gov).
 
-### Host indentification changed
+### Host identification changed
 
 ```
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -102,9 +118,12 @@ It is also possible that a host key has just been changed.
 ```
 
 Ensure that your `~/.ssh/known_hosts` file contains the correct entries for
-Edison and Cori.
+Edison and Cori and confirm the fingerprints using the posted fingerprints
+above.  Add the [certificate authority](#ssh-certificate-authority) line to
+your known_hosts file if you version of ssh supports SSH certificates.
 
-1. open `~/.ssh/known_hosts`
-1. remove any lines refering Cori or Edison
-1. add the following two lines (or retry connecting and verify that
-   you have the correct "fingerprint" from the above list.
+1. Open `~/.ssh/known_hosts`
+1. Remove any lines referring Cori or Edison and save the file
+1. Paste the host key entries from above or retry connecting to the host and
+   accept the new host key after verify that you have the correct "fingerprint"
+   from the above list.
