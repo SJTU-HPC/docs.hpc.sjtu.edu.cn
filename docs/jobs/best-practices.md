@@ -108,3 +108,76 @@ a flag with salloc for interactive batch, since salloc is already a
 wrapper script for srun.
 
 * [Example](examples/index.md#core-specialization)
+
+## Process placement
+
+Several mechanisms exsist to control process placement on NERSC's Cray
+systems. Application performance can depend strongly on placement
+depending on the communication pattern and other computational
+characteristics.
+
+Examples are run on Cori.
+
+### Default
+
+```
+user@nid01041:~> srun -n 8 -c 2 check-mpi.intel.cori|sort -nk 4
+Hello from rank 0, on nid01041. (core affinity = 0-63)
+Hello from rank 1, on nid01041. (core affinity = 0-63)
+Hello from rank 2, on nid01111. (core affinity = 0-63)
+Hello from rank 3, on nid01111. (core affinity = 0-63)
+Hello from rank 4, on nid01118. (core affinity = 0-63)
+Hello from rank 5, on nid01118. (core affinity = 0-63)
+Hello from rank 6, on nid01282. (core affinity = 0-63)
+Hello from rank 7, on nid01282. (core affinity = 0-63)
+```
+
+### `MPICH_RANK_REORDER_METHOD`
+
+The `MPICH_RANK_REORDER_METHOD` environment variable is used to
+specify other types of MPI task placement. For example, setting it to
+0 results in a round-robin placement:
+
+```
+user@nid01041:~> MPICH_RANK_REORDER_METHOD=0 srun -n 8 -c 2 check-mpi.intel.cori|sort -nk 4
+Hello from rank 0, on nid01041. (core affinity = 0-63)
+Hello from rank 1, on nid01111. (core affinity = 0-63)
+Hello from rank 2, on nid01118. (core affinity = 0-63)
+Hello from rank 3, on nid01282. (core affinity = 0-63)
+Hello from rank 4, on nid01041. (core affinity = 0-63)
+Hello from rank 5, on nid01111. (core affinity = 0-63)
+Hello from rank 6, on nid01118. (core affinity = 0-63)
+Hello from rank 7, on nid01282. (core affinity = 0-63)
+```
+
+There are other modes available with the `MPICH_RANK_REORDER_METHOD`
+environment variable, including one which lets the user provide a file
+called `MPICH_RANK_ORDER` which contains a list of each task's
+placement on each node. These options are described in detail in the
+`intro_mpi` man page on Cori and Edison.
+
+#### `grid_order`
+
+For MPI applications which perform a large amount of nearest-neighbor
+communication, e.g., stencil-based applications on structured grids,
+Cray provides a tool in the `perftools-base` module called
+`grid_order` which can generate a `MPICH_RANK_ORDER` file automatically
+by taking as parameters the dimensions of the grid, core count,
+etc. For example, to place MPI tasks in row-major order on a Cartesian
+grid of size $(4, 4, 4)$, using 32 tasks per node on Cori:
+
+```
+cori$ module load perftools-base
+cori$ grid_order -R -c 32 -g 4,4,4
+# grid_order -R -Z -c 32 -g 4,4,4
+# Region 3: 0,0,1 (0..63)
+0,1,2,3,16,17,18,19,32,33,34,35,48,49,50,51,4,5,6,7,20,21,22,23,36,37,38,39,52,53,54,55
+8,9,10,11,24,25,26,27,40,41,42,43,56,57,58,59,12,13,14,15,28,29,30,31,44,45,46,47,60,61,62,63
+```
+
+One can then save this output to a file called `MPICH_RANK_ORDER` and
+then set `MPICH_RANK_REORDER_METHOD=3` before running the job, which
+tells Cray MPI to read the `MPICH_RANK_ORDER` file to set the MPI task
+placement. For more information, please see the man page `man
+grid_order` (available when the `perftools-base` module is loaded) on
+Cori and Edison.
