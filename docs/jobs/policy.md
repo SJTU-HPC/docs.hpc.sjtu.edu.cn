@@ -28,7 +28,7 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | premium         | 1932      | 48             | 5            | -         | 2        | 180    |
 | scavenger[^2]   | 1932      | 48             | 5000         | -         | 5        | 0      |
 | xfer            | 1 (login) | 48             | 100          | 15        | -        | 0      |
-| bigmem          | 1 (login) | 48             | 100          | 1         | -        | 0      |
+| bigmem          | 1 (login) | 72             | 100          | 1         | -        | 90     |
 | realtime[^3]    | custom    | custom         | custom       | custom    | 1        | custom |
 | special[^5]     | custom    | custom         | custom       | custom    | -        | custom |
 
