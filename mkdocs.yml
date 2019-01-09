@@ -95,6 +95,7 @@ nav:
       - Science Gateways : services/science-gateways.md
       - NEWT : services/newt.md
       - Jupyter : services/jupyter.md
+      - Globus : services/globus.md
       - CDash :
         - Overview : services/cdash/index.md
         - CTest/CDash with CMake : services/cdash/with_cmake.md
