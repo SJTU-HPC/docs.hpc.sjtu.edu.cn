@@ -71,7 +71,7 @@ Interactive jobs are launched with the `salloc` command.
 	[Additional details](../interactive.md) on Cori's interactive
 	QOS
 
-## Running Multiple Parallel Jobs Sequentially
+## Multiple Parallel Jobs Sequentially
 
 Multiple sruns can be executed one after another in a single batch
 script. Be sure to specify the total walltime needed to run all jobs.
@@ -81,7 +81,7 @@ script. Be sure to specify the total walltime needed to run all jobs.
 	--8<-- "docs/jobs/examples/multiple-parallel-jobs/cori-haswell/sequential-parallel-jobs.sh"
 	```
 
-## Running Multiple Parallel Jobs Simultaneously
+## Multiple Parallel Jobs Simultaneously
 
 Multiple sruns can be executed simultaneously in a single batch
 script.
@@ -674,6 +674,34 @@ slots on the node (total of 64 CPUs, or 64 slots) by specifying the
     export OMP_NUM_THREADS=6
     ./mycode.exe
     ```
+
+## Multiple Parallel Jobs While Sharing Nodes
+
+Under certain scenarios, you might want two or more independent applications running simultaneously on each compute node allocated to your job. For example, a pair of applications that interact in a client-server fashion via some IPC mechanism on-node (e.g. shared memory), but must be launched in distinct MPI communicators.
+
+This latter constraint would mean that MPMD mode (see below) is not an appropriate solution, since although MPMD can allow multiple executables to share compute nodes, the executables will also share an MPI_COMM_WORLD at launch.
+
+SLURM can allow multiple executables launched with concurrent srun calls to share compute nodes as long as the sum of the resources assigned to each application does not exceed the node resources requested for the job. Importantly, you cannot over-allocate the CPU, memory, or "craynetwork" resource. While the former two are self-explanatory, the latter refers to limitations imposed on the number of applications per node that can simultaneously use the Aries interconnect, which is currently limited to 4.
+
+Here is a quick example of an sbatch script that uses two compute nodes and runs two applications concurrently. One application uses 8 cores on each node, while the other uses 24 on each node. The number of CPUs per node is again controlled with the "-n" and "-N" flags, while the amount of memory per node with the "--mem" flag. To specify the "craynetwork" resource, we use the "--gres" flag available in both "sbatch" and "srun".
+
+!!! example "Cori Haswell"
+	```
+	--8<-- "docs/jobs/examples/multiple-parallel-share-nodes/cori-haswell/multiple-parallel-share-nodes.sh"
+	```
+
+This is example is quite similar to the mutliple srun jobs shown for
+[running simultaneous parallel jobs](/jobs/examples#multiple-parallel-jobs-simultaneously), with the following exceptions:
+
+1. For our sbatch job, we have requested "--gres=craynetwork:2" which will allow us to run up to two applications simultaneously per compute node.
+
+2. In our srun calls, we have explicitly defined the maximum amount of memory available to each application per node with "--mem" (in this example 50 and 60 GB, respectively) such that the sum is less than the resource limit per node (roughly 122 GB).
+
+3. In our srun calls, we have also explicitly used one of the two requested craynetwork resources per call.
+
+Using this combination of resource requests, we are able to run multiple parallel applications per compute node.
+
+One additional observation: when calling srun, it is permitted to specify "--gres=craynetwork:0" which will not count against the craynetwork resource. This is useful when, for example, launching a bash script or other application that does not use the interconnect. We don't currently anticipate this being a common use case, but if your application(s) do employ this mode of operation it would be appreciated if you let us know.     
 
 ## Additional information
 
