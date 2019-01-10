@@ -13,6 +13,7 @@ model on Cori.
 
 **Training results**
 ![Training results](images/TF_benchmark_1.4.png)
+![Training results](images/TF_benchmark_rltv_1.4.png)
 
 ### PyTorch
 
