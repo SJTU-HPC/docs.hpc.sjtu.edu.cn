@@ -36,6 +36,7 @@ nav:
     - Mathematica : applications/mathematica/index.md
     - MATLAB : applications/matlab/index.md
     - NAMD : applications/namd/index.md
+    - SIESTA : applications/siesta/index.md
     - PARATEC: applications/paratec/index.md
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
     - Wannier90: applications/wannier90/index.md
