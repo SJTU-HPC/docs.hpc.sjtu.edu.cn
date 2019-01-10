@@ -681,7 +681,7 @@ Under certain scenarios, you might want two or more independent applications run
 
 This latter constraint would mean that MPMD mode (see below) is not an appropriate solution, since although MPMD can allow multiple executables to share compute nodes, the executables will also share an MPI_COMM_WORLD at launch.
 
-SLURM can allow multiple executables launched with concurrent srun calls to share compute nodes as long as the sum of the resources assigned to each application does not exceed the node resources requested for the job. Importantly, you cannot over-allocate the CPU, memory, or "craynetwork" resource. While the former two are self-explanatory, the latter refers to limitations imposed on the number of applications per node that can simultaneously use the Aries interconnect, which is currently limited to 4.
+Slurm can allow multiple executables launched with concurrent srun calls to share compute nodes as long as the sum of the resources assigned to each application does not exceed the node resources requested for the job. Importantly, you cannot over-allocate the CPU, memory, or "craynetwork" resource. While the former two are self-explanatory, the latter refers to limitations imposed on the number of applications per node that can simultaneously use the Aries interconnect, which is currently limited to 4.
 
 Here is a quick example of an sbatch script that uses two compute nodes and runs two applications concurrently. One application uses 8 cores on each node, while the other uses 24 on each node. The number of CPUs per node is again controlled with the "-n" and "-N" flags, while the amount of memory per node with the "--mem" flag. To specify the "craynetwork" resource, we use the "--gres" flag available in both "sbatch" and "srun".
 
