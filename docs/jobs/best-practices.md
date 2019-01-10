@@ -200,5 +200,5 @@ Users requiring large numbers of serial jobs have several options at
 NERSC.
 
 * [shared qos](/jobs/examples/index.md#shared)
-* [job arrays](/jobs/examples/index.md/#job-arrays)
+* [job arrays](/jobs/examples/index.md#job-arrays)
 * [workflow tools](/jobs/workflow-tools.md)
