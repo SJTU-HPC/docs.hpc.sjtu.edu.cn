@@ -1,21 +1,12 @@
 #!/bin/bash
 #SBATCH --qos=regular
 #SBATCH --time=02:00:00
-#SBATCH --nodes=100
+#SBATCH --nodes=4
 #SBATCH --constraint=haswell
 #SBATCH --ntasks-per-node=32
 #SBATCH --cpus-per-task=2
-#SBATCH --switches=1@20
 
 # make sure Haswell environment is loaded
-module unload ${CRAY_CPU_TARGET}
-module load craype-haswell
-# make sure correct hugepages module is loaded
-module unload $(module -l list 2>&1 | grep craype-hugepages | awk '{print $1}')
-module load craype-hugepages8M
-module load rca
+module swap craype-${CRAY_CPU_TARGET} craype-haswell
 module load namd
-export HUGETLB_DEFAULT_PAGE_SIZE=8M
-export HUGETLB_MORECORE=no
-
 srun namd2 ${INPUT_FILE}
