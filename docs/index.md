@@ -1,6 +1,6 @@
 # NERSC Technical Documentation
 
-docs.nersc.gov is a resource with the techinical details for users to
+docs.nersc.gov is a resource with the technical details for users to
 make effective use of [NERSC](https://nersc.gov)'s resources. For center news and information
 visit the [NERSC Home page](https://nersc.gov) and for interactive content
 visit [MyNERSC](https://my.nersc.gov).
