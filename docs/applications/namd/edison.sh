@@ -4,7 +4,6 @@
 #SBATCH --nodes=10
 #SBATCH --ntasks-per-node=24
 #SBATCH --cpus-per-task=2
-#SBATCH --switches=1@20
 
 # make sure correct hugepages module is loaded
 module unload $(module -l list 2>&1 | grep craype-hugepages | awk '{print $1}')
