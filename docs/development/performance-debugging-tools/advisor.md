@@ -1,318 +1,131 @@
 # Intel Advisor
 
-## Table of Contents
-
-1. [Introduction](#introduction)
-2. [Note](#note)
-3. [Using Intel Advisor on Edison and Cori](#using-intel-advisor-on-edison-and-cori)
-4. [Important Command Line Options for Intel Advisor](#important-command-line-options-for-intel-advisor)
-5. [Using the Advisor GUI](#using-the-advisor-gui)
-6. [Roofline Tool on Cori](#roofline-tool-on-cori)
-7. [Downloads](#downloads)
-
 ## Introduction
 
 Intel Advisor provides two workflows to help ensure that Fortran, C, and C++
-applications can make the most of today's processors:
+applications can make the most of modern Intel processors. Advisor contains
+three key capabilities:
 
-* **Vectorization Advisor** identifies loops that will benefit most from
-  vectorization, specifies what is blocking effective vectorization, finds the
-  benefit of alternative data reorganizations, and increases the confidence
-  that vectorization is safe.
-* **Threading Advisor** is used for threading design and prototyping and to
-  analyze, design, tune, and check threading design options without disrupting
-  normal code development.
+* [Vectorization
+  Advisor](https://software.intel.com/en-us/advisor/features/vectorization)
+  identifies loops that will benefit most from vectorization, specifies what is
+  blocking effective vectorization, finds the benefit of alternative data
+  reorganizations, and increases the confidence that vectorization is safe.
+* [Threading
+  Advisor](https://software.intel.com/en-us/advisor/features/threading) is used
+  for threading design and prototyping and to analyze, design, tune, and check
+  threading design options without disrupting normal code development.
+* [Advisor
+  Roofline](https://software.intel.com/en-us/articles/getting-started-with-intel-advisor-roofline-feature)
+  enables visualization of actual performance against hardware-imposed
+  performance ceilings (rooflines) such as memory bandwidth and compute
+  capacity - which provide an ideal roadmap of potential optimization steps.
 
-For more information on Intel Advisor, visit
-https://software.intel.com/en-us/intel-advisor-xe.
-
-## Note
-
-The `-no-auto-finalize` option that we have been recommending users to use (in
-our Advisor training slides) may not work after the recent security patch on
-Cori and Edison. Please run Advisor without this option until further notice.
-This option allows the data finalizing to be done on a login node instead of a
-compute node. The `-no-auto-finalize` option was recommended mainly to avoid
-wasting the compute resources when running jobs across multiple nodes;
-Advisor finalizes the collected data on the head node only, leaving all the
-rest of the compute nodes idle. In addition, for KNL jobs, even for the single
-node jobs, the `-no-auto-finalize` option was preferred so as to process the
-collected data on a much faster login node.
+The links to each capability above provide detailed information regarding how
+to use each feature in Advisor. For more information on Intel Advisor, visit
+[this page](https://software.intel.com/en-us/advisor).
 
 ## Using Intel Advisor on Edison and Cori
 
-To launch Advisor, the Lustre File System should be used instead of GPFS.
 Either the command line tool, `advixe-cl` or the GUI can be used. We recommend
-that you use the command line tool `inspxe-cl`  to collect data via batch jobs
-and then display results using the GUI `inspxe-gui` on a login node on Edison.
+that you use the command line tool `advixe-cl`  to collect data via batch jobs
+and then display results using the GUI `advixe-gui` on a login node on Edison.
+The GUI is very responsive if one uses the [NX](../../connect/nx.md) screen
+forwarding service available on Cori and Edison.
 
 ### Compiling Codes to Run with Advisor
 
-#### Additional Compiler Flags
-
 In order to compile code to work with Advisor, some additional flags need to be
-used.
-
-##### Cray Compiler Wrappers (`ftn`, `cc`, `CC`)
+used. In general, regardless of which compiler is used, one must enable debug
+symbols (typically by adding the `-g` flag to the compiler) and also link
+applications dynamically, not statically, in order for Advisor to produce
+useful output.
 
 When using the Cray compiler wrappers to compile codes to work with Advisor,
-the `-g` and `-dynamic` flags should be used. It is recommended that a minimum
-optimization level of 2 should be used for compiling codes that will be
-analyzed using Intel Advisor. To compile a C code for MPI as well as OpenMP,
-use the following command:
+one can enable dynamic linking of an application either by adding the
+`-dynamic` flag to the link line, or by setting the environment variable
+`CRAYPE_LINK_TYPE=dynamic`. (The default link type for the Cray wrappers is
+static.) If using the [Intel MPI compiler wrappers](../compilers/wrappers.md),
+the default link type is dynamic so no additional flags need to be set.
+
+To compile a code to be profiled by Advisor, one should use the same
+optimization flags used in production runs of the code (typically `-O2` or
+higher). For example, when using the Intel compilers with the Cray compiler
+wrappers, to compile a C code for MPI as well as OpenMP, one could use one of
+the following commands:
 
 ```
-nersc$ cc -g -dynamic -openmp -O2 -o mycode.exe mycode.c
+nersc$ cc -g -dynamic -qopenmp -O2 -o mycode.exe mycode.c
 ```
 
-Here, the `-g` option is needed to assist Advisor to associate addresses to
-source code lines, and the `-dynamic` option is needed to build dynamically
-linked applications with the compiler wrappers on Edison (the compiler wrappers
-`ftn`, `cc`, and `CC`, link applications statically by default). 
+Enabling debug symbols via the `-g` flag allows Advisor to associate
+application regions with source code lines.
 
-Without the `-dynamic` option, the following error is generated:
-
-```
-nersc$ module load advisor
-nersc$ cc -g -openmp -o mycode.exe mycode.c
-nersc$ srun -n 1 -c 8 advixe-cl --collect survey --project-dir ./myproj  -- ./mycode.exe
-advixe: Error: Binary file of the analysis target does not contain symbols required for profiling. See the 'Analyzing Statically Linked Binaries' help topic for more details.
-advixe: Error: Valid pthread_spin_trylock symbol is not found in the binary of the analysis target.
-```
-##### Intel Native Compilers (`mpiifort`, `mpiicc`, `mpiicpc`)
-
-When using the Intel native compilers to compile codes to work with Advisor,
-the `-g` flag should be used. There is no need to use the `-dynamic` flag
-because it is already a dynamic build. To compile C code for MPI as well as
-OpenMP, use the following command:
-
-```
-nersc$ mpiicc -g -openmp -O3 -o mycode.impi mycode.c
-```
 
 ### Launching Advisor with a Single MPI Rank
 
-It is recommended that the following commands should be executed from the
-Lustre file system.
-
-#### Cray Compiler Wrappers
-
-To launch Advisor for an MPI plus OpenMP code, use the following commands:
+Advisor works best when profiling a single MPI rank. To launch Advisor for an
+MPI + OpenMP code compiled with the Cray compiler wrappers, and using the basic
+`survey` profiling mode in Advisor, one may use the following commands:
 
 ```
 nersc$ salloc -N 1 -t 30:00 -q debug
 nersc$ module load advisor
 nersc$ export OMP_NUM_THREADS=8
 nersc$ cc -g -dynamic -openmp -o mycode.exe mycode.c
-nersc$ srun -n 1 -c 8 advixe-cl --collect survey --project-dir ./myproj  -- ./mycode.exe
+nersc$ srun -n 1 -c 8 --cpu-bind=cores advixe-cl --collect survey --project-dir $SCRATCH/myproj  -- ./mycode.exe
 ```
 
 This will store the results of the analysis performed by Advisor in the
-`myproj` directory.
-
-#### Intel Native Compilers
-
-To launch Advisor for an MPI plus OpenMP code, use the following commands:
-
-```
-nersc$ salloc -N 1 -t 30:00 -q debug
-nersc$ module load advisor
-nersc$ export OMP_NUM_THREADS=8
-nersc$ module load impi
-nersc$ mpiicc -g -openmp  -o mycode.exe mycode.c
-nersc$ export I_MPI_PMI_LIBRARY=/opt/slurm/default/lib/pmi/libpmi.so
-nersc$ srun -n 1 -c 8 advixe-cl --collect survey --project-dir ./myproj  -- ./mycode.exe
-```
-
-This will store the results of the analysis performed by Advisor in the
-`myproj` directory.
+`myproj` directory on the `$SCRATCH` Lustre file system.
 
 ### Launching Advisor with Multiple MPI Ranks
 
-It is recommended that the following commands should be executed from the
-Lustre file system.
+One can use Advisor to profile an application with multiple MPI ranks, albeit
+with a few limitations. The default behavior in Advisor is to generate a
+separate profiling database per MPI rank; this is rarely ideal, since the
+common use case is to see aggregate performance of an application across all
+MPI ranks. One can add the `-trace-mpi` flag to `advixe-cl`, which will
+aggregate profiling data into a single database across MPI ranks, but the
+aggregation is limited to ranks within a single compute node - Advisor will
+always generate a separate database per compute node, regardless of the number
+of ranks used per node.
 
-#### Using MPMD
-
-This can be done using code compiled with Cray compiler wrappers or with the
-Intel native compilers.
-
-##### Cray Compiler Wrappers
-
-To launch Advisor using MPMD for an MPI plus OpenMP code having multiple MPI
-ranks, use the following commands which involve creating the "mpmd.conf" file:
-
-```
-nersc$ salloc -N 1 -t 30:00 -q debug
-nersc$ module load advisor
-nersc$ export OMP_NUM_THREADS=8
-nersc$ vi mpmd.conf
-```
-
-Contents of "mpmd.conf":
-
+Another way to use Advisor across multiple ranks is with Slurm's MPMD mode, in
+which Advisor profiles only a subset of MPI processes. To do so, one may create
+a plain text file (below called 'mpmd.conf'), containing the following exapmle code:
 ```
 0 advixe-cl --collect survey --project-dir ./myproj -- ./mycode.exe
 1-3 ./mycode.exe
 ```
-
-Compilation and execution:
-
+To run this example in MPMD mode:
 ```
-nersc$ cc -g -dynamic -openmp -O3 -o mycode.exe mycode.c
 nersc$ srun --multi-prog ./mpmd.conf
 ```
+This example instructs Slurm to profile process 0 with Advisor, but run
+processes 1-3 without Advisor. This will generate a single profiling result
+from Advisor (for process 0). The user should beware that this approach is
+useful only if the workload for the application is similar across all
+processes.
 
-##### Intel Native Compilers
-
-To launch Advisor using MPMD for an MPI plus OpenMP code having multiple MPI
-ranks, use the following commands which involve creating the "mpmd.conf" file:
-
-```
-nersc$ salloc -N 1 -t 30:00 -q debug  
-nersc$ module load advisor
-nersc$ export OMP_NUM_THREADS=8
-nersc$ vi mpmd.conf
-```
-
-Contents of "mpmd.conf":
-
-```
-0 advixe-cl --collect survey --project-dir ./myproj -- ./mycode.exe
-1-3 ./mycode.exe
-```
-
-Compilation and execution:
-
-```
-nersc$ module load impi
-nersc$ mpiicc -g -openmp -O3 -o mycode.exe mycode.c
-nersc$ export I_MPI_PMI_LIBRARY=/opt/slurm/default/lib/pmi/libpmi.so
-nersc$ srun --multi-prog ./mpmd.conf
-```
-
-#### Using a Script
-
-This can be done using code compiled with Cray compiler wrappers or with the
-Intel native compilers.
-
-##### Cray Compiler Wrappers
-
-To launch Advisor using a script for an MPI plus OpenMP code having multiple
-MPI ranks, use the following commands which involve creating a script:
-
-```
-nersc$ salloc -N 1 -t 30:00 -q debug
-nersc$ module load advisor
-nersc$ export OMP_NUM_THREADS=8
-nersc$ vi ascript
-```
-
-Contents of "ascript":
-
+An alternative approach to MPMD mode is with a batch script which evalulates a
+Slurm environment variable to decide which processes are profiled with Advisor.
+For example, consider the following script, called `ascript.sh` below:
 ```
 #!/bin/bash
 if [ $SLURM_PROCID -eq 0 ]
 then
- advixe-cl --collect survey   --search-dir src:r=./ -- ./mycode.exe
+ advixe-cl --collect survey --project-dir ./myproj -- ./mycode.exe
 else
  ./mycode.exe
 fi
 ```
-
-Compilation and execution:
-
+One can then run this script as follows:
 ```
-nersc$ cc -g -dynamic -openmp -O3 -o mycode.exe mycode.c
-nersc$ srun -n 4  -c 8 ./ascript
+nersc$ srun -n 4  -c 8 ./ascript.sh
 ```
-
-##### Intel Native Compilers
-
-To launch Advisor using a script for an MPI plus OpenMP code having multiple
-MPI ranks, use the following commands which involve creating a script:
-
-```
-nersc$ salloc -N 1 -t 30:00 -q debug
-nersc$ module load advisor
-nersc$ export OMP_NUM_THREADS=8
-nersc$ vi ascript
-```
-
-Contents of "ascript":
-
-```
-#!/bin/bash
-if [ $SLURM_PROCID -eq 0 ]
-then
- advixe-cl --collect survey   --search-dir src:r=./ -- ./mycode.exe
-else
- ./mycode.exe
-fi
-```
-
-Compilation and execution:
-
-```
-nersc$ module load impi
-nersc$ mpiicc -g -openmp -O3 -o mycode.exe mycode.c
-nersc$ export I_MPI_PMI_LIBRARY=/opt/slurm/default/lib/pmi/libpmi.so
-nersc$ srun –n 4 ./ascript
-```
-
-#### Using `mpirun`
-
-This can only be done using code compiled with an Intel native compiler.
-
-##### Intel Native Compilers
-
-To launch Advisor using `mpirun` for an MPI plus OpenMP code having multiple
-MPI ranks, use the following commands:
-
-```
-nersc$ salloc -N 1 -t 30:00 -q debug  
-nersc$ module load advisor
-nersc$ export OMP_NUM_THREADS=8
-nersc$ module load impi
-nersc$ mpiicc -g -openmp -O3 -o mycode.exe mycode.c
-nersc$ mpirun -n 4 advixe-cl --collect survey --project-dir ./myproj  -- ./mycode.exe
-```
-
-The `I_MPI_PMI_LIBRARY` environment variable needs to be unset for this.
-
-#### Using the `-trace-mpi` Flag
-
-This can be done using code compiled with Cray compiler wrappers or with the
-Intel native compilers. However, this option is not available in the current
-Advisor version and is expected to be available in future versions of Advisor.
-
-##### Cray Compiler Wrappers
-
-To launch Advisor using the `-trace-mpi` flag for an MPI plus OpenMP code
-having multiple MPI ranks, use the following commands:
-
-```
-nersc$ salloc -N 1 -t 30:00 -q debug  
-nersc$ module load advisor
-nersc$ export OMP_NUM_THREADS=8
-nersc$ cc -g -dynamic -openmp -O3 -o mycode.exe mycode.c
-nersc$ srun -n 4  -c 8 advixe-cl --collect survey --trace-mpi --project-dir ./myproj  -- ./mycode.exe
-```
-
-##### Intel Native Compilers
-
-To launch Advisor using the `-trace-mpi` flag for an MPI plus OpenMP code
-having multiple MPI ranks, use the following commands:
-
-```
-nersc$ salloc -N 1 -t 30:00 -q debug  
-nersc$ module load advisor
-nersc$ export OMP_NUM_THREADS=8
-nersc$ module load impi
-nersc$ mpiicc -g -openmp -O3 -o mycode.exe mycode.c
-nersc$ export I_MPI_PMI_LIBRARY=/opt/slurm/default/lib/pmi/libpmi.so
-nersc$ srun -n 4 -c 8 advixe-cl --collect survey --trace-mpi --project-dir ./myproj  -- ./mycode.exe
-```
+This script will profile process 0 with Advisor but run processes 1-3 without
+profiling.
 
 ### Using the GUI to View Results
 
@@ -348,377 +161,188 @@ to the following one which shows a list of top time-consuming loops:
 To exit the GUI, simply click the cross on the top left hand corner of the
 Advisor dialog box.
 
-## Important Command Line Options for Intel Advisor
+## Roofline Model Integration in Advisor
 
-The general Intel Advisor `advixe-cl` command syntax is:
+Recent versions of Advisor (2018 and newer) have integrated [Roofline
+model](http://www.nersc.gov/assets/Uploads/2-SWillams-Roofline-Intro.pdf)
+automation into their performance analysis. The new collection type `roofline`
+runs the application twice - once with the `survey` analysis and again with the
+`tripcounts` analysis, and combines the profiling information from each of the
+two separate collections into a single presentation of the cache-aware roofline
+model. One can then view the roofline data for the application in the Advisor
+GUI.
+
+Intel has posted a [video on
+Youtube](https://www.youtube.com/watch?v=h2QEM1HpFgg) about how to use the
+roofline functionality in Advisor.
+
+## Examples
+
+Below are a collection of example run scripts demonstrating the different
+features of Advisor. All example assume the profiling data is being collected
+on a Cori KNL node.
+
+### Vectorization Advisor
+
+This collection mode identifies general vectorization and threading
+opportunities in a serial application. The example code provided in
+`/opt/intel/advisor/samples/en/C++/vec_samples.tgz` is
+suitable for this example.
+```
+srun -n 1 -c 4 --cpu-bind=cores advixe-cl -collect survey -project-dir $SCRATCH/Advisor_samples -- ./vec_samples
+```
+To view the result of the survey, the following statement can be run from a
+login or compute node:
+```
+advixe-cl -report survey -project-dir $SCRATCH/Advisor_samples
+```
+which results in output like the following:
 
 ```
-advixe-cl <-action> [-project-dir PATH] [-action-options] [-global-options] [[--] target [target options]]
+ID         Function Call Sites and Loops           Self Time   Total Time    Type                          Why No Vectorization                          Vector ISA   Compiler Estimated Gain   Average Trip Count   Min Trip Count   Max Trip Count   Call Count   Transformations   Source Location     Module
+______________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+14   [loop in matvec at Multiply.c:69]                9.348s       9.348s   Scalar                            vector dependence prevents vectorization                                                                                                                                  Multiply.c:69   vec_samples
+11   [loop in matvec at Multiply.c:60]                9.328s       9.328s   Scalar                            vector dependence prevents vectorization                                                                                                                                  Multiply.c:60   vec_samples
+13   [loop in matvec at Multiply.c:82]                9.232s       9.232s   Scalar                            vector dependence prevents vectorization                                                                                                                                  Multiply.c:82   vec_samples
+12   [loop in matvec at Multiply.c:49]                1.160s      29.068s   Scalar   outer loop was not auto-vectorized: consider using SIMD directive                                                                                                                                  Multiply.c:49   vec_samples
+10   [loop in main at Driver.c:155]                   0.012s      29.080s   Scalar   loop with function call not considered an optimization candidate.                                                                                                                                   Driver.c:155   vec_samples
+ 9   [loop in __libc_csu_init at elf-init.c:87]           0s      29.068s   Scalar                                                                                                                                                                                                      elf-init.c:87   vec_samples
 ```
 
-In our case, we use `srun` or `mpirun` with this command. Here, `<-action>`
-specifies the action to perform, such as collect. There must be only one action
-per command. There are a number of available actions, but `report` and
-`collect` are the most common. What follows is a list of the available
-"action-options" for these two types of actions:
+### Threading Advisor
 
-### Options for the Collect Action
-
-| Option      | Description |
-|-------------|-------------|
-| survey      | Surveys the application and collects data about sites in the code that may benefit from parallelism |
-| suitability | Collects suitability data by executing the annotated code to analyze the proposed parallelism opportunities and estimate where performance gains are most likely |
-| correctness | Collects correctness data from annotated code and helps to predict and eliminate data sharing problems |
-
-The `search-dir` option should be used to specify which directories store the
-source, symbol and binary files that are to be used during analysis. For the
-collect action option `suitability`, the annotations can only be found if the 
-location of the source file is known. To perform a Suitability Analysis, the 
-following command can be used:
-
+This collection mode identifies threading bottlenecks in an OpenMP code. The
+example code provided in
+`/opt/intel/advisor/samples/en/C++/nqueens_Advisor.tgz` is suitable for this
+example.
 ```
-nersc$ srun -n 1 advixe-cl -search-dir src:=/scratch2/scratchdirs/elvis --collect suitability --project-dir ./bigsci  -- ./mulmvma 10000
-```
-
-This command also specifies the source directory.
-
-### Options for the Report Action
-
-| Option      | Description |
-|-------------|-------------|
-| survey      | Generates a report on the data obtained from the Survey analysis |
-| suitability | Generates a report on the data obtained from the Suitability analysis |
-| correctness | Generates a report on the data obtained from the Correctness analysis data |
-| annotations | Generates an Annotation report which displays the locations of annotations in the source code |
-| summary     | Generates a Summary report, which summarizes the analysis |
-
-#### Using the Advisor GUI
-
-In order to launch Advisor in GUI mode so that the code is executed on the
-compute nodes, use the following commands:
-
-```
-$ ssh -XY edison.nersc.gov
-edison$ cd $SCRATCH
-edison$ salloc -N 1 -t 30:00 -q debug
-edison$ module load advisor
-edison$ advixe-gui
-```
-
-##### Creating a Project
-
-To create a project, click on the "New Project" button on the Welcome screen.
-
-![ ](images/Advisor-create-proj.png)
-
-Then, enter the name of the project and click the "Create Project" button.
-
-![ ](images/Advisor-create-proj2.png)
-
-Next, browse for and select the binary file that is to be executed. If
-required, also specify the parameters to be passed to the application and the
-required environment variables and their values.
-
-You might also want to modify the working directory and the directory where the
-results will be stored. By default, the result directory is the same as the
-project directory.
-
-![ ](images/Advisor-proj-prop1.png)
-
-In the "Source Search" tab, browse for and select the directory that contains
-your source file. 
-
-![ ](images/Advisor-proj-prop2.png)
-
-Then, click on the "OK" button to create the project.
-
-##### Opening a Project
-
-To open a project, click on the "Open Project" button on the Welcome screen.
-
-![ ](images/Advisor-open-proj1.png)
-
-Browse for and select the ".advixeproj" file in the project directory and then
-click the "Open" button.
-
-![ ](images/Advisor-open-proj2.png)
-
-##### Collecting Survey Data
-
-After opening a project, click on the "Collect Survey Data" button in the
-Workflow or the "Collect" button in the "Survey Target" box.
-
-![ ](images/Advisor-survey-report1.png)
-
-This executes the code and provides an analysis. It shows the time taken to
-execute the loops in decreasing order of time. It also shows the source code
-for the selected loop.
-
-![ ](images/Advisor-survey-report2.png)
-
-##### Inserting Annotations
-
-Double click on a the line representing a specific loop in the survey output to
-open the following window:
-
-![ ](images/Advisor-annotations1.png)
-
-The lower part of the window shows annotation suggestions. Use the "Copy to 
-Clipboard" button in order to copy the annotation suggestion. The annotation
-suggestions provide a description of exactly how the annotations should be
-placed in the source code.
-
-![ ](images/Advisor-annotations2.png)
-
-After copying the annotations, double click on any part of the code in the
-upper half of the window to open the source code file in an editor.
-
-![ ](images/Advisor-annotations3.png)
-
-Insert the annotations in the correct positions and save the file. Here, the
-annotation indicates the intent to parallelize a simple loop. Then, build the
-application again using the following command:
-
-```
-icpc -g -openmp -I${ADVISOR_XE_2016_DIR}/include -o mulmvs10 mulmv_fp.c
-```
-
-The `-I${ADVISOR_XE_2016_DIR}/include` option is used so that the annotations
-for Advisor can be recognized.
-
-!!! note
-    In order to access all the following types of analysis, you may have to click the Threading Workflow/ Vectorization Workflow button at the bottom left hand corner of the window.
-
-##### Performing Suitability Analysis for the Annotations
-
-After compiling the annotated source file, collect the "Survey" report once
-again. Then, click on the "Collect" button in the "Check Suitability" box in
-order to analyze the annotated program to check its predicted parallel
-performance.
-
-![ ](images/Advisor-suitability-report1.png)
-
-Once the analysis has been performed, you will see the details of the
-results as follows:
-
-![ ](images/Advisor-suitability-report2.png)
-
-By default, Advisor uses CPU as the target system with 8 threads and Intel TBB
-as the threading model. However, it is possible to increase or decrease the
-number of threads, change the Threading Model to any one of the other available
-options(including OpenMP) and change the Target System to Intel Xeon Phi. The
-number of coprocessor threads to be executed on the Intel Xeon Phi can also be
-selected.
-
-The suitability analysis result also shows:
-
-1. Expected speedup
-2. Scalability graph: The green region in the scalability graph shows that the
-   program scales well and the advantage to be obtained from parallelizing the
-   code is well worth the effort. The yellow region indicates that there will
-   be some advantage when the annotated part is parallelized but it may or may
-   not justify the required effort. The red part indicates that parallelizing
-   the annotated part might even degrade performance and is not worth the
-   effort. The small red circle shows the currently selected conditions and
-   marks out its location on the graph.
-3. Runtime Environment: This indicates the amount of performance gain that can
-   be obtained by selecting a runtime environment that minimizes different
-   types of overheads or allows task chunking. Select the checkboxes against
-   these options to identify the performance improvement or see the best
-   possible performance.
-4. The Task Modeling allows the user to model for different sizes of data sets
-   (by changing the number of iterations). Also, the duration of each iteration
-   can be modified. This helps to see how the parallel code will scale.
-5. Current percentages of Load Imbalance, Lock Contention and Runtime Overhead
-
-![ ](images/Advisor-suitability-report3.png)
-
-###### Comparison of Advisor Estimated Performance and Actual, Measured Performance
-
-Comparison between Advisor estimated and measured wall clock times:
-
-![ ](images/Advisor-performance.png)
-
-The variation range is 3-15% and increases with increasing numbers of threads.
-
-##### Performing Trip Count Analysis
-
-To find how many iterations of each loop are executed, click on the "Collect"
-button in the "Trip Count" box. This should only be done after the Survey
-information has been collected.
-
-![ ](images/Advisor-trip-count1.png)
-
-The number of times each loop was executed is displayed as follows:
-
-![ ](images/Advisor-trip-count2.png)
-
-##### Marking Loops for Deeper Analysis
-
-In order to perform dependency analysis of a loop or check the memory access
-pattern, the check box next to the specific loop in the Survey report has to be
-marked.
-
-![ ](images/Advisor-marking-loops.png)
-
-##### Checking Dependencies
-
-To check loop-carried dependences in the loops that have been marked for deeper
-analysis, click on the "Collect" button in the "Check Dependences" box.
-
-![ ](images/Advisor-dependency1.png)
-
-![ ](images/Advisor-dependency2.png)
-
-As in the above screenshot, if there is no loop-carried dependency, the report
-will specify that. In case there is any loop-carried dependency, the report
-will specify the kind of dependency and when that row is selected, the bottom
-part of the window will show the line of code that causes this dependency.
-
-![ ](images/Advisor-dependency3.png)
-
-##### Checking Memory Access Patterns
-
-To check the memory access patterns in the loops that have been marked for
-deeper analysis, click on the "Collect" button in the "Check Memory Access
-Patterns" box. 
-
-![ ](images/Advisor-memory1.png)
-
-This analysis specifies the stride at which the data is accessed in the loop
-and helps in optimizations that can improve memory access, prefetching and
-locality.
-
-![ ](images/Advisor-memory2.png)
-
-The access pattern is displayed in the form of "x%/y%/z%". The significance of
-this is displayed when the mouse pointer is made to point to any one of the
-cells in the "Strides Distribution" column.
-
-![ ](images/Advisor-strides.png)
-
-## Roofline Tool on Cori
-
-The latest versions of Advisor (v2018) provide the
-[Roofline model](http://www.nersc.gov/assets/Uploads/2-SWillams-Roofline-Intro.pdf)
-automation. Two analyses, the survey and trip counts, are required to run the
-Roofline analysis. We ran into some issues to use this feature on Cori (this
-feature is still in its early development stage), especially on Cori KNL. While
-Intel and Cray work to resolve the issues, the following job scripts worked to
-collect data for the Roofline analysis:
-
-### Sample job script to collect data for Roofline analysis on Cori KNL with an application linked to Cray MPICH
-
-```
-#!/bin/bash -l
-#SBATCH -q regular
-#SBATCH -C knl,quad,cache
-#SBATCH -N 4
-#SBATCH -t 8:00:00
-
-export OMP_PROC_BIND=true
+export OMP_NUM_THREADS=136
+export OMP_PROC_BIND=spread
 export OMP_PLACES=threads
-export OMP_NUM_THREADS=8
-
-module swap craype-haswell craype-mic-knl
-
-module load advisor/2018.integrated_roofline
-
-export PMI_MMAP_SYNC_WAIT_TIME=3600
-export PMI_CONNECT_RETRIES=3600
-
-srun -N 4 -n 64 -c 16 --cpu_bind=cores run_survey.sh
-
-srun -N 4 -n 64 -c 16 --cpu_bind=cores run_tripcounts.sh
+srun -n 1 -c 272 --cpu-bind=sockets advixe-cl -collect survey -project-dir $SCRATCH/Advisor_OpenMP -- ./5_nqueens_omp
 ```
-
-Contents of "run_survey.sh":
+To view the result of the survey, the following statement can be run from a
+login or compute node:
+```
+advixe-cl -report survey -project-dir $SCRATCH/Advisor_OpenMP
+```
+which results in output like the following:
 
 ```
-#!/bin/bash
- 
-if [[ $SLURM_PROCID == 0 ]];then
-  advixe-cl -collect=survey --project-dir knl-result -data-limit=0 -- ./a.out
-else
-  sleep 30
-  ./a.out
-fi
-
+ID                 Function Call Sites and Loops                   Self Time   Total Time    Type                                             Why No Vectorization                                            Vector ISA   Compiler Estimated Gain   Average Trip Count   Min Trip Count   Max Trip Count   Call Count   Transformations    Source Location         Module
+_________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________________
+ 4   [loop in setQueen at nqueens_omp.cpp:104]                       20.235s      20.235s   Scalar                 loop with multiple exits cannot be vectorized unless it meets search loop idiom criteria                                                                                                                                nqueens_omp.cpp:104   5_nqueens_omp
+ 3   [loop in setQueen at nqueens_omp.cpp:133]                        3.321s      28.714s   Scalar   loop control variable was found, but loop iteration count cannot be computed before executing the loop                                                                                                                                nqueens_omp.cpp:133   5_nqueens_omp
+ 1   [loop in main$omp$parallel_for@157 at nqueens_omp.cpp:157]           0s      28.714s   Scalar   loop control variable was found, but loop iteration count cannot be computed before executing the loop                                                                                                                                nqueens_omp.cpp:157   5_nqueens_omp
+ 2   [loop in main$omp$parallel_for@157 at nqueens_omp.cpp:158]           0s      28.714s   Scalar                                        loop with function call not considered an optimization candidate.                                                                                                                                nqueens_omp.cpp:158   5_nqueens_omp
 ```
 
-Contents of "run_tripcounts.sh":
+### Roofline Advisor
 
+The example code provided
+[here](https://software.intel.com/en-us/articles/training-sample-intel-advisor-roofline)
+is suitable for this example. To perform the roofline analysis on the code, the
+following example statement can be used:
 ```
-#!/bin/bash
-
-if [[ $SLURM_PROCID == 0 ]];then
-  advixe-cl -collect=tripcounts -flop --project-dir knl-result -data-limit=0 -- ./a.out
-else
-  ./a.out
-fi 
-```
-
-### Sample job script to collect data for Roofline analysis on Cori KNL with an application linked to Intel MPI
-
-```
-#!/bin/bash -l
-#SBATCH -q regular
-#SBATCH -C knl,quad,cache
-#SBATCH -N 4
-#SBATCH -t 8:00:00
-
-export OMP_PROC_BIND=true
+export OMP_NUM_THREADS=136
+export OMP_PROC_BIND=spread
 export OMP_PLACES=threads
-export OMP_NUM_THREADS=8
-
-module load impi
-
-export I_MPI_PMI_LIBRARY=/usr/lib64/slurmpmi/libpmi.so
-export I_MPI_FABRICS=shm:tcp
-
-module load advisor/2018.integrated_roofline
-
-export PMI_MMAP_SYNC_WAIT_TIME=1800
-
-srun -N 4 -n 64 -c 16 --cpu_bind=cores run_survey.sh
-
-srun -N 4 -n 64 -c 16 --cpu_bind=cores run_tripcounts.sh
+srun -n 1 -c 272 --cpu-bind=sockets advixe-cl -collect roofline -project-dir $SCRATCH/Advisor_roofline -- ./3_mmult_omp
 ```
+After Advisor runs the two analysis required for the roofline model (`survey`
+and `tripcounts`), one can view the resulting roofline plot in the Advisor GUI.
 
-Contents of "run_survey.sh":
+## Example Downloads
 
-```
-#!/bin/bash
-if [[ $SLURM_PROCID == 0 ]];then
-  advixe-cl -collect=survey --project-dir impi-knl3 -data-limit=0 -- ./a.out
-else
-  ./a.out
-fi
-```
+* [mulmv.c.txt](./example_codes/mulmv.c.txt): sample code used for the Advisor analysis.
+  It is a matrix and vector multiplication code.
+* [mulmv-annotated.c.txt](./example_codes/mulmv-annotated.c.txt): same file as above but
+  with loop annontations for more targeted profiling.
 
-Contents of "run_tripcounts.sh":
+## Common Pitfalls
+
+Users profiling their applications with Advisor should be aware of pitfalls
+described below.
+
+### Profiling a statically linked executable
+
+If one attempts to profile a statically linked application with Advisor, onen
+will encounter an error similar to the following:
 
 ```
-#!/bin/bash
-if [[ $SLURM_PROCID == 0 ]];then
-  advixe-cl -collect=tripcounts -flops-and-masks --project-dir impi-knl3 -data-limit=0 -- ./a.out
-else
-  ./a.out
-fi
+advixe: Error: Binary file of the analysis target does not contain symbols required for profiling. See the 'Analyzing Statically Linked Binaries' help topic for more details.
+advixe: Error: Valid pthread_spin_trylock symbol is not found in the binary of the analysis target.
 ```
 
-Intel has posted a
-[video on Youtube](https://www.youtube.com/watch?v=h2QEM1HpFgg) about how to
-use this functionality.
+Instead, one should link applications dynamically. With the Cray compiler
+wrappers this is achieved with the `-dynamic` link flag, or by setting the
+environment variable `CRAYPE_LINK_TYPE=dynamic`. For other compilers, the
+default link type is dynamic, and so no action is necessary.
 
-## Downloads
+One can verify that an application is dynamically linked by running the command
+`ldd` on the executable. For example, a dynamically linked executable may show
+output like the following:
 
-[mulmv.c.txt](http://www.nersc.gov/assets/Uploads/mulmv.c.txt)
+```
+user@cori04:src> ldd toypush
+	linux-vdso.so.1 (0x00007ffd92dc9000)
+	libAtpSigHandler.so.0 => /opt/cray/pe/lib64/libAtpSigHandler.so.0 (0x00002ba99e197000)
+	librca.so.0 => /opt/cray/rca/default/lib64/librca.so.0 (0x00002ba99e3a1000)
+	libmpich_intel.so.3 => /opt/cray/pe/lib64/libmpich_intel.so.3 (0x00002ba99e5a5000)
+	libm.so.6 => /lib64/libm.so.6 (0x00002ba99eb5d000)
+	libiomp5.so => /opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64/libiomp5.so (0x00002ba99ee5a000)
+	libpthread.so.0 => /lib64/libpthread.so.0 (0x00002ba99f235000)
+	libdl.so.2 => /lib64/libdl.so.2 (0x00002ba99f452000)
+	libc.so.6 => /lib64/libc.so.6 (0x00002ba99f656000)
+	libgcc_s.so.1 => /opt/intel/advisor/lib64/libgcc_s.so.1 (0x00002ba99f9fb000)
+	libxpmem.so.0 => /opt/cray/xpmem/default/lib64/libxpmem.so.0 (0x00002ba99fc12000)
+	librt.so.1 => /lib64/librt.so.1 (0x00002ba99fe15000)
+	libugni.so.0 => /opt/cray/ugni/default/lib64/libugni.so.0 (0x00002ba9a001d000)
+	libudreg.so.0 => /opt/cray/udreg/default/lib64/libudreg.so.0 (0x00002ba9a029a000)
+	libpmi.so.0 => /opt/cray/pe/lib64/libpmi.so.0 (0x00002ba9a04a4000)
+	libifport.so.5 => /opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64/libifport.so.5 (0x00002ba9a06eb000)
+	libifcore.so.5 => /opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64/libifcore.so.5 (0x00002ba9a0917000)
+	libimf.so => /opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64/libimf.so (0x00002ba9a0c74000)
+	libsvml.so => /opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64/libsvml.so (0x00002ba9a1207000)
+	libintlc.so.5 => /opt/intel/compilers_and_libraries_2018.3.222/linux/compiler/lib/intel64/libintlc.so.5 (0x00002ba9a2b15000)
+	/lib64/ld-linux-x86-64.so.2 (0x00002ba99df73000)
+```
 
-This is the sample code used for the Advisor analysis. It is a matrix and
-vector multiplication code.
+Howver, if one attempts to run `ldd` on a statically linked executable, the
+output is an error:
 
-[mulmv-annotated.c.txt](http://www.nersc.gov/assets/Uploads/mulmv-annotated.c.txt)
+```
+user@cori04:src> ldd toypush
+	not a dynamic executable
+```
 
-This file contains the annotations.
+### Saving profiling database on a GPFS file system
 
+The argument to the `-project-dir` flag for the `advixe-cl` command instructs
+Advisor where to save the resulting profiling database from the application. On
+the Cori and Edison systems at NERSC, the database must be saved to a Lustre
+filesystem, e.g., `$SCRATCH`. If one attempts to save this database to a GPFS
+file system (`$HOME` or `/project`), the profiling process will appear to run
+correctly, but the final step of Advisor will fail with the following error:
+```
+advixe: Error: Data loading failed.
+advixe: Error: Unexpected internal error / invalid state
+```
+
+### Finalization step on KNL nodes
+
+The final step of Advisor's profiling process, called "finalization", is a
+serial process, and runs as a single thread on a single node. Because
+finalization depends on single-threaded performance of the processor, this step
+can be very time consuming on Cori KNL nodes. Consequently, it is recommended
+to add the flag `-no-auto-finalize` to the `advixe-cl` command when profiling a
+code running on KNL nodes. This defers the finalization step so that it can be
+executed, e.g., on a login node which has Haswell processors with much higher
+single-threaded performance.
+
+One consequence of the `-no-auto-finalize` flag is that, when opening the GUI
+to display the profiling output, Advisor may warn that it cannot find the
+corresponding source code and object files for the profiled application, since
+this step is performed during the finalization procedure. The user must then
+manually add the locations of the directories containing source code and object
+files, and then 're-finalize' the database from the GUI.
