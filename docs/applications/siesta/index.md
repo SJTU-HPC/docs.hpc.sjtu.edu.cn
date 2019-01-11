@@ -53,6 +53,7 @@ methods.
 
 ## Support
 
+* [Manuals](https://departments.icmab.es/leem/siesta/Documentation/Manuals/manuals.html)
 * [Development and distribution platform](https://launchpad.net/siesta)
     * [Questions](https://answers.launchpad.net/siesta)
     * [FAQ](https://answers.launchpad.net/siesta/+faqs)
