@@ -337,19 +337,19 @@ the job repeatedly until it runs for the desired amount of time or the
 job completes.
 
 ??? example "Edison"
-        ```bash
-        --8<-- "docs/jobs/examples/variable-time-jobs/edison/variable-time-jobs.sh"
-        ```
+    ```bash
+    --8<-- "docs/jobs/examples/variable-time-jobs/edison/variable-time-jobs.sh"
+    ```
 
 !!! example "Cori Haswell"
-        ```bash
-        --8<-- "docs/jobs/examples/variable-time-jobs/cori-haswell/variable-time-jobs.sh"
-        ```
+    ```bash
+    --8<-- "docs/jobs/examples/variable-time-jobs/cori-haswell/variable-time-jobs.sh"
+    ```
 
 ??? example "Cori KNL"
-        ```bash
-        --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/variable-time-jobs.sh"
-        ```
+    ```bash
+    --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/variable-time-jobs.sh"
+    ```
 
 In the above example, the `--comment` option is used to enter the
 user’s desired maximum wall-clock time, which could be longer than the
