@@ -49,6 +49,11 @@ at [nxcloud01](https://nxcloud01.nersc.gov).
     The browser interface is still experimental and can sometimes
     be slower than connecting via the client.
 
+### Connecting with MFA
+
+Add your one-time password to the "Password" field after your NERSC
+password (with no spaces between them).
+
 ## Troubleshooting
 
 ### Connecting to NX
