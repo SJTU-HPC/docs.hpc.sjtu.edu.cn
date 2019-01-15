@@ -264,19 +264,19 @@ The intended use of the xfer queue is to transfer data between Cori or
 Edison and HPSS. The xfer jobs run on one of the login nodes and are
 free of charge. If you want to transfer data to the HPSS archive
 system at the end of a regular job, you can submit an xfer job at the
-end of your batch job script via `sbatch -M escori hsi put
-<my_files>` (use esedison on Edison), so that you will not get
-charged for the duration of the data transfer. The xfer jobs can be
-monitored via `squeue -M escori`. The number of running jobs for each
+end of your batch job script via `module load esslurm; sbatch hsi put
+<my_files>` (be sure to load the `esslurm` module first, or you'll end
+up in the regular queue), so that you will not get charged for the
+duration of the data transfer. The xfer jobs can be monitored via
+`module load esslurm; squeue`. The number of running jobs for each
 user is limited to the number of concurrent HPSS sessions (15).
 
 !!! warning
     Do not run computational jobs in the xfer queue.
 
-??? example "Edison transfer job"
+??? example "Xfer transfer job"
     ```bash
     #!/bin/bash
-    #SBATCH --clusters=esedison
     #SBATCH --qos=xfer
     #SBATCH --time=12:00:00
     #SBATCH --job-name=my_transfer
@@ -284,30 +284,24 @@ user is limited to the number of concurrent HPSS sessions (15).
 
     #Archive run01 to HPSS
     htar -cvf run01.tar run01
-    ```
 
-??? example "Cori transfer job"
-    ```bash
-    #!/bin/bash -l
-    #SBATCH -M escori
-    #SBATCH -q xfer
-    #SBATCH -t 12:00:00
-    #SBATCH -J my_transfer
-    #SBATCH -L SCRATCH
-
-    #Archive run01 to HPSS
-    htar -cvf run01.tar run01
+    #Submit job with
+    #module load esslurm
+    #sbatch <job_script>
     ```
 
 Xfer jobs specifying `-N nodes` will be rejected at submission
-time. Also `-C haswell` is not needed since the job does not run on
-compute nodes. By default, xfer jobs get ~2GB of memory allocated. If
-you're archiving larger files, you'll need to request more memory. You
-can do this by adding `#SBATCH --mem=XGB` to the above script (5 - 10
-GB is a good starting point for large files).
+time. When submitting an Xfer job from Cori, the `-C haswell` is not
+needed since the job does not run on compute nodes. By default, xfer
+jobs get 2GB of memory allocated. The memory footprint scales
+somewhat with the size of the file, so if you're archiving larger
+files, you'll need to request more memory. You can do this by adding
+`#SBATCH --mem=XGB` to the above script (where X in the range of 5 -
+10 GB is a good starting point for large files).
 
-To monitor your xfer jobs, please use the `squeue -M escori` command,
-or `scontrol -M escori show job job_id`.
+To monitor your xfer jobs please load the `esslurm` module, then you
+can use Slurm commands like `squeue` or `scontrol` to access the xfer
+queue on Cori or Edison.
 
 ## Variable-time jobs
 
@@ -677,13 +671,33 @@ slots on the node (total of 64 CPUs, or 64 slots) by specifying the
 
 ## Multiple Parallel Jobs While Sharing Nodes
 
-Under certain scenarios, you might want two or more independent applications running simultaneously on each compute node allocated to your job. For example, a pair of applications that interact in a client-server fashion via some IPC mechanism on-node (e.g. shared memory), but must be launched in distinct MPI communicators.
+Under certain scenarios, you might want two or more independent
+applications running simultaneously on each compute node allocated to
+your job. For example, a pair of applications that interact in a
+client-server fashion via some IPC mechanism on-node (e.g. shared
+memory), but must be launched in distinct MPI communicators.
 
-This latter constraint would mean that MPMD mode (see below) is not an appropriate solution, since although MPMD can allow multiple executables to share compute nodes, the executables will also share an MPI_COMM_WORLD at launch.
+This latter constraint would mean that MPMD mode (see below) is not an
+appropriate solution, since although MPMD can allow multiple
+executables to share compute nodes, the executables will also share an
+MPI_COMM_WORLD at launch.
 
-Slurm can allow multiple executables launched with concurrent srun calls to share compute nodes as long as the sum of the resources assigned to each application does not exceed the node resources requested for the job. Importantly, you cannot over-allocate the CPU, memory, or "craynetwork" resource. While the former two are self-explanatory, the latter refers to limitations imposed on the number of applications per node that can simultaneously use the Aries interconnect, which is currently limited to 4.
+Slurm can allow multiple executables launched with concurrent srun
+calls to share compute nodes as long as the sum of the resources
+assigned to each application does not exceed the node resources
+requested for the job. Importantly, you cannot over-allocate the CPU,
+memory, or "craynetwork" resource. While the former two are
+self-explanatory, the latter refers to limitations imposed on the
+number of applications per node that can simultaneously use the Aries
+interconnect, which is currently limited to 4.
 
-Here is a quick example of an sbatch script that uses two compute nodes and runs two applications concurrently. One application uses 8 cores on each node, while the other uses 24 on each node. The number of CPUs per node is again controlled with the "-n" and "-N" flags, while the amount of memory per node with the "--mem" flag. To specify the "craynetwork" resource, we use the "--gres" flag available in both "sbatch" and "srun".
+Here is a quick example of an sbatch script that uses two compute
+nodes and runs two applications concurrently. One application uses 8
+cores on each node, while the other uses 24 on each node. The number
+of CPUs per node is again controlled with the "-n" and "-N" flags,
+while the amount of memory per node with the "--mem" flag. To specify
+the "craynetwork" resource, we use the "--gres" flag available in both
+"sbatch" and "srun".
 
 !!! example "Cori Haswell"
 	```
@@ -691,17 +705,32 @@ Here is a quick example of an sbatch script that uses two compute nodes and runs
 	```
 
 This is example is quite similar to the mutliple srun jobs shown for
-[running simultaneous parallel jobs](/jobs/examples#multiple-parallel-jobs-simultaneously), with the following exceptions:
+[running simultaneous parallel
+jobs](/jobs/examples#multiple-parallel-jobs-simultaneously), with the
+following exceptions:
 
-1. For our sbatch job, we have requested "--gres=craynetwork:2" which will allow us to run up to two applications simultaneously per compute node.
+1. For our sbatch job, we have requested "--gres=craynetwork:2" which
+will allow us to run up to two applications simultaneously per compute
+node.
 
-2. In our srun calls, we have explicitly defined the maximum amount of memory available to each application per node with "--mem" (in this example 50 and 60 GB, respectively) such that the sum is less than the resource limit per node (roughly 122 GB).
+2. In our srun calls, we have explicitly defined the maximum amount of
+memory available to each application per node with "--mem" (in this
+example 50 and 60 GB, respectively) such that the sum is less than the
+resource limit per node (roughly 122 GB).
 
-3. In our srun calls, we have also explicitly used one of the two requested craynetwork resources per call.
+3. In our srun calls, we have also explicitly used one of the two
+requested craynetwork resources per call.
 
-Using this combination of resource requests, we are able to run multiple parallel applications per compute node.
+Using this combination of resource requests, we are able to run
+multiple parallel applications per compute node.
 
-One additional observation: when calling srun, it is permitted to specify "--gres=craynetwork:0" which will not count against the craynetwork resource. This is useful when, for example, launching a bash script or other application that does not use the interconnect. We don't currently anticipate this being a common use case, but if your application(s) do employ this mode of operation it would be appreciated if you let us know.     
+One additional observation: when calling srun, it is permitted to
+specify "--gres=craynetwork:0" which will not count against the
+craynetwork resource. This is useful when, for example, launching a
+bash script or other application that does not use the
+interconnect. We don't currently anticipate this being a common use
+case, but if your application(s) do employ this mode of operation it
+would be appreciated if you let us know.
 
 ## Additional information
 
