@@ -39,6 +39,9 @@ be used to identify this job in reports from Slurm.
 nersc$ sbatch first-job.sh
 Submitted batch job 864933
 ```
+Slurm will also check your file system usage and reject the job if
+you are over your quota in your scratch or home file system. See
+[here](#quota-enforcement) for more details.
 
 ### salloc
 
@@ -197,3 +200,14 @@ nersc$ scancel -u $USER
 !!! note
 	This only applies to jobs which are associated with your
 	accounts.
+
+## Quota Enforcement
+
+Users will not be allowed to submit jobs to Cori and Edison if they
+are over quota in their scratch or home directories. This quota check
+is done twice, first when the job is submitted and again when the
+running job invokes `srun`. This could mean that if you went over
+quota after submitting the job, the job could fail when it
+runs. Please [check your
+quota](https://docs.nersc.gov/filesystems/quotas/) regularly and
+delete or archive data as needed.
