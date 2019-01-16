@@ -16,9 +16,9 @@ NERSC's HPSS system can be accessed at archive.nersc.gov through a
 variety of clients such as hsi, htar, ftp, pftp, and globus. By
 default every user has an HPSS account.
 
-## Getting Started
+# Getting Started
 
-### Accessing HPSS
+## Accessing HPSS
 
 You can access HPSS from any NERSC system. Inside of NERSC, files can
 be archived to HPSS individually with the "hsi" command or in groups
@@ -33,7 +33,7 @@ this token. If you are access HPSS remotely (using ftp, pftp, or
 gridFTP), you may need to manually generate a token. Please see the
 [Accessing HPSS](archive_access.md) page for more details.
 
-### Best Practices
+## Best Practices
 
 HPSS is intended for long term storage of data that is not frequently
 accessed.
@@ -48,7 +48,7 @@ or detector run characteristics, etc. The optimal size for htar
 bundles is 100 - 500 GBs, so you may need to do several htar bundles
 for each set depending on the size of the data.
 
-#### Group Small Files Together
+### Group Small Files Together
 
 HPSS is optimized for file sizes of 100 - 500 GB. If you need to store
 many files smaller than this, please use htar to bundle them together
@@ -63,7 +63,7 @@ system for all users.
 Please see the [Accessing HPSS](archive_access.md) for more details on
 how to use htar.
 
-#### Order Large Retrievals
+### Order Large Retrievals
 
 If you are retrieving many (> 100 files) from HPSS, you need to
 order your retrievals so that all files on a single tape will be
@@ -116,7 +116,7 @@ a script to help you generate an ordered list for retrieval called
     harvest subdirectories from, and temp.txt holds the output from
     your "ls -1" call.
 
-#### Avoid Very Large Files
+### Avoid Very Large Files
 
 Files sizes greater than 1 TB can be difficult for HPSS to work with
 and lead to longer transfer times, increasing the possibility
@@ -135,7 +135,7 @@ these files, you can recombine them with cat
 
 ```cat my_output_tarname.tar.* | tar xvf -```
 
-#### Accessing HPSS Data Remotely
+### Accessing HPSS Data Remotely
 
 We recommend a two-stage process to move data to / from HPSS and a
 remote site. Use globus to transfer the data between NERSC and the
@@ -147,7 +147,7 @@ encounter problems due to firewalls at the client site. Often you will
 have to configure your client firewall to allow connections to
 HPSS. See the HPSS firewall page for more details.
 
-#### Use the Xfer Queue
+### Use the Xfer Queue
 
 User the dedicated [xfer queue](../../jobs/examples/#xfer-queue) for
 long-running transfers to / from HPSS. You can also submit jobs to the
@@ -155,11 +155,11 @@ xfer queue after your computations are done. The xfer queue is
 configured to limit the number of running jobs per user to the same
 number as the limit of HPSS sessions.
 
-### Session Limits
+## Session Limits
 
 Each HPSS user is limited to no more than 15 concurrent HPSS sessions.
 
-### HPSS Usage Charging
+## HPSS Usage Charging
 
 DOE's Office of Science awards an HPSS quota to each NERSC project
 every year. Users charge their HPSS space usage to the HPSS repos of
@@ -214,7 +214,7 @@ whole repo.
 You can also check the HPSS quota for a repo by logging in to the NIM
 and clicking on their "Account Usage" tab.
 
-#### Apportioning User Charges to Repositories: Project Percents
+### Apportioning User Charges to Repositories: Project Percents
 
 If a user belongs to only one HPSS repo all usage is charged to that
 repo. If a user belongs to multiple repos daily charges are
@@ -236,7 +236,7 @@ say "after the fact" how to distribute their HPSS usage charges to the
 HPSS repos to which they belong. For a given repo the MPP
 repository and the HPSS repository usually have the same name.
 
-#### If a user is added to a new repo or removed from an existing repo
+### If a user is added to a new repo or removed from an existing repo
 
 If a user is added to a new repo or removed from an existing repo the
 project percents for that user are adjusted based on the size of the
@@ -269,7 +269,7 @@ among the remaining repos while keeping their relative values the
 same.
 
 
-### HPSS Project Directories
+## HPSS Project Directories
 
 A special "project directory" can be created in HPSS for groups of
 researchers who wish to easily share files. The file in this directory
@@ -292,18 +292,18 @@ a Project Manager of the requesting repository should fill out the
 Form](https://www.nersc.gov/users/storage-and-file-systems/hpss/advanced-usage-examples/hpss-project-directories/request-form/).
 
 
-### Troubleshooting
+## Troubleshooting
 
 Some frequently encountered issues and how to solve them.
 
-#### Trouble connecting
+### Trouble connecting
 
 The first time you try to connect using a NERSC provided client like
-HSI, HTAR, or PFTP you will be prompted for your NIM password which
-will generate a token stored in $HOME/.netrc. This allows you to
-connect to HPSS without typing a password. However, sometimes this
-file can become out of date or otherwise corrupted. This generates
-errors that look like this:
+HSI, HTAR, or PFTP you will be prompted for your NIM password +
+one-time password which will generate a token stored in
+$HOME/.netrc. This allows you to connect to HPSS without typing a
+password. However, sometimes this file can become out of date or
+otherwise corrupted. This generates errors that look like this:
 
 ```
 % hsi
@@ -317,18 +317,18 @@ Error - authentication/initialization failed
 
 If this error occurs try moving $HOME/.netrc file to
 $HOME/.netrc_temp. Then connect to the HPSS system again and enter
-your NIM password when prompted. A new $HOME/.netrc file will be
-generated with a new entry/token. If the problem persists contact
-account support.
+your NIM password + one-time password when prompted. A new
+$HOME/.netrc file will be generated with a new entry/token. If the
+problem persists contact account support.
 
-#### Cannot transfer files using htar
+### Cannot transfer files using htar
 
 Htar requires the node you're on to accept incoming connections from
 its movers. This is not possible from a compute node at NERSC, so htar
 transfers will fail. Instead we recommend you use our special xfer
 queue for data transfers
 
-#### Globus transfer errors
+### Globus transfer errors
 
 Globus transfers will fail if you don't have permission to read the
 source directory or space to write in the target directory. One common
