@@ -391,9 +391,9 @@ in a file name ".netrc" for use by hsi, htar, pftp, and most ftp clients.
 
 The first time you try to connect from a NERSC system (Cori, Edison,
 etc.) using a NERSC provided client like HSI, HTAR, or pftp you will
-be prompted for your NIM password which will generate a token stored
-in $HOME/.netrc. After completing this step you will be able to
-connect to HPSS without typing a password:
+be prompted for your NIM password + one-time password which will
+generate a token stored in $HOME/.netrc. After completing this step
+you will be able to connect to HPSS without typing a password:
 
 ```
 hsi
