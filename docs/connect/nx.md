@@ -58,7 +58,7 @@ password (with no spaces between them).
 
 ### Connecting to NX
 
-If you are having trouble connecting to NX, please can try these steps:
+If you are having trouble connecting to NX, please try these steps:
 
 1. Log into [NIM](https://nim.nersc.gov) to clear any login
    failures. Access to NX uses your NERSC user name and password. If
