@@ -12,7 +12,7 @@ Anaconda Python is a platform for large-scale data processing,
 predictive analytics, and scientific computing.  It includes hundreds
 of open source packages and Intel MKL optimizations throughout the
 scientific Python stack.  Anaconda provides
-the [`conda`](https://conda.io/docs/user-guide/getting-started.html)
+the [`conda`](https://conda.io/)
 command-line tool for managing packages, but also works well
 with [`pip`.](https://pip.pypa.io/en/stable/user_guide/) The Anaconda
 distribution also exposes access to
