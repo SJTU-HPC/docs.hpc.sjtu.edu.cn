@@ -27,10 +27,10 @@ customize the desktop according to your work requirement.
 ## Installing
 
 ### Download latest NX Client
-#### Windows XP/Windows 7/Windows 8 ([Download](https://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.80_1.exe))
-#### Mac OS X 10.5 or later on an Intel Mac ([Download](https://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2.dmg))
-#### DEB Package for Debian/Ubuntu: ([Download](https://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2_amd64.deb))
-#### RPM Package for Centos/Redhat/Fedora ([Download](https://portal.nersc.gov/project/mpccc/nx/nomachine-enterprise-client_6.0.66_2_x86_64.rpm))
+#### Windows ([Download](https://www.nomachine.com/download/download&id=16))
+#### Mac OS ([Download](https://www.nomachine.com/download/download&id=15))
+#### DEB Package for Debian/Ubuntu: ([Download](https://www.nomachine.com/download/download&id=10))
+#### RPM Package for Centos/Redhat/Fedora ([Download](https://www.nomachine.com/download/download&id=11))
 
 To configure open the NX player and click on the box in the
 upper left that says "New". Use "SSH" for protocol,
