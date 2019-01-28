@@ -18,3 +18,7 @@ We have prioritized support for the following Deep Learning frameworks on Cori:
 
 We track general performance of Deep Learning frameworks as well as some
 specific scientific applications. See the [benchmarks](benchmarks.md) for details.
+
+### Science use-cases
+
+Machine Learning and Deep Learning are increasingly used to analyze scientific data, in diverse fields. We have gathered some examples of work ongoing at NERSC on the [science use-cases page](science-use-cases.md) including some code and datasets and how to run these at NERSC.
