@@ -50,6 +50,7 @@ nav:
         - TensorFlow: analytics/machinelearning/tensorflow/index.md
         - PyTorch: analytics/machinelearning/pytorch.md
         - Benchmarks: analytics/machinelearning/benchmarks.md
+        - Science use-cases: analytics/machinelearning/science-use-cases.md
   - Data:
       - Management : data/management.md
       - Sharing: data/sharing.md
