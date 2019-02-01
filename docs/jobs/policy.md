@@ -25,8 +25,8 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | shared[^1]      | 0.5       | 48             | 10000        | -         | 4        | 90     |
 | interactive[^4] | 64        | 4              | 1            | 1         | -        | 90     |
 | debug           | 64        | 0.5            | 5            | 2         | 3        | 90     |
-| premium         | 1932      | 48             | 5            | -         | 2        | 180    |
-| scavenger[^2]   | 1932      | 48             | 5000         | -         | 5        | 0      |
+| premium         | 1772      | 48             | 5            | -         | 2        | 180    |
+| scavenger[^2]   | 1772      | 48             | 5000         | -         | 5        | 0      |
 | xfer            | 1 (login) | 48             | 100          | 15        | -        | 0      |
 | bigmem          | 1 (login) | 72             | 100          | 1         | -        | 90     |
 | realtime[^3]    | custom    | custom         | custom       | custom    | 1        | custom |
@@ -36,11 +36,11 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 
 | QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
 |-----------------|-----------|----------------|--------------|-----------|----------|--------|
-| regular         | 8991      | 48             | 5000         | -         | 4        | 90[^6] |
+| regular         | 9489      | 48             | 5000         | -         | 4        | 90[^6] |
 | interactive[^5] | 64        | 4              | 1            | 1         | -        | 90     |
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
-| premium         | 8991      | 48             | 5            | -         | 2        | 180[^6]|
-| scavenger[^2]   | 8991      | 48             | 5000         | -         | 5        | 0      |
+| premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
+| scavenger[^2]   | 9489      | 48             | 5000         | -         | 5        | 0      |
 | special[^4]     | custom    | custom         | custom       | custom    | -        | custom |
 
 !!! tip
