@@ -211,13 +211,13 @@ nav:
       - Training and Tutorials: science-partners/jgi/training.md
       - Databases and Web Services: science-partners/jgi/services.md
   - Help: help/index.md
-  - Tutorials:
-    - Demo : demo/demo.md
-    - Tables : demo/table.md
-    - Dropdown: demo/dropdown.md
+#  - Tutorials:
+#    - Demo : demo/demo.md
+#    - Tables : demo/table.md
+#    - Dropdown: demo/dropdown.md
 
 # Project Information
-site_name: NERSC Documentation (beta)
+site_name: NERSC Documentation
 site_description: NERSC Documentation
 site_author: NERSC
 site_dir: public
