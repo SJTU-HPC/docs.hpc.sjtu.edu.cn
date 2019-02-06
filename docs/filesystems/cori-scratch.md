@@ -12,20 +12,22 @@ from all nodes (login, MOM, and compute nodes) and is tuned for high
 performance. We recommend that you run your jobs, especially data
 intensive ones, from the burst buffer or the scratch file system.
 
-All users have 20 TB of quota for the scratch file system. If your
-`$SCRATCH` usage exceeds your quota, you will not be able to submit batch
-jobs until you reduce your usage.  The batch job submit filter checks the
-usage of `/global/cscratch1`.
+!!! note
+    See [quotas](quotas.md) for detailed information about inode,
+    space quotas and file system purge policies.
+
+If your `$SCRATCH` usage exceeds your quota, you will not be able to
+submit batch jobs until you reduce your usage.  The batch job submit
+filter checks the usage of `/global/cscratch1`.
 
 The `myquota` command will display your current usage and quota. NERSC
 sometimes grants temporary quota increases for legitimate purposes. To
 apply for such an increase, please use the
 [Disk Quota Increase Form](http://www.nersc.gov/users/storage-and-file-systems/file-systems/data-storage-quota-increase-request/).
 
-The scratch file system is subject to purging. Files in your `$SCRATCH`
-directory that are older than 12 weeks (defined by last access time) are
-removed. Please make sure to back up your important files (e.g. to HPSS).
-Instructions for HPSS are [here](https://docs.nersc.gov/filesystems/archive/).
+The scratch file system is subject to purging. Please make sure to
+back up your important files (e.g. to HPSS).  Instructions for HPSS
+are [here](https://docs.nersc.gov/filesystems/archive/).
 
 To restore deleted or purged files, please refer to
 [Backup/Restore on Home directory](https://docs.nersc.gov/filesystems/global-home/#backups)
