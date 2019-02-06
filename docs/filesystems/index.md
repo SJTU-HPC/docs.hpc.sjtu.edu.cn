@@ -11,15 +11,19 @@ File systems are configured for different purposes. Each machine has
 access to at least three different file systems with different levels
 of performance, permanence and available space.
 
-| file system     | space | inodes | purge time | snapshots | backup | access          |
-|-----------------|-------|--------|------------|-----------|--------|-----------------|
-| project         | 1 TB  | 1 M    | -          | yes       | no     | repository      |
-| home            | 40 GB | 1 M    | -          | yes       | yes    | user            |
-| common          | 10 GB | 1 M    | -          | no        | no     | repository      |
-| Cori scratch    | 20 TB | 10 M   | 12 weeks   | no        | no     | user            |
-| Edison scratch  | 10 TB | 5 M    | 12 weeks   | no        | no     | user            |
-| Edison scratch3 | -     | -      | 8 weeks    | no        | no     | special request |
-| HPSS            | -     | -      | -          | no        | no     | user            |
+| file system     | snapshots | backup | purging | access          |
+|-----------------|-----------|--------|---------|-----------------|
+| project         | yes       | no     | no      | repository      |
+| home            | yes       | yes    | no      | user            |
+| common          | no        | no     | no      | repository      |
+| Cori scratch    | no        | no     | yes     | user            |
+| Edison scratch  | no        | no     | yes     | user            |
+| Edison scratch3 | no        | no     | yes     | special request |
+| HPSS            | no        | no     | no      | user            |
+
+!!! note
+	See [quotas](quotas.md) for detailed information about inode,
+	space quotas and file system purge policies.
 
 ## Global storage
 
