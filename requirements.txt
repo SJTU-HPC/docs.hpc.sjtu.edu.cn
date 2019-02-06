@@ -5,8 +5,8 @@ Jinja2==2.10
 livereload==2.5.2
 Markdown==2.6.11
 MarkupSafe==1.0
-mkdocs==1.0.1
-mkdocs-material==3.0.3
+mkdocs==1.0.4
+mkdocs-material==3.3.0
 Pygments==2.2.0
 pymdown-extensions==5.0
 PyYAML==3.13
