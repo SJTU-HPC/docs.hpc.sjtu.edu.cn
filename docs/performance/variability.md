@@ -34,7 +34,7 @@ srun -n 1024 -c 2 --cpu-bind=cores /tmp/my_program.x
 
 For applications with dynamic executables and many libraries
 (*especially* python based applications)
-use [shifter](/development/shifter/overview.md).
+use [shifter](/programming/shifter/overview.md).
 
 ## Topology
 
