@@ -205,6 +205,7 @@ nav:
       - Systems:
         - Overview: science-partners/jgi/systems.md
         - Cori Genepool: science-partners/jgi/cori-genepool.md
+        - Cori ExVivo: science-partners/jgi/cori-exvivo.md
         - Denovo: science-partners/jgi/denovo.md
       - Filesystems: science-partners/jgi/filesystems.md
       - Software: science-partners/jgi/software.md
