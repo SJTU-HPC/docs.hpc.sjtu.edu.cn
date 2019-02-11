@@ -40,7 +40,8 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | interactive[^5] | 64        | 4              | 1            | 1         | -        | 90     |
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
-| scavenger[^2]   | 9489      | 48             | 5000         | -         | 5        | 0      |
+| low.            | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
+| scavenger[^2]   | 9489      | 48             | 5000         | -         | 6        | 0      |
 | special[^4]     | custom    | custom         | custom       | custom    | -        | custom |
 
 !!! tip
@@ -96,6 +97,11 @@ script to submit another batch script.
 The intent of the premium QOS is to allow for faster turnaround before
 conferences and urgent project deadlines. It should be used with care.
 
+### Low
+
+The intent of the low QOS is to allow non-urgent jobs to run with a 
+lower usage charge.
+
 ### Scavenger
 
 The intent of the scavenger QOS is to allow users with a zero or
@@ -142,3 +148,8 @@ rejected by the batch system.
 [^6]:
 	The "regular" and "premium" QOS charges on Cori KNL are discounted
     by 20% if the job uses 1024 or more nodes.
+
+[^7]:
+	The "low" QOS (available on Cori KNL only) is charged 50% as compared to 
+	the "regular" QOS, but no extra large jobs discount.
+
