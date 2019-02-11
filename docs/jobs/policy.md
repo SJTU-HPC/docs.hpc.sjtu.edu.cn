@@ -40,7 +40,7 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | interactive[^5] | 64        | 4              | 1            | 1         | -        | 90     |
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
-| low.            | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
+| low             | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
 | scavenger[^2]   | 9489      | 48             | 5000         | -         | 6        | 0      |
 | special[^4]     | custom    | custom         | custom       | custom    | -        | custom |
 
@@ -151,5 +151,5 @@ rejected by the batch system.
 
 [^7]:
 	The "low" QOS (available on Cori KNL only) is charged 50% as compared to 
-	the "regular" QOS, but no extra large jobs discount.
+	the "regular" QOS, but no extra large job discount applies.
 
