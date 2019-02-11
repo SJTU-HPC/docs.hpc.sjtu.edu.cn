@@ -40,8 +40,8 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | interactive[^5] | 64        | 4              | 1            | 1         | -        | 90     |
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
-| low.            | 9489      | 48             | 5000         | -         | 4        | 45[^7] |
-| scavenger[^2]   | 9489      | 48             | 5000         | -         | 5        | 0      |
+| low.            | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
+| scavenger[^2]   | 9489      | 48             | 5000         | -         | 6        | 0      |
 | special[^4]     | custom    | custom         | custom       | custom    | -        | custom |
 
 !!! tip
@@ -99,8 +99,8 @@ conferences and urgent project deadlines. It should be used with care.
 
 ### Low
 
-The intent of the low QOS (only exists on Cori KNL) is to allow non-urgent
-jobs to run with a lower usage charge.
+The intent of the low QOS is to allow non-urgent jobs to run with a 
+lower usage charge.
 
 ### Scavenger
 
