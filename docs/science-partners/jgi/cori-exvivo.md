@@ -2,13 +2,13 @@
 
 ExVivo is a specialized system used to run JGI applications
 requiring more shared memory than available on standard Cori
-genepool hardware. 
+Genepool hardware. 
 
 ## Access
 
-Access to Cori ExVivo available to all JGI users as of February 6th 
+Access to Cori ExVivo is available to all JGI users as of February 6th 
 2019. To use Cori ExVivo, first connect to `cori.nersc.gov`, load 
-the `esslurm` module, and request a slurm allocation. That request
+the `esslurm` module, and request a Slurm allocation. That request
 command should include an `-A` argument with your project name,
 `-C skylake`, and specify QoS `jgi_exvivo` or `jgi_interactive`.
 
@@ -41,7 +41,7 @@ Cori ExVivo contains 20 total nodes. Each node has the following configuration:
 
 
 The user environment on ExVivo is very similar to that of a Cori login node.
-Common software is availible such as Cori modules, Shifter, and Anaconda.
+Common software is available such as Cori modules, Shifter, and Anaconda.
 
 The following filesystems are available on ExVivo: 
 
