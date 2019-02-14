@@ -1,6 +1,6 @@
-# Examples
+# Example job scripts
 
-## Basic MPI
+## Basic MPI batch script
 
 One MPI process per physical core.
 
