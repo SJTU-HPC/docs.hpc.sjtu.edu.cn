@@ -59,7 +59,6 @@ nav:
       - Formats : data/formats.md
       - Policy: data/policy.md
   - Performance:
-#    - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
@@ -68,7 +67,6 @@ nav:
         - Lustre: performance/io/lustre/index.md
         - I/O libraries: performance/io/library/index.md
         - Burst Buffer: performance/io/bb/index.md
-#        - GPFS: performance/io/gpfs/index.md
         - KNL: performance/io/knl/index.md
     - Portability: performance/portability.md
     - Variability: performance/variability.md
@@ -212,17 +210,13 @@ nav:
       - Training and Tutorials: science-partners/jgi/training.md
       - Databases and Web Services: science-partners/jgi/services.md
   - Help: help/index.md
-#  - Tutorials:
-#    - Demo : demo/demo.md
-#    - Tables : demo/table.md
-#    - Dropdown: demo/dropdown.md
 
 # Project Information
 site_name: NERSC Documentation
 site_description: NERSC Documentation
 site_author: NERSC
 site_dir: public
-site_url: "https://docs.nersc.gov"
+#site_url: "https://docs.nersc.gov/"
 repo_name: GitLab/NERSC/docs
 repo_url: https://gitlab.com/NERSC/nersc.gitlab.io
 edit_uri: blob/master/docs/
