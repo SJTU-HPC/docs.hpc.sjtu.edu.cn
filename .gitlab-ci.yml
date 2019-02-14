@@ -1,8 +1,6 @@
 image: python:3.7
 
 stages:
-  - lint
-  - filesize
   - build
   - test
   - deploy
@@ -10,20 +8,24 @@ stages:
 
 markdown_lint:
   image: node
-  stage: lint
+  stage: test
   script:
     - npm install -g markdownlint-cli
     - bash util/lint-changes.sh
   allow_failure: true
+  except:
+    - master@NERSC/nersc.gitlab.io
 
 filesize:
   image: ubuntu:latest
-  stage: filesize
+  stage: test
   before_script:
     - apt-get update && apt-get install -y git
   script:
     - bash util/filesize.sh
   allow_failure: true
+  except:
+    - master@NERSC/nersc.gitlab.io
 
 mkdocs_build:
   stage: build
@@ -52,6 +54,8 @@ check_links:
     paths:
       - .links_cache
       - good-urls-cache.txt
+  except:
+    - master@NERSC/nersc.gitlab.io
 
 pages:
   stage: deploy
