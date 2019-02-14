@@ -25,7 +25,7 @@ runtimes it is acceptable to run these on login nodes. For extended
 runtimes or large datasets these should be run in the batch queues.
 
 !!! tip
-	An[interactive qos](/jobs/examples/#interactive) is available
+	An [interactive qos](/jobs/examples/#interactive) is available
 	on Cori for compute and memory intensive interactive work.
 
 ### Data transfers
