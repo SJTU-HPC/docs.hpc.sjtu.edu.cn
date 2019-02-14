@@ -5,7 +5,7 @@ to a user for an ammount of time. Jobs can be interactive or batch
 (e.g. a script) scheduled for later execution.
 
 !!! tip
-	NERSC provides an extensive set of [example jobs](examples/)
+	NERSC provides an extensive set of [example job scripts](examples/)
 
 Once a job is assigned a set of nodes, the user is able to initiate
 parallel work in the form of job steps (sets of tasks) in any
