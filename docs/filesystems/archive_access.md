@@ -114,7 +114,9 @@ HTAR is a command line utility that creates and manipulates
 HPSS-resident tar-format archive files. It is ideal for storing groups
 of files in HPSS. Since the tar file is created directly in HPSS, it
 is generally faster and uses less local space than creating a local
-tar file then storing that into HPSS. Furthermore, HTAR creates an
+tar file then storing that into HPSS. HTAR also does inline compression 
+so compressing the data befrehand is unnecessary.
+Furthermore, HTAR creates an
 index file that (by default) is stored along with the archive in
 HPSS. This allows you to list the contents of an archive without
 retrieving it from tape first. The index file is only created
@@ -160,6 +162,14 @@ If your htar files are 100 GBs or larger and you only want to extract
 one or two small member files, you may find faster retrieval rates by
 skipping staging the file to the HPSS disk cache by adding the
 "-Hnostage" option to your htar command.
+
+### HTAR tips
+
+- Using `htar` to backup directories obviates the need to tar the directories locally first
+- `htar` compresses data inline, so you don't need to `gzip` it
+- Try to only bundle 100GB-500GB in any single `htar` call
+- If you have a truly huge amount of data to archive, try not to archive more than 100TB per day. This will help in allowing others to use the archive at the same time
+- To retrieve only a few members from a large `htar` archive, use the `-Hnostage` option to avoid untarring the whole file into the staging area
 
 ### HTAR Usage Examples
 
@@ -441,3 +451,4 @@ system to allow connections from HPSS Movers at NERSC, you will need
 to grant access for TCP connections originating from the
 128.55.32.0/22, 128.55.80.0/21, 128.55.88.0/24, 128.55.136.0/22, and
 128.55.207.0/24 subnets.
+
