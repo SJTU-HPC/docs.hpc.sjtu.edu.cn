@@ -139,7 +139,9 @@ nav:
 #        - Julia : programming/high-level-environments/julia.md
 #        - Matlab : programming/high-level-environments/matlab.md
     - Programming Models:
-        - MPI : programming/programming-models/mpi.md
+        - MPI :
+          - About: programming/programming-models/mpi/index.md
+          - OpenMPI: programming/programming-models/mpi/openmpi.md
         - OpenMP : 
           - About: programming/programming-models/openmp/openmp.md
           - OpenMP Resources : programming/programming-models/openmp/openmp-resources.md
