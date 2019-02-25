@@ -41,7 +41,7 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
 | low             | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
-| scavenger[^2]   | 9489      | 48             | 5000         | -         | 6        | 0      |
+| scavenger[^2]   | 9489      | 48[^8]         | 5000         | -         | 6        | 0      |
 | special[^4]     | custom    | custom         | custom       | custom    | -        | custom |
 
 !!! tip
@@ -153,3 +153,5 @@ rejected by the batch system.
 	The "low" QOS (available on Cori KNL only) is charged 50% as compared to 
 	the "regular" QOS, but no extra large job discount applies.
 
+[^8]:
+    For scavenger jobs a `--time-min` of 2hrs or less is required.
