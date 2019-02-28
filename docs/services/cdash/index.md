@@ -38,13 +38,13 @@ CI platforms -- such Travis, Jenkins, AppVeyor, etc. -- as it [extensively
 simplifies diagnosing CI issues](https://cdash.nersc.gov/viewBuildError.php?type=1&buildid=1358)
 and provides a location to log performance history.
 
-If the project uses CMake to generate a build system, see [CDash submission for CMake projects](/services/cdash/with_cmake.md).
+If the project uses CMake to generate a build system, see [CDash submission for CMake projects](with_cmake.md).
 
 If the project does not use CMake, NERSC provides python bindings to CMake/CTest in a project called
 [pyctest](https://github.com/jrmadsen/pyctest). These bindings allow projects to generate CTest
 tests and submit to the dashboard regardless of the build system (CMake, autotools, setup.py, etc.).
 This package is available with PyPi (source distribution) and Anaconda (pre-compiled distributions).
-For usage, see [CDash submission for non-CMake projects](/services/cdash/without_cmake.md),
+For usage, see [CDash submission for non-CMake projects](without_cmake.md),
 the [pyctest documentation](https://pyctest.readthedocs.io/en/latest/).
 
 - Anaconda: `conda install -c conda-forge pyctest`

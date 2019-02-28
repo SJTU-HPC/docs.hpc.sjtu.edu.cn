@@ -59,17 +59,17 @@ storage of data that is not frequently accessed.
 
 ### Scratch
 
-[Edison](/systems/edison/index.md) and [Cori](/systems/cori/index.md)
+[Edison](../systems/edison/index.md) and [Cori](../systems/cori/index.md)
 each have dedicated, large, local, parallel scratch file systems based
 on Lustre. The scratch file systems are intended for temporary uses
 such as storage of checkpoints or application input and output.
 
-* [Cori scratch](/filesystems/cori-scratch.md)
-* [Edison scratch](/filesystems/edison-scratch.md)
+* [Cori scratch](cori-scratch.md)
+* [Edison scratch](edison-scratch.md)
 
-### [Burst Buffer](/filesystems/cori-burst-buffer.md)
+### [Burst Buffer](cori-burst-buffer.md)
 
-Cori's [Burst Buffer](/filesystems/cori-burst-buffer.md) provides very
+Cori's [Burst Buffer](cori-burst-buffer.md) provides very
 high performance I/O on a per-job or short-term basis. It is
 particularly useful for codes that are I/O-bound, for example, codes
 that produce large checkpoint files, or that have small or random I/O

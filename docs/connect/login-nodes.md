@@ -1,6 +1,6 @@
 # Login Nodes
 
-Opening an [SSH connection](./ssh.md) to NERSC systems results in a
+Opening an [SSH connection](ssh.md) to NERSC systems results in a
 connection to a login node. Systems such as Cori and Edison have
 multiple login nodes which sit behind a load balancer. New connections
 will be assigned a random node. If an account has recently connected
@@ -17,7 +17,7 @@ the previous connection.
 
 * compile codes (limit to e.g. `make -j 8`)
 * edit files
-* submit [jobs](/jobs/index.md)
+* submit [jobs](../jobs/index.md)
 
 Some workflows require interactive use of applications such as IDL,
 MATLAB, NCL, python, and ROOT. For **small** datasets and **short**
@@ -25,7 +25,7 @@ runtimes it is acceptable to run these on login nodes. For extended
 runtimes or large datasets these should be run in the batch queues.
 
 !!! tip
-	An [interactive qos](/jobs/examples/#interactive) is available
+	An [interactive qos](../jobs/examples/index.md#interactive) is available
 	on Cori for compute and memory intensive interactive work.
 
 ### Data transfers

@@ -5,11 +5,9 @@ the world.
 
 ## FAQ
 
-* [Password Resets](/accounts/passwords.md#forgotten-passwords)
-* [Connection problems](/connect/ssh)
-* [Debug Crashed job](#)
-* [File Permissions](#)
-* [Software Installtion](#)
+* [Password Resets](../accounts/passwords.md#forgotten-passwords)
+* [Connection problems](../connect/ssh.md)
+* [File Permissions](../filesystems/unix-file-permissions.md)
 
 ## Help Desk
 

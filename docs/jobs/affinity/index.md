@@ -75,11 +75,11 @@ illustrative, not accurate).
    (mostly set to "threads" or "cores"). These are useful for fine
    tuning thread affinity.
 
-1. Use the [Slurm bcast option](/jobs/best-practices/) for large jobs
+1. Use the [Slurm bcast option](../best-practices.md) for large jobs
    to copy executables to the compute nodes before jobs starting.  See
    details here.
 
-1. Use the [core specialization](/jobs/best-practices/) feature to
+1. Use the [core specialization](../best-practices.md) feature to
    isloate system overhead to specific cores.
 
 ## Job Script Generator

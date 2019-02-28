@@ -15,10 +15,10 @@ storage device.
 
 ## Filesystems
 
-* [Cori scratch](/filesystems/cori-scratch.md)
-* [Burst Buffer](/filesystems/cori-burst-buffer.md)
+* [Cori scratch](../../filesystems/cori-scratch.md)
+* [Burst Buffer](../../filesystems/cori-burst-buffer.md)
 
-[Filesystems at NERSC](/filesystems/index.md)
+[Filesystems at NERSC](../../filesystems/index.md)
 
 ## Configuration
 

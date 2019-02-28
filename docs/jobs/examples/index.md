@@ -706,7 +706,7 @@ the "craynetwork" resource, we use the "--gres" flag available in both
 
 This is example is quite similar to the mutliple srun jobs shown for
 [running simultaneous parallel
-jobs](/jobs/examples#multiple-parallel-jobs-simultaneously), with the
+jobs](#multiple-parallel-jobs-simultaneously), with the
 following exceptions:
 
 1. For our sbatch job, we have requested "--gres=craynetwork:2" which

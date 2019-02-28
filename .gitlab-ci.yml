@@ -41,6 +41,11 @@ mkdocs_build:
     key: ${CI_JOB_NAME}
     paths:
       - .build_cache
+
+check_internal_links:
+  stage: build
+  script:
+    - bash util/check-internal-links.sh
     
 check_links:
   stage: test

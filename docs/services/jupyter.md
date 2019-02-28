@@ -26,7 +26,7 @@ Eventually these two hubs will be merged and an options form will allow you to s
 The two existing hubs are:
 
 * https://jupyter.nersc.gov/
-    * Runs as a [Spin](/services/spin/) service and is thus external to NERSC's Cray systems
+    * Runs as a [Spin](../services/spin/index.md) service and is thus external to NERSC's Cray systems
     * Notebooks spawned by this service have access to GPFS (e.g. `/project`, `$HOME`)
     * Python software environments and kernels run in the Spin service, not on Cori
 * https://jupyter-dev.nersc.gov/

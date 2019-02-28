@@ -33,10 +33,10 @@ For a full list of options pass the `--help` flag.
 
 ## project directories
 
-The [project](/filesystems/project.md) filesystem allows sharing of
+The [project](../filesystems/project.md) filesystem allows sharing of
 data within a project.
 
 ## Science Gateways
 
-* [Science gateways](/services/science-gateways.md)
+* [Science gateways](../services/science-gateways.md)
 

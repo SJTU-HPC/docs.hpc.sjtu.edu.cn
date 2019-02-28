@@ -12,4 +12,4 @@ depends on the granularity and size of the Burst Buffer
 allocation. Performance is also dependent on access pattern, transfer
 size and access method (e.g. MPI I/O, shared files).
 
-* [Examples](/jobs/examples/index.md)
+* [Examples](../jobs/examples/index.md)
