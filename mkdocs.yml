@@ -199,7 +199,7 @@ nav:
       - Archive (HPSS): 
         - Intro: filesystems/archive.md
         - Accessing HPSS: filesystems/archive_access.md
-        - Storage Statistics : http://www.nersc.gov/users/storage-and-file-systems/hpss/storage-statistics/
+        - Storage Statistics: filesystems/archive-stats.md
       - Backups: filesystems/backups.md
       - Unix File Permissions: filesystems/unix-file-permissions.md
   - Science Partners: 
