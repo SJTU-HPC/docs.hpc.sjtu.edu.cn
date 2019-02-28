@@ -5,11 +5,14 @@ nav:
       - Passwords : accounts/passwords.md
       - Policy : accounts/policy.md
       - Collaboration Accounts : accounts/collaboration_accounts.md
+      - Chinese:
+        - MFA: accounts/chinese/mfa.md
+        - NIM Guide: accounts/chinese/nim_guide.md
   - Connecting:
       - Login Nodes: connect/login-nodes.md
-      - SSH : connect/ssh.md
-      - MFA : connect/mfa.md
-      - NX : connect/nx.md
+      - SSH: connect/ssh.md
+      - MFA: connect/mfa.md
+      - NX: connect/nx.md
       - Jupyter : connect/jupyter.md
   - Running Jobs:
     - Overview: jobs/index.md
