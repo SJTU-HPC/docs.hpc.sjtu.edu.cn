@@ -62,12 +62,12 @@ all applications before they run in the production environment.
     The name **cattle** refers to the container *Orchestrator* which we use to manage
     containers and is part of Rancher. Rancher names many of their components with
     'Ranch'-themed names, such as 'Longhorn' or 'Wagyu'. To read more information
-    on Rancher, please read the [Spin Getting Started Guide overview](/services/spin/getting_started).
+    on Rancher, please read the [Spin Getting Started Guide overview](index.md).
 
 ### Follow the NERSC Security Requirements
 
 Note that all applications sent to Spin must follow the NERSC security requirements,
-which are outlined in the [Spin Best Practices Guide](/services/spin/best_practices). If
+which are outlined in the [Spin Best Practices Guide](../best_practices.md). If
 the application breaks one of the security requirements, Spin will refuse to
 run the application and will print an error, such as in the following example:
 
@@ -336,7 +336,7 @@ following:
   username & group. If you wish to run the Spin containers under your
   own Unix username and group instead of a UID & GID.  We'll cover how
   to do this in
-  the [Spin Best Practices Guide](/services/spin/best_practices).
+  the [Spin Best Practices Guide](../best_practices.md).
 * The permissions for all files used by your Spin application must be
   readable by this account.
 * We are looking into ways to improve this experience, and are waiting
@@ -492,7 +492,7 @@ major differences:
     * Sensitive ports, such as MySQL (port 3306), Postgres (5432) are
       restricted to NERSC & LBL networks only.
     * A detailed list of Ports and their accessibility can be found in the
-      [Spin Best Practices Guide](/services/spin/best_practices), under "Networking".
+      [Spin Best Practices Guide](../best_practices.md), under "Networking".
 * The `retain_ip` parameter helps a service to keep the same IP address during upgrades.
 * Users and groups
     * The application runs as your UID & GID account, so it can access files
@@ -513,7 +513,7 @@ major differences:
     even more secure. If you needed to add specific capabilities back
     to the container, you can add them with the **cap_add:**
     parameter, which is discussed more in
-    the [Spin Best Practices Guide](/services/spin/best_practices).
+    the [Spin Best Practices Guide](../best_practices.md).
 
 ### Step 3: Sanity checks
 
@@ -837,7 +837,7 @@ After running this command, note that the container previously marked as
 ## Other ways to work with your stack
 
 The Rancher CLI can do many things. Here are some common tasks you can do with
-the Rancher CLI. A more comprehensive list can be found at [Spin: Tips & Examples](/services/spin/tips_and_examples/).
+the Rancher CLI. A more comprehensive list can be found at [Spin: Tips & Examples](../tips_and_examples.md).
 
 ### View all of your stacks
 
@@ -927,7 +927,7 @@ See the topic [#removing-your-stack-if-you-get-stuck] above.
 
 ## Other useful command line tasks
 
-For more examples of how to use the Rancher CLI, please see [Spin: Tips & Examples](/services/spin/tips_and_examples/).
+For more examples of how to use the Rancher CLI, please see [Spin: Tips & Examples](../tips_and_examples.md).
 
 # Next Steps: Lesson 3
 

@@ -18,7 +18,7 @@ nersc$ module avail berkeleygw
 
 ## Example
 
-See the [example jobs page](/jobs/examples/) for additional
+See the [example jobs page](../../jobs/examples/index.md) for additional
 examples and information about jobs.
 
 ### Edison

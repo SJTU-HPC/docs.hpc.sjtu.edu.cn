@@ -33,7 +33,7 @@ above doesn't change that all our mounted repositories appear under
 CVMFS is also available on Cori and Edison compute nodes with or
 without shifter
 
-If using [shifter](/programming/shifter/how-to-use.md) you should
+If using [shifter](../programming/shifter/how-to-use.md) you should
 specify the `--modules=cvmfs` flag to shifter to make that mount
 appear inside your container (unless you want to use your own version
 of cvmfs inside the container).
