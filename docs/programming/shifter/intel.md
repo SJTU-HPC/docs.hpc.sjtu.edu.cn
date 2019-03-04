@@ -26,17 +26,34 @@ versions, and image use.
     are availble (7x2x6)
 -   Like all docker images, if a tag(version) isn't supplied it defaults to _latest_.
 
-### Image Matrix
+### Image Matrix [^1]
 
-| Toolset Variants (7)    | Image     | Version/tag |
-|---                      |---        |---        |
-| cxx                     |devel    |latest     |
-| fort                    |runtime    |2018       |
-| cxx_fort                |           |2018.1     |
-| cxx_mpi                 |           |2018.2     |
-| cxx_fort_mpi            |           |2018.1.163 |
-| cxx_fort_mpi_mkl        |           |2018.2.199 |
-| cxx_fort_mpi_mkl_ipp    |           |           |
+| Toolset Variants          | Image     | Version/tag   |
+| :---                      | :---:     | :---          |
+| cxx                       | devel     | latest        |
+| fort                      | runtime   | 2018          |
+| cxx_fort                  |           | 2018.1        |
+| cxx_mpi                   |           | 2018.2        |
+| cxx_fort_mpi              |           | 2018.3        |
+| cxx_fort_mpi_mkl          |           | 2018.1.163    |
+| cxx_fort_mpi_mkl_ipp      |           | 2018.2.199    |
+|                           |           | 2018.3.051    |
+
+[^1]: Based on Debian 9 "stretch" OS  (details located in `/etc/os-release` file within image)
+
+### Additional Image Matrix [^2]
+
+- This set of images is currently available but not completely worked into the full matrix above
+
+| Toolset Variants          | Image     | Version/tag   |
+| :---                      | :---:     | :---          |
+| cuda_cxx_fort_mpi_mkl[^3] | devel     | latest        |
+|                           | runtime   | 2019          |
+|                           |           | 2019.0        |
+|                           |           | 2019.0.117    |
+
+[^2]: Based on Ubuntu 18.04 "Bionic Beaver" OS (details located in `/etc/os-release` file within image)
+[^3]: CUDA version 10.0 (details located in `/usr/local/cuda/version.txt` file within image)
 
 Note:
 
@@ -53,18 +70,19 @@ Here are examples of a full image name:
 -   The devel images are relatively large and contain all the components for
     the set of Intel tools.  These are intended for compiling codes.
 -   The runtime images are much smaller and optimized for running previously compiled
-    applications.  These images contain only the shared libraries.  All bin directories and static libraries have been removed.  They can be used with a staged Docker build (described below) to create compact images that can be pushed to public registries
+    applications.  These images contain only the shared libraries.  All bin directories and static libraries have been removed.
+    They can be used with a staged Docker build (described below) to create compact images that can be pushed to public registries
     without violating the Intel License since the libraries can be distributed.
 
-| Image | Devel Size | Runtime Size |
-|--- |--- :|--- :|
-| nersc/intel\_cxx\_{devel,runtime}   | 1.3 GB | 0.7 GB|
-| nersc/intel\_fort\_{devel,runtime}  | 1.2 GB | 0.7 GB|
-| nersc/intel\_cxx\_fort\_{devel,runtime}       | 1.4 GB | 0.7 GB|
-| nersc/intel\_cxx\_mpi\_{devel,runtime}        | 2.9 GB | 1.2 GB|
-| nersc/intel\_cxx\_fort\_mpi\_{devel,runtime}  | 2.9 GB | 1.2 GB|
-| nersc/intel\_cxx\_fort\_mpi\_mkl\_{devel,runtime} | 4.7 GB | 2.0 GB|
-| nersc/intel\_cxx\_fort\_mpi\_mkl\_ipp\_{devel,runtime} | 7 GB | 2.8 GB|
+| Image                                             | devel     | runtime   |
+|---                                                |--- :      |--- :      |
+| intel\_cxx\_{devel,runtime}                       | 1.3 GB    | 0.7 GB    |
+| intel\_fort\_{devel,runtime}                      | 1.2 GB    | 0.7 GB    |
+| intel\_cxx\_fort\_{devel,runtime}                 | 1.4 GB    | 0.7 GB    |
+| intel\_cxx\_mpi\_{devel,runtime}                  | 2.9 GB    | 1.2 GB    |
+| intel\_cxx\_fort\_mpi\_{devel,runtime}            | 2.9 GB    | 1.2 GB    |
+| intel\_cxx\_fort\_mpi\_mkl\_{devel,runtime}       | 4.7 GB    | 2.0 GB    |
+| intel\_cxx\_fort\_mpi\_mkl\_ipp\_{devel,runtime}  | 7 GB      | 2.8 GB    |
 
 ## Using the Intel Compilers with NERSC's License Server
 
@@ -277,17 +295,18 @@ ENTRYPOINT [ "/intel-runtime-entrypoint.sh" ]
 
 -   Runtime link path options in containers
 
-    1.  Install compiled binaries into an isolated directory (e.g. `/opt/local`) in the builder stage and relocate this to `/usr` in final stage
+    1.  Install compiled binaries into an isolated directory (e.g. `/opt/local`) in the builder
+    stage and relocate this to `/usr` in final stage
 
         -   Note some libraries will hard-code link path so relocating to `/usr` in
             staged build causes runtime error
 
-    2.  Add custom `LD_LIBRARY_PATH` paths then prefix `LD_LIBRARY_PATH` with original (i.e. `/opt/udiImage/lib`)
+    1.  Add custom `LD_LIBRARY_PATH` paths then prefix `LD_LIBRARY_PATH` with original (i.e. `/opt/udiImage/lib`)
 
         -   May cause system library to be found instead of custom built library
 
-    3.  Create a file ending in “.conf” in the dynamic linker configuration directory and list all the library paths needed at runtime (recommended).  This can furhter
-    help optimize loading required libraries at runtime.
+    2.  Create a file ending in “.conf” in the dynamic linker configuration directory and list all the library
+    paths needed at runtime (recommended).  This can furhter help optimize loading required libraries at runtime.
 
         - E.g., <span style="color:red">/etc/ld.so.conf.d/intel-libs.conf</span>
         - Add a RUN /sbin/ldconfig at the end of the Dockerfile to refresh the
