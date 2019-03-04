@@ -8,8 +8,8 @@ Machine Learning and Deep Learning are increasingly used to analyze scientific d
 
 We have assembled some examples of machine learning projects being carried out at NERSC, in most cases including links to the codebase. These cover a variety of science areas, and in many cases showcase the use of Tensorflow optimized for the KNL architecture.
 
-* [Using deep networks for HEP physics analyses](https://www.nersc.gov/users/data-analytics/data-analytics-2/deep-learning/deep-networks-for-hep/)
-* [Using deep networks for neutrino telescopes](https://www.nersc.gov/users/data-analytics/data-analytics-2/deep-learning/deep-networks-for-neutrino/)
+* [Using deep networks for HEP physics analyses](science-use-cases/hep-cnn.md)
+* [Using deep networks for neutrino telescopes (Ice Cube)](https://www.nersc.gov/news-publications/nersc-news/nersc-center-news/2018/icecube-research-garners-best-paper-award-at-ieee-machine-learning-conference/)
 * [CosmoGAN: Deep networks for generating cosmology mass maps](https://www.nersc.gov/users/data-analytics/data-analytics-2/deep-learning/deep-networks-cosmogan/)
 * A use of SciKitLearn by Juliette Ugirumurera can be found in [this iPython notebook](https://github.com/NERSC/data-day-examples/blob/master/SLURM_challenge.ipynb). The code uses SciKitLearn to construct, train and evaluate the network, and was the winning code for the SLURM log data challenge in the [2017 Data Day Competition](https://www.nersc.gov/users/NUG/annual-meetings/nersc-data-day-and-nug2017/data-competition/).
 * The winning code for the Astronomy challenge in the [2017 Data Day Competition](https://www.nersc.gov/users/NUG/annual-meetings/nersc-data-day-and-nug2017/data-competition/) by Yisha Sun uses TensorFlow to set up and train the network. The code can be found in [this github repository](https://github.com/miaoshasha/Astronomical_Classification).
