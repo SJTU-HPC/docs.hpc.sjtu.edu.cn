@@ -30,15 +30,15 @@ The two existing hubs are:
     * Notebooks spawned by this service have access to GPFS (e.g. `/project`, `$HOME`)
     * Python software environments and kernels run in the Spin service, not on Cori
 * https://jupyter-dev.nersc.gov/
-    * Spawns Jupyter notebooks on a special-purpose large-memory node of Cori
+    * Spawns Jupyter notebooks on special-purpose large-memory nodes of Cori (cori13,cori14,cori19)
     * Exposes GPFS and Cori `$SCRATCH` though not Edison `$SCRATCH`
     * Default Python software environment is the same as one of the modules found on Cori
     * Notebooks can submit jobs to Cori batch queues via simple Slurm Magic commands
 
 !!! tip
-    The large-memory login node used by <https://jupyter-dev.nersc.gov/>
-    is a shared resource, so please be careful not to use too many CPUs
-    or too much memory
+    The large-memory login nodes used by <https://jupyter-dev.nersc.gov/>
+    are a shared resource, so please be careful not to use too many CPUs
+    or too much memory.  Treat them like regular login nodes.
 
 ## JupyterLab
 
