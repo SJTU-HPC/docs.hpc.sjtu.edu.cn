@@ -4,11 +4,14 @@ A **job** is an allocation of resources such as compute nodes assigned
 to a user for an ammount of time. Jobs can be interactive or batch
 (e.g. a script) scheduled for later execution.
 
+!!! tip
+	NERSC provides an extensive set of [example job scripts](examples/)
+
 Once a job is assigned a set of nodes, the user is able to initiate
 parallel work in the form of job steps (sets of tasks) in any
 configuration within the allocation.
 
-When you login to a NERSC cluster you land on a *login node*. Login
+When you login to a NERSC system you land on a *login node*. Login
 nodes are for editing, compiling, preparing jobs. They are not for
 running jobs. From the login node you can interact with Slurm to
 submit job scripts or start interactive jobs.
@@ -39,6 +42,7 @@ be used to identify this job in reports from Slurm.
 nersc$ sbatch first-job.sh
 Submitted batch job 864933
 ```
+
 Slurm will also check your file system usage and reject the job if
 you are over your quota in your scratch or home file system. See
 [here](#quota-enforcement) for more details.
@@ -114,9 +118,9 @@ variables. This has two important consequences:
 | Option     | Cori       | Edison     |
 |------------|------------|------------|
 | nodes      | 1          | 1          |
-| time       | 10minutes   | 10minutes   |
+| time       | 10minutes  | 10minutes  |
 | qos        | debug      | debug      |
-| constraint | haswell    | ivybridge  |
+| constraint | _          | ivybridge  |
 | account    | set in NIM | set in NIM |
 
 ## Monitoring jobs
@@ -125,7 +129,6 @@ variables. This has two important consequences:
 
 `sacct` is used to report job or job step accounting information about
 active or completed jobs.
-
 
 ### sqs
 

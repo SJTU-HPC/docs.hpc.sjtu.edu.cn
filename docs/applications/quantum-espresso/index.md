@@ -54,7 +54,7 @@ is currently no efficient OpenMP implementation available.
 
 We have optimized the hybrid DFT calculations in Quantum ESPRESSO
 (`pw.x`). These changes are described in our
-[Quantum ESPRESSO case study](/performance/case-studies/quantum-espresso/index.md)
+[Quantum ESPRESSO case study](../../performance/case-studies/quantum-espresso/index.md)
 and available in the `espresso/6.1` module we provide.
 
 The following scripts provides the best `pw.x` performance for hybrid

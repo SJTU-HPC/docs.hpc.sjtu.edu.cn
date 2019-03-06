@@ -25,8 +25,8 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | shared[^1]      | 0.5       | 48             | 10000        | -         | 4        | 90     |
 | interactive[^4] | 64        | 4              | 1            | 1         | -        | 90     |
 | debug           | 64        | 0.5            | 5            | 2         | 3        | 90     |
-| premium         | 1932      | 48             | 5            | -         | 2        | 180    |
-| scavenger[^2]   | 1932      | 48             | 5000         | -         | 5        | 0      |
+| premium         | 1772      | 48             | 5            | -         | 2        | 180    |
+| scavenger[^2]   | 1772      | 48             | 5000         | -         | 5        | 0      |
 | xfer            | 1 (login) | 48             | 100          | 15        | -        | 0      |
 | bigmem          | 1 (login) | 72             | 100          | 1         | -        | 90     |
 | realtime[^3]    | custom    | custom         | custom       | custom    | 1        | custom |
@@ -36,11 +36,12 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 
 | QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
 |-----------------|-----------|----------------|--------------|-----------|----------|--------|
-| regular         | 8991      | 48             | 5000         | -         | 4        | 90[^6] |
+| regular         | 9489      | 48             | 5000         | -         | 4        | 90[^6] |
 | interactive[^5] | 64        | 4              | 1            | 1         | -        | 90     |
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
-| premium         | 8991      | 48             | 5            | -         | 2        | 180[^6]|
-| scavenger[^2]   | 8991      | 48             | 5000         | -         | 5        | 0      |
+| premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
+| low             | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
+| scavenger[^2]   | 9489      | 48[^8]         | 5000         | -         | 6        | 0      |
 | special[^4]     | custom    | custom         | custom       | custom    | -        | custom |
 
 !!! tip
@@ -96,6 +97,11 @@ script to submit another batch script.
 The intent of the premium QOS is to allow for faster turnaround before
 conferences and urgent project deadlines. It should be used with care.
 
+### Low
+
+The intent of the low QOS is to allow non-urgent jobs to run with a 
+lower usage charge.
+
 ### Scavenger
 
 The intent of the scavenger QOS is to allow users with a zero or
@@ -142,3 +148,10 @@ rejected by the batch system.
 [^6]:
 	The "regular" and "premium" QOS charges on Cori KNL are discounted
     by 20% if the job uses 1024 or more nodes.
+
+[^7]:
+	The "low" QOS (available on Cori KNL only) is charged 50% as compared to 
+	the "regular" QOS, but no extra large job discount applies.
+
+[^8]:
+    For scavenger jobs a `--time-min` of 2hrs or less is required.

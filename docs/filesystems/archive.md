@@ -293,7 +293,7 @@ HPSS project directories have the following properties:
 To request creation of an HPSS project directory the PI, a PI Proxy or
 a Project Manager of the requesting repository should fill out the
 [HPSS Project Directory Request
-Form](https://www.nersc.gov/users/storage-and-file-systems/hpss/advanced-usage-examples/hpss-project-directories/request-form/).
+Form](https://www.nersc.gov/users/storage-and-file-systems/hpss/request-form).
 
 
 ### Troubleshooting

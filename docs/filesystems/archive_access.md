@@ -114,7 +114,9 @@ HTAR is a command line utility that creates and manipulates
 HPSS-resident tar-format archive files. It is ideal for storing groups
 of files in HPSS. Since the tar file is created directly in HPSS, it
 is generally faster and uses less local space than creating a local
-tar file then storing that into HPSS. Furthermore, HTAR creates an
+tar file then storing that into HPSS. HTAR also does inline compression 
+so compressing the data befrehand is unnecessary.
+Furthermore, HTAR creates an
 index file that (by default) is stored along with the archive in
 HPSS. This allows you to list the contents of an archive without
 retrieving it from tape first. The index file is only created
@@ -160,6 +162,14 @@ If your htar files are 100 GBs or larger and you only want to extract
 one or two small member files, you may find faster retrieval rates by
 skipping staging the file to the HPSS disk cache by adding the
 "-Hnostage" option to your htar command.
+
+### HTAR tips
+
+- Using `htar` to backup directories obviates the need to tar the directories locally first
+- `htar` compresses data inline, so you don't need to `gzip` it
+- Try to only bundle 100GB-500GB in any single `htar` call
+- If you have a truly huge amount of data to archive, try not to archive more than 100TB per day. This will help in allowing others to use the archive at the same time
+- To retrieve only a few members from a large `htar` archive, use the `-Hnostage` option to avoid untarring the whole file into the staging area
 
 ### HTAR Usage Examples
 
@@ -347,19 +357,19 @@ member files. Users can increase this limit to a maximum hard limit of
 
 Globus is recommended for transfers between sites (i.e. non-NERSC to NERSC).
 
-To access the HPSS system using [Globus
-Online](https://www.globus.org/), you first need to create a Globus
-Online account. Once you've created an account you can log in either
-with your Globus Online information or with your NERSC account
-information. The first time you log in using your NERSC account you'll
-be asked to enter your Globus Online account information as well.
+To access the HPSS system using [Globus](https://www.globus.org/), you
+first need to create a Globus account. Once you've created an
+account you can log in either with your Globus information or
+with your NERSC account information. The first time you log in using
+your NERSC account you'll be asked to enter your Globus account
+information as well.
 
 The NERSC HPSS endpoint is called "NERSC HPSS". You can use the GUI to
 transfer files. Currently, there is no explicit ordering by tape of
-file retrievals for Globus Online. If you're retrieving a large data
-set with Globus Online, we recommend that users see this page for
+file retrievals for Globus. If you're retrieving a large data
+set with Globus, we recommend that users see [this page](archive.md#order-large-retrievals) for
 instructions on how to best order files using HSI and then retrieve
-files using the command line interace for Globus Online in tape
+files using the command line interace for Globus in tape
 order.
 
 ## GridFTP, pftp, and ftp
@@ -427,3 +437,18 @@ HPSS. Note that this prefills the box with the IP address that the
 browser is running on and this may not be the system you intend to
 access HPSS from. Enter the correct IP address and select "Generate
 Token".
+
+## Firewalls and External Access
+
+Most firewalls are configured to deny incoming network connections
+unless access is explicitly granted. Systems running HTAR or HSI that
+want to connect to the archive at NERSC must accept network
+connections which are initiated by the HPSS Movers (helper machines
+that initiate multi-stream data movement into and out of the
+archive). By default HSI is configured with Firewall Mode set to on
+and will usually work without any firewall changes. To configure your
+system to allow connections from HPSS Movers at NERSC, you will need
+to grant access for TCP connections originating from the
+128.55.32.0/22, 128.55.80.0/21, 128.55.88.0/24, 128.55.136.0/22, and
+128.55.207.0/24 subnets.
+

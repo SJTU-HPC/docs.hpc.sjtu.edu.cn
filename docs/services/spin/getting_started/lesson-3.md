@@ -298,7 +298,7 @@ passwords in a Docker Compose file. We'll rectify that problem here by
 converting our passwords into Rancher **Secrets**. Secrets should be
 used to store any sensitive data, such as passwords or private keys,
 and explained further in
-the [Spin Best Practices Guide](/docs/services/spin/best_practices/).
+the [Spin Best Practices Guide](../best_practices.md).
 
 ### Build
 
@@ -315,7 +315,7 @@ normally obtain the files using `rancher export`.
 Exporting a stack can be useful for collaboration and to store the
 configuration files in a version control system. You can only export a
 stack that you have permission to do so. For more info on Exporting a
-stack, see the [Spin Tips](/docs/services/spin/tips_and_examples/)
+stack, see the [Spin Tips](../tips_and_examples.md)
 guide.
 
 **We've already obtained our Docker Compose files from the Git repo**,

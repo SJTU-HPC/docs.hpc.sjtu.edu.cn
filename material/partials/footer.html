@@ -1,45 +1,79 @@
 {% import "partials/language.html" as lang with context %}
 <footer class="md-footer">
+  {% if page.previous_page or page.next_page %}
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        {% if page.previous_page %}
+          <a href="{{ page.previous_page.url | url }}" title="{{ page.previous_page.title }}" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  {{ lang.t("footer.previous") }}
+                </span>
+                {{ page.previous_page.title }}
+              </span>
+            </div>
+          </a>
+        {% endif %}
+        {% if page.next_page %}
+          <a href="{{ page.next_page.url | url }}" title="{{ page.next_page.title }}" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  {{ lang.t("footer.next") }}
+                </span>
+                {{ page.next_page.title }}
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        {% endif %}
+      </nav>
+    </div>
+  {% endif %}
   <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">      
+    <div class="md-footer-meta__inner md-grid">
       <div class="nersc-foot-row">
-	<div class="nersc-foot-col-3">
-	  <div class="nersc-foot-cell">
-	    <div class="nersc-foot-title">Site Links</div>
-	    <a href="https://www.nersc.gov/" title="NERSC Main Site">NERSC Main Site</a><br>
-	    <a href="https://docs.nersc.gov/" title="User Documentation">User Documentation</a><br>
-	    <a href="https://my.nersc.gov/"  title="MyNERSC">MyNERSC</a><br><br>
-	    <a href="https://www.lbl.gov/" title="LBL">
-	      <img src="{{ base_url }}/img/lbl_logo.png">
-	    </a>
-	  </div>
-	</div><!-- nersc foot col -->
-	
-	<div class="nersc-foot-col-3">
-	  <div class="nersc-foot-cell">	    
-	    <div class="nersc-foot-title">Quick Links</div>
-	    <a href="https://www.nersc.gov/live-status/motd/" title="Live Status - MOTD">Live Status/ MOTD</a><br>
-	    <a href="{{ base_url }}/accounts/accounts/#obtaining-an-account" title="Obtaining an Account">Obtaining an Account</a><br>
-	    <a href="{{ base_url }}/development/compilers" title="Building Software">Building Software</a><br>
-	    <a href="{{ base_url }}/jobs/" title="Running Jobs">Running Jobs</a><br>
-	    <a href="{{ base_url }}/data/management" title="Managing Data">Managing Data</a><br>
-	    <a href="{{ base_url }}/accounts/passwords/#forgotten-passwords" title="Reset Password">Reset Password</a>
-	  </div>
-	</div><!-- nersc foot col -->
-
-	<div class="nersc-foot-col-3">
-	  <div class="nersc-foot-cell">
-	    <div class="nersc-foot-title">About</div>
-	    <a href="{{ base_url }}/accounts/policy/#acknowledge-use-of-nersc-resources" title="Acknowledge NERSC">Acknowledge NERSC</a><br>
-	    <a href="https://www.nersc.gov/about/contact-us/" title="Contact Us">Contact Us</a><br>
-	    <a href="https://www.lbl.gov/disclaimers/" title="Privacy and Security Notice">Privacy and Security Notice</a><br><br>
-	    <a href="https://science.energy.gov" title="DOE Office of Science">
-	      <img src="{{ base_url }}/img/doe_logo.png">
-	    </a>
-	  </div> <!-- table display ...-->
-	</div> <!-- nersc foot col -->
-      </div> <!-- nersc foot row -->
-      
+        <div class="nersc-foot-col-3">
+          <div class="nersc-foot-cell">
+            <div class="nersc-foot-title">Site Links</div>
+            <a href="https://www.nersc.gov/" title="NERSC Main Site">NERSC Main Site</a><br>
+            <a href="https://docs.nersc.gov/" title="User Documentation">User Documentation</a><br>
+            <a href="https://my.nersc.gov/" title="MyNERSC">MyNERSC</a><br><br>
+            <a href="https://www.lbl.gov/" title="LBL">
+              <img src="{{ base_url }}/img/lbl_logo.png">
+            </a>
+          </div>
+        </div>
+        <div class="nersc-foot-col-3">
+          <div class="nersc-foot-cell">
+            <div class="nersc-foot-title">Quick Links</div>
+            <a href="https://www.nersc.gov/live-status/motd/" title="Live Status - MOTD">Live Status/ MOTD</a><br>
+            <a href="{{ base_url }}/accounts/accounts/#obtaining-an-account" title="Obtaining an Account">Obtaining an Account</a><br>
+            <a href="{{ base_url }}/development/compilers/wrappers" title="Building Software">Building Software</a><br>
+            <a href="{{ base_url }}/jobs/" title="Running Jobs">Running Jobs</a><br>
+            <a href="{{ base_url }}/data/management" title="Managing Data">Managing Data</a><br>
+            <a href="{{ base_url }}/accounts/passwords/#forgotten-passwords" title="Reset Password">Reset Password
+</a>
+          </div>
+        </div>
+        <div class="nersc-foot-col-3">
+          <div class="nersc-foot-cell">
+            <div class="nersc-foot-title">About</div>
+            <a href="{{ base_url }}/accounts/policy/#acknowledge-use-of-nersc-resources" title="Acknowledge NERSC">Acknowledge NERSC</a><br>
+            <a href="https://www.nersc.gov/about/contact-us/" title="Contact Us">Contact Us</a><br>
+            <a href="https://www.lbl.gov/disclaimers/" title="Privacy and Security Notice">Privacy and Security Notice</a><br><br>
+            <a href="https://science.energy.gov" title="DOE Office of Science">
+              <img src="{{ base_url }}/img/doe_logo.png">
+            </a>
+          </div> 
+        </div> 
+      </div> 
       {% block social %}
         {% include "partials/social.html" %}
       {% endblock %}

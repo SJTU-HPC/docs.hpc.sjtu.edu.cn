@@ -52,7 +52,7 @@ of their home directories. Every directory and sub-directory in
 Global homes are backed up to [HPSS](archive.md) monthly.
 
 If the snapshot capability does not meet your need
-contact [NERSC Consulting](/help/index.md) with pathnames and
+contact [NERSC Consulting](../help/index.md) with pathnames and
 timestamps of the missing data.
 
 !!! note

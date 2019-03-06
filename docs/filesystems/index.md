@@ -11,15 +11,19 @@ File systems are configured for different purposes. Each machine has
 access to at least three different file systems with different levels
 of performance, permanence and available space.
 
-| file system     | space | inodes | purge time | snapshots | backup | access          |
-|-----------------|-------|--------|------------|-----------|--------|-----------------|
-| project         | 1 TB  | 1 M    | -          | yes       | no     | repository      |
-| home            | 40 GB | 1 M    | -          | yes       | yes    | user            |
-| common          | 10 GB | 1 M    | -          | no        | no     | repository      |
-| Cori scratch    | 20 TB | 10 M   | 12 weeks   | no        | no     | user            |
-| Edison scratch  | 10 TB | 5 M    | 12 weeks   | no        | no     | user            |
-| Edison scratch3 | -     | -      | 8 weeks    | no        | no     | special request |
-| HPSS            | -     | -      | -          | no        | no     | user            |
+| file system     | snapshots | backup | purging | access          |
+|-----------------|-----------|--------|---------|-----------------|
+| project         | yes       | no     | no      | repository      |
+| home            | yes       | yes    | no      | user            |
+| common          | no        | no     | no      | repository      |
+| Cori scratch    | no        | no     | yes     | user            |
+| Edison scratch  | no        | no     | yes     | user            |
+| Edison scratch3 | no        | no     | yes     | special request |
+| HPSS            | no        | no     | no      | user            |
+
+!!! note
+	See [quotas](quotas.md) for detailed information about inode,
+	space quotas and file system purge policies.
 
 ## Global storage
 
@@ -55,17 +59,17 @@ storage of data that is not frequently accessed.
 
 ### Scratch
 
-[Edison](/systems/edison/index.md) and [Cori](/systems/cori/index.md)
+[Edison](../systems/edison/index.md) and [Cori](../systems/cori/index.md)
 each have dedicated, large, local, parallel scratch file systems based
 on Lustre. The scratch file systems are intended for temporary uses
 such as storage of checkpoints or application input and output.
 
-* [Cori scratch](/filesystems/cori-scratch.md)
-* [Edison scratch](/filesystems/edison-scratch.md)
+* [Cori scratch](cori-scratch.md)
+* [Edison scratch](edison-scratch.md)
 
-### [Burst Buffer](/filesystems/cori-burst-buffer.md)
+### [Burst Buffer](cori-burst-buffer.md)
 
-Cori's [Burst Buffer](/filesystems/cori-burst-buffer.md) provides very
+Cori's [Burst Buffer](cori-burst-buffer.md) provides very
 high performance I/O on a per-job or short-term basis. It is
 particularly useful for codes that are I/O-bound, for example, codes
 that produce large checkpoint files, or that have small or random I/O

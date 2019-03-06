@@ -38,18 +38,17 @@ CI platforms -- such Travis, Jenkins, AppVeyor, etc. -- as it [extensively
 simplifies diagnosing CI issues](https://cdash.nersc.gov/viewBuildError.php?type=1&buildid=1358)
 and provides a location to log performance history.
 
-If the project uses CMake to generate a build system, see [CDash submission for CMake projects](/services/cdash/with_cmake.md).
+If the project uses CMake to generate a build system, see [CDash submission for CMake projects](with_cmake.md).
 
 If the project does not use CMake, NERSC provides python bindings to CMake/CTest in a project called
 [pyctest](https://github.com/jrmadsen/pyctest). These bindings allow projects to generate CTest
-tests and submit to the dashboard with a CMake build system. This package is available with PyPi
-(source distribution) and Anaconda (pre-compiled distributions). For usage, see
-[CDash submission for non-CMake projects](/services/cdash/without_cmake.md),
-the [pyctest documentation](https://github.com/jrmadsen/pyctest/blob/master/README.md)
-and [pyctest examples](https://github.com/jrmadsen/pyctest/examples).
+tests and submit to the dashboard regardless of the build system (CMake, autotools, setup.py, etc.).
+This package is available with PyPi (source distribution) and Anaconda (pre-compiled distributions).
+For usage, see [CDash submission for non-CMake projects](without_cmake.md),
+the [pyctest documentation](https://pyctest.readthedocs.io/en/latest/).
 
-- Anaconda: `conda install -c jrmadsen pyctest`
-- PyPi: `pip install -v pyctest`
+- Anaconda: `conda install -c conda-forge pyctest`
+- PyPi: `pip install -vvv pyctest`
 
 ## Features
 
@@ -60,12 +59,12 @@ and [pyctest examples](https://github.com/jrmadsen/pyctest/examples).
     - Test timing changes
 - Capture standard out and standard error from all the stages of building, testing,
 and deploying the package
-- Code coverage reports can be uploaded, visually displayed, and thresholds can be set to
+- Code coverage reports (in a variety of formats) can be uploaded, visually displayed, and thresholds can be set to
 notify developers if coverage drops below the threshold
 - Memory checking for leaks can be analyzed and reported
 - Visual results can be uploaded along with logs
     - e.g. if a test generates a visual product, by echoing a message such as
-`<DartMeasurementFile name="ExampleImage" type="image/jpeg">./example_image.jpeg</DartMeasurementFile>` to stdout, the `example_image.jpeg` will be uploaded to the dashboard and displayed in the test build log.
+`<DartMeasurementFile name="ExampleImage" type="image/jpeg">./example_image.jpeg</DartMeasurementFile>` to stdout, the `example_image.jpeg` will be uploaded to the dashboard and displayed in the test log
 - ASCII results can be attached as "Notes" to the "build"
 - Three primary submission tracks
     - Continuous

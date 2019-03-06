@@ -5,11 +5,14 @@ nav:
       - Passwords : accounts/passwords.md
       - Policy : accounts/policy.md
       - Collaboration Accounts : accounts/collaboration_accounts.md
+      - Chinese:
+        - MFA: accounts/chinese/mfa.md
+        - NIM Guide: accounts/chinese/nim_guide.md
   - Connecting:
       - Login Nodes: connect/login-nodes.md
-      - SSH : connect/ssh.md
-      - MFA : connect/mfa.md
-      - NX : connect/nx.md
+      - SSH: connect/ssh.md
+      - MFA: connect/mfa.md
+      - NX: connect/nx.md
       - Jupyter : connect/jupyter.md
   - Running Jobs:
     - Overview: jobs/index.md
@@ -24,10 +27,10 @@ nav:
     - Reservations: jobs/reservations.md
     - Queue Policy: jobs/policy.md
     - Containers:
-        - Overview : development/shifter/overview.md
-        - How to use Shifter: development/shifter/how-to-use.md
-        - Using Intel Compilers with Docker Images: development/shifter/intel.md
-        - Examples: development/shifter/examples.md
+        - Overview : programming/shifter/overview.md
+        - How to use Shifter: programming/shifter/how-to-use.md
+        - Using Intel Compilers with Docker Images: programming/shifter/intel.md
+        - Examples: programming/shifter/examples.md
   - Applications:
     - Overview: applications/index.md
     - Abinit: applications/abinit/index.md
@@ -59,7 +62,6 @@ nav:
       - Formats : data/formats.md
       - Policy: data/policy.md
   - Performance:
-#    - Optimization strategy : performance/optimization-strategy.md
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
@@ -68,7 +70,6 @@ nav:
         - Lustre: performance/io/lustre/index.md
         - I/O libraries: performance/io/library/index.md
         - Burst Buffer: performance/io/bb/index.md
-#        - GPFS: performance/io/gpfs/index.md
         - KNL: performance/io/knl/index.md
     - Portability: performance/portability.md
     - Variability: performance/variability.md
@@ -104,63 +105,65 @@ nav:
         - CTest/CDash with CMake : services/cdash/with_cmake.md
         - CTest/CDash without CMake : services/cdash/without_cmake.md
       - CVMFS : services/cvmfs.md
-  - Development:
+  - Programming:
     - Build Tools:
-        - development/build-tools/index.md
+        - programming/build-tools/index.md
     - Developer Tools:
-        - development/performance-debugging-tools/index.md
-        - DDT : development/performance-debugging-tools/ddt.md
-        - TotalView : development/performance-debugging-tools/totalview.md
-        - GDB : development/performance-debugging-tools/gdb.md
-        - STAT and ATP : development/performance-debugging-tools/stat_atp.md
-        - Valgrind : development/performance-debugging-tools/valgrind.md
-        - lgdb and CCDB : development/performance-debugging-tools/lgdb_ccdb.md
-        - MAP : development/performance-debugging-tools/map.md
-        - VTune : development/performance-debugging-tools/vtune.md
-        - Advisor : development/performance-debugging-tools/advisor.md
-        - Inspector : development/performance-debugging-tools/inspector.md
-        - Reveal : development/performance-debugging-tools/reveal.md
-        - APS : development/performance-debugging-tools/aps.md
-        - CrayPat : development/performance-debugging-tools/craypat.md
-        - darshan : development/performance-debugging-tools/darshan.md
-        - IPM : development/performance-debugging-tools/ipm.md
-        - Trace Analyzer and Collector: development/performance-debugging-tools/itac.md
-        - LIKWID : development/performance-debugging-tools/likwid.md
+        - programming/performance-debugging-tools/index.md
+        - DDT : programming/performance-debugging-tools/ddt.md
+        - TotalView : programming/performance-debugging-tools/totalview.md
+        - GDB : programming/performance-debugging-tools/gdb.md
+        - STAT and ATP : programming/performance-debugging-tools/stat_atp.md
+        - Valgrind : programming/performance-debugging-tools/valgrind.md
+        - lgdb and CCDB : programming/performance-debugging-tools/lgdb_ccdb.md
+        - MAP : programming/performance-debugging-tools/map.md
+        - VTune : programming/performance-debugging-tools/vtune.md
+        - Advisor : programming/performance-debugging-tools/advisor.md
+        - Inspector : programming/performance-debugging-tools/inspector.md
+        - Reveal : programming/performance-debugging-tools/reveal.md
+        - APS : programming/performance-debugging-tools/aps.md
+        - CrayPat : programming/performance-debugging-tools/craypat.md
+        - darshan : programming/performance-debugging-tools/darshan.md
+        - IPM : programming/performance-debugging-tools/ipm.md
+        - Trace Analyzer and Collector: programming/performance-debugging-tools/itac.md
+        - LIKWID : programming/performance-debugging-tools/likwid.md
     - Compilers :
-        - Native Compilers : development/compilers/native.md
-        - Compiler Wrappers (recommended) : development/compilers/wrappers.md
+        - Native Compilers : programming/compilers/native.md
+        - Compiler Wrappers (recommended) : programming/compilers/wrappers.md
     - High-level Programming Environments:
         - Python :
-            - development/high-level-environments/python/index.md
-            - Running Scripts : development/high-level-environments/python/running-scripts.md
-            - Scaling Up : development/high-level-environments/python/scaling-up.md
-            - Python FAQ : development/high-level-environments/python/frequently-asked-questions.md
-            - Best Practices : development/high-level-environments/python/best-practices.md
-            - Python on Cori KNL : development/high-level-environments/python/python-on-cori-knl.md
-            - Profiling Python : development/high-level-environments/python/profiling-python.md
-#        - Julia : development/high-level-environments/julia.md
-#        - Matlab : development/high-level-environments/matlab.md
+            - programming/high-level-environments/python/index.md
+            - Running Scripts : programming/high-level-environments/python/running-scripts.md
+            - Scaling Up : programming/high-level-environments/python/scaling-up.md
+            - Python FAQ : programming/high-level-environments/python/frequently-asked-questions.md
+            - Best Practices : programming/high-level-environments/python/best-practices.md
+            - Python on Cori KNL : programming/high-level-environments/python/python-on-cori-knl.md
+            - Profiling Python : programming/high-level-environments/python/profiling-python.md
+#        - Julia : programming/high-level-environments/julia.md
+#        - Matlab : programming/high-level-environments/matlab.md
     - Programming Models:
-        - MPI : development/programming-models/mpi.md
+        - MPI :
+          - About: programming/programming-models/mpi/index.md
+          - OpenMPI: programming/programming-models/mpi/openmpi.md
         - OpenMP : 
-          - About: development/programming-models/openmp/openmp.md
-          - OpenMP Resources : development/programming-models/openmp/openmp-resources.md
-          - Tools for OpenMP : development/programming-models/openmp/openmp-tools.md
-          - False Sharing Detection using VTune Amplifier : development/programming-models/openmp/sharing-vtune.md
-        - UPC++ : development/programming-models/upcxx.md
-        - Kokkos : development/programming-models/kokkos.md
-        - Raja : development/programming-models/raja.md
-        - Coarrays : development/programming-models/coarrays.md
+          - About: programming/programming-models/openmp/openmp.md
+          - OpenMP Resources : programming/programming-models/openmp/openmp-resources.md
+          - Tools for OpenMP : programming/programming-models/openmp/openmp-tools.md
+          - False Sharing Detection using VTune Amplifier : programming/programming-models/openmp/sharing-vtune.md
+        - UPC++ : programming/programming-models/upcxx.md
+        - Kokkos : programming/programming-models/kokkos.md
+        - Raja : programming/programming-models/raja.md
+        - Coarrays : programming/programming-models/coarrays.md
     - Libraries:
-        - FFTW : development/libraries/fftw/index.md
-        - LAPACK : development/libraries/lapack/index.md
-        - MKL : development/libraries/mkl/index.md
-        - LibSci : development/libraries/libsci/index.md
-        - HDF5 : development/libraries/hdf5/index.md
-        - NetCDF : development/libraries/netcdf/index.md
+        - FFTW : programming/libraries/fftw/index.md
+        - LAPACK : programming/libraries/lapack/index.md
+        - MKL : programming/libraries/mkl/index.md
+        - LibSci : programming/libraries/libsci/index.md
+        - HDF5 : programming/libraries/hdf5/index.md
+        - NetCDF : programming/libraries/netcdf/index.md
     - Version Control:
-        - git : development/version-control/git/index.md
-        - Subversion : development/version-control/subversion/index.md
+        - git : programming/version-control/git/index.md
+        - Subversion : programming/version-control/subversion/index.md
   - Environment: environment/index.md
   - Systems:
       - Cori: 
@@ -196,7 +199,7 @@ nav:
       - Archive (HPSS): 
         - Intro: filesystems/archive.md
         - Accessing HPSS: filesystems/archive_access.md
-        - Storage Statistics : http://www.nersc.gov/users/storage-and-file-systems/hpss/storage-statistics/
+        - Storage Statistics: filesystems/archive-stats.md
       - Backups: filesystems/backups.md
       - Unix File Permissions: filesystems/unix-file-permissions.md
   - Science Partners: 
@@ -205,23 +208,20 @@ nav:
       - Systems:
         - Overview: science-partners/jgi/systems.md
         - Cori Genepool: science-partners/jgi/cori-genepool.md
+        - Cori ExVivo: science-partners/jgi/cori-exvivo.md
         - Denovo: science-partners/jgi/denovo.md
       - Filesystems: science-partners/jgi/filesystems.md
       - Software: science-partners/jgi/software.md
       - Training and Tutorials: science-partners/jgi/training.md
       - Databases and Web Services: science-partners/jgi/services.md
   - Help: help/index.md
-  - Tutorials:
-    - Demo : demo/demo.md
-    - Tables : demo/table.md
-    - Dropdown: demo/dropdown.md
 
 # Project Information
-site_name: NERSC Documentation (beta)
+site_name: NERSC Documentation
 site_description: NERSC Documentation
 site_author: NERSC
 site_dir: public
-site_url: "https://docs.nersc.gov"
+#site_url: "https://docs.nersc.gov/"
 repo_name: GitLab/NERSC/docs
 repo_url: https://gitlab.com/NERSC/nersc.gitlab.io
 edit_uri: blob/master/docs/

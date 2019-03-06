@@ -14,4 +14,4 @@ and support library developed at the National Center for Atmospheric
 Research (NCAR).  Like HDF5, NetCDF is self-describing and portable
 across platforms.
 
-* [HDF5](/development/libraries/hdf5/index.md)
+* [HDF5](../programming/libraries/hdf5/index.md)

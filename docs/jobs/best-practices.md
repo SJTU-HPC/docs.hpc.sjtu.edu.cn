@@ -16,7 +16,7 @@ Simulations which must run for a long period of time achieve the best
 throughput when composed of main small jobs utilizing
 checkpoint/restart chained together.
 
-* [Example: job chaining](./examples/index.md#dependencies)
+* [Example: job chaining](examples/index.md#dependencies)
 
 ## I/O performance
 
@@ -30,7 +30,7 @@ These systems should be referenced with the environment variable
 `$SCRATCH`.
 
 !!! tip
-	On Cori the [Burst Buffer](#) offers the best I/O performance.
+	On Cori the [Burst Buffer](examples/index.md#burst-buffer-test) offers the best I/O performance.
 
 !!! warn
 	Scratch filesystems are not backed up and old files are
@@ -199,6 +199,6 @@ Cori and Edison.
 Users requiring large numbers of serial jobs have several options at
 NERSC.
 
-* [shared qos](/jobs/examples/index.md#shared)
-* [job arrays](/jobs/examples/index.md#job-arrays)
-* [workflow tools](/jobs/workflow-tools.md)
+* [shared qos](examples/index.md#shared)
+* [job arrays](examples/index.md#job-arrays)
+* [workflow tools](workflow-tools.md)

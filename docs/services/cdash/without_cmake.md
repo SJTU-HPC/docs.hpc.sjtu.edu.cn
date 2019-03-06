@@ -21,6 +21,10 @@ build system into a CDash submission without CMake and generate tests. For examp
 
 ## Using PyCTest
 
+| Name | Version | Platforms | Downloads |
+| --- | --- | --- | --- |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-pyctest-green.svg)](https://anaconda.org/conda-forge/pyctest) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/pyctest.svg)](https://anaconda.org/conda-forge/pyctest) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/pyctest.svg)](https://anaconda.org/conda-forge/pyctest) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/pyctest.svg)](https://anaconda.org/conda-forge/pyctest) |
+
 Install `pyctest` from Anaconda or PyPi
 
 - `conda install -c conda-forge pyctest`
@@ -33,7 +37,97 @@ The PyPi distribution is a source distribution that will require building
 CMake from scratch -- which can take a significant amount of time
 depending on your system specifications.
 
-### PyCTest Driver Example
+Write a primary driver script for the project, e.g. `pyctest-runner.py`, and place in
+the top-level directory of the project.
+
+
+### PyCTest Example for Python Project
+
+```python
+#!/usr/bin/env python
+
+import os
+import sys
+import platform
+import pyctest.pyctest as pyctest
+import pyctest.helpers as helpers
+
+parser = helpers.ArgumentParser("ProjectName", source_dir=os.getcwd(),binary_dir=os.getcwd(), vcs_type="git")
+args = parser.parse_args()
+
+pyctest.BUILD_NAME = "{}".format(args.build)
+pyctest.BUILD_COMMAND = "python setup.py install"
+
+test = pyctest.test()
+test.SetName("unittest")
+test.SetCommand(["nosetests"])
+
+pyctest.run()
+```
+
+### PyCTest Example for autotools Project
+
+```python
+#!/usr/bin/env python
+
+import os
+import sys
+import platform
+import multiprocessing as mp
+import pyctest.pyctest as pyctest
+import pyctest.helpers as helpers
+
+parser = helpers.ArgumentParser("ProjectName", source_dir=os.getcwd(), binary_dir=os.getcwd(),
+                                vcs_type="git")
+parser.add_argument("-n", "--build", type=str, required=True, help="Build name for identification")
+args = parser.parse_args()
+
+# CONFIGURE_COMMAND can only run one command so if autogen is required, just execute it here
+cmd = pyctest.command(["./autogen.sh"])
+cmd.SetWorkingDirectory(pyctest.SOURCE_DIRECTORY)
+cmd.SetErrorQuiet(False)
+cmd.Execute()
+
+pyctest.BUILD_NAME = "{}".format(args.build)
+pyctest.CONFIGURE_COMMAND = "./configure"
+pyctest.BUILD_COMMAND = "make -j{}".format(mp.cpu_count())
+
+# alternate test declaration format
+pyctest.test("unittest", ["./run-testing.sh"])
+
+pyctest.run()
+```
+
+### PyCTest Example for CMake Project
+
+```python
+#!/usr/bin/env python
+
+import os
+import sys
+import platform
+import multiprocessing as mp
+import pyctest.pyctest as pyctest
+import pyctest.helpers as helpers
+
+project = "PyCTestDemo"
+binary_dir = os.path.join(os.getcwd(), "{}-build".format(project))
+parser = helpers.ArgumentParser("ProjectName", os.getcwd(), binary_dir)
+parser.add_argument("-n", "--build", type=str, required=True, help="Build name for identification")
+args = parser.parse_args()
+
+pyctest.BUILD_NAME = "{}".format(args.build)
+pyctest.UPDATE_COMMAND = "git"
+pyctest.CONFIGURE_COMMAND = "cmake {}".format(pyctest.SOURCE_DIRECTORY)
+pyctest.BUILD_COMMAND = "cmake --build {} --target all -- -j{}".format(
+    pyctest.BINARY_DIRECTORY, mp.cpu_count())
+
+pyctest.test("unittest", ["./run-testing.sh"])
+
+pyctest.run()
+```
+
+### PyCTest Example for CMake Project
 
 Write a primary driver script for the project, e.g. `pyctest-runner.py`, and place in
 the top-level directory of the project.
@@ -41,25 +135,27 @@ the top-level directory of the project.
 ```python
 #!/usr/bin/env python
 
-import os, sys, platform
+import os
+import sys
+import platform
+import multiprocessing as mp
 import pyctest.pyctest as pyctest
 import pyctest.helpers as helpers
 
-cwd = os.getcwd()
-# process standard arguments
-args = helpers.ArgumentParser("PyCTest", cwd, cwd, vcs_type="git",
-                              build_type="MinSizeRel").parse_args()
-# base web address of dashboard
-pyctest.DROP_SITE = "cdash.nersc.gov"
-# custom setup.py command (runs CMake)
-pyctest.CONFIGURE_COMMAND = "python setup.py configure"
-# build and install
-pyctest.BUILD_COMMAND = "python setup.py install"
-# create test
-test_dir = os.path.join(pyctest.SOURCE_DIRECTORY, "examples", "Basic")
-pyctest.test(name="basic", cmd=["python", "basic.py", "--", "-VV"],
-             properties={ "WORKING_DIRECTORY" : test_dir })
-# run stages
+project = "PyCTestDemo"
+binary_dir = os.path.join(os.getcwd(), "{}-build".format(project))
+parser = helpers.ArgumentParser("ProjectName", os.getcwd(), binary_dir)
+parser.add_argument("-n", "--build", type=str, required=True, help="Build name for identification")
+args = parser.parse_args()
+
+pyctest.BUILD_NAME = "{}".format(args.build)
+pyctest.UPDATE_COMMAND = "git"
+pyctest.CONFIGURE_COMMAND = "cmake {}".format(pyctest.SOURCE_DIRECTORY)
+pyctest.BUILD_COMMAND = "cmake --build {} --target all -- -j{}".format(
+    pyctest.BINARY_DIRECTORY, mp.cpu_count())
+
+pyctest.test("unittest", ["./run-testing.sh"])
+
 pyctest.run()
 ```
 

@@ -8,7 +8,7 @@
 | Global HOME     | 40 GB | 1 M    | -          |
 | Global common   | 10 GB | 1 M    | -          |
 | Cori SCRATCH    | 20 TB | 10 M   | 12 weeks   |
-| Edison SCRATCH  | 10 TB | 5 M    | 12 weeks   |
+| Edison SCRATCH  | 10 TB | 5 M    | 8 weeks    |
 | Edison SCRATCH3 | -     | -      | 8 weeks    |
 
 ## Quotas

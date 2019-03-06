@@ -6,8 +6,8 @@ fast Intel Xeon processors, and 64 GB of memory per node.
 
 ## Filesystems
 
-* [Edison scratch](/filesystems/edison-scratch.md)
-* [Cori scratch](/filesystems/cori-scratch.md)[^1]
+* [Edison scratch](../../filesystems/edison-scratch.md)
+* [Cori scratch](../../filesystems/cori-scratch.md)[^1]
 
 [^1]: Cori's scratch filesystem is also mounted on Edison login and
       compute nodes
