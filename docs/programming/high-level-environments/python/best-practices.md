@@ -1,4 +1,3 @@
-
 # Best Practices
 
 Here is a list of best practices for using Python at NERSC.
@@ -15,8 +14,5 @@ Never use the version of Python found at /usr/bin/python, it is an older version
 This file system is mounted read-only on Cori and Edison compute nodes with client-side caching enabled.
 This is the file system that NERSC uses to install software modules (such as Python).
 Contact NERSC if to see if your required packages can be made available on /global/common either as a NERSC-build module or through Anaconda.
-* If you tend to run Python applications at larger concurrencies it may be advisable to stage or install your Python packages onto another file system, in particular the $SCRATCH file system.
-Users are advised to remember the purge policy in place on $SCRATCH.
-Running a recursive touch on the $SCRATCH file system to preserve a Python will be overlooked for now but should also not be abused.
 * There are several interventions that can further improve Python package import times.
 Users are advised to consider them and choose one that delivers the performance they desire at the level of invasiveness they are willing to accept.
