@@ -113,7 +113,7 @@ is 0 and it has the lowest priority on all systems.
 If you meet the above criteria, you can access the scavenger queue by
 submitting with `-q scavenger` (`-q shared_scavenger` for the shared
 queue). In addition, you must specify a minimum running time for this
-job of 2 hours or less with the `--time-min` flag. This means that the
+job of 4 hours or less with the `--time-min` flag. This means that the
 job could potentially be interrupted by a higher priority
 (i.e. non-scavenger job) after the minimum time has elapsed. Because
 of this, we recommend you implement checkpointing in your scavenger
