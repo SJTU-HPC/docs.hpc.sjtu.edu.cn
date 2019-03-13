@@ -76,7 +76,7 @@ functional calculations:
 	export OMP_PROC_BIND=spread
 
 	module load espresso/6.1
-	srun --cpu_bind=cores pw.x -nbgrp 8 -input test.in
+	srun --cpu-bind=cores pw.x -nbgrp 8 -input test.in
 	```
 
 !!! example "Cori KNL"
@@ -95,7 +95,7 @@ functional calculations:
 	export OMP_PROC_BIND=spread
 
 	module load espresso/6.1
-	srun --cpu_bind=cores pw.x -nbgrp 8 -input test.in
+	srun --cpu-bind=cores pw.x -nbgrp 8 -input test.in
 	```
 
 !!! tip

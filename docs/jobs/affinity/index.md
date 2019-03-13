@@ -63,9 +63,9 @@ illustrative, not accurate).
 
 1. If #MPI tasks per node is not a divisor of 64 on Haswell (meaning
    the node is not fully packed), need to add an srun flag
-   "--cpu_bind=cores". Add "--cpu_bind=threads" instead if
+   "--cpu-bind=cores". Add "--cpu-bind=threads" instead if
    #MPI_per_node > 32.  In most cases for KNL, when use only 64 cores
-   out of 68 cores, --cpu_bind is needed.
+   out of 68 cores, --cpu-bind is needed.
 
 1. Set `OMP_NUM_THREADS` environment variable to number of OpenMP
    threads per MPI task.
@@ -103,7 +103,7 @@ and OpenMP threads as what your application will use, and check if the
 desired binding is obtained. The Cori binaries can be used to check
 for both Haswell or KNL, since binaries are compatible.
 
-Alternatively an srun flag `--cpu_bind=verbose` can be added to report process and thread binding.
+Alternatively an srun flag `--cpu-bind=verbose` can be added to report process and thread binding.
 
 Or you can set the following run time environment to obtain affinity
 information as part of the job stdout:

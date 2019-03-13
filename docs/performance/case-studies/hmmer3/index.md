@@ -235,7 +235,7 @@ Slurm Batch Script
 #SBATCH -N 1
 #SBATCH -t 00:30:00
 #SBATCH -C haswell
-srun -n 16 -c 4 --cpu_bind=cores --multi-prog –k mpmd_16.conf
+srun -n 16 -c 4 --cpu-bind=cores --multi-prog –k mpmd_16.conf
 ```
 mpmd_16.conf
 ```

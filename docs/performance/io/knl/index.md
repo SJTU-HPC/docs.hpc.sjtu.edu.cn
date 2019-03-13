@@ -20,7 +20,7 @@ With core specialization, we increased the 32 nodes HDF5 collective IO bandwidth
 In case node is not fully packed, process affinity is important in balancing workload and leveraging memory locality.
 
 ```shell
-nersc$ srun -n 4 -c 64 --cpu_bind=cores
+nersc$ srun -n 4 -c 64 --cpu-bind=cores
 ```
 "That does the trick. The time for reading the WRF restart file is now 36 seconds, (was 300 seconds)" --John Michalakes, UCAR
 
