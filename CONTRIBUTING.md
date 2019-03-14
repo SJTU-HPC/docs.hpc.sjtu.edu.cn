@@ -22,7 +22,7 @@ NERSC customizations such as the colors.
 
 ### Merge Requests
 
-NERSC staff who have submited a succesful Merge Request are added to
+NERSC staff who have submitted a succesful Merge Request are added to
 the list of the approvers.
 
 Self-approval of Merge Requests is allowed if the change is *minor*.
