@@ -43,18 +43,25 @@ day, but otherwise the NX Client will automatically reconnect.
 
 1. Install sshproxy on your laptop and generate an SSH key
 (instructions are
-[here](https://www.nersc.gov/users/connecting-to-nersc/mfa/#toc-anchor-3))
+[here](https://www.nersc.gov/users/connecting-to-nersc/mfa/#toc-anchor-3)).
+Note that you must do this once every day to generate a new key.
 2. Open the NX client and click the "New" box in the upper right
 corner of the menu.
-3. Choose "SSH" for protocol and click next.
+3. Choose "SSH" for protocol and click Continue.
 4. Type in "nxcloud01.nersc.gov" for Host (leave the port set to 22)
-and click next.
+and click Continue.
 5. Choose "Private Key: use key-based authentication with a key you
-provide" and click next.
+provide" and click Continue. DO NOT check import private key or forward
+authentication.
 6. Fill in the path to the ssh key you generated in step 1 (usually
-~/.ssh/nersc) and click next.
-7. Select "Don't use a proxy" and click next.
-8. Choose the name you'd like to call this connection and click done.
+~/.ssh/nersc) and click Continue. Note that you may need to specify the full
+path to your ssh key rather than using the tilde (~).
+7. Select "Don't use a proxy" and click Continue.
+8. Choose the name you'd like to call this connection and click done. To make
+reconnecting easier you may elect to create a desktop icon ("Name of your
+connection.nxs") which will automatically load your NERSC connection settings.
+If you do not create a desktop icon, you can just click the NoMachine icon and
+then select the name of your connection.
 
 To configure without using sshproxy, choose "Password" for step 5
 (which skips step 6), otherwise all other steps are the same. Please
