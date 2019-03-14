@@ -9,12 +9,12 @@ storage of data that is not frequently accessed.
 
 HPSS is Hierarchical Storage Management (HSM) software developed by a
 collaboration of DOE labs, of which NERSC is a participant, and
-IBM. The HPSS system is a tape system that uses HSM software to ingest data onto high
-performance disk arrays and automatically migrate it to a very large
-enterprise tape subsystem for long-term retention. The disk cache in
-HPSS is designed to retain many days worth of new data and the tape
-subsystem is designed to provide the most cost-effective long-term
-scalable data storage available.
+IBM. The HPSS system is a tape system that uses HSM software to ingest
+data onto high performance disk arrays and automatically migrate it to
+a very large enterprise tape subsystem for long-term retention. The
+disk cache in HPSS is designed to retain many days worth of new data
+and the tape subsystem is designed to provide the most cost-effective
+long-term scalable data storage available.
 
 NERSC's HPSS system can be accessed at archive.nersc.gov through a
 variety of clients such as hsi, htar, ftp, pftp, and globus. By
@@ -25,14 +25,14 @@ default every user has an HPSS account.
 ### Accessing HPSS
 
 You can access HPSS from any NERSC system. Inside of NERSC, files can
-be archived to HPSS individually with the "hsi" command or in groups
-with the "htar" command (similar to the way "tar" works). HPSS is also
+be archived to HPSS individually with the `hsi` command or in groups
+with the `htar` command (similar to the way `tar` works). HPSS is also
 accessible via Globus, gridFTP, ftp, and pftp. Please see the
 [Accessing HPSS](archive_access.md) page for a list of all possible
 way to access HPSS and details on their use.
 
 HPSS uses NIM to create an "hpss token" for user authentication. On a
-NERSC system, typing "hsi" or "htar" will usually be enough to create
+NERSC system, typing `hsi` or `htar` will usually be enough to create
 this token. If you are access HPSS remotely (using ftp, pftp, or
 gridFTP), you may need to manually generate a token. Please see the
 [Accessing HPSS](archive_access.md) page for more details.
@@ -73,39 +73,43 @@ If you are retrieving many (> 100 files) from HPSS, you need to
 order your retrievals so that all files on a single tape will be
 retieved in a single pass in the order they are on the tape. NERSC has
 a script to help you generate an ordered list for retrieval called
-```hpss_file_sorter.script```.
+`hpss_file_sorter.script`.
 
 ??? tip "Generating a sorted list for retrieval"
-      To use the script, you first need a list of fully qualified
-      file path names and/or directory path names. If you do not
-      already have such a list, you can query HPSS using the
-      following command:
+    To use the script, you first need a list of fully qualified
+	file path names and/or directory path names. If you do not
+	already have such a list, you can query HPSS using the
+	following command:
 
-      ```
-      hsi -q 'ls -1 <HPSS_files_or_directories_you_want_to_retrieve>' 2> temp.txt
-      ```
+	```
+	hsi -q 'ls -1 <HPSS_files_or_directories_you_want_to_retrieve>' 2> temp.txt
+	```
 
-      (for csh replace "2>" with ">&"). Once you have the list of files, feed it to the sorting script:
+	(for csh replace "2>" with ">&"). Once you have the list of files, feed it to the sorting script:
 
-      ```
-      hpss_file_sorter.script temp.txt > retrieval_list.txt
-      ```
+	```
+	hpss_file_sorter.script temp.txt > retrieval_list.txt
+	```
 
-    The best way to retrieve this list from HPSS is with the ```cget```
+    The best way to retrieve this list from HPSS is with the `cget`
     command, which will get the file from HPSS only if it isn't
     already in the output directory. You also should take advantage of
-    the ```hsi in <file_of_hsi_commands.txt>``` to run an entire set of
+    the `hsi in <file_of_hsi_commands.txt>` to run an entire set of
     HPSS commands in one HPSS session. This will avoid HPSS doing a
     sign in procedure for each file, which can add up to a significant
     amount of time if you are retrieving many files. To do this,
     you'll need to add a little something to the retrieval_list.txt
     file you already generated:
 
-    ```awk '{print "cget",$1}' retrieval_list.txt > final_retrieval_list.txt```
+    ```
+	awk '{print "cget",$1}' retrieval_list.txt > final_retrieval_list.txt
+	```
 
     Finally, you can retrieve the files from HPSS with
 
-    ```hsi "in final_retrieval_list.txt"```
+    ```
+	hsi "in final_retrieval_list.txt"
+	```
 
     This procedure will return all the files you're retrieving in a
     single directory. You may want to preserve some of the directory
@@ -113,31 +117,35 @@ a script to help you generate an ordered list for retrieval called
     recreate HPSS subdirectories in your target directory with this
     command
 
-    ```sed 's:^'<your_hpss_directory>'/\(.*\):\1:' temp.txt | xargs
-    -I {} dirname {} | sort | uniq | xargs -I {} mkdir -p {} ```
+    ```
+	sed 's:^'<your_hpss_directory>'/\(.*\):\1:' temp.txt | xargs
+    -I {} dirname {} | sort | uniq | xargs -I {} mkdir -p {}
+	```
 
     where <your_hpss_directory> is the root directory you want to
     harvest subdirectories from, and temp.txt holds the output from
-    your "ls -1" call.
+    your `ls -1` call.
 
 #### Avoid Very Large Files
 
 Files sizes greater than 1 TB can be difficult for HPSS to work with
-and lead to longer transfer times, increasing the possibility
-of transfer interruptions. Generally it's best to aim for file
-sizes in the 100 - 500 GB range. You can use "tar" and "split"
-to break up large aggregates or large files into 500 GB sized
-chunks:
+and lead to longer transfer times, increasing the possibility of
+transfer interruptions. Generally it's best to aim for file sizes in
+the 100 - 500 GB range. You can use `tar` and `split` to break up
+large aggregates or large files into 500 GB sized chunks:
 
-```tar cvf - myfiles* | split -d --bytes=500G -
-my_output_tarname.tar.```
+```
+tar cvf - myfiles* | split -d --bytes=500G - my_output_tarname.tar.
+```
 
 This will generate a number of files with names like
-"my_output_tarname.tar.00", "my_output_tarname.tar.01", which
-you can use "hsi put" to archive into HPSS. When you retrieve
-these files, you can recombine them with cat
+`my_output_tarname.tar.00`, `my_output_tarname.tar.01`, which you can
+use "hsi put" to archive into HPSS. When you retrieve these files, you
+can recombine them with cat
 
-```cat my_output_tarname.tar.* | tar xvf -```
+```
+cat my_output_tarname.tar.* | tar xvf -
+```
 
 #### Accessing HPSS Data Remotely
 
@@ -338,5 +346,5 @@ Globus transfers will fail if you don't have permission to read the
 source directory or space to write in the target directory. One common
 mistake is to make the files readable, but forget to make the
 directory holding them readable. You can check directory permissions
-with ```ls -ld```. At NERSC you can make sure you have enough space to
-write in a directory by using the ```myquota``` command.
+with `ls -ld`. At NERSC you can make sure you have enough space to
+write in a directory by using the `myquota` command.
