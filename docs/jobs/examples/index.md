@@ -273,6 +273,15 @@ $$
 	./serial.exe
 	```
 
+## Using Intel MPI 
+
+Applications built with Intel MPI can be launched via srun in the SLURM batch script on Cori compute nodes. The module `impi` needs to be loaded, and the application should be built using the `mpiicc` (`for C Codes`) or `mpiifort` (`for Fortran codes`) or `mpiicpc` (`for C++ codes`) commands. Below is a sample compile and run script.  
+
+??? example "Cori Haswell"
+	```bash
+	--8<-- "docs/jobs/examples/intel-mpi/cori-haswell/intel-mpi.sh"
+	```
+
 ## Xfer queue
 
 The intended use of the xfer queue is to transfer data between Cori or
