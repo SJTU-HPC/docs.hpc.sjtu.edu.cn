@@ -19,6 +19,20 @@ One MPI process per physical core.
 	--8<-- "docs/jobs/examples/basic-mpi/cori-knl/basic-mpi.sh"
 	```
 
+One MPI process per physical core using Open MPI.
+
+??? example "Cori Haswell Open MPI"
+	```bash
+	--8<-- "docs/jobs/examples/basic-mpi/cori-haswell-open-mpi/basic-mpi.sh"
+	```
+
+??? example "Cori KNL Open MPI"
+	```bash
+	--8<-- "docs/jobs/examples/basic-mpi/cori-knl-open-mpi/basic-mpi.sh"
+	```
+
+See [Open MPI](../../programming/programming-models/mpi/openmpi.md) for more information about using Open MPI on NERSC systems.
+
 ## Hybrid MPI+OpenMP jobs
 
 One MPI process per socket and 1 OpenMP thread per
