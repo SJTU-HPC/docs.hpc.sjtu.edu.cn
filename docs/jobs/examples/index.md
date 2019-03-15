@@ -31,7 +31,8 @@ One MPI process per physical core using Open MPI.
 	--8<-- "docs/jobs/examples/basic-mpi/cori-knl-open-mpi/basic-mpi.sh"
 	```
 
-See [Open MPI](../../programming/programming-models/mpi/openmpi.md) for more information about using Open MPI on NERSC systems.
+See [Open MPI](../../programming/programming-models/mpi/openmpi.md) for more
+information about using Open MPI on NERSC systems.
 
 ## Hybrid MPI+OpenMP jobs
 
