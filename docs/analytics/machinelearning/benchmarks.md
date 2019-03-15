@@ -21,11 +21,32 @@ We have a repository of benchmarks with standard computer vision models,
 LSTM, and 3D convolutional models here:
 https://github.com/sparticlesteve/pytorch-benchmarks
 
-**Training results**
+We compare PyTorch software installations, hardware, and analyze scaling
+performance using the PyTorch distributed library with MPI. See the notebooks
+in the links below for numbers and plots.
+
+**Software versions**
+
+Results for a handful of software versions available on Cori are in this
+notebook:
+
+https://github.com/sparticlesteve/pytorch-benchmarks/blob/master/notebooks/SoftwareAnalysis.ipynb
+
+Training throughput results:
 ![Training results](images/pytorch_training_benchmarks.png)
 
-**Inference results**
-![Inference results](images/pytorch_inference_benchmarks.png)
+**Hardware comparisons**
+
+Results comparing training throughput on Cori Haswell, KNL, and GPU are here:
+
+https://github.com/sparticlesteve/pytorch-benchmarks/blob/master/notebooks/HardwareAnalysis.ipynb
+
+**Scaling analysis**
+
+Throughput scaling results on Cori Haswell with Intel PyTorch v1.0.0 are
+available here:
+
+https://github.com/sparticlesteve/pytorch-benchmarks/blob/master/notebooks/ScalingAnalysis.ipynb
 
 ## Scientific Deep Learning Benchmarks
 
