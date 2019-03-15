@@ -14,6 +14,18 @@ We have prioritized support for the following Deep Learning frameworks on Cori:
 * [TensorFlow](tensorflow/index.md)
 * [PyTorch](pytorch.md)
 
+### Deploying with Jupyter
+
+Users can deploy distributed deep learning workloads to Cori from Jupyter
+notebooks using parallel execution libraries such as IPyParallel. Jupyter
+notebooks can be used to submit workloads to the batch system and also
+provide powerful interactive capabilities for monitoring and controlling those
+workloads.
+
+We have some examples for running multi-node training and distributed
+hyper-parameter optimization jobs from notebooks in this github repository:
+https://github.com/sparticlesteve/cori-intml-examples
+
 ### Benchmarks
 
 We track general performance of Deep Learning frameworks as well as some
