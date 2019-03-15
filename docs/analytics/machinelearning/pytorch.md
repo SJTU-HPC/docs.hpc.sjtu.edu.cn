@@ -9,7 +9,18 @@ flexibility and expressivity.
 
 PyTorch can be picked up from the Anaconda python installations (e.g. via
 `module load python`) or from dedicated modules with MPI enabled. You can
-see which version are available with `module avail pytorch-mpi`.
+see which versions are available with `module avail pytorch`.
+
+### Current recommended version
+
+The currently recommended version of PyTorch to use on Cori is the
+Intel-optimized version `v1.0.0`, which can be loaded with
+
+`module load pytorch/v1.0.0-intel`
+
+The Intel optimizations in this installation can give you considerable speedups
+on Cori relative to the standard `v1.0.0`. See the [benchmarks](benchmarks.md)
+page for comparisons.
 
 ## Multi-node training
 
