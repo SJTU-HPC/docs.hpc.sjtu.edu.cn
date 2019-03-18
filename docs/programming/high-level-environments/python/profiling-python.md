@@ -400,16 +400,32 @@ LD_LIBRARY_PATH should point to the Python distribution you are using on Cori.
 In our case it is to the DESI conda version. PATH should point to the location
 in which you installed and configured Tau.
 
-Request an interactive job. Then either cd into the directory with your Python
-script (or specify the full path to your script) and try:
+!!! attention "Do you have a Python MPI code?"
+    If you have a Python MPI code, you must insert a tau.run() wrapper into
+    your code.
+
+There is still one important step before you can run your Python MPI code. (If
+you do not have an MPI code you can skip this step.) You will need to edit the
+highest level function of the program you intend to profile (in our case it is
+desi_extract_spectra_test.py). At the top of this file you will need to add:
+
+```
+import tau
+
+if __name__ == '__main__':
+    args = extract.parse()
+    tau.run("extract.main(args)")
+```
+where `main` is the name of the main function in your job. You MUST add this
+`tau.run()` wrapper to your Python MPI code to enable Tau to profile it.
+
+Now we're ready to run. Request an interactive job. Then either cd into the
+directory with your Python script (or specify the full path to your script) and
+try:
 
 ```
 time srun -u -n 32 -c 2 tau_python ./desi_extract_spectra_test.py arg1 arg2
 ```
-
-!!! attention "Tau prefers scripts"
-    Tau doesn't seem to be able to execute Python binaries so we used a
-    script instead of our usual binary.
 
 !!! tip "Tau may complain, don't panic"
     Tau may print some error messages like "Error in python later"
