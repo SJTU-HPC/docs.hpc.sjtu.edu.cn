@@ -19,21 +19,6 @@ One MPI process per physical core.
 	--8<-- "docs/jobs/examples/basic-mpi/cori-knl/basic-mpi.sh"
 	```
 
-One MPI process per physical core using Open MPI.
-
-??? example "Cori Haswell Open MPI"
-	```bash
-	--8<-- "docs/jobs/examples/basic-mpi/cori-haswell-open-mpi/basic-mpi.sh"
-	```
-
-??? example "Cori KNL Open MPI"
-	```bash
-	--8<-- "docs/jobs/examples/basic-mpi/cori-knl-open-mpi/basic-mpi.sh"
-	```
-
-See [Open MPI](../../programming/programming-models/mpi/openmpi.md) for more
-information about using Open MPI on NERSC systems.
-
 ## Hybrid MPI+OpenMP jobs
 
 One MPI process per socket and 1 OpenMP thread per
@@ -281,6 +266,22 @@ Applications built with Intel MPI can be launched via srun in the SLURM batch sc
 	```bash
 	--8<-- "docs/jobs/examples/intel-mpi/cori-haswell/intel-mpi.sh"
 	```
+
+## Using Open MPI
+
+Applications built with Open MPI can be launched via srun or Open MPI's mpirun command.  The module `openmpi` needs to be loaded to build an application against Open MPI.  Typically one builds the application using the `mpicc` (`for C Codes`),  `mpifort` (`for Fortran codes`), or `mpiCC` (`for C++ codes`) commands.  Alternatively, Open MPI supports use of `pkg-config` to obtain the include and library paths.  For example, `pkg-config --cflags --libs ompi-c` returns the flags that must be passed to the backend `c` compiler (e.g. gcc, gfortran, icc, ifort)  to build against Open MPI.  Open MPI also supports Java MPI bindings.  Use `mpijavac` to compile Java codes that use the Java MPI bindings.  For Java MPI, it is highly recommended to launch jobs using Open MPI's mpirun command.  Note the Open MPI packages at NERSC do not support static linking.
+
+See [Open MPI](../../programming/programming-models/mpi/openmpi.md) for more
+information about using Open MPI on NERSC systems.
+
+??? example "Cori Haswell Open MPI"
+	```bash
+	--8<-- "docs/jobs/examples/basic-mpi/cori-haswell-open-mpi/basic-mpi.sh"
+	```
+
+??? example "Cori KNL Open MPI"
+	```bash
+	--8<-- "docs/jobs/examples/basic-mpi/cori-knl-open-mpi/basic-mpi.sh"
 
 ## Xfer queue
 
