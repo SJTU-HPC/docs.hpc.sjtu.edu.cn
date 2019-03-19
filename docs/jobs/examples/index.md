@@ -282,6 +282,7 @@ information about using Open MPI on NERSC systems.
 ??? example "Cori KNL Open MPI"
 	```bash
 	--8<-- "docs/jobs/examples/basic-mpi/cori-knl-open-mpi/basic-mpi.sh"
+	```
 
 ## Xfer queue
 
