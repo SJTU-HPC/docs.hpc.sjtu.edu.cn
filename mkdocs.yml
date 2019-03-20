@@ -62,6 +62,7 @@ nav:
       - Formats : data/formats.md
       - Policy: data/policy.md
   - Performance:
+    - Readiness: performance/readiness.md
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
