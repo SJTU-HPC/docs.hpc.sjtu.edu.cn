@@ -45,7 +45,7 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | special[^4]     | custom    | custom         | custom       | custom    | -        | custom |
 
 !!! tip
-	Jobs using 1024 or more KNL nodes receive a 20% discount!
+	Jobs using 1024 or more KNL nodes receive a 40% discount!
 
 !!! note
 	User held jobs that were submitted more than 12 weeks ago will be deleted.
@@ -147,7 +147,7 @@ rejected by the batch system.
 
 [^6]:
 	The "regular" and "premium" QOS charges on Cori KNL are discounted
-    by 20% if the job uses 1024 or more nodes.
+    by 40% if the job uses 1024 or more nodes.
 
 [^7]:
 	The "low" QOS (available on Cori KNL only) is charged 50% as compared to 
