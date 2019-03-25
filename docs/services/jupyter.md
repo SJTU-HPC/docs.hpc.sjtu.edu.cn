@@ -1,9 +1,9 @@
 # Jupyter
 
-Jupyter is an essential component of NERSC's Data and Analytics Services ecosystem.
+Jupyter is an essential component of NERSC's data ecosystem.
 Use Jupyter at NERSC to:
 
-* Perform exploratory data analytics and visualization of data stored on the NERSC Global Filesystem (NGF) or in databases,
+* Perform exploratory data analytics and visualization of data stored on the NERSC Global Filesystem (NGF) or in databases at NERSC,
 * Guide machine learning through distributed training, hyperparameter optimization, model validation, prediction, and inference,
 * Manage workflows involving complex simulations and data analytics through the Cori batch queue,
 * ... or do other things we haven't thought of yet.
@@ -20,25 +20,31 @@ They are a powerful tool for reproducible research and teaching.
 
 [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/)
 provides a multi-user hub for spawning, managing, and proxying multiple instances of single-user Jupyter notebook servers.
-At NERSC, you authenticate to a JupyterHub instance using your NERSC credentials.
-There are currently two such hubs at NERSC.
-Eventually these two hubs will be merged and an options form will allow you to select how and where your notebook will spawn.
-The two existing hubs are:
+At NERSC, you authenticate to the JupyterHub instance we manage using your NERSC credentials and one-time password.
+Here is a link to NERSC's JupyterHub service: https://jupyter.nersc.gov/
 
-* https://jupyter.nersc.gov/
-    * Runs as a [Spin](../services/spin/index.md) service and is thus external to NERSC's Cray systems
-    * Notebooks spawned by this service have access to GPFS (e.g. `/project`, `$HOME`)
-    * Python software environments and kernels run in the Spin service, not on Cori
-* https://jupyter-dev.nersc.gov/
-    * Spawns Jupyter notebooks on special-purpose large-memory nodes of Cori (cori13,cori14,cori19)
+When you log into JupyterHub at NERSC, you will see a console or "home" page with some buttons.
+These buttons allow you to manage notebook servers running on Cori or in Spin.
+Which notebook server should you use?  It depends:
+
+* Cori
+    * Spawns Jupyter notebooks on special-purpose large-memory nodes of Cori (cori13, cori14, cori19)
     * Exposes GPFS and Cori `$SCRATCH` though not Edison `$SCRATCH`
     * Default Python software environment is the same as one of the modules found on Cori
     * Notebooks can submit jobs to Cori batch queues via simple Slurm Magic commands
+* Spin
+    * Runs as a [Spin](../services/spin/index.md) service and is thus external to NERSC's Cray systems
+    * Notebooks spawned by this service have access to GPFS (e.g. `/project`, `$HOME`)
+    * Python software environments and kernels run in the Spin service, not on Cori
+
+We view the Cori notebook service as the production service users should normally use.
+The Spin notebook service is a handy failover alternative if Cori login nodes are down.
+Generally users should run a notebook service on Cori, unless there's a reason to fail over to Spin.
 
 !!! tip
-    The large-memory login nodes used by <https://jupyter-dev.nersc.gov/>
-    are a shared resource, so please be careful not to use too many CPUs
-    or too much memory.  Treat them like regular login nodes.
+    The nodes used by <https://jupyter.nersc.gov/> are a shared resource, so
+    please be careful not to use too many CPUs or too much memory.  Treat them
+    like regular login nodes.
 
 ## JupyterLab
 
@@ -140,9 +146,9 @@ exec /global/homes/u/user/.conda/envs/myenv52/bin/python \
 You can put anything you want to configure your environment in the helper script.
 Just make sure it ends with the `ipykernel_launcher` command.
 
-## Shifter Kernels on Jupyter-dev
+## Shifter Kernels on Jupyter
 
-Shifter works on jupyter-dev.
+Shifter works with Cori notebook servers, but not Spin notebook servers.
 To make use of it, create a kernel spec and edit it to run `shifter`.
 The path to Python in your image should be used as the executable.
 Here's an example of how to set it up:
@@ -163,35 +169,37 @@ Here's an example of how to set it up:
 }
 ```
 
-## Spark on Jupyter-dev
+## Spark on Jupyter
 
-You can run small instances (< 4 cores) of Spark on jupyter-dev.
-Create the following kernel spec (you'll need to make the $SCRATCH/tmpfiles, $SCRATCH/spark/event_logs directories first):
+You can run small instances (< 4 cores) of Spark on Cori with Jupyter.
+You can even do it using Shifter too.
+Create the following kernel spec (you'll need to make the `$SCRATCH/tmpfiles`, `$SCRATCH/spark/event_logs` directories first):
 
 ```shell
 {
-"display_name": "shifter pyspark",
-"language": "python",
-"argv": [
-"shifter",
-"--image=nersc/spark-2.3.0:v1",
-"--volume=\"/global/cscratch1/sd/<your_dir>/tmpfiles:/tmp:perNodeCache=size=200G\"",
-"/root/anaconda3/bin/python",
-"-m",
-"ipykernel",
-"-f",
-"{connection_file}"],
-"env": {
-"SPARK_HOME": "/usr/local/bin/spark-2.3.0/",
-"PYSPARK_SUBMIT_ARGS": "--master local[1] pyspark-shell
---conf spark.eventLog.enabled=true
---conf spark.eventLog.dir=file:///global/cscratch1/sd/<your_dir>/spark/event_logs
---conf spark.history.fs.logDirectory=file:///global/cscratch1/sd/<your_dir>/spark/event_logs pyspark-shell",
-"PYTHONSTARTUP": "/usr/local/bin/spark-2.3.0/python/pyspark/shell.py",
-"PYTHONPATH": "/usr/local/bin/spark-2.3.0/python/lib/py4j-0.10.6-src.zip:/usr/local/bin/spark-2.3.0/python/",
-"PYSPARK_PYTHON": "/root/anaconda3/bin/python",
-"PYSPARK_DRIVER_PYTHON": "ipython3",
-"JAVA_HOME":"/usr"
-}
+    "display_name": "shifter pyspark",
+    "language": "python",
+    "argv": [
+        "shifter",
+        "--image=nersc/spark-2.3.0:v1",
+        "--volume=\"/global/cscratch1/sd/<your_dir>/tmpfiles:/tmp:perNodeCache=size=200G\"",
+        "/root/anaconda3/bin/python",
+        "-m",
+        "ipykernel",
+        "-f",
+        "{connection_file}"
+    ],
+    "env": {
+        "SPARK_HOME": "/usr/local/bin/spark-2.3.0/",
+        "PYSPARK_SUBMIT_ARGS": "--master local[1] pyspark-shell
+            --conf spark.eventLog.enabled=true
+            --conf spark.eventLog.dir=file:///global/cscratch1/sd/<your_dir>/spark/event_logs
+            --conf spark.history.fs.logDirectory=file:///global/cscratch1/sd/<your_dir>/spark/event_logs pyspark-shell",
+        "PYTHONSTARTUP": "/usr/local/bin/spark-2.3.0/python/pyspark/shell.py",
+        "PYTHONPATH": "/usr/local/bin/spark-2.3.0/python/lib/py4j-0.10.6-src.zip:/usr/local/bin/spark-2.3.0/python/",
+        "PYSPARK_PYTHON": "/root/anaconda3/bin/python",
+        "PYSPARK_DRIVER_PYTHON": "ipython3",
+        "JAVA_HOME":"/usr" 
+    }
 }
 ```
