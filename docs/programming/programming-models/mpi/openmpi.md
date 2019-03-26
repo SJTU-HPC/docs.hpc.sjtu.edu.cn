@@ -11,7 +11,6 @@ This wiki is primarily intended for NERSC users who wish to use Open MPI on Cori
 Load the Open MPI module to pick up the packages compiler wrappers, mpirun launch command, and other utilities:
 
 ```shell
-nersc$ module use /global/common/software/m3169/modulefiles
 nersc$ module load openmpi
 ```
 
