@@ -30,6 +30,13 @@ user. The list of endpoints are provided in the table below.
 | NERSC Cori | Originally a dual-node system needed for accessing the Cori scratch file system.  The endpoint is the same as NERSC DTN |  Use NERSC DTN instead
 | NERSC DTN-JGI | Single node system that was used to access JGI-specific file systems, which are now connected to the NERSC DTN servers. | Use NERSC DTN instead
 
+!!! warning 
+    Be aware that Globus will follow hard links and copy the data to
+    the target directory. Depending on the way the directory or file
+    is transferred, it will also follow soft links. You can find
+    details here:
+    https://docs.globus.org/faq/transfer-sharing/#how_does_globus_handle_symlinks
+
 !!! tip
     **To transfer files into/out of your laptop or desktop
     computer, you can install a [Globus connect (personal)
@@ -51,3 +58,4 @@ If you are having trouble activating a NERSC endpoint, please try
 logging into [NIM](https://nim.nersc.gov) to clear your authentication
 failures. If that still doesn't fix the issue, please open a ticket
 with the error and we'll investigate further.
+
