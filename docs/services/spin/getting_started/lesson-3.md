@@ -652,9 +652,6 @@ with ID `1i2596330` was removed.
 
 ## Example 3: Upgrading to use Rancher NFS
 
-NOTE: The following example is currently not working. We are working
-on this.
-
 Rancher NFS is a high-performance filesystem dedicated to Spin, and
 provides a persistent storage alternative to the NERSC Project
 Directories. Usage of Rancher NFS is fairly straightforward. In
