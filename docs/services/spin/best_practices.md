@@ -188,23 +188,33 @@ One or more identical containers providing the same function in Rancher is terme
 
 ### Naming Convention for Services
 
-* Common services should use a name from the following table of recommended names
+Common services should use an appropriate name from the following table of allowed service names,
+optionally followed by a hyphen and a descriptive suffix:
 
-  | Name | Description        |
-  |------|--------------------|
-  | app  | Application server |
-  | db   | Database           |
-  | lb   | Load Balancer      |
-  | web  | Web Server         |
-  | kv   | Key Value store    |
+  | Name  | Description        |
+  |-------|--------------------|
+  | app   | application server |
+  | db    | database           |
+  | kv    | key-value store    |
+  | lb    | load balancer      |
+  | util  | utility container  |
+  | web   | web server         |
 
-* Unique services should use a descriptive name for the service they provide. It should be a
-general description of the functionality, rather than the specific name of the
-implementation (e.g. web rather than apache)
-* As new service types become common, they will be added to this table of recommended names.
+For example, a service that uses an nginx front-end, a Django application server, a MySQL
+database, and a Redis key-value store might have services named web-nginx, app-django, db-mysql,
+and kv-redis.
+
+The descriptive suffix can also be used to indicate the application-specific purpose of the
+service. For example, a service that uses an Apache front-end, a Django application server for
+primary logic, and a custom image server might have services named web, app-primary and
+app-images.
+
+Some additional notes on service naming:
+
 * Standardizing service names has the benefit of clearly communicating the purpose of each
 service. This is beneficial when collaborating with others, when revisiting a
 service created in the past, and when enlisting the help of NERSC staff during troubleshooting.
+* As new service types become common, they will be added to this table of recommended names. If you have a suggestion for a new service name, please contact us!
 
 ## Stacks
 
@@ -212,8 +222,14 @@ The collection of services that comprise an application within Rancher is termed
 
 ### Naming Convention for Stacks
 
-Stacks should be named to match to non-TLD components of public-facing name (eg
-foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
+Stacks should be named after the software systems they contain, considering the aggregate function
+of all services. For example, if a stack contains a web front-end, application server, and database
+for a science gateway commonly known as _Rover_, then the stack could simply be called `rover`.
+The services within the `rover` stack should have descriptive names based on their individual function.
+
+Suffixes can be useful to distinguish separate instances of a system. For example, two instances of
+_Rover_ used to display data for two different experiments called _JPROM_ and _LPROM_ might be called
+`rover-jprom` and `rover-lprom`.
 
 ### Stack Tags
 
