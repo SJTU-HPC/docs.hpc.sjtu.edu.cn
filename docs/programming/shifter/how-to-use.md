@@ -109,10 +109,10 @@ RUN cd /build && wget https://www.mpich.org/static/downloads/3.2/mpich-3.2.tar.g
   && tar xvzf mpich-3.2.tar.gz && cd /build/mpich-3.2 \
   && ./configure && make -j4 && make install && make clean && rm /build/mpich-3.2.tar.gz
 
-RUN cd /build && wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-2.0.0.tar.gz \
-  && tar xvzf mpi4py-2.0.0.tar.gz
+RUN cd /build && wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz \
+  && tar xvzf mpi4py-3.0.0.tar.gz
 
-RUN cd /build/mpi4py-2.0.0 && python setup.py build && python setup.py install && rm -rf /build/
+RUN cd /build/mpi4py-3.0.0 && python setup.py build && python setup.py install && rm -rf /build/
 
 RUN /sbin/ldconfig
 ```
