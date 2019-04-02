@@ -37,12 +37,12 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
 |-----------------|-----------|----------------|--------------|-----------|----------|--------|
 | regular         | 9489      | 48             | 5000         | -         | 4        | 90[^6] |
-| interactive[^5] | 64        | 4              | 1            | 1         | -        | 90     |
+| interactive[^4] | 64        | 4              | 1            | 1         | -        | 90     |
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
 | low             | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
 | scavenger[^2]   | 9489      | 48[^8]         | 5000         | -         | 6        | 0      |
-| special[^4]     | custom    | custom         | custom       | custom    | -        | custom |
+| special[^5]     | custom    | custom         | custom       | custom    | -        | custom |
 
 !!! tip
 	Jobs using 1024 or more KNL nodes receive a 40% discount!
@@ -154,4 +154,4 @@ rejected by the batch system.
 	the "regular" QOS, but no extra large job discount applies.
 
 [^8]:
-    For scavenger jobs a `--time-min` of 2hrs or less is required.
+    For scavenger jobs a `--time-min` of 4hrs or less is required.
