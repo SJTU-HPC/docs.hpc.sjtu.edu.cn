@@ -1,124 +1,131 @@
 # Cori for JGI
 
-NERSC is pleased to provide compute capacity on its flagship
-supercomputer, Cori, to JGI users. Burst buffer, Shifter, and all
-other features available to Haswell Cori nodes are available via new
-JGI-specific "quality of service" (QOS).
+A subset of nodes on Cori, the flagship supercomputer at NERSC, are
+reserved for exclusive use by JGI users. The Burst Buffer, Shifter,
+and all other features available on Haswell Cori nodes are available
+by using the JGI-specific "quality of service" (QOS).
 
 ## Access
 
-Access to Cori compute capacity is now available to all JGI users. The
-JGI capacity is now considered to be in production use as of
-January 2018. As this change was only recently made, we are requesting
-that users give us feedback on their experience to help us through
-this learning period.
+All JGI affiliated individuals have access to the JGI reserved fraction
+of Cori compute capacity. This service first became available in
+January 2018. 
 
-JGI staff and Genepool-authorized researchers are provided special
-access to Cori via two different "quality of service" or QOS.
+JGI staff and affiliates are provided special
+access to Cori via a number of "quality of service" or QOS arguments
+which are passed to slurm job submissions.
 
+* All JGI users must specify the Slurm account under which the job
+  will run (with `-A <youraccount>`). Unlike other NERSC users, JGI
+  users do not have a default account.
 * For jobs requiring one or more whole nodes, use `--qos=genepool`.
-* For shared jobs ("slotted" jobs in UGE nomenclature), use
-  `--qos=genepool_shared`.
-* You will also need to specify the Slurm account under which the job
-  will run (with `-A <youraccount>`).
-* Do not request other standard Cori QOS settings (ie debug, premium,
-  etc).
+* For jobs which can share a node with other jobs, use `--qos=genepool_shared`.
+- Each of the following items first require `module load esslurm`:
+	* For large memory batch jobs use `--qos=jgi_exvivo`.
+	* For large memory shared batch jobs use `--qos=jgi_shared`.
+	* For large memory interactive jobs use `--qos=jgi_interactive`.
+	* For transfer jobs which write to the Data and Archive filesystem 
+        use `--qos=xfer_dna`.
 
 !!! note
-	Jobs run under the Cori "genepool" and "genepool_shared" QOS
-	are not charged. Fairshare rules will apply to prevent a single
-	user or project from monopolizing the resource.
+	Jobs run under the Cori "genepool", "genepool_shared",
+        "jgi_exvivo", "jgi_shared", "jgi_interactive", and "xfer_dna" QOS
+	are not charged. Resources are scheduled on a first come
+        first served basis; please be a good citizen to your fellow
+        researchers. Users violating the spirt of this policy
+        will find themselves less able to do so.
 
 !!! note
 	The JGI's Cori capacity is entirely housed on standard
-	Haswell nodes: 64 hyperthreaded cores (32 physical) and 128GB
-	memory. It is not necessary to request Haswell nodes via Slurm
-	(for example, with `-C haswell`). KNL nodes are NOT available via
-	the "genepool" or "genepool_shared" qos. To use KNL nodes, you
-	must submit to one of Cori's standard queues, and use the "m342"
-	account - though be aware that normal Cori job charging will
-	apply.
+	Haswell nodes: 32 physical cores, each core with 2 hyperthreads,
+        no local hard drives, and 128GB	memory. It is not necessary to
+        request `-c Haswell` via Slurm if using a JGI QOS. KNL nodes are
+        NOT available via a JGI QOS. To use KNL nodes, submit to one
+        of Cori's standard QOS (such as `regular`), and use the "m342"
+        account. Be aware that jobs run with "m342" will charge
+        NERSC allocation hours to JGI.
 
 !!! example
-	For a single-slotted job, you would minimally need:
+	For a single core shared job, you would minimally need:
 
 	`sbatch --qos=genepool_shared -A <youraccount> yourscript.sh`
 
-	To request an interactive session on a single node with all CPUs (and thus memory):
+	To request an interactive session on a single node with all CPUs and memory:
 
-	`salloc --qos=genepool -A <youraccount> -N 1 -n 64`
+	`salloc --qos=genepool -A <youraccount>`
 
-Note that 'youraccount' in the above example is the project name you
-submit to, not your login account. So fungalp, gentechp etc. Unlike
-during early access, you should use the same project account that you
-used on Genepool. If you don't know what accounts you belong to, you
-can check with:
+        Don't forget that if the Cori genepool QOS is full, the previous command
+        can take a long time to give you a node.
+
+In the earlier examples, 'youraccount' is the project name you
+submit to, not your username or file group name.  If you don't know what
+accounts you belong to, you can check with:
 
 `sacctmgr show associations where user=$USER`
 
 ## Cori Features and Other Things to Know
 
-Cori offers many additional useful features and capabilities that will
+Cori offers additional features and capabilities that can
 be of use to JGI researchers:
 
 ### Slurm
 
-Unlike Genepool, Cori uses the Slurm job scheduler, which is
-incompatible with UGE. We've prepared a separate page to get you
-started on converting submission scripts and commands to Slurm here,
-and the NERSC webpages on Slurm for Cori are here. Complete SLURM
-documentation is here, and you may also find this cheatsheet useful.
+Cori uses the Slurm job scheduler. Documentation and examples
+for using Slurm at NERSC can be found [here.](../../jobs/index.md) 
 
 The batch queues on Cori and Denovo are not configured
 identically. Cori and Denovo have different capabilities and
-maintenance cycles. If you need to write scripts that know which
+maintenance cycles. If you write scripts that need to know which
 machine they're running on, you can use the $NERSC_HOST environment
-variable to check where you are.
+variable to check the current host.
 
-### Cori scratch
-
+### Cori Scratch
+ 
 Cori scratch is a Lustre filesystem, accessible through Cori and
-Edison, but not on Genepool or Denovo. The \$CSCRATCH environment
-variable will point to your Cori scratch directory. Like
-/projectb/scratch (\$BSCRATCH), Cori scratch is purged periodically,
-so take care to back up your files. You can find information on how to
-do that on the HPSS Data Archive page.
+Cori ExVivo, but not Denovo. This directory can be found at
+`/global/cscratch1/sd/$USER` or by using the \$CSCRATCH environment
+variable. Like `/global/projectb/scratch` (\$BSCRATCH), Cori scratch is
+purged periodically; backing up data stored there is your responsibility.
+The [HPSS Tape Data Archive](../../filesystems/archive.md) can be
+used for for this purpose, or the JGI JAMO system. See
+[the NERSC Data Management Policy](../../data/policy.md) for more
+information on topics such as automatic file backups and 
+scratch directory purge frequency. 
 
-\$BSCRATCH is also mounted on Cori and Edison, so you can use that if
-you need to see your files on all machines.
+\$BSCRATCH is also mounted on Cori, Cori genepool, and Cori ExVivo.
+This is useful for a workload needing to see files from all machines.
 
 !!! note
-	The performance of the different filesystems may vary,
-	depending partly on what your application is doing. It's worth
+	The performance of the different filesystems will vary
+	depending significantly on what your application is doing. It's worth
 	experimenting with your data in different locations to see what
 	gives the best results.
 
 ### Burst Buffer
 
 The Burst buffer is a fast filesystem optimized for applications
-demanding high I/O. The Burst Buffer is particularly suitable for
-applications that perform lots of random-access I/O, or that read
-files more than once.
+demanding large amounts of I/O bandwidth and operations. This system 
+is particularly suitable for applications that perform lots of
+random-access, or that read files more than once.
 
-To access the Burst Buffer you need to add directives to your batch
-job to make a reservation. A reservation can be dynamic or
-persistent. A dynamic reservation lasts only as long as the job that
-requested it, the disk space is reclaimed once the job ends. A
-persistent reservation outlives the job that created it, and can be
-shared among many jobs.
+To use the Burst Buffer add directives to your batch
+job to either scheduling staging in/out of data or to make a
+persistent reservation. The dynamic reservation lasts only as long
+as the job that requested it and the disk space is reclaimed once
+the job ends. A persistent reservation outlives the job that created it,
+and can be accessed by multiple jobs.
 
 Use dynamic reservations for checkpoint files, for files that will be
 accessed randomly (i.e. not read through in a streaming manner) or
 just for local scratch space. Cori batch nodes don't have local disk,
-unlike the Genepool batch nodes, so a dynamic reservation serves that
-role well.
+so a dynamic reservation can serve that role.
 
 Use persistent reservations to store data that is shared between jobs
-and heavily used, e.g. reference DBs or similar data. The data on a
+and heavily used such as reference databases. The data on a
 persistent reservation is stored with normal unix filesystem
 permissions, and anyone can mount your persistent reservation in their
 batch job, so you can use them to share heavily used data among
-workflows belonging to a group, not just for your own private work.
+workflows belonging to a group.
 
 You can access multiple persistent reservations in a single batch job,
 but any batch job can have only one dynamic reservation.
@@ -153,9 +160,10 @@ reservations are removed.
 	/var/opt/cray/dws/mounts/registrations/24301  242G   99M  242G   1% /var/opt/cray/dws/mounts/batch/6501112_striped_scratch
 	```
 
-More information on getting started with Burst Buffer is here. There
-are slides from a training session on the Burst Buffer on the Genepool
-training page.
+More information on getting started with Burst Buffer can be found
+[here](../../filesystems/cori-burst-buffer.md). There
+are slides from a training session on the Burst Buffer on the
+[JGI training page](training.md).
 
 ## JGI Partition configuration
 
