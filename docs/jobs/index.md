@@ -137,7 +137,8 @@ is a custom script provided by NERSC which incorportates information
 from serveral sources.
 
 !!! note
-	See `man sqs` for details about all available options.
+    See `man sqs` for details about all available options, and
+    `man squeue` for information about job state and reason codes.
 
 ```
 nersc$ sqs

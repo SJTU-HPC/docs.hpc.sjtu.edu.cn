@@ -13,8 +13,8 @@ local-disk like functionality and IO performance.  Shifter
 functionality at NERSC is undergoing rapid development and is an
 experimental service. Usage will change over time, we will do our best
 to keep the documentation up to date, but there may be
-inconsistencies.  Currently, Shifter images can only be accessed via
-the batch system on Edison and Cori and are visible to all users.
+inconsistencies.  Shifter can be used interacitvely on logins nodes
+or in a batch job.
 
 ## Building Shifter Images
 
@@ -109,10 +109,10 @@ RUN cd /build && wget https://www.mpich.org/static/downloads/3.2/mpich-3.2.tar.g
   && tar xvzf mpich-3.2.tar.gz && cd /build/mpich-3.2 \
   && ./configure && make -j4 && make install && make clean && rm /build/mpich-3.2.tar.gz
 
-RUN cd /build && wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-2.0.0.tar.gz \
-  && tar xvzf mpi4py-2.0.0.tar.gz
+RUN cd /build && wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz \
+  && tar xvzf mpi4py-3.0.0.tar.gz
 
-RUN cd /build/mpi4py-2.0.0 && python setup.py build && python setup.py install && rm -rf /build/
+RUN cd /build/mpi4py-3.0.0 && python setup.py build && python setup.py install && rm -rf /build/
 
 RUN /sbin/ldconfig
 ```
@@ -145,10 +145,20 @@ To see a list of all available images, type:
 shifterimg images
 ```
 
-In the future, pulling Shifter images from private repositories or
-sources other than Docker will be enabled. If you have a specific need
-for this now, please
-see our [support page](https://help.nersc.gov).
+Shiter can also be used to pull private images.  To do this you need
+to first do a login with shifterimg (similar to a docker login).  During
+the image pull, you can specify which users or groups should have
+access to the pulled image.
+
+```Shell
+shifterimg login
+default username: auser
+default password:
+
+shifterimg --user buser  pull auser/private:latest
+2019-03-21T21:36:05 Pulling Image: docker:auser/private:latest, status: READY
+
+```
 
 ## Shifter Modules
 

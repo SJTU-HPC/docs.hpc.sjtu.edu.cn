@@ -133,9 +133,9 @@ it could be because of a conda-installed `mpi4py`.
 You can build `mpi4py` and install it into a conda environment on Cori
 using a recipe like the following:
 
-    wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-2.0.0.tar.gz
-    tar zxvf mpi4py-2.0.0.tar.gz
-    cd mpi4py-2.0.0
+    wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz
+    tar zxvf mpi4py-3.0.0.tar.gz
+    cd mpi4py-3.0.0
     module swap PrgEnv-intel PrgEnv-gnu
     python setup.py build --mpicc=$(which cc)
     python setup.py build_exe --mpicc="$(which cc) -dynamic"
