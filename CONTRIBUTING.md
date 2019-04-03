@@ -106,6 +106,12 @@ Work with a branch of the main repo.
     ```
 
 5.  Check if the continuous integration of your changes was successful
+    
+    * It is possible the GitLab shared runners will fail for an opaque 
+      reason (e.g. issues with the cloud provider where they are hosted).
+      Hitting the "Retry" button for specific stages in the
+      pipeline in the GitLab.com GUI may resolve this in some cases.
+
 6.  Submit a merge request to the master branch with your changes
 
 #### Option 2
