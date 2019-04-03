@@ -10,7 +10,8 @@ Access to Cori ExVivo is available to all JGI users as of February 6th
 2019. To use Cori ExVivo, first connect to `cori.nersc.gov`, load 
 the `esslurm` module, and request a Slurm allocation. That request
 command should include an `-A` argument with your project name,
-`-C skylake`, and specify QoS `jgi_exvivo` or `jgi_interactive`.
+`-C skylake`, and specify QoS `jgi_exvivo`, `jgi_shared`, or
+`jgi_interactive`.
 
 !!! example
 	```
@@ -20,14 +21,14 @@ command should include an `-A` argument with your project name,
 * `jgi_exvivo` is intended for production use by applications and data
 sets which cannot be run on Cori Genepool due to large RAM requirements.
 The maximum walltime for an allocation is 7 days.
-* `jgi_interactive` is intended for exploration and development. Four
-nodes are reserved for this QoS. The maximum wall time is 4 hours.
-* Additional QoS options are planned for the future.
+* `jgi_interactive` is intended for exploration and development. At most
+4 nodes can be allocated to this QoS. The maximum wall time is 4 hours.
+* `jgi_shared` is intended for jobs which require more than 128GB RAM 
+  but less than 768GB. Use `-c` and `--mem=###GB` arguments in the Slurm
+  invocation to request the needed resources. 
 
 !!! note
-	All allocations scheduled on ExVivo are for exactly one node.
-	MPI and multi-node allocations will not be supported. Shared
-        allocations are planned for the future.
+	Multi-node allocations will not be supported on ExVivo.
 
 ## Resources
 
@@ -53,8 +54,9 @@ The following filesystems are available on ExVivo:
 
 * projectb
 
+* Cori Scratch
+
 * seqfs
 
 * Data and Archive (read only access)
 
-* Cori Scratch (read only access, write will be available soon)

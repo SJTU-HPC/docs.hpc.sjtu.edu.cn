@@ -22,7 +22,7 @@ other platforms.
 
 Shifter is Docker-like software for running containers on NERSC
 systems. More information on Shifter is available
-[here](../../development/shifter/how-to-use/), and Shifter
+[here](../../programming/shifter/how-to-use.md), and Shifter
 training slides are also available. The main advantages of using
 Shifter are:
 

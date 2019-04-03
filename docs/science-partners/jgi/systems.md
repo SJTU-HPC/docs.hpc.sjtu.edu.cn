@@ -19,30 +19,31 @@ There are several SSH-capable clients available for Windows, Mac, and
 UNIX/Linux machines. NERSC does not support or recommend any
 particular client.
 
-The login nodes are situated behind a load balancer, so you may
-reach a different login node on different days.  If you make use of a
-tool like **screen** or **tmux**, make sure to take note of which
-login node you started it on.
+!!! note
+	 The login nodes are situated behind a load balancer, so you may
+	 be connected to different login nodes at different times.  If you
+	 make use of a tool like **screen** or **tmux**, note
+	 which login node your sessions are on, and after initially
+	 logging on to Cori you can **ssh** to a specific login node.
+	 
 
-To begin running jobs on Cori or Denovo, you should begin learning
-about the Slurm batch scheduler system, and look at
-the [example batch scripts](../../jobs/examples/index.md) before submitting
-your first job.
+Computational systems hosted at NERSC use the Slurm batch scheduler system.
+Documentation and instructions for using Slurm can be found [here.](../../jobs/index.md)
 
 ## [Cori Genepool](cori-genepool.md)
 
-NERSC is pleased to provide compute capacity on its flagship
-supercomputer, Cori, to JGI users. The Burst Buffer, Shifter, and all
-other features available to Haswell Cori nodes are available via the
-JGI-specific "quality of service" (QOS).
-
+A subset of nodes on Cori, the flagship supercomputer at NERSC, are reserved
+for exclusive use by JGI by using JGI-specific "quality of service" (QOS) 
+submissions. Full functionality of Cori is also available to JGI users such as
+the Burst Buffer, Shifter, and more.
+ 
 ## [Denovo](denovo.md)
 
-Denovo is the name of the system available exclusively to JGI users on the
-NERSC Mendel cluster. **It is scheduled for retirement in July 2019.**
+The Denovo system is exclusively available to JGI users.
+**It is scheduled for retirement in July 2019.**
 
 !!! warning "Deprecation"
      Although we provide documentation
      on usage of Denovo we **highly** recommend that most of your work be done
-     on Cori genepool (the QOS dedicated for JGI workloads).
+     on Cori genepool (the QOS dedicated for JGI workloads) or Cori ExVivo.
 
