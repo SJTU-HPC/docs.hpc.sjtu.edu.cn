@@ -202,7 +202,7 @@ optionally followed by a hyphen and a descriptive suffix:
 
 For example, a system made up of an nginx front-end, a Django application
 server, a MySQL database, and a Redis key-value store might have services named
-web-nginx`, `app-django`, `db-mysql`, and `kv-redis`.
+`web-nginx`, `app-django`, `db-mysql`, and `kv-redis`.
 
 The descriptive suffix can also be used to indicate the application-specific
 purpose of a service. For example, a system made up of an Apache front-end, a
