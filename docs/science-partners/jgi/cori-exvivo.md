@@ -24,7 +24,7 @@ The maximum walltime for an allocation is 7 days.
 * `jgi_interactive` is intended for exploration and development. At most
 4 nodes can be allocated to this QoS. The maximum wall time is 4 hours.
 * `jgi_shared` is intended for jobs which require more than 128GB RAM 
-  but less than 768GB. Use `-c` and `--mem=###GB` arguments in the slurm
+  but less than 768GB. Use `-c` and `--mem=###GB` arguments in the Slurm
   invocation to request the needed resources. 
 
 !!! note

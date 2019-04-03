@@ -33,10 +33,10 @@ Documentation and instructions for using Slurm can be found [here.](../../jobs/i
 ## [Cori Genepool](cori-genepool.md)
 
 A subset of nodes on Cori, the flagship supercomputer at NERSC, are reserved
-for exclusive use by JGI users. The Burst Buffer, Shifter, and all
-other features available on Haswell Cori nodes are available by using the
-JGI-specific "quality of service" (QOS).
-
+for exclusive use by JGI by using JGI-specific "quality of service" (QOS) 
+submissions. Full functionality of Cori is also available to JGI users such as
+the Burst Buffer, Shifter, and more.
+ 
 ## [Denovo](denovo.md)
 
 The Denovo system is exclusively available to JGI users.

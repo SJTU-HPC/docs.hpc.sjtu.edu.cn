@@ -57,22 +57,25 @@ The projectb filesystem is available on most NERSC systems.
 |Backups|Not backed up|Not backed up|Backed up|
 |File Purging|Files not accessed for 90 days are automatically deleted|no purge|no purge|
 
-projectb "Scratch" and "Sandbox" space is intended for staging and
-running JGI calculations on the NERSC systems. On Denovo, the projectb
-scratch space is the recommended filesystem for performing file IO
-during all your applications. The environment variable \$BSCRATCH points
-to the user's projectb scratch space. If you don't,
-please [file a Consulting ticket](https://help.nersc.gov).
+The projectb "Scratch" space is intended for staging and
+running JGI calculations by individual users of NERSC systems. Projectb
+scratch space is the recommended filesystem for application working
+directories and intermediate files when running on Denovo.
+The environment variable \$BSCRATCH points to a user's projectb scratch space.
+These scratch directories are not automatically granted to new users; to request
+space please [file a Consulting ticket](https://help.nersc.gov) asking for 
+an intial projectb scratch allocation.
 
-The Sandbox areas are allocated by program.  If you have questions
+Sandbox directories on projectb are allocated by program. Data and software
+stored in projectb sandbox is not subject to purging.  If you have questions
 about your program's space, please see your group lead. New Sandbox
-space must be allocated with JGI management approval.
+space or quota increase requests must be approved by JGI management.
 
-The projectB software allocations are intended for storage of
+The projectb software allocations are intended for storage of
 Conda environments, source code, and binaries being used by individual
-groups at JGI. At very large production scale, projectB performance,
-may degrade; consider moving such software to "/usr/common/software"
-or the Data and Archive filesystem.
+groups at JGI. At very large production scale, projectb performance,
+may degrade; consider moving such software to "/usr/common/software", 
+the Data and Archive filesystem, or a Shifter container.
 
 ### DnA (Data n' Archive)
 

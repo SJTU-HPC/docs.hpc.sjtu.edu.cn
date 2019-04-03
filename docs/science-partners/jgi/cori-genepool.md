@@ -2,18 +2,18 @@
 
 A subset of nodes on Cori, the flagship supercomputer at NERSC, are
 reserved for exclusive use by JGI users. The Burst Buffer, Shifter,
-and all other features available on Haswell Cori nodes are available
+and all other features available on Cori Haswell nodes are available
 by using the JGI-specific "quality of service" (QOS).
 
 ## Access
 
-All JGI affiliated individuals have access to the JGI reserved fraction
+All JGI staff and collaborators have access to the JGI reserved fraction
 of Cori compute capacity. This service first became available in
 January 2018. 
 
 JGI staff and affiliates are provided special
 access to Cori via a number of "quality of service" or QOS arguments
-which are passed to slurm job submissions.
+which are passed to Slurm job submissions.
 
 * All JGI users must specify the Slurm account under which the job
   will run (with `-A <youraccount>`). Unlike other NERSC users, JGI
@@ -32,7 +32,7 @@ which are passed to slurm job submissions.
         "jgi_exvivo", "jgi_shared", "jgi_interactive", and "xfer_dna" QOS
 	are not charged. Resources are scheduled on a first come
         first served basis; please be a good citizen to your fellow
-        researchers. Users violating the spirt of this policy
+        researchers. Users violating the spirit of this policy
         will find themselves less able to do so.
 
 !!! note
@@ -86,8 +86,8 @@ Cori ExVivo, but not Denovo. This directory can be found at
 `/global/cscratch1/sd/$USER` or by using the \$CSCRATCH environment
 variable. Like `/global/projectb/scratch` (\$BSCRATCH), Cori scratch is
 purged periodically; backing up data stored there is your responsibility.
-The [HPSS Tape Data Archive](../../filesystems/archive.md) can be
-used for for this purpose, or the JGI JAMO system. See
+The [HPSS Tape Data Archive](../../filesystems/archive.md) or JGI JAMO 
+system can be used for for this purpose. See
 [the NERSC Data Management Policy](../../data/policy.md) for more
 information on topics such as automatic file backups and 
 scratch directory purge frequency. 
@@ -109,7 +109,7 @@ is particularly suitable for applications that perform lots of
 random-access, or that read files more than once.
 
 To use the Burst Buffer add directives to your batch
-job to either scheduling staging in/out of data or to make a
+job to either schedule staging in/out of data or to make a
 persistent reservation. The dynamic reservation lasts only as long
 as the job that requested it and the disk space is reclaimed once
 the job ends. A persistent reservation outlives the job that created it,
