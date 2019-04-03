@@ -200,14 +200,15 @@ optionally followed by a hyphen and a descriptive suffix:
   | util  | utility container  |
   | web   | web server         |
 
-For example, a service that uses an nginx front-end, a Django application server, a MySQL
-database, and a Redis key-value store might have services named web-nginx, app-django, db-mysql,
-and kv-redis.
+For example, a system made up of an nginx front-end, a Django application
+server, a MySQL database, and a Redis key-value store might have services named
+web-nginx`, `app-django`, `db-mysql`, and `kv-redis`.
 
-The descriptive suffix can also be used to indicate the application-specific purpose of the
-service. For example, a service that uses an Apache front-end, a Django application server for
-primary logic, and a custom image server might have services named web, app-primary and
-app-images.
+The descriptive suffix can also be used to indicate the application-specific
+purpose of a service. For example, a system made up of an Apache front-end, a
+Python Flask-based application server for primary logic, and a custom image
+server might have services named `web` (a suffic isn't particularly description
+in this case), `app-primary` and `app-images`.
 
 Some additional notes on service naming:
 
@@ -218,18 +219,22 @@ service created in the past, and when enlisting the help of NERSC staff during t
 
 ## Stacks
 
-The collection of services that comprise an application within Rancher is termed a ‘Stack’.
+The collection of services that comprise an application within Rancher is termed
+a ‘Stack’.
 
 ### Naming Convention for Stacks
 
-Stacks should be named after the software systems they contain, considering the aggregate function
-of all services. For example, if a stack contains a web front-end, application server, and database
-for a science gateway commonly known as _Rover_, then the stack could simply be called `rover`.
-The services within the `rover` stack should have descriptive names based on their individual function.
+Stacks should be named after the software systems they represent, considering
+the aggregate function of all the services they contain. For example, for a
+fictional science gateway system known as _Rover_ made up of a web front-end,
+application server, and database, a stack in Spin could simply be called
+`rover`. The services within the `rover` stack should have descriptive names
+based on their individual function.
 
-Suffixes can be useful to distinguish separate instances of a system. For example, two instances of
-_Rover_ used to display data for two different experiments called _JPROM_ and _LPROM_ might be called
-`rover-jprom` and `rover-lprom`.
+Suffixes can be useful to distinguish separate instances of a system. For
+example, two instances of _Rover_ used to display data for two different
+experiments called _JPROM_ and _LPROM_ might be called `rover-jprom` and
+`rover-lprom`.
 
 ### Stack Tags
 
