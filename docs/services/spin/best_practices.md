@@ -207,7 +207,7 @@ server, a MySQL database, and a Redis key-value store might have services named
 The descriptive suffix can also be used to indicate the application-specific
 purpose of a service. For example, a system made up of an Apache front-end, a
 Python Flask-based application server for primary logic, and a custom image
-server might have services named `web` (a suffic isn't particularly description
+server might have services named `web` (a suffix isn't particularly descriptive
 in this case), `app-primary` and `app-images`.
 
 Some additional notes on service naming:
