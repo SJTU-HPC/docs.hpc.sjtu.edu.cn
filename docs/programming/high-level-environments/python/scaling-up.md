@@ -1,4 +1,3 @@
-
 # Scaling Up
 
 Many scientists appreciate Python's power for prototyping and developing scientific computing and data-intensive applications.
@@ -45,8 +44,7 @@ Using Shifter results in tremendous speed-ups for launching Python applications.
 
 There are a few other interventions that we are aware of that can help users scale their Python applications at NERSC.
 One is to bundle up Python and the dependency stack and broadcast it to the compute nodes where it is placed into /dev/shm.
-This has been implemented in the python-mpi-bcast library, developed at BIDS by Yu Feng.
-Detailed instructions for using python-mpi-bcast at NERSC are available here.
+This has been described [here.](https://github.com/rainwoodman/python-mpi-bcast).
 
 ## Combining MPI4PY and Subprocess
 
