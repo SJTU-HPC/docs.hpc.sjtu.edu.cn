@@ -191,6 +191,6 @@ Yes.  See the
 instructions
 [here.](../../../services/jupyter.md#custom-kernels-using-shifter-containers)
 
-## Coming Soon
-
-How can I profile my Python code's performance?
+## How can I profile my Python code's performance?
+Check out this page dedicated to both generic Python profiling and Python
+profiling on Cori [here.](../profiling-python)
