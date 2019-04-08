@@ -138,3 +138,37 @@ to enable "Remote Resize" in the NX menu:
 
 This is due to a problem with font server. Please use the following
 command instead: `emacs -font 7x14`
+
+#### Customize your NX termimal
+
+If you dislike the default NX terminal color scheme (white background, dark
+text), you can open a terminal from the `Show Applications` menu at the bottom
+of the menu bar on the left hand size of the screen (it looks like 9 dots).
+Once you have opened your terminal, click `Edit` --> `Preferences`. If you
+click the `Colors` menu at the top of the window, you can uncheck the `Use
+colors from system theme` box. You can then choose the color of the background
+and text you prefer.
+
+If you like to make adjustments from the command line, open a
+terminal/konsole from the `Show Applications` menu and enter:
+```
+dconf write /org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/use-theme-colors false
+```
+
+This should permanately adjust your terminal color settings to use a
+dark background with light text.
+
+#### How to adjust keyboard language
+
+To change your keyboard language from the default (US English), click the `Show
+Applications` menu at the bottom of the menu bar on the left hand side of the
+screen (it looks like 9 dots). Then click the `Settings` icon --> `Region and
+Language`. Under `Input Sources`, click the plus arrow on the bottom left hand
+side. This should open a list of additional options (for example: `Spanish
+(Spain)`). Under this menu will be another, more detailed submenu with options
+such as `Spanish (Macintosh)`. Choose your option and click the `Add` button on
+the upper right hand side. Then under input sources, make sure your new option
+is highlighted. You can click the keyboard icon on the bottom right to see how
+the keys in your new configuration are arranged.
+
+
