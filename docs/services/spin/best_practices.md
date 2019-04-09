@@ -191,14 +191,15 @@ One or more identical containers providing the same function in Rancher is terme
 Common services should use an appropriate name from the following table of allowed service names,
 optionally followed by a hyphen and a descriptive suffix:
 
-  | Name  | Description        |
-  |-------|--------------------|
-  | app   | application server |
-  | db    | database           |
-  | kv    | key-value store    |
-  | lb    | load balancer      |
-  | util  | utility container  |
-  | web   | web server         |
+  | Name  | Description                  |
+  |-------|------------------------------|
+  | api   | API server                   |
+  | app   | application server (backend) |
+  | db    | database                     |
+  | kv    | key-value store              |
+  | lb    | load balancer                |
+  | util  | utility service              |
+  | web   | web server                   |
 
 For example, a system made up of an nginx front-end, a Django application
 server, a MySQL database, and a Redis key-value store might have services named
