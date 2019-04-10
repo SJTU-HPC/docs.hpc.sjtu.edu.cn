@@ -91,11 +91,28 @@ If you are having trouble connecting to NX, please try these steps:
    must have the new NX player AND the new configuration file to
    connect to the NX service.
 3. Try to ssh directly to the NX server. You can do this with the
-   command `ssh <nersc_username>@nxcloud01.nersc.gov` and your NERSC
+   command
+   ```
+   ssh <nersc_username>@nxcloud01.nersc.gov
+   ```
+   and your NERSC
    user name and password+one-time MFA password (with no spaces in
    between). If your access to the NX server is blocked by a local
    firewall or something else and you can't connect via ssh, you will
-   also not be able to connect with the NX client.
+   also not be able to connect with the NX client. If this is the case,
+   please contact your local IT department.
+4. If you can ssh directly to the NX server but still cannot log in via the NX
+   client, you can try editing one of the NX config files on your
+   local machine:
+   ```
+   cd $HOME/.nx/config
+   vi player.cfg
+   ```
+   and change the following key from ``library`` to ``native``:
+   ```
+   <option key="SSH client mode" value="native" />
+   ```
+   Once you have changed this key, try logging in again.
 
 If you've tried these steps and still cannot connect, please open a
 help ticket. In this ticket, please include the following information:
