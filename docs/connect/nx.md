@@ -13,27 +13,34 @@ NX provides functionality that allow a user to disconnect from the session
 and reconnect to it at a later time while keeping the state of all
 running applications inside the session.
 
-## Installing
+!!! caution
+    Using NX requires both a recent NoMachine client and a recent connection file (specific
+    to accessing NERSC). Please make sure you have recently updated versions
+    of both of these.
 
-### Download latest NX Client
+## Installing the NoMachine Client
+
+### Download latest NoMachine Client
 #### Windows ([Download](https://www.nomachine.com/download/download&id=16))
 #### Mac OS ([Download](https://www.nomachine.com/download/download&id=15))
 #### DEB Package for Debian/Ubuntu: ([Download](https://www.nomachine.com/download/download&id=10))
 #### RPM Package for Centos/Redhat/Fedora ([Download](https://www.nomachine.com/download/download&id=11))
 
-## Configuring and Connecting
+## Installing the Configuration File
 
-The NX Client requires a one-time configuration to set it up to
-connect to the NERSC NX service. After that you can connect to the NX
-service via the NX Client or by pointing your browser at
-[nxcloud01](https://nxcloud01.nersc.gov).
+Download the most recent configuration file:
+[NX configuration file](https://portal.nersc.gov/project/mpccc/nx/Connection_to_NERSC_NX_service.nxs.gz)
 
-!!! note
-    The browser interface is still experimental and can sometimes
-    be slower than connecting via the client.
+This is a compressed file, so you will need to extract/unzip it. Once you have
+done this, you need to click on this file so the NoMachine client can be
+configured. It will automatically open the NoMachine client when it does this.
+To return to the main menu, you can close the client and re-open it. You will
+need the main menu for the next steps of the connection process.
 
+Depending on whether you are using the NERSC [sshproxy](https://www.nersc.gov/users/connecting-to-nersc/mfa/)
+service, we have two different sets of connection instructions below.
 
-### Connecting with MFA via sshproxy
+## Creating a connection to NERSC WITH sshproxy
 
 If you don't wish to re-authenticate with your password and a new
 one-time password every time the NX Client is disconnected (e.g. if
@@ -42,33 +49,51 @@ sshproxy. You will need to regenerate the ssh key with sshproxy once a
 day, but otherwise the NX Client will automatically reconnect.
 
 1. Install sshproxy on your laptop and generate an SSH key
-(instructions are
-[here](https://www.nersc.gov/users/connecting-to-nersc/mfa/#toc-anchor-3)).
-Note that you must do this once every day to generate a new key.
+   (instructions are
+   [here](https://www.nersc.gov/users/connecting-to-nersc/mfa/#toc-anchor-3)).
+   Note that you must do this once every day to generate a new key.
 2. Open the NX client and click the "New" box in the upper right
-corner of the menu.
+   corner of the menu.
 3. Choose "SSH" for protocol and click Continue.
 4. Type in "nxcloud01.nersc.gov" for Host (leave the port set to 22)
-and click Continue.
+   and click Continue.
 5. Choose "Private Key: use key-based authentication with a key you
-provide" and click Continue. DO NOT check import private key or forward
-authentication.
+   provide" and click Continue. DO NOT check import private key or forward
+   authentication.
 6. Fill in the path to the ssh key you generated in step 1 (usually
-~/.ssh/nersc) and click Continue. Note that you may need to specify the full
-path to your ssh key rather than using the tilde (~).
+   ~/.ssh/nersc) and click Continue. Note that you may need to specify the full
+   path to your ssh key rather than using the tilde (~).
 7. Select "Don't use a proxy" and click Continue.
 8. Choose the name you'd like to call this connection and click done. To make
-reconnecting easier you may elect to create a desktop icon ("Name of your
-connection.nxs") which will automatically load your NERSC connection settings.
-If you do not create a desktop icon, you can just click the NoMachine icon and
-then select the name of your connection.
+   reconnecting easier you may elect to create a desktop icon ("Name of your
+   connection.nxs") which will automatically load your NERSC connection settings.
+   If you do not create a desktop icon, you can just click the NoMachine icon and
+   then select the name of your connection.
+9. To log on to NERSC NX, click on the connection you just created. You should
+   not need to enter your username or password. At this point you should now be
+   logged onto the NX desktop.
 
-To configure without using sshproxy, choose "Password" for step 5
-(which skips step 6), otherwise all other steps are the same. Please
-note that choosing this option will mean you will need to
-reauthenticate every time the NX Client is disconnected. You will need
-to enter your NERSC password plus the one time numerical password for
-MFA into the "Password" field with no spaces between them.
+## Creating a connection to NERSC WITHOUT sshproxy
+
+If you would prefer not to use the sshproxy service, you can still
+connect to NX. You will need to enter your password + OTP (no spaces
+in between) every time you log on to NX.
+
+1. Open the NX client and click the "New" box in the upper right
+   corner of the menu.
+2. Choose "SSH" for protocol and click Continue.
+3. Type in "nxcloud01.nersc.gov" for Host (leave the port set to 22)
+   and click Continue.
+4. Choose "Password" for password+OTP authentication.
+5. Select "Don't use a proxy" and click Continue.
+6. Choose the name you'd like to call this connection and click done. To make
+   reconnecting easier you may elect to create a desktop icon ("Name of your
+   connection.nxs") which will automatically load your NERSC connection settings.
+   If you do not create a desktop icon, you can just click the NoMachine icon and
+   then select the name of your connection.
+7. To log on to NERSC NX, click on the connection you just created. You will need
+   to enter your username and password+OTP. At this point you should now be
+   logged onto the NX desktop.
 
 ## Troubleshooting
 
@@ -111,6 +136,7 @@ If you are having trouble connecting to NX, please try these steps:
    and change the following key from ``library`` to ``native``:
    ```
    <option key="SSH client mode" value="native" />
+
    ```
    Once you have changed this key, try logging in again.
 
@@ -123,6 +149,14 @@ help ticket. In this ticket, please include the following information:
 1. A tarball of the NX logs. You can find instructions for how to
    bundle your NX logs on
    the [NoMachine website](https://www.nomachine.com/DT07M00098).
+
+## Connecting via the Broswer Interface
+
+Point your browser at [nxcloud01](https://nxcloud01.nersc.gov).
+
+!!! note
+    The browser interface is still experimental and can sometimes
+    be slower than connecting via the client.
 
 ### Configuring the NX Environment
 
