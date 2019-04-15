@@ -26,24 +26,23 @@ More information on naming conventions for Services, Stacks, Secrets & Volumes, 
 
 ### Stack Names
 
-**Stacks** should be named to match to non-TLD components of public-facing name (eg
-foo-jgi-doe for foo.jgi.doe.gov and bar-nersc for bar.nersc.gov)
+Stacks should be named after the software systems they represent, considering
+the aggregate function of all the services they contain. 
 
 ### Service Names
 
-Common services should use a name from the following table of recommended names:
+Services must use one of the following names, optionally followed by a hyphen
+and a descriptive suffix:
 
-| Name | Description        |
-|------|--------------------|
-| app  | Application server |
-| db   | Database           |
-| lb   | Load Balancer      |
-| web  | Web Server         |
-| kv   | Key Value store    |
-
-Unique services should use a descriptive name for the service they provide. It
-should be a general description of the functionality, rather than the specific
-name of the implementation (e.g. web rather than apache)
+  | Name  | Description                  |
+  |-------|------------------------------|
+  | api   | API server                   |
+  | app   | application server (backend) |
+  | db    | database                     |
+  | kv    | key-value store              |
+  | lb    | load balancer                |
+  | util  | utility service              |
+  | web   | web server                   |
 
 ### Image Names
 
