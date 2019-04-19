@@ -21,24 +21,25 @@ nersc$ module avail wannier90
 See the [example jobs page](../../jobs/examples/index.md) for additional
 examples and information about jobs.
 
-### Edison
+### Cori Haswell
 
 ```
 #!/bin/bash
+#SBATCH --constraint=haswell
 #SBATCH --qos=regular
 #SBATCH --time=01:00:00
-#SBATCH --nodes=2
-#SBATCH --ntasks-per-node=24
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=32
 #SBATCH --cpus-per-task=2
 
+export OMP_NUM_THREADS=1
 module load wannier90
-srun -n 24 wannier90.x >& test.log
+srun wannier90.x
 ```
 
 ## Support
 
-*  [Forum](http://www.wannier.org/forum.html)
-*  [Documentation](http://www.wannier.org/user_guide.html)
+*  [Documentation and Form](http://www.wannier.org/support)
 
 !!! tip
 	If after consulting with the above you believe there is an issue
