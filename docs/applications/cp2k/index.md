@@ -30,6 +30,13 @@ module load cp2k/6.1
 srun --cpu-bind=cores cp2k.popt -i example.inp
 ```
 
+## Performance
+
+Performance of cp2k can vary depending on the system size and run type. The 
+multinode scaling performance of the code depends on the amount of work (or 
+number of atoms) per MPI rank. It is recommended to try a representative 
+test case on different number of nodes to see what gives the best performance.
+
 ## Support
 
 *  [Reference Manual](https://manual.cp2k.org/)
