@@ -41,7 +41,8 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
 | low             | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
-| scavenger[^2]   | 9489      | 48[^8]         | 5000         | -         | 6        | 0      |
+| flex   |          256       | 12             | 5000         | -         | 6        | 0[^8]  | 
+| scavenger[^2]   | 9489      | 48             | 5000         | -         | 7        | 0      |
 | special[^5]     | custom    | custom         | custom       | custom    | -        | custom |
 
 !!! tip
@@ -88,19 +89,47 @@ Jobs are charged by the node-hour.
 The "debug" QOS is to be used for code development, testing, and
 debugging. Production runs are not permitted in the debug QOS. User
 accounts are subject to suspension if they are determined to be using
-the debug QOS for production computing. In particular, job "chaining"
+the debug QOS for production computing. In particular, job `chaining`
 in the debug QOS is not allowed. Chaining is defined as using a batch
 script to submit another batch script.
 
+### Interactive
+The "interactive" QOS is to be used for code development, testing, and
+debugging in an interactive batch session.  Jobs should be submitted
+via 'salloc -q interactive' along with other salloc flags (such as 
+number of nodes, node feature, and walltime request, etc.).
+
 ### Premium
 
-The intent of the premium QOS is to allow for faster turnaround before
+The intent of the "premium" QOS is to allow for faster turnaround before
 conferences and urgent project deadlines. It should be used with care.
 
 ### Low
 
-The intent of the low QOS is to allow non-urgent jobs to run with a 
+The intent of the "low" QOS is to allow non-urgent jobs to run with a 
 lower usage charge.
+
+### Flex
+
+The intent of the “flex" QOS is for user jobs that can produce useful work with a relatively short amount of run time before terminating. For example, jobs that are capable of checkpointing and restarting where they left off may be able to use the flex QOS. Note that this QOS is available on Cori KNL only.
+
+Benefits to using the flex QOS include: The ability to improve your throughput 
+by submitting jobs that can fit into the cracks in the job schedule; A discount 
+in charging for your job. 
+
+You can access the flex queue by submitting with `-q flex`. Notice this is only 
+available on Cori KNL.  In addition, 
+you must specify a minimum running time for this job of 2 hours or less with 
+the `--time-min` flag. This means that the job could potentially be interrupted 
+by a higher priority job after the minimum time has elapsed.  Jobs submitted 
+without this flag will be automatically rejected by the batch system. The max 
+wall time request limit (requested via `--time` or `-t` flag) for flex jobs 
+must be greater than 2 hours and not exceed 12 hours.
+
+!!! example
+        A flex job requesting a minimum time of 1.5 hours, and max wall time of
+        10 hrs:
+	`sbatch -q flex --time-min=01:30:00 --time=10:00:00 my_batch_script.sl`
 
 ### Scavenger
 
@@ -131,7 +160,8 @@ rejected by the batch system.
 [^2]:
 	The "scavenger" QOS is *only* available when running a job would
     cause the *repository* (not only the user's allowed fraction)
-    balance to go negative.
+    balance to go negative.  For scavenger jobs a `--time-min` of 
+    4hrs or less is required.
 
 [^3]:
 	The "realtime" QOS is only available via
@@ -154,4 +184,5 @@ rejected by the batch system.
 	the "regular" QOS, but no extra large job discount applies.
 
 [^8]:
-    For scavenger jobs a `--time-min` of 4hrs or less is required.
+    The current charging rate for flex is 0 (subject to change).
+
