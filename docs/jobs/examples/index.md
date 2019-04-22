@@ -337,19 +337,44 @@ than 48 hours, the maximum wall-clock time allowed on Cori and
 Edison.
 
 Variable-time jobs are jobs submitted with a minimum time, `#SBATCH
---time-min`, in addition to the maximum time (`#SBATCH –time`). Jobs
-specifying a minimum time can start execution earlier than they
+--time-min`, in addition to the maximum time (`#SBATCH –time`). 
+Here is an example job script for variable-time jobs:
+
+!!! example "Sample job script with --time-min"
+
+    ```bash
+    --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/flex-jobs.sh"
+    ```
+Jobs specifying a minimum time can start execution earlier than they
 would otherwise with a time limit anywhere between the minimum and
-maximum time requests. Pre-terminated jobs can be requeued (using
-the `scontrol requeue` command) to resume from where the previous
+maximum time requests. Pre-terminated jobs can be requeued (or resubmitted) by using
+the `scontrol requeue` command (or sbatch) to resume from where the previous
 executions left off, until the cumulative execution time reaches the
-desired time limit or the job completes.
+desired time limit or the job completes.  
 
 !!! note
 	To use variable-time jobs, applications are required to be
 	able to checkpoint and restart by themselves.
+	
+### Use the flex QOS for charging discount for variable-time jobs on KNL
 
-### Annotated example
+Varaible-time jobs, specifying a shorter amount of time that a job should run, 
+increase the backfill opportunities for the jobs,
+therefore users will see a better queue turnaround with variable-time jobs. 
+In addition, the process of job resubmitting can be automated, 
+so users can run a long job in multiple shorter chunks with a single job script (See the automated job script sample below). 
+However, variable-time jobs incur (extra) checkpoint/regart overheads from spliting a longer job into multiple shorter ones. 
+In order to compenstate this overhead, and also to encourage users to use Cori KNL where more backfill opportunities are available, 
+we have created a QOS flex on Cori KNL with charging discount for the variable-time jobs.
+Users are encouraged to use the flex QOS (use #SBATCH -q flex) with their variable-time jobs on Cori KNL. 
+See the [Queues and Policy page for Cori KNL link](http://docs.nersc.gov/jobs/policy) for more details on the flex QOS. 
+
+!!! note
+        * The flex QOS is free of charge currently. The discont rate is subject to change. 
+        * The flex QOS is available only on Cori KNL.
+        * Variable-time jobs work with any QOS on Cori and Edison, but the charging discount is avialble only with the flex QOS on Cori KNL.  
+
+### Annotated example - automated variable-time jobs
 
 Here is a sample job script for variable-time jobs, which automates
 the process of executing, pre-terminating, requeuing and restarting
@@ -361,12 +386,12 @@ job completes.
     --8<-- "docs/jobs/examples/variable-time-jobs/edison/variable-time-jobs.sh"
     ```
 
-!!! example "Cori Haswell"
+??? example "Cori Haswell"
     ```bash
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-haswell/variable-time-jobs.sh"
     ```
 
-??? example "Cori KNL"
+!!! example "Cori KNL"
     ```bash
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/variable-time-jobs.sh"
     ```
@@ -392,7 +417,7 @@ The job script works as follows:
 2. The batch system looks for a backfill opportunity for the job. If
    it can allocate the requested number of nodes for this job for any
    duration (e.g., 3 hours) between the specified minimum time (2
-   hours) and the time limit (48 hours) before those nodes are used
+   hours) and the time limit (12 hours) before those nodes are used
    for other higher priority jobs, the job starts execution.
 3. The job runs until it receives a signal USR1
    (`--signal=B:USR1@<sig_time`) 60 seconds (`sig_time=60` in this
