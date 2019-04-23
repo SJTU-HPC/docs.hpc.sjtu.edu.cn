@@ -367,7 +367,7 @@ However, variable-time jobs incur (extra) checkpoint/regart overheads from split
 In order to compenstate this overhead, and also to encourage users to use Cori KNL where more backfill opportunities are available, 
 we have created a QOS flex on Cori KNL with charging discount for the variable-time jobs.
 Users are encouraged to use the flex QOS (use #SBATCH -q flex) with their variable-time jobs on Cori KNL. 
-See the [Queues and Policy page for Cori KNL link](http://docs.nersc.gov/jobs/policy) for more details on the flex QOS. 
+See the [Queues and Policy page for Cori KNL](http://docs.nersc.gov/jobs/policy) for more details on the flex QOS. 
 
 !!! note
         * The flex QOS is free of charge currently. The discont rate is subject to change. 
