@@ -359,19 +359,17 @@ desired time limit or the job completes.
 ### Using the flex QOS for charging discount for variable-time jobs on KNL
 
 Variable-time jobs, specifying a shorter amount of time that a job should run, 
-increase the backfill opportunities for the jobs,
-therefore users will see a better queue turnaround with variable-time jobs. 
+increase backfill opportunities, meaning
+users will see a better queue turnaround. 
 In addition, the process of job resubmitting can be automated, 
-so users can run a long job in multiple shorter chunks with a single job script (See the automated job script sample below). 
-However, variable-time jobs incur (extra) checkpoint/restart overheads from splitting a longer job into multiple shorter ones. 
-In order to compensate this overhead, and also to encourage users to use Cori KNL where more backfill opportunities are available, 
-we have created a flex QOS on Cori KNL with charging discount for the variable-time jobs.
-Users are encouraged to use the flex QOS (use #SBATCH -q flex) with their variable-time jobs on Cori KNL. 
+so users can run a long job in multiple shorter chunks with a single job script (see the automated job script sample below). 
+However, variable-time jobs incur checkpoint/restart overheads from splitting a longer job into multiple shorter ones. 
+To compensate for this overhead and to encourage users to use Cori KNL where more backfill opportunities are available, 
+we have created a flex QOS on Cori KNL (#SBATCH -q flex) with a charging discount for variable-time jobs.
 See the [Queues and Policy page for Cori KNL](http://docs.nersc.gov/jobs/policy) for more details on the flex QOS. 
 
 !!! note
         * The flex QOS is free of charge currently. The discount rate is subject to change. 
-        * The flex QOS is available only on Cori KNL.
         * Variable-time jobs work with any QOS on Cori and Edison, but the charging discount is available only with the flex QOS on Cori KNL.  
 
 ### Annotated example - automated variable-time jobs
@@ -407,7 +405,7 @@ The script `setup.sh` defines a few bash functions (e.g.,
 `requeue_job`, `func_trap`) that are used to automate the process.
 The `requeue_job func_trap USR1` command executes the `func_trap`
 function, which contains a list of actions to checkpoint and requeue
-the job, upon trapping the `USR1` signal. Users may want to modify the
+the job upon trapping the `USR1` signal. Users may want to modify the
 scripts (get a copy) as needed, although they should work for most
 applications as they are now.
 
@@ -427,7 +425,7 @@ The job script works as follows:
    variable `ckpt_overhead` is used to specify the amount of time (in
    seconds) needed for checkpointing and requeuing the job. It should
    match the sig_time in the `--signal` option.
-5. The steps 2-4 repeat until the job runs for the desired amount of
+5. Steps 2-4 repeat until the job runs for the desired amount of
    time (96 hours) or the job completes.
 
 !!! note
@@ -437,9 +435,9 @@ The job script works as follows:
 	  several commands to be executed within the specified checkpoint
 	  overhead time (`ckpt_overhead`).
 	* Additionally, if you need to change the job input files to
-      resume the job, you can do so within the `ckpt_command`.
+      resume the job, you can do so within `ckpt_command`.
 	* If your application does checkpointing periodically, like most
-      of the molecular dynamics codes do, you don’t need the
+      molecular dynamics codes do, you don’t need 
       `ckpt_command` (just leave it blank).
 	* You can send the `USR1` signal outside the job script any time
       using the `scancel -b -s USR1 <jobid>` command to terminate the
