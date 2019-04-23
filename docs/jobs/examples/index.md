@@ -356,7 +356,7 @@ desired time limit or the job completes.
 	To use variable-time jobs, applications are required to be
 	able to checkpoint and restart by themselves.
 	
-### Use the flex QOS for charging discount for variable-time jobs on KNL
+### Using the flex QOS for charging discount for variable-time jobs on KNL
 
 Variable-time jobs, specifying a shorter amount of time that a job should run, 
 increase the backfill opportunities for the jobs,
@@ -365,7 +365,7 @@ In addition, the process of job resubmitting can be automated,
 so users can run a long job in multiple shorter chunks with a single job script (See the automated job script sample below). 
 However, variable-time jobs incur (extra) checkpoint/restart overheads from splitting a longer job into multiple shorter ones. 
 In order to compensate this overhead, and also to encourage users to use Cori KNL where more backfill opportunities are available, 
-we have created a QOS flex on Cori KNL with charging discount for the variable-time jobs.
+we have created a flex QOS on Cori KNL with charging discount for the variable-time jobs.
 Users are encouraged to use the flex QOS (use #SBATCH -q flex) with their variable-time jobs on Cori KNL. 
 See the [Queues and Policy page for Cori KNL](http://docs.nersc.gov/jobs/policy) for more details on the flex QOS. 
 
