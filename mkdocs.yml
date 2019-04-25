@@ -54,6 +54,7 @@ nav:
         - PyTorch: analytics/machinelearning/pytorch.md
         - Benchmarks: analytics/machinelearning/benchmarks.md
         - Science use-cases: analytics/machinelearning/science-use-cases.md
+      - Spark: analytics/spark.md
   - Data:
       - Management : data/management.md
       - Sharing: data/sharing.md
