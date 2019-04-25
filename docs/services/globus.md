@@ -25,10 +25,11 @@ user. The list of endpoints are provided in the table below.
 | Endpoint Name | Description |Recommended Use
 | --- | --- | ---
 | NERSC DTN | Multi-node, high performance transfer system with access to all NERSC Global File systems (NGF) as well as Cori Scratch |  Almost all data transfers needs into & out of NERSC
-| NERSC HPSS | Single node system connected directly to the NERSC HPSS  tape archive | Remote transfers into & out of HPSS
-| NERSC Edison | Single node system connected to NGF and uniquely to  the Edison scratch file system | Only recommended for access to  Edison scratch
-| NERSC Cori | Originally a dual-node system needed for accessing the Cori scratch file system.  The endpoint is the same as NERSC DTN |  Use NERSC DTN instead
+| NERSC HPSS | Single node system connected directly to the NERSC HPSS tape archive | Remote transfers into & out of HPSS
+| NERSC Edison | Single node system connected to NGF and uniquely to the Edison scratch file system | Only recommended for access to  Edison scratch
+| NERSC Cori | Originally a dual-node system needed for accessing the Cori scratch file system. The endpoint is the same as NERSC DTN |  Use NERSC DTN instead
 | NERSC DTN-JGI | Single node system that was used to access JGI-specific file systems, which are now connected to the NERSC DTN servers. | Use NERSC DTN instead
+| NERSC SHARE | Single node system with read-only access to the project file system | Shared Globus endpoint
 
 !!! warning 
     Be aware that Globus will follow hard links and copy the data to
@@ -42,6 +43,27 @@ user. The list of endpoints are provided in the table below.
     computer, you can install a [Globus connect (personal)
     server](https://www.globus.org/globus-connect) to configure an
     endpoint on your personal device.**
+
+# Globus Sharing 
+Data can be shared at NERSC using [Globus
+Sharing](https://www.globus.org/data-sharing). Currently shared
+endpoints are read-only, no writing is allowed. To share data, create
+a "gsharing" directory in your repo's project directory. Then go to
+the [Globus endpoint web page](https://app.globus.org/endpoints) and
+search for the "NERSC SHARE" endpoint. Click on the "Shares" tab and
+select "Add a Shared Endpoint". This will bring you to a screen where
+you can give your shared endpoint a name and fill in the path you'd
+like to share. Currently sharing is limited to
+/project/projectdirs/<your_repo_name\>/gsharing and subdirectories
+(and the [dna file
+system](../../science-partners/jgi/filesystems/#dna-data-n-archive)
+for JGI users). Once you click "Create Share" it will take you to
+another screen where you can share this endpoint with specific Globus
+users or with all Globus users (these users do **not** have to be
+NERSC users). You can also make other Globus users administrators,
+which will mean that they will have the power to add or remove other
+users from the shared endpoint.
+
 
 # Troubleshooting
 
