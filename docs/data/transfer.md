@@ -11,9 +11,9 @@ for data transfer.
 
 !!! tip
     **NERSC recommends transferring data to and from
-    NERSC using [Globus](https://www.globus.org/)**
+    NERSC using [Globus](../services/globus.md)**
 
-[Globus](https://www.globus.org/) is a web-based service that solves
+[Globus](../services/globus.md) is a web-based service that solves
 many of the challenges encountered moving data between systems. Globus
 provides the most comprehensive, efficient, and easy to use
 service for most NERSC users.
@@ -21,8 +21,8 @@ service for most NERSC users.
 However, there are other tools available to transfer data between
 NERSC and other sites:
 
-* SCP/SFTP: for smaller files (<1GB)
-* GridFTP: for large files
+* scp / sftp: standard Linux utilities suitable for smaller files (<1GB)
+* [GridFTP](../services/gridftp.md): parallel transfer software for large files
 
 ## Transferring Data Within NERSC
 
