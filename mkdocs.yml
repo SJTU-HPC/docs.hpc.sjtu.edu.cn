@@ -79,6 +79,7 @@ nav:
     - Case Studies:
         - Overview : performance/case-studies/index.md
         - AMReX : performance/case-studies/amrex/index.md
+        - BerkeleyGW : performance/case-studies/berkeleygw/index.md
         - Chombo-Crunch : performance/case-studies/chombo-crunch/index.md
         - EMGeo : performance/case-studies/emgeo/index.md
         - HMMER3 : performance/case-studies/hmmer3/index.md
