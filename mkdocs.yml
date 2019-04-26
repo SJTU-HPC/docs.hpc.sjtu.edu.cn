@@ -107,6 +107,7 @@ nav:
         - CTest/CDash with CMake : services/cdash/with_cmake.md
         - CTest/CDash without CMake : services/cdash/without_cmake.md
       - CVMFS : services/cvmfs.md
+      - Databases: services/databases.md
   - Programming:
     - Build Tools:
         - programming/build-tools/index.md
