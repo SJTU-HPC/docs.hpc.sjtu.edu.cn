@@ -24,7 +24,7 @@ processing units.
 Perlmutter will arrive in 2020 and will have a mixture of CPU-only nodes and CPU + GPU nodes. Each CPU + GPU nodes will
 have 4 GPUs per CPU node.
 
-NERSC has made an effort to provide guidance on parallel programming approaches for Cori. Chief among these is the combination
+NERSC has made an effort to provide guidance on parallel programming approaches. Chief among these is the combination
 of MPI for inter-node parallelism and OpenMP for intra-node parallelism (or potentially MPI per NUMA domain with OpenMP
 within each). Many of the intra-node parallelism efforts made for Cori will propagate to Perlmutter.
 
@@ -45,9 +45,9 @@ model for one-sided communication, or use a thread-aware task-based runtime syst
 maps well to intra-node parallelism as well as inter-node.
 
 Indeed, the key point we would like to make is that inter and intra-node parallelism must be understood and treated
-differently in order to obtain good performance on many-core architectures like Cori.
+differently in order to obtain good performance on many-core architectures like Cori and Perlmutter.
 
-## Combined Programming Models
+## Combining Programming Models
 
 Although not meant to be an exhaustive list, here we briefly examine a number of options that we see as potentially
 attractive to our users. In general, a recommended mixture of parallelism models would be to limit the number of
@@ -58,30 +58,29 @@ that are reserved for asychronous communication with the GPU. While this certain
 model to all codes using NERSC resources, the reasons for this recommendation are as follows:
 
 - Limiting the number of processes within a node
-  - Processes have separate memory address spaces
-    - More separate memory spaces increases the total amount of memory used by the parallelism scheme
-    - Communication between processes potentially requires using the network and an underlying copy and transfer of
-    memory, whereas threads within the same memory address space can immediately "see" the updates
-  - Separate memory address spaces can be emulated within threads using thread-local memory but other threads can
-  still access that memory if given the address of that memory allocation.
-    - E.g., in object-oriented codes, one can allocate entire objects in thread-local memory and have the master thread
-    hold a list of the objects held by the worker threads.
+    - Processes have separate memory address spaces
+        - More separate memory spaces increases the total amount of memory used by the parallelism scheme
+        - Communication between processes potentially requires using the network and an underlying copy and transfer of
+        memory, whereas threads within the same memory address space can immediately "see" the updates
+    - Separate memory address spaces can be emulated within threads using thread-local memory but other threads can
+    still access that memory if given the address of that memory allocation.
+        - E.g., in object-oriented codes, one can allocate entire objects in thread-local memory and have the master thread
+        hold a list of the objects held by the worker threads.
 - Shared-memory model creating `nthreads = (ncores / nprocs)`
-  - If a node contains 48 cores and 4 processes are spawned on that node, each process creating 12 threads for
-  execution will enable the workload to saturate all 48 cores.
+    - If a node contains 48 cores and 4 processes are spawned on that node, each process creating 12 threads for
+    execution will enable the workload to saturate all 48 cores.
 - Additional threads of execution for asychronous communication with the GPU
-  - Oversubscribing the number of threads (i.e. `nthreads = (4 * ncores) / nprocs`), the communication latency with
-  the GPU can be hidden and the throughput can then be effectively increased.
-    - When work is offloaded to the GPU, there are CPU cycles that are not being utilized while a thread waits on the
-    communication with the GPU.
-    - This can be achieved via one large thread-pool implementing `nthreads = (4 * ncores) / nprocs` or
-    `nthreads = (ncores / nprocs)` each implementing an addition 4 threads.
-  - Enabling asynchronous communication with GPU depends on programming model but for CUDA, it is achieved through
-  CUDA streams.
-    - In general, a single thread with multiple streams is less efficient that multiple CPU threads with
-    one stream. In the former, the launching of kernels into different streams is a serial bottleneck where as in the
-    latter, the coordination of launching of kernels is effectively parallelized.
-
+    - Oversubscribing the number of threads (i.e. `nthreads = (4 * ncores) / nprocs`), the communication latency with
+    the GPU can be hidden and the throughput can then be effectively increased.
+        - When work is offloaded to the GPU, there are CPU cycles that are not being utilized while a thread waits on the
+        communication with the GPU.
+        - This can be achieved via one large thread-pool implementing `nthreads = (4 * ncores) / nprocs` or
+        `nthreads = (ncores / nprocs)` each implementing an addition 4 threads.
+    - Enabling asynchronous communication with GPU depends on programming model but for CUDA, it is achieved through
+    CUDA streams.
+        - In general, a single thread with multiple streams is less efficient that multiple CPU threads with
+        one stream. In the former, the launching of kernels into different streams is a serial bottleneck where as in the
+        latter, the coordination of launching of kernels is effectively parallelized.
 
 ### Distributed memory (inter-node) parallelism
 
@@ -89,10 +88,10 @@ These programming models create separate parallel processes with independent mem
 
 - [MPI](mpi/index.md)
 - [PGAS models](https://en.wikipedia.org/wiki/Partitioned_global_address_space)
-  - [UPC](https://upc.lbl.gov/)
-  - [UPC++](upcxx.md)
-  - [Coarrays](coarrays.md)
-  - [Others](https://en.wikipedia.org/wiki/Partitioned_global_address_space)
+    - [UPC](https://upc.lbl.gov/)
+    - [UPC++](upcxx.md)
+    - [Coarrays](coarrays.md)
+    - [Others](https://en.wikipedia.org/wiki/Partitioned_global_address_space)
 
 ### Shared memory (intra-node) parallelism
 
