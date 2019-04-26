@@ -24,6 +24,8 @@ nav:
       - Overview: jobs/workflow-tools.md
       - Taskfarmer: jobs/workflow/taskfarmer.md
       - Fireworks: jobs/workflow/fireworks.md
+      - Swift: jobs/workflow/swift.md
+      - Other workflow tools: jobs/workflow/other_tools.md
     - Reservations: jobs/reservations.md
     - Queue Policy: jobs/policy.md
     - Containers:

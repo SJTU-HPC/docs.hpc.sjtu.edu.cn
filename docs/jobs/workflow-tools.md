@@ -16,16 +16,13 @@ tasks have completed successfully, and allows straightforward re-submission of f
 
 ## Swift
 
-The Swift scripting language provides a simple, compact way to write
+The [Swift](workflow/swift.md)
+scripting language provides a simple, compact way to write
 parallel scripts that run many copies of ordinary programs
 concurrently in various workflow patterns, reducing the need for
 complex parallel programming or arcane scripting. Swift is very
 general, and is in use in domains ranging from earth systems to
 bioinformatics to molecular modeling.
-
-```bash
-module load swift
-```
 
 ## Fireworks
 
@@ -37,3 +34,8 @@ dynamic workflows, failure-detection routines, and built-in tools and
 execution modes for running high-throughput computations at large
 computing centers. It uses a centralized server model, where the
 server manages the workflows and workers run the jobs.
+
+## Other Workflow Tools
+
+If you find that these tools don't meet your needs, you can check out some
+of the [other](workflow/other_tools.md) workflow tools we currently support.
