@@ -297,8 +297,8 @@ likwid-pin -c E:S0:2:1:16@E:S1:2:1:16 ./xthi.x
 
 The `@` sign packs multiple processor lists into one, and the `E` sign is for expression based syntax which has the following 2 variants. This is very useful when there are many cores and the number of software threads doesn’t agree with the number of hardware threads. For example, on Cori KNL, if users want to run 128 threads on a node with 2 software threads running on a core where 4 hardware threads are available. The pinning can be expressed as `E:N:128:2:4`.
 
-1. -c E:\<thread domain\>:\<number of threads\>
-1. -c E:\<thread domain\>:\<number of threads\>:\<chunk size\>:\<stride\>
+1. -c E:<thread domain>:<number of threads>
+1. -c E:<thread domain>:<number of threads>:<chunk size>:<stride>
 
 To pin MPI or hybrid MPI/threaded applications, users can wrap `likwid-pin` with the MPI job launcher, which at NERSC is srun. The following example will place 2 MPI processes on a Cori Haswell node, with 2 threads per process, spread out as far as they can. 
 
