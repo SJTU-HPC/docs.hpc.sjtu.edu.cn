@@ -134,6 +134,7 @@ nav:
         - IPM : programming/performance-debugging-tools/ipm.md
         - Trace Analyzer and Collector: programming/performance-debugging-tools/itac.md
         - LIKWID : programming/performance-debugging-tools/likwid.md
+        - Roofline Performance Model : programming/performance-debugging-tools/roofline.md
     - Compilers :
         - Native Compilers : programming/compilers/native.md
         - Compiler Wrappers (recommended) : programming/compilers/wrappers.md
