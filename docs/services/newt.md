@@ -16,3 +16,5 @@ NEWT consists of two parts:
 
 1. A web service that resides at https://newt.nersc.gov/newt.
 2. A javascript library called newt.js which provides you with helper functions to access the NEWT service through simple AJAX calls.
+
+You can learn more about the NEWT API and get a copy of the newt.js library at [https://newt.nersc.gov/](https://newt.nersc.gov/)

@@ -39,7 +39,9 @@ nav:
     - BerkeleyGW: applications/berkeleygw/index.md
     - CP2K: applications/cp2k/index.md
     - Mathematica : applications/mathematica/index.md
-    - MATLAB : applications/matlab/index.md
+    - MATLAB : 
+      - MATLAB Overview: applications/matlab/index.md
+      - MATLAB Compiler: applications/matlab/matlab_compiler.md
     - NAMD : applications/namd/index.md
     - SIESTA : applications/siesta/index.md
     - PARATEC: applications/paratec/index.md
