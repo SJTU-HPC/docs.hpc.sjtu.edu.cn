@@ -27,9 +27,9 @@ LINPACK and EISPACK projects. Today, MATLAB engines incorporate the
 LAPACK and BLAS libraries, embedding the state of the art in software
 for matrix computation.
 
-## How to Use MATLAB on Edison and Cori
+## How to Use MATLAB on Cori
 
-MATLAB is available at NERSC on Edison and Cori.  The number of MATLAB
+MATLAB is available at NERSC on Cori (and Edison until it retires).  The number of MATLAB
 licenses at NERSC is not very large (currently 16), so users should
 not be running a MATLAB session when it is not being actively used. If
 you use NX, it's particularly easy to think you've released your
@@ -43,16 +43,16 @@ batch job to the regular queue.
 
 ### Running Interactively
 
-To run MATLAB interactively on Edison, connect with ssh -X or via NX,
+To run MATLAB interactively on Cori, connect with ssh -X or via NX,
 and do the following:
 
 ```
-salloc -p regular -N 1 -c 24 -t 30:00
+salloc  -q interactive -N 1 -c 32 -C haswell -t 30:00
 module load matlab
 matlab
 ```
 
-It is also possible to run MATLAB on an Edison login node directly:
+It is also possible to run MATLAB on a Cori login node directly. Production computing should not be undertaken on login nodes, however. For long-running or compute intensive jobs, use a batch script.
 
 ```
 module load matlab
@@ -62,29 +62,31 @@ matlab
 ### Batch Jobs
 
 To run one instance of MATLAB non-intearctively through a batch job,
-you can use the following job script on Edison:
+you can use the following job script on Cori:
 
 ```
 #!/bin/bash -l
-#SBATCH -p regular
+#SBATCH -q regular
 #SBATCH -N 1
-#SBATCH -c 24
+#SBATCH -c 32
+#SBATCH -C haswell
 #SBATCH -t 00:30:00
 cd $SLURM_SUBMIT_DIR   # optional, since this is the default behavior
 module load matlab
-matlab -nodisplay -r < myjob -logfile myjob.log
+srun -n 1 -c 32 matlab -nodisplay -r < myjob.m -logfile myjob.log
 ```
+
 Where `myjob.m` is your MATLAB script.
 
 ### Parallelism in MATLAB
 
-To prepare a MATLAB cluster with 24 cores (within MATLAB) do:
+To prepare a MATLAB cluster with 32 cores (within MATLAB) do:
 
 ```
 cluster = parcluster('local')
-cluster.NumWorkers = 24
-saveAsProfile(cluster,'edison_cluster')
-pp = parpool('edison_cluster', 24)
+cluster.NumWorkers = 32
+saveAsProfile(cluster,'cori_cluster')
+pp = parpool('cori_cluster', 32)
 ```
 
 #### Running MATLAB Parallel Commands
@@ -130,10 +132,7 @@ script (or interactive job).
 Another way to run MATLAB in parallel is to run multiple instances of
 a compiled MATLAB program. By compiling, you create a stand-alone
 application that doesn't need to obtain a separate license from the
-NERSC license server to run. The MathWorks web site has details about
-using
-the
-[MATLAB Compiler](https://www.mathworks.com/products/compiler.html).
+NERSC license server to run. See [MATLAB Compiler](matlab_compiler) for details.
 
 ## Documentation
 
