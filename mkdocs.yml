@@ -72,7 +72,7 @@ nav:
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
-    - I/O: 
+    - I/O:
         - Overview : performance/io/index.md
         - Lustre: performance/io/lustre/index.md
         - I/O libraries: performance/io/library/index.md
@@ -153,10 +153,11 @@ nav:
 #       - Matlab : programming/high-level-environments/matlab.md
         - R : programming/high-level-environments/r.md
     - Programming Models:
+        - Overview: programming/programming-models/index.md
         - MPI :
           - About: programming/programming-models/mpi/index.md
           - OpenMPI: programming/programming-models/mpi/openmpi.md
-        - OpenMP : 
+        - OpenMP :
           - About: programming/programming-models/openmp/openmp.md
           - OpenMP Resources : programming/programming-models/openmp/openmp-resources.md
           - Tools for OpenMP : programming/programming-models/openmp/openmp-tools.md
@@ -179,12 +180,12 @@ nav:
         - Subversion : programming/version-control/subversion/index.md
   - Environment: environment/index.md
   - Systems:
-      - Cori: 
+      - Cori:
            - Cori System: systems/cori/index.md
            - Interconnect : systems/cori/interconnect/index.md
            - KNL Modes : systems/cori/knl_modes/index.md
       - Edison : systems/edison/index.md
-      - PDSF: 
+      - PDSF:
            - PDSF System: systems/pdsf/index.md
            - Slurm :
               - Overview : pdsf/slurm/README.md
@@ -209,13 +210,13 @@ nav:
       - Edison scratch: filesystems/edison-scratch.md
       - Cori scratch: filesystems/cori-scratch.md
       - Cori Burst Buffer: filesystems/cori-burst-buffer.md
-      - Archive (HPSS): 
+      - Archive (HPSS):
         - Intro: filesystems/archive.md
         - Accessing HPSS: filesystems/archive_access.md
         - Storage Statistics: filesystems/archive-stats.md
       - Backups: filesystems/backups.md
       - Unix File Permissions: filesystems/unix-file-permissions.md
-  - Science Partners: 
+  - Science Partners:
     - Joint Genome Institute (JGI):
       - science-partners/jgi/index.md
       - Systems:
