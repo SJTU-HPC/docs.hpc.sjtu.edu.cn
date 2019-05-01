@@ -11,6 +11,6 @@ that do not necessarily map onto a natural 2D or 3D co-ordinate
 system. R (ggplot2) and python (matplotlib) provide capabilities for
 information visualization.
 
-* Paraview
-* Visit
-* NCAR Graphics
+* [Paraview](../../applications/paraview/)
+* [Visit](../../applications/visit/)
+* [NCAR Graphics](../../applications/ncargraphics/)
