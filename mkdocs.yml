@@ -74,6 +74,7 @@ nav:
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
     - Profiling : performance/profiling.md
+    - Arithmetic Intensity: performance/arithmetic_intensity.md
     - I/O:
         - Overview : performance/io/index.md
         - Lustre: performance/io/lustre/index.md
