@@ -429,17 +429,17 @@ reverse proxy stack to direct the appropriate traffic to your web service.
 
 The following TCP ports are publicly available from all source addresses:
 
-    80, 443, 8080, and 8443, 60000 - 60050
+    80, 443, 8080, 8443, 60000-60050
 
 The following TCP ports are available only from within NERSC networks
-(128.55.0.0/16) as well as from LBL networks that are secure and authenticated,
-such as the employee wireless and LBL VPN.
+(128.55.0.0/16) as well as non-guest LBL networks, including LBL employee
+wireless and VPN.
 
-    3128, 3306, 5432, 5672, 8008, 50000 - 50050
+    3128, 3306, 4873, 5432, 5984, 8008, 27017, 55000-55100
 
 The following TCP ports are available only from within NERSC networks:
 
-    4873, 8081
+    5672, 8081, 50000-50050
 
 ## External DNS
 
