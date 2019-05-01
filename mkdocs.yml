@@ -43,12 +43,14 @@ nav:
       - MATLAB Overview: applications/matlab/index.md
       - MATLAB Compiler: applications/matlab/matlab_compiler.md
     - NAMD : applications/namd/index.md
+    - NCAR Graphics : applications/ncargraphics/index.md
     - SIESTA : applications/siesta/index.md
     - PARATEC: applications/paratec/index.md
+    - ParaView : applications/paraview/index.md
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
     - Wannier90: applications/wannier90/index.md
     - VASP : applications/vasp/index.md
-    - MATLAB : applications/matlab/index.md
+    - VisIt : applications/visit/index.md
   - Analytics:
       - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
