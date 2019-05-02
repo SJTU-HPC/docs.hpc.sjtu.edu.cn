@@ -71,8 +71,10 @@ nav:
       - Policy: data/policy.md
   - Performance:
     - Readiness: performance/readiness.md
+    - Getting started on KNL: performance/knl/getting-started.md
     - Vectorization : performance/vectorization.md
     - Parallelism : performance/parallelism.md
+    - Memory Bandwidth: performance/mem_bw.md
     - Profiling : performance/profiling.md
     - I/O:
         - Overview : performance/io/index.md
@@ -186,6 +188,8 @@ nav:
            - Cori System: systems/cori/index.md
            - Interconnect : systems/cori/interconnect/index.md
            - KNL Modes : systems/cori/knl_modes/index.md
+           - Application Porting and Performance:
+               - Getting started on KNL: performance/knl/getting-started.md
       - Edison : systems/edison/index.md
       - PDSF:
            - PDSF System: systems/pdsf/index.md
