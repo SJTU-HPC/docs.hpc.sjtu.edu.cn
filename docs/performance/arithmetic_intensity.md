@@ -101,32 +101,33 @@ For example, in an MPI code SDE will create a file for each MPI process (one
 per rank) and if the application contains threads (e.g. OpenMP) those will be
 encapsulated into the same file (`-global_region` enables this).
 
-All of the above is best illustrated with an example found
-[here](https://bitbucket.org/dwdoerf/stream-ai-example). This example uses a
-modified version of the STREAM benchmark (it also contains a directory with an
-example Jacobi Method code utilizing fortran bindings). The example can be
-accessed using git, e.g.:
+!!! note "Example"
+    All of the above is best illustrated with an example found
+    [here](https://bitbucket.org/dwdoerf/stream-ai-example). This example uses a
+    modified version of the STREAM benchmark (it also contains a directory with an
+    example Jacobi Method code utilizing fortran bindings). The example can be
+    accessed using git, e.g.:
 
-```console
-$ git clone https://bitbucket.org/dwdoerf/stream-ai-example.git
-$ cd stream-ai-example
-$ module load sde
-$ module load vtune
-$ make
-```
+    ```console
+    $ git clone https://bitbucket.org/dwdoerf/stream-ai-example.git
+    $ cd stream-ai-example
+    $ module load sde
+    $ module load vtune
+    $ make
+    ```
 
-Note you may have to modify the Makefile to suit your needs. Once you've
-successfully built the executable, `stream.exe`, (an MPI+OpenMP code) you can
-use the example batch script `stream-ai.sh` (which may need to be modified to
-suit your target: Cori Haswell, Cori KNL or Edison) and submit a job which
-executes `stream.exe` in three modes: without instrumentation that can be used
-for accurate timing estimates, then under the control of SDE, and finally under
-the control of VTune.
+    Note you may have to modify the Makefile to suit your needs. Once you've
+    successfully built the executable, `stream.exe`, (an MPI+OpenMP code) you can
+    use the example batch script `stream-ai.sh` (which may need to be modified to
+    suit your target: Cori Haswell, Cori KNL or Edison) and submit a job which
+    executes `stream.exe` in three modes: without instrumentation that can be used
+    for accurate timing estimates, then under the control of SDE, and finally under
+    the control of VTune.
 
-```console
-$ sbatch stream-ai.sh
-< wait for job to finish, this may take a few to several minutes depending on demand>
-```
+    ```console
+    $ sbatch stream-ai.sh
+    < wait for job to finish, this may take a few to several minutes depending on demand>
+    ```
 
 When the job completes, SDE will have created several files, one for each rank,
 starting with `sde_`. VTune will have created one or more directories (one for
