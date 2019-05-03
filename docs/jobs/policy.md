@@ -23,7 +23,7 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 |-----------------|-----------|----------------|--------------|-----------|----------|--------|
 | regular         | 1932      | 48             | 5000         | -         | 4        | 90     |
 | shared[^1]      | 0.5       | 48             | 10000        | -         | 4        | 90     |
-| interactive[^4] | 64        | 4              | 1            | 1         | -        | 90     |
+| interactive[^4] | 64        | 4              | 2            | 2         | -        | 90     |
 | debug           | 64        | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 1772      | 48             | 5            | -         | 2        | 180    |
 | scavenger[^2]   | 1772      | 48             | 5000         | -         | 5        | 0      |
@@ -37,7 +37,7 @@ Cori. [Examples](examples/index.md) for each type of job are available.
 | QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
 |-----------------|-----------|----------------|--------------|-----------|----------|--------|
 | regular         | 9489      | 48             | 5000         | -         | 4        | 90[^6] |
-| interactive[^4] | 64        | 4              | 1            | 1         | -        | 90     |
+| interactive[^4] | 64        | 4              | 2            | 2         | -        | 90     |
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
 | low             | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
