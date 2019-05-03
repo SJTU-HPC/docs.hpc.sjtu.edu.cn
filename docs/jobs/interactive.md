@@ -8,14 +8,6 @@ shell. The shell is then used to execute srun commands to launch
 parallel tasks.
 
 
-### Edison
-
-Requesting 30 minutes of time on two nodes.
-
-```
-edison$ salloc --qos=debug --nodes=2 --time=30
-```
-
 ### Cori
 
 Cori has an dedicated interactive QOS. This queue is intended to
@@ -32,16 +24,16 @@ cori$ salloc -N 1 -C haswell -q interactive -t 01:00:00
 
 To run on KNL nodes, use "-C knl" instead of "-C haswell".
 
-Users in this queue are limited to a single running job on as many as
+Users in this queue are limited to two jobs running job on as many as
 64 nodes for up to 4 hours. Additionally, each NERSC allocation (MPP
 repo) is further limited to a total of 64 nodes between all their
 interactive jobs (KNL or haswell). This means that if UserA in repo
 m9999 has a job using 1 haswell node, UserB (who is also in repo
 m9999) can have a simultaneous job using 63 haswell nodes or 63 KNL
 nodes, but not 64 nodes. Since this is intended for interactive work,
-each user can submit only one job at a time (either KNL or
+each user can submit only two jobs at a time (either KNL or
 haswell). KNL nodes are currently limited to quad,cache mode only. You
-can only run single node job; sub-node jobs like those in the shared
+can only run full node jobs; sub-node jobs like those in the shared
 queue are not possible.
 
 We have configured this queue to reject the job if it cannot be
@@ -64,3 +56,12 @@ cori$ squeue --qos=interactive --account=<reponame> -O jobid,username,starttime,
 If the number of nodes in use by your repo sums up to 64 nodes, please
 contact the other group members if you feel they need to release
 interactive resources.
+
+### Edison
+
+Requesting 30 minutes of time on two nodes.
+
+```
+edison$ salloc --qos=debug --nodes=2 --time=30
+```
+
