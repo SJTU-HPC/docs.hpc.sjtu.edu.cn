@@ -181,17 +181,19 @@ and total bytes.
 
 `amplxe-cl` stores its trace data in directories (one per node). The example
 script includes `-finalization-mode=none` as the finalize step is I/O intensive
-and can take a long time. It is best done on an external login node. The
-following `amplxe-cl` command creates a summary report which is then redirected
-to another file. The `parse-vtune.sh` script is provided to extract the uncore
-counter data for all nodes and then print a summary of the total data traffic
-to the DDR memory. Note that each uncore count is a 64 byte cache line, which
-is reflected in the total bytes reports. Also note that you will need to run a
-summary report for each directory (one per node) created during data
-collection. In this example, only a single directory was created. Even though
-there is only a single summary file for this example, in the 2nd step of
-executing `parse-vtune.sh` a wildcard is used to illustrate that all summary
-files need to be specified on the command line for a multi-node result.
+and can take a long time. It is best done on an external login node. (Please
+see the [VTune](../programming/performance-debugging-tools/vtune.md) page for
+more information about using VTune effectively. The following `amplxe-cl`
+command creates a summary report which is then redirected to another file. The
+`parse-vtune.sh` script is provided to extract the uncore counter data for all
+nodes and then print a summary of the total data traffic to the DDR memory.
+Note that each uncore count is a 64 byte cache line, which is reflected in the
+total bytes reports. Also note that you will need to run a summary report for
+each directory (one per node) created during data collection. In this example,
+only a single directory was created. Even though there is only a single summary
+file for this example, in the 2nd step of executing `parse-vtune.sh` a wildcard
+is used to illustrate that all summary files need to be specified on the
+command line for a multi-node result.
 
 ```console
 $ amplxe-cl -report hw-events -group-by=package -r vtbw_2p16t_13568698.nid00619 -column=UNC_M_CAS_COUNT -format=csv -csv-delimiter=comma > vtbw_2p16t_13568698.summary
