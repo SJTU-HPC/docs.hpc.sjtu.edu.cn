@@ -76,6 +76,7 @@ nav:
     - Parallelism : performance/parallelism.md
     - Memory Bandwidth: performance/mem_bw.md
     - Profiling : performance/profiling.md
+    - Arithmetic Intensity: performance/arithmetic_intensity.md
     - I/O:
         - Overview : performance/io/index.md
         - Lustre: performance/io/lustre/index.md
