@@ -5,17 +5,17 @@
 One MPI process per physical core.
 
 ??? example "Edison"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/basic-mpi/edison/basic-mpi.sh"
 	```
 
 ??? example "Cori Haswell"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/basic-mpi/cori-haswell/basic-mpi.sh"
 	```
 
 ??? example "Cori KNL"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/basic-mpi/cori-knl/basic-mpi.sh"
 	```
 
@@ -31,17 +31,17 @@ physical core
 	core.
 
 ??? example "Edison"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/edison/hybrid-mpi-openmp.sh"
 	```
 
 ??? example "Cori Haswell"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/cori-haswell/hybrid-mpi-openmp.sh"
 	```
 
 ??? example "Cori KNL"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/cori-knl/hybrid-mpi-openmp.sh"
 	```
 
@@ -53,17 +53,17 @@ Interactive jobs are launched with the `salloc` command.
 	Cori has dedicated nodes for interactive work.
 
 ??? example "Edison"
-	```bash
+	```slurm
 	edison$ salloc --qos=debug --time=30 --nodes=2
 	```
 
 ??? example "Cori Haswell"
-	```bash
+	```slurm
 	cori$ salloc --qos=interactive -C haswell --time=60 --nodes=2
 	```
 
 ??? example "Cori KNL"
-	```bash
+	```slurm
 	cori$ salloc --qos=interactive -C knl --time=60 --nodes=2
 	```
 
@@ -77,7 +77,7 @@ Multiple sruns can be executed one after another in a single batch
 script. Be sure to specify the total walltime needed to run all jobs.
 
 ??? example "Cori Haswell"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/multiple-parallel-jobs/cori-haswell/sequential-parallel-jobs.sh"
 	```
 
@@ -114,7 +114,7 @@ flags are used in `srun` commands.
 	all the simultaneous sruns are completed.
 
 ??? example "Cori Haswell"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/multiple-parallel-jobs/cori-haswell/simultaneous-parallel-jobs.sh"
 	```
 
@@ -128,7 +128,7 @@ time limit and QOS. The `SLURM_ARRAY_TASK_ID` environment variable is
 set to the array index value.
 
 !!! example "Cori KNL"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/job-array/cori-knl/job-array.sh"
 	```
 
@@ -202,7 +202,7 @@ $$
 	A two rank MPI job which utilizes 2 physical cores (and 4
 	hyperthreads) of a Haswell node.
 
-	```bash
+	```slurm
 	#!/bin/bash
 	#SBATCH --qos=shared
 	#SBATCH --constraint=haswell
@@ -217,7 +217,7 @@ $$
 	A two rank MPI job which utilizes 4 physical cores (and 8
 	hyperthreads) of a Haswell node.
 
-	```bash
+	```slurm
 	#!/bin/bash
 	#SBATCH --qos=shared
 	#SBATCH --constraint=haswell
@@ -231,7 +231,7 @@ $$
 ??? example "Cori-Haswell OpenMP"
 	An OpenMP only code which utilizes 6 physical cores.
 
-	```bash
+	```slurm
 	#!/bin/bash
 	#SBATCH --qos=shared
 	#SBATCH --constraint=haswell
@@ -247,7 +247,7 @@ $$
 	increase the amount of memory required only as needed to
 	maximize thoughput and minimize charge and wait time.
 
-	```bash
+	```slurm
 	#!/bin/bash
 	#SBATCH --qos=shared
 	#SBATCH --constraint=haswell
@@ -263,7 +263,7 @@ $$
 Applications built with Intel MPI can be launched via srun in the SLURM batch script on Cori compute nodes. The module `impi` needs to be loaded, and the application should be built using the `mpiicc` (`for C Codes`) or `mpiifort` (`for Fortran codes`) or `mpiicpc` (`for C++ codes`) commands. Below is a sample compile and run script.  
 
 ??? example "Cori Haswell"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/intel-mpi/cori-haswell/intel-mpi.sh"
 	```
 
@@ -275,12 +275,12 @@ See [Open MPI](../../programming/programming-models/mpi/openmpi.md) for more
 information about using Open MPI on NERSC systems.
 
 ??? example "Cori Haswell Open MPI"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/basic-mpi/cori-haswell-open-mpi/basic-mpi.sh"
 	```
 
 ??? example "Cori KNL Open MPI"
-	```bash
+	```slurm
 	--8<-- "docs/jobs/examples/basic-mpi/cori-knl-open-mpi/basic-mpi.sh"
 	```
 
@@ -301,7 +301,7 @@ user is limited to the number of concurrent HPSS sessions (15).
     Do not run computational jobs in the xfer queue.
 
 ??? example "Xfer transfer job"
-    ```bash
+    ```slurm
     #!/bin/bash
     #SBATCH --qos=xfer
     #SBATCH --time=12:00:00
@@ -342,7 +342,7 @@ Here is an example job script for variable-time jobs:
 
 !!! example "Sample job script with --time-min"
 
-    ```bash
+    ```slurm
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/flex-jobs.sh"
     ```
 Jobs specifying a minimum time can start execution earlier than they
@@ -380,17 +380,17 @@ the job repeatedly until it runs for the desired amount of time or the
 job completes.
 
 ??? example "Edison"
-    ```bash
+    ```slurm
     --8<-- "docs/jobs/examples/variable-time-jobs/edison/variable-time-jobs.sh"
     ```
 
 ??? example "Cori Haswell"
-    ```bash
+    ```slurm
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-haswell/variable-time-jobs.sh"
     ```
 
 !!! example "Cori KNL"
-    ```bash
+    ```slurm
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/variable-time-jobs.sh"
     ```
 
@@ -453,7 +453,7 @@ The job script works as follows:
 ### VASP example
 
 !!! example "VASP atomic relaxation jobs for Cori KNL"
-    ```bash
+    ```slurm
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/vasp-relaxation-job.sh"
     ```
 
@@ -464,7 +464,7 @@ Run a job with different programs and different arguments for each
 task.  To run MPMD jobs under Slurm use `--multi-prog
 <config_file_name>`.
 
-```
+```slurm
 srun -n 8 --multi-prog myrun.conf
 ```
 
@@ -504,7 +504,7 @@ file with format described above, and a batch script which passes this
 configuration file via `--multi-prog` flag in the srun command.
 
 !!! example "Cori-Haswell"
-	```
+	```slurm
     --8<-- "docs/jobs/examples/mpmd/cori-haswell/mpmd"
     ```
 
@@ -524,7 +524,7 @@ the execution of I/O intensive codes. In this mode all data from the
 burst buffer allocation will be removed automatically at the end of
 the job.
 
-```bash
+```slurm
 --8<-- "docs/jobs/examples/burstbuffer/scratch.sh"
 ```
 
@@ -541,11 +541,11 @@ be accessed using `$DW_JOB_STRIPED`.
 	* Stage out occurs *after* the job is completed so there is no
       charge
 
-```bash
+```slurm
 --8<-- "docs/jobs/examples/burstbuffer/stagein.sh"
 ```
 
-```bash
+```slurm
 --8<-- "docs/jobs/examples/burstbuffer/stageout.sh"
 ```
 
@@ -564,7 +564,7 @@ the same files.
 
 #### Create
 
-```bash
+```slurm
 --8<-- "docs/jobs/examples/burstbuffer/create-persistent-reservation.sh"
 ```
 
@@ -573,7 +573,7 @@ the same files.
 Take care if multiple jobs will be using the reservation to not
 overwrite data.
 
-```bash
+```slurm
 --8<-- "docs/jobs/examples/burstbuffer/use-persistent-reservation.sh"
 ```
 
@@ -582,7 +582,7 @@ overwrite data.
 Any data on the resevration at the time the script executes will be
 removed.
 
-```bash
+```slurm
 --8<-- "docs/jobs/examples/burstbuffer/destroy-persistent-reservation.sh"
 ```
 
@@ -592,13 +592,13 @@ The burst buffer is available in interactive sessions. It is
 recommended to use a configuration file for the burst buffer
 directives:
 
-```shell
+```bash
 cori$ cat bbf.conf
 #DW jobdw capacity=10GB access_mode=striped type=scratch
 #DW stage_in source=/global/cscratch1/sd/username/path/to/filename destination=$DW_JOB_STRIPED/filename type=file
 ```
 
-```shell
+```bash
 cori$ salloc --qos=interactive -C haswell -t 00:30:00 --bbf=bbf.conf
 ```
 
@@ -617,7 +617,7 @@ this, add `#SBATCH --exclusive` and add the `-c 32` flag to your
 
 	A sample bigmem job which needs only one core.
 
-	```bash
+	```slurm
 	#!/bin/bash
 	#SBATCH --clusters=escori
 	#SBATCH --qos=bigmem
@@ -652,7 +652,7 @@ flag) or allow multiple applications to share a node (with the
 
 !!! example
 	Uses two full nodes
-	```
+	```slurm
 	#!/bin/bash
 	#SBATCH --qos=realtime
 	#SBATCH --constraint=haswell
@@ -678,7 +678,7 @@ slots on the node (total of 64 CPUs, or 64 slots) by specifying the
 	is using in total 8 physical cores (8 "cpus" or hyperthreads per
 	"task") and 10GB of memory.
 
-	```
+	```slurm
 	#!/bin/bash
 	#SBATCH --qos=realtime
     #SBATCH --constraint=haswell
@@ -700,7 +700,7 @@ slots on the node (total of 64 CPUs, or 64 slots) by specifying the
 	OpenMP only code running with 6 threads. Note that `srun`
 	is not required in this case.
 
-	```
+	```slurm
     #!/bin/bash
     #SBATCH --qos=realtime
     #SBATCH --constraint=haswell
@@ -729,7 +729,7 @@ memory), but must be launched in distinct MPI communicators.
 This latter constraint would mean that MPMD mode (see below) is not an
 appropriate solution, since although MPMD can allow multiple
 executables to share compute nodes, the executables will also share an
-MPI_COMM_WORLD at launch.
+`MPI_COMM_WORLD` at launch.
 
 Slurm can allow multiple executables launched with concurrent srun
 calls to share compute nodes as long as the sum of the resources
@@ -749,7 +749,7 @@ the "craynetwork" resource, we use the "--gres" flag available in both
 "sbatch" and "srun".
 
 !!! example "Cori Haswell"
-	```
+	```slurm
 	--8<-- "docs/jobs/examples/multiple-parallel-share-nodes/cori-haswell/multiple-parallel-share-nodes.sh"
 	```
 
