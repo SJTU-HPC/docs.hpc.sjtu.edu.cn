@@ -65,20 +65,20 @@ can share nodes.
 
 ## Charging
 
-Jobs are charged by the node-hour.
+Jobs are charged by the node-hour in every QOS except shared.
 
 !!! example
 	A job which ran for 35 minutes on 3 nodes on Edison with
-	the regular qos would be charged:
+	the regular QOS would be charged:
 	$$ (35/60)\\ \text{hours}*3\\ \text{nodes} * 64 = 112\\ \text{NERSC hours} $$
 
 !!! example
 	A job which ran for 12 hours on 4 physical cores (each core has 2 hyperthreads)
-	on Cori Haswell with the shared qos would be charged:
+	on Cori Haswell with the shared QOS would be charged:
 	$$ 12\\ \text{hours} * (2*4\\ \text{cores}/64) * 90 = 135\\ \text{NERSC hours} $$
 
 !!! note
-    Jobs are only charged for the actual walltime used. That is, if a job uses less
+    Jobs are charged only for the actual walltime used. That is, if a job uses less
     time than requested, the corresponding account is charged only for the actual job
     duration.
 
@@ -111,13 +111,16 @@ lower usage charge.
 
 ### Flex
 
-The intent of the “flex" QOS is for user jobs that can produce useful work with a relatively short amount of run time before terminating. For example, jobs that are capable of checkpointing and restarting where they left off may be able to use the flex QOS. Note that this QOS is available on Cori KNL only.
+The intent of the “flex" QOS is for user jobs that can produce useful work with 
+a relatively short amount of run time before terminating. For example, jobs that 
+are capable of checkpointing and restarting where they left off may be able to 
+use the flex QOS. Note that this QOS is available on Cori KNL only.
 
 Benefits to using the flex QOS include: The ability to improve your throughput 
 by submitting jobs that can fit into the cracks in the job schedule; A discount 
 in charging for your job. 
 
-You can access the flex queue by submitting with `-q flex`. Notice this is only 
+You can access the flex queue by submitting with `-q flex`. Note this is only 
 available on Cori KNL.  In addition, 
 you must specify a minimum running time for this job of 2 hours or less with 
 the `--time-min` flag. This means that the job could potentially be interrupted 
