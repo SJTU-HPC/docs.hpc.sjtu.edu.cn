@@ -38,6 +38,7 @@ nav:
     - Abinit: applications/abinit/index.md
     - BerkeleyGW: applications/berkeleygw/index.md
     - CP2K: applications/cp2k/index.md
+    - LAMMPS: applications/lammps/index.md
     - Mathematica : applications/mathematica/index.md
     - MATLAB : 
       - MATLAB Overview: applications/matlab/index.md
