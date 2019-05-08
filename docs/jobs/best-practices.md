@@ -36,7 +36,7 @@ These systems should be referenced with the environment variable
 	Scratch filesystems are not backed up and old files are
 	subject to purging.
 
-## File Sytem Licenses
+## File System Licenses
 
 A batch job will not start if the specified file system is unavailable
 due to maintenance or an outage or if a performance issue with
@@ -76,8 +76,8 @@ srun option --bcast=<destination_path> is recommended for large jobs
 requesting over 1500 MPI tasks. By default Slurm loads the executable
 to the allocated compute nodes from the current working directory,
 this may take long time when the file system (where the executable
-resides) is slow. With the --bcast=/tmp/myjob, the executable will be
-copied to the /tmp/myjob directory. Since /tmp is part of the memory
+resides) is slow. With the `--bcast=/tmp/myjob`, the executable will be
+copied to the `/tmp/myjob` directory. Since `/tmp` is part of the memory
 on the compute nodes, it can speed up the job startup time.
 
 ```bash
