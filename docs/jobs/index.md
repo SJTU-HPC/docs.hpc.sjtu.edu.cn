@@ -130,6 +130,16 @@ variables. This has two important consequences:
 `sacct` is used to report job or job step accounting information about
 active or completed jobs.
 
+```
+nersc$ sacct -j 864932
+       JobID    JobName  Partition    Account  AllocCPUS      State ExitCode 
+------------ ---------- ---------- ---------- ---------- ---------- -------- 
+864932       job.sh     regular         m1234         64  COMPLETED      0:0 
+```
+
+More information about `sacct` output format options can be found at the
+[SchedMD website](https://slurm.schedmd.com/sacct.html).
+
 ### sqs
 
 `sqs` is used to view job information for jobs managed by Slurm. This
@@ -145,6 +155,22 @@ nersc$ sqs
 JOBID   ST  USER   NAME         NODES REQUESTED USED  SUBMIT               PARTITION SCHEDULED_START      REASON
 864933  PD  elvis  first-job.*  2     10:00     0:00  2018-01-06T14:14:23  regular   avail_in_~48.0_days  None
 ```
+
+### sstat
+
+`sstat` is used to display various status information of a running job or job
+step. For example, one may wish to see the maximum memory usage (resident set
+size) of all tasks in a running job.
+
+```
+nersc$ sstat -j 864934 -o JobID,MaxRSS
+       JobID     MaxRSS 
+------------ ---------- 
+864934.0          4333K 
+```
+
+Information about `sstat` format options and other `sstat` examples are located
+at the [SchedMD website](https://slurm.schedmd.com/sstat.html).
 
 ### Email notification
 
