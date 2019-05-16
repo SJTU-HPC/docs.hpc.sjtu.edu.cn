@@ -1,5 +1,11 @@
 # Example job scripts
 
+For details of terminology used one this page please see
+our
+[jobs overview](../index.md). Correct
+[affinity settings](../affinity/index.md) are essential for good
+performance.
+
 ## Basic MPI batch script
 
 One MPI process per physical core.
@@ -21,14 +27,16 @@ One MPI process per physical core.
 
 ## Hybrid MPI+OpenMP jobs
 
-One MPI process per socket and 1 OpenMP thread per
-physical core
-
-!!! warning
+!!! warning 
 	In Slurm each hyper thread is considered a "cpu" so the
 	`--cpus-per-task` option must be adjusted accordingly. Generally
 	best performance is obtained with 1 OpenMP thread per physical
-	core.
+	core. [Additional details about affinity settings](../affinity/index.md).
+
+### Example 1
+
+One MPI process per socket and 1 OpenMP thread per
+physical core
 
 ??? example "Edison"
 	```slurm
@@ -43,6 +51,25 @@ physical core
 ??? example "Cori KNL"
 	```slurm
 	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/cori-knl/hybrid-mpi-openmp.sh"
+	```
+
+### Example 2
+
+28 MPI processes with 8 OpenMP threads per process, each OpenMP thread
+has 1 physical core
+
+!!! note
+	The addition of `--cpu-bind=cores` is useful for getting correct
+	[affinity settings](../affinity/index.md).
+
+??? example "Cori Haswell"
+	```slurm
+	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/cori-haswell/example2.sh"
+	```
+
+??? example "Cori KNL"
+	```slurm
+	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/cori-knl/example2.sh"
 	```
 
 ## Interactive
