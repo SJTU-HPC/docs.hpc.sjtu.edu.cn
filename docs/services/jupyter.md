@@ -115,6 +115,8 @@ These are just included in an `env` dictionary:
 }
 ```
 
+## Customizing Kernels with a Helper Shell Script
+
 Note however that these environment variables do not prepend or append to existing `PATH` or `LD_LIBRARY_PATH` settings.
 To use them you probably have to copy your entire path or library path, which is quite inconvenient.
 Instead you can use this trick that takes advantage of a helper shell script:
