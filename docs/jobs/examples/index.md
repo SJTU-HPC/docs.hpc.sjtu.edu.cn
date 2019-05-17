@@ -1,6 +1,6 @@
 # Example job scripts
 
-For details of terminology used one this page please see
+For details of terminology used on this page please see
 our
 [jobs overview](../index.md). Correct
 [affinity settings](../affinity/index.md) are essential for good
