@@ -43,6 +43,14 @@ day, but otherwise the NoMachine Client will automatically reconnect.
     directions below should fix this issue.** Make sure you edit this file while
     NoMachine is CLOSED/NOT RUNNING.
 
+Check out this video which shows you how to install NoMachine from
+scratch and configure using sshproxy. (Even if you don't want to use
+sshproxy, you might still find it helpful.)
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/sdlD6CUSE9o" frameborder="0"
+allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 1. Install sshproxy on your laptop and generate an SSH key
    (instructions are
    [here](https://www.nersc.gov/users/connecting-to-nersc/mfa/#toc-anchor-3)).
