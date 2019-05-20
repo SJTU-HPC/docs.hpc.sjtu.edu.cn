@@ -13,13 +13,9 @@ NoMachine provides functionality that allow a user to disconnect from the sessio
 and reconnect to it at a later time while keeping the state of all
 running applications inside the session.
 
-!!! caution
-    Using NoMachine requires both a recent NoMachine client and a
-    connection file specific to accessing NERSC (see below for
-    instructions to create a new connection file). Please make sure
-    you have recently updated versions of both of these.
-
 ## Installing the NoMachine Client
+
+Please make sure you have a recently updated version of the NoMachine client:
 
 ### Download latest NoMachine Client
 #### Windows ([Download](https://www.nomachine.com/download/download&id=16))
@@ -44,7 +40,8 @@ day, but otherwise the NoMachine Client will automatically reconnect.
     Since the most recent NoMachine update (Wednesday, April 10, 2019), using sshproxy
     is broken by default in NoMachine. NoMachine has provided a workaround which will require
     you to manually edit one of your config files. **Following step 9 in the
-    directions below should fix this issue.**
+    directions below should fix this issue.** Make sure you edit this file while
+    NoMachine is CLOSED/NOT RUNNING.
 
 1. Install sshproxy on your laptop and generate an SSH key
    (instructions are
@@ -68,9 +65,10 @@ day, but otherwise the NoMachine Client will automatically reconnect.
    If you do not create a desktop icon, you can just click the NoMachine icon and
    then select the name of your connection.
 9. **SSHPROXY WORKAROUND**: You will need to edit one of the NoMachine
-   config files on your local machine. First exit the NoMachine
+   config files on your local machine. YOU MUST EDIT THIS FILE WHILE NOMACHINE
+   IS CLOSED/NOT RUNNING. First exit the NoMachine
    program and then edit ```$HOME/.nx/config/player.cfg``` and
-   change the following key from ``library`` to ``native``: 
+   change the following key from ``library`` to ``native``:
    ```
    <option key="SSH client mode" value="native" />
 
