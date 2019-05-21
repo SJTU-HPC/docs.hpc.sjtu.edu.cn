@@ -29,7 +29,7 @@ Which notebook server should you use?  It depends:
 
 * Cori
     * Spawns Jupyter notebooks on special-purpose large-memory nodes of Cori (cori13, cori14, cori19)
-    * Exposes GPFS and Cori `$SCRATCH` though not Edison `$SCRATCH`
+    * Exposes GPFS and Cori `$SCRATCH`
     * Default Python software environment is the same as one of the modules found on Cori
     * Notebooks can submit jobs to Cori batch queues via simple Slurm Magic commands
 * Spin
