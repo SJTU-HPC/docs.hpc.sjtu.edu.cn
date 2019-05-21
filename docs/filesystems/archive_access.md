@@ -399,7 +399,7 @@ in a file name ".netrc" for use by hsi, htar, pftp, and most ftp clients.
 
 ### Automatic Token Generation for use at NERSC
 
-The first time you try to connect from a NERSC system (Cori, Edison,
+The first time you try to connect from a NERSC system (Cori, DTNs,
 etc.) using a NERSC provided client like HSI, HTAR, or pftp you will
 be prompted for your NIM password + one-time password which will
 generate a token stored in $HOME/.netrc. After completing this step

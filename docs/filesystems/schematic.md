@@ -3,11 +3,13 @@
 ![Cori Scratch](cori_scratch.png)
 
 # Edison Scratch
+Edison was decomissioned on May 13, 2019.
 
-![Cori Scratch](edison_scratch.png)
+![Edison Scratch](edison_scratch.png)
+
 # Project
 
-![Cori Scratch](project.png)
+![Project](project.png)
 
 
 # Abbreviations

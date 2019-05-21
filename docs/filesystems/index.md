@@ -2,11 +2,6 @@
 
 ## Summary
 
-NERSC file systems can be divided into two categories: local and
-global. Local file systems are only accessible on a single platform
-and provide the best performance; global file systems are accessible
-on multiple platforms, simplifying data sharing between platforms.
-
 File systems are configured for different purposes. Each machine has
 access to at least three different file systems with different levels
 of performance, permanence and available space.
@@ -17,8 +12,6 @@ of performance, permanence and available space.
 | home            | yes       | yes    | no      | user            |
 | common          | no        | no     | no      | repository      |
 | Cori scratch    | no        | no     | yes     | user            |
-| Edison scratch  | no        | no     | yes     | user            |
-| Edison scratch3 | no        | no     | yes     | special request |
 | HPSS            | no        | no     | no      | user            |
 
 !!! note
@@ -59,13 +52,11 @@ storage of data that is not frequently accessed.
 
 ### Scratch
 
-[Edison](../systems/edison/index.md) and [Cori](../systems/cori/index.md)
-each have dedicated, large, local, parallel scratch file systems based
-on Lustre. The scratch file systems are intended for temporary uses
-such as storage of checkpoints or application input and output.
+[Cori](../systems/cori/index.md) has a dedicated, large, local,
+parallel [scratch file system](cori-scratch.md) based on Lustre. The
+scratch file system is intended for temporary uses such as storage of
+checkpoints or application input and output.
 
-* [Cori scratch](cori-scratch.md)
-* [Edison scratch](edison-scratch.md)
 
 ### [Burst Buffer](cori-burst-buffer.md)
 
