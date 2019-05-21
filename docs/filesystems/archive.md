@@ -178,7 +178,7 @@ every year. Users charge their HPSS space usage to the HPSS repos of
 which they are members.
 
 Users can check their HPSS usage and quotas with the hpssquota command
-on Cori or Edison. You view usages on a user level:
+on Cori. You view usages on a user level:
 
 ```
 cori03> hpssquota -u usgtest

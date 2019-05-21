@@ -8,8 +8,6 @@
 | Global HOME     | 40 GB | 1 M    | -          |
 | Global common   | 10 GB | 1 M    | -          |
 | Cori SCRATCH    | 20 TB | 10 M   | 12 weeks   |
-| Edison SCRATCH  | 10 TB | 5 M    | 8 weeks    |
-| Edison SCRATCH3 | -     | -      | 8 weeks    |
 
 ## Quotas
 
@@ -30,12 +28,22 @@ To see current usage for home and available scratch filesystems:
 nersc$ myquota
 ```
 
-For project and global common the full path to the directory
+For project you can use
+```
+nersc$ prjquota <project_name>
+```
+
+or use `myquota` with the full path to the directory
 ```
 nersc$ myquota --path=/project/projectdirs/<project_name>
 ```
 
-or
+For global common software you can use
+```
+nersc$ cmnquota <project_name>
+```
+
+or use `myquota` with the full path to the directory
 
 ```
 nersc$ myquota --path=/global/common/software/<project_name>
