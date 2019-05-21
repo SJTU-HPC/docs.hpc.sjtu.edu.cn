@@ -18,7 +18,7 @@ When a large number of Python tasks are running simultaneously, especially if th
 Overcoming this problem is an area of active study and experimentation at NERSC and elsewhere.
   At the present we can make the following recommendations and offer various approaches to scaling Python applications at NERSC.
 
-### Using /global/common/edison and /global/common/cori
+### Using /global/common
 
 The /global/common file system is where NERSC staff install software.
 In August of 2015 this file system was configured so that it is mounted read-only from compute nodes, and client-side caching has been enabled.

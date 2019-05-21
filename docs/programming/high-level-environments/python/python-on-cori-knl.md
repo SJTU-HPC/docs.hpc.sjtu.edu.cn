@@ -7,7 +7,7 @@ vector register level.  However, for Python applications, the KNL
 architecture poses numerous challenges as well.
 
 * Python applications that do not already take advantage of on-node
-parallelism on Cori's Haswell or Edison's Ivy Bridge processors can be
+parallelism on Cori's Haswell processors can be
 expected to deliver markedly worse performance on Cori KNL.  While the
 KNLs are more energy-efficient, their lower clock rate and
 instructions retired per cycle are much lower than those
