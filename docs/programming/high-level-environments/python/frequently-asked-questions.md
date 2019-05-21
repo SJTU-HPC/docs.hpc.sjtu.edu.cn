@@ -34,16 +34,13 @@ need are likely to be met with a suggestion that the requester manage
 installation themselves.  Abandoned packages will not be installed but
 we may suggest alternatives.
 
-## Can I use virtualenv on Cori and Edison?
+## Can I use virtualenv on Cori?
 
-The virtualenv tool is not compatible with the conda tool used for
-maintaining Anaconda Python.  After the July 2017 Edison upgrade the
-default Python module on both systems has been Anaconda Python.  But
-this is not necessarily bad news as conda is an excellent replacement
-for virtualenv and addresses many of its shortcomings.  If you need
+The virtualenv tool is not compatible with the conda tool used for maintaining
+Anaconda Python.  But this is not necessarily bad news as conda is an excellent
+replacement for virtualenv and addresses many of its shortcomings.  If you need
 help migrating a custom Python environment from virtualenv to a conda
-environment, open a ticket
-with [NERSC Consulting](https://help.nersc.gov).
+environment, open a ticket with [NERSC Consulting](https://help.nersc.gov).
 
 Of course there is nothing preventing you from doing a from-source
 installation of Python of your own, and then using virtualenv if you

@@ -2,8 +2,8 @@
 
 [Python](https://www.python.org/about/) is an interpreted
 general-purpose high-level programming language.  You can
-use [Anaconda Python](https://docs.anaconda.com/anaconda/) on Cori and
-Edison through software environment modules.  Do **not** use the
+use [Anaconda Python](https://docs.anaconda.com/anaconda/) on Cori
+through software environment modules.  Do **not** use the
 system-provided Python `/usr/bin/python`.
 
 ## Anaconda Python
@@ -79,10 +79,8 @@ To leave an environment behind use:
     If you use csh or tcsh you will not be able to use the `source
     activate` syntax.  For csh users this is a shortcoming of the
     conda tool.  There are workarounds available on the web that work
-    to varying degrees.  This is particularly an issue on Edison where
-    the default shell setting is `/bin/csh`.  (We often find users are
-    able to switch to /bin/bash without much difficulty, that is one
-    solution.)
+    to varying degrees.  (We often find users are able to switch to /bin/bash
+    without much difficulty, that is one solution.)
 
     If you are a csh user and you do not need to install or manage
     packages once a conda environment has been provisioned, you can
@@ -141,11 +139,6 @@ using a recipe like the following:
     python setup.py build_exe --mpicc="$(which cc) -dynamic"
     python setup.py install
     python setup.py install_exe
-
-On Edison the procedure is slightly different.  The "build" command
-is:
-
-    LDFLAGS="-shared" python setup.py build --mpicc=$(which cc)
 
 The `build_exe` and `install_exe` steps install `python2.7-mpi` which
 can easily be relinked to `python-mpi` if the user prefers.  The
