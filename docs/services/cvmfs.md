@@ -10,16 +10,16 @@ such as a local file cache and squid web caches.
 
 ## NERSC Setup
 
-At NERSC CVMFS is mounted on Cori and Edison compute nodes as an NFS
-mount via DVMFS (Cray's I/O forwarder for remote mounted filesystems
-that is also used for /project filesystems).  It is also mounted on
-Cori and Edison login nodes. The NFS servers themselves mount cvmfs
-using FUSE in the normal way and we have dedicated local squid caches.
-We believe this setup to now be stable and perform well enough but
-users should please contact us if you see any problems, or if you need
-a new repository that is not currently available, via
-the [online help desk](https://help.nersc.gov/).  PDSF systems also
-provide CVMFS though via its 'normal' mechanism.
+At NERSC CVMFS is mounted on Cori compute nodes as an NFS mount via
+DVMFS (Cray's I/O forwarder for remote mounted filesystems that is
+also used for /project filesystems).  It is also mounted on Cori login
+nodes. The NFS servers themselves mount cvmfs using FUSE in the normal
+way and we have dedicated local squid caches.  We believe this setup
+to now be stable and perform well enough but users should please
+contact us if you see any problems, or if you need a new repository
+that is not currently available, via the [online help
+desk](https://help.nersc.gov/).  PDSF systems also provide CVMFS
+though via its 'normal' mechanism.
 
 ## Using CVMFS at NERSC
 
@@ -30,8 +30,7 @@ above doesn't change that all our mounted repositories appear under
     cori$ ls /cvmfs
     <various repositories>
 
-CVMFS is also available on Cori and Edison compute nodes with or
-without shifter
+CVMFS is also available on Cori compute nodes with or without shifter
 
 If using [shifter](../programming/shifter/how-to-use.md) you should
 specify the `--modules=cvmfs` flag to shifter to make that mount

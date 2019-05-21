@@ -26,7 +26,6 @@ user. The list of endpoints are provided in the table below.
 | --- | --- | ---
 | NERSC DTN | Multi-node, high performance transfer system with access to all NERSC Global File systems (NGF) as well as Cori Scratch |  Almost all data transfers needs into & out of NERSC
 | NERSC HPSS | Single node system connected directly to the NERSC HPSS tape archive | Remote transfers into & out of HPSS
-| NERSC Edison | Single node system connected to NGF and uniquely to the Edison scratch file system | Only recommended for access to  Edison scratch
 | NERSC Cori | Originally a dual-node system needed for accessing the Cori scratch file system. The endpoint is the same as NERSC DTN |  Use NERSC DTN instead
 | NERSC DTN-JGI | Single node system that was used to access JGI-specific file systems, which are now connected to the NERSC DTN servers. | Use NERSC DTN instead
 | NERSC SHARE | Single node system with read-only access to the project file system | Shared Globus endpoint
