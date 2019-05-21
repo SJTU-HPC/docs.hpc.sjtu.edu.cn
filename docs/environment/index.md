@@ -54,7 +54,7 @@ two huge advantages of the module approach:
 ### Module Command
 
 The following is a list of commands available in the Modules
-Environment tool available on Cori and Edison.
+Environment tool available on Cori.
 
 #### module help
 
@@ -169,18 +169,10 @@ depending on your shell:
 Users may have certain customizations that are appropriate for one
 NERSC platform, but not for others. This can be accomplished by
 testing the value of the environment variable `$NERSC_HOST`. For
-example, on Edison and Cori the default programming environment is
-Intel (PrgEnv-Intel). A C-shell user who wants to use the `GNU`
-programming environment should include the following module command in
-their `.cshrc.ext` file:
-
-#### Edison
-
-```bash
-if ($NERSC_HOST == "edison") then
-  module swap PrgEnv-intel PrgEnv-gnu
-endif
-```
+example, on Cori the default programming environment is Intel
+(PrgEnv-Intel). A C-shell user who wants to use the `GNU` programming
+environment should include the following module command in their
+`.cshrc.ext` file:
 
 #### Cori
 
