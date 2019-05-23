@@ -44,7 +44,7 @@ nersc$ module avail vasp
 ```
 
 The vasp modules generally define two important environment variables
-when loaded `PSEUDOPOTENTIAL_DIR` and `VDW_KENRAL_DIR` which are the
+when loaded `PSEUDOPOTENTIAL_DIR` and `VDW_KERNAL_DIR` which are the
 locations of the pseudopotential inputs and the `vdw_kernel.bindat`
 file used in dispersion calculations.
 
