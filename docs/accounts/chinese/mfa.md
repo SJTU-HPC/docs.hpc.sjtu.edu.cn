@@ -139,7 +139,7 @@ Password + OTP:
 **Authy用户请注意： Authy 显示的第一个一次性密码经常失效，因而导致登录失败。为了获取正确的一次性密码，请点击应用左上方的后退按钮，然后重新点击令牌。我们已经把这一情况反映给Authy。**
 请注意：一旦启用MFA，您在NIM中注册的ssh密钥（ssh key）将会失效。您必须在每次登录时进行MFA验证。请阅读下一章关于ssh代理（sshproxy）的内容以了解如何使用MFA（限每天一次），获取密钥用于自动化工作流程。
 ### ssh代理（sshproxy）
-NERSC开发了一项**ssh代理（sshproxy）**服务。它允许您使用MFA获取一个有时间限制的ssh密钥（默认24小时）。ssh代理提供一种单点登录(single-sign-on)NERSC系统的服务。一旦获取密钥，您可以使用它ssh到NERSC的各个系统（如Cori，Edison，Denovo，Genepool，PDSF，DTN等) 直到密钥失效。
+NERSC开发了一项**ssh代理（sshproxy）**服务。它允许您使用MFA获取一个有时间限制的ssh密钥（默认24小时）。ssh代理提供一种单点登录(single-sign-on)NERSC系统的服务。一旦获取密钥，您可以使用它ssh到NERSC的各个系统（如Cori，Denovo，Genepool，PDSF，DTN等) 直到密钥失效。
 ssh代理服务使用RESTful API获取密钥。NERSC提供一个可以在类Unix系统命令行上运行的bash客户端脚本，以及一个python脚本。而支持PuTTY的Windows客户端也将快上线。
 #### 安装客户端
 在类Unix平台（包括macOS）上，您可以直接在项目目录（project directory）中直接下载bash客户端sshproxy.sh：
@@ -245,7 +245,7 @@ $ ./sshproxy.sh -o mynersc
 如果您通常仅仅使用ssh代理默认的“nersc”密钥，您可以在配置文件中指定该密钥，无需每次都在命令行里输入。为此，请编辑__本地计算机__上的 **~/.ssh/config** 文件，加入以下这行：
 
 ```
-Host cori*.nersc.gov edison*.nersc.gov denovo.nersc.gov gpint*.nersc.gov gpweb*.nersc.gov genepool.nersc.gov pdsf.nersc.gov dtn*.nersc.gov
+Host cori*.nersc.gov denovo.nersc.gov gpint*.nersc.gov gpweb*.nersc.gov genepool.nersc.gov pdsf.nersc.gov dtn*.nersc.gov
     IdentityFile ~/.ssh/nersc
 ```
 
@@ -268,7 +268,7 @@ $                    # You're on cori
 您可以使用scp给NERSC系统上传或下载文件：
 
 ```
-$ scp myfile edison.nersc.gov:~
+$ scp myfile cori.nersc.gov:~
  *****************************************************************
  *                                                               *
  *                      NOTICE TO USERS                          *
@@ -293,33 +293,10 @@ Password + OTP:
 
 您可以在任何时候运行sshproxy.sh脚本，生成新的ssh密钥。
 ### 主机认证（Host Based Authentication）
-依照设置，NERSC高性能计算机在Cori，Edison和NX系统之间的ssh登录使用主机认证（Host Based Authentication）的方式进行身份验证。这意味着，一旦您远程登录到上面提到的任一主机，您就可以无需再次验证或使用ssh代理登录到其他NERSC主机。
+依照设置，NERSC高性能计算机在Cori和NX系统之间的ssh登录使用主机认证（Host Based Authentication）的方式进行身份验证。这意味着，一旦您远程登录到上面提到的任一主机，您就可以无需再次验证或使用ssh代理登录到其他NERSC主机。
 
-```
-$ ssh cori.nersc.gov
- *****************************************************************
- *                                                               *
- *                      NOTICE TO USERS                          *
- *                      ---------------                          *
-...
-$ nersc_host         # You're on Cori
-```
-cori
-
-```
-$ ssh edison         # Go to Edison from Cori
- *****************************************************************
- *                                                               *
- *                      NOTICE TO USERS                          *
- *                      ---------------                          *
-...
-$ nersc_host         # You're now on Edison
-```
-edison
-
-因为主机认证（Host Based Authentication）的方式已在NX上启用，您可以从NX上ssh到Cori或Edison而无需进行任何验证
 #### 在NoMachine(NX)上使用MFA
-当您登录到NX时，请一并输入您的NIM密码和六位数一次性密码。一旦成功登陆NX，再登录到Cori和Edison时就无需再进行验证。
+当您登录到NX时，请一并输入您的NIM密码和六位数一次性密码。一旦成功登陆NX，再登录到Cori时就无需再进行验证。
 
 #### 在MyProxy上使用MFA
 NERSC的MyProxy服务将要求激活MFA的用户使用NIM密码和一次性密码进行身份验证。
@@ -345,13 +322,12 @@ NERSC的MyProxy服务将要求激活MFA的用户使用NIM密码和一次性密�
 NIM用户入口也将要求启用MFA的用户使用MFA进行登录
 
 ## MFA在各用户系统的状态
-目前大多数可供用户通过ssh访问的系统都支持MFA，例如Cori，Edison等。网站和其他服务从2018年9月开始支持MFA。下面的表格显示NERSC各系统和服务对MFA的支持情况。
+目前大多数可供用户通过ssh访问的系统都支持MFA，例如Cori。网站和其他服务从2018年9月开始支持MFA。下面的表格显示NERSC各系统和服务对MFA的支持情况。
 ### 现已支持MFA
 
 | 身份验证        | 主机           |
 | ------------- |:-------------:|
 | SSH | Cori |
-| SSH | Edison|
 | SSH | Denovo |
 | SSH | PDSF |
 | SSH | Genepool |
@@ -411,7 +387,7 @@ NIM用户入口也将要求启用MFA的用户使用MFA进行登录
 
 **（问）我启用了MFA，但登录不断出错，怎么办？**
 
-如果这仅仅发生在某一特定主机上（例如Cori，Edison等），那么请通过该链接 [https://nim.nersc.gov](https://nim.nersc.gov/) 登录到您的NIM账户。这将清除累计的登录失败次数。然后再尝试登录到之前有问题的主机。
+如果这仅仅发生在某一特定主机上（例如Cori），那么请通过该链接 [https://nim.nersc.gov](https://nim.nersc.gov/) 登录到您的NIM账户。这将清除累计的登录失败次数。然后再尝试登录到之前有问题的主机。
 如果您多次输入错误的一次性密码，NERSC的MFA服务器将拒绝您的请求。在这种情况下，您需要等待15分钟才可以再次使用MFA服务。
 如果您使用sshproxy.sh脚本生成的ssh密钥进行身份验证，请检查密钥是否过期。
 使用ssh密钥进行身份验证的一个常用方法是使用ssh-agent（authentication agent）。把ssh私钥加入到ssh-agent，它会在远程服务器上找到相应的公钥进行身份验证。您可能在有意无意中使用这种方法登录（特别是当您在运行sshproxy.sh脚本时加上“-a”选项的时候）。Ssh-agent逐一检查保存的私钥，如果它尝试6次也找不到对应的密钥，ssh认证失败。当您在ssh-agent里储存太多密钥时，即便里面包含正确的密钥，只要它没有被用于最开始的6次验证中，验证都会失败。要知道ssh-agent中保存了多少密钥，请在本地计算机上运行“ssh-add -l”。如果您保存了很多密钥，您可以运行命令“ssh-add -D”删除它们，然后再次运行sshproxy.sh脚本。您也可以用“-d”选项选择性地删除密钥（更多说明请见ssh-add的man page）。
@@ -436,7 +412,7 @@ NIM用户入口也将要求启用MFA的用户使用MFA进行登录
 
 **（问）NERSC的所有主机是否都支持ssh主机认证（host based authentication）？**
 
-目前ssh主机认证仅被Cori，Edison和NX支持。如果您从Cori登陆到Edison，系统不会提示您输入NIM密码和一次性密码。而从NX上，您也可以无需经过再次验证就通过ssh登陆到Cori和Edison。然而当您从Cori或Edison，ssh到其他的主机（例如dtn01），您需要进行身份验证。反之亦然。我们正努力把主机认证功能扩展到其他系统。目前，您可以通过ssh代理获取ssh密钥，在不同主机之间跳转。
+目前ssh主机认证仅被Cori和NX支持。从NX上，您可以无需经过再次验证就通过ssh登陆到Cori。然而当您从Cori，ssh到其他的主机（例如dtn01），您需要进行身份验证。反之亦然。我们正努力把主机认证功能扩展到其他系统。目前，您可以通过ssh代理获取ssh密钥，在不同主机之间跳转。
 
 **（问）有没有Windows平台的ssh代理客户端？**
 
