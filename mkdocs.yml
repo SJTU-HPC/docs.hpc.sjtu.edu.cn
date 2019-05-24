@@ -168,6 +168,7 @@ nav:
           - OpenMP Resources : programming/programming-models/openmp/openmp-resources.md
           - Tools for OpenMP : programming/programming-models/openmp/openmp-tools.md
           - False Sharing Detection using VTune Amplifier : programming/programming-models/openmp/sharing-vtune.md
+        - UPC : programming/programming-models/upc.md
         - UPC++ : programming/programming-models/upcxx.md
         - Kokkos : programming/programming-models/kokkos.md
         - Raja : programming/programming-models/raja.md
