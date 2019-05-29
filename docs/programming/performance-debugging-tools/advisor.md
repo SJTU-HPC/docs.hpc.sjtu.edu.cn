@@ -25,13 +25,13 @@ The links to each capability above provide detailed information regarding how
 to use each feature in Advisor. For more information on Intel Advisor, visit
 [this page](https://software.intel.com/en-us/advisor).
 
-## Using Intel Advisor on Edison and Cori
+## Using Intel Advisor on Cori
 
 Either the command line tool, `advixe-cl` or the GUI can be used. We recommend
 that you use the command line tool `advixe-cl`  to collect data via batch jobs
-and then display results using the GUI `advixe-gui` on a login node on Edison.
+and then display results using the GUI `advixe-gui` on a login node.
 The GUI is very responsive if one uses the [NX](../../connect/nx.md) screen
-forwarding service available on Cori and Edison.
+forwarding service.
 
 ### Compiling Codes to Run with Advisor
 
@@ -135,28 +135,28 @@ greatly improved if used in conjunction with the free
 
 #### Launching Advisor in GUI Mode
 
-Log into Edison using the following command:
+Log into Cori using the following command:
 
 ```
-$ ssh -XY edison.nersc.gov
+$ ssh -XY cori.nersc.gov
 ```
 
 On the login node, load the Advisor module and then open the GUI:
 
 ```
-edison$ module load advisor
-edison$ advixe-gui
+cori$ module load advisor
+cori$ advixe-gui
 ```
 
 #### Viewing Results using the GUI
 
-![ ](images/Advisor-open-res.png)
+![advisor open result](images/Advisor-open-res.png)
 
 Use the "Open Result" button to browse for and open the ".advixeexp" file in
 the directory that contains the result. Then, you should see a screen similar
 to the following one which shows a list of top time-consuming loops:
 
-![ ](images/Advisor-Result.png)
+![advisor result](images/Advisor-Result.png)
 
 To exit the GUI, simply click the cross on the top left hand corner of the
 Advisor dialog box.
@@ -320,7 +320,7 @@ user@cori04:src> ldd toypush
 
 The argument to the `-project-dir` flag for the `advixe-cl` command instructs
 Advisor where to save the resulting profiling database from the application. On
-the Cori and Edison systems at NERSC, the database must be saved to a Lustre
+the Cori the database must be saved to a Lustre
 filesystem, e.g., `$SCRATCH`. If one attempts to save this database to a GPFS
 file system (`$HOME` or `/project`), the profiling process will appear to run
 correctly, but the final step of Advisor will fail with the following error:
@@ -331,14 +331,15 @@ advixe: Error: Unexpected internal error / invalid state
 
 ### Finalization step on KNL nodes
 
-The final step of Advisor's profiling process, called "finalization", is a
-serial process, and runs as a single thread on a single node. Because
-finalization depends on single-threaded performance of the processor, this step
-can be very time consuming on Cori KNL nodes. Consequently, it is recommended
-to add the flag `-no-auto-finalize` to the `advixe-cl` command when profiling a
-code running on KNL nodes. This defers the finalization step so that it can be
-executed, e.g., on a login node which has Haswell processors with much higher
-single-threaded performance.
+The final step of Advisor's profiling process, called "finalization",
+is a serial process, and runs as a single thread on a single
+node. Because finalization depends on single-threaded performance of
+the processor, this step can be very time consuming on Cori KNL
+nodes. Consequently, it is recommended to add the flag
+`-no-auto-finalize` to the `advixe-cl` command when profiling a code
+running on KNL nodes. This defers the finalization step so that it can
+be executed, e.g., on a login node which has Haswell processors with
+much higher single-threaded performance.
 
 One consequence of the `-no-auto-finalize` flag is that, when opening the GUI
 to display the profiling output, Advisor may warn that it cannot find the

@@ -1,11 +1,11 @@
 # Login Nodes
 
 Opening an [SSH connection](ssh.md) to NERSC systems results in a
-connection to a login node. Systems such as Cori and Edison have
-multiple login nodes which sit behind a load balancer. New connections
-will be assigned a random node. If an account has recently connected
-the load balancer will attempt to connect to the same login node as
-the previous connection.
+connection to a login node. Typically systems will have multiple login
+nodes which sit behind a load balancer. New connections will be
+assigned a random node. If an account has recently connected the load
+balancer will attempt to connect to the same login node as the
+previous connection.
 
 ## Usage
 

@@ -33,8 +33,8 @@ Two libraries unique to Cray are:
    further information, see intro_blas3(3s).
 
 !!! note
-	Additional details are available in the `intro_libsci` man pages available on Cori and Edison with the command
+	Additional details are available in the `intro_libsci` man pages.
 
 	```shell
-	man intro_libsci
+	cori$ man intro_libsci
 	```

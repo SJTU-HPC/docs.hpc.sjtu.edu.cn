@@ -18,7 +18,7 @@ You will also need:
 * An account on Spin. Any user who wants an account in Spin must first complete
   a hands on Spin workshop. For more information, see [Spin Getting Started
   Guide: How do I get started?](index.md)
-* SSH access on a NERSC Login node, such as cori.nersc.gov or edison.nersc.gov.
+* SSH access on a NERSC Login node, such as cori.nersc.gov.
 * Access to a Project directory on the NERSC Global Filesystem, and the ability
   to run `chmod o+x` on that directory to allow the user 'nobody' to read files
   in that directory. This requirement is explained in detail below in [Part 3:
@@ -124,7 +124,7 @@ If you have an account, test your Spin account by quickly logging into the Spin 
         elvis@laptop:~
 
 
-### Generate API keys on a system such as Cori or Edison
+### Generate API keys
 
 Communication with the Rancher server requires an NERSC account and an API key
 tied to that account. Follow the steps below to generate an API key.

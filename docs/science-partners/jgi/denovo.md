@@ -170,26 +170,25 @@ Check the man pages for more details of each command's options
 
 ## Shifter
 
-Shifter on Denovo behaves much the same as on Cori or Edison. You do
-not need to load any modules for Shifter, it's in the default
-$PATH. Shifter implements a limited subset of the Docker functionality
-which can be safely supported at NERSC. Shifter is able to run images,
-and volume mount to access filesystems. Specifying ports or
-environment variables is not supported, nor are more advanced features
-like linked containers. In general, you're expected to simply run a
-script or binary, with optional arguments, with input and output
-mapped to the global filesystems.
+Shifter on Denovo behaves much the same as on Cori. You do not need to load any
+modules for Shifter, it's in the default $PATH. Shifter implements a limited
+subset of the Docker functionality which can be safely supported at NERSC.
+Shifter is able to run images, and volume mount to access filesystems.
+Specifying ports or environment variables is not supported, nor are more
+advanced features like linked containers. In general, you're expected to simply
+run a script or binary, with optional arguments, with input and output mapped
+to the global filesystems.
 
 You can find more information on Shifter on the Using Shifter and
 Docker page, here are a few simple example commands:
 
 ### Running an image interactively
 
-Denovo currently supports running images on the login nodes. Cori and
-Edison do not. You should run on the login nodes only to debug or test
-images, not to run something that takes longer than a few
-minutes. Once you know that your container runs, please submit a batch
-job to run it, rather than use the login nodes.
+Denovo currently supports running images on the login nodes. Cori does not. You
+should run on the login nodes only to debug or test images, not to run
+something that takes longer than a few minutes. Once you know that your
+container runs, please submit a batch job to run it, rather than use the login
+nodes.
 
 ```bash
 denovo> shifter --image=registry.services.nersc.gov/jgi/hmmer:latest hmmscan -h
@@ -234,10 +233,9 @@ denovo>
 
 ### Running a shifter image in a batch script:
 
-Shifter is integrated with Slurm on Cori, Edison and Denovo, which
-means that you can tell Slurm to pull the shifter image you need, and
-keep the body of your script cleaner. For example, you can submit the
-following script to Slurm:
+Shifter is integrated with Slurm on Cori and Denovo, which means that you can
+tell Slurm to pull the shifter image you need, and keep the body of your script
+cleaner. For example, you can submit the following script to Slurm:
 
 ```bash
 denovo> cat shifter.sh

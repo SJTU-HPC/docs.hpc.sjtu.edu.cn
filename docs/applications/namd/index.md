@@ -18,11 +18,6 @@ such that *only* the number of nodes needs to be changed.
     --8<-- "docs/applications/namd/cori-hsw.sh"
     ```
 
-??? example "Edison"
-    ```shell
-    --8<-- "docs/applications/namd/edison.sh"
-    ```
-
 ## Support
 
  * [User's Guide](https://www.ks.uiuc.edu/Research/namd/current/ug/)

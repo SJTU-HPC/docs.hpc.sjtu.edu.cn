@@ -39,10 +39,10 @@ performance.
 
 ## MPI-I/O Hints
 
-Several environment variables can be used to control the behavior of
-collective buffering on Edison and Cori. The MPICH_MPII/O_HINTS
-variable specifies hints to the MPI-I/O library that can, for instance,
-override the built-in heuristic and force collective buffering on:
+Several environment variables can be used to control the behavior of collective
+buffering on Cori. The MPICH_MPII/O_HINTS variable specifies hints to the
+MPI-I/O library that can, for instance, override the built-in heuristic and
+force collective buffering on:
 
 ```shell
 export MPICH_MPIIO_HINTS="*:romio_cb_write=enable:romio_ds_write=disable"
@@ -68,4 +68,4 @@ check against spelling errors in your hints.
 
 More detail on MPICH runtime environment variables, including a full
 list and description of MPI-I/O hints, is available from the intro_mpi
-man page on Edison.
+man page on Cori.

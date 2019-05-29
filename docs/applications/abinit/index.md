@@ -19,15 +19,16 @@ nersc$ module avail abinit
 See the [example jobs page](../../jobs/examples/index.md) for additional
 examples and infortmation about jobs.
 
-### Edison
+### Cori
 
-```
+```slurm
 #!/bin/bash
 #SBATCH --qos=regular
 #SBATCH --time=01:00:00
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=24
+#SBATCH --ntasks-per-node=32
 #SBATCH --cpus-per-task=2
+#SBATCH --constraint=haswell
 
 module load abinit
 srun abinit < example.in

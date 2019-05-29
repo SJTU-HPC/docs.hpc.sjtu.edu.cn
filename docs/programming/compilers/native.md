@@ -1,6 +1,6 @@
 # Native compilers on NERSC systems
 
-Cori and Edison provide three compiler suites:
+Cori provides three compiler suites:
 
   * Intel
   * GNU
@@ -25,7 +25,7 @@ who require an open-source LLVM-based compiler toolchain.
 ## Intel
 
 The Intel compiler suite is available via the `PrgEnv-intel` module, and is loaded by
-default on Cori and Edison. The native compilers in this suite are:
+default on Cori. The native compilers in this suite are:
 
   * C: `icc`
   * C++: `icpc`

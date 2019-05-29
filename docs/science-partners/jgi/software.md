@@ -27,7 +27,7 @@ training slides are also available. The main advantages of using
 Shifter are:
 
 * Using containers makes your workflow portable, across Cori, Denovo,
-  Edison, and to cloud resources
+  and to cloud resources
 * You no longer need to depend on system features, such as specific
   compiler versions, software libraries or other tools
 * Because Shifter uses Docker containers, you can build and debug
@@ -45,7 +45,7 @@ roughly as follows:
 1. use Docker on a laptop or desktop machine to build a Docker
    container for your software
 2. push that container to Dockerhub or another Docker container
-   registry use Shifter on Cori, Edison or Denovo to pull that image to
+   registry use Shifter on Cori or Denovo to pull that image to
    the NERSC Shifter registry
 3. use Shifter on a batch node to run that container, and perform
    useful work

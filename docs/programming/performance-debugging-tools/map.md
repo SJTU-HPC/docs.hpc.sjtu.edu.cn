@@ -2,11 +2,11 @@
 
 MAP, a major component of the tool 'Arm Forge' (formerly called
 Allinea Forge), is a parallel profiler with a simple graphical user
-interface. It is installed on Edison and Cori.
+interface. It is installed on Cori.
 
 Note that the performance of the X Windows-based MAP Graphical User
 Interface can be greatly improved if used in conjunction with the
-free [NX software]((https://docs.nersc.gov/connect/nx/)).
+free [NX software](../../connect/nx.md).
 
 ## Introduction
 
@@ -16,7 +16,7 @@ and MPI codes.
 
 The Arm Forge User Guide available from the [Arm Forge web
 page](https://developer.arm.com/docs/101136/latest/arm-forge) or
-`$ALLINEA_TOOLS_DOCDIR/userguide.pdf` on Cori or Edison after loading
+`$ALLINEA_TOOLS_DOCDIR/userguide.pdf` on Cori after loading
 an `allinea-forge` module is a good resource for learning more
 about some of the advanced MAP features.
 
@@ -134,20 +134,20 @@ enabled. This could mean using the `-X` or `-Y` option to ssh. The
 `-Y` option often works better for macOS.
 
 ```Shell
-$ ssh -Y username@edison.nersc.gov
+$ ssh -Y username@cori.nersc.gov
 ```
 
 After loading the `allinea-forge` module and compiling with the
-`-g` option, request an interactive session on Edison or Cori.
+`-g` option, request an interactive session:
 
 ```Shell
-nersc$ salloc -p debug -N numNodes
+cori$ salloc -q interactive -N numNodes -C knl
 ```
 
 Load the `allinea-forge` module if you haven't loaded it yet:
 
 ```shell
-nersc$ module load allinea-forge
+nerscc$ module load allinea-forge
 ```
 
 Then launch the profiler with either
@@ -317,7 +317,7 @@ Make sure you have the most recent version of the `system.config`
 configuration file. The first time you run DDT, you pick up a master
 template which then gets stored locally in your home directory in
 `~/.allinea/${NERSC_HOST}/system.config` where `${NERSC_HOST}` is the
-machine name: cori or edison. If you are having problems launching DDT
+machine name. If you are having problems launching DDT
 you could be using an older verion of the `system.config` file and you
 may want to remove the entire directory:
 
@@ -339,12 +339,11 @@ directory and restart ddt.
 nersc$ rm -rf ~/.fontconfig
 ```
 
-Make sure you are requesting an interactive batch session on Cori
-or Edison.  NERSC has configured DDT to run from the interactive
-batch jobs.
+Make sure you are requesting an interactive batch session.  NERSC has
+configured DDT to run from the interactive batch jobs.
 
 ```Shell
-nersc$ salloc -q debug -N numNodes
+cori$ salloc -q interactive -N numNodes -C knl
 ```
 
 Finally make sure you have compiled your code with `-g`. If none
@@ -356,4 +355,4 @@ of these tips help, please contact the consultants via
 Previous tutorial presentation slides are available on how to use
 MAP:
 
--   [Allinea-MAP-perfreport-201702.pdf](http://www.nersc.gov/assets/Uploads/Allinea-MAP-perfreport-201702.pdf)
+- [Allinea-MAP-perfreport-201702.pdf](http://www.nersc.gov/assets/Uploads/Allinea-MAP-perfreport-201702.pdf)

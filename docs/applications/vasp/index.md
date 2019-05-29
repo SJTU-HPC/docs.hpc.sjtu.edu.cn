@@ -13,7 +13,7 @@ schemes and an efficient Pulay mixing.
 VASP is available only to NERSC users who already have an existing
 VASP license.  If you have a VASP license, send your license
 information to the VASP support at Vienna at
-vasp.materialphysik@univie.ac.at (and copy vasp_licensing@nersc.gov)
+vasp.materialphysik@univie.ac.at (and copy <vasp_licensing@nersc.gov>)
 requesting that they confirm your VASP license to NERSC staff at
 vasp_licensing@nersc.gov in order to gain access to the VASP binaries
 at NERSC.
@@ -66,25 +66,15 @@ However, some older versions of the vasp module provide:
 
 ### Basic
 
-#### Edison
-
-```bash
---8<-- "docs/applications/vasp/examples/edison-simple.sh"
-```
-
 #### Cori Haswell
 
-!!!note
-	The additional `--constraint=haswell` option is needed because
-	Cori contains both Haswell and KNL nodes.
-
-```bash
+```slurm
 --8<-- "docs/applications/vasp/examples/cori-haswell-simple.sh"
 ```
 
 #### Cori KNL
 
-!!! note
+!!! warn
 	A different module is needed besides the default for the KNL
 	optimized code.
 
@@ -93,6 +83,6 @@ However, some older versions of the vasp module provide:
 	will be dedicated to the operating system (`--core-spec=2`) to
 	improve efficiency.
 
-```bash
+```slurm
 --8<-- "docs/applications/vasp/examples/cori-knl-simple.sh"
 ```

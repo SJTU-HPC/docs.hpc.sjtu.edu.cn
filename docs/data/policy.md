@@ -45,10 +45,10 @@ data analysis.
 
 ### Scratch File Systems
 
-Our two primary computational systems, Edison and Cori, have dedicated
-parallel file systems based on Lustre that are optimized for
-short-term storage of application output and checkpoints.
- 
+Our primary computational system, Cori, has a dedicated parallel file system
+based on Lustre that is optimized for short-term storage of application output
+and checkpoints.
+
 !!! warning "Purging on Scratch File Systems"
     Running commands with the intent of circumventing purge policies 
     on scratch filesystems is **not allowed**.
@@ -341,12 +341,11 @@ and PI Proxies can request a special directory by contacting NERSC consulting.
 
 #### Intent:
 
-Cori and Edison each have large, local, parallel scratch file systems
-dedicated to the users of those systems. The scratch file systems are
-intended for temporary uses such as storage of checkpoints or
-application result output. If you need to retain files longer than
-the purge period (see below), the files should be copied to the
-project or home file systems, or to HPPS.
+Cori has a large, local, parallel scratch file system dedicated to the users of
+those systems. The scratch file system is intended for temporary uses such as
+storage of checkpoints or application result output. If you need to retain
+files longer than the purge period (see below), the files should be copied to
+the project or home file systems, or to HPSS.
 
 !!! warning "Purging on Scratch File Systems"
     Running commands with the intent of circumventing purge policies 
@@ -373,13 +372,12 @@ account is deactivated.
 
 #### Default Allocation:
 
-Each user is allocated a directory in the local scratch file systems
-and in the global scratch file system. The default local scratch
-quota on Cori and Edison is 20 TB and 10TB. Users may request an
-increase in quota using a web form. Quota increase requests are
-evaluated by the NERSC data group team, which considers the merits and
-duration of the request, and also must consider the amount of disk
-space available.
+Each user is allocated a directory in the local scratch file systems and in the
+global scratch file system. The default local scratch quota on Cori is 20 TB.
+Users may request an increase in quota using a web form. Quota increase
+requests are evaluated by the NERSC data group team, which considers the merits
+and duration of the request, and also must consider the amount of disk space
+available.
 
 ### Burst Buffer
 

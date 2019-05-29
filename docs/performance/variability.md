@@ -17,8 +17,7 @@ in the case of many `MPI_Alltoall` operations.
 	Consider adding `module load craype-hugepages2M` to
 	`~/.bashrc.ext`.
 
-For more details see the manual pages (`man intro_hugepages`) on Cori
-or Edison.
+For more details see the manual pages (`man intro_hugepages`) on Cori.
 
 ## Location of executables
 
@@ -27,7 +26,7 @@ Compilation of executables should be done in `$HOME` or
 start of a job with `sbcast` to greatly improve job startup times and
 reduce run-time variability in some cases:
 
-```bash
+```slurm
 sbcast -f --compress ./my_program.x /tmp/my_program.x
 srun -n 1024 -c 2 --cpu-bind=cores /tmp/my_program.x
 ```
@@ -38,10 +37,10 @@ use [shifter](../programming/shifter/overview.md).
 
 ## Topology
 
-Cori and Edison both use a Cray Aries network with a Dragonfly
-topology. Slurm has some options to control the placement of parallel
-jobs in the system. A "compact" placement can isolate a job from other
-traffic on the network.
+Cori has a Cray Aries network with a Dragonfly topology. Slurm has
+some options to control the placement of parallel jobs in the
+system. A "compact" placement can isolate a job from other traffic on
+the network.
 
 Slurm's topology awareness can enabled by adding --switches=N to your
 job script, where N is the number of switches for your job. Each
@@ -50,7 +49,7 @@ effective for jobs using less than ~300 nodes and 2 or fewer
 switches. Note: requesting fewer switches may increase the time it
 takes for your job to start.
 
-```
+```slurm
 #SBATCH -N 256
 #SBATCH --switches=2
 ```
@@ -69,7 +68,7 @@ variability.
 *  use check-mpi.*.cori and check-hybrid.*.cori to
    check affinity settings
 
-```bash
+```slurm
 user@nid01041:~> srun -n 8 -c 4 --cpu-bind=cores check-mpi.intel.cori|sort -nk 4
 Hello from rank 0, on nid07208. (core affinity = 0,68,136,204)
 Hello from rank 1, on nid07208. (core affinity = 1,69,137,205)
@@ -88,7 +87,7 @@ cores not in use by user applications, where n is the number of cores
 to dedicate to the OS. The example shows 4 cores per node on KNL for
 the OS and the other 64 for the application.
 
-```bash
+```slurm
 #SBATCH -S 4
 srun -n 128 -c 4 --cpu-bind=cores /tmp/my_program.x
 ```
@@ -97,7 +96,7 @@ srun -n 128 -c 4 --cpu-bind=cores /tmp/my_program.x
 
 This example is for Cori KNL.
 
-```bash
+```slurm
 #!/bin/bash
 #SBATCH --nodes=2
 #SBATCH --constraint=knl,quad,cache
@@ -113,4 +112,3 @@ module load craype-hugepages2M
 sbcast -f  --compress ./my_program.x /tmp/my_program.x
 srun --cpu-bind=cores /tmp/my_program.x
 ```
-

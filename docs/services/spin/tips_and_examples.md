@@ -1,7 +1,7 @@
 # CLI Tips & Examples
 
 The Rancher CLI is used to manage your Rancher applications. The CLI
-is available on Cori & Edison to allow NERSC users to manage their
+is available on Cori to allow NERSC users to manage their
 containers, and will soon be available on Denovo.
 
 For more information on using the Rancher CLI,

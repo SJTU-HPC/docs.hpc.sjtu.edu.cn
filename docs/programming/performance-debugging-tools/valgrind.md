@@ -70,10 +70,7 @@ nersc$ valgrind: Unrecognised instruction at address 0x6b2f2b
 accompanied by your program raising SIGILL and exiting. While this
 may be bug in your program (which caused it to jump to a non-code
 location), it may also be an instruction that is not correctly
-handled by Valgrind. For example, when using the Intel compilers
-on Edison, you may find this error is raised within the
-`__intel_sse4_strtok()` library function, which is in turn using the
-currently (Nov. 2014) unhandled pcmpistrm SSE4.2 instruction.
+handled by Valgrind.
 
 There are a couple of ways to work around issues related to
 unrecognized instructions. The simplest is often to make sure that

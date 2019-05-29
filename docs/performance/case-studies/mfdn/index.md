@@ -6,7 +6,7 @@ Many-Fermion Dynamics---nuclear, or MFDn, is a configuration
 interaction (CI) code for nuclear structure calculations. It is a
 platform independent Fortran 90 code using a hybrid MPI/ OpenMP
 programming model,and is being used on current supercomputers, such as
-Edison at NERSC, for ab initio calculations of atomic nuclei using
+Cori at NERSC, for ab initio calculations of atomic nuclei using
 realistic nucleon-nucleons and three-nucleon forces. A calculation
 consists of generating a many-body basis space, constructing the
 many-body Hamiltonian matrix in this basis, obtaining the lowest

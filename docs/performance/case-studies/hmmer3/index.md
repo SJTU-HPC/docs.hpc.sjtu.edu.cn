@@ -580,7 +580,7 @@ thread-scaling difference between the original `hmmsearch` driver and
 ![thread scaling of hmmsearch and hpc_hmmsearch](old_vs_new_thread.png)
 
 Fig. 4 presents data obtained by running both drivers on the Edison system with
-the same configuration as used to create Fig. 1 (Edison is architecturally
+the same configuration as used to create Fig. 1 (Edison was architecturally
 analogous to Cori Haswell, but one generation older with 24 cores per node
 instead of 32). Speedup is measured by thread scaling `hmmsearch` (light) and
 `hpc_hmmsearch` (dark) on one Edison Ivy Bridge node with 24 cores. Whisker

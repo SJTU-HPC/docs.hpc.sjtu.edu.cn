@@ -1,9 +1,8 @@
-Edison and Cori use Lustre as their $SCRATCH file systems. For many
-applications a technique called file striping will increase I/O
-performance. File striping will primarily improve performance for
-codes doing serial I/O from a single node or parallel I/O from multiple
-nodes writing to a single shared file as with MPI-I/O, parallel HDF5 or
-parallel NetCDF.
+Cori uses Lustre as its $SCRATCH file system. For many applications a technique
+called file striping will increase I/O performance. File striping will
+primarily improve performance for codes doing serial I/O from a single node or
+parallel I/O from multiple nodes writing to a single shared file as with
+MPI-I/O, parallel HDF5 or parallel NetCDF.
 
 The Lustre file system is made up of an underlying set of I/O servers
 and disks called Object Storage Servers (OSSs) and Object Storage
@@ -14,24 +13,18 @@ multiple OST's simultaneously increases the available I/O bandwidth.
 
 # NERSC Striping Shortcuts
 
-*    The default striping is set to 1
-on Edison's $SCRATCH (backed by either /scratch1 and /scratch2),
-8 on Edison's $SCRATCH3, and is 1 on Cori's
-$SCRATCH. (Edison's striping recommendation is under investigation)
+*    The default striping is set to  1 on Cori's $SCRATCH.
 *    This means that each file created with the default striping is split
-across 1 OSTs on Edison's primary scratch filesystems, and 8 on
-Edison's specialized $SCRATCH3. On Cori, the default striping
-allocates 1 OST for the file.
-*    Selecting the best striping can be
-complicated since striping a file over too few OSTs will not take
-advantage of the system's available bandwidth but striping over too
-many will cause unnecessary overhead and lead to a loss in
-performance.
-*    NERSC has provided striping command shortcuts based on
-file size to simplify optimization on both Edison and Cori.
-*    Users who want more detail should read the sections below and open a ticket
-with [NERSC Consulting](https://help.nersc.gov) if there are
-additional questions.
+     across 1 OSTs on Cori.
+*    Selecting the best striping can be complicated since striping a file over
+     too few OSTs will not take advantage of the system's available bandwidth
+     but striping over too many will cause unnecessary overhead and lead to a
+     loss in performance.
+*    NERSC has provided striping command shortcuts based on file size to
+     simplify optimization on Cori.
+*    Users who want more detail should read the sections below and open a
+     ticket with [NERSC Consulting](https://help.nersc.gov) if there are
+     additional questions.
 
 NERSC also provide empirical recommendations for striping based on I/O pattern
 
@@ -130,5 +123,5 @@ nersc$ lfs setstripe --size [stripe-size] --index [OST-start-index]
 | Option         | Description              | Default              |
 |:--------------:|--------------------------|----------------------|
 | stripe-size    | Number of bytes write on one OST before cycling to the next. Use multiples of 1MB. Default has been most successful. |1MB|
-| stripe-count   | Number of OSTs a file exists on|1 on Edison, 8 on Edison's /scratch3, 1 on Cori|
+| stripe-count   | Number of OSTs a file exists on|1 on Cori|
 | OST-start-index| Starting OST. Default highly recommended| -1 (System follows a round robin procedure to optimize creation of files by all users.)|

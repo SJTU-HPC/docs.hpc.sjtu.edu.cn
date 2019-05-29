@@ -25,8 +25,7 @@ shared across all systems, you may want to install your software
 stacks into separate subdirectories depending on the system or the
 processing architecture. For some general programs you can use the
 same installs across all systems, but for best performance, we
-recommend separate installs for each system and architecture (e.g. for
-edison vs. for Cori KNL).
+recommend separate installs for each system and architecture.
 
 !!! warning 
      Global common is mounted read-only on the computes to

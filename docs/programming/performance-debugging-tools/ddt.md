@@ -2,7 +2,7 @@
 
 Distributed Debugging Tool (DDT), a major component of the tool
 'Arm Forge' (formerly called Allinea Forge), is a parallel GUI
-debugger installed on Edison and Cori.
+debugger.
 
 ## Introduction
 
@@ -16,7 +16,7 @@ features from Totalview are available with DDT.
 
 The Arm Forge User Guide available from the [Arm Forge web
 page](https://developer.arm.com/docs/101136/latest/arm-forge) or
-`$ALLINEA_TOOLS_DOCDIR/userguide.pdf` on Cori or Edison after loading
+`$ALLINEA_TOOLS_DOCDIR/userguide.pdf` on Cori after loading
 an `allinea-forge` module is a good resource for learning more
 about some of the advanced DDT features.
 
@@ -85,14 +85,14 @@ enabled. This could mean using the `-X` or `-Y` option to ssh. The
 `-Y` option often works better for macOS.
 
 ```Shell
-$ ssh -Y username@edison.nersc.gov
+$ ssh -Y username@cori.nersc.gov
 ```
 
 After loading the `allinea-forge` module and compiling with the
-`-g` option, request an interactive session on Edison or Cori.
+`-g` option, request an interactive session:
 
 ```Shell
-nersc$ salloc -p debug -N numNodes
+nersc$ salloc -q interactive -N numNodes -C knl
 ```
 
 Then launch the debugger with either
@@ -155,7 +155,7 @@ Cori, as shown in the following example.
 
 Make sure that you uncheck the 'Proxy through login node' box.
 
-The configuration settings for Edison should be as follows:
+The configuration settings should be as follows:
 
 ![arm_forge_remote_client_edison_183](images/arm_forge_remote_client_edison_183.png)
 
@@ -172,9 +172,8 @@ and
 	machines, one with the machine name itself and the other with one of
 	its MOM nodes (`wyang@cmom02.nersc.gov` in the above example).
 
-Edison has 6 MOM nodes: edimom01, edison02, ..., and edimom06.
-
-Cori's MOM node names are cmom02 and cmom05.
+!!! note
+	Cori's MOM node names are cmom02 and cmom05.
 
 For the 'Remote Installation Directory', use the path for the default
 `allinea-forge` module. The value for the 'Remote Script' field
@@ -185,10 +184,6 @@ for the `allinea-forge` module are
 `/global/common/sw/cray/cnl6/haswell/allinea-forge/default` and
 `/global/common/sw/cray/cnl6/haswell/allinea-forge/remote-init`,
 respectively.
-
-For Edison the correct paths are
-`/global/common/sw/cray/cnl6/ivybridge/allinea-forge/default` and
-`/global/common/sw/cray/cnl6/ivybridge/allinea-forge/remote-init`.
 
 To start a debugging session on a machine, you need to login to the
 corresponding machine. This chooses the configuration for the machine
@@ -209,7 +204,7 @@ start an interactive batch session there, and run ddt with with the
 option `--connect` as follows:
 
 ```Shell
-nersc$ ssh edison.nersc.gov
+nersc$ ssh cori.nersc.gov
 [snip]
 nersc$ salloc -N 1 -t 30:00 -p debug -C haswell
 [snip]
@@ -239,7 +234,7 @@ Make sure you have the most recent version of the `system.config`
 configuration file. The first time you run DDT, you pick up a master
 template which then gets stored locally in your home directory in
 `~/.allinea/${NERSC_HOST}/system.config` where `${NERSC_HOST}` is the
-machine name: cori or edison. If you are having problems launching DDT
+machine name. If you are having problems launching DDT
 you could be using an older verion of the `system.config` file and you
 may want to remove the entire directory:
 
@@ -261,12 +256,11 @@ directory and restart ddt.
 nersc$ rm -rf ~/.fontconfig
 ```
 
-Make sure you are requesting an interactive batch session on Cori
-or Edison.  NERSC has configured DDT to run from the interactive
-batch jobs.
+Make sure you are requesting an interactive batch session.  NERSC has
+configured DDT to run from the interactive batch jobs.
 
 ```Shell
-nersc$ salloc -q debug -N numNodes
+cori$ salloc -q interactive -N numNodes -C knl
 ```
 
 Finally make sure you have compiled your code with `-g`. A large number
@@ -340,12 +334,12 @@ processors.
 ### Static linking
 
 To access the memory debugging feature, you must first build your code
-for memory debugging. On Cori and Edison, you have to follow certain
-steps. Below is a table showing steps for building a static executable
-using different compilers for memory debugging on Edison and Cori. The
-linking step is made of two parts. The first is to run in verbose mode
-using the `-v` flag to show all the linking steps taken. The second step
-is to rerun the last linker line after inserting some more options.
+for memory debugging. On Cori you have to follow certain steps. Below
+is a table showing steps for building a static executable using
+different compilers for memory debugging on Cori. The linking step is
+made of two parts. The first is to run in verbose mode using the `-v`
+flag to show all the linking steps taken. The second step is to rerun
+the last linker line after inserting some more options.
 
 *   GNU
 	```Shell

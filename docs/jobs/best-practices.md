@@ -5,7 +5,7 @@
 Due to backfill scheduling short and variable length jobs generally
 start quickly resulting in much better job throughput.
 
-```bash
+```slurm
 #SBATCH --time-min=<lower_bound>
 #SBATCH --time=<upper_bound>
 ```
@@ -20,17 +20,19 @@ checkpoint/restart chained together.
 
 ## I/O performance
 
-Edison and Cori each have dedicated large, local, parallel scratch
-file systems.  The scratch file systems are intended for temporary
-uses such as storage of checkpoints or application input and
-output. Data and I/O intensive applications should use the local
-scratch (or Burst Buffer) filesystems.
+Cori has dedicated large, local, parallel scratch file systems.  The
+scratch file systems are intended for temporary uses such as storage
+of checkpoints or application input and output. Data and I/O intensive
+applications should use the local scratch (or Burst Buffer)
+filesystems.
 
 These systems should be referenced with the environment variable
 `$SCRATCH`.
 
-!!! tip
-	On Cori the [Burst Buffer](examples/index.md#burst-buffer-test) offers the best I/O performance.
+!!! tip 
+	On Cori
+	the [Burst Buffer](examples/index.md#burst-buffer-test) offers the
+	best I/O performance.
 
 !!! warn
 	Scratch filesystems are not backed up and old files are
@@ -42,7 +44,7 @@ A batch job will not start if the specified file system is unavailable
 due to maintenance or an outage or if a performance issue with
 filesystem is detected.
 
-```bash
+```slurm
 #SBATCH --license=SCRATCH,project
 ```
 
@@ -56,23 +58,10 @@ filesystem is detected.
 * `seqfs`
 * `cvmfs`
 
-### Edison
-
-* `scratch1` (or `SCRATCH`)
-* `scratch2` (or `SCRATCH`)
-* `scratch3`
-* `cscratch1`
-* `project`
-* `projecta`
-* `projectb`
-* `dna`
-* `seqfs`
-* `cvmfs`
-
 ## Running Large Jobs (over 1500 MPI tasks)
 
 Large jobs may take a longer to start up, especially on KNL nodes. The
-srun option --bcast=<destination_path> is recommended for large jobs
+srun option `--bcast=<destination_path>` is recommended for large jobs
 requesting over 1500 MPI tasks. By default Slurm loads the executable
 to the allocated compute nodes from the current working directory,
 this may take long time when the file system (where the executable
@@ -92,14 +81,14 @@ For jobs which are sensitive to interconnect (MPI) performance and
 utilize less than ~300 nodes it is possible to request that all nodes
 are in a single Aries dragonfly group.
 
-Slurm has a concept of "switches" which on Cori and Edison are
-configured to map to Aries electrical groups. Since this places an
-additional constraint on the scheduler a maximum time to wait for the
-requested topology can be specified.
+Slurm has a concept of "switches" which on Cori are configured to map
+to Aries electrical groups. Since this places an additional constraint
+on the scheduler a maximum time to wait for the requested topology can
+be specified.
 
 !!! example
 	Wait up to 60 minutes
-	```bash
+	```slurm
 	sbatch --switches=1@60 job.sh
 	```
 
@@ -166,7 +155,7 @@ There are other modes available with the `MPICH_RANK_REORDER_METHOD`
 environment variable, including one which lets the user provide a file
 called `MPICH_RANK_ORDER` which contains a list of each task's
 placement on each node. These options are described in detail in the
-`intro_mpi` man page on Cori and Edison.
+`intro_mpi` man page.
 
 #### `grid_order`
 
@@ -192,7 +181,7 @@ then set `MPICH_RANK_REORDER_METHOD=3` before running the job, which
 tells Cray MPI to read the `MPICH_RANK_ORDER` file to set the MPI task
 placement. For more information, please see the man page `man
 grid_order` (available when the `perftools-base` module is loaded) on
-Cori and Edison.
+Cori.
 
 ## Serial jobs
 

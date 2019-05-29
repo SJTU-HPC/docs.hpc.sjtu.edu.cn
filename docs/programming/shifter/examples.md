@@ -17,7 +17,7 @@ show below how to build a Docker image with Ubuntu base.
 This Dockerfile is also available on github for download.  Docker hub
 image is available
 under [`mmustafa/desi`](https://hub.docker.com/r/mmustafa/desi/tags/)
-image. Shifter image is available at Edison and Cori under
+image. Shifter image is available at Cori under
 `mmustafa/desi:v0`.
 
 You need the following prerequesites:
@@ -106,8 +106,8 @@ We use an SL6.4 docker base image that
 is [publicly](https://hub.docker.com/r/ringo/scientific/tags/)
 available, install the needed rpms, extract pre-compiled binaries
 tarballs into the image and finally install some software that needed
-to run STAR jobs at Cori. The latest image is available at Cori and
-Edison (`mmustafa/sl64_sl16d:v1_pdsf6`).
+to run STAR jobs at Cori. The latest image is available at Cori
+(`mmustafa/sl64_sl16d:v1_pdsf6`).
 
 ```Shell
 # Example Dockerfile to show how to build STAR

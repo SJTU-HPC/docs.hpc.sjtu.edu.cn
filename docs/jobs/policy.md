@@ -1,19 +1,8 @@
 # Queue Policies
 
-This page details the charging and usage policies for Edison and
-Cori. [Examples](examples/index.md) for each type of job are available.
-
-## Edison
-
-| QOS           | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
-|---------------|-----------|----------------|--------------|-----------|----------|--------|
-| regular       | 5586      | 48             | 5000         | -         | 3        | 64     |
-| shared[^1]    | 0.5       | 48             | 10000        | -         | 3        | 64     |
-| debug         | 512       | 0.5            | 5            | 2         | 2        | 64     |
-| premium       | 5586      | 48             | 5            | -         | 2        | 128    |
-| scavenger[^2] | 5586      | 48             | 5000         | -         | 4        | 0      |
-| xfer          | 1 (login) | 48             | 100          | 15        | -        | 0      |
-| realtime[^3]  | custom    | custom         | custom       | custom    | 1        | custom |
+This page details the charging and usage
+policies. [Examples](examples/index.md) for each type of job are
+available.
 
 ## Cori
 
@@ -68,9 +57,9 @@ can share nodes.
 Jobs are charged by the node-hour in every QOS except shared.
 
 !!! example
-	A job which ran for 35 minutes on 3 nodes on Edison with
+	A job which ran for 35 minutes on 3 KNL nodes on Cori with
 	the regular QOS would be charged:
-	$$ (35/60)\\ \text{hours}*3\\ \text{nodes} * 64 = 112\\ \text{NERSC hours} $$
+	$$ (35/60)\\ \text{hours}*3\\ \text{nodes} * 90 = 157.5\\ \text{NERSC hours} $$
 
 !!! example
 	A job which ran for 12 hours on 4 physical cores (each core has 2 hyperthreads)

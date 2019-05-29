@@ -1,41 +1,44 @@
 # Measuring Arithmetic Intensity
 
 Arithmetic intensity is a measure of floating-point operations (FLOPs)
-performed by a given code (or code section) relative to the amount of memory
-accesses (Bytes) that are required to support those operations. It is most
-often defined as a FLOP per Byte ratio (F/B). This application note provides a
-methodology for determining arithmetic intensity using Intel's [Software
-Development Emulator Toolkit
-(SDE)](https://software.intel.com/en-us/articles/intel-software-development-emulator)
-and [VTune Amplifier
-(VTune)](https://software.intel.com/en-us/intel-vtune-amplifier-xe) tools. A
-NERSC tutorial on using VTune can be found
-[here](../programming/performance-debugging-tools/vtune.md). This method can
-also be used to determine arithmetic intensity for use in the [Roofline
-Performance
-Model](https://crd.lbl.gov/departments/computer-science/PAR/research/roofline/).
+performed by a given code (or code section) relative to the amount of
+memory accesses (Bytes) that are required to support those
+operations. It is most often defined as a FLOP per Byte ratio
+(F/B). This application note provides a methodology for determining
+arithmetic intensity using
+Intel's
+[Software Development Emulator Toolkit (SDE)](https://software.intel.com/en-us/articles/intel-software-development-emulator) and
+[VTune Amplifier (VTune)](https://software.intel.com/en-us/intel-vtune-amplifier-xe) tools. A
+NERSC tutorial on using VTune can be
+found
+[here](../programming/performance-debugging-tools/vtune.md). This
+method can also be used to determine arithmetic intensity for use in
+the
+[Roofline Performance Model](https://crd.lbl.gov/departments/computer-science/PAR/research/roofline/).
 
-Historically, processor manufacturers have provided counters for FLOPs and/or
-Bytes and profiling tools to support the F/B calculation. Some modern
-processors such as Intel's Ivy Bridge (used in Edison) and Haswell (used in
-Cori Phase 1) do not provide counters for FLOPs. However, Intel's SDE can be
-used to count floating-point instructions in addition to core-level memory
-accesses, and VTune can be used to count data accesses to the uncore (off-chip
+Historically, processor manufacturers have provided counters for FLOPs
+and/or Bytes and profiling tools to support the F/B calculation. Some
+modern processors such as Intel's Haswell (used in Cori) do not
+provide counters for FLOPs. However, Intel's SDE can be used to count
+floating-point instructions in addition to core-level memory accesses,
+and VTune can be used to count data accesses to the uncore (off-chip
 DRAM DIMMs).
 
-The SDE dynamic instruction tracing capability, and in particular the mix
-histogram tool, captures dynamic instructions executed, instruction length,
-instruction category and ISA extension grouping. Intel has developed a
-methodology for [calculating FLOPs with
-SDE](https://software.intel.com/en-us/articles/calculating-flop-using-intel-software-development-emulator-intel-sde).
-In general the following uses the method "Instructions to Count Unmasked FLOP"
-from Intel, which is applicable for Edison and Cori Phase 1.
+The SDE dynamic instruction tracing capability, and in particular the
+mix histogram tool, captures dynamic instructions executed,
+instruction length, instruction category and ISA extension
+grouping. Intel has developed a methodology
+for
+[calculating FLOPs with SDE](https://software.intel.com/en-us/articles/calculating-flop-using-intel-software-development-emulator-intel-sde).
+In general the following uses the method "Instructions to Count
+Unmasked FLOP" from Intel.
 
-This application note provides additional instruction on how to only capture
-traces around certain key segments of a code. This is critical for real
-applications as both SDE and VTune collect traces that can use large amounts of
-disk space if tracing is enabled for more than a few minutes. And maybe more
-importantly, post-processing the traces can take an intractable amount of time.
+This application note provides additional instruction on how to only
+capture traces around certain key segments of a code. This is critical
+for real applications as both SDE and VTune collect traces that can
+use large amounts of disk space if tracing is enabled for more than a
+few minutes. And maybe more importantly, post-processing the traces
+can take an intractable amount of time.
 
 An example command line for SDE is:
 
@@ -45,8 +48,7 @@ $ srun -n 4 -c 6 sde -ivb -d -iform 1 -omix my_mix.out -i -global_region -start_
 
 where:
 
-  - `-ivb` is used to target Edison's Ivy Bridge ISA (for Cori use `-hsw` for
-    Haswell or `-knl` for KNL processors)
+  - for Cori use `-hsw` for Haswell or `-knl` for KNL processors
   - `-d` specifies to only collect dynamic profile information
   - `-iform 1` turns on compute ISA iform mix
   - `-omix` specifies the output file (and turns on `-mix`)
@@ -57,16 +59,17 @@ where:
 
 An example command line for VTune is:
 
-```console
+```slurm
 $ srun -n 4 amplxe-cl -start-paused -r my_vtune -collect memory-access -finalization-mode=none -trace-mpi -- foo.exe
 ```
 
-SDE allows tracing to only occur around specified sections of code using
-`__SSC_MARK` macros.  The `-start_ssc_mark` and `-stop_ssc_mark` flags tell SDE
-to only trace sections of code between these marks. In addition, VTune has
-calls to start and stop tracing. This is illustrated below for an example
-kernel from the STREAM benchmark. Note that both use a double underscore prefix
-which may not be obvious when viewed in the web browser.
+SDE allows tracing to only occur around specified sections of code
+using `__SSC_MARK` macros.  The `-start_ssc_mark` and `-stop_ssc_mark`
+flags tell SDE to only trace sections of code between these marks. In
+addition, VTune has calls to start and stop tracing. This is
+illustrated below for an example kernel from the STREAM
+benchmark. Note that both use a double underscore prefix which may not
+be obvious when viewed in the web browser.
 
 ```C
 // Code must be built with appropriate paths for VTune include file
@@ -102,6 +105,7 @@ per rank) and if the application contains threads (e.g. OpenMP) those will be
 encapsulated into the same file (`-global_region` enables this).
 
 !!! note "Example"
+
     All of the above is best illustrated with an example found
     [here](https://bitbucket.org/dwdoerf/stream-ai-example). This example uses a
     modified version of the STREAM benchmark (it also contains a directory with an
@@ -116,30 +120,30 @@ encapsulated into the same file (`-global_region` enables this).
     $ make
     ```
 
-    Note you may have to modify the Makefile to suit your needs. Once you've
+    You may have to modify the Makefile to suit your needs. Once you've
     successfully built the executable, `stream.exe`, (an MPI+OpenMP code) you can
     use the example batch script `stream-ai.sh` (which may need to be modified to
-    suit your target: Cori Haswell, Cori KNL or Edison) and submit a job which
-    executes `stream.exe` in three modes: without instrumentation that can be used
-    for accurate timing estimates, then under the control of SDE, and finally under
-    the control of VTune.
+    suit your target and submit a job which executes `stream.exe` in three modes: 
+	without instrumentation that can be used for accurate timing estimates, 
+	then under the control of SDE, and finally under the control of VTune.
 
     ```console
     $ sbatch stream-ai.sh
     < wait for job to finish, this may take a few to several minutes depending on demand>
     ```
 
-When the job completes, SDE will have created several files, one for each rank,
-starting with `sde_`. VTune will have created one or more directories (one for
-each node used) starting with `vtbw_`.
+When the job completes, SDE will have created several files, one for
+each rank, starting with `sde_`. VTune will have created one or more
+directories (one for each node used) starting with `vtbw_`.
 
-SDE provides a wealth of information in each of its respective output files.
-For arithmetic intensity the floating-point instruction and data access
-instructions are of primary interest. You can use the links to the Intel
-documentation provided above to better understand these details, or you can use
-the script provided in the example to parse the output files. The script prints
-the instruction counts followed by a summary of total floating-point operations
-and total bytes.
+SDE provides a wealth of information in each of its respective output
+files.  For arithmetic intensity the floating-point instruction and
+data access instructions are of primary interest. You can use the
+links to the Intel documentation provided above to better understand
+these details, or you can use the script provided in the example to
+parse the output files. The script prints the instruction counts
+followed by a summary of total floating-point operations and total
+bytes.
 
 !!! tip "Parsing SDE output"
     You want to pass the script all files generated by SDE (one

@@ -109,7 +109,7 @@ ftn -coarray=distributed my_coarray_code.ex my_coarray_code.f90
 !!!warning
     Intel's implementations of both shared and distributed memory coarrays is
     currently incompatible with Cray MPI, and consequently this mode does not
-    work on Cori or Edison.
+    work on Cori.
 
 ### GCC
 
