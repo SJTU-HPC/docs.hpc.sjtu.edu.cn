@@ -205,7 +205,7 @@ You can transfer a file to or from a NERSC machine with scp, in the
 same manner as you use ssh:
 
 ```shell
-$ scp myfile edison.nersc.gov:~/
+$ scp myfile cori.nersc.gov:~/
  *****************************************************************
  *                                                               *
  *                      NOTICE TO USERS                          *
@@ -236,14 +236,14 @@ Password + OTP:
 $ nersc_host         # You're on Cori
 cori
 
-$ ssh edison         # no authentication required
+$ ssh cori         # no authentication required
  *****************************************************************
  *                                                               *
  *                      NOTICE TO USERS                          *
  *                      ---------------                          *
 ...
-$ nersc_host         # You're now on Edison
-edison
+$ nersc_host         # You're now on Cori
+cori
 ```
 
 ## SSH Control Master
@@ -272,7 +272,7 @@ platform, you can set the following in `~/.ssh/config`:
 
 ```shell
 $ cat ~/.ssh/config
-Host cori.nersc.gov edison.nersc.gov
+Host cori.nersc.gov cori.nersc.gov
 ControlMaster auto
 ControlPath ~/.ssh/%r@%h:%p
 <...Other configurations you may have...>
@@ -366,13 +366,12 @@ rolled out.
 
 ### MFA for ssh keys (sshproxy)
 
-The __sshproxy__ is NERSC-developed solution to provide single
-sign-on (SSO) ssh capability, and enable automated workflows. With
-sshproxy, you can get an ssh key (using MFA) that you can use for
-a limited amount of time (default of 24 hours). You can use the key
-to access NERSC systems (e.g., Cori, Edison, Genepool, ...) via
-ssh, without further authentication. Options will be available to
-request keys with longer lifetimes if you have a specific need.
+The __sshproxy__ is NERSC-developed solution to provide single sign-on (SSO)
+ssh capability, and enable automated workflows. With sshproxy, you can get an
+ssh key (using MFA) that you can use for a limited amount of time (default of
+24 hours). You can use the key to access NERSC systems (e.g., Cori) via ssh,
+without further authentication. Options will be available to request keys with
+longer lifetimes if you have a specific need.
 
 ### MFA for MyProxy
 
@@ -416,10 +415,9 @@ for creating tokens.
 
 ## Status of MFA on User Systems
 
-Currently, MFA is supported on most of the systems that users access
-via ssh, such as Cori, Edison, etc. Web and other services will
-start supporting MFA in September 2018. The table below shows the
-status of MFA on NERSC systems and services.
+Currently, MFA is supported on most of the systems that users access via ssh,
+such as Cori. Web and other services will start supporting MFA in September
+2018. The table below shows the status of MFA on NERSC systems and services.
 
 #### MFA Available Now
 
@@ -427,7 +425,6 @@ status of MFA on NERSC systems and services.
 [comment]: <> (| Authentication | Host |)
 [comment]: <> (|:---:|:---:|)
 [comment]: <> (| SSH | Cori |)
-[comment]: <> (|     | Edison |)
 [comment]: <> (|     | Denovo |)
 [comment]: <> (|     | PDSF |)
 [comment]: <> (|     | Genepool |)
@@ -444,9 +441,6 @@ status of MFA on NERSC systems and services.
 <tr>
 <td style="text-align: center; vertical-align: middle;" rowspan="8">SSH</td>
 <td style="text-align: center;">Cori</td>
-</tr>
-<tr>
-<td style="text-align: center;">Edison</td>
 </tr>
 <tr>
 <td style="text-align: center;">Denovo</td>

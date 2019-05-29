@@ -240,8 +240,7 @@ nersc$ stat-view atpMergedBT_line.dot
 ```
 
 !!! note
-	Edison has 6 MOM nodes: edimom01 through
-	edimom06. Cori's MOM node names are cmom02 and cmom05.
+	Cori's MOM node names are cmom02 and cmom05.
 
 ![atp-hungapplication](images/atp-hungapplication.png)
 

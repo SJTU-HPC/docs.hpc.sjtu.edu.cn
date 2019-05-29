@@ -12,7 +12,6 @@ susbsystems:
 * PDSF w/ CHOS
 * PDSF w/ Shifter
 * Cori w/ Shifter
-* Edison w/ Shifter
 
 To select the righ version you need to remove '-' sign from *#-SBTACH
 bhla* line(s). The other 3 lines will be ignord by Slurm

@@ -193,7 +193,6 @@ nav:
            - KNL Modes : systems/cori/knl_modes/index.md
            - Application Porting and Performance:
                - Getting started on KNL: performance/knl/getting-started.md
-      - Edison : systems/edison/index.md
       - PDSF:
            - PDSF System: systems/pdsf/index.md
            - Slurm :

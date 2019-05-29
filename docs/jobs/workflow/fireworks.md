@@ -42,12 +42,11 @@ tasks. Here we will assume this is running at NERSC on
 mongodb03.nersc.gov (the exact location will depend on where your
 database is allocated).
 
-Log in to a Cori or Edison node. Fireworks is installed under the
-python anaconda environment, which is the default python module on
-both Edison and Cori:
+Log in to a Cori node. Fireworks is installed under the python
+anaconda environment, which is the default python module on Cori:
 
 ```shell
-% module load python
+nersc$ module load python
 ```
 
 Setting up the Launchpad can be done interactively using the command
@@ -57,7 +56,7 @@ password - note that you need to have admin access to the database, so
 make sure you use the administrators username/password.
 
 ```
-% lpad init
+cori$ lpad init
 Please supply the following configuration values
 (press Enter if you want to accept the defaults)
 
@@ -148,12 +147,10 @@ In this example we have used the option "rapidfire" instead of
 are completed. The output data (output files and job status) is given
 in "launcher_*" directories.
 
-Batch job on Cori and Edison To run in batch mode, you will need to
-define a "Fireworker". This can be as simple as the following:
-
-The job that is sent to the batch system will want to pull down a job
-from the FireServer. It does this via a FireWorker script, which can
-be as simple as:
+To run in batch mode, you will need to define a "Fireworker".  The job
+that is sent to the batch system will want to pull down a job from the
+FireServer. It does this via a FireWorker script, which can be as
+simple as:
 
 ```
 name: test Cori fireworker
@@ -165,7 +162,7 @@ The commands that exist by default in the FireWorks Slurm template are
 as follows. If you need to add more options, you can copy this file
 and add to the template as described here.
 
-```bash
+```slurm
 #!/bin/bash -l
 
 #SBATCH --nodes=$${nodes}

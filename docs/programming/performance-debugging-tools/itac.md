@@ -9,7 +9,7 @@ developers optimize MPI parallelization and minimize communication and
 synchronization in their applications. Using Trace Collector on Cori must be
 done with a command line interface, while Trace Analyzer supports both a
 command line and graphical user interface which analyzes the data from Trace
-Collector. Currently ITAC is not available on Edison.
+Collector.
 
 Although ITAC works in principle with any MPICH distribution (including Cray
 MPI), it functions best when used on applications compiled with Intel MPI. Its

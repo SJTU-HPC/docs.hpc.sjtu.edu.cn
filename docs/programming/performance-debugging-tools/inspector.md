@@ -3,7 +3,7 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Using Intel Inspector on Edison and Cori](#using-intel-inspector-on-edison-and-cori)
+2. [Using Intel Inspector on Cori](#using-intel-inspector-on-cori)
 3. [Important Command Line Options for Intel Inspector](#important-command-line-options-for-intel-inspector)
 4. [Using the Inspector GUI](#using-the-inspector-gui)
 5. [Known Issues](#known-issues)
@@ -31,12 +31,12 @@ systems. The important features of Intel Inspector for Linux are:
 For more information on Intel Inspector, please visit
 https://software.intel.com/en-us/intel-inspector-xe.
 
-## Using Intel Inspector on Edison and Cori
+## Using Intel Inspector on Cori
 
 To launch Inspector, a Lustre File System should be used instead of GPFS. We
 recommend that you use the command line tool  `inspxe-cl`  to collect data via
 batch jobs and then display results using the GUI, `inspxe-gui`, on a login
-node on Edison.
+node.
 
 ### Compiling Codes to Run with Inspector
 
@@ -154,28 +154,28 @@ greatly improved if used in conjunction with the free
 
 #### Launching Inspector in GUI Mode
 
-Log into Edison using the following command:
+Log into Cori using the following command:
 
 ```
-$ ssh -XY edison.nersc.gov
+$ ssh -XY cori.nersc.gov
 ```
 
 On the login node, load the Inspector module and then open the GUI:
 
 ```
-edison$ module load inspector
-edison$ inspxe-gui
+cori$ module load inspector
+cori$ inspxe-gui
 ```
 
 #### Viewing Results using the GUI
 
-![ ](images/Inspector-view-res.png)
+![inspector view results](images/Inspector-view-res.png)
 
 Use the "Open Result" link to browse for and open the ".inspxe" file in the
 directory that contains the result. Then, you should see a screen similar to
 the following one which shows a list of detected problems:
 
-![ ](images/Inspector-result1.png)
+![inspector first result](images/Inspector-result1.png)
 
 In this case, the code had a Data Race Condition and this was detected by
 Inspector.
@@ -187,7 +187,7 @@ Inspector dialog box.
 
 #### Code
 
-```
+```C
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <unistd.h>
@@ -259,8 +259,8 @@ return(0);
 !!! warning
     This will not detect errors.
 
-```
-nersc$ salloc -N 1 -q debug
+```slurm
+nersc$ salloc -N 1 -q interactive -C haswell
 nersc$ module load inspector
 nersc$ module load impi
 nersc$ cc -g -dynamic -openmp –o xthi-race xthi-race.c
@@ -299,8 +299,8 @@ the Cray compiler wrapper.
 
 ##### Intel Native Compilers
 
-```
-nersc$ salloc -N 1 -q debug
+```slurm
+nersc$ salloc -N 1 -q interactive -C knl
 nersc$ module load inspector
 nersc$ module load impi
 nersc$ mpiicc -g openmp -o xthi-race.impi xthi-race.c
@@ -347,7 +347,6 @@ The general Intel Inspector `inspxe-cl` command syntax is:
 
 ```
 nersc$ inspxe-cl <-action> [-action-options] [-global-options] [-- application [application options]]
-
 ```
 
 We use `srun` or `mpirun` with this command. Here, `<-action>` specifies the
@@ -382,11 +381,11 @@ In order to launch Inspector in GUI mode such that the code is executed on the
 compute nodes, use the following commands:
 
 ```
-$ ssh -XY edison.nersc.gov
-edison$ cd $SCRATCH
-edison$ salloc -N 1 -t 10:00 -q debug
-edison$ module load inspector
-edison$ inspxe-gui
+$ ssh -XY cori.nersc.gov
+cori$ cd $SCRATCH
+cori$ salloc -N 1 -t 10:00 -q interactive -C knl
+cori$ module load inspector
+cori$ inspxe-gui
 ```
 
 Once you have opened the Inspector GUI using the `inspxe-gui` command, you can
@@ -403,11 +402,11 @@ The four possible types of analyses are:
 
 To create a project, click on the "New Project" link in the Welcome screen.
 
-![ ](images/Inspector-create-proj1.png)
+![inspector new project](images/Inspector-create-proj1.png)
 
 Then, enter the name of the project and click the "Create Project" button.
 
-![ ](images/Inspector-create-proj2.png)
+![inspector create project](images/Inspector-create-proj2.png)
 
 Next, browse for and select the binary file that is to be executed. If required,
 specify the parameters to be passed to the application as well as the necessary
@@ -417,19 +416,19 @@ You might also want to modify the working directory and the directory where the
 results will be stored. By default, the result directory is the same as the
 project directory. Then click on the 'OK' button to create the project.
 
-![ ](images/Inspector-proj-prop.png)
+![inspector project properties](images/Inspector-proj-prop.png)
 
 ### Opening a Project
 
 To open an existing project, click on the "Open Project" link on the welcome
 screen.
 
-![ ](images/Inspector-open-proj1.png)
+![inspector open project](images/Inspector-open-proj1.png)
 
 Browse for and select the ".inspxeproj" file in the project directory and then
 click the "Open" button.
 
-![ ](images/Inspector-open-proj2.png)
+![inspector open project part 2](images/Inspector-open-proj2.png)
 
 ### Performing an Analysis using the Inspector GUI
 
@@ -439,12 +438,12 @@ analysis. This executes the code and performs the analysis.
 Here, we select the "Threading Error Analysis/Locate Deadlocks and Data Races"
 analysis.
 
-![ ](images/Inspector-threading1.png)
+![inspector threading](images/Inspector-threading1.png)
 
 The analysis is performed and then the result of the analysis is displayed as
 follows:
 
-![ ](images/Inspector-threading2.png)
+![inspector threading2](images/Inspector-threading2.png)
 
 Since the sample code had a data race error, Inspector detects and reports the
 same. Additionally, it points out the specific line in the code that is causing
@@ -463,18 +462,18 @@ detected.  However, running both the analysis tool and the debugger has a
 negative effect on performance. To select this option, open a project and then
 select the "New Analysis" type as shown below:
 
-![ ](images/Inspector-debugger1.png)
+![inspector debugger](images/Inspector-debugger1.png)
 
 In the following window, select "Threading Error Analysis" from the drop-down
 list and then select the indicated option. You can also run the debugger while
 performing memory analysis by enabling the same option.
 
-![ ](images/Inspector-debugger2.png)
+![inspector debugger part 2](images/Inspector-debugger2.png)
 
 When this analysis is started, the detection of any problem other than memory
 leaks will result in breaking into the debugger.
 
-![ ](images/Inspector-debugger3.png)
+![inspector debugger part 3](images/Inspector-debugger3.png)
 
 The data race condition in the example causes the debugger window to be opened.
 It breaks into the debugger at the line that causes the issue.
@@ -487,7 +486,7 @@ Open a project and select the "New Analysis" type. In the following window, the
 "Memory Error Analysis" option is selected by default from the drop-down list.
 Some of the available variations are described below.
 
-![ ](images/Inspector-memory1.png)
+![inspector memory analysis](images/Inspector-memory1.png)
 
 There are three levels of memory analysis (in increasing order of scope and
 cost):
@@ -506,7 +505,7 @@ preset memory error analysis types.
 At the end of the analysis, the GUI displays memory leaks as "Memory leak"
 problems on the "Summary" window.
 
-![ ](images/Inspector-memory2.png)
+![inspector memory leak](images/Inspector-memory2.png)
 
 To identify leaks that occur at or during a specific time interval with an
 on-demand leak detection functionality, select the "Enable on-demand memory
@@ -517,7 +516,7 @@ Selecting on-demand leak detection activates two buttons on the right side of
 the GUI during analysis. They are labeled "Reset Leak Tracking" and "Find
 Leaks".
 
-![ ](images/Inspector-memory3.png)
+![inspector memory leaks on-demand](images/Inspector-memory3.png)
 
 By default, Inspector tracks all memory allocations when the application
 starts. Hence, if any of these allocations are leaked, they appear as a Memory
@@ -539,7 +538,7 @@ When the "Enable Interactive Memory Growth Detection" checkbox is selected, it
 enables two buttons on the right side of the GUI during analysis. They are
 labeled "Reset Growth Tracking" and "Measure Growth". 
 
-![ ](images/Inspector-memory4.png)
+![inspector memory growth](images/Inspector-memory4.png)
 
 During the analysis, clicking the Reset Growth Tracking button changes the
 starting point for detecting memory growth to the current time. By default,
@@ -551,14 +550,14 @@ that has been allocated, but not (yet) deallocated from the time of the
 previous growth reset operation up until the time of the report. Clicking the
 Reset Growth Tracking button results in a growth reset operation.
 
-![ ](images/Inspector-memory5.png)
+![inspector memory growth reset](images/Inspector-memory5.png)
 
 Inspector has a real-time memory usage graph that can be used to determine at
 what point in the program the use of memory is increasing. The memory graph is
 also marked with symbols to indicate when the on-demand leak detection and the
 memory analysis buttons were pressed.
 
-![ ](images/Inspector-memory6.png)
+![inspector memory grow graph](images/Inspector-memory6.png)
 
 ## Known Issues
 

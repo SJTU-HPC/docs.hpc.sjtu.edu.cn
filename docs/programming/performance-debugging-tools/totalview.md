@@ -46,10 +46,10 @@ better for Mac OSX.
 nersc$ ssh -Y username@cori.nersc.gov
 ```
 
-Then start an interactive batch session on Cori or Edison.
+Then start an interactive batch session:
 
 ```shell
-nersc$ salloc -N numNodes -t 30:00 -q debug               # on Cori or Edison
+cori$ salloc -N numNodes -t 30:00 -q interactive -C knl
 ```
 
 where 'numNodes' is the number of compute nodes that you need to

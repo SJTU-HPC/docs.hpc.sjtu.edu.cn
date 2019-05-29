@@ -8,8 +8,8 @@ NERSC offers various resources for the
 
 ## [Computational Systems](systems.md)
 
-JGI users have access to the main computational systems at NERSC, Cori and
-Edison, as well as the Denovo cluster.
+JGI users have access to the main computational system at NERSC, Cori, as well
+as the Denovo cluster.
 
 ## [Filesystems](filesystems.md)
 

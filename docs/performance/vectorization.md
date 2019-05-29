@@ -6,7 +6,6 @@ data, [SIMD](https://en.wikipedia.org/wiki/SIMD) per cycle.
 
 | System | microarchitecture | Instruction Set | SIMD width |
 |--|--|--|--|
-| Edison | IvyBridge | AVX | 128 bits |
 | Cori   | Haswell   | AVX2 | 256 bits |
 | Cori | KNL | AVX-512 | 512 bits |
 

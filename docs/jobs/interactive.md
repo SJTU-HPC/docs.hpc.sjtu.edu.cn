@@ -57,11 +57,3 @@ If the number of nodes in use by your repo sums up to 64 nodes, please
 contact the other group members if you feel they need to release
 interactive resources.
 
-### Edison
-
-Requesting 30 minutes of time on two nodes.
-
-```
-edison$ salloc --qos=debug --nodes=2 --time=30
-```
-

@@ -29,7 +29,7 @@ for matrix computation.
 
 ## How to Use MATLAB on Cori
 
-MATLAB is available at NERSC on Cori (and Edison until it retires).  The number of MATLAB
+MATLAB is available at NERSC on Cori.  The number of MATLAB
 licenses at NERSC is not very large (currently 16), so users should
 not be running a MATLAB session when it is not being actively used. If
 you use NX, it's particularly easy to think you've released your
@@ -37,9 +37,9 @@ license when you haven't, since license checkouts persist between NX
 sessions.
 
 MATLAB can be run interactively or in batch mode.  MATLAB can run on a
-compute node with exclusive access to the full usable memory (about 62
-GB on Edison nodes and 120 GB on Cori Phase 1 nodes) by submitting a
-batch job to the regular queue.
+compute node with exclusive access to the full usable memory (about
+120 GB on Cori Haswell nodes) by submitting a batch job to the regular
+queue.
 
 ### Running Interactively
 
@@ -52,7 +52,13 @@ module load matlab
 matlab
 ```
 
-It is also possible to run MATLAB on a Cori login node directly. Production computing should not be undertaken on login nodes, however. For long-running or compute intensive jobs, use a batch script.
+It is also possible to run MATLAB on a Cori login node
+directly. Production computing should not be undertaken on login
+nodes, however. 
+
+!!! warn 
+	For long-running or compute intensive jobs, use a batch
+	script.
 
 ```
 module load matlab
@@ -64,7 +70,7 @@ matlab
 To run one instance of MATLAB non-intearctively through a batch job,
 you can use the following job script on Cori:
 
-```
+```slurm
 #!/bin/bash -l
 #SBATCH -q regular
 #SBATCH -N 1
@@ -108,7 +114,7 @@ end
 
 For loop-level parallelism, MATLAB provides the parfor construct.
 
-In order to make MATLAB work in parallel on Edison, you need to make
+In order to make MATLAB work in parallel on Cori, you need to make
 sure it will access the MATLAB libraries before the standard cray
 libraries. You can do this by running this command for bash:
 
@@ -123,20 +129,20 @@ setenv LD_PRELOAD "/global/common/sw/cray/cnl6/ivybridge/matlab/R2016b/bin/glnxa
 ```
 
 However, if you have `LD_PRELOAD` set on a login node, this will
-interfere with the regular Edison and Cori environment. It's important
-that you only set the `LD_PRELOAD` variable in your parallel MATLAB job
-script (or interactive job).
+interfere with the regular environment. It's important that you only
+set the `LD_PRELOAD` variable in your parallel MATLAB job script (or
+interactive job).
 
 #### Parallelism with the MATLAB Compiler
 
 Another way to run MATLAB in parallel is to run multiple instances of
 a compiled MATLAB program. By compiling, you create a stand-alone
 application that doesn't need to obtain a separate license from the
-NERSC license server to run. See [MATLAB Compiler](matlab_compiler) for details.
+NERSC license server to run. See [MATLAB Compiler](matlab_compiler)
+for details.
 
 ## Documentation
 
 Extensive [on-line documentation](http://www.mathworks.com/) is
 available. You may subscribe to the MATLAB Digest, a monthly e-mail
-newsletter by sending e-mail to subscribe@mathworks.com.
-
+newsletter by sending e-mail to <subscribe@mathworks.com>.

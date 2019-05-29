@@ -1,6 +1,6 @@
 # Compiler Wrappers
 
-NERSC provides compiler wrappers on Cori and Edison which combine the [native
+NERSC provides compiler wrappers on Cori which combine the [native
 compilers](native.md) (Intel, GNU, and Cray) with MPI and various other
 libraries, to enable streamlined compilation of scientific applications.
 
@@ -70,7 +70,7 @@ CC -o example.x example.cpp
 ## Intel Compiler Wrappers
 
 Although the Cray compiler wrappers `cc`, `CC`, and `ftn`, are the default (and
-recommended) compiler wrappers on the Cori and Edison systems, wrappers for
+recommended) compiler wrappers on the Cori system, wrappers for
 Intel MPI are provided as well via the the `impi` module.
 
 The Intel MPI wrapper commands are `mpiicc`, `mpiicpc`, and `mpiifort`, which

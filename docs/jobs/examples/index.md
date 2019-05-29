@@ -10,11 +10,6 @@ performance.
 
 One MPI process per physical core.
 
-??? example "Edison"
-	```slurm
-	--8<-- "docs/jobs/examples/basic-mpi/edison/basic-mpi.sh"
-	```
-
 ??? example "Cori Haswell"
 	```slurm
 	--8<-- "docs/jobs/examples/basic-mpi/cori-haswell/basic-mpi.sh"
@@ -37,11 +32,6 @@ One MPI process per physical core.
 
 One MPI process per socket and 1 OpenMP thread per
 physical core
-
-??? example "Edison"
-	```slurm
-	--8<-- "docs/jobs/examples/hybrid-mpi-openmp/edison/hybrid-mpi-openmp.sh"
-	```
 
 ??? example "Cori Haswell"
 	```slurm
@@ -78,11 +68,6 @@ Interactive jobs are launched with the `salloc` command.
 
 !!! tip
 	Cori has dedicated nodes for interactive work.
-
-??? example "Edison"
-	```slurm
-	edison$ salloc --qos=debug --time=30 --nodes=2
-	```
 
 ??? example "Cori Haswell"
 	```slurm
@@ -208,7 +193,6 @@ hyperthreads):
 
 | System | MemoryPerCpu (megabytes)     |
 |--------|------------------------------|
-| Edison | 1300                         |
 | Cori   | 1952                         |
 
 The number of physical cores used by a job is computed by
@@ -313,8 +297,8 @@ information about using Open MPI on NERSC systems.
 
 ## Xfer queue
 
-The intended use of the xfer queue is to transfer data between Cori or
-Edison and HPSS. The xfer jobs run on one of the login nodes and are
+The intended use of the xfer queue is to transfer data between compute
+systems and HPSS. The xfer jobs run on one of the login nodes and are
 free of charge. If you want to transfer data to the HPSS archive
 system at the end of a regular job, you can submit an xfer job at the
 end of your batch job script via `module load esslurm; sbatch hsi put
@@ -354,14 +338,13 @@ files, you'll need to request more memory. You can do this by adding
 
 To monitor your xfer jobs please load the `esslurm` module, then you
 can use Slurm commands like `squeue` or `scontrol` to access the xfer
-queue on Cori or Edison.
+queue on Cori.
 
 ## Variable-time jobs
 
 Variable-time jobs are for users who wish to get a better queue
 turnaround and/or need to run long running jobs, including jobs longer
-than 48 hours, the maximum wall-clock time allowed on Cori and
-Edison.
+than 48 hours, the maximum wall-clock time allowed on Cori.
 
 Variable-time jobs are jobs submitted with a minimum time, `#SBATCH
 --time-min`, in addition to the maximum time (`#SBATCH –time`). 
@@ -397,7 +380,9 @@ See the [Queues and Policy page for Cori KNL](http://docs.nersc.gov/jobs/policy)
 
 !!! note
         * The flex QOS is free of charge currently. The discount rate is subject to change. 
-        * Variable-time jobs work with any QOS on Cori and Edison, but the charging discount is available only with the flex QOS on Cori KNL.  
+        * Variable-time jobs work with any QOS on Cori, but the
+          charging discount is available only with the flex QOS on
+          Cori KNL.
 
 ### Annotated example - automated variable-time jobs
 
@@ -405,11 +390,6 @@ Here is a sample job script for variable-time jobs, which automates
 the process of executing, pre-terminating, requeuing and restarting
 the job repeatedly until it runs for the desired amount of time or the
 job completes.
-
-??? example "Edison"
-    ```slurm
-    --8<-- "docs/jobs/examples/variable-time-jobs/edison/variable-time-jobs.sh"
-    ```
 
 ??? example "Cori Haswell"
     ```slurm

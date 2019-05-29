@@ -8,7 +8,6 @@
 #-SBATCH -J star-chos -p shared-chos --ntasks=1
 #SBATCH -J star-shift -p shared --ntasks=1 --image=custom:pdsf-sl64-star:v3
 #-SBATCH -J star-cori -p debug -N1 -t 25:00 --image=custom:pdsf-sl64-star:v7  -C haswell
-#SBATCH -J star-edison -p debug -N1 -t 25:00 --image=custom:pdsf-sl64-star:v3 
 
 echo "start-A "`hostname`" in PWD="`pwd`
 
@@ -47,7 +46,7 @@ export EXEC_NAME=root4star
 export OUT_DIR=/global/project/projectdirs/mpccc/balewski/tmp/outSTAR3/${SLURM_JOB_NAME}/${SLURM_JOB_ID}
 mkdir -p ${OUT_DIR}
 
-# prepare sandbox - it is done for you by SLURM on PDSF and must be done manualy on Cori/Edison
+# prepare sandbox - it is done for you by SLURM on PDSF and must be done manualy on Cori
 export WRK_DIR=$SLURM_TMP
 echo aaa $SLURM_CLUSTER_NAME
 if [[ $SLURM_CLUSTER_NAME != 'pdsf'* ]] ; then

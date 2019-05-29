@@ -21,18 +21,19 @@ nersc$ module avail berkeleygw
 See the [example jobs page](../../jobs/examples/index.md) for additional
 examples and information about jobs.
 
-### Edison
+### Cori
 
-```
+```slurm
 #!/bin/bash
 #SBATCH --qos=regular
 #SBATCH --time=01:00:00
 #SBATCH --nodes=2
-#SBATCH --ntasks-per-node=24
+#SBATCH --ntasks-per-node=32
 #SBATCH --cpus-per-task=2
+#SBATCH --constraint=haswell
 
 module load berkeleygw
-srun -n 24 epsilon.cplx.x
+srun epsilon.cplx.x
 ```
 
 ## Support

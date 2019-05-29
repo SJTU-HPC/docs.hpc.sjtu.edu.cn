@@ -100,11 +100,11 @@ For example, a MySQL service would be available at:
 
 ## Rancher CLI Cheat Sheet
 
-The Rancher CLI must be used from a NERSC system, such as Cori, Edison or
-Denovo.  NERSC provides a modified version of the Rancher CLI which is
-optimized for the NERSC environment, and some subcommands have been removed.
-For detailed documentation about using the Rancher CLI at NERSC, see
-[Spin Tips & Examples](tips_and_examples).
+The Rancher CLI must be used from a NERSC system, such as Cori. NERSC
+provides a modified version of the Rancher CLI which is optimized for
+the NERSC environment, and some subcommands have been removed. For
+detailed documentation about using the Rancher CLI at NERSC,
+see [Spin Tips & Examples](tips_and_examples).
 
 Rancher official CLI documentation can be found at
 https://rancher.com/docs/rancher/v1.6/en/cli/ & a detailed list of CLI commands

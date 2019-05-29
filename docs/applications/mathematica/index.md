@@ -15,12 +15,13 @@ To use the graphical interface to Mathematica, you will need to
 connect to a NERSC machine with X11.
 
 ```shell
-mylaptop$ ssh -X edison.nersc.gov
+mylaptop$ ssh -X cori.nersc.gov
 ```
 
-We highly recommend the use
-of [NX](https://www.nersc.gov/users/connecting-to-nersc/using-nx/) to
-invoke an X11 session and run the Mathematica notebook interface.
+!!! tip
+	We highly recommend the use
+	of [NX](https://www.nersc.gov/users/connecting-to-nersc/using-nx/) to
+	invoke an X11 session and run the Mathematica notebook interface.
 
 Next, you will need to load the Mathematica module. To use the default
 version of Mathematica, use
@@ -55,10 +56,8 @@ inadvertently using multiple seats.
 ### Running Mathematica Scripts
 
 To run Mathematica scripts, you can do so in interactive mode or in
-batch mode. Both approaches require the use of the job scheduler. On
-both Cori and Edison, this
-is
-[SLURM](https://www.nersc.gov/users/computational-systems/cori/running-jobs/slurm-at-nersc-overview/).
+batch mode. Both approaches require the use of
+the [job scheduler](../../jobs/index.md).
 
 To run in interactive mode, use salloc to obtain access to a compute
 node. To avoid using multiple license seats at once (always a good
@@ -99,9 +98,8 @@ site for more
 about
 [parallel commands in Mathematica](https://reference.wolfram.com/language/ParallelTools/tutorial/GettingStarted.html).)
 Following is an example script that works on Cori. With Cori, you can
-use up to 16 cores; with Edison, you can use up to 12 cores. Be sure
-the first line of your script points to the correct directory for the
-machine on which you're running.
+use up to 16 cores. Be sure the first line of your script points to
+the correct directory for the machine on which you're running.
 
 ```
 #!/global/common/cori/software/mathematica/10.3.0/bin/MathematicaScript -script
@@ -117,12 +115,6 @@ slow = AbsoluteTiming[Select[Range[5000], MersennePrimeQ]]
 WriteString[$Output, slow]
 fast = AbsoluteTiming[Parallelize[Select[Range[5000], MersennePrimeQ]]]
 WriteString[$Output, fast]
-```
-
-For Edison, the first line of this script would be
-
-```
-#!/global/common/edison/das/mathematica/10.1.0/bin/MathematicaScript -script
 ```
 
 ## Documentation

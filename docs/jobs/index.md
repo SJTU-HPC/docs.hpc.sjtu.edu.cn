@@ -115,13 +115,13 @@ variables. This has two important consequences:
 
 #### Defaults
 
-| Option     | Cori       | Edison     |
-|------------|------------|------------|
-| nodes      | 1          | 1          |
-| time       | 10minutes  | 10minutes  |
-| qos        | debug      | debug      |
-| constraint | _          | ivybridge  |
-| account    | set in NIM | set in NIM |
+| Option     | Cori       |
+|------------|------------|
+| nodes      | 1          |
+| time       | 10minutes  |
+| qos        | debug      |
+| constraint | _          |
+| account    | set in NIM |
 
 ## Monitoring jobs
 
@@ -233,11 +233,11 @@ nersc$ scancel -u $USER
 
 ## Quota Enforcement
 
-Users will not be allowed to submit jobs to Cori and Edison if they
-are over quota in their scratch or home directories. This quota check
-is done twice, first when the job is submitted and again when the
-running job invokes `srun`. This could mean that if you went over
-quota after submitting the job, the job could fail when it
-runs. Please [check your
-quota](https://docs.nersc.gov/filesystems/quotas/) regularly and
-delete or archive data as needed.
+Users will not be allowed to submit jobs if they are over quota in
+their scratch or home directories. This quota check is done twice,
+first when the job is submitted and again when the running job invokes
+`srun`. This could mean that if you went over quota after submitting
+the job, the job could fail when it
+runs. Please
+[check your quota](../filesystems/quotas/)
+regularly and delete or archive data as needed.

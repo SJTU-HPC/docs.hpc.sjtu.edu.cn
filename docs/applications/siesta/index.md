@@ -14,7 +14,7 @@ methods.
 ## Example run scripts
 
 !!! example "Cori KNL"
-	```bash
+	```slurm
 	#!/bin/bash
 	#SBATCH --qos=regular
 	#SBATCH --time=01:30:00
@@ -27,7 +27,7 @@ methods.
 	```
 
 ??? example "Cori Haswell"
-    ```shell
+    ```slurm
 	#!/bin/bash
 	#SBATCH --qos=regular
 	#SBATCH --time=01:30:00
@@ -37,18 +37,6 @@ methods.
 
 	module load siesta
 	srun siesta < test.fdf > test.out
-    ```
-
-??? example "Edison"
-    ```shell
-	#!/bin/bash
-    #SBATCH --qos=regular
-    #SBATCH --time=01:30:00
-    #SBATCH --nodes=2
-    #SBATCH --tasks-per-node=24
-
-    module load siesta
-    srun siesta < test.fdf > test.out
     ```
 
 ## Support

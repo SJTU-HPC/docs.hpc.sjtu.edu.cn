@@ -14,4 +14,11 @@ the fftw module is loaded, so that a user's program can call single- or
 double-precision routines. The single- and double-precision libraries
 are `libfftw3f.a` and `libfftw3.a`, respectively.
 
-Additional details are available in the `intro_fftw3` man pages on Cori and Edison.
+!!! note 
+	Additional details are available in the `intro_fftw3` man
+	pages.
+	
+	```shell
+	cori$ man intro_fftw3
+	```
+

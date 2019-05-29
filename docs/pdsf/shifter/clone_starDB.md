@@ -2,7 +2,7 @@
 
 This instruction shows how to **transfer tables from a live STAR DB
 into static directory**, to be uses by the Shifter-based local STAR DB
-serving tables to root4star jobs running on Cori/Edison.
+serving tables to root4star jobs running on Cori.
 
 The key instruction doing the trick is:
 

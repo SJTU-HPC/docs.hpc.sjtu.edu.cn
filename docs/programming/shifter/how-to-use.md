@@ -37,11 +37,11 @@ datasets on the file system and use Shifter's volume mount capability
 to mount them into the image.
 
 Once you have built your image, you can upload it to Docker Hub. Once
-that's done you can pull the image down onto Cori or
-Edison. Alternatively, you can use our private image registry if you
-do not want to upload your image to a public repository. If your image
-is too large to comfortably go through Docker Hub or our private
-repository (> 20GB), please see our [support page](https://help.nersc.gov).
+that's done you can pull the image down onto Cori. Alternatively, you
+can use our private image registry if you do not want to upload your
+image to a public repository. If your image is too large to
+comfortably go through Docker Hub or our private repository (> 20GB),
+please see our [support page](https://help.nersc.gov).
 
 Shifter images have a naming scheme that follows
 `source:image_name:image_version`. Typically the image source will be

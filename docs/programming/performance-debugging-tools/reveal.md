@@ -23,18 +23,18 @@ pure MPI code.
 
 ## Steps to Use Cray Reveal
 
-Reveal is available on Edison under PrgEnv-cray by loading the Cray `perftools`
+Reveal is available on Cori under PrgEnv-cray by loading the Cray `perftools`
 module. It has conflicts with the NERSC default loaded `darshan` module (used
 for collecting I/O information). Reveal has a GUI interface, so it needs X11
-access.  Make sure to access Edison via the `ssh -XY` option.
+access (`ssh -XY` or [NX](../../connect/nx.md)).
 
 ### 1. Basic Steps to Setup User Environment
 
-```
-edison$ module swap PrgEnv-intel PrgEnv-cray        
-edison$ module unload darshan
-edison$ module load perftools-base/6.3.2
-edison$ module load perftools/6.3.2
+```shell
+nersc$ module swap PrgEnv-intel PrgEnv-cray        
+nersc$ module unload darshan
+nersc$ module load perftools-base/6.3.2
+nersc$ module load perftools/6.3.2
 ```
 
 ### 2. Generate Loop Work Estimates
@@ -43,16 +43,16 @@ edison$ module load perftools/6.3.2
 
 Fortran code example:
 
-```
-edison$ ftn -c -h profile_generate myprogram.f90
-edison$ ftn -o myprogram -h profile_generate myprogram.o
+```shell
+nersc$ ftn -c -h profile_generate myprogram.f90
+nersc$ ftn -o myprogram -h profile_generate myprogram.o
 ```
 
 C code example (this code will be used in following steps):
 
-```
-edison$ cc -c -h profile_generate myprogram.c
-edison$ cc -o myprogram -h profile_generate myprogram.o
+```shell
+nersc$ cc -c -h profile_generate myprogram.c
+nersc$ cc -o myprogram -h profile_generate myprogram.o
 ```
 
 The C code is available [here](http://www.nersc.gov/assets/poisson-mpi.c.txt).
@@ -65,8 +65,8 @@ The C code is available [here](http://www.nersc.gov/assets/poisson-mpi.c.txt).
 
 #### b. Build CrayPat Executable
 
-```
-edison$ pat_build -w myprogram
+```shell
+nersc$ pat_build -w myprogram
 ```
 
 The executable `myprogram+pat` will be generated. Here, the `-w` flag is used
@@ -78,34 +78,34 @@ Below is a simple batch interactive session example. A regular batch script can
 also be used to launch the `myprogram+pat` program. It is recommended that you
 execute the code from a Lustre file system.
 
-```
-edison$ salloc -q debug -t 30:00
+```slurm
+nersc$ salloc -q debug -t 30:00 -C knl
 ```
 
 Then, use `srun` to run the code. In this case, 4 MPI tasks are used.
 
-```
-edison$ srun -n 4 ./myprogram+pat
+```slurm
+nersc$ srun -n 4 ./myprogram+pat
 ```
 
 This generates one or more raw data files in \*.xf format.
 
 Before proceeding, relinquish the job allocation:
 
-```
-edison$ exit
+```shell
+nersc$ exit
 ``` 
 
 #### d. Generate \*.ap2 and \*.rpt Files via `pat_report`
 
-```
-edison$ pat_report myprogram+pat+......xf > myprogram+pat.rpt  
+```shell
+nersc$ pat_report myprogram+pat+......xf > myprogram+pat.rpt  
 ```
 
 ### 3. Generate a Program Library
 
 ```
-edison$ cc -O3 -hpl=myprogram.pl -c myprogram.c
+nersc$ cc -O3 -hpl=myprogram.pl -c myprogram.c
 ```
 
 !!! warning
@@ -118,7 +118,7 @@ edison$ cc -O3 -hpl=myprogram.pl -c myprogram.c
 ### 4. Save an Original Copy of Your Source Code
 
 ```
-edison$ cp myprogram.c myprogram_orig.c
+nersc$ cp myprogram.c myprogram_orig.c
 ```
 
 The Reveal suggested code may overwrite your original version.
@@ -126,7 +126,7 @@ The Reveal suggested code may overwrite your original version.
 ### 5. Launch Reveal
 
 ```
-edison$ reveal myprogram.pl myprogram+pat+....ap2
+nersc$ reveal myprogram.pl myprogram+pat+....ap2
 ```
 
 (Use the exact \*.ap2 file name in the above command.)
@@ -140,40 +140,40 @@ The left-side panel lists the top time consuming loops. The top right panel
 displays the source code. The right bottom panel displays the compiler
 information about a loop.
 
-![ ](images/Reveal-omp-loop.png)
+![reveal openmp loop](images/Reveal-omp-loop.png)
 
 Double click a line in the "Info" section to display more explanations of a
 compiler decision about each loop, such as whether it is vectorized or
 unrolled.
 
-![ ](images/Reveal-omp-info.png)
+![reveal openmp info](images/Reveal-omp-info.png)
 
 Double click a line corresponding to a loop from the section that displays the
 code and a new "Reveal OpenMP Scoping" window will pop up:
 
-![ ](images/Reveal-omp-scope.png)
+![reveal openmp scope](images/Reveal-omp-scope.png)
 
 Ensure that the only the required loop is checked. Click the "Start Scoping"
 button on the bottom left. The scoping results for each variable will be
 provided in the "Scoping Results" tab. Some of the variables are marked red as
 "Unresolved". The reason why it fails in scoping is also specified. 
 
-![ ](images/Reveal-omp-scope-res.png)
+![reveal openmp results](images/Reveal-omp-scope-res.png)
 
 Click the "Show Directive" button and the Reveal-suggested OpenMP Directive
 will be displayed:
 
-![ ](images/Reveal-omp-directive.png)
+![reveal openmp directive](images/Reveal-omp-directive.png)
 
 Click the "Insert Directive" button to insert the suggested directive in the
 code:
 
-![ ](images/Reveal-insert.png)
+![reveal openmp insert directive](images/Reveal-insert.png)
 
 Click the "Save" button on the top right hand corner of the main window. A
 "Save Source" window will pop up:
 
-![ ](images/Reveal-save.png)
+![reveal save](images/Reveal-save.png)
 
 Choose "Yes", and a file having the same name as the original file and with
 the OpenMP directives inserted will be created. The original file will be
@@ -182,10 +182,10 @@ overwritten.
 The above steps can be repeated for one loop at a time. Note that the newly
 saved file will have the same file name as your original code.
 
-```
-edison$ cp myprogram.c myprogram.c.reveal # (myprogram.c.reveal is the code with OpenMP directives generated by Reveal)
-edison$ cp myprogram.c.orig myprogram.c # (these are copies of your original code)
-edison$ cp myprogram.c.reveal myprogram_omp.c # (myprogram_omp.c is the copy where all the variables will be resolved)
+```shell
+nersc$ cp myprogram.c myprogram.c.reveal # (myprogram.c.reveal is the code with OpenMP directives generated by Reveal)
+nersc$ cp myprogram.c.orig myprogram.c # (these are copies of your original code)
+nersc$ cp myprogram.c.reveal myprogram_omp.c # (myprogram_omp.c is the copy where all the variables will be resolved)
 ```
 
 ### 7. Work with `myprogram_omp.c`
@@ -194,7 +194,7 @@ edison$ cp myprogram.c.reveal myprogram_omp.c # (myprogram_omp.c is the copy whe
 
 For example, Reveal provides the following directive for the selected loop:
 
-```
+```C
 // Directive inserted by Cray Reveal.  May be incomplete.
 #pragma omp parallel for default(none)                      \
    unresolved (i,my_change,my_n,i_max,u_new,u)              \
@@ -218,7 +218,7 @@ Note that the keyword `unresolved` is used above since Reveal could not resolve
 the data scope. We need to change these to `reduction(+:my_change)` and
 `shared(u_new,u)` and save a new copy of the code as "myprogram_omp.c".
 
-```
+```C
 // Directive inserted by Cray Reveal.  May be incomplete.
 #pragma omp parallel for default(none)                \
    reduction (+:my_change,my_n)                      \
@@ -320,7 +320,7 @@ POISSON_MPI!!
 
 The following results were obtained by executing on Edison for 4 MPI tasks.
 
-![ ](images/Reveal-hybrid-result.png)
+![reveal hybrid results](images/Reveal-hybrid-result.png)
 
 ## Issues and Limitations
 

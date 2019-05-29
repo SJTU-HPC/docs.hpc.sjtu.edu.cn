@@ -181,7 +181,7 @@ Users can check their HPSS usage and quotas with the hpssquota command
 on Cori. You view usages on a user level:
 
 ```
-cori03> hpssquota -u usgtest
+cori$ hpssquota -u usgtest
 HPSS Usage for User usgtest
 REPO                          STORED [GB]      REPO QUOTA [GB]     PERCENT USED [%]
 -----------------------------------------------------------------------------------
@@ -200,7 +200,7 @@ maximum amount your PI has allocated for you to store data, and the
 You can also view usage on a repo level:
 
 ```
-edison03> hpssquota -r ntrain
+nersc$ hpssquota -r ntrain
 HPSS Usage for Repo ntrain
 
 USER                          STORED [GB]           USER QUOTA [GB]          PERCENT USED [%]

@@ -22,7 +22,7 @@ Spin is a good fit for projects that are similar to the following:
 Spin is not a good fit for services like the following:
 
 * Heavy computational workloads
-* Not an alternative or competitor to Cori, Edison or Genepool
+* Not an alternative or competitor to HPC systems
 * Login services
 * Not a replacement for login nodes or gpints
 * Services used for Authentication & Security providers cannot be run in Spin currently

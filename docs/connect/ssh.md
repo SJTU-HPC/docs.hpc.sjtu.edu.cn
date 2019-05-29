@@ -15,19 +15,12 @@ encrypted, including passwords. Most versions of SSH provide login
 secure ftp client (sftp). Additionally, SSH allows secure X Window
 connections.
 
-!!! example
-    ```bash
-    $ ssh elvis@edison.nersc.gov
-    elvis@edison.nersc.gov's password: [enter NIM password for user elvis]
-	edison$
-    ```
-
 ## Password-less logins and transfers
 
 Consult the documentation on using the
 [SSH Proxy](../mfa/#mfa-for-ssh-keys-sshproxy) service in the MFA
 documentation section for ways to connect to NERSC systems without reentering
-your password and one-time password.  
+your password and one-time password.
 
 ## SSH certificate authority
 
@@ -48,11 +41,6 @@ to confirm the current fingerprints.
  *  Cori
 	```
 	4096 SHA256:35yiNfemgwzHCHFrPGWrJBCCqERqLtOVSrR36s1DaPc cori.nersc.gov (RSA)
-	```
-
- *  Edison
-	```
-	4096 SHA256:riR+3TGNnPs0uqJxJBbvPU+JR3e/Z0xUzBRsip3ZOJ8 edison.nersc.gov (RSA)
 	```
 
  *  PDSF
@@ -84,12 +72,6 @@ These are the entries in `~/.ssh/known_hosts`.
 cori.nersc.gov ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCsxGw19ZL8EN+NZ9HhD+O/nATuvgZxcEuy/yXnGqz5wMzJj6rK7TsrdU8rdJNrhZDe3yjpCiKvqkbSKp22jK2/iMAeWDQvYpMgC6KyiNd0hztowtMFJEwb8gVmtkVioqIaf9ufJnOO0LX5A5J/4fQhICfbyPiX8SsjX0p655/kIm3T6hr7t89b4IkRu19/uWufbNaV/mZSFWl7asLKXJNTMhzEn6bsTcAqlm55Tp4NvCe1hvv6OY/vU5luDz09UDmnDfr/uukmVm5aIjtlZBGqbOe7huNJGIWhoGCN/SoArRu9T9c9fjOlRMOHcf0QYMQmxFQnR0TkJZQoJ5N+EYNUIB9dvnJs2mlN0ZEuUU0RwAUOge7RwujiZ2AWp/dV/PNvLGmDVUxiyXC0Uuw57Ga2e49hYisYU/J/NPp9AbHqO8M6kZqYdqWKYueIsM3FDti3vUbjV4J6sL6mOBbxuJpUhUEX5UXxGbR39hDVx9Lsj4dszu+mcBFnDNcpRCDjw3z+hDqdNNpzhIRlbHQErLBWL3vnn2MLnb/3z163gyRtu1iTuR5myBIs9jLDAsX94VbBzKWdCFe22x4Eo6HwB6u+UHlXov0fnBXtAmgwRegc1gQwxi2FXB/ty0q1EO+PYo3fjUVRRb4uqBBIvpFarwtL0T6iYAYgHY11vH9Z2BFAHQ==
 ```
 
-### Edison
-
-```
-edison.nersc.gov ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDQPHTSKic9gj6kyhfSkBWZdMgnESIQVI0vg7eNIkshb+pXGGGxWQXrIX3IL1W9bvwrjGNc2JAd9c5Y1CfV0B6sKHDm70pPTnZ3bkvWwq81bloepzJHWE9NpNd7xIlVaM7sh7fMURD5/e7E46qldrpBBtudJG9ZgmjxdmDSlWBTp6scDqehBZ+yaRg0N7zoEA86synBi/0DEDzqarHlvXwXS5mWBGnlC3ZI5Uz/QHD4K26y86SeKYf2EKUI0am+gcPRbUHjDLyThK+qFGveRe9G41eEw40hxmO/yooYgCjCEKVbfU4Po2uR6qb/p/cpeMLOyZ3itrZce6WMgQxw+8g9MPKWuCKH7SJnJ/70YQyLuSlc98mr3AE6fjcZZy8Uf4ckH49qXTH4ILYPEzqLzI86eM+tJltayUWV9aQVAG6lBn14DyCvAyAfts+RCE8JkGJzcUSu7UILiIrqEyOpMOrZ/z2wM7mYJlAVBbrjT0LO6hXh/ET/npo7mMhotjtptXk9qg7DLUfL647OZvWjxQxZlE6jtpHilOaCcXpY3pXUZTtza7kv3pRbnPmzWU0iKKLmqsjtAT773SIvJ/78MwwqIF4pEBiPx7Ixmf+rHwpQV/P6ADBadpTfx28297ZjzvQZ+gTscBWULxeUFNfZtm+jmpsMGPNJTXAAlyVW13zO9w==
-```
-
 ## Troubleshooting
 
 ### "Access Denied" or "Permission Denied"
@@ -109,7 +91,7 @@ This message may appear when a connection to a new machine is first
 established:
 
 ```
-The authenticity of host 'edison.nersc.gov' can't be established.
+The authenticity of host 'cori.nersc.gov' can't be established.
 RSA key fingerprint is <omitted>
 Are you sure you want to continue connecting (yes/no)?
 ```
@@ -132,12 +114,12 @@ It is also possible that a host key has just been changed.
 ```
 
 Ensure that your `~/.ssh/known_hosts` file contains the correct entries for
-Edison and Cori and confirm the fingerprints using the posted fingerprints
-above.  Add the [certificate authority](#ssh-certificate-authority) line to
-your known_hosts file if you version of ssh supports SSH certificates.
+Cori and confirm the fingerprints using the posted fingerprints above.  Add the
+[certificate authority](#ssh-certificate-authority) line to your known_hosts
+file if you version of ssh supports SSH certificates.
 
 1. Open `~/.ssh/known_hosts`
-1. Remove any lines referring Cori or Edison and save the file
+1. Remove any lines referring Cori and save the file
 1. Paste the host key entries from above or retry connecting to the host and
    accept the new host key after verify that you have the correct "fingerprint"
    from the above list.
