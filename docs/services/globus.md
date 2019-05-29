@@ -38,12 +38,13 @@ user. The list of endpoints are provided in the table below.
     https://docs.globus.org/faq/transfer-sharing/#how_does_globus_handle_symlinks
 
 !!! tip
-    **To transfer files into/out of your laptop or desktop
+    To transfer files into/out of your laptop or desktop
     computer, you can install a [Globus connect (personal)
     server](https://www.globus.org/globus-connect) to configure an
-    endpoint on your personal device.**
+    endpoint on your personal device.
 
 # Globus Sharing 
+
 Data can be shared at NERSC using [Globus
 Sharing](https://www.globus.org/data-sharing). Currently shared
 endpoints are read-only, no writing is allowed. To share data, create
@@ -52,17 +53,32 @@ the [Globus endpoint web page](https://app.globus.org/endpoints) and
 search for the "NERSC SHARE" endpoint. Click on the "Shares" tab and
 select "Add a Shared Endpoint". This will bring you to a screen where
 you can give your shared endpoint a name and fill in the path you'd
-like to share. Currently sharing is limited to
-/global/project/projectdirs/<your_repo_name\>/gsharing and subdirectories
-(and the [dna file
-system](../../science-partners/jgi/filesystems/#dna-data-n-archive)
-for JGI users). Once you click "Create Share" it will take you to
+like to share. Once you click "Create Share" it will take you to
 another screen where you can share this endpoint with specific Globus
 users or with all Globus users (these users do **not** have to be
 NERSC users). You can also make other Globus users administrators,
 which will mean that they will have the power to add or remove other
 users from the shared endpoint.
 
+!!! warning
+
+    Think carefully about what you'll be sharing before you create a
+    shared endpoint. Any user who has access to your shared endpoint
+    will be able to read all the data in the shared directory you can
+    read. Sharing a directory will also share all of its
+    subdirectories.
+
+
+
+Currently sharing is limited to
+`/global/project/projectdirs/<your_repo_name>/gsharing` and
+subdirectories,
+`/global/projecta/projectdirs/<your_repo_name>/gsharing` and
+subdirectories, and the [dna file
+system](../../science-partners/jgi/filesystems/#dna-data-n-archive)
+for JGI users.  If you need to share a path other than the gsharing
+path, please [open a ticket](../../help) and we'll try to accomodate
+your use case.
 
 # Troubleshooting
 
