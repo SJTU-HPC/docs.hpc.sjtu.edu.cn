@@ -18,6 +18,21 @@ such that *only* the number of nodes needs to be changed.
     --8<-- "docs/applications/namd/cori-hsw.sh"
     ```
 
+### SMP
+
+An SMP build is also provided with the `namd/$version-smp` module for
+some versions. The primary use of the SMP builds is to
+[reduce memory usage](https://www.ks.uiuc.edu/Research/namd/wiki/index.cgi?NamdMemoryReduction).
+
+!!! tip 
+	It is recommended to use the non-SMP builds where possible as
+	those typically provide the best performance.
+
+??? example "Cori KNL SMP"
+	```bash
+	--8<-- "docs/applications/namd/cori-knl-smp.sh"
+	```
+
 ## Support
 
  * [User's Guide](https://www.ks.uiuc.edu/Research/namd/current/ug/)
