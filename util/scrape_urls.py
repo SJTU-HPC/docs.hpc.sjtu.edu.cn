@@ -30,7 +30,8 @@ goodlist = ["https://www.lbl.gov/disclaimers",
             "https://localhost",
             "http://localhost:5000",
             "https://localhost:5000",
-            "https://registry.services.nersc.gov"]
+            "https://registry.services.nersc.gov",
+            "https://rancher.spin.nersc.gov/v2-beta/projects/1a5/services/NotMyStack"]
 skiplist = ["https://doi.org/"]
 
 def get_url(this_page):
