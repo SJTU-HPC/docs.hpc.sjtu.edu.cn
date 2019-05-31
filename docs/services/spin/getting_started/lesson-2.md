@@ -180,6 +180,17 @@ tied to that account. Follow the steps below to generate an API key.
             1a1221788  sandbox      cattle         active  2018-03-12T21:25:22Z
             nersc$
 
+!!!info "Note for the SpinUp training"
+      If you are reading this guide as part of the SpinUp training, you may only have access to the `sandbox` environment".
+      Access to the other environments will be granted upon completion of the SpinUp training.
+      ```
+      nersc$ rancher environment
+      ID         NAME         ORCHESTRATION  STATE   CREATED
+      1a1221788  sandbox      cattle         active  2018-03-12T21:25:22Z
+      nersc$
+      ```
+
+
 If everything ran successfully, you are ready to proceed.
 
 ## Part 2: Ship your image from your laptop to the Spin Registry
