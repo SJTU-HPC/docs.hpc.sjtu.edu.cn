@@ -473,8 +473,8 @@ more convenient or memorable name for accessing the service.
     ```
     $ rancher stop NotMyStack
     error NotMyStack: Bad response statusCode [401]. Status [401 Unauthorized].
-Body: [message=you don't own stack NotMyStack] from
-[https://rancher.spin.nersc.gov/v2-beta/projects/1a5/services/NotMyStack]
+    Body: [message=you don't own stack NotMyStack] from
+    [https://rancher.spin.nersc.gov/v2-beta/projects/1a5/services/NotMyStack]
     ```
 
 ### Security Recomendations
