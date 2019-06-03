@@ -13,14 +13,13 @@ see which versions are available with `module avail pytorch`.
 
 ### Current recommended version
 
-The currently recommended version of PyTorch to use on Cori is the
-Intel-optimized version `v1.0.0`, which can be loaded with
+The currently recommended version of PyTorch to use on Cori Haswell and KNL is
+the latest version, `v1.1.0`, which can be loaded with
 
-`module load pytorch/v1.0.0-intel`
+`module load pytorch/v1.1.0`
 
-The Intel optimizations in this installation can give you considerable speedups
-on Cori relative to the standard `v1.0.0`. See the [benchmarks](benchmarks.md)
-page for comparisons.
+For our PyTorch benchmarks, this version is the fastest for a number of standard
+model architectures. See the [benchmarks](benchmarks.md) page for comparisons.
 
 ## Multi-node training
 
@@ -50,6 +49,3 @@ The examples include:
 * HEP-CNN classifier
 * ResNet50 CIFAR10 image classification
 * HEP-GAN for generation of RPV SUSY images.
-
-The repository will also be used to benchmark our system for single and
-multi-node training.
