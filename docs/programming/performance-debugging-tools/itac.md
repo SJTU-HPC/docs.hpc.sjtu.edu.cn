@@ -184,7 +184,7 @@ application was traced without OpenMP tracing support (see
 total time spent in OpenMP regions is zero, even if the application was
 compiled and run with OpenMP threading enabled.
 
-[IMAGE]
+![ITAC Summary](./images/itac-summary.png)
 
 From here one can navigate to various windows which display detailed
 information about the MPI communication in the application. For example, the
@@ -192,19 +192,19 @@ information about the MPI communication in the application. For example, the
 help with identifying regions where the application experiences load imbalance
 or a communication hotspot among MPI processes.
 
-[IMAGE]
+![ITAC Event Timeline](./images/itac-event-timeline.png)
 
 Similarly, the "quantitative timeline" shows the fraction of time spent in MPI
 vs user code over the duration of the run:
 
-[IMAGE]
+![ITAC Quantitative Timeline](./images/itac-quantitative-timeline.png)
 
 Clicking "Show advanced ..." in the pane on the right expands the description
 of MPI bottlenecks in the application (e.g., late sender, early receiver), and
 also provides an illustration and explanation of how that particular bottleneck
 tends to occur:
 
-[IMAGE]
+![ITAC Show Advanced](./images/itac-show-advanced.png)
 
 Trace Analyzer also supports a command line interface, which can produce
 machine-readable text files from a `.stf` collection file for further analysis.
