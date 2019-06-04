@@ -231,7 +231,7 @@ and their possible causes are shown in the following table.
 
     The user does not belong to a VASP group. Please the user needs
     to provide VASP license info following the instructions in
-    [here](../applications/vasp/#access).
+    [here](../applications/vasp/index.md#access).
 
 -   Error message:
 
@@ -254,6 +254,7 @@ and their possible causes are shown in the following table.
     sacct: error: slurm_persist_conn_open: failed to send persistent connection init message to edique01:6819
     sacct: error: slurmdbd: Getting response to message type 1444
     sacct: error: slurmdbd: DBD_GET_JOBS_COND failure: Unspecified error
+    ```
 
     or
 
