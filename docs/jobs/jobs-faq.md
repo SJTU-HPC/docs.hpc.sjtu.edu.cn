@@ -65,10 +65,30 @@ at [this page](../performance/io/lustre/index.md)  for
 I/O optimization tips.
 
 
-## Job Error Messages
+## Job Errors
 
-Some common error messages encountered during submit or run times
+Some common errors encountered during submit or run times
 and their possible causes are shown in the following table.
+
+### Job submission errors
+
+-   Error message:
+
+    ```
+    sbatch: error: Job request does not match any supported policy.
+    sbatch: error: Batch job submission failed: Unspecified error.
+    ```
+
+    Possible causes/remedies:
+
+-   Error message:
+
+    ```
+    sbatch: error: More resources requested than allowed for logical queue shared (13 requested core-equivalents > 12) 
+    sbatch: error: Batch job submission failed: Unspecified error
+    ```
+
+    Possible causes/remedies:
 
 -   Error message:
 
@@ -77,8 +97,6 @@ and their possible causes are shown in the following table.
     ```
 
     Possible causes/remedies:
-
-    Happen during job submission time.
 
     This error could happen if a user has no active repo on Cori.
     Please make sure your NERSC account is renewed with an active
@@ -92,13 +110,12 @@ and their possible causes are shown in the following table.
 
     Possible causes/remedies:
 
-    Happen during job submission time.
-
     This error mostly happens if a user has no access to certain
-    Slurm qos.  For example, when only NESAP users had access to a
-    qos allowing job submission to the regular partition for over
-    2 hrs of run time on KNL nodes, non-NESAP users would see this
-    error when submitting a job longer than 2 hours.
+    Slurm qos.  For example, a user who doesn't have access to the
+    `realtime` would see this error when submitting a job to the
+    qos.
+
+### Runtime errors
 
 -   Error message:
 
@@ -155,6 +172,63 @@ and their possible causes are shown in the following table.
 -   Error message:
 
     ```
+    sbatch: error: Batch job submission failed: Socket timed out on send/recv operation
+    ```
+
+    Possible causes/remedies:
+
+    The job scheduler is busy. Some users may be submitting lots
+    of jobs in a short time span. Please wait a little bit before
+    you resubmit your job.
+
+-   Error message:
+
+    ```
+    srun: fatal: Can not execute vasp_gam
+    /var/spool/slurmd/job15816716/slurm_script: line 17: 34559 
+    Aborted                 srun -n 32 -c8 --cpu_bind=cores vasp_gam
+    ```
+
+    Possible causes/remedies:
+
+    The user does not belong to a VASP group. Please the user needs
+    to provide VASP license info following the instructions in
+    [here](../applications/vasp/index.md#access).
+
+-   Error message:
+
+    ```
+    cori$ scontrol show job XXXXXXXX 
+    ... 
+    JobState=PENDING Reason=Nodes_required_for_job_are_DOWN,_DRAINED_or_reserved_for_jobs_in_higher_priority_partitions Dependency=(null) 
+    ...
+    ```
+
+    Possible causes/remedies:
+
+    The scheduler assigns nodes to a job as a precursor to scheduling
+    and some of those either crashed or were assigned to a higher
+    job. Wait until nodes are allocated for your job.
+
+-   Error message:
+
+    ```
+    sacct: error: slurm_persist_conn_open: failed to send persistent connection init message to corique01:6819
+    sacct: error: slurmdbd: Getting response to message type 1444
+    sacct: error: slurmdbd: DBD_GET_JOBS_COND failure: Unspecified error
+    ```
+
+    or
+
+    ```
+    sacct: error: slurm_persist_conn_open_without_init: failed to open persistent connection to corique01:6819: Connection refused
+    ```
+
+    Possible causes/remedies:
+
+-   Error message:
+
+    ```
     Tue Sep 18 20:13:26 2018: [PE_5]:inet_listen_socket_setup:inet_setup_listen_socket: bind failed port 63725 listen_sock = 4 Address already in use
     Tue Sep 18 20:13:26 2018: [PE_5]:_pmi_inet_listen_socket_setup:socket setup failed
     Tue Sep 18 20:13:26 2018: [PE_5]:_pmi_init:_pmi_inet_listen_socket_setup (full) returned -1
@@ -189,77 +263,3 @@ and their possible causes are shown in the following table.
         export PMI_NO_PREINITIALIZE=1
         ```
 
--   Error message:
-
-    ```
-    sbatch: error: Job request does not match any supported policy.
-    sbatch: error: Batch job submission failed: Unspecified error.
-    ```
-
-    Possible causes/remedies:
-
--   Error message:
-
-    ```
-    sbatch: error: More resources requested than allowed for logical queue shared (13 requested core-equivalents > 12) 
-    sbatch: error: Batch job submission failed: Unspecified error
-    ```
-
-    Possible causes/remedies:
-
--   Error message:
-
-    ```
-    sbatch: error: Batch job submission failed: Socket timed out on send/recv operation
-    ```
-
-    Possible causes/remedies:
-
-    The job scheduler is busy. Some users may be submitting lots
-    of jobs in a short time span. Please wait a little bit before
-    you resubmit your job.
-
--   Error message:
-
-    ```
-    srun: fatal: Can not execute vasp_gam
-    /var/spool/slurmd/job15816716/slurm_script: line 17: 34559 
-    Aborted                 srun -n 32 -c8 --cpu_bind=cores vasp_gam
-    ```
-
-    Possible causes/remedies:
-
-    The user does not belong to a VASP group. Please the user needs
-    to provide VASP license info following the instructions in
-    [here](../applications/vasp/index.md#access).
-
--   Error message:
-
-    ```
-    $ scontrol show job XXXXXXXX 
-    ... 
-    JobState=PENDING Reason=Nodes_required_for_job_are_DOWN,_DRAINED_or_reserved_for_jobs_in_higher_priority_partitions Dependency=(null) 
-    ...
-    ```
-
-    Possible causes/remedies:
-
-    The scheduler assigns nodes to a job as a precursor to scheduling
-    and some of those either crashed or were assigned to a higher
-    job. Wait until nodes are allocated for your job.
-
--   Error message:
-
-    ```
-    sacct: error: slurm_persist_conn_open: failed to send persistent connection init message to edique01:6819
-    sacct: error: slurmdbd: Getting response to message type 1444
-    sacct: error: slurmdbd: DBD_GET_JOBS_COND failure: Unspecified error
-    ```
-
-    or
-
-    ```
-    sacct: error: slurm_persist_conn_open_without_init: failed to open persistent connection to edique01:6819: Connection refused
-    ```
-
-    Possible causes/remedies:
