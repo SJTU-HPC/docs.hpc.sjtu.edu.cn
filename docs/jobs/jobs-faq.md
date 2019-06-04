@@ -268,14 +268,14 @@ and their possible causes are shown in the following table.
 	code:
 
         ```shell
-        nersc$ module swap craype-network-aries craype-network-none
+        cori$ module swap craype-network-aries craype-network-none
         ```
 
     -   Set the fowllowing two env variables:
 
         ```shell
-        export PMI_NO_FORK=1
-        export PMI_NO_PREINITIALIZE=1
+        cori$ export PMI_NO_FORK=1
+        cori$ export PMI_NO_PREINITIALIZE=1
         ```
 
 [comment]: <> (-   Error message:)
