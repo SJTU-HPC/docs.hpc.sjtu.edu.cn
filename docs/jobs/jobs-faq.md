@@ -49,7 +49,7 @@ cori$ sinfo -o "%.20b %.20F"
       knl,cache,quad     9412/242/28/9682
 ```
 
-**(Q) Could I run jobs using both Haswell and KNL compute nodes?**
+**Q: Could I run jobs using both Haswell and KNL compute nodes?**
 
 **A**: Currently only available for certain NERSC and Cray staff
 for benchmarking.  We will evaluate whether (and if yes, how) to
@@ -59,9 +59,9 @@ make it available for general NERSC users.
 
 **A**: Consider using the Burst Buffer - this is a tier of SSDs
 that sits inside the Cori HSN, giving high-performance I/O. See
-[this page](https://docs.nersc.gov/performance/io/bb/) for more
+[this page](../performance/io/bb/index.md) for more
 details. If you are using the `$SCRATCH` file system, take a look
-at [this page](https://docs.nersc.gov/performance/io/lustre/)  for
+at [this page](../performance/io/lustre/index.md)  for
 I/O optimization tips.
 
 
@@ -231,7 +231,7 @@ and their possible causes are shown in the following table.
 
     The user does not belong to a VASP group. Please the user needs
     to provide VASP license info following the instructions in
-    [here](https://docs.nersc.gov/applications/vasp/#access).
+    [here](../applications/vasp/#access).
 
 -   Error message:
 
