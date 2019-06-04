@@ -129,10 +129,6 @@ If you have an account, test your Spin account by quickly logging into the Spin 
 Communication with the Rancher server requires an NERSC account and an API key
 tied to that account. Follow the steps below to generate an API key.
 
-!!! Bug
-    The Rancher module does not currently work on Denovo. We will get it
-    working soon.
-
 1. Log in to a NERSC login node and load the Spin module. The Spin module loads
    the Rancher CLI and related utilities.
 
