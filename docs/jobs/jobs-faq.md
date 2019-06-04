@@ -75,20 +75,40 @@ and their possible causes are shown in the following table.
 -   Error message:
 
     ```
+    sbatch: error: Your account has exceeded a filesystem quota and is not permitted to submit batch jobs.  Please run `myquota` for more information.
+    ```
+
+    Possible causes/remedies:
+
+    Your filesystem usage is over the quota(s). Please run the
+    `myquota` command to see which quota is exceeded. Reduce usage
+    and resubmit the job.
+
+-   Error message:
+
+    ```
     sbatch: error: Job request does not match any supported policy.
     sbatch: error: Batch job submission failed: Unspecified error.
     ```
 
     Possible causes/remedies:
 
+    There is something wrong with your job submission parameters
+    and the request (the requested number of nodes, the walltime
+    limit, etc.) does not match the policy for the selected qos.
+    Please check the [queue policy](policy.md).
+
 -   Error message:
 
     ```
-    sbatch: error: More resources requested than allowed for logical queue shared (13 requested core-equivalents > 12) 
+    sbatch: error: More resources requested than allowed for logical queue shared (XX requested core-equivalents > YY) 
     sbatch: error: Batch job submission failed: Unspecified error
     ```
 
     Possible causes/remedies:
+
+    The number of logical cores that your job tries to use exceeds
+    the the number that you requested for this `shared` qos job.
 
 -   Error message:
 
@@ -112,8 +132,41 @@ and their possible causes are shown in the following table.
 
     This error mostly happens if a user has no access to certain
     Slurm qos.  For example, a user who doesn't have access to the
-    `realtime` would see this error when submitting a job to the
-    qos.
+    `realtime` qos would see this error when submitting a job to
+    the qos.
+
+-   Error message:
+
+
+    ```
+    sbatch: error: Batch job submission failed: Socket timed out on send/recv operation
+    ```
+
+    Possible causes/remedies:
+
+    The job scheduler is busy. Some users may be submitting lots
+    of jobs in a short time span. Please wait a little bit before
+    you resubmit your job.
+
+    This error normally happens when submitting a job, but can
+    happen during runtimes, too.
+
+-   Error message:
+
+    ```
+    cori$ salloc ... --qos=interactive
+    salloc: Pending job allocation XXXXXXXX 
+    salloc: job XXXXXXXX queued and waiting for resources 
+    salloc: error: Unable to allocate resources: Connection timed out
+    ```
+
+    Possible causes/remedies:
+
+    The interactive job could not start within 6 minutes, and,
+    threfore, was cancelled. It is because either the number of
+    available nodes left from all the reserved interactive nodes
+    or out of the 64 node limit per repository was less than what
+    you requested.
 
 ### Runtime errors
 
@@ -154,32 +207,10 @@ and their possible causes are shown in the following table.
 -   Error message:
 
     ```
-    Sat Sep 1 21:31:48 2018: [PE_3]:_pmi_mmap_tmp: Warning bootstrap barrier failed: num_syncd=2, pes_this_node=4, timeout=180 secs
-    Sat Sep 1 21:31:48 2018: [PE_3]:_pmi_init:_pmi_mmap_init returned -1
-    ...
-    ```
-
-    Possible causes/remedies:
-
--   Error message:
-
-    ```
     libgomp: Thread creation failed: Resource temporarily unavailable
     ```
 
     Possible causes/remedies:
-
--   Error message:
-
-    ```
-    sbatch: error: Batch job submission failed: Socket timed out on send/recv operation
-    ```
-
-    Possible causes/remedies:
-
-    The job scheduler is busy. Some users may be submitting lots
-    of jobs in a short time span. Please wait a little bit before
-    you resubmit your job.
 
 -   Error message:
 
