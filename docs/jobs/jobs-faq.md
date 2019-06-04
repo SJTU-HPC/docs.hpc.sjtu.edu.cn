@@ -244,22 +244,6 @@ and their possible causes are shown in the following table.
 -   Error message:
 
     ```
-    sacct: error: slurm_persist_conn_open: failed to send persistent connection init message to corique01:6819
-    sacct: error: slurmdbd: Getting response to message type 1444
-    sacct: error: slurmdbd: DBD_GET_JOBS_COND failure: Unspecified error
-    ```
-
-    or
-
-    ```
-    sacct: error: slurm_persist_conn_open_without_init: failed to open persistent connection to corique01:6819: Connection refused
-    ```
-
-    Possible causes/remedies:
-
--   Error message:
-
-    ```
     Tue Sep 18 20:13:26 2018: [PE_5]:inet_listen_socket_setup:inet_setup_listen_socket: bind failed port 63725 listen_sock = 4 Address already in use
     Tue Sep 18 20:13:26 2018: [PE_5]:_pmi_inet_listen_socket_setup:socket setup failed
     Tue Sep 18 20:13:26 2018: [PE_5]:_pmi_init:_pmi_inet_listen_socket_setup (full) returned -1
@@ -294,3 +278,19 @@ and their possible causes are shown in the following table.
         export PMI_NO_PREINITIALIZE=1
         ```
 
+[comment]: <> (-   Error message:)
+[comment]: <> ()
+[comment]: <> (    ```)
+[comment]: <> (    sacct: error: slurm_persist_conn_open: failed to send persistent connection init message to corique01:6819)
+[comment]: <> (    sacct: error: slurmdbd: Getting response to message type 1444)
+[comment]: <> (    sacct: error: slurmdbd: DBD_GET_JOBS_COND failure: Unspecified error)
+[comment]: <> (    ```)
+[comment]: <> ()
+[comment]: <> (    or)
+[comment]: <> ()
+[comment]: <> (    ```)
+[comment]: <> (    sacct: error: slurm_persist_conn_open_without_init: failed to open persistent connection to corique01:6819: Connection refused)
+[comment]: <> (    ```)
+[comment]: <> ()
+[comment]: <> (    Possible causes/remedies:)
+[comment]: <> ()
