@@ -14,7 +14,7 @@ for this partition, and Column 4 shows the number of nodes
 Available/Idle/Other/Total in this partition.
 
 ```shell
-cori$ sinfo -o "%.10P %.10a %.15l %.20F"
+nersc$ sinfo -o "%.10P %.10a %.15l %.20F"
  PARTITION      AVAIL       TIMELIMIT       NODES(A/I/O/T)
     system         up      1-12:00:00   11611/412/53/12076
     debug*         up           30:00    11299/77/42/11418
@@ -42,7 +42,7 @@ Available/Idle/Other/Total in this partition.  Both `knl` and
 `knl,cache,quad` are KNL quad cache nodes.
 
 ```shell
-cori$ sinfo -o "%.20b %.20F"
+nersc$ sinfo -o "%.20b %.20F"
      ACTIVE_FEATURES       NODES(A/I/O/T)
                  knl              0/0/6/6
              haswell     2138/231/19/2388
@@ -70,13 +70,13 @@ I/O optimization tips.
 Some common error messages encountered during submit or run times
 and their possible causes are shown in the following table.
 
--   **Error message**:
+-   Error message:
 
     ```
     Job submit/allocate failed: Unspecified
     ```
 
-    **Possible causes/remedies**:
+    Possible causes/remedies:
 
     Happen during job submission time.
 
@@ -84,13 +84,13 @@ and their possible causes are shown in the following table.
     Please make sure your NERSC account is renewed with an active
     allocation.
 
--   **Error message**:
+-   Error message:
 
     ```
     Job sumit/allocate failed: Invalid qos specification
     ```
 
-    **Possible causes/remedies**:
+    Possible causes/remedies:
 
     Happen during job submission time.
 
