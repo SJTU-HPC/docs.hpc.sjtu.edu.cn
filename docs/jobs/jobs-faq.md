@@ -98,6 +98,9 @@ and their possible causes are shown in the following table.
     limit, etc.) does not match the policy for the selected qos.
     Please check the [queue policy](policy.md).
 
+    This error also happens when the job submission didn't include
+    the `--time-min` line with the `flex`.
+
 -   Error message:
 
     ```
@@ -204,6 +207,18 @@ and their possible causes are shown in the following table.
     `debug`, etc.), requesting more NERSC-Hours than your repo
     balance, it will be automatically routed to the `scavenger`
     queue.
+
+-   Error message:
+
+    ```
+    sbatch: error: No available NIM balance information for user xxxxx, account yyyyy. Cannot proceed.
+    sbatch: error: Batch job submission failed: Unspecified error
+    ```
+
+    Possible causes/remedies:
+
+    You submitted the job using a repo that you are not allowed to use.
+    Login in to your NIM account to see which repo you can use.
 
 ### Runtime errors
 
