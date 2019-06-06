@@ -168,6 +168,43 @@ and their possible causes are shown in the following table.
     or out of the 64 node limit per repository was less than what
     you requested.
 
+-   Error message:
+
+    ```
+    sbatch: error: No architecture specified, cannot estimate job costs.
+    sbatch: error: Batch job submission failed: Unspecified error
+    ```
+
+    Possible causes/remedies:
+
+    Your job didn't specify the type of compute nodes. To run on
+    Hawell nodes, add to your batch script:
+
+    ```
+    #SBATCH -C haswell
+    ```
+
+    To request KNL nodes, add this line:
+
+    ```
+    #SBATCH -C knl
+    ```
+
+-   Error message:
+
+    ```
+    sbatch: error: The scavenger logical queue requires an lower balance than the estimated job cost. Job cost estimated at XX.XX NERSC-Hours, your balance is YYYYYY.YY NERSC-Hours (Repo: YYYYYYY.YY NERSC-Hours). Cannot proceed, please see https://docs.nersc.gov/jobs/policy/ for your options to run this job.
+    sbatch: error: Batch job submission failed: Unspecified error
+    ```
+
+    Possible causes/remedies:
+
+    You submitted the job to the `scavenger` partition directly.
+    When you submit a job with a normal qos (e.g., `regular`,
+    `debug`, etc.), requesting more NERSC-Hours than your repo
+    balance, it will be automatically routed to the `scavenger`
+    queue.
+
 ### Runtime errors
 
 -   Error message:
