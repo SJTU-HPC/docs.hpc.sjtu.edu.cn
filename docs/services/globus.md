@@ -1,4 +1,5 @@
-# Overview
+# Globus
+## Overview
 [Globus](https://globus.org) is the recommended way to move
 significant amounts of data between NERSC and other sites. Globus
 addresses many of the common challenges faced by researchers in
@@ -11,7 +12,7 @@ research. Visit [Globus.org](https://globus.org) for documentation on
 its easy to use web interface and its versatile REST/API for building
 scripted tasks and operations.
 
-# Availability
+## Availability
 Globus is available as a free service that any user can access.
 You can log into Globus web interface with your NERSC
 credentials (by selecting NERSC in the drop down menu of supported
@@ -41,7 +42,7 @@ user. The list of endpoints are provided in the table below.
     server](https://www.globus.org/globus-connect) to configure an
     endpoint on your personal device.**
 
-# Globus Sharing
+## Globus Sharing
 Data can be shared at NERSC using [Globus
 Sharing](https://www.globus.org/data-sharing). Currently shared
 endpoints are read-only, no writing is allowed. To share data, create
@@ -61,8 +62,8 @@ NERSC users). You can also make other Globus users administrators,
 which will mean that they will have the power to add or remove other
 users from the shared endpoint.
 
-# Command Line Globus Transfers
-## Globus SDK
+## Command Line Globus Transfers
+### Globus SDK
 Globus provides a [python based
 SDK](https://globus-sdk-python.readthedocs.io/en/stable/) (Software
 Development Kit) for doing data transfers, managing endpoints,
@@ -114,8 +115,8 @@ transfer ID which you cna use to check on the transfer on the [Globus
 web page](https://www.globus.org) (or with the Globus SDK).
 
 
-### Example
-#### Transfer files from [NERSC's HPSS Archive](../filesystems/archive.md) to another location
+#### Example
+##### Transfer files from [NERSC's HPSS Archive](../filesystems/archive.md) to another location
 First, generate a list of files you'd like to transfer:
 ```
 hsi -q ls -1 -R name_of_hpss_directory_or_file 2> gtransfer_list.txt
@@ -127,15 +128,15 @@ Please go to this URL and login: https://auth.globus.org/v2/oauth2/authorize?cli
 Please enter the code you get after login here: <snipped>
 Transfer ID is b'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 ```
-# Troubleshooting
-## Connection Errors Between NERSC and other endpoint
+## Troubleshooting
+### Connection Errors Between NERSC and other endpoint
 If you are getting errors that you cannot connect to the NERSC
 endpoint after you've activated it, please check with your system
 administrator that they are not blocking the IP of the NERSC host (you
 can find this information in the error message of the Activity pane on
 the globus web page). If they are not, please open a ticket with the
 IP address of the other endpoint and we will investigate further.
-## Trouble Activating a NERSC Endpoint
+### Trouble Activating a NERSC Endpoint
 If you are having trouble activating a NERSC endpoint, please try
 logging into [NIM](https://nim.nersc.gov) to clear your authentication
 failures. If that still doesn't fix the issue, please open a ticket
