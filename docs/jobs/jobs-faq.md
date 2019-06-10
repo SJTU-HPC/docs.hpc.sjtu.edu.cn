@@ -281,6 +281,14 @@ and their possible causes are shown in the following table.
 -   Error message:
 
     ```
+    cori$ sqs
+    JOBID     ST  ...  REASON
+    XXXXXXXX  PD  ...  Nodes required*
+    ```
+
+    or
+
+    ```
     cori$ scontrol show job XXXXXXXX 
     ... 
     JobState=PENDING Reason=Nodes_required_for_job_are_DOWN,_DRAINED_or_reserved_for_jobs_in_higher_priority_partitions Dependency=(null) 
@@ -289,9 +297,9 @@ and their possible causes are shown in the following table.
 
     Possible causes/remedies:
 
-    The scheduler assigns nodes to a job as a precursor to scheduling
-    and some of those either crashed or were assigned to a higher
-    job. Wait until nodes are allocated for your job.
+    The job was tentatively scheduled to start as a backfill job.
+    But some of the assigned nodes are now down, drained or re-assigned
+    to a higher priority job. Wait until Slurm reschedules the job.
 
 -   Error message:
 
@@ -329,6 +337,22 @@ and their possible causes are shown in the following table.
         cori$ export PMI_NO_FORK=1
         cori$ export PMI_NO_PREINITIALIZE=1
         ```
+
+-   Error message:
+
+    ```
+    /some/path/ ./a.out error while loading shared libraries: /opt/gcc/7.3.0/snos/lib64/libgomp.so.1: cannot read file data:
+    Input/output error
+    ...
+    ```
+
+    Possible causes/remedies:
+
+    A possible cause is that the `LD_LIBRARY_PATH` environment
+    varialbe has been modified.  Since `libgomp.so.1` is part of
+    the Intel libraries, you can try unloading the `gcc` module
+    with `module unload gcc` if it is loaded, or reloading the
+    `intel` module with `module load intel`.
 
 [comment]: <> (-   Error message:)
 [comment]: <> ()
