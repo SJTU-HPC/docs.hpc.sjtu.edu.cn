@@ -290,7 +290,7 @@ file group can have the same name as the repository (in which case all
 members of the repository will have access to the project directory)
 or a new name can be requested (in which case only those users added
 to the new file group by the requester will have access to the project
-directory.
+directory).
 
 HPSS project directories have the following properties:
 
