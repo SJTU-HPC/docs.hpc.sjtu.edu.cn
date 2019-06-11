@@ -20,7 +20,7 @@ Please make sure you have a recently updated version of the NoMachine client:
 ### Download latest NoMachine Client
 #### Windows ([Download](https://www.nomachine.com/download/download&id=16))
 #### Mac OS ([Download](https://www.nomachine.com/download/download&id=15))
-#### DEB Package for Debian/Ubuntu: ([Download](https://www.nomachine.com/download/download&id=10))
+#### DEB Package for Debian/Ubuntu: ([Download](https://www.nomachine.com/download/download&id=9))
 #### RPM Package for Centos/Redhat/Fedora ([Download](https://www.nomachine.com/download/download&id=11))
 
 ## Configuring the Connection File
