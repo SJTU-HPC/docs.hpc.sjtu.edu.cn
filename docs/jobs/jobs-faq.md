@@ -220,6 +220,17 @@ and their possible causes are shown in the following table.
     You submitted the job using a repo that you are not allowed to use.
     Login in to your NIM account to see which repo you can use.
 
+-   Error message:
+
+    ```
+    sbatch: error: Batch job submission failed: Unable to contact slurm controller (connect failure)
+    ```
+
+    Possible causes/remedies:
+
+    There may be an issue with Slurm. If the error is still seen after
+    a few minutes, report to NERSC.
+
 ### Runtime errors
 
 -   Error message:
