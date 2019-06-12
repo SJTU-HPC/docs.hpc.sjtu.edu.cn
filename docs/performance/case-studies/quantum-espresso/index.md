@@ -1,4 +1,6 @@
-#Background
+# Quantum ESPRESSO EXX
+
+## Background
 
 Quantum ESPRESSO is an OpenSource density functional theory (DFT) code
 and widely used in Materials Science and Quantum Chemistry to compute
@@ -19,7 +21,7 @@ calculating the exact exchange. In this case study, we discuss
 improvements to the scalability and performance of hybrid DFT
 calculations in Quantum ESPRESSO.
 
-#Starting Point
+## Starting Point
 
 The most costly part of an exact exchange calculation is the
 calculation of the exact exchange functional,
@@ -50,14 +52,14 @@ MPI. We have optimized both parts and will split the discussion as the
 changes we applied to the code are almost completely orthogonal to
 each other.
 
-##Improving OpenMP Scaling
+## Improving OpenMP Scaling
 
 The inner element-wise products over $\mathbf{r}$ and $\mathbf{g}$ in
 the algorithm described above are performed in loops over all points
 of the (dual) grid. In the naive approach, one would spawn OpenMP
 sections around the loops over those grids and destroy them after the
 loops are done. However, that produces very bad scaling as shown in
-the figure below. <a href="fig1">Fig. 1</a> shows thread scaling
+the figure below. <a href="#fig1">Fig. 1</a> shows thread scaling
 vs. MPI scaling for the unoptimized code (left panel) as well as the
 total wall time for the point which showed the best performance (right
 panel) for a system comprised of 16 water molecules.
@@ -82,7 +84,7 @@ data layout conversions which employs global data transformations to
 make all grid points involved in the FFT for a set of i and j band
 indices node-local (for more details about that, please read the next
 section). This improvement lead to much better scaling as shown in <a
-href="fig2">Fig. 2</a>.
+href="#fig2">Fig. 2</a>.
 
 <a name="fig2"></a>
 ![qe-3dfft-openmp](images/vexx-vanilla-mpi-vs-3dfft.png)
@@ -117,7 +119,7 @@ end do
 !$omp end parallel do
 ```
 
-<a href="fig3">Fig. 3</a> shows how cache blocking improved scaling performance.
+<a href="#fig3">Fig. 3</a> shows how cache blocking improved scaling performance.
 
 <a name="fig3"></a>
 ![qe-blocked-openmp](images/vexx-vanilla-mpi-vs-3dfft-tiled.png)
@@ -133,7 +135,7 @@ pooling) to allow the FFT libraries to perform multiple FFT's at once
 (common FFT libraries such as FFTW or Intel's DFTI support these
 functionality). By employing this, we achieve very good scaling and
 impressive performance compared to the original all-MPI code. This is
-shown in <a href="fig4">Fig. 4</a>.
+shown in <a href="#fig4">Fig. 4</a>.
 
 <a name="fig4"></a>
 ![qe-batched-openmp](images/vexx-vanilla-mpi-vs-3dfft-many-tiled.png)
@@ -147,13 +149,13 @@ studies on larger systems show better scaling and speedups for up to
 vexx. We will now have a look at multi-rank scaling and how that can
 be improved as well.
 
-##Improving MPI Scaling
+## Improving MPI Scaling
 
 Most of the changes described in this section are orthogonal to the
 changes applied above, with some minor exceptions such as the
 enablement of local 3D-FFT's due to data-layout rearrangements. We
 will first look at out-of-the-box performance of Quantum ESPRESSO's
-MPI parallelization. <a href="fig5">Fig. 5</a> depicts the strong
+MPI parallelization. <a href="#fig5">Fig. 5</a> depicts the strong
 scaling behavior of that code for different types of parallelizations
 in QE, denoted as *task-group* and *band-group* parallelization.
 
@@ -166,7 +168,7 @@ Those implementations are mutually exclusive and the former only
 benefits the local (plain DFT) part of the code, and the latter only
 benefits the EXX part of the code. We can see that band-group
 parallelization is preferred but also that only scales to about 16
-ranks. The cartoon in <a href="fig6">Fig. 6</a> shows how espresso
+ranks. The cartoon in <a href="#fig6">Fig. 6</a> shows how espresso
 5.2.0 (and also up to version 6.0) implements band-group parallelism
 in QE.
 
@@ -181,7 +183,7 @@ are parallelized while regions colored in red are not. In the original
 code, the SCF loop is basically duplicated among each rank in the
 partition. For that reason, this part of the calculation dominates the
 wall clock time for large partition sizes, i.e. see <a
-href="fig7">Fig. 7</a>.
+href="#fig7">Fig. 7</a>.
 
 <a name="fig7"></a>
 ![qe-local-vs-exx-fraction](images/qe-local-vs-exx-fraction.png)
@@ -211,21 +213,21 @@ the local calculation was replicated on every node and thus
 significantly limiting scaling to many nodes. In the new approach, we
 parallelize the local part by distributing g-vector components. The
 layouts used in the different parts of the calculation are shown in <a
-href="fig8">Fig. 8</a>.
+href="#fig8">Fig. 8</a>.
 
 <a name="fig8"></a>
 ![qe-data-transpose](images/qe-data-transpose.png)
 
 *Fig. 8: data conversion between g-vector (left) and band parallelization (right).*
 
-The panel on the left of <a href="fig8">Fig. 8</a> shows the
+The panel on the left of <a href="#fig8">Fig. 8</a> shows the
 distribution over g-vectors. Here, all bands reside on one node and
 thus the diagonalization can be performed in an embarassingly parallel
 way. For the EXX calculation, we distribute band pairs and keep
 $\mathbf{g}$-vectors and $\mathbf{r}$-components local to any node, so
 that we can employ local 3D FFT's and the loop merging described
 above, thus facilitating OpenMP scaling. The diagram for the optimized
-code in <a href="fig9">Fig. 9</a> shows that every part of the
+code in <a href="#fig9">Fig. 9</a> shows that every part of the
 calculation is parallelized.
 
 <a name="fig9"></a>
@@ -236,7 +238,7 @@ calculation is parallelized.
 Using different layouts for different parts of the calculation
 requires in-flight data transpositions. However, despite the
 associated overhead, our changes significantly improve scaling
-performance as shown in <a href="fig10">Fig. 10</a>.
+performance as shown in <a href="#fig10">Fig. 10</a>.
 
 <a name="fig10"></a>
 ![qe-strong-scaling-optimized](images/qe-strong-scaling-optimized.png)

@@ -89,8 +89,6 @@ sections below.
 
 * [Advanced OpenMP and CESM Case Study](http://www.nersc.gov/users/training/events/advanced-openmp-training-february-4-2016/)
   by Helen He, March 2016.
-* [Advanced OpenMP Training](http://www.nersc.gov/users/training/events/advanced-openmp-training-february-4-2016/)
-  by Dr. Michael Klemm, Intel; Dr. Bronis R. de Supinski, LLNL, February 2016.
 * [Nested OpenMP](http://www.nersc.gov/assets/Uploads/Nested-OpenMP-NUG-20151008.pdf)
   by Helen He, October 2015.
 * [Tutorial: Getting up to Speed on OpenMP 4.0](http://www.nersc.gov/users/training/events/tutorial-getting-up-to-speed-on-openmp-4-0/)
@@ -130,16 +128,8 @@ sections below.
    (2013) on Youtube; 27 video segments, 4 hours total. Slides
    [here](http://openmp.org/mp-documents/Intro_To_OpenMP_Mattson.pdf) and
    exercises [here](http://openmp.org/mp-documents/Mattson_OMP_exercises.zip).
- * [SC13 Tutorial: Hybrid MPI and OpenMP Parallel Programming](http://openmp.org/wp/sc13-tutorial-hybrid-mpi-and-openmp-parallel-programming/)
  * [LLNL OpenMP Tutorial](https://computing.llnl.gov/tutorials/openMP/)
    by Blaise Barney, LLNL.
- * ANL Training Program on Exascale Computing, August 2013
-    * [Using OpenMP for Intranode Parallelism: Tutorial Overview](http://extremecomputingtraining.anl.gov/files/2013/07/ATPESC_OpenMP.Overview.31.pdf)
-      by Bronis de Supinski, LLNL; Paul Petersen, Intel.
-    * [Using OpenMP for Intranode Parallelism: Useful Information](http://extremecomputingtraining.anl.gov/files/2013/07/ATPESC_OpenMP.Useful.31.pdf)
-      by Bronis de Supinski, LLNL; Paul Petersen, Intel.
-    * [Using OpenMP for Intranode Parallelism. OpenMP 4.0 and the Future of OpenMP](http://extremecomputingtraining.anl.gov/files/2013/07/ATPESC_OpenMP.Future.12.pdf)
-      by Bronis de Supinski, LLNL.
  * UC Berkeley ParLab Boot Camp, 2013
     * [Shared Memory Programming with OpenMP - Basics](http://parlab.eecs.berkeley.edu/sites/all/parlab/files/openmp_basics_0.pdf)
       by Tim Mattson, Intel. Video

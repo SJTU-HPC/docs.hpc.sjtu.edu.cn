@@ -64,8 +64,6 @@ an excellent alternative for users seeking to establish merely a web
 presence for their project.  Such simple websites are not within the
 scope of science gateways at NERSC, and we do not provide support to
 users attempting to set them up.
-See
-[Wikipedia's comparison of free hosting services](https://en.wikipedia.org/wiki/Comparison_of_free_web_hosting_services).
 
 The service level for NERSC science gateway support is formally 8x5
 (business hours).  Outside of those hours the NERSC Data and Analytics
@@ -93,7 +91,6 @@ is for https. These two gateway nodes are available for users to do
 general development on. Service level agreements are possible along
 with dedicated resources for projects that wish to build robustly
 monitored web services.
-
 
 NERSC encourages its users to create their own science gateways by
 using the resources described on this page. The center engages with
@@ -212,7 +209,7 @@ tape archives via a science gateway should only be reserved for
 infrequent accesses from a data pool that is too large to be
 practically kept on the "project" filesystem. If you need to serve
 very large files very frequently via a science gateway, please
-contact [NERSC Consulting](https:help.nersc.gov) for assistance.
+contact [NERSC Consulting](https://help.nersc.gov) for assistance.
 
 Retrieving data from HPSS via a science gateway can be very slow. If
 files have not been accessed in some time they will have to be
