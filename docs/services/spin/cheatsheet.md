@@ -22,7 +22,7 @@ Images and Containers:
 
 ## Naming conventions for Stacks, Services, Secrets & Volumes
 
-More information on naming conventions for Services, Stacks, Secrets & Volumes, can be found in the [Best Practices Guide](best_practices).
+More information on naming conventions for Services, Stacks, Secrets & Volumes, can be found in the [Best Practices Guide](best_practices.md).
 
 ### Stack Names
 
@@ -68,7 +68,7 @@ data:
 
 ## Network
 
-More information on Network, Ports and Firewall considerations can be found in the [Best Practices Guide: Networking](best_practices/#networking).
+More information on Network, Ports and Firewall considerations can be found in the [Best Practices Guide: Networking](best_practices.md#networking).
 
 ### Network Ports and Firewall Restrictions
 
@@ -104,7 +104,7 @@ The Rancher CLI must be used from a NERSC system, such as Cori. NERSC
 provides a modified version of the Rancher CLI which is optimized for
 the NERSC environment, and some subcommands have been removed. For
 detailed documentation about using the Rancher CLI at NERSC,
-see [Spin Tips & Examples](tips_and_examples).
+see [Spin Tips & Examples](tips_and_examples.md).
 
 Rancher official CLI documentation can be found at
 https://rancher.com/docs/rancher/v1.6/en/cli/ & a detailed list of CLI commands
