@@ -49,6 +49,21 @@ cori$ sinfo -o "%.20b %.20F"
       knl,cache,quad     9412/242/28/9682
 ```
 
+**Q: How many interactive QOS nodes are available that I can use?**
+
+**A**: 192 Haswell and 192 KNL nodes are reserved for interactive
+jobs.  Each repo can use up to total 64 nodes (combining Hawell and
+KNL nodes).  Run the following command to see how many interactive
+nodes are being used by the members of your repo:
+
+```shell
+cori$ squeue --qos=interactive --account=<reponame> -O jobid,username,starttime,timelimit,maxnodes,account
+```
+
+If the number sums up to 64 nodes, please contact the other group
+members if you feel they need to release interactive resources.
+
+
 **Q: Could I run jobs using both Haswell and KNL compute nodes?**
 
 **A**: Currently only available for certain NERSC and Cray staff
@@ -231,6 +246,29 @@ and their possible causes are shown in the following table.
     There may be an issue with Slurm. If the error is still seen after
     a few minutes, report to NERSC.
 
+-   Error message:
+
+    ```
+    sbatch: error: Job cost estimated at XXXXXXXX.XX NERSC-Hours, your balance is XXXXXXX.XX NERSC-Hours (Repo: XXXXXXXX.XX NERSC-Hours). Cannot proceed, please see https://docs.nersc.gov/jobs/policy/ for your options to run this job.
+    sbatch: error: Job submit/allocate failed: Unspecified error
+    ```
+
+    Possible causes/remedies:
+
+    Your remaining repo balance is not big enough to run the job.
+
+-   Error message:
+
+    ```
+    srun: error: Unable to create step for job XXXXXXXX: More processors requested than permitted
+    ```
+
+    Possible causes/remedies:
+
+    Your `srun` command required more logical cores than available.
+    Please check the values for the `-n`, `-c`, etc.
+
+
 ### Runtime errors
 
 -   Error message:
@@ -267,14 +305,14 @@ and their possible causes are shown in the following table.
 
     This situation does not affect the job. This issue may have been fixed.
 
--   Error message:
-
-    ```
-    libgomp: Thread creation failed: Resource temporarily unavailable
-    ```
-
-    Possible causes/remedies:
-
+[comment]: <> (-   Error message:)
+[comment]: <> ()
+[comment]: <> (    ```)
+[comment]: <> (    libgomp: Thread creation failed: Resource temporarily unavailable)
+[comment]: <> (    ```)
+[comment]: <> ()
+[comment]: <> (    Possible causes/remedies:)
+[comment]: <> ()
 -   Error message:
 
     ```
