@@ -60,7 +60,9 @@ nav:
         - TensorFlow: analytics/machinelearning/tensorflow/index.md
         - PyTorch: analytics/machinelearning/pytorch.md
         - Benchmarks: analytics/machinelearning/benchmarks.md
-        - Science use-cases: analytics/machinelearning/science-use-cases.md
+        - Science use-cases:
+            Overview: analytics/machinelearning/science-use-cases/index.md
+            HEP CNN: analytics/machinelearning/science-use-cases/hep-cnn.md
       - RStudio : services/rstudio.md
       - Spark: analytics/spark.md
   - Data:
@@ -120,6 +122,7 @@ nav:
         - CTest/CDash without CMake : services/cdash/without_cmake.md
       - CVMFS : services/cvmfs.md
       - Databases: services/databases.md
+      - GridFTP: services/gridftp.md
   - Programming:
     - Build Tools:
         - programming/build-tools/index.md

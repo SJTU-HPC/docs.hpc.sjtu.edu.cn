@@ -33,4 +33,8 @@ specific scientific applications. See the [benchmarks](benchmarks.md) for detail
 
 ### Science use-cases
 
-Machine Learning and Deep Learning are increasingly used to analyze scientific data, in diverse fields. We have gathered some examples of work ongoing at NERSC on the [science use-cases page](science-use-cases.md) including some code and datasets and how to run these at NERSC.
+Machine Learning and Deep Learning are increasingly used to analyze
+scientific data, in diverse fields. We have gathered some examples of
+work ongoing at NERSC on
+the [science use-cases page](science-use-cases/index.md) including some code
+and datasets and how to run these at NERSC.
