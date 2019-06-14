@@ -20,6 +20,7 @@ nav:
     - Affinity: jobs/affinity/index.md
     - Interactive: jobs/interactive.md
     - Best Practices: jobs/best-practices.md
+    - FAQs: jobs/jobs-faq.md
     - Workflow Tools:
       - Overview: jobs/workflow-tools.md
       - Taskfarmer: jobs/workflow/taskfarmer.md
