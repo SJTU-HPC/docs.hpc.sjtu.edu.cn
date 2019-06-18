@@ -333,6 +333,7 @@ and their possible causes are shown in the following table.
     cori$ sqs
     JOBID     ST  ...  REASON
     XXXXXXXX  PD  ...  Nodes required*
+    ...
     ```
 
     or
@@ -353,6 +354,22 @@ and their possible causes are shown in the following table.
 -   Error message:
 
     ```
+    srun: error: Unable to create step for job XXXXXXXX: Job/step already completing or completed
+    ```
+
+    which appears with or without this message:
+
+    ```
+    srun: Job XXXXXXXX step creation temporarily disabled, retrying
+    ```
+
+    Possible causes/remedies:
+
+    This may be caused by a system issue. Please report to NERSC.
+
+-   Error message:
+
+    ```
     Tue Sep 18 20:13:26 2018: [PE_5]:inet_listen_socket_setup:inet_setup_listen_socket: bind failed port 63725 listen_sock = 4 Address already in use
     Tue Sep 18 20:13:26 2018: [PE_5]:_pmi_inet_listen_socket_setup:socket setup failed
     Tue Sep 18 20:13:26 2018: [PE_5]:_pmi_init:_pmi_inet_listen_socket_setup (full) returned -1
@@ -363,10 +380,13 @@ and their possible causes are shown in the following table.
 
     Typically this error indicates that multiple applications have
     been launched on the same node, and both are using the same PMI
-    control port number. When running multiple applications per
-    node, it is the launcher's responsibility to provide PMI with
-    a new (available) port nuber by setting the `PMI_CONTROL_PORT`
-    env variable. Slurm typically does this.
+    (Process Management Interface, which supports launching and
+    managing the processes that make up the execution of a parallel
+    program; see the `intro_pmi` man page for more info) control
+    port number. When running multiple applications per node, it
+    is the launcher's responsibility to provide PMI with a new
+    (available) port nuber by setting the `PMI_CONTROL_PORT` env
+    variable. Slurm typically does this.
 
     You can try either of the following approaches to suppress the
     PMI errors because your code runs on a single node and does not
