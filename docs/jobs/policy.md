@@ -29,8 +29,8 @@ available.
 | interactive[^4] | 64        | 4              | 2            | 2         | -        | 90     |
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
-| low             | 9489      | 48             | 5000         | -         | 5        | 45[^7] |
-| flex   |          256       | 12             | 5000         | -         | 6        | 0[^8]  | 
+| low             | 9489      | 48             | 5000         | -         | 5        | 135[^7] |
+| flex   |          256       | 12             | 5000         | -         | 6        | 45[^8]  | 
 | scavenger[^2]   | 9489      | 48             | 5000         | -         | 7        | 0      |
 | special[^5]     | custom    | custom         | custom       | custom    | -        | custom |
 
@@ -172,9 +172,10 @@ rejected by the batch system.
     by 40% if the job uses 1024 or more nodes.
 
 [^7]:
-	The "low" QOS (available on Cori KNL only) is charged 50% as compared to 
+	The "low" QOS (available on Cori KNL only) is charged 75% as compared to 
 	the "regular" QOS, but no extra large job discount applies.
 
 [^8]:
-    The current charging rate for flex is 0 (subject to change).
+    The current charging rate for flex is 25% (subject to change) as compared 
+    to the "regular" QOS.
 
