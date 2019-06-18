@@ -29,8 +29,8 @@ available.
 | interactive[^4] | 64        | 4              | 2            | 2         | -        | 90     |
 | debug           | 512       | 0.5            | 5            | 2         | 3        | 90     |
 | premium         | 9489      | 48             | 5            | -         | 2        | 180[^6]|
-| low             | 9489      | 48             | 5000         | -         | 5        | 135[^7] |
-| flex   |          256       | 12             | 5000         | -         | 6        | 45[^8]  | 
+| low             | 9489      | 48             | 5000         | -         | 5        | 67.5[^7] |
+| flex   |          256       | 48             | 5000         | -         | 6        | 22.5[^8]  | 
 | scavenger[^2]   | 9489      | 48             | 5000         | -         | 7        | 0      |
 | special[^5]     | custom    | custom         | custom       | custom    | -        | custom |
 
@@ -116,7 +116,7 @@ the `--time-min` flag. This means that the job could potentially be interrupted
 by a higher priority job after the minimum time has elapsed.  Jobs submitted 
 without this flag will be automatically rejected by the batch system. The max 
 wall time request limit (requested via `--time` or `-t` flag) for flex jobs 
-must be greater than 2 hours and not exceed 12 hours.
+must be greater than 2 hours and not exceed 48 hours.
 
 !!! example
         A flex job requesting a minimum time of 1.5 hours, and max wall time of
