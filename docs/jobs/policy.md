@@ -172,9 +172,10 @@ rejected by the batch system.
     by 40% if the job uses 1024 or more nodes.
 
 [^7]:
-	The "low" QOS (available on Cori KNL only) is charged 50% as compared to 
+	The "low" QOS (available on Cori KNL only) is charged 75% as compared to 
 	the "regular" QOS, but no extra large job discount applies.
 
 [^8]:
-    The current charging rate for flex is 0 (subject to change).
+    The current charging rate for flex is 25% (subject to change) as compared 
+    to the "regular" QOS.
 
