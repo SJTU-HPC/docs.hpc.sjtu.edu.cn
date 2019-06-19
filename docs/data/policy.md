@@ -34,14 +34,15 @@ develop your data management plan.
 
 ### NERSC Global Filesystem (NGF)
 
-NGF is a collection of centerwide file systems, based on IBM’s GPFS,
-available on nearly all systems at the facility. There are two main
-file systems that comprise NGF: one providing a common login user
-environment for all our systems (global common) and one for sharing
-data among collaborators on a science project or team (project). The
-main focus of NGF is data sharing, ease of workflow management (i.e.,
-not moving data around or maintaining unnecessary copies of data), and
-data analysis.
+NGF is a collection of centerwide file systems, based on IBM’s
+Spectrum Scale, available on all the systems at NERSC. There are three
+main file systems that comprise NGF: one providing home directories
+(global homes), one providing a common login user environment for all
+our systems (global common), and one for sharing data among
+collaborators on a science project or team (project). The main focus
+of NGF is data sharing, ease of workflow management (i.e., not moving
+data around or maintaining unnecessary copies of data), and data
+analysis.
 
 ### Scratch File Systems
 
@@ -61,7 +62,7 @@ storage, that is available to users on a per-job or short-term basis.
 ### Archival Storage (HPSS)
 
 HPSS provides long-term archival storage to users at the facility.
-The main focus of the system is data stewardship or preservation, but
+The main focus of the system is data stewardship and preservation, but
 it also supports some data sharing needs.
 
 ## Data Retention Policy
@@ -97,16 +98,17 @@ resource at our facility.
 
 ### Globus
 
-Our facility provides numerous endpoints (access points) into our
-various storage systems. The key benefit of using
-[Globus](https://www.globus.org) software is its ease of use in providing
-access to high performance storage resources, including third party
-transfers and reliable fire-and-forget self-managed transfers.
+Our facility provides numerous Globus endpoints (access points) into
+our various storage systems. The key benefit of using
+[Globus](https://www.globus.org) software is its ease of use in
+providing third party transfers and reliable fire-and-forget
+self-managed transfers.
 
 ### Direct Web Access to Data
 
 For rapid and simple data sharing, users can enable web access to
-files in their project file system. See the [Science Gateways page](https://docs.nersc.gov/services/science-gateways/#getting-started).
+files in their project file system. See the [Science Gateways
+page](https://docs.nersc.gov/services/science-gateways/#getting-started).
 
 ### Science Gateways
 
@@ -203,7 +205,7 @@ usage, performance, and data retention needs.
 
 ### Home File System
 
-#### Intent:
+#### Intent
 
 The [home file
 system](https://docs.nersc.gov/filesystems/global-home/) is intended
@@ -212,18 +214,18 @@ small to medium sized files. It is NOT meant to hold the output from
 your application runs; the scratch or project file systems should be
 used for computational output.
 
-#### Stability:
+#### Stability
 
 This file system has redundancy in the servers and storage, and
 duplicate copies of metadata, so we expect good stability and the
 highest availability in this space.
 
-#### Backup:
+#### Backup
 
 There are nightly tape backups performed to enable recovery of files
 older than one day after file creation. Backups are kept for 90 days.
 
-#### Retention:
+#### Retention
 
 Data for active users is not purged from this space. A user is
 considered inactive if they do not have an active allocation and have
@@ -231,14 +233,14 @@ not accessed their data for at least one year. All files in your home
 file system will be archived to tape and maintained on disk for one
 year from the date your account is deactivated.
 
-#### Default Allocation:
+#### Default Allocation
 
 Each user is allocated a directory with a 40 GB hard quota in the home
 file system. This is the default allocation granted to all users.
 
 ### Project File System
 
-#### Intent:
+#### Intent
 
 The [project file system](https://docs.nersc.gov/filesystems/project/)
 is primarily intended for sharing data within a team or across
@@ -249,11 +251,8 @@ don't need regular access (> 1 year) to the data any longer, you
 should either archive the data in the HPSS data archive (below) or
 transfer it back to your home institution.
 
-There is a separate projectb file system on the Joint Genome
-Institute's Genepool system.  See [Genepool File
-Storage](https://docs.nersc.gov/systems/genepool/genepool-file-storage-and-io/).
 
-#### Stability:
+#### Stability
 
 These file systems have redundancy in the servers and storage and
 duplicate copies of metadata, so we expect good stability and
@@ -261,15 +260,16 @@ reliability. With high demand and capacity shared usage, we do expect
 some degradation on availability of the system (97% is the target
 overall availability).
 
-#### Backup:
+#### Backup
 
-Starting February, 2017 project directories will no longer be backed
-up. Project directories use a snapshot capability to provide users a
-seven-day history of their project directories. Users can use this
-capability to recover accidentally deleted files (please see here for
-instructions). A user may also opt to archive their data in HPSS.
+Project directories are not backed up. Instead they use a snapshot
+capability to provide users a seven-day history of their project
+directories. Users can use this capability to recover accidentally
+deleted files. It is recommended that users back up any essential data
+in our tape archive system or at another location.
 
-#### Retention:
+
+#### Retention
 
 Data for active users is not purged from this space. A user or project
 will be considered inactive if they do not have an active allocation
@@ -278,28 +278,27 @@ directories will be archived to tape and maintained on disk for one
 year from the date your account is deactivated. For details on the
 process, see project file system.
 
-#### Default Allocation:
+#### Default Allocation
 
 Each repository is allocated a directory in the project file
 system. The default quota for project directories is 1 TB and the
 default name of a project directory is the repository name
 (i.e. m767). These directories are owned by the Principal
 Investigators (PIs) and are accessible to everyone in the Unix group
-associated with the repository. PIs and PI Proxies may request
-additional space via the quota increase request form. If files need to
-be shared with a group that is different from a repository group, PIs
-and PI Proxies can request a special project directory by filling out
-the Project Directory Request form.  
+associated with the repository. If files need to be shared with a
+group that is different from a repository group, PIs and PI Proxies
+can request a special project directory by filling out the Project
+Directory Request form in the "Request Forms" section at the [NERSC
+help portal](https://nersc.service-now.com/).
 
-#### Sponsored Storage:
-
-Upon requesting an allocation that NERSC cannot fulfill, PIs will be
-requested to pursue a sponsored storage allocation. For more, see
-Details of Sponsored Storage.
+NERSC is working to deploy a new file system to replace the project
+file system. After this is deployed (expected late 2019), quotas on
+this system will be determined by DOE allocations managers based on
+information you provide on your ERCAP form.
 
 ### Global Common File System
 
-#### Intent:
+#### Intent
 
 The [global common file system](https://docs.nersc.gov/filesystems/global-common/)
 is primarily intended for sharing software installations within a team or across
@@ -307,81 +306,76 @@ computational platforms. The global common file system is a parallel file
 system optimized for small-block-size access to small
 files.
 
-#### Stability:
+#### Stability
 
 These file systems have redundancy in the servers and storage and
 duplicate copies of metadata, so we expect good stability and
 reliability.
 
-#### Backup:
+#### Backup
 
-Global common directories are not backedup. A user may also opt to
+Global common directories are not backed up. A user may also opt to
 archive their data in HPSS, but it is also recommended that software
 stacks be managed by a versioning control system such as git.
 
-#### Retention:
+#### Retention
 
 Data for active users is not purged from this space. A user or project
 will be considered inactive if they do not have an active allocation
 and have not accessed the data in at least one year.
 
-#### Default Allocation:
+#### Default Allocation
 
 Each repository is allocated a directory in the global common file
-system. The default quota for directories is 10 GB and the
-default name of a directory is the repository name
-(i.e. m767). These directories are owned by the Principal
-Investigators (PIs) and are accessible to everyone in the Unix group
-associated with the repository. PIs and PI Proxies may request
-additional space via the quota increase request form. If files need to
-be shared with a group that is different from a repository group, PIs
-and PI Proxies can request a special directory by contacting NERSC consulting.
+system. The default quota for directories is 10 GB and the default
+name of a directory is the repository name (i.e. m767). These
+directories are owned by the Principal Investigators (PIs) and are
+accessible to everyone in the Unix group associated with the
+repository. If files need to be shared with a group that is different
+from a repository group, PIs and PI Proxies can request a special
+directory by contacting NERSC consulting.
 
 ### Scratch File Systems
 
-#### Intent:
+#### Intent
 
-Cori has a large, local, parallel scratch file system dedicated to the users of
-those systems. The scratch file system is intended for temporary uses such as
-storage of checkpoints or application result output. If you need to retain
-files longer than the purge period (see below), the files should be copied to
-the project or home file systems, or to HPSS.
+Cori has a large, local, parallel scratch file system dedicated to the
+users of the system. The scratch file system is intended for temporary
+uses such as storage of checkpoints or application result output. If
+you need to retain files longer than the purge period (see below), the
+files should be copied to the project file systems or to HPSS.
 
 !!! warning "Purging on Scratch File Systems"
     Running commands with the intent of circumventing purge policies 
     on scratch filesystems is **not allowed**.
 
-#### Stability:
+#### Stability
 
 These file systems have redundancy in the servers and storage, so we
 expect good stability and reliability. The extreme high demand placed
 on these storage systems results in some degradation of availability
 for the systems (97% is the target overall availability).
 
-#### Backup:
+#### Backup
 
 Due to the extremely large volume of data and its temporary nature,
 backups are not performed.
 
-#### Retention:
+#### Retention
 
 These file systems are purged on a regular interval as communicated to
 users of the system (e.g., all files not accessed within 12 weeks).
 All files in scratch are eligible for deletion one week after your
 account is deactivated.
 
-#### Default Allocation:
+#### Default Allocation
 
-Each user is allocated a directory in the local scratch file systems and in the
-global scratch file system. The default local scratch quota on Cori is 20 TB.
-Users may request an increase in quota using a web form. Quota increase
-requests are evaluated by the NERSC data group team, which considers the merits
-and duration of the request, and also must consider the amount of disk space
-available.
+Each user is allocated a directory in the Cori's scratch file
+system. The default quota is 20 TB.
 
 ### Burst Buffer
 
-#### Intent:
+#### Intent
 
 Cori has a layer of SSD storage sitting within the high-speed network
 that provides very high-performance I/O for user applications. In
@@ -392,7 +386,7 @@ or for a short-term persistent reservation. It is not a long-term
 storage layer - the user is responsible for transferring data to other
 file systems for longer retention.
 
-#### Stability:
+#### Stability
 
 The Burst Buffer has very high stability - since it sits within the
 high-speed interconnect of Cori is it available whenever Cori compute
@@ -400,11 +394,11 @@ nodes are available. We have seen no instances of data corruption, but
 we warn users that data is not guaranteed on the Burst Buffer due to
 the risk of SSD failure.
 
-#### Backup:
+#### Backup
 
 No backups are performed.
 
-#### Retention:
+#### Retention
 
 Data is removed at the end of a Burst Buffer reservation. This is
 either at the end of a batch job (for a scratch reservation) or when a
@@ -413,7 +407,7 @@ user to stage or copy data that needs to be retained. We ask that
 users remove a persistent reservation after 6 weeks - after 8 weeks
 the reservation may be removed by an administrator.
 
-#### Default Allocation:
+#### Default Allocation
 
 Users must request usage of the Burst Buffer from their job submission
 script. All users are limited to a total of 50TB of Burst Buffer
@@ -421,34 +415,32 @@ storage. Larger requests may be considered in special circumstances.
 
 ### HPSS Data Archive
 
-#### Intent:
+#### Intent
 
 The HPSS data archive is intended for long-term, offline storage
-(tape) of results that you wish to retain, but either you do not need
-immediate access to, or you do not have room in the other file systems
-(above). The primary HPSS access is via HSI, or HTAR for small files.
-We also have access to HPSS via gridFTP or Globus. Tape backups of the
-other file systems are stored in a special partition of the archive.
+(tape) of results that you wish to retain, but you do not need
+immediate access to. The primary HPSS access is via HSI, or HTAR for
+small files.  We also have access to HPSS via gridFTP or Globus. Tape
+backups of the other file systems are stored in a special partition of
+the archive.
 
-#### Stability:
+#### Stability
 
 The HPSS service is configured to be stable and reliable, but is
 routinely taken offline for short periods for planned maintenance.
 
-#### Backup:
+#### Backup
 
 By default, a single copy of the data will be written to tape. Data
-loss due to hardware faults can occur, but is very rare. All tapes
-are currently stored at the NERSC facility. There is no off-site
-backup, and in principle there is a chance of permanent data loss in
-the case of a site disaster such as a fire. Critical data should be
-manually protected by making an explicit second copy: You can make
-another copy within the data archive, or you can request an account on
-our separate backup archive for additional copies. In both cases, you
-will be “charged” twice for the storage from your HPSS allocation.
-Alternatively, you can transfer the data to another site.
+loss due to hardware faults can occur, but is very rare. All tapes are
+currently stored at the NERSC facility. There is no off-site backup,
+and in principle there is a chance of permanent data loss in the case
+of a site disaster such as a fire. Critical data should be manually
+protected by making an explicit second copy: You can make another copy
+within the data archive, or you can copy the data to another location.
 
-#### Retention:
+
+#### Retention
 
 We do not actively remove data from HPSS, and will communicate with
 users or data owners should a need arise to reclaim space. Note that
@@ -456,19 +448,18 @@ in NERSC’s history, we have not deleted files in the HPSS archive due
 to storage limitations. Projects requiring a firm commitment for data
 retention should contact NERSC.
 
-#### Default Allocation:
+#### Default Allocation
 
 Projects receive HPSS allocations at the same time that computational
-resources are allocated. All projects receive an HPSS allocation; the
-allocation units are called Storage Resource Units.
+resources are allocated. Each group recieves a default allocation of 1
+TB.
 
-#### Appropriate Use:
+#### Appropriate Use
 
 The Archive is a shared multi-user resource. Use of the Archive is
 subject to interruption if it is determined that a user's method or
 pattern of storing or retrieving files significantly impacts other
 users' activities or undermines the long term viability of the system.
-See Using HPSS.
 
 ### Requests for Data Storage Beyond Defaults
 
@@ -476,9 +467,15 @@ NERSC establishes defaults for allocations, retention, and backup to
 serve the needs of the majority of our users, avoid oversubscription,
 and place practical limits on the costs of storage provided. We are
 willing to work with individual projects to accommodate special
-needs. If you need additional space, please fill out the Quota
-increase form here and we will address those issues on a case by case
-basis. Exceptionally large requests may require alternative funding.
+needs. If you need additional space, please fill out the "Request a
+Disk Quota Change" in form in the "Request Forms" section at the
+[NERSC help portal](https://nersc.service-now.com/).
+
+
+NERSC is working to deploy a new file system to replace the project
+file system. After this is deployed (expected late 2019), quotas on
+this system will be determined by DOE allocations managers based on
+information you provide on your ERCAP form.
 
 ### Proper Use of Software and Data
 
