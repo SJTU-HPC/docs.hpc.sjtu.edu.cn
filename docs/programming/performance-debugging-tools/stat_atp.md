@@ -21,8 +21,9 @@ One way to collect backtraces under Slurm is explained below.
     background. Keep the process ID (PID).
 
     ```shell
-    nersc$ salloc -N 1 -t 30:00 -q debug ...
-    nersc$ srun -n 4 ./jacobi_mpi &
+    nersc$ salloc -N 1 -t 30:00 -q debug [...other flags...]
+    ...
+    nersc$ srun -n 4 [...other flags...] ./jacobi_mpi &
     [1] 95298
     ```
 
