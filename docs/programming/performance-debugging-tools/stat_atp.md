@@ -21,8 +21,8 @@ One way to collect backtraces under Slurm is explained below.
     background. Keep the process ID (PID).
 
     ```shell
-    nersc$ salloc -N 1 -t
-    30:00 -q debug ...  $ srun -n 4 ./jacobi_mpi &
+    nersc$ salloc -N 1 -t 30:00 -q debug ...
+    nersc$ srun -n 4 ./jacobi_mpi &
     [1] 95298
     ```
 
@@ -75,12 +75,12 @@ One way to collect backtraces under Slurm is explained below.
     file in DOT format.
 
 
-4.  Then, run the GUI command, `stat-view`, with the file above to
+4.  Then, run the GUI command, `STATview`, with the file above to
     visualize the generated `*.dot` files for stack backtrace
     information.
 
     ```shell
-    nersc$ stat-view stat_results/jacobi_mpi.0004/00_jacobi_mpi.0004.3D.dot
+    nersc$ STATview stat_results/jacobi_mpi.0004/00_jacobi_mpi.0004.3D.dot
     ```
 
     Please note that, if you're running on Cori KNL nodes, you have to go
@@ -175,7 +175,7 @@ ATP Stack walkback for Rank 3 starting:
   raise@pt-raise.c:37
 ATP Stack walkback for Rank 3 done
 Process died with signal 4: 'Illegal instruction'
-View application merged backtrace tree with: stat-view atpMergedBT.dot
+View application merged backtrace tree with: STATview atpMergedBT.dot
 You may need to: module load stat
 
 srun: error: nid00009: tasks 0-3: Killed
@@ -191,7 +191,7 @@ too. To view the collected backtrace result, you need to load the
 
 ```shell
 nersc$ module load stat
-nersc$ stat-view atpMergedBT.dot
+nersc$ STATview atpMergedBT.dot
 ```
 
 ![atp](images/atp.png)
@@ -232,11 +232,11 @@ ATP Stack walkback for Rank 0 starting:
   MAIN__@jacobi_mpi.f90:174
 ATP Stack walkback for Rank 0 done
 Process died with signal 6: 'Aborted'
-View application merged backtrace tree with: stat-view atpMergedBT.dot
+View application merged backtrace tree with: STATview atpMergedBT.dot
 You may need to: module load stat
 [snip]
 
-nersc$ stat-view atpMergedBT_line.dot
+nersc$ STATview atpMergedBT_line.dot
 ```
 
 !!! note
