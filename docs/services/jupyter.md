@@ -152,8 +152,13 @@ Just make sure it ends with the `ipykernel_launcher` command.
 
 Shifter works with Cori notebook servers, but not Spin notebook servers.
 To make use of it, create a kernel spec and edit it to run `shifter`.
-The path to Python in your image should be used as the executable.
-Here's an example of how to set it up:
+The path to Python in your image should be used as the executable, and the
+kernel spec should be placed at
+`~/.local/share/jupyter/kernels/<my-shifter-kernel>/kernel.json` (you do not
+need to create a Conda environment for this).
+
+
+Here's an example of how to set up the kernel spec:
 
 ```shell
 {
