@@ -141,6 +141,7 @@ nav:
         - Inspector : programming/performance-debugging-tools/inspector.md
         - Reveal : programming/performance-debugging-tools/reveal.md
         - APS : programming/performance-debugging-tools/aps.md
+        - Performance Reports : programming/performance-debugging-tools/performancereports.md
         - CrayPat : programming/performance-debugging-tools/craypat.md
         - darshan : programming/performance-debugging-tools/darshan.md
         - IPM : programming/performance-debugging-tools/ipm.md
