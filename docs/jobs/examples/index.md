@@ -379,9 +379,9 @@ we have created a flex QOS on Cori KNL (#SBATCH -q flex) with a charging discoun
 See the [Queues and Policy page for Cori KNL](http://docs.nersc.gov/jobs/policy) for more details on the flex QOS. 
 
 !!! note
-        * The flex QOS is free of charge currently. The discount rate is subject to change. 
+        * The flex QOS has a 75% charging discount currently as of June 2019. The discount rate is subject to change. 
         * Variable-time jobs work with any QOS on Cori, but the
-          charging discount is available only with the flex QOS on
+          charging discount is only available with the flex QOS on
           Cori KNL.
 
 ### Annotated example - automated variable-time jobs
