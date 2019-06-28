@@ -16,9 +16,9 @@ and MPI codes.
 
 The Arm Forge User Guide available from the [Arm Forge web
 page](https://developer.arm.com/docs/101136/latest/arm-forge) or
-`$ALLINEA_TOOLS_DOCDIR/userguide.pdf` on Cori after loading
-an `allinea-forge` module is a good resource for learning more
-about some of the advanced MAP features.
+`$ALLINEA_TOOLS_DOCDIR/userguide-forge.pdf` on Cori after loading
+an `allinea-forge` module is a good resource for learning more about
+some of the advanced MAP features.
 
 ## Change of Module Name
 
