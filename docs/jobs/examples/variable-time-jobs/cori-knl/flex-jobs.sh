@@ -3,7 +3,7 @@
 #SBATCH -q flex 
 #SBATCH -C knl 
 #SBATCH -N 1
-#SBATCH --time=12:00:00      #the max walltime allowed for flex QOS jobs
+#SBATCH --time=48:00:00      #the max walltime allowed for flex QOS jobs
 #SBATCH --time-min=2:00:00   #the minimum amount of time the job should run
 
 #this is an example to run an MPI+OpenMP job: 
