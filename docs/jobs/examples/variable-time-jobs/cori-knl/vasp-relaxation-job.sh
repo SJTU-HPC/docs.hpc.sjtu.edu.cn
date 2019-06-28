@@ -3,7 +3,7 @@
 #SBATCH -q regular 
 #SBATCH -C knl 
 #SBATCH -N 2 
-#SBATCH --time=12:0:00 
+#SBATCH --time=48:0:00 
 #SBATCH --error=vt_vasp%j.err 
 #SBATCH --output=vt_vasp%j.out 
 #SBATCH --mail-user=elvis@nersc.gov 
@@ -43,7 +43,7 @@ set +x
 } 
   
 ckpt_command=ckpt_vasp 
-max_timelimit=12:00:00 
+max_timelimit=48:00:00 
 ckpt_overhead=300 
   
 # requeueing the job if remaining time >0 
