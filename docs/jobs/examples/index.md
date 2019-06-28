@@ -422,7 +422,7 @@ The job script works as follows:
 2. The batch system looks for a backfill opportunity for the job. If
    it can allocate the requested number of nodes for this job for any
    duration (e.g., 3 hours) between the specified minimum time (2
-   hours) and the time limit (12 hours) before those nodes are used
+   hours) and the time limit (48 hours) before those nodes are used
    for other higher priority jobs, the job starts execution.
 3. The job runs until it receives a signal USR1
    (`--signal=B:USR1@<sig_time`) 60 seconds (`sig_time=60` in this
