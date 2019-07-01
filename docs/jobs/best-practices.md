@@ -10,7 +10,7 @@ start quickly resulting in much better job throughput.
 #SBATCH --time=<upper_bound>
 ```
 
-## Long running jobs
+## Long Running Jobs
 
 Simulations which must run for a long period of time achieve the best
 throughput when composed of main small jobs utilizing
@@ -18,7 +18,7 @@ checkpoint/restart chained together.
 
 * [Example: job chaining](examples/index.md#dependencies)
 
-## I/O performance
+## I/O Performance
 
 Cori has dedicated large, local, parallel scratch file systems.  The
 scratch file systems are intended for temporary uses such as storage
@@ -110,7 +110,7 @@ wrapper script for srun.
 
 * [Example](examples/index.md#core-specialization)
 
-## Process placement
+## Process Placement
 
 Several mechanisms exsist to control process placement on NERSC's Cray
 systems. Application performance can depend strongly on placement
@@ -183,7 +183,61 @@ placement. For more information, please see the man page `man
 grid_order` (available when the `perftools-base` module is loaded) on
 Cori.
 
-## Serial jobs
+## Hugepages
+
+ Huge pages are virtual memory pages which are bigger than the default
+     base page size of 4K bytes. Huge pages can improve memory performance
+     for common access patterns on large data sets since it helps to reduce
+     the number of virtual to physical address translations than compated with
+     using the default 4K. Huge pages also
+     increase the maximum size of data and text in a program accessible by
+     the high speed network, and reduce the cost of accessing memory, such as 
+     in the case of many MPI_Alltoall operations. Using hugepages 
+     can help to [reduce the application runtime variability](../performance/variability.md).
+
+To use hugepages for an application (with the 2M hugepages as an example):
+```
+module load craype-hugepages2M
+cc -o mycode.exe mycode.c
+```
+And also load the same hugepages module at runtime.
+
+The craype-hugepages2M module will be loaded by deafult on Cori after the OS upgrade
+to CLE7 in July 2019, users do not need to explicitly load the hugepage modules at compile time and runtime after that. Users could unload the craype-hugepages2M module explicitly to disable the hugepages usage. 
+
+Due to the hugepages memory fragmentation issue, applications may get "Cannot allocate memory" warnings or errors when there are not enough hugepages on the compute node, such as:
+```
+libhugetlbfs [nid000xx:xxxxx]: WARNING: New heap segment map at 0x10000000 failed: Cannot allocate memory
+```
+
+### When to Use Huge Pages
+* For MPI applications, map the static data and/or heap onto huge
+        pages.
+* For an application which uses shared memory, which needs to be
+        concurrently registered with the high speed network drivers for
+        remote communication.
+* For SHMEM applications, map the static data and/or private heap
+        onto huge pages.
+* For applications written in Unified Parallel C, Coarray Fortran,
+        and other languages based on the PGAS programming model, map the
+        static data and/or private heap onto huge pages.
+* For an application doing heavy I/O.
+* To improve memory performance for common access patterns on large
+        data sets.
+
+### When to Avoid Huge Pages
+* Applications sometimes consist of many steering programs in addition
+     to the core application. Applying huge page behavior to all processes
+     would not provide any benefit and would consume huge pages that would
+     otherwise benefit the core application. The runtime environment 
+     variable HUGETLB_RESTRICT_EXE can be used to specify the susbset of 
+     the programs to use hugepages.
+* For certain applications if using hugepages either causes issues or slowing
+down performances, users can explicitly unload the craype-hugepages2M module. 
+One such example is that when an application forks more subprocesses (such as 
+pthreads) and allocate memory, the newly allocated memory are the small 4K pages.
+
+## Serial Jobs
 
 Users requiring large numbers of serial jobs have several options at
 NERSC.
