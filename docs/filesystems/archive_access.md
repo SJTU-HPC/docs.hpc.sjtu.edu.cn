@@ -4,22 +4,27 @@ HTAR are the best ways to transfer data in and out of HPSS within
 NERSC. Globus is recommended for transfers to or from outside
 NERSC. We also offer access via gridFTP, pftp, and ftp.
 
-HSI, HTAR, pftp, and some ftp clients will look for a file name
-".netrc" in your home directory. This will enable automated
-authentication of access to HPSS. You will not be prompted for a
-username/password pair. A sample file showing entries is provided
-below:
-
-```
-machine archive.nersc.gov
-login elvis
-password 02V02zwoA3kI5sZ2VysafaFyZABi8K7Tz+iJj4jJ99EdyMjFMZcUyw==
-```
-
 Users are limited to 15 concurrent sessions. This number can be
-temporarily reduced if a user is impacting system usability for others.
+temporarily reduced if a user is impacting system usability for
+others.
 
+## Automatic Token Generation for use at NERSC
+The first time you try to connect from a NERSC system (Cori, DTNs,
+etc.) using a NERSC provided client like HSI, HTAR, or pftp you will
+be prompted for your NIM password + one-time password which will
+generate a token stored in $HOME/.netrc. After completing this step
+you will be able to connect to HPSS without typing a password:
 
+```
+hsi
+Generating .netrc entry...
+elvis@auth2.nersc.gov's password:
+```
+
+If you have an existing $HOME/.netrc file and you are having problems
+connecting to either HPSS system try moving this file to temp.netrc
+and re-connect to HPSS. If the problem persists contact NERSC account
+support.
 
 ## HSI
 HSI is a flexible and powerful command-line utility to access
@@ -87,7 +92,6 @@ non-HPSS side of things:
 | command | Issue shell command |
 
 #### Removing Older Files
-
 You can find and remove older files in HPSS using the ```hsi find```
 command. This may be useful if you're doing periodic backups of
 directories (this is not recommended for software version control,
@@ -103,13 +107,11 @@ hsi in temp1.txt
 ```
 
 #### Removing Entire Directories
-
 To recursively remove a directory and all of its contained
 sub-directories and files, use ```rm -R <directory_name>```.
 
 
 ## HTAR
-
 HTAR is a command line utility that creates and manipulates
 HPSS-resident tar-format archive files. It is ideal for storing groups
 of files in HPSS. Since the tar file is created directly in HPSS, it
@@ -164,7 +166,6 @@ skipping staging the file to the HPSS disk cache by adding the
 "-Hnostage" option to your htar command.
 
 ### HTAR tips
-
 - Using `htar` to backup directories obviates the need to tar the directories locally first
 - `htar` compresses data inline, so you don't need to `gzip` it
 - Try to only bundle 100GB-500GB in any single `htar` call
@@ -331,30 +332,25 @@ HTAR: x nova/sn1993j, 9331200 bytes, 18226 media blocks
 ```
 
 ### HTAR Limitations
-
 HTAR has several limitations to be aware of:
 
 #### Member File Path Length
-
 File path names within an HTAR aggregate of the form prefix/name are
 limited to 154 characters for the prefix and 99 characters for the
 file name. Link names cannot exceed 99 characters.
 
 #### Member File Size
-
 The maximum file size the NERSC archive will support is approximately
 20 TB. However, we recommend you aim for HTAR aggregate sizes of
 several hundred GBs. Member files within an HTAR aggregate are limited
 to approximately 68GB.
 
 #### Member File Limit
-
 HTAR aggregates have a default soft limit of 1,000,000 (1 million)
 member files. Users can increase this limit to a maximum hard limit of
 5,000,000 member file.
 
 ## Globus
-
 Globus is recommended for transfers between sites (i.e. non-NERSC to NERSC).
 
 To access the HPSS system using [Globus](https://www.globus.org/), you
@@ -373,7 +369,6 @@ files using the command line interace for Globus in tape
 order.
 
 ## GridFTP, pftp, and ftp
-
 Files can be transferred between HPSS and remote sites via the
 standard internet protocol ftp, however, being non-parallel the
 performance of ftp will probably not be as good as other methods such
@@ -386,7 +381,6 @@ special procedures must be used with ftp on remote sites, see HPSS
 Passwords.
 
 ## HPSS Passwords
-
 The HPSS systems use NIM and the NERSC LDAP server to create an "hpss
 token" for user authentication. The HPSS token does not expire and
 users may generate new tokens as often as they wish and old tokens
@@ -397,25 +391,7 @@ Because HPSS passwords do not expire it is only necessary to generate
 a password one time for continued use of HPSS. This password is placed
 in a file name ".netrc" for use by hsi, htar, pftp, and most ftp clients.
 
-### Automatic Token Generation for use at NERSC
-
-The first time you try to connect from a NERSC system (Cori, DTNs,
-etc.) using a NERSC provided client like HSI, HTAR, or pftp you will
-be prompted for your NIM password + one-time password which will
-generate a token stored in $HOME/.netrc. After completing this step
-you will be able to connect to HPSS without typing a password:
-
-```
-hsi
-Generating .netrc entry...
-elvis@auth2.nersc.gov's password:
-```
-
-If you have an existing $HOME/.netrc file and you are having problems
-connecting to either HPSS system try moving this file to temp.netrc
-and re-connect to HPSS. If the problem persists contact NERSC account
-support.
-
+### Manual Token Generation
 You can log into NIM to manually generate an HPSS token by selecting
 "Generate an HPSS token" from the "Actions" menu. This will provide
 you with a token (an encrypted string) in the pale yellow highlighted
@@ -439,7 +415,6 @@ access HPSS from. Enter the correct IP address and select "Generate
 Token".
 
 ## Firewalls and External Access
-
 Most firewalls are configured to deny incoming network connections
 unless access is explicitly granted. Systems running HTAR or HSI that
 want to connect to the archive at NERSC must accept network
