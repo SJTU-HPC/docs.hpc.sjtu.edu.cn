@@ -13,13 +13,13 @@ its easy to use web interface and its versatile REST/API for building
 scripted tasks and operations.
 
 ## Availability
-Globus is available as a free service that any user can access.
-You can log into Globus web interface with your NERSC
-credentials (by selecting NERSC in the drop down menu of supported
-identity providers) or using many of the other supported providers
-listed that you can authenticate against. NERSC maintains several
-Globus endpoints that can be activated for individual use by any NERSC
-user. The list of endpoints are provided in the table below.
+Globus is available as a free service that any user can access.  You
+can log into [Globus web interface](https://globus.org) with your
+NERSC credentials (by selecting NERSC in the drop down menu of
+supported identity providers) or using many of the other supported
+providers listed that you can authenticate against. NERSC maintains
+several Globus endpoints that can be activated for individual use by
+any NERSC user. The list of endpoints are provided in the table below.
 
 | Endpoint Name | Description |Recommended Use
 | --- | --- | ---
