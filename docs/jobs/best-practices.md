@@ -193,7 +193,7 @@ Cori.
      increase the maximum size of data and text in a program accessible by
      the high speed network, and reduce the cost of accessing memory, such as 
      in the case of many MPI_Alltoall operations. Using hugepages 
-     can help to [reduce the application runtime variability](https://docs.nersc.gov/performance/variability/).
+     can help to [reduce the application runtime variability](../performance/variability.md).
 
 To use hugepages for an application (with the 2M hugepages as an example):
 ```
