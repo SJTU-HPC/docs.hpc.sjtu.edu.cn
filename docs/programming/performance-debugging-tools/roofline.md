@@ -212,7 +212,7 @@ collect Bytes information, users just need to compile the code with
 
 ```slurm
 module load likwid
-srun -n 1 -c 272 --cpu_bind=cores --cpu-freq=1401000 likwid-perfctr -c 0-271 -g HBM_CACHE foo.exe >> result.likwid
+srun -n 1 -c 272 --cpu-bind=cores --cpu-freq=1401000 likwid-perfctr -c 0-271 -g HBM_CACHE foo.exe >> result.likwid
 ```
 
 which runs on a single node with all 272 hyper-threads being tracked.
@@ -236,7 +236,7 @@ the following command in a job script:
 
 ```slurm
 module load vtune
-srun -n 1 -c 272 --cpu_bind=cores --cpu-freq=1401000 amplxe-cl -start-paused -r Result.vtune.$SLURM_JOB_ID/my_vtune -collect memory-access -finalization-mode=none -data-limit=0 -- foo.exe
+srun -n 1 -c 272 --cpu-bind=cores --cpu-freq=1401000 amplxe-cl -start-paused -r Result.vtune.$SLURM_JOB_ID/my_vtune -collect memory-access -finalization-mode=none -data-limit=0 -- foo.exe
 ```
 
 where `-start-paused` allows for regional tracing, if the code
