@@ -20,8 +20,8 @@ time spent running jobs.
 
 ## Requesting a reservation
 
-To reserve compute nodes, a request must be sent in with *at least 72
-hours* notice.  Please ask for the least amount of resources you need
+To reserve compute nodes, a request must be sent in with *at least 1 week*
+notice.  Please ask for the least amount of resources you need
 and try to schedule reservations so as to minimize impact on other
 users. It is also recommended that reservations be scheduled to start
 during NERSC business hours to ensure availability of staff in case
@@ -31,9 +31,9 @@ any issues arise.
 
 ## Cancellations
 
-Cancellation of a reservation must be done with a minimum of 72 hours
-notice as well. If you do not receive a confirmation that your
-cancellation was received and it is less than 72 hours until your
+Cancellation of a reservation must be done with a minimum of 4 days
+notice. If you do not receive a confirmation that your
+cancellation was received and it is less than 4 days until your
 start time you *must* contact NERSC operations via 1-800-666-3772 (or
 1-510-486-8600) menu option 1 to confirm.
 
