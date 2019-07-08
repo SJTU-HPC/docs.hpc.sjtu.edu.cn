@@ -318,7 +318,7 @@ and their possible causes are shown in the following table.
     ```
     srun: fatal: Can not execute vasp_gam
     /var/spool/slurmd/job15816716/slurm_script: line 17: 34559 
-    Aborted                 srun -n 32 -c8 --cpu_bind=cores vasp_gam
+    Aborted                 srun -n 32 -c8 --cpu-bind=cores vasp_gam
     ```
 
     Possible causes/remedies:

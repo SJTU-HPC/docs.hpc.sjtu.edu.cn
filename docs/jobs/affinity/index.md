@@ -168,7 +168,7 @@ OMP\_NUM\_THREADS sets the number of threads to be used for the OpenMP parallel 
    which is 32, or just simply calculate as using a total of 64 physical 
    cores only, and set "-c" value as 64\*4/8, which is 32.
 
-*  **srun option "--cpu_bind"**: If #MPI tasks per node is not a divisor of 64 on Haswell (meaning
+*  **srun option "--cpu-bind"**: If #MPI tasks per node is not a divisor of 64 on Haswell (meaning
    the node is not fully packed), an additional srun flag
    "--cpu-bind=cores" is needed. Add "--cpu-bind=threads" instead if
    #MPI_per_node > 32.  In most cases for KNL, we use only 64 cores
@@ -216,13 +216,13 @@ salloc: job 21541802 has been allocated resources
 salloc: Granted job allocation 21541802
  
 <Note: Below is a pure MPI example: 8 MPI ranks on one node. Using the correct 
-"-n", "-c", and "--cpu_bind=cores" option, the MPI tasks are spread out, and 
+"-n", "-c", and "--cpu-bind=cores" option, the MPI tasks are spread out, and 
 bind to both sockets on the Haswell node. MPI ranks 0,2,4,6 are on the first
 socket, and MPI ranks 1,3,5,7 are on the second socket. Each MPI rank binds to  
 4 physical CPUs (which has 8 logical CPUs total). For example, MPI rank 0 binds
 to physical cores 0-3, which includes logical CPUs 0-3,32-25.>
 
-elvis@nid00224:~> srun -n 8 -c 8 --cpu_bind=cores check-mpi.intel.cori
+elvis@nid00224:~> srun -n 8 -c 8 --cpu-bind=cores check-mpi.intel.cori
 Hello from rank 0, on nid00224. (core affinity = 0-3,32-35)
 Hello from rank 1, on nid00224. (core affinity = 16-19,48-51)
 Hello from rank 2, on nid00224. (core affinity = 4-7,36-39)
@@ -240,7 +240,7 @@ set OMP_PROC_BIND=true, it spreads out the threads onto CPUs.>
 elvis@nid00224:~> export OMP_NUM_THREADS=4
 elvis@nid00224:~> export OMP_PLACES=threads
 elvis@nid00224:~> export OMP_PROC_BIND=true
-elvis@nid00224:~> srun -n 8 -c 8 --cpu_bind=cores check-hybrid.gnu.cori |sort -k 4,6
+elvis@nid00224:~> srun -n 8 -c 8 --cpu-bind=cores check-hybrid.gnu.cori |sort -k 4,6
 Hello from rank 0, thread 0, on nid00224. (core affinity = 0)
 Hello from rank 0, thread 1, on nid00224. (core affinity = 1)
 Hello from rank 0, thread 2, on nid00224. (core affinity = 2)
@@ -283,7 +283,7 @@ by Slurm). For Intel compiler, we set OMP_PROC_BIND=spread.>
 elvis@nid00224:~> export OMP_NUM_THREADS=4
 elvis@nid00224:~> export OMP_PLACES=cores
 elvis@nid00224:~> export OMP_PROC_BIND=spread
-elvis@nid00224:~> srun -n 4 -c 16 --cpu_bind=cores check-hybrid.intel.cori |sort -k 4,6
+elvis@nid00224:~> srun -n 4 -c 16 --cpu-bind=cores check-hybrid.intel.cori |sort -k 4,6
 Hello from rank 0, thread 0, on nid00224. (core affinity = 0,32)
 Hello from rank 0, thread 1, on nid00224. (core affinity = 2,34)
 Hello from rank 0, thread 2, on nid00224. (core affinity = 4,36)
@@ -335,7 +335,7 @@ Then on a compute node via salloc or sbatch:
 % export OMP_PLACES=threads
 % export OMP_DISPLAY_AFFINITY=true
 % export OMP_AFFINITY_FORMAT="host=%H, pid=%P, thread_num=%n, thread affinity=%A"
-% srun -n 8 -c 32 --cpu_bind=cores ./hybrid-hello |sort -k1,3
+% srun -n 8 -c 32 --cpu-bind=cores ./hybrid-hello |sort -k1,3
 host=nid02496, pid=150147, thread_num=0, thread affinity=0
 host=nid02496, pid=150147, thread_num=1, thread affinity=4
 host=nid02496, pid=150148, thread_num=0, thread affinity=8
