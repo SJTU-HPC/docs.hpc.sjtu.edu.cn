@@ -7,7 +7,7 @@ text and HTML reports summarizing and characterizing both
 scalar and MPI application performance.  The report intends to
 answer a range of vital questions:
 
--   Is this applicaiton optimized for the system it is running on?
+-   Is this application optimized for the system it is running on?
 
 -   Does it benefit from running at this scale?
 
@@ -29,7 +29,7 @@ more about its features.
 
 ## Loading the Arm Performance Reports Module
 
-To use Arm Performace Reports, first load the `allinea-reports`
+To use Arm Performance Reports, first load the `allinea-reports`
 module to set the correct environment settings:
 
 ```Shell
@@ -54,7 +54,7 @@ or C++ usage is the same.
 
 ### On Cray Machines
 
-Buidling an executable for MAP is more complicated on Cray machines.
+Building an executable for MAP is more complicated on Cray machines.
 First, you need to explicitly build the MAP sampler and MPI wrapper
 libraries using `make-profiler-libraries`, and link your executable
 against them.
