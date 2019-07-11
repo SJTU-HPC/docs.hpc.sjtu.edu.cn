@@ -18,7 +18,7 @@ the highest performance DFT/HF calculations to high level post-HF correlation me
 ## How to access Q-Chem
 NERSC uses [modules](../../environment/#nersc-modules-environment) to manage access to software. 
 To see the available Q-Chem modules, type "`module avail qchem`" command. To access a specific qchem module, 
-type "`module load &lt;qchem modulefile&gt;`", e.g., "module load qchem/5.2". 
+type "`module load <qchem modulefile>`", e.g., "module load qchem/5.2". 
 In general we recommend users to use the default module, which can be accessed with the following command,
 
 ```shell
