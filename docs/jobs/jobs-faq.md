@@ -439,3 +439,27 @@ and their possible causes are shown in the following table.
 [comment]: <> ()
 [comment]: <> (    Possible causes/remedies:)
 [comment]: <> ()
+
+-   Error message:
+
+    ```
+    slurmstepd: error: Detected zonesort setup failure: Could not open job cpuset (########.#)
+    ```
+
+    Possible causes/remedies:
+
+    KNL's MCDRAM cache is prone to cache thrashing because it uses
+    direct mapped caching, which can result in slow code performance.
+    To alleviate this possiblity, the system's Node Health Check
+    tool runs the 'zonesort' kernel module on compute nodes. For
+    more info, please see [KNL Cache
+    Mode](../performance/knl/cache-mode.md). Note that the zonesort
+    module is also run on Haswell nodes although performance
+    implication may not be as significant as it uses associative
+    caching.
+
+    The error message means that running the zonesort kernel failed
+    for some reason. The end result is that your code may have run
+    less optimally. Other than that, the message is usually harmless.
+    If your job failed because the application ran slowly, please
+    resubmit the job.
