@@ -6,7 +6,7 @@ performs electronic structure calculations of solids using density functional th
 Wien2k is available on Cori. It is important for users to follow the instructions posted here to use Wien2k on NERSC systems.
 
 ## How to access WIEN2k
-NERSC uses [modules](https://www.nersc.gov/users/software/user-environment/modules/) to manage access to software. 
+NERSC uses [modules](https://docs.nersc.gov/environment/#nersc-modules-environment) to manage access to software. 
 To use the default version of WIEN2k, include the following line:
 ```shell
 cori$ module load wien2k
