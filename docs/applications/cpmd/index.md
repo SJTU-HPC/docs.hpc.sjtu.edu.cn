@@ -3,7 +3,7 @@
 [CPMD](http://www.cpmd.org/) is a plane wave/pseudopotential DFT code for ab initio molecular dynamics simulations.
 
 ## How to access CPMD 
-NERSC uses [modules](https://docs.nersc.gov/environment/#nersc-modules-environment) to manage access to software. 
+NERSC uses [modules](../../environment/#nersc-modules-environment) to manage access to software. 
 To use the default version of CPMD, type,
 
 ```shell
@@ -30,7 +30,7 @@ You need to replace [PP-path] with the path to the pseudo potential files for yo
 Here is an example run script. 
 
 !!! example "Cori Haswell"
-    ```shell
+    ```slurm
     --8<-- "docs/applications/cpmd/cori-hsw.sh"
     ```
 This script requests two Cori Haswell node for four hours to run CPMD. You need to submit the batch script using the sbatch command, assuming your job script is "run.slurm", 
