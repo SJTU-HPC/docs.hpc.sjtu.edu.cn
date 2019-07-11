@@ -7,17 +7,17 @@ The heart of the program consists of the multiconfiguration SCF, multireference 
 
 ## Accessing MOLPRO
 
-NERSC uses [modules](https://www.nersc.gov/users/software/user-environment/modules/) to manage access to software. To use the default version of MOLPRO, type:
+NERSC uses [modules](../../environment/#nersc-modules-environment) to manage access to software. To use the default version of MOLPRO, type:
 ```shell
-% module load molpro
+cori$ module load molpro
 ```
 To see all the available versions, use:
 ```shell
-% module avail molpro
+cori$ module avail molpro
 ```
 To see where the MOLPRO executables reside (the bin directory) and what environment variables the modulefile defines, use:
 ```shell
-% module show molpro
+cori$ module show molpro
 ```
 ## Running MOLPRO  
 You must use the batch system to run MOLPRO on the compute nodes. You can do this interactively or you can use a script. Examples of both are below.
@@ -26,13 +26,13 @@ To run a parallel job interactively use the "salloc" command to request an inter
 Here is an example, requesting 1 Haswell node for 30 minutes to run jobs interactively
 
 ```shell
-% salloc -N 1 -q interactive -t 1:00:00 -C haswell
+cori$ salloc -N 1 -q interactive -t 1:00:00 -C haswell
 ```
 When this command is successful a new batch session will start in the window where you typed the command. Then, issue commands similar to the following:
 
 ```shell
-%  module load molpro 
-%  molpro -n 32 your_molpro_inputfile_name
+cori$  module load molpro 
+cori$  molpro -n 32 your_molpro_inputfile_name
 ```
 Note that there are 32 cores (or 64 logical cores with Hyperthreading) per Haswell node on Cori. 
 You can run up to 32 way (or 64 way with Hyperthreading) parallel molpro jobs on a single node. 
@@ -46,7 +46,7 @@ Put those commands or similar ones in a file, say, run.slurm and then use the sb
     --8<-- "docs/applications/molpro/cori-hsw.sh"
     ```
 ```shell
-% sbatch run.slurm
+cori$ sbatch run.slurm
 ```
 If your job requires large memory, meaning more than available on per core memory, 4.0 GB, on Cori, you can run with a reduced number of cores per node:
 
@@ -64,12 +64,12 @@ If you run small parallel jobs using less than 32 cores available, you can use t
     ```
 You can run short jobs interactively using the shared partition as well. Note that the shared partition has a longer wall limit. For example, the following command request 8 cores under the shared partition for 1 hour:
 ```shell
-% salloc -n 8 -q shared -t 1:00:00
+cori$ salloc -n 8 -q shared -t 1:00:00
 ```
 When a batch shell prompts, do:
 ```shell
-%  module load molpro 
-%  molpro -n 8 your_molpro_inputfile_name
+cori$  module load molpro 
+cori$  molpro -n 8 your_molpro_inputfile_name
 ```
 ##Restart Capabilities
 
@@ -79,7 +79,7 @@ MOLPRO has three main files which contain information which can be used for a re
 
 By putting the following lines in the input file, the wavefunction file (file number 2) can be saved as file "h2.wfu",and the auxiliary file (file number 3) saved as "h2.aux". By default, the files are saved to the subdirectory "wfu" of your home directory if the job runs out of time.
 
-```shell
+```txt
 ***,H2
 file,2,h2.wfu,new
 file,3,h2.aux,new
@@ -91,7 +91,7 @@ The directory where the files are saved may be changed using the "-W" command li
 
 These files enable some restarts to be performed, as they provide snapshots of the calculation as each module finishes. Unfortunately, restarting an incomplete SCF or CI calculation is not possible. To use the files in a restart, remove the "new" qualifier from the "file" command:
 
-```shell
+```txt
 ***,H2
 file,2,h2.wfu
 file,3,h2.aux

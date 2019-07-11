@@ -36,12 +36,12 @@ are in the `vasp5` file group, then you can access VASP 5 binaries provided at N
 
 We provide multiple VASP builds for users. To see what VASP modules are available:
 ```shell
-% module avail vasp
+cori$ module avail vasp
 ```
 For example, these are the available modules (as of 7/8/2019),
 
 ```shell
-% module avail vasp
+cori$ module avail vasp
 
 ------------------------- /usr/common/software/modulefiles --------------------------
 vasp/5.4.1-hsw                    vasp/20170629-hsw      vasp-tpc/5.4.1-hsw
@@ -61,16 +61,16 @@ The current default on Cori is vasp/5.4.4-hsw (release date: April 17, 2017, wit
 and you can access it by 
 
 ```shell
-% module load vasp
+cori$ module load vasp
 ```
 To use other non-default module, you need to provide the full module name, 
 ```shell
-% module load vasp/20181030-knl
+cori$ module load vasp/20181030-knl
 ```
 The "module show" command shows what VASP modules do to your environment, e.g. 
 
 ```shell
-% module show vasp/20181030-knl
+cori$ module show vasp/20181030-knl
 -------------------------------------------------------------------
 /usr/common/software/modulefiles/vasp/20181030-knl:
 
@@ -110,7 +110,7 @@ To run batch jobs, you need to prepare a job script (see samples below), and sub
 with the "sbatch" command. Assume the job script is named as run.slurm, 
 
 ```shell
-% sbatch run.slurm
+cori$ sbatch run.slurm
 ```
 
 Please check the [Queue Policy](http://docs.nersc.gov/jobs/policy/) page for the available QOS's and their resource limits. 
@@ -147,26 +147,26 @@ Please check the [Queue Policy](http://docs.nersc.gov/jobs/policy/) page for the
 
 ## Runninge interactively
 To run VASP interactively, you need to request a batch session using the "salloc" command, e.g.,
-the following command requests one **Cori Haswell** node for 1 hour,
+the following command requests one **Cori Haswell** node for one hour,
 
 ```shell
-% salloc -N 1 -q interactive -C haswell -t 1:00:00
+cori$ salloc -N 1 -q interactive -C haswell -t 1:00:00
 ```
 When the batch session returns with a shell prompt, execute the following commands: 
 ```shell
-% module load vasp 
-% srun -n32 -c2 --cpu-bind=cores vasp_std
+cori$ module load vasp 
+cori$ srun -n32 -c2 --cpu-bind=cores vasp_std
 ```
 To run on **Cori KNL** interactively, do
 
 ```shell
-% salloc -N 2 -q interactive -C knl -t 4:00:00
+cori$ salloc -N 2 -q interactive -C knl -t 4:00:00
 ```
-The above command requests 2 KNL nodes for 4 hours. When the batch session returns with a shell prompt, execute the following commands:
+The above command requests two KNL nodes for four hours. When the batch session returns with a shell prompt, execute the following commands:
 ```shell
-% module load vasp/20181030-knl
-% export OMP_NUM_TRHEADS=4
-% srun -n32 -c16 --cpu-bind=cores vasp_std
+cori$ module load vasp/20181030-knl
+cori$ export OMP_NUM_TRHEADS=4
+cori$ srun -n32 -c16 --cpu-bind=cores vasp_std
 ```
 
 !!! Tips
@@ -180,7 +180,7 @@ For example, the "makefile.include" file that we used to build the vasp/5.4.4-hs
 
 /global/common/sw/cray/cnl6/haswell/vasp/5.4.4/intel/17.0.2.174/4bqi2il 
 
-Type "module show &lt;a vasp module&gt;" to find the installation directory. 
+Type "module show `<a vasp module>`" to find the installation directory. 
 
 ## Documentation
 

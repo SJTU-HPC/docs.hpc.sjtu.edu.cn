@@ -1,11 +1,10 @@
 #!/bin/bash -l
-#SBATCH -q debug
-#SBATCH -N 1
-#SBATCH -t 00:30:00
+#SBATCH -q shared
+#SBATCH -n 2
+#SBATCH -t 1:00:00
 #SBATCH -J my_job
 #SBATCH -L SCRATCH
-#SBATCH -C haswell
 
 module load qchem
-qchem -slurm -nt 32 B3LYP_water.in 
+qchem -slurm -nt 2 B3LYP_water.in 
 

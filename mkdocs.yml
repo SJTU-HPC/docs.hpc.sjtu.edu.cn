@@ -36,23 +36,28 @@ nav:
         - Examples: programming/shifter/examples.md
   - Applications:
     - Overview: applications/index.md
+    - AMBER: applications/amber/index.md
     - Abinit: applications/abinit/index.md
     - BerkeleyGW: applications/berkeleygw/index.md
     - CP2K: applications/cp2k/index.md
+    - CPMD: applications/cpmd/index.md
     - LAMMPS: applications/lammps/index.md
     - Mathematica : applications/mathematica/index.md
     - MATLAB : 
       - MATLAB Overview: applications/matlab/index.md
       - MATLAB Compiler: applications/matlab/matlab_compiler.md
+    - MOLPRO : applications/molpro/index.md
     - NAMD : applications/namd/index.md
     - NCAR Graphics : applications/ncargraphics/index.md
     - SIESTA : applications/siesta/index.md
     - PARATEC: applications/paratec/index.md
     - ParaView : applications/paraview/index.md
+    - Q-Chem : applications/qchem/index.md
     - Quantum ESPRESSO : applications/quantum-espresso/index.md
-    - Wannier90: applications/wannier90/index.md
     - VASP : applications/vasp/index.md
     - VisIt : applications/visit/index.md
+    - WIEN2k: applications/wien2k/index.md
+    - Wannier90: applications/wannier90/index.md
   - Analytics:
       - Overview : analytics/analytics.md
       - Jupyter : services/jupyter.md
