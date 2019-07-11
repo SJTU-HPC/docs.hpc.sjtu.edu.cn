@@ -32,7 +32,7 @@ follows:
     FLOPS rate, top time-consuming user functions, MPI information, etc.
   - A `.rpt` text file with the same info as above.
   - A `.ap2` file that can be used with `pat_report` for more detailed
-    informaition, and with `app2` for graphic visualization.
+    information, and with `app2` for graphic visualization.
   - Possibly one or more suggested `MPICH_RANK_ORDER_FILE` files.
 
 ## How to Use CrayPat
