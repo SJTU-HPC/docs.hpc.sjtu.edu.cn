@@ -180,7 +180,7 @@ For example, the "makefile.include" file that we used to build the vasp/5.4.4-hs
 
 /global/common/sw/cray/cnl6/haswell/vasp/5.4.4/intel/17.0.2.174/4bqi2il 
 
-Type "module show &lt;a vasp module&gt;" to find the installation directory. 
+Type "module show `<a vasp module>`" to find the installation directory. 
 
 ## Documentation
 
