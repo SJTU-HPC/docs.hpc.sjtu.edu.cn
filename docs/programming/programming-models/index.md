@@ -53,7 +53,7 @@ Although not meant to be an exhaustive list, here we briefly examine a number of
 attractive to our users. In general, a recommended mixture of parallelism models would be to limit the number of
 processes (created via distributed memory parallelism, e.g. MPI) to a few instances per node where each process
 implements a shared-memory parallelism model (e.g. threads) which creates a minimum of `nthreads = (ncores / nprocs)`.
-Then, optionally when targetting GPUs, within the shared-parallelism model, there are additional threads of execution
+Then, optionally when targeting GPUs, within the shared-parallelism model, there are additional threads of execution
 that are reserved for asychronous communication with the GPU. While this certainly will not be a globally applicable
 model to all codes using NERSC resources, the reasons for this recommendation are as follows:
 
