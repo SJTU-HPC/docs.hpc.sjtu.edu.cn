@@ -93,7 +93,7 @@ of ranks used per node.
 
 Another way to use Advisor across multiple ranks is with Slurm's MPMD mode, in
 which Advisor profiles only a subset of MPI processes. To do so, one may create
-a plain text file (below called 'mpmd.conf'), containing the following exapmle code:
+a plain text file (below called 'mpmd.conf'), containing the following example code:
 ```
 0 advixe-cl --collect survey --project-dir ./myproj -- ./mycode.exe
 1-3 ./mycode.exe
