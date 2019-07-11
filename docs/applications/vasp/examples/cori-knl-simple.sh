@@ -1,10 +1,9 @@
-#!/bin/bash
-#SBATCH --qos=debug
-#SBATCH --time=00:30:00
-#SBATCH --nodes=2
-#SBATCH --core-spec=2
-#SBATCH --tasks-per-node=66
-#SBATCH --constraint=knl
+#!/bin/bash -l
+#SBATCH –N 2 
+#SBATCH -C knl
+#SBATCH –q regular
+#SBATCH –t 6:00:00
 
 module load vasp/5.4.4-knl
-srun vasp_std
+srun –n128 -c4 --cpu_bind=cores vasp_std
+
