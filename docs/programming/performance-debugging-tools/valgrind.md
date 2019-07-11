@@ -82,7 +82,7 @@ likely to be unhandled.
 
 If you find that this does not work, you may wish to try a different
 compiler - this can affect both the nature of the optimizations
-peformed on your code, as well as the libraries to which your code
+performed on your code, as well as the libraries to which your code
 is linked. In the specific example above with `__intel_sse4_strtok`,
 switching to the GNU programming environment and recompiling the
 code being debugged remedied this situation.
