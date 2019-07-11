@@ -53,20 +53,20 @@ Wien2k on Cori was built with the graphical user interface w2web enabled. To use
 You can use ssh as follows:
 
 ```shell
-ssh -L 46500:localhost:46600 cori.nersc.gov  
+ssh -L 4650:localhost:4660 cori.nersc.gov  
 ```
-After you login, you should load the wien2k module, and then run the w2web application. It will ask you to pick a port number: in this example the port number is 46600. After pointing your web browser to http://localhost:46500, you should be able to see w2web's startup screen.
+After you login, you should load the wien2k module, and then run the w2web application. It will ask you to pick a port number: in this example the port number is 4660. After pointing your web browser to `http://localhost:4650`, you should be able to see w2web's startup screen.
 
 If you use windows and the F_secure or putty shell client to access Cori, then specify a local tunnel as follows.
 
 Open the F-Secure shell client, and choose Edit-->settings.  This will pop up a settings window, in which you should click add. Another pop-up window will then appear, requesting that you define your local tunnel.  Enter
 
-46500 in the source port field
-46600 in the destination field
+4650 in the source port field
+4660 in the destination field
 cori.nersc.gov in the destination host field
-Using local tunnels with putty is similar, except that for the destination host field you enter cori.nersc.gov:46600 (there is no separate field for the destination port as with F-secure).
+Using local tunnels with putty is similar, except that for the destination host field you enter cori.nersc.gov:4660 (there is no separate field for the destination port as with F-secure).
 
-Note: the port numbers 46600 and 46500 used here are just examples, you can choose any port number larger than 1024 and less than 65535.
+Note: the port numbers 4660 and 4650 used here are just examples, you can choose any port number larger than 1024 and less than 65535.
 
 
 ## Documentation
