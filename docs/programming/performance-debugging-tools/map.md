@@ -73,7 +73,7 @@ or C++ usage is the same.
 
 ### On Cray Machines
 
-Buidling an executable for MAP is more complicated on Cray machines.
+Building an executable for MAP is more complicated on Cray machines.
 First, you need to explicitly build the MAP sampler and MPI wrapper
 libraries using `make-profiler-libraries`, and link your executable
 against them.
@@ -246,7 +246,7 @@ displayed in the remote client.
 
 ## Profiling Results
 
-After completing the run, MAP displays the collected perfromance
+After completing the run, MAP displays the collected performance
 data using GUI.
 
 ![afmapresults](images/afmapresults.png)

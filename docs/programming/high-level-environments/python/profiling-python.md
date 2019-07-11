@@ -320,7 +320,7 @@ Once you have collected your data, you can finalize:
     At this point we recommend logging on to Cori via
     [NX](http://www.nersc.gov/users/connecting-to-nersc/using-nx/) to view the results in the
     Vtune GUI. You can also use -X or -Y for ssh forwarding, but it will be very
-    frustratingly slow. As a result we highly reccomend NX for the next steps in
+    frustratingly slow. As a result we highly recommend NX for the next steps in
     this process.
 
 Log onto Cori via NX. Then
@@ -472,7 +472,7 @@ each MPI rank. It also displays the max, min, and standard deviation.
 
 ![tau_xypix](tau_xypix.png)
 
-You can also click on a node number (but really, this should be labelled as
+You can also click on a node number (but really, this should be labeled as
 rank number) and it will open another window which shows a top-down list of
 time spent in functions for this rank. It should look something like:
 

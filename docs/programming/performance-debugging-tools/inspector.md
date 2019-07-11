@@ -525,7 +525,7 @@ Inspector discards information about earlier allocations and tracks leaks only
 for those allocations that occur after the Reset Leak Tracking button is clicked.
 
 When the "Find Leaks" button is clicked, Inspector will show any memory that
-the application has leaked util that point. Newly found leaks appear in the
+the application has leaked until that point. Newly found leaks appear in the
 Summary window as "Memory leak problems".
 
 #### Memory Growth

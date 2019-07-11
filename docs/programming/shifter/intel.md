@@ -23,7 +23,7 @@ versions, and image use.
     applications or running applications.
 -   The tag defines the version of the Intel compiler suite to use.
 -   The table below shows the different options for each portion.  All combinations
-    are availble (7x2x6)
+    are available (7x2x6)
 -   Like all docker images, if a tag(version) isn't supplied it defaults to _latest_.
 
 ### Image Matrix [^1]

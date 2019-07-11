@@ -86,7 +86,7 @@ ftn -o my_coarray_code.ex my_coarray_code.f90
 
 ### Intel
 
-Intel supports coarray compliation in two different forms: shared memory and
+Intel supports coarray compilation in two different forms: shared memory and
 distributed memory. By default, neither mode is active, and the compiler will
 throw an error if it encounters coarray syntax.
 
@@ -113,7 +113,7 @@ ftn -coarray=distributed my_coarray_code.ex my_coarray_code.f90
 
 ### GCC
 
-GCC supports single-image coarray compliation, and also distributed-memory
+GCC supports single-image coarray compilation, and also distributed-memory
 coarrays via [OpenCoarrays](http://www.opencoarrays.org/). By default, coarray
 support is disabled, and GCC will throw an error if it encounters coarray
 syntax.

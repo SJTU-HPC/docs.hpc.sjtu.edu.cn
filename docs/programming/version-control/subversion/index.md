@@ -9,7 +9,7 @@ functionality and availability moving forward._
 In order to create Subversion (SVN) repositories on the NERSC Global File
 System (NGF) a user must first have a project directory. After the project
 directory is setup then access to the directory can be controlled in the NERSC
-Information Management system (NIM) by the project's pricipal investigator
+Information Management system (NIM) by the project's principal investigator
 (PI). Users who create repositories must have write access to the project
 directory. Once the user has a project directory, then the SVN repository can
 be created under that project directory. For example, a valid repository path
@@ -55,7 +55,7 @@ Any files added to SVN from NGF should be done using `portal-auth.nersc.gov`.
 After you login then you can follow the basic instructions below for adding
 files to your SVN repo. If you have an existing project then the simplest way
 to get started with SVN is to import your local project directory into the SVN
-repo you previosly created. An example has been provided to you below.
+repo you previously created. An example has been provided to you below.
 ```
 svn import /project/projectdirs/<project>/<project_name> file:///project/projectdirs/<project>/<svn_repository_path>/<svn_repository_name>
 ```

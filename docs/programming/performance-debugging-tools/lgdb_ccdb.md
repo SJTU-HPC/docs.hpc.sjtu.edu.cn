@@ -56,7 +56,7 @@ processes. For these, lgdb and CCDB use 3 entities:
 
 Please see the man page `man lgdb` for usage information about
 lgdb's comparative debugging feature. Cray's 'XC Series Programming
-Environment User Guide,' available from [here]((https://pubs.cray.com/))
+Environment User Guide,' available from [here](https://pubs.cray.com/)
 provides info on how to use the tool.  The tutorial manual uses
 example codes that are provided in the lgdb distribution package.
 You can build executables using the provided script as follows:

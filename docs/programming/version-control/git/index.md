@@ -9,7 +9,7 @@ functionality and availability moving forward._
 In order to create CVS, Subversion, or git repositories on the NERSC Global
 File System (NGF) a user must first have a project directory. After the project
 directory is set up, access to the directory can be controlled in the NERSC
-Information Management system (NIM) by the project's pricipal investigator
+Information Management system (NIM) by the project's principal investigator
 (PI). Users who create repositories must have write access to the project
 directory. Once the user has a project directory, then the repository can be
 created under that project directory. For example, a valid repository path
