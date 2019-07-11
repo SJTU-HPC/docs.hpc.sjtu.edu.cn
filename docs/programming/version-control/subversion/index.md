@@ -55,7 +55,7 @@ Any files added to SVN from NGF should be done using `portal-auth.nersc.gov`.
 After you login then you can follow the basic instructions below for adding
 files to your SVN repo. If you have an existing project then the simplest way
 to get started with SVN is to import your local project directory into the SVN
-repo you previosly created. An example has been provided to you below.
+repo you previously created. An example has been provided to you below.
 ```
 svn import /project/projectdirs/<project>/<project_name> file:///project/projectdirs/<project>/<svn_repository_path>/<svn_repository_name>
 ```
