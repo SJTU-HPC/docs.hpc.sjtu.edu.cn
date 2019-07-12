@@ -187,10 +187,3 @@ nersc$ ls -l
 -rw-r--r--   1 xxxxx xxxxx     3078 Jun 28 08:52 jacobi_mpi_8p_2n_2019-06-21_17-16.txt
 ...
 ```
-
-## Tutorial Materials
-
-Previous tutorial presentation slides are available on how to use
-MAP:
-
-- [Allinea-MAP-perfreport-201702.pdf](http://www.nersc.gov/assets/Uploads/Allinea-MAP-perfreport-201702.pdf)
