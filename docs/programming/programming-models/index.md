@@ -88,7 +88,7 @@ These programming models create separate parallel processes with independent mem
 
 - [MPI](mpi/index.md)
 - [PGAS models](https://en.wikipedia.org/wiki/Partitioned_global_address_space)
-    - [UPC](https://upc.lbl.gov/)
+    - [UPC](upc.md)
     - [UPC++](upcxx.md)
     - [Coarrays](coarrays.md)
     - [Others](https://en.wikipedia.org/wiki/Partitioned_global_address_space)
