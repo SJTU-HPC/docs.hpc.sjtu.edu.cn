@@ -18,7 +18,8 @@ Berkeley UPC and Cray UPC.
 
 ### Berkeley UPC
 
-Berkeley UPC (BUPC) provides a portable UPC programming environment consisting
+[Berkeley UPC (BUPC)](https://upc.lbl.gov)
+provides a portable UPC programming environment consisting
 of a source translation front-end (which in turn relies on a user-supplied C
 compiler underneath) and a runtime library based on
 [GASNet](https://gasnet.lbl.gov/). The latter is able to take advantage of
@@ -31,13 +32,15 @@ initializes the environment and calls `srun`). Further, all three supported
 programming environments on Cori (Intel, GNU, and Cray) are supported by BUPC
 for use as the underlying C compiler.
 
-There are a number of environment variables that affect the execution
+There are a number of flags and environment variables that affect the execution
 environment of your UPC application compiled with BUPC, all of which can be
-found in the BUPC documentation. One of the most important is
-`UPC_SHARED_HEAP_SIZE`, which controls the size of the shared symmetric heap
-used to service shared memory allocations. If you encounter errors at
-application launch related to memory allocation, you will likely want to start
-by adjusting this variable.
+found in the [BUPC documentation](https://upc.lbl.gov/docs/). 
+Both `upcc` and `upcrun` have `-help` options and man pages describing these.
+One of the most important settings is the size of the shared symmetric heap
+used to service shared memory allocations. This size can be controlled via the
+`UPC_SHARED_HEAP_SIZE` envvar, or the `-shared-heap` flag to `upcc` or `upcrun`.
+If you encounter errors related to shared memory allocation, you will likely
+want to start by adjusting this quantity. 
 
 Compiling and running a simple application with BUPC on Cori is fairly
 straightforward. First, consider the following UPC source file:
