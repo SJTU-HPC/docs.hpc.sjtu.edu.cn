@@ -11,6 +11,8 @@ the amount of parallelism is fixed at program startup time, typically with a
 single thread of execution per processor. The [Berkeley
 UPC](https://upc.lbl.gov/) project is one implementation.
 
+Here is a good [training video tutorial on UPC](https://www.youtube.com/watch?v=Ey-inJ9Dz6Q).
+
 ## UPC at NERSC
 
 UPC is supported on NERSC systems through two different implementations:
