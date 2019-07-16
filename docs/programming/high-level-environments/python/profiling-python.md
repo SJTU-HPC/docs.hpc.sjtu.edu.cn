@@ -247,6 +247,118 @@ for i in `seq 0 31`; do python -m line_profiler script_to_profile.lprof$i > line
 ```
 -->
 
+## Arm Forge Map for Python
+
+Arm Forge
+has recently added support for Python to their [Map profiling
+tool](https://developer.arm.com/tools-and-software/server-and-hpc/arm-architecture-tools/arm-forge/arm-map/python-profiling).
+Since this is a "big tool" we recommend that you try this tool
+after you have profiled your code with something simple and have some
+idea what you're looking for. That said, this is probably the easiest
+"big tool" that we support for Python on our systems. It can profile
+large, multinode, MPI jobs out of the box. Perhaps the only major
+drawback is that it cannot display information for indivdual MPI
+ranks; it will only show the collected statistics for all ranks. If
+you require information about individual ranks you may consider
+Tau instead (see below).
+
+There are two ways to use Map on our systems: either using NX or using
+a Remote Client/reverse connection on your own system (i.e. your laptop).
+
+### Arm Forge Map using NX
+
+Log onto NERSC using [NX](http://www.nersc.gov/users/connecting-to-nersc/using-nx/)
+as usual. Then, open a connection to Cori and get an interactive node:
+
+`salloc -A yourrepo ... `
+
+and once you have a node:
+
+```
+module load python/3.6-anaconda-4.4
+module load allinea-forge
+map srun python your_ap.py ...
+```
+
+and the Arm Forge GUI window will pop up. Click run to start the profiling
+run. Don't panic: it will add some overhead to the normal runtime of your code. When
+the profiling data collection is finished and the statistics are aggregated,
+a window that displays the data from your application will automatically
+open. You will find the metrics displayed as a function of time, callstack
+information, MPI information, etc.
+
+![arm_map](arm_map_example.png)
+
+### Arm Forge Map using Remote Client
+
+The workflow for using the Map profiler from the Remote Client is similar
+to using NX, but with a few extra complications. The tradeoff for these
+additional steps is that you'll
+get faster response and better graphics resolution using the GUI
+than you would over NX.
+
+#### On your local machine:
+
+You'll first need to visit Arm Forge's [website](https://developer.arm.com/tools-and-software/server-and-hpc/arm-architecture-tools/downloads/download-arm-forge)
+to download a copy of their
+remote client for your laptop/desktop. You may need to scroll down the page
+a bit to find the remote client. Follow the steps to install the remote
+client software for your OS.
+
+Open the GUI and click on the dropdown menu under Remote Launch. Click the
+Configure option. Then click Add.
+
+<code>
+**Connection name:** Cori  
+**Host name:** yourusername@cori.nersc.gov yourusername@cmom02.nersc.gov  
+**Remote installation directory:** /global/common/sw/cray/cnl6/haswell/allinea-forge/default  
+**Remote script:** /global/common/sw/cray/cnl6/haswell/allinea-forge/remote-init  
+**Uncheck the Proxy through login node box**
+</code>
+
+Hit ok-- this will save your connection configuration to Cori.
+
+Then in the GUI main menu, under Remote Connection, hit `Cori`.
+You will have to enter your login credentials for Cori
+(password + OTP). If you are using [sshproxy](https://www.nersc.gov/users/connecting-to-nersc/mfa/#toc-anchor-3), you should not
+be prompted to enter your information. Once your remote client
+has sucessfully launched, you will begin your profiling run on
+Cori.
+
+#### On Cori:
+
+After you have started the remote client,
+ssh to Cori as you would normally.
+
+`salloc -A yourrepo ... qos=interactive`
+
+once you have an interactive node:
+
+```
+module load python/3.6-anaconda-4.4
+module load allinea-forge
+map --connect srun python your_ap.py ...
+```
+
+!!! tip "One small difference in Remote Client vs NX"
+    The difference between the NX version and the Remote Client reverse connection
+    is this `--connect` after the map command.
+
+Once you execute this command on Cori, you will be prompted to accept a reverse
+connection on your local machine. Click Accept and the profiling window will
+open and automatically start.
+
+![reverse_connection](reverse_connect.png)
+
+!!! attention "You must uncheck some metrics"
+    Unlike the NX version, you will need to click the Metrics box and uncheck all
+    but the first two CPU options. Otherwise you will have errors
+    and the profiling will fail.
+
+Once you have unchecked all but the first two CPU metrics, you can click OK
+and profiling will start in the same way that it did via NX. After profiling the
+GUI will display the results of your profiling.
+
 ## Intel Vtune
 
 [Intel
