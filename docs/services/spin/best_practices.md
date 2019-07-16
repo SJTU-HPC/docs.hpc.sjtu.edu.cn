@@ -8,7 +8,8 @@
 
 ## Spin Overview & Steps to Get Started
 
-For an overview of Spin and short tutorials to get started, please see the [Spin Getting Started Guide](getting_started)
+For an overview of Spin and short tutorials to get started, please see the
+[Spin Getting Started Guide](./getting_started/index.md)
 
 ## Using Images & Creating Containers
 
