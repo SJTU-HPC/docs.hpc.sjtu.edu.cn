@@ -1,6 +1,6 @@
 # Applications
 
-NERSC provides [modules](docs/environment/#nersc-modules-environment)
+NERSC provides [modules](./environment/#nersc-modules-environment)
 for a variety of common science codes such as:
 
 ## Density functional theory
