@@ -272,7 +272,7 @@ solver.
 [^6]:
    Williams, S., Stralen, B.V., Ligocki, T.,
    Oliker, L., Cordery, M., Lo, L.: Roofline performance model,
-   https://crd.lbl.gov/departments/computerscience/PAR/research/roofline/
+   https://crd.lbl.gov/departments/computer-science/PAR/research/roofline/
 [^7]:
    Tal, A.: Intel software development emulator,
    https://software.intel.com/en-us/articles/intel-software-development-emulator
