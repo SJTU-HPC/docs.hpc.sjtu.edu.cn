@@ -22,7 +22,7 @@ data management requirements for long-term data sharing and
 preservation. The OSTP has issued a memorandum on Increasing Access to
 the Results of Federally Funded Scientific Research
 (https://obamawhitehouse.archives.gov/sites/default/files/microsites/ostp/public_access_report_to_congress_apr2016_final.pdf)
-and the DOE has issued a [Statement on Digital Data Management](https://science.energy.gov/funding-opportunities/digital-data-management/).
+and the DOE has issued a [Statement on Digital Data Management](https://science.osti.gov/Funding-Opportunities/Digital-Data-Management/).
 
 NERSC resources are intended for users with active allocations, and as
 described below, NERSC cannot guarantee long-term data access without

@@ -1,6 +1,6 @@
 # NAMD
 
-[NAMD](www.ks.uiuc.edu/Research/namd/) is a molecular dynamics (MD)
+[NAMD](https://www.ks.uiuc.edu/Research/namd/) is a molecular dynamics (MD)
 program designed for parallel computation.
 
 ## Example run script

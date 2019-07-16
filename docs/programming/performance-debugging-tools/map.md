@@ -202,7 +202,7 @@ to use on the NERSC machines.
 
 For configuring the client for NERSC systems, follow the similar
 steps shown in the [DDT web
-page](https://docs.nersc.gov/development/performance-debugging-tools/ddt/).
+page](./ddt.md).
 If you have done configuration for using DDT on a NERSC machine,
 the same configuration will be used for running MAP.
 
