@@ -101,7 +101,7 @@ These programming models create separate parallel "threads" of execution on the 
 
 - [OpenMP](openmp/openmp.md)
 - Raw threads ([pthreads](https://en.wikipedia.org/wiki/POSIX_Threads), [STL threads](https://en.cppreference.com/w/cpp/thread/thread))
-- [TBB](https://www.threadingbuildingblocks.org/)
+- [TBB](https://01.org/tbb/)
 - [Kokkos](kokkos.md)
 - [Raja](raja.md)
 
