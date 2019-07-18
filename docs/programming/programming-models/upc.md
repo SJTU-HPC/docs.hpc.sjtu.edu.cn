@@ -48,105 +48,70 @@ Compiling and running a simple application with BUPC on Cori is fairly
 straightforward. First, consider the following UPC source file:
 
 ```C
-/* The ubiquitous cpi program.
- Compute pi using a simple quadrature rule
- in parallel
- Usage: cpi [intervals_per_thread] */
+// Compute pi by approximating the area of a circle of radius 1. 
+// Algorithm: generate random points in [0,1]x[0,1] and measure the fraction 
+// of them falling in a circle centered at the origin (approximates pi/4)
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
-#include <upc_relaxed.h>
+#include <stdint.h>
+#include <upc.h>
 
-#define INTERVALS_PER_THREAD_DEFAULT 100
-/* Add up all the inputs on all the threads.
- When the collective spec becomes finalised this
- will be replaced */
-
-shared double reduce_data[THREADS];
-shared double reduce_result;
-double myreduce(double myinput)
-{
-#if defined(__xlC__)
- // Work-around Bug 3228
- *(volatile double *)(&myinput);
-#endif
- reduce_data[MYTHREAD]=myinput;
- upc_barrier;
- if(MYTHREAD == 0) {
- double result = 0;
- int i;
- for(i=0;i < THREADS;i++) {
- result += reduce_data[i];
- }
- reduce_result = result;
- }
- upc_barrier;
- return(reduce_result);
+int hit() { // return non-zero for a hit in the circle
+  double x = rand()/(double)RAND_MAX;
+  double y = rand()/(double)RAND_MAX;
+  return (x*x + y*y) <= 1.0;
 }
 
-/* The function to be integrated */
-double f(double x)
-{
- double dfour=4;
- double done=1;
- return(dfour/(done + (x*x)));
-}
+// shared array for the results computed by each thread
+shared int64_t all_hits[THREADS];
 
-/* Implementation of a simple quadrature rule */
-double integrate(double left,double right,int intervals)
-{
- int i;
- double sum = 0;
- double h = (right-left)/intervals;
- double hh = h/2;
- /* Use the midpoint rule */
- double midpt = left + hh;
- for(i=0;i < intervals;i++) {
- sum += f(midpt + i*h);
- }
- return(h*sum);
-}
+int main(int argc, char **argv) {
+    int64_t trials = 100000000;
+    if (argc > 1) trials = (int64_t)atoll(argv[1]);
+    int64_t my_trials = (trials + THREADS - 1 - MYTHREAD)/THREADS;
 
-int main(int argc,char **argv)
-{
- double mystart, myend;
- double myresult;
- double piapprox;
- int intervals_per_thread = INTERVALS_PER_THREAD_DEFAULT;
- double realpi=3.141592653589793238462643;
- /* Get the part of the range that I'm responsible for */
- mystart = (1.0*MYTHREAD)/THREADS;
- myend = (1.0*(MYTHREAD+1))/THREADS;
- if(argc > 1) {
- intervals_per_thread = atoi(argv[1]);
- }
- piapprox = myreduce(integrate(mystart,myend,intervals_per_thread));
- if(MYTHREAD == 0) {
- printf("Approx: %20.17f Error: %23.17f\n",piapprox,fabs(piapprox - realpi));
- }
- return(0);
+    srand(MYTHREAD); // seed each thread's PRNG differently
+
+    int64_t my_hits = 0;
+    for (int64_t i=0; i < my_trials; i++)
+        my_hits += hit(); // compute in parallel
+
+    all_hits[MYTHREAD] = my_hits; // publish results
+    upc_barrier;
+
+    if (MYTHREAD == 0) { // fetch results from each thread
+        // (could alternatively call upc_all_reduce())
+        int64_t total_hits = 0;
+        for (int i=0; i < THREADS; i++)
+            total_hits += all_hits[i];
+        double pi = 4.0*total_hits/(double)trials;
+        printf("PI estimated to %10.7f from %lld trials on %d threads.\n",
+               pi, (long long)trials, THREADS);
+    }
+
+    return 0;
 }
 ```
 
 To compile this file with BUPC:
 
 ```console
-user@cori02:~$ module load bupc
-user@cori02:~$ upcc cpi.c -o cpi.x
+cori$ module load bupc
+cori$ upcc mcpi.upc -o mcpi.x
 ```
 
 And then run, in this case in a interactive `salloc` session:
 
 ```slurm
-user@cori02:~$ salloc -N 2 -t 10:00 -p debug -C haswell
+cori$ salloc -N 2 -t 10:00 --qos=interactive -C haswell
 [...]
-user@cori02:~$ upcrun -n 4 ./cpi.x
-UPCR: UPC thread 0 of 4 on nid01901 (pshm node 0 of 2, process 0 of 4, pid=36911)
-UPCR: UPC thread 1 of 4 on nid01901 (pshm node 0 of 2, process 1 of 4, pid=36912)
-UPCR: UPC thread 2 of 4 on nid01902 (pshm node 1 of 2, process 2 of 4, pid=35611)
-UPCR: UPC thread 3 of 4 on nid01902 (pshm node 1 of 2, process 3 of 4, pid=35612)
-Approx: 3.14159317442312691 Error: 0.00000052083333379
+cori$ upcrun -n 4 ./mcpi.x
+UPCR: UPC thread 2 of 4 on nid00707 (pshm node 1 of 2, process 2 of 4, pid=33268)
+UPCR: UPC thread 0 of 4 on nid00705 (pshm node 0 of 2, process 0 of 4, pid=12390)
+UPCR: UPC thread 3 of 4 on nid00707 (pshm node 1 of 2, process 3 of 4, pid=33269)
+UPCR: UPC thread 1 of 4 on nid00705 (pshm node 0 of 2, process 1 of 4, pid=12391)
+PI estimated to  3.1415196 from 100000000 trials on 4 threads.
 ```
 
 ### Cray UPC
@@ -176,7 +141,7 @@ PE 0: ERROR: failed to attach XPMEM segment (at or around line 23 in __pgas_runt
 then you may need to release your virtual memory limits by running:
 
 ```console
-user@cori02:~$ ulimit -v unlimited
+cori$ ulimit -v unlimited
 ```
 
 With all of this in mind, compiling and running a simple UPC application,
@@ -184,11 +149,11 @@ analogous to the above example for BUPC but now using the Cray compilers, would
 look like:
 
 ```slurm
-user@cori02:~$ module swap PrgEnv-intel PrgEnv-cray
-user@cori02:~$ cc -h upc cpi.c -o cpi.x
-user@cori02:~$ salloc -N 2 -t 10:00 -p debug -C haswell
+cori$ module swap PrgEnv-intel PrgEnv-cray
+cori$ cc -h upc mcpi.upc -o mcpi.x
+cori$ salloc -N 2 -t 10:00 --qos=interactive -C haswell
 [...]
-user@cori02:~$ ulimit -v unlimited  # may not be necessary
-user@cori02:~$ srun -n 4 ./cpi.x
-Approx:  3.14159317442312691 Error:     0.00000052083333379
+cori$ ulimit -v unlimited  # may not be necessary
+cori$ srun -n 4 ./mcpi.x
+PI estimated to  3.1414546 from 100000000 trials on 4 threads.
 ```
