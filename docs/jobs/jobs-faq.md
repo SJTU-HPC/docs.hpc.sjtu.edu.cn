@@ -51,8 +51,7 @@ cori$ sinfo -o "%.20b %.20F"
 
 **Q: How many interactive QOS nodes are available that I can use?**
 
-**A**: 192 Haswell and 192 KNL nodes are reserved for interactive
-jobs.  Each repo can use up to total 64 nodes (combining Hawell and
+**A**: Each repo can use up to total 64 nodes (combining Hawell and
 KNL nodes).  Run the following command to see how many interactive
 nodes are being used by the members of your repo:
 
