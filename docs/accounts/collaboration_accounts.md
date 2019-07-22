@@ -36,6 +36,22 @@ with it with the name c_<collaboration account\>. You can add users to
 the corresponding group following the instructions
 [here](https://www.nersc.gov/users/accounts/nim/nim-guide-for-pis/#toc-anchor-8).
 
+## External Access and Collaboration Accounts
+
+If you need to have external ssh-based access to NERSC with your
+collaboration account (for instance for transferring data), you can
+use
+[sshproxy](https://www.nersc.gov/users/connecting-to-nersc/mfa/#toc-anchor-3)
+to generate an ssh key for the account
+
+```
+sshproxy.sh -c your_collab_acct
+Enter the password+OTP for fakenerscuser: 
+Successfully obtained ssh key /global/homes/f/fakenerscuser/.ssh/your_collab_acct
+Key /global/homes/f/fakenerscuser/.ssh/your_collab_acct is valid: from 2019-07-16T09:46:00 to 2019-07-17T09:47:58
+```
+You can use this key to ssh (or scp, etc.) to any NERSC system.
+
 ## Use Cases
 
 ### Collaborative Data Management
