@@ -46,14 +46,18 @@ any NERSC user. The list of endpoints are provided in the table below.
 Data can be shared at NERSC using [Globus
 Sharing](https://www.globus.org/data-sharing). Currently shared
 endpoints are read-only, no writing is allowed. To share data, create
-a "gsharing" directory in your repo's project directory. Then go to
-the [Globus endpoint web page](https://app.globus.org/endpoints) and
-search for the "NERSC SHARE" endpoint. Click on the "Shares" tab and
-select "Add a Shared Endpoint". This will bring you to a screen where
-you can give your shared endpoint a name and fill in the path you'd
-like to share. Currently sharing is limited to
-/global/project/projectdirs/<your_repo_name\>/gsharing and subdirectories
-(and the [dna file
+a "gsharing" directory in your repo's project directory. Then [open a
+ticket](https://help.nersc.gov/) and let us know the directory path
+you'd like to share (we currently have to manually update the
+configuration file to allow directories to be shared). Once you hear
+back from us, go to the [Globus endpoint web
+page](https://app.globus.org/endpoints) and search for the "NERSC
+SHARE" endpoint. Click on the "Shares" tab and select "Add a Shared
+Endpoint". This will bring you to a screen where you can give your
+shared endpoint a name and fill in the path you'd like to
+share. Currently sharing is limited to
+/global/project/projectdirs/<your_repo_name\>/gsharing and
+subdirectories (and the [dna file
 system](../../science-partners/jgi/filesystems/#dna-data-n-archive)
 for JGI users). Once you click "Create Share" it will take you to
 another screen where you can share this endpoint with specific Globus
