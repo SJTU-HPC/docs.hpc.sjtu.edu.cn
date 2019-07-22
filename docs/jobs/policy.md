@@ -160,8 +160,7 @@ rejected by the batch system.
     [special request](https://nersc.service-now.com/catalog_home.do?sysparm_view=catalog_default).
 
 [^4]:
-	The "interactive" QOS has 192 Haswell and 192 KNL nodes
-    reserved. Batch job submission is not enabled and the 64 node
+	Batch job submission is not enabled and the 64 node
     limit applies **per repository** not per user.
 
 [^5]:
