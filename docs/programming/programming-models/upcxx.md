@@ -1,6 +1,6 @@
 # UPC++
 
-[UPC++](http://upcxx.lbl.gov) is a C++ library that supports
+[UPC++](https://upcxx.lbl.gov) is a C++ library that supports
 Partitioned Global Address Space (PGAS) programming, and is designed
 to interoperate smoothly and efficiently with MPI, OpenMP, CUDA and
 AMTs. It leverages GASNet-EX to deliver low-overhead, fine-grained

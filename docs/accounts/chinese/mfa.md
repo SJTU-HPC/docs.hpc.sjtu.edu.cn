@@ -342,7 +342,6 @@ NIM用户入口也将要求启用MFA的用户使用MFA进行登录
 | Others | [NIM](https://nim.nersc.gov/) |
 | Others | NX和[NX-cloud](https://nxcloud01.nersc.gov/) |
 | Others | [Jupyter](https://jupyter.nersc.gov) |
-| Others | [Jupyter-dev](https://jupyter-dev.nersc.gov/) |
 | Others | [RStudio](https://rstudio.nersc.gov/) |
 | Others | [HPSS token generation](https://docs.nersc.gov/filesystems/archive_access/#automatic-token-generation-for-use-at-nersc)|
 
