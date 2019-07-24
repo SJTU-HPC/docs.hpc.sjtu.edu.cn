@@ -471,7 +471,7 @@ such as Cori. Web and other services will start supporting MFA in September
 [comment]: <> (|            | [Science gateways](https://portal.nersc.gov/) with NERSC (Shibboleth) login banner |)
 [comment]: <> (| NEWT       | [My NERSC](https://my.nersc.gov/) |)
 [comment]: <> (|            | [Science gateways](https://portal.nersc.gov/) accepting NIM passwords not displaying the  NERSC (Shibboleth)  login banner |)
-[comment]: <> (| Others     | JupyterHubs ([Jupyter](https://jupyter.nersc.gov/) and [Jupyter-dev](https://jupyter-dev.nersc.gov/)) |)
+[comment]: <> (| Others     | [JupyterHub](https://jupyter.nersc.gov/) |)
 [comment]: <> (|            | [RStudio](https://rstudio.nersc.gov/) |)
 [comment]: <> (|            | NX and [NX-cloud](https://nxcloud01.nersc.gov/) |)
 

@@ -87,11 +87,11 @@ sections below.
 
 ## Relevant NERSC Training Sessions on OpenMP
 
-* [Advanced OpenMP and CESM Case Study](http://www.nersc.gov/users/training/events/advanced-openmp-training-february-4-2016/)
+* [Advanced OpenMP and CESM Case Study](https://www.nersc.gov/assets/Uploads/Advanced-OpenMP-CESM-NUG2016-He.pdf)
   by Helen He, March 2016.
 * [Nested OpenMP](http://www.nersc.gov/assets/Uploads/Nested-OpenMP-NUG-20151008.pdf)
   by Helen He, October 2015.
-* [Tutorial: Getting up to Speed on OpenMP 4.0](http://www.nersc.gov/users/training/events/tutorial-getting-up-to-speed-on-openmp-4-0/)
+* [Tutorial: Getting up to Speed on OpenMP 4.0](https://www.youtube.com/playlist?list=PL20S5EeApOSshYrRnuY3S3BUw4IY3LYTt)
 * [OpenMP Basics and MPI/OpenMP Scaling](http://www.nersc.gov/assets/pubs_presos/hybridMPIOpenMP20150323.pdf)
   Helen He. LBNL Computational Sciences Postdocs Training, March 2015.
 * Intel OpenMP Training at NERSC ([part 1](http://www.nersc.gov/assets/For-Users/N8/0IntelThreadingIntroduction.pdf),

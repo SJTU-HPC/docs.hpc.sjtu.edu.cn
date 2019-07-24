@@ -10,7 +10,7 @@ will discuss some examples in more details.
 
 ### DESI
 
-[DESI](https://desi.lbl.gov/) jobs use community standard publicly
+[DESI](https://www.desi.lbl.gov/) jobs use community standard publicly
 available software, it is independent of the Linux distro flavor. We
 show below how to build a Docker image with Ubuntu base.
 
