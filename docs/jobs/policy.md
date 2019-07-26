@@ -35,7 +35,7 @@ available.
 | special[^5]     | custom    | custom         | custom       | custom    | -        | custom |
 
 !!! tip
-	Jobs using 1024 or more KNL nodes receive a 40% discount!
+	Jobs using 1024 or more KNL nodes receive a 50% discount!
 
 !!! note
 	User held jobs that were submitted more than 12 weeks ago will be deleted.
