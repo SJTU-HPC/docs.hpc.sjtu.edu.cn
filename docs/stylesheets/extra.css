@@ -1,3 +1,7 @@
+.md-content__icon:hover {
+    font-weight: bold;
+}
+
 .md-nav {
     background: rgb(247,247,247);
 }
