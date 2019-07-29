@@ -168,7 +168,7 @@ rejected by the batch system.
 
 [^6]:
 	The "regular" and "premium" QOS charges on Cori KNL are discounted
-    by 40% if the job uses 1024 or more nodes.
+    by 50% if the job uses 1024 or more nodes.
 
 [^7]:
 	The "low" QOS (available on Cori KNL only) is charged 50% as compared to 
