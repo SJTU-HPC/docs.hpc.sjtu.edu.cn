@@ -498,7 +498,7 @@ such as Cori. Web and other services will start supporting MFA in September
 </tr>
 <tr>
 <td style="text-align: center; vertical-align: middle;" rowspan="3">Others</td>
-<td style="text-align: center;">JupyterHubs (<a title="https://jupyter.nersc.gov" href="https://jupyter.nersc.gov">Jupyter</a>&nbsp;and&nbsp;<a title="https://jupyter-dev.nersc.gov" href="https://jupyter-dev.nersc.gov">Jupyter-dev</a>)</td>
+<td style="text-align: center;"><a title="https://jupyter.nersc.gov" href="https://jupyter.nersc.gov">JupyterHub</a></td>
 </tr>
 <tr>
 <td style="text-align: center;"><a title="https://rstudio.nersc.gov" href="https://rstudio.nersc.gov">RStudio</a></td>

@@ -41,5 +41,5 @@ cori$ sbatch run.slurm
 
 ## Documentation
 
-[CPMD Online Manual](http://cpmd.org/documentation) 
+[CPMD Online Manual](https://www.cpmd.org/wordpress/index.php/documentation/)
 
