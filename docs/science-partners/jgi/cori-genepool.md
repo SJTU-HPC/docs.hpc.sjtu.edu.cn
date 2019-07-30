@@ -31,7 +31,7 @@ which are passed to Slurm job submissions.
 	Jobs run under the Cori "genepool", "genepool_shared",
         "jgi_exvivo", "jgi_shared", "jgi_interactive", and "xfer_dna" QOS
 	are not charged. Resources are scheduled to the best of our
-        ability, but interference with other user's workloads can still
+        ability, but interference with other users' workloads can still
         occur. Please be a good citizen to your fellow
         researchers. Users violating the spirit of this policy
         will find themselves less able to do so.

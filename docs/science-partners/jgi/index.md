@@ -9,8 +9,8 @@ NERSC offers various resources for the
 ## [Computational Systems](systems.md)
 
 JGI users have access to the main computational system at NERSC, Cori.
-This access includes a JGI exclusive partition named Genepool QOS and
-a purpose built large RAM node partition named ExVivo.
+This access includes a JGI-exclusive partition named Genepool QOS and
+a purpose-built large RAM node partition named ExVivo.
 
 ## [Filesystems](filesystems.md)
 
