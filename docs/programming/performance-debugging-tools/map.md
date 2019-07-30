@@ -244,6 +244,12 @@ configurations and debugging options. Click 'Run'.
 Now, your program will start under MAP and profiling results are
 displayed in the remote client.
 
+!!! note
+	The above `map ... srun ...` command with version 19.1.x
+	dumps a core file, and the vendor will release a fixed
+	version. Note that the tool still generates performance
+	summary results.
+
 ## Profiling Results
 
 After completing the run, MAP displays the collected performance

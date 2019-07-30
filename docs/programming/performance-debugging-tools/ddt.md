@@ -214,6 +214,11 @@ Now, you can start debugging in the remote client:
 
 ![allinea-reverseconnect3](images/allinea-reverseconnect3.png)
 
+!!! note
+	The above `ddt ... srun ...` command with version 19.1.x
+	dumps a core file, and the vendor will release a fixed
+	version. Note that the tool still works OK.
+
 ## Troubleshooting
 
 If you are having trouble launching DDT try these steps.

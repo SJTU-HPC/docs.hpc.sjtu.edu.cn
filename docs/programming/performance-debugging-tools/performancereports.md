@@ -122,7 +122,7 @@ perf-report srun <usual srun flags> ./jacobi_mpi
 where `./jacobi_mpi` is the name of a program to profile.
 
 !!! note
-	The above `perf-report srun ...` command with version 19.1
+	The above `perf-report srun ...` command with version 19.1.x
 	dumps a core file, and the vendor will release a fixed
 	version. Note that the tool still generates performance
 	summary results.
