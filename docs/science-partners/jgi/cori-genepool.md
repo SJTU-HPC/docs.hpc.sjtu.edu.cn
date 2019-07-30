@@ -12,12 +12,12 @@ of Cori compute capacity. This service first became available in
 January 2018. 
 
 JGI staff and affiliates are provided special
-access to Cori via a number of "quality of service" or QOS arguments
+access to Cori via a number of "quality of service" (QOS) arguments
 which are passed to Slurm job submissions.
 
 * All JGI users must specify the Slurm account under which the job
   will run (with `-A <youraccount>`). Unlike other NERSC users, JGI
-  users do not have a default account.
+  users accessing the Genepool QOS do not have a default account.
 * For jobs requiring one or more whole nodes, use `--qos=genepool`.
 * For jobs which can share a node with other jobs, use `--qos=genepool_shared`.
 - Each of the following items first require `module load esslurm`:
@@ -30,8 +30,9 @@ which are passed to Slurm job submissions.
 !!! note
 	Jobs run under the Cori "genepool", "genepool_shared",
         "jgi_exvivo", "jgi_shared", "jgi_interactive", and "xfer_dna" QOS
-	are not charged. Resources are scheduled on a first come
-        first served basis; please be a good citizen to your fellow
+	are not charged. Resources are scheduled to the best of our
+        ability, but interference with other user's workloads can still
+        occur. Please be a good citizen to your fellow
         researchers. Users violating the spirit of this policy
         will find themselves less able to do so.
 
@@ -73,16 +74,10 @@ be of use to JGI researchers:
 Cori uses the Slurm job scheduler. Documentation and examples
 for using Slurm at NERSC can be found [here.](../../jobs/index.md) 
 
-The batch queues on Cori and Denovo are not configured
-identically. Cori and Denovo have different capabilities and
-maintenance cycles. If you write scripts that need to know which
-machine they're running on, you can use the $NERSC_HOST environment
-variable to check the current host.
-
 ### Cori Scratch
  
-Cori scratch is a Lustre filesystem, accessible through Cori and
-Cori ExVivo, but not Denovo. This directory can be found at
+Cori scratch is storage space for each user located on a Lustre filesystem
+accessible from Cori and Cori ExVivo. This directory can be found at
 `/global/cscratch1/sd/$USER` or by using the \$CSCRATCH environment
 variable. Like `/global/projectb/scratch` (\$BSCRATCH), Cori scratch is
 purged periodically; backing up data stored there is your responsibility.

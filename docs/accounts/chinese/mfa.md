@@ -139,7 +139,7 @@ Password + OTP:
 **Authy用户请注意： Authy 显示的第一个一次性密码经常失效，因而导致登录失败。为了获取正确的一次性密码，请点击应用左上方的后退按钮，然后重新点击令牌。我们已经把这一情况反映给Authy。**
 请注意：一旦启用MFA，您在NIM中注册的ssh密钥（ssh key）将会失效。您必须在每次登录时进行MFA验证。请阅读下一章关于ssh代理（sshproxy）的内容以了解如何使用MFA（限每天一次），获取密钥用于自动化工作流程。
 ### ssh代理（sshproxy）
-NERSC开发了一项**ssh代理（sshproxy）**服务。它允许您使用MFA获取一个有时间限制的ssh密钥（默认24小时）。ssh代理提供一种单点登录(single-sign-on)NERSC系统的服务。一旦获取密钥，您可以使用它ssh到NERSC的各个系统（如Cori，Denovo，Genepool，PDSF，DTN等) 直到密钥失效。
+NERSC开发了一项**ssh代理（sshproxy）**服务。它允许您使用MFA获取一个有时间限制的ssh密钥（默认24小时）。ssh代理提供一种单点登录(single-sign-on)NERSC系统的服务。一旦获取密钥，您可以使用它ssh到NERSC的各个系统（如Cori，DTN等) 直到密钥失效。
 ssh代理服务使用RESTful API获取密钥。NERSC提供一个可以在类Unix系统命令行上运行的bash客户端脚本，以及一个python脚本。而支持PuTTY的Windows客户端也将快上线。
 #### 安装客户端
 在类Unix平台（包括macOS）上，您可以直接在项目目录（project directory）中直接下载bash客户端sshproxy.sh：
@@ -245,7 +245,7 @@ $ ./sshproxy.sh -o mynersc
 如果您通常仅仅使用ssh代理默认的“nersc”密钥，您可以在配置文件中指定该密钥，无需每次都在命令行里输入。为此，请编辑__本地计算机__上的 **~/.ssh/config** 文件，加入以下这行：
 
 ```
-Host cori*.nersc.gov denovo.nersc.gov gpint*.nersc.gov gpweb*.nersc.gov genepool.nersc.gov pdsf.nersc.gov dtn*.nersc.gov
+Host cori*.nersc.gov gpweb*.nersc.gov dtn*.nersc.gov
     IdentityFile ~/.ssh/nersc
 ```
 
@@ -328,9 +328,6 @@ NIM用户入口也将要求启用MFA的用户使用MFA进行登录
 | 身份验证        | 主机           |
 | ------------- |:-------------:|
 | SSH | Cori |
-| SSH | Denovo |
-| SSH | PDSF |
-| SSH | Genepool |
 | SSH |Data Transfer Nodes|
 | SSH | gpweb |
 | SSH | gpdb |
