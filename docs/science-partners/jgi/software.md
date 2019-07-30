@@ -2,42 +2,42 @@
 
 ## Modules and Bioinformatics Software
 
-Unlike on the now-retired Genepool system, very few NERSC software modules are
-available for JGI user software on Cori or Denovo. We encourage users to use
-alternatives wherever possible, which will be more maintainable and portable to
-other platforms.
+Unlike previous systems, a limited and generic set of software modules are
+maintained by NERSC and available for JGI users on Cori. Users should
+themselves build and maintain any more specialized software they may need.
 
-### Alternatives to using software modules are:
+### Alternatives to using NERSC provided software modules are:
 
-* Shifter, with the software installed in a Docker container
+* Shifter, with the software built inside a Docker container
 * Anaconda virtual environments
-* You are, as always, welcome to install and maintain any software you
-  like on NERSC systems within your own user disk space. While scratch
-  space is subject to NERSC's purge policy, many groups hold a
-  "sandbox" space which is equally performant to $BSCRATCH and shared
-  among group members. (Running software from $HOME is strongly
-  discouraged.)
+* A wide array of powerful compilers and tools are available
+  to build software from source code. While scratch
+  space is subject to NERSC's purge policy, many groups posess a
+  "sandbox" allocation which is equally performant to \$BSCRATCH,
+  and shared among group members. (Running software from $HOME is
+  strongly discouraged.)
 
 ## Shifter
 
-Shifter is Docker-like software for running containers on NERSC
+Shifter is a Docker-like software tool used to run containers on NERSC
 systems. More information on Shifter is available
 [here](../../programming/shifter/how-to-use.md), and Shifter
 training slides are also available. The main advantages of using
 Shifter are:
 
-* Using containers makes your workflow portable, across Cori, Denovo,
-  and to cloud resources
+* Using containers makes your workflow portable between Cori, other
+  HPC facilities and clusters, and cloud resources
 * You no longer need to depend on system features, such as specific
-  compiler versions, software libraries or other tools
+  compiler versions, software libraries, or other tools
 * Because Shifter uses Docker containers, you can build and debug
-  containers on your laptop or desktop, then be sure they will run the
-  same way on Cori or other NERSC platforms.
-* Shifter exists because Docker cannot be safely run on NERSC
-  machines. Docker requires too much access to the system, anyone who
-  can run a container can essentially access the entire
-  machine. Shifter implements a subset of the same functionality that
-  Docker provides, and can run Docker containers unmodified.
+  containers on your laptop or desktop, then be confident they will
+  run the same way on Cori or other platforms.
+* Shifter exists because Docker does not incorporate the security
+  requirements of a HPC facility. Docker requires an access model
+  and permissions which are too broad; anyone who
+  can run a container has access to the entire machine. Shifter
+  implements a subset of the same functionality that
+  Docker provides and can run Docker containers unmodified.
 
 The process for building a container and running it with Shifter is
 roughly as follows:
@@ -45,7 +45,7 @@ roughly as follows:
 1. use Docker on a laptop or desktop machine to build a Docker
    container for your software
 2. push that container to Dockerhub or another Docker container
-   registry use Shifter on Cori or Denovo to pull that image to
+   registry and use Shifter on Cori to pull that image to
    the NERSC Shifter registry
 3. use Shifter on a batch node to run that container, and perform
    useful work

@@ -425,9 +425,6 @@ such as Cori. Web and other services will start supporting MFA in September
 [comment]: <> (| Authentication | Host |)
 [comment]: <> (|:---:|:---:|)
 [comment]: <> (| SSH | Cori |)
-[comment]: <> (|     | Denovo |)
-[comment]: <> (|     | PDSF |)
-[comment]: <> (|     | Genepool |)
 [comment]: <> (|     | Data Transfer Nodes |)
 [comment]: <> (|     | gpweb |)
 [comment]: <> (|     | gpdb |)
@@ -441,15 +438,6 @@ such as Cori. Web and other services will start supporting MFA in September
 <tr>
 <td style="text-align: center; vertical-align: middle;" rowspan="8">SSH</td>
 <td style="text-align: center;">Cori</td>
-</tr>
-<tr>
-<td style="text-align: center;">Denovo</td>
-</tr>
-<tr>
-<td style="text-align: center;">PDSF</td>
-</tr>
-<tr>
-<td style="text-align: center;">Genepool</td>
 </tr>
 <tr>
 <td style="text-align: center;">Data Transfer Nodes</td>
