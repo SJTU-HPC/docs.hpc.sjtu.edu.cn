@@ -6,13 +6,13 @@ Unlike previous systems, a limited and generic set of software modules are
 maintained by NERSC and available for JGI users on Cori. Users should
 themselves build and maintain any more specialized software they may need.
 
-### Alternatives to using NERSC provided software modules are:
+### Alternatives to using NERSC-provided software modules are:
 
 * Shifter, with the software built inside a Docker container
 * Anaconda virtual environments
 * A wide array of powerful compilers and tools are available
   to build software from source code. While scratch
-  space is subject to NERSC's purge policy, many groups posess a
+  space is subject to NERSC's purge policy, many groups possess a
   "sandbox" allocation which is equally performant to \$BSCRATCH,
   and shared among group members. (Running software from $HOME is
   strongly discouraged.)
