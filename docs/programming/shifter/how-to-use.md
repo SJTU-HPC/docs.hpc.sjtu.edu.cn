@@ -172,6 +172,7 @@ values for modules are:
 | Module Name | Function  |
 |-------------|-----------|
 |mpich	|Allows communication between nodes using the high-speed interconnect|
+|mpich-cle6 | Uses older CLE6 MPI libraries (needed for some images with older OSes)|
 |cvmfs 	|Makes access to DVS shared [CVMFS software stack](../../services/cvmfs.md) available at /cvmfs in the image|
 |none 	|Turns off all modules|
 
