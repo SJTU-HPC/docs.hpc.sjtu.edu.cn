@@ -186,7 +186,7 @@ Cori.
 ## Hugepages
 
  Huge pages are virtual memory pages which are bigger than the default
-     base page size of 4K bytes. Huge pages can improve memory performance
+     page size of 4K bytes. Huge pages can improve memory performance
      for common access patterns on large data sets since it helps to reduce
      the number of virtual to physical address translations than compated with
      using the default 4K. Huge pages also
@@ -202,13 +202,17 @@ cc -o mycode.exe mycode.c
 ```
 And also load the same hugepages module at runtime.
 
-The craype-hugepages2M module will be loaded by deafult on Cori after the OS upgrade
-to CLE7 in July 2019, users do not need to explicitly load the hugepage modules at compile time and runtime after that. Users could unload the craype-hugepages2M module explicitly to disable the hugepages usage. 
+The craype-hugepages2M module is loaded by deafult on Cori.
+Users could unload the craype-hugepages2M module explicitly to disable the hugepages usage. 
+
+!!! note
+    The craype-hugepages2M module is loaded by default since the Cori CLE7 upgrade on July 30, 2019.
 
 Due to the hugepages memory fragmentation issue, applications may get "Cannot allocate memory" warnings or errors when there are not enough hugepages on the compute node, such as:
 ```
 libhugetlbfs [nid000xx:xxxxx]: WARNING: New heap segment map at 0x10000000 failed: Cannot allocate memory
 ```
+The verbosity level of libhugetlbfs HUGETLB_VERBOSE is set to 0 on Cori by default to surpress debugging messages.  Users can adjust this value to obtain more info.  
 
 ### When to Use Huge Pages
 * For MPI applications, map the static data and/or heap onto huge
