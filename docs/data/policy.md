@@ -30,6 +30,29 @@ a prior, written, service-level agreement.  Please carefully consider
 these policies, including their limitations and restrictions, as you
 develop your data management plan.
 
+## User Responsibilities
+
+While NERSC provides users with the systems and services that aid them
+in managing their data, users have ultimate responsibility for
+managing their data:
+
+* Select the most appropriate resources to meet their individual needs.
+* Use shared resources responsibly.
+* Set appropriate access control limits.
+* Archive and back up critical data.
+* Never keep a single copy of critical data; NERSC is not responsible for data loss.
+* Follow proper use policies, described in the NERSC User Agreement.
+
+## PI (and PI Proxy) Responsibilites and Rights
+
+* Monitor the usage of all NERSC resources associated with NERSC
+  awards, including data storage and transfer, to ensure that usage is
+  for the awarded project.  
+* PIs can request the modification, deletion, or transfer to another
+  NERSC file system of data associated with their NERSC award
+* Be conversant with NERSC's [data archive
+  policy](https://docs.nersc.gov/data/policy/#data-retention-policy)
+
 ## Storage Resources
 
 ### NERSC Global Filesystem (NGF)
@@ -126,19 +149,6 @@ for HPC that brings traditional HPC functions of working with batch
 jobs and data to the web browser. Science gateways and web data
 portals can use NEWT to build powerful web applications using nothing
 but HTML and Javascript.
-
-## User Responsibilities
-
-While NERSC provides users with the systems and services that aid them
-in managing their data, users have ultimate responsibility for
-managing their data:
-
-* Select the most appropriate resources to meet their individual needs.
-* Use shared resources responsibly.
-* Set appropriate access control limits.
-* Archive and back up critical data.
-* Never keep a single copy of critical data; NERSC is not responsible for data loss.
-* Follow proper use policies, described in the NERSC User Agreement.
 
 ## Data Confidentiality and Access Control
 
