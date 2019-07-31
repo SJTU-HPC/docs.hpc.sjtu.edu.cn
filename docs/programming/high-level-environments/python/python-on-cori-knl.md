@@ -93,7 +93,7 @@ Users can try the Intel Distribution for Python through a conda
 environment even!  This post provides more details, but at NERSC one
 can use the following procedure:
 
-    module load python/2.7-anaconda
+    module load python/2.7-anaconda-2019.07
     conda create -n idp -c intel intelpython2_core python=2
     source activate idp
 

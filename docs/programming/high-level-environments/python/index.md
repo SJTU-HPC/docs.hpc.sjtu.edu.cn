@@ -20,13 +20,12 @@ the
 [Intel Distribution for Python.](https://software.intel.com/en-us/distribution-for-python/get-started)
 
 Both Anaconda Python 2 and 3 are available.  For example, to load the
-Python 3.6 Anaconda environment, type:
+Python 3.7 Anaconda environment, type:
 
-    module load python/3.6-anaconda-4.4
+    module load python/3.7-anaconda-2019.07
 
-The default is `python/2.7-anaconda-4.4` so only `module load python`
-is necessary to use it.  Currently Python modules with versions ending
-with `anaconda-4.4` are the recommended ones.  Python 2.7 will remain
+The default is `python/2.7-anaconda-2019.07` so only `module load python`
+is necessary to use it. Python 2.7 will remain
 the
 default
 [through the end of 2019](https://github.com/python/devguide/pull/344)
@@ -51,8 +50,8 @@ environment and at least one Python package to install.  In particular
 you should specify which Python interpreter you want installed.
 Otherwise `conda` may make a decision that surprises you.
 
-    module load python/3.6-anaconda-4.4
-    conda create -n myenv python=2 numpy
+    module load python/3.7-anaconda-2019.07
+    conda create -n myenv python=3 numpy
     [installation outputs]
     source activate myenv
 
