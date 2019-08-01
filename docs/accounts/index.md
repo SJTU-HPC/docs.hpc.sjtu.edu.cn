@@ -14,11 +14,10 @@ particular, Startup Awards are available for new projects that wish to
 investigate using NERSC resources, or who wish to port or develop new codes.
 How to get a New User account in an existing project/repository
 
- 1. You can submit a request for a new NERSC account by using the NERSC New
-Account Request form. This form can be used to request either a Standard (MPP)
-account, an account on the PDSF High Energy and Nuclear Physics cluster, or the
-JGI Genepool Bioinformatiics cluster. Select one of these options from the
-"Account Type" menu.
+ 1. You can submit a request for a new NERSC account by using the
+NERSC New Account Request form. This form can be used to request
+either a Standard (MPP) account or the JGI Genepool Bioinformatiics
+cluster. Select one of these options from the "Account Type" menu.
  2. After you have selected the Account Type, enter your contact information,
 preferred username, organization and then select which project you want to be
 added to. You can search for the project by the PI's or PI Proxy's name, the

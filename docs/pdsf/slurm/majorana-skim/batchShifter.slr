@@ -1,7 +1,0 @@
-#!/bin/bash
-# Example provided by Clinton Wiseman, used public Docker image prepared by C.W. for MJD, runs arbitrary MJD code on PDSF or Cori
-#SBATCH --image=wisecg/mjsw:v2
-#SBATCH --workdir=/global/homes/w/wisecg/lat
-#SBATCH --output=/global/homes/w/wisecg/lat/logs/shifter-%j.txt
-#SBATCH -p shared
-shifter  /bin/bash inShifterJob.sh ${@}
