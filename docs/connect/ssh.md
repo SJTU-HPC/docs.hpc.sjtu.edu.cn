@@ -43,11 +43,6 @@ to confirm the current fingerprints.
 	4096 SHA256:35yiNfemgwzHCHFrPGWrJBCCqERqLtOVSrR36s1DaPc cori.nersc.gov (RSA)
 	```
 
- *  PDSF
-	```
-	2048 SHA256:4JGbnhiMkJ5kv1S5+UI5ggTY+Z6DzdEeBQvoFRfN9lw pdsf.nersc.gov (RSA)
-	```
-
  *  DTN[01-04]
 	All of the dtn nodes should have the same fingerprints:
 	```

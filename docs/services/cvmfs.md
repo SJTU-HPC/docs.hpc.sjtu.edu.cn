@@ -18,8 +18,7 @@ way and we have dedicated local squid caches.  We believe this setup
 to now be stable and perform well enough but users should please
 contact us if you see any problems, or if you need a new repository
 that is not currently available, via the [online help
-desk](https://help.nersc.gov/).  PDSF systems also provide CVMFS
-though via its 'normal' mechanism.
+desk](https://help.nersc.gov/).
 
 ## Using CVMFS at NERSC
 
