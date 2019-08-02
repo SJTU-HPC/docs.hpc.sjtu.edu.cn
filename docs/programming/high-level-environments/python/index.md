@@ -134,7 +134,8 @@ using a recipe like the following:
     tar zxvf mpi4py-3.0.0.tar.gz
     cd mpi4py-3.0.0
     module swap PrgEnv-intel PrgEnv-gnu
-    python setup.py build --mpicc=$(which cc)
+    module unload craype-hugepages2M
+    python setup.py build --mpicc="$(which cc) -shared"
     python setup.py build_exe --mpicc="$(which cc) -dynamic"
     python setup.py install
     python setup.py install_exe
@@ -145,6 +146,14 @@ MPI-enabled Python interpreter is not required
 (see
 [this page](https://mpi4py.readthedocs.io/en/stable/appendix.html#mpi-enabled-python-interpreter) in
 the mpi4py documentation) to use `mpi4py`.
+
+!!! tip "About Huge Memory Pages (As of 2019-08-02)"
+    Note also that we recommend you unload craype-hugepages2M before
+    compiling.  There's an issue with how Python and huge memory pages
+    can work together, but Cray is working on a solution.  When that fix
+    is in place we'll reconsider the guidance here, but for now
+    compiling mpi4py without huge memory pages seems the easiest path
+    forward for users.
 
 ### `h5py` with MPI-IO
 
