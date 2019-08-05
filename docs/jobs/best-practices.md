@@ -1,5 +1,19 @@
 # Best practices for jobs
 
+## Do Not Run Production Jobs in Global Homes
+
+As a general best practice, we recommend users to do production runs from your SCRATCH 
+instead of HOME.  
+
+Home is meant for permanent and relatively small storage. It is not tuned to perform well 
+for parallel jobs. Home is perfect for storing files such as source codes and shell scripts, 
+etc. Please note that while building software in /global/home is generally good, it is best to install dynamic libraries that are used on compute nodes in [global common](../../filesystems/global-common) for best performance. 
+
+SCRATCH is meant for large and temporary storage. It is optimized for read and write 
+operations. SCRATCH is perfect for staging data and performing parallel computations. 
+Running in SCRATCH also helps to improve the responsiveness of the global file 
+systems (global homes and global project) in general.
+
 ## Time Limits
 
 Due to backfill scheduling short and variable length jobs generally
@@ -17,6 +31,27 @@ throughput when composed of main small jobs utilizing
 checkpoint/restart chained together.
 
 * [Example: job chaining](examples/index.md#dependencies)
+
+## Improve Efficiency by Preparing User Environment Before Running 
+
+When compute nodes are allocated for a batch job, all commands other than the srun command, 
+such as: load modules, set up runtime environment variables, compile applications, and 
+prepare input data, etc., will run on the head compute node (the first compute node in the 
+allocated nodes pool).  Running on a compute node is much more inefficient than running 
+on a login node. It also creates a burden on the global home file system.
+
+Using the [Linux here document](https://en.wikipedia.org/wiki/Here_document) as in the 
+example below will run those commands to prepare user environment for the batch 
+job on the login node, to help improve job efficiency and save computing cost of the 
+batch job. It can also help to alleviate the burden on the global home file system. 
+This script also keeps the user environment needed for the batch job in a single file.
+
+!!! example
+    Prepare user environment for batach job (run commands prior to srun on the login node)
+    The file name below is "prepare-env.sh".
+```
+--8<-- "docs/jobs/examples/prepare-env/prepare-env.sh"
+```
 
 ## I/O Performance
 
