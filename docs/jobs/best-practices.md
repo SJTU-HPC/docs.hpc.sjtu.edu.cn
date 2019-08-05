@@ -112,7 +112,7 @@ wrapper script for srun.
 
 ## Process Placement
 
-Several mechanisms exsist to control process placement on NERSC's Cray
+Several mechanisms exist to control process placement on NERSC's Cray
 systems. Application performance can depend strongly on placement
 depending on the communication pattern and other computational
 characteristics.

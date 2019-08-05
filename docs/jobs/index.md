@@ -100,7 +100,7 @@ of 4 nodes. If you don't specify an option in the `srun` command line,
 `srun` will inherit the value of that option from `sbatch`.
 
 In these cases the default behavior of `srun` is to assume the same
-options as were passed to `sbatch`. This is acheived via environment
+options as were passed to `sbatch`. This is achieved via environment
 variables: `sbatch` sets a number of environment variables with names
 like `SLURM_NNODES` and srun checks the values of those
 variables. This has two important consequences:
@@ -144,7 +144,7 @@ More information about `sacct` output format options can be found at the
 
 `sqs` is used to view job information for jobs managed by Slurm. This
 is a custom script provided by NERSC which incorportates information
-from serveral sources.
+from several sources.
 
 !!! note
     See `man sqs` for details about all available options, and

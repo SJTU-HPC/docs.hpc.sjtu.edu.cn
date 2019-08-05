@@ -143,7 +143,7 @@ Please check the [Queue Policy](http://docs.nersc.gov/jobs/policy/) page for the
     1. For a better job throughput, run jobs on Cori KNL. 
     2. The hybrid MPI+OpenMP VASP are recommended on Cori KNL for optimal performance.  
     3. More performance tips can be found in a [Cray User Group 2017 proceeding](https://cug.org/proceedings/cug2017_proceedings/includes/files/pap134s2-file1.pdf)
-    4. Also refer to the presenation [slides](https://www.nersc.gov/users/training/events/vasp-user-hands-on-knl-training-june-18-2019/) for the VASP user training (6/18/2019).
+    4. Also refer to the presentation [slides](https://www.nersc.gov/users/training/events/vasp-user-hands-on-knl-training-june-18-2019/) for the VASP user training (6/18/2019).
 
 ## Runninge interactively
 To run VASP interactively, you need to request a batch session using the "salloc" command, e.g.,

@@ -157,7 +157,7 @@ instructions here. At this point, we encourage you to keep it simple.
 
 First, we need to create a parent working directory to store your
 files. These lessons will use '~/docker/my-first-container' in your
-home directory, but you can place it whereever you prefer. Open a
+home directory, but you can place it wherever you prefer. Open a
 terminal and create these directories:
 
 

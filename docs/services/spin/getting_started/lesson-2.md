@@ -815,7 +815,7 @@ which means 'Two containers exist. One is in use.'
     1s5546    service               elvis-first-stack/web   registry.spin.nersc.gov/elvis/my-first-container-nginx:latest   healthy    1/1       false
     elvis@nersc:elvis-first-stack $
 
-Now that we've seen the new and old containers, and we're satisified that the
+Now that we've seen the new and old containers, and we're satisfied that the
 upgrade went well, confirm that the upgrade was successful by executing the
 command `rancher up -d --upgrade --confirm-upgrade`.  This will delete the old
 containers.
@@ -940,5 +940,5 @@ For more examples of how to use the Rancher CLI, please see [Spin: Tips & Exampl
 
 The next lesson, [Spin Getting Started Guide: Lesson 3: Storage, Secrets &
 Managing your services](lesson-3.md) will show you how to use Rancher NFS for
-persistant storage, Rancher Secrets to store files and other sensitive data,
+persistent storage, Rancher Secrets to store files and other sensitive data,
 and will also cover more advanced upgrades.

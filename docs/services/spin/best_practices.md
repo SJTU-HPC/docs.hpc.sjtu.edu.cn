@@ -138,7 +138,7 @@ Docker will not see it. Docker can also be told to pull down an image (See below
 replicas on multiple Docker hosts, one replica may be running `:latest` from
 September, while a second node may be running `:latest` from July.
 
-We recommend using **explict version numbers**, such as `:v1.2.3` or a date format
+We recommend using **explicit version numbers**, such as `:v1.2.3` or a date format
 such as `:v20180809` instead of `:latest`, an that you **update the tag for any changes**.
 
 If you do use `:latest`: in your service, you can also use the label
@@ -478,7 +478,7 @@ more convenient or memorable name for accessing the service.
     [https://rancher.spin.nersc.gov/v2-beta/projects/1a5/services/NotMyStack]
     ```
 
-### Security Recomendations
+### Security Recommendations
 
 Docker containers are fairly secure by default. This security is achieved
 through the use of Linux kernel 'namespaces', isolated network stacks, Control
@@ -535,7 +535,7 @@ and Spin containers which uses the NERSC Global Filesystem:
 | SETUID        | Yes | No | Make arbitrary manipulations of process UIDs. |
 | NET_BIND_SERVICE | Yes | Yes | Bind a socket to internet domain privileged ports (port numbers less than 1024). |
 
-* Detailed desciption of each capabilities can be found at http://man7.org/linux/man-pages/man7/capabilities.7.html
+* Detailed description of each capabilities can be found at http://man7.org/linux/man-pages/man7/capabilities.7.html
 
 ## Secrets
 

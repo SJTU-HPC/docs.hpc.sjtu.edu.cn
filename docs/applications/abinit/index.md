@@ -17,7 +17,7 @@ nersc$ module avail abinit
 ## Example
 
 See the [example jobs page](../../jobs/examples/index.md) for additional
-examples and infortmation about jobs.
+examples and information about jobs.
 
 ### Cori
 

@@ -56,7 +56,7 @@ gsiftp://garchive.nersc.gov/path/to/file
 
 ## Performance Optimization
 
-For optimal data transfer perfomance, you may need to tune certain
+For optimal data transfer performance, you may need to tune certain
 parameters for your network. In the example below we are using 4
 parallel streams with a TCP block size of 4MB:
 

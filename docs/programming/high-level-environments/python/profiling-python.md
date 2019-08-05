@@ -257,7 +257,7 @@ after you have profiled your code with something simple and have some
 idea what you're looking for. That said, this is probably the easiest
 "big tool" that we support for Python on our systems. It can profile
 large, multinode, MPI jobs out of the box. Perhaps the only major
-drawback is that it cannot display information for indivdual MPI
+drawback is that it cannot display information for individual MPI
 ranks; it will only show the collected statistics for all ranks. If
 you require information about individual ranks you may consider
 Tau instead (see below).
@@ -322,7 +322,7 @@ Then in the GUI main menu, under Remote Connection, hit `Cori`.
 You will have to enter your login credentials for Cori
 (password + OTP). If you are using [sshproxy](https://www.nersc.gov/users/connecting-to-nersc/mfa/#toc-anchor-3), you should not
 be prompted to enter your information. Once your remote client
-has sucessfully launched, you will begin your profiling run on
+has successfully launched, you will begin your profiling run on
 Cori.
 
 #### On Cori:

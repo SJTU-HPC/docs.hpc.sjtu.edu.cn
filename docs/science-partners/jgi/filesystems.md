@@ -62,7 +62,7 @@ running JGI computation by individual users of NERSC systems.
 The environment variable \$BSCRATCH points to a user's projectb scratch space.
 These scratch directories are not automatically granted to new users; to request
 space please [file a Consulting ticket](https://help.nersc.gov) asking for 
-an intial projectb scratch allocation.
+an initial projectb scratch allocation.
 
 Sandbox directories on projectb are allocated by program. Data and software
 stored in projectb sandbox is not subject to purging.  If you have questions

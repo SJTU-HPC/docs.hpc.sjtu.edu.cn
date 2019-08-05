@@ -449,7 +449,7 @@ and their possible causes are shown in the following table.
 
     KNL's MCDRAM cache is prone to cache thrashing because it uses
     direct mapped caching, which can result in slow code performance.
-    To alleviate this possiblity, the system's Node Health Check
+    To alleviate this possibility, the system's Node Health Check
     tool runs the 'zonesort' kernel module on compute nodes. For
     more info, please see [KNL Cache
     Mode](../performance/knl/cache-mode.md). Note that the zonesort
