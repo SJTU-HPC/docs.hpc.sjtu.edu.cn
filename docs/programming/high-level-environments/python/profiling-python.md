@@ -257,9 +257,10 @@ after you have profiled your code with something simple and have some
 idea what you're looking for. That said, this is probably the easiest
 "big tool" that we support for Python on our systems. It can profile
 multiprocessing and single or multinode MPI jobs out of the box. Perhaps the only major
-drawback is that it cannot display information for individual MPI
-ranks; it will only show the collected statistics for all profiled ranks. If
-you require simultaneous information for individual ranks you may consider
+drawback is that it cannot display information for individual multiprocessing
+threads or MPI
+ranks; it will only show the collected statistics for all profiled threads/ranks. If
+you require simultaneous information for individual threads/ranks you may consider Vtune or
 Tau instead (see below).
 
 There are two ways to use Map on our systems: either using NX or using
@@ -275,10 +276,28 @@ as usual. Then, open a connection to Cori and get an interactive node:
 Once you have a node:
 
 ```
-module load python/3.5-anaconda
+module load python/3.7-anaconda-2019.07
 module load allinea-forge
 map python your_app.py ...
 ```
+
+!!! attention "Map incompatible with Anaconda Python 3.6"
+    Due to optimizations in Anaconda Python 3.6, the Map profiling
+    tool will not work with this version of Anaconda Python.
+    We suggest instead our most recent module,
+    `module load python/3.7-anaconda-2019.07`. There are no problems
+    with Anacaonda Python 3.7 (or other versions of Python 3).
+    If you must use Python 3.6, we reccomend
+    that you try Intel Python. You can more information about Intel
+    Python [here](frequently-asked-questions.md).
+
+Once you have started your program with the `map` command,
+the Arm Forge GUI window will open. Click run to start the profiling
+run. Don't panic: it will add some overhead to the normal runtime of your code. When
+the profiling data collection is finished and the statistics are aggregated,
+a window that displays the data from your application will automatically
+open. You will find the metrics displayed as a function of time, callstack
+information, MPI information, etc.
 
 !!! tip "Profiling an MPI application"
     If you are profiling an MPI application, you will need to run:
@@ -286,12 +305,17 @@ map python your_app.py ...
     One other MPI option is to use the `--select-ranks` option if you would
     like to profile only specific MPI ranks.
 
-The Arm Forge GUI window will automatically pop up. Click run to start the profiling
-run. Don't panic: it will add some overhead to the normal runtime of your code. When
-the profiling data collection is finished and the statistics are aggregated,
-a window that displays the data from your application will automatically
-open. You will find the metrics displayed as a function of time, callstack
-information, MPI information, etc.
+!!! tip "Profiling a multiprocessing application"
+    If you are profiling a Python multiprocessing application, you
+    will run something like: `map --no-mpi python your_app.py` Unlike MPI,
+    you will not need an `srun` command and adding the `--no-mpi`
+    flag saves a little time (although it is not required).
+    Note: The number of cores displayed in the top
+    left of the Map GUI will be incorrect. This is a known issue for
+    Pythom multiprocessing that
+    the Map team is addressing. The rest of the profiling information
+    should be valid, but if you notice inconsistencies, please file
+    a ticket and we will pass your information on to the Map team.
 
 ![arm_map](arm_map_example.png)
 
@@ -341,7 +365,7 @@ ssh to Cori as you would normally.
 Once you have an interactive node:
 
 ```
-module load python/3.5-anaconda
+module load python/3.7-anaconda-2019.07
 module load allinea-forge
 map --connect python your_ap.py ...
 ```
