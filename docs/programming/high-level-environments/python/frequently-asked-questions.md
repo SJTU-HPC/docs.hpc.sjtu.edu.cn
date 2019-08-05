@@ -113,10 +113,11 @@ conda tool.
 
 If you have created an Anaconda environment through "conda create" or
 you have run the Anaconda/Miniconda installer script you will want to
-build mpi4py "from source" and not use "conda install mpi4py."  You
-will definitely want to build mpi4py using the Cray compiler wrappers
-described here and here that link in Cray MPICH libraries.  The
-procedure is described in more detail here.
+build mpi4py "from source" and not use "conda install mpi4py."  You will
+definitely want to build mpi4py using the [Cray compiler
+wrappers](../../../../programming/compilers/wrappers) that link in Cray
+MPICH libraries.  The procedure is described in more detail
+[here.](../#mpi4py)
 
 ## Why do I get an error using Matplotlib on compute nodes?
 
