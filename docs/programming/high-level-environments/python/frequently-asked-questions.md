@@ -97,12 +97,15 @@ can be overridden by defining the PYTHONUSERBASE environment variable.
 ## Can I install my own Anaconda Python "from scratch?"
 
 Yes.  One reason you might consider this is that you want to install
-Anaconda Python on `$SCRATCH` or in a Shifter image to improve
-launch-time performance for large-scale applications.  Or you might
-want more complete control over what versions of packages are
-installed and don't want to worry about whether NERSC will upgrade
-packages to versions that break backwards compatibility you depend on.
-See here for more information on how you can do this.
+Anaconda Python on
+[`/global/common/software`](../../../../filesystems/global-common) or in
+a Shifter image to improve launch-time performance for large-scale
+applications.  Or you might want more complete control over what
+versions of packages are installed and don't want to worry about whether
+NERSC will upgrade packages to versions that break backwards
+compatibility you depend on.  See
+[here](../#collaborative-installations) for more information on how you
+can do this.
 
 ## How can I use mpi4py from my Anaconda environment?
 
