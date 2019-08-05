@@ -20,7 +20,7 @@ visit [MyNERSC](https://my.nersc.gov).
  1. [Queue Policies](jobs/policy.md)
  1. [Running Jobs](jobs/index.md)
  1. [Best Practices](jobs/best-practices.md)
- 1. [Jupyer](connect/jupyter.md)
+ 1. [Jupyter](connect/jupyter.md)
  1. [File Permissions](filesystems/unix-file-permissions.md)
  1. [Building Software](programming/compilers/wrappers.md)
  1. [Managing Data](data/management.md)
