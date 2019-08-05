@@ -71,7 +71,7 @@ To run one instance of MATLAB non-intearctively through a batch job,
 you can use the following job script on Cori:
 
 ```slurm
-#!/bin/bash -l
+#!/bin/bash
 #SBATCH -q regular
 #SBATCH -N 1
 #SBATCH -c 32

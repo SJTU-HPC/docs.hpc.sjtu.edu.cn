@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 #SBATCH -q shared
 #SBATCH -n 2
 #SBATCH -t 1:00:00

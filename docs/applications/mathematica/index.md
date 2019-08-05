@@ -79,8 +79,8 @@ To run in batch mode, you will need to write a Slurm batch script and
 then use sbatch to put your job into the queue. An example batch
 script that makes 4 cores available to your script follows.
 
-```shell
-#! /bin/bash -l
+```slurm
+#! /bin/bash
 
 #SBATCH -p regular
 #SBATCH -N 1
