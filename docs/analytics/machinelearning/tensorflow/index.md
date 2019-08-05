@@ -8,7 +8,7 @@ results of recent deep learning research. Therefore, TensorFlow
 supports a large variety of state-of-the-art neural network layers,
 activation functions, optimizers and tools for analyzing, profiling
 and debugging deep neural networks. In order to deliver good
-performance, the TensorFlow installation at NERSC utlizes the
+performance, the TensorFlow installation at NERSC utilizes the
 optimized MKL-DNN library from Intel.  Explaining the full framework
 is beyond the scope of this website. For users who want to get started
 we recommend reading the

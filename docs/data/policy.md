@@ -43,7 +43,7 @@ managing their data:
 * Never keep a single copy of critical data; NERSC is not responsible for data loss.
 * Follow proper use policies, described in the NERSC User Agreement.
 
-## PI (and PI Proxy) Responsibilites and Rights
+## PI (and PI Proxy) Responsibilities and Rights
 
 * Monitor the usage of all NERSC resources associated with NERSC
   awards, including data storage and transfer, to ensure that usage is
@@ -461,7 +461,7 @@ retention should contact NERSC.
 #### Default Allocation
 
 Projects receive HPSS allocations at the same time that computational
-resources are allocated. Each group recieves a default allocation of 1
+resources are allocated. Each group receives a default allocation of 1
 TB.
 
 #### Appropriate Use

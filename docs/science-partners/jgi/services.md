@@ -5,7 +5,7 @@
 Any long-lived process or process listening to a network socket to communicate
 requires some special attention and care to ensure that the service is
 accessible to the appropriate audience, is properly monitored, and maintained
-correctly. The rules and guidlines presented here are intended to strike a
+correctly. The rules and guidelines presented here are intended to strike a
 balance between convenience of running and developing services with the need
 for system maintenance, distribution of resources, appropriate security, and
 monitoring of each service.
@@ -95,7 +95,7 @@ latest security patches are applied to software in use.
 
 * Any service directly launching processes should require some kind of
   authentication or pre-shared key to reduce risk of unauthorized access.
-* All communcations should be encrypted, if possible.
+* All communications should be encrypted, if possible.
 * Communications of authentication credentials or pre-shared keys must be
   encrypted.
 * Connections should be restricted to computers in the NERSC (`128.55.\*.\*`)

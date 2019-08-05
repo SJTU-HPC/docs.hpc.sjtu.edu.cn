@@ -33,7 +33,7 @@ method for contacting NERSC.
 
 ### Phone support
 
-The [ticketing system](https://help.nersc.gov/) is the prefered method
+The [ticketing system](https://help.nersc.gov/) is the preferred method
 of contacting NERSC. NERSC staff can be reached at 1-800-66-NERSC
 (USA) or 510-486-8600 (local and international). Consulting and
 account support are only available during NERSC business hours (8-5 US

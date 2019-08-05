@@ -4,7 +4,7 @@ This page contains recommendations for application developers to "hit
 the ground running" with upcoming system architectures such
 as [Perlmutter](https://www.nersc.gov/systems/perlmutter/).
 
-Testing of performance on relevant hardware and compatability with the
+Testing of performance on relevant hardware and compatibility with the
 software environment are both important.
 
 ## Proxy hardware platforms

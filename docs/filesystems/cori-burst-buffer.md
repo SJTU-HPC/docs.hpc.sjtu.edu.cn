@@ -6,7 +6,7 @@ patterns that sits within the High Speed Network (HSN) on
 Cori. Accessible only from compute nodes, the Burst Buffer provides
 per-job (or short-term) storage for I/O intensive codes.
 
-The peak bandwidth performance is over 1.7 TB/s wtih each Burst Buffer
+The peak bandwidth performance is over 1.7 TB/s with each Burst Buffer
 node contributing up to 6.5 GB/s. The number of Burst Buffer nodes
 depends on the granularity and size of the Burst Buffer
 allocation. Performance is also dependent on access pattern, transfer

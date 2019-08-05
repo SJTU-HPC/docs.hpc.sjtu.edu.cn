@@ -244,7 +244,7 @@ merit, the closer to 1.0 the more bandwidth bound the application.
 ## Change Log
 
 - June 9, 2018
-    - Brought up to date to relect the latest system software installed at
+    - Brought up to date to reflect the latest system software installed at
       NERSC. In particular the example script is now compatible with the latest
       configuration of Slurm and the amplxe-cl arguments are compatible with VTune
       Amplifier 2018. In addition, the STREAM example and all associated scripts to

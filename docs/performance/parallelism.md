@@ -61,7 +61,7 @@ pure MPI mode.
             - Any C++ compiler
         - Features
             - Built-in [thread-pool](https://en.wikipedia.org/wiki/Thread_pool)
-            - Highly efficent nested and recursive parallelism
+            - Highly efficient nested and recursive parallelism
             - Constructs for parallel: loops, reductions, function calls, etc.
             - Flow-graphs and pipelines
 
@@ -132,7 +132,7 @@ tbb::parallel_for(0, N, do_loop_b);
 ##### Synchronization
 
 Synchronizing the access of shared memory in multithreading creates a serial bottleneck and poor synchronization implementations
-can all but eliminate any potential speed-up. One of the most common synchronization issues involes updating shared containers:
+can all but eliminate any potential speed-up. One of the most common synchronization issues involves updating shared containers:
 
 ```c++
 // a shared container

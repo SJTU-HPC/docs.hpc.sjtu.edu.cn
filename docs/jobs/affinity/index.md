@@ -325,7 +325,7 @@ Not specifying a size for each field allows it to expand the display result as n
 
 There are also omp_display_affinity() and omp_capture_affinity() APIs available that you could call from specific threads. Details for the available display affinity fields (with short and long names) and runtime APIs are in [OpenMP 5.0 Specification](https://www.openmp.org/wp-content/uploads/OpenMP-API-Specification-5.0.pdf) and in the OpenMP 5.0 Examples document (to be available soon).
 
-Below is sample output on Cori KNL (using intel/19.0.3.199, with a sample code [hybrid-hello.f90](hybrid-hello.f90) with the code output commented out). You could see that with OMP_PROC_BIND=spread, the OpenMP threads are evenly spread out, and with OMP_PLACES=threads, each thread binds to a specific hyperthread on a core; and with OMP_PLACES=cores, each thread binds to a specifc core, and is allowed to freely migrate within the core on any of the hyperthreads (as reported as logical CPUs by Slurm. For example, logical CPUs 0,68,136,204 are all on physical core 0).
+Below is sample output on Cori KNL (using intel/19.0.3.199, with a sample code [hybrid-hello.f90](hybrid-hello.f90) with the code output commented out). You could see that with OMP_PROC_BIND=spread, the OpenMP threads are evenly spread out, and with OMP_PLACES=threads, each thread binds to a specific hyperthread on a core; and with OMP_PLACES=cores, each thread binds to a specific core, and is allowed to freely migrate within the core on any of the hyperthreads (as reported as logical CPUs by Slurm. For example, logical CPUs 0,68,136,204 are all on physical core 0).
 ```
 % module swap intel intel/19.0.3.199
 % ftn -qopenmp -o hybrid-hello hybrid-hello.f90

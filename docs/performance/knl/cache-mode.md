@@ -165,7 +165,7 @@ so that all their data structures fit into MCDRAM. (This is most
 easily done by strong scaling via MPI or OpenMP.) Reducing the memory
 footprint does not prevent cache conflicts, but by using less memory,
 the likelihood of allocating conflicting addresses is reduced,
-particulary when zonesort is used. This will also improve performance
+particularly when zonesort is used. This will also improve performance
 by eliminating the DDR traffic due to capacity misses.
 
 Software developers may be able to reduce MCDRAM cache conflicts by

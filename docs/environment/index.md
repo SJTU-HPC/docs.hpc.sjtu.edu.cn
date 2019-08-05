@@ -1,6 +1,6 @@
 # Environment
 
-## NERSC User Enviroment
+## NERSC User Environment
 
 ### Home Directories, Shells and Dotfiles
 
