@@ -11,11 +11,17 @@ visit [MyNERSC](https://my.nersc.gov).
 	[git repository](https://gitlab.com/NERSC/nersc.gitlab.io) and
 	[contributions](https://gitlab.com/NERSC/nersc.gitlab.io/blob/master/CONTRIBUTING.md)
 	are welcome!
+	
+	[Fork this repo](https://gitlab.com/NERSC/nersc.gitlab.io/-/forks/new)
 
-## Quick links/ FAQ
+## Quick links
 
- 1. [Obtaining an Account](accounts/index.md#obtaining-an-account)
- 1. [Building Software](programming/compilers/wrappers.md)
+ 1. [Example Jobs](jobs/examples/index.md)
+ 1. [Queue Policies](jobs/policy.md)
  1. [Running Jobs](jobs/index.md)
+ 1. [Best Practices](jobs/best-practices.md)
+ 1. [Jupyer](connect/jupyter.md)
+ 1. [File Permissions](filesystems/unix-file-permissions.md)
+ 1. [Building Software](programming/compilers/wrappers.md)
  1. [Managing Data](data/management.md)
- 1. [Reset my password](accounts/index.md#forgotten-passwords)
+ 1. [Password Reset](accounts/index.md#forgotten-passwords)
