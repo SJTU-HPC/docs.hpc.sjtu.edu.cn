@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 #SBATCH -J test_molpro
 #SBATCH -q debug
 #SBATCH -N 1

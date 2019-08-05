@@ -74,7 +74,7 @@ The full list of directives is documented in the man pages for the
 either as a directive in the job script:
 
 ```bash
-#!/bin/bash -l
+#!/bin/bash
 #SBATCH -N 2
 ```
 

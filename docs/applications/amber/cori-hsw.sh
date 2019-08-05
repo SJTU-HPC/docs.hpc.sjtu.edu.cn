@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 #SBATCH -J test_amber
 #SBATCH -q debug
 #SBATCH -N 2

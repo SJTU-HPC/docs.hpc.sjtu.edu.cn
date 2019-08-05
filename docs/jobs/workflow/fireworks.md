@@ -163,8 +163,7 @@ as follows. If you need to add more options, you can copy this file
 and add to the template as described here.
 
 ```slurm
-#!/bin/bash -l
-
+#!/bin/bash
 #SBATCH --nodes=$${nodes}
 #SBATCH --ntasks=$${ntasks}
 #SBATCH --ntasks-per-node=$${ntasks_per_node}

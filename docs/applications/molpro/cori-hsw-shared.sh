@@ -1,4 +1,4 @@
-#!/bin/bash -l
+#!/bin/bash
 #SBATCH -J test_molpro
 #SBATCH -q shared
 #SBATCH -n 8

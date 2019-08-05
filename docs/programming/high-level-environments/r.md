@@ -1,4 +1,3 @@
-
 # R
 
 ![R Logo](r-logo.jpg)
@@ -15,18 +14,17 @@ well-designed publication-quality plots can be produced, including mathematical
 symbols and formulae where needed. R is an integrated suite of software facilities 
 for data manipulation, calculation and graphical display. 
 
-R users should also be interested in the [RStudio](https://www.google.com) web integrated development environment hosted at NERSC.
+R users should also be interested in
+the [RStudio](https://www.google.com) web integrated development
+environment hosted at NERSC.
 
-##
+## R at NERSC
 
-R is available at NERSC.
-There are theoretically no limitations to the number of R sessions running at NERSC. 
 Type the following command to launch R:
 
     nersc$ module load R
     nersc$ R
 
-It's that simple.
 To run R in an interactive allocation, allocate an interactive allocation and run R inside it.
 
     cori$ salloc -q interactive -C knl -t 234
@@ -35,7 +33,7 @@ To run R in an interactive allocation, allocate an interactive allocation and ru
 
 To run R through a batch job, make a script like the following and submit it.
 
-    #!/bin/bash -l
+    #!/bin/bash
     #SBATCH -C knl
     #SBATCH -q regular
      
