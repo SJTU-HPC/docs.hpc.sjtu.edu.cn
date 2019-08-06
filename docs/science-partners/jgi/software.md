@@ -13,9 +13,9 @@ themselves build and maintain any more specialized software they may need.
 * A wide array of powerful compilers and tools are available
   to build software from source code. While scratch
   space is subject to NERSC's purge policy, many groups possess a
-  "sandbox" allocation which is equally performant to \$BSCRATCH,
-  and shared among group members. (Running software from $HOME is
-  strongly discouraged.)
+  "sandbox" allocation which is equally performant to `$BSCRATCH`,
+  and shared among group members. (Running software from `$HOME` is
+  **strongly discouraged**.)
 
 ## Shifter
 
@@ -63,5 +63,7 @@ roughly as follows:
 Anaconda virtual environments allow you to install software in a clean and
 reproducible manner. See this the [training page](training.md) for more
 information about using Anaconda at NERSC. Note that while Anaconda started
-life as a python package manager, now R, Perl and many other computing
-languages and associated modules can also be installed using it.
+life as a Python package manager, now R, Perl and many other computing
+languages and associated modules can also be installed using it. For more
+information about using Python at NERSC, please see our
+[Python documentation](../../programming/high-level-environments/python/index.md).
