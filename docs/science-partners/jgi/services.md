@@ -54,11 +54,12 @@ launch processes on compute systems will require special scrutiny.
 
 ### Public Web Services
 
-JGI users may host web services for public access. NERSC offers two web hosting
-environments, [Spin](https://docs.nersc.gov/services/spin/) and virtual
-machines. The requirements of your web service will determine which of these
-environments is appropriate. Please [contact NERSC](https://help.nersc.gov/)
-with inquiries regarding public web services.
+JGI users may host web services for public access. NERSC offers two
+web hosting environments, [Spin](../../services/spin/index.md) and
+virtual machines. The requirements of your web service will determine
+which of these environments is
+appropriate. Please [contact NERSC](https://help.nersc.gov/) with
+inquiries regarding public web services.
 
 ### Getting Started
 

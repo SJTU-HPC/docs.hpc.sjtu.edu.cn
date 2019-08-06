@@ -50,8 +50,8 @@ managing their data:
   for the awarded project.  
 * PIs can request the modification, deletion, or transfer to another
   NERSC file system of data associated with their NERSC award
-* Be conversant with NERSC's [data archive
-  policy](https://docs.nersc.gov/data/policy/#data-retention-policy)
+* Be conversant with
+  NERSC's [data archive policy](#data-retention-policy)
 
 ## Storage Resources
 
@@ -95,7 +95,7 @@ group has an allocation at NERSC. Allocations are renewed on a yearly
 basis (see our section on accounts for information on renewal). If a
 group's allocation is not renewed, any data in their project directory
 will be automatically archived into HPSS. Please see the [project file
-system](https://docs.nersc.gov/filesystems/project/) page for details
+system](../filesystems/project.md) page for details
 on the timing of this process.
 
 Currently NERSC has no plans to delete data in HPSS. Should NERSC ever
@@ -117,7 +117,7 @@ of the facility), and secondarily for high speed local transfers
 (e.g., NGF to HPSS). Staff from NERSC and ESnet with extensive data
 transfer experience are available to aid scientists in organizing,
 packaging, and moving their data to the most appropriate storage
-resource at our facility.  
+resource at our facility.
 
 ### Globus
 
@@ -130,8 +130,9 @@ self-managed transfers.
 ### Direct Web Access to Data
 
 For rapid and simple data sharing, users can enable web access to
-files in their project file system. See the [Science Gateways
-page](https://docs.nersc.gov/services/science-gateways/#getting-started).
+files in their project file system. See
+the
+[Science Gateways page](../services/science-gateways.md#getting-started).
 
 ### Science Gateways
 
@@ -139,8 +140,9 @@ For more complex collaborative data, analytics, and computing
 projects, NERSC offers users the ability to create web gateways that
 can access NERSC computing, NGF, and HPSS resources. This includes
 rapid data subselection, deep search including machine learning, and
-simulation science in addition to bulk data movement. More details are
-[here](https://docs.nersc.gov/services/science-gateways).
+simulation science in addition to bulk data
+movement. [More details](../services/science-gateways.md) about
+science gateways are available.
 
 ### NERSC Web Toolkit (NEWT)
 
@@ -217,9 +219,8 @@ usage, performance, and data retention needs.
 
 #### Intent
 
-The [home file
-system](https://docs.nersc.gov/filesystems/global-home/) is intended
-to hold source files, configuration files, etc., and is optimized for
+The [home file system](../filesystems/global-home.md) is intended to
+hold source files, configuration files, etc., and is optimized for
 small to medium sized files. It is NOT meant to hold the output from
 your application runs; the scratch or project file systems should be
 used for computational output.
@@ -252,15 +253,14 @@ file system. This is the default allocation granted to all users.
 
 #### Intent
 
-The [project file system](https://docs.nersc.gov/filesystems/project/)
-is primarily intended for sharing data within a team or across
-computational platforms. The project file systems are parallel file
-systems optimized for high-bandwidth, large-block-size access to large
+The [project file system](../filesystems/project.md) is primarily
+intended for sharing data within a team or across computational
+platforms. The project file systems are parallel file systems
+optimized for high-bandwidth, large-block-size access to large
 files. Once any active production and/or analysis is completed and you
 don't need regular access (> 1 year) to the data any longer, you
 should either archive the data in the HPSS data archive (below) or
 transfer it back to your home institution.
-
 
 #### Stability
 
@@ -277,7 +277,6 @@ capability to provide users a seven-day history of their project
 directories. Users can use this capability to recover accidentally
 deleted files. It is recommended that users back up any essential data
 in our tape archive system or at another location.
-
 
 #### Retention
 
@@ -310,7 +309,7 @@ information you provide on your ERCAP form.
 
 #### Intent
 
-The [global common file system](https://docs.nersc.gov/filesystems/global-common/)
+The [global common file system](../filesystems/global-common.md)
 is primarily intended for sharing software installations within a team or across
 computational platforms. The global common file system is a parallel file
 system optimized for small-block-size access to small

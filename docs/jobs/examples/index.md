@@ -360,7 +360,7 @@ would otherwise with a time limit anywhere between the minimum and
 maximum time requests. Pre-terminated jobs can be requeued (or resubmitted) by using
 the `scontrol requeue` command (or sbatch) to resume from where the previous
 executions left off, until the cumulative execution time reaches the
-desired time limit or the job completes.  
+desired time limit or the job completes.
 
 !!! note
 	To use variable-time jobs, applications are required to be
@@ -368,18 +368,23 @@ desired time limit or the job completes.
 	
 ### Using the flex QOS for charging discount for variable-time jobs on KNL
 
-Variable-time jobs, specifying a shorter amount of time that a job should run, 
-increase backfill opportunities, meaning
-users will see a better queue turnaround. 
-In addition, the process of job resubmitting can be automated, 
-so users can run a long job in multiple shorter chunks with a single job script (see the automated job script sample below). 
-However, variable-time jobs incur checkpoint/restart overheads from splitting a longer job into multiple shorter ones. 
-To compensate for this overhead and to encourage users to use Cori KNL where more backfill opportunities are available, 
-we have created a flex QOS on Cori KNL (#SBATCH -q flex) with a charging discount for variable-time jobs.
-See the [Queues and Policy page for Cori KNL](http://docs.nersc.gov/jobs/policy) for more details on the flex QOS. 
+Variable-time jobs, specifying a shorter amount of time that a job
+should run, increase backfill opportunities, meaning users will see a
+better queue turnaround.  In addition, the process of job resubmitting
+can be automated, so users can run a long job in multiple shorter
+chunks with a single job script (see the automated job script sample
+below).  However, variable-time jobs incur checkpoint/restart
+overheads from splitting a longer job into multiple shorter ones.  To
+compensate for this overhead and to encourage users to use Cori KNL
+where more backfill opportunities are available, we have created a
+flex QOS on Cori KNL (`#SBATCH -q flex`) with a charging discount for
+variable-time jobs.  See
+the [Queues and Policy page for Cori KNL](../policy.md) for more
+details on the flex QOS.
 
 !!! note
-        * The flex QOS has a 75% charging discount currently as of June 2019. The discount rate is subject to change. 
+        * The flex QOS has a 75% charging discount currently as of
+          June 2019. The discount rate is subject to change.
         * Variable-time jobs work with any QOS on Cori, but the
           charging discount is only available with the flex QOS on
           Cori KNL.
