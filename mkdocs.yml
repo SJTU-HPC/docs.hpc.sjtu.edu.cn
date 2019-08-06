@@ -216,7 +216,6 @@ nav:
       - Cori Burst Buffer: filesystems/cori-burst-buffer.md
       - Archive (HPSS):
         - Intro: filesystems/archive.md
-        - Accessing HPSS: filesystems/archive_access.md
         - Storage Statistics: filesystems/archive-stats.md
       - Backups: filesystems/backups.md
       - Unix File Permissions: filesystems/unix-file-permissions.md
