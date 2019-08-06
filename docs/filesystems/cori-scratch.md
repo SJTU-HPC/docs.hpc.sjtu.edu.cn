@@ -22,13 +22,14 @@ filter checks the usage of `/global/cscratch1`.
 
 The `myquota` command will display your current usage and quota. NERSC
 sometimes grants temporary quota increases for legitimate purposes. To
-apply for such an increase, please use the
-[Disk Quota Increase Form](http://www.nersc.gov/users/storage-and-file-systems/file-systems/data-storage-quota-increase-request/).
+apply for such an increase, please use
+the
+[Disk Quota Increase Form](https://www.nersc.gov/users/storage-and-file-systems/file-systems/data-storage-quota-increase-request/).
 
 The scratch file system is subject to purging. Please make sure to
-back up your important files (e.g. to HPSS).  Instructions for HPSS
-are [here](https://docs.nersc.gov/filesystems/archive/).
+back up your important files (e.g. to
+HPSS). [Instructions for HPSS](archive.md).
 
-To restore deleted or purged files, please refer to
-[Backup/Restore on Home directory](https://docs.nersc.gov/filesystems/global-home/#backups)
-or [Projects directory](https://docs.nersc.gov/filesystems/project/).
+To restore deleted or purged files, please refer
+to [Backup/Restore on Home directory](global-home.md#backups)
+or [Projects directory](project.md).

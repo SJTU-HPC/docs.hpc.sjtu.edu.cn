@@ -122,12 +122,12 @@ nersc$ ftn -dynamic -o testMAP_ex testMAP.o -Wl,--eh-frame-hdr
 
 ## Starting a Job with MAP
 
-Running an X window GUI application can be painfully slow when it
-is launched from a remote system over internet. NERSC recommends
-to use the free [NX software](https://docs.nersc.gov/connect/nx/)
-because the performance of the X Window-based DDT GUI can be greatly
-improved. Another way to cope with the problem is to use Arm Forge
-remote client, which will be discussed in the next section.
+Running an X window GUI application can be painfully slow when it is
+launched from a remote system over internet. NERSC recommends to use
+the free [NX software](../../connect/nx.md) because the performance of
+the X Window-based DDT GUI can be greatly improved. Another way to
+cope with the problem is to use Arm Forge remote client, which will be
+discussed in the next section.
 
 You can also start Be sure to log in with an X window forwarding
 enabled. This could mean using the `-X` or `-Y` option to ssh. The

@@ -26,9 +26,11 @@ cori$ module load qchem
 ```
 ## How to run Q-Chem
 
-###Running interactively
-To run Q-Chem interactively, you need to request a batch session using the "salloc" command, e.g., 
-the following command requests one Cori Haswell node for one hour, 
+### Running interactively
+
+To run Q-Chem interactively, you need to request a batch session using
+the "salloc" command, e.g., the following command requests one Cori
+Haswell node for one hour,
 
 ```shell
 cori$ salloc -N 1 -q interactive -C haswell -t 1:00:00
@@ -64,7 +66,13 @@ The Q-Chem modules available on Cori were built for Haswell, however, the Haswel
     ```slurm
     --8<-- "docs/applications/qchem/cori-knl-omp.sh"
     ```
-If you run single node Q-Chem jobs and do not need all the cores and memory available on the node, you can run your jobs under the shared QOS, which then you will be charged less. For more information about using the shared QOS, see our [Running Jobs](https://docs.nersc.gov/jobs/examples/#shared) page. Here is a sample job script to run Q-Chem with the shared QOS:
+	
+If you run single node Q-Chem jobs and do not need all the cores and
+memory available on the node, you can run your jobs under the shared
+QOS, which then you will be charged less. For more information about
+using the shared QOS, see
+our [Running Jobs](../../jobs/examples/index.md#shared) page. Here is
+a sample job script to run Q-Chem with the shared QOS:
 
 !!! example "Cori Haswell: using shared QOS"
     ```slurm
@@ -72,18 +80,21 @@ If you run single node Q-Chem jobs and do not need all the cores and memory avai
     ```
 The above script requests two cores (-n 2) (four CPUs in total) for one hour.
 
-The distributed memory parallelism (MPI) was enabled in the default Q-Chem module, so you can run Q-Chem across multiple nodes. However,
-Only basic DFT and TD-DFT features in Q-Chem are capable of utilizing MPI parallelism, 
-please consult the Q-Chem manual to ensure effective utilization of computational resources.  
-Here is a sample job script to run Q-Chem across multiple nodes. 
+The distributed memory parallelism (MPI) was enabled in the default
+Q-Chem module, so you can run Q-Chem across multiple nodes. However,
+Only basic DFT and TD-DFT features in Q-Chem are capable of utilizing
+MPI parallelism, please consult the Q-Chem manual to ensure effective
+utilization of computational resources.  Here is a sample job script
+to run Q-Chem across multiple nodes.
 
 !!! example "Cori Haswell: running with multiple nodes"
     ```slurm
     --8<-- "docs/applications/qchem/cori-hsw-mpi.sh"
     ```
-The job script requests two Haswell nodes, and run qchem with two MPI tasks (-np 2) each with 32 OpenMP threads (-nt 32). 
+	
+The job script requests two Haswell nodes, and run qchem with two MPI
+tasks (-np 2) each with 32 OpenMP threads (-nt 32).
 
 ## Documentation
 
 Q-Chem 5.2 manual [pdf](http://manual.q-chem.com/5.2/qchem_manual_5.2.pdf) [html](http://manual.q-chem.com/5.2/) 
-

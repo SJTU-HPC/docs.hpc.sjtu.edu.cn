@@ -91,9 +91,12 @@ prepend-path	 PATH /global/common/cori/software/vasp/20181030/knl/intel/bin
 -------------------------------------------------------------------
 ```
 
-This vasp module adds the path to the VASP binaries to your search path, and also sets a few environment variables. 
-Where `PSEUDOPOTENTIAL_DIR` and `VDW_KERNAL_DIR` are defined for the locations of the pseudopotential files and the `vdw_kernel.bindat`
-file used in dispersion calculations. The OpenMP and MKL environment variables are set for optimal performance. 
+This vasp module adds the path to the VASP binaries to your search
+path, and also sets a few environment variables.  Where
+`PSEUDOPOTENTIAL_DIR` and `VDW_KERNAL_DIR` are defined for the
+locations of the pseudopotential files and the `vdw_kernel.bindat`
+file used in dispersion calculations. The OpenMP and MKL environment
+variables are set for optimal performance.
 
 ## Vasp binaries
 
@@ -106,53 +109,64 @@ Each VASP module provides the three different binaries:
 You need to choose an appropriate binary to run your job.
 
 ## Running batch jobs 
-To run batch jobs, you need to prepare a job script (see samples below), and submit it to the batch system 
-with the "sbatch" command. Assume the job script is named as run.slurm, 
+
+To run batch jobs, you need to prepare a job script (see samples
+below), and submit it to the batch system with the "sbatch"
+command. Assume the job script is named as run.slurm,
 
 ```shell
 cori$ sbatch run.slurm
 ```
 
-Please check the [Queue Policy](http://docs.nersc.gov/jobs/policy/) page for the available QOS's and their resource limits. 
+Please check the [Queue Policy](../../jobs/policy.md) page for the
+available QOS's and their resource limits.
  
 ### Cori Haswell
 
 1. A sample job script to run the **Pure MPI VASP** codes
-```slurm
 
---8<-- "docs/applications/vasp/examples/cori-haswell-simple.sh"
-```
+   ```slurm
+   --8<-- "docs/applications/vasp/examples/cori-haswell-simple.sh"
+   ```
+
 2. A sample job script to run the **hybrid MPI+OpenMP VASP** codes
-```slurm
---8<-- "docs/applications/vasp/examples/cori-haswell-hybrid.sh"
-```
+
+   ```slurm
+   --8<-- "docs/applications/vasp/examples/cori-haswell-hybrid.sh"
+   ```
 
 ### Cori KNL
 
 1. A sample job scripts to run the **Pure MPI VASP** codes
-```slurm
---8<-- "docs/applications/vasp/examples/cori-knl-simple.sh"
-```
+
+   ```slurm
+   --8<-- "docs/applications/vasp/examples/cori-knl-simple.sh"
+   ```
 
 2. A sample job scripts to run the **hybrid MPI+OpenMP VASP** codes
-```slurm
---8<-- "docs/applications/vasp/examples/cori-knl-hybrid.sh"
-```
+
+   ```slurm
+   --8<-- "docs/applications/vasp/examples/cori-knl-hybrid.sh"
+   ```
 
 !!! Tips
     1. For a better job throughput, run jobs on Cori KNL. 
-    2. The hybrid MPI+OpenMP VASP are recommended on Cori KNL for optimal performance.  
+    2. The hybrid MPI+OpenMP VASP are recommended on Cori KNL for optimal performance.
     3. More performance tips can be found in a [Cray User Group 2017 proceeding](https://cug.org/proceedings/cug2017_proceedings/includes/files/pap134s2-file1.pdf)
     4. Also refer to the presentation [slides](https://www.nersc.gov/users/training/events/vasp-user-hands-on-knl-training-june-18-2019/) for the VASP user training (6/18/2019).
 
 ## Runninge interactively
-To run VASP interactively, you need to request a batch session using the "salloc" command, e.g.,
-the following command requests one **Cori Haswell** node for one hour,
+
+To run VASP interactively, you need to request a batch session using
+the "salloc" command, e.g., the following command requests one **Cori
+Haswell** node for one hour,
 
 ```shell
 cori$ salloc -N 1 -q interactive -C haswell -t 1:00:00
 ```
+
 When the batch session returns with a shell prompt, execute the following commands: 
+
 ```shell
 cori$ module load vasp 
 cori$ srun -n32 -c2 --cpu-bind=cores vasp_std
@@ -162,7 +176,11 @@ To run on **Cori KNL** interactively, do
 ```shell
 cori$ salloc -N 2 -q interactive -C knl -t 4:00:00
 ```
-The above command requests two KNL nodes for four hours. When the batch session returns with a shell prompt, execute the following commands:
+
+The above command requests two KNL nodes for four hours. When the
+batch session returns with a shell prompt, execute the following
+commands:
+
 ```shell
 cori$ module load vasp/20181030-knl
 cori$ export OMP_NUM_TRHEADS=4
@@ -170,19 +188,25 @@ cori$ srun -n32 -c16 --cpu-bind=cores vasp_std
 ```
 
 !!! Tips
-    1. The interactive QOS allocates the requested nodes immediately or cancels your job in about 5 minutes (when no nodes are available). 
-See the [Queue Policy](http://docs.nersc.gov/jobs/policy/) page for more info. 
-    2. Test your job using the interactive QOS before submitting a long running job.
+    1. The interactive QOS allocates the requested nodes immediately
+       or cancels your job in about 5 minutes (when no nodes are available).
+       See the [Queue Policy](../../jobs/policy.md) page for more info.
+    2. Test your job using the interactive QOS before submitting a
+       long running job.
 
 ## VASP makefiles
-If you need to build VASP by yourselves, use the makefiles available at the VASP installation directories. 
-For example, the "makefile.include" file that we used to build the vasp/5.4.4-hsw module is available at,
 
+If you need to build VASP by yourselves, use the makefiles available
+at the VASP installation directories.  For example, the
+"makefile.include" file that we used to build the vasp/5.4.4-hsw
+module is available at,
+
+```
 /global/common/sw/cray/cnl6/haswell/vasp/5.4.4/intel/17.0.2.174/4bqi2il 
+```
 
-Type "module show `<a vasp module>`" to find the installation directory. 
+Type `module show `<a vasp module>`` to find the installation directory.
 
 ## Documentation
 
 [VASP Online Manual](http://cms.mpi.univie.ac.at/vasp/vasp/vasp.html)
-

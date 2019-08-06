@@ -75,7 +75,7 @@ nersc$ cc -g -O0 -o testDDT_ex testDDT.c
 
 Running an X window GUI application can be painfully slow when it
 is launched from a remote system over internet. NERSC recommends
-to use the free [NX software](https://docs.nersc.gov/connect/nx/)
+to use the free [NX software](../../connect/nx.md)
 because the performance of the X Window-based DDT GUI can be greatly
 improved. Another way to cope with the problem is to use Arm Forge
 remote client, which will be discussed in the next section.
