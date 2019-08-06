@@ -28,8 +28,8 @@ which are passed to Slurm job submissions.
         use `--qos=xfer_dna`.
 
 !!! note
-	Jobs run under the Cori "genepool", "genepool_shared",
-        "jgi_exvivo", "jgi_shared", "jgi_interactive", and "xfer_dna" QOS
+	Jobs run under the Cori `genepool`, `genepool_shared`,
+        `jgi_exvivo`, `jgi_shared`, `jgi_interactive`, and `xfer_dna` QOSes
 	are not charged. Resources are scheduled to the best of our
         ability, but interference with other users' workloads can still
         occur. Please be a good citizen to your fellow
@@ -55,10 +55,10 @@ which are passed to Slurm job submissions.
 
 	`salloc --qos=genepool -A <youraccount>`
 
-        Don't forget that if the Cori genepool QOS is full, the previous command
-        can take a long time to give you a node.
+     Don't forget that if the Cori Genepool QOS is full, the previous command
+     can take a long time to give you a node.
 
-In the earlier examples, 'youraccount' is the project name you
+In the earlier examples, `youraccount` is the project name you
 submit to, not your username or file group name.  If you don't know what
 accounts you belong to, you can check with:
 
@@ -78,8 +78,8 @@ for using Slurm at NERSC can be found [here.](../../jobs/index.md)
  
 Cori scratch is storage space for each user located on a Lustre filesystem
 accessible from Cori and Cori ExVivo. This directory can be found at
-`/global/cscratch1/sd/$USER` or by using the \$CSCRATCH environment
-variable. Like `/global/projectb/scratch` (\$BSCRATCH), Cori scratch is
+`/global/cscratch1/sd/$USER` or by using the `$CSCRATCH` environment
+variable. Like `/global/projectb/scratch` (`$BSCRATCH`), Cori scratch is
 purged periodically; backing up data stored there is your responsibility.
 The [HPSS Tape Data Archive](../../filesystems/archive.md) or JGI JAMO 
 system can be used for for this purpose. See
@@ -87,7 +87,7 @@ system can be used for for this purpose. See
 information on topics such as automatic file backups and 
 scratch directory purge frequency. 
 
-\$BSCRATCH is also mounted on Cori, Cori genepool, and Cori ExVivo.
+`$BSCRATCH` is also mounted on Cori, Cori Genepool, and Cori ExVivo.
 This is useful for a workload needing to see files from all machines.
 
 !!! note
@@ -98,26 +98,26 @@ This is useful for a workload needing to see files from all machines.
 
 ### Burst Buffer
 
-The Burst buffer is a fast filesystem optimized for applications
+The Burst Buffer is a fast filesystem optimized for applications
 demanding large amounts of I/O bandwidth and operations. This system 
 is particularly suitable for applications that perform lots of
 random-access, or that read files more than once.
 
-To use the Burst Buffer add directives to your batch
+To use the Burst Buffer, add directives to your batch
 job to either schedule staging in/out of data or to make a
 persistent reservation. The dynamic reservation lasts only as long
 as the job that requested it and the disk space is reclaimed once
-the job ends. A persistent reservation outlives the job that created it,
+the job ends. A persistent reservation outlives the job that created it
 and can be accessed by multiple jobs.
 
 Use dynamic reservations for checkpoint files, for files that will be
-accessed randomly (i.e. not read through in a streaming manner) or
+accessed randomly (i.e., not read through in a streaming manner) or
 just for local scratch space. Cori batch nodes don't have local disk,
 so a dynamic reservation can serve that role.
 
 Use persistent reservations to store data that is shared between jobs
 and heavily used such as reference databases. The data on a
-persistent reservation is stored with normal unix filesystem
+persistent reservation is stored with normal Unix filesystem
 permissions, and anyone can mount your persistent reservation in their
 batch job, so you can use them to share heavily used data among
 workflows belonging to a group.
@@ -160,7 +160,7 @@ More information on getting started with Burst Buffer can be found
 are slides from a training session on the Burst Buffer on the
 [JGI training page](training.md).
 
-## JGI Partition configuration
+## JGI Partition Configuration
 
 |Setting|Value|
 |---|---|
