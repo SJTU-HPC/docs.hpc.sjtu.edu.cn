@@ -17,10 +17,10 @@ strengths and limitations of each filesystem.
 
 All NERSC filesystems have per-user quotas on total storage and
 number of files and directories (known as `inodes`). To
-check your filesystem usage use the `myquota` command from any login
+check your filesystem usage, use the `myquota` command from any login
 node, check the [Data Dashboard](https://my.nersc.gov/data-mgt.php)
 on [my.nersc.gov](https://my.nersc.gov) or log into
-the [NERSC Information Management (NIM) website](https://nim.nersc.gov)
+the [NERSC Information Management (NIM) website](https://nim.nersc.gov),
 and click on the "Account Usage" tab.
 
 ### $HOME
@@ -29,13 +29,13 @@ Your home directory is mounted across all NERSC systems.  You should
 refer to this home directory as `$HOME` wherever possible, and you
 should not change the environment variable `$HOME`.
 
-Each user's `$HOME` directory has a quota of 40GB and 1M inodes. \$HOME
+Each user's `$HOME` directory has a quota of 40GB and 1M inodes. `$HOME`
 quotas will not be increased. Other filesystems should be used for
 storage of large volumes of data which are either being stored long term
 or are a part of computation in progress.
 
 !!! warning
-	As a global filesystem, \$HOME is shared by all users, and
+	As a global filesystem, `$HOME` is shared by all users, and
 	is *not* configured for performance. Do not write scripts or run
 	software in a way that will cause high bandwidth I/O to
 	\$HOME. High volumes of reads and writes can cause congestion on
@@ -45,21 +45,21 @@ or are a part of computation in progress.
 
 ### Projectb
 
-projectb is a 2.7PB GPFS based file system dedicated to the JGI's
+projectb is a 2.7PB GPFS-based file system dedicated to the JGI's
 active projects.  There are three distinct user spaces in the projectb
-filesystem: "projectb/sandbox", "project/software", and "projectb/scratch".
+filesystem: `projectb/sandbox`, `project/software`, and `projectb/scratch`.
 The projectb filesystem is available on most NERSC systems.
 
 | 	|projectb Scratch|projectb Sandbox|projectb Software|
 |---|---|---|---|
-|Location|/global/projectb/scratch/\$username|/global/projectb/sandbox/$program|/global/projectb/software/$group|
+|Location|`/global/projectb/scratch/$username`|`/global/projectb/sandbox/$program`|`/global/projectb/software/$group`|
 |Quota|20TB, 5M inodes by default; 40TB upon request|Defined by agreement with JGI Management|500GB, 500K inodes|
 |Backups|Not backed up|Not backed up|Backed up|
-|File Purging|Files not accessed for 90 days are automatically deleted|no purge|no purge|
+|File Purging|Files not accessed for 90 days are automatically deleted|Not purged|Not purged|
 
 The projectb "Scratch" space is intended for staging and
 running JGI computation by individual users of NERSC systems.
-The environment variable \$BSCRATCH points to a user's projectb scratch space.
+The environment variable `$BSCRATCH` points to a user's projectb scratch space.
 These scratch directories are not automatically granted to new users; to request
 space please [file a Consulting ticket](https://help.nersc.gov) asking for 
 an initial projectb scratch allocation.
@@ -72,7 +72,7 @@ space or quota increase requests must be approved by JGI management.
 The projectb software allocations are intended for storage of
 Conda environments, source code, and binaries being used by individual
 groups at JGI. At very large production scale, projectb performance,
-may degrade; consider moving such software to "/usr/common/software", 
+may degrade; consider moving such software to `/usr/common/software`, 
 the Data and Archive filesystem, or a Shifter container.
 
 ### DnA (Data n' Archive)
@@ -82,10 +82,10 @@ databases, and project directories.
 
 | 	|DnA Projects|DnA Shared|DnA DM Archive|
 |---|---|---|---|
-|Location|/global/dna/projectdirs/|/global/dna/shared|/global/dna/dm_archive|
+|Location|`/global/dna/projectdirs/`|`/global/dna/shared`|`/global/dna/dm_archive`|
 |Quota|5TB default|Defined by agreement with the JGI Management|Defined by agreement with the JGI Management|
 |Backups|Daily, only for projectdirs with quota <= 5TB|Backed up by JAMO|Backed up by JAMO|
-|Files are not automatically purged|Files are not automatically purged|Purge policy set by users of the JAMO system|Files are not automatically purged|
+|File purging|Files are not automatically purged|Purge policy set by users of the JAMO system|Files are not automatically purged|
 
 The intention of the DnA "Project" and "Shared" space is to be a place
 for data that is needed by multiple users collaborating on a project
@@ -111,7 +111,7 @@ management team.
 Each user has a "scratch" directory.  Scratch directories are NOT
 backed up and files can be purged if they have not been accessed for 90
 days. Find your scratch directory using the environment variable
-"$SCRATCH" for example:
+`$SCRATCH` for example:
 
 ```
 elvis@cori02:~> cd $SCRATCH
@@ -122,32 +122,33 @@ Scratch environment variables:
 
 |Environment Variable|Value|NERSC Systems|
 |---|---|---|
-\$SCRATCH|Best-connected file system|All NERSC computational systems|
-\$CSCRATCH|/global/cscratch[1,2,3]/sd/$username|Cori|
+`$SCRATCH`|Best-connected file system|All NERSC computational systems|
+`$CSCRATCH`|`/global/cscratch[1,2,3]/sd/$username`|Cori|
 
-\$BSCRATCH points to your projectb scratch space if you have a
-BSCRATCH allocation.  \$SCRATCH will always point to the
+`$BSCRATCH` points to your projectb scratch space if you have a
+BSCRATCH allocation. `$SCRATCH` will always point to the
 best-connected scratch space available for the NERSC machine you are
 accessing.  
 
 The intention of scratch space is for staging, running, and completing
-calculations on NERSC systems.  Thus these filesystems are
+calculations on NERSC systems.  Thus, these filesystems are
 configured for best performance when usage is wide-scale file reading
-and writing from many compute nodes.  The scratch filesystems are not
-intended for long-term file storage or archival. Data is not backed-up,
+and writing from many compute nodes. The scratch filesystems are not
+intended for long-term file storage or archival. Data is not backed up,
 and files not accessed for a significant time period can be purged.
 
-Policies for \$SCRATCH are described at [NERSC Data Management Policy](../../data/policy.md#scratch-file-systems).
+Policies for `$SCRATCH` are described at
+[NERSC Data Management Policy](../../data/policy.md#scratch-file-systems).
 
 ### Other file systems
 Other file systems used by JGI may also be mounted on NERSC systems:
 
 * SeqFS - file system used exclusively by the Illumina sequencers, SDM
   and Instrumentation groups at the JGI.
-* /usr/common - is a file system where NERSC staff build software for
+* `/usr/common` - is a file system where NERSC staff build software for
   user applications.  This is the principal site for the modular
   software installations.
-* /global/project - is a GPFS based file system that is accessible on
+* `/global/project` - is a GPFS-based file system that is accessible on
   almost all of NERSC's other compute systems used by all the other
   NERSC users.  The projectdir portion of projectb should be favored
-  by JGI users instead of /global/project.
+  by JGI users instead of `/global/project`.
