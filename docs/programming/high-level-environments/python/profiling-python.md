@@ -250,16 +250,16 @@ for i in `seq 0 31`; do python -m line_profiler script_to_profile.lprof$i > line
 ## Arm Forge Map for Python
 
 Arm Forge
-has recently added support for Python to their [Map profiling
+has recently (early 2019) added support for Python to their [Map profiling
 tool](https://developer.arm.com/tools-and-software/server-and-hpc/arm-architecture-tools/arm-forge/arm-map/python-profiling).
 Since this is a "big tool" we recommend that you try this tool
 after you have profiled your code with something simple and have some
 idea what you're looking for. That said, this is probably the easiest
 "big tool" that we support for Python on our systems. It can profile
-large, multinode, MPI jobs out of the box. Perhaps the only major
+multiprocessing and single or multinode MPI jobs out of the box. Perhaps the only major
 drawback is that it cannot display information for individual MPI
-ranks; it will only show the collected statistics for all ranks. If
-you require information about individual ranks you may consider
+ranks; it will only show the collected statistics for all profiled ranks. If
+you require simultaneous information for individual ranks you may consider
 Tau instead (see below).
 
 There are two ways to use Map on our systems: either using NX or using
@@ -272,15 +272,21 @@ as usual. Then, open a connection to Cori and get an interactive node:
 
 `salloc -A yourrepo ... `
 
-and once you have a node:
+Once you have a node:
 
 ```
-module load python/3.6-anaconda-4.4
+module load python/3.5-anaconda
 module load allinea-forge
-map srun python your_ap.py ...
+map python your_app.py ...
 ```
 
-and the Arm Forge GUI window will pop up. Click run to start the profiling
+!!! tip "Profiling an MPI application"
+    If you are profiling an MPI application, you will need to run:
+    `map srun python your_app.py`. The difference is the `srun` command.
+    One other MPI option is to use the `--select-ranks` option if you would
+    like to profile only specific MPI ranks.
+
+The Arm Forge GUI window will automatically pop up. Click run to start the profiling
 run. Don't panic: it will add some overhead to the normal runtime of your code. When
 the profiling data collection is finished and the statistics are aggregated,
 a window that displays the data from your application will automatically
@@ -332,12 +338,12 @@ ssh to Cori as you would normally.
 
 `salloc -A yourrepo ... qos=interactive`
 
-once you have an interactive node:
+Once you have an interactive node:
 
 ```
-module load python/3.6-anaconda-4.4
+module load python/3.5-anaconda
 module load allinea-forge
-map --connect srun python your_ap.py ...
+map --connect python your_ap.py ...
 ```
 
 !!! tip "One small difference in Remote Client vs NX"
