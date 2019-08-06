@@ -30,3 +30,8 @@ A subset of nodes on Cori, the flagship supercomputer at NERSC, are reserved
 for exclusive use by JGI by using JGI-specific "quality of service" (QOS) 
 submissions. Full functionality of Cori is also available to JGI users such as
 the Burst Buffer, Shifter, and more.
+
+## [Cori ExVivo](cori-exvivo.md)
+
+ExVivo is a specialized system used to run JGI applications requiring more
+shared memory than available on standard Cori Genepool hardware.

@@ -43,14 +43,14 @@ available.
 ### JGI Accounts
 
 There are 192 Haswell nodes reserved for the "genepool" and
-"genepool_shared" QOSs combined.  Jobs run with the "genepool" QOS
+"genepool_shared" QOSes combined.  Jobs run with the "genepool" QOS
 uses these nodes exclusively. Jobs run with the "genepool_shared" QOS
 can share nodes.
 
-| QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority | Charge |
-|-----------------|-----------|----------------|--------------|-----------|----------|--------|
-| genepool        | 192       | 72             | 500          | -         | 3        | 90     |
-| genepool_shared | 0.5       | 72             | 500          | -         | 3        | 90     |
+| QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority |
+|-----------------|-----------|----------------|--------------|-----------|----------|
+| genepool        | 192       | 72             | 500          | -         | 3        | 
+| genepool_shared | 0.5       | 72             | 500          | -         | 3        | 
 
 ## Charging
 
