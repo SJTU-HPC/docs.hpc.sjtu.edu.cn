@@ -46,9 +46,19 @@ job on the login node, to help improve job efficiency and save computing cost of
 batch job. It can also help to alleviate the burden on the global home file system. 
 This script also keeps the user environment needed for the batch job in a single file.
 
-!!! example
-    Prepare user environment for batach job (run commands prior to srun on the login node)
-    The file name below is "prepare-env.sh".
+!!! Example
+    This is an example to prepare user environment on a login node and propagate this 
+    environment to a batch job, and submit the batch job.  This can be accomplished 
+    in a single script. 
+    
+    You could do so by preparing a file named "prepare-env.sh" in the example below, 
+    and run it as "./prepare-env.sh" on a login node. This script:
+
+    * Sets up the user environment for the batch job first on a login node, such as 
+    loading modules, set environment variables, or copy input files, etc.;
+    * Creates a batch script named "prepare-env.sl";
+    * Submits "prepare-env.sl", this job will inherit the user environment just set earlier 
+    in the script. 
 ```
 --8<-- "docs/jobs/examples/prepare-env/prepare-env.sh"
 ```

@@ -3,18 +3,16 @@
 # Submit this script as: "./prepare-env.sh" instead of "sbatch prepare-env.sh"
 
 # Prepare user env needed for Slurm batch job
-# such as module load, compile your code, setup runtime environment variables, etc.
+# such as module load, setup runtime environment variables, or copy input files, etc.
 # Basically, these are the commands you usually run ahead of the srun command 
 
-# module load cray-netcdf
-cc -qopenmp -o xthi xthi.c
+module load cray-netcdf
 export OMP_NUM_THREADS=4
 
 # Generate the Slurm batch script below with the here document, 
 # then when sbatch the script later, the user env set up above will run on the login node
 # instead of on a head compute node (if included in the Slurm batch script),
 # and inherited into the batch job.
-# Notice other_commands_needed_after_srun should still be incldued in the Slurm script.
 
 cat << EOF > prepare-env.sl 
 #!/bin/bash
@@ -23,11 +21,11 @@ cat << EOF > prepare-env.sl
 #SBATCH -q debug
 #SBATCH -C haswell
 
-srun -n 16 -c 32 --cpu_bind=cores ./xthi 
+srun -n 16 -c 32 --cpu_bind=cores ./myapp.exe 
 
-# add other commands after the srun here, such as archive run output
-cat prepare-env.sl
-ls -al xthi
+# Other commands needed after srun, such as copy your output filies,
+# should still be incldued in the Slurm script.
+cp <my_output_file> <target_location>/.
 EOF
 
 # Now submit the batch job
