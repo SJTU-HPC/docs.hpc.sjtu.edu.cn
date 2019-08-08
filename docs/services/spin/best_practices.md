@@ -253,6 +253,21 @@ usage. Some tags are optional, while others are required for all stacks.
 | fqdn: | Recommended | Public facing DNS Name | fqdn:foo.nersc.gov |
 | requires: | Optional | Specifies dependencies of the stack, for example external file systems | requires:gpfs |
 
+### Stack Tags
+
+Tags are created within the Rancher environment to label stacks with
+information that can be useful for identifying ownership, support and resource
+usage. Some tags are optional, while others are required for all stacks.
+
+| Tag | Status | Description | Example |
+|-----|--------|-------------|-------- |
+| owner: | Required | Developer or primary user of stack. Must be in the form of a NIM username | owner:fred |
+| staff-owner: | Required | NERSC staff member that is most familiar with or contact person for application (similar semantics to staff-owner in Service Now). Must be in the form of a NIM username | staff-owner:wilma |
+| group: | Recommended | Group that owns the stack. All members of group have permission to update or restart services in stack. Should be an LDAP group | group:csg |
+| staff-group: | Recommended | NERSC group most familiar with or contact for application | staff-group:isg |
+| fqdn: | Recommended | Public facing DNS Name | fqdn:foo.nersc.gov |
+| requires: | Optional | Specifies dependencies of the stack, for example external file systems | requires:gpfs |
+
 ## Storage
 
 A number of different types of storage are available to containers running in
