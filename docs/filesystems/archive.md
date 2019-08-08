@@ -10,33 +10,33 @@ storage of data that is not frequently accessed.
 HPSS is Hierarchical Storage Management (HSM) software developed by a
 collaboration of DOE labs, of which NERSC is a participant, and
 IBM. The HPSS system is a tape system that uses HSM software to ingest
-data onto high performance disk arrays and automatically migrate it to
-a very large enterprise tape subsystem for long-term retention. The
+data onto a high performance disk cache and automatically migrate it
+to a very large enterprise tape subsystem for long-term retention. The
 disk cache in HPSS is designed to retain many days worth of new data
 and the tape subsystem is designed to provide the most cost-effective
 long-term scalable data storage available.
 
-NERSC's HPSS system can be accessed at archive.nersc.gov through a
-variety of clients such as HSI, HTAR, ftp, pftp, and Globus. By
+NERSC's HPSS system can be accessed at `archive.nersc.gov` through a
+variety of clients such as hsi, htar, ftp, pftp, and Globus. By
 default every user has an HPSS account.
 
 ## Accessing HPSS
-You can access NERSC's HPSS in a variety of different ways. HSI and
-HTAR are the best ways to transfer data in and out of HPSS within
+You can access NERSC's HPSS in a variety of different ways. Hsi and
+htar are the best ways to transfer data in and out of HPSS within
 NERSC. Globus is recommended for transfers to or from outside
 NERSC. We also offer access via gridFTP, pftp, and ftp.
 
 ### Automatic Token Generation
 The first time you try to connect from a NERSC system (Cori, DTNs,
-etc.) using a NERSC provided client like HSI, HTAR, or pftp you will
+etc.) using a NERSC provided client like hsi, htar, or pftp you will
 be prompted for your NERSC password + one-time password which will
 generate a token stored in $HOME/.netrc. After completing this step
 you will be able to connect to HPSS without typing a password:
 
 ```
-hsi
+nersc$ hsi
 Generating .netrc entry...
-elvis@auth2.nersc.gov's password:
+Password + OTP:
 ```
 
 If you are having problems connecting see the [Troubleshooting
@@ -48,51 +48,51 @@ Users are limited to 15 concurrent sessions. This number can be
 temporarily reduced if a user is impacting system usability for
 others.
 
-### HSI
-HSI is a flexible and powerful command-line utility to access the
+### Hsi
+Hsi is a flexible and powerful command-line utility to access the
 NERSC HPSS storage system. You can use it to store and retrieve files
 and it has a large set of commands for listing your files and
 directories, creating directories, changing file permissions, etc. The
 command set has a UNIX look and feel (e.g. mv, mkdir, rm, cp, cd,
 etc.) so that moving through your HPSS directory tree is close to what
-you would find on a UNIX file system. HSI can be used both
+you would find on a UNIX file system. Hsi can be used both
 interactively or in batch scripts.
 
-The HSI utility is available on all NERSC production computer systems
+The hsi utility is available on all NERSC production computer systems
 and it has been configured on these systems to use high-bandwidth
 parallel transfers.
 
-#### HSI Usage Examples
-All of the NERSC computational systems available to users have the HSI
+#### Hsi Usage Examples
+All of the NERSC computational systems available to users have the hsi
 client already installed. To access the Archive storage system you can
-type HSI with no arguments. This will put you in an interactive
+type hsi with no arguments. This will put you in an interactive
 command shell, placing you in your home directory on the Archive
-system. From this shell, you can run the ```ls``` command to see your
-files, ```cd``` into storage system subdirectories, ```put``` files
-into the storage system and ```get``` files from it.
+system. From this shell, you can run the `ls` command to see your
+files, `cd` into storage system subdirectories, `put` files
+into the storage system and `get` files from it.
 
 In addition to command line, you can run hsi commands several
 different ways:
 
-  * Single-line execution: ```hsi "mkdir run123;  cd run123; put bigdata.0311```
-  * Read commands from a file: ```hsi "in command_file"```
-  * Read commands from standard input: ```hsi < command_file```
-  * Read commands from a pipe: ```cat command_file | hsi```
+  * Single-line execution: `hsi "mkdir run123;  cd run123; put bigdata.0311"`
+  * Read commands from a file: `hsi "in command_file"`
+  * Read commands from standard input: `hsi < command_file`
+  * Read commands from a pipe: `cat command_file | hsi`
 
-The HSI utility uses a special syntax to specify local and HPSS
+The hsi utility uses a special syntax to specify local and HPSS
 file names when using the put and get commands. The local file
 name is always on the left and the HPSS file name is always on the
 right and a ":" (colon character) is used to separate the names
 
-There are some shortcuts, for instance the command ```put
-myfile.txt``` will store the file named "myfile" from your current
+There are some shortcuts, for instance the command `put
+myfile.txt` will store the file named `myfile` from your current
 local file system directory into a file of the same name into your
 current HPSS directory. If you wanted to put it into a specific
-HPSS directory, you can also do something like ```hsi "cd run123;
-put myfile.txt"```
+HPSS directory, you can also do something like `hsi "cd run123;
+put myfile.txt"`
 
-Most of the standard Linux commands work in hsi (```cd```,
-```ls```,```rm```,```chmod```,etc.). There are a few commands that
+Most of the standard Linux commands work in hsi (`cd`,
+`ls`,`rm`,`chmod`,etc.). There are a few commands that
 are unique to hsi
 
 | Command | Function  |
@@ -102,7 +102,7 @@ are unique to hsi
 | put, mput | Copy one or more local files to HPSS |
 | cput | Conditional put - copy the file into HPSS unless it is already there |
 
-HSI also has a series of "local" commands, that act on the
+Hsi also has a series of "local" commands, that act on the
 non-HPSS side of things:
 
 | Command | Function |
@@ -114,7 +114,7 @@ non-HPSS side of things:
 | command | Issue shell command |
 
 #### Removing Older Files
-You can find and remove older files in HPSS using the ```hsi find```
+You can find and remove older files in HPSS using the `hsi find`
 command. This may be useful if you're doing periodic backups of
 directories (this is not recommended for software version control,
 instead use a versioning system like git) and want to delete older
@@ -130,55 +130,57 @@ hsi in temp1.txt
 
 #### Removing Entire Directories
 To recursively remove a directory and all of its contained
-sub-directories and files, use ```hsi rm -R <directory_name>```.
+sub-directories and files, use `hsi rm -R <directory_name>`.
 
-### HTAR
-HTAR is a command line utility that is ideal for storing groups of
+### Htar
+Htar is a command line utility that is ideal for storing groups of
 files in HPSS. Since the tar file is created directly in HPSS, it is
 generally faster and uses less local space than creating a local tar
-file then storing that into HPSS. HTAR also does inline compression so
+file then storing that into HPSS. Htar also does inline compression so
 compressing the data beforehand is unnecessary and it preserves the
-directory structure of stored files. Furthermore, HTAR creates an
+directory structure of stored files. Furthermore, htar creates an
 index file that (by default) is stored along with the archive in
 HPSS. This allows you to list the contents of an archive without
 retrieving it from tape first. The index file is only created if the
-HTAR bundle is successfully stored in the archive.
+htar bundle is successfully stored in the archive.
 
-HTAR is installed and maintained on all NERSC production systems. If
-you need to access the member files of an HTAR archive from a system
-that does not have the HTAR utility installed, you can retrieve the
+Htar is installed and maintained on all NERSC production systems. If
+you need to access the member files of an htar archive from a system
+that does not have the htar utility installed, you can retrieve the
 tar file to a local file system and extract the member files using the
 local tar utility.
 
-If stored individually, the files will likely be distributed across a
-collection of tapes, requiring long delays (due to multiple tape
-mounts) when fetching them from HPSS. On the other hand, an HTAR
-archive file will likely be stored on a single tape, requiring only a
-single tape mount when it comes time to retrieve the data.
+If you have a collection of files and store them individually with
+hsi, the files will likely be distributed across a collection of
+tapes, requiring long delays (due to multiple tape mounts) when
+fetching them from HPSS. Instead, grouping these files in an htar
+archive file that will likely be stored on a single tape, requiring
+only a single tape mount when it comes time to retrieve the data.
 
-The basic syntax of HTAR is similar to the standard tar utility:
+The basic syntax of htar is similar to the standard tar utility:
 
-``` htar -{c|K|t|x|X} -f tarfile [directories] [files]```
+```
+htar -{c|K|t|x|X} -f tarfile [directories] [files]
+```
 
-As with the standard unix tar utility the "-c" "-x" and "-t" options
-respectively function to create, extract, and list tar archive
-files. The "-K" option verifies an existing tarfile in HPSS and the
-"-X" option can be used to re-create the index file for an existing
-archive.
+As with the standard unix tar utility the `-c` `-x` and `-t` options
+create, extract, and list tar archive files. The `-K` option verifies
+an existing tarfile in HPSS and the `-X` option can be used to
+re-create the index file for an existing archive.
 
-Please note, you cannot add or append files to an existing archive.
+Please note, you cannot add or append files to an existing htar file.
 
 If your htar files are 100 GB or larger and you only want to extract
 one or two small member files, you may find faster retrieval rates by
 skipping staging the file to the HPSS disk cache by adding the
-"-Hnostage" option to your htar command.
+`-Hnostage` option to your htar command.
 
-#### HTAR Usage Examples
+#### Htar Usage Examples
 
-Create an archive with directory "nova" and file "simulator"
+Create an archive with directory `nova` and file `simulator`
 
 ```
-htar -cvf nova.tar nova simulator
+nersc$ htar -cvf nova.tar nova simulator
 HTAR: a   nova/
 HTAR: a   nova/sn1987a
 HTAR: a   nova/sn1993j
@@ -192,7 +194,7 @@ HTAR: HTAR SUCCESSFUL
 Now list the contents:
 
 ```
-htar -tf nova.tar
+nersc$ htar -tf nova.tar
 HTAR: drwx------  elvis/elvis          0 2010-09-24 14:24  nova/
 HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1987a
 HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1993j
@@ -202,16 +204,16 @@ HTAR: -rw-------  elvis/elvis        256 2010-09-24 17:36  /scratch/scratchdirs/
 HTAR: HTAR SUCCESSFUL
 ```
 
-As an example, using HSI remove the nova.tar.idx index file from HPSS
+As an example, using hsi remove the `nova.tar.idx` index file from HPSS
 (Note: you generally do not want to do this)
 ```
-hsi "rm nova.tar.idx"
-rm: /home/j/elvis/nova.tar.idx (2010/09/24 17:36:53 3360 bytes)
+nersc$ hsi "rm nova.tar.idx"
+rm: /home/e/elvis/nova.tar.idx (2010/09/24 17:36:53 3360 bytes)
 ```
 
 Now try to list the archive contents without the index file:
 ```
-htar -tf nova.tar
+nersc$ htar -tf nova.tar
 ERROR: No such file: nova.tar.idx
 ERROR: Fatal error opening index file: nova.tar.idx
 HTAR: HTAR FAILED
@@ -219,7 +221,7 @@ HTAR: HTAR FAILED
 
 Here is how we can rebuild the index file if it is accidently deleted
 ```
-htar -Xvf nova.tar
+nersc$ htar -Xvf nova.tar
 HTAR: i nova
 HTAR: i nova/sn1987a
 HTAR: i nova/sn1993j
@@ -229,7 +231,7 @@ HTAR: i /scratch/scratchdirs/elvis/HTAR_CF_CHK_61406_1285375012
 HTAR: Build Index complete for nova.tar, 5 files 6 total objects, size=28,396,544 bytes
 HTAR: HTAR SUCCESSFUL
 
-htar -tf nova.tar
+nersc$ htar -tf nova.tar
 HTAR: drwx------  elvis/elvis          0 2010-09-24 14:24  nova/
 HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1987a
 HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1993j
@@ -241,47 +243,47 @@ HTAR: HTAR SUCCESSFUL
 
 Here is how we extract a single file from a htar file
 
-```htar -xvf nova.tar simulator```
+```
+nersc$ htar -xvf nova.tar simulator
+```
 
-##### Using ListFiles to Create an HTAR Archive
+##### Using ListFiles to Create an htar Archive
 
 Rather than specifying the list of files and directories on the
-command line when creating an HTAR archive, you can place the list of
-file and directory pathnames into a ListFile and use the "-L" option.
+command line when creating an htar archive, you can place the list of
+file and directory pathnames into a ListFile and use the `-L` option.
 The contents of the ListFile must contain exactly one pathname per
 line.
 
 ```
-find nova -name 'sn19*' -print > novalist
-
-cat novalist
+nersc$ find nova -name 'sn19*' -print > novalist
+nersc$ cat novalist
 nova/sn1987a
 nova/sn1993j
 ```
 
 Now create an archive containing only these files
 ```
-htar -cvf nova19.tar -L novalist
+nersc$ htar -cvf nova19.tar -L novalist
 HTAR: a   nova/sn1987a
 HTAR: a   nova/sn1993j
-
-htar -tf nova19.tar
+nersc$ htar -tf nova19.tar
 HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1987a
 HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1993j
 ```
 
 ##### Soft Delete and Undelete
 
-The "-D" option can be used to "soft delete" one or more member files
-or directories from an HTAR archive. The files are not really
+The `-D` option can be used to "soft delete" one or more member files
+or directories from an htar archive. The files are not really
 deleted, but simply marked in the index file as deleted. A file that
 is soft-deleted will not be retrieved from the archive during an
 extract operation. If you list the contents of the archive, soft
-deleted files will have a 'D' character after the mode bits in the
+deleted files will have a `D` character after the mode bits in the
 listing:
 
 ```
-htar -Df nova.tar nova/sn1993j
+nersc$ htar -Df nova.tar nova/sn1993j
 HTAR: d  nova/sn1993j
 HTAR: HTAR SUCCESSFUL
 ```
@@ -289,7 +291,7 @@ HTAR: HTAR SUCCESSFUL
 Now list the files and note that sn1993j is marked as deleted:
 
 ```
-htar -tf nova.tar
+nersc$ htar -tf nova.tar
 HTAR: drwx------   elvis/elvis          0 2010-09-24 14:24  nova/
 HTAR: -rwx------   elvis/elvis    9331200 2010-09-24 14:24  nova/sn1987a
 HTAR: -rwx------ D elvis/elvis    9331200 2010-09-24 14:24  nova/sn1993j
@@ -298,27 +300,27 @@ HTAR: -rwx------   elvis/elvis    9331200 2010-09-24 14:24  nova/sn2005e
 To undelete the file, use the -U option:
 
 ```
-htar -Uf nova.tar nova/sn1993j
+nersc$ htar -Uf nova.tar nova/sn1993j
 HTAR: u  nova/sn1993j
 HTAR: HTAR SUCCESSFUL
 ```
 
 List the file and note that the 'D' is missing
 ```
-htar -tf nova.tar nova/sn1993j
+nersc$ htar -tf nova.tar nova/sn1993j
 HTAR: -rwx------  elvis/elvis    9331200 2010-09-24 14:24  nova/sn1993j
 ```
 
-#### HTAR Archive Verification
+#### Htar Archive Verification
 
-You can request that HTAR compute and save checksum values for each
+You can request that htar compute and save checksum values for each
 member file during archive creation. The checksums are saved in the
-corresponding HTAR index file. You can then further request that HTAR
+corresponding htar index file. You can then further request that htar
 compute checksums of the files as you extract them from the archive
 and compare the values to what it has stored in the index file.
 
 ```
-htar -Hcrc -cvf nova.tar nova
+nersc$ htar -Hcrc -cvf nova.tar nova
 HTAR: a   nova/
 HTAR: a   nova/sn1987a
 HTAR: a   nova/sn1993j
@@ -327,24 +329,24 @@ HTAR: a   nova/sn2005e
 
 Now, in another directory, extract the files and request verification
 ```
-htar -Hverify=crc -xvf nova.tar
+nersc$ htar -Hverify=crc -xvf nova.tar
 HTAR: x nova/
 HTAR: x nova/sn1987a, 9331200 bytes, 18226 media blocks
 HTAR: x nova/sn1993j, 9331200 bytes, 18226 media blocks
 ```
 
-#### HTAR Limitations
-HTAR has several limitations to be aware of:
+#### Htar Limitations
+Htar has several limitations to be aware of:
 
-* **Member File Path Length:** File path names within an HTAR
+* **Member File Path Length:** File path names within an htar
 aggregate of the form prefix/name are limited to 154 characters for
 the prefix and 99 characters for the file name. Link names cannot
 exceed 99 characters.  
 * **Member File Size:** The maximum file size the NERSC archive will
-support is approximately 20 TB. However, we recommend you aim for HTAR
-aggregate sizes of several hundred GBs. Member files within an HTAR
+support is approximately 20 TB. However, we recommend you aim for htar
+aggregate sizes of several hundred GBs. Member files within an htar
 aggregate are limited to approximately 68GB.
-* **Member File Limit:** HTAR aggregates have a default soft limit of
+* **Member File Limit:** Htar aggregates have a default soft limit of
 1,000,000 (1 million) member files. Users can increase this limit to a
 maximum hard limit of 5,000,000 member files.
 
@@ -358,18 +360,21 @@ with your Globus information or with your NERSC account information.
 
 The NERSC HPSS endpoint is called "NERSC HPSS". You can use the web
 interface to transfer files. Currently, there is no explicit ordering
-by tape of file retrievals for Globus. If you're retrieving a large
-data set with Globus, please see [this
-page](../services/globus.md#transfer-files-from-nerscs-hpss-archive-to-another-location)
-for instructions on how to best order files using HSI and then
-retrieve files using the command line interace for Globus in tape
-order.
+by tape of file retrievals for Globus. 
+
+!!! caution
+    **If you're retrieving a large data set from HPSS with Globus,
+    please see [this
+    page](../services/globus.md#transfer-files-from-nerscs-hpss-archive-to-another-location)
+    for instructions on how to best order files using hsi and then
+    retrieve files using the command line interace for Globus in tape
+    order.**
 
 ### GridFTP, pftp, and ftp
 Files can be transferred between HPSS and remote sites via the
 standard internet protocol ftp, however, being non-parallel the
 performance of ftp will probably not be as good as other methods such
-as gridFTP. Note that on NERSC systems ftp translates to pftp so it
+as Globus. Note that on NERSC systems ftp translates to pftp so it
 is in fact parallel. There is no sftp (secure ftp) or scp access.
 
 As standard ftp clients only support authentication via the
@@ -384,11 +389,11 @@ accessed.
 The best guide for how files should be stored in HPSS is how you might
 want to retrieve them. If you are backing up against accidental
 directory deletion / failure, then you would want to store your files
-in a structure where you use HTAR to separately bundle up each
+in a structure where you use htar to separately bundle up each
 directory. On the other hand, if you are archiving data files, you
 might want to bundle things up according to month the data was taken
-or detector run characteristics, etc. The optimal size for HTAR
-bundles is 100 - 500 GBs, so you may need to do several HTAR bundles
+or detector run characteristics, etc. The optimal size for htar
+bundles is 100 - 500 GBs, so you may need to do several htar bundles
 for each set depending on the size of the data.
 
 ### Group Small Files Together
@@ -468,7 +473,7 @@ the 100 - 500 GB range. You can use `tar` and `split` to break up
 large aggregates or large files into 500 GB sized chunks:
 
 ```
-tar cvf - myfiles* | split -d --bytes=500G - my_output_tarname.tar.
+nersc$ tar cvf - myfiles* | split -d --bytes=500G - my_output_tarname.tar.
 ```
 
 This will generate a number of files with names like
@@ -477,14 +482,14 @@ use "hsi put" to archive into HPSS. When you retrieve these files, you
 can recombine them with cat
 
 ```
-cat my_output_tarname.tar.* | tar xvf -
+nersc$ cat my_output_tarname.tar.* | tar xvf -
 ```
 
 ### Accessing HPSS Data Remotely
 We recommend a two-stage process to move data to / from HPSS and a
 remote site. Use Globus to transfer the data between NERSC and the
 remote site (your scratch directory would make a useful temporary
-staging point) and use HSI or HTAR to move the data into HPSS.
+staging point) and use hsi or htar to move the data into HPSS.
 
 When connecting with HPSS via ftp or pftp, it is not uncommon to
 encounter problems due to firewalls at the client site. Often you will
@@ -504,16 +509,16 @@ Token".
 
 #### Firewalls and External Access
 Most firewalls are configured to deny incoming network connections
-unless access is explicitly granted. Systems running HTAR or HSI that
+unless access is explicitly granted. Systems running htar or hsi that
 want to connect to the archive at NERSC must accept network
 connections which are initiated by the HPSS Movers (helper machines
 that initiate multi-stream data movement into and out of the
-archive). By default HSI is configured with Firewall Mode set to on
+archive). By default hsi is configured with Firewall Mode set to on
 and will usually work without any firewall changes. To configure your
 system to allow connections from HPSS Movers at NERSC, you will need
 to grant access for TCP connections originating from the
-128.55.32.0/22, 128.55.80.0/21, 128.55.88.0/24, 128.55.136.0/22, and
-128.55.207.0/24 subnets.
+`128.55.32.0/22`, `128.55.80.0/21`, `128.55.88.0/24`, `128.55.136.0/22`, and
+`128.55.207.0/24` subnets.
 
 
 ### Use the Xfer Queue
@@ -532,7 +537,7 @@ Users can check their HPSS usage and quotas with the hpssquota command
 on Cori. You view usages on a user level:
 
 ```
-cori$ hpssquota -u usgtest
+nersc$ hpssquota -u usgtest
 HPSS Usage for User usgtest
 REPO                          STORED [GB]      REPO QUOTA [GB]     PERCENT USED [%]
 -----------------------------------------------------------------------------------
@@ -656,14 +661,14 @@ Some frequently encountered issues and how to solve them.
 
 ### Trouble connecting
 The first time you try to connect using a NERSC provided client like
-HSI, HTAR, or PFTP you will be prompted for your NERSC password +
+hsi, htar, or PFTP you will be prompted for your NERSC password +
 one-time password which will generate a token stored in
 $HOME/.netrc. This allows you to connect to HPSS without typing a
 password. However, sometimes this file can become out of date or
 otherwise corrupted. This generates errors that look like this:
 
 ```
-% hsi
+nersc$ hsi
 result = -11000, errno = 29
 Unable to authenticate user with HPSS.
 result = -11000, errno = 9
@@ -681,8 +686,8 @@ problem persists contact account support.
 ### Cannot transfer files using htar
 Htar requires the node you're on to accept incoming connections from
 its movers. This is not possible from a compute node at NERSC, so htar
-transfers will fail. Instead we recommend you use our special xfer
-queue for data transfers
+transfers will fail. Instead we recommend you use our special [xfer
+queue](../../jobs/examples/#xfer-queue) for data transfers
 
 ### Globus transfer errors
 Globus transfers will fail if you don't have permission to read the
