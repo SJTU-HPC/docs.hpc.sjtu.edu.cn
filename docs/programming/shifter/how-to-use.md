@@ -163,11 +163,12 @@ shifterimg --user buser  pull auser/private:latest
 ## Shifter Modules
 
 Shifter has functionality that can be toggled on or off using modules
-flags. By default, the "mpich" module is enabled at NERSC which allows
+flags. By default, the `mpich` module is enabled at NERSC which allows
 communication between nodes using the high-speed
-interconnect. However, you can override this default by invoking
-shifter with the "--modules" flag. Currently, the only allowable
-values for modules are:
+interconnect. However, you can override this default by adding the
+`#SBATCH --modules=<module name>` flag to your batch script (this flag can also be
+applied directly to the shifter command, but that's not
+recommended). Currently, the only allowable values for modules are:
 
 | Module Name | Function  |
 |-------------|-----------|
@@ -176,16 +177,24 @@ values for modules are:
 |cvmfs 	|Makes access to DVS shared [CVMFS software stack](../../services/cvmfs.md) available at /cvmfs in the image|
 |none 	|Turns off all modules|
 
+!!! tip
+    **If you're encountering glibc errors when you try to run MPI in
+    your shifter image, running with the `mpich-cle6` module enabled
+    may fix the issue. However, these older mpich libraries may not be
+    retained during the next upgrade, so ultimately we recommend you
+    remake your image with a newer OS.**
+
 Modules can be used together. So if you wanted MPI functionality and
-access to cvmfs, use "shifter --modules=mpich,cvmfs". Using the flag
-"none" will disable all modules (even if you list others in the
+access to cvmfs, use `#SBATCH --modules=mpich,cvmfs`. Using the flag
+`none` will disable all modules (even if you list others in the
 command line).
 
 ## Running Jobs in Shifter Images
 
-Shifter images can only be accessed via the batch system. For each of
-the examples below, you can submit them to the batch system with
-`sbatch <your_shifter_job_script_name.sh>`.
+For each of the examples below, you can submit them to the batch
+system with `sbatch <your_shifter_job_script_name.sh>`.
+
+### Basic Job Script
 
 Here's the syntax for a basic Shifter script:
 
@@ -213,16 +222,28 @@ the srun since it runs on a single core by default:
 shifter python myPythonScript.py args
 ```
 
+###Interactive Shifter Jobs
+
 Sometimes it may be helpful during debugging to run a Shifter image
-interactively. You can do this using the batch system as well. The
-following commands will give you an interactive bash shell in your
-Shifter image on a single node. Please note that for this to work you
-must have bash installed in your image.
+interactively. You can do this on any Cori login node or via the batch
+system. To get an interactive session on a login node use
+
+```Shell
+shifter --image=docker:image_name:latest /bin/bash
+```
+or via the batch system to get an interactive bash shell in your
+Shifter image on a single node. 
+
 
 ```Shell
 salloc -N 1 -p debug --image=docker:image_name:latest -t 00:30:00
 shifter /bin/bash
 ```
+
+Please note that for these examples to work you must have bash
+installed in your image.
+
+###Multiple Shifter Images in a Single Job
 
 You can also run several different Shifter images inside of a single
 job. The script below starts two images. The first runs only once and
@@ -273,6 +294,8 @@ two locations inside the container:
 #SBATCH --volume="/global/project/projectdirs/mpcc:/output;/global/project/projectdirs/mpccc:/input"
 ```
 
+###Temporary Xfs Files for Optimizing IO
+
 Shifter also has the ability to create temporary xfs files for each
 node. These files are created on the Lustre file system, but because
 all of the metadata operations are taking place on a single node the
@@ -289,6 +312,12 @@ batch script:
 
 This will create a xfs file with a 200 GB capacity for every node in
 the job and mount it at `/tmp` in the image.
+
+!!! tip
+
+    **If your job is frequently accessing many temporary files that
+      are local to the node, you may find better performance writing
+      these files to the xfs file.**
 
 ## Using NERSC's Private Registry
 
