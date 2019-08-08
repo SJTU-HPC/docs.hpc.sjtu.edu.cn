@@ -11,7 +11,7 @@ and write operations access multiple OST's concurrently. File striping
 is a way to increase I/O performance since writing or reading from
 multiple OST's simultaneously increases the available I/O bandwidth.
 
-# NERSC Striping Shortcuts
+## NERSC Striping Recommendation
 
 *    The default striping is set to  1 on Cori's $SCRATCH.
 *    This means that each file created with the default striping is split
@@ -25,6 +25,7 @@ multiple OST's simultaneously increases the available I/O bandwidth.
 *    Users who want more detail should read the sections below and open a
      ticket with [NERSC Consulting](https://help.nersc.gov) if there are
      additional questions.
+
 
 NERSC also provide empirical recommendations for striping based on I/O pattern
 
@@ -98,7 +99,7 @@ stripe_medium myOutputDir
 srun -n 10 ./a.out
 ```
 
-# More Details on File Striping
+## Lustre Striping
 
 To set striping for a file or directory use the command
 

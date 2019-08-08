@@ -50,6 +50,4 @@ This has been described [here.](https://github.com/rainwoodman/python-mpi-bcast)
 
 Combining mpi4py and the Python subprocess module may be a suitable way to manage embarrassingly parallel execution. Typically a user writes a Python+mpi4py driver code that runs another program through subprocess.  This may not be a particularly stable execution model, but has been observed to work with the Cray MPICH used to build mpi4py if the external worker code is a compiled executable (C, C++, Fortran) compiled without the Cray wrappers (cc, CC, ftn).  That is, via gcc, g++ or gfortran.
 
-## H5py
 
-Basic usage and best practice of serial/parallel H5py.

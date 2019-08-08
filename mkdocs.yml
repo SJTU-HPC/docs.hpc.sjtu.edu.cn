@@ -88,8 +88,8 @@ nav:
     - Arithmetic Intensity: performance/arithmetic_intensity.md
     - I/O:
         - Overview : performance/io/index.md
-        - Lustre: performance/io/lustre/index.md
         - I/O libraries: performance/io/library/index.md
+        - Lustre: performance/io/lustre/index.md
         - Burst Buffer: performance/io/bb/index.md
         - KNL: performance/io/knl/index.md
     - Portability: performance/portability.md

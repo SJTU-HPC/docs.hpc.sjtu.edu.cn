@@ -157,7 +157,7 @@ the mpi4py documentation) to use `mpi4py`.
 
 ### `h5py` with MPI-IO
 
-TBD
+[H5Py](../../libraries/hdf5/h5py.md)
 
 ## Collaborative Installations
 
