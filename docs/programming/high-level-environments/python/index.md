@@ -57,17 +57,37 @@ Otherwise `conda` may make a decision that surprises you.
 
 !!! tip "Should I use `source activate\deactivate` or `conda activate\deactivate`?"
     You may have noticed messages like:
-    `DeprecationWarning: 'source deactivate' is deprecated. Use 'conda deactivate'.`
 
-    **Short answer**: use `source activate` and `source deactivate` for now.
+    ```
+     To activate this environment, use
+         $ conda activate <environment>
+     To deactivate an active environment, use
+         $ conda deactivate
+    ```
 
-    **Long answer**: `conda activate` will try to modify your .bashrc
-    (assuming Bash shell).  At NERSC .bashrc is owned by a restricted user,
-    not by you, and so this does not work. Part of the issue is that conda
+    **Short answer**:
+
+    - Use `source activate <environment>` or
+    `source activate && conda activate <environment>`
+
+    - Use `conda deactivate` instead of `source deactivate`
+
+    **Long answer**:
+    Using `conda activate <environment>` will fail with a message to
+    run conda init <shell>. At NERSC, this is not possible because `conda init` will
+    try to modify the shell initialization script (.bashrc for bash), which is
+    owned by a restricted user, not by you. Running `source activate` (no environment
+    specified) will effectively emulate the functionality of `conda init <shell>`.
+    Once, conda is activated, either by `source activate && conda activate
+    <environment>` or `source activate <environment>`, it is then possible (and
+    recommended) to use the modern `conda deactivate` to deactivate the conda
+    environment.
+
+    Part of the issue is that conda
     does not provide a way for us to edit this configuration. The other part
     is how we have configured our own system. We are hoping that one or both
     of these issues can be resolved soon so we can switch to the more modern
-    `conda activate\deactivate`.
+    `conda activate`.
 
 Before it installs anything `conda create` will show you what package
 management steps it will take and where the installation will go.  You
