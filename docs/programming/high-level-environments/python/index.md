@@ -170,16 +170,14 @@ using a recipe like the following:
     module swap PrgEnv-intel PrgEnv-gnu
     module unload craype-hugepages2M
     python setup.py build --mpicc="$(which cc) -shared"
-    python setup.py build_exe --mpicc="$(which cc) -dynamic"
     python setup.py install
-    python setup.py install_exe
 
-The `build_exe` and `install_exe` steps install `python2.7-mpi` which
-can easily be relinked to `python-mpi` if the user prefers.  The
-MPI-enabled Python interpreter is not required
-(see
+The MPI-enabled Python interpreter is not required (see
 [this page](https://mpi4py.readthedocs.io/en/stable/appendix.html#mpi-enabled-python-interpreter) in
-the mpi4py documentation) to use `mpi4py`.
+the mpi4py documentation).  To install it however, use these additional steps:
+
+    python setup.py build_exe --mpicc="$(which cc) -dynamic"
+    python setup.py install_exe
 
 Initializing MPI on a login node will not work at NERSC.  This is what you will
 see if you try to do it:
