@@ -161,6 +161,31 @@ MPI-enabled Python interpreter is not required
 [this page](https://mpi4py.readthedocs.io/en/stable/appendix.html#mpi-enabled-python-interpreter) in
 the mpi4py documentation) to use `mpi4py`.
 
+Initializing MPI on a login node will not work at NERSC.  This is what you will
+see if you try to do it:
+
+    nersc$ module load python
+    nersc$ python -c 'from mpi4py import MPI'
+    [Fri Aug  9 09:26:55 2019] [unknown] Fatal error in PMPI_Init_thread: Other MPI error, error stack:
+    MPIR_Init_thread(537):
+    MPID_Init(246).......: channel initialization failed
+    MPID_Init(647).......:  PMI2 init failed: 1
+    Aborted
+
+If you see this kind of output from a batch job or in an interactive allocation
+then it means something different.  It likely means that `MPI_Init()` exceeded
+a timeout, perhaps due to I/O issues.  This is more likely to occur when the
+file system you are importing packages from isn't optimized for serving up code
+to the compute nodes.  Increasing the timeout is a temporary fix:
+
+    export PMI_MMAP_SYNC_WAIT_TIME=300
+
+but it just gives your job more time to start up.  What you want is for your
+job to start up more quickly.  See the documentation on
+[`/global/common/software`](../../../../filesystems/global-common)
+or better yet,
+[Shifter.](../../shifter/overview.md)
+
 !!! tip "About Huge Memory Pages (As of 2019-08-02)"
     Note also that we recommend you unload craype-hugepages2M before
     compiling.  There's an issue with how Python and huge memory pages
