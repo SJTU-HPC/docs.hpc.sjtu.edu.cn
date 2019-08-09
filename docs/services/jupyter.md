@@ -46,6 +46,24 @@ Generally users should run a notebook service on Cori, unless there's a reason t
     please be careful not to use too many CPUs or too much memory.  Treat them
     like regular login nodes.
 
+## Using Jupyter at NERSC for Events
+
+Jupyter at NERSC can be used for demos, tutorials, or workshops.
+You can even use training accounts with Jupyter at NERSC.
+If you plan to use Jupyter in this way, we ask that you observe the following guidelines:
+
+* If 20 people or less at your event will be logging into jupyter.nersc.gov, there's no need to let us know ahead of time.
+  We should be able to handle that level of increased load without any issues.
+  Just be sure you don't schedule your event on a day when there is scheduled maintenance.
+* For events where more than 20 people are logging in, please send us a heads up **at least 1 month in advance** via [ticket.](https://help.nersc.gov)
+  We've been able to absorb events of 50-100 people without any issues but we still want to know about your event.
+  This lets us keep an eye on things while your event is going and hopefully keep things going smoothly.
+* In either case please let us know if you have any special requirements or would like to do something more experimental.
+  That is likely to incur a need for more lead time, but we're willing to work with you if there aren't already similar events coming up.
+  For this case, please contact us **at least 2 months in advance** via ticket.
+
+These are not hard and fast rules, but we're more likely to be able to help if we have advanced notice.
+
 ## JupyterLab
 
 [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/)
@@ -206,7 +224,7 @@ Create the following kernel spec (you'll need to make the `$SCRATCH/tmpfiles`, `
         "PYTHONPATH": "/usr/local/bin/spark-2.3.0/python/lib/py4j-0.10.6-src.zip:/usr/local/bin/spark-2.3.0/python/",
         "PYSPARK_PYTHON": "/root/anaconda3/bin/python",
         "PYSPARK_DRIVER_PYTHON": "ipython3",
-        "JAVA_HOME":"/usr" 
+        "JAVA_HOME":"/usr"
     }
 }
 ```
