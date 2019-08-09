@@ -55,6 +55,20 @@ Otherwise `conda` may make a decision that surprises you.
     [installation outputs]
     source activate myenv
 
+!!! tip "Should I use `source activate\deactivate` or `conda activate\deactivate`?"
+    You may have noticed messages like:
+    `DeprecationWarning: 'source deactivate' is deprecated. Use 'conda deactivate'.`
+
+    **Short answer**: use `source activate` and `source deactivate` for now.
+
+    **Long answer**: `conda activate` will try to modify your .bashrc
+    (assuming Bash shell).  At NERSC .bashrc is owned by a restricted user,
+    not by you, and so this does not work. Part of the issue is that conda
+    does not provide a way for us to edit this configuration. The other part
+    is how we have configured our own system. We are hoping that one or both
+    of these issues can be resolved soon so we can switch to the more modern
+    `conda activate\deactivate`.
+
 Before it installs anything `conda create` will show you what package
 management steps it will take and where the installation will go.  You
 will be asked for confirmation before installation proceeds.
