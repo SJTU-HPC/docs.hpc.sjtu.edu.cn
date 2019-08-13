@@ -1,5 +1,11 @@
 # TotalView
 
+!!! note
+	TotalView does not work properly on Cori after the recent
+	system OS upgrade to CLE7. The vendor is working on a fix.
+	Please use a different debugger such as [DDT](ddt.md) for
+	a time being.
+
 ## Description
 
 TotalView from Rogue Wave Software is a parallel debugging tool that
@@ -10,10 +16,10 @@ command line interface (CLI) environments for debugging. The
 performance of the GUI can be greatly improved if used in conjunction
 with
 free
-[NX software](https://www.nersc.gov/users/connecting-to-nersc/using-nx/).
+[NX software](../../connect/nx.md).
 
 The
-[TotalView documentation](https://support.roguewave.com/documentation/tvdocs/en/current/) web
+[TotalView documentation](https://docs.roguewave.com/en/totalview/current-main) web
 page is a good resource for learning more about some of the advanced
 TotalView features.
 
