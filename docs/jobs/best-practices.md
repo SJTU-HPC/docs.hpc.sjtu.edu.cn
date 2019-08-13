@@ -2,17 +2,30 @@
 
 ## Do Not Run Production Jobs in Global Homes
 
-As a general best practice, we recommend users to do production runs from your SCRATCH 
-instead of HOME.  
+As a general best practice,users should do production runs from
+`$SCRATCH` instead of `$HOME`.
 
-Home is meant for permanent and relatively small storage. It is not tuned to perform well 
-for parallel jobs. Home is perfect for storing files such as source codes and shell scripts, 
-etc. Please note that while building software in /global/home is generally good, it is best to install dynamic libraries that are used on compute nodes in [global common](../../filesystems/global-common) for best performance. 
+`$HOME` is meant for permanent and relatively small storage. It is not
+tuned to perform well for parallel jobs. Home is perfect for storing
+files such as source codes and shell scripts, etc. Please note that
+while building software in /global/home is generally good, it is best
+to install dynamic libraries that are used on compute nodes
+in [global common](../../filesystems/global-common) for best
+performance.
 
-SCRATCH is meant for large and temporary storage. It is optimized for read and write 
-operations. SCRATCH is perfect for staging data and performing parallel computations. 
-Running in SCRATCH also helps to improve the responsiveness of the global file 
-systems (global homes and global project) in general.
+`$SCRATCH` is meant for large and temporary storage. It is optimized
+for read and write operations. `$SCRATCH` is perfect for staging data
+and performing parallel computations.  Running in `$SCRATCH` also helps
+to improve the responsiveness of the global file systems (global homes
+and global project) in general.
+
+## Specify account
+
+For users who are members of multiple NERSC repositories charges are
+made to the default account, as set in [NIM](https://nim.nersc.gov),
+unless the `#SBATCH --account=<NERSC repository>` flag has been
+set. It is good practice to always set the account flag to ensure the
+appropriate allocation is charged.
 
 ## Time Limits
 
