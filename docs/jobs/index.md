@@ -69,6 +69,10 @@ At a minimum a job script must include number of nodes, time, type of
 nodes (constraint), and quality of service (QOS). If a script does not
 specify any of these options then a default may be applied.
 
+!!! tip
+	It is good practice to always set the account option
+	(`--account = <NERSC Repository>`).
+
 The full list of directives is documented in the man pages for the
 `sbatch` command (see. `man sbatch`). Each option can be specified
 either as a directive in the job script:

@@ -54,7 +54,13 @@ can share nodes.
 
 ## Charging
 
-Jobs are charged by the node-hour in every QOS except shared.
+Jobs are charged by the node-hour in every QOS except shared. 
+
+!!! warn
+	For users who are members of multiple NERSC repositories
+	charges are made to the default account, as set
+	in [NIM](https://nim.nersc.gov), unless the `#SBATCH
+	--account=<NERSC repository>` flag has been set.
 
 !!! example
 	A job which ran for 35 minutes on 3 KNL nodes on Cori with
