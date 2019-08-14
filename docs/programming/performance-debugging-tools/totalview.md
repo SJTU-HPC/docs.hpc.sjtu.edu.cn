@@ -1,11 +1,5 @@
 # TotalView
 
-!!! note
-	TotalView does not work properly on Cori after the recent
-	system OS upgrade to CLE7. The vendor is working on a fix.
-	Please use a different debugger such as [DDT](ddt.md) for
-	a time being.
-
 ## Description
 
 TotalView from Rogue Wave Software is a parallel debugging tool that
@@ -74,6 +68,13 @@ to Slurm for batch scheduling.:
 ```shell
 nersc$ totalview srun -a -n numTasks ./testTV_ex
 ```
+
+!!! note
+	There is an issue with starting TotalView normally after
+	the recent system OS upgrade to CLE7. The vendor is working
+	on a fix.  Until that is fixed, please add the `-nomrnet`
+	flag to the above command, as in `totalview -nomrnet srun
+	-a ...`.
 
 The TotalView startup GUI will pop up and show debugging startup
 parameters. After reviewing them, click OK.
