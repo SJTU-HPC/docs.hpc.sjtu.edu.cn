@@ -40,11 +40,17 @@ The idea is to package up an application and its entire software stack into a Li
 This localizes the module files and associated shared object libraries to the compute nodes, eliminating contention on the shared file system.
 Using Shifter results in tremendous speed-ups for launching Python applications.
 
+### Dask
+
+Dask is a framework that allows Python to flexibly scale from small to large
+systems (even Cori-sized!). You can read more about it on our Dask page
+[here](dask.md).
+
 ### Other Approaches
 
 There are a few other interventions that we are aware of that can help users scale their Python applications at NERSC.
 One is to bundle up Python and the dependency stack and broadcast it to the compute nodes where it is placed into /dev/shm.
-This has been described [here.](https://github.com/rainwoodman/python-mpi-bcast).
+This has been described [here](https://github.com/rainwoodman/python-mpi-bcast).
 
 ## Combining MPI4PY and Subprocess
 
