@@ -20,7 +20,7 @@ minute Dask demo [here](https://www.youtube.com/watch?v=ods97a5Pzw0).
 * It runs on both CPUs and GPUs.  
 * It is robust. A nanny process can revive dead workers and the job can continue.  
 * It has a very nice Bokeh status monitoring page.  
-* It can be used on an interactive node or in batch script.
+* It can be used on an interactive node or in a batch script.
 
 # Dask on Cori
 We reccomend first creating your own conda environment using Python 3 which
