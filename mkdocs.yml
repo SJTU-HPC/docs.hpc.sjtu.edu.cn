@@ -165,6 +165,7 @@ nav:
             - Best Practices : programming/high-level-environments/python/best-practices.md
             - Python on Cori KNL : programming/high-level-environments/python/python-on-cori-knl.md
             - Profiling Python : programming/high-level-environments/python/profiling-python.md
+            - Dask : programming/high-level-environments/python/dask.md
         - Julia : programming/high-level-environments/julia.md
 #       - Matlab : programming/high-level-environments/matlab.md
         - R : programming/high-level-environments/r.md
