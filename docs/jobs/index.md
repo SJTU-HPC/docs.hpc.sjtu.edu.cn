@@ -38,7 +38,7 @@ parallel tasks.
 When you submit the job, Slurm responds with the job's ID, which will
 be used to identify this job in reports from Slurm.
 
-```
+```bash
 nersc$ sbatch first-job.sh
 Submitted batch job 864933
 ```
@@ -77,14 +77,14 @@ The full list of directives is documented in the man pages for the
 `sbatch` command (see. `man sbatch`). Each option can be specified
 either as a directive in the job script:
 
-```bash
+```slurm
 #!/bin/bash
 #SBATCH -N 2
 ```
 
 Or as a command line option when submitting the script:
 
-```
+```bash
 nersc$ sbatch -N 2 ./first-job.sh
 ```
 
@@ -129,12 +129,26 @@ variables. This has two important consequences:
 
 ## Monitoring jobs
 
+Continuously running squeue/sqs with e.g. watch and especially
+multiple instances of "watch squeue/sqs" is not allowed. When many
+users are doing this at once it impacts the performance of the job
+scheduler which is a shared resource.
+
+If you must monitor your workload run only single instances of
+`squeue` or `sqs` If `watch` is *essential* to your workflow then
+limit the refresh interval to 1 min (`watch -n 60`) and be sure to
+terminate the process when you are not actively using it.
+
+Additionally the `sacct` command (`sacct -X -s pd,r`) uses less
+expensive queries for much of the same information, but the same
+advice about `watch` applies.
+
 ### sacct
 
 `sacct` is used to report job or job step accounting information about
 active or completed jobs.
 
-```
+```bash
 nersc$ sacct -j 864932
        JobID    JobName  Partition    Account  AllocCPUS      State ExitCode 
 ------------ ---------- ---------- ---------- ---------- ---------- -------- 
@@ -154,7 +168,7 @@ from several sources.
     See `man sqs` for details about all available options, and
     `man squeue` for information about job state and reason codes.
 
-```
+```bash
 nersc$ sqs
 JOBID   ST  USER   NAME         NODES REQUESTED USED  SUBMIT               PARTITION SCHEDULED_START      REASON
 864933  PD  elvis  first-job.*  2     10:00     0:00  2018-01-06T14:14:23  regular   avail_in_~48.0_days  None
@@ -166,7 +180,7 @@ JOBID   ST  USER   NAME         NODES REQUESTED USED  SUBMIT               PARTI
 step. For example, one may wish to see the maximum memory usage (resident set
 size) of all tasks in a running job.
 
-```
+```bash
 nersc$ sstat -j 864934 -o JobID,MaxRSS
        JobID     MaxRSS 
 ------------ ---------- 
@@ -178,7 +192,7 @@ at the [SchedMD website](https://slurm.schedmd.com/sstat.html).
 
 ### Email notification
 
-```bash
+```slurm
 #SBATCH --mail-type=begin,end,fail
 #SBATCH --mail-user=user@domain.com
 ```
@@ -191,21 +205,30 @@ changes will not be applied.
 
 ### Change timelimit
 
-```
+```bash
 nersc$ scontrol update jobid=$jobid timelimit=$new_timelimit
 ```
 
 ### Change QOS
 
-```
+```bash
 nersc$ scontrol update jobid=$jobid qos=$new_qos
 ```
+
+### Change repository
+
+```bash
+nersc$ scontrol update jobid=$jobid account=$new_repo_to_charge
+```
+
+!!! note
+	The new repo must be eligible to run the job.
 
 ### Hold jobs
 
 Prevent a pending job from being started:
 
-```
+```bash
 nersc$ scontrol hold $jobid
 ```
 
@@ -213,7 +236,7 @@ nersc$ scontrol hold $jobid
 
 Allow a held job to accrue priority and run:
 
-```
+```bash
 nersc$ scontrol release $jobid
 ```
 
@@ -221,13 +244,13 @@ nersc$ scontrol release $jobid
 
 Cancel a specific job:
 
-```
+```bash
 nersc$ scancel $jobid
 ```
 
 Cancel all jobs owned by a user
 
-```
+```bash
 nersc$ scancel -u $USER
 ```
 
