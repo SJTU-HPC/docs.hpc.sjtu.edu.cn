@@ -157,8 +157,8 @@ the modules facility to load VisIt and then launch the application by
 typing visit using the additional **-cli -nowin** options as shown in
 the example below:
 
-```
-$ module load visit
+```bash
+nersc$ module load visit
 ```
 
 To execute a predefined VisIt python script on start-up use the **-s**
@@ -169,7 +169,7 @@ following command line:
 General Format:
 
 ```shell
- $ visit -cli -nowin -l sbatch/srun -p "Queue to use for submitting job" -np "Number of processors" -t "Wall time limit for job" -s "script name"
+cori$ visit -cli -nowin -l sbatch/srun -p "Queue to use for submitting job" -np "Number of processors" -t "Wall time limit for job" -s "script name"
 ```
 
 ```shell
@@ -247,15 +247,15 @@ To use a version of VisIt other than the default, include the version
 number on the module load line, e.g., to use version 2.10.0:
 
 ```
-$ module load visit/2.12.0 
+nersc$ module load visit/2.12.0 
 ```
 
 For a list of additional command line options use:
 
 ```
-$ module load visit                     #Load the VisIt module
-$ visit -help                           #List most common command line options
-$ visit -fullhelp                       #List all command line options
+nersc$ module load visit                     #Load the VisIt module
+nersc$ visit -help                           #List most common command line options
+nersc$ visit -fullhelp                       #List all command line options
 ```
 
 For more detailed information about using VisIt's CLI
