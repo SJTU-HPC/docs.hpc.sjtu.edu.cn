@@ -2,7 +2,6 @@ Cori KNL (Phase II) has different architecture from Cori Haswell (Phase I). In o
 achieve the best IO performance, applications need to leverage the new features in KNL
 and avoid using the chip improperly. Based on our study and interaction with different applications,
 we have collected the best practices for KNL IO, and we are continuously working on this list.
-If you spot anything unusual issue or exciting practice regarding Cori IO, please email us consult@nersc.gov
 
 # Core Specialization
 
