@@ -32,8 +32,8 @@ cc  ...   (for C code)
 CC  ...   (for C++ code)
 ```
 
-For questions about HDF5 on any NERSC systems, please send email to
-consult@nersc.gov. Additional information is available at The HDF Group.
+For questions about HDF5 on any NERSC systems, please
+contact [NERSC Consulting](https://help.nersc.gov).
 
 ## Availability at NERSC
 
@@ -41,7 +41,6 @@ consult@nersc.gov. Additional information is available at The HDF Group.
     * Cori: 1.10.1.1, 1.10.2.0 (default, recommended)
 * NERSC's versions:
     * Cori: 1.10.1,  1.10.2 (default)
-
 
 ## Further Information 
 

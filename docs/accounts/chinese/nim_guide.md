@@ -48,8 +48,11 @@ Another NIM session is currently active on your computer. If you continue to log
 
 ### 无法使用NIM？
 
-如需初始化或重置NIM密码，请联系NERSC账号帮助办公室 (800-66-NERSC, 菜单选项 2; 或 510-486-8612; 或发电邮至 [accounts@nersc.gov](mailto:accounts@nersc.gov)。
-如无法登录，请联系NERSC技术顾问 (800-66-NERSC, 菜单选项 3; 或 510-486-8611; 或发电邮至 [consult@nersc.gov](mailto:consult@nersc.gov)
+如需初始化或重置NIM密码，请联系NERSC账号帮助办公室 (800-66-NERSC, 菜单
+选项 2; 或 510-486-8612; 或发电邮
+至 [accounts@nersc.gov](mailto:accounts@nersc.gov)。如无法登录，请联系
+NERSC技术顾问 (800-66-NERSC, 菜单选项 3; 或 510-486-8611; 或发电邮
+至 [NERSC Consulting](https://help.nersc.gov)
 
 ## NIM菜单导航
 

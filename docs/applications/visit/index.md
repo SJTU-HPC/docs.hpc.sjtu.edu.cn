@@ -104,11 +104,7 @@ The VisIt installations on NERSC systems (e.g. Cori) are provided for
 the purpose of running the parallel remote visualization backend and
 for running scripts via VisIt's Python Command Line Interface
 (CLI). If you need to run VisIt's GUI, please install a compatible
-version of VisIt on your local workstation (recommended). See
-Installing VisIt for information about how to install/setup VisIt with
-support for remote visualization at NERSC. If it does not seem to
-work, check the Troubleshooting section below for suggestions, or
-contact NERSC Help at consult@nersc.gov.
+version of VisIt on your local workstation (recommended).
 
 ### Remote Visualization
 
