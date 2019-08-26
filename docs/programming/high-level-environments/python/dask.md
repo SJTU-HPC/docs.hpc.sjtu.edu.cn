@@ -23,7 +23,7 @@ minute Dask demo [here](https://www.youtube.com/watch?v=ods97a5Pzw0).
 * It can be used on an interactive node or in a batch script.
 
 # Dask on Cori
-We reccomend first creating your own conda environment using Python 3 which
+We recommend first creating your own conda environment using Python 3 which
 we'll call `my_dask_env` in this example (see [here](index.md) for more info)
 and then installing Dask distributed via conda-forge:
 ```
@@ -192,7 +192,7 @@ distributed.scheduler - INFO - Close client connection: Client-d540277a-bdf5-11e
 Congratulations! You just ran your first Dask program on Cori!
 
 ## Batch Dask example
-Ok, so you're comforable with Dask and you're ready to start submitting
+Ok, so you're comfortable with Dask and you're ready to start submitting
 Dask jobs through our batch system. Here is an example that we'll
 call `dask_batch.sh` that demonstrates how
 to run our same `test_dask.py` program that we showed above as a batch job.

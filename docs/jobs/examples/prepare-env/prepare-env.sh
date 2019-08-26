@@ -24,7 +24,7 @@ cat << EOF > prepare-env.sl
 srun -n 16 -c 32 --cpu_bind=cores ./myapp.exe 
 
 # Other commands needed after srun, such as copy your output filies,
-# should still be incldued in the Slurm script.
+# should still be included in the Slurm script.
 cp <my_output_file> <target_location>/.
 EOF
 
