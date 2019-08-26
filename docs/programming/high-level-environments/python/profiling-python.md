@@ -287,7 +287,7 @@ map python your_app.py ...
     We suggest instead our most recent module,
     `module load python/3.7-anaconda-2019.07`. There are no problems
     with Anacaonda Python 3.7 (or other versions of Python 3).
-    If you must use Python 3.6, we reccomend
+    If you must use Python 3.6, we recommend
     that you try Intel Python. You can more information about Intel
     Python [here](frequently-asked-questions.md).
 

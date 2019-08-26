@@ -22,7 +22,7 @@ computational meshes**, including two- and three-dimensional
 rectilinear, curvilinear, and unstructured meshes as well as
 structured AMR and CSG meshes (see the VisIt FAQ
 for
-[a list of supported formats](https://wci.llnl.gov/simulation/computer-codes/visit/faqs/faq11)). VisIt
+[a list of supported formats](https://wci.llnl.gov/simulation/computer-codes/visit/faqs/faq04)). VisIt
 provides extensive functionality for interactive and static
 visualization and analysis of extremely large data and also has the
 ability to **animate** data, allowing users to see the time evolution
@@ -80,7 +80,7 @@ at examples of visualizations similar to what you want to do, or from
 your science domain, can also be helpful (see Examples below). VisIt
 supports a large variety of data formats (see the VisIt FAQ for
 a
-[list of supported formats](https://wci.llnl.gov/simulation/computer-codes/visit/faqs/faq11)). If
+[list of supported formats](https://wci.llnl.gov/simulation/computer-codes/visit/faqs/faq04)). If
 your data format is not supported by VisIt, then you may have to
 convert your data files in order access them in VisIt or write your
 own data reader (see the VisIt

@@ -338,7 +338,5 @@ The following results were obtained by executing on Edison for 4 MPI tasks.
   Cray documentation
 * [Adding OpenMP to Your Code Using Cray Reveal](http://www.nersc.gov/assets/Documentation/Performance/Reveal/Reveal-2013.pdf),
   NERSC Edison Performance 2013 Training talk
-* [Cray Reveal Training](http://www.nersc.gov/users/training/events/cray-reveal-tool-training-sept-18-2014/),
-  presented by Heidi Paxon, September 2014
 * [Lecture Slides](http://www.nersc.gov/assets/Uploads/Day-1B-01-Cray-PE-workshop-Reveal-NERSC.pdf)
   for talk on Cray Reveal by Heidi Paxon, March 2016

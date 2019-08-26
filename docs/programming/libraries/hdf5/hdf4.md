@@ -3,7 +3,7 @@
 Hierarchical Data Format is a set of file formats, libraries, and tools for
 storing and managing large scientific datasets. Originally developed at the
 National Center for Supercomputing Applications, it is currently supported by
-the non-profit HDF Group and is now typically called 'HDF4' to distinquish it
+the non-profit HDF Group and is now typically called 'HDF4' to distinguish it
 from the later 'HDF5' package.
 
 HDF files written with older versions can be read with the current version.
