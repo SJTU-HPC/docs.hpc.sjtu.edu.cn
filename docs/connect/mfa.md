@@ -1,23 +1,11 @@
-# Introduction to MFA
+# Multi-Factor Authentication (MFA)
 
-NERSC provides users with the ability to use __Multi-Factor
-Authentication__ (__MFA__) for logging into NERSC resources.  MFA
+NERSC provides users with the ability to use Multi-Factor
+Authentication (**MFA**) for logging into NERSC resources.  MFA
 provides greater protection than regular passwords against phishing
 and other modern threats to your digital security.
 
-Currently, we support MFA for ssh logins to NERSC.  In September
-2018, we will be rolling out several new technologies to enhance
-the MFA experience, and provide MFA support for most NERSC user
-resources.
-
-We have implemented MFA in ways that only minimally impact how you
-work at NERSC. For example, we’ve created technologies that allow
-you to authenticate with MFA only once per day as well as incorporate
-MFA into automated workflows.
-
-See below for more details on these new features.
-
-### About the Implementation
+## About the Implementation
 
 The NERSC MFA implementation uses Google Authenticator, an application
 for mobile phones and devices available for download from Google,

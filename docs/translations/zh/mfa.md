@@ -246,7 +246,7 @@ $ ssh -i ~/.ssh/nersc cori.nersc.gov
 
 #### ssh代理命令行参数
 
-您可以使用几个参数改变sshporxy.sh的默认行为。请运行“sshproxy.sh -h”获取帮助信息。
+您可以使用几个参数改变sshproxy.sh的默认行为。请运行“sshproxy.sh -h”获取帮助信息。
 
 ```
 $ ./sshproxy.sh -h
@@ -373,7 +373,7 @@ NIM用户入口也将要求启用MFA的用户使用MFA进行登录
 
 目前大多数可供用户通过ssh访问的系统都支持MFA，例如Cori。网站和其他服务从2018年9月开始支持MFA。下面的表格显示NERSC各系统和服务对MFA的支持情况。
 
-### 现已支持MFA
+### 现已支持
 
 | 身份验证        | 主机           |
 | ------------- |:-------------:|
@@ -392,14 +392,14 @@ NIM用户入口也将要求启用MFA的用户使用MFA进行登录
 | Others | [RStudio](https://rstudio.nersc.gov/) |
 | Others | [HPSS token generation](../../filesystems/archive/#automatic-token-generation-for-use-at-nersc)|
 
-### 即将支持MFA
+### 即将支持
 
 | 身份验证        | 主机           |
 | ------------- |:-------------:|
 | TBD | [Shifter Registry](https://registry.services.nersc.gov/) |
 | TBD | [Spin Registry](https://registry.spin.nersc.gov/)|
 
-### 不支持MFA
+### 不支持
 
 | 主机|
 | ------------- |
