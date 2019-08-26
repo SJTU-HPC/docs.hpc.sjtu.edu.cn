@@ -7,28 +7,32 @@ stages:
   - post-deploy
 
 markdown_lint:
+  allow_failure: true
   image: node
   stage: test
+  except:
+    - schedules
+    - master@NERSC/nersc.gitlab.io
   script:
     - npm install -g markdownlint-cli
     - bash util/lint-changes.sh
-  allow_failure: true
-  except:
-    - master@NERSC/nersc.gitlab.io
 
 filesize:
+  allow_failure: true
   image: ubuntu:latest
   stage: test
+  except:
+    - schedules
+    - master@NERSC/nersc.gitlab.io
   before_script:
     - apt-get update && apt-get install -y git
   script:
     - bash util/filesize.sh
-  allow_failure: true
-  except:
-    - master@NERSC/nersc.gitlab.io
 
 mkdocs_build:
   stage: build
+  except:
+    - schedules
   script:
     - mkdir -p .build_cache
     - pip install --upgrade --cache-dir=.build_cache -r requirements.txt
@@ -46,24 +50,23 @@ check_internal_links:
   stage: build
   script:
     - bash util/check-internal-links.sh
-    
+
 check_links:
+  allow_failure: true
   stage: test
+  only:
+    - schedules
   script:
     - mkdir -p .links_cache
     - pip install --cache-dir=.links_cache -r util/requirements.txt
     - python util/scrape_urls.py public
-  allow_failure: true
-  cache:
-    key: ${CI_JOB_NAME}
-    paths:
-      - .links_cache
-      - good-urls-cache.txt
-  except:
-    - master@NERSC/nersc.gitlab.io
 
 pages:
   stage: deploy
+  except:
+    - schedules
+  only:
+    - master@NERSC/nersc.gitlab.io
   before_script:
     - pip install htmlmin
   script:
@@ -76,12 +79,14 @@ pages:
   artifacts:
     paths:
     - public
-  only:
-    - master@NERSC/nersc.gitlab.io
 
 update-search-api:
-  stage: post-deploy
   image: ubuntu:18.04
+  stage: post-deploy
+  only:
+    - master@NERSC/nersc.gitlab.io
+  except:
+    - schedules
   before_script:
     - apt-get update; apt-get -y install curl
   script:
@@ -89,5 +94,3 @@ update-search-api:
     --url https://nersc-docs-search-app-214117.appspot.com/reindex \
     --header 'content-type: application/json' \
     --data '{\"source\":\"docs\"}'"
-  only:
-    - master@NERSC/nersc.gitlab.io
