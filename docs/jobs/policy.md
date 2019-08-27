@@ -49,7 +49,7 @@ can share nodes.
 
 | QOS             | Max nodes | Max time (hrs) | Submit limit | Run limit | Priority |
 |-----------------|-----------|----------------|--------------|-----------|----------|
-| genepool        | 192       | 72             | 500          | -         | 3        | 
+| genepool        | 16        | 72             | 500          | -         | 3        | 
 | genepool_shared | 0.5       | 72             | 500          | -         | 3        | 
 
 ## Charging
