@@ -133,7 +133,7 @@ If `conda search` fails to identify your desired package it may still
 be installed via `pip.` Both `conda` and `pip` can be used in conda
 environments.
 
-!!! attention "Use conda to Install pip into Your Environment"
+!!! attention "Use conda to install pip into your environment"
     To use `pip` in your own environment you may need to `conda install
     pip`.  Verify whether you need to by typing "`which pip`" at the
     command line.  If the path returned looks like
@@ -153,68 +153,24 @@ is recommended.  In particular any package that depends on the Cray
 programming environment should be installed this way.  For Python this
 usually boils down to `mpi4py` and `h5py` with MPI-IO support.
 
-### `mpi4py`
+## Running Scripts
 
-Users creating their own conda environments should build `mpi4py`
-using the Cray compiler wrappers instead of using `conda install
-mpi4py`.  If you try to use `mpi4py` but you observe an
-`MPI_COMM_WORLD` size of 1 and all processes report they are rank 0,
-it could be because of a conda-installed `mpi4py`.
+Run serial Python scripts on a login node, or on a compute node in an
+interactive session (started via salloc) or batch job (submitted via sbatch) as
+you normally would in any Unix-like environment. On login nodes, please be
+mindful of resource consumption since those nodes are shared by many users at
+the same time.
 
-You can build `mpi4py` and install it into a conda environment on Cori
-using a recipe like the following:
+Parallel Python scripts launched in an interactive (salloc) session or batch
+job (sbatch), such as those using MPI via the mpi4py module, must use srun to
+launch:
 
-    wget https://bitbucket.org/mpi4py/mpi4py/downloads/mpi4py-3.0.0.tar.gz
-    tar zxvf mpi4py-3.0.0.tar.gz
-    cd mpi4py-3.0.0
-    module swap PrgEnv-intel PrgEnv-gnu
-    module unload craype-hugepages2M
-    python setup.py build --mpicc="$(which cc) -shared"
-    python setup.py install
+    srun -n 64 python ./hello-world.py
 
-The MPI-enabled Python interpreter is not required (see
-[this page](https://mpi4py.readthedocs.io/en/stable/appendix.html#mpi-enabled-python-interpreter) in
-the mpi4py documentation).  To install it however, use these additional steps:
+Please see this [page](mpi4py.md) for more information about using mpi4py.
 
-    python setup.py build_exe --mpicc="$(which cc) -dynamic"
-    python setup.py install_exe
-
-Initializing MPI on a login node will not work at NERSC.  This is what you will
-see if you try to do it:
-
-    nersc$ module load python
-    nersc$ python -c 'from mpi4py import MPI'
-    [Fri Aug  9 09:26:55 2019] [unknown] Fatal error in PMPI_Init_thread: Other MPI error, error stack:
-    MPIR_Init_thread(537):
-    MPID_Init(246).......: channel initialization failed
-    MPID_Init(647).......:  PMI2 init failed: 1
-    Aborted
-
-If you see this kind of output from a batch job or in an interactive allocation
-then it means something different.  It likely means that `MPI_Init()` exceeded
-a timeout, perhaps due to I/O issues.  This is more likely to occur when the
-file system you are importing packages from isn't optimized for serving up code
-to the compute nodes.  Increasing the timeout is a temporary fix:
-
-    export PMI_MMAP_SYNC_WAIT_TIME=300
-
-but it just gives your job more time to start up.  What you want is for your
-job to start up more quickly.  See the documentation on
-[`/global/common/software`](../../../../filesystems/global-common)
-or better yet,
-[Shifter.](../../shifter/overview.md)
-
-!!! tip "About Huge Memory Pages (As of 2019-08-02)"
-    Note also that we recommend you unload craype-hugepages2M before
-    compiling.  There's an issue with how Python and huge memory pages
-    can work together, but Cray is working on a solution.  When that fix
-    is in place we'll reconsider the guidance here, but for now
-    compiling mpi4py without huge memory pages seems the easiest path
-    forward for users.
-
-### `h5py` with MPI-IO
-
-[H5Py](../../libraries/hdf5/h5py.md)
+Please see this [page](../../libraries/hdf5/h5py.md) for more information about using
+h5py MPI-IO.
 
 ## Collaborative Installations
 
