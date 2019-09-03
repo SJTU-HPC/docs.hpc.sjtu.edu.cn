@@ -156,13 +156,14 @@ nav:
     - High-level Programming Environments:
         - Python :
             - programming/high-level-environments/python/index.md
-            - Running Scripts : programming/high-level-environments/python/running-scripts.md
-            - Scaling Up : programming/high-level-environments/python/scaling-up.md
-            - Python FAQ : programming/high-level-environments/python/frequently-asked-questions.md
             - Best Practices : programming/high-level-environments/python/best-practices.md
             - Python on Cori KNL : programming/high-level-environments/python/python-on-cori-knl.md
-            - Profiling Python : programming/high-level-environments/python/profiling-python.md
+            - Scaling Up : programming/high-level-environments/python/scaling-up.md
+            - Multiprocessing : programming/high-level-environments/python/multiprocessing.md
+            - mpi4py : programming/high-level-environments/python/mpi4py.md
             - Dask : programming/high-level-environments/python/dask.md
+            - Profiling Python : programming/high-level-environments/python/profiling-python.md
+            - Python FAQ : programming/high-level-environments/python/frequently-asked-questions.md
         - Julia : programming/high-level-environments/julia.md
 #       - Matlab : programming/high-level-environments/matlab.md
         - R : programming/high-level-environments/r.md

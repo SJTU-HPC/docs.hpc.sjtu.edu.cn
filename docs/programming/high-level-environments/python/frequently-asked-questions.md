@@ -107,20 +107,10 @@ compatibility you depend on.  See
 [here](../#collaborative-installations) for more information on how you
 can do this.
 
-## How can I use mpi4py from my Anaconda environment?
+## Can I use mpi4py from my Anaconda environment?
 
-If you try to use mpi4py and you observe something like an apparent
-`MPI_COMM_WORLD` size of 1 and all processes report that they are rank
-0, check to see if you have installed mpi4py from Anaconda with the
-conda tool.
-
-If you have created an Anaconda environment through "conda create" or
-you have run the Anaconda/Miniconda installer script you will want to
-build mpi4py "from source" and not use "conda install mpi4py."  You will
-definitely want to build mpi4py using the [Cray compiler
-wrappers](../../../../programming/compilers/wrappers) that link in Cray
-MPICH libraries.  The procedure is described in more detail
-[here.](../#mpi4py)
+Yes, you can use mpi4py in your own custom Conda environment. See this
+[page](mpi4py.md) for detailed instructions.
 
 ## Why do I get an error using Matplotlib on compute nodes?
 
