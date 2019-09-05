@@ -6,6 +6,18 @@ use [Anaconda Python](https://docs.anaconda.com/anaconda/) on Cori
 through software environment modules.  Do **not** use the
 system-provided Python `/usr/bin/python`.
 
+## Python 2 is retiring on Jan 1, 2020
+
+!!! danger "Are you still using Python 2?"
+    Python 2 is retiring on [Jan 1, 2020](https://pythonclock.org/).
+    **Now** is the time to update your
+    code to Python 3. Python 2 will stop being maintained on
+    January 1, 2020. It will still "work", but without active
+    support, it will wither away. **Python 3
+    is not backward-compatible with Python 2, so you must actively
+    transition your code.** Please see our dedicated page [here](python2-dying.md)
+    for more information and reccomendations.
+
 ## Anaconda Python
 
 Anaconda Python is a platform for large-scale data processing,
