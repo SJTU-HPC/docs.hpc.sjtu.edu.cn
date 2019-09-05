@@ -97,7 +97,7 @@ number of nodes, node feature, and walltime request, etc.).
 ### Premium
 
 The intent of the "premium" QOS is to allow for faster turnaround before
-conferences and urgent project deadlines. It should be used with care.
+conferences and urgent project deadlines. It should be used with care. NERSC has a target of keeping premium usage at or below 10 percent of all usage.
 
 ### Low
 
