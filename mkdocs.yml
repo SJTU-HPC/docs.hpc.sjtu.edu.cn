@@ -156,6 +156,7 @@ nav:
     - High-level Programming Environments:
         - Python :
             - programming/high-level-environments/python/index.md
+            - Python 2 Retirement : programming/high-level-environments/python/python2-dying.md
             - Best Practices : programming/high-level-environments/python/best-practices.md
             - Python on Cori KNL : programming/high-level-environments/python/python-on-cori-knl.md
             - Scaling Up : programming/high-level-environments/python/scaling-up.md
