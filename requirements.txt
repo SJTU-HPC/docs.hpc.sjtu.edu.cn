@@ -1,12 +1,12 @@
 certifi>=2018.8.13
 click==6.7
-htmlmin==0.1.12
 Jinja2==2.10
 livereload==2.5.2
 Markdown==2.6.11
 MarkupSafe==1.0
 mkdocs==1.0.4
-mkdocs-material==3.3.0
+mkdocs-material==4.4.1
+mkdocs-minify-plugin==0.2.1
 Pygments>=2.4.0
 pymdown-extensions==5.0
 PyYAML==3.13

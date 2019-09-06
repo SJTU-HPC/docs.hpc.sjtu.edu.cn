@@ -1,3 +1,6 @@
+{#-
+  This file was automatically generated - do not edit
+-#}
 {% import "partials/language.html" as lang with context %}
 {% set feature = config.theme.feature %}
 {% set palette = config.theme.palette %}
@@ -41,21 +44,21 @@
         <meta name="lang:{{ key }}" content="{{ lang.t(key) }}">
       {% endfor %}
       <link rel="shortcut icon" href="{{ config.theme.favicon | url }}">
-      <meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-material-3.3.0">
+      <meta name="generator" content="mkdocs-{{ mkdocs_version }}, mkdocs-material-4.4.1">
     {% endblock %}
     {% block htmltitle %}
       {% if page and page.meta and page.meta.title %}
         <title>{{ page.meta.title }}</title>
       {% elif page and page.title and not page.is_homepage %}
-        <title>{{ page.title }} - {{ config.site_name }}</title>
+        <title>{{ page.title | striptags }} - {{ config.site_name }}</title>
       {% else %}
         <title>{{ config.site_name }}</title>
       {% endif %}
     {% endblock %}
     {% block styles %}
-      <link rel="stylesheet" href="{{ 'assets/stylesheets/application.572ca0f0.css' | url }}">
+      <link rel="stylesheet" href="{{ 'assets/stylesheets/application.30686662.css' | url }}">
       {% if palette.primary or palette.accent %}
-        <link rel="stylesheet" href="{{ 'assets/stylesheets/application-palette.e88139c2.css' | url }}">
+        <link rel="stylesheet" href="{{ 'assets/stylesheets/application-palette.dca7238a.css' | url }}">
       {% endif %}
       {% if palette.primary %}
         {% import "partials/palette.html" as map %}
@@ -66,15 +69,15 @@
       {% endif %}
     {% endblock %}
     {% block libs %}
-      <script src="{{ 'assets/javascripts/modernizr.962652e9.js' | url }}"></script>
+      <script src="{{ 'assets/javascripts/modernizr.74668098.js' | url }}"></script>
     {% endblock %}
     {% block fonts %}
       {% if font != false %}
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family={{
-              font.text | replace(' ', '+')  + ':300,400,400i,700|' +
+              font.text | replace(' ', '+') + ':300,400,400i,700|' +
               font.code | replace(' ', '+')
-            }}">
+            }}&display=fallback">
         <style>body,input{font-family:"{{ font.text }}","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"{{ font.code }}","Courier New",Courier,monospace}</style>
       {% endif %}
     {% endblock %}
@@ -131,7 +134,7 @@
       {% if feature.tabs %}
         {% include "partials/tabs.html" %}
       {% endif %}
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           {% block site_nav %}
             {% if nav %}
@@ -190,7 +193,7 @@
       {% endblock %}
     </div>
     {% block scripts %}
-      <script src="{{ 'assets/javascripts/application.bdf98f12.js' | url }}"></script>
+      <script src="{{ 'assets/javascripts/application.26c2d431.js' | url }}"></script>
       {% if lang.t("search.language") != "en" %}
         {% set languages = lang.t("search.language").split(",") %}
         {% if languages | length and languages[0] != "" %}
@@ -198,10 +201,10 @@
           <script src="{{ (path ~ 'lunr.stemmer.support.js') | url }}"></script>
           {% for language in languages | map("trim") %}
             {% if language != "en" %}
-              {% if language == "jp" %}
+              {% if language == "ja" %}
                 <script src="{{ (path ~ 'tinyseg.js') | url }}"></script>
               {% endif %}
-              {% if language in ("da", "de", "du", "es", "fi", "fr", "hu", "it", "jp", "no", "pt", "ro", "ru", "sv", "tr") %}
+              {% if language in ("da", "de", "es", "fi", "fr", "hu", "it", "ja", "nl", "no", "pt", "ro", "ru", "sv", "th", "tr") %}
                 <script src="{{ (path ~ 'lunr.' ~ language ~ '.js') | url }}"></script>
               {% endif %}
             {% endif %}

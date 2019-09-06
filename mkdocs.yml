@@ -294,3 +294,9 @@ extra_css:
 google_analytics:
   - 'UA-115581982-1'
   - 'auto'
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+
