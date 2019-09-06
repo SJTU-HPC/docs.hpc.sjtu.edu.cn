@@ -178,7 +178,7 @@ need to create a Conda environment for this).
 
 Here's an example of how to set up the kernel spec:
 
-```shell
+```json
 {
 	"argv": [
     	"shifter",
@@ -200,7 +200,7 @@ You can run small instances (< 4 cores) of Spark on Cori with Jupyter.
 You can even do it using Shifter too.
 Create the following kernel spec (you'll need to make the `$SCRATCH/tmpfiles`, `$SCRATCH/spark/event_logs` directories first):
 
-```shell
+```json
 {
     "display_name": "shifter pyspark",
     "language": "python",
@@ -228,3 +228,30 @@ Create the following kernel spec (you'll need to make the `$SCRATCH/tmpfiles`, `
     }
 }
 ```
+
+## Debugging Jupyter Problems
+
+At NERSC, users launch Jupyter notebooks after authenticating to JupyterHub.
+Logs from a user's notebook process appear in a file called `.jupyter.log` in the user's `$HOME` directory.
+These logs can be very helpful when it comes to debugging issues with Jupyter, your custom kernels, or your Python environment.
+One of the first things we do when investigating Jupyter tickets is consult this log file.
+
+Need more information in the log file?
+You can control how verbose the logging is by changing the value of `c.Application.log_level` in your Jupyter notebook config file.
+You may not have a Jupyter notebook config file created yet.
+You can create it by running
+
+```shell
+module load python/3.7-anaconda-2019.07
+jupyter notebook --generate-config
+```
+
+Open the generated configuration file, uncomment `c.Application.log_level` and change the value to say, 0, for debug level information.
+The logger used is Python's standard `logger` object.
+
+!!! tip "Help Us Help You"
+    You might save yourself a lot of time if you look at this log file yourself before opening a ticket.
+    In fact, if you see anything that you think might be particularly important, you can highlight that in a ticket.
+
+    And as always, be sure to be as specific as possible in tickets you file about Jupyter.
+    For example, if you have an issue with a particular kernel or Conda environment, let us know which one it is.
