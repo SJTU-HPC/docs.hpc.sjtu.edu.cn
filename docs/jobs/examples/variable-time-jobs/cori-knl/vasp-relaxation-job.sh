@@ -17,11 +17,11 @@
 #user setting 
 export OMP_PROC_BIND=true 
 export OMP_PLACES=threads 
-export OMP_NUM_THREADS=8 
+export OMP_NUM_THREADS=4 
   
 #srun must execute in background and catch signal on wait command 
 module load vasp/20171017-knl 
-srun -n 8 -c32 --cpu_bind=cores vasp_std & 
+srun -n 32 -c16 --cpu_bind=cores vasp_std & 
   
 # put any commands that need to run to continue the next job (fragment) here 
 ckpt_vasp() { 
