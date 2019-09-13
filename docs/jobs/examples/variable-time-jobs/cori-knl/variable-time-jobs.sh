@@ -29,7 +29,7 @@ requeue_job func_trap USR1
 # user setting goes here
 export OMP_PROC_BIND=true
 export OMP_PLACES=threads
-export OMP_NUM_THREADS=8
+export OMP_NUM_THREADS=4
 
 #srun must execute in the background and catch the signal USR1 on the wait command
 srun -n32 -c16 --cpu_bind=cores ./a.out &

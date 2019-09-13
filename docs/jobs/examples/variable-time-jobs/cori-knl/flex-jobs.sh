@@ -11,5 +11,5 @@ export OMP_PROC_BIND=true
 export OMP_PLACES=threads
 export OMP_NUM_THREADS=8
 
-srun -n8 -c16 --cpu_bind=cores ./a.out
+srun -n8 -c32 --cpu_bind=cores ./a.out
 
