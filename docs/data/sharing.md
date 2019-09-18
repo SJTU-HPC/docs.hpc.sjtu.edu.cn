@@ -29,6 +29,8 @@ To see what files `<sending_username>` has sent to you:
 nersc$ take -u <sending_username>
 ```
 
+Files that remain untaken 12 weeks after being given wil be purged from teh staging area.
+
 For a full list of options pass the `--help` flag.
 
 ## project directories
