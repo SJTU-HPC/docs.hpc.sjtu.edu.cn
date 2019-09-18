@@ -8,7 +8,6 @@ nav:
   - Connecting:
       - Login Nodes: connect/login-nodes.md
       - SSH: connect/ssh.md
-      - MFA: connect/mfa.md
       - NX: connect/nx.md
       - Jupyter : connect/jupyter.md
   - Running Jobs:
