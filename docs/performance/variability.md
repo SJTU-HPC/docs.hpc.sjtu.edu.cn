@@ -23,13 +23,9 @@ For more details see the manual pages (`man intro_hugepages`) on Cori.
 
 Compilation of executables should be done in `$HOME` or
 `/tmp`. Executables can be copied into the compute node memory at the
-start of a job with `sbcast` to greatly improve job startup times and
-reduce run-time variability in some cases:
-
-```slurm
-sbcast -f --compress ./my_program.x /tmp/my_program.x
-srun -n 1024 -c 2 --cpu-bind=cores /tmp/my_program.x
-```
+start of a job with [sbcast](../jobs/best-practices.md#large-jobs)
+to greatly improve job startup times and reduce run-time variability
+in some cases.
 
 For applications with dynamic executables and many libraries
 (*especially* python based applications)

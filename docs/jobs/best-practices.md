@@ -116,22 +116,28 @@ filesystem is detected.
 * `seqfs`
 * `cvmfs`
 
-## Running Large Jobs (over 1500 MPI tasks)
+## Large jobs
 
 Large jobs may take a longer to start up, especially on KNL nodes. The
 srun option `--bcast=<destination_path>` is recommended for large jobs
 requesting over 1500 MPI tasks. By default Slurm loads the executable
 to the allocated compute nodes from the current working directory,
 this may take long time when the file system (where the executable
-resides) is slow. With the `--bcast=/tmp/myjob`, the executable will be
-copied to the `/tmp/myjob` directory. Since `/tmp` is part of the memory
-on the compute nodes, it can speed up the job startup time.
+resides) is slow. With the `--bcast=/tmp/myjob`, the executable will
+be copied to the `/tmp/myjob` directory. Since `/tmp` is part of the
+memory on the compute nodes, it can speed up the job startup time.
 
 ```bash
-% sbcast --compress=lz4 ./mycode.exe /tmp/mycode.exe     # here -C is to compress first
-% srun <srun options> /tmp/mycode.exe
-# or in the case of when numactl is not needed: % srun --bcast=/tmp/mycode.exe --compress=lz4 <srun options> ./mycode.exe
+sbcast --compress=lz4 /path/to/exe /tmp/exe
+srun /tmp/exe
 ```
+
+!!! warning
+    Currently there is a known bug with `sbcast`! Instead please use:
+    ```bash
+    srun --ntasks-per-node=1 cp /path/to/exe /tmp/exe
+    srun /tmp/exe
+    ```
 
 ## Network locality
 
