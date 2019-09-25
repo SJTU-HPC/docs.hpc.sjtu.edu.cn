@@ -15,13 +15,8 @@ running applications inside the session.
 
 ## Installing the NoMachine Client
 
-Please make sure you have a recently updated version of the NoMachine client:
-
-### Download latest NoMachine Client
-#### Windows ([Download](https://www.nomachine.com/download/download&id=16))
-#### Mac OS ([Download](https://www.nomachine.com/download/download&id=15))
-#### DEB Package for Debian/Ubuntu: ([Download](https://www.nomachine.com/download/download&id=9))
-#### RPM Package for Centos/Redhat/Fedora ([Download](https://www.nomachine.com/download/download&id=11))
+Please make sure you have a recently updated version of the [NoMachine
+client](https://www.nomachine.com/download-enterprise#NoMachine-Enterprise-Client).
 
 ## Configuring the Connection File
 
