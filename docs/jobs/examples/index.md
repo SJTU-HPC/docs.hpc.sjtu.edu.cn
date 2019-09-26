@@ -271,7 +271,11 @@ $$
 
 ## Using Intel MPI 
 
-Applications built with Intel MPI can be launched via srun in the SLURM batch script on Cori compute nodes. The module `impi` needs to be loaded, and the application should be built using the `mpiicc` (`for C Codes`) or `mpiifort` (`for Fortran codes`) or `mpiicpc` (`for C++ codes`) commands. Below is a sample compile and run script.  
+Applications built with Intel MPI can be launched via srun in the
+Slurm batch script on Cori compute nodes. The module `impi` needs to
+be loaded, and the application should be built using the `mpiicc`
+(for C Codes) or `mpiifort` (for Fortran codes) or `mpiicpc` (for
+C++ codes) commands.
 
 ??? example "Cori Haswell"
 	```slurm
@@ -280,7 +284,19 @@ Applications built with Intel MPI can be launched via srun in the SLURM batch sc
 
 ## Using Open MPI
 
-Applications built with Open MPI can be launched via srun or Open MPI's mpirun command.  The module `openmpi` needs to be loaded to build an application against Open MPI.  Typically one builds the application using the `mpicc` (`for C Codes`),  `mpifort` (`for Fortran codes`), or `mpiCC` (`for C++ codes`) commands.  Alternatively, Open MPI supports use of `pkg-config` to obtain the include and library paths.  For example, `pkg-config --cflags --libs ompi-c` returns the flags that must be passed to the backend `c` compiler (e.g. gcc, gfortran, icc, ifort)  to build against Open MPI.  Open MPI also supports Java MPI bindings.  Use `mpijavac` to compile Java codes that use the Java MPI bindings.  For Java MPI, it is highly recommended to launch jobs using Open MPI's mpirun command.  Note the Open MPI packages at NERSC do not support static linking.
+Applications built with Open MPI can be launched via srun or Open
+MPI's mpirun command.  The module `openmpi` needs to be loaded to
+build an application against Open MPI.  Typically one builds the
+application using the `mpicc` (for C Codes), `mpifort` (for Fortran
+codes), or `mpiCC` (for C++ codes) commands.  Alternatively, Open MPI
+supports use of `pkg-config` to obtain the include and library paths.
+For example, `pkg-config --cflags --libs ompi-c` returns the flags
+that must be passed to the backend `c` compiler (e.g. gcc, gfortran,
+icc, ifort) to build against Open MPI.  Open MPI also supports Java
+MPI bindings.  Use `mpijavac` to compile Java codes that use the Java
+MPI bindings.  For Java MPI, it is highly recommended to launch jobs
+using Open MPI's mpirun command.  Note the Open MPI packages at NERSC
+do not support static linking.
 
 See [Open MPI](../../programming/programming-models/mpi/openmpi.md) for more
 information about using Open MPI on NERSC systems.
@@ -355,12 +371,14 @@ Here is an example job script for variable-time jobs:
     ```slurm
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/flex-jobs.sh"
     ```
+
 Jobs specifying a minimum time can start execution earlier than they
 would otherwise with a time limit anywhere between the minimum and
-maximum time requests. Pre-terminated jobs can be requeued (or resubmitted) by using
-the `scontrol requeue` command (or sbatch) to resume from where the previous
-executions left off, until the cumulative execution time reaches the
-desired time limit or the job completes.
+maximum time requests. Pre-terminated jobs can be requeued (or
+resubmitted) by using the `scontrol requeue` command (or sbatch) to
+resume from where the previous executions left off, until the
+cumulative execution time reaches the desired time limit or the job
+completes.
 
 !!! note
 	To use variable-time jobs, applications are required to be
@@ -391,10 +409,10 @@ details on the flex QOS.
 
 ### Annotated example - automated variable-time jobs
 
-Here is a sample job script for variable-time jobs, which automates
-the process of executing, pre-terminating, requeuing and restarting
-the job repeatedly until it runs for the desired amount of time or the
-job completes.
+A sample job script for variable-time jobs, which automates the
+process of executing, pre-terminating, requeuing and restarting the
+job repeatedly until it runs for the desired amount of time or the job
+completes.
 
 ??? example "Cori Haswell"
     ```slurm
@@ -406,12 +424,11 @@ job completes.
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/variable-time-jobs.sh"
     ```
 
-In the above example, the `--comment` option is used to enter the
-user’s desired maximum wall-clock time, which could be longer than the
-maximum time limit allowed by the batch system (96 hours in this
-example). In addition to the time limit (`--time`), the `--time-min`
-option is used to specify the minimum amount of time the job should
-run (2 hours).
+The `--comment` option is used to enter the user’s desired maximum
+wall-clock time, which could be longer than the maximum time limit
+allowed by the batch system (96 hours in this example). In addition to
+the time limit (`--time`), the `--time-min` option is used to specify
+the minimum amount of time the job should run (2 hours).
 
 The script `setup.sh` defines a few bash functions (e.g.,
 `requeue_job`, `func_trap`) that are used to automate the process.
@@ -468,7 +485,6 @@ The job script works as follows:
     ```slurm
     --8<-- "docs/jobs/examples/variable-time-jobs/cori-knl/vasp-relaxation-job.sh"
     ```
-
 
 ## MPMD (Multiple Program Multiple Data) jobs
 
@@ -785,13 +801,13 @@ requested craynetwork resources per call.
 Using this combination of resource requests, we are able to run
 multiple parallel applications per compute node.
 
-One additional observation: when calling srun, it is permitted to
-specify "--gres=craynetwork:0" which will not count against the
-craynetwork resource. This is useful when, for example, launching a
-bash script or other application that does not use the
-interconnect. We don't currently anticipate this being a common use
-case, but if your application(s) do employ this mode of operation it
-would be appreciated if you let us know.
+!!! note 
+	It is permitted to specify `srun --gres=craynetwork:0` which
+	will not count against the craynetwork resource. This is useful
+	when, for example, launching a bash script or other application
+	that does not use the interconnect. We don't currently anticipate
+	this being a common use case, but if your application(s) do employ
+	this mode of operation it would be appreciated if you let us know.
 
 ## Additional information
 
