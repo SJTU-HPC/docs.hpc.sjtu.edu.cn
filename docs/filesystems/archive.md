@@ -408,11 +408,13 @@ long retrieval times for these files and will slow down the HPSS
 system for all users.
 
 ### Order Large Retrievals
-If you are retrieving many (> 100 files) from HPSS, you need to
-order your retrievals so that all files on a single tape will be
-retieved in a single pass in the order they are on the tape. NERSC has
-a script to help you generate an ordered list for retrieval called
-`hpss_file_sorter.script`.
+If you are retrieving many (> 100 files) from HPSS, you need to order
+your retrievals so that all files on a single tape will be retieved in
+a single pass in the order they are on the tape. NERSC has a script to
+help you generate an ordered list for retrieval called
+`hpss_file_sorter.py`. This script will retrieve the files in the
+proper tape order and also recreate the directory structure the files
+had in HPSS.
 
 ??? tip "Generating a sorted list for retrieval"
     To use the script, you first need a list of fully qualified
@@ -421,49 +423,19 @@ a script to help you generate an ordered list for retrieval called
 	following command:
 
 	```
-	hsi -q 'ls -1 <HPSS_files_or_directories_you_want_to_retrieve>' 2> temp.txt
+	nersc$ hsi -q 'ls -1 -R <HPSS_files_or_directories_you_want_to_retrieve>' 2> temp.txt
 	```
 
 	(for csh replace "2>" with ">&"). Once you have the list of files, feed it to the sorting script:
 
 	```
-	hpss_file_sorter.script temp.txt > retrieval_list.txt
+	nersc$ hpss_file_sorter.py -i temp.txt -o <your_target_directory, default is current directory> -s <strip string, default in NONE>
 	```
 
-    The best way to retrieve this list from HPSS is with the `cget`
-    command, which will get the file from HPSS only if it isn't
-    already in the output directory. You also should take advantage of
-    the `hsi in <file_of_hsi_commands.txt>` to run an entire set of
-    HPSS commands in one HPSS session. This will avoid HPSS doing a
-    sign in procedure for each file, which can add up to a significant
-    amount of time if you are retrieving many files. To do this,
-    you'll need to add a little something to the retrieval_list.txt
-    file you already generated:
-
-    ```
-	awk '{print "cget",$1}' retrieval_list.txt > final_retrieval_list.txt
-	```
-
-    Finally, you can retrieve the files from HPSS with
-
-    ```
-	hsi "in final_retrieval_list.txt"
-	```
-
-    This procedure will return all the files you're retrieving in a
-    single directory. You may want to preserve some of the directory
-    structure you have in HPSS. If so, you could automatically
-    recreate HPSS subdirectories in your target directory with this
-    command
-
-    ```
-	sed 's:^'<your_hpss_directory>'/\(.*\):\1:' temp.txt | xargs
-    -I {} dirname {} | sort | uniq | xargs -I {} mkdir -p {}
-	```
-
-    where <your_hpss_directory> is the root directory you want to
-    harvest subdirectories from, and temp.txt holds the output from
-    your `ls -1` call.
+	For files in HPSS under /home/e/elvis/unique_data, you might
+	    want to strip off "/home/e/elvis" from the target
+	    directory. You can do that by adding the `-s
+	    /home/e/elvis` flag.
 
 ### Avoid Very Large Files
 Files sizes greater than 1 TB can be difficult for HPSS to work with
