@@ -9,6 +9,10 @@
 | Global common   | 10 GB | 1 M    | -          |
 | Cori SCRATCH    | 20 TB | 10 M   | 12 weeks   |
 
+## Policy
+
+[NERSC data management policy](../data/policy.md).
+
 ## Quotas
 
 !!! warning
@@ -24,21 +28,25 @@ NERSC provides a `myquota` command which displays applicable quotas
 and current usage.
 
 To see current usage for home and available scratch filesystems:
+
 ```
 nersc$ myquota
 ```
 
 For project you can use
+
 ```
 nersc$ prjquota <project_name>
 ```
 
 or use `myquota` with the full path to the directory
+
 ```
 nersc$ myquota --path=/project/projectdirs/<project_name>
 ```
 
 For global common software you can use
+
 ```
 nersc$ cmnquota <project_name>
 ```
