@@ -1,5 +1,9 @@
 # IPM
 
+!!! danger
+	IPM is not currently available on NERSC systems due to compatability
+	issues with the latest Cray OS.
+
 ## Description and Overview
 
 IPM is a portable profiling infrastructure which provide a high level report on
@@ -13,7 +17,7 @@ main objectives of IPM are ease-of-use and scalability in performance analysis.
 ## Usage
 
 ```console
-user@cori02:~$ module load ipm
+module load ipm
 ```
 
 On HPC architectures that support shared libraries, that's all you need to do.
@@ -35,9 +39,9 @@ You must link your code against IPM. Here is a simple example compile and link
 for the default Intel programming environment.
 
 ```console
-user@cori02:~$ module load ipm
-user@cori02:~$ ftn -c mycode.f90
-user@cori02:~$ ftn -o mycode.x mycode.o $IPM
+module load ipm
+ftn -c mycode.f90
+ftn -o mycode.x mycode.o $IPM
 ```
 
 The `$IPM` reference needs to be the last argument on the link line.
@@ -127,7 +131,7 @@ By default, IPM records its profiling data in an XML file. One can convert this
 to an HTML page using the following command
 
 ```console
-user@cori02:~$ ipm_parse -html <ipm_file_name>.xml
+ipm_parse -html <ipm_file_name>.xml
 ```
 
 This produces a new directory in the present working directory, in which is
