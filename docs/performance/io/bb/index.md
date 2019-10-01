@@ -6,11 +6,11 @@ performance on Cori for all file sizes and all access patterns.
 
 ### Striping
 
-Currently, the Burst Buffer granularity is 82GiB. If you request an
+Currently, the Burst Buffer granularity is 20GB. If you request an
 allocation smaller than this amount, your files will sit on one Burst
 Buffer node. If you request more than this amount, then your files
 will be striped over multiple Burst Buffer nodes. For example, if you
-request 25GiB then your files all sit on the same Burst Buffer
+request 19GB then your files all sit on the same Burst Buffer
 server. This is important, because each Burst Buffer server has a
 maximum possible bandwidth of roughly 6.5GB/s - so your aggregate
 bandwidth is summed over the number of Burst Buffer servers you use. If other
