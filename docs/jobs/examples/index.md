@@ -218,6 +218,7 @@ $$
 	#SBATCH --qos=shared
 	#SBATCH --constraint=haswell
 	#SBATCH --time=5
+	#SBATCH --nodes=1
 	#SBATCH --ntasks=2
 	#SBATCH --cpus-per-task=2
 
@@ -233,6 +234,7 @@ $$
 	#SBATCH --qos=shared
 	#SBATCH --constraint=haswell
 	#SBATCH --time=5
+	#SBATCH --nodes=1
 	#SBATCH --ntasks=2
 	#SBATCH --cpus-per-task=4
 	export OMP_NUM_THREADS=2
@@ -247,6 +249,7 @@ $$
 	#SBATCH --qos=shared
 	#SBATCH --constraint=haswell
 	#SBATCH --time=5
+	#SBATCH --nodes=1
 	#SBATCH --ntasks=1
 	#SBATCH --cpus-per-task=12
 	export OMP_NUM_THREADS=6
@@ -263,6 +266,7 @@ $$
 	#SBATCH --qos=shared
 	#SBATCH --constraint=haswell
 	#SBATCH --time=5
+	#SBATCH --nodes=1
 	#SBATCH --ntasks=1
 	#SBATCH --mem=1GB
 
