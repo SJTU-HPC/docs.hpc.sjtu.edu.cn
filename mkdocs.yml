@@ -167,6 +167,7 @@ nav:
         - Julia : programming/high-level-environments/julia.md
 #       - Matlab : programming/high-level-environments/matlab.md
         - R : programming/high-level-environments/r.md
+        - IDL: programming/high-level-environments/idl.md
     - Programming Models:
         - Overview: programming/programming-models/index.md
         - MPI :
