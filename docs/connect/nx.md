@@ -13,15 +13,19 @@ NoMachine provides functionality that allow a user to disconnect from the sessio
 and reconnect to it at a later time while keeping the state of all
 running applications inside the session.
 
+The previous KDE desktop has been retired since it is no longer supported in
+CentOS7. Our current default desktop is GNOME. Most of the instructions on this
+page will help you use our GNOME desktop. If you would prefer to use our
+lighter-weight Xfce desktop, you will find directions further down this page.
+
 ## Installing the NoMachine Client
 
 Please make sure you have a recently updated version of the [NoMachine
 client](https://www.nomachine.com/download-enterprise#NoMachine-Enterprise-Client).
 
-## Configuring the Connection File
-
-**Depending on whether you are using the NERSC [sshproxy](https://www.nersc.gov/users/connecting-to-nersc/mfa/)
-service, we have two different sets of connection instructions below.**
+!!! warning "To sshproxy or not to sshproxy?"
+    Depending on whether you are using the NERSC [sshproxy](https://www.nersc.gov/users/connecting-to-nersc/mfa/)
+    service, we have two different sets of connection instructions below.
 
 ## Creating a connection to NERSC **WITH sshproxy**
 
@@ -110,6 +114,31 @@ in between) every time you log on to NoMachine.
 7. To log on to NERSC NoMachine, click on the connection you just created. You will need
    to enter your username and password+OTP. At this point you should now be
    logged onto the NoMachine desktop.
+
+## Using Xfce instead of GNOME
+
+!!! tip "Would you like a lighter-weight desktop?"
+    The current default desktop environment in NoMachine is GNOME. However,
+    some users have found that this desktop can sometimes be laggy or graphics
+    may be displayed with poor resolution. If you have expereinced these issues
+    (or simply would prefer a lighter-weight environment) we reccomend trying
+    our Xfce desktop.
+
+To use our [Xfce](https://www.xfce.org/) desktop instead of our default
+[GNOME](https://www.gnome.org/) desktop:
+
+1. Make sure you have completely logged out of any open NoMachine
+   sessions. To do so click "log out" in the bottom left corner of the
+   GNOME desktop menu.
+2. Return to the NoMachine connection page. Create a new connection file following
+   either the WITH or WITHOUT sshproxy directions above. To help your future self,
+   consider calling it "Xfce connection" or something similar.
+3. Click connect.
+4. Once you've connected, choose "Create a new custom session"
+5. On the next screen, click "Run the following command" and fill in "/bin/startxfce4" and click "Run the command in a virtual desktop"
+6. This should give you a session with the Xfce desktop
+7. Then you can connect to Cori clicking on the small terminal icon on the bottom of the screen and typing "ssh -X cori.nersc.gov".
+
 
 ## Troubleshooting
 
