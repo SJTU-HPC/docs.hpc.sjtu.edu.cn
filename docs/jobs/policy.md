@@ -97,7 +97,8 @@ number of nodes, node feature, and walltime request, etc.).
 ### Premium
 
 The intent of the "premium" QOS is to allow for faster turnaround before
-conferences and urgent project deadlines. It should be used with care. NERSC has a target of keeping premium usage at or below 10 percent of all usage.
+conferences and urgent project deadlines. It should be used with care. 
+NERSC has a target of keeping premium usage at or below 10 percent of all usage.
 
 ### Low
 
@@ -118,9 +119,10 @@ in charging for your job.
 You can access the flex queue by submitting with `-q flex`. Note this is only 
 available on Cori KNL.  In addition, 
 you must specify a minimum running time for this job of 2 hours or less with 
-the `--time-min` flag. This means that the job could potentially be interrupted 
-by a higher priority job after the minimum time has elapsed.  Jobs submitted 
-without this flag will be automatically rejected by the batch system. The max 
+the `--time-min` flag. Because the walltime you receive may vary, we recommend
+implementing checkpoint/restart capabilities within your code or using DMTCP to 
+checkpoint your code. Jobs submitted without the `--time-min` flag will be 
+automatically rejected by the batch system. The max 
 wall time request limit (requested via `--time` or `-t` flag) for flex jobs 
 must be greater than 2 hours and not exceed 48 hours.
 
@@ -140,12 +142,9 @@ is 0 and it has the lowest priority on all systems.
 If you meet the above criteria, you can access the scavenger queue by
 submitting with `-q scavenger` (`-q shared_scavenger` for the shared
 queue). In addition, you must specify a minimum running time for this
-job of 4 hours or less with the `--time-min` flag. This means that the
-job could potentially be interrupted by a higher priority
-(i.e. non-scavenger job) after the minimum time has elapsed. Because
-of this, we recommend you implement checkpointing in your scavenger
-jobs. Jobs submitted without these flags will be automatically
-rejected by the batch system.
+job of 4 hours or less with the `--time-min` flag. We recommend you implement 
+checkpointing in your scavenger jobs to save your progress. Jobs submitted 
+without these flags will be automatically rejected by the batch system.
 
 !!! example
         A scavenger job requesting a minimum time of 1.5 hours:
