@@ -206,3 +206,54 @@ nersc$ chmod u+x,go+rx foo
 nersc$ ls -l foo
 -rwxr-xr-x 1 elvis elvis 0 Nov 19 14:49 foo
 ```
+
+## Unix File Groups
+
+Unix file groups provide a means to control access to shared data on
+disk and tape.
+
+###Overview of Unix Groups
+
+Every user on a Unix system is a member of one or more Unix groups,
+including their primary or default group. Every file (or directory) on
+the system has an owner and an associated group. When a user creates a
+file, the file's associated group will be the user's default
+group. The user (owner) has the ability to change the associated group
+to any of the groups to which the user belongs. Unix groups can be
+defined that allow users to share data with other users who belong to
+the same group.
+
+###Unix Groups at NERSC
+
+Group names are limited to eight characters. A user's default group is
+the same as their username. NERSC users usually belong to several
+other groups, including groups associated with specific research
+projects. For example, consider a NERSC user named "elvis", who is
+working with the "Big Science" research project. This project has an
+allocation on NERSC's MPP systems, controlled by the repository (repo)
+"bigsci". Associated with this the repo is the Unix group
+"bigsci". The user (elvis) would then be a member of two file groups,
+elvis and bigsci. Because a NERSC user can be a member of more than
+one research project, such a user would be a member of more than one
+repo-associated Unix groups.
+
+NERSC PIs, PI Proxies, and Project Managers can manage group
+membership with NIM. Continuing with the example above, if user elvis
+wants to collaborate with another user "jimi", but does not want other
+members of bigsci to be able to see the data, the PI for Big Science
+could create a new group (for example, "ejdata", for elvis and jimi's
+data). The PI would then add elvis and jimi to the ejdata group. Those
+two users could then use "group permissions" on directories and files
+to share data with one another. Currently, PIs who wish to create a
+new Unix group should contact NERSC Consulting.
+
+###Useful Unix Group Commands
+
+| Command       | Description                                  |
+|---------------|----------------------------------------------|
+|groups username|List group membership                         |
+|id username    |List group membership 		               |
+|ls -l          |List group associated with file or directory  |
+|chgrp          |Change group associated with file or directory|
+|newgrp         |Create new shell with different default group |
+|sg             |Execute command with different default group  |
