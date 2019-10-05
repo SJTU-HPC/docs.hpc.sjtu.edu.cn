@@ -125,6 +125,8 @@ nav:
       - CVMFS : services/cvmfs.md
       - Databases: services/databases.md
       - GridFTP: services/gridftp.md
+      - Scp: services/scp.md
+      - Bbcp: services/bbcp.md
   - Programming:
     - Build Tools:
         - programming/build-tools/index.md
