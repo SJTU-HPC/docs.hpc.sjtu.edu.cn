@@ -1,8 +1,10 @@
 # GridFTP Data Transfer
 
-GridFTP is a command line service for parallel movement of data. You
-may find it easier to use [Globus](globus.md), which uses the same
-underlying gridFTP but adds reliability, performance, and ease of use.
+GridFTP is a command line service for parallel movement of data. For
+most transfers, we recommend [Globus](globus.md), which uses the same
+underlying gridFTP but adds reliability, performance, and ease of
+use. However, users occasionally find the flexibility of GridFTP
+useful.
 
 ## Availability
 
