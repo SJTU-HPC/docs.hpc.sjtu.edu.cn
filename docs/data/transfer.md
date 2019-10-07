@@ -49,3 +49,9 @@ model. DTNs are tuned to transfer data efficiently, optimized for
 bandwidth and have direct access to most of the NERSC file
 systems. These transfer nodes are configured within Globus as managed
 endpoints available to all NERSC users.
+
+## NERSC FTP Upload Service
+NERSC maintains [an FTP upload
+service](https://www.nersc.gov/users/storage-and-file-systems/transferring-data/nersc-ftp-upload-service/)
+designed for external collaborators to be able to send data to NERSC
+staff and users.
