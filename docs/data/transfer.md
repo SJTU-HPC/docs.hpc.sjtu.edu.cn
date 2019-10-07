@@ -21,7 +21,7 @@ service for most NERSC users.
 However, there are other tools available to transfer data between
 NERSC and other sites:
 
-* scp / sftp: standard Linux utilities suitable for smaller files (<1GB)
+* [scp](../services/scp.md): standard Linux utilities suitable for smaller files (<1GB)
 * [GridFTP](../services/gridftp.md): parallel transfer software for large files
 
 ## Transferring Data Within NERSC
