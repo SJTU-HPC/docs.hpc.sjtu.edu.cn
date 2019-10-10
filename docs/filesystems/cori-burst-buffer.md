@@ -13,3 +13,5 @@ allocation. Performance is also dependent on access pattern, transfer
 size and access method (e.g. MPI I/O, shared files).
 
 * [Examples](../jobs/examples/index.md#burst-buffer)
+* [Performance Tuning](../performance/io/bb/index.md)
+* [Cray Data Warp User Guide](https://pubs.cray.com/content/S-2558/CLE%207.0.UP00/xctm-series-datawarptm-user-guide)
