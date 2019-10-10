@@ -83,12 +83,12 @@ If you have a Conda environment, depending on how it is installed, it may just s
 If not, use the following procedure to enable a custom kernel based on a Conda environment.
 Let's start by assuming you are a user with username `user` who wants to create a Conda environment on Cori and use it from Jupyter.
 
-    cori$ module load python/3.6-anaconda-5.2
-    cori$ conda create -n myenv python=3.6 ipykernel <further-packages-to-install>
+    cori$ module load python/3.7-anaconda-2019.07
+    cori$ conda create -n myenv python=3.7 ipykernel <further-packages-to-install>
     <... installation messages ...>
     cori$ source activate myenv
     cori$ python -m ipykernel install --user --name myenv --display-name MyEnv
-    Installed kernelspec myenv52 in /global/u1/u/user/.local/share/jupyter/kernels/myenv52
+    Installed kernelspec myenv in /global/u1/u/user/.local/share/jupyter/kernels/myenv
     cori$
 
 Be sure to specify what version of Python interpreter you want installed.
@@ -97,13 +97,13 @@ This will create and install a JSON file called a "kernel spec" in `kernel.json`
 ```json
 {
 	"argv": [
-  		"/global/homes/u/user/.conda/envs/myenv52/bin/python",
+  		"/global/homes/u/user/.conda/envs/myenv/bin/python",
   		"-m",
   		"ipykernel_launcher",
   		"-f",
   		"{connection_file}"
  	],
- 	"display_name": "MyEnv52",
+ 	"display_name": "MyEnv",
  	"language": "python"
 }
 ```
@@ -116,13 +116,13 @@ These are just included in an `env` dictionary:
 ```json
 {
 	"argv": [
-  		"/global/homes/u/user/.conda/envs/myenv52/bin/python",
+  		"/global/homes/u/user/.conda/envs/myenv/bin/python",
   		"-m",
   		"ipykernel_launcher",
   		"-f",
   		"{connection_file}"
  	],
- 	"display_name": "MyEnv52",
+ 	"display_name": "MyEnv",
  	"language": "python",
 	"env": {
     	"PATH":
@@ -157,9 +157,12 @@ The helper could be like:
 ```shell
 #!/bin/bash
 module load <some-module>
-module load <some-other-module>
 export SOME_VALUE=987654321
-exec /global/homes/u/user/.conda/envs/myenv52/bin/python \
+
+module load python/3.7-anaconda-2019.07
+source activate myenv
+
+exec /global/homes/u/user/.conda/envs/myenv/bin/python \
 	-m ipykernel_launcher "$@"
 ```
 
@@ -243,6 +246,9 @@ You can create it by running
 
 ```shell
 module load python/3.7-anaconda-2019.07
+# for customized kernels with own conda environments:
+source activate myenv
+
 jupyter notebook --generate-config
 ```
 
