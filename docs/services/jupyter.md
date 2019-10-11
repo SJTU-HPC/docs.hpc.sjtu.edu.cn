@@ -245,11 +245,7 @@ You may not have a Jupyter notebook config file created yet.
 You can create it by running
 
 ```shell
-module load python/3.7-anaconda-2019.07
-# for customized kernels with own conda environments:
-source activate myenv
-
-jupyter notebook --generate-config
+/usr/common/software/jupyter/19-09/bin/jupyter notebook --generate-config
 ```
 
 Open the generated configuration file, uncomment `c.Application.log_level` and change the value to say, 0, for debug level information.
