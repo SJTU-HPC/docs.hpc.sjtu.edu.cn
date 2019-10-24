@@ -1,255 +1,307 @@
 nav:
-  - Home: index.md
-  - Accounts:
-      - Accounts : accounts/index.md
-      - Passwords : accounts/passwords.md
-      - Policy : accounts/policy.md
-      - Collaboration Accounts : accounts/collaboration_accounts.md
-  - Connecting:
-      - Login Nodes: connect/login-nodes.md
-      - SSH: connect/ssh.md
-      - NoMachine: connect/nx.md
-      - Jupyter : connect/jupyter.md
-  - Running Jobs:
-    - Overview: jobs/index.md
-    - Examples: jobs/examples/index.md
-    - Affinity: jobs/affinity/index.md
-    - Interactive: jobs/interactive.md
-    - Best Practices: jobs/best-practices.md
-    - FAQs: jobs/jobs-faq.md
-    - Workflow Tools:
-      - Overview: jobs/workflow-tools.md
-      - Taskfarmer: jobs/workflow/taskfarmer.md
-      - Fireworks: jobs/workflow/fireworks.md
-      - Swift: jobs/workflow/swift.md
-      - Other workflow tools: jobs/workflow/other_tools.md
-    - Reservations: jobs/reservations.md
-    - Queue Policy: jobs/policy.md
-    - Containers:
-        - Overview : programming/shifter/overview.md
-        - How to use Shifter: programming/shifter/how-to-use.md
-        - Using Intel Compilers with Docker Images: programming/shifter/intel.md
-        - Examples: programming/shifter/examples.md
-  - Applications:
-    - Overview: applications/index.md
-    - AMBER: applications/amber/index.md
-    - Abinit: applications/abinit/index.md
-    - BerkeleyGW: applications/berkeleygw/index.md
-    - CP2K: applications/cp2k/index.md
-    - CPMD: applications/cpmd/index.md
-    - LAMMPS: applications/lammps/index.md
-    - Mathematica : applications/mathematica/index.md
-    - MATLAB : 
-      - MATLAB Overview: applications/matlab/index.md
-      - MATLAB Compiler: applications/matlab/matlab_compiler.md
-    - MOLPRO : applications/molpro/index.md
-    - NAMD : applications/namd/index.md
-    - NCAR Graphics : applications/ncargraphics/index.md
-    - SIESTA : applications/siesta/index.md
-    - PARATEC: applications/paratec/index.md
-    - ParaView : applications/paraview/index.md
-    - Q-Chem : applications/qchem/index.md
-    - Quantum ESPRESSO : applications/quantum-espresso/index.md
-    - VASP : applications/vasp/index.md
-    - VisIt : applications/visit/index.md
-    - WIEN2k: applications/wien2k/index.md
-    - Wannier90: applications/wannier90/index.md
-  - Analytics:
-      - Overview : analytics/analytics.md
-      - Jupyter : services/jupyter.md
-      - Machine Learning:
-        - Overview: analytics/machinelearning/overview.md
-        - TensorFlow: analytics/machinelearning/tensorflow/index.md
-        - PyTorch: analytics/machinelearning/pytorch.md
-        - Benchmarks: analytics/machinelearning/benchmarks.md
-        - Science use-cases:
-            Overview: analytics/machinelearning/science-use-cases/index.md
-            HEP CNN: analytics/machinelearning/science-use-cases/hep-cnn.md
-      - RStudio : services/rstudio.md
-      - Spark: analytics/spark.md
-  - Data:
-      - Management : data/management.md
-      - Sharing: data/sharing.md
-      - Transfer : data/transfer.md
-      - Visualization : data/visualization.md
-      - Formats : data/formats.md
-      - Policy: data/policy.md
-  - Performance:
-    - Readiness: performance/readiness.md
-    - Getting started on KNL: performance/knl/getting-started.md
-    - Vectorization : performance/vectorization.md
-    - Parallelism : performance/parallelism.md
-    - Memory Bandwidth: performance/mem_bw.md
-    - Profiling : performance/profiling.md
-    - Arithmetic Intensity: performance/arithmetic_intensity.md
-    - I/O:
-        - Overview : performance/io/index.md
-        - I/O libraries: performance/io/library/index.md
-        - Lustre: performance/io/lustre/index.md
-        - Burst Buffer: performance/io/bb/index.md
-        - KNL: performance/io/knl/index.md
-    - Portability: performance/portability.md
-    - Variability: performance/variability.md
-    - Case Studies:
-        - Overview : performance/case-studies/index.md
-        - AMReX : performance/case-studies/amrex/index.md
-        - BerkeleyGW : performance/case-studies/berkeleygw/index.md
-        - Chombo-Crunch : performance/case-studies/chombo-crunch/index.md
-        - EMGeo : performance/case-studies/emgeo/index.md
-        - HMMER3 : performance/case-studies/hmmer3/index.md
-        - MFDn : performance/case-studies/mfdn/index.md
-        - QPhiX : performance/case-studies/qphix/index.md
-        - Quantum ESPRESSO : performance/case-studies/quantum-espresso/index.md
-        - WARP: performance/case-studies/warp/index.md
-        - XGC1: performance/case-studies/xgc1/index.md
-    - KNL Cache Mode: performance/knl/cache-mode.md
-  - Services:
-      - Spin Containers :
-        - services/spin/index.md
-        - services/spin/best_practices.md
-        - services/spin/tips_and_examples.md
-        - Spin Getting Started Guide:
-          - "Overview" : services/spin/getting_started/index.md
-          - "Lesson 1" : services/spin/getting_started/lesson-1.md
-          - "Lesson 2" : services/spin/getting_started/lesson-2.md
-          - "Lesson 3" : services/spin/getting_started/lesson-3.md
-        - services/spin/cheatsheet.md
-      - Science Gateways : services/science-gateways.md
-      - NEWT : services/newt.md
-      - Jupyter : services/jupyter.md
-      - Globus : services/globus.md
-      - CDash :
-        - Overview : services/cdash/index.md
-        - CTest/CDash with CMake : services/cdash/with_cmake.md
-        - CTest/CDash without CMake : services/cdash/without_cmake.md
-      - CVMFS : services/cvmfs.md
-      - Databases: services/databases.md
-      - GridFTP: services/gridftp.md
-      - Scp: services/scp.md
-      - Bbcp: services/bbcp.md
-  - Programming:
-    - Build Tools:
-        - programming/build-tools/index.md
-    - Developer Tools:
-        - programming/performance-debugging-tools/index.md
-        - DDT : programming/performance-debugging-tools/ddt.md
-        - TotalView : programming/performance-debugging-tools/totalview.md
-        - GDB : programming/performance-debugging-tools/gdb.md
-        - STAT and ATP : programming/performance-debugging-tools/stat_atp.md
-        - Valgrind : programming/performance-debugging-tools/valgrind.md
-        - lgdb and CCDB : programming/performance-debugging-tools/lgdb_ccdb.md
-        - MAP : programming/performance-debugging-tools/map.md
-        - VTune : programming/performance-debugging-tools/vtune.md
-        - Advisor : programming/performance-debugging-tools/advisor.md
-        - Inspector : programming/performance-debugging-tools/inspector.md
-        - Reveal : programming/performance-debugging-tools/reveal.md
-        - APS : programming/performance-debugging-tools/aps.md
-        - Performance Reports : programming/performance-debugging-tools/performancereports.md
-        - CrayPat : programming/performance-debugging-tools/craypat.md
-        - darshan : programming/performance-debugging-tools/darshan.md
-        - IPM : programming/performance-debugging-tools/ipm.md
-        - Trace Analyzer and Collector: programming/performance-debugging-tools/itac.md
-        - LIKWID : programming/performance-debugging-tools/likwid.md
-        - Roofline Performance Model : programming/performance-debugging-tools/roofline.md
-    - Compilers :
-        - Native Compilers : programming/compilers/native.md
-        - Compiler Wrappers (recommended) : programming/compilers/wrappers.md
-    - High-level Programming Environments:
-        - Python :
-            - programming/high-level-environments/python/index.md
-            - Python 2 Retirement : programming/high-level-environments/python/python2-dying.md
-            - Best Practices : programming/high-level-environments/python/best-practices.md
-            - Python on Cori KNL : programming/high-level-environments/python/python-on-cori-knl.md
-            - Scaling Up : programming/high-level-environments/python/scaling-up.md
-            - Multiprocessing : programming/high-level-environments/python/multiprocessing.md
-            - mpi4py : programming/high-level-environments/python/mpi4py.md
-            - Dask : programming/high-level-environments/python/dask.md
-            - Profiling Python : programming/high-level-environments/python/profiling-python.md
-            - Python FAQ : programming/high-level-environments/python/frequently-asked-questions.md
-        - Julia : programming/high-level-environments/julia.md
-#       - Matlab : programming/high-level-environments/matlab.md
-        - R : programming/high-level-environments/r.md
-        - IDL: programming/high-level-environments/idl.md
-    - Programming Models:
-        - Overview: programming/programming-models/index.md
-        - MPI :
-          - About: programming/programming-models/mpi/index.md
-          - OpenMPI: programming/programming-models/mpi/openmpi.md
-        - OpenMP :
-          - About: programming/programming-models/openmp/openmp.md
-          - OpenMP Resources : programming/programming-models/openmp/openmp-resources.md
-          - Tools for OpenMP : programming/programming-models/openmp/openmp-tools.md
-          - False Sharing Detection using VTune Amplifier : programming/programming-models/openmp/sharing-vtune.md
-        - UPC : programming/programming-models/upc.md
-        - UPC++ : programming/programming-models/upcxx.md
-        - Kokkos : programming/programming-models/kokkos.md
-        - Raja : programming/programming-models/raja.md
-        - Coarrays : programming/programming-models/coarrays.md
-    - Libraries:
-        - About: programming/libraries/index.md
-        - FFTW : programming/libraries/fftw/index.md
-        - LAPACK : programming/libraries/lapack/index.md
-        - MKL : programming/libraries/mkl/index.md
-        - LibSci : programming/libraries/libsci/index.md
-        - HDF5 : programming/libraries/hdf5/index.md
-        - NetCDF : programming/libraries/netcdf/index.md
-        - PETSc: programming/libraries/petsc/index.md
-    - Version Control:
-        - git : programming/version-control/git/index.md
-        - Subversion : programming/version-control/subversion/index.md
-  - Environment: environment/index.md
-  - Systems:
-      - Cori:
-           - Cori System: systems/cori/index.md
-           - Interconnect : systems/cori/interconnect/index.md
-           - KNL Modes : systems/cori/knl_modes/index.md
-           - Application Porting and Performance:
-               - Getting started on KNL: performance/knl/getting-started.md
-      - Data Transfer Nodes : systems/dtn/index.md
-  - Filesystems:
-      - Overview: filesystems/index.md
-      - Schematic: filesystems/schematic.md
-      - Quotas: filesystems/quotas.md
-      - Global Home: filesystems/global-home.md
-      - Global Common: filesystems/global-common.md
-      - Project: filesystems/project.md
-      - Edison scratch: filesystems/edison-scratch.md
-      - Cori scratch: filesystems/cori-scratch.md
-      - Cori Burst Buffer: filesystems/cori-burst-buffer.md
-      - Archive (HPSS):
-        - Intro: filesystems/archive.md
-        - Storage Statistics: filesystems/archive-stats.md
-      - Backups: filesystems/backups.md
-      - Unix File Permissions: filesystems/unix-file-permissions.md
-  - Science Partners:
-    - Joint Genome Institute (JGI):
-      - science-partners/jgi/index.md
-      - Systems:
-        - Overview: science-partners/jgi/systems.md
-        - Cori Genepool: science-partners/jgi/cori-genepool.md
-        - Cori ExVivo: science-partners/jgi/cori-exvivo.md
-      - Filesystems: science-partners/jgi/filesystems.md
-      - Software: science-partners/jgi/software.md
-      - Training and Tutorials: science-partners/jgi/training.md
-      - Databases and Web Services: science-partners/jgi/services.md
-  - Help: help/index.md
-  - Translations:
-      - Chinese:
-        - MFA: translations/zh/mfa.md
-        - NIM Guide: translations/zh/nim_guide.md
+  - 主页: index.md
+  - 账号:
+    - 账号申请: 账号/账号申请.md
+    - 密码: 账号/密码.md
+    - 账号管理: 账号/账号管理.md
+    - 机时充值: 账号/机时充值.md
+    - 收费细则: 账号/收费细则.md
+  - 登陆:
+    - 登陆节点: 登陆/登陆节点.md
+    - SSH: 登陆/SSH.md
+    - OpenOnDemand: 登陆/OpenOnDemand.md
+  - 文件系统:
+    - 概览: 文件系统/概览.md
+    - 数据传输: 文件系统/数据传输.md
+    - 与校云计算文件交互: 文件系统/云平台.md
+    - 与其他用户共享文件: 文件系统/共享文件.md 
+  - 作业:
+    - slurm概览: 作业/slurm.md
+    - 脚本式作业: 作业/脚本式作业.md
+    - MPI、OpenMP、CUDA作业示例: 作业/MPI、OpenMP、CUDA作业示例.md
+    - 作业脚本样例: 作业/作业脚本样例.md
+    - 交互式作业: 作业/交互式作业.md
+    - 队列选择: 作业/队列选择.md
+    - 节点预约: 作业/节点预约.md
+    - 作业优先级: 作业/作业优先级.md
+    - 容器: 作业/容器/singularity.md
+  - 软件环境:
+    - Module Environment: 软件环境/module.md
+  - 应用软件:
+    - Python: 应用软件/Python.md
+    - Nektar++: 应用软件/Nektar.md
+    - Lammps: 应用软件/Lammps.md
+    - VASP: 应用软件/VASP.md
+    - Amber: 应用软件/Amber.md
+    - VMD: 应用软件/VMD.md
+    - nwchen: 应用软件/nwchen.md
+    - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
+    - Gromacs: 应用软件/Gromacs.md
+    - FFTW: 应用软件/FFTW.md
+    - OpenFoam: 应用软件/OpenFoam.md
+    - GNU Library: 应用软件/GNU.md
+    - MPI4PY: 应用软件/MPI4PY.md
+    - Pytorch: 应用软件/Pytorch.md
+    - TensorFlow: 应用软件/TensorFlow.md
+    - MXNet: 应用软件/MXNet.md
+    - HIC-Pro: 应用软件/HIC-Pro.md
+    - Octave: 应用软件/Octave.md
+    - Perl: 应用软件/Perl.md
+    - Spark: 应用软件/Spark.md
+    - R: 应用软件/R.md
+    - 商业软件: 应用软件/商业软件.md
+  - FAQ:
+    - faq: FAQ/faq.md
+#   - Accounts:
+#       - Accounts : accounts/index.md
+#       - Passwords : accounts/passwords.md
+#       - Policy : accounts/policy.md
+#       - Collaboration Accounts : accounts/collaboration_accounts.md
+#   - Connecting:
+#       - Login Nodes: connect/login-nodes.md
+#       - SSH: connect/ssh.md
+#       - NoMachine: connect/nx.md
+#       - Jupyter : connect/jupyter.md
+#   - Running Jobs:
+#     - Overview: jobs/index.md
+#     - Examples: jobs/examples/index.md
+#     - Affinity: jobs/affinity/index.md
+#     - Interactive: jobs/interactive.md
+#     - Best Practices: jobs/best-practices.md
+#     - FAQs: jobs/jobs-faq.md
+#     - Workflow Tools:
+#       - Overview: jobs/workflow-tools.md
+#       - Taskfarmer: jobs/workflow/taskfarmer.md
+#       - Fireworks: jobs/workflow/fireworks.md
+#       - Swift: jobs/workflow/swift.md
+#       - Other workflow tools: jobs/workflow/other_tools.md
+#     - Reservations: jobs/reservations.md
+#     - Queue Policy: jobs/policy.md
+#     - Containers:
+#         - Overview : programming/shifter/overview.md
+#         - How to use Shifter: programming/shifter/how-to-use.md
+#         - Using Intel Compilers with Docker Images: programming/shifter/intel.md
+#         - Examples: programming/shifter/examples.md
+#   - Applications:
+#     - Overview: applications/index.md
+#     - AMBER: applications/amber/index.md
+#     - Abinit: applications/abinit/index.md
+#     - BerkeleyGW: applications/berkeleygw/index.md
+#     - CP2K: applications/cp2k/index.md
+#     - CPMD: applications/cpmd/index.md
+#     - LAMMPS: applications/lammps/index.md
+#     - Mathematica : applications/mathematica/index.md
+#     - MATLAB : 
+#       - MATLAB Overview: applications/matlab/index.md
+#       - MATLAB Compiler: applications/matlab/matlab_compiler.md
+#     - MOLPRO : applications/molpro/index.md
+#     - NAMD : applications/namd/index.md
+#     - NCAR Graphics : applications/ncargraphics/index.md
+#     - SIESTA : applications/siesta/index.md
+#     - PARATEC: applications/paratec/index.md
+#     - ParaView : applications/paraview/index.md
+#     - Q-Chem : applications/qchem/index.md
+#     - Quantum ESPRESSO : applications/quantum-espresso/index.md
+#     - VASP : applications/vasp/index.md
+#     - VisIt : applications/visit/index.md
+#     - WIEN2k: applications/wien2k/index.md
+#     - Wannier90: applications/wannier90/index.md
+#   - Analytics:
+#       - Overview : analytics/analytics.md
+#       - Jupyter : services/jupyter.md
+#       - Machine Learning:
+#         - Overview: analytics/machinelearning/overview.md
+#         - TensorFlow: analytics/machinelearning/tensorflow/index.md
+#         - PyTorch: analytics/machinelearning/pytorch.md
+#         - Benchmarks: analytics/machinelearning/benchmarks.md
+#         - Science use-cases:
+#             Overview: analytics/machinelearning/science-use-cases/index.md
+#             HEP CNN: analytics/machinelearning/science-use-cases/hep-cnn.md
+#       - RStudio : services/rstudio.md
+#       - Spark: analytics/spark.md
+#   - Data:
+#       - Management : data/management.md
+#       - Sharing: data/sharing.md
+#       - Transfer : data/transfer.md
+#       - Visualization : data/visualization.md
+#       - Formats : data/formats.md
+#       - Policy: data/policy.md
+#   - Performance:
+#     - Readiness: performance/readiness.md
+#     - Getting started on KNL: performance/knl/getting-started.md
+#     - Vectorization : performance/vectorization.md
+#     - Parallelism : performance/parallelism.md
+#     - Memory Bandwidth: performance/mem_bw.md
+#     - Profiling : performance/profiling.md
+#     - Arithmetic Intensity: performance/arithmetic_intensity.md
+#     - I/O:
+#         - Overview : performance/io/index.md
+#         - I/O libraries: performance/io/library/index.md
+#         - Lustre: performance/io/lustre/index.md
+#         - Burst Buffer: performance/io/bb/index.md
+#         - KNL: performance/io/knl/index.md
+#     - Portability: performance/portability.md
+#     - Variability: performance/variability.md
+#     - Case Studies:
+#         - Overview : performance/case-studies/index.md
+#         - AMReX : performance/case-studies/amrex/index.md
+#         - BerkeleyGW : performance/case-studies/berkeleygw/index.md
+#         - Chombo-Crunch : performance/case-studies/chombo-crunch/index.md
+#         - EMGeo : performance/case-studies/emgeo/index.md
+#         - HMMER3 : performance/case-studies/hmmer3/index.md
+#         - MFDn : performance/case-studies/mfdn/index.md
+#         - QPhiX : performance/case-studies/qphix/index.md
+#         - Quantum ESPRESSO : performance/case-studies/quantum-espresso/index.md
+#         - WARP: performance/case-studies/warp/index.md
+#         - XGC1: performance/case-studies/xgc1/index.md
+#     - KNL Cache Mode: performance/knl/cache-mode.md
+#   - Services:
+#       - Spin Containers :
+#         - services/spin/index.md
+#         - services/spin/best_practices.md
+#         - services/spin/tips_and_examples.md
+#         - Spin Getting Started Guide:
+#           - "Overview" : services/spin/getting_started/index.md
+#           - "Lesson 1" : services/spin/getting_started/lesson-1.md
+#           - "Lesson 2" : services/spin/getting_started/lesson-2.md
+#           - "Lesson 3" : services/spin/getting_started/lesson-3.md
+#         - services/spin/cheatsheet.md
+#       - Science Gateways : services/science-gateways.md
+#       - NEWT : services/newt.md
+#       - Jupyter : services/jupyter.md
+#       - Globus : services/globus.md
+#       - CDash :
+#         - Overview : services/cdash/index.md
+#         - CTest/CDash with CMake : services/cdash/with_cmake.md
+#         - CTest/CDash without CMake : services/cdash/without_cmake.md
+#       - CVMFS : services/cvmfs.md
+#       - Databases: services/databases.md
+#       - GridFTP: services/gridftp.md
+#       - Scp: services/scp.md
+#       - Bbcp: services/bbcp.md
+#   - Programming:
+#     - Build Tools:
+#         - programming/build-tools/index.md
+#     - Developer Tools:
+#         - programming/performance-debugging-tools/index.md
+#         - DDT : programming/performance-debugging-tools/ddt.md
+#         - TotalView : programming/performance-debugging-tools/totalview.md
+#         - GDB : programming/performance-debugging-tools/gdb.md
+#         - STAT and ATP : programming/performance-debugging-tools/stat_atp.md
+#         - Valgrind : programming/performance-debugging-tools/valgrind.md
+#         - lgdb and CCDB : programming/performance-debugging-tools/lgdb_ccdb.md
+#         - MAP : programming/performance-debugging-tools/map.md
+#         - VTune : programming/performance-debugging-tools/vtune.md
+#         - Advisor : programming/performance-debugging-tools/advisor.md
+#         - Inspector : programming/performance-debugging-tools/inspector.md
+#         - Reveal : programming/performance-debugging-tools/reveal.md
+#         - APS : programming/performance-debugging-tools/aps.md
+#         - Performance Reports : programming/performance-debugging-tools/performancereports.md
+#         - CrayPat : programming/performance-debugging-tools/craypat.md
+#         - darshan : programming/performance-debugging-tools/darshan.md
+#         - IPM : programming/performance-debugging-tools/ipm.md
+#         - Trace Analyzer and Collector: programming/performance-debugging-tools/itac.md
+#         - LIKWID : programming/performance-debugging-tools/likwid.md
+#         - Roofline Performance Model : programming/performance-debugging-tools/roofline.md
+#     - Compilers :
+#         - Native Compilers : programming/compilers/native.md
+#         - Compiler Wrappers (recommended) : programming/compilers/wrappers.md
+#     - High-level Programming Environments:
+#         - Python :
+#             - programming/high-level-environments/python/index.md
+#             - Python 2 Retirement : programming/high-level-environments/python/python2-dying.md
+#             - Best Practices : programming/high-level-environments/python/best-practices.md
+#             - Python on Cori KNL : programming/high-level-environments/python/python-on-cori-knl.md
+#             - Scaling Up : programming/high-level-environments/python/scaling-up.md
+#             - Multiprocessing : programming/high-level-environments/python/multiprocessing.md
+#             - mpi4py : programming/high-level-environments/python/mpi4py.md
+#             - Dask : programming/high-level-environments/python/dask.md
+#             - Profiling Python : programming/high-level-environments/python/profiling-python.md
+#             - Python FAQ : programming/high-level-environments/python/frequently-asked-questions.md
+#         - Julia : programming/high-level-environments/julia.md
+# #       - Matlab : programming/high-level-environments/matlab.md
+#         - R : programming/high-level-environments/r.md
+#         - IDL: programming/high-level-environments/idl.md
+#     - Programming Models:
+#         - Overview: programming/programming-models/index.md
+#         - MPI :
+#           - About: programming/programming-models/mpi/index.md
+#           - OpenMPI: programming/programming-models/mpi/openmpi.md
+#         - OpenMP :
+#           - About: programming/programming-models/openmp/openmp.md
+#           - OpenMP Resources : programming/programming-models/openmp/openmp-resources.md
+#           - Tools for OpenMP : programming/programming-models/openmp/openmp-tools.md
+#           - False Sharing Detection using VTune Amplifier : programming/programming-models/openmp/sharing-vtune.md
+#         - UPC : programming/programming-models/upc.md
+#         - UPC++ : programming/programming-models/upcxx.md
+#         - Kokkos : programming/programming-models/kokkos.md
+#         - Raja : programming/programming-models/raja.md
+#         - Coarrays : programming/programming-models/coarrays.md
+#     - Libraries:
+#         - About: programming/libraries/index.md
+#         - FFTW : programming/libraries/fftw/index.md
+#         - LAPACK : programming/libraries/lapack/index.md
+#         - MKL : programming/libraries/mkl/index.md
+#         - LibSci : programming/libraries/libsci/index.md
+#         - HDF5 : programming/libraries/hdf5/index.md
+#         - NetCDF : programming/libraries/netcdf/index.md
+#         - PETSc: programming/libraries/petsc/index.md
+#     - Version Control:
+#         - git : programming/version-control/git/index.md
+#         - Subversion : programming/version-control/subversion/index.md
+#   - Environment: environment/index.md
+#   - Systems:
+#       - Cori:
+#            - Cori System: systems/cori/index.md
+#            - Interconnect : systems/cori/interconnect/index.md
+#            - KNL Modes : systems/cori/knl_modes/index.md
+#            - Application Porting and Performance:
+#                - Getting started on KNL: performance/knl/getting-started.md
+#       - Data Transfer Nodes : systems/dtn/index.md
+#   - Filesystems:
+#       - Overview: filesystems/index.md
+#       - Schematic: filesystems/schematic.md
+#       - Quotas: filesystems/quotas.md
+#       - Global Home: filesystems/global-home.md
+#       - Global Common: filesystems/global-common.md
+#       - Project: filesystems/project.md
+#       - Edison scratch: filesystems/edison-scratch.md
+#       - Cori scratch: filesystems/cori-scratch.md
+#       - Cori Burst Buffer: filesystems/cori-burst-buffer.md
+#       - Archive (HPSS):
+#         - Intro: filesystems/archive.md
+#         - Storage Statistics: filesystems/archive-stats.md
+#       - Backups: filesystems/backups.md
+#       - Unix File Permissions: filesystems/unix-file-permissions.md
+#   - Science Partners:
+#     - Joint Genome Institute (JGI):
+#       - science-partners/jgi/index.md
+#       - Systems:
+#         - Overview: science-partners/jgi/systems.md
+#         - Cori Genepool: science-partners/jgi/cori-genepool.md
+#         - Cori ExVivo: science-partners/jgi/cori-exvivo.md
+#       - Filesystems: science-partners/jgi/filesystems.md
+#       - Software: science-partners/jgi/software.md
+#       - Training and Tutorials: science-partners/jgi/training.md
+#       - Databases and Web Services: science-partners/jgi/services.md
+#   - Help: help/index.md
+#   - Translations:
+#       - Chinese:
+#         - MFA: translations/zh/mfa.md
+#         - NIM Guide: translations/zh/nim_guide.md
 
 # Project Information
-site_name: NERSC Documentation
-site_description: NERSC Documentation
-site_author: NERSC
+site_name: Pi Documentation
+site_description: Pi Documentation
+site_author: SJTU HPC Team
 site_dir: public
-site_url: "https://docs.nersc.gov/"
-repo_name: GitLab/NERSC/docs
-repo_url: https://gitlab.com/NERSC/nersc.gitlab.io
-edit_uri: blob/master/docs/
+site_url: "http://docs.hpc.sjtu.edu.cn"
+repo_name: Github/sjtuhpcc/docs
+repo_url: https://github.com/sjtuhpcc/docs.sjtu.edu.cn
+edit_uri: tree/master/docs/
 
 # Configuration
-strict: true
+strict: false
 
 theme:
   name: material

@@ -38,6 +38,13 @@
     font-weight:bold;   
 }
 
+.ft-copyright{
+    color: rgb(118,119,120);
+    margin-top: 4px;
+    font-size: 12px;
+    text-align:center;
+    width: 100%;
+}
 
 @media (max-width: 720px) {
     .nersc-foot-col-2 {
