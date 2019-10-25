@@ -1,120 +1,123 @@
-# SSH
+#<center>通过SSH登录HPC集群<center/>
 
-All NERSC computers (except HPSS) are reached using either the Secure
-Shell (SSH) communication and encryption protocol (version 2) or by
-Grid tools that use trusted certificates.
+-------
 
-SSH (Secure Shell) is an encrypted network protocol used to log into
-computers over an unsecured network. On UNIX/LINUX/BSD type systems,
-SSH is also the name of a suite of software applications for
-connecting via the SSH protocol. The SSH applications can execute
-commands on a remote machine and transfer files from one machine to
-another.  All communications are automatically and transparently
-encrypted, including passwords. Most versions of SSH provide login
-(ssh, slogin) a remote copy operation (scp), and many also provide a
-secure ftp client (sftp). Additionally, SSH allows secure X Window
-connections.
+&ensp;&ensp;本文将向大家介绍在交大校园网内如何通过SSH远程登录到HPC集群上。在阅读本文档之前，您需要具备Linux/Unix、终端、MS-DOS、SSH远程登录的相关知识，或者您可以阅读参考资料理解这些概念。
 
-## Password-less logins and transfers
+本文主要内容：
 
-Consult the documentation on using the
-[SSH Proxy](../mfa/#mfa-for-ssh-keys-sshproxy) service in the MFA
-documentation section for ways to connect to NERSC systems without reentering
-your password and one-time password.
+ * 使用ssh登录集群的注意事项；
+ * 首次登录准备，如信息采集、客户端下载、ssh登录、ssh文件传输、无密码登录等；
+ * 故障排除和反馈。
+ 
+按照文档的操作说明将有助于您完成工作，谢谢您的配合！
 
-## SSH certificate authority
+#注意事项
 
-NERSC generates SSH certificates for the primary login nodes using a NERSC
-SSH certificate authority.  Most recent ssh clients support these certificates.
-You can add the following entry to the `known_hosts` file to make use of
-this certificate.
+ * HPC账号仅限于同一课题组的成员使用，请勿将账号借给他人使用。
+ * 请妥善保管好您的账号密码，不要告知他人。HPC管理员不会要求您提供密码。
+ * 恶意的SSH客户端软件会窃取您的密码，请在官网下载正版授权SSH客户端软件。
+ * 登录HPC集群后，请不要跳转到其他登录节点。任务完成后请关闭SSH会话。
+ * 若无法登录，请检查输入密码或确认IP地址是否加入白名单。您可以参考故障排除和反馈，将诊断信息发送给集群管理员hpc@sjtu.edu.cn。
+#准备
+##收集信息
+通过SSH登录HPC集群，需要在客户端输入登录节点IP地址（或主机名），SSH端口，SSH用户名和密码。账号开通好后我们会给您发送邮件确认，邮件内容如下：
 
-```
-@cert-authority *.nersc.gov ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEA2yKBpvRbdD9MWiu+7wg17vBsKy46AjjuL27DmdpDYiCqRE2mN0om9b0jn4eI91RGykbcRa9wUKJ2qaD0zsD08A8HM+R14H4UsZ5hi7S+xGqscJH7uTmXy5Igo5xEOahS9Z+ecgonDCgWKJnbd/FRu4vITYXrvTlIIGHGRBYj0GzbgLHBzedoMaGNRwhVyadH2SGRaZCgbH+Swevzy0GwYfZJA9zd7EX0jiAClkSYcflIOsygmI3gHv+b35mrvXcHDeQOR/wg8knfpSiFLCkVDpfgnj27Lemzxe6k61Brhv9CUiq+t7WApVDBovhdXZn6pBg+OKeDk1G1OLvRbxJ2bw==
-```
+>     SSH login node:202.120.58.241
+>     Username: YOUR_USERNAME
+>     Password: YOUR_PASSWORD
+>     Home: /lustre/home/YOUR_HOME
 
-## Key fingerprints
+详细信息：
 
-NERSC may occasionally update the host keys on the major systems.  Check here
-to confirm the current fingerprints.
+>    * SSH username: YOUR_USERNAME    
+>    * SSH password: YOUR_PASSWORD    
+>    * SSH login node’s IP address: 202.120.58.241    
+>    * user’s home folder: /lustre/home/YOUR_HOME
 
- *  Cori
-	```
-	4096 SHA256:35yiNfemgwzHCHFrPGWrJBCCqERqLtOVSrR36s1DaPc cori.nersc.gov (RSA)
-	```
+ *提示：为了便于叙述，以下文档内容将遵循上述信息。在实际操作中，请参阅收到的电子邮件，并注意您的登录信息。*
+ 
+##下载客户端
+###Windows
+ Windows用户可以使用putty免费客户端登录软件，下载后双击即可运行使用。putty可通过以下连接下载：http://www.putty.org/.
+ 
+###Linux/Unix/Mac
+ 像Linux / Unix / Mac这样的Nix opration系统拥有自己的SSH客户端，包括ssh, scp,sftp等，因此没必要再去下载其他登录软件。
+#通过SSH登录集群
+##Windows用户
+启动客户端putty，填写登录节点IP地址202.120.58.241，端口号，然后点Open按钮，如下图所示：
+ 
+![avater](..\img\putty1.png)
+ 
+在终端窗口中，输入您的SSH用户名和密码进行登录，如图2所示：
 
- *  DTN[01-04]
-	All of the dtn nodes should have the same fingerprints:
-	```
-	2048 SHA256:/cIQwTFd8zgeZKVdzE5Jqscu3IX3mRBn7ikaAGH5h6k dtn01.nersc.gov (RSA)
-	256 SHA256:tIO6fLqc2dHa1o3IGmWA5mtxqOURTlxHm3E6lV9zIGg dtn01.nersc.gov (ECDSA)
-	256 SHA256:wirBRUHXris8lXH856CnJMg6JFO2zSWqogXsDmZnZo8 dtn01.nersc.gov (ED25519)
-	```
 
-!!! note
-	The ssh fingerprints can be obtained via:
-	```
-	ssh-keygen -lf <(ssh-keyscan -t rsa,ed25519,ecdsa $hostname 2>/dev/null)
-	```
+![avater](..\img\putty2.png)
 
-## Host Keys
+*提示：输入密码时，没有可显示字符，请照常进行操作，然后按回车键登录。*
+  
+##Linux/Unix/Mac用户
+  Linux / Unix / Mac用户可以使用终端中的命令行工具登录。下列语句指出了该节点的IP地址、用户名和SSH端口。
+  > $ ssh YOUR_USERNAME@TARGET_IP
+ 
+#通过SSH传输文件
+##Windows用户
+ Windows用户可以使用WinSCP在群集和您自己的计算机之间传输文件。如下图所示，填写节点的地址，SSH端口，SSH用户名，SSH密码，然后点击Login进行连接。 使用WinSCP的方法类似于使用FTP客户端GUI，如下图所示：
 
-These are the entries in `~/.ssh/known_hosts`.
+![avater](..\img\winscp.png)
+![avater](..\img\winscp2.png)
 
-### Cori
+##Linux/Unix/Mac用户
+Linux/Unix/Mac 用户可以使用命令行工具在集群和您自己的计算机之间传输数据。下列语句会将文件夹data/上传到主文件夹的tmp/。
+> $ scp -r data/YOUR_USERNAME@TARGET_IP:tmp/
 
-```
-cori.nersc.gov ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCsxGw19ZL8EN+NZ9HhD+O/nATuvgZxcEuy/yXnGqz5wMzJj6rK7TsrdU8rdJNrhZDe3yjpCiKvqkbSKp22jK2/iMAeWDQvYpMgC6KyiNd0hztowtMFJEwb8gVmtkVioqIaf9ufJnOO0LX5A5J/4fQhICfbyPiX8SsjX0p655/kIm3T6hr7t89b4IkRu19/uWufbNaV/mZSFWl7asLKXJNTMhzEn6bsTcAqlm55Tp4NvCe1hvv6OY/vU5luDz09UDmnDfr/uukmVm5aIjtlZBGqbOe7huNJGIWhoGCN/SoArRu9T9c9fjOlRMOHcf0QYMQmxFQnR0TkJZQoJ5N+EYNUIB9dvnJs2mlN0ZEuUU0RwAUOge7RwujiZ2AWp/dV/PNvLGmDVUxiyXC0Uuw57Ga2e49hYisYU/J/NPp9AbHqO8M6kZqYdqWKYueIsM3FDti3vUbjV4J6sL6mOBbxuJpUhUEX5UXxGbR39hDVx9Lsj4dszu+mcBFnDNcpRCDjw3z+hDqdNNpzhIRlbHQErLBWL3vnn2MLnb/3z163gyRtu1iTuR5myBIs9jLDAsX94VbBzKWdCFe22x4Eo6HwB6u+UHlXov0fnBXtAmgwRegc1gQwxi2FXB/ty0q1EO+PYo3fjUVRRb4uqBBIvpFarwtL0T6iYAYgHY11vH9Z2BFAHQ==
-```
+下列语句会将主文件夹的data.out下载到本地当前工作目录中。
+> $ scp YOUR_USERNAME@TARGET_IP:data.out./
 
-## Troubleshooting
+如果要完成更复杂的数据传输操作，可以使用sftp。它类似于FTP命令行客户端。
+> $ sftp YOUR_USERNAME@TARGET_IP
+> Connected to TARGET_IP
+> sftp> ls 
 
-### "Access Denied" or "Permission Denied"
+#无密码登录
+*提示：“无密码登录”仅适用于使用SSH命令行工具的Linux/ UNIX / Mac用户*
 
-This is likely a username or password problem.
+ &ensp;&ensp;“无密码登录”使您无需输入用户名和密码即可登录，它还可以作为服务器的别名来简化说明。无密码登录需要建立从远程主机（群集的登录节点）到本地主机（您自己的计算机）的SSH信任关系。建立信任关系后，双方将通过SSH密钥对进行身份验证。有关SSH密钥对的更多信息。
+&ensp;&ensp;首先，您需要生成本地主机的SSH密钥对。您可以选择是否使用密码来保护密钥对（建议选择“是”并且不建议使用SSH登录密码）。如果您选择使用密码来保护密钥对，则每次双方进行身份验证时都需要输入密码。Mac操作系统可以自动重新设置密码。 Linux/UNIX用户可以使用钥匙串来帮助管理SSH密码。
+> $ ssh-keygen -t rsa
 
-1. Make sure you are using the proper NERSC user name.
-1. Log into [NIM](https://nim.nersc.gov) to clear login failures.
+&ensp;&ensp;ssh-keygen将在 -/.ssh中生成一个密钥对，id_rsa是需要保留的私钥，id_rsa.pub是可以作为您的身份发送的公钥。然后，使用ssh-copy-id将本地主机的公共密钥id_rsa.pub添加到远程主机的信任列表中。实际上，ssh-copy-id所做的就是将id_rsa.pub的内容添加到远程主机的文件~/.ssh/authorized_keys中。
 
-!!! note
-	If you are still unable to login, contact the Account Support
-	Office at 1-800-66-NERSC, menu option 2.
+> $ ssh-copy-id YOUR_USERNAME@TARGET_IP
 
-### Host authenticity
+我们还可以将连接参数写入~/.ssh / config中，以使其简洁明了。 新建或编辑文件~/ .ssh / config：
 
-This message may appear when a connection to a new machine is first
-established:
+> $ EDIT ~/.ssh/config
 
-```
-The authenticity of host 'cori.nersc.gov' can't be established.
-RSA key fingerprint is <omitted>
-Are you sure you want to continue connecting (yes/no)?
-```
+ 还需分配以下内容： 主机分配远程主机的别名，主机名是远程主机的真实域名或IP地址，端口分配SSH端口，用户分配SSH用户名。
+> Host hpc
+> HostName TARGET_IP
+> User YOUR_USERNAME
 
-1. Check that the fingerprints match
-   the [list above](#Key-fingerprints).
-1. If they match accept
-1. If they do not match [let us know](https://help.nersc.gov).
+ 您需要确保此文件的权限正确：
+ 
+ > $ chmod 600 ~/.ssh/config
+ 
+ 然后，您只需输入以下内容即可登录HPC群集：
+ > $ ssh hpc
+ 
+#调试SSH登录问题
+&ensp;&ensp;有许多原因可能会阻止您登录到HPC群集。因两次尝试失败而失败的IP地址将被阻止两次。在阻塞期间，建议尝试其他登录节点。 如果两个小时后此问题仍然存在，请与管理员联系并联系attech以下信息。
+1.检查您的IP地址
+2.使用ping命令检查您的电脑和集群连接状态。
+> $ ping IP
 
-### Host identification changed
+3.使用telnet检查登录节点
+> $ telnet IP 22
 
-```
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED! @
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-IT IS POSSIBLE THAT SOMEONE IS DOING SOMETHING NASTY!
-Someone could be eavesdropping on you right now (man-in-the-middle attack)!
-It is also possible that a host key has just been changed.
-...
-```
-
-Ensure that your `~/.ssh/known_hosts` file contains the correct entries for
-Cori and confirm the fingerprints using the posted fingerprints above.  Add the
-[certificate authority](#ssh-certificate-authority) line to your known_hosts
-file if you version of ssh supports SSH certificates.
-
-1. Open `~/.ssh/known_hosts`
-1. Remove any lines referring Cori and save the file
-1. Paste the host key entries from above or retry connecting to the host and
-   accept the new host key after verify that you have the correct "fingerprint"
-   from the above list.
+请与管理员联系，并在消息中附加调试信息（您的IP，Ping、telnet、ssh结果）。
+#参考文献
+*  http://www.ee.surrey.ac.uk/Teaching/Unix/
+*  http://vbird.dic.ksu.edu.tw/linux_server/0310telnetssh.php#ssh_server
+*  http://nerderati.com/2011/03/simplify-your-life-with-an-ssh-config-file/
+*  http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
