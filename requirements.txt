@@ -9,6 +9,6 @@ mkdocs-material==4.4.1
 mkdocs-minify-plugin==0.2.1
 Pygments>=2.4.0
 pymdown-extensions==5.0
-PyYAML==3.13
+PyYAML==5.1
 six==1.11.0
 tornado==5.1
