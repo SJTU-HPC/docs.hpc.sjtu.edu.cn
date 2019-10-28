@@ -93,7 +93,7 @@ Pi上的软件可以分类为编译器和平台，MPI库，Math库，FD工具，
 | 模块名字 | 描述 | 提供版本 | 默认版本 | 
 | ---- | ---- | ---- | ---- |
 | gcc | GNU编译器集合 | 5.5 8.3 9.2 | 9.2 |
-| icc | intel编译器套件 | 19.0.4 | 19.0.4 | 
+| icc | Intel编译器套件 | 19.0.4 | 19.0.4 | 
 | pgi | PGI编译器 | 18.4 | 18.4 |
 | cuda | NVIDIA CUDA SDK | 10.0 9.0 | 10.0 |
 | jdk | Java开发套件 | 11.0 | 11.0 | 
@@ -104,10 +104,29 @@ Pi上的软件可以分类为编译器和平台，MPI库，Math库，FD工具，
 | ---- | ---- | ---- | ---- |
 | openmpi | OpenMPI | 3.1.4 | 3.1.4 |
 | mvapich2 | MVAPICH2 | 2.3 | 2.3 |
-| impi | intel MPI | 2019.4 | 2019.4 |
+| impi | Intel MPI | 2019.4 | 2019.4 |
 
 ## 数学库
 
+| 模块名字 | 描述 | 提供版本 | 默认版本 | 备注 |
+| ---- | ---- | ---- | ---- | ---- |
+| mkl | Intel数学核心函数库 | 19.3 | 19.3 | 包含FFTW，BLAS，LAPACK实现 |
+
+## 计算机视觉与深度学习
+
+| 模块名字 | 描述 | 提供版本 | 默认版本 | GPU支持 |
+| ---- | ---- | ---- | ---- | ---- |
+| cudnn | NVIDIA深度学习GPU加速原语库 | 7.3 7.4 7.5 | 7.5 | Yes |
+
+## 用于构建和调整软件的工具
+
 | 模块名字 | 描述 | 提供版本 | 默认版本 | 
 | ---- | ---- | ---- | ---- |
-| openmpi | OpenMPI | 3.1.4 | 3.1.4 |
+| maven | 软件项目管理工具 | 3.3 | 3.3 |
+| bazel | 软件构建工具 | 0.1 | 0.1 |
+| vtune | Intel vtune | 5.1 | 5.1 |
+
+# 参考链接
+
+ - [Environment Modules Project](http://modules.sourceforge.net/)
+ - [Modules Software Environment on NERSC](https://www.nersc.gov/users/software/nersc-user-environment/modules/)
