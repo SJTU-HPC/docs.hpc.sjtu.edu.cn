@@ -1,57 +1,57 @@
 nav:
   - 主页: index.md
-  - 账号:
-    - 账号申请: 账号/账号申请.md
-    - 密码: 账号/密码.md
-    - 账号管理: 账号/账号管理.md
-    - 机时充值: 账号/机时充值.md
-    - 收费细则: 账号/收费细则.md
+  # - 账号:
+  #   - 账号申请: 账号/账号申请.md
+  #   - 密码: 账号/密码.md
+  #   - 账号管理: 账号/账号管理.md
+  #   - 机时充值: 账号/机时充值.md
+  #   - 收费细则: 账号/收费细则.md
   - 登陆:
-    - 登陆节点: 登陆/登陆节点.md
-    - SSH: 登陆/SSH.md
-    - OpenOnDemand: 登陆/OpenOnDemand.md
-  - 文件系统:
-    - 概览: 文件系统/概览.md
-    - 数据传输: 文件系统/数据传输.md
-    - 与校云计算文件交互: 文件系统/云平台.md
-    - 与其他用户共享文件: 文件系统/共享文件.md 
-  - 作业:
-    - slurm概览: 作业/slurm.md
-    - 脚本式作业: 作业/脚本式作业.md
-    - MPI、OpenMP、CUDA作业示例: 作业/MPI、OpenMP、CUDA作业示例.md
-    - 作业脚本样例: 作业/作业脚本样例.md
-    - 交互式作业: 作业/交互式作业.md
-    - 队列选择: 作业/队列选择.md
-    - 节点预约: 作业/节点预约.md
-    - 作业优先级: 作业/作业优先级.md
-    - 容器: 作业/容器/singularity.md
+    # - 登陆节点: 登陆/登陆节点.md
+    - SSH: login/SSH.md
+    - OpenOnDemand: login/OpenOnDemand.md
+  # - 文件系统:
+  #   - 概览: 文件系统/概览.md
+  #   - 数据传输: 文件系统/数据传输.md
+  #   - 与校云计算文件交互: 文件系统/云平台.md
+  #   - 与其他用户共享文件: 文件系统/共享文件.md 
+  - job:
+    - slurm概览: job/slurm.md
+    # - 脚本式作业: 作业/脚本式作业.md
+    # - MPI、OpenMP、CUDA作业示例: 作业/MPI、OpenMP、CUDA作业示例.md
+    # - 作业脚本样例: 作业/作业脚本样例.md
+    # - 交互式作业: 作业/交互式作业.md
+    # - 队列选择: 作业/队列选择.md
+    # - 节点预约: 作业/节点预约.md
+    # - 作业优先级: 作业/作业优先级.md
+    # - 容器: 作业/容器/singularity.md
   - 软件环境:
-    - Module Environment: 软件环境/module.md
-  - 应用软件:
-    - Python: 应用软件/Python.md
-    - Nektar++: 应用软件/Nektar.md
-    - Lammps: 应用软件/Lammps.md
-    - VASP: 应用软件/VASP.md
-    - Amber: 应用软件/Amber.md
-    - VMD: 应用软件/VMD.md
-    - nwchen: 应用软件/nwchen.md
-    - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
-    - Gromacs: 应用软件/Gromacs.md
-    - FFTW: 应用软件/FFTW.md
-    - OpenFoam: 应用软件/OpenFoam.md
-    - GNU Library: 应用软件/GNU.md
-    - MPI4PY: 应用软件/MPI4PY.md
-    - Pytorch: 应用软件/Pytorch.md
-    - TensorFlow: 应用软件/TensorFlow.md
-    - MXNet: 应用软件/MXNet.md
-    - HIC-Pro: 应用软件/HIC-Pro.md
-    - Octave: 应用软件/Octave.md
-    - Perl: 应用软件/Perl.md
-    - Spark: 应用软件/Spark.md
-    - R: 应用软件/R.md
-    - 商业软件: 应用软件/商业软件.md
-  - FAQ:
-    - faq: FAQ/faq.md
+    - Module Environment: module/module.md
+  # - 应用软件:
+  #   - Python: 应用软件/Python.md
+  #   - Nektar++: 应用软件/Nektar.md
+  #   - Lammps: 应用软件/Lammps.md
+  #   - VASP: 应用软件/VASP.md
+  #   - Amber: 应用软件/Amber.md
+  #   - VMD: 应用软件/VMD.md
+  #   - nwchen: 应用软件/nwchen.md
+  #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
+  #   - Gromacs: 应用软件/Gromacs.md
+  #   - FFTW: 应用软件/FFTW.md
+  #   - OpenFoam: 应用软件/OpenFoam.md
+  #   - GNU Library: 应用软件/GNU.md
+  #   - MPI4PY: 应用软件/MPI4PY.md
+  #   - Pytorch: 应用软件/Pytorch.md
+  #   - TensorFlow: 应用软件/TensorFlow.md
+  #   - MXNet: 应用软件/MXNet.md
+  #   - HIC-Pro: 应用软件/HIC-Pro.md
+  #   - Octave: 应用软件/Octave.md
+  #   - Perl: 应用软件/Perl.md
+  #   - Spark: 应用软件/Spark.md
+  #   - R: 应用软件/R.md
+  #   - 商业软件: 应用软件/商业软件.md
+  # - FAQ:
+  #   - faq: FAQ/faq.md
 #   - Accounts:
 #       - Accounts : accounts/index.md
 #       - Passwords : accounts/passwords.md
@@ -310,7 +310,7 @@ theme:
   palette:
     primary: mute-turquoise
     accent: orange
-  logo: img/logo.png
+  logo: img/logo2.png
 
 # Extensions
 markdown_extensions:
