@@ -5,18 +5,18 @@
 	该文档通过github仓库维护
 	[github仓库](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)。
 	如果您有什么建议或者意见，欢迎提交修改
-	[contributions](https://gitlab.com/NERSC/nersc.gitlab.io/blob/master/CONTRIBUTING.md)
+	[contributions]()
 	
 	[Fork this repo](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)
 
 ## 快速链接
 
- 1. [Example Jobs](jobs/examples/index.md)
- 1. [Queue Policies](jobs/policy.md)
- 1. [Running Jobs](jobs/index.md)
- 1. [Best Practices](jobs/best-practices.md)
- 1. [Jupyter](connect/jupyter.md)
- 1. [File Permissions](filesystems/unix-file-permissions.md)
- 1. [Building Software](programming/compilers/wrappers.md)
- 1. [Managing Data](data/management.md)
- 1. [Password Reset](accounts/index.md#forgotten-passwords)
+ 1. [Example Jobs]()
+ 1. [Queue Policies]()
+ 1. [Running Jobs]()
+ 1. [Best Practices]()
+ 1. [Jupyter]()
+ 1. [File Permissions]()
+ 1. [Building Software]()
+ 1. [Managing Data]()
+ 1. [Password Reset]()

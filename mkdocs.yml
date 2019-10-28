@@ -16,7 +16,7 @@ nav:
   #   - 与校云计算文件交互: 文件系统/云平台.md
   #   - 与其他用户共享文件: 文件系统/共享文件.md 
   - job:
-    - slurm概览: job/slurm.md
+    - slurm概览: job/Slurm.md
     # - 脚本式作业: 作业/脚本式作业.md
     # - MPI、OpenMP、CUDA作业示例: 作业/MPI、OpenMP、CUDA作业示例.md
     # - 作业脚本样例: 作业/作业脚本样例.md

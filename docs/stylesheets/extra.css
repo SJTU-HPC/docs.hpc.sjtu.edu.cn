@@ -44,8 +44,13 @@
     margin-top: 4px;
     font-size: 12px;
     text-align:center;
-    width: 100%;
     margin-bottom: 30px;
+    width: 100%;
+}
+
+.ft-segline{
+    width:100%;
+    color:whitesmoke;
 }
 
 @media (max-width: 720px) {

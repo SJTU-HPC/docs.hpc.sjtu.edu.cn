@@ -6,7 +6,7 @@ ENVIRONMENT MODULES可以帮助您在Pi上使用预构建的软件包。每个EN
 
 本文档将向您介绍ENVIRONMENT MODULES的基本用法以及Pi上可用的软件模块。
 
-# MODULES指令
+## MODULES指令
 
 | 命令 | 功能 |
 | ---- | ---- |
@@ -62,7 +62,7 @@ $ module unload gcc openmpi
 $ module list
 ```
 
-# MODULES智能选择与Slurm
+## MODULES智能选择与Slurm
 
 在SLURM上，我们应用了以下规则来选取最合适的模块。
 
@@ -82,7 +82,7 @@ $ module load gcc/5.4 openmpi/3.1
 $ module load gcc openmpi
 ```
 
-# PI上的软件模块
+## PI上的软件模块
 
 Pi有许多预建的软件模块，并且数量还在不断增长。欢迎您告诉我们您研究领域中流行的软件。由于收费很少甚至为零，因此开源软件的安装优先级更高。
 
@@ -126,7 +126,7 @@ Pi上的软件可以分类为编译器和平台，MPI库，Math库，FD工具，
 | bazel | 软件构建工具 | 0.1 | 0.1 |
 | vtune | Intel vtune | 5.1 | 5.1 |
 
-# 参考链接
+## 参考链接
 
  - [Environment Modules Project](http://modules.sourceforge.net/)
  - [Modules Software Environment on NERSC](https://www.nersc.gov/users/software/nersc-user-environment/modules/)

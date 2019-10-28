@@ -6,7 +6,7 @@
 
 本文档将协助您通过SLURM管理作业。 在这里可以找到更多的工作样本。
 
-如果我们可以提供任何帮助，请随时联系[hpc邮箱](hpc@sjtu.edu.cn)。
+如果我们可以提供任何帮助，请随时联系[hpc邮箱](mailto:hpc@sjtu.edu.cn)。
 
 ## Slurm概览
 
