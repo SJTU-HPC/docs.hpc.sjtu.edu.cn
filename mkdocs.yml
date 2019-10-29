@@ -50,8 +50,8 @@ nav:
   #   - Spark: 应用软件/Spark.md
   #   - R: 应用软件/R.md
   #   - 商业软件: 应用软件/商业软件.md
-  # - FAQ:
-  #   - faq: FAQ/faq.md
+  - FAQ:
+    - faq: FAQ/faq.md
 #   - Accounts:
 #       - Accounts : accounts/index.md
 #       - Passwords : accounts/passwords.md
