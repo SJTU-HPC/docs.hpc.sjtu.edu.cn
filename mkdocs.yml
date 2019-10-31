@@ -73,7 +73,7 @@ theme:
   palette:
     primary: mute-turquoise
     accent: orange
-  logo: img/logo.png
+  logo: img/logos.png
 
 # Extensions
 markdown_extensions:
