@@ -4,7 +4,7 @@
 
 ## 登陆
 
-打开浏览器，在地址栏输入：`202.120.58.243`
+在浏览器中，打开：http://portal.hpc.sjtu.edu.cn
 
 !!! tip
     浏览器需为chrome，火狐，edge
