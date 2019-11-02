@@ -11,12 +11,8 @@
 
 ## 快速链接
 
- 1. [Example Jobs]()
- 1. [Queue Policies]()
- 1. [Running Jobs]()
- 1. [Best Practices]()
- 1. [Jupyter]()
- 1. [File Permissions]()
- 1. [Building Software]()
- 1. [Managing Data]()
- 1. [Password Reset]()
+ 1. [账号申请](accounts/apply.md)
+ 2. [远程登陆](login/SSH.md)
+ 3. [远程桌面](login/OpenOnDemand.md)
+ 4. [作业提交](job/slurm.md)
+ 5. [软件使用](module/module.md)
