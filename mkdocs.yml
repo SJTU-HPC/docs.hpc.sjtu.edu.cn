@@ -1,7 +1,7 @@
 nav:
   - 主页: index.md
   - 账号:
-    - 账号申请: accounts/aaply.md
+    - 账号申请: accounts/apply.md
   #   - 密码: accounts/password.md
   #   - 账号管理: accounts/management.md
   #   - 机时充值: accounts/charge.md
