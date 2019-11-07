@@ -9,13 +9,13 @@ nav:
   - 登陆:
     # - 登陆节点: 登陆/登陆节点.md
     - SSH: login/SSH.md
-    - OpenOnDemand: login/OpenOnDemand.md
+    - Open OnDemand: login/OpenOnDemand.md
   # - 文件系统:
   #   - 概览: 文件系统/概览.md
   #   - 数据传输: 文件系统/数据传输.md
   #   - 与校云计算文件交互: 文件系统/云平台.md
   #   - 与其他用户共享文件: 文件系统/共享文件.md 
-  - JOB:
+  - 作业:
     - Slurm概览: job/slurm.md
     # - 脚本式作业: 作业/脚本式作业.md
     # - MPI、OpenMP、CUDA作业示例: 作业/MPI、OpenMP、CUDA作业示例.md
@@ -25,14 +25,14 @@ nav:
     - 节点预约: job/reservation.md
     # - 作业优先级: 作业/作业优先级.md
     # - 容器: 作业/容器/singularity.md
-  - 软件环境:
-    - Module Environment: module/module.md
-  # - 应用软件:
+  - 预置软件环境: module/module.md
+    # - Module Environment: module/module.md
+  - 应用软件:
   #   - Python: 应用软件/Python.md
   #   - Nektar++: 应用软件/Nektar.md
   #   - Lammps: 应用软件/Lammps.md
-  #   - VASP: 应用软件/VASP.md
-  #   - Amber: 应用软件/Amber.md
+    - VASP: application/VASP.md
+    - Amber: application/Amber.md
   #   - VMD: 应用软件/VMD.md
   #   - nwchen: 应用软件/nwchen.md
   #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
@@ -50,8 +50,8 @@ nav:
   #   - Spark: 应用软件/Spark.md
   #   - R: 应用软件/R.md
   #   - 商业软件: 应用软件/商业软件.md
-  - FAQ:
-    - faq: FAQ/faq.md
+  - 常见问题: FAQ/faq.md
+    # - faq: FAQ/faq.md
 
 # Project Information
 site_name: Pi Documentation
