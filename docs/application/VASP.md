@@ -3,26 +3,26 @@
 -------
 ## 编译VASP
 
-1.解压缩VASP
+1. 解压缩 VASP
 ```
 $ tar xvf vasp.5.4.4.tar.bz2
 $ cd vasp.5.4.4
 ```
-2.设置VTST
+2. 如果需要 VTST 拓展，使用以下方式安装 (不同的 VTST 和 VASP 版本可能有不同的安装方式)
+  * 从官网下载
 ```
-$ wget http://theory.cm.utexas.edu/code/vtstcode.tgz
-$ tar xvf vtstcode.tgz
+  $ wget http://theory.cm.utexas.edu/code/vtstcode.tgz
+  $ tar xvf vtstcode.tgz
 ```
-3.在VASP中备份文件（可选）
+  * 备份 VASP 文件（可选）
 ```
-$ cp src/chain.F src/chain.F-org
+  $ cp src/chain.F src/chain.F-org
 ```
-4.在VASP中替换文件
+  * 替换部分 VASP 文件
 ```
-$ cp vtstcode-171/* src/
+  $ cp vtstcode-171/* src/
 ```
-5.修改源代码
-在src/main.F中将第3146行如下内容：
+  * 修改源文件, 在 `src/main.F` 中将第3146行如下内容：
 ```
 CALL CHAIN_FORCE(T_INFO%NIONS,DYN%POSION,TOTEN,TIFOR, &
      LATT_CUR%A,LATT_CUR%B,IO%IU6)
@@ -42,31 +42,23 @@ fire.o lanczos.o neb.o qm.o opt.o \
 !!! tip
     注意后面没有空格
 
-6.加载 icc 和 impi
+3. 加载 intel 编译器，对于 VASP 5.4.4，我们推荐 intel-parallel-studio-2018
 ```
-$ module load icc/16.0
-$ module load impi/2016
+$ module load intel-parallel-studio/cluster.2018.3-gcc-4.8.5
 ```
-7.设置MKLROOT变量
-检查ifort路径，设置MKLROOT
-```
-$ which ifort
-/lustre/spack/tools/linux-centos7-x86_64/intel-16.0.4/intel-parallel-studio-cluster.2016.4-ybjjq75tqpzgzjc4drolyijzm45g5qul/compilers_and_libraries_2016.4.258/linux/bin/intel64/ifort
-$ export MKLROOT=/lustre/spack/tools/linux-centos7-x86_64/intel-16.0.4/intel-parallel-studio-cluster.2016.4-ybjjq75tqpzgzjc4drolyijzm45g5qul/compilers_and_libraries_2016.4.258/linux/mkl
-```
-8.使用arch / makefile.include.linux_intel作为模板
+上述操作后会 load 包括 intel compilers, intel-mpi, intel-mkl 等所需的编译器组件，您可以使用 ``echo $MKLROOT`` 等方式检查是否成功导入.
+
+4. 使用 `arch/ makefile.include.linux_intel` 作为模板
 ```
 $ cp arch/makefile.include.linux_intel makefile.include
 ```
-9.清理之前编译的文件
+
+5. 清理之前编译的文件（某些情况需要）并编译
 ```
-$ make veryclean
-```
-10.编译
-```
+$ make veryclean ## WARNING: all previously generated files will be removed
 $ make
 ```
-现在bin中的二进制文件包含vasp_std vasp_gam vasp_ncl
+现在 `./bin` 目录中的二进制文件包含 vasp_std vasp_gam vasp_ncl. 您也可以单独编译每一个，用指令例如：`make std` 即可编译 vasp_std
 
 ## 参考文献
 * [VASP 5.4.1+VTST编译安装](http://hmli.ustc.edu.cn/doc/app/vasp.5.4.1-vtst.htm)
