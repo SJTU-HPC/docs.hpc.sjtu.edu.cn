@@ -251,7 +251,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
-使用GCC编译如下：
+### 使用GCC编译如下：
 ```
 $ module purge && module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
 $ mpicc -O3 -fopenmp hybridmpi.c -o hybridmpi
@@ -416,7 +416,7 @@ module load gcc/8.3.0-gcc-4.8.5 cuda/10.1.243-gcc-8.3.0
 ./cublashello
 ```
 
-将作业提交到SLURM上的gpu分区：
+### 将作业提交到SLURM上的dgx2分区：
 ```
 $ sbatch cublashello.slurm
 ```
@@ -481,7 +481,7 @@ $ tail -f /lustre/home/hpc-jianwen/tmp/358.out
 $ scancel 358
 ```
 
-## <center>提交具有Spack依赖关系的作业</center>
+<!-- ## <center>提交具有Spack依赖关系的作业</center>
 
 以下是一个运行Space的应用程序（gromacs)的作业脚本示例。 
 ```
@@ -509,24 +509,21 @@ fi
 source <(spack module tcl loads gromacs+cuda %gcc@5.4.0 )
 
 LAUNCH_YOUR_APP
-```
-## <center>提交作业到串行分区</center>
+``` -->
+## <center>提交作业到small分区</center>
 串行作业需要提交到名为串行的队列中，作业脚本和qos中的队列名称需要相应调整。
 ```
 #!/bin/bash
 
 #SBATCH -J Hello
-#SBATCH -p serial
-#SBATCH --qos=QosPartitionSerial
-#SBATCH --mail-type=end
-#SBATCH --mail-user=YOU@EMAIL.COM
+#SBATCH -p small
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 #SBATCH -n 1
 
 hostname
 ```
-## <center>提交作业到调试分区</center>
+<!-- ## <center>提交作业到调试分区</center>
 应用程序可免费调试，提交给分区的作业最多可以运行6个小时。
 ```
 #!/bin/bash
@@ -542,5 +539,5 @@ hostname
 #SBATCH --ntasks-per-node=16
 
 hostname
-```
+``` -->
 

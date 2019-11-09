@@ -61,7 +61,8 @@ $ make
 现在 `./bin` 目录中的二进制文件包含 vasp_std vasp_gam vasp_ncl. 您也可以单独编译每一个，用指令例如：`make std` 即可编译 vasp_std
 
 ## 参考文献
-* [VASP 5.4.1+VTST编译安装](http://hmli.ustc.edu.cn/doc/app/vasp.5.4.1-vtst.htm)
-* [VTST installation](http://theory.cm.utexas.edu/vtsttools/installation.html)
+
+- [VASP 5.4.1+VTST编译安装](http://hmli.ustc.edu.cn/doc/app/vasp.5.4.1-vtst.htm)
+- [VTST installation](http://theory.cm.utexas.edu/vtsttools/installation.html)
 
 

@@ -37,12 +37,12 @@ nav:
   #   - VMD: 应用软件/VMD.md
   #   - nwchen: 应用软件/nwchen.md
   #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
-  #   - Gromacs: 应用软件/Gromacs.md
+    - Gromacs: application/gromacs.md
   #   - FFTW: 应用软件/FFTW.md
   #   - OpenFoam: 应用软件/OpenFoam.md
   #   - GNU Library: 应用软件/GNU.md
   #   - MPI4PY: 应用软件/MPI4PY.md
-  #   - Pytorch: 应用软件/Pytorch.md
+    - Pytorch: application/pytorch.md
   #   - TensorFlow: 应用软件/TensorFlow.md
   #   - MXNet: 应用软件/MXNet.md
   #   - HIC-Pro: 应用软件/HIC-Pro.md
@@ -52,14 +52,13 @@ nav:
   #   - R: 应用软件/R.md
   #   - 商业软件: 应用软件/商业软件.md
   - 常见问题: FAQ/faq.md
-    # - faq: FAQ/faq.md
 
 # Project Information
 site_name: Pi Documentation
 site_description: Pi Documentation
 site_author: SJTU HPC Team
 site_dir: public
-site_url: "http://docs.hpc.sjtu.edu.cn"
+site_url: "https://docs.hpc.sjtu.edu.cn"
 repo_name: Github/sjtuhpcc/docs
 repo_url: https://github.com/sjtuhpcc/docs.sjtu.edu.cn
 edit_uri: tree/master/docs/
