@@ -37,12 +37,12 @@ nav:
   #   - VMD: 应用软件/VMD.md
   #   - nwchen: 应用软件/nwchen.md
   #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
-    - Gromacs: application/gromacs.md
+    - Gromacs: application/Gromacs.md
   #   - FFTW: 应用软件/FFTW.md
   #   - OpenFoam: 应用软件/OpenFoam.md
   #   - GNU Library: 应用软件/GNU.md
   #   - MPI4PY: 应用软件/MPI4PY.md
-    - Pytorch: application/pytorch.md
+    - Pytorch: application/Pytorch.md
   #   - TensorFlow: 应用软件/TensorFlow.md
   #   - MXNet: 应用软件/MXNet.md
   #   - HIC-Pro: 应用软件/HIC-Pro.md
