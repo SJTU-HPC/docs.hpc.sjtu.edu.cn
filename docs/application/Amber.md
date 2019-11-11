@@ -1,51 +1,95 @@
-# <center>AMBER<center/>
+# Amber18
 
--------
-## 安装Amber14 MPI版本
-Amber14[下载](http://ambermd.org/Amber14-get.htmlTools)，将下载的文件上传到Pi集群。
-加载基本模块解压缩文件
+------
+
+## 准备工作
+
+安装前请移除 .bashrc 不必要的内容，包括 module load 与 export 等等
+
+- 准备 amber18 源代码
 ```
-$ module purge
-$ module load gcc/5.4 openmpi/3.1
-$ tar -xvjf AmberTools14.tar.bz2                 
-$ tar -xvjf Amber14.tar.bz2
+$ tar xvf amber18.tar.gz
+$ cd amber18
+$ make veryclean
 ```
-配置Amber14.
+!!! tip
+      `make veryclean`将移除大量编译过的临时文件等内容, 具体查看[Amber文档](http://ambermd.org/doc12/Amber18.pdf)
+		 
+- 编译 Amber 非常消耗计算资源，请登陆到 CPU 节点
 ```
-$ cd amber14
-$ export AMBERHOME=$HOME/amber14  
-$ ./configure -mpi -noX11 gnu
+   srun -p cpu -N 1 --exclusive --pty /bin/bash
 ```
-安装Amber14.
+
+- 安装 Amber18 的串行版本 (不可跳过)
 ```
-$ make install
+$ export AMBERHOME=$(pwd)  ## make sure you are in the amber18 directory extracted
+$ ./configure --no-updates -noX11 gnu
+$ source ./amber.sh
+$ make -j 40 && make install   #change 40 to total ncore
 ```
-使用Amber 14, 输入amber.sh.
+
+!!! tip
+      `--no-updates` 表示跳过 "download & install updates"
+      如果提示是否自动下载安装 miniconda, 请根据自己需求选择 YES or NO
+
+!!! tip
+      如果您的任务规模较小，仅需编译串行版本Amber，那么至此编译工作已经完成。但我们强烈建议您继续编译MPI或CUDA版本。
+
+## 编译MPI版本
+
+- 安装 Amber18 的 MPI 版本
 ```
-$ source amber.sh
+$ module load openmpi/3.1.4-gcc-4.8.5
+$ ./configure --no-updates -noX11 -mpi gnu
+$ make -j 40 && make install
 ```
-## 安装Amber14 GPU 版本 
-Amber14下载[http://ambermd.org/Amber14-get.htmlTools]，AmberTools14下载[http://ambermd.org/AmberTools14-get.html]，将下载的文件上传到Pi集群。
-加载基本模块解压缩文件
+
+## 编译CUDA版本
+
+- 安装 Amber18 的 CUDA 版本
 ```
-$ module purge
-$ module load gcc/4.8 openmpi/3.1 cuda/6.5
-$ tar -xvjf AmberTools14.tar.bz2                 
-$ tar -xvjf Amber14.tar.bz2
+$ module load cuda/9.0.176-gcc-4.8.5
+$ export LIBRARY_PATH="/lustre/opt/cascadelake/linux-centos7-x86_64/gcc-4.8.5/cuda-9.0.176-pusmroeeme62xntggzjygame4htcbil7/lib64/stubs:${LIBRARY_PATH}"
+$ ./configure --no-updates -noX11 -cuda gnu
+$ make -j 40 && make install
 ```
-配置Amber14.
+
+## 编译MPI+CUDA版本
+
+- 安装 Amber18 的 CUDA+mpi 版本
 ```
-$ cd amber14
-$ export AMBERHOME=$HOME/amber14  
-$ ./configure -cuda -mpi -noX11 gnu
+$ ./configure --no-updates -noX11 -cuda -mpi gnu
+$ make -j 40 && make install
 ```
-安装Amber14.
+
+编译完成后推出计算节点
+
 ```
-$ make install
+$ exit
 ```
-使用Amber 14, 输入amber.sh.
+
+## 作业脚本示例
+
 ```
-$ source amber.sh
+#!/bin/bash
+
+#SBATCH -J amber_test
+#SBATCH -p cpu
+#SBATCH -N 1
+#SBATCH -n 40
+#SBATCH --ntasks-per-node=40
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+
+module load cuda/9.0.176-gcc-4.8.5
+module load openmpi/3.1.4-gcc-4.8.5
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+srun --mpi=pmi2 {YOUR AMBER COMMANDS}
 ```
+
 ## 参考文献
-* [Amber 14 Reference Manual Chapter 2](http://ambermd.org/doc12/Amber14.pdf)
+
+- [Amber文档](http://ambermd.org/doc12/Amber18.pdf)

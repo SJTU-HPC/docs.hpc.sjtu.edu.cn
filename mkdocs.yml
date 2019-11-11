@@ -31,7 +31,7 @@ nav:
   - 应用软件:
   #   - Python: 应用软件/Python.md
   #   - Nektar++: 应用软件/Nektar.md
-  #   - Lammps: 应用软件/Lammps.md
+    - Lammps: application/Lammps.md
     - VASP: application/VASP.md
     - Amber: application/Amber.md
   #   - VMD: 应用软件/VMD.md
