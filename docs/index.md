@@ -5,7 +5,7 @@
 	该文档通过github仓库维护
 	[github仓库](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)。
 	如果您有什么建议或者意见，欢迎提交修改
-	[contributions]()
+	[contributions](contribution/contribution.md)
 	
 	[Fork this repo](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)
 

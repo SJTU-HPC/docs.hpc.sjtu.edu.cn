@@ -52,6 +52,7 @@ nav:
   #   - R: 应用软件/R.md
   #   - 商业软件: 应用软件/商业软件.md
   - 常见问题: FAQ/faq.md
+  - 提交修改: contribution/contribution.md
 
 # Project Information
 site_name: Pi Documentation
