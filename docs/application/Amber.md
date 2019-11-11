@@ -1,4 +1,4 @@
-# Amber18
+# <center>Amber18</center>
 
 ------
 
@@ -17,7 +17,7 @@ $ make veryclean
 		 
 - 编译 Amber 非常消耗计算资源，请登陆到 CPU 节点
 ```
-   srun -p cpu -N 1 --exclusive --pty /bin/bash
+$ srun -p cpu -N 1 --exclusive --pty /bin/bash
 ```
 
 - 安装 Amber18 的串行版本 (不可跳过)
@@ -29,7 +29,7 @@ $ make -j 40 && make install   #change 40 to total ncore
 ```
 
 !!! tip
-      `--no-updates` 表示跳过 "download & install updates"
+      `--no-updates` 表示跳过 "download & install updates"。
       如果提示是否自动下载安装 miniconda, 请根据自己需求选择 YES or NO
 
 !!! tip

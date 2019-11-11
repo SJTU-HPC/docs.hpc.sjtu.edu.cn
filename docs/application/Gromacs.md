@@ -1,4 +1,4 @@
-# GROMACS
+# <center>GROMACS</center>
 
 GROMACS是一种分子动力学应用程序，可以模拟具有数百至数百万个粒子的系统的牛顿运动方程。GROMACS旨在模拟具有许多复杂键合相互作用的生化分子，例如蛋白质，脂质和核酸。有关GROMACS的更多信息，请访问[http://www.gromacs.org/](http://www.gromacs.org/)。
 
