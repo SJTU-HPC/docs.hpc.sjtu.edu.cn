@@ -11,16 +11,16 @@ $ cd vasp.5.4.4
 2. 如果需要 VTST 拓展，使用以下方式安装 (不同的 VTST 和 VASP 版本可能有不同的安装方式)
   - 从官网下载
 ```
-  $ wget http://theory.cm.utexas.edu/code/vtstcode.tgz
-  $ tar xvf vtstcode.tgz
+$ wget http://theory.cm.utexas.edu/code/vtstcode.tgz
+$ tar xvf vtstcode.tgz
 ```
   - 备份 VASP 文件（可选）
 ```
-  $ cp src/chain.F src/chain.F-org
+$ cp src/chain.F src/chain.F-org
 ```
   - 替换部分 VASP 文件
 ```
-  $ cp vtstcode-171/* src/
+$ cp vtstcode-171/* src/
 ```
   - 修改源文件, 在 `src/main.F` 中将第3146行如下内容：
 ```
