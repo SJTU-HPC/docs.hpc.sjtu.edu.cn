@@ -29,7 +29,7 @@ nav:
   - 预置软件环境: module/module.md
     # - Module Environment: module/module.md
   - 应用软件:
-  #   - Python: 应用软件/Python.md
+    - Python: application/Python.md
   #   - Nektar++: 应用软件/Nektar.md
     - Lammps: application/Lammps.md
     - VASP: application/VASP.md
