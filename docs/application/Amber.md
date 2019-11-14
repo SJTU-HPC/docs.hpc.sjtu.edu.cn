@@ -68,26 +68,49 @@ $ make -j 40 && make install
 $ exit
 ```
 
-## 作业脚本示例
+## 作业脚本示例 
 
+- 版本：GNU + cpu
 ```
 #!/bin/bash
 
 #SBATCH -J amber_test
 #SBATCH -p cpu
-#SBATCH -N 1
 #SBATCH -n 40
 #SBATCH --ntasks-per-node=40
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 
+module purge
 module load cuda/9.0.176-gcc-4.8.5
 module load openmpi/3.1.4-gcc-4.8.5
 
 ulimit -s unlimited
 ulimit -l unlimited
 
-srun --mpi=pmi2 {YOUR AMBER COMMANDS}
+source {YOUR amber.sh}
+srun --mpi=pmi2 {pmemd.MPI ... YOUR AMBER COMMANDS}
+```
+
+- 版本：GNU + gpu
+```
+#SBATCH -J amber_gpu_test
+#SBATCH -p dgx2
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH -n 6 # number of tasks
+#SBATCH --ntasks-per-node=6
+#SBATCH --gres=gpu:1
+
+module purge
+module load cuda/9.0.176-gcc-4.8.5
+module load openmpi/3.1.4-gcc-4.8.5
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+source {path/to/your/amber.sh}
+srun --mpi=pmi2 {YOUR AMBER CUDA COMMANDS; eg: pmemd.cuda.MPI -ng 6 ... }
 ```
 
 ## 参考文献
