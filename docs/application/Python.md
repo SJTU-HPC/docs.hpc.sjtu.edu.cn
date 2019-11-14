@@ -44,6 +44,32 @@ $ conda install YOUR_PACKAGE
 $ pip install YOUR_PACKAGE
 ```
 
+## 使用Miniconda向slurm提交作业
+
+以下为python示例作业脚本，我们将向slurm申请两cpu核心，并在上面通过python打印`hello world`。
+
+```
+#!/bin/bash
+#SBATCH -J hello-python
+#SBATCH -p small
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH -n 2
+
+module purge
+module load miniconda3/4.6.14-gcc-4.8.5
+
+source activate mypython3
+
+python -c "print('hello world')"
+```
+
+我们假定以上脚本内容被写到了`hello_python.slurm`中，使用`sbatch`指令提交作业。
+
+```
+$ sbatch hello_python.slurm
+```
+
 ## 参考文献
 
 - [miniconda](https://docs.conda.io/en/latest/miniconda.html)

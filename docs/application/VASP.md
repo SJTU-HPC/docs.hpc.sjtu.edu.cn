@@ -1,7 +1,7 @@
 # <center>VASP<center/>
 
 -------
-## 编译VASP (Intel compiler 2018 + CPU/GPU)
+## 编译Intel+CPU版本VASP
 
 - 解压缩 VASP
 ```
@@ -60,16 +60,10 @@ $ make
 ```
 现在 `./bin` 目录中的二进制文件包含 vasp_std vasp_gam vasp_ncl. 您也可以单独编译每一个，用指令例如：`make std` 即可编译 vasp_std
 
-- 编译 GPU 版本只需在上述基础上使用下述命令
-```
-$ # 修改 makefile.include 中的 CUDA_ROOT 路径为 CUDA_ROOT  := $(CUDA_HOME)
-$ # 修改 makefile.include 中的 -openmp 参数为 -qopenmp
-$ module load cuda/10.0.130-gcc-4.8.5
-$ make gpu
-```
+## 提交Intel+CPU版本VASP任务
 
-## 使用示例
-- 提交 cpu 任务
+使用intel编译的CPU版本VASP运行单节点作业脚本示例vasp_cpu_intel.slurm如下：
+
 ```
 #!/bin/bash
 
@@ -92,7 +86,26 @@ ulimit -l unlimited
 srun /path/to/your_vasp_dir/bin/vasp_std
 ```
 
-- 提交 gpu 任务
+并使用如下指令提交：
+
+```
+$ sbatch vasp_cpu_intel.slurm
+```
+
+## 编译Intel+GPU版本VASP
+
+- 编译 GPU 版本需要首先编译CPU版本，在其基础上使用下述命令
+```
+$ # 修改 makefile.include 中的 CUDA_ROOT 路径为 CUDA_ROOT  := $(CUDA_HOME)
+$ # 修改 makefile.include 中的 -openmp 参数为 -qopenmp
+$ module load cuda/10.0.130-gcc-4.8.5
+$ make gpu
+```
+
+## 提交Intel+GPU版本VASP任务
+
+使用intel编译的GPU版本VASP运行单卡作业脚本示例vasp_gpu_intel.slurm如下：
+
 ```
 #!/bin/bash
 
@@ -115,6 +128,12 @@ ulimit -s unlimited
 ulimit -l unlimited
 
 srun /path/to/your_vasp_dir/bin/vasp_gpu
+```
+
+并使用如下指令提交：
+
+```
+$ sbatch vasp_gpu_intel.slurm
 ```
 
 ## 参考文献

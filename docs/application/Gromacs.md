@@ -4,16 +4,16 @@ GROMACS是一种分子动力学应用程序，可以模拟具有数百至数百�
 
 ## 模块加载方法
 
-可以使用module直接加载GROMACS应用，默认版本为2019.2：
+可以使用module直接加载GROMACS应用，提供了不同的版本：
 
-```shell
-$ module purge
-$ module load gromacs
-```
+| 版本 | 加载方式 |
+| ---- | ------ |
+| 2018.2(gcc)   | module load gromacs/2019.2-gcc-8.3.0-openmpi |
+| 2019.2(intel) | module load gromacs/2019.4-intel-19.0.4-impi |
 
 ## 作业脚本示例
 
-单节点作业脚本示例gromacs.slurm如下：
+使用intel编译的GROMACS运行单节点作业脚本示例gromacs_cpu_intel.slurm如下：
 
 ```
 #!/bin/bash
@@ -21,13 +21,42 @@ $ module load gromacs
 #SBATCH -p cpu
 #SBATCH -o %j.out
 #SBATCH -e %j.err
-#SBATCH -N 1
-#SBATCH --exclusive
+#SBATCH -n 40
 #SBATCH --ntasks-per-node=40
-#SBATCH --cpus-per-task=1
+#SBATCH --exclusive
 
 module purge
-module load gromacs
+module load gromacs/2019.4-intel-19.0.4-impi
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+export I_MPI_FABRICS=shm:dapl
+
+srun gmx_mpi mdrun -deffnm test -ntomp 1
+```
+
+并使用如下指令提交：
+
+```
+$ sbatch gromacs_cpu_intel.slurm
+```
+
+使用gcc编译的GROMACS运行单节点作业脚本示例gromacs_gnu_intel.slurm如下：
+
+```
+#!/bin/bash
+#SBATCH -J gromacs_cpu_test
+#SBATCH -p cpu
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH -n 40
+#SBATCH --ntasks-per-node=40
+#SBATCH --exclusive
+
+module purge
+module load gromacs/2019.2-gcc-8.3.0-openmpi
 
 ulimit -s unlimited
 ulimit -l unlimited
@@ -38,14 +67,17 @@ srun --mpi=pmi2 gmx_mpi mdrun -deffnm test -ntomp 1
 并使用如下指令提交：
 
 ```
-$ sbatch gromacs.slurm
+$ sbatch gromacs_cpu_intel.slurm
 ```
 
-多节点运行，只需要更改`#SBATCH -N 1`中的`1`至你需要的节点数量。
 
-## 使用GPU运行GROMACS
+## 使用singularity容器中的GROMACS
 
-如需使用GPU运行GROMACS，需要指定使用dgx2分区。以下是基于Singularity的作业脚本gromacs.slurm示例：
+集群中已经预置了NVIDIA GPU CLOUD提供的优化镜像，通过调用该镜像即可运行GROMACS作业，无需单独安装，目前版本为2018.2。该容器文件位于/lustre/share/img/gromacs-2018.2.simg
+
+## 使用singularity容器提交GROMACS作业
+
+如需使用GPU运行GROMACS，需要指定使用dgx2分区。以下是基于Singularity的作业脚本gromacs_gpu_singularity.slurm示例：
 
 ```
 #!/bin/bash
@@ -53,10 +85,8 @@ $ sbatch gromacs.slurm
 #SBATCH -p dgx2
 #SBATCH -o %j.out
 #SBATCH -e %j.err
-#SBATCH -N 1
-#SBATCH --ntasks-per-node=3
-#SBATCH --cpus-per-task=2
-#SBATCH --mem=MaxMemPerNode
+#SBATCH -n 6
+#SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:1
 
 IMAGE_PATH=/lustre/share/img/gromacs-2018.2.simg
@@ -64,18 +94,28 @@ IMAGE_PATH=/lustre/share/img/gromacs-2018.2.simg
 ulimit -s unlimited
 ulimit -l unlimited
 
-srun --mpi=pmi2 singularity run --nv $IMAGE_PATH gmx mdrun -deffnm test -ntomp 1
+singularity run --nv $IMAGE_PATH gmx mdrun -deffnm benchmark -ntmpi 6 -ntomp 1
 ```
-
-其中`/lustre/share/img/gromacs-2018.2.simg`是[NVIDIA GPU CLOUD](https://ngc.nvidia.com/)提供的优化镜像，目前版本为2018.2。
 
 并使用如下指令提交：
 
 ```
-$ sbatch gromacs.slurm
+$ sbatch gromacs_gpu_singularity.slurm
 ```
+
+## 性能评测
+
+测试使用了GROMACS提供的Benchmark算例和两位用户提供的算例进行了CPU和GPU的性能进行对比。其中cpu测试使用单节点40核心，dgx2测试分配1块gpu并配比6核心。
+
+| (ns/day) | CPU (2019.2-gcc) | CPU (2019.4-intel) | dgx2 (Singularity) | dgx2 (2019.2-gcc) |
+| ---- | ------ | ------ | ------ | ------ |
+| Benchmark | 49.281 | 64.800 | 117.593 | 124.219 |
+| 算例1      | 33.916 | 35.143 |  14.902 |  17.171 |
+| 算例2      | 16.771 | 13.781 |   5.436 |   6.643 |
+
+｜ 性能数据供用户选择参考。
 
 ## 参考文献
 
-- [gromacs官方网站](http://www.gromacs.org/)
-- [NVIDIA GPU CLOUD](https://ngc.nvidia.com/catalog/containers/hpc:gromacs)
+* [gromacs官方网站](http://www.gromacs.org/)
+* [NVIDIA GPU CLOUD](ngc.nvidia.com)

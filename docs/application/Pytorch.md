@@ -10,9 +10,51 @@ PyTorch 是一个 Python 优先的深度学习框架，也是使用 GPU 和 CPU 
 1. 作为 numpy 的替代，以便使用强大的 GPU；
 2. 将其作为一个能提供最大的灵活性和速度的深度学习研究平台。
 
-## 作业脚本示例
+## 使用miniconda安装pytorch
 
-以下为在DGX-2上使用PyTorch的作业脚本pytorch.slurm示例，其中作业使用单节点并分配2块GPU：
+创建名为`pytorch-env`的虚拟环境，激活虚拟环境，然后安装pytorch。
+
+```
+$ conda create -n pytorch-env
+$ source activate pytorch-env
+$ conda install pytorch torchvision -c pytorch
+```
+
+## 使用miniconda提交pytorch作业
+
+以下为在DGX-2上使用PyTorch的虚拟环境作业脚本示例，其中作业使用单节点并分配2块GPU：
+
+```
+#!/bin/bash
+#SBATCH -J test
+#SBATCH -p dgx2
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=MaxMemPerNode
+#SBATCH --gres=gpu:2
+
+source activate pytorch-env
+
+python -c 'import torch; print(torch.__version__); print(torch.zeros(10,10).cuda().shape)'
+```
+
+我们假设这个脚本文件名为`test_pytorch.slurm`,使用以下指令提交作业。
+
+```
+$ sbatch pytorch_conda.slurm
+```
+
+## 使用singularity容器中的pytorch
+
+集群中已经预置了[NVIDIA GPU CLOUD](https://ngc.nvidia.com/)提供的优化镜像，通过调用该镜像即可运行pytorch作业，无需单独安装，目前版本为`pytorch-1.3.0`。该容器文件位于`/lustre/share/img/pytorch-19.10-py3.simg`
+
+
+## 使用singularity容器提交pytorch作业
+
+以下为在DGX-2上使用PyTorch的容器作业脚本示例，其中作业使用单节点并分配2块GPU：
 
 ```
 #!/bin/bash
@@ -31,15 +73,8 @@ IMAGE_PATH=/lustre/share/img/pytorch-19.10-py3.simg
 singularity run --nv $IMAGE_PATH python -c 'import torch; print(torch.__version__); print(torch.zeros(10,10).cuda().shape)'
 ```
 
-其中`/lustre/share/img/pytorch-19.10-py3.simg`是[NVIDIA GPU CLOUD](https://ngc.nvidia.com/)提供的优化镜像，目前版本为`pytorch-1.3.0`。
-
-并使用如下指令提交：
+我们假设这个脚本文件名为`test_pytorch.slurm`,使用以下指令提交作业。
 
 ```
-$ sbatch pytorch.slurm
+$ sbatch pytorch_singularity.slurm
 ```
-
-## 参考文献
-
-- [pytorch官方网站](https://pytorch.org/)
-- [NVIDIA GPU CLOUD](https://ngc.nvidia.com/catalog/containers/nvidia:pytorch)

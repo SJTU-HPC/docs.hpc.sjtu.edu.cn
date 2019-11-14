@@ -12,7 +12,8 @@
 ## 快速链接
 
  1. [账号申请](accounts/apply.md)
- 2. [远程登陆](login/SSH.md)
- 3. [远程桌面](login/OpenOnDemand.md)
- 4. [作业提交](job/slurm.md)
- 5. [软件使用](module/module.md)
+ 2. [密码](accounts/passwords.md)
+ 3. [远程登陆](login/SSH.md)
+ 4. [远程桌面](login/OpenOnDemand.md)
+ 5. [作业提交](job/slurm.md)
+ 6. [软件使用](module/module.md)
