@@ -35,5 +35,5 @@ srun --mpi=pmi2 您的LAMMPS命令
 并使用如下指令提交：
 
 ```
-$ $ sbatch lammps_cpu_gnu.slurm
+$ sbatch lammps_cpu_gnu.slurm
 ```
