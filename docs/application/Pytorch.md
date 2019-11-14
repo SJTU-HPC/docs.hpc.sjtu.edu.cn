@@ -1,5 +1,7 @@
 # <center>PyTorch</center>
 
+-----------
+
 PyTorch 是一个 Python 优先的深度学习框架，也是使用 GPU 和 CPU 优化的深度学习张量库，能够在强大的 GPU 加速基础上实现张量和动态神经网络。同时，PyTorch 主要为开发者提供两种高层面的功能：
 
 1. 使用强大的 GPU 加速的 Tensor 计算（类似 numpy）；
