@@ -2,8 +2,8 @@
 ------------
 本文档向您展示如何使用Miniconda在家目录中建立自定义的Python环境。不同的Python版本2或3，对应不同的Miniconda。
 
-## MINICONDA2
-加载MINICONDA2
+## Miniconda2
+加载Miniconda2
 
 ```
 $ module purge
