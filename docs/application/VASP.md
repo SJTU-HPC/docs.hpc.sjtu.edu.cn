@@ -1,7 +1,7 @@
 # <center>VASP<center/>
 
 -------
-## 编译VASP
+## 编译VASP (Intel compiler 2018 + CPU/GPU)
 
 - 解压缩 VASP
 ```
@@ -60,9 +60,64 @@ $ make
 ```
 现在 `./bin` 目录中的二进制文件包含 vasp_std vasp_gam vasp_ncl. 您也可以单独编译每一个，用指令例如：`make std` 即可编译 vasp_std
 
+- 编译 GPU 版本只需在上述基础上使用下述命令
+```
+$ # 修改 makefile.include 中的 CUDA_ROOT 路径为 CUDA_ROOT  := $(CUDA_HOME)
+$ # 修改 makefile.include 中的 -openmp 参数为 -qopenmp
+$ module load cuda/10.0.130-gcc-4.8.5
+$ make gpu
+```
+
+## 使用示例
+- 提交 cpu 任务
+```
+#!/bin/bash
+
+#SBATCH -J vasp_test
+#SBATCH -p cpu
+#SBATCH -n 40
+#SBATCH --ntasks-per-node=40
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+
+module purge
+module load intel-parallel-studio/cluster.2018.3-gcc-4.8.5
+
+export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+export I_MPI_FABRICS=shm:ofi
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+srun /path/to/your_vasp_dir/bin/vasp_std
+```
+
+- 提交 gpu 任务
+```
+#!/bin/bash
+
+#SBATCH -J vasp_test
+#SBATCH -p dgx2
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH -n 6 # number of tasks
+#SBATCH --ntasks-per-node=6
+#SBATCH --gres=gpu:1
+
+module purge
+module load intel-parallel-studio/cluster.2018.3-gcc-4.8.5
+module load cuda/10.0.130-gcc-4.8.5
+
+export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+export I_MPI_FABRICS=shm:ofi
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+srun /path/to/your_vasp_dir/bin/vasp_gpu
+```
+
 ## 参考文献
 
 - [VASP 5.4.1+VTST编译安装](http://hmli.ustc.edu.cn/doc/app/vasp.5.4.1-vtst.htm)
 - [VTST installation](http://theory.cm.utexas.edu/vtsttools/installation.html)
-
-
