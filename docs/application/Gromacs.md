@@ -45,7 +45,7 @@ srun gmx_mpi mdrun -deffnm test -ntomp 1
 $ sbatch gromacs_cpu_intel.slurm
 ```
 
-使用gcc编译的GROMACS运行单节点作业脚本示例gromacs_gnu_intel.slurm如下：
+使用gcc编译的GROMACS运行单节点作业脚本示例gromacs_cpu_gnu.slurm如下：
 
 ```
 #!/bin/bash
@@ -69,7 +69,7 @@ srun --mpi=pmi2 gmx_mpi mdrun -deffnm test -ntomp 1
 并使用如下指令提交：
 
 ```
-$ sbatch gromacs_cpu_intel.slurm
+$ sbatch gromacs_cpu_gnu.slurm
 ```
 
 
