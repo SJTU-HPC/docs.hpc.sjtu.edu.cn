@@ -42,6 +42,7 @@ nav:
     - OpenFoam: application/OpenFoam.md
   #   - GNU Library: 应用软件/GNU.md
   #   - MPI4PY: 应用软件/MPI4PY.md
+    - Quantum-Espresso: application/Quantum-Espresso.md
     - Pytorch: application/Pytorch.md
   #   - TensorFlow: 应用软件/TensorFlow.md
   #   - MXNet: 应用软件/MXNet.md
