@@ -25,13 +25,16 @@ module load quantum-espresso/6.4.1-intel-19.0.4-impi
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 
-module purge
-module load quantum-espresso/6.4.1-intel-19.0.4-impi
-
 ulimit -s unlimited
 ulimit -l unlimited
 
-srun --mpi=pmi2 pw.x < rlx.in &> runlog
+export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+export I_MPI_FABRICS=shm:ofi
+
+module purge
+module load quantum-espresso/6.4.1-intel-19.0.4-impi
+
+srun pw.x < rlx.in
 ```
 
 其中 rlx.in 是您提供的参数文件.
