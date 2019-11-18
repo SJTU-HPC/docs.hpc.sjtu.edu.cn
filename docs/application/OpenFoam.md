@@ -47,7 +47,7 @@ $ sbatch lammps_cpu_gnu.slurm
 
 ## 使用singularity容器提交OPENFOAM作业
 
-提交脚本作业
+使用singularity容器中的openfoam运行单节点作业脚本示例openfoam_singularity.slurm如下：
 
 ```
 #!/bin/bash
@@ -67,7 +67,15 @@ ulimit -l unlimited
 singularity run $IMAGE_PATH "simpleFoam --help"
 ```
 
-提交交互式作业
+并使用如下指令提交：
+
+```
+$ sbatch openfoam_singularity.slurm
+```
+
+## 使用singularity容器提交交互式OPENFOAM作业
+
+要提交交互式作业：
 
 ```
 srun -p cpu -N 1 --exclusive --pty singularity run /lustre/share/img/openfoam-6-it.simg
