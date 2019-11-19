@@ -44,32 +44,26 @@ $ conda install YOUR_PACKAGE
 $ pip install YOUR_PACKAGE
 ```
 
-## 使用Miniconda创建全局conda环境
+## 使用全局预创建的conda环境
 
-全局conda环境需要在rpm下进行创建，以使用miniconda3加载tensorflow-gpu@2.0.0为例
-
-```
-$ module purge
-$ module load miniconda3/4.6.14-gcc-4.8.5
-```
-
-使用prefix参数指定环境创建路径，并加载conda环境
-
-```
-$ conda create --prefix /lustre/opt/condaenv/life_sci python==3.7.4 numpy
-$ source activate  /lustre/opt/condaenv/life_sci
-```
-
-安装tensorflow-gpu@2.0.0
-```
-$ conda install tensorflow-gpu==2.0.0
-```
-
-通过以上命令完成具有tensorflow-gpu@2.0.0模块的conda环境创建，全局调用方法
+集群已创建全局的conda环境，调用方法
 
 ```
 $ module load miniconda3/4.6.14-gcc-4.8.5 
 $ source activate /lustre/opt/condaenv/life_sci
+```
+
+该环境主要包含模块：tensorflow-gpu@2.0.0，R@3.6.1，python@3.7.4 
+
+conda拓展模块查询方法
+```
+$ conda list
+```
+
+R拓展模块查询方法
+```
+$ R
+> installed.packages()
 ```
 
 ## 使用Miniconda向slurm提交作业
