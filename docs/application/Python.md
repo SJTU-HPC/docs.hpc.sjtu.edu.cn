@@ -44,6 +44,34 @@ $ conda install YOUR_PACKAGE
 $ pip install YOUR_PACKAGE
 ```
 
+## 使用Miniconda创建全局conda环境
+
+全局conda环境需要在rpm下进行创建，以使用miniconda3加载tensorflow-gpu@2.0.0为例
+
+```
+$ module purge
+$ module load miniconda3/4.6.14-gcc-4.8.5
+```
+
+使用prefix参数指定环境创建路径，并加载conda环境
+
+```
+$ conda create --prefix /lustre/opt/condaenv/life_sci python==3.7.4 numpy
+$ source activate  /lustre/opt/condaenv/life_sci
+```
+
+安装tensorflow-gpu@2.0.0
+```
+$ conda install tensorflow-gpu==2.0.0
+```
+
+通过以上命令完成具有tensorflow-gpu@2.0.0模块的conda环境创建，全局调用方法
+
+```
+$ module load miniconda3/4.6.14-gcc-4.8.5 
+$ source activate /lustre/opt/condaenv/life_sci
+```
+
 ## 使用Miniconda向slurm提交作业
 
 以下为python示例作业脚本，我们将向slurm申请两cpu核心，并在上面通过python打印`hello world`。
@@ -69,6 +97,8 @@ python -c "print('hello world')"
 ```
 $ sbatch hello_python.slurm
 ```
+
+
 
 ## 参考文献
 
