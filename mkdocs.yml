@@ -40,7 +40,8 @@ nav:
     - Gromacs: application/Gromacs.md
   #   - FFTW: 应用软件/FFTW.md
     - OpenFoam: application/OpenFoam.md
-  #   - GNU Library: 应用软件/GNU.md
+    - GNU Library: application/GNU.md
+    - Intel编译套件: application/Intel.md
   #   - MPI4PY: 应用软件/MPI4PY.md
     - Quantum-Espresso: application/Quantum-Espresso.md
     - Pytorch: application/Pytorch.md

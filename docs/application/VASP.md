@@ -95,6 +95,7 @@ $ sbatch vasp_cpu_intel.slurm
 ## 编译Intel+GPU版本VASP
 
 - 编译 GPU 版本需要首先编译CPU版本，在其基础上使用下述命令
+
 ```
 $ # 修改 makefile.include 中的 CUDA_ROOT 路径为 CUDA_ROOT  := $(CUDA_HOME)
 $ # 修改 makefile.include 中的 -openmp 参数为 -qopenmp
