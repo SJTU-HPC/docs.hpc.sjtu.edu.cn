@@ -46,14 +46,12 @@ $ pip install YOUR_PACKAGE
 
 ## 使用全局预创建的conda环境
 
-集群已创建全局的conda环境，调用方法
+集群已创建全局的conda环境，该环境主要面向生物医学用户主要包含tensorflow-gpu@2.0.0，R@3.6.1，python@3.7.4 。使用以下指令激活环境：
 
 ```
 $ module load miniconda3/4.6.14-gcc-4.8.5 
 $ source activate /lustre/opt/condaenv/life_sci
 ```
-
-该环境主要包含模块：tensorflow-gpu@2.0.0，R@3.6.1，python@3.7.4 
 
 conda拓展模块查询方法
 ```

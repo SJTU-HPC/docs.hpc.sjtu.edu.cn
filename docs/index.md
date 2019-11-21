@@ -17,3 +17,5 @@
  4. [远程桌面](login/OpenOnDemand.md)
  5. [作业提交](job/slurm.md)
  6. [软件使用](module/module.md)
+ 7. [使用GNU套件编译代码](application/GNU.md)
+ 8. [使用Intel套件编译代码](application/Intel.md)
