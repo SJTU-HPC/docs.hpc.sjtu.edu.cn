@@ -1,4 +1,4 @@
-# <center>OpenOnDemand：图形化操作与远程桌面</center>
+# <center>HPC Studio：图形化操作与远程桌面</center>
 
 --------
 
@@ -60,7 +60,7 @@
 
 ![avater](../img/ondemand_job_composer_template.png)
 
-同时OpenOnDemand提供了在线文本编辑功能，在右侧底部的`Submit Script`选项卡中，点击`Open Editor`按钮，即可打开文本编辑器。
+同时HPC Studio提供了在线文本编辑功能，在右侧底部的`Submit Script`选项卡中，点击`Open Editor`按钮，即可打开文本编辑器。
 
 ![avater](../img/ondemand_editor_open.png)
 

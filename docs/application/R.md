@@ -10,7 +10,7 @@
 
 ```
 $ module purge
-$ module load miniconda3/4.6.14-gcc-4.8.5
+$ module load miniconda3/4.7.12.1-gcc-4.8.5
 ```
 
 创建conda环境
@@ -55,7 +55,7 @@ $ conda install -c conda-forge r-rmysql
 source /usr/share/Modules/init/bash
 
 module purge
-module load miniconda3/4.6.14-gcc-4.8.5
+module load miniconda3/4.7.12.1-gcc-4.8.5
 source activate R
 
 R hello.r
@@ -70,13 +70,40 @@ $ sbatch r_conda.slurm
 ## 在R交互终端中安装R模块
 ```
 $ R --version
-R version 3.5.0 (2018-04-23) -- "Joy in Playing"
-Copyright (C) 2018 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
-> R
-> source("https://bioconductor.org/biocLite.R")                    
-...  
-Bioconductor version 3.7 (BiocInstaller 1.30.0), ?biocLite for help
-> biocLite()                  
+R version 3.6.1 (2019-07-05) -- "Action of the Toes"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-conda_cos6-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under the terms of the
+GNU General Public License versions 2 or 3.
+For more information about these matters see
+https://www.gnu.org/licenses/.
+
+$ R
+R version 3.6.1 (2019-07-05) -- "Action of the Toes"
+Copyright (C) 2019 The R Foundation for Statistical Computing
+Platform: x86_64-conda_cos6-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> if (!requireNamespace("BiocManager", quietly = TRUE))
++     install.packages("BiocManager")
+> BiocManager::install()
+Bioconductor version 3.10 (BiocManager 1.30.10), R 3.6.1 (2019-07-05)
+Old packages: 'boot', 'cluster', 'foreign', 'KernSmooth', 'MASS', 'mgcv',
+  'nlme', 'survival'               
 ...
 ```

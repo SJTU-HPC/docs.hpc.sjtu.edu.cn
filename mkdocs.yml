@@ -6,15 +6,15 @@ nav:
   #   - 账号管理: accounts/management.md
   #   - 机时充值: accounts/charge.md
   #   - 收费细则: accounts/fee.md
-  - 登陆:
+  - 登陆: login/SSH.md
     # - 登陆节点: 登陆/登陆节点.md
-    - SSH: login/SSH.md
-    - Open OnDemand: login/OpenOnDemand.md
+    # - SSH: login/SSH.md
   # - 文件系统:
   #   - 概览: 文件系统/概览.md
   #   - 数据传输: 文件系统/数据传输.md
   #   - 与校云计算文件交互: 文件系统/云平台.md
   #   - 与其他用户共享文件: 文件系统/共享文件.md 
+  - HPC Studio: login/OpenOnDemand.md
   - 作业:
     - Slurm概览: job/slurm.md
     # - 脚本式作业: 作业/脚本式作业.md
@@ -30,7 +30,7 @@ nav:
     # - Module Environment: module/module.md
   - 应用软件:
     - Python: application/Python.md
-  #   - Nektar++: 应用软件/Nektar.md
+    - Nektar++: application/Nektar.md
     - Lammps: application/Lammps.md
     - VASP: application/VASP.md
     - Amber: application/Amber.md
@@ -51,7 +51,7 @@ nav:
   #   - Octave: 应用软件/Octave.md
   #   - Perl: 应用软件/Perl.md
   #   - Spark: 应用软件/Spark.md
-  #   - R: 应用软件/R.md
+    - R: application/R.md
   #   - 商业软件: 应用软件/商业软件.md
   - 常见问题: FAQ/faq.md
   - 提交修改: contribution/contribution.md
