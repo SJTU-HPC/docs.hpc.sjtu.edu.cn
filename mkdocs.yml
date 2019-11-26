@@ -52,7 +52,7 @@ nav:
   #   - Perl: 应用软件/Perl.md
   #   - Spark: 应用软件/Spark.md
     - R: application/R.md
-  #   - 商业软件: 应用软件/商业软件.md
+    - 商业软件: application/commercial.md
   - 常见问题: FAQ/faq.md
   - 提交修改: contribution/contribution.md
 
