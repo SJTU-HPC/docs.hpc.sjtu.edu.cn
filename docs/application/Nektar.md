@@ -16,7 +16,7 @@ $ module load nektar/4.4.1-gcc-8.3.0-openblas-openmpi
 
 
 ```
-#SBATCH -J lammps_test
+#SBATCH -J Nektar_test
 #SBATCH -p cpu
 #SBATCH -n 40
 #SBATCH --ntasks-per-node=40

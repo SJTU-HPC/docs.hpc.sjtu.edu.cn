@@ -35,7 +35,7 @@ nav:
     - VASP: application/VASP.md
     - Amber: application/Amber.md
   #   - VMD: 应用软件/VMD.md
-  #   - nwchen: 应用软件/nwchen.md
+    - nwchem: application/nwchem.md
   #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
     - Gromacs: application/Gromacs.md
   #   - FFTW: 应用软件/FFTW.md
