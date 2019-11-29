@@ -4,7 +4,7 @@
 
 ## 登陆
 
-在浏览器中，打开：https://portal.hpc.sjtu.edu.cn
+在浏览器中，打开：https://studio.hpc.sjtu.edu.cn
 
 !!! tip
     浏览器需为chrome，火狐，edge

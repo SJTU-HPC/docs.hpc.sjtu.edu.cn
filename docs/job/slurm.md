@@ -137,12 +137,13 @@ Slurm具有丰富的参数集。 以下最常用的。
 ```
 #SBATCH --job-name=hostname
 #SBATCH --partition=cpu
-#SBATCH -n 1
+#SBATCH -N 1
 #SBATCH --mail-type=end
 #SBATCH --mail-user=YOU@EMAIL.COM
 #SBATCH --output=%j.out
 #SBATCH --error=%j.err
 #SBATCH --time=00:00:10
+#SBATCH --exclusive
 
 /bin/hostname
 ```
@@ -160,8 +161,8 @@ sbatch cpu.slurm
 ```
 #SBATCH --job-name=LINPACK
 #SBATCH --partition=cpu
-#SBATCH -n 64
-#SBATCH --ntasks-per-node=16
+#SBATCH -n 80
+#SBATCH --ntasks-per-node=40
 #SBATCH --mail-type=end
 #SBATCH --mail-user=YOU@EMAIL.COM
 #SBATCH --output=%j.out
@@ -169,14 +170,13 @@ sbatch cpu.slurm
 #SBATCH --time=00:20:00
 ```
 
-以下作业请求8张GPU卡，其中1个CPU进程管理1张GPU卡。由于每个GPU节点都有2个GPU卡，因此每个节点启动2个CPU进程。
-
+以下作业请求4张GPU卡，其中1个CPU进程管理1张GPU卡。
 ```
 #SBATCH --job-name=GPU_HPL
-#SBATCH --partition=k40
-#SBATCH -n 8
-#SBATCH --ntasks-per-node=2
-#SBATCH --exclusive
+#SBATCH --partition=dgx2
+#SBATCH -n 4
+#SBATCH --ntasks-per-node=4
+#SBATCH --gres=gpu:4
 #SBATCH --mail-type=end
 #SBATCH --mail-user=YOU@MAIL.COM
 #SBATCH --output=%j.out
@@ -184,7 +184,7 @@ sbatch cpu.slurm
 #SBATCH --time=00:30:00
 ```
 
-以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于Pi上的Python，您可以查阅我们的[Python文档](job/python/index.md)。
+以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于Pi上的Python，您可以查阅我们的[Python文档](../application/python.md)。
 
 ```
 #!/bin/bash
@@ -200,10 +200,9 @@ sbatch cpu.slurm
 
 source /usr/share/Modules/init/bash
 module purge
-module load miniconda3/4.5
+module load miniconda2/4.6.14-gcc-4.8.5
 
-VIRTUAL_ENV_DISABLE_PROMPT=1
-source ~/python27-hpc-gcc/bin/activate
+source activate YOUR_ENV_NAME
 
 echo "SLURM_JOBID: " $SLURM_JOBID
 echo "SLURM_ARRAY_TASK_ID: " $SLURM_ARRAY_TASK_ID
