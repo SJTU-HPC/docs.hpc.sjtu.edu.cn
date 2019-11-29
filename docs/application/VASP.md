@@ -44,7 +44,7 @@ fire.o lanczos.o neb.o qm.o opt.o \
 
 - 加载 intel 编译器，对于 VASP 5.4.4，我们推荐 intel-parallel-studio-2018
 ```
-$ module load intel-parallel-studio/cluster.2018.3-gcc-4.8.5
+$ module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
 ```
 上述操作后会 load 包括 intel compilers, intel-mpi, intel-mkl 等所需的编译器组件，您可以使用 ``echo $MKLROOT`` 等方式检查是否成功导入.
 
@@ -75,7 +75,7 @@ $ make
 #SBATCH -e %j.err
 
 module purge
-module load intel-parallel-studio/cluster.2018.3-gcc-4.8.5
+module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:ofi
@@ -119,7 +119,7 @@ $ make gpu
 #SBATCH --gres=gpu:1
 
 module purge
-module load intel-parallel-studio/cluster.2018.3-gcc-4.8.5
+module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
 module load cuda/10.0.130-gcc-4.8.5
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so

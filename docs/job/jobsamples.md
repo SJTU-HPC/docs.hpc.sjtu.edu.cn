@@ -189,7 +189,7 @@ $ sbatch job_openmpi.slurm
 
 ### 使用Intel编译器
 ```
-$ module purge; module load intel-parallel-studio/cluster.2019.4-gcc-4.8.5 
+$ module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 $ mpiicc mpihello.c -o mpihello
 ```
 
@@ -209,7 +209,7 @@ ulimit -l unlimited
 
 source /usr/share/Modules/init/bash
 module purge
-module load intel-parallel-studio/cluster.2019.4-gcc-4.8.5 
+module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:ofi
@@ -221,7 +221,9 @@ srun ./mpihello
 ```
 $ sbatch -p cpu job_impi.slurm
 ```
+
 ## <center>MPI + OpenMP混合示例</center>
+
 以hybridmpi.c为例，代码如下：
 ```
 #include <stdio.h>
@@ -280,7 +282,7 @@ srun --mpi=pmi2 ./hybridmpi
 
 ### 使用ICC编译
 ```
-$ module purge; module load intel-parallel-studio/cluster.2019.4-gcc-4.8.5 
+$ module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 $ mpiicc -O3 -fopenmp hybridmpi.c -o hybridmpi
 ```
 准备一个名为hybridmpi.slurm的作业脚本
@@ -300,7 +302,7 @@ ulimit -s unlimited
 ulimit -l unlimited
 
 source /usr/share/Modules/init/bash
-module purge; module load intel-parallel-studio/cluster.2019.4-gcc-4.8.5 
+module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
 export I_MPI_DEBUG=5
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
@@ -440,15 +442,15 @@ $ cp /lustre/usr/samples/LINPACK/64/HPL.dat .
 #SBATCH --mail-user=YOU@EMAIL.COM
 #SBATCH --output=%j.out
 #SBATCH --error=%j.err
-#SBATCH -n 64
-#SBATCH --ntasks-per-node=16
+#SBATCH -n 80
+#SBATCH --ntasks-per-node=40
 
 ulimit -s unlimited
 ulimit -l unlimited
 
 source /usr/share/Modules/init/bash
 module purge
-module load icc mkl impi
+module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:dapl

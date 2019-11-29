@@ -14,8 +14,9 @@ Intel编译套件是由Intel提供的编译器、MPI环境、MKL库等集成套�
 | intel-mkl-2019.3 | module load intel-mkl/2019.3.199-intel-19.0.4 | Intel MKL库 |
 | intel-mpi-2019.4.243/gcc-9.2.0 | module load intel-mpi/2019.4.243-gcc-9.2.0 | Intel MPI库，由gcc编译 |
 | intel-mpi-2019.4.243/intel-19.0.4 | module load intel-mpi/2019.4.243-intel-19.0.4 | Intel MPI库，由intel编译器编译 |
-| intel-parallel-studio/cluster.2018.3-gcc-4.8.5 | module load intel-parallel-studio/cluster.2018.3-gcc-4.8.5 | Intel全家桶18.3 |
-| intel-parallel-studio/cluster.2019.4-gcc-4.8.5 | module load intel-parallel-studio/cluster.2019.4-gcc-4.8.5 | Intel全家桶19.3 |
+| intel-parallel-studio/cluster.2018.4-intel-18.0.4 | module load intel-parallel-studio/cluster.2018.4-intel-18.0.4 | Intel全家桶18.4 |
+| intel-parallel-studio/cluster.2019.4-intel-19.0.4 | module load intel-parallel-studio/cluster.2019.4-intel-19.0.4 | Intel全家桶19.4 |
+| intel-parallel-studio/cluster.2019.5-intel-19.0.5 | module load intel-parallel-studio/cluster.2019.5-intel-19.0.5 | Intel全家桶19.5 |
 
 !!! tip
     在使用intel-mpi的时候，请尽量保持编译器版本与后缀中的编译器版本一致，如intel-mpi-2019.4.243/intel-19.0.4和intel-19.0.4
