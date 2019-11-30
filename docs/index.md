@@ -5,14 +5,17 @@
 	该文档通过github仓库维护
 	[github仓库](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)。
 	如果您有什么建议或者意见，欢迎提交修改
-	[contributions]()
+	[contributions](contribution/contribution.md)
 	
 	[Fork this repo](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)
 
 ## 快速链接
 
  1. [账号申请](accounts/apply.md)
- 2. [远程登陆](login/SSH.md)
- 3. [远程桌面](login/OpenOnDemand.md)
- 4. [作业提交](job/slurm.md)
- 5. [软件使用](module/module.md)
+ 2. [密码](accounts/passwords.md)
+ 3. [远程登陆](login/SSH.md)
+ 4. [远程桌面](login/HpcStudio.md)
+ 5. [作业提交](job/slurm.md)
+ 6. [软件使用](module/module.md)
+ 7. [使用GNU套件编译代码](application/GNU.md)
+ 8. [使用Intel套件编译代码](application/Intel.md)
