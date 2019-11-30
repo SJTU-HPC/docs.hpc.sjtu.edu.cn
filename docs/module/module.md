@@ -31,8 +31,8 @@ ENVIRONMENT MODULES可以帮助您在Pi上使用预构建的软件包。每个EN
 bismark/0.19.0-intel-19.0.4                    intel/19.0.4-gcc-4.8.5                         openblas/0.3.6-intel-19.0.4
 bowtie2/2.3.5-intel-19.0.4                     intel-mkl/2019.3.199-intel-19.0.4              openmpi/3.1.4-gcc-4.8.5
 bwa/0.7.17-intel-19.0.4                        intel-mpi/2019.4.243-intel-19.0.4              openmpi/3.1.4-intel-19.0.4
-cuda/10.0.130-gcc-4.8.5                        intel-parallel-studio/cluster.2018.3-gcc-4.8.5 perl/5.26.2-gcc-4.8.5
-cuda/10.0.130-intel-19.0.4                     intel-parallel-studio/cluster.2019.4-gcc-4.8.5 perl/5.26.2-intel-19.0.4
+cuda/10.0.130-gcc-4.8.5                        intel-parallel-studio/cluster.2018.4-intel-18.0.4 perl/5.26.2-gcc-4.8.5
+cuda/10.0.130-intel-19.0.4                     intel-parallel-studio/cluster.2019.5-intel-19.0.5 perl/5.26.2-intel-19.0.4
 cuda/9.0.176-intel-19.0.4                      jdk/11.0.2_9-intel-19.0.4                      perl/5.30.0-gcc-4.8.5
 emacs/26.1-gcc-4.8.5                           miniconda2/4.6.14-gcc-4.8.5                    soapdenovo2/240-gcc-4.8.5
 gcc/5.5.0-gcc-4.8.5                            miniconda2/4.6.14-intel-19.0.4                 stream/5.10-intel-19.0.4
