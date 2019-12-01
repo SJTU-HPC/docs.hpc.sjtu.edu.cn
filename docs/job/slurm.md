@@ -132,7 +132,7 @@ Slurm具有丰富的参数集。 以下最常用的。
 | --depend=[state:job_id] | 作业依赖 | 
 | --array=[array_spec] | 序列作业 | 
 
-这是一个名为`cpu.slurm`的作业脚本，该脚本向cpu队列申请1核，将walltime限制设置为10秒，并在作业完成时通知。在此作业中执行的命令是`/bin/hostname`。
+这是一个名为`cpu.slurm`的作业脚本，该脚本向cpu队列申请1个节点40核，将walltime限制设置为10秒，并在作业完成时通知。在此作业中执行的命令是`/bin/hostname`。
 
 ```
 #SBATCH --job-name=hostname
@@ -156,7 +156,7 @@ sbatch cpu.slurm
 
 `squeue`可用于检查作业状态。用户可以在作业执行期间通过SSH登录到计算节点。输出将实时更新到文件[jobid] .out和[jobid] .err。
 
-这里展示一个更复杂的作业要求，其中将启动64个进程，每台主机16个进程。
+这里展示一个更复杂的作业要求，其中将启动80个进程，每台主机40个进程。
 
 ```
 #SBATCH --job-name=LINPACK
