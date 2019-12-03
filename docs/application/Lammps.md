@@ -15,7 +15,7 @@ $ module load lammps/20190807-gcc-8.3.0-openblas-openmpi
 使用GNU编译的CPU版本Lammps运行单节点作业脚本示例lammps_cpu_gnu.slurm如下：
 
 
-```
+```bash
 #SBATCH -J lammps_test
 #SBATCH -p cpu
 #SBATCH -n 40
@@ -34,6 +34,6 @@ srun --mpi=pmi2 您的LAMMPS命令
 
 并使用如下指令提交：
 
-```
+```bash
 $ sbatch lammps_cpu_gnu.slurm
 ```

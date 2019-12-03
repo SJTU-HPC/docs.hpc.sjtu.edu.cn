@@ -16,7 +16,7 @@ Pi2.0 系统中已经预装 openfoam/1712&1906 (GNU+cpu版本)，可以用以下
 
 使用GNU编译的CPU版本openfoam/1906运行单节点作业脚本test_openfoam.slurm示例如下：
 
-```
+```bash
 #!/bin/bash
 #SBATCH -J gromacs_cpu_test
 #SBATCH -p cpu
@@ -34,10 +34,10 @@ module load openfoam/1906-gcc-8.3.0-openmpi
 
 srun --mpi=pmi2 icoFoam -parallel
 ```
- 
+
 并使用如下指令提交：
 
-```
+```bash
 $ sbatch lammps_cpu_gnu.slurm
 ```
 
@@ -49,7 +49,7 @@ $ sbatch lammps_cpu_gnu.slurm
 
 使用singularity容器中的openfoam运行单节点作业脚本示例openfoam_singularity.slurm如下：
 
-```
+```bash
 #!/bin/bash
 #SBATCH -J openfoam_singularity_test
 #SBATCH -p cpu
@@ -69,7 +69,7 @@ singularity run $IMAGE_PATH "simpleFoam --help"
 
 并使用如下指令提交：
 
-```
+```bash
 $ sbatch openfoam_singularity.slurm
 ```
 
@@ -77,7 +77,7 @@ $ sbatch openfoam_singularity.slurm
 
 要提交交互式作业：
 
-```
+```bash
 srun -p cpu -N 1 --exclusive --pty singularity run /lustre/share/img/openfoam-6-it.simg
 ```
 

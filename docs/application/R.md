@@ -8,32 +8,32 @@
 
 加载Miniconda 3
 
-```
+```bash
 $ module purge
 $ module load miniconda3/4.7.12.1-gcc-4.8.5
 ```
 
 创建conda环境
 
-```
+```bash
 $ conda create --name R
 ```
 
 激活R环境
 
-```
+```bash
 $ source activate R
 ```
 
 安装R
 
-```
-conda install -c r r==3.6.0
+```bash
+$ conda install -c r r==3.6.0
 ```
 
 通过conda（例如RMySQL）添加更多软件包。
 
-```
+```bash
 $ conda install -c conda-forge r-rmysql
 ```
 
@@ -43,7 +43,7 @@ $ conda install -c conda-forge r-rmysql
 
 使用conda环境中R运行单节点作业脚本示例r_conda.slurm如下：
 
-```
+```bash
 #!/bin/bash
 
 #SBATCH -J R
@@ -63,12 +63,12 @@ R hello.r
 
 并使用如下指令提交：
 
-```
+```bash
 $ sbatch r_conda.slurm
 ```
 
 ## 在R交互终端中安装R模块
-```
+```bash
 $ R --version
 R version 3.6.1 (2019-07-05) -- "Action of the Toes"
 Copyright (C) 2019 The R Foundation for Statistical Computing

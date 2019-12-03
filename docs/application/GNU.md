@@ -32,7 +32,7 @@ Pi2.0 系统中已经预装不同版本的gcc，可以用以下命令加载:
 
 加载和编译：
 
-```
+```bash
 $ module purge; module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
 $ mpicc mpihello.c -o mpihello
 ```
@@ -41,7 +41,7 @@ $ mpicc mpihello.c -o mpihello
 
 准备一个名为job_openmpi.slurm的作业脚本
 
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=mpihello
@@ -63,7 +63,7 @@ srun --mpi=pmi2 ./mpihello
 
 最后，将作业提交到SLURM
 
-```
+```bash
 $ sbatch job_openmpi.slurm
 ```
 

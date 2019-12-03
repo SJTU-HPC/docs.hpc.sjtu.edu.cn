@@ -14,7 +14,7 @@
 
 准备作业脚本然后通过`sbatch`提交是Slurm的最常见用法。为了将作业脚本提交给作业系统，SLURM使用
 
-```
+```bash
 $ sbatch jobscript.slurm
 ```
 
@@ -40,7 +40,7 @@ Slurm具有丰富的参数集。 以下最常用的。
 
 这是一个名为`dgx.slurm`的作业脚本，该脚本向dgx2队列申请4块GPU，并在作业完成时通知。在此示例作业中执行的为NVIDIA Sample中的`cudaTensorCoreGemm`。
 
-```
+```bash
 #SBATCH --job-name=dgx2_test
 #SBATCH --partition=dgx2
 #SBATCH --gres=gpu:4
@@ -57,8 +57,8 @@ module load gcc cuda
 
 用以下方式提交作业：
 
-```
-sbatch dgx.slurm
+```bash
+$ sbatch dgx.slurm
 ```
 
 `squeue`可用于检查作业状态。用户可以在作业执行期间通过SSH登录到计算节点。输出将实时更新到文件[jobid] .out和[jobid] .err。
@@ -67,15 +67,15 @@ sbatch dgx.slurm
 
 `srun`可以启动交互式作业。该操作将阻塞，直到完成或终止。例如，在DGX-2上运行`hostname`。
 
-```
+```bash
 $ srun -N1 -n1 -p dgx2 --gres=gpu:4 hostname
 vol01
 ```
 
 启动远程主机bash终端。
 
-```
-srun -N1 -n1 -p dgx2 --exclusive --pty /bin/bash
+```bash
+$ srun -N1 -n1 -p dgx2 --exclusive --pty /bin/bash
 $ hostname
 vol01
 ```

@@ -45,20 +45,20 @@ hisat2/2.1.0-intel-19.0.4                      ncbi-rmblastn/2.2.28-gcc-4.8.5
 
 在开始新作业之前，先卸载所有已加载的模块是一个好习惯。
 
-```
+```bash
 $ mdoule purge
 ```
 
 可以一次加载或卸载多个模块。
 
-```
+```bash
 $ mdoule load gcc openmpi
 $ module unload gcc openmpi
 ```
 
 您可以在工作中的任何时候检查加载的模块。
 
-```
+```bash
 $ module list
 ```
 
@@ -72,13 +72,13 @@ $ module list
 
 在SLURM上，以下子句与上面的子句具有相同的作用。
 
-```
+```bash
 $ module load gcc/9.2.0-gcc-4.8.5 openmpi/3.1
 ```
 
 或者，如果您喜欢最新的稳定版本，则可以忽略版本号。
 
-```
+```bash
 $ module load gcc openmpi
 ```
 
