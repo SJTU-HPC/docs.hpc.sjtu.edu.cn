@@ -7,7 +7,7 @@
 安装前请移除 .bashrc 不必要的内容，包括 module load 与 export 等等
 
 - 准备 amber18 源代码
-```
+```bash
 $ tar xvf amber18.tar.gz
 $ cd amber18
 $ make veryclean
@@ -16,12 +16,12 @@ $ make veryclean
       `make veryclean`将移除大量编译过的临时文件等内容, 具体查看[Amber文档](http://ambermd.org/doc12/Amber18.pdf)
 		 
 - 编译 Amber 非常消耗计算资源，请登陆到 CPU 节点
-```
+```bash
 $ srun -p cpu -N 1 --exclusive --pty /bin/bash
 ```
 
 - 安装 Amber18 的串行版本 (不可跳过)
-```
+```bash
 $ export AMBERHOME=$(pwd)  ## make sure you are in the amber18 directory extracted
 $ ./configure --no-updates -noX11 gnu
 $ source ./amber.sh
@@ -38,7 +38,7 @@ $ make -j 40 && make install   #change 40 to total ncore
 ## 编译MPI版本
 
 - 安装 Amber18 的 MPI 版本
-```
+```bash
 $ module load openmpi/3.1.4-gcc-4.8.5
 $ ./configure --no-updates -noX11 -mpi gnu
 $ make -j 40 && make install
@@ -47,7 +47,7 @@ $ make -j 40 && make install
 ## 编译CUDA版本
 
 - 安装 Amber18 的 CUDA 版本
-```
+```bash
 $ module load cuda/9.0.176-gcc-4.8.5
 $ export LIBRARY_PATH="/lustre/opt/cascadelake/linux-centos7-x86_64/gcc-4.8.5/cuda-9.0.176-pusmroeeme62xntggzjygame4htcbil7/lib64/stubs:${LIBRARY_PATH}"
 $ ./configure --no-updates -noX11 -cuda gnu
@@ -57,21 +57,21 @@ $ make -j 40 && make install
 ## 编译MPI+CUDA版本
 
 - 安装 Amber18 的 CUDA+mpi 版本
-```
+```bash
 $ ./configure --no-updates -noX11 -cuda -mpi gnu
 $ make -j 40 && make install
 ```
 
 编译完成后推出计算节点
 
-```
+```bash
 $ exit
 ```
 
 ## 作业脚本示例 
 
 - 版本：GNU + cpu
-```
+```bash
 #!/bin/bash
 
 #SBATCH -J amber_test
@@ -93,7 +93,7 @@ srun --mpi=pmi2 {pmemd.MPI ... YOUR AMBER COMMANDS}
 ```
 
 - 版本：GNU + gpu
-```
+```bash
 #SBATCH -J amber_gpu_test
 #SBATCH -p dgx2
 #SBATCH -o %j.out

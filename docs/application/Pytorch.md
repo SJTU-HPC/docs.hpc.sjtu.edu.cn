@@ -16,7 +16,7 @@ PyTorch 是一个 Python 优先的深度学习框架，也是使用 GPU 和 CPU 
 
 创建名为`pytorch-env`的虚拟环境，激活虚拟环境，然后安装pytorch。
 
-```
+```bash
 $ conda create -n pytorch-env
 $ source activate pytorch-env
 $ conda install pytorch torchvision -c pytorch
@@ -26,7 +26,7 @@ $ conda install pytorch torchvision -c pytorch
 
 以下为在DGX-2上使用PyTorch的虚拟环境作业脚本示例，其中作业使用单节点并分配2块GPU：
 
-```
+```bash
 #!/bin/bash
 #SBATCH -J test
 #SBATCH -p dgx2
@@ -45,7 +45,7 @@ python -c 'import torch; print(torch.__version__); print(torch.zeros(10,10).cuda
 
 我们假设这个脚本文件名为`test_pytorch.slurm`,使用以下指令提交作业。
 
-```
+```bash
 $ sbatch pytorch_conda.slurm
 ```
 
@@ -58,7 +58,7 @@ $ sbatch pytorch_conda.slurm
 
 以下为在DGX-2上使用PyTorch的容器作业脚本示例，其中作业使用单节点并分配2块GPU：
 
-```
+```bash
 #!/bin/bash
 #SBATCH -J test
 #SBATCH -p dgx2
@@ -77,6 +77,6 @@ singularity run --nv $IMAGE_PATH python -c 'import torch; print(torch.__version_
 
 我们假设这个脚本文件名为`test_pytorch.slurm`,使用以下指令提交作业。
 
-```
+```bash
 $ sbatch pytorch_singularity.slurm
 ```

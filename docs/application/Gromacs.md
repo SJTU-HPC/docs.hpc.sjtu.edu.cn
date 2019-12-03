@@ -17,7 +17,7 @@ GROMACS是一种分子动力学应用程序，可以模拟具有数百至数百�
 
 使用intel编译的GROMACS运行单节点作业脚本示例gromacs_cpu_intel.slurm如下：
 
-```
+```bash
 #!/bin/bash
 #SBATCH -J gromacs_cpu_test
 #SBATCH -p cpu
@@ -41,13 +41,13 @@ srun gmx_mpi mdrun -deffnm test -ntomp 1
 
 并使用如下指令提交：
 
-```
+```bash
 $ sbatch gromacs_cpu_intel.slurm
 ```
 
 使用gcc编译的GROMACS运行单节点作业脚本示例gromacs_cpu_gnu.slurm如下：
 
-```
+```bash
 #!/bin/bash
 #SBATCH -J gromacs_cpu_test
 #SBATCH -p cpu
@@ -68,7 +68,7 @@ srun --mpi=pmi2 gmx_mpi mdrun -deffnm test -ntomp 1
 
 并使用如下指令提交：
 
-```
+```bash
 $ sbatch gromacs_cpu_gnu.slurm
 ```
 
@@ -81,7 +81,7 @@ $ sbatch gromacs_cpu_gnu.slurm
 
 如需使用GPU运行GROMACS，需要指定使用dgx2分区。以下是基于Singularity的作业脚本gromacs_gpu_singularity.slurm示例：
 
-```
+```bash
 #!/bin/bash
 #SBATCH -J gromacs_gpu_test
 #SBATCH -p dgx2
@@ -101,7 +101,7 @@ singularity run --nv $IMAGE_PATH gmx mdrun -deffnm benchmark -ntmpi 6 -ntomp 1
 
 并使用如下指令提交：
 
-```
+```bash
 $ sbatch gromacs_gpu_singularity.slurm
 ```
 

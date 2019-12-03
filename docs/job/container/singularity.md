@@ -17,7 +17,7 @@ Singularity是劳伦斯伯克利国家实验室专门为大规模、跨节点HPC
 
 首先我们需要准备Singularity镜像。如果镜像来自于[Docker Hub](https://hub.docker.com/)，则可以直接在集群中使用如下命令制作镜像。
 
-```
+```bash
 $ singularity build ubuntu.simg docker://ubuntu
 INFO:    Starting build...
 Getting image source signatures
@@ -40,7 +40,7 @@ INFO:    Build complete: ubuntu.simg
 
 ## 任务提交
 
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=test_singularity

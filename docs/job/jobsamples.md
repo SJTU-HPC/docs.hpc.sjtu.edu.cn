@@ -5,7 +5,7 @@
 
 ## <center>OpenMP 示例<center/>
 以OpenMP为例，名为omp_hello.c代码如下：
-```
+```c
 #include <omp.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -33,18 +33,18 @@ int nthreads, tid;
 }
 ```
 ### 使用GCC 9.2.0编译
-```
+```bash
 $ module purge; module load gcc 
 $ gcc -fopenmp omp_hello.c -o omphello
 ```
 在本地运行4线程应用程序
-```
+```bash
 $ export OMP_NUM_THREADS=4 && ./omphello
 ```
 
 准备一个名为ompgcc.slurm的作业脚本
 
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=Hello_OpenMP
@@ -65,23 +65,23 @@ export OMP_NUM_THREADS=8
 ```
 
 提交到SLURM
-```
+```bash
 $ sbatch ompgcc.slurm
 ```
 
 ### 使用Intel编译器
 
-```
+```bash
 $ module purge; module load intel 
 $ icc -fopenmp omp_hello.c -o omphello
 ```
 在本地运行4线程应用程序
-```
+```bash
 $ export OMP_NUM_THREADS=4 && ./omphello
 ```
 
 准备一个名为ompicc.slurm的作业脚本
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=Hello_OpenMP
@@ -102,13 +102,13 @@ export OMP_NUM_THREADS=8
 ```
 
 提交到SLURM
-```
+```bash
 $ sbatch ompicc.slurm
 ```
 
 ## <center>MPI示例</center>
 以mpihello.c为例，代码如下：
-```
+```c
 #include <mpi.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -157,12 +157,12 @@ int main(int argc, char *argv[])
 ```
 
 ### 使用OpenMPI+GCC编译
-```
+```bash
 $ module purge; module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
 $ mpicc mpihello.c -o mpihello
 ```
 准备一个名为job_openmpi.slurm的作业脚本
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=mpihello
@@ -183,18 +183,18 @@ srun --mpi=pmi2 ./mpihello
 ```
 
 最后，将作业提交到SLURM
-```
+```bash
 $ sbatch job_openmpi.slurm
 ```
 
 ### 使用Intel编译器
-```
+```bash
 $ module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 $ mpiicc mpihello.c -o mpihello
 ```
 
 准备一个名为job_impi.slurm的作业脚本
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=mpihello
@@ -218,14 +218,14 @@ srun ./mpihello
 ```
 
 最后，将作业提交到SLURM
-```
+```bash
 $ sbatch -p cpu job_impi.slurm
 ```
 
 ## <center>MPI + OpenMP混合示例</center>
 
 以hybridmpi.c为例，代码如下：
-```
+```c
 #include <stdio.h>
 #include "mpi.h"
 #include <omp.h>
@@ -253,12 +253,12 @@ int main(int argc, char *argv[]) {
 ```
 
 ### 使用GCC编译如下：
-```
+```bash
 $ module purge && module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
 $ mpicc -O3 -fopenmp hybridmpi.c -o hybridmpi
 ```
 准备一个名为hybridmpi.slurm的作业脚本
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=HybridMPI
@@ -281,13 +281,13 @@ srun --mpi=pmi2 ./hybridmpi
 ```
 
 ### 使用ICC编译
-```
+```bash
 $ module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 $ mpiicc -O3 -fopenmp hybridmpi.c -o hybridmpi
 ```
 准备一个名为hybridmpi.slurm的作业脚本
 
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=HybridMPI
@@ -312,13 +312,13 @@ export OMP_NUM_THREADS=40
 srun ./hybridmpi
 ```
 ### 将作业提交到4个计算节点上
-```
+```bash
 $ sbatch -N 4 hybridmpi.slurm
 ```
 
 ## <center>CUDA 示例</center> 
 以cublashello.cu为例，代码如下：
-```
+```c
 //Example 2. Application Using C and CUBLAS: 0-based indexing
 //-----------------------------------------------------------
 #include <stdio.h>
@@ -391,13 +391,13 @@ int main (void){
 ```
 
 ### 使用CUDA编译
-```
+```bash
 $ module purge; module load gcc/8.3.0-gcc-4.8.5 cuda/10.1.243-gcc-8.3.0
 $ nvcc cublashello.cu -o cublashello -lcublas
 ```
 
 作业脚本cublashello.slurm如下：
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=cublas
@@ -418,14 +418,14 @@ module load gcc/8.3.0-gcc-4.8.5 cuda/10.1.243-gcc-8.3.0
 ```
 
 ### 将作业提交到SLURM上的dgx2分区：
-```
+```bash
 $ sbatch cublashello.slurm
 ```
 ## <center>通过sbatch运行Intel LINPACK</center>
 
 假如在多节点运行MPI作业，首先准备执行文件并输入数据：
 
-```
+```bash
 $ cd ~/tmp
 $ cp /lustre/usr/samples/LINPACK/64/xhpl_intel64 .
 $ cp /lustre/usr/samples/LINPACK/64/HPL.dat .
@@ -433,7 +433,7 @@ $ cp /lustre/usr/samples/LINPACK/64/HPL.dat .
 
 然后，准备一个的作业脚本linpack.sh。 在此脚本中，我们请求cpu分区上的64个内核，每个节点16个内核。 请注意，MPI作业是通过srun（不是mpirun）启动的。
 
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=Intel_MPLINPACK
@@ -460,32 +460,32 @@ srun ./xhpl_intel64
 ```
 
 最后，将作业提交到SLURM.
-```
+```bash
 $ sbatch linpack.sh
 Submitted batch job 358
 ```
 
 我们可以附加到正在运行的任务，并观察其STDOUT和STDERR：
 
-```
+```bash
 $ sattach 358.0
 $ CTRL-C
 ```
 
 我们可以查看作业输出文件：
-```
+```bash
 $ tail -f /lustre/home/hpc-jianwen/tmp/358.out
 ```
 
 停止工作：
-```
+```bash
 $ scancel 358
 ```
 
 <!-- ## <center>提交具有Spack依赖关系的作业</center>
 
-以下是一个运行Space的应用程序（gromacs)的作业脚本示例。 
-```
+以下是一个运行Space的应用程序(gromacs)的作业脚本示例。 
+```bash
 #!/bin/bash
 
 #SBATCH -J your_app
@@ -513,7 +513,7 @@ LAUNCH_YOUR_APP
 ``` -->
 ## <center>提交作业到small分区</center>
 串行作业需要提交到名为串行的队列中，作业脚本和qos中的队列名称需要相应调整。
-```
+​```bash
 #!/bin/bash
 
 #SBATCH -J Hello
@@ -526,7 +526,7 @@ hostname
 ```
 <!-- ## <center>提交作业到调试分区</center>
 应用程序可免费调试，提交给分区的作业最多可以运行6个小时。
-```
+```bash
 #!/bin/bash
 
 #SBATCH -J Hello

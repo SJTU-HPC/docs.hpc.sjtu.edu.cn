@@ -41,7 +41,7 @@
 ### 2.5 Q：我的作业需要大内存怎么办？
 **A：** 目前集群有胖节点和huge节点两种节点可以提供较大的内存。胖节点每节点提供256G内存，集群有20台。要提交到胖节点，请参考以下脚本头：
 
-```
+```bash
 #SBATCH -J fat-test
 #SBATCH -p fat
 #SBATCH --mail-type=end
@@ -53,7 +53,7 @@
 
 huge节点每节点提供3T内存，集群有2台。要提交到huge节点，请参考以下脚本头：
         
-```
+```bash
 #SBATCH -J huge-test
 #SBATCH -p huge
 #SBATCH --mail-type=end

@@ -27,13 +27,13 @@
 | sinfo -N | 查看节点级信息 |
 | sinfo -N --states=idel |  查看可用节点信息 |
 | sinfo --partition=cpu | 查看队列信息 |
-| sinfo --help | 查看所有选项 | 
+| sinfo --help | 查看所有选项 |
 
 节点状态包括`drain`(节点故障)，`alloc`(节点在用)，`idle`(节点可用)，`down`(节点下线)。
 
 如果要查看总体资源信息：
 
-```
+```bash
 $ sinfo
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 cpu         up  30-00:00:0    656   idle cas[001-656]
@@ -42,7 +42,7 @@ dgx2        up  30-00:00:0      8   idle vol[01-08]
 
 查看`cpu`队列状态:
 
-```
+```bash
 $ sinfo -p cpu
 PARTITION AVAIL  TIMELIMIT  NODES  STATE NODELIST
 cpu*         up 30-00:00:0    656   idle cas[001-656]
@@ -50,7 +50,7 @@ cpu*         up 30-00:00:0    656   idle cas[001-656]
 
 查看节点级资源状态信息:
 
-```
+```bash
 $ sinfo -N
 cas001         1      cpu  idle  
 cas002         1      cpu  idle  
@@ -82,7 +82,7 @@ vol08          .      dgx2 idle
 
 默认情况下，`squeue`只会展示在排队或在运行的作业。
 
-```
+```bash
 $ squeue
 JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 18046      dgx2   ZXLing     eenl  R    1:35:53      1 vol04
@@ -91,7 +91,7 @@ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 
 显示您自己账户下的作业：
 
-```
+```bash
 squeue -u `whoami`
 JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 17923      dgx2     bash    hpcwj  R 1-12:59:05      1 vol05
@@ -99,7 +99,7 @@ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 
 `-l`选项可以显示更细节的信息。
 
-```
+```bash
 squeue -u `whoami` -l
 JOBID PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
 17923      dgx2     bash    hpcwj  RUNNING 1-13:00:53 30-00:00:00    1 vol05
@@ -109,7 +109,7 @@ JOBID PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(
 
 准备作业脚本然后通过`sbatch`提交是Slurm的最常见用法。 为了将作业脚本提交给作业系统，SLURM使用
 
-```
+```bash
 $ sbatch jobscript.slurm
 ```
 
@@ -118,23 +118,23 @@ Slurm具有丰富的参数集。 以下最常用的。
 | Slurm | 含义 |
 | ---- | ---- |
 | -n [count] | 总进程数 |
-| --ntasks-per-node=[count] | 每台节点上的进程数 | 
+| --ntasks-per-node=[count] | 每台节点上的进程数 |
 | -p [partition] | 作业队列 |
-| --job-name=[name] | 作业名 | 
+| --job-name=[name] | 作业名 |
 | --output=[file_name] | 标准输出文件 |
-| --error=[file_name] | 标准错误文件 | 
+| --error=[file_name] | 标准错误文件 |
 | --time=[dd-hh\:mm\:ss] | 作业最大运行时长 |
 | --exclusive | 独占节点 |
-| -mail-type=[type] | 通知类型 | 
+| -mail-type=[type] | 通知类型 |
 | --mail-user=[mail_address] | 通知邮箱 |
-| --nodelist=[nodes] | 偏好的作业节点 | 
-| --exclude=[nodes] | 避免的作业节点 | 
-| --depend=[state:job_id] | 作业依赖 | 
-| --array=[array_spec] | 序列作业 | 
+| --nodelist=[nodes] | 偏好的作业节点 |
+| --exclude=[nodes] | 避免的作业节点 |
+| --depend=[state:job_id] | 作业依赖 |
+| --array=[array_spec] | 序列作业 |
 
 这是一个名为`cpu.slurm`的作业脚本，该脚本向cpu队列申请1个节点40核，将walltime限制设置为10秒，并在作业完成时通知。在此作业中执行的命令是`/bin/hostname`。
 
-```
+```bash
 #SBATCH --job-name=hostname
 #SBATCH --partition=cpu
 #SBATCH -N 1
@@ -150,7 +150,7 @@ Slurm具有丰富的参数集。 以下最常用的。
 
 用以下方式提交作业：
 
-```
+```bash
 sbatch cpu.slurm
 ```
 
@@ -158,7 +158,7 @@ sbatch cpu.slurm
 
 这里展示一个更复杂的作业要求，其中将启动80个进程，每台主机40个进程。
 
-```
+```bash
 #SBATCH --job-name=LINPACK
 #SBATCH --partition=cpu
 #SBATCH -n 80
@@ -171,7 +171,7 @@ sbatch cpu.slurm
 ```
 
 以下作业请求4张GPU卡，其中1个CPU进程管理1张GPU卡。
-```
+```bash
 #SBATCH --job-name=GPU_HPL
 #SBATCH --partition=dgx2
 #SBATCH -n 4
@@ -186,7 +186,7 @@ sbatch cpu.slurm
 
 以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于Pi上的Python，您可以查阅我们的[Python文档](../application/python.md)。
 
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=python_array
@@ -215,14 +215,14 @@ python < vec_${SLURM_ARRAY_TASK_ID}.py
 
 `srun`可以启动交互式作业。该操作将阻塞，直到完成或终止。例如，在计算主机上运行`hostname`。
 
-```
+```bash
 $ srun -N1 -n1 hostname
 cas006
 ```
 
 启动远程主机bash终端。
 
-```
+```bash
 srun -N1 -n1 --exclusive /bin/bash
 hostname
 cas005
@@ -234,7 +234,7 @@ Swap:      33554428           0    33554428
 
 或者，可以通过`salloc`请求资源，然后在获取节点后登录到计算节点。
 
-```
+```bash
 salloc -N1 -n1 --exclusive
 squeue -u `whoami` --state=running
 ssh casxxx
@@ -257,29 +257,29 @@ ssh casxxx
 | Slurm | 功能 |
 | ---- | ---- |
 | sacct -l | 查看详细的帐户作业信息 |
-| sacct -A ACCOUNT_LIST | 查看ACCOUNT_ID的账号作业信息 | 
+| sacct -A ACCOUNT_LIST | 查看ACCOUNT_ID的账号作业信息 |
 | sacct -u USER_NAME | 查看USER_NAME的账号作业信息 |
-| sacct --allusers | 查看所有用户的工作账号作业信息 | 
+| sacct --allusers | 查看所有用户的工作账号作业信息 |
 | sacct --states=R | 查看具有特定状态的作业的账号作业信息 |
-| sacct -S YYYY-MM-DD | 在指定时间后选择处于任意状态的作业 | 
+| sacct -S YYYY-MM-DD | 在指定时间后选择处于任意状态的作业 |
 | sacct --format="LAYOUT" | 使用给定的LAYOUT自定义sacct输出 |
 | sacct --help | 查看所有选项 |
 
 默认情况下，sacct显示过去**24小时**的账号作业信息。
 
-```
+```bash
 $ sacct
 ```
 
 查看更多的信息：
 
-```
+```bash
 $ sacct --format=jobid,jobname,account,partition,ntasks,alloccpus,elapsed,state,exitcode -j 3224
 ```
 
 查看平均作业内存消耗和最大内存消耗：
 
-```
+```bash
 $ sacct --format="JobId,AveRSS,MaxRSS" -P -j xxx
 ```
 

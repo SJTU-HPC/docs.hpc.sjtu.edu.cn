@@ -27,7 +27,7 @@ Intel编译套件是由Intel提供的编译器、MPI环境、MKL库等集成套�
 
 加载和编译：
 
-```
+```bash
 $ module purge; module load intel-mpi/2019.4.243-intel-19.0.4 intel/19.0.4-gcc-4.8.5
 $ mpiicc mpihello.c -o mpihello
 ```
@@ -36,7 +36,7 @@ $ mpiicc mpihello.c -o mpihello
 
 准备一个名为job_impi.slurm的作业脚本
 
-```
+```bash
 #!/bin/bash
 
 #SBATCH --job-name=mpihello
@@ -61,7 +61,7 @@ srun ./mpihello
 
 最后，将作业提交到SLURM
 
-```
+```bash
 $ sbatch job_impi.slurm
 ```
 

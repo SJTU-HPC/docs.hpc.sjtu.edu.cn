@@ -6,7 +6,7 @@
 
 Pi2.0 系统中已经预装 Quantum-Espresso 6.4.1 (Intel+CPU 版本)，可以用以下命令加载: 
 
-```
+```bash
 module load quantum-espresso/6.4.1-intel-19.0.4-impi
 ```
 
@@ -16,7 +16,7 @@ module load quantum-espresso/6.4.1-intel-19.0.4-impi
 
 使用Intel编译的CPU版本Quantum-Espresso运行单节点作业脚本示例qe_cpu_intel.slurm如下：
 
-```
+```bash
 #SBATCH -J qe_test
 #SBATCH -p cpu
 #SBATCH -N 1
@@ -42,6 +42,6 @@ srun pw.x < rlx.in
 
 并使用如下指令提交：
 
-```
+```bash
 $ sbatch qe_cpu_intel.slurm
 ```
