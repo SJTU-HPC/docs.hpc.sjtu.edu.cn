@@ -34,7 +34,7 @@ nav:
     - Lammps: application/Lammps.md
     - VASP: application/VASP.md
     - Amber: application/Amber.md
-  #   - VMD: 应用软件/VMD.md
+    - VMD: application/VMD.md
     - nwchem: application/nwchem.md
   #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
     - Gromacs: application/Gromacs.md
@@ -48,7 +48,7 @@ nav:
   #   - TensorFlow: 应用软件/TensorFlow.md
   #   - MXNet: 应用软件/MXNet.md
   #   - HIC-Pro: 应用软件/HIC-Pro.md
-  #   - Octave: 应用软件/Octave.md
+    - Octave: application/Octave.md
   #   - Perl: 应用软件/Perl.md
   #   - Spark: 应用软件/Spark.md
     - R: application/R.md
