@@ -45,7 +45,7 @@ nav:
   #   - MPI4PY: 应用软件/MPI4PY.md
     - Quantum-Espresso: application/Quantum-Espresso.md
     - Pytorch: application/Pytorch.md
-  #   - TensorFlow: 应用软件/TensorFlow.md
+    - TensorFlow: application/TensorFlow.md
   #   - MXNet: 应用软件/MXNet.md
   #   - HIC-Pro: 应用软件/HIC-Pro.md
     - Octave: application/Octave.md

@@ -119,5 +119,6 @@ $ sbatch gromacs_gpu_singularity.slurm
 
 ## 参考文献
 
-* [gromacs官方网站](http://www.gromacs.org/)
-* [NVIDIA GPU CLOUD](ngc.nvidia.com)
+- [gromacs官方网站](http://www.gromacs.org/)
+- [NVIDIA GPU CLOUD](ngc.nvidia.com)
+- [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)
