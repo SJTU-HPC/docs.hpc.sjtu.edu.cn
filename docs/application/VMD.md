@@ -11,3 +11,8 @@ VMD是一套分子建模与可视化软件，主要用来分析分子动力学�
 ```bash
 singularity run /lustre/share/img/vmd.simg vmd
 ```
+
+## 参考文献
+
+- [VMD](https://www.ks.uiuc.edu/Research/vmd/)
+- [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)
