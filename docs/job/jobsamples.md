@@ -52,6 +52,7 @@ $ export OMP_NUM_THREADS=4 && ./omphello
 #SBATCH --output=%j.out
 #SBATCH --error=%j.err
 #SBATCH -n 8
+#SBATCH --ntasks-per-node=8
 
 ulimit -l unlimited
 ulimit -s unlimited
@@ -89,7 +90,7 @@ $ export OMP_NUM_THREADS=4 && ./omphello
 #SBATCH --output=%j.out
 #SBATCH --error=%j.err
 #SBATCH -n 8
-#SBATCH –ntasks-per-node=8
+#SBATCH –-ntasks-per-node=8
 ulimit -l unlimited
 ulimit -s unlimited
 
