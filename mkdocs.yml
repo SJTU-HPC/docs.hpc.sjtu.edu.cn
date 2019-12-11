@@ -8,7 +8,7 @@ nav:
   #   - 收费细则: accounts/fee.md
   - 登陆: 
     - SSH: login/SSH.md
-    - 登陆节点: login/login-nodes.md
+    - 登陆节点: login/login.md
   # - 文件系统:
   #   - 概览: 文件系统/概览.md
   #   - 数据传输: 文件系统/数据传输.md
