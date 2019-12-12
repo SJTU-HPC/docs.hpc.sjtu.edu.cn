@@ -20,6 +20,7 @@ Intel编译套件是由Intel提供的编译器、MPI环境、MKL库等集成套�
 
 !!! tip
     在使用intel-mpi的时候，请尽量保持编译器版本与后缀中的编译器版本一致，如intel-mpi-2019.4.243/intel-19.0.4和intel-19.0.4
+    另外我们建议直接使用Intel全家桶
 
 ## 使用Intel+Intel-mpi编译应用
 
@@ -28,7 +29,7 @@ Intel编译套件是由Intel提供的编译器、MPI环境、MKL库等集成套�
 加载和编译：
 
 ```bash
-$ module purge; module load intel-mpi/2019.4.243-intel-19.0.4 intel/19.0.4-gcc-4.8.5
+$ module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 $ mpiicc mpihello.c -o mpihello
 ```
 
@@ -51,7 +52,7 @@ ulimit -l unlimited
 
 source /usr/share/Modules/init/bash
 module purge
-module load intel-mpi-2019.4.243/intel-19.0.4 intel-19.0.4
+module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:ofi
