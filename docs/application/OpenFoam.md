@@ -73,6 +73,35 @@ singularity run $IMAGE_PATH "simpleFoam --help"
 $ sbatch openfoam_singularity.slurm
 ```
 
+使用singularity容器中的openfoam运行多节点作业脚本示例openfoam_singularity_multi_node.slurm如下：
+
+```bash
+#!/bin/bash
+
+#SBATCH -J openfoam_singularity_multi_node_test
+#SBATCH -p cpu
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH -n 128
+#SBATCH --ntasks-per-node=32
+#SBATCH --exclusive
+
+IMAGE_PATH=/lustre/share/img/openfoam-6.simg
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+module load openmpi/2.1.1-gcc-4.8.5
+
+mpirun -n 128 singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
+```
+
+并使用如下指令提交：
+
+```bash
+$ sbatch openfoam_singularity_multi_node.slurm
+```
+
 ## 使用singularity容器提交交互式OPENFOAM作业
 
 要提交交互式作业：
