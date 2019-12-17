@@ -94,6 +94,8 @@ srun --mpi=pmi2 {pmemd.MPI ... YOUR AMBER COMMANDS}
 
 - 版本：GNU + gpu
 ```bash
+#!/bin/bash
+
 #SBATCH -J amber_gpu_test
 #SBATCH -p dgx2
 #SBATCH -o %j.out

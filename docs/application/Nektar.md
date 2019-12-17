@@ -16,6 +16,8 @@ $ module load nektar/4.4.1-gcc-8.3.0-openblas-openmpi
 
 
 ```bash
+#!/bin/bash
+
 #SBATCH -J Nektar_test
 #SBATCH -p cpu
 #SBATCH -n 40

@@ -135,6 +135,8 @@ Slurm具有丰富的参数集。 以下最常用的。
 这是一个名为`cpu.slurm`的作业脚本，该脚本向cpu队列申请1个节点40核，将walltime限制设置为10秒，并在作业完成时通知。在此作业中执行的命令是`/bin/hostname`。
 
 ```bash
+#!/bin/bash
+
 #SBATCH --job-name=hostname
 #SBATCH --partition=cpu
 #SBATCH -N 1
@@ -159,6 +161,8 @@ sbatch cpu.slurm
 这里展示一个更复杂的作业要求，其中将启动80个进程，每台主机40个进程。
 
 ```bash
+#!/bin/bash
+
 #SBATCH --job-name=LINPACK
 #SBATCH --partition=cpu
 #SBATCH -n 80
@@ -172,6 +176,8 @@ sbatch cpu.slurm
 
 以下作业请求4张GPU卡，其中1个CPU进程管理1张GPU卡。
 ```bash
+#!/bin/bash
+
 #SBATCH --job-name=GPU_HPL
 #SBATCH --partition=dgx2
 #SBATCH -n 4

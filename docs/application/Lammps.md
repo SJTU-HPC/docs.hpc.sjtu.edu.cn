@@ -16,6 +16,8 @@ $ module load lammps/20190807-gcc-8.3.0-openblas-openmpi
 
 
 ```bash
+#!/bin/bash
+
 #SBATCH -J lammps_test
 #SBATCH -p cpu
 #SBATCH -n 40

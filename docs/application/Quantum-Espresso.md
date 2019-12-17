@@ -17,6 +17,8 @@ module load quantum-espresso/6.4.1-intel-19.0.4-impi
 使用Intel编译的CPU版本Quantum-Espresso运行单节点作业脚本示例qe_cpu_intel.slurm如下：
 
 ```bash
+#!/bin/bash
+
 #SBATCH -J qe_test
 #SBATCH -p cpu
 #SBATCH -N 1

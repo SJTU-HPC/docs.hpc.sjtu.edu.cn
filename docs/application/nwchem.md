@@ -15,6 +15,8 @@ $ module load nwchem/6.8.1-gcc-8.3.0-openblas-openmpi
 使用GNU编译的CPU版本nwchem运行单节点作业脚本示例nwchem_cpu_gnu.slurm如下：
 
 ```bash
+#!/bin/bash
+
 #SBATCH -J nechem_test
 #SBATCH -p cpu
 #SBATCH -n 40

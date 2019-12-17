@@ -41,6 +41,8 @@ Slurm具有丰富的参数集。 以下最常用的。
 这是一个名为`dgx.slurm`的作业脚本，该脚本向dgx2队列申请4块GPU，并在作业完成时通知。在此示例作业中执行的为NVIDIA Sample中的`cudaTensorCoreGemm`。
 
 ```bash
+#!/bin/bash
+
 #SBATCH --job-name=dgx2_test
 #SBATCH --partition=dgx2
 #SBATCH --gres=gpu:4
