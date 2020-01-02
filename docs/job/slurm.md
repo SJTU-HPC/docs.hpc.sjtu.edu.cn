@@ -25,7 +25,7 @@
 | Slurm | 功能 |
 | ---- | ---- |
 | sinfo -N | 查看节点级信息 |
-| sinfo -N --states=idel |  查看可用节点信息 |
+| sinfo -N --states=idle |  查看可用节点信息 |
 | sinfo --partition=cpu | 查看队列信息 |
 | sinfo --help | 查看所有选项 |
 
