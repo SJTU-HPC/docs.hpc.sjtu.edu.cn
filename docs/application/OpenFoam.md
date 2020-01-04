@@ -8,7 +8,7 @@ Pi2.0 系统中已经预装 openfoam/1712&1906 (GNU+cpu版本)，可以用以下
 
 版本|加载指令
 ---|:--:
-1712| module load openfoam/1712-gcc-8.3.0-openmpi
+1712| module load openfoam/1712-gcc-7.4.0-openmpi 
 1906| module load openfoam/1906-gcc-8.3.0-openmpi
 
 
