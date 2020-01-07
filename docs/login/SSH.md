@@ -25,7 +25,7 @@
 通过SSH登录HPC集群，需要在客户端输入登录节点IP地址（或主机名），SSH端口，SSH用户名和密码。账号开通好后我们会给您发送邮件确认，邮件内容如下：
 
 ```
-SSH login node:login1.hpc.sjtu.edu.cn;login2.hpc.sjtu.edu.cn;login3.sjtu.edu.cn
+SSH login node:login.hpc.sjtu.edu.cn
 Username: YOUR_USERNAME
 Password: YOUR_PASSWORD
 Home: /lustre/home/YOUR_HOME
@@ -36,7 +36,7 @@ Home: /lustre/home/YOUR_HOME
 ```
 SSH username: YOUR_USERNAME    
 SSH password: YOUR_PASSWORD    
-SSH login node’s IP address: login1.hpc.sjtu.edu.cn/login2.hpc.sjtu.edu.cn/login3.sjtu.edu.cn
+SSH login node’s IP address: login.hpc.sjtu.edu.cn
 user’s home folder: /lustre/home/YOUR_HOME
 ```
 
@@ -51,7 +51,7 @@ Windows用户可以使用putty免费客户端登录软件，下载后双击即�
 
 # 通过SSH登录集群
 ## Windows用户
-启动客户端putty，填写登录节点地址login1.hpc.sjtu.edu.cn，端口号，然后点Open按钮，如下图所示：
+启动客户端putty，填写登录节点地址login.hpc.sjtu.edu.cn，端口号，然后点Open按钮，如下图所示：
  
 ![avater](../img/putty1.png)
  
