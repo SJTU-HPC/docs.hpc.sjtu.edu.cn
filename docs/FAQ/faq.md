@@ -98,9 +98,8 @@
 ### 6.1 Q 向[hpc邮箱](mailto:hpc@sjtu.edu.cn)发送的邮件多久才能收到回复？
 **A：** 根据邮件内容不同，下面是响应周期：<br/>
 &ensp;&ensp;&ensp;1. 邮件确认：1个工作日内；<br/>
-&ensp;&ensp;&ensp;2. 添加IP到白名单：1个工作日内；<br/>
-&ensp;&ensp;&ensp;3. 编译Spack已有的软件包：2个工作日内；<br/>
-&ensp;&ensp;&ensp;4. 调整作业脚本：1个工作日内；<br/>
-&ensp;&ensp;&ensp;5. 排查异常中断作业：2~3个工作日内；<br/>
-&ensp;&ensp;&ensp;6. 新建帐号：2个工作日内；<br/>
-&ensp;&ensp;&ensp;7. 编译不包含在Spack或自行开发的软件包：1~2周内。
+&ensp;&ensp;&ensp;2. 编译Spack已有的软件包：2个工作日内；<br/>
+&ensp;&ensp;&ensp;3. 调整作业脚本：1个工作日内；<br/>
+&ensp;&ensp;&ensp;4. 排查异常中断作业：2~3个工作日内；<br/>
+&ensp;&ensp;&ensp;5. 新建帐号：2个工作日内；<br/>
+&ensp;&ensp;&ensp;6. 编译不包含在Spack或自行开发的软件包：1~2周内。
