@@ -115,6 +115,11 @@ $ sbatch gromacs_gpu_singularity.slurm
 
 本测试中使用到的测试算例均可在`/lustre/share/benchmarks/gromacs`找到，用户可自行取用测试。
 
+用户在自行测试时，需：
+
+    1. 将上述目录复制到家目录下
+    2. 使用`sbatch`指令提交目录中包含的slurm脚本文件，关于`sbatch`指令的说明，请参考[slurm文档](../job/slurm.md)
+
 ｜ 性能数据供用户选择参考。
 
 ## 参考文献
