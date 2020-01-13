@@ -117,8 +117,8 @@ $ sbatch gromacs_gpu_singularity.slurm
 
 用户在自行测试时，需：
 
-    1. 将上述目录复制到家目录下
-    2. 使用`sbatch`指令提交目录中包含的slurm脚本文件，关于`sbatch`指令的说明，请参考[slurm文档](../job/slurm.md)
+1. 将上述目录复制到家目录下
+2. 使用`sbatch`指令提交目录中包含的slurm脚本文件，关于`sbatch`指令的说明，请参考 [slurm文档](../job/slurm.md)
 
 ｜ 性能数据供用户选择参考。
 
