@@ -107,13 +107,11 @@ $ sbatch gromacs_gpu_singularity.slurm
 
 ## 性能评测
 
-测试使用了GROMACS提供的Benchmark算例和两位用户提供的算例进行了CPU和GPU的性能进行对比。其中cpu测试使用单节点40核心，dgx2测试分配1块gpu并配比6核心。
+测试使用了GROMACS提供的Benchmark算例进行了CPU和GPU的性能进行对比。其中cpu测试使用单节点40核心，dgx2测试分配1块gpu并配比6核心。
 
 | (ns/day) | CPU (2019.2-gcc) | CPU (2019.4-intel) | dgx2 (Singularity) | dgx2 (2019.2-gcc) |
 | ---- | ------ | ------ | ------ | ------ |
 | Benchmark | 49.281 | 64.800 | 117.593 | 124.219 |
-| 算例1      | 33.916 | 35.143 |  14.902 |  17.171 |
-| 算例2      | 16.771 | 13.781 |   5.436 |   6.643 |
 
 本测试中使用到的测试算例均可在`/lustre/share/benchmarks/gromacs`找到，用户可自行取用测试。
 
