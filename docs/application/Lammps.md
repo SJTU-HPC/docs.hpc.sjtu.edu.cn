@@ -31,7 +31,7 @@ module load lammps/20190807-gcc-8.3.0-openblas-openmpi
 ulimit -s unlimited
 ulimit -l unlimited
 
-srun --mpi=pmi2 您的LAMMPS命令
+srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
 ```
 
 并使用如下指令提交：
