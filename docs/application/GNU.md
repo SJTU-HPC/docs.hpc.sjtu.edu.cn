@@ -11,6 +11,7 @@ Pi2.0 系统中已经预装不同版本的gcc，可以用以下命令加载:
 | 版本 | 加载方式 |
 | ---- | ------ |
 | gcc-5.5.0   | module load gcc/5.5.0-gcc-4.8.5 |
+| gcc-7.4.0 | module load gcc/7.4.0-gcc-4.8.5 |
 | gcc-8.3.0 | module load gcc/8.3.0-gcc-4.8.5 |
 | gcc-9.2.0 | module load gcc/9.2.0-gcc-4.8.5 | 
 
@@ -19,12 +20,12 @@ Pi2.0 系统中已经预装不同版本的gcc，可以用以下命令加载:
 | 版本 | 加载方式 |
 | ---- | ------ |
 | openmpi-3.1.4/gcc-4.8.5   | module load openmpi/3.1.4-gcc-4.8.5 |
-| openmpi-2.0.4/gcc-8.3.0 | module load openmpi/2.0.4-gcc-8.3.0 |
-| openmpi-3.1.4/gcc-8.3.0 | module load openmpi/3.1.4-gcc-8.3.0 | 
-| openmpi-3.1.4/intel-19.0.4 | module load openmpi/3.1.4-intel-19.0.4 |
+| openmpi-3.1.5/gcc-7.4.0 | module load openmpi/3.1.5-gcc-7.4.0 | 
+| openmpi-3.1.5/gcc-8.3.0 | module load openmpi/3.1.5-gcc-8.3.0 |
+| openmpi-3.1.5/gcc-9.2.0 | module load openmpi/3.1.5-gcc-9.2.0 |
 
 !!! tip
-    在同时使用openmpi和gcc的时候，请尽量保持gcc版本与openmpi后缀中的编译器版本一致，如gcc-8.3.0和openmpi-3.1.4/gcc-8.3.0
+    在同时使用openmpi和gcc的时候，请尽量保持gcc版本与openmpi后缀中的编译器版本一致，如gcc-8.3.0和openmpi-3.1.5/gcc-8.3.0
 
 ## 使用GCC+OpenMPI编译应用
 
@@ -33,7 +34,7 @@ Pi2.0 系统中已经预装不同版本的gcc，可以用以下命令加载:
 加载和编译：
 
 ```bash
-$ module purge; module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
+$ module purge; module load gcc/8.3.0-gcc-4.8.5 openmpi-3.1.5/gcc-8.3.0
 $ mpicc mpihello.c -o mpihello
 ```
 
@@ -56,7 +57,7 @@ ulimit -l unlimited
 
 source /usr/share/Modules/init/bash
 module purge
-module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
+module load gcc/8.3.0-gcc-4.8.5 openmpi-3.1.5/gcc-8.3.0
 
 srun --mpi=pmi2 ./mpihello
 ```
