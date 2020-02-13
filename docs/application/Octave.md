@@ -17,7 +17,7 @@ GNU Octave是一种采用高级编程语言的主要用于数值分析的软件�
 #SBATCH -n 1
 #SBATCH --ntasks-per-node=1
 
-IMAGE_PATH=/lustre/share/img/ocatve.simg
+IMAGE_PATH=/lustre/share/img/octave.simg
 
 ulimit -s unlimited
 ulimit -l unlimited
