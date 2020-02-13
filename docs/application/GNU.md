@@ -19,7 +19,7 @@ Pi2.0 系统中已经预装不同版本的gcc，可以用以下命令加载:
 
 | 版本 | 加载方式 |
 | ---- | ------ |
-| openmpi-3.1.4/gcc-4.8.5   | module load openmpi/3.1.4-gcc-4.8.5 |
+| openmpi-3.1.5/gcc-4.8.5   | module load openmpi/3.1.5-gcc-4.8.5 |
 | openmpi-3.1.5/gcc-7.4.0 | module load openmpi/3.1.5-gcc-7.4.0 | 
 | openmpi-3.1.5/gcc-8.3.0 | module load openmpi/3.1.5-gcc-8.3.0 |
 | openmpi-3.1.5/gcc-9.2.0 | module load openmpi/3.1.5-gcc-9.2.0 |
