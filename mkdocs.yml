@@ -54,8 +54,8 @@ nav:
   #   - Spark: 应用软件/Spark.md
     - R: application/R.md
     - 商业软件: application/commercial.md
-  - 常见问题: FAQ/faq.md
-  - 提交修改: contribution/contribution.md
+  - 常见问题: faq.md
+  - 提交修改: contribution.md
 
 # Project Information
 site_name: Pi Documentation

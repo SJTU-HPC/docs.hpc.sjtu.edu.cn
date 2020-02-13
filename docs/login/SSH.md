@@ -142,7 +142,9 @@ User YOUR_USERNAME
 
 # 调试SSH登录问题
 有许多原因可能会阻止您登录到HPC群集。因两次尝试失败而失败的IP地址将被阻止两次。在阻塞期间，建议尝试其他登录节点。 如果两个小时后此问题仍然存在，请与管理员联系并附上以下信息。
+
 1.检查您的IP地址
+
 2.使用ping命令检查您的电脑和集群连接状态。
 
 ```bash
@@ -157,8 +159,44 @@ $ telnet IP 22
 
 请与管理员联系，并在消息中附加调试信息（您的IP，Ping、telnet、ssh结果）。
 
+# 登陆常掉线的问题
+如果SSH客户端长时间静默后，SSH服务器端会自动断开相关会话。要解决这个，需要调整SSH的keepalive值，设置一个较长的静默时长阈值。
+
+## 1.mac/linux用户
+
+对于unix like用户，并且使用操作系统原生的终端(terminal)，需要修改`$HOME/.ssh/config`。具体的，在文件中添加如下内容：
+
+```bash
+Host pi-sjtu-login:
+    HostName login.hpc.sjtu.edu.cn
+    ServerAliveInterval 240
+```
+
+其中ServerAliveInterval后的值即为阈值，单位为秒，用户可根据需要自行调整。
+
+或者为了对所有的服务器设置长静默阈值：
+
+```bash
+Host *
+    ServerAliveInterval 240
+```
+
+之后保持`config`文件为只可读：
+
+```bash
+chmod 600 ~/.ssh/config
+```
+
+## 2.Windows/三方SSH客户端用户
+
+这里我们以putty为例。市面有不同的SSH客户端，您可以根据自身情况自行搜索您使用的SSH客户端的设置方法。
+
+在putty的session的属性中，`Connection` -> `Sending of null packets to keep session active` -> `Seconds between keepalives (0 to turn off)`后的文本框中，输入对应的值，如240。
+
 # 参考文献
 *  http://www.ee.surrey.ac.uk/Teaching/Unix/
 *  http://vbird.dic.ksu.edu.tw/linux_server/0310telnetssh.php#ssh_server
 *  http://nerderati.com/2011/03/simplify-your-life-with-an-ssh-config-file/
 *  http://www.cyberciti.biz/faq/ssh-passwordless-login-with-keychain-for-scripts/
+*  https://stackoverflow.com/questions/25084288/keep-ssh-session-alive
+*  https://patrickmn.com/aside/how-to-keep-alive-ssh-sessions/
