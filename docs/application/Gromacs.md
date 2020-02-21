@@ -34,7 +34,7 @@ ulimit -s unlimited
 ulimit -l unlimited
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-export I_MPI_FABRICS=shm:dapl
+export I_MPI_FABRICS=shm:ofi
 
 srun gmx_mpi mdrun -deffnm test -ntomp 1
 ```
