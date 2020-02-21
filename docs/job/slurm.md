@@ -217,19 +217,19 @@ echo "SLURM_ARRAY_JOB_ID: " $SLURM_ARRAY_JOB_ID
 python < vec_${SLURM_ARRAY_TASK_ID}.py
 ```
 
-`srun` and `salloc`: 提交交互式作业
+## `srun` and `salloc`: 提交交互式作业
 
 `srun`可以启动交互式作业。该操作将阻塞，直到完成或终止。例如，在计算主机上运行`hostname`。
 
 ```bash
-$ srun -N1 -n1 hostname
+$ srun -N1 -n1  hostname
 cas006
 ```
 
 启动远程主机bash终端。
 
 ```bash
-srun -N1 -n1 --exclusive /bin/bash
+ srun -p cpu -n 1 --exclusive --pty /bin/bash
 hostname
 cas005
 free
