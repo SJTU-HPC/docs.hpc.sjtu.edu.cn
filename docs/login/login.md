@@ -2,7 +2,7 @@
 
 ----------
 
-通过SSH协议连接集群后，您的本地环境是与集群登陆节点相连的。集群有多个登陆节点（login1/login2/login3），您可以选择任意一个登陆节点。
+通过SSH协议连接集群后，您的本地环境是与集群登陆节点相连的。集群有多个登陆节点（login1.hpc.sjtu.edu.cn/login2.hpc.sjtu.edu.cn/login3.hpc.sjtu.edu.cn），您可以选择任意一个登陆节点。或者您也可以使用登陆节点的自动路由域名(login.hpc.sjtu.edu.cn)，该域名会随机将您的连接分配到其中一个登陆节点。
 
 ## 使用
 
@@ -13,7 +13,13 @@
 - 编辑文件
 - 提交作业
 
-某些工作流程需要交互式使用，如IDL，NCL，python和ROOT等应用程序。请参考[slurm文档](../job/slurm.md)中的`srun`指令，交互式地提交作业。
+某些工作流程需要交互式使用，如IDL，NCL，python和ROOT等应用程序。请参考slurm文档中的(`srun`指令)[https://docs.hpc.sjtu.edu.cn/job/slurm/#srun-and-salloc]，交互式地提交作业。
+
+具体的，使用如下指令启动远程主机bash终端。
+
+```bash
+srun -p cpu -n 1 --exclusive --pty /bin/bash
+```
 
 ## 数据传输
 
