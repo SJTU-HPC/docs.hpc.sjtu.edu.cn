@@ -13,7 +13,7 @@
 - 编辑文件
 - 提交作业
 
-某些工作流程需要交互式使用，如IDL，NCL，python和ROOT等应用程序。请参考slurm文档中的(`srun`指令)[https://docs.hpc.sjtu.edu.cn/job/slurm/#srun-and-salloc]，交互式地提交作业。
+某些工作流程需要交互式使用，如IDL，NCL，python和ROOT等应用程序。请参考slurm文档中的[`srun`指令](https://docs.hpc.sjtu.edu.cn/job/slurm/#srun-and-salloc)，交互式地提交作业。
 
 具体的，使用如下指令启动远程主机bash终端。
 
