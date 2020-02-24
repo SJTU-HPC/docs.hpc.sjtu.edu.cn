@@ -454,7 +454,7 @@ module purge
 module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-export I_MPI_FABRICS=shm:dapl
+export I_MPI_FABRICS=shm:ofi
 export I_MPI_DEBUG=100
 
 srun ./xhpl_intel64
