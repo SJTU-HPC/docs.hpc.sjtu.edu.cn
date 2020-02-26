@@ -13,7 +13,7 @@ $ module load miniconda3
 $ conda create -n tf-env
 $ source activate tf-env
 $ conda install pip
-$ pip install tensorflow-gpu
+$ pip install tensorflow-gpu==2.0.0
 ```
 
 ## 使用miniconda提交TensorFlow作业
@@ -32,10 +32,14 @@ $ pip install tensorflow-gpu
 #SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
 
+module load cuda/10.0.130-gcc-4.8.5 cudnn
+
 module load miniconda3
 source activate tf-env
 
-python -c 'import tensorflow as tf; print(tf.__version__);'
+python -c 'import tensorflow as tf; \
+           print(tf.__version__);   \
+           print(tf.test.is_gpu_available());'
 ```
 
 我们假设这个脚本文件名为`tensorflow_conda.slurm`,使用以下指令提交作业。
@@ -67,7 +71,9 @@ $ sbatch tensorflow_conda.slurm
 
 IMAGE_PATH=/lustre/share/img/tensorflow-2.0.0.simg
 
-singularity run --nv $IMAGE_PATH python -c 'import tensorflow as tf; print(tf.__version__);'
+singularity run --nv $IMAGE_PATH python -c 'import tensorflow as tf; \
+                                            print(tf.__version__);   \
+                                            print(tf.test.is_gpu_available());'
 ```
 
 我们假设这个脚本文件名为`tensorflow_singularity.slurm`,使用以下指令提交作业。
