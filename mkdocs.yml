@@ -26,6 +26,7 @@ nav:
     - 节点预约: job/reservation.md
     # - 作业优先级: 作业/作业优先级.md
     - 容器: job/container/singularity.md
+    - 非特权容器构建: job/container/u2cb.md
   - 预置软件环境: module/module.md
     # - Module Environment: module/module.md
   - 应用软件:
