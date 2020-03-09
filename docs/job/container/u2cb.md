@@ -6,11 +6,11 @@ U2BC是上海交通大学高性能计算中心自行研发的非特权用户容�
 
 ## 容器构建流程
 
-镜像创建，支持从[Docker Hub](https://hub.docker.com/)或者NVIDIA NGC(https://ngc.nvidia.com/)提供的镜像开始构建。如下指令，从`docker://ubuntu:latest`构建名为`ubuntu-test`的镜像。从`docker://nvcr.io/nvidia/pytorch:20.02-py3`构建名为`pytorch-test`的镜像。
+镜像创建，支持从[Docker Hub](https://hub.docker.com/)或者[NVIDIA NGC](https://ngc.nvidia.com/)提供的镜像开始构建。如下指令，从`docker://ubuntu:latest`构建名为`ubuntu-test`的镜像。从`docker://nvcr.io/nvidia/pytorch:20.02-py3`构建名为`pytorch-test`的镜像。
 
 ```shell
-u2cb create -n ubuntu-test -b docker://ubuntu:latest
-u2cb create -n pytorch-test -b docker://nvcr.io/nvidia/pytorch:20.02-py3
+$ u2cb create -n ubuntu-test -b docker://ubuntu:latest
+$ u2cb create -n pytorch-test -b docker://nvcr.io/nvidia/pytorch:20.02-py3
 ```
 
 也可以根据定义文件（define file）来进行容器构建（推荐）。
@@ -18,7 +18,7 @@ u2cb create -n pytorch-test -b docker://nvcr.io/nvidia/pytorch:20.02-py3
 根据基础镜像的大小和构建流程，创建过程需要一定的时间。完成镜像创建后，可以使用如下指令进行镜像查询。
 
 ```shell
-u2cb list
+$ u2cb list
 ubuntu-test pytorch-test
 ```
 
@@ -44,12 +44,18 @@ root@centos77-300GB:~# apt install relion
 可以使用如下指令可以将镜像从构建服务器上打包并下载到本地`./ubuntu-test.simg`，然后可以在集群环境中使用该镜像。
 
 ```shell
-u2cb download -n ubuntu-test
-singularity shell ubuntu-test.simg
+$ u2cb download -n ubuntu-test
+$ singularity shell ubuntu-test.simg
 ```
 
 使用如下指令删除在构建服务器上的镜像文件。
 
 ```shell
-u2cb delete -n ubuntu-test
+$ u2cb delete -n ubuntu-test
 ```
+
+## 参考文献
+ - [Singularity Quick Start](https://sylabs.io/guides/3.4/user-guide/quick_start.html)
+ - [Docker Hub](https://hub.docker.com/)
+ - [NVIDIA GPU CLOUD](https://ngc.nvidia.com/)
+ - [Fakeroot feature of Singularity](https://sylabs.io/guides/3.5/user-guide/fakeroot.html)
