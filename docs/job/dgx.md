@@ -70,16 +70,26 @@ $ sbatch dgx.slurm
 `srun`可以启动交互式作业。该操作将阻塞，直到完成或终止。例如，在DGX-2上运行`hostname`。
 
 ```bash
-$ srun -N1 -n1 -p dgx2 --gres=gpu:4 hostname
+$ srun -n 1 -p dgx2 --gres=gpu:4 hostname
 vol01
 ```
 
 启动远程主机bash终端。
 
 ```bash
-$ srun -N1 -n1 -p dgx2 --exclusive --pty /bin/bash
+$ srun -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
 $ hostname
 vol01
+```
+
+## GPU程序调试
+
+启动远程主机bash终端，然后使用cuda toolkit中提供的cuda-gdb工具调试程序。
+
+```bash
+$ srun -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
+$ module load cuda
+$ cuda-gdb ./your_app
 ```
 
 ## 参考文献
