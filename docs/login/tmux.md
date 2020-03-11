@@ -57,7 +57,7 @@ $ tmux
 
 上面命令会启动 Tmux 窗口，底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息。
 
-[tmux](img/tmux_1.png)
+![tmux](../img/tmux_1.png)
 
 按下`Ctrl+d`或者显式输入`exit`命令，就可以退出 Tmux 窗口。
 
@@ -166,7 +166,7 @@ $ tmux split-window
 $ tmux split-window -h
 ```
 
-[tmux](../img/tmux_2.png)
+![tmux](../img/tmux_2.png)
 
 对应快捷键为`Ctrl+b "`和`Ctrl+b %`
 
