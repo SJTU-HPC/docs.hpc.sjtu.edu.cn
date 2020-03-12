@@ -38,12 +38,6 @@ which mkdcos
 make server
 ```
 
-更新文档
-
-```
-make update
-```
-
 对于make不可用的情况
 
 本地启动服务器
@@ -55,6 +49,5 @@ mkdocs serve
 更新文档
 
 ```
-mkdocs build --clean
-scp -r public/* root@docs.hpc.sjtu.edu.cn:/usr/local/webserver/nginx/html/
+# 将更新推送到仓库master分支自动部署
 ```
