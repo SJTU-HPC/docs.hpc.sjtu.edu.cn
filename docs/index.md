@@ -1,13 +1,13 @@
 # Pi超算集群用户文档
 [docs](http://docs.hpc.sjtu.edu.cn/)是上海交通大学Pi2.0超级计算集群用户文档，为用户提供快速上手指导和问题解答。如果想获取更多hpc团队的动态和信息，请访问[hpc](https://hpc.sjtu.edu.cn/)。
 
+
 !!!tip
-超算平台暂不提供军工项目等涉密计算
 	该文档通过github仓库维护
 	[github仓库](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)。
 	如果您有什么建议或者意见，欢迎提交修改
 	[contributions](contribution/contribution.md)
-	
+	超算平台暂不提供军工项目等涉密计算
 	[Fork this repo](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)
 
 ## 快速链接
