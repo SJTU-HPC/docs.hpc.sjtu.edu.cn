@@ -26,17 +26,20 @@ INFO:    Creating SIF file...
 INFO:    Build complete: ubuntu.simg
 ```
 
-如果需要自行构建镜像或者修改现有镜像，因为其过程需要root权限，我们建议使用个人的Linux环境进行镜像构建然后传至集群。在完成镜像构建后，再将镜像上传至集群。
+如果需要自行构建镜像或者修改现有镜像，因为其过程需要root权限，我们建议:
+
+1. 使用交大高性能计算中心自研的U2BC非特权用户容器构建服务，参见[非特权用户容器构建](../u2cb)。
+1. 使用个人的Linux环境进行镜像构建然后传至集群。
 
 我们在集群中预置了以下软件的Singularity的镜像。
 
-| 软件  | 位置  |
-| ---- | ---- |
-| PyTorch | /lustre/share/img/pytorch-19.10-py3.simg |
-| Gromacs | /lustre/share/img/gromacs-2018.2.simg  |
-| vmd | /lustre/share/img/vmd-1.9.3.simg |
-| octave | /lustre/share/img/octave-4.2.2.simg | 
-|openfoam| /lustre/share/img/openfoam-6.simg |
+| 软件     | 位置  |
+| ----     | ----  |
+| PyTorch  | /lustre/share/img/pytorch-19.10-py3.simg |
+| Gromacs  | /lustre/share/img/gromacs-2018.2.simg  |
+| vmd      | /lustre/share/img/vmd-1.9.3.simg |
+| octave   | /lustre/share/img/octave-4.2.2.simg | 
+| openfoam | /lustre/share/img/openfoam-6.simg |
 
 ## 任务提交
 

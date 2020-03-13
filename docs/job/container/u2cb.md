@@ -62,17 +62,17 @@ Singularity> apt update && apt install -y gcc
     1. 请勿将任何应用安装在`/root`下（因容器在集群上运行时为普通用户态，`/root`不会被打包），推荐直接安装在系统目录或者`/opt`下。
     2. 运行应用所需的环境变量可以添加到`/enviroment`文件中。
         ```shell
-        Singularity> echo "export TEST_ENV_VAR=SJTU" >> /enviroment
-        Singularity> echo "export PATH=/opt/app/bin:$PATH" >> /enviroment
+        Singularity> echo "export TEST_ENV_VAR=SJTU" >> /environment
+        Singularity> echo "export PATH=/opt/app/bin:$PATH" >> /environment
         ```
 
 ### 镜像下载
 
-可以使用如下指令可以将镜像从构建服务器上打包并下载到本地`./ubuntu-test.simg`，然后可以在集群环境中使用该镜像。
+可以使用如下指令可以将镜像从构建服务器上打包并下载到本地`./ubuntu-test.simg`，然后可以在集群环境中使用该镜像，详细可见[容器](../singularity/#_2)一节。
 
 ```shell
 $ u2cb download -n ubuntu-test
-$ singularity shell ubuntu-test.simg
+$ srun -p small -n 1 singularity shell ubuntu-test.simg
 ```
 
 ### 镜像删除
