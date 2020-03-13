@@ -43,20 +43,37 @@ INFO:    Build complete: ubuntu.simg
 
 ## 任务提交
 
+可以通过作业脚本然后使用`sbatch`进行作业提交，以下示例为在DGX-2上使用PyTorch的容器作业脚本示例，其中作业使用单节点并分配2块GPU：
+
 ```bash
 #!/bin/bash
+#SBATCH -J test
+#SBATCH -p dgx2
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=12
+#SBATCH --mem=MaxMemPerNode
+#SBATCH --gres=gpu:2
 
-#SBATCH --job-name=test_singularity
-#SBATCH --partition=cpu
-#SBATCH --output=%j.out
-#SBATCH --error=%j.err
-#SBATCH -n 1
-#SBATCH --exclusive
+IMAGE_PATH=/lustre/share/img/pytorch-19.10-py3.simg
 
-ulimit -l unlimited
-ulimit -s unlimited
+singularity run --nv $IMAGE_PATH python -c 'import torch; print(torch.__version__); print(torch.zeros(10,10).cuda().shape)'
+```
 
-singularity run /lustre/share/img/pytorch-19.10-py3.simg python -c "import torch;print(torch.__version__)"
+我们假设这个脚本文件名为`pytorch_singularity.slurm`,使用以下指令提交作业。
+
+```bash
+$ sbatch pytorch_singularity.slurm
+```
+
+## 交互式提交
+
+```shell
+srun -n 1 -p dgx2 --gres=gpu:2 --pty singularity shell --nv /lustre/share/img/pytorch-19.10-py3.simg
+Singularity pytorch-19.10-py3.simg:~/u2cb_test> python -c "import torch;print(torch.__version__)"
+1.3.0a0+24ae9b5
 ```
 
 ## 参考文献

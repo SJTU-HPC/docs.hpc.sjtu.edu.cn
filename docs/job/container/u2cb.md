@@ -72,7 +72,7 @@ Singularity> apt update && apt install -y gcc
 
 ```shell
 $ u2cb download -n ubuntu-test
-$ srun -p small -n 1 singularity shell ubuntu-test.simg
+$ srun -p small -n 1 --pty singularity shell ubuntu-test.simg
 ```
 
 ### 镜像删除
