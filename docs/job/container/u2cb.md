@@ -29,7 +29,7 @@ From: ubuntu
     apt update && apt install -y gcc
 
 %enviroment
-    export TEST_ENV_VAR="sjtu hpc"
+    export TEST_ENV_VAR=SJTU
 ```
 
 然后使用u2cb进行镜像构建：
@@ -62,8 +62,8 @@ Singularity> apt update && apt install -y gcc
     1. 请勿将任何应用安装在`/root`下（因容器在集群上运行时为普通用户态，`/root`不会被打包），推荐直接安装在系统目录或者`/opt`下。
     2. 运行应用所需的环境变量可以添加到`/enviroment`文件中。
         ```shell
-        export TEST_ENV_VAR="sjtu hpc"
-        export PATH="/opt/app/bin:$PATH"
+        Singularity> echo "export TEST_ENV_VAR=SJTU" >> /enviroment
+        Singularity> echo "export PATH=/opt/app/bin:$PATH" >> /enviroment
         ```
 
 ### 镜像下载
@@ -101,7 +101,7 @@ create  delete  help  list  shell
         Use `list def` to see all define files
         Use `list img` to see all image files
 
-(U2CB Server) > 
+(U2CB Server) > list def
 ```
 
 ## 参考文献
