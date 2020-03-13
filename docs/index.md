@@ -7,8 +7,8 @@
 	[github仓库](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)。
 	如果您有什么建议或者意见，欢迎提交修改
 	[contributions](contribution/contribution.md)
-	超算平台暂不提供军工项目等涉密计算
 	[Fork this repo](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)
+	超算平台暂不提供军工项目等涉密计算
 
 ## 快速链接
 
