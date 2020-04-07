@@ -52,6 +52,7 @@ nav:
   #   - HIC-Pro: 应用软件/HIC-Pro.md
     - Octave: application/Octave.md
     - Mrbayes: application/mrbayes.md
+    - CESM: application/CESM.md
   #   - Perl: 应用软件/Perl.md
   #   - Spark: 应用软件/Spark.md
     - R: application/R.md
