@@ -97,9 +97,9 @@ $ cpan install XML::LibXML
 
 ```shell
 $ cd cesm1_2_2_1/scripts
-cd ccsm_utils/Machines/
-touch mkbatch.pi && chmod +x ./mkbatch.pi
-vim config_machines.xml
+$ cd ccsm_utils/Machines/
+$ touch mkbatch.pi && chmod +x ./mkbatch.pi
+$ vim config_machines.xml
 ```
 
 在`config_machines.xml`中增加配置`pi`：
@@ -132,7 +132,7 @@ vim config_machines.xml
 
 ```shell
 $ cd <cesm-base>/cesm1.2.2.1/scripts/
-$ ./create_newcase -case ../cases/lbtest-f19_g16-B -res f19_g16 -compset B -mach pipi
+$ ./create_newcase -case ../cases/lbtest-f19_g16-B -res f19_g16 -compset B -mach pi
 ```
 
 配置和编译该算例：
