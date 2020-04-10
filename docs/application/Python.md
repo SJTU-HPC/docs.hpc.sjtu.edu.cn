@@ -13,6 +13,10 @@ $ module load miniconda2/4.6.14-gcc-4.8.5
 ```bash
 $ conda create --name mypython2 numpy scipy matplotlib ipython jupyter
 ```
+指定python版本（不指定将默认安装最新版）
+```bash
+$ conda create --name mypython2 python==2.7
+```
 激活 python 环境
 ```bash
 $ source activate mypython2
