@@ -38,7 +38,27 @@ Slurm具有丰富的参数集。 以下最常用的。
 | --depend=[state:job_id] | 作业依赖 | 
 | --array=[array_spec] | 序列作业 | 
 
-这是一个名为`dgx.slurm`的作业脚本，该脚本向dgx2队列申请4块GPU，并在作业完成时通知。在此示例作业中执行的为NVIDIA Sample中的`cudaTensorCoreGemm`。
+这是一个名为`dgx.slurm`的**单机单卡**作业脚本，该脚本向dgx2队列申请1块GPU，并在作业完成时通知。在此示例作业中执行的为NVIDIA Sample中的`cudaTensorCoreGemm`。
+
+```bash
+#!/bin/bash
+
+#SBATCH --job-name=dgx2_test
+#SBATCH --partition=dgx2
+#SBATCH --gres=gpu:1
+#SBATCH -n 1
+#SBATCH --ntasks-per-node 1
+#SBATCH --mail-type=end
+#SBATCH --mail-user=YOU@EMAIL.COM
+#SBATCH --output=%j.out
+#SBATCH --error=%j.err
+
+module load gcc cuda
+
+./cudaTensorCoreGemm
+```
+
+或者通过如下脚本提交**单机多卡**作业。
 
 ```bash
 #!/bin/bash
@@ -46,7 +66,8 @@ Slurm具有丰富的参数集。 以下最常用的。
 #SBATCH --job-name=dgx2_test
 #SBATCH --partition=dgx2
 #SBATCH --gres=gpu:4
-#SBATCH -n 1
+#SBATCH -n 4
+#SBATCH --ntasks-per-node 4
 #SBATCH --mail-type=end
 #SBATCH --mail-user=YOU@EMAIL.COM
 #SBATCH --output=%j.out
