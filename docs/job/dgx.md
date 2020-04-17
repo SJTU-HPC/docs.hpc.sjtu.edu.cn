@@ -38,7 +38,7 @@ Slurm具有丰富的参数集。 以下最常用的。
 | --depend=[state:job_id] | 作业依赖 | 
 | --array=[array_spec] | 序列作业 | 
 
-这是一个名为`dgx.slurm`的**单机单卡**作业脚本，该脚本向dgx2队列申请1块GPU，并在作业完成时通知。在此示例作业中执行的为NVIDIA Sample中的`cudaTensorCoreGemm`。
+这是一个名为`dgx.slurm`的 **单机单卡** 作业脚本，该脚本向dgx2队列申请1块GPU，并在作业完成时通知。在此示例作业中执行的为NVIDIA Sample中的`cudaTensorCoreGemm`。
 
 ```bash
 #!/bin/bash
@@ -58,7 +58,7 @@ module load gcc cuda
 ./cudaTensorCoreGemm
 ```
 
-或者通过如下脚本提交**单机多卡**作业。
+或者通过如下脚本提交 **单机多卡** 作业。
 
 ```bash
 #!/bin/bash

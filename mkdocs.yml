@@ -32,6 +32,7 @@ nav:
     # - Module Environment: module/module.md
   - 应用软件:
     - Python: application/Python.md
+    - CUDA: application/cuda.md
     - Nektar++: application/Nektar.md
     - Lammps: application/Lammps.md
     - VASP: application/VASP.md
