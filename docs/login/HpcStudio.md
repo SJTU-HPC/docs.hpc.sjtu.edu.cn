@@ -97,3 +97,4 @@
 ![avater](../img/ondemand_desktop4.png)
 
 ![avater](../img/ondemand_desktop5.png)
+## Rstudio使用说明
