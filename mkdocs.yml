@@ -30,9 +30,15 @@ nav:
     - 非特权容器构建: job/container/u2cb.md
   - 预置软件环境: module/module.md
     # - Module Environment: module/module.md
-  - 应用软件:
+  - 编程语言:
     - Python: application/Python.md
+    - Perl: application/Perl.md
+    - R: application/R.md
+    - Octave(Matlab): application/Octave.md
+    - GNU Library: application/GNU.md
+    - Intel编译套件: application/Intel.md
     - CUDA: application/cuda.md
+  - 应用软件:
     - Nektar++: application/Nektar.md
     - Lammps: application/Lammps.md
     - VASP: application/VASP.md
@@ -43,20 +49,15 @@ nav:
     - Gromacs: application/Gromacs.md
   #   - FFTW: 应用软件/FFTW.md
     - OpenFoam: application/OpenFoam.md
-    - GNU Library: application/GNU.md
-    - Intel编译套件: application/Intel.md
   #   - MPI4PY: 应用软件/MPI4PY.md
     - Quantum-Espresso: application/Quantum-Espresso.md
     - Pytorch: application/Pytorch.md
     - TensorFlow: application/TensorFlow.md
   #   - MXNet: 应用软件/MXNet.md
   #   - HIC-Pro: 应用软件/HIC-Pro.md
-    - Octave: application/Octave.md
     - Mrbayes: application/mrbayes.md
     - CESM: application/CESM.md
-    - Perl: application/Perl.md
   #   - Spark: 应用软件/Spark.md
-    - R: application/R.md
     - 商业软件: application/commercial.md
   - 常见问题: faq.md
   - 提交修改: contribution.md
