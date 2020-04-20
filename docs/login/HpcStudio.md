@@ -98,3 +98,10 @@
 
 ![avater](../img/ondemand_desktop5.png)
 ## RStudio使用说明
+在浏览器中，打开：https://studio.hpc.sjtu.edu.cn ,点击右上角Develop栏目中的My Sandbox Apps(Development)选项。
+![avater](../img/RStudio_4.png)
+选择Launch RStudio Server,填写RStudio版本信息，小时数，节点类型以及节点数量后，点击Launch，即可进入选项卡界面。
+![avater](../img/RStudio_1.png)
+![avater](../img/RStudio_2.png)
+点击Connect to RStudio Server,并填写用户名和密码，即可进入RStudio界面。
+![avater](../img/RStudio_3.png)
