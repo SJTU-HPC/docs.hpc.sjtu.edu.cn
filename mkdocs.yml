@@ -54,7 +54,7 @@ nav:
     - Octave: application/Octave.md
     - Mrbayes: application/mrbayes.md
     - CESM: application/CESM.md
-  #   - Perl: 应用软件/Perl.md
+    - Perl: application/Perl.md
   #   - Spark: 应用软件/Spark.md
     - R: application/R.md
     - 商业软件: application/commercial.md
