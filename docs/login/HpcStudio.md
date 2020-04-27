@@ -113,3 +113,23 @@
 该RStduio Server提供了基本与本地的desktop版本相同的功能，所需的R依赖包自行下载
 
 ![avater](../img/RStudio_4.png)
+
+上图代码示例::
+
+    library(ggplot2)
+    library(dplyr)
+    diamonds< -cbind(diamonds,Cou=rep(1,nrow(diamonds)))
+    sum_clarity<-aggregate(Cou~clarity,diamonds,sum)
+    sort_clarity<-arrange(sum_clarity,desc(Cou))
+    diamonds$clarity<- factor(diamonds$clarity, levels = sort_clarity$clarity)
+    myAngle <-seq(-20,-340,length.out = 8)
+    ggplot(diamonds,aes(x=clarity,fill=color))+
+    geom_bar(width=1.0,colour="black",size=0.25)+
+    coord_polar(theta = "x",start=0)+
+    scale_fill_brewer(palette="GnBu")+guides(fill=guide_legend(reverse=TRUE,title=NULL))+ ylim(c(0,12000))+
+    theme_light()+
+    theme( panel.background = element_blank(),
+         panel.grid.major = element_line(colour = "grey80",size=.25),
+         axis.text.y = element_text(size = 12,colour="black"),
+         axis.line.y = element_line(size=0.25),
+         axis.text.x=element_text (size = 13,colour="black",angle = myAngle))
