@@ -99,7 +99,6 @@
 ### 5.4 Q:电子信息与电气工程学院优惠政策怎么申请？（仅适用于电院老师）
 **A：** 申请电院优惠政策的老师，请参考[http://dzb.seiee.sjtu.edu.cn/dzb/info/15820.htm](http://dzb.seiee.sjtu.edu.cn/dzb/info/15820.htm)<br/>
 申请表下载地址：[http://dzb.seiee.sjtu.edu.cn/dzb/info/15825.htm](http://dzb.seiee.sjtu.edu.cn/dzb/info/15825.htm)<br/>
-配套申请表和相关证明材料由陶伟老师统一提交至网络信息中心。
 
 ## 6.邮件支持
 
