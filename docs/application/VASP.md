@@ -78,7 +78,7 @@ module purge
 module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-export I_MPI_FABRICS=shm:ofi
+export I_MPI_FABRICS=shm:tmi
 
 ulimit -s unlimited
 ulimit -l unlimited
@@ -123,7 +123,7 @@ module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
 module load cuda/10.0.130-gcc-4.8.5
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-export I_MPI_FABRICS=shm:ofi
+export I_MPI_FABRICS=shm:tmi
 
 ulimit -s unlimited
 ulimit -l unlimited
