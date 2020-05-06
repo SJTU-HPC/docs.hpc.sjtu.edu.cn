@@ -200,7 +200,7 @@ sbatch cpu.slurm
 #SBATCH --time=00:30:00
 ```
 
-以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于Pi上的Python，您可以查阅我们的[Python文档](../application/python.md)。
+以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于Pi上的Python，您可以查阅我们的[Python文档](https://docs.hpc.sjtu.edu.cn/application/Python/)。
 
 ```bash
 #!/bin/bash
@@ -281,7 +281,7 @@ ssh casxxx
 | sacct --format="LAYOUT" | 使用给定的LAYOUT自定义sacct输出 |
 | sacct --help | 查看所有选项 |
 
-默认情况下，sacct显示过去**24小时**的账号作业信息。
+默认情况下，sacct显示过去**24 小时** 的账号作业信息。
 
 ```bash
 $ sacct

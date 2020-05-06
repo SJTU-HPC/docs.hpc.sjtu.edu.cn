@@ -80,13 +80,7 @@
 
 ![avater](../img/ondemand_desktop.png)
 
-填写账号信息`Account`及队列`Patition`。然后点击`launch`即可进入桌面选项卡。
-
-!!! tips
-    `Account`为各用户的主账号而非登录的用户名，格式为acct-xxxxxx
-    `Number of hours`为设置远程卓业桌面使用的时间，作业一旦节点，远程桌面的session即会失效
-    `Number of nodes`为节点数量，请设置为1，以免浪费您的机时
-    `Patition`为队列
+Number of hours 默认是 1，然后点击 launch 即可进入桌面选项卡。
 
 ![avater](../img/ondemand_desktop2.png)
 

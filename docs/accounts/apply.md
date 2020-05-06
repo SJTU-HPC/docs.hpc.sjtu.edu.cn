@@ -23,7 +23,7 @@
 
 1. 您需要下载并填写[《上海交通大学高性能计算申请表》](https://net.sjtu.edu.cn/doc/HPC.xlsx)，并将邮件发送至[hpc邮箱](mailto:hpc@sjtu.edu.cn)，并抄送[acccount邮箱](mailto:account@sjtu.edu.cn)。
 
-2. 申请人可以是学生或者老师，账号负责人必须为在校教师（含博士后），Email必须填写交大邮箱（xxx.sjtu.edu.cn），并填写账号负责人所在院系和职称。
+2. 申请人可以是学生或者老师，账号负责人必须为在校教师（含博士后），Email必须填写交大邮箱（xxx@sjtu.edu.cn），并填写账号负责人所在院系和职称。
 
 ## 子账号申请
  
