@@ -281,7 +281,7 @@ ssh casxxx
 | sacct --format="LAYOUT" | 使用给定的LAYOUT自定义sacct输出 |
 | sacct --help | 查看所有选项 |
 
-默认情况下，sacct显示过去**24 小时** 的账号作业信息。
+默认情况下，sacct显示过去 **24小时** 的账号作业信息。
 
 ```bash
 $ sacct
