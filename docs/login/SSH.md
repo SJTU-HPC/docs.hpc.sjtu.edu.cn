@@ -47,7 +47,7 @@ user’s home folder: /lustre/home/YOUR_HOME
 Windows用户可以使用putty免费客户端登录软件，下载后双击即可运行使用。putty可通过以下连接下载：http://www.putty.org/.
  
 ### Linux/Unix/Mac
-像Linux / Unix / Mac这样的Nix operation系统拥有自己的SSH客户端，包括ssh, scp,sftp等，因此没必要再去下载其他登录软件。
+Linux / Unix / Mac 操作系统拥有自己的SSH客户端，包括ssh, scp, sftp等，因此没必要再去下载其他登录软件。
 
 # 通过SSH登录集群
 ## Windows用户
