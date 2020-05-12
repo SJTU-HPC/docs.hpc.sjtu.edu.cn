@@ -17,13 +17,13 @@ pip install -r requirements.txt
 Windows用户
 
 ```
-where mkdcos
+where mkdocs
 ```
 
 linux和mac用户
 
 ```
-which mkdcos
+which mkdocs
 ```
 
 ## 启动服务器和更新文档
