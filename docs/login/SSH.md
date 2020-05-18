@@ -109,6 +109,14 @@ sftp> ls
 $ ssh-keygen -t rsa
 ```
 
+接下来屏幕会显示：
+```bash 
+Generating public/private rsa key pair.
+Enter file in which to save the key (/XXX/XXX/.ssh/id_rsa):   # 存储地址，默认回车即可
+Enter passphrase (empty for no passphrase):                   # 请设置密码短语，并记住。输入的时候屏幕无显示
+Enter same passphrase again:                                  # 再输入一遍密码短语
+```
+
 !!! suggetion
     为何要设置含有密码短语的密钥对：
     输入 ssh-keygen 时，会请求您输入一个密码短语，您应该输入一些难以猜到的短语。
