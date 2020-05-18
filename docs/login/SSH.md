@@ -20,27 +20,6 @@
  * 登录HPC集群后，请不要跳转到其他登录节点。任务完成后请关闭SSH会话。
  * 若无法登录，请检查输入密码或确认IP地址是否正确。您可以参考故障排除和反馈，将诊断信息发送给集群管理员hpc@sjtu.edu.cn。
 
-# 当 SSH 密钥对发生泄漏，请立即清理 .ssh 文件夹内容，并重新生成密钥对（生成时请设置密码短语）
-
-## 为何要设置含有密码短语的密钥对
-输入 ssh-keygen 时，会请求您输入一个密码短语，您应该输入一些难以猜到的短语。
-在无密码短语的情况下，您的私钥未经加密就存储在您的硬盘上，任何人拿到您的私钥都可以随意的访问对应的 SSH 服务器。
-    
-## 如何清理 .ssh 文件夹，并重新生成密钥对（含密码短语）：
-```bash 
-$ rm  ~/.ssh/*                                               # 清除 .ssh 原文件信息
-$ ssh-keygen                                                 # 在自己的本地电脑终端上输入
-```
-    
-接下来屏幕会显示：
-    
-```bash 
-Generating public/private rsa key pair.
-Enter file in which to save the key (/XXX/XXX/.ssh/id_rsa):  # 询问密码存储位置，默认是 ~/.ssh，回车即可
-Enter passphrase (empty for no passphrase):                  # 为了安全，请设置密码短语，并记住。输入的时候屏幕无显示
-Enter same passphrase again:                                 # 再输入一遍密码短语
-```
-
 # 准备
 ## 收集信息
 通过SSH登录HPC集群，需要在客户端输入登录节点IP地址（或主机名），SSH端口，SSH用户名和密码。账号开通好后我们会给您发送邮件确认，邮件内容如下：
@@ -129,6 +108,10 @@ sftp> ls
 ```bash 
 $ ssh-keygen -t rsa
 ```
+
+!!! tips 为何要设置含有密码短语的密钥对
+输入 ssh-keygen 时，会请求您输入一个密码短语，您应该输入一些难以猜到的短语。
+在无密码短语的情况下，您的私钥未经加密就存储在您的硬盘上，任何人拿到您的私钥都可以随意的访问对应的 SSH 服务器。
 
 ssh-keygen将在 -/.ssh中生成一个密钥对，包含两个文件：id_rsa（需要保留的私钥），和 id_rsa.pub（可作为您的身份发送的公钥）。然后，使用ssh-copy-id将本地主机的公共密钥id_rsa.pub添加到远程主机的信任列表中。实际上，ssh-copy-id所做的就是将id_rsa.pub的内容添加到远程主机的文件~/.ssh/authorized_keys中。
 
