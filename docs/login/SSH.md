@@ -168,7 +168,7 @@ User YOUR_USERNAME
 
 # SSH 重置 known_hosts
 ![avater](../img/knownhosts.png)
-若遇到下方图片中的问题，请重置 known_hosts，命令如下：
+若遇到上方图片中的问题，请重置 known_hosts，命令如下：
 
 ```bash
 $ ssh-keygen -R login.hpc.sjtu.edu.cn
