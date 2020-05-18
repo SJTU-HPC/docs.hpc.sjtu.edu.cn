@@ -99,7 +99,7 @@ sftp> ls
 ```
 
 # 无密码登录
-*提示：“无密码登录”仅适用于使用SSH命令行工具的 Linux/ UNIX / Mac用户*
+*提示：“无密码登录”仅适用于使用 SSH 命令行工具的 Linux/ UNIX / Mac 用户*
 
 “无密码登录”使您无需输入用户名和密码即可登录，它还可以作为服务器的别名来简化说明。无密码登录需要建立从远程主机（群集的登录节点）到本地主机（您自己的计算机）的SSH信任关系。建立信任关系后，双方将通过 SSH 密钥对进行身份验证。
 
@@ -160,10 +160,10 @@ User YOUR_USERNAME
     
 ## 如何清理 .ssh 文件夹，并重新生成密钥对（含密码短语）：
 ```bash 
-（在 HPC 集群上）$ rm -f ~/.ssh/authorized_keys              # 清除服务器上原有的 authorized_keys
-（在自己电脑上）$ rm  ~/.ssh/id*                              # 清除本地 .ssh 文件夹中的密钥对
-（在自己电脑上）$ ssh-keygen -t rsa                           # 在本地重新生成密钥对
-（在自己电脑上）$ ssh-copy-id YOUR_USERNAME@TARGET_IP         # 将本地新的公钥发给服务器，存在服务器的 authorized_keys 文件里
+（在 HPC 集群上）$ rm -f ~/.ssh/authorized_keys           # 清除服务器上原有的 authorized_keys
+（在自己电脑上）$ rm  ~/.ssh/id*                           # 清除本地 .ssh 文件夹中的密钥对
+（在自己电脑上）$ ssh-keygen -t rsa                        # 在本地重新生成密钥对。第二个问题，设置密码短语 (passphrase)，并记住密码短语
+（在自己电脑上）$ ssh-copy-id YOUR_USERNAME@TARGET_IP      # 将本地新的公钥发给服务器，存在服务器的 authorized_keys 文件里
 ```
 
 
