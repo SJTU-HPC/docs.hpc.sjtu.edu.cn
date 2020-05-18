@@ -114,7 +114,7 @@ $ ssh-keygen -t rsa
     输入 ssh-keygen 时，会请求您输入一个密码短语，您应该输入一些难以猜到的短语。
     在无密码短语的情况下，您的私钥未经加密就存储在您的硬盘上，任何人拿到您的私钥都可以随意的访问对应的 SSH 服务器。
 
-ssh-keygen将在 -/.ssh中生成一个密钥对，包含两个文件：id_rsa（需要保留的私钥），和 id_rsa.pub（可作为您的身份发送的公钥）。然后，使用ssh-copy-id将本地主机的公共密钥id_rsa.pub添加到远程主机的信任列表中。实际上，ssh-copy-id所做的就是将id_rsa.pub的内容添加到远程主机的文件~/.ssh/authorized_keys中。
+ssh-keygen将在 -/.ssh中生成一个密钥对，包含两个文件：id_rsa（需要保留的私钥），和 id_rsa.pub（可作为您的身份发送的公钥）。然后，使用ssh-copy-id将本地主机的公钥id_rsa.pub添加到远程主机的信任列表中。实际上，ssh-copy-id所做的就是将id_rsa.pub的内容添加到远程主机的文件~/.ssh/authorized_keys中。
 
 ```bash
 $ ssh-copy-id YOUR_USERNAME@TARGET_IP
@@ -148,12 +148,13 @@ User YOUR_USERNAME
 ``` 
 
 !!! suggetion
-    当 SSH 密钥对发生泄漏，请立即清理 .ssh 文件夹内容，并重新生成密钥对（生成时请设置密码短语）
+    当 SSH 密钥对发生泄漏，请立即清理本地电脑上的 .ssh 文件夹内容，并重新在本地生成密钥对（生成时请设置密码短语）。另外同时删除 HPC 集群上的 ~/.ssh/authorized_keys 文件。
     
 ## 如何清理 .ssh 文件夹，并重新生成密钥对（含密码短语）：
 ```bash 
-$ rm  ~/.ssh/*                                               # 清除 .ssh 原文件信息
-$ ssh-keygen -t rsa                                          # 在自己的本地电脑终端上输入
+（在自己电脑终端上）$ rm  ~/.ssh/*                                     # 清除 .ssh 原文件信息
+（在自己电脑终端上）$ ssh-keygen -t rsa                                # 在自己的本地电脑终端上输入
+（在 HPC 集群上） $ rm  ~/.ssh/authorized_keys                        # 清除服务器上的 authorized_keys
 ```
 
 # 调试SSH登录问题
