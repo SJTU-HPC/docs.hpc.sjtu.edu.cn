@@ -117,19 +117,19 @@ Enter passphrase (empty for no passphrase):                   # 请设置密码�
 Enter same passphrase again:                                  # 再输入一遍密码短语
 ```
 
-!!! suggetion
+!!! tips
     为何要设置含有密码短语的密钥对：
     输入 ssh-keygen 时，会请求您输入一个密码短语，您应该输入一些难以猜到的短语。
     在无密码短语的情况下，您的私钥未经加密就存储在您的硬盘上，任何人拿到您的私钥都可以随意的访问对应的 SSH 服务器。
 
-ssh-keygen将在 ~/.ssh中生成一个密钥对，包含两个文件：id_rsa（需要保留的私钥），和 id_rsa.pub（可作为您的身份发送的公钥）。然后，使用ssh-copy-id将本地主机的公钥id_rsa.pub添加到远程主机的信任列表中。实际上，ssh-copy-id所做的就是将id_rsa.pub的内容添加到远程主机的文件~/.ssh/authorized_keys中。
+ssh-keygen 将在 ~/.ssh 中生成一个密钥对，包含两个文件：id_rsa (需保留的私钥)，和 id_rsa.pub（可作为您的身份发送的公钥）。然后，使用 ssh-copy-id 将本地主机的公钥 id_rsa.pub 添加到远程主机的信任列表中。实际上，ssh-copy-id 所做的就是将 id_rsa.pub 的内容添加到远程主机的文件 ~/.ssh/authorized_keys 中。
 
 ```bash
 $ ssh-copy-id YOUR_USERNAME@TARGET_IP
 ```
 ![avater](../img/sshfile.png)
 
-我们还可以将连接参数写入~/.ssh/config中，以使其简洁明了。 新建或编辑文件~/.ssh/config：
+我们还可以将连接参数写入 ~/.ssh/config 中，以使其简洁明了。 新建或编辑文件 ~/.ssh/config：
 
 ```bash
 $ EDIT ~/.ssh/config
