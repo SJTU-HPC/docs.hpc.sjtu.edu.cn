@@ -28,18 +28,21 @@
     在无密码短语的情况下，您的私钥未经加密就存储在您的硬盘上，任何人拿到您的私钥都可以随意的访问对应的 SSH 服务器。
     
     2. 如何清理 .ssh 文件夹，并重新生成密钥对（含密码短语）：
-    $ rm  ~/.ssh/*                                                 # 清除原 .ssh 原文件夹信息
-    $ ssh-keygen                                                   # 在自己的本地电脑终端上输入
+    ```bash
+    $ rm  ~/.ssh/*                                               # 清除原 .ssh 原文件夹信息
+    $ ssh-keygen                                                 # 在自己的本地电脑终端上输入
+    ```
     
     接下来屏幕会显示：
     
+    ```bash
     Generating public/private rsa key pair.
-    Enter file in which to save the key (/XXX/XXX/.ssh/id_rsa):    # 询问密码存储位置，默认是 ~/.ssh，回车即可
-    /XXX/XXX/.ssh/id_rsa already exists.                           # 若之前生成过，会提示已经存在，回复 y 重写覆盖
+    Enter file in which to save the key (/XXX/XXX/.ssh/id_rsa):  # 询问密码存储位置，默认是 ~/.ssh，回车即可
+    /XXX/XXX/.ssh/id_rsa already exists.                         # 若之前生成过，会提示已经存在，回复 y 重写覆盖
     Overwrite (y/n)? y
-    Enter passphrase (empty for no passphrase):                    # 为了安全，请设置密码短语，并记住。输入的时候屏幕无显示
-    Enter same passphrase again:                                   # 再输入一遍密码短语
-
+    Enter passphrase (empty for no passphrase):                  # 为了安全，请设置密码短语，并记住。输入的时候屏幕无显示
+    Enter same passphrase again:                                 # 再输入一遍密码短语
+    ```
     
 
 # 准备
