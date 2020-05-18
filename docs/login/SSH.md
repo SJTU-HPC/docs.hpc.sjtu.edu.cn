@@ -23,26 +23,23 @@
 # 当 SSH 密钥对发生泄漏，请立即清理 .ssh 文件夹内容，并重新生成密钥对（生成时请设置密码短语）
 
 ## 为何要设置含有密码短语的密钥对
-  输入 ssh-keygen 时，会请求您输入一个密码短语，您应该输入一些难以猜到的短语。
-  在无密码短语的情况下，您的私钥未经加密就存储在您的硬盘上，任何人拿到您的私钥都可以随意的访问对应的 SSH 服务器。
+输入 ssh-keygen 时，会请求您输入一个密码短语，您应该输入一些难以猜到的短语。
+在无密码短语的情况下，您的私钥未经加密就存储在您的硬盘上，任何人拿到您的私钥都可以随意的访问对应的 SSH 服务器。
     
 ## 如何清理 .ssh 文件夹，并重新生成密钥对（含密码短语）：
 ```bash 
-   $ rm  ~/.ssh/*                                               # 清除 .ssh 原文件信息
-   $ ssh-keygen                                                 # 在自己的本地电脑终端上输入
+$ rm  ~/.ssh/*                                               # 清除 .ssh 原文件信息
+$ ssh-keygen                                                 # 在自己的本地电脑终端上输入
 ```
     
-  接下来屏幕会显示：
+接下来屏幕会显示：
     
 ```bash 
-    Generating public/private rsa key pair.
-    Enter file in which to save the key (/XXX/XXX/.ssh/id_rsa):  # 询问密码存储位置，默认是 ~/.ssh，回车即可
-    /XXX/XXX/.ssh/id_rsa already exists.                         # 若之前生成过，会提示已经存在，回复 y 重写覆盖
-    Overwrite (y/n)? y
-    Enter passphrase (empty for no passphrase):                  # 为了安全，请设置密码短语，并记住。输入的时候屏幕无显示
-    Enter same passphrase again:                                 # 再输入一遍密码短语
+Generating public/private rsa key pair.
+Enter file in which to save the key (/XXX/XXX/.ssh/id_rsa):  # 询问密码存储位置，默认是 ~/.ssh，回车即可
+Enter passphrase (empty for no passphrase):                  # 为了安全，请设置密码短语，并记住。输入的时候屏幕无显示
+Enter same passphrase again:                                 # 再输入一遍密码短语
 ```
-    
 
 # 准备
 ## 收集信息
