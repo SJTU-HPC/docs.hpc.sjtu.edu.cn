@@ -156,7 +156,7 @@ User YOUR_USERNAME
 ``` 
 
 !!! suggetion
-    当 SSH 密钥对发生泄漏，请立即清理本地电脑上的 .ssh 文件夹内容，并重新在本地生成密钥对（生成时请设置密码短语）。另外同时删除 HPC 集群上的 ~/.ssh/authorized_keys 文件。
+    当 SSH 密钥对发生泄漏，请立即清理本地电脑 .ssh 文件夹里的密钥对，并重新在本地生成密钥对（生成时请设置密码短语）。另外请删除 HPC 集群上的 ~/.ssh/authorized_keys 文件。
     
 ## 如何清理 .ssh 文件夹，并重新生成密钥对（含密码短语）：
 ```bash 
