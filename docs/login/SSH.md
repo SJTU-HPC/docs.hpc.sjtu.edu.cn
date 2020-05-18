@@ -160,10 +160,10 @@ User YOUR_USERNAME
     
 ## 如何清理 .ssh 文件夹，并重新生成密钥对（含密码短语）：
 ```bash 
-（在 HPC 集群上）$ rm -f ~/.ssh/authorized_keys              # 清除服务器上的原有的 authorized_keys
-（在自己电脑上）$ rm  ~/.ssh/id*                              # 清除本地 .ssh 中的密钥对信息
+（在 HPC 集群上）$ rm -f ~/.ssh/authorized_keys              # 清除服务器上原有的 authorized_keys
+（在自己电脑上）$ rm  ~/.ssh/id*                              # 清除本地 .ssh 文件夹中的密钥对
 （在自己电脑上）$ ssh-keygen -t rsa                           # 在本地重新生成密钥对
-（在自己电脑上）$ ssh-copy-id YOUR_USERNAME@TARGET_IP         # 在本地将新的公钥发给服务器，存在服务器的 authorized_keys 文件里
+（在自己电脑上）$ ssh-copy-id YOUR_USERNAME@TARGET_IP         # 将本地新的公钥发给服务器，存在服务器的 authorized_keys 文件里
 ```
 
 
