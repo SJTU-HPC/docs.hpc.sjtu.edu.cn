@@ -166,6 +166,14 @@ User YOUR_USERNAME
 （在自己电脑上）$ ssh-copy-id YOUR_USERNAME@TARGET_IP      # 将本地新的公钥发给服务器，存在服务器的 authorized_keys 文件里
 ```
 
+# SSH 重置 known_hosts
+![avater](../img/knownhosts.png)
+若遇到下方图片中的问题，请重置 known_hosts，命令如下：
+
+```bash
+$ ssh-keygen -R login.hpc.sjtu.edu.cn
+``` 
+
 
 # 调试SSH登录问题
 有许多原因可能会阻止您登录到HPC集群。因两次尝试失败而失败的IP地址将被阻止两次。在阻塞期间，建议尝试其他登录节点。 如果两个小时后此问题仍然存在，请与管理员联系并附上以下信息。
