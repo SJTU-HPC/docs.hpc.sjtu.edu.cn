@@ -130,12 +130,12 @@ sftp> ls
 $ ssh-keygen -t rsa
 ```
 
-ssh-keygen将在 -/.ssh中生成一个密钥对，id_rsa是需要保留的私钥，id_rsa.pub是可以作为您的身份发送的公钥。然后，使用ssh-copy-id将本地主机的公共密钥id_rsa.pub添加到远程主机的信任列表中。实际上，ssh-copy-id所做的就是将id_rsa.pub的内容添加到远程主机的文件~/.ssh/authorized_keys中。
+ssh-keygen将在 -/.ssh中生成一个密钥对，包含两个文件：id_rsa（需要保留的私钥），和 id_rsa.pub（可作为您的身份发送的公钥）。然后，使用ssh-copy-id将本地主机的公共密钥id_rsa.pub添加到远程主机的信任列表中。实际上，ssh-copy-id所做的就是将id_rsa.pub的内容添加到远程主机的文件~/.ssh/authorized_keys中。
 
 ```bash
 $ ssh-copy-id YOUR_USERNAME@TARGET_IP
 ```
-![avater](../img/winscp.png)
+![avater](../img/sshfile.png)
 
 我们还可以将连接参数写入~/.ssh/config中，以使其简洁明了。 新建或编辑文件~/.ssh/config：
 
