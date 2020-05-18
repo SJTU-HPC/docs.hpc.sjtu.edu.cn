@@ -135,6 +135,7 @@ ssh-keygen将在 -/.ssh中生成一个密钥对，id_rsa是需要保留的私钥
 ```bash
 $ ssh-copy-id YOUR_USERNAME@TARGET_IP
 ```
+![avater](../img/winscp.png)
 
 我们还可以将连接参数写入~/.ssh/config中，以使其简洁明了。 新建或编辑文件~/.ssh/config：
 
