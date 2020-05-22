@@ -47,6 +47,7 @@ nav:
     - nwchem: application/nwchem.md
   #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
     - Gromacs: application/Gromacs.md
+    - Relion: application/Relion.md
   #   - FFTW: 应用软件/FFTW.md
     - OpenFoam: application/OpenFoam.md
   #   - MPI4PY: 应用软件/MPI4PY.md
