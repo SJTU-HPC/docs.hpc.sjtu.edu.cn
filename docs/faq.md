@@ -113,7 +113,7 @@
 
 ## 7.致谢模版
 ### Q 如何在论文中致谢交大高性能计算？
-**A：** 致谢模版如下。我们欢迎大家将已接收的高质量成果邮件分享给我们：<br/><br/>
+**A：** 致谢模版如下。欢迎大家将已接收的高质量成果邮件分享给我们。<br/><br/>
 &ensp;&ensp;&ensp;（中文）本论文的计算结果得到了上海交通大学高性能计算中心的支持和帮助。<br/><br/>
 &ensp;&ensp;&ensp;（英文）The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.<br/><br/><br/><br/>
 
