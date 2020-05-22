@@ -110,3 +110,10 @@
 &ensp;&ensp;&ensp;4. 排查异常中断作业：2~3个工作日内；<br/>
 &ensp;&ensp;&ensp;5. 新建帐号：2个工作日内；<br/>
 &ensp;&ensp;&ensp;6. 编译不包含在Spack或自行开发的软件包：1~2周内。
+
+## 7.致谢模版
+### ：中文
+**A：** 本论文的计算结果得到了上海交通大学高性能计算中心的支持和帮助。
+### ：English
+**A：** The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
+
