@@ -12,7 +12,7 @@ $ module load lammps/20190807-intel-19.0.5-impi
 
 ## 提交 Intel+CPU 版本 Lammps 任务
 
-使用 Intel 2019 编译的 CPU 版本 Lammps 运行单节点作业脚本示例 lammps_cpu_intel.slurm 如下：
+使用 Intel 2019 编译的 CPU 版本 Lammps 运行单节点作业脚本示例 lammps_cpu_intel.slurm：
 
 
 ```bash
