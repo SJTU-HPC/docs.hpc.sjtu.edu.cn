@@ -75,9 +75,7 @@ make yes-user-meamc            #"make yes-"后面接需要安装的 package 名�
 make -j 4 intel_cpu_intelmpi   #开始编译
 ```
 
-编译成功后，将在 src 文件夹下生成 lmp_intel_cpu_intelmpi
-
-后续调用时，请给该文件的路径，比如 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi
+编译成功后，将在 src 文件夹下生成 lmp_intel_cpu_intelmpi. 后续调用，请给该文件的路径，比如 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi
 
 5. 测试脚本
 ```bash
