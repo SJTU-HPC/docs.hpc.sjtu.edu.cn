@@ -4,17 +4,21 @@
 
 ## 加载预编译的Openfoam
 
-Pi2.0 系统中已经预装 openfoam/1712&1906 (GNU+cpu版本)，可以用以下方式加载: 
+Pi2.0 系统中已经预装 openfoam/1712&1912 (GNU+cpu版本)，可以用以下方式加载: 
 
 版本|加载指令
 ---|:--:
 1712| module load openfoam/1712-gcc-7.4.0-openmpi 
-1906| module load openfoam/1906-gcc-8.3.0-openmpi
+1912| module load openfoam/1912-gcc-7.4.0-openmpi
 
+可以用下方命令查看系统中已装的全部 module:
+```bash
+module av
+```
 
 ## 作业脚本示例
 
-使用GNU编译的CPU版本openfoam/1906运行单节点作业脚本test_openfoam.slurm示例如下：
+使用GNU编译的CPU版本openfoam/1912运行单节点作业脚本test_openfoam.slurm示例如下：
 
 ```bash
 #!/bin/bash
@@ -30,7 +34,7 @@ ulimit -s unlimited
 ulimit -l unlimited
 
 module purge
-module load openfoam/1906-gcc-8.3.0-openmpi
+module load openfoam/1912-gcc-7.4.0-openmpi
 
 srun --mpi=pmi2 icoFoam -parallel
 ```
