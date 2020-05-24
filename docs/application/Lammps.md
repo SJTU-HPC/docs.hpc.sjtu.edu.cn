@@ -2,17 +2,17 @@
 
 -----
 
-## 加载预安装的Lammps
+## 加载预安装的 Lammps
 
-Pi2.0 系统中已经预装 lammps/20190807 (GNU+cpu 版本)，可以用以下命令加载: 
+Pi 2.0 系统中已经预装 lammps/20190807 (Intel+cpu 版本)，可以用以下命令加载: 
 
 ```
-$ module load lammps/20190807-gcc-8.3.0-openblas-openmpi
+$ module load lammps/20190807-intel-19.0.5-impi
 ```
 
-## 提交GNU+CPU版本Lammps任务
+## 提交 Intel+CPU 版本 Lammps 任务
 
-使用GNU编译的CPU版本Lammps运行单节点作业脚本示例lammps_cpu_gnu.slurm如下：
+使用 Intel 2019 编译的 CPU 版本 Lammps 运行单节点作业脚本示例 lammps_cpu_intel.slurm 如下：
 
 
 ```bash
@@ -26,7 +26,11 @@ $ module load lammps/20190807-gcc-8.3.0-openblas-openmpi
 #SBATCH -e %j.err
 
 module purge
-module load lammps/20190807-gcc-8.3.0-openblas-openmpi
+module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
+module load lammps/20190807-intel-19.0.5-impi
+
+export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+export I_MPI_FABRICS=shm:ofi
 
 ulimit -s unlimited
 ulimit -l unlimited
@@ -37,5 +41,5 @@ srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
 并使用如下指令提交：
 
 ```bash
-$ sbatch lammps_cpu_gnu.slurm
+$ sbatch lammps_cpu_intel.slurm
 ```
