@@ -64,13 +64,15 @@ module purge;
 module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 ```
 
-4. 编译
+4. 编译 (以额外安装 USER-MEAMC 包为例)
 ```bash
+tar xvf lammps-stable.tar.gz
+cd lammps-XXXXXX
 cd src
-make					   #查看编译选项
-make package               #查看包
-make yes-user-meamc        #示例：额外安装 USER-MEAMC 包（MEAMC 为 C++ 版本的 MEAM）
-make -j 4 intel_cpu_intelmpi    #开始编译
+make					                 #查看编译选项
+make package                   #查看包
+make yes-user-meamc            #"make yes-"后面接需要安装的 package 名字
+make -j 4 intel_cpu_intelmpi   #开始编译
 ```
 
 编译成功后，将在 src 文件夹下生成 lmp_intel_cpu_intelmpi
@@ -80,17 +82,13 @@ make -j 4 intel_cpu_intelmpi    #开始编译
 ```bash
 #!/bin/bash
 
-#SBATCH --job-name=lammps_test
-#SBATCH --partition=cpu
-#SBATCH --output=%j.out
-#SBATCH --error=%j.err
-#SBATCH -n 80
+#SBATCH -J lammps_test
+#SBATCH -p cpu
+#SBATCH -n 40
 #SBATCH --ntasks-per-node=40
+#SBATCH -o %j.out
+#SBATCH -e %j.err
 
-ulimit -s unlimited
-ulimit -l unlimited
-
-source /usr/share/Modules/init/bash
 module purge
 module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 module load lammps/20190807-intel-19.0.5-impi
@@ -98,14 +96,11 @@ module load lammps/20190807-intel-19.0.5-impi
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:ofi
 
+ulimit -s unlimited
+ulimit -l unlimited
+
 srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
 ```
-
-
-
-
-
-
 
 
 
