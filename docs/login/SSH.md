@@ -127,6 +127,13 @@ ssh-keygen 将在 ~/.ssh 中生成一个密钥对，包含两个文件：id_rsa 
 ```bash
 $ ssh-copy-id YOUR_USERNAME@TARGET_IP
 ```
+
+若手动自行添加 authorized_keys 文件，需确保 authorized_keys 文件的权限为 600：
+
+ ```bash
+ $ chmod 600 ~/.ssh/authorized_keys
+ ```
+
 ![avater](../img/sshfile.png)
 
 我们还可以将连接参数写入 ~/.ssh/config 中，以使其简洁明了。 新建或编辑文件 ~/.ssh/config：
