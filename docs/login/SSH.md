@@ -128,10 +128,10 @@ ssh-keygen 将在 ~/.ssh 中生成一个密钥对，包含两个文件：id_rsa 
 $ ssh-copy-id YOUR_USERNAME@TARGET_IP
 ```
 
-若手动自行添加 authorized_keys 文件，需确保 authorized_keys 文件的权限为 600：
+若手动自行在服务器上添加 authorized_keys 文件，需确保 authorized_keys 文件的权限为 600：
 
  ```bash
- $ chmod 600 ~/.ssh/authorized_keys
+ （在 HPC 集群上）$ chmod 600 ~/.ssh/authorized_keys
  ```
 
 ![avater](../img/sshfile.png)
