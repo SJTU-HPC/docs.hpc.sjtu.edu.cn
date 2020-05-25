@@ -125,7 +125,7 @@ Enter same passphrase again:                                  # 再输入一遍�
 ssh-keygen 将在 ~/.ssh 中生成一个密钥对，包含两个文件：id_rsa (需保留的私钥)，和 id_rsa.pub（可作为您的身份发送的公钥）。然后，使用 ssh-copy-id 将本地主机的公钥 id_rsa.pub 添加到远程主机的信任列表中。实际上，ssh-copy-id 所做的就是将 id_rsa.pub 的内容添加到远程主机的文件 ~/.ssh/authorized_keys 中。
 
 ```bash
-$ ssh-copy-id YOUR_USERNAME@TARGET_IP
+（在自己电脑上）$ ssh-copy-id YOUR_USERNAME@TARGET_IP
 ```
 
 若手动自行在服务器上添加 authorized_keys 文件，需确保 authorized_keys 文件的权限为 600：
