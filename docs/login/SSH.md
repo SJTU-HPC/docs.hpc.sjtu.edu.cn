@@ -179,7 +179,7 @@ User YOUR_USERNAME
 若遇到上方图片中的问题，请重置 known_hosts，命令如下：
 
 ```bash
-$ ssh-keygen -R login.hpc.sjtu.edu.cn
+（在自己电脑上）$ ssh-keygen -R login.hpc.sjtu.edu.cn
 ``` 
 
 
