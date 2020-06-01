@@ -10,7 +10,7 @@ STRique is a python package to analyze repeat expansion and methylation states o
 
 ```bash
 $ srun -p small -n 4 --pty /bin/bash
-$ module load miniconda3/4.7.12.1-gcc-4.8.5 gcc/8.3.0-gcc-4.8.5
+$ module load miniconda3/4.7.12.1-gcc-4.8.5
 $ conda create -n teststr python=3.6
 $ source activate teststr
 $ git clone --recursive https://github.com/giesselmann/STRique
@@ -32,7 +32,7 @@ $ python setup.py install
 #SBATCH -e %j.err
 
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5 gcc/8.3.0-gcc-4.8.5
+module load miniconda3/4.7.12.1-gcc-4.8.5
 source activate teststr
 
 cd ~/STRique/data
