@@ -6,7 +6,7 @@ STRique is a python package to analyze repeat expansion and methylation states o
 
 ## 在 Pi 上安装 STRique
 
-首先申请计算节点用来编译，并输入以下指令：
+首先申请计算节点，然后输入以下指令进行编译：
 
 ```bash
 $ srun -p small -n 4 --pty /bin/bash
@@ -19,7 +19,7 @@ $ pip install -r requirements.txt
 $ python setup.py install
 ```
 
-安装完成后，按下方操作使用：
+## 在 Pi 上运行的 Slurm 脚本示例：
 
 ```bash
 #!/bin/bash
