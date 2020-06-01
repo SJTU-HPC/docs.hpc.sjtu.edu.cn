@@ -59,7 +59,7 @@ nav:
     - Mrbayes: application/mrbayes.md
     - CESM: application/CESM.md
   #   - Spark: 应用软件/Spark.md
-    - CESM: application/STRique.md
+    - STRique: application/STRique.md
     - 商业软件: application/commercial.md
   - 常见问题: faq.md
   - 提交修改: contribution.md
