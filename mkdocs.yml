@@ -70,8 +70,8 @@ site_description: Pi Documentation
 site_author: SJTU HPC Team
 site_dir: public
 site_url: "https://docs.hpc.sjtu.edu.cn"
-repo_name: Github/sjtuhpcc/docs
-repo_url: https://github.com/sjtuhpcc/docs.sjtu.edu.cn
+repo_name: SJTU-HPC/docs.hpc.sjtu.edu.cn
+repo_url: https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn
 edit_uri: tree/master/docs/
 
 # Configuration

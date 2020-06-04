@@ -1,6 +1,6 @@
 # 向本文档提交修改
 
-本文档通过[github仓库](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)维护。如果您认为我们的文档有不妥或改进之处，欢迎提交修改。
+本文档通过[github仓库](https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn)维护。如果您认为我们的文档有不妥或改进之处，欢迎提交修改。
 
 ## 准备工作
 

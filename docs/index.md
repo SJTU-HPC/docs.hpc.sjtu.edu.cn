@@ -4,10 +4,10 @@
 
 !!!tip
 	该文档通过github仓库维护
-	[github仓库](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)。
+	[github仓库](https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn)。
 	如果您有什么建议或者意见，欢迎提交修改
 	[contributions](contribution/contribution.md)
-	[Fork this repo](https://github.com/sjtuhpcc/docs.sjtu.edu.cn)
+	[Fork this repo](https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn)
 	
 
 ## 快速链接
