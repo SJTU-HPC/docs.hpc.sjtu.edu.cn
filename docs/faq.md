@@ -93,7 +93,7 @@
 **A：** 请发送邮件至[hpc邮箱](mailto:hpc@sjtu.edu.cn)咨询。
 
 ### 5.2 Q：如何查看账户余额？
-**A：** 您可以使用主账号登陆 [https://acct.hpc.sjtu.edu.cn](https://acct.hpc.sjtu.edu.cn) 查看。
+**A：** 您可以使用主账号登陆 [https://account.hpc.sjtu.edu.cn](https://account.hpc.sjtu.edu.cn) 查看。
 
 ### 5.3 Q：有没有机时奖励政策？
 **A：** 目前新的收费政策正在商讨中，预计将于近期公布。在此之前已有的奖励机时仍然生效。
