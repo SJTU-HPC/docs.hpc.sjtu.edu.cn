@@ -2,7 +2,7 @@
 
 -------
 
-## 0.为什么集群叫π？有什么含义？
+## 0.为什么集群叫 π？有什么含义？
 
 1. π在希腊文里具有并行的涵义；
 2. π是无限不循环的无理数，是人类理解无限的开始；
@@ -32,9 +32,10 @@
 ## 2.作业提交和运行
 
 ### 2.1 Q：单个作业最长运行时间是多长？
-**A：** 7天。
+**A：** cpu, small 和 dgx2 队列上的作业运行时间最长 7 天。huge 和 192c6t 运行时间最长 2 天。
+具体时间限制可以通过 scontrol show partition 命令查看 MaxTime 参量。
 
-### 2.2 Q：我的作业需要运行超过7天，有没有办法延长运行时限？
+### 2.2 Q：我的作业运行将超过最长时间限制，有没有办法延长运行时限？
 **A：** 有。请将您的作业号发送到[hpc邮箱](mailto:hpc@sjtu.edu.cn)，我们将会为您延长。需要注意的是：30天作业的排队时间可能会较长，且运行超过7天后意外终止的作业不做返还或诊断。
 <!-- 可以在作业脚本中添加#SBATCH --qos=qoslong选项，作业的最长时间将被续为30天。需要注意的是：30天作业的排队时间可能会较长，且运行超过7天后意外终止的作业不做返还或诊断。 -->
 
@@ -44,7 +45,7 @@
 ```bash
 #SBATCH -J huge-test
 #SBATCH -p huge
-#SBATCH --mail-type=end
+#SBATCH --mail-type=all
 #SBATCH --mail-user=YOU@EMAIL.COM
 #SBATCH -o %j.out
 #SBATCH -e %j.err
@@ -105,7 +106,7 @@
 ### 6.1 Q 向[hpc邮箱](mailto:hpc@sjtu.edu.cn)发送的邮件多久才能收到回复？
 **A：** 根据邮件内容不同，下面是响应周期：<br/>
 &ensp;&ensp;&ensp;1. 邮件确认：1个工作日内；<br/>
-&ensp;&ensp;&ensp;2. 编译Spack已有的软件包：2个工作日内；<br/>
+&ensp;&ensp;&ensp;2. 编译 Spack 已有的软件包：2个工作日内；<br/>
 &ensp;&ensp;&ensp;3. 调整作业脚本：1个工作日内；<br/>
 &ensp;&ensp;&ensp;4. 排查异常中断作业：2~3个工作日内；<br/>
 &ensp;&ensp;&ensp;5. 新建帐号：2个工作日内；<br/>
