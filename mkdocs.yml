@@ -16,7 +16,7 @@ nav:
   #   - 与校云计算文件交互: 文件系统/云平台.md
   #   - 与其他用户共享文件: 文件系统/共享文件.md 
   - 可视化平台: login/HpcStudio.md
-  - 作业:
+  - 提交作业:
     - Slurm概览: job/slurm.md
     # - 脚本式作业: 作业/脚本式作业.md
     # - MPI、OpenMP、CUDA作业示例: 作业/MPI、OpenMP、CUDA作业示例.md
@@ -28,17 +28,9 @@ nav:
     # - 作业优先级: 作业/作业优先级.md
     - 容器: job/container/singularity.md
     - 非特权容器构建: job/container/u2cb.md
-  - 预置软件环境: module/module.md
-    # - Module Environment: module/module.md
-  - 编程语言:
-    - Python: application/Python.md
-    - Perl: application/Perl.md
-    - R: application/R.md
-    - Octave(Matlab): application/Octave.md
-    - GNU Library: application/GNU.md
-    - Intel编译套件: application/Intel.md
-    - CUDA: application/cuda.md
   - 应用软件:
+    - 预置软件环境: module/module.md
+    # - Module Environment: module/module.md
     - Nektar++: application/Nektar.md
     - Lammps: application/Lammps.md
     - VASP: application/VASP.md
@@ -60,9 +52,17 @@ nav:
     - CESM: application/CESM.md
   #   - Spark: 应用软件/Spark.md
     - STRique: application/STRique.md
-    - 商业软件: application/commercial.md
+  #  - 商业软件: application/commercial.md
+  - 编程语言:
+    - Python: application/Python.md
+    - Perl: application/Perl.md
+    - R: application/R.md
+    - Octave(Matlab): application/Octave.md
+    - GNU Library: application/GNU.md
+    - Intel编译套件: application/Intel.md
+    - CUDA: application/cuda.md
   - 常见问题: faq.md
-  - 提交修改: contribution.md
+  #- 提交修改: contribution.md
 
 # Project Information
 site_name: Pi Documentation
