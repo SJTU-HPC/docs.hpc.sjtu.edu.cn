@@ -28,7 +28,7 @@ nav:
     # - 作业优先级: 作业/作业优先级.md
     - 容器: job/container/singularity.md
     - 非特权容器构建: job/container/u2cb.md
-  - 应用软件: application/applications.md
+  - 应用软件: login/HpcStudio.md
     - 预置软件环境: module/module.md
     # - Module Environment: module/module.md
     - Nektar++: application/Nektar.md
