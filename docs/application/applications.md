@@ -2,7 +2,7 @@
 
 -----------
 
-本文档介绍 Pi 上的 module，和一些常用的科学软件。其中，商业软件需用户自行获取版权并安装。
+本文档介绍 Pi 上可用的 module 软件模块，和一些常用的科学软件。其中，商业软件需用户自行获取版权并安装。
 
 
 ## Pi 上的 module
@@ -10,6 +10,10 @@
 最新列表可通过下方命令查看：
 ```
 $ module av
+```
+然后通过 module load 加载需要的模块，示例：
+```
+$ module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 ```
 
 | module | Version |
