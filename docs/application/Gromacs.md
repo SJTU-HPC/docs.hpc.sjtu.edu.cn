@@ -10,8 +10,11 @@ GROMACS是一种分子动力学应用程序，可以模拟具有数百至数百�
 
 | 版本 | 加载方式 |
 | ---- | ------ |
-| 2018.2(gcc)   | module load gromacs/2019.2-gcc-8.3.0-openmpi |
-| 2019.2(intel) | module load gromacs/2019.4-intel-19.0.4-impi |
+| 2019.2(gcc/8.3) | module load gromacs/2019.2-gcc-8.3.0-openmpi |
+| 2019.4(gcc/8.3) | module laod gromacs/2019.4-gcc-8.3.0-openmpi |
+| 2019.2(gcc/9.2) | module load gromacs/2019.2-gcc-9.2.0-openmpi |
+| 2019.4(gcc/9.2) | module load  gromacs/2019.4-gcc-9.2.0-openmpi |
+| 2019.4(intel/19.0.4) | module load gromacs/2019.4-intel-19.0.4-impi |
 
 ## 作业脚本示例
 
@@ -36,7 +39,7 @@ ulimit -l unlimited
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:ofi
 
-srun gmx_mpi mdrun -deffnm test -ntomp 1
+srun --mpi=pmi2 gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
 ```
 
 并使用如下指令提交：
@@ -63,7 +66,7 @@ module load gromacs/2019.2-gcc-8.3.0-openmpi
 ulimit -s unlimited
 ulimit -l unlimited
 
-srun --mpi=pmi2 gmx_mpi mdrun -deffnm test -ntomp 1
+srun --mpi=pmi2 gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
 ```
 
 并使用如下指令提交：
@@ -109,9 +112,14 @@ $ sbatch gromacs_gpu_singularity.slurm
 
 测试使用了GROMACS提供的Benchmark算例进行了CPU和GPU的性能进行对比。其中cpu测试使用单节点40核心，dgx2测试分配1块gpu并配比6核心。
 
-| (ns/day) | CPU (2019.2-gcc) | CPU (2019.4-intel) | dgx2 (Singularity) | dgx2 (2019.2-gcc) |
-| ---- | ------ | ------ | ------ | ------ |
-| Benchmark | 49.281 | 64.800 | 117.593 | 124.219 |
+| Settings | Performance(ns/day) |
+| --- | --- |
+| CPU(2019.2-gcc/8.3) | 43.718 |
+| CPU(2019.2-gcc/9.2) | 43.362 |
+| CPU(2019.4-gcc/8.3) | 43.783 |
+| CPU(2019.4-gcc/9.2) | 43.057 |
+| CPU(2019.4-intel/19.0.4) | 43.296 |
+| DGX2(Singularity) | 19.425 |
 
 本测试中使用到的测试算例均可在`/lustre/share/benchmarks/gromacs`找到，用户可自行取用测试。
 
