@@ -1,4 +1,4 @@
-# <center>应用软件</center>
+# <center>Pi 上可用的 module 软件列表，与常用的软件介绍</center>
 
 -----------
 
@@ -101,7 +101,7 @@ $ module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
 
 
-## 常用的科学计算软件介绍
+## 常用的软件介绍
 
 | 软件名 | 介绍 |
 | ---- | ---- |
