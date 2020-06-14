@@ -1,4 +1,4 @@
-# <center>module 软件列表，与常用的软件介绍</center>
+# <center>module 软件列表，与常用软件介绍</center>
 
 -----------
 
@@ -130,6 +130,9 @@ $ module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 |[ TensorFlow ](https://docs.hpc.sjtu.edu.cn/application/TensorFlow/)|TensorFlow is a free and open-source software library for dataflow and differentiable programming across a range of tasks. It is a symbolic math library, and is also used for machine learning applications such as neural networks.|
 |[ R ](https://docs.hpc.sjtu.edu.cn/application/R/)| R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. |
 |[ Nektar++ ](https://docs.hpc.sjtu.edu.cn/application/Nektar/)|Nektar++ is a spectral/hp element framework designed to support the construction of efficient high-performance scalable solvers for a wide range of partial differential equations (PDE).|
+|[ Intel ](https://docs.hpc.sjtu.edu.cn/application/Intel/)| Intel compiler |
+|[ GNU ](https://docs.hpc.sjtu.edu.cn/application/GNU/)|GNU is an operating system and an extensive collection of computer software.|
+
 
 
 
