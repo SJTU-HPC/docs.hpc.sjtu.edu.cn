@@ -1,4 +1,4 @@
-# <center>Pi 上可用的 module 软件列表，与常用的软件介绍</center>
+# <center>module 软件列表，与常用的软件介绍</center>
 
 -----------
 
