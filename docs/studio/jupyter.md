@@ -56,7 +56,7 @@ Jupyter Project的名称是对Jupyter支持的三种核心编程语言的引用�
 ``` shell
 $ module load miniconda3
 $ conda create -n test-env
-$ conda activate test-env
+$ source activate test-env
 ```
 
 安装并注册为`jupter kernel`：
@@ -68,6 +68,12 @@ $ conda activate test-env
 
 然后可以在`Jupyter`中选择名为`Test Environment`的Kernel进行计算。
 
+如果环境需要依赖`NVIDIA CUDA Toolkit`或`NVIDIA cuDNN`，可以使用`conda`进行安装：
+
+``` shell
+(test-env) $ conda install cudatoolkit=10.1 cudnn
+```
+
 ## 在 Jupyter 中使用自定义 R 环境
 
 新建环境（或使用已有环境）:
@@ -75,7 +81,7 @@ $ conda activate test-env
 ``` shell
 $ module load miniconda3
 $ conda create -n r-test-env
-$ conda activate r-test-env
+$ source activate r-test-env
 $ (r-test-env) $ conda install -c r r-essentials
 ```
 
