@@ -1,4 +1,4 @@
-# <center>Jupyter使用说明</center>
+# <center>Jupyter 使用说明</center>
 
 --------
 
@@ -6,11 +6,11 @@ Jupyter是一个非营利组织，旨在“为数十种编程语言的交互式�
 
 Jupyter Project的名称是对Jupyter支持的三种核心编程语言的引用，这三种语言是Julia、Python和R，也是对伽利略记录发现木星的卫星的笔记本的致敬。Jupyter项目开发并支持交互式计算产品Jupyter Notebook、JupyterHub和JupyterLab，这是Jupyter Notebook的下一代版本。
 
-登录HPC Studio平台后，可以在内置应用中选择`Jupyter`或`Jupyer (GPU)`。
+登录HPC Studio平台后，可以在内置应用中选择`Jupyter`或`Jupyer (GPU)`，均支持`Jupyter Notebook`和`JupyterLab`。
 
 ## 在 Jupyter 中使用预置环境
 
-已有两个预置环境，可供用户使用：
+已有三个预置环境，可供用户使用：
 
 ### 预置 PyTorch 环境
 
@@ -43,6 +43,12 @@ Jupyter Project的名称是对Jupyter支持的三种核心编程语言的引用�
 | matplotlib | 3.2.1 |
 | seaborn | 0.10.1 |
 
+### 预置 R 环境
+
+| 环境 | 版本 |
+| ---- | ---- |
+| R | 3.6.1 |
+
 ## 在 Jupyter 中使用自定义的环境
 
 新建环境（或使用已有环境）:
@@ -57,11 +63,33 @@ $ conda activate test-env
 
 ``` shell
 (test-env) $ conda install ipykernel
-(test-env) $ python -m ipykernel install --name test-env --display-name "Test Environment"
+(test-env) $ python -m ipykernel install --user --name test-env --display-name "Test Environment"
 ```
 
 然后可以在`Jupyter`中选择名为`Test Environment`的Kernel进行计算。
 
+## 在 Jupyter 中使用自定义 R 环境
+
+新建环境（或使用已有环境）:
+
+``` shell
+$ module load miniconda3
+$ conda create -n r-test-env
+$ conda activate r-test-env
+$ (r-test-env) $ conda install -c r r-essentials
+```
+
+安装并注册为`jupter kernel`：
+
+``` shell
+(test-env) $ R
+> install.packages('IRkernel')
+> IRkernel::installspec(name = 'r-test-env', displayname = 'R 3.6.1')
+```
+
+然后可以在`Jupyter`中选择名为`R 3.6.1`的Kernel进行计算。
+
 ## 参考文献
 
 - [Jupyter Wikepedia](https://zh.wikipedia.org/wiki/Jupyter)
+- [Jupyter Home](https://jupyter.org/)
