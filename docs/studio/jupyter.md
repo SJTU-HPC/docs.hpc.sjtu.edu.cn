@@ -1,4 +1,4 @@
-# <center>RStudio使用说明</center>
+# <center>Jupyter使用说明</center>
 
 --------
 
