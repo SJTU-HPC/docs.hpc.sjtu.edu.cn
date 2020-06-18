@@ -15,7 +15,11 @@ nav:
   #   - 数据传输: 文件系统/数据传输.md
   #   - 与校云计算文件交互: 文件系统/云平台.md
   #   - 与其他用户共享文件: 文件系统/共享文件.md 
-  - 可视化平台: login/HpcStudio.md
+  - 可视化平台:
+    - 基础操作: studio/basic.md
+    - 远程桌面: studio/remote-desktop.md
+    - Jupyter: studio/jupyter.md
+    - RStudio: studio/rstudio.md
   - 提交作业:
     - Slurm概览: job/slurm.md
     # - 脚本式作业: 作业/脚本式作业.md
