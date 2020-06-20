@@ -38,7 +38,7 @@ srun abinit < example.in
 
 ## Pi 上提交作业
 ```bash
-# sbatch slurm.test
+$ sbatch slurm.test
 ```
 
 ## 参考链接
