@@ -14,19 +14,19 @@
 | [ ABINIT ](https://docs.hpc.sjtu.edu.cn/application/abinit/) | 8.10.3 |ABINIT is a package whose main program allows one to find the total energy, charge density and electronic structure of systems made of electrons and nuclei (molecules and periodic solids) within Density Functional Theory (DFT), using pseudopotentials and a planewave or wavelet basis.|
 | [ Amber ](https://docs.hpc.sjtu.edu.cn/application/Amber/) || A package of molecular simulation programs and analysis tools. |
 | BCFtools | 1.9 | BCFtools is a program for variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF. All commands work transparently with both VCFs and BCFs, both uncompressed and BGZF-compressed.|
-| bedtools2 | 2.27.1 |The bedtools utilities are a swiss-army knife of tools for a wide-range of genomics analysis tasks. The most widely-used tools enable genome arithmetic: that is, set theory on the genome. |
+| Bedtools2 | 2.27.1 |The bedtools utilities are a swiss-army knife of tools for a wide-range of genomics analysis tasks. The most widely-used tools enable genome arithmetic: that is, set theory on the genome. |
 | Bismark  | 0.19.0| Bismark is a program to map bisulfite treated sequencing reads to a genome of interest and perform methylation calls in a single step. The output can be easily imported into a genome viewer, such as SeqMonk, and enables a researcher to analyse the methylation levels of their samples straight away.|
 | Bowtie | 1.2.3 |Bowtie is an ultrafast, memory-efficient short read aligner geared toward quickly aligning large sets of short DNA sequences (reads) to large genomes.|
-| bwa | 0.7.17|BWA is a software package for mapping low-divergent sequences against a large reference genome, such as the human genome.|
+| BWA | 0.7.17|BWA is a software package for mapping low-divergent sequences against a large reference genome, such as the human genome.|
 | [ CESM ](https://docs.hpc.sjtu.edu.cn/application/CESM/) || Community Earth System Model, or CESM, is a fully-coupled, community, global climate model that provides state-of-the-art computer simulations of the Earth's past, present, and future climate states. |
 | CDO | 1.9.8|CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data.|
 | CP2K |6.1| A freely available program to perform atomistic and molecular simulations of solid state, liquid, molecular and biological systems. It provides a general framework for different methods such as e.g. density functional theory (DFT) using a mixed Gaussian and plane waves approach (GPW), and classical pair and many-body potentials. |
 | Cufflinks | 2.2.1|Cufflinks assembles transcripts, estimates their abundances, and tests for differential expression and regulation in RNA-Seq samples.|
 | FastQC | 0.11.7|FastQC aims to provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines.|
-| gatk | 3.8| The GATK is the industry standard for identifying SNPs and indels in germline DNA and RNAseq data. |
+| GATK | 3.8| The GATK is the industry standard for identifying SNPs and indels in germline DNA and RNAseq data. |
 |Gaussian ||Gaussian is a general purpose computational chemistry software package initially released in 1970 by John Pople and his research group at Carnegie Mellon University as Gaussian 70.|
-| gmap-gsnap | 2019-05-12|GMAP is a tools for rapidly and accurately mapping and aligning cDNA sequences to genomic sequences. GSNAP is designed to align short reads from NGS data and allow detection of short and long range splicing de novo or with a database of know juctions. |
-| graphmap | 0.3.||
+| GMAP-GSNAP | 2019-05-12|GMAP is a tools for rapidly and accurately mapping and aligning cDNA sequences to genomic sequences. GSNAP is designed to align short reads from NGS data and allow detection of short and long range splicing de novo or with a database of know juctions. |
+| GraphMap | 0.3.0|A highly sensitive and accurate mapper for long, error-prone reads.|
 | [ Gromacs ](https://docs.hpc.sjtu.edu.cn/application/Gromacs/) |2019.2, 2019.4 |GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles. It is primarily designed for biochemical molecules like proteins, lipids and nucleic acids that have a lot of complicated bonded interactions, but since GROMACS is extremely fast at calculating the nonbonded interactions (that usually dominate simulations) many groups are also using it for research on non-biological systems, e.g. polymers. |
 | HISAT2 | 2.1.0|HISAT2 is a fast and sensitive alignment program for mapping next-generation sequencing reads (both DNA and RNA) to a population of human genomes as well as to a single reference genome. |
 | [ LAMMPS ](https://docs.hpc.sjtu.edu.cn/application/Lammps/) | 20190807|(Large-scale Atomic/Molecular Massively Parallel Simulator) a classical molecular dynamics code. |
@@ -51,12 +51,12 @@
 | SAMtools | 1.9| SAM Tools provide various utilities for manipulating alignments in the SAM format.|
 | SOAPdenovo2 | 240| SOAPdenovo is a novel short-read assembly method that can build a de novo draft assembly for the human-sized genomes.|
 | SRAtoolkit | 2.9.6|The SRA Toolkit and SDK from NCBI is a collection of tools and libraries for using data in the INSDC Sequence Read Archives.|
-| star | 2.7.0| Spliced Transcripts Alignment to a Reference (STAR) software is based on a previously undescribed RNA-seq alignment algorithm that uses sequential maximum mappable seed search in uncompressed suffix arrays followed by seed clustering and stitching procedure.|
+| STAR | 2.7.0| Spliced Transcripts Alignment to a Reference (STAR) software is based on a previously undescribed RNA-seq alignment algorithm that uses sequential maximum mappable seed search in uncompressed suffix arrays followed by seed clustering and stitching procedure.|
 | StringTie | 1.3.4d| StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. |
 |[ TensorFlow ](https://docs.hpc.sjtu.edu.cn/application/TensorFlow/)|2.0.0|TensorFlow is a free and open-source software library for dataflow and differentiable programming across a range of tasks. It is a symbolic math library, and is also used for machine learning applications such as neural networks.|
 | TopHat | 2.1.2|TopHat is a program that aligns RNA-Seq reads to a genome in order to identify exon-exon splice junctions.|
 | vardictjava | 1.5.1|VarDictJava is a variant discovery program written in Java and Perl.|
 | [ VASP ](https://docs.hpc.sjtu.edu.cn/application/VASP/) | |A package for ab initio, quantum-mechanical, molecular dynamics simulations. |
-| vsearch | 2.4.3 |VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed.|
+| VSEARCH | 2.4.3 |VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed.|
 | [ VMD ](https://docs.hpc.sjtu.edu.cn/application/VMD/) |1.9.4| VMD is a molecular visualization program for displaying, animating, and analyzing large biomolecular systems using 3-D graphics and built-in scripting. |
 
