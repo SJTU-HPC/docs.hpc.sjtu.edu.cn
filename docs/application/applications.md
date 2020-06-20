@@ -1,141 +1,62 @@
-# <center>module 软件列表，与常用软件介绍</center>
+# <center>Pi 上的软件</center>
 
 -----------
 
-本文档介绍 Pi 上可用的 module 软件模块，和一些常用的科学软件。<br><br>
-module 软件模块是已预构建的软件包，可直接调用。<br><br>
-module 列表里没有的软件，需先安装才能使用。常用的开源软件可联系我们安装，商业软件则需用户自行获取版权并安装。
+本文档介绍 Pi 上的软件。<br>
+商业软件需用户自行获取版权并安装。<br>
 
 
-## Pi 上的 module 软件模块
-
-最新列表可通过下方命令查看：
-```
-$ module av
-```
-然后通过 module load 加载需要的模块，示例：
-```
-$ module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
-```
-
-| module | Version |
-| ---- | ---- |
-| abinit | 8.10.3-gcc-8.3.0-openblas-openmpi |
-| bcftools | 1.9-gcc-9.2.0, 1.9-gcc-8.3.0 |
-| bedtools2 | 2.27.1-intel-19.0.4, 2.27.1-gcc-8.3.0 |
-| bismark | 0.19.0-intel-19.0.4 |
-| boost | 1.70.0-gcc-9.2.0, 1.70.0-intel-19.0.4, 1.70.0-intel-19.0.5, 1.56.0-gcc-8.3.0, 1.65.1-gcc-8.3.0-openmpi, 1.66.0-gcc-8.3.0, 1.70.0-gcc-7.4.0, 1.70.0-gcc-8.3.0 |
-| bowtie | 1.2.3-gcc-9.2.0, 1.2.3-gcc-8.3.0 |
-| bwa | 0.7.17-gcc-9.2.0, 0.7.17-intel-19.0.4, 0.7.17-gcc-8.3.0 |
-| cdo | 1.9.8-gcc-8.3.0-openmpi |
-| cp2k | 6.1-gcc-8.3.0-openblas-openmpi |
-| cuda | 10.2.89-intel-19.0.4, 10.1.243-gcc-9.2.0, 9.0.176-intel-19.0.4, 10.0.130-gcc-8.3.0, 10.1.243-gcc-8.3.0, 10.2.89-gcc-8.3.0, 9.0.176-gcc-8.3.0, 9.1.85-gcc-8.3.0, 9.2.88-gcc-8.3.0, 10.0.130-gcc-4.8.5, 10.1.243-gcc-4.8.5, 7.5.18-gcc-4.8.5, 8.0.61-gcc-4.8.5, 9.0.176-gcc-4.8.5, 9.2.88-gcc-4.8.5 |
-| cudnn | 7.1.2-9.0-linux-x64-gcc-8.3.0, 7.6.5.32-10.1-linux-x64-gcc-4.8.5, 7.6.5.32-9.0-linux-x64-gcc-4.8.5 |
-| cufflinks | 2.2.1-gcc-9.2.0, 2.2.1-intel-19.0.4, 2.2.1-gcc-8.3.0 |
-| curl | 7.63.0-gcc-8.3.0 |
-| eigen | 3.3.7-gcc-9.2.0, 3.3.7-gcc-8.3.0 |
-| elpa | 2017.11.001-gcc-8.3.0-openblas-openmpi |
-| emacs | 26.3-gcc-4.8.5 |
-| fastqc | 0.11.7-gcc-9.2.0, 0.11.7-intel-19.0.4, 0.11.7-gcc-8.3.0 |
-| fftw | 3.3.8-gcc-9.2.0, 3.3.8-intel-19.0.4, 3.3.8-intel-19.0.4-impi, 3.3.8-intel-19.0.5, 3.3.8-intel-19.0.5-impi, 2.1.5-gcc-8.3.0, 3.3.8-gcc-7.4.0, 3.3.8-gcc-8.3.0, 3.3.8-gcc-8.3.0-openmpi, 3.3.8-gcc-4.8.5 |
-| flash | 1.2.11-gcc-9.2.0, 1.2.11-gcc-8.3.0 |
-| gatk | 3.8-1-gcc-8.3.0 |
-| gcc | 5.5.0-gcc-4.8.5, 7.4.0-gcc-4.8.5, 8.3.0-gcc-4.8.5, 9.2.0-gcc-4.8.5, 9.3.0-gcc-4.8.5 |
-| gmap-gsnap | 2019-05-12-gcc-8.3.0 |
-| graphmap | 0.3.0-gcc-8.3.0 |
-| gromacs | 2019.2-gcc-9.2.0-openmpi, 2019.4-gcc-9.2.0-openmpi, 2019.4-intel-19.0.4-impi, 2019.2-gcc-8.3.0-openmpi, 2019.4-gcc-8.3.0-openmpi |
-| gsl | 2.5-gcc-9.2.0, 2.5-intel-19.0.4, 2.5-intel-19.0.5, 2.5-gcc-8.3.0, 2.5-gcc-4.8.5 |
-| hdf5 | 1.10.5-gcc-9.2.0, 1.10.5-intel-19.0.4-impi, 1.10.5-intel-19.0.5-impi, 1.10.6-intel-19.0.5-impi, 1.10.5-gcc-7.4.0, 1.10.6-gcc-8.3.0, 1.10.6-gcc-8.3.0-openmpi, 1.10.5-gcc-4.8.5
-| hisat2 | 2.1.0-intel-19.0.4, 2.1.0-gcc-8.3.0
-| intel | 18.0.4-gcc-4.8.5, 19.0.4-gcc-4.8.5, 19.0.5-gcc-4.8.5, 19.1.1-gcc-4.8.5
-| intel-mkl | 2019.3.199-intel-19.0.4, 2019.5.281-intel-19.0.5, 2020.1.217-intel-19.1.1, 2019.4.243-intel-19.0.4, 2019.6.154-gcc-9.2.0, 2019.6.154-intel-19.0.5
-| intel-parallel-studio | cluster.2019.4-intel-19.0.4, cluster.2019.5-intel-19.0.5, cluster.2020.1-intel-19.1.1, cluster.2018.4-intel-18.0.4
-| jdk | 12.0.2_10-gcc-9.2.0, 12.0.2_10-intel-19.0.4, 12.0.2_10-gcc-8.3.0, 12.0.2_10-gcc-4.8.5
-| lammps | 20190807-intel-19.0.5-impi, 20190807-gcc-8.3.0-openmpi
-| libbeagle | 3.1.2-gcc-8.3.0
-| libxc | 4.3.2-gcc-8.3.0
-| llvm | 7.0.0-gcc-4.8.5
-| lumpy-sv | 0.2.13-gcc-9.2.0
-| mcl | 14-137-gcc-9.2.0
-| megahit | 1.1.4-intel-19.0.4
-| megahit | 1.1.4-gcc-8.3.0
-| metis | 5.1.0-gcc-7.4.0, 5.1.0-gcc-8.3.0, 5.1.0-gcc-4.8.5
-| miniconda2 | 4.6.14-gcc-4.8.5, 4.7.12.1-gcc-4.8.5, 4.6.14-gcc-4.8.5, 4.7.12.1-gcc-4.8.5, 4.8.2-gcc-4.8.5
-| mpich | 3.3.2-gcc-9.2.0, 3.3.2-intel-19.0.4, 3.3.2-intel-19.0.5, 3.3.2-gcc-8.3.0
-| mrbayes | 3.2.7a-gcc-8.3.0-openmpi
-| mvapich2 | 2.3.2-intel-19.0.5, 2.3.2-gcc-8.3.0
-| ncbi-rmblastn | 2.2.28-gcc-4.8.5
-| nccl | 2.4.8-1-gcc-8.3.0
-| netcdf-c | 4.7.3-gcc-9.2.0, 4.7.3-intel-19.0.5-impi, 4.7.3-gcc-7.4.0, 4.7.3-gcc-8.3.0, 4.7.3-gcc-8.3.0-openmpi
-| netcdf-fortran | 4.5.2-gcc-9.2.0, 4.5.2-gcc-8.3.0, 4.5.2-gcc-8.3.0-openmpi
-| nwchem | 6.8.1-gcc-9.2.0-openblas
-| octave | 5.2.0-gcc-8.3.0-openblas
-| openblas | 0.3.7-gcc-8.3.0, 0.3.7-gcc-9.2.0, 0.3.7-intel-19.0.4
-| openfoam | 1712-gcc-7.4.0-openmpi, 1812_191001-gcc-7.4.0-openmpi, 1912-gcc-7.4.0-openmpi
-| openfoam-org | 7-gcc-7.4.0-openmpi
-| openjdk | 11.0.2-gcc-9.2.0, 11.0.2-intel-19.0.4, 11.0.2-gcc-8.3.0, 1.8.0_202-b08-gcc-8.3.0
-| openmpi | 3.1.5-gcc-9.2.0, 3.1.5-gcc-8.3.0, 4.0.2-gcc-9.2.0, 3.1.5-gcc-4.8.5
-| openssl | 1.1.1d-gcc-8.3.0
-| perl | 5.30.0-gcc-9.2.0, 5.30.0-intel-19.0.4, 5.30.0-intel-19.0.5, 5.28.0-gcc-8.3.0, 5.30.0-gcc-7.4.0, 5.30.0-gcc-8.3.0, 5.30.0-gcc-9.2.0, 5.26.2-gcc-4.8.5, 5.30.0-gcc-4.8.5 |
-| pgi | 19.4-gcc-4.8.5 |
-| picard | 2.19.0-gcc-9.2.0, 2.19.0-intel-19.0.4, 2.19.0-gcc-8.3.0 |
-| precice | 1.6.1-gcc-8.3.0-openblas-openmpi
-| python | 3.7.4-gcc-9.2.0, 3.7.4-intel-19.0.4, 3.7.4-intel-19.0.5, 2.7.16-gcc-8.3.0, 2.7.16-gcc-9.2.0, 3.7.4-gcc-7.4.0, 3.7.4-gcc-8.3.0, 3.7.4-gcc-4.8.5 |
-| quantum-espresso | 6.4.1-intel-19.0.4-impi, 6.4.1-intel-19.0.5-impi |
-| r | 1.1.8-gcc-9.2.0, 1.1.8-intel-19.0.4, 3.6.2-gcc-8.3.0-openblas |
-| rna-seqc | 1.1.8-gcc-8.3.0 |
-| salmon | 0.14.1-gcc-8.3.0 |
-| samtools | 1.9-gcc-9.2.0, 1.9-intel-19.0.4, 1.9-gcc-8.3.0, 1.9-gcc-4.8.5 |
-| soapdenovo2 | 240-gcc-4.8.5 |
-| sratoolkit | 2.9.6-gcc-8.3.0 |
-| star | 2.7.0e-gcc-8.3.0 |
-| stream | 5.10-intel-19.0.4 |
-| stringtie | 1.3.4d-gcc-8.3.0 |
-| sundials | 3.1.2-gcc-9.2.0, 4.1.0-gcc-8.3.0-openmpi, 5.0.0-gcc-8.3.0-openmpi |
-| tcl | 8.6.8-gcc-8.3.0 |
-| tophat | 2.1.2-intel-19.0.4 |
-| vardictjava | 1.5.1-gcc-8.3.0 |
-| vsearch | 2.4.3-intel-19.0.4, 2.4.3-gcc-8.3.0 |
-| vt | 0.5772-gcc-8.3.0 |
+## Pi 上的软件
 
 
-
-
-## 常用的软件介绍
-
-| 软件名 | 介绍 |
-| ---- | ---- |
-| [ Amber ](https://docs.hpc.sjtu.edu.cn/application/Amber/) | A package of molecular simulation programs and analysis tools. |
-| abinit | ABINIT is a package whose main program allows one to find the total energy, charge density and electronic structure of systems made of electrons and nuclei (molecules and periodic solids) within Density Functional Theory (DFT), using pseudopotentials and a planewave or wavelet basis. ABINIT also includes options to optimize the geometry according to the DFT forces and stresses, or to perform molecular dynamics simulations using these forces, or to generate dynamical matrices, Born effective charges, and dielectric tensors, based on Density-Functional Perturbation Theory, and many more properties. |
-| CASTEP | A software package which uses density functional theory to provide a good atomic-level description of all manner of materials and molecules. |
-| [ CESM ](https://docs.hpc.sjtu.edu.cn/application/CESM/) | Community Earth System Model, or CESM, is a fully-coupled, community, global climate model that provides state-of-the-art computer simulations of the Earth's past, present, and future climate states. |
-| CP2K | A freely available program to perform atomistic and molecular simulations of solid state, liquid, molecular and biological systems. It provides a general framework for different methods such as e.g. density functional theory (DFT) using a mixed Gaussian and plane waves approach (GPW), and classical pair and many-body potentials. |
-| CPMD | A parallelized plane wave/pseudopotential implementation of Density Functional Theory, particularly designed for ab-initio molecular dynamics. |
-| CRYSTAL | CRYSTAL is a general-purpose program for the study of crystalline solids. The CRYSTAL program computes the electronic structure of periodic systems within Hartree Fock, density functional or various hybrid approximations (global, range-separated and double-hybrids). The Bloch functions of the periodic systems are expanded as linear combinations of atom centred Gaussian functions. Powerful screening techniques are used to exploit real space locality. Restricted (Closed Shell) and Unrestricted (Spin-polarized) calculations can be performed with all-electron and valence-only basis sets with effective core pseudo-potentials. |
-| GPAW | GPAW is a density-functional theory (DFT) Python code based on the projector-augmented wave (PAW) method and the atomic simulation environment (ASE). |
-| [ Gromacs ](https://docs.hpc.sjtu.edu.cn/application/Gromacs/) | GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles. It is primarily designed for biochemical molecules like proteins, lipids and nucleic acids that have a lot of complicated bonded interactions, but since GROMACS is extremely fast at calculating the nonbonded interactions (that usually dominate simulations) many groups are also using it for research on non-biological systems, e.g. polymers. |
-| [ LAMMPS ](https://docs.hpc.sjtu.edu.cn/application/Lammps/) | (Large-scale Atomic/Molecular Massively Parallel Simulator) a classical molecular dynamics code. |
-| NAMD | A parallel molecular dynamics application designed to simulate large bio-molecular systems. It is developed and maintained by the University of Illinois at Urbana-Champaign. |
-| [ nwChem ](https://docs.hpc.sjtu.edu.cn/application/nwchem/) | NWChem aims to provide its users with computational chemistry tools that are scalable both in their ability to treat large scientific computational chemistry problems efficiently, and in their use of available parallel computing resources from high-performance parallel supercomputers to conventional workstation clusters. The NWChem software can handle: Biomolecules, nanostructures, and solid-state; From quantum to classical, and all combinations; Gaussian basis functions or plane-waves; Scaling from one to thousands of processors; Properties and relativity. | 
-| [ OpenFoam ](https://docs.hpc.sjtu.edu.cn/application/OpenFoam/) | OpenFOAM is an open-source toolbox for computational fluid dynamics. OpenFOAM consists of generic tools to simulate complex physics for a variety of fields of interest, from fluid flows involving chemical reactions, turbulence and heat transfer, to solid dynamics, electromagnetism and the pricing of financial options. The core technology of OpenFOAM is a flexible set of modules written in C++. These are used to build solvers and utilities to perform pre- and post-processing tasks ranging from simple data manipulation to visualisation and mesh processing. |
-| Paraview | Paraview is a data visualisation and analysis package. Whilst ARCHER compute or login nodes do not have graphics cards installed in them paraview is installed so the visualisation libraries and applications can be used to post-process simulation data. To this end the pvserver application has been installed, along with the paraview libraries and client application. |
-| [ Quantum-Espresso ](https://docs.hpc.sjtu.edu.cn/application/Quantum-Espresso/) | Quantum Espresso is an integrated suite of Open-Source computer codes for electronic-structure calculations and materials modeling at the nanoscale. It is based on density-functional theory, plane waves, and pseudopotentials. |
-| SIESTA | (Scalable Library for Eigenvalue Problem Computations) a library	for parallel computation of eigenvalues and eigenvectors. Based on PETSc. Note: not centrally installed as a module, only build	instructions provided.|
-| [ VASP ](https://docs.hpc.sjtu.edu.cn/application/VASP/) | A package for ab initio, quantum-mechanical, molecular dynamics simulations. |
-| WIEN2k | WIEN2k allows to perform electronic structure calculations of solids using density functional theory. It is based on the full-potential (linearized) augmented plane-wave and local orbitals method, one among the most accurate schemes for band structure calculations. |
-| [ VMD ](https://docs.hpc.sjtu.edu.cn/application/VMD/) | VMD is a molecular visualization program for displaying, animating, and analyzing large biomolecular systems using 3-D graphics and built-in scripting. |
-|[ Pytorch ](https://docs.hpc.sjtu.edu.cn/application/Pytorch/) | PyTorch is an open source machine learning library based on the Torch library, used for applications such as computer vision and natural language processing, primarily developed by Facebook's AI Research lab. |
-|[ Relion ](https://docs.hpc.sjtu.edu.cn/application/Relion/) | REgularised LIkelihood OptimisatioN (RELION) employs an empirical Bayesian approach to refinement of (multiple) 3D reconstructions or 2D class averages in electron cryomicroscopy.|
-|[ Octave ](https://docs.hpc.sjtu.edu.cn/application/Octave/) | GNU Octave is software featuring a high-level programming language, primarily intended for numerical computations.|
-|[ TensorFlow ](https://docs.hpc.sjtu.edu.cn/application/TensorFlow/)|TensorFlow is a free and open-source software library for dataflow and differentiable programming across a range of tasks. It is a symbolic math library, and is also used for machine learning applications such as neural networks.|
-|[ R ](https://docs.hpc.sjtu.edu.cn/application/R/)| R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. |
-|[ Nektar++ ](https://docs.hpc.sjtu.edu.cn/application/Nektar/)|Nektar++ is a spectral/hp element framework designed to support the construction of efficient high-performance scalable solvers for a wide range of partial differential equations (PDE).|
-|[ Intel ](https://docs.hpc.sjtu.edu.cn/application/Intel/)| Intel compiler |
-|[ GNU ](https://docs.hpc.sjtu.edu.cn/application/GNU/)|GNU is an operating system and an extensive collection of computer software.|
-
-
-
-
-
-
+| Name | Version | Introduction |
+| ---- | ---- | ---- |
+| [ ABINIT ](https://docs.hpc.sjtu.edu.cn/application/abinit/) | 8.10.3 |ABINIT is a package whose main program allows one to find the total energy, charge density and electronic structure of systems made of electrons and nuclei (molecules and periodic solids) within Density Functional Theory (DFT), using pseudopotentials and a planewave or wavelet basis.|
+| [ Amber ](https://docs.hpc.sjtu.edu.cn/application/Amber/) || A package of molecular simulation programs and analysis tools. |
+| BCFtools | 1.9 | BCFtools is a program for variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF. All commands work transparently with both VCFs and BCFs, both uncompressed and BGZF-compressed.|
+| bedtools2 | 2.27.1 |The bedtools utilities are a swiss-army knife of tools for a wide-range of genomics analysis tasks. The most widely-used tools enable genome arithmetic: that is, set theory on the genome. |
+| Bismark  | 0.19.0| Bismark is a program to map bisulfite treated sequencing reads to a genome of interest and perform methylation calls in a single step. The output can be easily imported into a genome viewer, such as SeqMonk, and enables a researcher to analyse the methylation levels of their samples straight away.|
+| Bowtie | 1.2.3 |Bowtie is an ultrafast, memory-efficient short read aligner geared toward quickly aligning large sets of short DNA sequences (reads) to large genomes.|
+| bwa | 0.7.17|BWA is a software package for mapping low-divergent sequences against a large reference genome, such as the human genome.|
+| [ CESM ](https://docs.hpc.sjtu.edu.cn/application/CESM/) || Community Earth System Model, or CESM, is a fully-coupled, community, global climate model that provides state-of-the-art computer simulations of the Earth's past, present, and future climate states. |
+| CDO | 1.9.8|CDO is a collection of command line Operators to manipulate and analyse Climate and NWP model Data.|
+| CP2K |6.1| A freely available program to perform atomistic and molecular simulations of solid state, liquid, molecular and biological systems. It provides a general framework for different methods such as e.g. density functional theory (DFT) using a mixed Gaussian and plane waves approach (GPW), and classical pair and many-body potentials. |
+| Cufflinks | 2.2.1|Cufflinks assembles transcripts, estimates their abundances, and tests for differential expression and regulation in RNA-Seq samples.|
+| FastQC | 0.11.7|FastQC aims to provide a simple way to do some quality control checks on raw sequence data coming from high throughput sequencing pipelines.|
+| gatk | 3.8| The GATK is the industry standard for identifying SNPs and indels in germline DNA and RNAseq data. |
+|Gaussian ||Gaussian is a general purpose computational chemistry software package initially released in 1970 by John Pople and his research group at Carnegie Mellon University as Gaussian 70.|
+| gmap-gsnap | 2019-05-12|GMAP is a tools for rapidly and accurately mapping and aligning cDNA sequences to genomic sequences. GSNAP is designed to align short reads from NGS data and allow detection of short and long range splicing de novo or with a database of know juctions. |
+| graphmap | 0.3.||
+| [ Gromacs ](https://docs.hpc.sjtu.edu.cn/application/Gromacs/) |2019.2, 2019.4 |GROMACS is a versatile package to perform molecular dynamics, i.e. simulate the Newtonian equations of motion for systems with hundreds to millions of particles. It is primarily designed for biochemical molecules like proteins, lipids and nucleic acids that have a lot of complicated bonded interactions, but since GROMACS is extremely fast at calculating the nonbonded interactions (that usually dominate simulations) many groups are also using it for research on non-biological systems, e.g. polymers. |
+| HISAT2 | 2.1.0|HISAT2 is a fast and sensitive alignment program for mapping next-generation sequencing reads (both DNA and RNA) to a population of human genomes as well as to a single reference genome. |
+| [ LAMMPS ](https://docs.hpc.sjtu.edu.cn/application/Lammps/) | 20190807|(Large-scale Atomic/Molecular Massively Parallel Simulator) a classical molecular dynamics code. |
+| LUMPY-SV| 0.2.13| A general probabilistic framework for structural variant discovery.|
+| MEGAHIT | 1.1.4|MEGAHIT is an ultra-fast and memory-efficient NGS assembler. It is optimized for metagenomes, but also works well on generic single genome assembly (small or mammalian size) and single-cell assembly.|
+| METIS | 5.1.0|METIS is a set of serial programs for partitioning graphs, partitioning finite element meshes, and producing fill reducing orderings for sparse matrices. |
+| MrBayes | 3.2.7a|MrBayes is a program for Bayesian inference and model choice across a wide range of phylogenetic and evolutionary models.|
+| NCBI-RMBlastn | 2.2.28|RMBlast is a RepeatMasker compatible version of the standard NCBI BLAST suite. The primary difference between this distribution and the NCBI distribution is the addition of a new program "rmblastn" for use with RepeatMasker and RepeatModeler.|
+|[ Nektar++ ](https://docs.hpc.sjtu.edu.cn/application/Nektar/)|4.4.1|Nektar++ is a spectral/hp element framework designed to support the construction of efficient high-performance scalable solvers for a wide range of partial differential equations (PDE).|
+| [ nwChem ](https://docs.hpc.sjtu.edu.cn/application/nwchem/) |6.8.1| NWChem aims to provide its users with computational chemistry tools that are scalable both in their ability to treat large scientific computational chemistry problems efficiently, and in their use of available parallel computing resources from high-performance parallel supercomputers to conventional workstation clusters. The NWChem software can handle: Biomolecules, nanostructures, and solid-state; From quantum to classical, and all combinations; Gaussian basis functions or plane-waves; Scaling from one to thousands of processors; Properties and relativity. | 
+|[ Octave ](https://docs.hpc.sjtu.edu.cn/application/Octave/) |5.2.0| GNU Octave is software featuring a high-level programming language, primarily intended for numerical computations.|
+| [ OpenFoam ](https://docs.hpc.sjtu.edu.cn/application/OpenFoam/) |7, 1712, 1812, 1912| OpenFOAM is an open-source toolbox for computational fluid dynamics. OpenFOAM consists of generic tools to simulate complex physics for a variety of fields of interest, from fluid flows involving chemical reactions, turbulence and heat transfer, to solid dynamics, electromagnetism and the pricing of financial options. |
+| OVITO || OVITO (Open Visualization Tool) is a scientific visualization and analysis package for atomistic and particle-based simulation data. |
+| Paraview |0.4.1| Paraview is a data visualisation and analysis package. Whilst ARCHER compute or login nodes do not have graphics cards installed in them paraview is installed so the visualisation libraries and applications can be used to post-process simulation data. To this end the pvserver application has been installed, along with the paraview libraries and client application. |
+| Picard | 2.19.0| Picard is a set of command line tools for manipulating high-throughput sequencing (HTS) data and formats such as SAM/BAM/CRAM and VCF.|
+|[ Pytorch ](https://docs.hpc.sjtu.edu.cn/application/Pytorch/) |19.10| PyTorch is an open source machine learning library based on the Torch library, used for applications such as computer vision and natural language processing, primarily developed by Facebook's AI Research lab. |
+| [ Quantum-Espresso ](https://docs.hpc.sjtu.edu.cn/application/Quantum-Espresso/) |6.4.1| Quantum Espresso is an integrated suite of Open-Source computer codes for electronic-structure calculations and materials modeling at the nanoscale. It is based on density-functional theory, plane waves, and pseudopotentials. |
+|[ R ](https://docs.hpc.sjtu.edu.cn/application/R/)| 1.1.8, 3.6.2|R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. |
+|[ Relion ](https://docs.hpc.sjtu.edu.cn/application/Relion/) |3.0.8| REgularised LIkelihood OptimisatioN (RELION) employs an empirical Bayesian approach to refinement of (multiple) 3D reconstructions or 2D class averages in electron cryomicroscopy.|
+| RNA-SeQC | 1.1.8| RNA-SeQC is a java program which computes a series of quality control metrics for RNA-seq data.|
+| Salmon | 0.14.1|Salmon is a tool for wicked-fast transcript quantification from RNA-seq data.|
+| SAMtools | 1.9| SAM Tools provide various utilities for manipulating alignments in the SAM format.|
+| SOAPdenovo2 | 240| SOAPdenovo is a novel short-read assembly method that can build a de novo draft assembly for the human-sized genomes.|
+| SRAtoolkit | 2.9.6|The SRA Toolkit and SDK from NCBI is a collection of tools and libraries for using data in the INSDC Sequence Read Archives.|
+| star | 2.7.0| Spliced Transcripts Alignment to a Reference (STAR) software is based on a previously undescribed RNA-seq alignment algorithm that uses sequential maximum mappable seed search in uncompressed suffix arrays followed by seed clustering and stitching procedure.|
+| StringTie | 1.3.4d| StringTie is a fast and highly efficient assembler of RNA-Seq alignments into potential transcripts. |
+|[ TensorFlow ](https://docs.hpc.sjtu.edu.cn/application/TensorFlow/)|2.0.0|TensorFlow is a free and open-source software library for dataflow and differentiable programming across a range of tasks. It is a symbolic math library, and is also used for machine learning applications such as neural networks.|
+| TopHat | 2.1.2|TopHat is a program that aligns RNA-Seq reads to a genome in order to identify exon-exon splice junctions.|
+| vardictjava | 1.5.1|VarDictJava is a variant discovery program written in Java and Perl.|
+| [ VASP ](https://docs.hpc.sjtu.edu.cn/application/VASP/) | |A package for ab initio, quantum-mechanical, molecular dynamics simulations. |
+| vsearch | 2.4.3 |VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed.|
+| [ VMD ](https://docs.hpc.sjtu.edu.cn/application/VMD/) |1.9.4| VMD is a molecular visualization program for displaying, animating, and analyzing large biomolecular systems using 3-D graphics and built-in scripting. |
 
