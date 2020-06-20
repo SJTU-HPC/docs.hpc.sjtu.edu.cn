@@ -11,7 +11,7 @@ Amber (Assisted Model Building with Energy Refinement) is the collective name fo
 由于 Amber 是需要版权的软件，Pi 上不提供。需要用户自行获取版权并安装。安装方法见本文档后面部分。
 
 ## Pi 上的 Slurm 脚本 slurm.test
-（版本：GNU + cpu）
+（版本：GNU + cpu）<br>
 在 cpu 队列上，总共使用 80 核 (n = 80)<br>
 cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ```bash
@@ -34,7 +34,7 @@ source {YOUR amber.sh}
 srun --mpi=pmi2 {pmemd.MPI ... YOUR AMBER COMMANDS}
 ```
 
-（版本：GNU + gpu）
+（版本：GNU + gpu）<br>
 在 dgx2 队列上，使用一张卡：
 ```bash
 #!/bin/bash
@@ -63,7 +63,7 @@ srun --mpi=pmi2 {YOUR AMBER CUDA COMMANDS; eg: pmemd.cuda.MPI -ng 6 ... }
 # sbatch slurm.test
 ```
 
-## Amber 安装（以 Amber 18 为例）
+## Amber 安装
 
 安装前请移除 .bashrc 不必要的内容，包括 module load 与 export 等等
 
