@@ -60,7 +60,7 @@ srun --mpi=pmi2 {YOUR AMBER CUDA COMMANDS; eg: pmemd.cuda.MPI -ng 6 ... }
 
 ## Pi 上提交作业
 ```bash
-# sbatch slurm.test
+$ sbatch slurm.test
 ```
 
 ## Amber 安装
