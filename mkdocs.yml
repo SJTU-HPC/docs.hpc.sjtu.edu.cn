@@ -33,30 +33,30 @@ nav:
     - 容器: job/container/singularity.md
     - 非特权容器构建: job/container/u2cb.md
   - 应用软件:
-    - 软件列表与介绍: application/applications.md
+    - Pi 上的软件: application/applications.md
     - 预置软件环境: application/module.md
-    # - Module Environment: module/module.md
-    - Nektar++: application/Nektar.md
-    - Lammps: application/Lammps.md
-    - VASP: application/VASP.md
+    - ABINIT: application/abinit.md
     - Amber: application/Amber.md
-    - VMD: application/VMD.md
-    - nwchem: application/nwchem.md
-  #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
+    - CESM: application/CESM.md
     - Gromacs: application/Gromacs.md
-    - Relion: application/Relion.md
-  #   - FFTW: 应用软件/FFTW.md
+    - Lammps: application/Lammps.md
+    - Mrbayes: application/mrbayes.md
+    - Nektar++: application/Nektar.md
+    - nwchem: application/nwchem.md
     - OpenFoam: application/OpenFoam.md
-  #   - MPI4PY: 应用软件/MPI4PY.md
-    - Quantum-Espresso: application/Quantum-Espresso.md
     - Pytorch: application/Pytorch.md
+    - Quantum-Espresso: application/Quantum-Espresso.md
+    - Relion: application/Relion.md
+    - STRique: application/STRique.md
     - TensorFlow: application/TensorFlow.md
+    - VASP: application/VASP.md
+    - VMD: application/VMD.md   
+  #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md  
+  #   - FFTW: 应用软件/FFTW.md
+  #   - MPI4PY: 应用软件/MPI4PY.md
   #   - MXNet: 应用软件/MXNet.md
   #   - HIC-Pro: 应用软件/HIC-Pro.md
-    - Mrbayes: application/mrbayes.md
-    - CESM: application/CESM.md
   #   - Spark: 应用软件/Spark.md
-    - STRique: application/STRique.md
   #  - 商业软件: application/commercial.md
   - 编程语言:
     - Python: application/Python.md
