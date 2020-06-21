@@ -35,7 +35,7 @@ export I_MPI_FABRICS=shm:ofi
 ulimit -s unlimited
 ulimit -l unlimited
 
-srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
+srun lmp -i YOUR_INPUT_FILE
 ```
 
 并使用如下指令提交：
@@ -96,7 +96,7 @@ export I_MPI_FABRICS=shm:ofi
 ulimit -s unlimited
 ulimit -l unlimited
 
-srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
+srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
 ```
 
 
