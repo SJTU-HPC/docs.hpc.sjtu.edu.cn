@@ -26,7 +26,6 @@ $ module load lammps/20190807-intel-19.0.5-impi
 #SBATCH -e %j.err
 
 module purge
-module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 module load lammps/20190807-intel-19.0.5-impi
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
