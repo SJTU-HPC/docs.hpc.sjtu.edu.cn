@@ -15,7 +15,7 @@
  1. [账号申请](accounts/apply.md)
  2. [密码](accounts/passwords.md)
  3. [远程登陆](login/SSH.md)
- 4. [远程桌面](login/HpcStudio.md)
+ 4. [远程桌面](studio/basic.md)
  5. [作业提交](job/slurm.md)
  6. [应用软件](application/applications.md)
  7. [使用GNU套件编译代码](application/GNU.md)
