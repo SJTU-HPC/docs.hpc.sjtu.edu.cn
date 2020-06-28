@@ -1,27 +1,33 @@
-# <center>Lammps</center> 
+# <center>LAMMPS</center> 
 
 -----
 
-## 加载预安装的 Lammps
+## 简介
 
-Pi 2.0 系统中已经预装 lammps/20190807 (Intel+cpu 版本)，可以用以下命令加载: 
+LAMMPS is a large scale classical molecular dynamics code, and stands for Large-scale Atomic/Molecular Massively Parallel Simulator. LAMMPS has potentials for soft materials (biomolecules, polymers), solid-state materials (metals, semiconductors) and coarse-grained or mesoscopic systems. It can be used to model atoms or, more generically, as a parallel particle simulator at the atomic, meso, or continuum scale.
 
+## Pi 上的 LAMMPS
+查看 Pi 上已编译的软件模块:
+```bash
+$ module avail lammps
 ```
+
+调用该模块:
+```bash
 $ module load lammps/20190807-intel-19.0.5-impi
 ```
 
-## 提交 Intel+CPU 版本 Lammps 任务
-
-使用 Intel 2019 编译的 CPU 版本 Lammps 运行单节点作业脚本示例 lammps_cpu_intel.slurm：
-
-
+## Pi 上的 Slurm 脚本 slurm.test
+在 cpu 队列上，总共使用 80 核 (n = 80)<br>
+cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ```bash
 #!/bin/bash
 
-#SBATCH -J lammps_test
+#SBATCH -J QE_test
 #SBATCH -p cpu
-#SBATCH -n 40
+#SBATCH -n 80
 #SBATCH --ntasks-per-node=40
+#SBATCH --exclusive
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 
@@ -38,10 +44,9 @@ ulimit -l unlimited
 srun lmp -i YOUR_INPUT_FILE
 ```
 
-并使用如下指令提交：
-
+## Pi 上提交作业
 ```bash
-$ sbatch lammps_cpu_intel.slurm
+$ sbatch slurm.test
 ```
 
 ## 自行编译 Lammps
@@ -99,7 +104,8 @@ ulimit -l unlimited
 srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
 ```
 
-
+## 参考链接
+- [LAMMPS 官网](https://lammps.sandia.gov/)
 
 
 
