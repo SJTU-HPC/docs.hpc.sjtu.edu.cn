@@ -12,7 +12,7 @@
 | Name | Version | Introduction |
 | ---- | ---- | ---- |
 | [ ABINIT ](https://docs.hpc.sjtu.edu.cn/application/abinit/) | 8.10.3 ![x86](https://img.shields.io/badge/-x86-green) |ABINIT is a package whose main program allows one to find the total energy, charge density and electronic structure of systems made of electrons and nuclei (molecules and periodic solids) within Density Functional Theory (DFT), using pseudopotentials and a planewave or wavelet basis.|
-| [ Amber ](https://docs.hpc.sjtu.edu.cn/application/Amber/) || A package of molecular simulation programs and analysis tools. |
+| [ Amber ](https://docs.hpc.sjtu.edu.cn/application/Amber/) |![x86](https://img.shields.io/badge/-x86-green) ![gpu](https://img.shields.io/badge/-gpu-blueviolet)| A package of molecular simulation programs and analysis tools. |
 | BCFtools | 1.9 | BCFtools is a program for variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF. All commands work transparently with both VCFs and BCFs, both uncompressed and BGZF-compressed.|
 | Bedtools2 | 2.27.1 |The bedtools utilities are a swiss-army knife of tools for a wide-range of genomics analysis tasks. The most widely-used tools enable genome arithmetic: that is, set theory on the genome. |
 | Bismark  | 0.19.0| Bismark is a program to map bisulfite treated sequencing reads to a genome of interest and perform methylation calls in a single step. The output can be easily imported into a genome viewer, such as SeqMonk, and enables a researcher to analyse the methylation levels of their samples straight away.|
