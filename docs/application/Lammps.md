@@ -23,7 +23,7 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ```bash
 #!/bin/bash
 
-#SBATCH -J QE_test
+#SBATCH -J lammps_test
 #SBATCH -p cpu
 #SBATCH -n 80
 #SBATCH --ntasks-per-node=40
