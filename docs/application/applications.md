@@ -5,7 +5,7 @@
 本文档介绍 Pi 上的软件。<br>
 商业软件需用户自行获取版权并安装。<br>
 <br>
-![x86](https://img.shields.io/badge/-x86-green) ![gpu](https://img.shields.io/badge/-gpu-blueviolet) ![arm](https://img.shields.io/badge/-arm-yellow) 标签表明软件有x86、gpu、arm 版本
+![x86](https://img.shields.io/badge/-x86-green) ![gpu](https://img.shields.io/badge/-gpu-blueviolet) ![arm](https://img.shields.io/badge/-arm-yellow) 标签表明软件有 x86、gpu、arm 版本
 
 
 ## Pi 上的软件
@@ -13,7 +13,7 @@
 
 | Name | Version | Introduction |
 | ---- | ---- | ---- |
-| [ ABINIT ](https://docs.hpc.sjtu.edu.cn/application/abinit/) | 8.10.3 ![x86](https://img.shields.io/badge/-x86-green) |ABINIT is a package whose main program allows one to find the total energy, charge density and electronic structure of systems made of electrons and nuclei (molecules and periodic solids) within Density Functional Theory (DFT), using pseudopotentials and a planewave or wavelet basis.|
+| [ ABINIT ](https://docs.hpc.sjtu.edu.cn/application/abinit/) | 8.10.3 |ABINIT is a package whose main program allows one to find the total energy, charge density and electronic structure of systems made of electrons and nuclei (molecules and periodic solids) within Density Functional Theory (DFT), using pseudopotentials and a planewave or wavelet basis.|
 | [ Amber ](https://docs.hpc.sjtu.edu.cn/application/Amber/) |![x86](https://img.shields.io/badge/-x86-green) ![gpu](https://img.shields.io/badge/-gpu-blueviolet)| A package of molecular simulation programs and analysis tools. |
 | BCFtools | 1.9 | BCFtools is a program for variant calling and manipulating files in the Variant Call Format (VCF) and its binary counterpart BCF. All commands work transparently with both VCFs and BCFs, both uncompressed and BGZF-compressed.|
 | Bedtools2 | 2.27.1 |The bedtools utilities are a swiss-army knife of tools for a wide-range of genomics analysis tasks. The most widely-used tools enable genome arithmetic: that is, set theory on the genome. |
@@ -37,17 +37,17 @@
 | METIS | 5.1.0|METIS is a set of serial programs for partitioning graphs, partitioning finite element meshes, and producing fill reducing orderings for sparse matrices. |
 | MrBayes | 3.2.7a|MrBayes is a program for Bayesian inference and model choice across a wide range of phylogenetic and evolutionary models.|
 | NCBI-RMBlastn | 2.2.28|RMBlast is a RepeatMasker compatible version of the standard NCBI BLAST suite. The primary difference between this distribution and the NCBI distribution is the addition of a new program "rmblastn" for use with RepeatMasker and RepeatModeler.|
-|[ Nektar++ ](https://docs.hpc.sjtu.edu.cn/application/Nektar/)|4.4.1 ![x86](https://img.shields.io/badge/-x86-green) |Nektar++ is a spectral/hp element framework designed to support the construction of efficient high-performance scalable solvers for a wide range of partial differential equations (PDE).|
-| [ nwChem ](https://docs.hpc.sjtu.edu.cn/application/nwchem/) |6.8.1 ![x86](https://img.shields.io/badge/-x86-green) | NWChem aims to provide its users with computational chemistry tools that are scalable both in their ability to treat large scientific computational chemistry problems efficiently, and in their use of available parallel computing resources from high-performance parallel supercomputers to conventional workstation clusters. The NWChem software can handle: Biomolecules, nanostructures, and solid-state; From quantum to classical, and all combinations; Gaussian basis functions or plane-waves; Scaling from one to thousands of processors; Properties and relativity. | 
+|[ Nektar++ ](https://docs.hpc.sjtu.edu.cn/application/Nektar/)|4.4.1 |Nektar++ is a spectral/hp element framework designed to support the construction of efficient high-performance scalable solvers for a wide range of partial differential equations (PDE).|
+| [ nwChem ](https://docs.hpc.sjtu.edu.cn/application/nwchem/) |6.8.1 | NWChem aims to provide its users with computational chemistry tools that are scalable both in their ability to treat large scientific computational chemistry problems efficiently, and in their use of available parallel computing resources from high-performance parallel supercomputers to conventional workstation clusters. The NWChem software can handle: Biomolecules, nanostructures, and solid-state; From quantum to classical, and all combinations; Gaussian basis functions or plane-waves; Scaling from one to thousands of processors; Properties and relativity. | 
 |[ Octave ](https://docs.hpc.sjtu.edu.cn/application/Octave/) |5.2.0 ![gpu](https://img.shields.io/badge/-gpu-blueviolet)| GNU Octave is software featuring a high-level programming language, primarily intended for numerical computations.|
-| [ OpenFoam ](https://docs.hpc.sjtu.edu.cn/application/OpenFoam/) |7, 1712, 1812, 1912 ![x86](https://img.shields.io/badge/-x86-green) | OpenFOAM is an open-source toolbox for computational fluid dynamics. OpenFOAM consists of generic tools to simulate complex physics for a variety of fields of interest, from fluid flows involving chemical reactions, turbulence and heat transfer, to solid dynamics, electromagnetism and the pricing of financial options. |
+| [ OpenFoam ](https://docs.hpc.sjtu.edu.cn/application/OpenFoam/) |7, 1712, 1812, 1912 | OpenFOAM is an open-source toolbox for computational fluid dynamics. OpenFOAM consists of generic tools to simulate complex physics for a variety of fields of interest, from fluid flows involving chemical reactions, turbulence and heat transfer, to solid dynamics, electromagnetism and the pricing of financial options. |
 | OVITO || OVITO (Open Visualization Tool) is a scientific visualization and analysis package for atomistic and particle-based simulation data. |
 | Paraview |0.4.1| Paraview is a data visualisation and analysis package. Whilst ARCHER compute or login nodes do not have graphics cards installed in them paraview is installed so the visualisation libraries and applications can be used to post-process simulation data. To this end the pvserver application has been installed, along with the paraview libraries and client application. |
-| Picard | 2.19.0 ![x86](https://img.shields.io/badge/-x86-green) | Picard is a set of command line tools for manipulating high-throughput sequencing (HTS) data and formats such as SAM/BAM/CRAM and VCF.|
+| Picard | 2.19.0 | Picard is a set of command line tools for manipulating high-throughput sequencing (HTS) data and formats such as SAM/BAM/CRAM and VCF.|
 |[ Pytorch ](https://docs.hpc.sjtu.edu.cn/application/Pytorch/) |19.10| PyTorch is an open source machine learning library based on the Torch library, used for applications such as computer vision and natural language processing, primarily developed by Facebook's AI Research lab. |
-| [ Quantum-Espresso ](https://docs.hpc.sjtu.edu.cn/application/Quantum-Espresso/) |6.4.1 ![x86](https://img.shields.io/badge/-x86-green) | Quantum Espresso is an integrated suite of Open-Source computer codes for electronic-structure calculations and materials modeling at the nanoscale. It is based on density-functional theory, plane waves, and pseudopotentials. |
+| [ Quantum-Espresso ](https://docs.hpc.sjtu.edu.cn/application/Quantum-Espresso/) |6.4.1| Quantum Espresso is an integrated suite of Open-Source computer codes for electronic-structure calculations and materials modeling at the nanoscale. It is based on density-functional theory, plane waves, and pseudopotentials. |
 |[ R ](https://docs.hpc.sjtu.edu.cn/application/R/)| 1.1.8, 3.6.2|R is a programming language and free software environment for statistical computing and graphics supported by the R Foundation for Statistical Computing. |
-|[ Relion ](https://docs.hpc.sjtu.edu.cn/application/Relion/) |3.0.8 ![x86](https://img.shields.io/badge/-x86-green) | REgularised LIkelihood OptimisatioN (RELION) employs an empirical Bayesian approach to refinement of (multiple) 3D reconstructions or 2D class averages in electron cryomicroscopy.|
+|[ Relion ](https://docs.hpc.sjtu.edu.cn/application/Relion/) |3.0.8 | REgularised LIkelihood OptimisatioN (RELION) employs an empirical Bayesian approach to refinement of (multiple) 3D reconstructions or 2D class averages in electron cryomicroscopy.|
 | RNA-SeQC | 1.1.8| RNA-SeQC is a java program which computes a series of quality control metrics for RNA-seq data.|
 | Salmon | 0.14.1|Salmon is a tool for wicked-fast transcript quantification from RNA-seq data.|
 | SAMtools | 1.9| SAM Tools provide various utilities for manipulating alignments in the SAM format.|
@@ -58,7 +58,7 @@
 |[ TensorFlow ](https://docs.hpc.sjtu.edu.cn/application/TensorFlow/)|2.0.0 ![gpu](https://img.shields.io/badge/-gpu-blueviolet)|TensorFlow is a free and open-source software library for dataflow and differentiable programming across a range of tasks. It is a symbolic math library, and is also used for machine learning applications such as neural networks.|
 | TopHat | 2.1.2|TopHat is a program that aligns RNA-Seq reads to a genome in order to identify exon-exon splice junctions.|
 | vardictjava | 1.5.1|VarDictJava is a variant discovery program written in Java and Perl.|
-| [ VASP ](https://docs.hpc.sjtu.edu.cn/application/VASP/) | ![x86](https://img.shields.io/badge/-x86-green) |A package for ab initio, quantum-mechanical, molecular dynamics simulations. |
+| [ VASP ](https://docs.hpc.sjtu.edu.cn/application/VASP/) | |A package for ab initio, quantum-mechanical, molecular dynamics simulations. |
 | VSEARCH | 2.4.3 |VSEARCH stands for vectorized search, as the tool takes advantage of parallelism in the form of SIMD vectorization as well as multiple threads to perform accurate alignments at high speed.|
 | [ VMD ](https://docs.hpc.sjtu.edu.cn/application/VMD/) |1.9.4| VMD is a molecular visualization program for displaying, animating, and analyzing large biomolecular systems using 3-D graphics and built-in scripting. |
 
