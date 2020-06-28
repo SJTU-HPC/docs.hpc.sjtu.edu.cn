@@ -4,6 +4,8 @@
 
 本文档介绍 Pi 上的软件。<br>
 商业软件需用户自行获取版权并安装。<br>
+<br>
+![x86](https://img.shields.io/badge/-x86-green) ![gpu](https://img.shields.io/badge/-gpu-blueviolet)![arm](https://img.shields.io/badge/-arm-yellow)标签表明软件有x86、gpu、arm 版本
 
 
 ## Pi 上的软件
