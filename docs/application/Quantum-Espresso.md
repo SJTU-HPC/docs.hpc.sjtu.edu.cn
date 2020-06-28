@@ -1,29 +1,35 @@
-# Quantum-Espresso
+# <center>Quantum ESPRESSO</center> 
 
---------
+-----
 
-## 加载预安装的Quantum-Espresso
+## 简介
 
-Pi2.0 系统中已经预装 Quantum-Espresso 6.4.1 (Intel+CPU 版本)，可以用以下命令加载: 
+Quantum ESPRESSO is an integrated suite of computer codes for electronic-structure calculations and materials modeling at the nanoscale. It is based on density-functional theory, plane waves, and pseudopotentials (both norm-conserving and ultrasoft).<br>
 
+Quantum ESPRESSO stands for opEn Source Package for Research in Electronic Structure, Simulation, and Optimization. It is freely available to researchers around the world under the terms of the GNU General Public License.
+
+## Pi 上的 Quantum ESPRESSO
+查看 Pi 上已编译的软件模块:
 ```bash
-module load quantum-espresso/6.4.1-intel-19.0.4-impi
+$ module avail espresso
 ```
 
-## 提交Intel+CPU版本Quantum-Espresso任务
+调用该模块:
+```bash
+$ module load quantum-espresso/6.4.1-intel-19.0.4-impi
+```
 
-加载后即可使用 `pw.x` 等命令。
-
-使用Intel编译的CPU版本Quantum-Espresso运行单节点作业脚本示例qe_cpu_intel.slurm如下：
-
+## Pi 上的 Slurm 脚本 slurm.test
+在 cpu 队列上，总共使用 80 核 (n = 80)<br>
+cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ```bash
 #!/bin/bash
 
-#SBATCH -J qe_test
+#SBATCH -J QE_test
 #SBATCH -p cpu
-#SBATCH -N 1
-#SBATCH -n 40
+#SBATCH -n 80
 #SBATCH --ntasks-per-node=40
+#SBATCH --exclusive
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 
@@ -33,17 +39,15 @@ ulimit -l unlimited
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:ofi
 
-module purge
 module load quantum-espresso/6.4.1-intel-19.0.4-impi
 
-srun pw.x < rlx.in
+srun pw.x -i test.in
 ```
 
-其中 rlx.in 是您提供的参数文件.
-
-
-并使用如下指令提交：
-
+## Pi 上提交作业
 ```bash
-$ sbatch qe_cpu_intel.slurm
+$ sbatch slurm.test
 ```
+
+## 参考链接
+- [Quantum ESPRESSO 官网](https://www.quantum-espresso.org/)
