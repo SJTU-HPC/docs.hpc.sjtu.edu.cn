@@ -138,7 +138,7 @@ $ sbatch vasp_gpu_intel.slurm
 ```
 
 ## VASP 算例
-- [H2 bond length](https://hpc.sjtu.edu.cn/Item/docs/vasp_test_H2-bond-length.tar.gz)
+- [H ground state](https://hpc.sjtu.edu.cn/Item/docs/H-ground-state.tar.gz)
 
 
 ## 参考文献
