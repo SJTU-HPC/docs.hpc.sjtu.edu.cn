@@ -137,6 +137,10 @@ srun /path/to/your_vasp_dir/bin/vasp_gpu
 $ sbatch vasp_gpu_intel.slurm
 ```
 
+## VASP 算例
+- [H2 bond length](hpc.sjtu.edu.cn/Item/docs/vasp_test_H2-bond-length.tar.gz)
+
+
 ## 参考文献
 
 - [VASP 5.4.1+VTST编译安装](http://hmli.ustc.edu.cn/doc/app/vasp.5.4.1-vtst.htm)
