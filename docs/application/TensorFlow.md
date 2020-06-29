@@ -13,7 +13,10 @@ $ module load miniconda3
 $ conda create -n tf-env
 $ source activate tf-env
 $ conda install pip
-$ pip install tensorflow-gpu==2.0.0
+$ conda install cudatoolkit=10.1 cudnn
+$ pip install tensorflow
+# 如需使用，可以选择安装keras
+$ pip install keras
 ```
 
 ## 使用miniconda提交TensorFlow作业
@@ -31,8 +34,6 @@ $ pip install tensorflow-gpu==2.0.0
 #SBATCH --cpus-per-task=12
 #SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
-
-module load cuda/10.0.130-gcc-4.8.5 cudnn
 
 module load miniconda3
 source activate tf-env
