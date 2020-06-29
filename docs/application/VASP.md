@@ -1,7 +1,7 @@
 # <center>VASP<center/>
 
 -------
-## 编译 Intel+CPU 版本VASP
+## 编译 Intel+CPU 版本 VASP
 
 - 解压缩 VASP
 ```bash
@@ -33,7 +33,7 @@ CALL CHAIN_FORCE(T_INFO%NIONS,DYN%POSION,TOTEN,TIFOR, &
      TSIF,LATT_CUR%A,LATT_CUR%B,IO%IU6)
 !     LATT_CUR%A,LATT_CUR%B,IO%IU6)
 ```
-在src/.objects中chain.o（第72行）之前添加如下内容：
+在 src/.objects中chain.o（第72行）之前添加如下内容：
 ```bash
 bfgs.o dynmat.o instanton.o lbfgs.o sd.o cg.o dimer.o bbm.o \
 fire.o lanczos.o neb.o qm.o opt.o \
