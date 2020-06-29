@@ -1,7 +1,7 @@
 # <center>VASP<center/>
 
 -------
-## 编译Intel+CPU版本VASP
+## 编译 Intel+CPU 版本VASP
 
 - 解压缩 VASP
 ```bash
