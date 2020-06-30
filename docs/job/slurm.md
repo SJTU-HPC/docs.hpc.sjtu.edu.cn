@@ -8,6 +8,8 @@
 
 如果我们可以提供任何帮助，请随时联系[hpc邮箱](mailto:hpc@sjtu.edu.cn)。
 
+![avater](../img/slurm_pi.svg)
+
 ## Slurm概览
 
 |  Slurm   | 功能  |
