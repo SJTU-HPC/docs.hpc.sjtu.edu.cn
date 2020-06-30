@@ -138,7 +138,7 @@ $ sbatch vasp_gpu_intel.slurm
 ```
 
 ## VASP 算例
-- [H ground state](https://hpc.sjtu.edu.cn/Item/docs/H-ground-state.tar.gz)
+- [Pt](https://hpc.sjtu.edu.cn/Item/docs/mp-126_Pt.tar.gz)
 
 
 ## 参考文献
