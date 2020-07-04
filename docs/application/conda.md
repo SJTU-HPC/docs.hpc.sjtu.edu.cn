@@ -24,10 +24,13 @@ $ conda create --name mypy python=3.6
 $ source activate mypy
 ```
 
-通过 conda 安装软件包（有些软件也可以用 pip 安装）
 安装之前，先申请计算节点资源（登陆节点禁止大规模编译安装）
 ```bash
 $ srun -p small -n 4 --pty /bin/bash
+```
+
+通过 conda 安装软件包（有些软件也可以用 pip 安装。软件官网一般给出推荐，用 conda 还是 pip）
+```bash
 $ conda install -c bioconda openslide-python （以 openslide-python 为例）
 ```
 
@@ -35,7 +38,7 @@ $ conda install -c bioconda openslide-python （以 openslide-python 为例）
 
 Pi 上的计算，需用 slurm 脚本提交作业，或在计算节点提交交互式任务
 
-以下 Slurm 脚本，申请 small 队列的 2 个核，通过 python 打印 `hello world`
+slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印 `hello world`
 
 ```bash
 #!/bin/bash
