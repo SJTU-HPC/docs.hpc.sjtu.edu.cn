@@ -48,7 +48,7 @@ nav:
     - Pytorch: application/Pytorch.md
     - Quantum-Espresso: application/Quantum-Espresso.md
     - Relion: application/Relion.md
-    - STRique: application/STRique.md
+  #  - STRique: application/STRique.md
     - TensorFlow: application/TensorFlow.md
     - VASP: application/VASP.md
     - VMD: application/VMD.md   
