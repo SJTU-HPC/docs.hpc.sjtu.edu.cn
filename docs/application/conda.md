@@ -5,6 +5,7 @@
 - [openslide](#openslide-python)
 - [pandas](#pandas)
 - [cdsapi](#cdsapi)
+- [STRique](#STRique)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
@@ -99,7 +100,19 @@ $ source activate mypy
 $ conda install -c conda-forge cdsapi
 ```
 
+## STRique 安装
 
+完整步骤
+```bash
+$ srun -p small -n 4 --pty /bin/bash
+$ module load miniconda3/4.7.12.1-gcc-4.8.5
+$ conda create -n mypy python=3.6
+$ source activate mypy
+$ git clone --recursive https://github.com/giesselmann/STRique
+$ cd STRique
+$ pip install -r requirements.txt
+$ python setup.py install 
+```
 
 ## 参考文献
 
