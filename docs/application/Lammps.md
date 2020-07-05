@@ -138,7 +138,7 @@ IMAGE_PATH=/lustre/share/img/gromacs-2018.2.simg
 ulimit -s unlimited
 ulimit -l unlimited
 
-singularity run --nv $IMAGE_PATH gmx mdrun -deffnm benchmark -ntmpi 6 -ntomp 1
+singularity run $IMAGE_PATH -i YOUR_INPUT_FILE
 ```
 
 使用如下指令提交：
