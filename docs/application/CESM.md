@@ -1,22 +1,31 @@
-# <center>CESM</center>
 
-------
+# <center>CESM</center> 
+
+-----
+
+## 简介
 
 CESM （Community Earth System Model）是一种全耦合的全球气候模型，它提供了地球过去，现在和将来的气候状态的计算机模拟。
 
-## 获得CESM代码
+## CESM 使用
+CESM 是一种免费的开源软件，但是在授予对 Subversion 存储库的访问权限之前，需要注册。具体安装见下方介绍。
 
-CESM是一种免费的开源软件，但是在授予对Subversion存储库的访问权限之前，需要[注册](http://www.cesm.ucar.edu/models/register/register.html)。 
-注册完成后，可以将CESM项目下载至<cesm-base>：
+CESM 与一般软件不同，每次计算都需要编译，也即算例构建。
+
+以下以 CESM 1.2 为例，介绍软件的安装和使用。
+
+## 获得 CESM 代码
+
+[注册](http://www.cesm.ucar.edu/models/register/register.html) 获取 Subversion 存储库的访问权限。注册完成后，可以将 CESM 项目下载至<cesm-base>：
 
 ```shell
 $ cd <cesm-base>
 $ svn co https://svn-ccsm-models.cgd.ucar.edu/cesm1/release_tags/cesm1_2_2_1
 ```
 
-## 构建CESM的依赖环境
+## 构建 CESM 的依赖环境
 
-载入Intel编译环境，进行依赖构建：
+载入 Intel 编译环境，进行依赖构建：
 
 ```shell
 $ srun -N 1 -p cpu --exclusive --pty /bin/bash
@@ -34,6 +43,8 @@ $ export LD_LIBRARY_PATH=$CESM_ENV/lib:$LD_LIBRARY_PATH
 ```
 
 分别进行 `curl,hdf5,netcdf,pnercdf` 的编译和安装：
+
+（也可以通过 `module av` 查看 Pi 上已有的 module，直接调用）
 
 ```shell
 $ cd $CESM_ENVSRC
@@ -93,7 +104,7 @@ $ cpan install Switch
 $ cpan install XML::LibXML
 ```
 
-## CESM算例构建
+## CESM 算例构建
 
 ```shell
 $ cd cesm1_2_2_1/scripts
@@ -102,7 +113,7 @@ $ touch mkbatch.pi && chmod +x ./mkbatch.pi
 $ vim config_machines.xml
 ```
 
-在`config_machines.xml`中增加配置`pi`：
+在 `config_machines.xml` 中增加配置 `pi`：
 
 ```xml
 <machine MACH="pi">
@@ -128,7 +139,7 @@ $ vim config_machines.xml
 </machine>
 ```
 
-使用`create_newcase`构建算例：
+使用 `create_newcase` 构建算例：
 
 ```shell
 $ cd <cesm-base>/cesm1.2.2.1/scripts/
@@ -141,6 +152,12 @@ $ ./create_newcase -case ../cases/lbtest-f19_g16-B -res f19_g16 -compset B -mach
 $ cd <cesm-base>/cesm1.2.2.1/cases/lbtest-f19_g16-B
 $ ./cesm_setup
 $ ./lbtest-f19_g16-B.build
+```
+
+提交并运行该算例：
+
+```shell
+$ ./lbtest-f19_g16-B.run
 ```
 
 ## 参考文献
