@@ -6,6 +6,8 @@
 - [pandas](#pandas)
 - [cdsapi](#cdsapi)
 - [STRique](#STRique)
+- [r-rgl](#r-rgl)
+- [sra-tools](#sra-tools)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
@@ -116,6 +118,29 @@ $ cd STRique
 $ pip install -r requirements.txt
 $ python setup.py install 
 ```
+
+## r-rgl 安装
+
+完整步骤
+```bash
+$ module purge
+$ module load miniconda3/4.7.12.1-gcc-4.8.5
+$ conda create -n mypy python=3.6
+$ source activate mypy
+$ conda install -c r r-rgl
+```
+
+## sra-tools 安装
+
+完整步骤
+```bash
+$ module purge
+$ module load miniconda3/4.7.12.1-gcc-4.8.5
+$ conda create -n mypy python=3.6
+$ source activate mypy
+$ conda install -c bioconda sra-tools
+```
+
 
 ## 参考文献
 
