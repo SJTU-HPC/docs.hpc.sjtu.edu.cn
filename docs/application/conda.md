@@ -8,8 +8,8 @@
 - [STRique](#STRique)
 - [r-rgl](#r-rgl)
 - [sra-tools](#sra-tools)
-- [DESeq2](#DESeq2)
-- [WGCNA](#WGCNA)
+- [DESeq2](#deseq2)
+- [WGCNA](#wgcna)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
