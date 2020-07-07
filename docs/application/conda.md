@@ -10,6 +10,7 @@
 - [sra-tools](#sra-tools)
 - [DESeq2](#deseq2)
 - [WGCNA](#wgcna)
+- [MAKER](#maker)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
@@ -166,6 +167,16 @@ $ source activate mypy
 $ conda install -c bioconda r-wgcna
 ```
 
+## MAKER 安装
+
+完整步骤
+```bash
+$ module purge
+$ module load miniconda3/4.7.12.1-gcc-4.8.5
+$ conda create -n mypy python=3.6
+$ source activate mypy
+$ conda install -c bioconda maker
+```
 
 ## 参考文献
 
