@@ -11,6 +11,7 @@
 - [DESeq2](#deseq2)
 - [WGCNA](#wgcna)
 - [MAKER](#maker)
+- [AUGUSTUS](#augustus)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
@@ -171,11 +172,25 @@ $ conda install -c bioconda r-wgcna
 
 完整步骤
 ```bash
+$ srun -p small -n 4 --pty /bin/bash
 $ module purge
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
-$ conda create -n mypy python=3.6
+$ module load miniconda3
+$ conda create -n mypy
 $ source activate mypy
 $ conda install -c bioconda maker
+```
+
+## AUGUSTUS 安装
+
+完整步骤
+```bash
+$ srun -p small -n 4 --pty /bin/bash
+$ module purge
+$ module load miniconda3
+$ conda create -n mypy
+$ source activate mypy
+$ conda install -c anaconda boost
+$ conda install -c bioconda augustus
 ```
 
 ## 参考文献
