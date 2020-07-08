@@ -5,13 +5,13 @@
 本文档介绍 Pi 上的软件。<br>
 商业软件需用户自行获取版权并安装。<br>
 <br>
-![cpu](https://img.shields.io/badge/-cpu-blue) ![gpu](https://img.shields.io/badge/-gpu-green) ![arm](https://img.shields.io/badge/-arm-yellow) ![singularity](https://img.shields.io/badge/-singularity-blueviolet) 标签表明软件有 cpu、gpu、arm、singularity 版本
+![cpu](https://img.shields.io/badge/-cpu-blue) ![gpu](https://img.shields.io/badge/-gpu-green) ![arm](https://img.shields.io/badge/-arm-yellow) ![singularity](https://img.shields.io/badge/-singularity-blueviolet) 标签表明软件有 cpu, gpu, arm 和 singularity 版本
 
 
 ## Pi 上的软件
 
 
-| Name | Version | build | Introduction |
+| Name | Version | Distribution | Introduction |
 | ---- | ---- | ---- | ---- |
 | [ ABINIT ](https://docs.hpc.sjtu.edu.cn/application/abinit/) | 8.10.3 |![cpu](https://img.shields.io/badge/-cpu-blue)|ABINIT is a package whose main program allows one to find the total energy, charge density and electronic structure of systems made of electrons and nuclei (molecules and periodic solids) within Density Functional Theory (DFT), using pseudopotentials and a planewave or wavelet basis.|
 | [ Amber ](https://docs.hpc.sjtu.edu.cn/application/Amber/) ||![cpu](https://img.shields.io/badge/-cpu-blue) ![gpu](https://img.shields.io/badge/-gpu-green)| A package of molecular simulation programs and analysis tools. |
