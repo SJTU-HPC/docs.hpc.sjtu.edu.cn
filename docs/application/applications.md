@@ -5,7 +5,7 @@
 本文档介绍 Pi 上的软件。<br>
 商业软件需用户自行获取版权并安装。<br>
 <br>
-![cpu](https://img.shields.io/badge/-cpu-blue) ![gpu](https://img.shields.io/badge/-gpu-green) ![arm](https://img.shields.io/badge/-arm-yellow) ![singularity](https://img.shields.io/badge/-arm-blueviolet) 标签表明软件有 cpu、gpu、arm、singularity 版本
+![cpu](https://img.shields.io/badge/-cpu-blue) ![gpu](https://img.shields.io/badge/-gpu-green) ![arm](https://img.shields.io/badge/-arm-yellow) ![singularity](https://img.shields.io/badge/-singularity-blueviolet) 标签表明软件有 cpu、gpu、arm、singularity 版本
 
 
 ## Pi 上的软件
