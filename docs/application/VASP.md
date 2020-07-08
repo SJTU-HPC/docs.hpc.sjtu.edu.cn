@@ -92,18 +92,24 @@ srun /path/to/your_vasp_dir/bin/vasp_std
 $ sbatch vasp_cpu_intel.slurm
 ```
 
-## 编译Intel+GPU版本VASP
+## 编译 Intel+GPU 版本 VASP
+
+GPU 需要在 dgx2 队列上编译，以如下命令申请计算节点资源用于编译：
+```bash
+$ srun -p dgx2 --gres=gpu:1 --ntasks-per-node 6 --pty /bin/bash
+```
 
 - 编译 GPU 版本需要首先编译CPU版本，在其基础上使用下述命令
 
 ```bash
 $ # 修改 makefile.include 中的 CUDA_ROOT 路径为 CUDA_ROOT  := $(CUDA_HOME)
 $ # 修改 makefile.include 中的 -openmp 参数为 -qopenmp
-$ module load cuda/10.0.130-gcc-4.8.5
+$ module load cuda/10.2.89-intel-19.0.4
+$ module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
 $ make gpu
 ```
 
-## 提交Intel+GPU版本VASP任务
+## 提交 Intel+GPU 版本 VASP 任务
 
 使用intel编译的GPU版本VASP运行单卡作业脚本示例vasp_gpu_intel.slurm如下：
 
@@ -120,7 +126,7 @@ $ make gpu
 
 module purge
 module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
-module load cuda/10.0.130-gcc-4.8.5
+module load cuda/10.2.89-intel-19.0.4
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:tmi
