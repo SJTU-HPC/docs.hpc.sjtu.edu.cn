@@ -51,7 +51,7 @@ ulimit -l unlimited
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:ofi
 
-srun gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
+srun --mpi=pmi2 gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
 ```
 
 ## ![x86](https://img.shields.io/badge/-x86-green) (CPU) GROMACS 提交作业
