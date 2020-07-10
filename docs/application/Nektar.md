@@ -4,15 +4,15 @@
 
 ## 加载预安装的Nektar++
 
-Pi2.0 系统中已经预装nektar-4.4.1(GNU+cpu 版本)，可以用以下命令加载: 
+Pi 2.0 系统中已经预装nektar-5.0.0 (GNU+intel 版本)，可以用以下命令加载: 
 
 ```
-$ module load nektar/4.4.1-gcc-8.3.0-openblas-openmpi
+$ module load nektar/5.0.0-intel-19.0.4-impi
 ```
 
-## 提交GNU+CPU版本Nektar任务
+## 提交 GNU+Intel 版本Nektar任务
 
-使用GNU编译的CPU版本Nektar运行单节点作业脚本示例nektar_cpu_gnu.slurm如下：
+使用GNU编译的CPU版本Nektar运行单节点作业脚本示例nektar_cpu_intel.slurm如下：
 
 
 ```bash
@@ -26,7 +26,7 @@ $ module load nektar/4.4.1-gcc-8.3.0-openblas-openmpi
 #SBATCH -e %j.err
 
 module purge
-module load nektar/4.4.1-gcc-8.3.0-openblas-openmpi
+module load nektar/5.0.0-intel-19.0.4-impi
 
 ulimit -s unlimited
 ulimit -l unlimited
