@@ -13,11 +13,6 @@ Nektar++ is a spectral/hp element framework designed to support the construction
 $ module avail Nektar
 ```
 
-调用该模块:
-```bash
-$ module load nektar/5.0.0-intel-19.0.4-impi
-```
-
 ## 加载预安装的 Nektar++
 
 Pi 2.0 系统中已经预装 nektar-5.0.0 (intel 版本)，可以用以下命令加载: 
@@ -46,7 +41,7 @@ module load nektar/5.0.0-intel-19.0.4-impi
 ulimit -s unlimited
 ulimit -l unlimited
 
-srun --mpi=pmi2 IncNavierStokesSolver-rg
+srun IncNavierStokesSolver-rg
 ```
 
 并使用如下指令提交：
