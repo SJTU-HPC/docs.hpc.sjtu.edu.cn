@@ -2,19 +2,24 @@
 
 -----
 
-## 加载预安装的MrBayes
+## 简介
 
-Pi2.0 系统中已经预装 mrbayes/3.2.7a (GNU+cpu 版本)，可以用以下命令加载: 
+MrBayes is a program for Bayesian inference and model choice across a wide range of phylogenetic and evolutionary models. MrBayes uses Markov chain Monte Carlo (MCMC) methods to estimate the posterior distribution of model parameters.
 
+## Pi 上的 MrBayes
+查看 Pi 上已编译的软件模块:
+```bash
+$ module spider mrbayes
 ```
+
+调用该模块:
+```bash
 $ module load mrbayes/3.2.7a-gcc-8.3.0-openmpi
 ```
 
-## 提交GNU+CPU版本MrBayes任务
-
-使用GNU编译的CPU版本MrBayes运行单节点作业脚本示例mrbayes_cpu_gnu.slurm如下：
-
-
+## Pi 上的 Slurm 脚本 slurm.test
+在 cpu 队列上，总共使用 16 核 (n = 16)<br>
+cpu 队列每个节点配有 40 核，这里使用了 1 个节点：
 ```bash
 #!/bin/bash
 
@@ -37,9 +42,11 @@ srun --mpi=pmi2 mb your_input_file
 
 !!! tips
     根据我们的测试，mrbayes最多只能使用16进程/节点的配置，请根据具体需要调整`-n`和`--ntasks-per-node`参数
-
-并使用如下指令提交：
-
+    
+## Pi 上提交作业
 ```bash
 $ sbatch mrbayes_cpu_gnu.slurm
 ```
+
+## 参考链接
+- [MrBayes 官网](http://nbisweden.github.io/MrBayes/)
