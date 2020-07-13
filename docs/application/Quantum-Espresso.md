@@ -16,7 +16,7 @@ $ module avail espresso
 
 调用该模块:
 ```bash
-$ module load quantum-espresso/6.4.1-intel-19.0.4-impi
+$ module load quantum-espresso/6.5-intel-19.0.5-impi
 ```
 
 ## Pi 上的 Slurm 脚本 slurm.test
@@ -39,7 +39,7 @@ ulimit -l unlimited
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 export I_MPI_FABRICS=shm:ofi
 
-module load quantum-espresso/6.4.1-intel-19.0.4-impi
+module load quantum-espresso/6.5-intel-19.0.5-impi
 
 srun pw.x -i test.in
 ```
