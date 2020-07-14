@@ -57,7 +57,6 @@ $ export OMP_NUM_THREADS=4 && ./omphello
 ulimit -l unlimited
 ulimit -s unlimited
 
-source /usr/share/Modules/init/bash
 module purge
 module load gcc
 
@@ -94,7 +93,6 @@ $ export OMP_NUM_THREADS=4 && ./omphello
 ulimit -l unlimited
 ulimit -s unlimited
 
-source /usr/share/Modules/init/bash
 module purge
 module load intel
 
@@ -176,7 +174,6 @@ $ mpicc mpihello.c -o mpihello
 ulimit -s unlimited
 ulimit -l unlimited
 
-source /usr/share/Modules/init/bash
 module purge
 module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
 
@@ -208,7 +205,6 @@ $ mpiicc mpihello.c -o mpihello
 ulimit -s unlimited
 ulimit -l unlimited
 
-source /usr/share/Modules/init/bash
 module purge
 module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
@@ -273,7 +269,6 @@ $ mpicc -O3 -fopenmp hybridmpi.c -o hybridmpi
 ulimit -s unlimited
 ulimit -l unlimited
 
-source /usr/share/Modules/init/bash
 module purge
 module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
 
@@ -302,7 +297,6 @@ $ mpiicc -O3 -fopenmp hybridmpi.c -o hybridmpi
 ulimit -s unlimited
 ulimit -l unlimited
 
-source /usr/share/Modules/init/bash
 module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
 export I_MPI_DEBUG=5
@@ -411,7 +405,6 @@ $ nvcc cublashello.cu -o cublashello -lcublas
 ulimit -s unlimited
 ulimit -l unlimited
 
-source /usr/share/Modules/init/bash
 module purge
 module load gcc/8.3.0-gcc-4.8.5 cuda/10.1.243-gcc-8.3.0
 
@@ -449,7 +442,6 @@ $ cp /lustre/usr/samples/LINPACK/64/HPL.dat .
 ulimit -s unlimited
 ulimit -l unlimited
 
-source /usr/share/Modules/init/bash
 module purge
 module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
@@ -498,8 +490,6 @@ $ scancel 358
 
 unlimit -s unlimited
 unlimit -l unlimited
-
-source /usr/share/Modules/init/bash
 
  /* Spack */
 if [ -d "$HOME/spack" ]; then
