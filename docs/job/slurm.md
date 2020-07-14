@@ -84,7 +84,7 @@ vol08          .      dgx2 idle
 | squeue -l | 查看细节信息 |
 | squeue -n HOST | 查看特定节点作业信息 |
 | squeue -A ACCOUNT_LIST | 查看ACCOUNT_LIST的作业 |
-| squeue -u USER_LIST | 查看USER_LIST的作业 |
+| squeue | 查看USER_LIST的作业 |
 | squeue --state=R | 查看特定状态的作业 |
 | squeue --start | 查看排队作业的估计开始时间 |
 | squeue --format=“LAYOUT” | 使用给定的LAYOUT自定义输出 |
@@ -104,7 +104,7 @@ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 显示您自己账户下的作业：
 
 ```bash
-squeue -u `whoami`
+squeue
 JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 17923      dgx2     bash    hpcwj  R 1-12:59:05      1 vol05
 ```
@@ -112,7 +112,7 @@ JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
 `-l`选项可以显示更细节的信息。
 
 ```bash
-squeue -u `whoami` -l
+squeue
 JOBID PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
 17923      dgx2     bash    hpcwj  RUNNING 1-13:00:53 30-00:00:00    1 vol05
 ```
@@ -137,7 +137,7 @@ Slurm具有丰富的参数集。 以下最常用的。
 | --error=[file_name] | 标准错误文件 |
 | --time=[dd-hh\:mm\:ss] | 作业最大运行时长 |
 | --exclusive | 独占节点 |
-| -mail-type=[type] | 通知类型 |
+| -mail-type=[type] | 通知类型，可选 all, fail, end，分别对应全通知、故障通知、结束通知 |
 | --mail-user=[mail_address] | 通知邮箱 |
 | --nodelist=[nodes] | 偏好的作业节点 |
 | --exclude=[nodes] | 避免的作业节点 |
@@ -216,7 +216,6 @@ sbatch cpu.slurm
 #SBATCH --output=python_array_%A_%a.out
 #SBATCH --output=python_array_%A_%a.err
 
-source /usr/share/Modules/init/bash
 module purge
 module load miniconda2/4.6.14-gcc-4.8.5
 
