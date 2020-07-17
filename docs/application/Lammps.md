@@ -133,7 +133,7 @@ Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即�
 #SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:1
 
-IMAGE_PATH=/lustre/share/img/gromacs-2018.2.simg
+IMAGE_PATH=/lustre/share/img/lammps_7Aug2019.simg
 
 ulimit -s unlimited
 ulimit -l unlimited
