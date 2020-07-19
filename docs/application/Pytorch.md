@@ -12,11 +12,11 @@ PyTorch 是一个 Python 优先的深度学习框架，也是使用 GPU 和 CPU 
 通常，人们使用 PyTorch 的原因通常有二：
 
 1. 作为 numpy 的替代，以便使用强大的 GPU；
-2. 将其作为一个能提供最大的灵活性和速度的深度学习研究平台。
+2. 将其作为一个能提供最大的灵活性和速度的深度学习研究平台
 
 ## Pi 上的 PyTorch
 
-Pi 上可以用 miniconda 自行安装 PyTorch，也可以用已预置的 singularity `pytorch-1.3.0` 优化镜像。
+Pi 上可用 miniconda 自行安装 PyTorch，也可用已预置的 singularity `pytorch-1.3.0` 优化镜像
 
 ## 使用 miniconda 安装 PyTorch
 
