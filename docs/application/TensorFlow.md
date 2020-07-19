@@ -49,10 +49,10 @@ python -c 'import tensorflow as tf; \
            print(tf.test.is_gpu_available());'
 ```
 
-并使用如下指令提交：
+假设这个脚本文件名为 `tensorflow_conda.slurm`，使用以下指令提交作业：
 
 ```bash
-$ sbatch sbatch tensorflow_conda.slurm
+$ sbatch tensorflow_conda.slurm
 ```
 
 ## 使用 singularity 容器中的 TensorFlow
