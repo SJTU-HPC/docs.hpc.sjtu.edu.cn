@@ -28,7 +28,6 @@ $ pip install keras
 
 示例：在 DGX-2 上使用 TensorFlow。作业使用单节点，分配 2 块 GPU，GPU:CPU 配比 1:6
 
-
 ```bash
 #!/bin/bash
 #SBATCH -J test
@@ -88,8 +87,8 @@ singularity run --nv $IMAGE_PATH python -c 'import tensorflow as tf; \
 $ sbatch tensorflow_singularity.slurm
 ```
 
-## 参考文献
+## 参考链接
 
-- [TensorFlow官网](https://www.tensorflow.org/)
+- [TensorFlow 官网](https://www.tensorflow.org/)
 - [NVIDIA GPU CLOUD](ngc.nvidia.com)
 - [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)
