@@ -41,8 +41,8 @@ $ sbatch relion_singularity.slurm
 
 参照[可视化平台](../../login/HpcStudio/)，登陆 HPC Studio，在顶栏选择 Relion：
 
-![avater](../img/relion1.png)
 ![avater](../img/relion2.png)
+![avater](../img/relion1.png)
 
 
 ## 参考链接
