@@ -348,7 +348,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
 
 --mail-type=<type> 指定状态发生时，发送邮件通知: ALL, BEGIN, END, FAIL
 
-!!! example "cpu 队列 slurm 脚本示例 array"
+!!! example "small 队列 slurm 脚本示例：邮件提醒"
     ```
     #!/bin/bash
     
