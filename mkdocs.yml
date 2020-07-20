@@ -24,7 +24,8 @@ nav:
     - Slurm概览: job/slurm.md
     # - 脚本式作业: 作业/脚本式作业.md
     # - MPI、OpenMP、CUDA作业示例: 作业/MPI、OpenMP、CUDA作业示例.md
-    - 作业脚本样例: job/jobsamples.md
+    - 作业示例: job/jobsamples_basic.md
+    - 作业示例（开发者）: job/jobsamples.md
     # - 交互式作业: 作业/交互式作业.md
     # - 队列选择: 作业/队列选择.md
     - DGX2: job/dgx.md
