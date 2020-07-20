@@ -121,6 +121,7 @@ $ make gpu
 #SBATCH -p dgx2
 #SBATCH -o %j.out
 #SBATCH -e %j.err
+#SBATCH -N 1
 #SBATCH -n 6
 #SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:1
