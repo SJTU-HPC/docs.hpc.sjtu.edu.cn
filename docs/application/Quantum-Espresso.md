@@ -29,7 +29,6 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 #SBATCH -p cpu
 #SBATCH -n 80
 #SBATCH --ntasks-per-node=40
-#SBATCH --exclusive
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 
