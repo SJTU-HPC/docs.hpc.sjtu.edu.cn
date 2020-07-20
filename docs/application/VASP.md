@@ -111,7 +111,9 @@ $ make gpu
 
 ## 提交 Intel+GPU 版本 VASP 任务
 
-使用intel编译的GPU版本VASP运行单卡作业脚本示例vasp_gpu_intel.slurm如下：
+使用 intel 编译的 GPU 版本 VASP 运行单卡作业脚本示例 vasp_gpu_intel.slurm 如下：
+
+注意：INCAR 里倒数第三行需要改为 LREAL = .TRUE.
 
 ```bash
 #!/bin/bash
