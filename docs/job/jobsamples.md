@@ -159,7 +159,7 @@ int main(int argc, char *argv[])
 
 ### 使用OpenMPI+GCC编译
 ```bash
-$ module purge; module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
+$ module purge; module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
 $ mpicc mpihello.c -o mpihello
 ```
 准备一个名为job_openmpi.slurm的作业脚本
@@ -177,7 +177,7 @@ ulimit -s unlimited
 ulimit -l unlimited
 
 module purge
-module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
+module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
 
 srun --mpi=pmi2 ./mpihello
 ```
@@ -272,7 +272,7 @@ ulimit -s unlimited
 ulimit -l unlimited
 
 module purge
-module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
+module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
 
 export OMP_NUM_THREADS=40
 srun --mpi=pmi2 ./hybridmpi
@@ -517,21 +517,5 @@ LAUNCH_YOUR_APP
 
 hostname
 ```
-<!-- ## <center>提交作业到调试分区</center>
-应用程序可免费调试，提交给分区的作业最多可以运行6个小时。
-```bash
-#!/bin/bash
 
-#SBATCH -J Hello
-#SBATCH -p debug
-#SBATCH --mail-type=end
-#SBATCH --mail-user=YOU@EMAIL.COM
-#SBATCH --time=01:00:00
-#SBATCH -o %j.out
-#SBATCH -e %j.err
-#SBATCH -n 16
-#SBATCH --ntasks-per-node=16
-
-hostname
-``` -->
 
