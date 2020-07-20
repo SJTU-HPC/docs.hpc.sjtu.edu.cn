@@ -253,7 +253,7 @@ int main(int argc, char *argv[]) {
 
 ### 使用GCC编译如下：
 ```bash
-$ module purge && module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.4-gcc-8.3.0
+$ module purge && module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
 $ mpicc -O3 -fopenmp hybridmpi.c -o hybridmpi
 ```
 准备一个名为hybridmpi.slurm的作业脚本
