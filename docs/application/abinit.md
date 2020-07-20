@@ -18,6 +18,7 @@ $ module load abinit/8.10.3-gcc-8.3.0-openblas-openmpi
 ```
 
 ## Pi 上的 Slurm 脚本 slurm.test
+
 在 cpu 队列上，总共使用 80 核 (n = 80)<br>
 cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ```bash
@@ -31,8 +32,10 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 #SBATCH -e %j.err
 
 module purge
-module load abinit/8.10.3-gcc-8.3.0-openblas-openmpi
-srun abinit < example.in
+module load abinit
+module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
+
+srun --mpi=pmi2 < example.in
 ```
 
 ## Pi 上提交作业
