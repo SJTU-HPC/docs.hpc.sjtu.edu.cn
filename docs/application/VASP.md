@@ -115,12 +115,11 @@ $ make gpu
 
 ```bash
 #!/bin/bash
-
-#SBATCH -J vasp_test
+#SBATCH -J vasp_gpu
 #SBATCH -p dgx2
 #SBATCH -o %j.out
 #SBATCH -e %j.err
-#SBATCH -n 6 # number of tasks
+#SBATCH -n 6
 #SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:1
 
@@ -129,7 +128,7 @@ module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
 module load cuda/10.2.89-intel-19.0.4
 
 export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-export I_MPI_FABRICS=shm:tmi
+export I_MPI_FABRICS=shm:ofi
 
 ulimit -s unlimited
 ulimit -l unlimited
