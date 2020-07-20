@@ -1,6 +1,8 @@
-# <center>π集群上作业示例<center/>
+# <center>作业示例（开发者）<center/>
 
 -------
+介绍不同并行环境的作业示例。
+
 本文档中使用的作业样本可以在/lustre/share/samples中找到。 在继续之前，请阅读有关预置软件环境的文档。
 
 ## <center>OpenMP 示例<center/>
