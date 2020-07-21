@@ -5,7 +5,7 @@
 - [openslide](#openslide-python)
 - [pandas](#pandas)
 - [cdsapi](#cdsapi)
-- [STRique](#STRique)
+- [STRique](#strique)
 - [r-rgl](#r-rgl)
 - [sra-tools](#sra-tools)
 - [DESeq2](#deseq2)
