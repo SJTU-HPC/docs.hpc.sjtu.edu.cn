@@ -13,6 +13,7 @@
 - [MAKER](#maker)
 - [AUGUSTUS](#augustus)
 - [DeepGo](#deepgo)
+- [km](#km)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
@@ -199,6 +200,7 @@ $ conda install -c bioconda augustus
 完整步骤
 ```bash
 srun -p small -n 4 --pty /bin/bash
+git clone https://github.com/bio-ontology-research-group/deepgo.git
 module purge
 module load miniconda3/4.7.12.1-gcc-4.8.5
 conda create -n ha python=3.6
@@ -206,6 +208,21 @@ source activate ha
 conda install pip
 pip install -r requirements.txt
 ```
+
+## km 安装
+
+完整步骤
+```bash
+srun -p small -n 4 --pty /bin/bash
+git clone https://github.com/iric-soft/km.git
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n ha python=3.6
+source activate ha
+chmod +x easy_install.sh 
+./easy_install.sh
+```
+
 
 ## 参考文献
 
