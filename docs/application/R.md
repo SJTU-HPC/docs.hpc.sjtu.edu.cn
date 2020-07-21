@@ -52,8 +52,6 @@ $ conda install -c conda-forge r-rmysql
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 
-source /usr/share/Modules/init/bash
-
 module purge
 module load miniconda3/4.7.12.1-gcc-4.8.5
 source activate R
