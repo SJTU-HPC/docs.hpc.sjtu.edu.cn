@@ -12,6 +12,7 @@
 - [WGCNA](#wgcna)
 - [MAKER](#maker)
 - [AUGUSTUS](#augustus)
+- [DeepGo](#deepgo)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
@@ -191,6 +192,19 @@ $ conda create -n mypy
 $ source activate mypy
 $ conda install -c anaconda boost
 $ conda install -c bioconda augustus
+```
+
+## DeepGo 安装
+
+完整步骤
+```bash
+srun -p small -n 4 --pty /bin/bash
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n ha python=3.6
+source activate ha
+conda install pip
+pip install -r requirements.txt
 ```
 
 ## 参考文献
