@@ -16,7 +16,7 @@ Pi 上有多种版本的 GROMACS:
 
 - ![arm](https://img.shields.io/badge/-arm-yellow) [arm](#arm-gromacs)
 
-## ![cpu](https://img.shields.io/badge/-x86-green) (CPU) GROMACS 模块调用
+## ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) GROMACS 模块调用
 
 查看 Pi 上已编译的软件模块:
 ```bash
