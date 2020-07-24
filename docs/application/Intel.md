@@ -50,7 +50,6 @@ $ mpiicc mpihello.c -o mpihello
 ulimit -s unlimited
 ulimit -l unlimited
 
-source /usr/share/Modules/init/bash
 module purge
 module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
