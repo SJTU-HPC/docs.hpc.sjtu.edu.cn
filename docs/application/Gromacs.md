@@ -10,13 +10,13 @@ GROMACS 是一种分子动力学应用程序，可以模拟具有数百至数百
 
 Pi 上有多种版本的 GROMACS:
 
-- ![x86](https://img.shields.io/badge/-x86-green) [x86](#cpu-gromacs)
+- ![cpu](https://img.shields.io/badge/-cpu-blue)  [cpu](#cpu-gromacs)
 
-- ![gpu](https://img.shields.io/badge/-gpu-blueviolet) [gpu](#gpu-gromacs)
+- ![gpu](https://img.shields.io/badge/-gpu-green) [gpu](#gpu-gromacs)
 
 - ![arm](https://img.shields.io/badge/-arm-yellow) [arm](#arm-gromacs)
 
-## ![x86](https://img.shields.io/badge/-x86-green) (CPU) GROMACS 模块调用
+## ![cpu](https://img.shields.io/badge/-x86-green) (CPU) GROMACS 模块调用
 
 查看 Pi 上已编译的软件模块:
 ```bash
@@ -28,7 +28,7 @@ $ module avail gromacs
 $ module load gromacs/2019.4-intel-19.0.4-impi
 ```
 
-## ![x86](https://img.shields.io/badge/-x86-green) (CPU) GROMACS 的 Slurm 脚本
+## ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) GROMACS 的 Slurm 脚本
 在 cpu 队列上，总共使用 80 核 (n = 80)<br>
 cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ```bash
@@ -43,24 +43,21 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 #SBATCH -e %j.err
 
 module purge
-module load gromacs/2019.4-intel-19.0.4-impi
+module load gromacs/2019.4-gcc-9.2.0-openmpi
 
 ulimit -s unlimited
 ulimit -l unlimited
 
-export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-export I_MPI_FABRICS=shm:ofi
-
-srun --mpi=pmi2 gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
+mpirun gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
 ```
 
-## ![x86](https://img.shields.io/badge/-x86-green) (CPU) GROMACS 提交作业
+## ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) GROMACS 提交作业
 ```bash
 $ sbatch slurm.test
 ```
 
 
-## ![gpu](https://img.shields.io/badge/-gpu-blueviolet) (GPU) GROMACS 使用
+## ![gpu](https://img.shields.io/badge/-gpu-green) (GPU) GROMACS 使用
 
 Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即可运行 GROMACS，无需单独安装，目前版本为 2018.2。该容器文件位于 /lustre/share/img/gromacs-2018.2.simg
 
@@ -75,6 +72,7 @@ Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即�
 #SBATCH -n 6
 #SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:1
+#SBATCH -N 1
 
 IMAGE_PATH=/lustre/share/img/gromacs-2018.2.simg
 
@@ -90,7 +88,7 @@ singularity run --nv $IMAGE_PATH gmx mdrun -deffnm benchmark -ntmpi 6 -ntomp 1
 $ sbatch gromacs_gpu.slurm
 ```
 
-## ![x86](https://img.shields.io/badge/-x86-green) ![gpu](https://img.shields.io/badge/-gpu-blueviolet) 性能评测
+## ![cpu](https://img.shields.io/badge/-cpu-blue) ![gpu](https://img.shields.io/badge/-gpu-green) 性能评测
 
 测试使用了 GROMACS 提供的 Benchmark 算例进行了 CPU 和 GPU 的性能进行对比。其中 cpu 测试使用单节点40核心，dgx2 测试分配 1 块 gpu 并配比 6 核心。
 
