@@ -2,17 +2,24 @@
 
 ---------
 
-VMD是一套分子建模与可视化软件，主要用来分析分子动力学模拟的实验数据。同时，软件也包含处理长度与提及相关数据的模块，能可视化与分析轨迹，添加任意图形，并能导出成其他软件能利用的格式例如POV-Ray，PRMan，VRML等。用户能运行Tcl和Python脚本进行批量操作，也可通过Tcl/Tk与其他程序进行交互。
+## 简介
 
-## 使用HPC Studio启动VMD可视化界面
+Visual Molecular Dynamics is a molecular modelling and visualization computer program. VMD is developed as mainly a tool to view and analyze the results of molecular dynamics simulations. It also includes tools for working with volumetric data, sequence data, and arbitrary graphics objects.
 
-首先参照[可视化平台](../../login/HpcStudio/)开启远程桌面，并在远程桌面中启动终端，并输入以下指令：
+## Pi 上的 VMD
 
-```bash
-singularity run /lustre/share/img/vmd.simg vmd
-```
+集群中已预置了编译优化的容器镜像，通过调用该镜像即可运行 VMD，无需单独安装，目前版本为 `vmd-1.9.3`。该容器文件位于 `/lustre/share/img/vmd-1.9.3.simg`
 
-## 参考文献
+
+## 使用 HPC Studio 启动可视化界面
+
+参照[可视化平台](../../login/HpcStudio/)，登陆 HPC Studio，在顶栏选择 VMD：
+
+![avater](../img/relion2.png)
+![avater](../img/vmd.png)
+
+
+## 参考链接
 
 - [VMD](https://www.ks.uiuc.edu/Research/vmd/)
 - [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)
