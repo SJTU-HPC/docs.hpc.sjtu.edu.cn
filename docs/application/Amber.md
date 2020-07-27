@@ -100,7 +100,7 @@ $ make -j 40 && make install   #change 40 to total ncore
 
 - 安装 Amber18 的 MPI 版本
 ```bash
-$ module load openmpi/3.1.4-gcc-4.8.5
+$ module load openmpi
 $ ./configure --no-updates -noX11 -mpi gnu
 $ make -j 40 && make install
 ```
