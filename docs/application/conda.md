@@ -14,6 +14,7 @@
 - [AUGUSTUS](#augustus)
 - [DeepGo](#deepgo)
 - [km](#km)
+- [requests](#requests)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
@@ -81,81 +82,81 @@ $ sbatch hello_python.slurm
 
 完整步骤
 ```bash
-$ module purge
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
-$ conda create -n mypy python=3.6
-$ source activate mypy
-$ conda install -c bioconda openslide-python
-$ conda install libiconv
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n mypy python=3.6
+source activate mypy
+conda install -c bioconda openslide-python
+conda install libiconv
 ```
 
 ## pandas 安装
 
 完整步骤
 ```bash
-$ module purge
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
-$ conda create -n mypy python=3.6
-$ source activate mypy
-$ conda install -c anaconda pandas
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n mypy python=3.6
+source activate mypy
+conda install -c anaconda pandas
 ```
 
 ## cdsapi 安装
 
 完整步骤
 ```bash
-$ module purge
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
-$ conda create -n mypy python=3.6
-$ source activate mypy
-$ conda install -c conda-forge cdsapi
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n mypy python=3.6
+source activate mypy
+conda install -c conda-forge cdsapi
 ```
 
 ## STRique 安装
 
 完整步骤
 ```bash
-$ srun -p small -n 4 --pty /bin/bash
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
-$ conda create -n mypy python=3.6
-$ source activate mypy
-$ git clone --recursive https://github.com/giesselmann/STRique
-$ cd STRique
-$ pip install -r requirements.txt
-$ python setup.py install 
+srun -p small -n 4 --pty /bin/bash
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n mypy python=3.6
+source activate mypy
+git clone --recursive https://github.com/giesselmann/STRique
+cd STRique
+pip install -r requirements.txt
+python setup.py install 
 ```
 
 ## r-rgl 安装
 
 完整步骤
 ```bash
-$ module purge
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
-$ conda create -n mypy python=3.6
-$ source activate mypy
-$ conda install -c r r-rgl
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n mypy python=3.6
+source activate mypy
+conda install -c r r-rgl
 ```
 
 ## sra-tools 安装
 
 完整步骤
 ```bash
-$ module purge
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
-$ conda create -n mypy python=3.6
-$ source activate mypy
-$ conda install -c bioconda sra-tools
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n mypy python=3.6
+source activate mypy
+conda install -c bioconda sra-tools
 ```
 
 ## DESeq2 安装
 
 完整步骤
 ```bash
-$ module purge
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
-$ conda create -n mypy python=3.6
-$ source activate mypy
-$ conda install -c bioconda bioconductor-deseq2
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n mypy python=3.6
+source activate mypy
+conda install -c bioconda bioconductor-deseq2
 ```
 安装完成后可以在 R 中输入  `library("DESeq2")` 检测是否安装成功
 
@@ -163,36 +164,36 @@ $ conda install -c bioconda bioconductor-deseq2
 
 完整步骤
 ```bash
-$ module purge
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
-$ conda create -n mypy python=3.6
-$ source activate mypy
-$ conda install -c bioconda r-wgcna
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n mypy python=3.6
+source activate mypy
+conda install -c bioconda r-wgcna
 ```
 
 ## MAKER 安装
 
 完整步骤
 ```bash
-$ srun -p small -n 4 --pty /bin/bash
-$ module purge
-$ module load miniconda3
-$ conda create -n mypy
-$ source activate mypy
-$ conda install -c bioconda maker
+srun -p small -n 4 --pty /bin/bash
+module purge
+module load miniconda3
+conda create -n mypy
+source activate mypy
+conda install -c bioconda maker
 ```
 
 ## AUGUSTUS 安装
 
 完整步骤
 ```bash
-$ srun -p small -n 4 --pty /bin/bash
-$ module purge
-$ module load miniconda3
-$ conda create -n mypy
-$ source activate mypy
-$ conda install -c anaconda boost
-$ conda install -c bioconda augustus
+srun -p small -n 4 --pty /bin/bash
+module purge
+module load miniconda3
+conda create -n mypy
+source activate mypy
+conda install -c anaconda boost
+conda install -c bioconda augustus
 ```
 
 ## DeepGo 安装
@@ -222,6 +223,18 @@ source activate ha
 chmod +x easy_install.sh 
 ./easy_install.sh
 ```
+
+## Requests 安装
+
+完整步骤
+```bash
+module purge
+module load miniconda3/4.7.12.1-gcc-4.8.5
+conda create -n mypy python=3.6
+source activate mypy
+conda install -c anaconda requests
+```
+
 
 
 ## 参考文献
