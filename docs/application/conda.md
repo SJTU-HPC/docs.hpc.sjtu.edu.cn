@@ -14,7 +14,7 @@
 - [AUGUSTUS](#augustus)
 - [DeepGo](#deepgo)
 - [km](#km)
-- [requests](#requests)
+- [Requests](#requests)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
