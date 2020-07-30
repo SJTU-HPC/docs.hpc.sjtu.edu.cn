@@ -322,7 +322,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     ulimit -l unlimited
 
     IMAGE_PATH=/lustre/share/img/openfoam-6.simg
-    mpirun -n 128 singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
+    mpirun -n 80 singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
     ```
 
 !!! example "gpu 队列 slurm 脚本示例 OpenFoam singularity 版"
@@ -345,7 +345,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     ulimit -l unlimited
 
     IMAGE_PATH=/lustre/share/img/openfoam-6.simg
-    mpirun -n 128 singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
+    mpirun singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
     ```
     
 ### Job Array 阵列作业
