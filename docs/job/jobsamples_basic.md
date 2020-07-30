@@ -325,6 +325,29 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     mpirun -n 128 singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
     ```
 
+!!! example "gpu 队列 slurm 脚本示例 OpenFoam singularity 版"
+    ```
+    #!/bin/bash
+    
+    #SBATCH --job-name=test           # 作业名
+    #SBATCH --partition=dgx2          # dgx2 队列
+    #SBATCH -N 1                      # 单节点
+    #SBATCH --ntasks-per-node=1       
+    #SBATCH --cpus-per-task=12        # 1:6 的 GPU:CPU 配比
+    #SBATCH --mem=MaxMemPerNode
+    #SBATCH --gres=gpu:2              # 2 块 GPU
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err 
+
+    module load openmpi/2.1.1-gcc-4.8.5
+
+    ulimit -s unlimited
+    ulimit -l unlimited
+
+    IMAGE_PATH=/lustre/share/img/openfoam-6.simg
+    mpirun -n 128 singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
+    ```
+    
 ### Job Array 阵列作业
 
 一批作业，若所需资源和内容相似，可借助 Job Array 批量提交。Job Array 中的每一个作业在调度时视为独立的作业。
