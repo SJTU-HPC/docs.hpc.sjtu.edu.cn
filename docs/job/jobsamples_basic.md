@@ -305,6 +305,10 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
 
 ### singularity 容器
 
+Pi 上已部署的 singularity 容器位于 `/lustre/share/img`
+
+其中，gromacs/lammps/relion/pytorch/tensorflow/chroma 为 GPU 版本的 singularity
+
 !!! example "cpu 队列 slurm 脚本示例 OpenFoam singularity 版"
     ```
     #!/bin/bash
@@ -325,27 +329,24 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     mpirun -n 80 singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
     ```
 
-!!! example "gpu 队列 slurm 脚本示例 OpenFoam singularity 版"
+!!! example "gpu 队列 slurm 脚本示例 lammps singularity 版"
     ```
     #!/bin/bash
-    
-    #SBATCH --job-name=test           # 作业名
-    #SBATCH --partition=dgx2          # dgx2 队列
-    #SBATCH -N 1                      # 单节点
-    #SBATCH --ntasks-per-node=1       
-    #SBATCH --cpus-per-task=12        # 1:6 的 GPU:CPU 配比
-    #SBATCH --mem=MaxMemPerNode
-    #SBATCH --gres=gpu:2              # 2 块 GPU
-    #SBATCH --output=%j.out
-    #SBATCH --error=%j.err 
+    #SBATCH -J gromacs_gpu_test
+    #SBATCH -p dgx2
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -n 6
+    #SBATCH --ntasks-per-node=6
+    #SBATCH --gres=gpu:1
+    #SBATCH -N 1
 
-    module load openmpi/2.1.1-gcc-4.8.5
+    IMAGE_PATH=/lustre/share/img/lammps_7Aug2019.simg
 
     ulimit -s unlimited
     ulimit -l unlimited
 
-    IMAGE_PATH=/lustre/share/img/openfoam-6.simg
-    mpirun singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
+    singularity run $IMAGE_PATH -i YOUR_INPUT_FILE
     ```
     
 ### Job Array 阵列作业
