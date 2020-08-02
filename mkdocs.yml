@@ -52,7 +52,8 @@ nav:
     - STAR-CCM+: application/star-ccm.md
     - TensorFlow: application/TensorFlow.md
     - VASP: application/VASP.md
-    - VMD: application/VMD.md   
+    - VMD: application/VMD.md    
+    - Keras: application/Keras.md
   #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md  
   #   - FFTW: 应用软件/FFTW.md
   #   - MPI4PY: 应用软件/MPI4PY.md
