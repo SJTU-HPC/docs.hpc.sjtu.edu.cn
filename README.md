@@ -20,7 +20,7 @@ Windows用户
 where mkdocs
 ```
 
-linux和mac用户
+Linux和Mac用户
 
 ```
 which mkdocs
@@ -44,6 +44,12 @@ make server
 
 ```
 mkdocs serve
+```
+
+重新编译文档
+
+```
+make build
 ```
 
 更新文档
