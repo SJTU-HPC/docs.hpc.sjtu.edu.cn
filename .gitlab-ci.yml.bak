@@ -1,0 +1,13 @@
+stages:
+  - build
+  - deploy
+
+mkdocs_build:
+  stage: build
+  script:
+    - mkdocs --verbose build
+
+rsync_deploy:
+  stage: deploy
+  script:
+    - rsync -avr --progress --delete public/ /var/lib/www/docs.hpc.sjtu.edu.cn/
