@@ -44,7 +44,7 @@ nav:
     - Lammps: application/Lammps.md
     - Mrbayes: application/mrbayes.md
     - Nektar++: application/Nektar.md
-    - nwchem: application/nwchem.md
+    - NWChem: application/nwchem.md
     - OpenFoam: application/OpenFoam.md
     - Pytorch: application/Pytorch.md
     - Quantum-Espresso: application/Quantum-Espresso.md
@@ -54,6 +54,8 @@ nav:
     - VASP: application/VASP.md
     - VMD: application/VMD.md    
     - Keras: application/Keras.md
+    - SIESTA: application/SIESTA.md
+    - CP2k: application/CP2k.md
   #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md  
   #   - FFTW: 应用软件/FFTW.md
   #   - MPI4PY: 应用软件/MPI4PY.md
