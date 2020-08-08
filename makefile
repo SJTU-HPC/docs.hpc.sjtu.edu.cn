@@ -7,9 +7,11 @@ git:
 server:
 	mkdocs serve
 
-update:
+build:
 	rm -rf public
 	mkdocs build --clean
+
+update: build
 	rm -rf static
 	mkdir static
 	scp -r root@docs.hpc.sjtu.edu.cn:/usr/local/webserver/nginx/html/* static/
