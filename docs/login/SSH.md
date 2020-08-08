@@ -1,8 +1,8 @@
-# <center>通过SSH登录HPC集群<center/>
+# <center>通过 SSH 登录 HPC 集群<center/>
 
 -------
 
-本文将向大家介绍如何通过SSH远程登录到HPC集群上。在阅读本文档之前，您需要具备Linux/Unix、终端、MS-DOS、SSH远程登录的相关知识，或者您可以阅读参考资料理解这些概念。
+本文将向大家介绍如何通过 SSH 远程登录到 HPC 集群上。在阅读本文档之前，您需要具备 Linux/Unix、终端、MS-DOS、SSH 远程登录的相关知识，或者您可以阅读参考资料理解这些概念。
 
 本文主要内容：
 
@@ -21,37 +21,29 @@
  * 若无法登录，请检查输入密码或确认IP地址是否正确。您可以参考故障排除和反馈，将诊断信息发送给集群管理员hpc@sjtu.edu.cn。
 
 # 准备
-## 收集信息
-通过SSH登录HPC集群，需要在客户端输入登录节点IP地址（或主机名），SSH端口，SSH用户名和密码。账号开通好后我们会给您发送邮件确认，邮件内容如下：
+
+通过 SSH 登录 HPC 集群，需要在客户端输入登录节点 IP 地址（或主机名），SSH 端口，SSH 用户名和密码。账号开通后您会收到以下内容的邮件：
 
 ```
-SSH login node:login.hpc.sjtu.edu.cn
+SSH login node: login.hpc.sjtu.edu.cn
 Username: YOUR_USERNAME
 Password: YOUR_PASSWORD
-Home: /lustre/home/YOUR_HOME
 ```
 
-详细信息：
+登录节点 IP 地址（或主机名）为 login.hpc.sjtu.edu.cn
+SSH 端口为 22
 
-```
-SSH username: YOUR_USERNAME    
-SSH password: YOUR_PASSWORD    
-SSH login node’s IP address: login.hpc.sjtu.edu.cn
-user’s home folder: /lustre/home/YOUR_HOME
-```
-
-*提示：为了便于叙述，以下文档内容将遵循上述信息。在实际操作中，请参阅收到的电子邮件，并注意您的登录信息。*
  
 ## 下载客户端
 ### Windows
-Windows用户可以使用putty免费客户端登录软件，下载后双击即可运行使用。putty可通过以下连接下载：http://www.putty.org/.
+Windows 推荐使用 putty 免费客户端，下载后双击即可运行使用。putty 下载链接：http://www.putty.org/.
  
 ### Linux/Unix/Mac
-Linux / Unix / Mac 操作系统拥有自己的SSH客户端，包括ssh, scp, sftp等，因此没必要再去下载其他登录软件。
+Linux / Unix / Mac 操作系统拥有自己的 SSH 客户端，包括 ssh, scp, sftp 等。
 
-# 通过SSH登录集群
+# 通过 SSH 登录集群
 ## Windows用户
-启动客户端putty，填写登录节点地址login.hpc.sjtu.edu.cn，端口号，然后点Open按钮，如下图所示：
+启动客户端 putty，填写登录节点地址 login.hpc.sjtu.edu.cn，端口号采用默认值 22，然后点 Open 按钮，如下图所示：
  
 ![avater](../img/putty1.png)
  
@@ -61,16 +53,16 @@ Linux / Unix / Mac 操作系统拥有自己的SSH客户端，包括ssh, scp, sft
 
 *提示：输入密码时，没有可显示字符，请照常进行操作，然后按回车键登录。*
   
-## Linux/Unix/Mac用户
-Linux / Unix / Mac用户可以使用终端中的命令行工具登录。下列语句指出了该节点的IP地址、用户名和SSH端口。
+## Linux/Unix/Mac 用户
+Linux / Unix / Mac 用户可以使用终端中的命令行工具登录。下列语句指出了该节点的IP地址、用户名和SSH端口。
 
 ```bash
 $ ssh YOUR_USERNAME@TARGET_IP
 ```
 
-# 通过SSH传输文件
-## Windows用户
- Windows用户可以使用WinSCP在群集和您自己的计算机之间传输文件。如下图所示，填写节点的地址，SSH端口，SSH用户名，SSH密码，然后点击Login进行连接。 使用WinSCP的方法类似于使用FTP客户端GUI，如下图所示：
+# 通过 SSH 传输文件
+## Windows 用户
+ Windows 用户可以使用 WinSCP 在群集和您自己的计算机之间传输文件。如下图所示，填写节点的地址，SSH 端口，SSH 用户名，SSH 密码，然后点击 Login 进行连接。 使用 WinSCP 的方法类似于使用 FTP 客户端 GUI，如下图所示：
 
 ![avater](../img/winscp.png)
 
