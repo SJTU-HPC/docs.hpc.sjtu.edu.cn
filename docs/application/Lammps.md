@@ -119,7 +119,7 @@ srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
 ```
 
 
-## ![gpu](https://img.shields.io/badge/-gpu-green) (GPU) LAMMPS 使用
+## ![gpu](https://img.shields.io/badge/-gpu-green) 使用 GPU 版本的 LAMMPS
 
 Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即可运行 LAMMPS，无需单独安装，目前版本为 2019.8。该容器文件位于 /lustre/share/img/lammps_7Aug2019.simg
 
