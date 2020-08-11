@@ -20,12 +20,12 @@
 加载 Miniconda3
 ```bash
 $ module purge
-$ module load miniconda3/4.7.12.1-gcc-4.8.5
+$ module load miniconda3
 ```
 
 创建 conda 环境来安装所需 Python 包（可指定 Python 版本，也可以不指定）
 ```bash
-$ conda create --name mypy python=3.6
+$ conda create --name mypy
 ```
 
 激活 python 环境
@@ -59,7 +59,7 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印 `hel
 #SBATCH -e %j.err
 
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
+module load miniconda3
 
 source activate mypy
 
@@ -83,8 +83,8 @@ $ sbatch hello_python.slurm
 完整步骤
 ```bash
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n mypy python=3.6
+module load miniconda3
+conda create -n mypy
 source activate mypy
 conda install -c bioconda openslide-python
 conda install libiconv
@@ -95,8 +95,8 @@ conda install libiconv
 完整步骤
 ```bash
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n mypy python=3.6
+module load miniconda3
+conda create -n mypy
 source activate mypy
 conda install -c anaconda pandas
 ```
@@ -106,8 +106,8 @@ conda install -c anaconda pandas
 完整步骤
 ```bash
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n mypy python=3.6
+module load miniconda3
+conda create -n mypy
 source activate mypy
 conda install -c conda-forge cdsapi
 ```
@@ -117,8 +117,8 @@ conda install -c conda-forge cdsapi
 完整步骤
 ```bash
 srun -p small -n 4 --pty /bin/bash
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n mypy python=3.6
+module load miniconda3
+conda create -n mypy
 source activate mypy
 git clone --recursive https://github.com/giesselmann/STRique
 cd STRique
@@ -131,8 +131,8 @@ python setup.py install
 完整步骤
 ```bash
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n mypy python=3.6
+module load miniconda3
+conda create -n mypy
 source activate mypy
 conda install -c r r-rgl
 ```
@@ -142,8 +142,8 @@ conda install -c r r-rgl
 完整步骤
 ```bash
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n mypy python=3.6
+module load miniconda3
+conda create -n mypy
 source activate mypy
 conda install -c bioconda sra-tools
 ```
@@ -153,8 +153,8 @@ conda install -c bioconda sra-tools
 完整步骤
 ```bash
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n mypy python=3.6
+module load miniconda3
+conda create -n mypy
 source activate mypy
 conda install -c bioconda bioconductor-deseq2
 ```
@@ -165,8 +165,8 @@ conda install -c bioconda bioconductor-deseq2
 完整步骤
 ```bash
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n mypy python=3.6
+module load miniconda3
+conda create -n mypy
 source activate mypy
 conda install -c bioconda r-wgcna
 ```
@@ -203,9 +203,9 @@ conda install -c bioconda augustus
 srun -p small -n 4 --pty /bin/bash
 git clone https://github.com/bio-ontology-research-group/deepgo.git
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n ha python=3.6
-source activate ha
+module load miniconda3
+conda create -n mypy
+source activate mypy
 conda install pip
 pip install -r requirements.txt
 ```
@@ -217,9 +217,9 @@ pip install -r requirements.txt
 srun -p small -n 4 --pty /bin/bash
 git clone https://github.com/iric-soft/km.git
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n ha python=3.6
-source activate ha
+module load miniconda3
+conda create -n mypy
+source activate mypy
 chmod +x easy_install.sh 
 ./easy_install.sh
 ```
@@ -229,8 +229,8 @@ chmod +x easy_install.sh
 完整步骤
 ```bash
 module purge
-module load miniconda3/4.7.12.1-gcc-4.8.5
-conda create -n mypy python=3.6
+module load miniconda3
+conda create -n mypy
 source activate mypy
 conda install -c anaconda requests
 ```
