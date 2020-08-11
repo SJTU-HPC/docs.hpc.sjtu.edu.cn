@@ -18,6 +18,9 @@ Pi 上有多种版本的 LAMMPS:
 
 ## ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) LAMMPS 模块调用
 
+
+## 使用 CPU 版本 LAMMPS
+
 查看 Pi 上已编译的软件模块:
 ```bash
 $ module avail lammps
@@ -28,7 +31,7 @@ $ module avail lammps
 $ module load lammps/20190807-intel-19.0.5-impi
 ```
 
-## ![cpu](https://img.shields.io/badge/-cpu-blue)  (CPU) LAMMPS 的 Slurm 脚本
+### ![cpu](https://img.shields.io/badge/-cpu-blue)  (CPU) LAMMPS 的 Slurm 脚本
 在 cpu 队列上，总共使用 80 核 (n = 80)<br>
 cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ```bash
@@ -55,12 +58,12 @@ ulimit -l unlimited
 srun lmp -i YOUR_INPUT_FILE
 ```
 
-## ![cpu](https://img.shields.io/badge/-cpu-blue) LAMMPS 提交作业
+### ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) LAMMPS 提交作业
 ```bash
 $ sbatch slurm.test
 ```
 
-## ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) LAMMPS 自行编译
+### ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) LAMMPS 自行编译
 
 若对 lammps 版本有要求，或需要特定的 package，可自行编译 Intel 版本的 Lammps.
 

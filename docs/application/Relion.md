@@ -58,7 +58,7 @@ $ sbatch slurm.test
 
 集群中已预置了编译优化的容器镜像，通过调用该镜像即可运行 Relion，无需单独安装，目前版本为 `relion-3.0.8`。该容器文件位于 `/lustre/share/img/relion-3.0.8-cuda9.2-openmpi4.0.simg`
 
-### 使用 singularity 容器提交 PyTorch 作业
+### 使用 singularity 容器提交 Relion 作业
 
 示例：在 DGX-2 上使用 Relion 容器，作业使用单节点并分配 2 块 GPU：
 
