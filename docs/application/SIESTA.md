@@ -8,7 +8,7 @@ SIESTA is both a method and its computer program implementation, to perform effi
 
 ## Pi 上的 SIESTA
 
-Pi2.0 系统中已经预装 SIESTA (GNU+cpu 版本)，可用以下命令加载: 
+Pi2.0 系统中已经预装 SIESTA (Intel 版本)，可用以下命令加载: 
 
 ```bash
 $ module load siesta
@@ -30,7 +30,10 @@ cpu 队列每个节点配有 40 核，所以这里使用了 1 个节点：
 #SBATCH -e %j.err
 
 module purge
-module load siesta
+module load siesta/4.0.1-intel-19.0.4-impi
+
+export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
+export I_MPI_FABRICS=shm:ofi
 
 ulimit -s unlimited
 ulimit -l unlimited
