@@ -1,17 +1,10 @@
 stages:
-  - build
-  - deploy
+  - build_and_deploy
 
-mkdocs_build:
-  stage: build
+install:
+  stage: build_and_deploy
   tags:
     - web
   script:
     - mkdocs --verbose build
-
-rsync_deploy:
-  stage: deploy
-  tags:
-    - web
-  script:
     - rsync -avr --progress --delete public/ /var/lib/www/docs.hpc.sjtu.edu.cn/
