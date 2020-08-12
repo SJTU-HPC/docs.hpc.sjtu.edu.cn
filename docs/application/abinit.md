@@ -14,7 +14,7 @@ $ module avail abinit
 
 调用该模块:
 ```bash
-$ module load abinit/8.10.3-gcc-8.3.0-openblas-openmpi
+$ module load abinit/8.10.3-gcc-9.2.0-openblas-openmpi
 ```
 
 ## Pi 上的 Slurm 脚本 slurm.test
@@ -33,7 +33,6 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 
 module purge
 module load abinit
-module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
 
 srun --mpi=pmi2 < example.in
 ```
