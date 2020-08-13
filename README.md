@@ -9,7 +9,7 @@ mkdocs是一个python包，用于本文档网页渲染。在开始之前请确�
 使用以下指令安装指定的python包：
 
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 检查mkdocs是否安装完成：
