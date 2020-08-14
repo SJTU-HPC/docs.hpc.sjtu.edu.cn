@@ -246,7 +246,7 @@ module load miniconda3
 conda create -n mypy
 source activate mypy
 conda install -c anaconda cellprofiler
-
+```
 
 
 ## 参考文献
