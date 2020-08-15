@@ -1,6 +1,4 @@
-# <center>Intel</center> 
-
------
+# Intel
 
 Intel编译套件是由Intel提供的编译器、MPI环境、MKL库等集成套件。本节讲解如何使用集群中预安装的相关组件。
 

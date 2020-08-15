@@ -10,15 +10,15 @@ Pi超算集群用户文档
 快速链接
 --------
 
-1. `账号申请 <accounts/apply>`_
-2. `密码 <accounts/passwords>`_
-3. `远程登陆 <login/SSH>`_
-4. `远程桌面 <studio/basic>`_
-5. `作业提交 <job/slurm>`_
-6. `应用软件 <application/applications>`_
-7. `使用GNU套件编译代码 <application/GNU>`_
-8. `使用Intel套件编译代码 <application/Intel>`_
-9. `常见问题 <faq>`_
+1. :ref:`账号申请 <accountsapply>`
+2. :ref:`密码 <accountspasswords>`
+3. :ref:`远程登陆 <loginssh>`
+4. :ref:`远程桌面 <studiobasic>`
+5. :ref:`作业提交 <jobslurm>`
+6. :ref:`应用软件 <applications>`
+7. :ref:`使用GNU套件编译代码 <applicationsgnu>`
+8. :ref:`使用Intel套件编译代码 <applicationsintel>`
+9. :ref:`常见问题 <faq>`
 
 .. toctree::
    :maxdepth: 1
