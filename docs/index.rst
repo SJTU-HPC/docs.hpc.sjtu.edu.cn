@@ -26,6 +26,7 @@ Pi超算集群用户文档
    :caption: 账户
 
    accounts/apply
+   accounts/passwords
 
 .. toctree::
    :maxdepth: 1
@@ -34,7 +35,15 @@ Pi超算集群用户文档
    login/SSH
    login/login
    login/tmux
-  
+
+.. toctree::
+   :maxdepth: 1
+   :caption: 可视化平台
+
+   studio/basic
+   studio/rdp
+   studio/tmux
+
 .. toctree::
    :maxdepth: 1
    :caption: 常见问题
