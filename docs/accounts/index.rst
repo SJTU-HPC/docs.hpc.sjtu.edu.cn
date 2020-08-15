@@ -7,5 +7,5 @@
 .. toctree::
    :maxdepth: 1
 
-   accounts_apply
-   accounts_password
+   apply
+   password
