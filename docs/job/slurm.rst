@@ -1,30 +1,15 @@
-#
-
-.. raw:: html
-
-   <center>
-
+=================
 Slurm作业调度系统
+=================
 
-.. raw:: html
-
-   </center>
-
---------------
-
-`SLURM <http://slurm.schedmd.com/>`__\ （Simple Linux Utility for
-Resource
-Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
-它是免费且开源的，根据\ `通用公共许可证 <http://www.gnu.org/licenses/gpl.html>`__\ 发行。
+`SLURM <http://slurm.schedmd.com/>`_ （Simple Linux Utility for Resource Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
+它是免费且开源的，根据\ `GPL通用公共许可证 <http://www.gnu.org/licenses/gpl.html>`__\ 发行。
 
 本文档将协助您通过SLURM管理作业。 在这里可以找到更多的工作样本。
 
 如果我们可以提供任何帮助，请随时联系\ `hpc邮箱 <mailto:hpc@sjtu.edu.cn>`__\ 。
 
-.. figure:: ../img/slurm_pi.svg
-   :alt: avater
-
-   avater
+.. figure:: ../img/slurm_pi.png
 
 Slurm概览
 ---------
