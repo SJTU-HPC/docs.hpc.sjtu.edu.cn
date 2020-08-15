@@ -61,15 +61,15 @@ Pi超算集群用户文档
    container/singularity
    container/u2cb
 
-.. toctree::
-   :maxdepth: 1
-   :caption: 应用软件
-
-   app/index
-   app/module
-   app/conda
-   app/gnu
-   app/intel
+.. .. toctree::
+..    :maxdepth: 1
+..    :caption: 应用软件
+.. 
+..    app/index
+..    app/module
+..    app/conda
+..    app/gnu
+..    app/intel
 
 .. toctree::
    :maxdepth: 1
