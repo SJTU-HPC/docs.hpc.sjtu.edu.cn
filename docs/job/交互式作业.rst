@@ -1,0 +1,18 @@
+#
+
+.. raw:: html
+
+   <center>
+
+Slurm交互式作业
+
+.. raw:: html
+
+   </center>
+
+--------------
+
+Slurm提供了\ ``srun``\ 指令
+
+srun
+----

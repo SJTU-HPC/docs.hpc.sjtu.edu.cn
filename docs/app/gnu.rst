@@ -1,6 +1,3 @@
-.. _applicationsgnu:
-
-===
 GNU
 ===
 
@@ -10,7 +7,7 @@ Free Software
 Definition）的权利。在本节中，GNU将代指那些基于GNU许可的开源软件，特别是GCC和OpenMPI。
 
 加载预安装的GNU
-===============
+---------------
 
 Pi2.0 系统中已经预装不同版本的gcc，可以用以下命令加载:
 
@@ -34,10 +31,11 @@ openmpi-3.1.5/gcc-8.3.0 module load openmpi/3.1.5-gcc-8.3.0
 openmpi-3.1.5/gcc-9.2.0 module load openmpi/3.1.5-gcc-9.2.0
 ======================= ===================================
 
-.. tip: 在同时使用openmpi和gcc的时候，请尽量保持gcc版本与openmpi后缀中的编译器版本一致，如gcc-8.3.0和openmpi-3.1.5/gcc-8.3.0
+!!! tip
+在同时使用openmpi和gcc的时候，请尽量保持gcc版本与openmpi后缀中的编译器版本一致，如gcc-8.3.0和openmpi-3.1.5/gcc-8.3.0
 
 使用GCC+OpenMPI编译应用
-=======================
+-----------------------
 
 这里，我们演示如何使用系统中的OpenMPI和GCC编译MPI代码，所使用的MPI代码可以在\ ``/lustre/share/samples/MPI/mpihello.c``\ 中找到。
 
