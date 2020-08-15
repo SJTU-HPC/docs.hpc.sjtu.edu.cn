@@ -1,6 +1,6 @@
-==================
+******************
 Pi超算集群用户文档
-==================
+******************
 
 `docs <https://docs.hpc.sjtu.edu.cn/>`_ 是上海交通大学 Pi2.0 超级计算集群用户文档，为用户提供快速上手指导和问题解答。如果想获取更多HPC团队的动态和信息，请访问 `上海交通大学HPC站点 <https://hpc.sjtu.edu.cn/>`_ 。   
 
@@ -22,11 +22,9 @@ Pi超算集群用户文档
 .. 9. :ref:`常见问题 <faq>`
 
 .. toctree::
-   :maxdepth: 1
-   :caption: 账户
+   :maxdepth: 2
 
-   accounts/apply
-   accounts/passwords
+   accounts
 
 .. toctree::
    :maxdepth: 1
