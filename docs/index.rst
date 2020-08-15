@@ -24,7 +24,7 @@ Pi超算集群用户文档
 .. toctree::
    :maxdepth: 2
 
-   accounts
+   accounts/index.rst
 
 .. toctree::
    :maxdepth: 1
