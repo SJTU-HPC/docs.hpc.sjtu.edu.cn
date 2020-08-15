@@ -8,18 +8,21 @@ Pi超算集群用户文档
 
 .. tip:: 该文档通过 `github <https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn>`_ 维护。如果您有什么建议或者意见，欢迎提交修改。 
 
-.. 快速链接
-.. ========
-.. 
-.. 1. :ref:`账号申请 <accountsapply>`
-.. 2. :ref:`密码 <accountspasswords>`
-.. 3. :ref:`远程登陆 <loginssh>`
-.. 4. :ref:`远程桌面 <studiobasic>`
-.. 5. :ref:`作业提交 <jobslurm>`
-.. 6. :ref:`应用软件 <applications>`
-.. 7. :ref:`使用GNU套件编译代码 <applicationsgnu>`
-.. 8. :ref:`使用Intel套件编译代码 <applicationsintel>`
-.. 9. :ref:`常见问题 <faq>`
+快速链接
+========
+
+1. :ref:`账号申请 <accountsapply>`
+2. :ref:`密码 <accountspasswords>`
+3. :ref:`远程登陆 <loginssh>`
+4. :ref:`远程桌面 <studiobasic>`
+5. :ref:`作业提交 <jobslurm>`
+6. :ref:`应用软件 <applications>`
+7. :ref:`使用GNU套件编译代码 <applicationsgnu>`
+8. :ref:`使用Intel套件编译代码 <applicationsintel>`
+9. :ref:`常见问题 <faq>`
+
+内容导航
+========
 
 .. toctree::
    :maxdepth: 2
@@ -28,40 +31,39 @@ Pi超算集群用户文档
 
 .. toctree::
    :maxdepth: 1
-   :caption: 登录
 
-   login/ssh
-   login/login
-   login/tmux
-
-.. toctree::
-   :maxdepth: 1
-   :caption: 可视化平台
-
-   studio/basic
-   studio/rdp
-   studio/tmux
+   login/index
+..   login/ssh
+..   login/login
+..   login/tmux
 
 .. toctree::
    :maxdepth: 1
-   :caption: 提交作业
 
-   job/slurm
-   job/jobssample1
-   job/jobssample2
-   job/dgx
-   job/reservation
+   studio/index
+..  studio/basic
+..  studio/rdp
+..  studio/tmux
 
 .. toctree::
    :maxdepth: 1
-   :caption: 容器
 
-   container/singularity
-   container/u2cb
+   job/index
+..   job/slurm
+..   job/jobssample1
+..   job/jobssample2
+..   job/dgx
+..   job/reservation
+
+.. toctree::
+   :maxdepth: 1
+
+   container/index
+..   container/singularity
+..   container/u2cb
 
 .. .. toctree::
 ..    :maxdepth: 1
-..    :caption: 应用软件
 .. 
 ..    app/index
 ..    app/module
@@ -71,6 +73,5 @@ Pi超算集群用户文档
 
 .. toctree::
    :maxdepth: 1
-   :caption: 常见问题
 
    faq/index
