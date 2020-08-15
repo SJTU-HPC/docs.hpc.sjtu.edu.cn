@@ -1,3 +1,4 @@
+==================
 Pi超算集群用户文档
 ==================
 
@@ -8,7 +9,7 @@ Pi超算集群用户文档
 .. tip:: 该文档通过 `github仓库 <https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn>`__\ 维护。如果您有什么建议或者意见，欢迎提交修改。 
 
 快速链接
---------
+========
 
 1. :ref:`账号申请 <accountsapply>`
 2. :ref:`密码 <accountspasswords>`
