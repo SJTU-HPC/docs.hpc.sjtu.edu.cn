@@ -50,10 +50,11 @@ Pi超算集群用户文档
 ..   container/singularity
 ..   container/u2cb
 
-.. .. toctree::
-..    :maxdepth: 2
-.. 
-..    app/index
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   app/index
 ..    app/module
 ..    app/conda
 ..    app/gnu

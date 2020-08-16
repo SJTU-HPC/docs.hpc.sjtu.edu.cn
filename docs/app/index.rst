@@ -1,22 +1,18 @@
-Pi 上的软件
-===========
+****
+软件
+****
 
 本文档介绍 Pi 上的软件。 商业软件需用户自行获取版权并安装。 |cpu| |gpu|
 |arm| |singularity| 标签表明软件有 cpu, gpu, arm 和 singularity 版本
 
-.. _pi-上的软件-1:
-
-Pi 上的软件
------------
-
 +-----------------+-----------------+-----------------+-----------------+
 | Name            | Version         | Distribution    | Introduction    |
 +=================+=================+=================+=================+
-| `               | 8.10.3          | |cpu|           | ABINIT is a     |
-| ABINIT <https:/ |                 |                 | package whose   |
-| /docs.hpc.sjtu. |                 |                 | main program    |
-| edu.cn/applicat |                 |                 | allows one to   |
-| ion/abinit/>`__ |                 |                 | find the total  |
+| Abinit          | 8.10.3          | |cpu|           | ABINIT is a     |
+|                 |                 |                 | package whose   |
+|                 |                 |                 | main program    |
+|                 |                 |                 | allows one to   |
+|                 |                 |                 | find the total  |
 |                 |                 |                 | energy, charge  |
 |                 |                 |                 | density and     |
 |                 |                 |                 | electronic      |
@@ -37,10 +33,10 @@ Pi 上的软件
 |                 |                 |                 | or wavelet      |
 |                 |                 |                 | basis.          |
 +-----------------+-----------------+-----------------+-----------------+
-| `Amber <https:  |                 | |cpu| |gpu|     | A package of    |
-| //docs.hpc.sjtu |                 |                 | molecular       |
-| .edu.cn/applica |                 |                 | simulation      |
-| tion/Amber/>`__ |                 |                 | programs and    |
+| Amber           |                 | |cpu| |gpu|     | A package of    |
+|                 |                 |                 | molecular       |
+|                 |                 |                 | simulation      |
+|                 |                 |                 | programs and    |
 |                 |                 |                 | analysis tools. |
 +-----------------+-----------------+-----------------+-----------------+
 | BCFtools        | 1.9             | |cpu|           | BCFtools is a   |
@@ -131,10 +127,10 @@ Pi 上的软件
 |                 |                 |                 | the human       |
 |                 |                 |                 | genome.         |
 +-----------------+-----------------+-----------------+-----------------+
-| `CESM <https    |                 | |cpu|           | Community Earth |
-| ://docs.hpc.sjt |                 |                 | System Model,   |
-| u.edu.cn/applic |                 |                 | or CESM, is a   |
-| ation/CESM/>`__ |                 |                 | fully-coupled,  |
+| CESM            |                 | |cpu|           | Community Earth |
+|                 |                 |                 | System Model,   |
+|                 |                 |                 | or CESM, is a   |
+|                 |                 |                 | fully-coupled,  |
 |                 |                 |                 | community,      |
 |                 |                 |                 | global climate  |
 |                 |                 |                 | model that      |
@@ -320,11 +316,11 @@ Pi 上的软件
 |                 |                 |                 | reference       |
 |                 |                 |                 | genome.         |
 +-----------------+-----------------+-----------------+-----------------+
-| `               | 20190807        | |cpu|           | (Large-scale    |
-| LAMMPS <https:/ |                 | |gpu|\ |arm|    | A               |
-| /docs.hpc.sjtu. |                 | |singularity|   | tomic/Molecular |
-| edu.cn/applicat |                 |                 | Massively       |
-| ion/Lammps/>`__ |                 |                 | Parallel        |
+| Lammps          | 20190807        | |cpu|           | (Large-scale    |
+|                 |                 | |gpu|\ |arm|    | A               |
+|                 |                 | |singularity|   | tomic/Molecular |
+|                 |                 |                 | Massively       |
+|                 |                 |                 | Parallel        |
 |                 |                 |                 | Simulator) a    |
 |                 |                 |                 | classical       |
 |                 |                 |                 | molecular       |
@@ -418,11 +414,11 @@ Pi 上的软件
 |                 |                 |                 | equations       |
 |                 |                 |                 | (PDE).          |
 +-----------------+-----------------+-----------------+-----------------+
-| `               | 6.8.1           | |cpu|           | NWChem aims to  |
-| nwChem <https:/ |                 |                 | provide its     |
-| /docs.hpc.sjtu. |                 |                 | users with      |
-| edu.cn/applicat |                 |                 | computational   |
-| ion/nwchem/>`__ |                 |                 | chemistry tools |
+| nwChem          | 6.8.1           | |cpu|           | NWChem aims to  |
+|                 |                 |                 | provide its     |
+|                 |                 |                 | users with      |
+|                 |                 |                 | computational   |
+|                 |                 |                 | chemistry tools |
 |                 |                 |                 | that are        |
 |                 |                 |                 | scalable both   |
 |                 |                 |                 | in their        |
@@ -466,11 +462,11 @@ Pi 上的软件
 |                 |                 |                 | Properties and  |
 |                 |                 |                 | relativity.     |
 +-----------------+-----------------+-----------------+-----------------+
-| `               | 5.2.0           | |cpu|           | GNU Octave is   |
-| Octave <https:/ |                 | |singularity|   | software        |
-| /docs.hpc.sjtu. |                 |                 | featuring a     |
-| edu.cn/applicat |                 |                 | high-level      |
-| ion/Octave/>`__ |                 |                 | programming     |
+| Octave          | 5.2.0           | |cpu|           | GNU Octave is   |
+|                 |                 | |singularity|   | software        |
+|                 |                 |                 | featuring a     |
+|                 |                 |                 | high-level      |
+|                 |                 |                 | programming     |
 |                 |                 |                 | language,       |
 |                 |                 |                 | primarily       |
 |                 |                 |                 | intended for    |
@@ -611,11 +607,11 @@ Pi 上的软件
 |                 |                 |                 | Statistical     |
 |                 |                 |                 | Computing.      |
 +-----------------+-----------------+-----------------+-----------------+
-| `               | 3.0.8           | |gpu|           | REgularised     |
-| Relion <https:/ |                 |                 | LIkelihood      |
-| /docs.hpc.sjtu. |                 |                 | OptimisatioN    |
-| edu.cn/applicat |                 |                 | (RELION)        |
-| ion/Relion/>`__ |                 |                 | employs an      |
+| Relion          | 3.0.8           | |gpu|           | REgularised     |
+|                 |                 |                 | LIkelihood      |
+|                 |                 |                 | OptimisatioN    |
+|                 |                 |                 | (RELION)        |
+|                 |                 |                 | employs an      |
 |                 |                 |                 | empirical       |
 |                 |                 |                 | Bayesian        |
 |                 |                 |                 | approach to     |
@@ -792,7 +788,7 @@ Pi 上的软件
 |                 |                 |                 | scripting.      |
 +-----------------+-----------------+-----------------+-----------------+
 
-.. |cpu| image:: https://img.shields.io/badge/-cpu-blue
-.. |gpu| image:: https://img.shields.io/badge/-gpu-green
-.. |arm| image:: https://img.shields.io/badge/-arm-yellow
-.. |singularity| image:: https://img.shields.io/badge/-singularity-blueviolet
+.. |cpu| image:: https://raster.shields.io/badge/-cpu-blue
+.. |gpu| image:: https://raster.shields.io/badge/-gpu-green
+.. |arm| image:: https://raster.shields.io/badge/-arm-yellow
+.. |singularity| image:: https://raster.shields.io/badge/-singularity-blueviolet
