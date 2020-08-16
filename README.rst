@@ -21,18 +21,21 @@ Linux和Mac用户检查sphinx是否安装成功::
 
    which sphinx-build
 
+`Pandoc <https://pandoc.org>`_ 能够将markdown文档转换为rst文档，减少重复操作::
+
+  brew install pandoc
+  pandoc -t index.md -o index.rst
+
 在本地预览文档更新 
 ------------------
 
 重新编译HTML站点::
 
-  $ cd docs
-  $ make html
+  $ make -C docs html
 
 重新编译PDF文档::
 
-  $ cd docs
-  $ make latexpdf
+  $ make -C docs latexpdf
 
 从仓库更新文档代码::
 
