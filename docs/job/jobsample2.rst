@@ -1,33 +1,13 @@
-#
-
-.. raw:: html
-
-   <center>
-
-作业示例（开发者）
-
-.. raw:: html
-
-   <center/>
-
---------------
+作业示例
+========
 
 介绍不同并行环境的作业示例。
 
 本文档中使用的作业样本可以在/lustre/share/samples中找到。
 在继续之前，请阅读有关预置软件环境的文档。
 
-##
-
-.. raw:: html
-
-   <center>
-
 OpenMP 示例
-
-.. raw:: html
-
-   <center/>
+-----------
 
 以OpenMP为例，名为omp_hello.c代码如下：
 
@@ -621,18 +601,12 @@ CUDA 示例
 
 ##
 
-.. raw:: html
-
-   <center>
-
 提交作业到small分区
-
-.. raw:: html
-
-   </center>
+-------------------
 
 串行作业需要提交到名为串行的队列中，作业脚本和qos中的队列名称需要相应调整。
-​```bash #!/bin/bash
+
+bash #!/bin/bash
 
 #SBATCH -J Hello #SBATCH -p small #SBATCH -o %j.out #SBATCH -e %j.err
 #SBATCH -n 1

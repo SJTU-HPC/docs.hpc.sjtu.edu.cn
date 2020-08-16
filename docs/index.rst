@@ -32,28 +32,26 @@ Pi超算集群用户文档
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
 
    studio/index
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :hidden:
 
    job/index
-..   job/slurm
-..   job/jobssample1
-..   job/jobssample2
-..   job/dgx
-..   job/reservation
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :hidden:
 
    container/index
 ..   container/singularity
 ..   container/u2cb
 
 .. .. toctree::
-..    :maxdepth: 1
+..    :maxdepth: 2
 .. 
 ..    app/index
 ..    app/module
