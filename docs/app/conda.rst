@@ -1,16 +1,7 @@
-#
+.. _conda: 
 
-.. raw:: html
-
-   <center>
-
-用 Conda 安装生信软件
-
-.. raw:: html
-
-   </center>
-
---------------
+用Conda安装生信软件
+===================
 
 本文档介绍使用 Conda 在个人目录中安装生物信息类应用软件。
 
@@ -291,4 +282,4 @@ Requests 安装
 参考文献
 --------
 
--  `miniconda <https://docs.conda.io/en/latest/miniconda.html>`__
+-  miniconda https://docs.conda.io/en/latest/miniconda.html
