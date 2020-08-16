@@ -1,11 +1,10 @@
 .. _studiobasic:
 
-================================
 HPC Studio：图形化操作与远程桌面
 ================================
 
 登陆
-====
+----
 
 在浏览器中，打开：https://studio.hpc.sjtu.edu.cn
 
@@ -64,10 +63,10 @@ HPC Studio：图形化操作与远程桌面
    avater
 
 作业
-====
+----
 
 查看作业
---------
+^^^^^^^^
 
 点击\ ``Jobs->Active Jobs``\ ，查看队列中的作业。在右上角的\ ``Your Jobs/All Jobs``\ 中选择要查看的任务类型。
 
@@ -84,82 +83,49 @@ HPC Studio：图形化操作与远程桌面
 点击作业项前的箭头查看作业详情。
 
 .. figure:: ../img/ondemand_active_job_details.png
-   :alt: avater
-
-   avater
 
 提交作业
---------
+^^^^^^^^
 
 点击\ ``Jobs->Job Composer``\ ，打开新建作业选项卡。
 
 .. figure:: ../img/ondemand_job_composer.png
-   :alt: avater
-
-   avater
 
 点击左上角\ ``New Job``\ （1）按钮，选择模板，点击\ ``submit``\ （2）按钮提交作业。
 
 .. figure:: ../img/ondemand_job_composer_template.png
-   :alt: avater
-
-   avater
 
 同时HPC
 Studio提供了在线文本编辑功能，在右侧底部的\ ``Submit Script``\ 选项卡中，点击\ ``Open Editor``\ 按钮，即可打开文本编辑器。
 
 .. figure:: ../img/ondemand_editor_open.png
-   :alt: avater
-
-   avater
 
 .. figure:: ../img/ondemand_editor.png
-   :alt: avater
-
-   avater
 
 在线Shell终端
-=============
+-------------
 
 点击 ``Clusters->sjtu Shell Access`` ,打开在线终端。
 
 .. figure:: ../img/ondemand_shell.png
-   :alt: avater
-
-   avater
 
 远程桌面
-========
+--------
 
 远程桌面打开方式需先提交一个空的作业取得计算节点的控制权（此操作会计入机时）。
 
 点击\ ``Interactive Apps->Desktop``\ 按钮，进入作业提交页面。
 
 .. figure:: ../img/ondemand_desktop.png
-   :alt: avater
-
-   avater
 
 Number of hours 默认是 1，然后点击 launch 即可进入桌面选项卡。
 
 .. figure:: ../img/ondemand_desktop2.png
-   :alt: avater
-
-   avater
 
 .. figure:: ../img/ondemand_desktop3.png
-   :alt: avater
-
-   avater
 
 待选项卡显示作业在running的状态时,点击\ ``launch``\ 即可进入远程桌面。
 
 .. figure:: ../img/ondemand_desktop4.png
-   :alt: avater
-
-   avater
 
 .. figure:: ../img/ondemand_desktop5.png
-   :alt: avater
-
-   avater

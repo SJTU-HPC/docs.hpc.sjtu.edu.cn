@@ -22,7 +22,7 @@ Pi超算集群用户文档
    :maxdepth: 2
    :hidden:
 
-   accounts/index.rst
+   accounts/index
 
 .. toctree::
    :maxdepth: 2
@@ -34,9 +34,6 @@ Pi超算集群用户文档
    :maxdepth: 2
 
    studio/index
-..  studio/basic
-..  studio/rdp
-..  studio/tmux
 
 .. toctree::
    :maxdepth: 1

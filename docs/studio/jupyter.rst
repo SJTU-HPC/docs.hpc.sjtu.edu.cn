@@ -1,4 +1,3 @@
-================
 Jupyter 使用说明
 ================
 
@@ -13,7 +12,7 @@ Notebook、JupyterHub和JupyterLab，这是Jupyter Notebook的下一代版本。
 Studio平台后，可以在内置应用中选择\ ``Jupyter``\ 或\ ``Jupyer (GPU)``\ ，均支持\ ``Jupyter Notebook``\ 和\ ``JupyterLab``\ 。
 
 在 Jupyter 中使用预置环境
-=========================
+-------------------------
 
 已有三个预置环境，可供用户使用：
 
