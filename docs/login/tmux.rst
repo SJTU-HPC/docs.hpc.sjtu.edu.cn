@@ -1,10 +1,7 @@
 Tmux
 ====
 
---------------
-
-Tmux是一个终端复用器（terminal
-multiplexer）。如果您有使用screen的经历的话，您可以理解为Tmux是screen的不同实现软件。本教程将讲解Tmux的基础用法。
+Tmux是一个终端复用器（terminal multiplexer）。如果您有使用screen的经历的话，您可以理解为Tmux是screen的不同实现软件。本教程将讲解Tmux的基础用法。
 
 一、Tmux是什么？
 ----------------

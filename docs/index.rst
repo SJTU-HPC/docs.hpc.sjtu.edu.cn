@@ -25,15 +25,13 @@ Pi超算集群用户文档
    accounts/index.rst
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :hidden:
 
    login/index
-..   login/ssh
-..   login/login
-..   login/tmux
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
 
    studio/index
 ..  studio/basic
@@ -67,6 +65,7 @@ Pi超算集群用户文档
 ..    app/intel
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
+   :hidden:
 
    faq/index
