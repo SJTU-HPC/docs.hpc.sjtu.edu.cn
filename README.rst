@@ -17,7 +17,7 @@ Windows用户检查sphinx是否安装完成::
 
    where sphinx-build
 
-Linux和Mac用户检查sphinx是否安装陈宫个::
+Linux和Mac用户检查sphinx是否安装成功::
 
    which sphinx-build
 
@@ -27,14 +27,14 @@ Linux和Mac用户检查sphinx是否安装陈宫个::
 重新编译HTML站点::
 
   $ cd docs
-  $ make build
+  $ make html
 
 重新编译PDF文档::
 
   $ cd docs
   $ make latexpdf
 
-更新文档::
+从仓库更新文档代码::
 
   $ git pull origin
 
