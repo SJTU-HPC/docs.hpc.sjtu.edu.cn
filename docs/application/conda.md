@@ -16,6 +16,7 @@
 - [km](#km)
 - [Requests](#requests)
 - [CellProfiler](#cellprofiler)
+- [Rosetta](#rosetta)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
@@ -247,6 +248,21 @@ conda create -n mypy
 source activate mypy
 conda install -c anaconda cellprofiler
 ```
+
+## Rosetta 安装
+
+完整步骤
+```bash
+srun -p small -n 4 --pty /bin/bash
+module purge
+module load miniconda3
+conda create -n mypy
+source activate mypy
+conda install -c steven_c rosetta
+```
+
+
+
 
 
 ## 参考文献
