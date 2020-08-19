@@ -8,7 +8,7 @@
    :maxdepth: 1
 
    slurm
-   jobsmaple1
-   jobsmaple2
-   dgx2
+   jobsample1
+   jobsample2
+   dgx
    reservation
