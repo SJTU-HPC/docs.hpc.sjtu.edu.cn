@@ -108,20 +108,24 @@
 &ensp;&ensp;&ensp;1. 邮件确认：1 个工作日内；<br/>
 &ensp;&ensp;&ensp;2. 编译 Spack 已有的软件包：2个工作日内；<br/>
 &ensp;&ensp;&ensp;3. 调整作业脚本：1个工作日内；<br/>
-&ensp;&ensp;&ensp;4. 排查异常中断作业：2~3个工作日内；<br/>
+&ensp;&ensp;&ensp;4. 排查异常中断作业：2~3个工作日内；<br>
 &ensp;&ensp;&ensp;5. 新建帐号：2个工作日内；<br/>
 &ensp;&ensp;&ensp;6. 编译不包含在 Spack 或自行开发的软件包：1~2周内。
 
 ## 7.致谢模版
 ### Q: 如何在论文中致谢交大高性能计算？
-**A：** 致谢模版如下。欢迎大家将已接收的高质量成果邮件分享给我们。<br/><br/>
-&ensp;&ensp;&ensp;（中文）本论文的计算结果得到了上海交通大学高性能计算中心的支持和帮助。<br/><br/>
-&ensp;&ensp;&ensp;（英文）The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.<br/><br/><br/><br/>
+**A：** 致谢模版如下。欢迎大家将已接收的高质量成果邮件分享给我们。
+
+&ensp;&ensp;&ensp;（中文）本论文的计算结果得到了上海交通大学高性能计算中心的支持和帮助。
+
+&ensp;&ensp;&ensp;（英文）The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
 
 ## 8 Q: 医学院和附属医院如何申请 Jaccount 账号
 **A：** 请至 [上海交通大学医学院网络信息中心](https://www.shsmu.edu.cn/net/info/1054/1080.htm) 页面了解和办理。
 
-## 9 Q: 我觉得 π2 和我的电脑/服务器上数据传输速度很慢，怎么办？
+## 9 网络连接和数据传输
+
+### 9.1 Q: 我觉得 π2 和我的电脑/服务器上数据传输速度很慢，怎么办？
 
 **A：** π2 集群的登陆节点通过公网 IP 传输数据，理论速度上限约为 110 MB/s，但是考虑到登陆节点为大家共享使用，因此实际传输速度会偏低。对于数据传输，我们为您提供如下解决方案：
 
@@ -131,15 +135,14 @@
 
 **数据量特别庞大（如超过 1PB）**，请您与我们联系，由计算专员根据具体情况为您解决数据传输问题。
 
-## 10. Q: 想测网速
+### 9.2. Q: 想测网速
 **A：** 校内的网络测速
 http://comic.sjtu.edu.cn/speed/
 
-校园主干网速度：
-
-net.sjtu.edu.cn 主页右侧“运行状态 -> 校园主干网” 查看
+校园主干网速度：[交大网络中心首页](https://net.sjtu.edu.cn) 右侧页面上，点击“运行状态 -> 校园主干网” 查看
 
 
 
 
 
+<br><br><br><br><br><br><br>
