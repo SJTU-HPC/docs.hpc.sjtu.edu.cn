@@ -1,19 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
-
 Amber
-
-.. raw:: html
-
-   </center>
-
---------------
-
-简介
-----
+=====
 
 Amber (Assisted Model Building with Energy Refinement) is the collective
 name for a suite of programs designed to carry out molecular mechanical
