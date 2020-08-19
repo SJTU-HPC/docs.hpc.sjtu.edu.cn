@@ -9,5 +9,4 @@ install:
   tags:
     - web
   script:
-    - cd docs
-    - make html
+    - make -C docs html SPHINXOPTS="-W --keep-going"
