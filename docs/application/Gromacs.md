@@ -25,7 +25,7 @@ $ module avail gromacs
 
 调用该模块:
 ```bash
-$ module load gromacs/2019.4-intel-19.0.4-impi
+$ module load gromacs/2019.4-gcc-9.2.0-openmpi
 ```
 
 ## ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) GROMACS 的 Slurm 脚本
@@ -38,17 +38,17 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 #SBATCH -p cpu
 #SBATCH -n 80
 #SBATCH --ntasks-per-node=40
-#SBATCH --exclusive
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 
 module purge
 module load gromacs/2019.4-gcc-9.2.0-openmpi
+module load gcc openmpi
 
 ulimit -s unlimited
 ulimit -l unlimited
 
-mpirun gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
+srun --mpi=pmi2 gmx_mpi mdrun -s ./ion_channel.tpr -maxh 0.50 -resethway -noconfout -nsteps 10000
 ```
 
 ## ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) GROMACS 提交作业
