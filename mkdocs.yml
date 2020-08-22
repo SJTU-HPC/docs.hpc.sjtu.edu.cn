@@ -38,39 +38,39 @@ nav:
     - 用 Conda 安装生信软件: application/conda.md
     - 预置软件环境: application/module.md
     - ABINIT: application/abinit.md
-    - Amber: application/Amber.md
-    - CESM: application/CESM.md
-    - Gromacs: application/Gromacs.md
-    - Lammps: application/Lammps.md
+    - Amber: application/amber.md
+    - CESM: application/cesm.md
+    - Gromacs: application/gromacs.md
+    - Lammps: application/lammps.md
     - Mrbayes: application/mrbayes.md
-    - Nektar++: application/Nektar.md
+    - Nektar++: application/nektar.md
     - NWChem: application/nwchem.md
-    - OpenFoam: application/OpenFoam.md
-    - Pytorch: application/Pytorch.md
-    - Quantum-Espresso: application/Quantum-Espresso.md
-    - Relion: application/Relion.md
+    - OpenFoam: application/openfoam.md
+    - Pytorch: application/pytorch.md
+    - Quantum-Espresso: application/quantum-espresso.md
+    - Relion: application/relion.md
     - STAR-CCM+: application/star-ccm.md
-    - TensorFlow: application/TensorFlow.md
-    - VASP: application/VASP.md
-    - VMD: application/VMD.md    
-    - Keras: application/Keras.md
-    - SIESTA: application/SIESTA.md
-    - CP2k: application/CP2k.md
-    - DeepVariant: application/DeepVariant.md
-  #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md  
-  #   - FFTW: 应用软件/FFTW.md
-  #   - MPI4PY: 应用软件/MPI4PY.md
-  #   - MXNet: 应用软件/MXNet.md
-  #   - HIC-Pro: 应用软件/HIC-Pro.md
-  #   - Spark: 应用软件/Spark.md
+    - TensorFlow: application/tensorflow.md
+    - VASP: application/vasp.md
+    - VMD: application/vmd.md    
+    - Keras: application/keras.md
+    - SIESTA: application/siesta.md
+    - CP2k: application/cp2k.md
+    - DeepVariant: application/deepvariant.md
+  #   - Desmond and Maestro: 应用软件/desmond_and_maestro.md  
+  #   - FFTW: 应用软件/fftw.md
+  #   - MPI4PY: 应用软件/mpi4py.md
+  #   - MXNet: 应用软件/mxnet.md
+  #   - HIC-Pro: 应用软件/hic-pro.md
+  #   - Spark: 应用软件/spark.md
   #  - 商业软件: application/commercial.md
   - 编程语言:
-    - Python: application/Python.md
-    - Perl: application/Perl.md
-    - R: application/R.md
-    - Octave(Matlab): application/Octave.md
-    - GNU Library: application/GNU.md
-    - Intel编译套件: application/Intel.md
+    - Python: application/python.md
+    - Perl: application/perl.md
+    - R: application/r.md
+    - Octave(Matlab): application/octave.md
+    - GNU Library: application/gnu.md
+    - Intel编译套件: application/intel.md
     - CUDA: application/cuda.md
   - 常见问题: faq.md
   #- 提交修改: contribution.md
