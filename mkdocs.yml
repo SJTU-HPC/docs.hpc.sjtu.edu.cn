@@ -56,6 +56,7 @@ nav:
     - Keras: application/Keras.md
     - SIESTA: application/SIESTA.md
     - CP2k: application/CP2k.md
+    - DeepVariant: application/DeepVariant.md
   #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md  
   #   - FFTW: 应用软件/FFTW.md
   #   - MPI4PY: 应用软件/MPI4PY.md
