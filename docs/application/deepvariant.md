@@ -28,6 +28,9 @@ $ singularity build deepvariant.simg docker://google/deepvariant
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 
+ulimit -s unlimited
+ulimit -l unlimited
+
 IMAGE_PATH=/安装路径/deepvariant.simg
 
 singularity run $IMAGE_PATH /opt/deepvariant/bin/make_examples 
@@ -71,6 +74,9 @@ $ singularity build deepvariant.gpu.simg docker://google/deepvariant:0.10.0-gpu
 #SBATCH -o %j.out
 #SBATCH -e %j.err
 
+ulimit -s unlimited
+ulimit -l unlimited
+
 IMAGE_PATH=/安装路径/deepvariant.gpu.simg
 
 singularity run $IMAGE_PATH /opt/deepvariant/bin/make_examples 
@@ -84,8 +90,7 @@ $ sbatch slurm.sh
 
 ### 交互式提交
 ```bash
-salloc --ntasks-per-node=1 -p dgx2 --gres=gpu:1 -N 1
-ssh vol01 （此处需换成实际分配的节点）
+srun --ntasks-per-node=1 -p dgx2 --gres=gpu:1 -N 1 --pty /bin/bash
 export IMAGE_PATH=/安装路径/deepvariant.gpu.simg
 singularity run $IMAGE_PATH /opt/deepvariant/bin/make_examples
 ```
@@ -94,3 +99,4 @@ singularity run $IMAGE_PATH /opt/deepvariant/bin/make_examples
 ## 参考链接
 - [DeepVariant 官网](https://github.com/google/deepvariant)
 - [Pi 上使用 Singularity](https://docs.hpc.sjtu.edu.cn/job/container/singularity/)
+
