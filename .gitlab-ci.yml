@@ -26,6 +26,7 @@ build html pages:
 
 deploy html to nginx directory:
   stage: deploy
+  image: centos:7
   tags:
     - web
   only:
