@@ -26,7 +26,7 @@ build html pages:
 
 deploy html to nginx directory:
   stage: deploy
-  image: alpine-rsync
+  image: instrumentisto/rsync-ssh
   tags:
     - web
   only:
