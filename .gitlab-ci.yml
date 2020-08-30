@@ -26,13 +26,11 @@ build html pages:
 
 deploy html to nginx directory:
   stage: deploy
-  image: centos:7
+  image: alpine-rsync
   tags:
     - web
   only:
     - master
     - merge_request
-  before_script:
-    - yum install rsync
   script:
     - rsync -avr --progress --delete public/ /var/lib/www/docs.hpc.sjtu.edu.cn/
