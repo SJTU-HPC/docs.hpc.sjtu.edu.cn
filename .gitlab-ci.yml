@@ -1,5 +1,3 @@
-image: python:3.7
-
 variables:
     GIT_STRATEGY: clone
 
@@ -9,8 +7,9 @@ stages:
 
 build html pages:
   stage: build
+  image: python:3.7
   tags:
-    - web
+    - docker
   before_script:
     - mkdir -p .build_cache
     - pip install --upgrade --cache-dir=.build_cache -r requirements.txt
@@ -26,9 +25,8 @@ build html pages:
 
 deploy html to nginx directory:
   stage: deploy
-  image: instrumentisto/rsync-ssh
   tags:
-    - web
+    - shell.web.hpc.sjtu.edu.cn
   only:
     - master
     - merge_request
