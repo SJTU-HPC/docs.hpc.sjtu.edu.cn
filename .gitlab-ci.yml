@@ -19,5 +19,8 @@ deploy html to nginx directory:
   stage: deploy
   tags:
     - web
+  only:
+    - master
+    - merge_request
   script:
     - rsync -avr --progress --delete public/ /var/lib/www/docs.hpc.sjtu.edu.cn/
