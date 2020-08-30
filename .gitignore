@@ -18,3 +18,4 @@ node_modules
 package-lock.json
 docs/_build
 _build
+.#*
