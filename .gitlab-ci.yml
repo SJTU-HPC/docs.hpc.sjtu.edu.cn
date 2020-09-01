@@ -2,12 +2,33 @@ variables:
     GIT_STRATEGY: clone
 
 stages:
-  - build_and_deploy
+  - build
+  - deploy
 
-install:
-  stage: build_and_deploy
+build html pages:
+  stage: build
+  image: python:3.7
   tags:
-    - web
+    - docker
+  before_script:
+    - mkdir -p .build_cache
+    - pip install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
     - mkdocs --verbose build
+  artifacts:
+    paths:
+      - public
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - .build_cache
+
+deploy html to nginx directory:
+  stage: deploy
+  tags:
+    - shell.web.hpc.sjtu.edu.cn
+  only:
+    - master
+    - merge_request
+  script:
     - rsync -avr --progress --delete public/ /var/lib/www/docs.hpc.sjtu.edu.cn/
