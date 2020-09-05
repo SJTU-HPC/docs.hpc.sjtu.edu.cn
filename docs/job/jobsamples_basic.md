@@ -44,7 +44,7 @@
 | small | 允许使用 CPU 核数为 1~39，每核配比 4G 内存，节点可共享使用；单节点配置为 40 核，192G 内存 |
 | cpu | 允许使用 CPU 核数为 40~24000，每核配比 4G 内存，节点需独占使用；单节点配置为 40核，192G 内存。用户需独占节点，用满 40 核，或使用部分核心的时候加上 `--exclusive` 命令 |
 | huge | 允许使用 CPU 核数为 1~80，每核配比 35G 内存，节点可共享使用；单节点配置为 80 核，3T 内存 |
-| 192c6t | 允许使用 CPU 核数为 1~192，每核配比 31G 内存，节点可共享使用；单节点配置为 192 核，6T 内存 |
+| 192c6t | 允许使用 CPU 核数为 96~192，每核配比 31G 内存，节点可共享使用；单节点配置为 192 核，6T 内存 |
 | dgx2 | 允许使用 GPU 卡数为 1~128，推荐每卡配比 CPU 为 6，每 CPU 配比 15G 内存；单节点配置为 96 核，1.45T 内存，16>块 32G 显存的 V100卡 |
 
 small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192c6t 为 2 天
@@ -67,6 +67,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err 
     ```
+    small 队列不支持独占使用，也即不可添加 --exclusive 语句
 
 ### cpu
 
@@ -76,7 +77,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     
     #SBATCH --job-name=test           # 作业名
     #SBATCH --partition=cpu           # cpu 队列
-    #SBATCH -n 160                    # 总核数 160
+    #SBATCH -n 160                    # 使用核数 160
     #SBATCH --ntasks-per-node=40      # 每节点核数
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err 
@@ -88,7 +89,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     
     #SBATCH --job-name=test           # 作业名
     #SBATCH --partition=cpu           # cpu 队列
-    #SBATCH -n 40                     # 总核数 40
+    #SBATCH -n 40                     # 使用核数 40
     #SBATCH --ntasks-per-node=40      # 每节点核数
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err 
@@ -100,7 +101,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     
     #SBATCH --job-name=test           # 作业名
     #SBATCH --partition=cpu           # cpu 队列
-    #SBATCH -n 20                     # 总核数 20
+    #SBATCH -n 20                     # 使用核数 20
     #SBATCH --ntasks-per-node=20      # 每节点核数
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err 
@@ -115,7 +116,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     
     #SBATCH --job-name=test           # 作业名
     #SBATCH --partition=huge          # huge 队列
-    #SBATCH -n 20                     # 总核数 20
+    #SBATCH -n 20                     # 使用核数 20
     #SBATCH --ntasks-per-node=20      # 每节点核数
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err 
@@ -129,7 +130,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     
     #SBATCH --job-name=test           # 作业名
     #SBATCH --partition=192c6         # 192c6t 队列
-    #SBATCH -n 20                     # 总核数 20
+    #SBATCH -n 96                     # 使用半个节点的资源，对应 3T 内存
     #SBATCH --ntasks-per-node=20      # 每节点核数
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err 
@@ -163,14 +164,14 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     
     #SBATCH --job-name=test           # 作业名
     #SBATCH --partition=cpu           # cpu 队列
-    #SBATCH -n 80                     # 总核数 80
+    #SBATCH -n 80                     # 使用核数 80
     #SBATCH --ntasks-per-node=40      # 每节点核数
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
     module purge
-    module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
-    module load lammps/20190807-intel-19.0.5-impi
+    module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
+    module load lammps/20200505-intel-19.0.4-impi
 
     export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
     export I_MPI_FABRICS=shm:ofi
@@ -189,7 +190,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     
     #SBATCH --job-name=test           # 作业名
     #SBATCH --partition=cpu           # cpu 队列
-    #SBATCH -n 80                     # 总核数 80
+    #SBATCH -n 80                     # 使用核数 80
     #SBATCH --ntasks-per-node=40      # 每节点核数
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
@@ -214,16 +215,13 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     
     #SBATCH --job-name=test           # 作业名
     #SBATCH --partition=cpu           # cpu 队列
-    #SBATCH -n 80                     # 总核数 80
+    #SBATCH -n 80                     # 使用核数 80
     #SBATCH --ntasks-per-node=40      # 每节点核数
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
     module purge
-    module load gromacs/2019.4-intel-19.0.4-impi
-
-    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-    export I_MPI_FABRICS=shm:ofi
+    module load gromacs/2019.4-gcc-9.2.0-openmpi
 
     ulimit -s unlimited
     ulimit -l unlimited
@@ -315,7 +313,7 @@ Pi 上已部署的 singularity 容器位于 `/lustre/share/img`
     
     #SBATCH --job-name=test           # 作业名
     #SBATCH --partition=cpu           # cpu 队列
-    #SBATCH -n 80                     # 总核数 80
+    #SBATCH -n 80                     # 使用核数 80
     #SBATCH --ntasks-per-node=40      # 每节点核数
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
@@ -329,24 +327,26 @@ Pi 上已部署的 singularity 容器位于 `/lustre/share/img`
     mpirun -n 80 singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
     ```
 
-!!! example "gpu 队列 slurm 脚本示例 lammps singularity 版"
+!!! example "gpu 队列 slurm 脚本示例 GPU lammps"
     ```
     #!/bin/bash
-    #SBATCH -J gromacs_gpu_test
+    #SBATCH -J lmp
     #SBATCH -p dgx2
     #SBATCH -o %j.out
     #SBATCH -e %j.err
-    #SBATCH -n 6
+    #SBATCH -n 1
     #SBATCH --ntasks-per-node=6
     #SBATCH --gres=gpu:1
     #SBATCH -N 1
 
-    IMAGE_PATH=/lustre/share/img/lammps_7Aug2019.simg
+    module use /lustre/share/img/modules
+    module load lammps/2020-ngc
 
     ulimit -s unlimited
     ulimit -l unlimited
 
-    singularity run $IMAGE_PATH -i YOUR_INPUT_FILE
+    srun --mpi=pmi2 lmp -k on g 1 t 6  -sf kk -pk kokkos comm device \
+    -i in.eam -var x 4 -var y 2 -var z 4
     ```
     
 ### Job Array 阵列作业
