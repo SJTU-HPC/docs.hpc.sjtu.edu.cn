@@ -152,12 +152,13 @@ Slurm具有丰富的参数集。 以下最常用的。
 #SBATCH --job-name=hostname
 #SBATCH --partition=cpu
 #SBATCH -N 1
+#SBATCH --ntasks-per-node=40
 #SBATCH --mail-type=end
 #SBATCH --mail-user=YOU@EMAIL.COM
 #SBATCH --output=%j.out
 #SBATCH --error=%j.err
 #SBATCH --time=00:00:10
-#SBATCH --exclusive
+
 
 /bin/hostname
 ```
@@ -193,7 +194,7 @@ sbatch cpu.slurm
 #SBATCH --job-name=GPU_HPL
 #SBATCH --partition=dgx2
 #SBATCH -n 4
-#SBATCH --ntasks-per-node=6
+#SBATCH --cpus-per-task=6
 #SBATCH --gres=gpu:4
 #SBATCH --mail-type=end
 #SBATCH --mail-user=YOU@MAIL.COM

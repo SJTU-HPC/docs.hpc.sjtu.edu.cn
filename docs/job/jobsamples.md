@@ -403,6 +403,7 @@ $ nvcc cublashello.cu -o cublashello -lcublas
 #SBATCH --error=%j.err
 #SBATCH -n 1
 #SBATCH --gres=gpu:1
+#SBATCH --cpus-per-task=6
 
 ulimit -s unlimited
 ulimit -l unlimited

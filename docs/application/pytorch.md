@@ -42,7 +42,6 @@ $ conda install pytorch torchvision -c pytorch
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
 
 module load miniconda3
@@ -75,7 +74,6 @@ $ sbatch pytorch_conda.slurm
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
 
 IMAGE_PATH=/lustre/share/img/pytorch-19.10-py3.simg

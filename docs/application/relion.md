@@ -35,11 +35,11 @@ $ module load relion/3.0.8-gcc-8.3.0-openmpi
 
 #SBATCH -J relion
 #SBATCH -p dgx2
-#SBATCH -o %j.out
-#SBATCH -e %j.err
 #SBATCH -n 6 # number of tasks
 #SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:1
+#SBATCH -o %j.out
+#SBATCH -e %j.err
 
 module purge
 module load cuda/9.0.176-gcc-4.8.5
@@ -66,13 +66,12 @@ $ sbatch slurm.test
 #!/bin/bash
 #SBATCH -J test
 #SBATCH -p dgx2
-#SBATCH -o %j.out
-#SBATCH -e %j.err
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
+#SBATCH -o %j.out
+#SBATCH -e %j.err
 
 IMAGE_PATH=/lustre/share/img/relion-3.0.8-cuda9.2-openmpi4.0.simg
 

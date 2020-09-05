@@ -37,7 +37,6 @@ $ pip install keras
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
 
 module load miniconda3
@@ -72,7 +71,6 @@ $ sbatch tensorflow_conda.slurm
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
 
 IMAGE_PATH=/lustre/share/img/tensorflow-2.0.0.simg
