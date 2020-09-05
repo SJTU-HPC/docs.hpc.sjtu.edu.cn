@@ -39,7 +39,7 @@
 | ---- | ---- |
 | cpu | 允许单作业CPU核数为40~24000，每核配比4G内存，节点需独占使用；单节点配置为40核，192G内存 |
 | huge | 允许单作业CPU核数为1~80，每核配比35G内存，节点可共享使用；单节点配置为80核，3T内存 |
-| 192c6t | 允许单作业CPU核数为1~192，每核配比31G内存，节点可共享使用；单节点配置为192核，6T内存 |
+| 192c6t | 允许单作业CPU核数为96~192，每核配比31G内存，节点可共享使用；单节点配置为192核，6T内存 |
 | small | 允许单作业CPU核数为1~39，每核配比4G内存，节点可共享使用；单节点配置为40核，192G内存 |
 | dgx2 | 允许单作业GPU卡数为1~128，推荐每卡配比CPU为6，每CPU配比15G内存；单节点配置为96核，1.45T内存，16块32G显存的V100卡 |
 
@@ -193,7 +193,7 @@ sbatch cpu.slurm
 #SBATCH --job-name=GPU_HPL
 #SBATCH --partition=dgx2
 #SBATCH -n 4
-#SBATCH --ntasks-per-node=4
+#SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:4
 #SBATCH --mail-type=end
 #SBATCH --mail-user=YOU@MAIL.COM

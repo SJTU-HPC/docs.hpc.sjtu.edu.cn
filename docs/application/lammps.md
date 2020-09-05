@@ -120,13 +120,11 @@ srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
 
 ## ![gpu](https://img.shields.io/badge/-gpu-green) GPU 版本 LAMMPS
 
-### GPU Singularity 版本（速度跟 intel CPU 版本基本相同）
+### GPU 版本速度跟 intel CPU 版本基本相同
 
-Singularity 版本的 LAMMPS 针对 Tesla V100 的 GPU 做过优化，性能很好，LJ 和 EAM 的 Benchmark 与同等计算价格的 CPU 基本一样。建议感兴趣的用户可以针对自己的算例，测试 CPU 和 GPU 计算效率，然后决定使用哪一种平台。
+Pi 上提供了 GPU 版本的 LAMMPS 15Jun2020。采用容器技术，使用 LAMMPS 官方提供给 NVIDIA 的镜像，针对 Tesla V100 的 GPU 做过优化，性能很好。经测试，LJ 和 EAM 两 Benchmark 算例与同等计算费用的 CPU 基本一样。建议感兴趣的用户针对自己的算例，测试 CPU 和 GPU 计算效率，然后决定使用哪一种平台。
 
-Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即可运行 LAMMPS，无需单独安装，目前版本为 15Jun2020。该容器文件位于 /lustre/share/img/hpc/lammps_15Jun2020.sif
-
-以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心，调用 Singularity 容器中的 LAMMPS：
+以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心，使用 GPU kokkos 版的 LAMMPS：
 
 ```bash
 #!/bin/bash
@@ -144,10 +142,10 @@ Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即�
 ulimit -s unlimited
 ulimit -l unlimited
 
-IMAGE_PATH=/lustre/share/img/hpc/lammps_15Jun2020.sif
+module use /lustre/share/img/modules
+module load lammps/2020-ngc
 
-srun --mpi=pmi2 singularity run --nv $IMAGE_PATH \
-lmp -k on g 2 t 12  -sf kk -pk kokkos comm device -in in.eam
+srun --mpi=pmi2 lmp -k on g 2 t 12  -sf kk -pk kokkos comm device -in in.eam
 ```
 
 其中，g 2 t 12 意思是使用 2 张 GPU 和 12 个线程。-sf kk -pk kokkos comm device 是 LAMMPS 的 kokkos 设置，可以用这些默认值

@@ -345,8 +345,7 @@ Pi 上已部署的 singularity 容器位于 `/lustre/share/img`
     ulimit -s unlimited
     ulimit -l unlimited
 
-    srun --mpi=pmi2 lmp -k on g 1 t 6  -sf kk -pk kokkos comm device \
-    -i in.eam -var x 4 -var y 2 -var z 4
+    srun --mpi=pmi2 lmp -k on g 1 t 6  -sf kk -pk kokkos comm device -i in.eam
     ```
     
 ### Job Array 阵列作业
