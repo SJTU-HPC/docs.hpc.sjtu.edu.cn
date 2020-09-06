@@ -11,7 +11,6 @@ Sphinx是一个将rst文档编译为HTML、PDF、eBook等出版物的python包�
 使用以下指令安装构建这个文档所需的Python包::
 
    pip3 install -r requirements.txt
-   pip3 install -r docs/requirements.txt
 
 Windows用户检查sphinx是否安装完成::
 
