@@ -3,10 +3,59 @@ variables:
 
 stages:
   - build
+  - deploy
 
-install:
+build html pages:
   stage: build
+  image: python:3.7
   tags:
-    - web
+    - docker.web.hpc.sjtu.edu.cn
+  before_script:
+    - mkdir -p .build_cache
+    - pip install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
-    - make -C docs html SPHINXOPTS="-W --keep-going"
+    - make -C docs html
+  artifacts:
+    paths:
+      - docs/_build/html
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - .build_cache
+
+build latex pdf:
+  stage: build
+  image: laurenss/texlive-full
+  tags:
+    - docker.web.hpc.sjtu.edu.cn
+  before_script:
+    - apt-get update
+    - apt-get install -y python3-pip wget
+    - mkdir -p .build_cache
+    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
+    - wget https://cs.fit.edu/code/projects/ndworld/repository/revisions/12/raw/Resources/Fonts/AdobeSongStd-Light.otf -O /usr/share/fonts/opentype/AdobeSongStd-Light.otf
+    - wget https://cs.fit.edu/code/projects/ndworld/repository/revisions/12/raw/Resources/Fonts/AdobeHeitiStd-Regular.otf -O /usr/share/fonts/opentype/AdobeHeitiStd-Regular.otf
+    - fc-cache -fv
+    - fc-list | grep -i adobe
+  script:
+    - make -C docs latexpdf
+    - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/pi.pdf
+    - mv docs/_build/latex/pi_small.pdf  docs/_build/latex/pi.pdf
+  artifacts:
+    paths:
+      - docs/_build/latex/pi.pdf
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - .build_cache
+
+deploy html to nginx directory:
+  stage: deploy
+  tags:
+    - shell.proxy.pi.sjtu.edu.cn
+  only:
+    - master
+    - merge_request
+    - sphinx
+  script:
+    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/hpc.pi.sjtu.edu.cn/
