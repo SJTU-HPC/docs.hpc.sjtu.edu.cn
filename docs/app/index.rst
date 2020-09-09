@@ -22,11 +22,6 @@
 |                 |                 |                 | scripting.      |
 +-----------------+-----------------+-----------------+-----------------+
 
-.. |cpu| image:: https://raster.shields.io/badge/cpu-blue
-.. |gpu| image:: https://raster.shields.io/badge/gpu-green
-.. |arm| image:: https://raster.shields.io/badge/arm-yellow
-.. |singularity| image:: https://raster.shields.io/badge/singularity-blueviolet
-
 PI上的软件模块
 --------------
 

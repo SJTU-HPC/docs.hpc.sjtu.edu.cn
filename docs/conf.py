@@ -29,7 +29,8 @@ author = 'SJTU HPC Team'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-  'sphinx_copybutton'
+    'sphinx_copybutton',
+    'sphinx_substitution_extensions'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -101,3 +102,12 @@ html_theme_options = {
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
 }
+
+
+# Global substitution
+rst_prolog = """
+.. |cpu| image:: https://raster.shields.io/badge/cpu-blue
+.. |gpu| image:: https://raster.shields.io/badge/gpu-green
+.. |arm| image:: https://raster.shields.io/badge/arm-yellow
+.. |singularity| image:: https://raster.shields.io/badge/singularity-blueviolet
+"""

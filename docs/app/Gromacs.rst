@@ -24,9 +24,7 @@ Pi 上的 GROMACS
 Pi 上有多种版本的 GROMACS:
 
 -  |cpu| `cpu <#cpu-gromacs>`__
-
 -  |gpu| `gpu <#gpu-gromacs>`__
-
 -  |arm| `arm <#arm-gromacs>`__
 
 |cpu| (CPU) GROMACS 模块调用
@@ -133,13 +131,9 @@ DGX2 (Singularity)        19.425
 本测试中使用到的测试算例均可在
 ``/lustre/share/benchmarks/gromacs``\ 找到，用户可自行取用测试。测试时，需将上述目录复制到家目录下。
 
-参考文献
+参考资料
 --------
 
 -  `gromacs官方网站 <http://www.gromacs.org/>`__
 -  `NVIDIA GPU CLOUD <ngc.nvidia.com>`__
 -  `Singularity文档 <https://sylabs.io/guides/3.5/user-guide/>`__
-
-.. |cpu| image:: https://img.shields.io/badge/-cpu-blue
-.. |gpu| image:: https://img.shields.io/badge/-gpu-green
-.. |arm| image:: https://img.shields.io/badge/-arm-yellow
