@@ -29,6 +29,7 @@ author = 'SJTU HPC Team'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx-prompt',
     'sphinx_copybutton',
     'sphinx_substitution_extensions'
 ]
