@@ -63,8 +63,7 @@ Pi2.0集群中已经默认安装了Tmux，无须操作。如果您需要在自�
 上面命令会启动 Tmux
 窗口，底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息。
 
-.. figure:: ../img/tmux_1.png
-   :alt: tmux
+.. image:: /img/tmux_1.png
 
    tmux
 
@@ -186,8 +185,7 @@ Tmux可以将窗口分成多个窗格（window），每个窗格运行不同的�
    # 划分左右两个窗格
    $ tmux split-window -h
 
-.. figure:: ../img/tmux_2.png
-   :alt: tmux
+.. image:: /img/tmux_2.png
 
    tmux
 
