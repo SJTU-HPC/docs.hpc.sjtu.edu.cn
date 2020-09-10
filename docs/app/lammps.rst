@@ -17,9 +17,7 @@ Pi上的LAMMPS
 Pi 上有多种版本的 LAMMPS:
 
 -  |cpu| `cpu <#cpu-lammps>`__
-
 -  |gpu| `gpu <#gpu-lammps>`__
-
 -  |arm| `arm <#arm-lammps>`__
 
 使用CPU版本LAMMPS
