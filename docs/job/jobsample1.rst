@@ -190,8 +190,8 @@ dgx2
 
 下面根据不同应用软件，示例 slurm 作业脚本
 
-LAMMPS
-~~~~~~
+LAMMPS作业示例
+~~~~~~~~~~~~~~
 
 !!! example “cpu 队列 slurm 脚本示例 LAMMPS” \``\` #!/bin/bash
 
