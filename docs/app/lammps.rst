@@ -1,16 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
-
 LAMMPS
-
-.. raw:: html
-
-   </center>
-
---------------
+======
 
 简介
 ----
@@ -22,19 +11,17 @@ materials (metals, semiconductors) and coarse-grained or mesoscopic
 systems. It can be used to model atoms or, more generically, as a
 parallel particle simulator at the atomic, meso, or continuum scale.
 
-Pi 上的 LAMMPS
---------------
+Pi上的LAMMPS
+------------
 
 Pi 上有多种版本的 LAMMPS:
 
 -  |cpu| `cpu <#cpu-lammps>`__
-
 -  |gpu| `gpu <#gpu-lammps>`__
-
 -  |arm| `arm <#arm-lammps>`__
 
-使用 CPU 版本 LAMMPS
---------------------
+使用CPU版本LAMMPS
+-----------------
 
 |cpu| (CPU) LAMMPS 模块调用
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -189,13 +176,10 @@ singularity 容器中的 GROMACS：
 
    $ sbatch lammps_gpu.slurm
 
-参考链接
+参考资料
 --------
 
--  `LAMMPS 官网 <https://lammps.sandia.gov/>`__
--  `NVIDIA GPU CLOUD <ngc.nvidia.com>`__
--  `Singularity文档 <https://sylabs.io/guides/3.5/user-guide/>`__
+-  LAMMPS官网 https://lammps.sandia.gov/
+-  NVIDIA GPU CLOUD https://ngc.nvidia.com
+-  Singularity文档 https://sylabs.io/guides/3.5/user-guide/
 
-.. |cpu| image:: https://img.shields.io/badge/-cpu-blue
-.. |gpu| image:: https://img.shields.io/badge/-gpu-green
-.. |arm| image:: https://img.shields.io/badge/-arm-yellow

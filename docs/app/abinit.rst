@@ -1,16 +1,7 @@
-#
-
-.. raw:: html
-
-   <center>
+.. _appabinit:
 
 ABINIT
-
-.. raw:: html
-
-   </center>
-
---------------
+======
 
 简介
 ----
@@ -21,8 +12,8 @@ structure for molecules and periodic solids. In addition to many other
 features, it provides the time dependent DFT, or many-body perturbation
 theory (GW approximation) to compute the excited states.
 
-Pi 上的 ABINIT
---------------
+Pi上的ABINIT
+------------
 
 查看 Pi 上已编译的软件模块:
 
@@ -65,7 +56,7 @@ Pi 上提交作业
 
    $ sbatch slurm.test
 
-参考链接
+参考资料
 --------
 
--  `ABINIT 官网 <http://www.abinit.org>`__
+-  `ABINIT http://www.abinit.org
