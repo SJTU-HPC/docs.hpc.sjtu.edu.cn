@@ -2,6 +2,14 @@
 软件
 ****
 
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   conda 
+   module
+   lammps
+
 分子动力学软件
 ==============
 
@@ -62,21 +70,3 @@ intel-mpi Intel MPI 2019.4   2019.4
 cudnn    NVIDIA深度学习GPU加速原语库 7.3 7.4 7.5 7.5      Yes
 ======== =========================== =========== ======== =======
 
-.. raw:: html
-
-   <!-- ## 用于构建和调整软件的工具
-
-   | 模块名字 | 描述 | 提供版本 | 默认版本 | 
-   | ---- | ---- | ---- | ---- |
-   | maven | 软件项目管理工具 | 3.3 | 3.3 |
-   | bazel | 软件构建工具 | 0.1 | 0.1 |
-   | vtune | Intel vtune | 5.1 | 5.1 | -->
-
-
-.. toctree::
-   :maxdepth: 1
-   :hidden:
-
-   conda 
-   module
-   lammps
