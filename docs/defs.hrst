@@ -1,4 +1,4 @@
-.. |cpu| replace:: .. image:: /img/cpu-icon.png
-.. |gpu| replace:: .. image:: /img/gpu-icon.png
-.. |arm| replace:: .. image:: /img/arm-icon.png
-.. |singularity| replace:: .. image:: /img/singularity-icon.png
+.. |cpu| image:: /img/cpu-icon.png
+# .. |gpu| replace:: .. image:: /img/gpu-icon.png
+# .. |arm| replace:: .. image:: /img/arm-icon.png
+# .. |singularity| replace:: .. image:: /img/singularity-icon.png

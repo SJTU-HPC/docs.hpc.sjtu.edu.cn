@@ -2,8 +2,6 @@
 Pi超算集群用户文档
 ******************
 
-.. include:: defs.hrst
-
 .. caution:: *超算平台禁止**运行军工项目等涉密计算任务。*
 
 .. tip:: 该文档通过 `github <https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn>`_ 维护。如果您有什么建议或者意见，欢迎提交修改。
@@ -74,3 +72,6 @@ Pi超算集群用户文档
    :hidden:
 
    faq/index
+
+.. include:: defs.hrst
+
