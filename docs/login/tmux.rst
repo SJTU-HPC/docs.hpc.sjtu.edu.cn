@@ -65,8 +65,6 @@ Pi2.0集群中已经默认安装了Tmux，无须操作。如果您需要在自�
 
 .. image:: /img/tmux_1.png
 
-   tmux
-
 按下\ ``Ctrl+d``\ 或者显式输入\ ``exit``\ 命令，就可以退出 Tmux 窗口。
 
 .. code:: bash
@@ -186,8 +184,6 @@ Tmux可以将窗口分成多个窗格（window），每个窗格运行不同的�
    $ tmux split-window -h
 
 .. image:: /img/tmux_2.png
-
-   tmux
 
 对应快捷键为\ ``Ctrl+b "``\ 和\ ``Ctrl+b %``
 
