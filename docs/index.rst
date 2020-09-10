@@ -9,14 +9,14 @@ Pi超算集群用户文档
 `docs <https://docs.hpc.sjtu.edu.cn/>`_ 是上海交通大学 Pi2.0 超级计算集群用户文档，为用户提供快速上手指导和问题解答。如果想获取更多HPC团队的动态和信息，请访问 `上海交通大学HPC站点 <https://hpc.sjtu.edu.cn/>`_ 。您可通过如下链接快速访问超算使用常见问题，或点击左侧访问完整文档内容。
 
 1. :ref:`快速上手`
-2. :ref:`账号`
+2. :ref:`账号 <accounts>`
 3. :ref:`密码`
 4. :ref:`通过SSH登录HPC集群`
 5. :ref:`远程桌面`
 6. :ref:`作业`
 7. :ref:`软件`
-8. :ref:`使用GNU套件编译代码`
-9. :ref:`使用Intel套件编译代码`
+8. :ref:`使用GNU套件编译代码 <GNU>`
+9. :ref:`使用Intel套件编译代码 <Intel>`
 10. :ref:`常见问题`
 
 .. toctree::
