@@ -123,4 +123,3 @@ DGX2 (Singularity)        19.425
 -  NVIDIA GPU CLOUD https://ngc.nvidia.com
 -  Singularity文档 https://sylabs.io/guides/3.5/user-guide
 
-.. include:: /defs.hrst

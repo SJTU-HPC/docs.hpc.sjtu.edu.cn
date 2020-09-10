@@ -183,4 +183,3 @@ singularity 容器中的 GROMACS：
 -  NVIDIA GPU CLOUD https://ngc.nvidia.com
 -  Singularity文档 https://sylabs.io/guides/3.5/user-guide/
 
-.. include:: /defs.hrst

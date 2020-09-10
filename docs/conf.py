@@ -104,3 +104,11 @@ html_theme_options = {
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
 }
+
+
+rst_prolog = """
+.. |cpu| image:: /img/cpu-icon.png
+.. |gpu| image:: /img/gpu-icon.png
+.. |arm| image:: /img/arm-icon.png
+.. |sig| image:: /img/singularity-icon.png
+"""
