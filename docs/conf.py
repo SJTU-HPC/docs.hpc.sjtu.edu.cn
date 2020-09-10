@@ -31,7 +31,8 @@ author = 'SJTU HPC Team'
 extensions = [
     'sphinx-prompt',
     'sphinx_copybutton',
-    'sphinx_substitution_extensions'
+    'sphinx_substitution_extensions',
+    'sphinx.ext.autosectionlabel
 ]
 
 # Add any paths that contain templates here, relative to this directory.
