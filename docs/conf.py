@@ -104,12 +104,3 @@ html_theme_options = {
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
 }
-
-
-# Global substitution
-rst_prolog = """
-.. |cpu| replace:: .. image:: /img/cpu-icon.png
-.. |gpu| replace:: .. image:: /img/gpu-icon.png
-.. |arm| replace:: .. image:: /img/arm-icon.png
-.. |singularity| replace:: .. image:: /img/singularity-icon.png
-"""
