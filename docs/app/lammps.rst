@@ -179,6 +179,8 @@ singularity 容器中的 GROMACS：
 参考资料
 --------
 
--  `LAMMPS官网 <https://lammps.sandia.gov/>`__
--  `NVIDIA GPU CLOUD <ngc.nvidia.com>`__
--  `Singularity文档 <https://sylabs.io/guides/3.5/user-guide/>`__
+-  LAMMPS官网 https://lammps.sandia.gov/
+-  NVIDIA GPU CLOUD https://ngc.nvidia.com
+-  Singularity文档 https://sylabs.io/guides/3.5/user-guide/
+
+.. include:: /defs.hrst

@@ -229,8 +229,8 @@ ulimit -s unlimited ulimit -l unlimited
 
 srun /path/to/your_vasp_dir/bin/vasp_std \``\`
 
-GROMACS
-~~~~~~~
+GROMACS作业示例
+~~~~~~~~~~~~~~~
 
 !!! example “cpu 队列 slurm 脚本示例 GROMACS” \``\` #!/bin/bash
 

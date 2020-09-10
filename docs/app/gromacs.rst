@@ -1,25 +1,10 @@
-#
-
-.. raw:: html
-
-   <center>
-
 GROMACS
+=======
 
-.. raw:: html
+GROMACS是一种分子动力学应用程序，可以模拟具有数百至数百万个粒子的系统的牛顿运动方程。GROMACS旨在模拟具有许多复杂键合相互作用的生化分子，例如蛋白质，脂质和核酸。
 
-   </center>
-
---------------
-
-简介
-----
-
-GROMACS
-是一种分子动力学应用程序，可以模拟具有数百至数百万个粒子的系统的牛顿运动方程。GROMACS旨在模拟具有许多复杂键合相互作用的生化分子，例如蛋白质，脂质和核酸。
-
-Pi 上的 GROMACS
----------------
+Pi上的GROMACS
+-------------
 
 Pi 上有多种版本的 GROMACS:
 
@@ -134,6 +119,8 @@ DGX2 (Singularity)        19.425
 参考资料
 --------
 
--  `gromacs官方网站 <http://www.gromacs.org/>`__
--  `NVIDIA GPU CLOUD <ngc.nvidia.com>`__
--  `Singularity文档 <https://sylabs.io/guides/3.5/user-guide/>`__
+-  gromacs官方网站 http://www.gromacs.org
+-  NVIDIA GPU CLOUD https://ngc.nvidia.com
+-  Singularity文档 https://sylabs.io/guides/3.5/user-guide
+
+.. include:: /defs.hrst
