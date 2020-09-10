@@ -2,8 +2,7 @@
 软件
 ****
 
-本文档介绍 Pi 上的软件。 商业软件需用户自行获取版权并安装。 |cpu| |gpu|
-|arm| |singularity| 标签表明软件有 cpu, gpu, arm 和 singularity 版本
+本文档介绍 Pi 上的软件。 商业软件需用户自行获取版权并安装。 |cpu| |gpu| |arm| |singularity| 标签表明软件有 cpu, gpu, arm 和 singularity 版本
 
 +-----------------+-----------------+-----------------+-----------------+
 | 软件            | 介绍         | Distribution    | Introduction    |
