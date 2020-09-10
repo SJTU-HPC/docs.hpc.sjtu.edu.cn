@@ -108,8 +108,8 @@ html_theme_options = {
 
 # Global substitution
 rst_prolog = """
-.. |cpu| replace:: image:: https://raster.shields.io/badge/cpu-blue
-.. |gpu| replace:: image:: https://raster.shields.io/badge/gpu-green
-.. |arm| replace:: image:: https://raster.shields.io/badge/arm-yellow
-.. |singularity| replace:: image:: /img/singularitylog.png
+.. |cpu| replace:: .. image:: /img/cpu-icon.png
+.. |gpu| replace:: .. image:: /img/gpu-icon.png
+.. |arm| replace:: .. image:: /img/arm-icon.png
+.. |singularity| replace:: .. image:: /img/singularity-icon.png
 """
