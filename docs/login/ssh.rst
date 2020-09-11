@@ -282,7 +282,7 @@ Windows/第三方 SSH 客户端用户
 ``Sending of null packets to keep session active`` ->
 ``Seconds between keepalives (0 to turn off)``\ 后的文本框中，输入对应的值，如 240。
 
-参考文献
+参考资料
 --------
 
 -  http://www.ee.surrey.ac.uk/Teaching/Unix/

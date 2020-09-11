@@ -229,7 +229,7 @@ chmod 600 ~/.ssh/config
 
 在putty的session的属性中，`Connection` -> `Sending of null packets to keep session active` -> `Seconds between keepalives (0 to turn off)`后的文本框中，输入对应的值，如240。
 
-# 参考文献
+# 参考资料
 *  http://www.ee.surrey.ac.uk/Teaching/Unix/
 *  http://vbird.dic.ksu.edu.tw/linux_server/0310telnetssh.php#ssh_server
 *  http://nerderati.com/2011/03/simplify-your-life-with-an-ssh-config-file/

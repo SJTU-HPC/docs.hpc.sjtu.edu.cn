@@ -76,6 +76,6 @@ Singularity pytorch-19.10-py3.simg:~/u2cb_test> python -c "import torch;print(to
 1.3.0a0+24ae9b5
 ```
 
-## 参考文献
+## 参考资料
  - [Singularity Quick Start](https://sylabs.io/guides/3.4/user-guide/quick_start.html)
  - [Docker Hub](https://hub.docker.com/)

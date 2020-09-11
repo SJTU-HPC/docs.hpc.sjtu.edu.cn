@@ -82,7 +82,7 @@ openfoam /lustre/share/img/openfoam-6.simg
    Singularity pytorch-19.10-py3.simg:~/u2cb_test> python -c "import torch;print(torch.__version__)"
    1.3.0a0+24ae9b5
 
-参考文献
+参考资料
 --------
 
 -  `Singularity Quick

@@ -8,7 +8,7 @@ Slurm 作业调度系统
 
 如果我们可以提供任何帮助，请随时联系 \ `HPC 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ 。
 
-.. figure:: ../img/slurm_pi.png
+.. image:: ../img/slurm_pi.png
 
 Slurm概览
 ---------
@@ -365,7 +365,7 @@ $SLURM_SUBMIT_DIR      工作目录
 $SLURM_SUBMIT_HOST     提交作业的主机名
 ====================== ==========================
 
-参考链接
+参考资料
 --------
 
 -  `SLURM Workload Manager <http://slurm.schedmd.com>`__

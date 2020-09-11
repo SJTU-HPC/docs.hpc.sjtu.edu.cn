@@ -113,6 +113,6 @@ $ module load cuda
 $ cuda-gdb ./your_app
 ```
 
-## 参考文献
+## 参考资料
  - [DGX-2 User Guide](https://docs.nvidia.com/dgx/pdf/dgx2-user-guide.pdf)
  - [SLURM Workload Manager](http://slurm.schedmd.com)

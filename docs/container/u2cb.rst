@@ -112,7 +112,7 @@ Server，进行镜像查询，镜像交互，镜像删除的功能。
 
    (U2CB Server) > list def
 
-参考文献
+参考资料
 --------
 
 -  `Singularity Quick
