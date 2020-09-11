@@ -42,6 +42,6 @@ srun --mpi=pmi2 < example.in
 $ sbatch slurm.test
 ```
 
-## 参考链接
+## 参考资料
 - [ABINIT 官网](http://www.abinit.org)
 

@@ -125,7 +125,7 @@ Pi上的软件可以分类为编译器和平台，MPI库，Math库，FD工具，
 | bazel | 软件构建工具 | 0.1 | 0.1 |
 | vtune | Intel vtune | 5.1 | 5.1 | -->
 
-## 参考链接
+## 参考资料
 
  - [Environment Modules Project](http://modules.sourceforge.net/)
  - [Modules Software Environment on NERSC](https://www.nersc.gov/users/software/nersc-user-environment/modules/)

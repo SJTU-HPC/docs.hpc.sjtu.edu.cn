@@ -79,7 +79,7 @@ Pi 上提交作业
 
    $ sbatch slurm.test
 
-参考链接
+参考资料
 --------
 
 -  `STAR-CCM+ 网站 <https://www.femto.eu/star-ccm/>`__

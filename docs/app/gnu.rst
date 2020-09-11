@@ -76,7 +76,7 @@ openmpi-3.1.5/gcc-9.2.0 module load openmpi/3.1.5-gcc-9.2.0
 
    $ sbatch job_openmpi.slurm
 
-参考文献
+参考资料
 --------
 
 -  `Top 20

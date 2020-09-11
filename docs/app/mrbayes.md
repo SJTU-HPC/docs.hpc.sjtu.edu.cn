@@ -48,5 +48,5 @@ srun --mpi=pmi2 mb your_input_file
 $ sbatch mrbayes_cpu_gnu.slurm
 ```
 
-## 参考链接
+## 参考资料
 - [MrBayes 官网](http://nbisweden.github.io/MrBayes/)

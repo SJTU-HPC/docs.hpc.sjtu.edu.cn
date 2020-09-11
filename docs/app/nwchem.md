@@ -44,5 +44,5 @@ srun --mpi=pmi2 nwchem
 $ sbatch slurm.test
 ```
 
-## 参考链接
+## 参考资料
 - [NWChem 官网](https://nwchemgit.github.io/)
