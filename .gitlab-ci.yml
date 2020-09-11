@@ -49,7 +49,7 @@ build latex pdf:
     paths:
       - .build_cache
 
-deploy html to nginx directory:
+deploy html and pdf to nginx directory:
   stage: deploy
   tags:
     - shell.web.hpc.sjtu.edu.cn
@@ -58,4 +58,5 @@ deploy html to nginx directory:
     - merge_request
     - sphinx
   script:
+    - cp docs/_build/latex/pi.pdf docs/_build/html/_static/hpcmanual.pdf
     - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.jianwen.me/
