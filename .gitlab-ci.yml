@@ -2,11 +2,12 @@ variables:
     GIT_STRATEGY: clone
 
 stages:
-  - build
+  - build pdf
+  - build html
   - deploy
 
 build_latex_pdf:
-  stage: build
+  stage: build pdf
   image: laurenss/texlive-full
   tags:
     - docker.singularity.hpc.sjtu.edu.cn
@@ -32,7 +33,7 @@ build_latex_pdf:
       - .build_cache
 
 build_html_pages:
-  stage: build
+  stage: build html
   image: python:3.7
   tags:
     - docker.singularity.hpc.sjtu.edu.cn
