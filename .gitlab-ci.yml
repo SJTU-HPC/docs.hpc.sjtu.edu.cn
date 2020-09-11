@@ -44,8 +44,8 @@ build_html_pages:
     - mkdir -p .build_cache
     - pip install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
-    - mkdir _static || true
-    - cp _build/latex/pi.pdf _static/hpcmanual.pdf
+    - mkdir docs/_static || true
+    - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
     - make -C docs html
   artifacts:
     paths:
