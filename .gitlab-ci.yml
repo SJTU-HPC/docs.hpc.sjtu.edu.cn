@@ -29,6 +29,7 @@ build latex pdf:
   tags:
     - docker.web.hpc.sjtu.edu.cn
   before_script:
+    - curl http://archive.ubuntu.com
     - apt-get update
     - apt-get install -y python3-pip wget
     - mkdir -p .build_cache
