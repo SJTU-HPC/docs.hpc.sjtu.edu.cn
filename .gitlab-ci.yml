@@ -5,7 +5,7 @@ stages:
   - build
   - deploy
 
-build latex pdf:
+build_latex_pdf:
   stage: build
   image: laurenss/texlive-full
   tags:
@@ -31,13 +31,13 @@ build latex pdf:
     paths:
       - .build_cache
 
-build html pages:
+build_html_pages:
   stage: build
   image: python:3.7
   tags:
     - docker.singularity.hpc.sjtu.edu.cn
   needs:
-    - job: build latex pdf
+    - job: build_latex_pdf
       artifacts: true
   before_script:
     - mkdir -p .build_cache
@@ -54,7 +54,7 @@ build html pages:
     paths:
       - .build_cache
 
-deploy html and pdf to nginx directory:
+deploy_html_and_pdf_to_nginx_directory:
   stage: deploy
   tags:
     - shell.web.hpc.sjtu.edu.cn
