@@ -9,7 +9,7 @@ build html pages:
   stage: build
   image: python:3.7
   tags:
-    - docker.web.hpc.sjtu.edu.cn
+    - docker.singularity.hpc.sjtu.edu.cn
   before_script:
     - mkdir -p .build_cache
     - pip install --upgrade --cache-dir=.build_cache -r requirements.txt
@@ -27,7 +27,7 @@ build latex pdf:
   stage: build
   image: laurenss/texlive-full
   tags:
-    - docker.web.hpc.sjtu.edu.cn
+    - docker.singularity.hpc.sjtu.edu.cn
   before_script:
     - curl http://archive.ubuntu.com
     - apt-get update
