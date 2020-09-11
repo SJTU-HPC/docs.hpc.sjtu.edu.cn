@@ -65,13 +65,11 @@ Windows用户
 login.hpc.sjtu.edu.cn，端口号采用默认值 22，然后点 Open
 按钮，如下图所示：
 
-.. figure:: ../img/putty1.png
-   :alt: avater
+.. image:: ../img/putty1.png
 
 在终端窗口中，输入您的 SSH 用户名和密码进行登录：
 
-.. figure:: ../img/putty2.png
-   :alt: avater
+.. image:: ../img/putty2.png
 
 
 *提示：输入密码时，不显示字符，请照常进行操作，然后按回车键登录。*
@@ -96,13 +94,11 @@ Windows 用户可以使用 WinSCP
 端口，SSH 用户名，SSH 密码，然后点击 Login 进行连接。 使用 WinSCP
 的方法类似于使用 FTP 客户端 GUI，如下图所示：
 
-.. figure:: ../img/winscp.png
-   :alt: avater
+.. image:: ../img/winscp.png
 
 
 
-.. figure:: ../img/winscp2.png
-   :alt: avater
+.. image:: ../img/winscp2.png
 
 
 Linux/Unix/Mac 用户
@@ -168,8 +164,7 @@ ssh-copy-id 将本地主机的公钥 id_rsa.pub添加到远程主机的信任列
 
    （在 HPC 集群上）$ chmod 600 ~/.ssh/authorized_keys
 
-.. figure:: ../img/sshfile.png
-   :alt: avater
+.. image:: ../img/sshfile.png
 
 
 我们还可以将连接参数写入 ~/.ssh/config 中，以使其简洁明了。
