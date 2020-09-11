@@ -73,3 +73,8 @@ Pi超算集群用户文档
 
    faq/index
 
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   download/index
