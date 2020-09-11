@@ -15,8 +15,7 @@ HPC Studio：图形化操作与远程桌面
 
 点击图标Files下拉菜单Home Directory即可进入文件管理界面
 
-.. figure:: ../img/ondemand_file.png
-   :alt: avater
+.. image:: ../img/ondemand_file.png
 
    avater
 
@@ -57,10 +56,9 @@ HPC Studio：图形化操作与远程桌面
 | 删除          | 删除文件/文件夹                             | 15   |
 +---------------+---------------------------------------------+------+
 
-.. figure:: ../img/ondemand_button.png
-   :alt: avater
+.. image:: ../img/ondemand_button.png
 
-   avater
+
 
 作业
 ----
@@ -70,44 +68,40 @@ HPC Studio：图形化操作与远程桌面
 
 点击\ ``Jobs->Active Jobs``\ ，查看队列中的作业。在右上角的\ ``Your Jobs/All Jobs``\ 中选择要查看的任务类型。
 
-.. figure:: ../img/ondemand_active_job.png
-   :alt: avater
+.. image:: ../img/ondemand_active_job.png
 
-   avater
 
-.. figure:: ../img/ondemand_active_job_all_or_yours.png
-   :alt: avater
+.. image:: ../img/ondemand_active_job_all_or_yours.png
 
-   avater
 
 点击作业项前的箭头查看作业详情。
 
-.. figure:: ../img/ondemand_active_job_details.png
+.. image:: ../img/ondemand_active_job_details.png
 
 提交作业
 ^^^^^^^^
 
 点击\ ``Jobs->Job Composer``\ ，打开新建作业选项卡。
 
-.. figure:: ../img/ondemand_job_composer.png
+.. image:: ../img/ondemand_job_composer.png
 
 点击左上角\ ``New Job``\ （1）按钮，选择模板，点击\ ``submit``\ （2）按钮提交作业。
 
-.. figure:: ../img/ondemand_job_composer_template.png
+.. image:: ../img/ondemand_job_composer_template.png
 
 同时HPC
 Studio提供了在线文本编辑功能，在右侧底部的\ ``Submit Script``\ 选项卡中，点击\ ``Open Editor``\ 按钮，即可打开文本编辑器。
 
-.. figure:: ../img/ondemand_editor_open.png
+.. image:: ../img/ondemand_editor_open.png
 
-.. figure:: ../img/ondemand_editor.png
+.. image:: ../img/ondemand_editor.png
 
 在线Shell终端
 -------------
 
 点击 ``Clusters->sjtu Shell Access`` ,打开在线终端。
 
-.. figure:: ../img/ondemand_shell.png
+.. image:: ../img/ondemand_shell.png
 
 远程桌面
 --------
@@ -116,16 +110,16 @@ Studio提供了在线文本编辑功能，在右侧底部的\ ``Submit Script``\
 
 点击\ ``Interactive Apps->Desktop``\ 按钮，进入作业提交页面。
 
-.. figure:: ../img/ondemand_desktop.png
+.. image:: ../img/ondemand_desktop.png
 
 Number of hours 默认是 1，然后点击 launch 即可进入桌面选项卡。
 
-.. figure:: ../img/ondemand_desktop2.png
+.. image:: ../img/ondemand_desktop2.png
 
-.. figure:: ../img/ondemand_desktop3.png
+.. image:: ../img/ondemand_desktop3.png
 
 待选项卡显示作业在running的状态时,点击\ ``launch``\ 即可进入远程桌面。
 
-.. figure:: ../img/ondemand_desktop4.png
+.. image:: ../img/ondemand_desktop4.png
 
-.. figure:: ../img/ondemand_desktop5.png
+.. image:: ../img/ondemand_desktop5.png
