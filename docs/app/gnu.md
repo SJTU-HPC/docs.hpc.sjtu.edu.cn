@@ -65,6 +65,6 @@ srun --mpi=pmi2 ./mpihello
 $ sbatch job_openmpi.slurm
 ```
 
-## 参考文献
+## 参考资料
 
 - [Top 20 licenses](https://web.archive.org/web/20160719043600/https://www.blackducksoftware.com/top-open-source-licenses)

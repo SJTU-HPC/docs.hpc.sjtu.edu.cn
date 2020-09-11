@@ -48,5 +48,5 @@ srun pw.x -i test.in
 $ sbatch slurm.test
 ```
 
-## 参考链接
+## 参考资料
 - [Quantum ESPRESSO 官网](https://www.quantum-espresso.org/)

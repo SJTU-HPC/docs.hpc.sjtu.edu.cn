@@ -116,7 +116,7 @@ Studio，在顶栏选择 Relion：
 
 |avater| |image1|
 
-参考链接
+参考资料
 --------
 
 -  `Relion 官网 <http://www2.mrc-lmb.cam.ac.uk/relion>`__

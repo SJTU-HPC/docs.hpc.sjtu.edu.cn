@@ -149,7 +149,7 @@ $ sbatch vasp_gpu_intel.slurm
 - [Pt](https://hpc.sjtu.edu.cn/Item/docs/mp-126_Pt.tar.gz)
 
 
-## 参考文献
+## 参考资料
 
 - [VASP 5.4.1+VTST编译安装](http://hmli.ustc.edu.cn/doc/app/vasp.5.4.1-vtst.htm)
 - [VTST installation](http://theory.cm.utexas.edu/vtsttools/installation.html)

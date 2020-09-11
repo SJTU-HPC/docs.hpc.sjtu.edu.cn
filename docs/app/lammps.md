@@ -151,7 +151,7 @@ $ sbatch lammps_gpu.slurm
 ```
 
 
-## 参考链接
+## 参考资料
 - [LAMMPS 官网](https://lammps.sandia.gov/)
 - [NVIDIA GPU CLOUD](ngc.nvidia.com)
 - [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)

@@ -119,7 +119,7 @@ Perl的SLURM作业示例
 
    perl hello.pl
 
-参考文献
+参考资料
 --------
 
 -  `Set Install path in

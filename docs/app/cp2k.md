@@ -44,5 +44,5 @@ srun --mpi=pmi2 cp2k.popt -i example.inp
 $ sbatch slurm.test
 ```
 
-## 参考链接
+## 参考资料
 - [CP2K 官网](https://manual.cp2k.org/#gsc.tab=0)

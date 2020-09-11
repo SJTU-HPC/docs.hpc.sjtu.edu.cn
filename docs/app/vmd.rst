@@ -21,7 +21,7 @@ VMD，无需单独安装，目前版本为 ``vmd-1.9.3``\ 。该容器文件位�
 .. image:: ../img/relion2.png
 .. image:: ../img/vmd.png
 
-参考文献
+参考资料
 --------
 
 - VMD https://www.ks.uiuc.edu/Research/vmd/

@@ -129,7 +129,7 @@ R拓展模块查询方法
 
    $ sbatch hello_python.slurm
 
-参考文献
+参考资料
 --------
 
 -  `miniconda <https://docs.conda.io/en/latest/miniconda.html>`__

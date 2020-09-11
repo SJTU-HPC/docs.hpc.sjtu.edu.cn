@@ -87,7 +87,7 @@ singularity run --nv $IMAGE_PATH python -c 'import tensorflow as tf; \
 $ sbatch tensorflow_singularity.slurm
 ```
 
-## 参考链接
+## 参考资料
 
 - [TensorFlow 官网](https://www.tensorflow.org/)
 - [NVIDIA GPU CLOUD](ngc.nvidia.com)

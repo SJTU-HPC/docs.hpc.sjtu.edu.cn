@@ -47,5 +47,5 @@ srun --mpi=pmi2 siesta < input.in
 $ sbatch slurm.test
 ```
 
-## 参考链接
+## 参考资料
 - [SIESTA 官网](http://departments.icmab.es/leem/siesta/)

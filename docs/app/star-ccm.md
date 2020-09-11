@@ -57,6 +57,6 @@ starccm+ -power -mpi intel -machinefile './machinefile' -np $SLURM_NTASKS -rsh s
 $ sbatch slurm.test
 ```
 
-## 参考链接
+## 参考资料
 - [STAR-CCM+ 网站](https://www.femto.eu/star-ccm/)
 

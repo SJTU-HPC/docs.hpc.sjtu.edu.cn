@@ -279,7 +279,7 @@ Requests 安装
    source activate mypy
    conda install -c anaconda requests
 
-参考文献
+参考资料
 --------
 
 -  miniconda https://docs.conda.io/en/latest/miniconda.html

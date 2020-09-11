@@ -41,6 +41,6 @@ cat c9orf72.sam | python ../scripts/STRique.py count c9orf72.fofn ../models/r9_4
 cat c9orf72.hg19.strique.tsv | python ../scripts/STRique.py plot c9orf72.fofn --output c9orf72.pdf --format pdf
 ```
 
-## 参考文献
+## 参考资料
 
 - [STRique](https://strique.readthedocs.io/en/latest/installation/src/)

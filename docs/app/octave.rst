@@ -61,7 +61,7 @@ Octave是一种采用高级编程语言的主要用于数值分析的软件。Oc
 
    singularity run /lustre/share/img/octave.simg octave
 
-参考文献
+参考资料
 --------
 
 -  `Octave官方网站 <https://www.gnu.org/software/octave/>`__

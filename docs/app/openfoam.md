@@ -114,7 +114,7 @@ $ sbatch openfoam_singularity_multi_node.slurm
 srun -p cpu -N 1 --exclusive --pty singularity run /lustre/share/img/openfoam-6-it.simg
 ```
 
-## 参考文献
+## 参考资料
 
 - [openfoam官方网站](https://openfoam.org/)
 - [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)

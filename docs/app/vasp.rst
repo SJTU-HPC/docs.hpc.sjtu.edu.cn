@@ -189,7 +189,7 @@ VASP 算例
 
 -  `Pt <https://hpc.sjtu.edu.cn/Item/docs/mp-126_Pt.tar.gz>`__
 
-参考文献
+参考资料
 --------
 
 -  `VASP

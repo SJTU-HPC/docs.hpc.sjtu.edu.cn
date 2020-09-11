@@ -104,6 +104,6 @@ source activate PERL
 
 perl hello.pl
 ```
-## 参考文献
+## 参考资料
 - [Set Install path in CPAN](http://www.perlmonks.org/?node_id=630026)
 - [perl模块安装大全](http://www.bio-info-trainee.com/2451.html)

@@ -133,7 +133,7 @@ Pi2.0 系统中已经预装 openfoam/1712&1912
 
    srun -p cpu -N 1 --exclusive --pty singularity run /lustre/share/img/openfoam-6-it.simg
 
-参考文献
+参考资料
 --------
 
 -  `openfoam官方网站 <https://openfoam.org/>`__

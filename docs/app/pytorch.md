@@ -89,7 +89,7 @@ singularity run --nv $IMAGE_PATH python -c 'import torch; print(torch.__version_
 $ sbatch pytorch_singularity.slurm
 ```
 
-## 参考链接
+## 参考资料
 
 - [PyTorch官网](https://pytorch.org/)
 - [NVIDIA GPU CLOUD](ngc.nvidia.com)

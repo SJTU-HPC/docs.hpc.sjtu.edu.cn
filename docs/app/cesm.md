@@ -160,7 +160,7 @@ $ ./lbtest-f19_g16-B.build
 $ ./lbtest-f19_g16-B.run
 ```
 
-## 参考文献
+## 参考资料
 
 - [CESM官方网站](https://http://www.cesm.ucar.edu/)
 - [CESM User Guide](http://www.cesm.ucar.edu/models/cesm1.2/cesm/doc/usersguide/book1.html)

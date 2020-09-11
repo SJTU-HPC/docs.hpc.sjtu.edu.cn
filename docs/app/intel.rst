@@ -94,7 +94,7 @@ Intel编译套件是由Intel提供的编译器、MPI环境、MKL库等集成套�
 
    $ sbatch job_impi.slurm
 
-参考文献
+参考资料
 --------
 
 -  `intel-parallel-studio <https://software.intel.com/zh-cn/parallel-studio-xe>`__

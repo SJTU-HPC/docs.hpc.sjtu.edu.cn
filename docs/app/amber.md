@@ -129,6 +129,6 @@ $ exit
 ```
 
 
-## 参考文献
+## 参考资料
 
 - [Amber 官网](https://ambermd.org/)

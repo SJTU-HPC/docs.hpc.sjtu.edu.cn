@@ -178,7 +178,7 @@ CESM 算例构建
 
    $ ./lbtest-f19_g16-B.run
 
-参考文献
+参考资料
 --------
 
 -  `CESM官方网站 <https://http://www.cesm.ucar.edu/>`__

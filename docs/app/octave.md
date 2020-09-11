@@ -48,7 +48,7 @@ srun -p cpu -N 1 --exclusive --pty singularity run /lustre/share/img/octave.simg
 singularity run /lustre/share/img/octave.simg octave
 ```
 
-## 参考文献
+## 参考资料
 
 - [Octave官方网站](https://www.gnu.org/software/octave/)
 - [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)

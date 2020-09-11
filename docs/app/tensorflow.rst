@@ -112,7 +112,7 @@ Pi 上可以用 miniconda 自行安装 TensorFlow，也可以用已预置的 sin
 
    $ sbatch tensorflow_singularity.slurm
 
-参考链接
+参考资料
 --------
 
 -  `TensorFlow 官网 <https://www.tensorflow.org/>`__

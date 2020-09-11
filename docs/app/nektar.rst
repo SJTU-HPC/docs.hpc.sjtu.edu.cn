@@ -68,7 +68,7 @@ nektar_cpu_intel.slurm 如下：
 
    $ sbatch nektar_cpu_intel.slurm
 
-参考链接
+参考资料
 --------
 
 -  `Nektar 官网 <https://www.nektar.info/>`__

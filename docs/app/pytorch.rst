@@ -113,7 +113,7 @@ Pi 上可用 miniconda 自行安装 PyTorch，也可用已预置的 singularity
 
    $ sbatch pytorch_singularity.slurm
 
-参考链接
+参考资料
 --------
 
 -  `PyTorch官网 <https://pytorch.org/>`__

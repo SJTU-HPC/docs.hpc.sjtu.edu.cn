@@ -67,7 +67,7 @@ Pi 上提交作业
 
    $ sbatch slurm.test
 
-参考链接
+参考资料
 --------
 
 -  `Keras 官网 <https://keras.io/>`__

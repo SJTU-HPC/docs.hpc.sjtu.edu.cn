@@ -92,7 +92,7 @@ MODULES智能选择与Slurm
 
    $ module load gcc openmpi
 
-参考链接
+参考资料
 --------
 
 - Lmod: A New Environment Module System https://lmod.readthedocs.io/en/latest/   

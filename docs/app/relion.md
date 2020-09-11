@@ -93,7 +93,7 @@ $ sbatch relion_singularity.slurm
 ![avater](../img/relion1.png)
 
 
-## 参考链接
+## 参考资料
 
 - [Relion 官网](http://www2.mrc-lmb.cam.ac.uk/relion)
 - [Singularity 文档](https://sylabs.io/guides/3.5/user-guide/)

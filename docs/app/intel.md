@@ -66,6 +66,6 @@ srun ./mpihello
 $ sbatch job_impi.slurm
 ```
 
-## 参考文献
+## 参考资料
 
 - [intel-parallel-studio](https://software.intel.com/zh-cn/parallel-studio-xe)
