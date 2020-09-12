@@ -1,14 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
 
 TensorFlow
-
-.. raw:: html
-
-   </center>
 
 --------------
 

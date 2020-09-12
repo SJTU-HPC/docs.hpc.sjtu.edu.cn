@@ -1,14 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 R
 
-.. raw:: html
-
-   </center>
 
 --------------
 

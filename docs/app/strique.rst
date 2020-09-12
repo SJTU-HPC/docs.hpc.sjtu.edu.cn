@@ -1,14 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
 
 STRique
-
-.. raw:: html
-
-   </center>
 
 --------------
 

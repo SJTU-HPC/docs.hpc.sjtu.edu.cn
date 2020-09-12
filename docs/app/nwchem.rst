@@ -1,14 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
 
 NWChem
-
-.. raw:: html
-
-   </center>
 
 --------------
 

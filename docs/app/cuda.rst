@@ -1,14 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
 
 CUDA
-
-.. raw:: html
-
-   </center>
 
 --------------
 

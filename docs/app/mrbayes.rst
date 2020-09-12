@@ -1,14 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
 
 MrBayes
-
-.. raw:: html
-
-   </center>
 
 --------------
 

@@ -1,14 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
 
 VASP
-
-.. raw:: html
-
-   <center/>
 
 --------------
 

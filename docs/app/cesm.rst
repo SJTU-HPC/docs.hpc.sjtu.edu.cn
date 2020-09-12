@@ -1,14 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
 
 CESM
-
-.. raw:: html
-
-   </center>
 
 --------------
 

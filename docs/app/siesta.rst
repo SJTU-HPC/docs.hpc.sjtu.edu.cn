@@ -1,14 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
 
 SIESTA
-
-.. raw:: html
-
-   </center>
 
 --------------
 

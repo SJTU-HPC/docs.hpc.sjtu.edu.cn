@@ -1,14 +1,5 @@
-#
-
-.. raw:: html
-
-   <center>
 
 Relion
-
-.. raw:: html
-
-   </center>
 
 --------------
 
