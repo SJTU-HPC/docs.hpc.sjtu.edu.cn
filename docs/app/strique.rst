@@ -1,6 +1,5 @@
 
 STRique
-
 --------------
 
 STRique is a python package to analyze repeat expansion and methylation

@@ -1,8 +1,6 @@
-#
 
 
 PERL
-
 --------------
 
 使用Miniconda 3环境安装perl
