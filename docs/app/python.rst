@@ -1,14 +1,8 @@
 #
 
-.. raw:: html
-
-   <center>
 
 Python
 
-.. raw:: html
-
-   </center>
 
 --------------
 

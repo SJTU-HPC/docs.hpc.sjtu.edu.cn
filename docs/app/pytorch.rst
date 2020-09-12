@@ -1,14 +1,7 @@
 #
 
-.. raw:: html
-
-   <center>
-
 PyTorch
 
-.. raw:: html
-
-   </center>
 
 --------------
 

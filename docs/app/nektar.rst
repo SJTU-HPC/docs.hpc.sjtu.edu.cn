@@ -1,14 +1,8 @@
 #
 
-.. raw:: html
-
-   <center>
 
 Nektar++
 
-.. raw:: html
-
-   </center>
 
 --------------
 

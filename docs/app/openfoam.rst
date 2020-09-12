@@ -1,14 +1,8 @@
 #
 
-.. raw:: html
-
-   <center>
 
 OPENFOAM
 
-.. raw:: html
-
-   <center>
 
 --------------
 

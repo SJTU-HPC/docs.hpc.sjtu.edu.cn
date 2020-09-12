@@ -1,8 +1,5 @@
 #
 
-.. raw:: html
-
-   <center>
 
 PERL
 

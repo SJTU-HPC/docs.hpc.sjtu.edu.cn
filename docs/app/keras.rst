@@ -1,14 +1,7 @@
 #
 
-.. raw:: html
-
-   <center>
-
 Keras
 
-.. raw:: html
-
-   </center>
 
 --------------
 

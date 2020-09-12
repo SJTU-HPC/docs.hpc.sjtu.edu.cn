@@ -1,14 +1,7 @@
 #
 
-.. raw:: html
-
-   <center>
-
 Octave
 
-.. raw:: html
-
-   </center>
 
 --------------
 
