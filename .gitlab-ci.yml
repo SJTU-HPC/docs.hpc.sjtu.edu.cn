@@ -10,7 +10,7 @@ build_latex_pdf:
   stage: build pdf
   image: sjtuhpc/texlive-sphinx
   tags:
-    - docker.singularity.hpc.sjtu.edu.cn
+    - docker
   before_script:
     - mkdir -p .build_cache
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
@@ -30,7 +30,7 @@ build_html_pages:
   stage: build html
   image: sjtuhpc/texlive-sphinx
   tags:
-    - docker.singularity.hpc.sjtu.edu.cn
+    - docker
   needs:
     - job: build_latex_pdf
       artifacts: true
