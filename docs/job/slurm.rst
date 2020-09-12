@@ -1,5 +1,5 @@
 Slurm 作业调度系统
-=================
+==================
 
 `SLURM <http://slurm.schedmd.com/>`_ （Simple Linux Utility for Resource Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
 它是免费且开源的，根据\ `GPL通用公共许可证 <http://www.gnu.org/licenses/gpl.html>`__\ 发行。

@@ -1,14 +1,6 @@
 #
 
-.. raw:: html
-
-   <center>
-
 STAR-CCM+
-
-.. raw:: html
-
-   </center>
 
 --------------
 
