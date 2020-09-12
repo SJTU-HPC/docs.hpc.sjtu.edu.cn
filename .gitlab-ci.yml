@@ -8,18 +8,12 @@ stages:
 
 build_latex_pdf:
   stage: build pdf
-  image: laurenss/texlive-full
+  image: sjtuhpc/texlive-sphinx
   tags:
     - docker.singularity.hpc.sjtu.edu.cn
   before_script:
-    - apt-get update
-    - apt-get install -y python3-pip wget
     - mkdir -p .build_cache
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
-    - wget https://cs.fit.edu/code/projects/ndworld/repository/revisions/12/raw/Resources/Fonts/AdobeSongStd-Light.otf -O /usr/share/fonts/opentype/AdobeSongStd-Light.otf
-    - wget https://cs.fit.edu/code/projects/ndworld/repository/revisions/12/raw/Resources/Fonts/AdobeHeitiStd-Regular.otf -O /usr/share/fonts/opentype/AdobeHeitiStd-Regular.otf
-    - fc-cache -fv
-    - fc-list | grep -i adobe
   script:
     - make -C docs latexpdf
     - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/pi.pdf
@@ -34,7 +28,7 @@ build_latex_pdf:
 
 build_html_pages:
   stage: build html
-  image: python:3.7
+  image: sjtuhpc/texlive-sphinx
   tags:
     - docker.singularity.hpc.sjtu.edu.cn
   needs:
