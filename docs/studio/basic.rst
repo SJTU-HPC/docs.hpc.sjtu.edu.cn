@@ -15,9 +15,7 @@ HPC Studio：图形化操作与远程桌面
 
 点击图标Files下拉菜单Home Directory即可进入文件管理界面
 
-.. image:: ../img/ondemand_file.png
-
-   avater
+.. image:: /img/ondemand_file.png
 
 文件管理包含以下功能：
 
