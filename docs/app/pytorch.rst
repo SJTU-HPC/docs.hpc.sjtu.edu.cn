@@ -1,16 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 PyTorch
-
-.. raw:: html
-
-   </center>
-
---------------
+=======
 
 简介
 ----

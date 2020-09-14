@@ -1,16 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 NWChem
-
-.. raw:: html
-
-   </center>
-
---------------
+======
 
 简介
 ----

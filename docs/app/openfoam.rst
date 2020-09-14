@@ -1,16 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 OPENFOAM
-
-.. raw:: html
-
-   <center>
-
---------------
+========
 
 加载预编译的Openfoam
 --------------------

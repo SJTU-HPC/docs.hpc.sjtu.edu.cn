@@ -1,16 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 Nektar++
-
-.. raw:: html
-
-   </center>
-
---------------
+========
 
 简介
 ----

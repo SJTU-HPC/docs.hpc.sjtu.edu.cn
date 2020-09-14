@@ -1,16 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 Quantum ESPRESSO
-
-.. raw:: html
-
-   </center>
-
---------------
+================
 
 简介
 ----

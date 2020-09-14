@@ -1,16 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 SIESTA
-
-.. raw:: html
-
-   </center>
-
---------------
+======
 
 简介
 ----

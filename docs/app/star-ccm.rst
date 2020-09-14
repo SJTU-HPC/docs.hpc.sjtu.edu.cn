@@ -1,16 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 STAR-CCM+
-
-.. raw:: html
-
-   </center>
-
---------------
+=========
 
 简介
 ----

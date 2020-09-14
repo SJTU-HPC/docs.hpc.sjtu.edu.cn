@@ -1,16 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 Relion
-
-.. raw:: html
-
-   </center>
-
---------------
+======
 
 简介
 ----

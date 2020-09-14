@@ -1,16 +1,6 @@
-#
-
-.. raw:: html
-
-   <center>
 
 STRique
-
-.. raw:: html
-
-   </center>
-
---------------
+=======
 
 STRique is a python package to analyze repeat expansion and methylation
 states of short tandem repeats (STR) in Oxford Nanopore Technology (ONT)
