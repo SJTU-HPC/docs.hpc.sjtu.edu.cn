@@ -55,7 +55,7 @@
 ## 4.软件安装
 
 ### 4.1 Q：如何在超算上安装开源软件？
-**A：** 请查看[应用软件](../application/index.md) 获取已有软件信息。如未找到所需的软件信息，请发送邮件至 [hpc邮箱](mailto:hpc@sjtu.edu.cn)获取帮助。
+**A：** 请查看[应用软件](https://docs.hpc.sjtu.edu.cn/application/applications/) 获取已有软件信息。如未找到所需的软件信息，请发送邮件至 [hpc邮箱](mailto:hpc@sjtu.edu.cn)获取帮助。
 
 ### 4.2 Q：超算上是否提供商业软件？
 **A：** 目前暂不提供商业软件，不过您可以自行购买后安装。以下是注意事项：<br/>
