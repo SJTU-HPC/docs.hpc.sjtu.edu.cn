@@ -18,6 +18,6 @@
  4. [远程桌面](studio/basic.md)
  5. [作业提交](job/slurm.md)
  6. [应用软件](application/applications.md)
- 7. [使用GNU套件编译代码](application/GNU.md)
- 8. [使用Intel套件编译代码](application/Intel.md)
+ 7. [使用GNU套件编译代码](application/gnu.md)
+ 8. [使用Intel套件编译代码](application/intel.md)
  9. [常见问题](faq.md)
