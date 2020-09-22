@@ -22,8 +22,19 @@ Pi 上有多种版本的 LAMMPS:
 
 查看 Pi 上已编译的软件模块:
 ```bash
-$ module avail lammps
+$ module use /lustre/share/img/modules
+$ module av lammps
 ```
+
+推荐使用 lammps/2020-intel，经测试，该版本在 Pi 2.0 上运行速度最好，且安装有丰富的 LAMMPS package：
+
+ASPHERE BODY CLASS2 COLLOID COMPRESS CORESHELL DIPOLE
+        GRANULAR KSPACE MANYBODY MC MISC MLIAP MOLECULE OPT PERI
+        POEMS PYTHON QEQ REPLICA RIGID SHOCK SNAP SPIN SRD VORONOI
+        USER-BOCS USER-CGDNA USER-CGSDK USER-COLVARS USER-DIFFRACTION
+        USER-DPD USER-DRUDE USER-EFF USER-FEP USER-MEAMC USER-MESODPD
+        USER-MISC USER-MOFFF USER-OMP USER-PHONON USER-REACTION
+        USER-REAXC USER-SDPD USER-SPH USER-SMD USER-UEF USER-YAFF
 
 调用该模块:
 ```bash
@@ -35,25 +46,22 @@ $ module load lammps/20200505-intel-19.0.4-impi
 cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ```bash
 #!/bin/bash
-
-#SBATCH -J lammps_test
-#SBATCH -p cpu
-#SBATCH -n 80
+#SBATCH --job-name=lmp_test
+#SBATCH --partition=cpu
+#SBATCH --output=%j.out
+#SBATCH --error=%j.err
+#SBATCH -N 2
 #SBATCH --ntasks-per-node=40
-#SBATCH -o %j.out
-#SBATCH -e %j.err
+#SBATCH --reservation=star_model
 
 module purge
-module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
-module load lammps/20200505-intel-19.0.4-impi
-
-export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-export I_MPI_FABRICS=shm:ofi
+module use /lustre/share/img/modules
+module load lammps/2020-intel
 
 ulimit -s unlimited
 ulimit -l unlimited
 
-srun lmp -i YOUR_INPUT_FILE
+srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
 ```
 
 用下方语句提交作业
