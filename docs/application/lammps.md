@@ -22,8 +22,8 @@ Pi 上有多种版本的 LAMMPS:
 
 查看 Pi 上已编译的软件模块:
 ```bash
-$ module use /lustre/share/img/modules
-$ module av lammps
+module use /lustre/share/img/modules
+module av lammps
 ```
 
 推荐使用 lammps/2020-intel，经测试，该版本在 Pi 2.0 上运行速度最好，且安装有丰富的 LAMMPS package：
@@ -38,7 +38,8 @@ ASPHERE BODY CLASS2 COLLOID COMPRESS CORESHELL DIPOLE
 
 调用该模块:
 ```bash
-$ module load lammps/20200505-intel-19.0.4-impi
+module use /lustre/share/img/modules
+module load lammps/2020-intel
 ```
 
 ### ![cpu](https://img.shields.io/badge/-cpu-blue)  CPU 版本 Slurm 脚本
@@ -66,7 +67,7 @@ srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
 
 用下方语句提交作业
 ```bash
-$ sbatch slurm.test
+sbatch slurm.test
 ```
 
 ### ![cpu](https://img.shields.io/badge/-cpu-blue) （进阶）CPU 版本自行编译
