@@ -25,7 +25,7 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 #SBATCH -e %j.err
 
 module purge
-module load openmpi/3.1.5-gcc-9.2.0
+module load openmpi/3.1.5-gcc-4.8.5
 
 ulimit -s unlimited
 ulimit -l unlimited
@@ -49,7 +49,7 @@ srun --mpi=pmi2 {pmemd.MPI ... YOUR AMBER COMMANDS}
 
 module purge
 module load cuda/9.0.176-gcc-4.8.5
-module load openmpi/3.1.5-gcc-9.2.0
+module load openmpi/3.1.5-gcc-4.8.5
 
 ulimit -s unlimited
 ulimit -l unlimited
@@ -100,7 +100,7 @@ $ make -j 40 && make install   #change 40 to total ncore
 
 - 安装 Amber18 的 MPI 版本
 ```bash
-$ module load openmpi
+$ module load openmpi/3.1.5-gcc-4.8.5
 $ ./configure --no-updates -noX11 -mpi gnu
 $ make -j 40 && make install
 ```
