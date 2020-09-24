@@ -53,7 +53,6 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 #SBATCH --error=%j.err
 #SBATCH -N 2
 #SBATCH --ntasks-per-node=40
-#SBATCH --reservation=star_model
 
 module purge
 module use /lustre/share/img/modules

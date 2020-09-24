@@ -89,6 +89,8 @@
 ### 5.5 Q:电子信息与电气工程学院优惠政策怎么申请？（仅适用于电院老师）
 **A：** 申请电院优惠政策的老师，请参考 [http://dzb.seiee.sjtu.edu.cn/dzb/info/15820.htm](http://dzb.seiee.sjtu.edu.cn/dzb/info/15820.htm)<br/>
 &ensp;&ensp;&ensp;&ensp;申请表下载地址：[http://dzb.seiee.sjtu.edu.cn/dzb/info/15825.htm](http://dzb.seiee.sjtu.edu.cn/dzb/info/15825.htm)<br/>
+因网上充值流程暂未上线，若着急充值，可以将审批表交给电院高怡祯老师送至网络信息中心，电话：34204693，34204865
+
 
 ## 6.邮件支持
 

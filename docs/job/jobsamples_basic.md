@@ -165,16 +165,13 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     #SBATCH --error=%j.err
 
     module purge
-    module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
-    module load lammps/20200505-intel-19.0.4-impi
-
-    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-    export I_MPI_FABRICS=shm:ofi
+    module use /lustre/share/img/modules
+    module load lammps/2020-intel
 
     ulimit -s unlimited
     ulimit -l unlimited
 
-    srun lmp -i YOUR_INPUT_FILE
+    srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
     ```
 
 ### VASP
