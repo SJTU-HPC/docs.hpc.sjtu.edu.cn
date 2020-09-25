@@ -2,56 +2,78 @@ nav:
   - 主页: index.md
   - 账号:
     - 账号申请: accounts/apply.md
-  #   - 密码: accounts/password.md
+    - 密码: accounts/passwords.md
   #   - 账号管理: accounts/management.md
   #   - 机时充值: accounts/charge.md
   #   - 收费细则: accounts/fee.md
-  - 登陆:
-    # - 登陆节点: 登陆/登陆节点.md
+  - 登陆: 
     - SSH: login/SSH.md
-    - Open OnDemand: login/OpenOnDemand.md
+    - 登陆节点: login/login.md
+    - Tmux: login/tmux.md
   # - 文件系统:
   #   - 概览: 文件系统/概览.md
   #   - 数据传输: 文件系统/数据传输.md
   #   - 与校云计算文件交互: 文件系统/云平台.md
   #   - 与其他用户共享文件: 文件系统/共享文件.md 
-  - 作业:
+  - 可视化平台:
+    - 基础操作: studio/basic.md
+    - 远程桌面: studio/remote-desktop.md
+    - Jupyter: studio/jupyter.md
+    - RStudio: studio/rstudio.md
+  - 提交作业:
     - Slurm概览: job/slurm.md
     # - 脚本式作业: 作业/脚本式作业.md
     # - MPI、OpenMP、CUDA作业示例: 作业/MPI、OpenMP、CUDA作业示例.md
-    - 作业脚本样例: job/jobsamples.md
+    - 作业示例: job/jobsamples_basic.md
+    - 作业示例（开发者）: job/jobsamples.md
     # - 交互式作业: 作业/交互式作业.md
     # - 队列选择: 作业/队列选择.md
     - DGX2: job/dgx.md
     - 节点预约: job/reservation.md
     # - 作业优先级: 作业/作业优先级.md
     - 容器: job/container/singularity.md
-  - 预置软件环境: module/module.md
-    # - Module Environment: module/module.md
+    - 非特权容器构建: job/container/u2cb.md
   - 应用软件:
-  #   - Python: 应用软件/Python.md
-  #   - Nektar++: 应用软件/Nektar.md
-  #   - Lammps: 应用软件/Lammps.md
-    - VASP: application/VASP.md
-    - Amber: application/Amber.md
-  #   - VMD: 应用软件/VMD.md
-  #   - nwchen: 应用软件/nwchen.md
-  #   - Desmond and Maestro: 应用软件/Desmond_and_Maestro.md
-    - Gromacs: application/Gromacs.md
-  #   - FFTW: 应用软件/FFTW.md
-  #   - OpenFoam: 应用软件/OpenFoam.md
-  #   - GNU Library: 应用软件/GNU.md
-  #   - MPI4PY: 应用软件/MPI4PY.md
-    - Pytorch: application/Pytorch.md
-  #   - TensorFlow: 应用软件/TensorFlow.md
-  #   - MXNet: 应用软件/MXNet.md
-  #   - HIC-Pro: 应用软件/HIC-Pro.md
-  #   - Octave: 应用软件/Octave.md
-  #   - Perl: 应用软件/Perl.md
-  #   - Spark: 应用软件/Spark.md
-  #   - R: 应用软件/R.md
-  #   - 商业软件: 应用软件/商业软件.md
-  - 常见问题: FAQ/faq.md
+    - Pi 上的软件: application/applications.md
+    - 用 Conda 安装生信软件: application/conda.md
+    - 预置软件环境: application/module.md
+    - ABINIT: application/abinit.md
+    - Amber: application/amber.md
+    - CESM: application/cesm.md
+    - Gromacs: application/gromacs.md
+    - Lammps: application/lammps.md
+    - Mrbayes: application/mrbayes.md
+    - Nektar++: application/nektar.md
+    - NWChem: application/nwchem.md
+    - OpenFoam: application/openfoam.md
+    - Pytorch: application/pytorch.md
+    - Quantum-Espresso: application/quantum-espresso.md
+    - Relion: application/relion.md
+    - STAR-CCM+: application/star-ccm.md
+    - TensorFlow: application/tensorflow.md
+    - VASP: application/vasp.md
+    - VMD: application/vmd.md    
+    - Keras: application/keras.md
+    - SIESTA: application/siesta.md
+    - CP2k: application/cp2k.md
+    - DeepVariant: application/deepvariant.md
+  #   - Desmond and Maestro: 应用软件/desmond_and_maestro.md  
+  #   - FFTW: 应用软件/fftw.md
+  #   - MPI4PY: 应用软件/mpi4py.md
+  #   - MXNet: 应用软件/mxnet.md
+  #   - HIC-Pro: 应用软件/hic-pro.md
+  #   - Spark: 应用软件/spark.md
+  #  - 商业软件: application/commercial.md
+  - 编程语言:
+    - Python: application/python.md
+    - Perl: application/perl.md
+    - R: application/r.md
+    - Octave(Matlab): application/octave.md
+    - GNU Library: application/gnu.md
+    - Intel编译套件: application/intel.md
+    - CUDA: application/cuda.md
+  - 常见问题: faq.md
+  #- 提交修改: contribution.md
 
 # Project Information
 site_name: Pi Documentation
@@ -59,8 +81,8 @@ site_description: Pi Documentation
 site_author: SJTU HPC Team
 site_dir: public
 site_url: "https://docs.hpc.sjtu.edu.cn"
-repo_name: Github/sjtuhpcc/docs
-repo_url: https://github.com/sjtuhpcc/docs.sjtu.edu.cn
+repo_name: SJTU-HPC/docs.hpc.sjtu.edu.cn
+repo_url: https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn
 edit_uri: tree/master/docs/
 
 # Configuration

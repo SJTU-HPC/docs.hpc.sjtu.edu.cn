@@ -3,7 +3,7 @@ click==6.7
 Jinja2>=2.10.1
 livereload==2.5.2
 Markdown==2.6.11
-MarkupSafe==1.0
+MarkupSafe==1.1.1
 mkdocs==1.0.4
 mkdocs-material==4.4.1
 mkdocs-minify-plugin==0.2.1

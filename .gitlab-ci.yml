@@ -1,95 +1,34 @@
-image: python:3.7
+variables:
+    GIT_STRATEGY: clone
 
 stages:
   - build
-  - test
   - deploy
-  - post-deploy
 
-markdown_lint:
-  allow_failure: true
-  image: node
-  stage: test
-  except:
-    - schedules
-    - master@NERSC/nersc.gitlab.io
-  script:
-    - npm install -g markdownlint-cli
-    - bash util/lint-changes.sh
-
-filesize:
-  allow_failure: true
-  image: ubuntu:latest
-  stage: test
-  except:
-    - schedules
-    - master@NERSC/nersc.gitlab.io
-  before_script:
-    - apt-get update && apt-get install -y git
-  script:
-    - bash util/filesize.sh
-
-mkdocs_build:
+build html pages:
   stage: build
-  except:
-    - schedules
-  script:
+  image: python:3.7
+  tags:
+    - docker
+  before_script:
     - mkdir -p .build_cache
     - pip install --upgrade --cache-dir=.build_cache -r requirements.txt
+  script:
     - mkdocs --verbose build
   artifacts:
     paths:
-    - public
-    expire_in: 1 week
+      - public
   cache:
     key: ${CI_JOB_NAME}
     paths:
       - .build_cache
 
-check_internal_links:
-  stage: build
-  script:
-    - bash util/check-internal-links.sh
-
-check_links:
-  allow_failure: true
-  stage: test
-  only:
-    - schedules
-  script:
-    - mkdir -p .links_cache
-    - pip install --cache-dir=.links_cache -r util/requirements.txt
-    - python util/scrape_urls.py public
-
-pages:
+deploy html to nginx directory:
   stage: deploy
-  except:
-    - schedules
+  tags:
+    - shell.web.hpc.sjtu.edu.cn
   only:
-    - master@NERSC/nersc.gitlab.io
-  before_script:
-    - pip install htmlmin
+    - master
+    - merge_request
   script:
-    - gzip -k -6 -r public/assets/stylesheets
-    - gzip -k -6 -r public/assets/javascripts
-    - find public -type f -name "*.html" -exec gzip --keep --verbose {} \;
-    - mkdir -p public/.well-known/pki-validation/
-    - echo 1ulpvnf7n6o5idmfdlk4aa2e87 > public/.well-known/pki-validation/godaddy.html
-  artifacts:
-    paths:
-    - public
-
-update-search-api:
-  image: ubuntu:18.04
-  stage: post-deploy
-  only:
-    - master@NERSC/nersc.gitlab.io
-  except:
-    - schedules
-  before_script:
-    - apt-get update; apt-get -y install curl
-  script:
-    - "curl --request POST \
-    --url https://nersc-docs-search-app-214117.appspot.com/reindex \
-    --header 'content-type: application/json' \
-    --data '{\"source\":\"docs\"}'"
+    - rsync -avr --progress --delete public/ /var/lib/www/docs.hpc.sjtu.edu.cn/

@@ -14,7 +14,7 @@
 
 准备作业脚本然后通过`sbatch`提交是Slurm的最常见用法。为了将作业脚本提交给作业系统，SLURM使用
 
-```
+```bash
 $ sbatch jobscript.slurm
 ```
 
@@ -38,13 +38,36 @@ Slurm具有丰富的参数集。 以下最常用的。
 | --depend=[state:job_id] | 作业依赖 | 
 | --array=[array_spec] | 序列作业 | 
 
-这是一个名为`dgx.slurm`的作业脚本，该脚本向dgx2队列申请4块GPU，并在作业完成时通知。在此示例作业中执行的为NVIDIA Sample中的`cudaTensorCoreGemm`。
+这是一个名为`dgx.slurm`的 **单机单卡** 作业脚本，该脚本向dgx2队列申请1块GPU，并在作业完成时通知。在此示例作业中执行的为NVIDIA Sample中的`cudaTensorCoreGemm`。
 
+```bash
+#!/bin/bash
+
+#SBATCH --job-name=dgx2_test
+#SBATCH --partition=dgx2
+#SBATCH --gres=gpu:1
+#SBATCH -n 1
+#SBATCH --ntasks-per-node 1
+#SBATCH --mail-type=end
+#SBATCH --mail-user=YOU@EMAIL.COM
+#SBATCH --output=%j.out
+#SBATCH --error=%j.err
+
+module load gcc cuda
+
+./cudaTensorCoreGemm
 ```
+
+或者通过如下脚本提交 **单机多卡** 作业。
+
+```bash
+#!/bin/bash
+
 #SBATCH --job-name=dgx2_test
 #SBATCH --partition=dgx2
 #SBATCH --gres=gpu:4
-#SBATCH -n 1
+#SBATCH -n 4
+#SBATCH --ntasks-per-node 4
 #SBATCH --mail-type=end
 #SBATCH --mail-user=YOU@EMAIL.COM
 #SBATCH --output=%j.out
@@ -57,8 +80,8 @@ module load gcc cuda
 
 用以下方式提交作业：
 
-```
-sbatch dgx.slurm
+```bash
+$ sbatch dgx.slurm
 ```
 
 `squeue`可用于检查作业状态。用户可以在作业执行期间通过SSH登录到计算节点。输出将实时更新到文件[jobid] .out和[jobid] .err。
@@ -67,17 +90,27 @@ sbatch dgx.slurm
 
 `srun`可以启动交互式作业。该操作将阻塞，直到完成或终止。例如，在DGX-2上运行`hostname`。
 
-```
-$ srun -N1 -n1 -p dgx2 --gres=gpu:4 hostname
+```bash
+$ srun -n 1 -p dgx2 --gres=gpu:4 hostname
 vol01
 ```
 
 启动远程主机bash终端。
 
-```
-srun -N1 -n1 -p dgx2 --exclusive --pty /bin/bash
+```bash
+$ srun -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
 $ hostname
 vol01
+```
+
+## GPU程序调试
+
+启动远程主机bash终端，然后使用cuda toolkit中提供的cuda-gdb工具调试程序。
+
+```bash
+$ srun -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
+$ module load cuda
+$ cuda-gdb ./your_app
 ```
 
 ## 参考文献
