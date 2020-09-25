@@ -18,13 +18,13 @@ PyTorch 是一个 Python 优先的深度学习框架，也是使用 GPU 和 CPU
 1. 作为 numpy 的替代，以便使用强大的 GPU；
 2. 将其作为一个能提供最大的灵活性和速度的深度学习研究平台
 
-Pi 上的 PyTorch
+Pi上的PyTorch
 ---------------
 
 Pi 上可用 miniconda 自行安装 PyTorch，也可用已预置的 singularity
 ``pytorch-1.3.0`` 优化镜像
 
-使用 miniconda 安装 PyTorch
+使用miniconda安装PyTorch
 ---------------------------
 
 创建名为 ``pytorch-env`` 的虚拟环境，激活虚拟环境，然后安装 pytorch
@@ -36,7 +36,7 @@ Pi 上可用 miniconda 自行安装 PyTorch，也可用已预置的 singularity
    $ source activate pytorch-env
    $ conda install pytorch torchvision -c pytorch
 
-提交 PyTorch 作业
+提交PyTorch作业
 -----------------
 
 示例：在 DGX-2 上使用 pytorch。作业使用单节点，分配 2 块 GPU，GPU:CPU
@@ -66,7 +66,7 @@ Pi 上可用 miniconda 自行安装 PyTorch，也可用已预置的 singularity
 
    $ sbatch pytorch_conda.slurm
 
-使用 singularity 容器中的 PyTorch
+使用singularity容器中的PyTorch
 ---------------------------------
 
 集群中已预置了 `NVIDIA GPU CLOUD <https://ngc.nvidia.com/>`__
@@ -74,7 +74,7 @@ Pi 上可用 miniconda 自行安装 PyTorch，也可用已预置的 singularity
 ``pytorch-1.3.0``\ 。该容器文件位于
 ``/lustre/share/img/pytorch-19.10-py3.simg``
 
-使用 singularity 容器提交 PyTorch 作业
+使用singularity容器提交PyTorch作业
 --------------------------------------
 
 示例：在 DGX-2 上使用 PyTorch 的容器。作业使用单节点并分配 2 块 GPU：

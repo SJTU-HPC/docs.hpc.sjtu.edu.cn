@@ -12,7 +12,7 @@ Pi 上有多种版本的 GROMACS:
 -  |gpu| `gpu <#gpu-gromacs>`__
 -  |arm| `arm <#arm-gromacs>`__
 
-|cpu| (CPU) GROMACS 模块调用
+|cpu| (CPU) GROMACS模块调用
 ----------------------------
 
 查看 Pi 上已编译的软件模块:
@@ -27,7 +27,7 @@ Pi 上有多种版本的 GROMACS:
 
    $ module load gromacs/2019.4-intel-19.0.4-impi
 
-|cpu| (CPU) GROMACS 的 Slurm 脚本
+|cpu| (CPU) GROMACS的Slurm 脚本
 ---------------------------------
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
@@ -53,14 +53,14 @@ Pi 上有多种版本的 GROMACS:
 
    mpirun gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
 
-|cpu| (CPU) GROMACS 提交作业
+|cpu| (CPU) GROMACS提交作业
 ----------------------------
 
 .. code:: bash
 
    $ sbatch slurm.test
 
-|gpu| (GPU) GROMACS 使用
+|gpu| (GPU) GROMACS使用
 ------------------------
 
 Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即可运行

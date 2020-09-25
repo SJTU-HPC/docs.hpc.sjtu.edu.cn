@@ -23,7 +23,7 @@ Pi 上有多种版本的 LAMMPS:
 使用CPU版本LAMMPS
 -----------------
 
-|cpu| (CPU) LAMMPS 模块调用
+|cpu| (CPU) LAMMPS模块调用
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 查看 Pi 上已编译的软件模块:
@@ -38,7 +38,7 @@ Pi 上有多种版本的 LAMMPS:
 
    $ module load lammps/20190807-intel-19.0.5-impi
 
-|cpu| (CPU) LAMMPS 的 Slurm 脚本
+|cpu| (CPU) LAMMPS的Slurm 脚本
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
@@ -68,14 +68,14 @@ Pi 上有多种版本的 LAMMPS:
 
    srun lmp -i YOUR_INPUT_FILE
 
-|cpu| (CPU) LAMMPS 提交作业
+|cpu| (CPU) LAMMPS提交作业
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
    $ sbatch slurm.test
 
-|cpu| (CPU) LAMMPS 自行编译
+|cpu| (CPU) LAMMPS自行编译
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 若对 lammps 版本有要求，或需要特定的 package，可自行编译 Intel 版本的
@@ -141,7 +141,7 @@ Lammps.
 
    srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
 
-|gpu| 使用 GPU 版本的 LAMMPS
+|gpu| 使用GPU版本的LAMMPS
 ----------------------------
 
 Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即可运行

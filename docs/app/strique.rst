@@ -6,7 +6,7 @@ STRique is a python package to analyze repeat expansion and methylation
 states of short tandem repeats (STR) in Oxford Nanopore Technology (ONT)
 long read sequencing data.
 
-在 Pi 上安装 STRique
+在 Pi上安装STRique
 --------------------
 
 首先申请计算节点，然后输入以下指令进行编译：
@@ -22,7 +22,7 @@ long read sequencing data.
    $ pip install -r requirements.txt
    $ python setup.py install
 
-在 Pi 上运行的 Slurm 脚本示例：
+在 Pi上运行的Slurm 脚本示例：
 -------------------------------
 
 .. code:: bash

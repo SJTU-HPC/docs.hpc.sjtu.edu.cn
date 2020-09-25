@@ -14,7 +14,7 @@ accuracy and cost can be tuned in a wide range, from quick exploratory
 calculations to highly accurate simulations matching the quality of
 other approaches, such as plane-wave methods.
 
-Pi 上的 SIESTA
+Pi上的SIESTA
 --------------
 
 Pi2.0 系统中已经预装 SIESTA (Intel 版本)，可用以下命令加载:
@@ -23,7 +23,7 @@ Pi2.0 系统中已经预装 SIESTA (Intel 版本)，可用以下命令加载:
 
    $ module load siesta
 
-Pi 上的 Slurm 脚本 slurm.test
+Pi上的Slurm脚本 slurm.test
 -----------------------------
 
 在 cpu 队列上，总共使用 40 核 (n = 40) cpu 队列每个节点配有 40

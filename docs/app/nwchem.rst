@@ -11,7 +11,7 @@ computational chemistry problems efficiently, and in their use of
 available parallel computing resources from high-performance parallel
 supercomputers to conventional workstation clusters.
 
-Pi 上的 NWChem
+Pi上的NWChem
 --------------
 
 Pi2.0 系统中已经预装 NWChem-6.8.1 (GNU+cpu 版本)，可用以下命令加载:
@@ -20,7 +20,7 @@ Pi2.0 系统中已经预装 NWChem-6.8.1 (GNU+cpu 版本)，可用以下命令�
 
    $ module load nwchem/6.8.1-gcc-8.3.0-openblas-openmpi
 
-Pi 上的 Slurm 脚本 slurm.test
+Pi上的Slurm脚本 slurm.test
 -----------------------------
 
 在 cpu 队列上，总共使用 40 核 (n = 40) cpu 队列每个节点配有 40

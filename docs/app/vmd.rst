@@ -13,7 +13,7 @@ objects.
 VMD，无需单独安装，目前版本为 ``vmd-1.9.3``\ 。该容器文件位于
 ``/lustre/share/img/vmd-1.9.3.simg``
 
-使用 HPC Studio 启动可视化界面
+使用HPC Studio启动可视化界面
 ------------------------------
 
 参照 `可视化平台 <../../login/HpcStudio/>`_ ，登陆 HPC Studio，在顶栏选择 VMD：

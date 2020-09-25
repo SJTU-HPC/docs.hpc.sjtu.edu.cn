@@ -5,13 +5,13 @@ Amber (Assisted Model Building with Energy Refinement) is the collective
 name for a suite of programs designed to carry out molecular mechanical
 force field simulations, particularly on biomolecules.
 
-Pi 上的 Amber
+Pi上的Amber
 -------------
 
 由于 Amber 是需要版权的软件，Pi
 上不提供。需要用户自行获取版权并安装。安装方法见本文档后面部分。
 
-Pi 上的 Slurm 脚本 slurm.test
+Pi上的Slurm脚本slurm.test
 -----------------------------
 
 （版本：GNU + cpu） 在 cpu 队列上，总共使用 80 核 (n = 80) cpu
@@ -61,14 +61,14 @@ Pi 上的 Slurm 脚本 slurm.test
    source {path/to/your/amber.sh}
    srun --mpi=pmi2 {YOUR AMBER CUDA COMMANDS; eg: pmemd.cuda.MPI -ng 6 ... }
 
-Pi 上提交作业
+Pi上提交作业
 -------------
 
 .. code:: bash
 
    $ sbatch slurm.test
 
-Amber 安装
+Amber安装
 ----------
 
 安装前请移除 .bashrc 不必要的内容，包括 module load 与 export 等等
@@ -105,7 +105,7 @@ Amber 安装
 !!! tip
 如果您的任务规模较小，仅需编译串行版本Amber，那么至此编译工作已经完成。但我们强烈建议您继续编译MPI或CUDA版本。
 
-编译 MPI 版本
+编译MPI版本
 -------------
 
 -  安装 Amber18 的 MPI 版本
@@ -116,7 +116,7 @@ Amber 安装
    $ ./configure --no-updates -noX11 -mpi gnu
    $ make -j 40 && make install
 
-编译 CUDA 版本
+编译CUDA版本
 --------------
 
 -  安装 Amber18 的 CUDA 版本
@@ -128,7 +128,7 @@ Amber 安装
    $ ./configure --no-updates -noX11 -cuda gnu
    $ make -j 40 && make install
 
-编译 MPI+CUDA 版本
+编译MPI+CUDA版本
 ------------------
 
 -  安装 Amber18 的 CUDA+mpi 版本

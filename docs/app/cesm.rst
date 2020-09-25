@@ -8,7 +8,7 @@ CESM
 CESM （Community Earth System
 Model）是一种全耦合的全球气候模型，它提供了地球过去，现在和将来的气候状态的计算机模拟。
 
-CESM 使用
+CESM使用
 ---------
 
 CESM 是一种免费的开源软件，但是在授予对 Subversion
@@ -18,7 +18,7 @@ CESM 与一般软件不同，每次计算都需要编译，也即算例构建。
 
 以下以 CESM 1.2 为例，介绍软件的安装和使用。
 
-获得 CESM 代码
+获得CESM代码
 --------------
 
 `注册 <http://www.cesm.ucar.edu/models/register/register.html>`__ 获取
@@ -29,7 +29,7 @@ Subversion 存储库的访问权限。注册完成后，可以将 CESM 项目下
    $ cd <cesm-base>
    $ svn co https://svn-ccsm-models.cgd.ucar.edu/cesm1/release_tags/cesm1_2_2_1
 
-构建 CESM 的依赖环境
+构建CESM的依赖环境
 --------------------
 
 载入 Intel 编译环境，进行依赖构建：
@@ -111,7 +111,7 @@ Subversion 存储库的访问权限。注册完成后，可以将 CESM 项目下
    $ cpan install Switch
    $ cpan install XML::LibXML
 
-CESM 算例构建
+CESM算例构建
 -------------
 
 .. code:: shell

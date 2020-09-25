@@ -2,7 +2,7 @@
 VASP
 ====
 
-编译 Intel+CPU 版本 VASP
+编译Intel+CPU版本VASP
 ------------------------
 
 -  解压缩 VASP
@@ -117,7 +117,7 @@ VASP
 
    $ sbatch vasp_cpu_intel.slurm
 
-编译 Intel+GPU 版本 VASP
+编译Intel+GPU版本VASP
 ------------------------
 
 GPU 需要在 dgx2 队列上编译，以如下命令申请计算节点资源用于编译：
@@ -136,7 +136,7 @@ GPU 需要在 dgx2 队列上编译，以如下命令申请计算节点资源用�
    $ module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
    $ make gpu
 
-提交 Intel+GPU 版本 VASP 任务
+提交Intel+GPU版本VASP 任务
 -----------------------------
 
 使用 intel 编译的 GPU 版本 VASP 运行单卡作业脚本示例
@@ -174,7 +174,7 @@ vasp_gpu_intel.slurm 如下：
 
    $ sbatch vasp_gpu_intel.slurm
 
-VASP 算例
+VASP算例
 ---------
 
 -  `Pt <https://hpc.sjtu.edu.cn/Item/docs/mp-126_Pt.tar.gz>`__
