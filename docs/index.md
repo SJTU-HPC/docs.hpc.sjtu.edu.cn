@@ -3,7 +3,7 @@
 
   **友情提醒:** 超算平台禁止运行军工项目等涉密计算任务。
 
-  若有任何问题，欢迎邮件联系我们： [hpc邮箱](mailto:hpc@sjtu.edu.cn)
+  若有任何问题，欢迎邮件联系我们： [hpc 邮箱](mailto:hpc@sjtu.edu.cn): hpc (at) sjtu.edu.cn
 
 !!!tip
 	该文档通过github仓库维护
