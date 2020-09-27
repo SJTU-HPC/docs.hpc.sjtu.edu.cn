@@ -31,6 +31,8 @@ cpu 队列每个节点配有 40 核，所以这里使用了 1 个节点：
 
 module purge
 module load cp2k/6.1-gcc-8.3.0-openblas-openmpi
+module load cuda/9.0.176-gcc-4.8.5
+module load openmpi/3.1.5-gcc-4.8.5
 
 ulimit -s unlimited
 ulimit -l unlimited
