@@ -19,6 +19,7 @@
 - [Rosetta](#rosetta)
 - [GMP](#gmp)
 - [Deepvariant](#deepvariant)
+- [Julia](#julia)
 
 ## 用 Conda 安装软件的流程 
 加载 Miniconda3
@@ -296,7 +297,7 @@ module purge
 module load miniconda3
 conda create -n mypy
 source activate mypy
-conda install -c conda-forge julia
+conda install -c conda-forge/label/cf202003 julia
 ```
 
 
