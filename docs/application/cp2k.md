@@ -11,7 +11,7 @@ CP2K is a quantum chemistry and solid state physics software package that can pe
 Pi2.0 系统中已经预装 CP2K (GNU+cpu 版本)，可用以下命令加载: 
 
 ```bash
-$ module load cp2k/6.1-gcc-8.3.0-openblas-openmpi
+$ module load cp2k/7.1-gcc-9.2.0-openblas-openmpi
 ```
 
 ## Pi 上的 Slurm 脚本 slurm.test
@@ -22,7 +22,7 @@ cpu 队列每个节点配有 40 核，所以这里使用了 1 个节点：
 ```bash
 #!/bin/bash
 
-#SBATCH -J nechem_test
+#SBATCH -J cp2k_test
 #SBATCH -p cpu
 #SBATCH -n 40
 #SBATCH --ntasks-per-node=40
@@ -30,9 +30,9 @@ cpu 队列每个节点配有 40 核，所以这里使用了 1 个节点：
 #SBATCH -e %j.err
 
 module purge
-module load cp2k/6.1-gcc-8.3.0-openblas-openmpi
-module load cuda/9.0.176-gcc-4.8.5
-module load openmpi/3.1.5-gcc-4.8.5
+module load cp2k/7.1-gcc-9.2.0-openblas-openmpi
+module load openmpi/3.1.5-gcc-9.2.0
+module load gcc/9.2.0-gcc-4.8.5
 
 ulimit -s unlimited
 ulimit -l unlimited
