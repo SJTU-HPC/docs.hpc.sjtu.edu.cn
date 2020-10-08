@@ -22,7 +22,7 @@ Pi 上有多种版本的 LAMMPS:
 
 查看 Pi 上已编译的软件模块:
 ```bash
-module use /lustre/share/img/modules
+module use /lustre/share/singularity/modules
 module av lammps
 ```
 
@@ -38,7 +38,7 @@ ASPHERE BODY CLASS2 COLLOID COMPRESS CORESHELL DIPOLE
 
 调用该模块:
 ```bash
-module use /lustre/share/img/modules
+module use /lustre/share/singularity/modules
 module load lammps/2020-intel
 ```
 
@@ -55,7 +55,7 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 #SBATCH --ntasks-per-node=40
 
 module purge
-module use /lustre/share/img/modules
+module use /lustre/share/singularity/modules
 module load lammps/2020-intel
 
 ulimit -s unlimited
