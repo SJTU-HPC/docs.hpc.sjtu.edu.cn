@@ -22,7 +22,7 @@ HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
 
 1. 浏览器打开 https://studio.hpc.sjtu.edu.cn
 
-2. 顶栏 Interactive Apps 下拉菜单第一个 Desktop
+2. 顶栏 Interactive Apps 下拉菜单，选择第一个 Desktop
 
 3. Desktop 里第一个 "Desktop Instance Size" 选择最基本的 1core-desktop（画图所需资源少，1 core 够用），然后点击 Launch
 

@@ -75,5 +75,5 @@ sftp://userXXX@login.hpc.sjtu.edu.cn/lustre/home/acct-userXXX/userXXX/SiVacancy.
 
 ## 参考链接
 
-- [gnuplot 官网](http://www.gnuplot.info/)
+- [OVITO 官网](http://ovito.org)
 
