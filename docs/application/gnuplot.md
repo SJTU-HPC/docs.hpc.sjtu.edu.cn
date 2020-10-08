@@ -20,83 +20,38 @@ HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
 
 ### 在 HPC Studio 上连接远程桌面
 
-查看 Pi 上已编译的 GPU 版软件:
-```bash
-$ module avail relion
-```
+1. 浏览器打开 https://studio.hpc.sjtu.edu.cn
 
-调用该模块:
-```bash
-$ module load relion/3.0.8-gcc-8.3.0-openmpi
-```
+2. 顶栏 Interactive Apps 下拉菜单第一个 Desktop
 
-### GPU Relion 的 Slurm 脚本
+3. Desktop 里第一个 "Desktop Instance Size" 选择最基本的 1core-desktop（画图所需资源少，1 core 够用），然后点击 Launch
 
-在 dgx2 队列上使用 1 块 gpu，并配比 6 cpu 核心
+4. 等待几秒，甚或更长时间，取决于 small 队列可用资源量。Studio 的远程桌面以一个正常的 small 队列作业启动
 
-```bash
-#!/bin/bash
+5. 启动后，右上角会显示 1 node 1 core Running. 然后点击 Launch Desktop
 
-#SBATCH -J relion
-#SBATCH -p dgx2
-#SBATCH -n 6 # number of tasks
-#SBATCH --ntasks-per-node=6
-#SBATCH --gres=gpu:1
-#SBATCH -o %j.out
-#SBATCH -e %j.err
+###  远程桌面启动 gnuplot
 
-module purge
-module load cuda/9.0.176-gcc-4.8.5
-module load openmpi/3.1.5-gcc-9.2.0
-module load relion/3.0.8-gcc-8.3.0-openmpi
-
-srun --mpi=pmi2 relion_refine_mpi (relion 的命令...)
-```
-
-###  GPU Relion 提交作业
-```bash
-$ sbatch slurm.test
-```
-
-## 使用 Relion 容器镜像
-
-集群中已预置了编译优化的容器镜像，通过调用该镜像即可运行 Relion，无需单独安装，目前版本为 `relion-3.0.8`。该容器文件位于 `/lustre/share/img/relion-3.0.8-cuda9.2-openmpi4.0.simg`
-
-### 使用 singularity 容器提交 Relion 作业
-
-示例：在 DGX-2 上使用 Relion 容器，作业使用单节点并分配 2 块 GPU：
+在远程桌面空白处右键单击，Open Terminal Here 打开终端
 
 ```bash
-#!/bin/bash
-#SBATCH -J test
-#SBATCH -p dgx2
-#SBATCH -N 1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=12
-#SBATCH --gres=gpu:2
-#SBATCH -o %j.out
-#SBATCH -e %j.err
-
-IMAGE_PATH=/lustre/share/img/relion-3.0.8-cuda9.2-openmpi4.0.simg
-
-singularity run --nv $IMAGE_PATH relion_refine_mpi --version
+$ gnuplot
+gnuplot> p x    (以绘制 y = x 函数为例)
 ```
 
-假设这个脚本文件名为 `relion_singularity.slurm`，使用以下指令提交作业
+###  结束后退出远程桌面
 
-```bash
-$ sbatch relion_singularity.slurm
-```
+远程桌面作业，使用完毕后需退出，否则会持续计费。两种退出方法：
 
-### 使用 HPC Studio 启动可视化界面
+1. 在 Studio 界面上点 "Delete" 删除该作业
 
-参照[可视化平台](../../login/HpcStudio/)，登陆 HPC Studio，在顶栏选择 Relion：
+2. 或在 Pi 上用 squeue 查看作业，并用 scancel 终止该作业
 
-![avater](../img/relion2.png)
-![avater](../img/relion1.png)
+![avater](../img/gnuplot.gif)
+
 
 
 ## 参考链接
 
 - [gnuplot 官网](http://www.gnuplot.info/)
-- [Singularity 文档](https://sylabs.io/guides/3.5/user-guide/)
+

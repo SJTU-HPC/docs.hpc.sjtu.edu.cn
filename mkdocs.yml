@@ -58,6 +58,7 @@ nav:
     - CP2k: application/cp2k.md
     - DeepVariant: application/deepvariant.md
     - Geant4: application/geant4.md
+    - Gnuplot: application/gnuplot.md
   #   - Desmond and Maestro: 应用软件/desmond_and_maestro.md  
   #   - FFTW: 应用软件/fftw.md
   #   - MPI4PY: 应用软件/mpi4py.md
