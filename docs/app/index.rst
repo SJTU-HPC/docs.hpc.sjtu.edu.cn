@@ -66,3 +66,25 @@ cudnn    NVIDIA深度学习GPU加速原语库 7.3 7.4 7.5 7.5      Yes
    module
    lammps
    gromacs
+   abinit
+   amber
+   cesm
+   commercial
+   cp2k
+   mrbayes
+   nektar
+   nwchem
+   openfoam
+   pytorch
+   quantum-espresso
+   relion
+   star-ccm
+   tensorflow
+   vasp
+   vmd
+   keras
+   siesta
+   deepvariant
+   geant4
+   ovito
+   strique

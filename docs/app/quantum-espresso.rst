@@ -1,3 +1,4 @@
+.. _quantum-espresso:
 
 Quantum ESPRESSO
 ================

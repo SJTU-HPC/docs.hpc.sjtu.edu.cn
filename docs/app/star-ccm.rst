@@ -1,3 +1,4 @@
+.. _star-ccm:
 
 STAR-CCM+
 =========

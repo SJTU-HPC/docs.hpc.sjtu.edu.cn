@@ -1,4 +1,4 @@
-.. _appabinit:
+.. _abinit:
 
 ABINIT
 ======

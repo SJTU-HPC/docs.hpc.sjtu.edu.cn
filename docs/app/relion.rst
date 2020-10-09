@@ -1,3 +1,4 @@
+.. _relion:
 
 Relion
 ======

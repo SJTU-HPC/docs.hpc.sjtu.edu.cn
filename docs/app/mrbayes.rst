@@ -1,3 +1,4 @@
+.. _mrbayes:
 
 MrBayes
 =======
