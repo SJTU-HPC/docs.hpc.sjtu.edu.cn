@@ -62,10 +62,12 @@ Pi超算集群用户文档
    :hidden:
 
    app/index
-..    app/module
-..    app/conda
-..    app/gnu
-..    app/intel
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   language/index
 
 .. toctree::
    :maxdepth: 2

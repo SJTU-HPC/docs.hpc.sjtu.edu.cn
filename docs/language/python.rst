@@ -1,7 +1,7 @@
 .. _python:
 
 Python
-======
+=======
 
 本文档向您展示如何使用Miniconda在家目录中建立自定义的Python环境。不同的Python版本2或3，对应不同的Miniconda。
 
