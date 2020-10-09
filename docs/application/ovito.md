@@ -11,16 +11,34 @@ OVITO is a scientific visualization and analysis software for atomistic and part
 
 使用 OVITO 查看原子构型有两种方法：
 
-一、在可视化平台的远程桌面里调用 Pi 上的 OVITO
+一、在本地电脑的 OVITO 上，远程调用 Pi 上的原子构型文件（推荐）
 
-二、在本地电脑的 OVITO 上，远程调用 Pi 上的原子构型文件
+二、在可视化平台的远程桌面里调用 Pi 上的 OVITO
 
 
-## 方法一：远程桌面运行 Pi 上的 OVITO
+## 方法一：本地 OVITO 调用远程构型文件
+
+特点：速度快、画质无损失、不计费
+
+### 本地电脑的 OVITO 加载 Pi 远程文件
+
+点击 Ovito 顶上的 File -> Load Remote File
+
+地址栏按下方格式，给定绝对路径。注意：Pi 路径前面无冒号
+
+sftp://userXXX@login.hpc.sjtu.edu.cn/lustre/home/acct-userXXX/userXXX/SiVacancy.cfg
+
+
+![avater](../img/ovito2.gif)
+
+
+## 方法二：远程桌面运行 Pi 上的 OVITO
+
+特点：无需安装 OVITO、远程桌面按使用机时计费
 
 ### 在 HPC Studio 上连接远程桌面
 
-OVITO 需要在 HPC Studio 可视化平台上使用。Pi 登陆节点不支持 gnuplot 显示。
+OVITO 需要在 HPC Studio 可视化平台上使用。Pi 登陆节点不支持 OVITO 显示。
 
 HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
 
@@ -60,18 +78,7 @@ $ ovito
 
 
 
-## 方法二：本地 OVITO 调用远程构型文件
 
-### 本地电脑的 OVITO 加载 Pi 远程文件
-
-点击 Ovito 顶上的 File -> Load Remote File
-
-地址栏按下方格式，给定绝对路径。注意：Pi 路径前面无冒号
-
-sftp://userXXX@login.hpc.sjtu.edu.cn/lustre/home/acct-userXXX/userXXX/SiVacancy.cfg
-
-
-![avater](../img/ovito2.gif)
 
 ## 参考链接
 
