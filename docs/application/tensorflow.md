@@ -84,9 +84,9 @@ module load tensorflow/2.2.0
 module purge
 module load tensorflow/2.2.0
 
-singularity run --nv $IMAGE_PATH python -c 'import tensorflow as tf; \
-                                            print(tf.__version__);   \
-                                            print(tf.test.is_gpu_available());'
+python -c 'import tensorflow as tf; \
+           print(tf.__version__);   \
+           print(tf.test.is_gpu_available());'
 ```
 
 使用如下指令提交：
