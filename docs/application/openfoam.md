@@ -4,17 +4,6 @@
 
 ## Pi 上的 LAMMPS
 
-Pi 上有多种版本的 LAMMPS:
-
-- ![cpu](https://img.shields.io/badge/-cpu-blue)  [cpu](#cpu-openfoam)
-
-- ![gpu](https://img.shields.io/badge/-gpu-green) [gpu](#gpu-openfoam)
-
-
-## CPU 版本 LAMMPS
-
-### ![cpu](https://img.shields.io/badge/-cpu-blue) CPU 版本
-
 查看 Pi 上已编译的软件模块:
 ```bash
 module av openfoam

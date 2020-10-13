@@ -100,37 +100,6 @@ $ sbatch slurm.test
 
 
 
-## 使用 Pi 上的 PyTorch
-
-集群中已预置了 [NVIDIA GPU CLOUD](https://ngc.nvidia.com/) 提供的优化镜像，通过调用该镜像即可运行 PyTorch，无需单独安装，目前版本为 `pytorch-1.6.0`。
-
-## 使用 singularity 容器提交 PyTorch 作业
-
-示例：在 DGX-2 上使用 PyTorch 的容器。作业使用单节点并分配 2 块 GPU。脚本名称可设为 slurm.test
-
-```bash
-#!/bin/bash
-#SBATCH -J test
-#SBATCH -p dgx2
-#SBATCH -o %j.out
-#SBATCH -e %j.err
-#SBATCH -N 1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=12
-#SBATCH --gres=gpu:2
-
-module purge
-module load pytorch/1.6.0
-
-python -c 'import torch; print(torch.__version__); print(torch.zeros(10,10).cuda().shape)'
-```
-
-使用如下指令提交：
-
-```bash
-$ sbatch slurm.test
-```
-
 ## 参考链接
 
 - [PyTorch官网](https://pytorch.org/)

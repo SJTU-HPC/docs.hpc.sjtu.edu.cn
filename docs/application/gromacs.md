@@ -12,7 +12,7 @@ Pi 上有多种版本的 GROMACS:
 
 - ![cpu](https://img.shields.io/badge/-cpu-blue)  [cpu](#cpu-gromacs)
 
-- ![cpu](https://img.shields.io/badge/-cpu-blue)  [cpu](#cpu-gromacs)双精度
+- ![cpu](https://img.shields.io/badge/-cpu-blue)  [cpu](#cpu-gromacs) 双精度
 
 - ![gpu](https://img.shields.io/badge/-gpu-green) [gpu](#gpu-gromacs)
 
@@ -24,7 +24,7 @@ Pi 上有多种版本的 GROMACS:
 
 查看 Pi 上已编译的软件模块:
 ```bash
-$ module avail gromacs
+$ module av gromacs
 ```
 
 调用某个版本的 gromacs 模块:
