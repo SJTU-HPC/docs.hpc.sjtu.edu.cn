@@ -140,7 +140,7 @@ Pi 上提供了 GPU 版本的 LAMMPS 2020。经测试，LJ 和 EAM 两 Benchmark
 #SBATCH --error=%j.err
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=12
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=1
 #SBATCH --gres=gpu:2
 
 ulimit -s unlimited

@@ -21,7 +21,7 @@ $ module load quantum-espresso/6.6
 
 ## Pi 上的 Slurm 脚本 slurm.test
 在 cpu 队列上，总共使用 80 核 (n = 80)<br>
-cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
+cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
 ```bash
 #!/bin/bash
 

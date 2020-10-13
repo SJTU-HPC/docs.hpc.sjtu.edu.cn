@@ -103,7 +103,7 @@ Pi 集群已预置最新的 GPU GROMACS。脚本名称可设为 slurm.test
 #SBATCH -e %j.err
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=6
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=1
 #SBATCH --gres=gpu:1
 
 module purge
@@ -134,7 +134,7 @@ Pi 集群已预置最新的 GPU GROMACS MPI 版。脚本名称可设为 slurm.te
 #SBATCH -e %j.err
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=12
-#SBATCH --cpus-per-task=6
+#SBATCH --cpus-per-task=1
 #SBATCH --gres=gpu:2
 
 module purge
