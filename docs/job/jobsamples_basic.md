@@ -165,8 +165,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     #SBATCH --error=%j.err
 
     module purge
-    module use /lustre/share/img/modules
-    module load lammps/2020-intel
+    module load lammps/2020-cpu
 
     ulimit -s unlimited
     ulimit -l unlimited
@@ -213,7 +212,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     #SBATCH --error=%j.err
 
     module purge
-    module load gromacs/2019.4-gcc-9.2.0-openmpi
+    module load gromacs/2020-cpu
 
     ulimit -s unlimited
     ulimit -l unlimited
@@ -235,10 +234,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     #SBATCH --error=%j.err
 
     module purge
-    module load quantum-espresso/6.5-intel-19.0.5-impi
-
-    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-    export I_MPI_FABRICS=shm:ofi
+    module load quantum-espresso/6.6
 
     ulimit -s unlimited
     ulimit -l unlimited
@@ -246,7 +242,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     srun pw.x -i test.in
     ```
 
-### OpenFoam
+### OpenFOAM
 
 !!! example "cpu 队列 slurm 脚本示例 OpenFoam"
     ```
@@ -260,7 +256,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     #SBATCH --error=%j.err
 
     module purge
-    module load openfoam/1912-gcc-7.4.0-openmpi
+    module load openfoam/8
 
     ulimit -s unlimited
     ulimit -l unlimited
@@ -280,11 +276,10 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
     #SBATCH --cpus-per-task=12
-    #SBATCH --mem=MaxMemPerNode
     #SBATCH --gres=gpu:2
 
-    module load miniconda3
-    source activate tf-env
+    module purge
+    module load tensorflow/2.2.0
 
     python -c 'import tensorflow as tf; \
            print(tf.__version__);   \
@@ -293,52 +288,6 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
 
 ## <center>其它示例<center/>
 
-### singularity 容器
-
-Pi 上已部署的 singularity 容器位于 `/lustre/share/img`
-
-其中，gromacs/lammps/relion/pytorch/tensorflow/chroma 为 GPU 版本的 singularity
-
-!!! example "cpu 队列 slurm 脚本示例 OpenFoam singularity 版"
-    ```
-    #!/bin/bash
-    
-    #SBATCH --job-name=test           # 作业名
-    #SBATCH --partition=cpu           # cpu 队列
-    #SBATCH -n 80                     # 使用核数 80
-    #SBATCH --ntasks-per-node=40      # 每节点核数
-    #SBATCH --output=%j.out
-    #SBATCH --error=%j.err
-
-    module load openmpi/2.1.1-gcc-4.8.5
-
-    ulimit -s unlimited
-    ulimit -l unlimited
-
-    IMAGE_PATH=/lustre/share/img/openfoam-6.simg
-    mpirun -n 80 singularity run $IMAGE_PATH "sprayFlameletFoamOutput -parallel"
-    ```
-
-!!! example "gpu 队列 slurm 脚本示例 GPU lammps"
-    ```
-    #!/bin/bash
-    #SBATCH -J lmp
-    #SBATCH -p dgx2
-    #SBATCH -o %j.out
-    #SBATCH -e %j.err
-    #SBATCH -n 1
-    #SBATCH --ntasks-per-node=6
-    #SBATCH --gres=gpu:1
-    #SBATCH -N 1
-
-    module use /lustre/share/img/modules
-    module load lammps/2020-ngc
-
-    ulimit -s unlimited
-    ulimit -l unlimited
-
-    srun --mpi=pmi2 lmp -k on g 1 t 6  -sf kk -pk kokkos comm device -i in.eam
-    ```
     
 ### Job Array 阵列作业
 
@@ -363,7 +312,7 @@ Pi 上已部署的 singularity 容器位于 `/lustre/share/img`
 
 --mail-type=<type> 指定状态发生时，发送邮件通知: ALL, BEGIN, END, FAIL
 
-!!! example "small 队列 slurm 脚本示例：邮件提醒"
+!!! example "small 队列 slurm 脚本示例：邮件提醒（作业结束时提醒）"
     ```
     #!/bin/bash
     
@@ -373,9 +322,24 @@ Pi 上已部署的 singularity 容器位于 `/lustre/share/img`
     #SBATCH --ntasks-per-node=20
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
-    #SBATCH --mail-type=end           # 作业结束时，邮件提醒
+    #SBATCH --mail-type=end           # 仅在作业结束时邮件提醒
     #SBATCH --mail-user=XX@sjtu.edu.cn
     ```
+
+!!! example "small 队列 slurm 脚本示例：邮件提醒（作业开始运行、异常终止、完结时均提醒）"
+    ```
+    #!/bin/bash
+    
+    #SBATCH --job-name=test           
+    #SBATCH --partition=small         
+    #SBATCH -n 20                     
+    #SBATCH --ntasks-per-node=20
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
+    #SBATCH --mail-type=all          # 仅在作业结束时邮件提醒
+    #SBATCH --mail-user=XX@sjtu.edu.cn
+    ```
+
 
 
 

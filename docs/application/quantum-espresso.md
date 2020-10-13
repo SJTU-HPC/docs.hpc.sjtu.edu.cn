@@ -16,7 +16,7 @@ $ module avail espresso
 
 调用该模块:
 ```bash
-$ module load quantum-espresso/6.5-intel-19.0.5-impi
+$ module load quantum-espresso/6.6
 ```
 
 ## Pi 上的 Slurm 脚本 slurm.test
@@ -35,10 +35,7 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ulimit -s unlimited
 ulimit -l unlimited
 
-export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-export I_MPI_FABRICS=shm:ofi
-
-module load quantum-espresso/6.5-intel-19.0.5-impi
+module load quantum-espresso/6.6
 
 srun pw.x -i test.in
 ```

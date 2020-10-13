@@ -22,11 +22,10 @@ Pi 上有多种版本的 LAMMPS:
 
 查看 Pi 上已编译的软件模块:
 ```bash
-module use /lustre/share/singularity/modules
 module av lammps
 ```
 
-推荐使用 lammps/2020-intel，经测试，该版本在 Pi 2.0 上运行速度最好，且安装有丰富的 LAMMPS package：
+推荐使用 lammps/2020-cpu，经测试，该版本在 Pi 2.0 上运行速度最好，且安装有丰富的 LAMMPS package：
 
 ASPHERE BODY CLASS2 COLLOID COMPRESS CORESHELL DIPOLE
         GRANULAR KSPACE MANYBODY MC MISC MLIAP MOLECULE OPT PERI
@@ -38,13 +37,12 @@ ASPHERE BODY CLASS2 COLLOID COMPRESS CORESHELL DIPOLE
 
 调用该模块:
 ```bash
-module use /lustre/share/singularity/modules
-module load lammps/2020-intel
+module load lammps/2020-cpu
 ```
 
 ### ![cpu](https://img.shields.io/badge/-cpu-blue)  CPU 版本 Slurm 脚本
 在 cpu 队列上，总共使用 80 核 (n = 80)<br>
-cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
+cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
 ```bash
 #!/bin/bash
 #SBATCH --job-name=lmp_test
@@ -55,8 +53,7 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 #SBATCH --ntasks-per-node=40
 
 module purge
-module use /lustre/share/singularity/modules
-module load lammps/2020-intel
+module load lammps/2020-cpu
 
 ulimit -s unlimited
 ulimit -l unlimited
@@ -102,7 +99,7 @@ $ make -j 4 intel_cpu_intelmpi   #开始编译
 
 5. 测试脚本
 
-编译成功后，将在 src 文件夹下生成 lmp_intel_cpu_intelmpi. 后续调用，请给该文件的路径，比如 `~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi`
+编译成功后，将在 src 文件夹下生成 lmp_intel_cpu_intelmpi. 后续调用，请给该文件的路径，比如 `~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi`。脚本名称可设为 slurm.test
 ```bash
 #!/bin/bash
 
@@ -130,9 +127,43 @@ srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
 
 ### GPU 版本速度跟 intel CPU 版本基本相同
 
-Pi 上提供了 GPU 版本的 LAMMPS 15Jun2020。采用容器技术，使用 LAMMPS 官方提供给 NVIDIA 的镜像，针对 Tesla V100 的 GPU 做过优化，性能很好。经测试，LJ 和 EAM 两 Benchmark 算例与同等计算费用的 CPU 基本一样。建议感兴趣的用户针对自己的算例，测试 CPU 和 GPU 计算效率，然后决定使用哪一种平台。
+Pi 上提供了 GPU 版本的 LAMMPS 2020。经测试，LJ 和 EAM 两 Benchmark 算例与同等计算费用的 CPU 基本一样。建议感兴趣的用户针对自己的算例，测试 CPU 和 GPU 计算效率，然后决定使用哪一种平台。
 
-以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心，使用 GPU kokkos 版的 LAMMPS：
+以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心，使用 GPU 版 LAMMPS。脚本名称可设为 slurm.test
+
+```bash
+#!/bin/bash
+
+#SBATCH --job-name=lmp_test
+#SBATCH --partition=dgx2
+#SBATCH --output=%j.out
+#SBATCH --error=%j.err
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=12
+#SBATCH --cpus-per-task=6
+#SBATCH --gres=gpu:2
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+module load lammps/2020-dgx
+
+srun --mpi=pmi2 lmp -in in.eam
+```
+
+使用如下指令提交：
+
+```bash
+$ sbatch slurm.test
+```
+
+## ![gpu](https://img.shields.io/badge/-gpu-green) GPU 版本 LAMMPS + kokkos
+
+### GPU 版本速度跟 intel CPU 版本基本相同
+
+Pi 上提供了 GPU + kokkos 版本的 LAMMPS 15Jun2020。采用容器技术，使用 LAMMPS 官方提供给 NVIDIA 的镜像，针对 Tesla V100 的 GPU 做过优化，性能很好。经测试，LJ 和 EAM 两 Benchmark 算例与同等计算费用的 CPU 基本一样。建议感兴趣的用户针对自己的算例，测试 CPU 和 GPU 计算效率，然后决定使用哪一种平台。
+
+以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心，使用 GPU kokkos 版的 LAMMPS。脚本名称可设为 slurm.test
 
 ```bash
 #!/bin/bash
@@ -144,14 +175,12 @@ Pi 上提供了 GPU 版本的 LAMMPS 15Jun2020。采用容器技术，使用 LAM
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=2
 #SBATCH --cpus-per-task=6
-#SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
 
 ulimit -s unlimited
 ulimit -l unlimited
 
-module use /lustre/share/img/modules
-module load lammps/2020-ngc
+module load lammps/2020-dgx-kokkos
 
 srun --mpi=pmi2 lmp -k on g 2 t 12  -sf kk -pk kokkos comm device -in in.eam
 ```
@@ -161,78 +190,8 @@ srun --mpi=pmi2 lmp -k on g 2 t 12  -sf kk -pk kokkos comm device -in in.eam
 使用如下指令提交：
 
 ```bash
-$ sbatch lammps_gpu.slurm
+$ sbatch slurm.test
 ```
-
-### ![gpu](https://img.shields.io/badge/-gpu-green)（进阶）GPU 版本自行编译
-
-lammps GPU 支持很好，Pi 集群有先进的 dgx2 队列。感兴趣的用户可自行编译 GPU 版本 Lammps.
-
-1. 从官网下载 lammps，推荐安装最新的稳定版：
-```bash
-$ wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
-```
-
-2. 由于登陆节点禁止运行作业和并行编译，请申请计算节点资源用来编译 lammps，并在编译结束后退出。GPU 编译需要在 dgx2 节点上：
-```bash
-$ srun -p dgx2 --gres=gpu:1 --ntasks-per-node=12 --pty /bin/bash
-```
-
-3. 加载 cuda, openmpi 和 gcc 模块：
-```bash
-$ module load openmpi/3.1.5-gcc-8.3.0
-$ module load cuda/10.2.89-gcc-8.3.0         
-$ module load gcc/8.3.0-gcc-4.8.5
-```
-
-4. 编译 (以额外安装 NEB 和 MEAMC 包为例)
-```bash
-$ tar xvf lammps-stable.tar.gz
-$ cd lammps-XXXXXX
-$ cd lib/gpu                     #
-
-Makefile 第25行 CUDA_ARCH = -arch=sm_70
-make -j12  -f Makefile.linux
-
-cd ../../src
-make yes-gpu 
-make yes-replica
-make yes-user-meamc
-make yes-manybody
-
-make -j12  -f Makefile.gpu
-```
-
-5. 测试脚本
-
-编译成功后，将在 src 文件夹下生成 lmp_gpu. 后续调用，请给该文件的路径，比如 `~/lammps-3Mar20/src/lmp_gpu`
-```bash
-#!/bin/bash
-
-#SBATCH --job-name=lmp_test
-#SBATCH --partition=dgx2
-#SBATCH --output=%j.out
-#SBATCH --error=%j.err
-#SBATCH -N 1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=6
-#SBATCH --mem=MaxMemPerNode
-#SBATCH --gres=gpu:1
-
-ulimit -s unlimited
-ulimit -l unlimited
-
-LMP=~/lammps-3Mar20/src/lmp_gpu
-
-srun --mpi=pmi2 $LMP -sf gpu -pk gpu 1 -in in.eam
-```
-
-然后使用如下指令提交：
-
-```bash
-$ sbatch lammps_gpu.slurm
-```
-
 
 
 

@@ -12,7 +12,11 @@ Pi 上有多种版本的 GROMACS:
 
 - ![cpu](https://img.shields.io/badge/-cpu-blue)  [cpu](#cpu-gromacs)
 
+- ![cpu](https://img.shields.io/badge/-cpu-blue)  [cpu](#cpu-gromacs)双精度
+
 - ![gpu](https://img.shields.io/badge/-gpu-green) [gpu](#gpu-gromacs)
+
+- ![gpu](https://img.shields.io/badge/-gpu-green) [gpu](#gpu-gromacs) MPI 版
 
 - ![arm](https://img.shields.io/badge/-arm-yellow) [arm](#arm-gromacs)
 
@@ -23,14 +27,17 @@ Pi 上有多种版本的 GROMACS:
 $ module avail gromacs
 ```
 
-调用该模块:
+调用某个版本的 gromacs 模块:
 ```bash
-$ module load gromacs/2019.4-gcc-9.2.0-openmpi
+$ module load gromacs/2020-cpu
 ```
 
-## ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) GROMACS 的 Slurm 脚本
+## ![cpu](https://img.shields.io/badge/-cpu-blue) CPU 版本的 GROMACS
+
+### 使用 CPU 版本的 GROMACS
+
 在 cpu 队列上，总共使用 80 核 (n = 80)<br>
-cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
+cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
 ```bash
 #!/bin/bash
 
@@ -42,8 +49,7 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 #SBATCH -e %j.err
 
 module purge
-module load gromacs/2019.4-gcc-9.2.0-openmpi
-module load gcc openmpi
+module load gromacs/2020-cpu
 
 ulimit -s unlimited
 ulimit -l unlimited
@@ -51,17 +57,43 @@ ulimit -l unlimited
 srun --mpi=pmi2 gmx_mpi mdrun -s ./ion_channel.tpr -maxh 0.50 -resethway -noconfout -nsteps 10000
 ```
 
-## ![cpu](https://img.shields.io/badge/-cpu-blue) (CPU) GROMACS 提交作业
+用下方语句提交作业
+```bash
+$ sbatch slurm.test
+```
+
+### 使用 CPU 版本的 GROMACS (双精度)
+
+在 cpu 队列上，总共使用 80 核 (n = 80)<br>
+cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
+```bash
+#!/bin/bash
+
+#SBATCH -J gromacs_test
+#SBATCH -p cpu
+#SBATCH -n 80
+#SBATCH --ntasks-per-node=40
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+
+module purge
+module load gromacs/2020-cpu-double
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+srun --mpi=pmi2 gmx_mpi_d mdrun -s ./ion_channel.tpr -maxh 0.50 -resethway -noconfout -nsteps 10000
+```
+
+用下方语句提交作业
 ```bash
 $ sbatch slurm.test
 ```
 
 
-## ![gpu](https://img.shields.io/badge/-gpu-green) (GPU) GROMACS 使用
+## ![gpu](https://img.shields.io/badge/-gpu-green) GPU 版本的 GROMACS
 
-Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即可运行 GROMACS，无需单独安装，目前版本为 2018.2。该容器文件位于 /lustre/share/img/gromacs-2018.2.simg
-
-以下 slurm 脚本，在 dgx2 队列上使用 1 块 gpu，并配比 6 cpu 核心，调用 singularity 容器中的 GROMACS：
+Pi 集群已预置最新的 GPU GROMACS。脚本名称可设为 slurm.test
 
 ```bash
 #!/bin/bash
@@ -69,24 +101,57 @@ Pi 集群已预置 NVIDIA GPU CLOUD 提供的优化镜像，调用该镜像即�
 #SBATCH -p dgx2
 #SBATCH -o %j.out
 #SBATCH -e %j.err
-#SBATCH -n 6
-#SBATCH --ntasks-per-node=6
-#SBATCH --gres=gpu:1
 #SBATCH -N 1
+#SBATCH --ntasks-per-node=6
+#SBATCH --cpus-per-task=6
+#SBATCH --gres=gpu:1
 
-IMAGE_PATH=/lustre/share/img/gromacs-2018.2.simg
+module purge
+module load gromacs/2020-gpu
 
 ulimit -s unlimited
 ulimit -l unlimited
 
-singularity run --nv $IMAGE_PATH gmx mdrun -deffnm benchmark -ntmpi 6 -ntomp 1
+srun --mpi=pmi2 gmx mdrun -deffnm benchmark -ntmpi 6 -ntomp 1
 ```
 
 使用如下指令提交：
 
 ```bash
-$ sbatch gromacs_gpu.slurm
+$ sbatch slurm.test
 ```
+
+
+## ![gpu](https://img.shields.io/badge/-gpu-green) GPU 版本的 GROMACS (MPI 版)
+
+Pi 集群已预置最新的 GPU GROMACS MPI 版。脚本名称可设为 slurm.test
+
+```bash
+#!/bin/bash
+#SBATCH -J gromacs_gpu_test
+#SBATCH -p dgx2
+#SBATCH -o %j.out
+#SBATCH -e %j.err
+#SBATCH -N 1
+#SBATCH --ntasks-per-node=12
+#SBATCH --cpus-per-task=6
+#SBATCH --gres=gpu:2
+
+module purge
+module load gromacs/2020-dgx-mpi
+
+ulimit -s unlimited
+ulimit -l unlimited
+
+srun --mpi=pmi2 gmx_mpi mdrun -deffnm benchmark -ntmpi 6 -ntomp 1
+```
+
+使用如下指令提交：
+
+```bash
+$ sbatch slurm.test
+```
+
 
 ## ![cpu](https://img.shields.io/badge/-cpu-blue) ![gpu](https://img.shields.io/badge/-gpu-green) 性能评测
 
