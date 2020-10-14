@@ -104,4 +104,4 @@ $ sbatch slurm.test
 
 - [PyTorch官网](https://pytorch.org/)
 - [NVIDIA GPU CLOUD](ngc.nvidia.com)
-- [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)
+

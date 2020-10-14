@@ -2,7 +2,11 @@
 
 ---------
 
-## Pi 上的 LAMMPS
+## 简介
+
+OpenFOAM is a C++ toolbox for the development of customized numerical solvers, and pre-/post-processing utilities for the solution of continuum mechanics problems, most prominently including computational fluid dynamics.
+
+## Pi 上的 OpenFOAM
 
 查看 Pi 上已编译的软件模块:
 ```bash

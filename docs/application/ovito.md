@@ -60,7 +60,6 @@ HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
 在远程桌面空白处右键单击，Open Terminal Here 打开终端
 
 ```bash
-$ module use /lustre/share/singularity/modules
 $ module load ovito
 $ ovito
 ```

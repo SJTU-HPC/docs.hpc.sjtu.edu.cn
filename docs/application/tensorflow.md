@@ -99,4 +99,4 @@ $ sbatch slurm.test
 
 - [TensorFlow 官网](https://www.tensorflow.org/)
 - [NVIDIA GPU CLOUD](ngc.nvidia.com)
-- [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)
+
