@@ -77,16 +77,16 @@ $ wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
 
 2. 由于登陆节点禁止运行作业和并行编译，请申请计算节点资源用来编译 lammps，并在编译结束后退出：
 ```bash
-$ srun -p small -n 4 --pty /bin/bash
+$ srun -p small -n 8 --pty /bin/bash
 ```
 
-3. 加载 Intel-mpi 模块：
+3. 加载 Intel 模块：
 ```bash
 $ module purge
 $ module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
 ```
 
-4. 编译 (以额外安装 USER-MEAMC 包为例)
+4. 编译 (以额外安装 MANYBODY 和 USER-MEAMC 包为例)
 ```bash
 $ tar xvf lammps-stable.tar.gz
 $ cd lammps-XXXXXX
@@ -94,7 +94,9 @@ $ cd src
 $ make					         #查看编译选项
 $ make package                   #查看包
 $ make yes-user-meamc            #"make yes-"后面接需要安装的 package 名字
-$ make -j 4 intel_cpu_intelmpi   #开始编译
+$ make yes-manybody
+$ make ps                        #查看计划安装的包列表 
+$ make -j 8 intel_cpu_intelmpi   #开始编译
 ```
 
 5. 测试脚本
@@ -200,6 +202,6 @@ $ sbatch slurm.test
 ## 参考链接
 - [LAMMPS 官网](https://lammps.sandia.gov/)
 - [NVIDIA GPU CLOUD](ngc.nvidia.com)
-- [Singularity 文档](https://sylabs.io/guides/3.5/user-guide/)
+
 
 

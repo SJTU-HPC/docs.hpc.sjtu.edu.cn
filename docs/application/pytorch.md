@@ -16,7 +16,7 @@ PyTorch 是一个 Python 优先的深度学习框架，也是使用 GPU 和 CPU 
 
 ## Pi 上的 PyTorch
 
-Pi 上可用 miniconda 自行安装 PyTorch，也可用已预置的 singularity `pytorch-1.3.0` 优化镜像
+Pi 上可用 miniconda 自行安装 PyTorch，也可用已预置的 NVIDIA 提供的 NGC 镜像 `pytorch-1.6.0`（性能更好）
 
 ## 使用 miniconda 安装 PyTorch
 

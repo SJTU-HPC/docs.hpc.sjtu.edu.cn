@@ -19,7 +19,8 @@ $ module avail espresso
 $ module load quantum-espresso/6.6
 ```
 
-## Pi 上的 Slurm 脚本 slurm.test
+## Pi 上使用 Quantum ESPRESSO
+
 在 cpu 队列上，总共使用 80 核 (n = 80)<br>
 cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
 ```bash
@@ -35,12 +36,14 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点。脚本
 ulimit -s unlimited
 ulimit -l unlimited
 
+module purge
 module load quantum-espresso/6.6
 
-srun pw.x -i test.in
+srun --mpi=pmi2 pw.x -i test.in
 ```
 
-## Pi 上提交作业
+使用如下指令提交：
+
 ```bash
 $ sbatch slurm.test
 ```
