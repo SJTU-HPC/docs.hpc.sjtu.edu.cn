@@ -239,7 +239,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     ulimit -s unlimited
     ulimit -l unlimited
 
-    srun pw.x -i test.in
+    srun --mpi=pmi2 pw.x -i test.in
     ```
 
 ### OpenFOAM
@@ -312,7 +312,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
 
 --mail-type=<type> 指定状态发生时，发送邮件通知: ALL, BEGIN, END, FAIL
 
-!!! example "small 队列 slurm 脚本示例：邮件提醒（作业结束时提醒）"
+!!! example "small 队列 slurm 脚本示例：作业结束时提醒"
     ```
     #!/bin/bash
     
@@ -326,7 +326,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     #SBATCH --mail-user=XX@sjtu.edu.cn
     ```
 
-!!! example "small 队列 slurm 脚本示例：邮件提醒（作业开始运行、异常终止、完结时均提醒）"
+!!! example "small 队列 slurm 脚本示例：作业开始运行、异常终止、完结时均提醒"
     ```
     #!/bin/bash
     
@@ -336,7 +336,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
     #SBATCH --ntasks-per-node=20
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
-    #SBATCH --mail-type=all          # 仅在作业结束时邮件提醒
+    #SBATCH --mail-type=all          # 作业开始运行、异常终止、完结时均提醒
     #SBATCH --mail-user=XX@sjtu.edu.cn
     ```
 
