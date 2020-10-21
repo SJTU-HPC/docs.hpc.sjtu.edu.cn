@@ -54,8 +54,6 @@ Pi超算集群用户文档
    :hidden:
 
    container/index
-..   container/singularity
-..   container/u2cb
 
 .. toctree::
    :maxdepth: 2
