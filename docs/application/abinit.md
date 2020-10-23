@@ -34,7 +34,7 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 module purge
 module load abinit
 
-srun --mpi=pmi2 < example.in
+srun --mpi=pmi2 abinit < example.in
 ```
 
 ## Pi 上提交作业

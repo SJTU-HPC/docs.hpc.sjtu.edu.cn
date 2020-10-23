@@ -58,6 +58,7 @@ nav:
     - CP2k: application/cp2k.md
     - DeepVariant: application/deepvariant.md
     - Geant4: application/geant4.md
+    - GAUSSIAN: application/gaussian.md
     - Gnuplot: application/gnuplot.md
     - OVITO: application/ovito.md
   #   - Desmond and Maestro: 应用软件/desmond_and_maestro.md  
