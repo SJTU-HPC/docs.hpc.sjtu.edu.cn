@@ -7,7 +7,7 @@
 在浏览器中，打开：https://studio.hpc.sjtu.edu.cn
 
 !!! tip
-    浏览器推荐使用chrome，火狐，edge，safari。若遇到studio功能异常问题，请先尝试更新浏览器到最新版本或更换不同的浏览器。
+    浏览器推荐使用chrome，火狐，edge，safari。若遇到studio功能异常问题，请先尝试更新浏览器到最新版本或更换浏览器。
 
 ## 文件管理
 
