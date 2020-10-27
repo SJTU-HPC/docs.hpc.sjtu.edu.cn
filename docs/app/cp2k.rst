@@ -14,13 +14,13 @@ Pi2.0 系统中已经预装 CP2K (GNU+cpu 版本)，可用以下命令加载:
 
 .. code:: bash
 
-   $ module load cp2k/6.1-gcc-8.3.0-openblas-openmpi
+   $ module load cp2k/6.1-gcc-9.2.0-openblas-openmpi
 
 Pi上的Slurm脚本slurm.test
 -----------------------------
 
-在 cpu 队列上，总共使用 40 核 (n = 40) cpu 队列每个节点配有 40
-核，所以这里使用了 1 个节点：
+在 cpu 队列上，总共使用 40 核 (n = 40) 
+cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：
 
 .. code:: bash
 
@@ -34,7 +34,9 @@ Pi上的Slurm脚本slurm.test
    #SBATCH -e %j.err
 
    module purge
-   module load cp2k/6.1-gcc-8.3.0-openblas-openmpi
+   module load cp2k/6.1-gcc-9.2.0-openblas-openmpi
+   module load openmpi/3.1.5-gcc-9.2.0
+   module load gcc/9.2.0-gcc-4.8.5
 
    ulimit -s unlimited
    ulimit -l unlimited

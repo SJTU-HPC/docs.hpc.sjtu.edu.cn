@@ -1,7 +1,7 @@
 .. _module:
 
-Environment Modules软件模块
-============================
+软件使用
+==========
 
 ENVIRONMENT MODULES可以帮助您在Pi上使用预构建的软件包。每个ENVIRONMENT
 MODULES都是可以实时应用和不应用的一组环境设置。用户可以编写自己的模块。

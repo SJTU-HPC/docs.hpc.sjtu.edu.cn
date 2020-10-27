@@ -62,29 +62,36 @@ cudnn    NVIDIA深度学习GPU加速原语库 7.3 7.4 7.5 7.5      Yes
    :maxdepth: 1
    :hidden:
 
-   conda 
    module
-   lammps
-   gromacs
+   conda
    abinit
-   amber
+   amber 
    cesm
-   commercial
    cp2k
+   deepvariant
+   desmond_and_maestro
+   fftw
+   gaussian
+   geant4
+   gnuplot
+   gromacs
+   hic-pro
+   keras
+   lammps
    mrbayes
+   mpi4py
+   mxnet
    nektar
    nwchem
    openfoam
+   ovito
    pytorch
    quantum-espresso
    relion
+   siesta
+   spark
    star-ccm
+   strique
    tensorflow
    vasp
    vmd
-   keras
-   siesta
-   deepvariant
-   geant4
-   ovito
-   strique

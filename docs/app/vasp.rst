@@ -3,7 +3,7 @@
 VASP
 ====
 
-编译Intel+CPU版本VASP
+编译 Intel+CPU 版本 VASP
 ------------------------
 
 -  解压缩 VASP
@@ -22,18 +22,13 @@ VASP
 
       $ wget http://theory.cm.utexas.edu/code/vtstcode-179.tgz
       $ tar xvf vtstcode.tgz
+      $ cd vasp.5.4.4   (再回到 vasp 文件夹进行安装)
 
-   -  备份 VASP 文件（可选）
-
-   .. code:: bash
-
-      $ cp src/chain.F src/chain.F-org
-
-   -  替换部分 VASP 文件
+   -  在 vasp 文件夹里开始安装。首先替换部分 VASP 文件：
 
    .. code:: bash
 
-      $ cp vtstcode-179/* src/
+      $ cp ../vtstcode-179/* src/
 
    -  修改源文件, 在 ``src/main.F`` 中将第3146行如下内容：
 
@@ -69,7 +64,7 @@ VASP
 上述操作后会 load 包括 intel compilers, intel-mpi, intel-mkl
 等所需的编译器组件，您可以使用 ``echo $MKLROOT`` 等方式检查是否成功导入.
 
--  使用 ``arch/ makefile.include.linux_intel`` 作为模板
+-  使用 ``arch/makefile.include.linux_intel`` 作为模板
 
 .. code:: bash
 
@@ -80,13 +75,13 @@ VASP
 .. code:: bash
 
    $ make veryclean
-   $ make
+   $ make     （不建议用 -j）
 
 现在 ``./bin`` 目录中的二进制文件包含 vasp_std vasp_gam vasp_ncl.
 您也可以单独编译每一个，用指令例如：\ ``make std`` 即可编译 vasp_std
 
-提交Intel+CPU版本VASP任务
--------------------------
+提交 Intel+CPU 版本 VASP 任务
+-----------------------------
 
 使用intel编译的CPU版本VASP运行单节点作业脚本示例vasp_cpu_intel.slurm如下：
 
@@ -118,7 +113,7 @@ VASP
 
    $ sbatch vasp_cpu_intel.slurm
 
-编译Intel+GPU版本VASP
+编译 Intel+GPU 版本 VASP
 ------------------------
 
 GPU 需要在 dgx2 队列上编译，以如下命令申请计算节点资源用于编译：
@@ -137,7 +132,7 @@ GPU 需要在 dgx2 队列上编译，以如下命令申请计算节点资源用�
    $ module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
    $ make gpu
 
-提交Intel+GPU版本VASP 任务
+提交 Intel+GPU 版本 VASP 任务
 -----------------------------
 
 使用 intel 编译的 GPU 版本 VASP 运行单卡作业脚本示例
@@ -175,7 +170,7 @@ vasp_gpu_intel.slurm 如下：
 
    $ sbatch vasp_gpu_intel.slurm
 
-VASP算例
+VASP 算例
 ---------
 
 -  `Pt <https://hpc.sjtu.edu.cn/Item/docs/mp-126_Pt.tar.gz>`__

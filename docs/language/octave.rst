@@ -3,45 +3,50 @@
 Octave
 ======
 
-GNU
+##简介
+-------
 Octave是一种采用高级编程语言的主要用于数值分析的软件。Octave有助于以数值方式解决线性和非线性问题，并使用与MATLAB兼容的语言进行其他数值实验。它也可以作为面向批处理的语言使用。因为它是GNU计划的一部分，所以它是GNU通用公共许可证条款下的自由软件。
 
-使用singularity容器提交Octave作业
+Pi上的Octave
 ---------------------------------
 
-以下是基于Singularity的作业脚本\ ``octave_singularity.slurm``\ 示例：
+查看Pi上已编译的软件模块：
 
 .. code:: bash
 
-   #!/bin/bash
-   #SBATCH -J octave_test
-   #SBATCH -p cpu
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-   #SBATCH -n 1
-   #SBATCH --ntasks-per-node=1
+   module av octave
 
-   IMAGE_PATH=/lustre/share/img/octave.simg
+调用该模块：
+.. code:: bash
+   
+   module load octave/5.2.0
+
+示例slurm脚本：在small队列上，总共使用4核（n=4），脚本名称设为slurm.test
+small队列slurm脚本示例Octave：
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=test
+   #SBATCH --partition=small
+   #SBATCH -n 4
+   #SBATCH --ntasks-per-ode=4
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module purge
+   module load octave/5.2.0
 
    ulimit -s unlimited
    ulimit -l unlimited
 
-   singularity run $IMAGE_PATH octave [FILE_NAME]
+   octave [FILE_NAME]
 
-并使用如下指令提交：
-
-.. code:: bash
-
-   $ sbatch octave_singularity.slurm
-
-使用singularity容器提交Octave交互式作业
----------------------------------------
-
-可以通过如下指令提交Octave交互式作业：
+用下方语句提交作业：
 
 .. code:: bash
 
-   srun -p cpu -N 1 --exclusive --pty singularity run /lustre/share/img/octave.simg octave-cli
+   $ sbatch slurm.test
+
 
 使用HPC Studio启动Octave可视化界面
 ----------------------------------
@@ -50,10 +55,11 @@ Octave是一种采用高级编程语言的主要用于数值分析的软件。Oc
 
 .. code:: bash
 
-   singularity run /lustre/share/img/octave.simg octave
+  module load octave/5.2.0
+  octave [FILE_NAME]
 
 参考资料
 --------
 
 -  `Octave官方网站 <https://www.gnu.org/software/octave/>`__
--  `Singularity文档 <https://sylabs.io/guides/3.5/user-guide/>`__
+-  

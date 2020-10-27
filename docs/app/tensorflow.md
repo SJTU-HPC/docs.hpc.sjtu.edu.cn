@@ -37,7 +37,6 @@ $ pip install keras
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
 
 module load miniconda3
@@ -54,14 +53,22 @@ python -c 'import tensorflow as tf; \
 $ sbatch tensorflow_conda.slurm
 ```
 
-## 使用 singularity 容器中的 TensorFlow
+## 使用 Pi 提供的 TensorFlow
 
-集群中已经预置了 [NVIDIA GPU CLOUD](https://ngc.nvidia.com/) 提供的优化镜像，通过调用该镜像即可运行 TensorFlow 作业，无需单独安装，目前版本为 `tensorflow-2.0.0`。该容器文件位于 `/lustre/share/img/tensorflow-2.0.0.simg`
+集群中已经预置了 [NVIDIA GPU CLOUD](https://ngc.nvidia.com/) 提供的优化镜像，通过调用该镜像即可运行 TensorFlow 作业，无需单独安装，目前版本为 `tensorflow-2.2.0`。
 
 
-## 使用 singularity 容器提交 TensorFlow 作业
+查看 Pi 上已编译的软件模块:
+```bash
+module av tensorflow
+```
 
-示例：在 DGX-2 上使用 TensorFlow 的容器。作业使用单节点并分配 2 块 GPU：
+调用该模块:
+```bash
+module load tensorflow/2.2.0
+```
+
+以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心。脚本名称可设为 slurm.test
 
 ```bash
 #!/bin/bash
@@ -72,23 +79,24 @@ $ sbatch tensorflow_conda.slurm
 #SBATCH -N 1
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=12
-#SBATCH --mem=MaxMemPerNode
 #SBATCH --gres=gpu:2
 
-IMAGE_PATH=/lustre/share/img/tensorflow-2.0.0.simg
+module purge
+module load tensorflow/2.2.0
 
-singularity run --nv $IMAGE_PATH python -c 'import tensorflow as tf; \
-                                            print(tf.__version__);   \
-                                            print(tf.test.is_gpu_available());'
+python -c 'import tensorflow as tf; \
+           print(tf.__version__);   \
+           print(tf.test.is_gpu_available());'
 ```
 
-假设这个脚本文件名为 `tensorflow_singularity.slurm`，使用以下指令提交作业
+使用如下指令提交：
+
 ```bash
-$ sbatch tensorflow_singularity.slurm
+$ sbatch slurm.test
 ```
 
-## 参考资料
+## 参考链接
 
 - [TensorFlow 官网](https://www.tensorflow.org/)
 - [NVIDIA GPU CLOUD](ngc.nvidia.com)
-- [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)
+

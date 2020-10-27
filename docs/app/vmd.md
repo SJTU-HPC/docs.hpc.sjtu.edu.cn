@@ -19,7 +19,7 @@ Visual Molecular Dynamics is a molecular modelling and visualization computer pr
 ![avater](../img/vmd.png)
 
 
-## 参考资料
+## 参考链接
 
 - [VMD](https://www.ks.uiuc.edu/Research/vmd/)
 - [Singularity文档](https://sylabs.io/guides/3.5/user-guide/)
