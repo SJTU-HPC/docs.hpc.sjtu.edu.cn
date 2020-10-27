@@ -54,7 +54,7 @@
 
    $ conda install -c bioconda openslide-python （以 openslide-python 为例）
 
-生信软件在 Pi 上的使用：用 slurm 提交作业
+生信软件在Pi上的使用：用slurm提交作业
 -----------------------------------------
 
 Pi 上的计算，需用 slurm 脚本提交作业，或在计算节点提交交互式任务
@@ -95,7 +95,7 @@ https://anaconda.org/bioconda
 
 以下为一些软件的具体安装步骤：
 
-openslide-python 安装
+openslide-python安装
 ---------------------
 
 完整步骤
@@ -109,7 +109,7 @@ openslide-python 安装
    conda install -c bioconda openslide-python
    conda install libiconv
 
-pandas 安装
+pandas安装
 -----------
 
 完整步骤
@@ -122,7 +122,7 @@ pandas 安装
    source activate mypy
    conda install -c anaconda pandas
 
-cdsapi 安装
+cdsapi安装
 -----------
 
 完整步骤
@@ -135,7 +135,7 @@ cdsapi 安装
    source activate mypy
    conda install -c conda-forge cdsapi
 
-STRique 安装
+STRique安装
 ------------
 
 完整步骤
@@ -151,7 +151,7 @@ STRique 安装
    pip install -r requirements.txt
    python setup.py install 
 
-r-rgl 安装
+r-rgl安装
 ----------
 
 完整步骤
@@ -164,7 +164,7 @@ r-rgl 安装
    source activate mypy
    conda install -c r r-rgl
 
-sra-tools 安装
+sra-tools安装
 --------------
 
 完整步骤
@@ -177,7 +177,7 @@ sra-tools 安装
    source activate mypy
    conda install -c bioconda sra-tools
 
-DESeq2 安装
+DESeq2安装
 -----------
 
 完整步骤
@@ -192,7 +192,7 @@ DESeq2 安装
 
 安装完成后可以在 R 中输入 ``library("DESeq2")`` 检测是否安装成功
 
-WGCNA 安装
+WGCNA安装
 ----------
 
 完整步骤
@@ -205,7 +205,7 @@ WGCNA 安装
    source activate mypy
    conda install -c bioconda r-wgcna
 
-MAKER 安装
+MAKER安装
 ----------
 
 完整步骤
@@ -219,7 +219,7 @@ MAKER 安装
    source activate mypy
    conda install -c bioconda maker
 
-AUGUSTUS 安装
+AUGUSTUS安装
 -------------
 
 完整步骤
@@ -234,7 +234,7 @@ AUGUSTUS 安装
    conda install -c anaconda boost
    conda install -c bioconda augustus
 
-DeepGo 安装
+DeepGo安装
 -----------
 
 完整步骤
@@ -250,7 +250,7 @@ DeepGo 安装
    conda install pip
    pip install -r requirements.txt
 
-km 安装
+km安装
 -------
 
 完整步骤
@@ -266,7 +266,7 @@ km 安装
    chmod +x easy_install.sh 
    ./easy_install.sh
 
-Requests 安装
+Requests安装
 -------------
 
 完整步骤
@@ -279,7 +279,7 @@ Requests 安装
    source activate mypy
    conda install -c anaconda requests
 
-参考文献
+参考资料
 --------
 
 -  miniconda https://docs.conda.io/en/latest/miniconda.html

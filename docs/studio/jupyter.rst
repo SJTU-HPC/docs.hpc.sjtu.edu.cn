@@ -110,7 +110,7 @@ R    3.6.1
 
 然后可以在\ ``Jupyter``\ 中选择名为\ ``R 3.6.1``\ 的Kernel进行计算。
 
-参考文献
+参考资料
 --------
 
 -  `Jupyter Wikepedia <https://zh.wikipedia.org/wiki/Jupyter>`__

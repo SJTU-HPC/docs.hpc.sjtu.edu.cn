@@ -328,7 +328,7 @@ $ sacct --format="JobId,AveRSS,MaxRSS" -P -j xxx
 | $SLURM_SUBMIT_DIR | 工作目录 |
 | $SLURM_SUBMIT_HOST | 提交作业的主机名 |
 
-## 参考链接
+## 参考资料
 
  - [SLURM Workload Manager](http://slurm.schedmd.com)
  - [ACCRE’s SLURM Documentation](http://www.accre.vanderbilt.edu/?page_id=2154)

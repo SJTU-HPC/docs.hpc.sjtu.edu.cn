@@ -1,16 +1,7 @@
-#
-
-.. raw:: html
-
-   <center>
+.. _star-ccm:
 
 STAR-CCM+
-
-.. raw:: html
-
-   </center>
-
---------------
+=========
 
 简介
 ----
@@ -19,7 +10,7 @@ Much more than just a CFD solver, STAR-CCM+ is an entire engineering
 process for solving problems involving flow (of fluids or solids), heat
 transfer and stress.
 
-STAR-CCM+ 需自行安装
+STAR-CCM+需自行安装
 --------------------
 
 STAR-CCM+
@@ -44,7 +35,7 @@ License服务器、License 服务器能否安装在虚拟机上；3)
 
    4. chmod 600 ~/.ssh/config
 
-Pi 上的 Slurm 脚本 slurm.test
+Pi上的Slurm脚本 slurm.test
 -----------------------------
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
@@ -72,14 +63,14 @@ Pi 上的 Slurm 脚本 slurm.test
 
    starccm+ -power -mpi intel -machinefile './machinefile' -np $SLURM_NTASKS -rsh ssh -cpubind -batch run -batch-report YOURsample.sim
 
-Pi 上提交作业
+Pi上提交作业
 -------------
 
 .. code:: bash
 
    $ sbatch slurm.test
 
-参考链接
+参考资料
 --------
 
 -  `STAR-CCM+ 网站 <https://www.femto.eu/star-ccm/>`__

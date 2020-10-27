@@ -209,7 +209,7 @@ $ Ctrl+b Ctrl+<arrow key>：按箭头方向调整窗格大小。
 $ Ctrl+b q：显示窗格编号。
 ```
 
-# 参考文献
+# 参考资料
 *  https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/
 *  https://danielmiessler.com/study/tmux/
 *  https://linuxize.com/post/getting-started-with-tmux/

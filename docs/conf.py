@@ -29,7 +29,10 @@ author = 'SJTU HPC Team'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-  'sphinx_copybutton'
+    'sphinx-prompt',
+    'sphinx_copybutton',
+    'sphinx_substitution_extensions',
+    'sphinx.ext.autosectionlabel'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -101,3 +104,13 @@ html_theme_options = {
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
 }
+
+# Add doc prefix for atutlabeling
+autosectionlabel_prefix_document = True
+
+rst_prolog = """
+.. |cpu| image:: /img/cpu-icon.png
+.. |gpu| image:: /img/gpu-icon.png
+.. |arm| image:: /img/arm-icon.png
+.. |sig| image:: /img/singularity-icon.png
+"""

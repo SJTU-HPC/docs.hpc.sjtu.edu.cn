@@ -124,7 +124,7 @@ GPU程序调试
    $ module load cuda
    $ cuda-gdb ./your_app
 
-参考文献
+参考资料
 --------
 
 -  `DGX-2 User

@@ -40,3 +40,7 @@ Linux和Mac用户检查sphinx是否安装成功::
 
   $ git pull origin
 
+注意事项
+---------
+使用make前请清除_build中的所有内容，否则可能因缓存内容导致错误。
+

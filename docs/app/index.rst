@@ -2,40 +2,26 @@
 软件
 ****
 
-本文档介绍 Pi 上的软件。 商业软件需用户自行获取版权并安装。 |cpu| |gpu|
-|arm| |singularity| 标签表明软件有 cpu, gpu, arm 和 singularity 版本
+分子动力学软件
 
-+-----------------+-----------------+-----------------+-----------------+
-| 软件            | 介绍         | Distribution    | Introduction    |
-+=================+=================+=================+=================+
-| `VMD <http      | 1.9.4           | |cpu|           | VMD is a        |
-| s://docs.hpc.sj |                 | |singularity|   | molecular       |
-| tu.edu.cn/appli |                 |                 | visualization   |
-| cation/VMD/>`__ |                 |                 | program for     |
-|                 |                 |                 | displaying,     |
-|                 |                 |                 | animating, and  |
-|                 |                 |                 | analyzing large |
-|                 |                 |                 | biomolecular    |
-|                 |                 |                 | systems using   |
-|                 |                 |                 | 3-D graphics    |
-|                 |                 |                 | and built-in    |
-|                 |                 |                 | scripting.      |
-+-----------------+-----------------+-----------------+-----------------+
++----------------+------------------+------------------------------------------+------+
+| 软件           | 简介             | 可用版本                                 | 备注 |
++================+==================+==========================================+======+
+| :ref:`LAMMPS`  | |whatis_lammps|  | 20190807 |cpu| |gpu| |arm| |sig|         |      |
++----------------+------------------+------------------------------------------+------+
+| :ref:`GROMACS` | |whatis_gromacs| | 2019.4 |cpu| |gpu| |arm| |sig|           |      |
++----------------+------------------+------------------------------------------+------+
 
-.. |cpu| image:: https://raster.shields.io/badge/cpu-blue
-.. |gpu| image:: https://raster.shields.io/badge/gpu-green
-.. |arm| image:: https://raster.shields.io/badge/arm-yellow
-.. |singularity| image:: https://raster.shields.io/badge/singularity-blueviolet
+.. |whatis_lammps| replace:: LAMMPS （"Large-scale Atomic/Molecular Massively Parallel Simulator"，大尺度原子/分子并行模拟工具）是由桑迪亚国家实验室开发的一套分子动力学模拟的开源程序包。
+.. |whatis_gromacs| replace:: GROMACS是一种分子动力学应用程序，可以模拟具有数百至数百万个粒子的系统的牛顿运动方程。GROMACS旨在模拟具有许多复杂键合相互作用的生化分子，例如蛋白质，脂质和核酸。
 
 PI上的软件模块
---------------
 
 Pi有许多预建的软件模块，并且数量还在不断增长。欢迎您告诉我们您研究领域中流行的软件。由于收费很少甚至为零，因此开源软件的安装优先级更高。
 
 Pi上的软件可以分类为编译器和平台，MPI库，Math库，FD工具，生物信息学工具等。
 
 编译器和平台
-------------
 
 ======== =============== =========== ========
 模块名字 描述            提供版本    默认版本
@@ -48,7 +34,6 @@ jdk      Java开发套件    11.0        11.0
 ======== =============== =========== ========
 
 MPI库
------
 
 ========= ========= ======== ========
 模块名字  描述      提供版本 默认版本
@@ -58,7 +43,6 @@ intel-mpi Intel MPI 2019.4   2019.4
 ========= ========= ======== ========
 
 数学库
-------
 
 +-----------+---------------------+----------+----------+----------------------------+
 | 模块名字  | 描述                | 提供版本 | 默认版本 | 备注                       |
@@ -67,7 +51,6 @@ intel-mpi Intel MPI 2019.4   2019.4
 +-----------+---------------------+----------+----------+----------------------------+
 
 计算机视觉与深度学习
---------------------
 
 ======== =========================== =========== ======== =======
 模块名字 描述                        提供版本    默认版本 GPU支持
@@ -75,20 +58,33 @@ intel-mpi Intel MPI 2019.4   2019.4
 cudnn    NVIDIA深度学习GPU加速原语库 7.3 7.4 7.5 7.5      Yes
 ======== =========================== =========== ======== =======
 
-.. raw:: html
-
-   <!-- ## 用于构建和调整软件的工具
-
-   | 模块名字 | 描述 | 提供版本 | 默认版本 | 
-   | ---- | ---- | ---- | ---- |
-   | maven | 软件项目管理工具 | 3.3 | 3.3 |
-   | bazel | 软件构建工具 | 0.1 | 0.1 |
-   | vtune | Intel vtune | 5.1 | 5.1 | -->
-
-
 .. toctree::
    :maxdepth: 1
    :hidden:
 
    conda 
    module
+   lammps
+   gromacs
+   abinit
+   amber
+   cesm
+   commercial
+   cp2k
+   mrbayes
+   nektar
+   nwchem
+   openfoam
+   pytorch
+   quantum-espresso
+   relion
+   star-ccm
+   tensorflow
+   vasp
+   vmd
+   keras
+   siesta
+   deepvariant
+   geant4
+   ovito
+   strique

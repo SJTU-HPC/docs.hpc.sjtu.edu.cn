@@ -2,18 +2,44 @@ variables:
     GIT_STRATEGY: clone
 
 stages:
-  - build
+  - build pdf
+  - build html
   - deploy
 
-build html pages:
-  stage: build
-  image: python:3.7
+build_latex_pdf:
+  stage: build pdf
+  image: sjtuhpc/texlive-sphinx
   tags:
-    - docker.web.hpc.sjtu.edu.cn
+    - docker
   before_script:
     - mkdir -p .build_cache
-    - pip install --upgrade --cache-dir=.build_cache -r requirements.txt
+    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
+    - make -C docs latexpdf
+    - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/pi.pdf
+    - mv docs/_build/latex/pi_small.pdf  docs/_build/latex/pi.pdf
+  artifacts:
+    paths:
+      - docs/_build/latex/pi.pdf
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - .build_cache
+
+build_html_pages:
+  stage: build html
+  image: sjtuhpc/texlive-sphinx
+  tags:
+    - docker
+  needs:
+    - job: build_latex_pdf
+      artifacts: true
+  before_script:
+    - mkdir -p .build_cache
+    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
+  script:
+    - mkdir docs/_static || true
+    - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
     - make -C docs html
   artifacts:
     paths:
@@ -23,13 +49,13 @@ build html pages:
     paths:
       - .build_cache
 
-deploy html to nginx directory:
+deploy_html_and_pdf_to_nginx_directory:
   stage: deploy
   tags:
-    - shell.proxy.pi.sjtu.edu.cn
+    - shell.web.hpc.sjtu.edu.cn
   only:
     - master
     - merge_request
     - sphinx
   script:
-    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/hpc.pi.sjtu.edu.cn/
+    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.jianwen.me/

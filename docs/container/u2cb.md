@@ -104,7 +104,7 @@ create  delete  help  list  shell
 (U2CB Server) > list def
 ```
 
-## 参考文献
+## 参考资料
  - [Singularity Quick Start](https://sylabs.io/guides/3.4/user-guide/quick_start.html)
  - [Docker Hub](https://hub.docker.com/)
  - [NVIDIA GPU CLOUD](https://ngc.nvidia.com/)

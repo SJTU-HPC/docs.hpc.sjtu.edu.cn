@@ -3,20 +3,20 @@ RStudio使用说明
 
 登录HPC Studio平台后，在内置应用中选择RStudio Server，如下图
 
-.. figure:: ../img/RStudio_1.png
+.. image:: ../img/RStudio_1.png
 
 点击后会出现下图的选项卡，里面定义好了所需的选项卡，可以自定义时间，该时间为作业时间，时间自行定义。设置完成后launch即可完成提交。
 
-.. figure:: ../img/RStudio_2.png
+.. image:: ../img/RStudio_2.png
 
 待选项卡从等待变成Running后，如下图所示，可使用Connect to RStudio
 Server打开Rstudio平台进行开发。
 
-.. figure:: ../img/RStudio_3.png
+.. image:: ../img/RStudio_3.png
 
 该RStduio Server提供了基本与本地的desktop版本相同的功能，所需的R依赖包自行下载。
 
-.. figure:: ../img/RStudio_4.png
+.. image:: ../img/RStudio_4.png
 
 上图代码示例::
 

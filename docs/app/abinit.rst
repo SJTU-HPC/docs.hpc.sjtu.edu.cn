@@ -1,4 +1,4 @@
-.. _appabinit:
+.. _abinit:
 
 ABINIT
 ======
@@ -15,7 +15,7 @@ theory (GW approximation) to compute the excited states.
 Pi上的ABINIT
 ------------
 
-查看 Pi 上已编译的软件模块:
+查看Pi上已编译的软件模块:
 
 .. code:: bash
 
@@ -27,7 +27,7 @@ Pi上的ABINIT
 
    $ module load abinit/8.10.3-gcc-9.2.0-openblas-openmpi
 
-Pi 上的 Slurm 脚本 slurm.test
+Pi上的Slurm脚本 slurm.test
 -----------------------------
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
@@ -49,7 +49,7 @@ Pi 上的 Slurm 脚本 slurm.test
 
    srun --mpi=pmi2 < example.in
 
-Pi 上提交作业
+Pi上提交作业
 -------------
 
 .. code:: bash
@@ -59,4 +59,4 @@ Pi 上提交作业
 参考资料
 --------
 
--  `ABINIT http://www.abinit.org
+-  ABINIT http://www.abinit.org

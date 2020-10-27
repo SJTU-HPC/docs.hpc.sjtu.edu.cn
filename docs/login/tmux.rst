@@ -63,10 +63,7 @@ Pi2.0集群中已经默认安装了Tmux，无须操作。如果您需要在自�
 上面命令会启动 Tmux
 窗口，底部有一个状态栏。状态栏的左侧是窗口信息（编号和名称），右侧是系统信息。
 
-.. figure:: ../img/tmux_1.png
-   :alt: tmux
-
-   tmux
+.. image:: /img/tmux_1.png
 
 按下\ ``Ctrl+d``\ 或者显式输入\ ``exit``\ 命令，就可以退出 Tmux 窗口。
 
@@ -186,10 +183,7 @@ Tmux可以将窗口分成多个窗格（window），每个窗格运行不同的�
    # 划分左右两个窗格
    $ tmux split-window -h
 
-.. figure:: ../img/tmux_2.png
-   :alt: tmux
-
-   tmux
+.. image:: /img/tmux_2.png
 
 对应快捷键为\ ``Ctrl+b "``\ 和\ ``Ctrl+b %``
 
@@ -234,7 +228,7 @@ Tmux可以将窗口分成多个窗格（window），每个窗格运行不同的�
    $ Ctrl+b Ctrl+<arrow key>：按箭头方向调整窗格大小。
    $ Ctrl+b q：显示窗格编号。
 
-参考文献
+参考资料
 ========
 
 -  https://www.hamvocke.com/blog/a-quick-and-easy-guide-to-tmux/

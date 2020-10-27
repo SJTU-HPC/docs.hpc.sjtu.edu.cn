@@ -1,6 +1,6 @@
 .. _module:
 
-Environment Modules 软件模块
+Environment Modules软件模块
 ============================
 
 ENVIRONMENT MODULES可以帮助您在Pi上使用预构建的软件包。每个ENVIRONMENT
@@ -92,7 +92,7 @@ MODULES智能选择与Slurm
 
    $ module load gcc openmpi
 
-参考链接
+参考资料
 --------
 
 - Lmod: A New Environment Module System https://lmod.readthedocs.io/en/latest/   

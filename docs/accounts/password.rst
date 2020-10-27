@@ -1,5 +1,3 @@
-.. _accountspasswords:
-
 密码
 ====
 
