@@ -81,8 +81,8 @@ OpenMP 示例
 
    $ sbatch ompgcc.slurm
 
-使用Intel编译器
-~~~~~~~~~~~~~~~
+使用Intel编译器构建OpenMP应用
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
 
@@ -219,10 +219,8 @@ MPI示例
 
    $ sbatch job_openmpi.slurm
 
-.. _使用intel编译器-1:
-
-使用Intel编译器
-~~~~~~~~~~~~~~~
+使用Intel编译器构建MPI应用
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
 

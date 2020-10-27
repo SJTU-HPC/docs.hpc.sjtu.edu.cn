@@ -74,8 +74,8 @@ login.hpc.sjtu.edu.cn，端口号采用默认值 22，然后点 Open
 
 *提示：输入密码时，不显示字符，请照常进行操作，然后按回车键登录。*
 
-Linux/Unix/Mac 用户
-^^^^^^^^^^^^^^^^^^^
+Linux/Unix/Mac用户使用SSH
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Linux / Unix / Mac 用户可以使用终端中的命令行工具登录。下列语句指出了该节点的IP地址、用户名和SSH端口。
 
@@ -101,8 +101,8 @@ Windows 用户可以使用 WinSCP
 .. image:: ../img/winscp2.png
 
 
-Linux/Unix/Mac 用户
-^^^^^^^^^^^^^^^^^^^
+Linux/Unix/Mac用户使用scp
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Linux/Unix/Mac 用户可以使用命令在集群和自己的计算机之间传输数据。
 下列命令将文件夹 data 上传至集群家目录。

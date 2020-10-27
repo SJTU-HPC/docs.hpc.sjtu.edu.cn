@@ -1,4 +1,4 @@
-# GNU
+# 使用GNU编译器套件编译软件
 
 GNU通用公共许可协议（英语：GNU General Public License，缩写GNU GPL 或 GPL），是被广泛使用的自由软件许可证，给予了终端用户运行、学习、共享和修改软件的自由。许可证最初由自由软件基金会的理查德·斯托曼为GNU项目所撰写，并授予计算机程序的用户自由软件定义（The Free Software Definition）的权利。在本节中，GNU将代指那些基于GNU许可的开源软件，特别是GCC和OpenMPI。
 

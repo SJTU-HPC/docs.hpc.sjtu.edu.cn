@@ -105,6 +105,8 @@ html_theme_options = {
     'globaltoc_includehidden': True,
 }
 
+# Add doc prefix for atutlabeling
+autosectionlabel_prefix_document = True
 
 rst_prolog = """
 .. |cpu| image:: /img/cpu-icon.png
