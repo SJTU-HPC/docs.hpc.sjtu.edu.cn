@@ -35,8 +35,9 @@ nav:
     - 非特权容器构建: job/container/u2cb.md
   - 应用软件:
     - Pi 上的软件: application/applications.md
-    - 用 Conda 安装生信软件: application/conda.md
     - 预置软件环境: application/module.md
+    - 生物信息软件: application/bio.md
+    - Conda 安装软件: application/conda.md
     - ABINIT: application/abinit.md
     - Amber: application/amber.md
     - CESM: application/cesm.md
