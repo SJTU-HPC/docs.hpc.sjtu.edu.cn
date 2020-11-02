@@ -2,9 +2,20 @@ variables:
     GIT_STRATEGY: clone
 
 stages:
+  - check raw html
   - build pdf
   - build html
   - deploy
+
+fail_if_contain_raw_html:
+  stage: check raw html
+  tags:
+    - docker
+  before_script:
+    - mkdir -p .build_cache
+    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
+  script:
+    - ack '.*raw.*html' docs && exit 1 || exit 0
 
 build_latex_pdf:
   stage: build pdf
@@ -48,7 +59,7 @@ build_html_pages:
     key: ${CI_JOB_NAME}
     paths:
       - .build_cache
-
+     
 deploy_html_and_pdf_to_nginx_directory:
   stage: deploy
   tags:
