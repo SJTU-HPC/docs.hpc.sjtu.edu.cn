@@ -13,8 +13,8 @@ fail_if_contain_raw_html:
   tags:
     - docker
   before_script:
-    - apt-get update
-    - apt-get install ack-grep
+    - apt-get update -y
+    - apt-get install -y ack-grep
   script:
     - ack '.*raw.*html' docs && exit 1 || exit 0
 
