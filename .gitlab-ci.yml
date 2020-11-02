@@ -9,6 +9,7 @@ stages:
 
 fail_if_contain_raw_html:
   stage: check raw html
+  image: sjtuhpc/texlive-sphinx
   tags:
     - docker
   before_script:
