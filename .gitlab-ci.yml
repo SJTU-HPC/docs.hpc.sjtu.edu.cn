@@ -13,7 +13,7 @@ fail_if_contain_raw_html:
   tags:
     - docker
   before_script:
-    - sudo apt-get install ack
+    - apt-get install ack
   script:
     - ack '.*raw.*html' docs && exit 1 || exit 0
 
