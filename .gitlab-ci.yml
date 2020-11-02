@@ -16,7 +16,7 @@ fail_if_contain_raw_html:
     - apt-get update -y
     - apt-get install -y ack-grep
   script:
-    - ack '.*raw.*html' docs && exit 1 || exit 0
+    - ack '.*raw.*html' docs && false || true
 
 build_latex_pdf:
   stage: build pdf
