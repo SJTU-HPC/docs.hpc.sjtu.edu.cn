@@ -16,7 +16,7 @@ Pi上的软件
 | //docs.hpc.sjtu | .shields.io/bad |                 | package whose   |
 | .edu.cn/applica | ge/version-8.10 |                 | main program    |
 | tion/abinit/>`_ | .3-yellowgreen? |                 | allows one to   |
-| _               | style=flat-squa |                 | find the total  |
+|                 | style=flat-squa |                 | find the total  |
 |                 | re)             |                 | energy, charge  |
 |                 |                 |                 | density and     |
 |                 |                 |                 | electronic      |
