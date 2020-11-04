@@ -10,7 +10,7 @@ Pi上的软件
 ----------
 
 +-----------------+-----------------+-----------------+-----------------+
-| Name            | Version         | Distribution    | Introduction    |
+| Name            | Version         | Platform        | Introduction    |
 +=================+=================+=================+=================+
 | `ABINIT <https: | ![](https://img | |cpu|           | ABINIT is a     |
 | //docs.hpc.sjtu | .shields.io/bad |                 | package whose   |
