@@ -12,12 +12,12 @@ Pi上的软件
 +-----------------+-----------------+-----------------+-----------------+
 | Name            | Version         | Distribution    | Introduction    |
 +=================+=================+=================+=================+
-| `ABINIT <https: | 8.10.3          | |cpu|           | ABINIT is a     |
-| //docs.hpc.sjtu |                 |                 | package whose   |
-| .edu.cn/applica |                 |                 | main program    |
-| tion/abinit/>`_ |                 |                 | allows one to   |
-| _               |                 |                 | find the total  |
-|                 |                 |                 | energy, charge  |
+| `ABINIT <https: | ![](https://img | |cpu|           | ABINIT is a     |
+| //docs.hpc.sjtu | .shields.io/bad |                 | package whose   |
+| .edu.cn/applica | ge/version-8.10 |                 | main program    |
+| tion/abinit/>`_ | .3-yellowgreen? |                 | allows one to   |
+| _               | style=flat-squa |                 | find the total  |
+|                 | re)             |                 | energy, charge  |
 |                 |                 |                 | density and     |
 |                 |                 |                 | electronic      |
 |                 |                 |                 | structure of    |
@@ -43,12 +43,12 @@ Pi上的软件
 | ion/Amber/>`__  |                 |                 | programs and    |
 |                 |                 |                 | analysis tools. |
 +-----------------+-----------------+-----------------+-----------------+
-| BCFtools        | 1.9             | |cpu|           | BCFtools is a   |
-|                 |                 |                 | program for     |
-|                 |                 |                 | variant calling |
-|                 |                 |                 | and             |
-|                 |                 |                 | manipulating    |
-|                 |                 |                 | files in the    |
+| BCFtools        | ![](https://img | |cpu|           | BCFtools is a   |
+|                 | .shields.io/bad |                 | program for     |
+|                 | ge/version-1.9  |                 | variant calling |
+|                 | .3-yellowgreen? |                 | and             |
+|                 | style=flat-squa |                 | manipulating    |
+|                 | re)             |                 | files in the    |
 |                 |                 |                 | Variant Call    |
 |                 |                 |                 | Format (VCF)    |
 |                 |                 |                 | and its binary  |
@@ -63,12 +63,12 @@ Pi上的软件
 |                 |                 |                 | BGZF-compressed |
 |                 |                 |                 | .               |
 +-----------------+-----------------+-----------------+-----------------+
-| Bedtools2       | 2.27.1          | |cpu|           | The bedtools    |
-|                 |                 |                 | utilities are a |
-|                 |                 |                 | swiss-army      |
-|                 |                 |                 | knife of tools  |
-|                 |                 |                 | for a           |
-|                 |                 |                 | wide-range of   |
+| Bedtools2       | ![](https://img | |cpu|           | The bedtools    |
+|                 | .shields.io/bad |                 | utilities are a |
+|                 | ge/version-2.27 |                 | swiss-army      |
+|                 | .1-yellowgreen? |                 | knife of tools  |
+|                 | style=flat-squa |                 | for a           |
+|                 | re)             |                 | wide-range of   |
 |                 |                 |                 | genomics        |
 |                 |                 |                 | analysis tasks. |
 |                 |                 |                 | The most        |
@@ -80,12 +80,12 @@ Pi上的软件
 |                 |                 |                 | theory on the   |
 |                 |                 |                 | genome.         |
 +-----------------+-----------------+-----------------+-----------------+
-| Bismark         | 0.19.0          | |cpu|           | Bismark is a    |
-|                 |                 |                 | program to map  |
-|                 |                 |                 | bisulfite       |
-|                 |                 |                 | treated         |
-|                 |                 |                 | sequencing      |
-|                 |                 |                 | reads to a      |
+| Bismark         | ![](https://img | |cpu|           | Bismark is a    |
+|                 | .shields.io/bad |                 | program to map  |
+|                 | ge/version-0.19 |                 | bisulfite       |
+|                 | .0-yellowgreen? |                 | treated         |
+|                 | style=flat-squa |                 | sequencing      |
+|                 | re)             |                 | reads to a      |
 |                 |                 |                 | genome of       |
 |                 |                 |                 | interest and    |
 |                 |                 |                 | perform         |
@@ -106,12 +106,12 @@ Pi上的软件
 |                 |                 |                 | samples         |
 |                 |                 |                 | straight away.  |
 +-----------------+-----------------+-----------------+-----------------+
-| Bowtie          | 1.2.3           | |cpu|           | Bowtie is an    |
-|                 |                 |                 | ultrafast,      |
-|                 |                 |                 | memory-efficien |
-|                 |                 |                 | t               |
-|                 |                 |                 | short read      |
-|                 |                 |                 | aligner geared  |
+| Bowtie          | ![](https://img | |cpu|           | Bowtie is an    |
+|                 | .shields.io/bad |                 | ultrafast,      |
+|                 | ge/version-1.2  |                 | memory-efficien |
+|                 | .3-yellowgreen? |                 | t               |
+|                 | style=flat-squa |                 | short read      |
+|                 | re)             |                 | aligner geared  |
 |                 |                 |                 | toward quickly  |
 |                 |                 |                 | aligning large  |
 |                 |                 |                 | sets of short   |
@@ -119,24 +119,24 @@ Pi上的软件
 |                 |                 |                 | (reads) to      |
 |                 |                 |                 | large genomes.  |
 +-----------------+-----------------+-----------------+-----------------+
-| BWA             | 0.7.17          | |cpu|           | BWA is a        |
-|                 |                 |                 | software        |
-|                 |                 |                 | package for     |
-|                 |                 |                 | mapping         |
-|                 |                 |                 | low-divergent   |
-|                 |                 |                 | sequences       |
+| BWA             | ![](https://img | |cpu|           | BWA is a        |
+|                 | .shields.io/bad |                 | software        |
+|                 | ge/version-0.7. |                 | package for     |
+|                 | 17-yellowgreen? |                 | mapping         |
+|                 | style=flat-squa |                 | low-divergent   |
+|                 | re)             |                 | sequences       |
 |                 |                 |                 | against a large |
 |                 |                 |                 | reference       |
 |                 |                 |                 | genome, such as |
 |                 |                 |                 | the human       |
 |                 |                 |                 | genome.         |
 +-----------------+-----------------+-----------------+-----------------+
-| `CESM <https:// |                 | |cpu|           | Community Earth |
-| docs.hpc.sjtu.e |                 |                 | System Model,   |
-| du.cn/applicati |                 |                 | or CESM, is a   |
-| on/CESM/>`__    |                 |                 | fully-coupled,  |
-|                 |                 |                 | community,      |
-|                 |                 |                 | global climate  |
+| `CESM <https:// | ![](https://img | |cpu|           | Community Earth |
+| docs.hpc.sjtu.e | .shields.io/bad |                 | System Model,   |
+| du.cn/applicati | ge/version-1.2  |                 | or CESM, is a   |
+| on/CESM/>`__    | -yellowgreen?   |                 | fully-coupled,  |
+|                 | style=flat-squa |                 | community,      |
+|                 | re)             |                 | global climate  |
 |                 |                 |                 | model that      |
 |                 |                 |                 | provides        |
 |                 |                 |                 | state-of-the-ar |
@@ -148,21 +148,21 @@ Pi上的软件
 |                 |                 |                 | and future      |
 |                 |                 |                 | climate states. |
 +-----------------+-----------------+-----------------+-----------------+
-| CDO             | 1.9.8           | |cpu|           | CDO is a        |
-|                 |                 |                 | collection of   |
-|                 |                 |                 | command line    |
-|                 |                 |                 | Operators to    |
-|                 |                 |                 | manipulate and  |
-|                 |                 |                 | analyse Climate |
+| CDO             | ![](https://img | |cpu|           | CDO is a        |
+|                 | .shields.io/bad |                 | collection of   |
+|                 | ge/version-1.9  |                 | command line    |
+|                 | .8-yellowgreen? |                 | Operators to    |
+|                 | style=flat-squa |                 | manipulate and  |
+|                 | re)             |                 | analyse Climate |
 |                 |                 |                 | and NWP model   |
 |                 |                 |                 | Data.           |
 +-----------------+-----------------+-----------------+-----------------+
-| CP2K            | 6.1             | |cpu|           | A freely        |
-|                 |                 |                 | available       |
-|                 |                 |                 | program to      |
-|                 |                 |                 | perform         |
-|                 |                 |                 | atomistic and   |
-|                 |                 |                 | molecular       |
+| CP2K            | ![](https://img | |cpu|           | A freely        |
+|                 | .shields.io/bad |                 | available       |
+|                 | ge/version-6.1  |                 | program to      |
+|                 | -yellowgreen?   |                 | perform         |
+|                 | style=flat-squa |                 | atomistic and   |
+|                 | re)             |                 | molecular       |
 |                 |                 |                 | simulations of  |
 |                 |                 |                 | solid state,    |
 |                 |                 |                 | liquid,         |
@@ -186,36 +186,60 @@ Pi上的软件
 |                 |                 |                 | many-body       |
 |                 |                 |                 | potentials.     |
 +-----------------+-----------------+-----------------+-----------------+
-| Cufflinks       | 2.2.1           | |cpu|           | Cufflinks       |
-|                 |                 |                 | assembles       |
-|                 |                 |                 | transcripts,    |
-|                 |                 |                 | estimates their |
-|                 |                 |                 | abundances, and |
-|                 |                 |                 | tests for       |
+| CUDA            | ![](https://img | |gpu|           |                 |
+|                 | .shields.io/bad |                 |                 |
+|                 | ge/version-10.0 |                 |                 |
+|                 | .130-yellowgree |                 |                 |
+|                 | n?style=flat-sq |                 |                 |
+|                 | uare)           |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
++-----------------+-----------------+-----------------+-----------------+
+| Cufflinks       | ![](https://img | |cpu|           | Cufflinks       |
+|                 | .shields.io/bad |                 | assembles       |
+|                 | ge/version-2.2  |                 | transcripts,    |
+|                 | .1-yellowgreen? |                 | estimates their |
+|                 | style=flat-squa |                 | abundances, and |
+|                 | re)             |                 | tests for       |
 |                 |                 |                 | differential    |
 |                 |                 |                 | expression and  |
 |                 |                 |                 | regulation in   |
 |                 |                 |                 | RNA-Seq         |
 |                 |                 |                 | samples.        |
 +-----------------+-----------------+-----------------+-----------------+
-| FastQC          | 0.11.7          | |cpu|           | FastQC aims to  |
-|                 |                 |                 | provide a       |
-|                 |                 |                 | simple way to   |
-|                 |                 |                 | do some quality |
-|                 |                 |                 | control checks  |
-|                 |                 |                 | on raw sequence |
+| DeepVariant     | ![](https://img | |cpu| |gpu|     |                 |
+|                 | .shields.io/bad |                 |                 |
+|                 | ge/version-10.0 |                 |                 |
+|                 | .130-yellowgree |                 |                 |
+|                 | n?style=flat-sq |                 |                 |
+|                 | uare)           |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
++-----------------+-----------------+-----------------+-----------------+
+| FastQC          | ![](https://img | |cpu|           | FastQC aims to  |
+|                 | .shields.io/bad |                 | provide a       |
+|                 | ge/version-0.11 |                 | simple way to   |
+|                 | .7-yellowgreen? |                 | do some quality |
+|                 | style=flat-squa |                 | control checks  |
+|                 | re)             |                 | on raw sequence |
 |                 |                 |                 | data coming     |
 |                 |                 |                 | from high       |
 |                 |                 |                 | throughput      |
 |                 |                 |                 | sequencing      |
 |                 |                 |                 | pipelines.      |
 +-----------------+-----------------+-----------------+-----------------+
-| GATK            | 3.8             | |cpu|           | The GATK is the |
-|                 |                 |                 | industry        |
-|                 |                 |                 | standard for    |
-|                 |                 |                 | identifying     |
-|                 |                 |                 | SNPs and indels |
-|                 |                 |                 | in germline DNA |
+| GATK            | ![](https://img | |cpu|           | The GATK is the |
+|                 | .shields.io/bad |                 | industry        |
+|                 | ge/version-3.8  |                 | standard for    |
+|                 | -yellowgreen?   |                 | identifying     |
+|                 | style=flat-squa |                 | SNPs and indels |
+|                 | re)             |                 | in germline DNA |
 |                 |                 |                 | and RNAseq      |
 |                 |                 |                 | data.           |
 +-----------------+-----------------+-----------------+-----------------+
@@ -235,12 +259,28 @@ Pi上的软件
 |                 |                 |                 | University as   |
 |                 |                 |                 | Gaussian 70.    |
 +-----------------+-----------------+-----------------+-----------------+
-| GMAP-GSNAP      | 2019-05-12      | |cpu|           | GMAP is a tools |
-|                 |                 |                 | for rapidly and |
-|                 |                 |                 | accurately      |
-|                 |                 |                 | mapping and     |
-|                 |                 |                 | aligning cDNA   |
-|                 |                 |                 | sequences to    |
+| Geant4          | ![](https://img | |cpu|           |                 |
+|                 | .shields.io/bad |                 |                 |
+|                 | ge/version-10.6 |                 |                 |
+|                 | .2-yellowgreen? |                 |                 |
+|                 | style=flat-squa |                 |                 |
+|                 | re)             |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
+|                 |                 |                 |                 |
++-----------------+-----------------+-----------------+-----------------+
+| GMAP-GSNAP      | ![](https://img | |cpu|           | GMAP is a tools |
+|                 | .shields.io/bad |                 | for rapidly and |
+|                 | ge/version-2019 |                 | accurately      |
+|                 | -5-12-yellowgre |                 | mapping and     |
+|                 | en?style=flat-s |                 | aligning cDNA   |
+|                 | quare)          |                 | sequences to    |
 |                 |                 |                 | genomic         |
 |                 |                 |                 | sequences.      |
 |                 |                 |                 | GSNAP is        |
@@ -255,19 +295,55 @@ Pi上的软件
 |                 |                 |                 | a database of   |
 |                 |                 |                 | know juctions.  |
 +-----------------+-----------------+-----------------+-----------------+
-| GraphMap        | 0.3.0           | |cpu|           | A highly        |
-|                 |                 |                 | sensitive and   |
-|                 |                 |                 | accurate mapper |
-|                 |                 |                 | for long,       |
-|                 |                 |                 | error-prone     |
-|                 |                 |                 | reads.          |
+| Gnuplot         |                 | |studio|        | Gnuplot is a    |
+|                 |                 |                 | command-driven  |
+|                 |                 |                 | interactive     |
+|                 |                 |                 | function        |
+|                 |                 |                 | plotting        |
+|                 |                 |                 | program. It can |
+|                 |                 |                 | be used to plot |
+|                 |                 |                 | functions and   |
+|                 |                 |                 | data points in  |
+|                 |                 |                 | both two- and   |
+|                 |                 |                 | three-          |
+|                 |                 |                 | dimensional     |
+|                 |                 |                 | plots in many   |
+|                 |                 |                 | different       |
+|                 |                 |                 | formats. It was |
+|                 |                 |                 | originally      |
+|                 |                 |                 | made to allow   |
+|                 |                 |                 | scientists and  |
+|                 |                 |                 | students to     |
+|                 |                 |                 | visualize       |
+|                 |                 |                 | mathematical    |
+|                 |                 |                 | functions and   |
+|                 |                 |                 | data            |
+|                 |                 |                 | interactively,  |
+|                 |                 |                 | but has grown   |
+|                 |                 |                 | to support many |
+|                 |                 |                 | non-interactive |
+|                 |                 |                 | uses such as    |
+|                 |                 |                 | web scripting.  |
+|                 |                 |                 | It is also used |
+|                 |                 |                 | as a plotting   |
+|                 |                 |                 | engine by       |
+|                 |                 |                 | third-party     |
+|                 |                 |                 | applications    |
+|                 |                 |                 | like Octave.    |
 +-----------------+-----------------+-----------------+-----------------+
-| `Gromacs <https | 2019.2, 2019.4  | |cpu|           | GROMACS is a    |
-| ://docs.hpc.sjt |                 | |gpu|\ |arm|    | versatile       |
-| u.edu.cn/applic |                 | |singularity|   | package to      |
-| ation/Gromacs/> |                 |                 | perform         |
-| `__             |                 |                 | molecular       |
-|                 |                 |                 | dynamics,       |
+| GraphMap        | ![](https://img | |cpu|           | A highly        |
+|                 | .shields.io/bad |                 | sensitive and   |
+|                 | ge/version-0.3  |                 | accurate mapper |
+|                 | .0-yellowgreen? |                 | for long,       |
+|                 | style=flat-squa |                 | error-prone     |
+|                 | re)             |                 | reads.          |
++-----------------+-----------------+-----------------+-----------------+
+| `Gromacs <https | ![](https://img | |cpu|           | GROMACS is a    |
+| ://docs.hpc.sjt | .shields.io/bad | |gpu|\ |arm|    | versatile       |
+| u.edu.cn/applic | ge/version-2020 | |singularity|   | package to      |
+| ation/Gromacs/> | -yellowgreen?   |                 | perform         |
+| `__             | style=flat-squa |                 | molecular       |
+|                 | re)             |                 | dynamics,       |
 |                 |                 |                 | i.e. simulate   |
 |                 |                 |                 | the Newtonian   |
 |                 |                 |                 | equations of    |
@@ -303,12 +379,12 @@ Pi上的软件
 |                 |                 |                 | systems,        |
 |                 |                 |                 | e.g. polymers.  |
 +-----------------+-----------------+-----------------+-----------------+
-| HISAT2          | 2.1.0           | |cpu|           | HISAT2 is a     |
-|                 |                 |                 | fast and        |
-|                 |                 |                 | sensitive       |
-|                 |                 |                 | alignment       |
-|                 |                 |                 | program for     |
-|                 |                 |                 | mapping         |
+| HISAT2          | ![](https://img | |cpu|           | HISAT2 is a     |
+|                 | .shields.io/bad |                 | fast and        |
+|                 | ge/version-2.1  |                 | sensitive       |
+|                 | .0-yellowgreen? |                 | alignment       |
+|                 | style=flat-squa |                 | program for     |
+|                 | re)             |                 | mapping         |
 |                 |                 |                 | next-generation |
 |                 |                 |                 | sequencing      |
 |                 |                 |                 | reads (both DNA |
@@ -320,29 +396,52 @@ Pi上的软件
 |                 |                 |                 | reference       |
 |                 |                 |                 | genome.         |
 +-----------------+-----------------+-----------------+-----------------+
-| `LAMMPS <https: | 20190807        | |cpu|           | (Large-scale    |
-| //docs.hpc.sjtu |                 | |gpu|\ |arm|    | Atomic/Molecula |
-| .edu.cn/applica |                 | |singularity|   | r               |
-| tion/Lammps/>`_ |                 |                 | Massively       |
-| _               |                 |                 | Parallel        |
-|                 |                 |                 | Simulator) a    |
+| Keras           |                 |                 | Keras is a      |
+|                 |                 |                 | minimalist,     |
+|                 |                 |                 | highly modular  |
+|                 |                 |                 | neural networks |
+|                 |                 |                 | library written |
+|                 |                 |                 | in Python and   |
+|                 |                 |                 | capable on      |
+|                 |                 |                 | running on top  |
+|                 |                 |                 | of either       |
+|                 |                 |                 | TensorFlow or   |
+|                 |                 |                 | Theano. It was  |
+|                 |                 |                 | developed with  |
+|                 |                 |                 | a focus on      |
+|                 |                 |                 | enabling fast   |
+|                 |                 |                 | experimentation |
+|                 |                 |                 | . Being able to |
+|                 |                 |                 | go from idea to |
+|                 |                 |                 | result with the |
+|                 |                 |                 | least possible  |
+|                 |                 |                 | delay is key to |
+|                 |                 |                 | doing good      |
+|                 |                 |                 | research.       |
++-----------------+-----------------+-----------------+-----------------+
+| `LAMMPS <https: | ![](https://img | |cpu|           | (Large-scale    |
+| //docs.hpc.sjtu | .shields.io/bad | |gpu|\ |arm|    | Atomic/Molecula |
+| .edu.cn/applica | ge/version-2020 | |singularity|   | r               |
+| tion/Lammps/>`_ | -yellowgreen?   |                 | Massively       |
+| _               | style=flat-squa |                 | Parallel        |
+|                 | re)             |                 | Simulator) a    |
 |                 |                 |                 | classical       |
 |                 |                 |                 | molecular       |
 |                 |                 |                 | dynamics code.  |
 +-----------------+-----------------+-----------------+-----------------+
-| LUMPY-SV        | 0.2.13          | |cpu|           | A general       |
-|                 |                 |                 | probabilistic   |
-|                 |                 |                 | framework for   |
-|                 |                 |                 | structural      |
-|                 |                 |                 | variant         |
-|                 |                 |                 | discovery.      |
+| LUMPY-SV        | ![](https://img | |cpu|           | A general       |
+|                 | .shields.io/bad |                 | probabilistic   |
+|                 | ge/version-0.2. |                 | framework for   |
+|                 | 13-yellowgreen? |                 | structural      |
+|                 | style=flat-squa |                 | variant         |
+|                 | re)             |                 | discovery.      |
 +-----------------+-----------------+-----------------+-----------------+
-| MEGAHIT         | 1.1.4           | |cpu|           | MEGAHIT is an   |
-|                 |                 |                 | ultra-fast and  |
-|                 |                 |                 | memory-efficien |
-|                 |                 |                 | t               |
-|                 |                 |                 | NGS assembler.  |
-|                 |                 |                 | It is optimized |
+| MEGAHIT         | ![](https://img | |cpu|           | MEGAHIT is an   |
+|                 | .shields.io/bad |                 | ultra-fast and  |
+|                 | ge/version-1.1  |                 | memory-efficien |
+|                 | .4-yellowgreen? |                 | t               |
+|                 | style=flat-squa |                 | NGS assembler.  |
+|                 | re)             |                 | It is optimized |
 |                 |                 |                 | for             |
 |                 |                 |                 | metagenomes,    |
 |                 |                 |                 | but also works  |
@@ -354,12 +453,12 @@ Pi上的软件
 |                 |                 |                 | single-cell     |
 |                 |                 |                 | assembly.       |
 +-----------------+-----------------+-----------------+-----------------+
-| METIS           | 5.1.0           | |cpu|           | METIS is a set  |
-|                 |                 |                 | of serial       |
-|                 |                 |                 | programs for    |
-|                 |                 |                 | partitioning    |
-|                 |                 |                 | graphs,         |
-|                 |                 |                 | partitioning    |
+| METIS           | ![](https://img | |cpu|           | METIS is a set  |
+|                 | .shields.io/bad |                 | of serial       |
+|                 | ge/version-5.1  |                 | programs for    |
+|                 | .0-yellowgreen? |                 | partitioning    |
+|                 | style=flat-squa |                 | graphs,         |
+|                 | re)             |                 | partitioning    |
 |                 |                 |                 | finite element  |
 |                 |                 |                 | meshes, and     |
 |                 |                 |                 | producing fill  |
@@ -368,24 +467,24 @@ Pi上的软件
 |                 |                 |                 | sparse          |
 |                 |                 |                 | matrices.       |
 +-----------------+-----------------+-----------------+-----------------+
-| MrBayes         | 3.2.7a          | |cpu|           | MrBayes is a    |
-|                 |                 |                 | program for     |
-|                 |                 |                 | Bayesian        |
-|                 |                 |                 | inference and   |
-|                 |                 |                 | model choice    |
-|                 |                 |                 | across a wide   |
+| MrBayes         | ![](https://img | |cpu|           | MrBayes is a    |
+|                 | .shields.io/bad |                 | program for     |
+|                 | ge/version-3.2. |                 | Bayesian        |
+|                 | 7a-yellowgreen? |                 | inference and   |
+|                 | style=flat-squa |                 | model choice    |
+|                 | re)             |                 | across a wide   |
 |                 |                 |                 | range of        |
 |                 |                 |                 | phylogenetic    |
 |                 |                 |                 | and             |
 |                 |                 |                 | evolutionary    |
 |                 |                 |                 | models.         |
 +-----------------+-----------------+-----------------+-----------------+
-| NCBI-RMBlastn   | 2.2.28          | |cpu|           | RMBlast is a    |
-|                 |                 |                 | RepeatMasker    |
-|                 |                 |                 | compatible      |
-|                 |                 |                 | version of the  |
-|                 |                 |                 | standard NCBI   |
-|                 |                 |                 | BLAST suite.    |
+| NCBI-RMBlastn   | ![](https://img | |cpu|           | RMBlast is a    |
+|                 | .shields.io/bad |                 | RepeatMasker    |
+|                 | ge/version-2.2. |                 | compatible      |
+|                 | 28-yellowgreen? |                 | version of the  |
+|                 | style=flat-squa |                 | standard NCBI   |
+|                 | re)             |                 | BLAST suite.    |
 |                 |                 |                 | The primary     |
 |                 |                 |                 | difference      |
 |                 |                 |                 | between this    |
@@ -400,12 +499,12 @@ Pi上的软件
 |                 |                 |                 | and             |
 |                 |                 |                 | RepeatModeler.  |
 +-----------------+-----------------+-----------------+-----------------+
-| `Nektar++ <http | 4.4.1           | |cpu|           | Nektar++ is a   |
-| s://docs.hpc.sj |                 |                 | spectral/hp     |
-| tu.edu.cn/appli |                 |                 | element         |
-| cation/Nektar/> |                 |                 | framework       |
-| `__             |                 |                 | designed to     |
-|                 |                 |                 | support the     |
+| `Nektar++ <http | ![](https://img | |cpu|           | Nektar++ is a   |
+| s://docs.hpc.sj | .shields.io/bad |                 | spectral/hp     |
+| tu.edu.cn/appli | ge/version-5.0  |                 | element         |
+| cation/Nektar/> | .0-yellowgreen? |                 | framework       |
+| `__             | style=flat-squa |                 | designed to     |
+|                 | re)             |                 | support the     |
 |                 |                 |                 | construction of |
 |                 |                 |                 | efficient       |
 |                 |                 |                 | high-performanc |
@@ -418,12 +517,12 @@ Pi上的软件
 |                 |                 |                 | equations       |
 |                 |                 |                 | (PDE).          |
 +-----------------+-----------------+-----------------+-----------------+
-| `nwChem <https: | 6.8.1           | |cpu|           | NWChem aims to  |
-| //docs.hpc.sjtu |                 |                 | provide its     |
-| .edu.cn/applica |                 |                 | users with      |
-| tion/nwchem/>`_ |                 |                 | computational   |
-| _               |                 |                 | chemistry tools |
-|                 |                 |                 | that are        |
+| `nwChem <https: | ![](https://img | |cpu|           | NWChem aims to  |
+| //docs.hpc.sjtu | .shields.io/bad |                 | provide its     |
+| .edu.cn/applica | ge/version-6.8  |                 | users with      |
+| tion/nwchem/>`_ | .1-yellowgreen? |                 | computational   |
+| _               | style=flat-squa |                 | chemistry tools |
+|                 | re)             |                 | that are        |
 |                 |                 |                 | scalable both   |
 |                 |                 |                 | in their        |
 |                 |                 |                 | ability to      |
@@ -466,12 +565,12 @@ Pi上的软件
 |                 |                 |                 | Properties and  |
 |                 |                 |                 | relativity.     |
 +-----------------+-----------------+-----------------+-----------------+
-| `Octave <https: | 5.2.0           | |cpu|           | GNU Octave is   |
-| //docs.hpc.sjtu |                 | |singularity|   | software        |
-| .edu.cn/applica |                 |                 | featuring a     |
-| tion/Octave/>`_ |                 |                 | high-level      |
-| _               |                 |                 | programming     |
-|                 |                 |                 | language,       |
+| `Octave <https: | ![](https://img | |cpu|           | GNU Octave is   |
+| //docs.hpc.sjtu | .shields.io/bad | |singularity|   | software        |
+| .edu.cn/applica | ge/version-5.2  |                 | featuring a     |
+| tion/Octave/>`_ | .0-yellowgreen? |                 | high-level      |
+| _               | style=flat-squa |                 | programming     |
+|                 | re)             |                 | language,       |
 |                 |                 |                 | primarily       |
 |                 |                 |                 | intended for    |
 |                 |                 |                 | numerical       |
@@ -516,12 +615,12 @@ Pi上的软件
 |                 |                 |                 | simulation      |
 |                 |                 |                 | data.           |
 +-----------------+-----------------+-----------------+-----------------+
-| Paraview        | 0.4.1           | |cpu|           | Paraview is a   |
-|                 |                 |                 | data            |
-|                 |                 |                 | visualisation   |
-|                 |                 |                 | and analysis    |
-|                 |                 |                 | package. Whilst |
-|                 |                 |                 | ARCHER compute  |
+| Paraview        | ![](https://img | |cpu|           | Paraview is a   |
+|                 | .shields.io/bad |                 | data            |
+|                 | ge/version-0.4  |                 | visualisation   |
+|                 | .1-yellowgreen? |                 | and analysis    |
+|                 | style=flat-squa |                 | package. Whilst |
+|                 | re)             |                 | ARCHER compute  |
 |                 |                 |                 | or login nodes  |
 |                 |                 |                 | do not have     |
 |                 |                 |                 | graphics cards  |
@@ -546,23 +645,32 @@ Pi上的软件
 |                 |                 |                 | client          |
 |                 |                 |                 | application.    |
 +-----------------+-----------------+-----------------+-----------------+
-| Picard          | 2.19.0          | |cpu|           | Picard is a set |
-|                 |                 |                 | of command line |
-|                 |                 |                 | tools for       |
-|                 |                 |                 | manipulating    |
-|                 |                 |                 | high-throughput |
-|                 |                 |                 | sequencing      |
+| Perl            |                 | |cpu|           |                 |
++-----------------+-----------------+-----------------+-----------------+
+| Picard          | ![](https://img | |cpu|           | Picard is a set |
+|                 | .shields.io/bad |                 | of command line |
+|                 | ge/version-2.19 |                 | tools for       |
+|                 | .0-yellowgreen? |                 | manipulating    |
+|                 | style=flat-squa |                 | high-throughput |
+|                 | re)             |                 | sequencing      |
 |                 |                 |                 | (HTS) data and  |
 |                 |                 |                 | formats such as |
 |                 |                 |                 | SAM/BAM/CRAM    |
 |                 |                 |                 | and VCF.        |
 +-----------------+-----------------+-----------------+-----------------+
-| `Pytorch <https | 19.10           | |gpu|           | PyTorch is an   |
-| ://docs.hpc.sjt |                 | |singularity|   | open source     |
-| u.edu.cn/applic |                 |                 | machine         |
-| ation/Pytorch/> |                 |                 | learning        |
-| `__             |                 |                 | library based   |
-|                 |                 |                 | on the Torch    |
+| Python          | ![](https://img | |cpu| |gpu|     |                 |
+|                 | .shields.io/bad | |singularity|   |                 |
+|                 | ge/version-3.7  |                 |                 |
+|                 | .4-yellowgreen? |                 |                 |
+|                 | style=flat-squa |                 |                 |
+|                 | re)             |                 |                 |
++-----------------+-----------------+-----------------+-----------------+
+| `Pytorch <https | ![](https://img | |gpu|           | PyTorch is an   |
+| ://docs.hpc.sjt | .shields.io/bad | |singularity|   | open source     |
+| u.edu.cn/applic | ge/version-1.6  |                 | machine         |
+| ation/Pytorch/> | .0-yellowgreen? |                 | learning        |
+| `__             | style=flat-squa |                 | library based   |
+|                 | re)             |                 | on the Torch    |
 |                 |                 |                 | library, used   |
 |                 |                 |                 | for             |
 |                 |                 |                 | applications    |
@@ -576,12 +684,12 @@ Pi上的软件
 |                 |                 |                 | Facebook’s AI   |
 |                 |                 |                 | Research lab.   |
 +-----------------+-----------------+-----------------+-----------------+
-| `Quantum-Espres | 6.4.1           | |cpu|           | Quantum         |
-| so <https://doc |                 |                 | Espresso is an  |
-| s.hpc.sjtu.edu. |                 |                 | integrated      |
-| cn/application/ |                 |                 | suite of        |
-| Quantum-Espress |                 |                 | Open-Source     |
-| o/>`__          |                 |                 | computer codes  |
+| `Quantum-Espres | ![](https://img | |cpu|           | Quantum         |
+| so <https://doc | .shields.io/bad |                 | Espresso is an  |
+| s.hpc.sjtu.edu. | ge/version-6.6  |                 | integrated      |
+| cn/application/ | -yellowgreen?   |                 | suite of        |
+| Quantum-Espress | style=flat-squa |                 | Open-Source     |
+| o/>`__          | re)             |                 | computer codes  |
 |                 |                 |                 | for             |
 |                 |                 |                 | electronic-stru |
 |                 |                 |                 | cture           |
@@ -611,12 +719,12 @@ Pi上的软件
 |                 |                 |                 | Statistical     |
 |                 |                 |                 | Computing.      |
 +-----------------+-----------------+-----------------+-----------------+
-| `Relion <https: | 3.0.8           | |gpu|           | REgularised     |
-| //docs.hpc.sjtu |                 |                 | LIkelihood      |
-| .edu.cn/applica |                 |                 | OptimisatioN    |
-| tion/Relion/>`_ |                 |                 | (RELION)        |
-| _               |                 |                 | employs an      |
-|                 |                 |                 | empirical       |
+| `Relion <https: | ![](https://img | |gpu|           | REgularised     |
+| //docs.hpc.sjtu | .shields.io/bad |                 | LIkelihood      |
+| .edu.cn/applica | ge/version-3.0  |                 | OptimisatioN    |
+| tion/Relion/>`_ | .8-yellowgreen? |                 | (RELION)        |
+| _               | style=flat-squa |                 | employs an      |
+|                 | re)             |                 | empirical       |
 |                 |                 |                 | Bayesian        |
 |                 |                 |                 | approach to     |
 |                 |                 |                 | refinement of   |
@@ -627,28 +735,71 @@ Pi上的软件
 |                 |                 |                 | electron        |
 |                 |                 |                 | cryomicroscopy. |
 +-----------------+-----------------+-----------------+-----------------+
-| RNA-SeQC        | 1.1.8           | |cpu|           | RNA-SeQC is a   |
-|                 |                 |                 | java program    |
-|                 |                 |                 | which computes  |
-|                 |                 |                 | a series of     |
-|                 |                 |                 | quality control |
-|                 |                 |                 | metrics for     |
+| RNA-SeQC        | ![](https://img | |cpu|           | RNA-SeQC is a   |
+|                 | .shields.io/bad |                 | java program    |
+|                 | ge/version-1.1  |                 | which computes  |
+|                 | .8-yellowgreen? |                 | a series of     |
+|                 | style=flat-squa |                 | quality control |
+|                 | re)             |                 | metrics for     |
 |                 |                 |                 | RNA-seq data.   |
 +-----------------+-----------------+-----------------+-----------------+
-| Salmon          | 0.14.1          | |cpu|           | Salmon is a     |
-|                 |                 |                 | tool for        |
-|                 |                 |                 | wicked-fast     |
-|                 |                 |                 | transcript      |
-|                 |                 |                 | quantification  |
-|                 |                 |                 | from RNA-seq    |
+| Salmon          | ![](https://img | |cpu|           | Salmon is a     |
+|                 | .shields.io/bad |                 | tool for        |
+|                 | ge/version-0.14 |                 | wicked-fast     |
+|                 | .1-yellowgreen? |                 | transcript      |
+|                 | style=flat-squa |                 | quantification  |
+|                 | re)             |                 | from RNA-seq    |
 |                 |                 |                 | data.           |
 +-----------------+-----------------+-----------------+-----------------+
-| SAMtools        | 1.9             | |cpu|           | SAM Tools       |
-|                 |                 |                 | provide various |
-|                 |                 |                 | utilities for   |
-|                 |                 |                 | manipulating    |
-|                 |                 |                 | alignments in   |
-|                 |                 |                 | the SAM format. |
+| SAMtools        | ![](https://img | |cpu|           | SAM Tools       |
+|                 | .shields.io/bad |                 | provide various |
+|                 | ge/version-1.9- |                 | utilities for   |
+|                 | yellowgreen?    |                 | manipulating    |
+|                 | style=flat-squa |                 | alignments in   |
+|                 | re)             |                 | the SAM format. |
++-----------------+-----------------+-----------------+-----------------+
+| SIESTA          | ![](https://img | |cpu|           | SIESTA is both  |
+|                 | .shields.io/bad |                 | a method and    |
+|                 | ge/version-4.0. |                 | its computer    |
+|                 | 1-yellowgreen?  |                 | program         |
+|                 | style=flat-squa |                 | implementation, |
+|                 | re)             |                 | to perform      |
+|                 |                 |                 | efficient       |
+|                 |                 |                 | electronic      |
+|                 |                 |                 | structure       |
+|                 |                 |                 | calculations    |
+|                 |                 |                 | and ab initio   |
+|                 |                 |                 | molecular       |
+|                 |                 |                 | dynamics        |
+|                 |                 |                 | simulations of  |
+|                 |                 |                 | molecules and   |
+|                 |                 |                 | solids.         |
+|                 |                 |                 | SIESTA's        |
+|                 |                 |                 | efficiency      |
+|                 |                 |                 | stems from the  |
+|                 |                 |                 | use of a basis  |
+|                 |                 |                 | set of strictly |
+|                 |                 |                 | -localized      |
+|                 |                 |                 | atomic orbitals |
+|                 |                 |                 | . A very        |
+|                 |                 |                 | important       |
+|                 |                 |                 | feature of the  |
+|                 |                 |                 | code is that    |
+|                 |                 |                 | its accuracy    |
+|                 |                 |                 | and cost can be |
+|                 |                 |                 | tuned in a wide |
+|                 |                 |                 | range, from     |
+|                 |                 |                 | quick           |
+|                 |                 |                 | exploratory     |
+|                 |                 |                 | calculations to |
+|                 |                 |                 | highly accurate |
+|                 |                 |                 | simulations     |
+|                 |                 |                 | matching the    |
+|                 |                 |                 | quality of      |
+|                 |                 |                 | other           |
+|                 |                 |                 | approaches,     |
+|                 |                 |                 | such as plane-  |
+|                 |                 |                 | wave methods.   |
 +-----------------+-----------------+-----------------+-----------------+
 | SOAPdenovo2     | 240             | |cpu|           | SOAPdenovo is a |
 |                 |                 |                 | novel           |
@@ -660,23 +811,23 @@ Pi上的软件
 |                 |                 |                 | the human-sized |
 |                 |                 |                 | genomes.        |
 +-----------------+-----------------+-----------------+-----------------+
-| SRAtoolkit      | 2.9.6           | |cpu|           | The SRA Toolkit |
-|                 |                 |                 | and SDK from    |
-|                 |                 |                 | NCBI is a       |
-|                 |                 |                 | collection of   |
-|                 |                 |                 | tools and       |
-|                 |                 |                 | libraries for   |
+| SRAtoolkit      | ![](https://img | |cpu|           | The SRA Toolkit |
+|                 | .shields.io/bad |                 | and SDK from    |
+|                 | ge/version-2.9  |                 | NCBI is a       |
+|                 | .6-yellowgreen? |                 | collection of   |
+|                 | style=flat-squa |                 | tools and       |
+|                 | re)             |                 | libraries for   |
 |                 |                 |                 | using data in   |
 |                 |                 |                 | the INSDC       |
 |                 |                 |                 | Sequence Read   |
 |                 |                 |                 | Archives.       |
 +-----------------+-----------------+-----------------+-----------------+
-| STAR            | 2.7.0           | |cpu|           | Spliced         |
-|                 |                 |                 | Transcripts     |
-|                 |                 |                 | Alignment to a  |
-|                 |                 |                 | Reference       |
-|                 |                 |                 | (STAR) software |
-|                 |                 |                 | is based on a   |
+| STAR            | ![](https://img | |cpu|           | Spliced         |
+|                 | .shields.io/bad |                 | Transcripts     |
+|                 | ge/version-2.7  |                 | Alignment to a  |
+|                 | .0-yellowgreen? |                 | Reference       |
+|                 | style=flat-squa |                 | (STAR) software |
+|                 | re)             |                 | is based on a   |
 |                 |                 |                 | previously      |
 |                 |                 |                 | undescribed     |
 |                 |                 |                 | RNA-seq         |
@@ -708,21 +859,36 @@ Pi上的软件
 |                 |                 |                 | transfer and    |
 |                 |                 |                 | stress.         |
 +-----------------+-----------------+-----------------+-----------------+
-| StringTie       | 1.3.4d          | |cpu|           | StringTie is a  |
-|                 |                 |                 | fast and highly |
-|                 |                 |                 | efficient       |
-|                 |                 |                 | assembler of    |
-|                 |                 |                 | RNA-Seq         |
-|                 |                 |                 | alignments into |
+| StringTie       | ![](https://img | |cpu|           | StringTie is a  |
+|                 | .shields.io/bad |                 | fast and highly |
+|                 | ge/version-1.3. |                 | efficient       |
+|                 | 4d-yellowgreen? |                 | assembler of    |
+|                 | style=flat-squa |                 | RNA-Seq         |
+|                 | re)             |                 | alignments into |
 |                 |                 |                 | potential       |
 |                 |                 |                 | transcripts.    |
 +-----------------+-----------------+-----------------+-----------------+
-| `TensorFlow <ht | 2.0.0           | |gpu|           | TensorFlow is a |
-| tps://docs.hpc. |                 | |singularity|   | free and        |
-| sjtu.edu.cn/app |                 |                 | open-source     |
-| lication/Tensor |                 |                 | software        |
-| Flow/>`__       |                 |                 | library for     |
-|                 |                 |                 | dataflow and    |
+| STRique         |                 | |cpu|           | STRique is a    |
+|                 |                 |                 | python package  |
+|                 |                 |                 | to analyze      |
+|                 |                 |                 | repeat          |
+|                 |                 |                 | expansion and   |
+|                 |                 |                 | methylation     |
+|                 |                 |                 | states of short |
+|                 |                 |                 | tandem repeats  |
+|                 |                 |                 | (STR) in Oxford |
+|                 |                 |                 | Nanopore        |
+|                 |                 |                 | Technology(ONT) |
+|                 |                 |                 | long read       |
+|                 |                 |                 | sequencing      |
+|                 |                 |                 | data.           |
++-----------------+-----------------+-----------------+-----------------+
+| `TensorFlow <ht | ![](https://img | |gpu|           | TensorFlow is a |
+| tps://docs.hpc. | .shields.io/bad | |singularity|   | free and        |
+| sjtu.edu.cn/app | ge/version-2.0  |                 | open-source     |
+| lication/Tensor | .0-yellowgreen? |                 | software        |
+| Flow/>`__       | style=flat-squa |                 | library for     |
+|                 | re)             |                 | dataflow and    |
 |                 |                 |                 | differentiable  |
 |                 |                 |                 | programming     |
 |                 |                 |                 | across a range  |
@@ -736,37 +902,37 @@ Pi上的软件
 |                 |                 |                 | such as neural  |
 |                 |                 |                 | networks.       |
 +-----------------+-----------------+-----------------+-----------------+
-| TopHat          | 2.1.2           | |cpu|           | TopHat is a     |
-|                 |                 |                 | program that    |
-|                 |                 |                 | aligns RNA-Seq  |
-|                 |                 |                 | reads to a      |
-|                 |                 |                 | genome in order |
-|                 |                 |                 | to identify     |
+| TopHat          | ![](https://img | |cpu|           | TopHat is a     |
+|                 | .shields.io/bad |                 | program that    |
+|                 | ge/version-2.1  |                 | aligns RNA-Seq  |
+|                 | .2-yellowgreen? |                 | reads to a      |
+|                 | style=flat-squa |                 | genome in order |
+|                 | re)             |                 | to identify     |
 |                 |                 |                 | exon-exon       |
 |                 |                 |                 | splice          |
 |                 |                 |                 | junctions.      |
 +-----------------+-----------------+-----------------+-----------------+
-| VarDictJava     | 1.5.1           | |cpu|           | VarDictJava is  |
-|                 |                 |                 | a variant       |
-|                 |                 |                 | discovery       |
-|                 |                 |                 | program written |
-|                 |                 |                 | in Java and     |
-|                 |                 |                 | Perl.           |
+| VarDictJava     | ![](https://img | |cpu|           | VarDictJava is  |
+|                 | .shields.io/bad |                 | a variant       |
+|                 | ge/version-1.5  |                 | discovery       |
+|                 | .1-yellowgreen? |                 | program written |
+|                 | style=flat-squa |                 | in Java and     |
+|                 | re)             |                 | Perl.           |
 +-----------------+-----------------+-----------------+-----------------+
-| `VASP <https:// |                 | |cpu| |gpu|     | A package for   |
-| docs.hpc.sjtu.e |                 |                 | ab initio,      |
-| du.cn/applicati |                 |                 | quantum-mechani |
-| on/VASP/>`__    |                 |                 | cal,            |
-|                 |                 |                 | molecular       |
-|                 |                 |                 | dynamics        |
+| `VASP <https:// | ![](https://img | |cpu| |gpu|     | A package for   |
+| docs.hpc.sjtu.e | .shields.io/bad |                 | ab initio,      |
+| du.cn/applicati | ge/version-5.4  |                 | quantum-mechani |
+| on/VASP/>`__    | .4-yellowgreen? |                 | cal,            |
+|                 | style=flat-squa |                 | molecular       |
+|                 | re)             |                 | dynamics        |
 |                 |                 |                 | simulations.    |
 +-----------------+-----------------+-----------------+-----------------+
-| VSEARCH         | 2.4.3           | |cpu|           | VSEARCH stands  |
-|                 |                 |                 | for vectorized  |
-|                 |                 |                 | search, as the  |
-|                 |                 |                 | tool takes      |
-|                 |                 |                 | advantage of    |
-|                 |                 |                 | parallelism in  |
+| VSEARCH         | ![](https://img | |cpu|           | VSEARCH stands  |
+|                 | .shields.io/bad |                 | for vectorized  |
+|                 | ge/version-2.4  |                 | search, as the  |
+|                 | .3-yellowgreen? |                 | tool takes      |
+|                 | style=flat-squa |                 | advantage of    |
+|                 | re)             |                 | parallelism in  |
 |                 |                 |                 | the form of     |
 |                 |                 |                 | SIMD            |
 |                 |                 |                 | vectorization   |
@@ -778,12 +944,12 @@ Pi上的软件
 |                 |                 |                 | alignments at   |
 |                 |                 |                 | high speed.     |
 +-----------------+-----------------+-----------------+-----------------+
-| `VMD <https://d | 1.9.4           | |cpu|           | VMD is a        |
-| ocs.hpc.sjtu.ed |                 | |singularity|   | molecular       |
-| u.cn/applicatio |                 |                 | visualization   |
-| n/VMD/>`__      |                 |                 | program for     |
-|                 |                 |                 | displaying,     |
-|                 |                 |                 | animating, and  |
+| `VMD <https://d | ![](https://img | |cpu|           | VMD is a        |
+| ocs.hpc.sjtu.ed | .shields.io/bad | |singularity|   | molecular       |
+| u.cn/applicatio | ge/version-1.9  |                 | visualization   |
+| n/VMD/>`__      | .4-yellowgreen? |                 | program for     |
+|                 | style=flat-squa |                 | displaying,     |
+|                 | re)             |                 | animating, and  |
 |                 |                 |                 | analyzing large |
 |                 |                 |                 | biomolecular    |
 |                 |                 |                 | systems using   |
@@ -792,8 +958,8 @@ Pi上的软件
 |                 |                 |                 | scripting.      |
 +-----------------+-----------------+-----------------+-----------------+
 
-.. |cpu| image:: https://img.shields.io/badge/-cpu-blue
-.. |gpu| image:: https://img.shields.io/badge/-gpu-green
+.. |cpu| image:: https://img.shields.io/badge/CPU-blue?style=flat-square
+.. |gpu| image:: https://img.shields.io/badge/DGX2-green?style=flat-square
 .. |arm| image:: https://img.shields.io/badge/-arm-yellow
 .. |singularity| image:: https://img.shields.io/badge/-singularity-blueviolet
 
