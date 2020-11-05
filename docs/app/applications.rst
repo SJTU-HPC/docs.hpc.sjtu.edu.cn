@@ -2,7 +2,7 @@ Pi上的软件
 ==========
 
 本文档介绍 Pi 上的软件。商业软件需用户自行获取版权并安装。 |cpu| |gpu|
-|arm| |singularity| 标签表明软件有 cpu, gpu, arm 和 singularity 版本
+|arm| 标签表明软件有 cpu, gpu 和 arm 版本。
 
 .. _pi-上的软件-1:
 
@@ -16,7 +16,7 @@ Pi上的软件
 | //docs.hpc.sjtu | .shields.io/bad |                 | package whose   |
 | .edu.cn/applica | ge/version-8.10 |                 | main program    |
 | tion/abinit/>`_ | .3-yellowgreen? |                 | allows one to   |
-|                 | style=flat-squa |                 | find the total  |
+| _               | style=flat-squa |                 | find the total  |
 |                 | re)             |                 | energy, charge  |
 |                 |                 |                 | density and     |
 |                 |                 |                 | electronic      |
@@ -340,7 +340,7 @@ Pi上的软件
 +-----------------+-----------------+-----------------+-----------------+
 | `Gromacs <https | ![](https://img | |cpu|           | GROMACS is a    |
 | ://docs.hpc.sjt | .shields.io/bad | |gpu|\ |arm|    | versatile       |
-| u.edu.cn/applic | ge/version-2020 | |singularity|   | package to      |
+| u.edu.cn/applic | ge/version-2020 |                 | package to      |
 | ation/Gromacs/> | -yellowgreen?   |                 | perform         |
 | `__             | style=flat-squa |                 | molecular       |
 |                 | re)             |                 | dynamics,       |
@@ -421,7 +421,7 @@ Pi上的软件
 +-----------------+-----------------+-----------------+-----------------+
 | `LAMMPS <https: | ![](https://img | |cpu|           | (Large-scale    |
 | //docs.hpc.sjtu | .shields.io/bad | |gpu|\ |arm|    | Atomic/Molecula |
-| .edu.cn/applica | ge/version-2020 | |singularity|   | r               |
+| .edu.cn/applica | ge/version-2020 |                 | r               |
 | tion/Lammps/>`_ | -yellowgreen?   |                 | Massively       |
 | _               | style=flat-squa |                 | Parallel        |
 |                 | re)             |                 | Simulator) a    |
@@ -566,7 +566,7 @@ Pi上的软件
 |                 |                 |                 | relativity.     |
 +-----------------+-----------------+-----------------+-----------------+
 | `Octave <https: | ![](https://img | |cpu|           | GNU Octave is   |
-| //docs.hpc.sjtu | .shields.io/bad | |singularity|   | software        |
+| //docs.hpc.sjtu | .shields.io/bad |                 | software        |
 | .edu.cn/applica | ge/version-5.2  |                 | featuring a     |
 | tion/Octave/>`_ | .0-yellowgreen? |                 | high-level      |
 | _               | style=flat-squa |                 | programming     |
@@ -577,7 +577,7 @@ Pi上的软件
 |                 |                 |                 | computations.   |
 +-----------------+-----------------+-----------------+-----------------+
 | `OpenFoam <http | 7, 1712, 1812,  | |cpu|           | OpenFOAM is an  |
-| s://docs.hpc.sj | 1912            | |singularity|   | open-source     |
+| s://docs.hpc.sj | 1912            |                 | open-source     |
 | tu.edu.cn/appli |                 |                 | toolbox for     |
 | cation/OpenFoam |                 |                 | computational   |
 | />`__           |                 |                 | fluid dynamics. |
@@ -659,14 +659,14 @@ Pi上的软件
 |                 |                 |                 | and VCF.        |
 +-----------------+-----------------+-----------------+-----------------+
 | Python          | ![](https://img | |cpu| |gpu|     |                 |
-|                 | .shields.io/bad | |singularity|   |                 |
+|                 | .shields.io/bad |                 |                 |
 |                 | ge/version-3.7  |                 |                 |
 |                 | .4-yellowgreen? |                 |                 |
 |                 | style=flat-squa |                 |                 |
 |                 | re)             |                 |                 |
 +-----------------+-----------------+-----------------+-----------------+
 | `Pytorch <https | ![](https://img | |gpu|           | PyTorch is an   |
-| ://docs.hpc.sjt | .shields.io/bad | |singularity|   | open source     |
+| ://docs.hpc.sjt | .shields.io/bad |                 | open source     |
 | u.edu.cn/applic | ge/version-1.6  |                 | machine         |
 | ation/Pytorch/> | .0-yellowgreen? |                 | learning        |
 | `__             | style=flat-squa |                 | library based   |
@@ -884,7 +884,7 @@ Pi上的软件
 |                 |                 |                 | data.           |
 +-----------------+-----------------+-----------------+-----------------+
 | `TensorFlow <ht | ![](https://img | |gpu|           | TensorFlow is a |
-| tps://docs.hpc. | .shields.io/bad | |singularity|   | free and        |
+| tps://docs.hpc. | .shields.io/bad |                 | free and        |
 | sjtu.edu.cn/app | ge/version-2.0  |                 | open-source     |
 | lication/Tensor | .0-yellowgreen? |                 | software        |
 | Flow/>`__       | style=flat-squa |                 | library for     |
@@ -945,7 +945,7 @@ Pi上的软件
 |                 |                 |                 | high speed.     |
 +-----------------+-----------------+-----------------+-----------------+
 | `VMD <https://d | ![](https://img | |cpu|           | VMD is a        |
-| ocs.hpc.sjtu.ed | .shields.io/bad | |singularity|   | molecular       |
+| ocs.hpc.sjtu.ed | .shields.io/bad |                 | molecular       |
 | u.cn/applicatio | ge/version-1.9  |                 | visualization   |
 | n/VMD/>`__      | .4-yellowgreen? |                 | program for     |
 |                 | style=flat-squa |                 | displaying,     |
@@ -961,5 +961,6 @@ Pi上的软件
 .. |cpu| image:: https://img.shields.io/badge/CPU-blue?style=flat-square
 .. |gpu| image:: https://img.shields.io/badge/DGX2-green?style=flat-square
 .. |arm| image:: https://img.shields.io/badge/-arm-yellow
+.. |studio| image::  https://img.shields.io/badge/Studio-inactive?style=flat-square
 .. |singularity| image:: https://img.shields.io/badge/-singularity-blueviolet
 
