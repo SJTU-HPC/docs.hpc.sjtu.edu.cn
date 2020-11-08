@@ -963,4 +963,3 @@ Pi上的软件
 .. |arm| image:: https://img.shields.io/badge/-arm-yellow
 .. |studio| image::  https://img.shields.io/badge/Studio-inactive?style=flat-square
 .. |singularity| image:: https://img.shields.io/badge/-singularity-blueviolet
-
