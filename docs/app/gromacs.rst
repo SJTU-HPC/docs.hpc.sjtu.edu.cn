@@ -177,8 +177,22 @@ Pi 集群已预置最新的 GPU GROMACS MPI 版。脚本名称可设为 slurm.te
 
    $ sbatch slurm.test
 
-|cpu| |gpu| 性能评测
---------------------
+性能测试
+--------
+
+本测试中使用到的测试算例均可在
+``/lustre/share/benchmarks/gromacs``\ 找到，用户可自行取用测试。测试时，需将上述目录复制到家目录下。
+
+Gromacs在CPU上的性能测试
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+使用 ``ion_channel.tpr`` 算例，不同Gromacs模块在单节点、2节点、4节点性能如下表所示，性能单位为 ``ns/day`` ，越高越好。
+
++------------+------------+-----------+
+|                  | 1 Node  | 2 Nodes  | 3 Nodes    |
++============+============+===========+
+| gromacs/2020-cpu | -  | - | - |
++------------+------------+-----------+
 
 测试使用了 GROMACS 提供的 Benchmark 算例进行了 CPU 和 GPU
 的性能进行对比。其中 cpu 测试使用单节点40核心，dgx2 测试分配 1 块 gpu
@@ -191,16 +205,14 @@ CPU (2019.2-gcc/8.3)      43.718
 CPU (2019.2-gcc/9.2)      43.362
 CPU (2019.4-gcc/8.3)      43.783
 CPU (2019.4-gcc/9.2)      43.057
-CPU (2019.4-intel/19.0.4) 43.296
-DGX2 (Singularity)        19.425
 ========================= ===================
 
-本测试中使用到的测试算例均可在
-``/lustre/share/benchmarks/gromacs``\ 找到，用户可自行取用测试。测试时，需将上述目录复制到家目录下。
+Gromacs在CPU上的性能测试
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 参考资料
 --------
 
--  `gromacs官方网站 <http://www.gromacs.org/>`__
--  `NVIDIA GPU CLOUD <ngc.nvidia.com>`__
--  `Singularity文档 <https://sylabs.io/guides/3.5/user-guide/>`__
+- gromacs官方网站 http://www.gromacs.org/
+- NVIDIA GPU CLOUD https://ngc.nvidia.com
+- Singularity文档 https://sylabs.io/guides/3.5/user-guide/
