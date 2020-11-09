@@ -5,10 +5,10 @@
 Pi 有许多预建的软件模块，并且数量还在不断增长。欢迎您告诉我们您研究领域中流行的软件。由于收费很少甚至为零，因此开源软件的安装优先级更高。
 
 软件分类
-=======
+===========
 
 原子分子软件
------------
+-------------------
 
 +------------------------+-----------------+-----------------+
 | Name                   | Version         | Platform        |
@@ -41,12 +41,10 @@ Pi 有许多预建的软件模块，并且数量还在不断增长。欢迎您�
 +------------------------+-----------------+-----------------+
 | :ref:`Paraview`        | 0.4.1           | |cpu| |studio|  |
 +------------------------+-----------------+-----------------+
-| :ref:`VMD`             | 1.9.4           | |cpu| |studio|  |
-+------------------------+-----------------+-----------------+
 
 
 工程计算软件
------------
+-------------------
 
 +------------------------+-----------------+-----------------+
 | Name                   | Version         | Platform        |
@@ -68,7 +66,7 @@ Pi 有许多预建的软件模块，并且数量还在不断增长。欢迎您�
 
 
 AI 计算软件
------------
+-------------------
 
 +------------------------+-----------------+-----------------+
 | Name                   | Version         | Platform        |
@@ -84,7 +82,7 @@ AI 计算软件
 
 
 生信计算软件
------------
+-------------------
 +------------------------+-----------------+-----------------+
 | Name                   | Version         | Platform        |
 +========================+=================+=================+
@@ -153,16 +151,14 @@ AI 计算软件
 | :ref:`VSEARCH`         | 2.4.3           | |cpu|           |
 +------------------------+-----------------+-----------------+
 
-.. |cpu| image:: https://img.shields.io/badge/CPU-blue?style=flat-square
-.. |gpu| image:: https://img.shields.io/badge/DGX2-green?style=flat-square
-.. |arm| image:: https://img.shields.io/badge/-arm-yellow
+
 .. |studio| image::  https://img.shields.io/badge/Studio-inactive?style=flat-square
 .. |singularity| image:: https://img.shields.io/badge/-singularity-blueviolet
 .. |version1.9.4| image:: https://img.shields.io/badge/version-1.9.4-yellowgreen?style=flat-square
 
 
 编译器和库
-===========
+=================
 
 编译器
 
@@ -194,7 +190,7 @@ intel-mpi Intel MPI 2019.4   2019.4
 +-----------+---------------------+----------+----------+----------------------------+
 
 软件使用
-==========
+================
 
 ENVIRONMENT MODULES可以帮助您在Pi上使用预构建的软件包。每个ENVIRONMENT
 MODULES都是可以实时应用和不应用的一组环境设置。用户可以编写自己的模块。
@@ -202,7 +198,7 @@ MODULES都是可以实时应用和不应用的一组环境设置。用户可以�
 本文档将向您介绍ENVIRONMENT MODULES的基本用法以及Pi上可用的软件模块。
 
 调用 module
------------
+-------------------
 
 ======================= ================================
 命令                    功能
@@ -290,7 +286,7 @@ MODULES智能选择与Slurm
 - Modules Software Environment on NERSC https://www.nersc.gov/users/software/nersc-user-environment/modules/
 
 conda 安装软件
-----------------
+-------------------
 
 下面介绍使用 Conda 在个人目录中安装生物信息类应用软件。
 
@@ -373,18 +369,22 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
 
 
 具体软件页面
-===========
+=================
 
 -  `abinit <abinit.html>`__
 -  `amber <amber.html>`__
 -  `cesm <cesm.html>`__
 -  `cp2k <cp2k.html>`__
+-  `cuda <cuda.html>`__
 -  `deepvariant <deepvariant.html>`__
 -  `desmond_and_maestro <desmond_and_maestro.html>`__
+-  `fftw <fftw.html>`__
 -  `gaussian <gaussian.html>`__
 -  `geant4 <geant4.html>`__
+-  `gnu <gnu.html>`__
 -  `gnuplot <gnuplot.html>`__
 -  `gromacs <gromacs.html>`__
+-  `intel <intel.html>`__
 -  `keras <keras.html>`__
 -  `lammps <lammps.html>`__
 -  `mrbayes <mrbayes.html>`__
@@ -394,12 +394,16 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
 -  `nwchem <nwchem.html>`__
 -  `openfoam <openfoam.html>`__
 -  `ovito <ovito.html>`__
+-  `octave <octave.html>`__
 -  `pytorch <pytorch.html>`__
+-  `perl <perl.html>`__
+-  `python <python.html>`__
 -  `quantum-espresso <quantum-espresso.html>`__
 -  `relion <relion.html>`__
 -  `siesta <siesta.html>`__
 -  `star-ccm <star-ccm.html>`__
 -  `strique <strique.html>`__
+-  `r <r.html>`__
 -  `tensorflow <tensorflow.html>`__
 -  `vasp <vasp.html>`__
 -  `vmd <vmd.html>`__
@@ -411,17 +415,20 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    :maxdepth: 1
    :hidden:
 
-   conda
    abinit
    amber 
    cesm
    cp2k
+   cuda
    deepvariant
    desmond_and_maestro
+   fftw
    gaussian
    geant4
+   gnu
    gnuplot
    gromacs
+   intel
    keras
    lammps
    mrbayes
@@ -431,9 +438,13 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    nwchem
    openfoam
    ovito
+   octave
    pytorch
+   python
+   perl
    quantum-espresso
    relion
+   r
    siesta
    spark
    star-ccm
@@ -441,3 +452,8 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    tensorflow
    vasp
    vmd
+   bio
+   
+
+
+

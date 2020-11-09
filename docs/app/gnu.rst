@@ -1,4 +1,4 @@
-使用GNU编译器套件编译软件
+GNU编译器
 =========================
 
 GNU通用公共许可协议（英语：GNU General Public License，缩写GNU GPL 或
