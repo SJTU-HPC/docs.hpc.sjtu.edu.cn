@@ -1,3 +1,5 @@
+.. _deepvariant:
+
 DeepVariant
 ===========
 
@@ -14,8 +16,8 @@ learning framework.
 CPU 版本的 Singularity DeepVariant
 ----------------------------------
 
-安装
-~~~~
+CPU版安装
+~~~~~~~~~~
 
 申请计算节点，然后制作 singularity 镜像
 
@@ -65,8 +67,8 @@ CPU 版本的 Singularity DeepVariant
 GPU 版本的 Singularity DeepVariant
 ----------------------------------
 
-安装
-~~~~
+GPU版安装
+~~~~~~~~~~
 
 申请计算节点，然后制作 singularity 镜像
 

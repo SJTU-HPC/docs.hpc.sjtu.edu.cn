@@ -1,4 +1,4 @@
-.. _appcuda:
+.. _cuda:
 
 CUDA
 ====

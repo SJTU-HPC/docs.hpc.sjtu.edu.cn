@@ -18,16 +18,14 @@ Pi 上的 LAMMPS
 
 Pi 上有多种版本的 LAMMPS:
 
--  |cpu| 参考 [1]_
+-  |cpu| `CPU版本 LAMMPS`_
 
--  |gpu| 参考 [2]_
+-  |gpu| `GPU版本 LAMMPS`_
 
--  |arm| arm
+-  |arm|
 
-CPU 版本 LAMMPS
----------------
+.. _CPU版本 LAMMPS:
 
-.. [1]
 
 |cpu| CPU 版本
 ~~~~~~~~~~~~~~
@@ -153,13 +151,13 @@ slurm.test
 
    srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
 
-.. [2]
 
-|gpu| GPU 版本 LAMMPS
----------------------
+.. _GPU版本 LAMMPS:
+
+|gpu| GPU版本
+~~~~~~~~~~~~~
 
 GPU 版本速度跟 intel CPU 版本基本相同
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pi 上提供了 GPU 版本的 LAMMPS 2020。经测试，LJ 和 EAM 两 Benchmark
 算例与同等计算费用的 CPU 基本一样。建议感兴趣的用户针对自己的算例，测试
@@ -198,7 +196,6 @@ GPU 版 LAMMPS。脚本名称可设为 slurm.test
 ------------------------------
 
 GPU 版本速度跟 intel CPU 版本基本相同
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Pi 上提供了 GPU + kokkos 版本的 LAMMPS 15Jun2020。采用容器技术，使用
 LAMMPS 官方提供给 NVIDIA 的镜像，针对 Tesla V100 的 GPU
@@ -244,6 +241,3 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 -  `LAMMPS 官网 <https://lammps.sandia.gov/>`__
 -  `NVIDIA GPU CLOUD <ngc.nvidia.com>`__
 
-.. |cpu| image:: https://img.shields.io/badge/-cpu-blue
-.. |gpu| image:: https://img.shields.io/badge/-gpu-green
-.. |arm| image:: https://img.shields.io/badge/-arm-yellow

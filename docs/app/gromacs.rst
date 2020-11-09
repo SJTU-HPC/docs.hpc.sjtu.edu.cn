@@ -14,18 +14,18 @@ Pi 上的 GROMACS
 
 Pi 上有多种版本的 GROMACS:
 
--  |cpu| cpu,参考 [1]_
+-  |cpu| `CPU版本GROMACS`_
 
--  |cpu| cpu,参考 [2]_
+-  |cpu| `CPU版本GROMACS（双精度）`_
 
--  |gpu| gpu,参考 [3]_
+-  |gpu| `GPU版本GROMACS`_
 
--  |gpu| gpu,MPI 版，参考 [4]_
+-  |gpu| `GPU版本GROMACS+MPI`_
 
 -  |arm| arm
 
 |cpu| (CPU) GROMACS 模块调用
-----------------------------
+----------------------------------
 
 查看 Pi 上已编译的软件模块:
 
@@ -39,10 +39,11 @@ Pi 上有多种版本的 GROMACS:
 
    $ module load gromacs/2020-cpu
 
-.. [1]
 
 |cpu| CPU 版本的 GROMACS
 ------------------------
+
+.. _CPU版本GROMACS:
 
 使用 CPU 版本的 GROMACS
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -75,7 +76,8 @@ Pi 上有多种版本的 GROMACS:
 
    $ sbatch slurm.test
 
-.. [2]
+.. _CPU版本GROMACS（双精度）:
+
 
 使用 CPU 版本的 GROMACS (双精度)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -108,7 +110,7 @@ Pi 上有多种版本的 GROMACS:
 
    $ sbatch slurm.test
 
-.. [3]
+.. _GPU版本GROMACS:
 
 |gpu| GPU 版本的 GROMACS
 ------------------------
@@ -141,7 +143,8 @@ Pi 集群已预置最新的 GPU GROMACS。脚本名称可设为 slurm.test
 
    $ sbatch slurm.test
 
-.. [4]
+
+.. _GPU版本GROMACS+MPI:
 
 |gpu| GPU 版本的 GROMACS (MPI 版)
 ---------------------------------
@@ -201,7 +204,3 @@ DGX2 (Singularity)        19.425
 -  `gromacs官方网站 <http://www.gromacs.org/>`__
 -  `NVIDIA GPU CLOUD <ngc.nvidia.com>`__
 -  `Singularity文档 <https://sylabs.io/guides/3.5/user-guide/>`__
-
-.. |cpu| image:: https://img.shields.io/badge/-cpu-blue
-.. |gpu| image:: https://img.shields.io/badge/-gpu-green
-.. |arm| image:: https://img.shields.io/badge/-arm-yellow

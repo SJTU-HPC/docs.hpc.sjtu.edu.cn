@@ -1,4 +1,4 @@
-.. _apppython:
+.. _python:
 
 Python
 ======
@@ -123,4 +123,4 @@ R拓展模块查询方法
 参考资料
 --------
 
--  `miniconda https://docs.conda.io/en/latest/miniconda.html
+-  `miniconda <https://docs.conda.io/en/latest/miniconda.html/>`__

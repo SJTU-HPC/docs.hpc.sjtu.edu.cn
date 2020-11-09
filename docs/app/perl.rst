@@ -1,4 +1,4 @@
-.. _appperl:
+.. _perl:
 
 PERL
 ====
@@ -118,5 +118,5 @@ Perl的SLURM作业示例
 --------
 
 -  `Set Install path in
-   CPAN http://www.perlmonks.org/?node_id=630026
--  `perl模块安装大全 http://www.bio-info-trainee.com/2451.html
+   CPAN <http://www.perlmonks.org/?node_id=630026/>`__
+-  `perl模块安装大全 <http://www.bio-info-trainee.com/2451.html/>`__
