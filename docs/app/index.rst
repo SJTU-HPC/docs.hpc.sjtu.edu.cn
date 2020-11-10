@@ -168,7 +168,7 @@ AI 计算软件
 :ref:`gnu`      GNU编译器集合   5.5 8.3 9.2 9.2
 :ref:`intel`    Intel编译器套件 19.0.4      19.0.4
 pgi             PGI编译器       19.4        19.4
-:ref:`cuda`     NVIDIA CUDA SDK 10.0 9.0    10.0
+:doc:`cuda`     NVIDIA CUDA SDK 10.0 9.0    10.0
 jdk             Java开发套件    11.0        11.0
 =============== =============== =========== ========
 
