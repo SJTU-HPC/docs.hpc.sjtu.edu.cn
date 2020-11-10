@@ -20,3 +20,4 @@ _build
 +_build/.gitignore
 *.#*
 docs/reframe-tests-master*
+docs/_static/reframe-tests-master*

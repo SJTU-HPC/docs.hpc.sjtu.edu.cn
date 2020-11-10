@@ -151,14 +151,8 @@ AI 计算软件
 |       VSEARCH          | 2.4.3           | |cpu|           |
 +------------------------+-----------------+-----------------+
 
-
-.. |studio| image::  https://img.shields.io/badge/Studio-inactive?style=flat-square
-.. |singularity| image:: https://img.shields.io/badge/-singularity-blueviolet
-.. |version1.9.4| image:: https://img.shields.io/badge/version-1.9.4-yellowgreen?style=flat-square
-
-
 编译器和库
-=================
+==========
 
 编译器
 

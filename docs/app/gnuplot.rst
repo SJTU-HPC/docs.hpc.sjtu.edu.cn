@@ -61,9 +61,9 @@ HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
 
 2. 或在 Pi 上用 squeue 查看作业，并用 scancel 终止该作业
 
-.. image:: ../img/gnuplot.gif
+.. image:: /img/gnuplot.*
 
 参考资料
 --------
 
--  `gnuplot 官网 <http://www.gnuplot.info/>`__
+-  gnuplot http://www.gnuplot.info/
