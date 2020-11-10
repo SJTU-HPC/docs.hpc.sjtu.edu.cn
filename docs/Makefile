@@ -14,9 +14,8 @@ help:
 
 # Download code samples from https://github.com/SJTU-HPC/reframe-tests.git
 download:
-	wget --no-check-certificate --content-disposition https://codeload.github.com/SJTU-HPC/reframe-tests/zip/master
-	unzip reframe-tests-master.zip
-	mv reframe-tests-master/sjtuhpc-checks _static/
+	wget --no-check-certificate --content-disposition https://codeload.github.com/SJTU-HPC/reframe-tests/zip/master -O _build/reframe-tests-master.zip
+	unzip -f _build/reframe-tests-master.zip -d _static/
 
 .PHONY: help Makefile download
 
