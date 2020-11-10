@@ -18,3 +18,4 @@ node_modules
 package-lock.json
 _build
 *.#*
+docs/reframe-tests-master*
