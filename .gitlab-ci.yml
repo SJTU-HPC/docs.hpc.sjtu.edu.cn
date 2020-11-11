@@ -2,9 +2,21 @@ variables:
     GIT_STRATEGY: clone
 
 stages:
+  - check raw html
   - build pdf
   - build html
   - deploy
+
+fail_if_contain_raw_html:
+  stage: check raw html
+  image: sjtuhpc/texlive-sphinx
+  tags:
+    - docker
+  before_script:
+    - apt-get update -y
+    - apt-get install -y ack-grep
+  script:
+    - ack '.*raw.*html' docs && false || true
 
 build_latex_pdf:
   stage: build pdf
@@ -48,7 +60,7 @@ build_html_pages:
     key: ${CI_JOB_NAME}
     paths:
       - .build_cache
-
+     
 deploy_html_and_pdf_to_nginx_directory:
   stage: deploy
   tags:
