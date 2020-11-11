@@ -1,6 +1,6 @@
 .. _conda: 
 
-用Conda安装生信软件
+Conda安装软件
 ===================
 
 本文档介绍使用 Conda 在个人目录中安装生物信息类应用软件。
@@ -19,81 +19,6 @@
 -  `km <#km>`__
 -  `Requests <#requests>`__
 
-用 Conda 安装软件的流程
------------------------
-
-加载 Miniconda3
-
-.. code:: bash
-
-   $ module purge
-   $ module load miniconda3
-
-创建 conda 环境来安装所需 Python 包（可指定 Python 版本，也可以不指定）
-
-.. code:: bash
-
-   $ conda create --name mypy
-
-激活 python 环境
-
-.. code:: bash
-
-   $ source activate mypy
-
-安装之前，先申请计算节点资源（登陆节点禁止大规模编译安装）
-
-.. code:: bash
-
-   $ srun -p small -n 4 --pty /bin/bash
-
-通过 conda 安装软件包（有些软件也可以用 pip
-安装。软件官网一般给出推荐，用 conda 还是 pip）
-
-.. code:: bash
-
-   $ conda install -c bioconda openslide-python （以 openslide-python 为例）
-
-生信软件在Pi上的使用：用slurm提交作业
------------------------------------------
-
-Pi 上的计算，需用 slurm 脚本提交作业，或在计算节点提交交互式任务
-
-slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
-``hello world``
-
-.. code:: bash
-
-   #!/bin/bash
-   #SBATCH -J py_test
-   #SBATCH -p small
-   #SBATCH -n 2
-   #SBATCH --ntasks-per-node=2
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-
-   module purge
-   module load miniconda3
-
-   source activate mypy
-
-   python -c "print('hello world')"
-
-我们假定以上脚本内容被写到了 ``hello_python.slurm`` 中，使用 ``sbatch``
-指令提交作业
-
-.. code:: bash
-
-   $ sbatch hello_python.slurm
-
-软件安装示例
-------------
-
-许多生信软件可以在 anaconda 的 bioconda package 里找到：
-
-https://anaconda.org/bioconda
-
-以下为一些软件的具体安装步骤：
 
 openslide-python安装
 ---------------------

@@ -30,8 +30,8 @@ Pi上的ABINIT
 Pi上的Slurm脚本 slurm.test
 -----------------------------
 
-在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
-核，所以这里使用了 2 个节点：
+在 cpu 队列上，总共使用 80 核 (n = 80)
+cpu 队列每个节点配有 40核，所以这里使用了 2 个节点：
 
 .. code:: bash
 
@@ -47,7 +47,7 @@ Pi上的Slurm脚本 slurm.test
    module purge
    module load abinit
 
-   srun --mpi=pmi2 < example.in
+   srun --mpi=pmi2 abinit < example.in
 
 Pi上提交作业
 -------------

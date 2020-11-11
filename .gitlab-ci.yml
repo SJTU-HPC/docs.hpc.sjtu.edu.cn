@@ -2,9 +2,21 @@ variables:
     GIT_STRATEGY: clone
 
 stages:
+  - check raw html
   - build pdf
   - build html
   - deploy
+
+fail_if_contain_raw_html:
+  stage: check raw html
+  image: sjtuhpc/texlive-sphinx
+  tags:
+    - docker
+  before_script:
+    - apt-get update -y
+    - apt-get install -y ack-grep
+  script:
+    - ack '.*raw.*html' docs && false || true
 
 build_latex_pdf:
   stage: build pdf
@@ -15,7 +27,7 @@ build_latex_pdf:
     - mkdir -p .build_cache
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
-    - make -C docs latexpdf
+    - make -C docs clean latexpdf
     - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/pi.pdf
     - mv docs/_build/latex/pi_small.pdf  docs/_build/latex/pi.pdf
   artifacts:
@@ -40,7 +52,7 @@ build_html_pages:
   script:
     - mkdir docs/_static || true
     - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
-    - make -C docs html
+    - make -C docs clean html
   artifacts:
     paths:
       - docs/_build/html
@@ -48,7 +60,7 @@ build_html_pages:
     key: ${CI_JOB_NAME}
     paths:
       - .build_cache
-
+     
 deploy_html_and_pdf_to_nginx_directory:
   stage: deploy
   tags:

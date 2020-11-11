@@ -16,12 +16,13 @@ $ module avail espresso
 
 调用该模块:
 ```bash
-$ module load quantum-espresso/6.5-intel-19.0.5-impi
+$ module load quantum-espresso/6.6
 ```
 
-## Pi 上的 Slurm 脚本 slurm.test
+## Pi 上使用 Quantum ESPRESSO
+
 在 cpu 队列上，总共使用 80 核 (n = 80)<br>
-cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
+cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
 ```bash
 #!/bin/bash
 
@@ -35,18 +36,17 @@ cpu 队列每个节点配有 40 核，所以这里使用了 2 个节点：
 ulimit -s unlimited
 ulimit -l unlimited
 
-export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-export I_MPI_FABRICS=shm:ofi
+module purge
+module load quantum-espresso/6.6
 
-module load quantum-espresso/6.5-intel-19.0.5-impi
-
-srun pw.x -i test.in
+srun --mpi=pmi2 pw.x -i test.in
 ```
 
-## Pi 上提交作业
+使用如下指令提交：
+
 ```bash
 $ sbatch slurm.test
 ```
 
-## 参考资料
+## 参考链接
 - [Quantum ESPRESSO 官网](https://www.quantum-espresso.org/)

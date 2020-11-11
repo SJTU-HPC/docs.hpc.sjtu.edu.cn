@@ -38,15 +38,8 @@
 
 ##
 
-.. raw:: html
-
-   <center>
-
 π 集群队列介绍
-
-.. raw:: html
-
-   <center/>
+--------------
 
 π 集群上现有 small, cpu, huge, 192c6t 和 dgx2 队列。
 
@@ -98,15 +91,8 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
 
 ##
 
-.. raw:: html
-
-   <center>
-
 各队列作业示例
-
-.. raw:: html
-
-   <center/>
+--------------
 
 下面根据不同队列，示例 slurm 作业脚本
 
@@ -178,15 +164,8 @@ dgx2
 
 ##
 
-.. raw:: html
-
-   <center>
-
 常用软件作业示例
-
-.. raw:: html
-
-   <center/>
+----------------
 
 下面根据不同应用软件，示例 slurm 作业脚本
 
@@ -296,15 +275,8 @@ module load miniconda3 source activate tf-env
 
 ##
 
-.. raw:: html
-
-   <center>
-
 其它示例
-
-.. raw:: html
-
-   <center/>
+--------
 
 singularity 容器
 ~~~~~~~~~~~~~~~~

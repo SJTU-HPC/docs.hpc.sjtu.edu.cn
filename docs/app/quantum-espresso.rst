@@ -16,7 +16,7 @@ Electronic Structure, Simulation, and Optimization. It is freely
 available to researchers around the world under the terms of the GNU
 General Public License.
 
-Pi上的Quantum ESPRESSO
+Pi 上的 Quantum ESPRESSO
 ------------------------
 
 查看 Pi 上已编译的软件模块:
@@ -29,13 +29,13 @@ Pi上的Quantum ESPRESSO
 
 .. code:: bash
 
-   $ module load quantum-espresso/6.5-intel-19.0.5-impi
+   $ module load quantum-espresso/6.6
 
-Pi上的Slurm脚本slurm.test
------------------------------
+Pi 上使用 Quantum ESPRESSO
+--------------------------
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
-核，所以这里使用了 2 个节点：
+核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
 
 .. code:: bash
 
@@ -51,15 +51,12 @@ Pi上的Slurm脚本slurm.test
    ulimit -s unlimited
    ulimit -l unlimited
 
-   export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
+   module purge
+   module load quantum-espresso/6.6
 
-   module load quantum-espresso/6.5-intel-19.0.5-impi
+   srun --mpi=pmi2 pw.x -i test.in
 
-   srun pw.x -i test.in
-
-Pi上提交作业
--------------
+使用如下指令提交：
 
 .. code:: bash
 

@@ -13,14 +13,11 @@ $ cd vasp.5.4.4
 ```bash
 $ wget http://theory.cm.utexas.edu/code/vtstcode-179.tgz
 $ tar xvf vtstcode.tgz
+$ cd vasp.5.4.4   (再回到 vasp 文件夹进行安装)
 ```
-  - 备份 VASP 文件（可选）
+  - 在 vasp 文件夹里开始安装。首先替换部分 VASP 文件：
 ```bash
-$ cp src/chain.F src/chain.F-org
-```
-  - 替换部分 VASP 文件
-```bash
-$ cp vtstcode-179/* src/
+$ cp ../vtstcode-179/* src/
 ```
   - 修改源文件, 在 `src/main.F` 中将第3146行如下内容：
 ```fortran
@@ -48,7 +45,7 @@ $ module load intel-parallel-studio/cluster.2018.4-intel-18.0.4
 ```
 上述操作后会 load 包括 intel compilers, intel-mpi, intel-mkl 等所需的编译器组件，您可以使用 ``echo $MKLROOT`` 等方式检查是否成功导入.
 
-- 使用 `arch/ makefile.include.linux_intel` 作为模板
+- 使用 `arch/makefile.include.linux_intel` 作为模板
 ```bash
 $ cp arch/makefile.include.linux_intel makefile.include
 ```
@@ -56,11 +53,11 @@ $ cp arch/makefile.include.linux_intel makefile.include
 - 清理之前编译的文件（某些情况需要）并编译
 ```bash
 $ make veryclean
-$ make
+$ make     （不建议用 -j）
 ```
 现在 `./bin` 目录中的二进制文件包含 vasp_std vasp_gam vasp_ncl. 您也可以单独编译每一个，用指令例如：`make std` 即可编译 vasp_std
 
-## 提交Intel+CPU版本VASP任务
+## 提交 Intel+CPU 版本 VASP 任务
 
 使用intel编译的CPU版本VASP运行单节点作业脚本示例vasp_cpu_intel.slurm如下：
 
@@ -149,7 +146,7 @@ $ sbatch vasp_gpu_intel.slurm
 - [Pt](https://hpc.sjtu.edu.cn/Item/docs/mp-126_Pt.tar.gz)
 
 
-## 参考资料
+## 参考文献
 
 - [VASP 5.4.1+VTST编译安装](http://hmli.ustc.edu.cn/doc/app/vasp.5.4.1-vtst.htm)
 - [VTST installation](http://theory.cm.utexas.edu/vtsttools/installation.html)
