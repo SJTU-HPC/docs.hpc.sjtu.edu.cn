@@ -124,15 +124,8 @@ OpenMP 示例
 
 ##
 
-.. raw:: html
-
-   <center>
-
 MPI示例
-
-.. raw:: html
-
-   </center>
+-------
 
 以mpihello.c为例，代码如下：
 
@@ -257,17 +250,8 @@ MPI示例
 
    $ sbatch -p cpu job_impi.slurm
 
-##
-
-.. raw:: html
-
-   <center>
-
-MPI + OpenMP混合示例
-
-.. raw:: html
-
-   </center>
+MPI+OpenMP混合示例
+------------------
 
 以hybridmpi.c为例，代码如下：
 
@@ -372,15 +356,8 @@ MPI + OpenMP混合示例
 
 ##
 
-.. raw:: html
-
-   <center>
-
-CUDA 示例
-
-.. raw:: html
-
-   </center>
+CUDA示例
+--------
 
 以cublashello.cu为例，代码如下：
 
@@ -494,15 +471,8 @@ CUDA 示例
 
 ##
 
-.. raw:: html
-
-   <center>
-
 通过sbatch运行Intel LINPACK
-
-.. raw:: html
-
-   </center>
+----------------------------
 
 假如在多节点运行MPI作业，首先准备执行文件并输入数据：
 
@@ -566,10 +536,6 @@ CUDA 示例
 .. code:: bash
 
    $ scancel 358
-
-.. raw:: html
-
-   <!-- ## <center>提交具有Spack依赖关系的作业</center>
 
    以下是一个运行Space的应用程序(gromacs)的作业脚本示例。 
    ```bash
