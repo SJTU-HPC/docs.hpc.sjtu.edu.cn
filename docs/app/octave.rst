@@ -1,4 +1,4 @@
-.. _appoctave:
+.. _octave:
 
 Octave
 ======
@@ -55,5 +55,5 @@ Octave是一种采用高级编程语言的主要用于数值分析的软件。Oc
 参考资料
 --------
 
--  `Octave https://www.gnu.org/software/octave/
--  `Singularity文档 https://sylabs.io/guides/3.5/user-guide/
+-  `Octave <https://www.gnu.org/software/octave/>`__
+-  `Singularity文档 <https://sylabs.io/guides/3.5/user-guide/>`__

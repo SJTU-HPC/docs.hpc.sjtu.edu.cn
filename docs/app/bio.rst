@@ -10,302 +10,21 @@
 .. code:: bash
 
    $ srun -p small -n 4 --pty /bin/bash
+   
++-----------------+-------------+-------------+---------------+
+| MELT            | Manta       | Lumpy       | Hydra-sv      |
++-----------------+-------------+-------------+---------------+
+| VariationHunter | GRIDSS      | GenomeSTRiP | FermiKit      |
++-----------------+-------------+-------------+---------------+
+| ERDS            | DELLY       | CREST       | Control-FREEC |
++-----------------+-------------+-------------+---------------+
+| CNVnator        | CLEVER      | BreakDancer |BICseq2        |
++-----------------+-------------+-------------+---------------+
+| BatVI           | BASIL-ANISE | MetaSV      |MindTheGap     |
++-----------------+-------------+-------------+---------------+
+| Mobster         | pbsv        | Pindel      |PRISM          |
++-----------------+-------------+-------------+---------------+
 
-.. raw:: html
-
-   <table>
-
-.. raw:: html
-
-   <tr>
-
-.. raw:: html
-
-   <td>
-
-MELT
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-Manta
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-Lumpy
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-Hydra-sv
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   </tr>
-
-.. raw:: html
-
-   <tr>
-
-.. raw:: html
-
-   <td>
-
-VariationHunter
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-GRIDSS
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-GenomeSTRiP
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-FermiKit
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   </tr>
-
-.. raw:: html
-
-   <tr>
-
-.. raw:: html
-
-   <td>
-
-ERDS
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-DELLY
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-CREST
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-Control-FREEC
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   </tr>
-
-.. raw:: html
-
-   <tr>
-
-.. raw:: html
-
-   <td>
-
-CNVnator
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-CLEVER
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-BreakDancer
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-BICseq2
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   </tr>
-
-.. raw:: html
-
-   <tr>
-
-.. raw:: html
-
-   <td>
-
-BatVI
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-BASIL-ANISE
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-MetaSV
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-MindTheGap
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   </tr>
-
-.. raw:: html
-
-   <tr>
-
-.. raw:: html
-
-   <td>
-
-Mobster
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-pbsv
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-Pindel
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   <td>
-
-PRISM
-
-.. raw:: html
-
-   </td>
-
-.. raw:: html
-
-   </tr>
-
-.. raw:: html
-
-   </table>
 
 MELT安装
 --------
@@ -623,3 +342,190 @@ PRISM安装
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
    conda install -c conda-forge pyprism
+
+
+
+openslide-python安装
+---------------------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda openslide-python
+   conda install libiconv
+
+pandas安装
+-----------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c anaconda pandas
+
+cdsapi安装
+-----------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c conda-forge cdsapi
+
+STRique安装
+------------
+
+完整步骤
+
+.. code:: bash
+
+   srun -p small -n 4 --pty /bin/bash
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   git clone --recursive https://github.com/giesselmann/STRique
+   cd STRique
+   pip install -r requirements.txt
+   python setup.py install 
+
+r-rgl安装
+----------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c r r-rgl
+
+sra-tools安装
+--------------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda sra-tools
+
+DESeq2安装
+-----------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda bioconductor-deseq2
+
+安装完成后可以在 R 中输入 ``library("DESeq2")`` 检测是否安装成功
+
+WGCNA安装
+----------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda r-wgcna
+
+MAKER安装
+----------
+
+完整步骤
+
+.. code:: bash
+
+   srun -p small -n 4 --pty /bin/bash
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda maker
+
+AUGUSTUS安装
+-------------
+
+完整步骤
+
+.. code:: bash
+
+   srun -p small -n 4 --pty /bin/bash
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c anaconda boost
+   conda install -c bioconda augustus
+
+DeepGo安装
+-----------
+
+完整步骤
+
+.. code:: bash
+
+   srun -p small -n 4 --pty /bin/bash
+   git clone https://github.com/bio-ontology-research-group/deepgo.git
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install pip
+   pip install -r requirements.txt
+
+km安装
+-------
+
+完整步骤
+
+.. code:: bash
+
+   srun -p small -n 4 --pty /bin/bash
+   git clone https://github.com/iric-soft/km.git
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   chmod +x easy_install.sh 
+   ./easy_install.sh
+
+Requests安装
+-------------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c anaconda requests
+

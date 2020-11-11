@@ -108,9 +108,30 @@ html_theme_options = {
 # Add doc prefix for atutlabeling
 autosectionlabel_prefix_document = True
 
+# Image Match Order for HTML Builder
+from sphinx.builders.html import StandaloneHTMLBuilder
+StandaloneHTMLBuilder.supported_image_types = [
+    'image/svg+xml',
+    'image/gif',
+    'image/png',
+    'image/jpeg',
+    'image/jpg'
+]
+
+# Image Match Order for HTML Builder
+from sphinx.builders.latex import LaTeXBuilder
+LaTeXBuilder.supported_image_types = [
+    'image/pdf',
+    'image/png',
+    'image/jpeg',
+    'image/jpg'
+]
+
+# Image Placeholder
 rst_prolog = """
 .. |cpu| image:: /img/cpu-icon.png
 .. |gpu| image:: /img/gpu-icon.png
 .. |arm| image:: /img/arm-icon.png
 .. |sig| image:: /img/singularity-icon.png
+.. |studio| image:: /img/studio-icon.png
 """

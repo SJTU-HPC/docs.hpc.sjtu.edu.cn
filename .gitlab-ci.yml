@@ -28,7 +28,7 @@ build_latex_pdf:
     - mkdir -p .build_cache
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
-    - make -C docs latexpdf
+    - make -C docs clean latexpdf
     - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/pi.pdf
     - mv docs/_build/latex/pi_small.pdf  docs/_build/latex/pi.pdf
   artifacts:
@@ -53,7 +53,7 @@ build_html_pages:
   script:
     - mkdir docs/_static || true
     - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
-    - make -C docs html
+    - make -C docs clean html
   artifacts:
     paths:
       - docs/_build/html

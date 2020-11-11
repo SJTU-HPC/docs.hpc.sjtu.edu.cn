@@ -15,8 +15,8 @@ Pi超算集群用户文档
 5. :doc:`studio/rdp`
 6. :doc:`job/index`
 7. :doc:`app/index`
-8. :doc:`language/gnu`
-9. :doc:`language/intel`
+8. :doc:`app/gnu`
+9. :doc:`app/intel`
 10. :doc:`faq/index`
 
 .. toctree::
@@ -60,12 +60,6 @@ Pi超算集群用户文档
    :hidden:
 
    app/index
-
-.. toctree::
-   :maxdepth: 2
-   :hidden:
-
-   language/index
 
 .. toctree::
    :maxdepth: 2

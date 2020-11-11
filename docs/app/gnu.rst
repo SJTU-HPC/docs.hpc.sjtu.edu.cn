@@ -1,4 +1,6 @@
-使用GNU编译器套件编译软件
+.. _gnu:
+
+GNU Compiler
 =========================
 
 GNU通用公共许可协议（英语：GNU General Public License，缩写GNU GPL 或
@@ -80,4 +82,5 @@ openmpi-3.1.5/gcc-9.2.0 module load openmpi/3.1.5-gcc-9.2.0
 --------
 
 -  `Top 20
-   licenses https://web.archive.org/web/20160719043600/https://www.blackducksoftware.com/top-open-source-licenses
+   licenses <https://web.archive.org/web/20160719043600/>`__
+   https://www.blackducksoftware.com/top-open-source-licenses/
