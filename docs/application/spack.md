@@ -695,6 +695,36 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 
     ```
 
+我们来做一个实验，用新安装的`gcc@10.2.0`来编译一个2048小游戏
+
+项目地址： https://github.com/plibither8/2048.cpp
+
+```bash
+$ spack find gcc
+==> 2 installed packages
+-- linux-ubuntu18.04-skylake_avx512 / gcc@7.5.0 -----------------
+gcc@7.5.0  gcc@10.2.0
+
+$ spack load gcc@10.2.0
+$ git clone https://github.com/plibither8/2048.cpp
+$ cd 2048.cpp
+$ mkdir build && cd build
+
+$ cmake ../         
+......
+-- Build files have been written to: /home/nfs/admin0/qizewen/2048.cpp/build
+
+$ cmake --build .        
+Scanning dependencies of target 2048
+......
+[100%] Linking CXX executable 2048
+[100%] Built target 2048
+
+$ ./2048
+```
+
+
+
 
 
 #### `spack unload`
