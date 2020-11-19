@@ -319,8 +319,9 @@ conda 安装软件
 
    $ conda install -c bioconda openslide-python （以 openslide-python 为例）
 
+conda 安装的软件详细列表见 `生信软件安装 <bio.html>`_
 
-下面是一个软件安装的完整示例：
+下面以其中一个软件为例，展示 conda 安装的完整示例：
 
 .. code:: bash
 
@@ -409,7 +410,6 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    amber 
    cesm
    cp2k
-   conda
    cuda
    deepvariant
    desmond_and_maestro
