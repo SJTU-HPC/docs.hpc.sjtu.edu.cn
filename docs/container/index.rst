@@ -2,7 +2,7 @@
 容器
 ****
 
-这里是引言，请用一段话介绍一下这部分的内容，会在Web和PDF文档出现。
+Pi 集群支持用户使用 Singularity 方法构建自己的容器应用。Pi 上许多应用软件也是通过 Singularity 方法安装的。
 
 .. toctree::
    :maxdepth: 1
