@@ -370,8 +370,6 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
 -  `cesm <cesm.html>`__
 -  `cp2k <cp2k.html>`__
 -  `cuda <cuda.html>`__
--  `desmond_and_maestro <desmond_and_maestro.html>`__
--  `fftw <fftw.html>`__
 -  `gaussian <gaussian.html>`__
 -  `geant4 <geant4.html>`__
 -  `gnu <gnu.html>`__
@@ -381,8 +379,6 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
 -  `keras <keras.html>`__
 -  `lammps <lammps.html>`__
 -  `mrbayes <mrbayes.html>`__
--  `mpi4py <mpi4py.html>`__
--  `mxnet <mxnet.html>`__
 -  `nektar <nektar.html>`__
 -  `nwchem <nwchem.html>`__
 -  `openfoam <openfoam.html>`__
