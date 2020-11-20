@@ -412,8 +412,6 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    cp2k
    cuda
    deepvariant
-   desmond_and_maestro
-   fftw
    gaussian
    geant4
    gnu
@@ -423,8 +421,6 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    keras
    lammps
    mrbayes
-   mpi4py
-   mxnet
    nektar
    nwchem
    openfoam
@@ -437,7 +433,6 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    relion
    r
    siesta
-   spark
    star-ccm
    strique
    tensorflow

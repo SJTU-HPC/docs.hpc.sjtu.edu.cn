@@ -22,8 +22,6 @@ Pi 上有多种版本的 LAMMPS:
 
 -  |gpu| `GPU版本 LAMMPS`_
 
--  |arm|
-
 .. _CPU版本 LAMMPS:
 
 
