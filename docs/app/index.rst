@@ -371,7 +371,6 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
 -  `cp2k <cp2k.html>`__
 -  `cuda <cuda.html>`__
 -  `gaussian <gaussian.html>`__
--  `geant4 <geant4.html>`__
 -  `gnu <gnu.html>`__
 -  `gnuplot <gnuplot.html>`__
 -  `gromacs <gromacs.html>`__
@@ -409,7 +408,6 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    cuda
    deepvariant
    gaussian
-   geant4
    gnu
    gnuplot
    gromacs
