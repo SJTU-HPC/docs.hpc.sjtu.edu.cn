@@ -14,7 +14,7 @@
 +-----------------+-------------+-------------+---------------+
 | MELT            | Manta       | Lumpy       | Hydra-sv      |
 +-----------------+-------------+-------------+---------------+
-| VariationHunter | GRIDSS      | GenomeSTRiP | FermiKit      |
+| VariationHunter | GRIDSS      | GenomeSTRiP | FermiKit_     |
 +-----------------+-------------+-------------+---------------+
 | ERDS            | DELLY       | CREST       | Control-FREEC |
 +-----------------+-------------+-------------+---------------+
@@ -121,6 +121,8 @@ GenomeSTRiP安装
    source activate mypy_py27
    conda install -c bioconda genomestrip
 
+
+.. _fermikit:
 FermiKit安装
 -------------
 
