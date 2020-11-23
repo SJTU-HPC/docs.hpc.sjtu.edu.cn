@@ -24,6 +24,10 @@
 +-----------------+-------------+-------------+---------------+
 | Mobster         | pbsv        | Pindel      |PRISM          |
 +-----------------+-------------+-------------+---------------+
+| RetroSeq        | Sniffles    | SV2         |SvABA          |
++-----------------+-------------+-------------+---------------+
+| SVDetect        | Wham        | gsutil      |               |
++-----------------+-------------+-------------+---------------+
 
 
 MELT安装
@@ -342,6 +346,111 @@ PRISM安装
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
    conda install -c conda-forge pyprism
+
+
+
+RetroSeq安装
+-------------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy_py27 python=2.7
+   source activate mypy_py27
+   conda install -c hcc retroseq
+
+
+
+Sniffles安装
+-------------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda sniffles
+
+
+
+SV2安装
+--------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy_py27 python=2.7
+   source activate mypy_py27
+   conda install -c bioconda sv2
+
+
+
+SvABA安装
+----------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda svaba
+
+
+
+SVDetect安装
+-------------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c imperial-college-research-computing svdetect
+
+
+
+Wham安装
+---------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda wham
+
+
+
+gsutil安装
+-----------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c conda-forge gsutil
 
 
 
