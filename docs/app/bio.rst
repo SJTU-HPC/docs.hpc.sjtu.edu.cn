@@ -11,23 +11,31 @@
 
    $ srun -p small -n 4 --pty /bin/bash
    
-+-----------------+-------------+-------------+---------------+
-| MELT            | Manta       | Lumpy       | Hydra-sv      |
-+-----------------+-------------+-------------+---------------+
-| VariationHunter | GRIDSS      | GenomeSTRiP | FermiKit_     |
-+-----------------+-------------+-------------+---------------+
-| ERDS            | DELLY       | CREST       | Control-FREEC |
-+-----------------+-------------+-------------+---------------+
-| CNVnator        | CLEVER      | BreakDancer |BICseq2        |
-+-----------------+-------------+-------------+---------------+
-| BatVI           | BASIL-ANISE | MetaSV      |MindTheGap     |
-+-----------------+-------------+-------------+---------------+
-| Mobster         | pbsv        | Pindel      |PRISM          |
-+-----------------+-------------+-------------+---------------+
-| RetroSeq        | Sniffles    | SV2         |SvABA          |
-+-----------------+-------------+-------------+---------------+
-| SVDetect        | Wham        | gsutil      |               |
-+-----------------+-------------+-------------+---------------+
++-----------------+-------------+-------------+------------------+
+| MELT            | Manta       | Lumpy       | Hydra-sv         |
++-----------------+-------------+-------------+------------------+
+| VariationHunter | GRIDSS      | GenomeSTRiP | **FermiKit**     |
++-----------------+-------------+-------------+------------------+
+| ERDS            | DELLY       | CREST       | Control-FREEC    |
++-----------------+-------------+-------------+------------------+
+| CNVnator        | CLEVER      | BreakDancer |BICseq2           |
++-----------------+-------------+-------------+------------------+
+| BatVI           | BASIL-ANISE | MetaSV      |MindTheGap        |
++-----------------+-------------+-------------+------------------+
+| Mobster         | pbsv        | Pindel      |PRISM             |
++-----------------+-------------+-------------+------------------+
+| RetroSeq        | Sniffles    | SV2         |SvABA             |
++-----------------+-------------+-------------+------------------+
+| SVDetect        | Wham        | gsutil      | openslide-python |
++-----------------+-------------+-------------+------------------+
+| pandas          | cdsapi      | STRique     | r-rgl            |
++-----------------+-------------+-------------+------------------+
+| sra-tools       | DESeq2      | WGCNA       | MAKER            |
++-----------------+-------------+-------------+------------------+
+| AUGUSTUS        | DeepGo      | km          | Requests         |
++-----------------+-------------+-------------+------------------+
+
+
 
 
 MELT安装
@@ -81,6 +89,7 @@ Hydra-sv安装
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
    conda install -c conda-forge hydra
+
 
 VariationHunter安装
 --------------------
@@ -640,3 +649,7 @@ Requests安装
    source activate mypy
    conda install -c anaconda requests
 
+Internal crossreferences, like example_.
+.. _example:
+
+This is an example crossreference target.
