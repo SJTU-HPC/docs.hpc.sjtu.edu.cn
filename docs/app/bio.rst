@@ -31,7 +31,7 @@
 
 
 MELT安装
---------
+---------
 
 完整步骤
 
@@ -44,7 +44,7 @@ MELT安装
    conda install -c bioconda melt
 
 Manta安装
----------
+----------
 
 完整步骤
 
@@ -57,7 +57,7 @@ Manta安装
    conda install -c bioconda manta
 
 Lumpy安装
----------
+----------
 
 完整步骤
 
@@ -70,7 +70,7 @@ Lumpy安装
    conda install -c bioconda lumpy-sv
 
 Hydra-sv安装
-------------
+-------------
 
 完整步骤
 
@@ -83,7 +83,7 @@ Hydra-sv安装
    conda install -c conda-forge hydra
 
 VariationHunter安装
--------------------
+--------------------
 
 完整步骤
 
@@ -96,7 +96,7 @@ VariationHunter安装
    conda install -c bioconda tardis
 
 GRIDSS安装
-----------
+-----------
 
 完整步骤
 
@@ -109,7 +109,7 @@ GRIDSS安装
    conda install -c bioconda gridss
 
 GenomeSTRiP安装
----------------
+----------------
 
 完整步骤
 
@@ -122,7 +122,7 @@ GenomeSTRiP安装
    conda install -c bioconda genomestrip
 
 FermiKit安装
-------------
+-------------
 
 完整步骤
 
@@ -135,7 +135,7 @@ FermiKit安装
    conda install -c bioconda fermikit
 
 ERDS安装
---------
+---------
 
 完整步骤
 
@@ -148,7 +148,7 @@ ERDS安装
    conda install -c bioconda erds
 
 DELLY安装
----------
+----------
 
 完整步骤
 
@@ -161,7 +161,7 @@ DELLY安装
    conda install -c bioconda delly
 
 CREST安装
----------
+----------
 
 完整步骤
 
@@ -179,7 +179,7 @@ CREST安装
    conda install -c imperial-college-research-computing crest
 
 Control-FREEC安装
------------------
+------------------
 
 完整步骤
 
@@ -192,7 +192,7 @@ Control-FREEC安装
    conda install -c bioconda control-freec
 
 CNVnator安装
-------------
+-------------
 
 完整步骤
 
@@ -205,7 +205,7 @@ CNVnator安装
    conda install -c bioconda -c conda-forge cnvnator
 
 CLEVER安装
-----------
+-----------
 
 完整步骤
 
@@ -218,7 +218,7 @@ CLEVER安装
    conda install -c bioconda clever-toolkit
 
 BreakDancer安装
----------------
+----------------
 
 完整步骤
 
@@ -231,7 +231,7 @@ BreakDancer安装
    conda install -c bioconda breakdancer
 
 BICseq2安装
------------
+------------
 
 完整步骤
 
@@ -244,7 +244,7 @@ BICseq2安装
    conda install -c bioconda bicseq2-norm
 
 BatVI安装
----------
+----------
 
 完整步骤
 
@@ -257,7 +257,7 @@ BatVI安装
    conda install -c bioconda batvi
 
 BASIL-ANISE安装
----------------
+----------------
 
 完整步骤
 
@@ -270,7 +270,7 @@ BASIL-ANISE安装
    conda install -c bioconda anise_basil
 
 MetaSV安装
-----------
+-----------
 
 完整步骤
 
@@ -283,7 +283,7 @@ MetaSV安装
    conda install -c bioconda metasv
 
 MindTheGap安装
---------------
+---------------
 
 完整步骤
 
@@ -296,7 +296,7 @@ MindTheGap安装
    conda install -c bioconda mindthegap
 
 Mobster安装
------------
+------------
 
 完整步骤
 
@@ -309,7 +309,7 @@ Mobster安装
    conda install -c bioconda mobster
 
 pbsv安装
---------
+---------
 
 完整步骤
 
@@ -322,7 +322,7 @@ pbsv安装
    conda install -c bioconda pbsv
 
 Pindel安装
-----------
+-----------
 
 完整步骤
 
@@ -335,7 +335,7 @@ Pindel安装
    conda install -c bioconda pindel
 
 PRISM安装
----------
+----------
 
 完整步骤
 
@@ -350,7 +350,7 @@ PRISM安装
 
 
 RetroSeq安装
----------
+-------------
 
 完整步骤
 
@@ -365,7 +365,7 @@ RetroSeq安装
 
 
 Sniffles安装
----------
+-------------
 
 完整步骤
 
@@ -380,7 +380,7 @@ Sniffles安装
 
 
 SV2安装
----------
+--------
 
 完整步骤
 
@@ -395,7 +395,7 @@ SV2安装
 
 
 SvABA安装
----------
+----------
 
 完整步骤
 
@@ -410,7 +410,7 @@ SvABA安装
 
 
 SVDetect安装
----------
+-------------
 
 完整步骤
 
@@ -440,7 +440,7 @@ Wham安装
 
 
 gsutil安装
----------
+-----------
 
 完整步骤
 
