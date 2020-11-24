@@ -29,9 +29,11 @@ Pi 上的 OpenFOAM
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
 
-!!! example “cpu 队列 slurm 脚本示例 OpenFoam” \``\` #!/bin/bash
+cpu 队列 slurm 脚本示例 OpenFoam
 
-::
+.. code:: bash
+
+   #!/bin/bash
 
    #SBATCH --job-name=test           # 作业名
    #SBATCH --partition=cpu           # cpu 队列
@@ -47,7 +49,8 @@ Pi 上的 OpenFOAM
    ulimit -l unlimited
 
    srun --mpi=pmi2 icoFoam -parallel
-   ```
+
+
 
 用下方语句提交作业
 

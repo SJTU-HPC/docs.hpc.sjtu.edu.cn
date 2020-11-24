@@ -52,7 +52,7 @@ Pi 上使用 Quantum ESPRESSO
    ulimit -l unlimited
 
    module purge
-   module load quantum-espresso/6.6
+   module load quantum-espresso
 
    srun --mpi=pmi2 pw.x -i test.in
 
