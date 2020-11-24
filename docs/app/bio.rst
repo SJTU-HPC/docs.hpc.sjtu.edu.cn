@@ -648,9 +648,3 @@ Requests安装
    source activate mypy
    conda install -c anaconda requests
 
-Internal crossreferences, like example_.
-
-
-.. _example:
-
-This is an example crossreference target.
