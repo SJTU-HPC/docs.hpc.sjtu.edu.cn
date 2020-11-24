@@ -11,4 +11,3 @@ Pi 集群通过 Slurm 调度系统运行作业。
    jobsample1
    jobsample2
    dgx
-   reservation
