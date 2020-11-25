@@ -167,6 +167,7 @@ Files <https://sylabs.io/guides/3.5/user-guide/definition_files.html>`__\ 编写
 2. 运行应用所需的环境变量可以添加到\ ``/enviroment``\ 文件中。
 
 .. code:: shell
+
    Singularity> echo "export TEST_ENV_VAR=SJTU" >> /environment         
    Singularity> echo "export PATH=/opt/app/bin:$PATH" >> /environment
 
