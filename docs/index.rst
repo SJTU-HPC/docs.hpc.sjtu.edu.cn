@@ -10,7 +10,7 @@ Pi超算集群用户文档
 
 1. :doc:`quickstart/index`
 2. :doc:`accounts/index`
-3. :doc:`accounts/password`
+3. `密码 <accounts/index.html#id7>`_ 
 4. :doc:`login/index`
 5. :doc:`studio/rdp`
 6. :doc:`job/index`

@@ -133,7 +133,7 @@ d) 简短版使用手册（Cheat Sheet）：https://hpc.sjtu.edu.cn/Item/docs/Pi
 
    $ export OMP_NUM_THREADS=4 && ./hello_world
 
-4. 编写一个名为 helloworld.slurm 的作业脚本
+4. 编写一个名为 hello_world.slurm 的作业脚本
 
 .. code:: bash
 

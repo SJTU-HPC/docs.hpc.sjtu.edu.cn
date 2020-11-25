@@ -122,7 +122,7 @@ OpenMP 示例
 
    $ sbatch ompicc.slurm
 
-##
+
 
 MPI示例
 -------
@@ -354,7 +354,7 @@ MPI+OpenMP混合示例
 
    $ sbatch -N 4 hybridmpi.slurm
 
-##
+
 
 CUDA示例
 --------
@@ -469,7 +469,7 @@ CUDA示例
 
    $ sbatch cublashello.slurm
 
-##
+
 
 通过sbatch运行Intel LINPACK
 ----------------------------
@@ -537,42 +537,4 @@ CUDA示例
 
    $ scancel 358
 
-   以下是一个运行Space的应用程序(gromacs)的作业脚本示例。 
-   ```bash
-   #!/bin/bash
 
-   #SBATCH -J your_app
-   #SBATCH -p cpu
-   #SBATCH --mail-type=end
-   #SBATCH --mail-user=YOU@EMAIL.COM
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-
-   unlimit -s unlimited
-   unlimit -l unlimited
-
-    /* Spack */
-   if [ -d "$HOME/spack" ]; then
-       export SPACK_ROOT=$HOME/spack
-       source $SPACK_ROOT/share/spack/setup-env.sh
-   fi
-
-   /* Add your Spack apps here */
-   source <(spack module tcl loads gromacs+cuda %gcc@5.4.0 )
-
-   LAUNCH_YOUR_APP
-   ``` -->
-
-##
-
-提交作业到small分区
--------------------
-
-串行作业需要提交到名为串行的队列中，作业脚本和qos中的队列名称需要相应调整。
-
-bash #!/bin/bash
-
-#SBATCH -J Hello #SBATCH -p small #SBATCH -o %j.out #SBATCH -e %j.err
-#SBATCH -n 1
-
-hostname \``\`
