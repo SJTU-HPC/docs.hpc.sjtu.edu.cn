@@ -135,3 +135,26 @@ rst_prolog = """
 .. |sig| image:: /img/singularity-icon.png
 .. |studio| image:: /img/studio-icon.png
 """
+
+# LaTeX PDF customization
+latex_engine = 'xelatex'
+latex_elements = {
+    # The paper size ('letterpaper' or 'a4paper').
+    #
+    # 'papersize': 'letterpaper',
+
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    # 'pointsize': '10pt',
+
+    'fncychap' : '\\usepackage[Bjornstrup]{fncychap}',
+
+    # Additional stuff for the LaTeX preamble.
+    #
+    # 'preamble': r'''\usepackage{ctex}
+    # ''',
+
+    # Latex figure (float) alignment
+    #
+    # 'figure_align': 'htbp',
+}
