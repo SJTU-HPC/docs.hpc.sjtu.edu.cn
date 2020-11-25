@@ -61,13 +61,20 @@ build_html_pages:
     paths:
       - .build_cache
      
-deploy_html_and_pdf_to_nginx_directory:
+deploy_to_jianwen_me:
+  stage: deploy
+  tags:
+    - shell.web.hpc.sjtu.edu.cn
+  only:
+    - branches
+  script:
+    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.jianwen.me/
+
+deploy_html_to_hpc:
   stage: deploy
   tags:
     - shell.web.hpc.sjtu.edu.cn
   only:
     - master
-    - merge_request
-    - sphinx
   script:
-    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.jianwen.me/
+    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.hpc.sjtu.edu.cn/
