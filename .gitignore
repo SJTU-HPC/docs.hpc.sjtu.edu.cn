@@ -2,6 +2,7 @@ site
 public
 src
 *.pdf
+!docs/img/cover.pdf
 *.xml
 *.ps
 *.tar.gz

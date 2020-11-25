@@ -28,7 +28,8 @@ build_latex_pdf:
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
     - make -C docs clean latexpdf
-    - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/pi.pdf
+    - pdftk A=docs/img/cover.pdf B=docs/_build/latex/pi.pdf cat A1 B2-end output docs/_build/latex/merge.pdf
+    - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/merge.pdf
     - mv docs/_build/latex/pi_small.pdf  docs/_build/latex/pi.pdf
   artifacts:
     paths:
