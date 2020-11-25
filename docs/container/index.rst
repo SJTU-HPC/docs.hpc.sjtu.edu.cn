@@ -160,10 +160,15 @@ Files <https://sylabs.io/guides/3.5/user-guide/definition_files.html>`__\ 编写
    root
    Singularity> apt update && apt install -y gcc
 
-!!! tip 1.
-请勿将任何应用安装在\ ``/root``\ 下（因容器在集群上运行时为普通用户态，\ ``/root``\ 不会被打包），推荐直接安装在系统目录或者\ ``/opt``\ 下。
+注意事项：
+
+1. 请勿将任何应用安装在\ ``/root``\ 下（因容器在集群上运行时为普通用户态，\ ``/root``\ 不会被打包），推荐直接安装在系统目录或者\ ``/opt``\ 下；
+
 2. 运行应用所需的环境变量可以添加到\ ``/enviroment``\ 文件中。
-``shell         Singularity> echo "export TEST_ENV_VAR=SJTU" >> /environment         Singularity> echo "export PATH=/opt/app/bin:$PATH" >> /environment``
+
+.. code:: shell
+   Singularity> echo "export TEST_ENV_VAR=SJTU" >> /environment         
+   Singularity> echo "export PATH=/opt/app/bin:$PATH" >> /environment
 
 镜像下载
 ~~~~~~~~

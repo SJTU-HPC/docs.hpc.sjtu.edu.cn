@@ -52,7 +52,6 @@ cpu 队列每个节点配有 40核，这里使用了 1 个节点：
 
    srun --mpi=pmi2 mb your_input_file
 
-!!! tips
 根据我们的测试，mrbayes最多只能使用16进程/节点的配置，请根据具体需要调整\ ``-n``\ 和\ ``--ntasks-per-node``\ 参数
 
 Pi上提交作业
