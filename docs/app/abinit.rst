@@ -12,10 +12,10 @@ structure for molecules and periodic solids. In addition to many other
 features, it provides the time dependent DFT, or many-body perturbation
 theory (GW approximation) to compute the excited states.
 
-π集群上的ABINIT
--------------------
+Pi上的ABINIT
+------------
 
-查看π集群上已编译的软件模块:
+查看Pi上已编译的软件模块:
 
 .. code:: bash
 
@@ -27,8 +27,8 @@ theory (GW approximation) to compute the excited states.
 
    $ module load abinit/8.10.3-gcc-9.2.0-openblas-openmpi
 
-π集群上的Slurm脚本 slurm.test
------------------------------------
+Pi上的Slurm脚本 slurm.test
+-----------------------------
 
 在 cpu 队列上，总共使用 80 核 (n = 80)
 cpu 队列每个节点配有 40核，所以这里使用了 2 个节点：
@@ -49,8 +49,8 @@ cpu 队列每个节点配有 40核，所以这里使用了 2 个节点：
 
    srun --mpi=pmi2 abinit < example.in
 
-π集群上提交作业
--------------------
+Pi上提交作业
+-------------
 
 .. code:: bash
 

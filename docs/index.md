@@ -1,5 +1,5 @@
-# π集群超算集群用户文档
-[docs](http://docs.hpc.sjtu.edu.cn/)是上海交通大学 π集群2.0 超级计算集群用户文档，为用户提供快速上手指导和问题解答。如果想获取更多 hpc 团队的动态和信息，请访问[hpc](https://hpc.sjtu.edu.cn/)。   
+# Pi超算集群用户文档
+[docs](http://docs.hpc.sjtu.edu.cn/)是上海交通大学 Pi2.0 超级计算集群用户文档，为用户提供快速上手指导和问题解答。如果想获取更多 hpc 团队的动态和信息，请访问[hpc](https://hpc.sjtu.edu.cn/)。   
   **友情提醒:** 超算平台禁止运行军工项目等涉密计算任务。
 
 !!!tip

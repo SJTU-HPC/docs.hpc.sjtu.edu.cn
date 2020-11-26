@@ -3,28 +3,43 @@
 生物信息软件
 ============
 
-生物信息类软件可通过conda,pip等方法在π集群上安装。
+生物信息类软件可通过conda,pip等方法在Pi上安装。
 
 安装之前，须先申请计算节点资源（登陆节点禁止大规模编译安装）
 
 .. code:: bash
 
    $ srun -p small -n 4 --pty /bin/bash
+   
++-----------------+-------------+-------------+------------------+
+| MELT            | Manta       | Lumpy       | Hydra-sv         |
++-----------------+-------------+-------------+------------------+
+| VariationHunter | GRIDSS      | GenomeSTRiP | FermiKit         |
++-----------------+-------------+-------------+------------------+
+| ERDS            | DELLY       | CREST       | Control-FREEC    |
++-----------------+-------------+-------------+------------------+
+| CNVnator        | CLEVER      | BreakDancer |BICseq2           |
++-----------------+-------------+-------------+------------------+
+| BatVI           | BASIL-ANISE | MetaSV      |MindTheGap        |
++-----------------+-------------+-------------+------------------+
+| Mobster         | pbsv        | Pindel      |PRISM             |
++-----------------+-------------+-------------+------------------+
+| RetroSeq        | Sniffles    | SV2         |SvABA             |
++-----------------+-------------+-------------+------------------+
+| SVDetect        | Wham        | gsutil      | openslide-python |
++-----------------+-------------+-------------+------------------+
+| pandas          | cdsapi      | STRique     | r-rgl            |
++-----------------+-------------+-------------+------------------+
+| sra-tools       | DESeq2      | WGCNA       | MAKER            |
++-----------------+-------------+-------------+------------------+
+| AUGUSTUS        | DeepGo      | km          | Requests         |
++-----------------+-------------+-------------+------------------+
 
-===============================================================
 
-================== ============= ============= ================
- MELT              Manta         Lumpy          Hydra-sv      
- VariationHunter   GRIDSS        GenomeSTRiP    FermiKit      
- ERDS              DELLY         CREST          Control-FREEC 
- CNVnator          CLEVER        BreakDancer    BICseq2        
- BatVI             BASIL-ANISE   MetaSV         MindTheGap     
- Mobster           pbsv          π集群ndel     PRISM          
-================== ============= ============= ================
 
 
 MELT安装
---------
+---------
 
 完整步骤
 
@@ -37,7 +52,7 @@ MELT安装
    conda install -c bioconda melt
 
 Manta安装
----------
+----------
 
 完整步骤
 
@@ -50,7 +65,7 @@ Manta安装
    conda install -c bioconda manta
 
 Lumpy安装
----------
+----------
 
 完整步骤
 
@@ -63,7 +78,7 @@ Lumpy安装
    conda install -c bioconda lumpy-sv
 
 Hydra-sv安装
-------------
+-------------
 
 完整步骤
 
@@ -75,8 +90,9 @@ Hydra-sv安装
    source activate mypy_py27
    conda install -c conda-forge hydra
 
+
 VariationHunter安装
--------------------
+--------------------
 
 完整步骤
 
@@ -89,7 +105,7 @@ VariationHunter安装
    conda install -c bioconda tardis
 
 GRIDSS安装
-----------
+-----------
 
 完整步骤
 
@@ -102,7 +118,7 @@ GRIDSS安装
    conda install -c bioconda gridss
 
 GenomeSTRiP安装
----------------
+----------------
 
 完整步骤
 
@@ -114,8 +130,9 @@ GenomeSTRiP安装
    source activate mypy_py27
    conda install -c bioconda genomestrip
 
+
 FermiKit安装
-------------
+-------------
 
 完整步骤
 
@@ -128,7 +145,7 @@ FermiKit安装
    conda install -c bioconda fermikit
 
 ERDS安装
---------
+---------
 
 完整步骤
 
@@ -141,7 +158,7 @@ ERDS安装
    conda install -c bioconda erds
 
 DELLY安装
----------
+----------
 
 完整步骤
 
@@ -154,7 +171,7 @@ DELLY安装
    conda install -c bioconda delly
 
 CREST安装
----------
+----------
 
 完整步骤
 
@@ -172,7 +189,7 @@ CREST安装
    conda install -c imperial-college-research-computing crest
 
 Control-FREEC安装
------------------
+------------------
 
 完整步骤
 
@@ -185,7 +202,7 @@ Control-FREEC安装
    conda install -c bioconda control-freec
 
 CNVnator安装
-------------
+-------------
 
 完整步骤
 
@@ -198,7 +215,7 @@ CNVnator安装
    conda install -c bioconda -c conda-forge cnvnator
 
 CLEVER安装
-----------
+-----------
 
 完整步骤
 
@@ -211,7 +228,7 @@ CLEVER安装
    conda install -c bioconda clever-toolkit
 
 BreakDancer安装
----------------
+----------------
 
 完整步骤
 
@@ -224,7 +241,7 @@ BreakDancer安装
    conda install -c bioconda breakdancer
 
 BICseq2安装
------------
+------------
 
 完整步骤
 
@@ -237,7 +254,7 @@ BICseq2安装
    conda install -c bioconda bicseq2-norm
 
 BatVI安装
----------
+----------
 
 完整步骤
 
@@ -250,7 +267,7 @@ BatVI安装
    conda install -c bioconda batvi
 
 BASIL-ANISE安装
----------------
+----------------
 
 完整步骤
 
@@ -263,7 +280,7 @@ BASIL-ANISE安装
    conda install -c bioconda anise_basil
 
 MetaSV安装
-----------
+-----------
 
 完整步骤
 
@@ -276,7 +293,7 @@ MetaSV安装
    conda install -c bioconda metasv
 
 MindTheGap安装
---------------
+---------------
 
 完整步骤
 
@@ -289,7 +306,7 @@ MindTheGap安装
    conda install -c bioconda mindthegap
 
 Mobster安装
------------
+------------
 
 完整步骤
 
@@ -302,7 +319,7 @@ Mobster安装
    conda install -c bioconda mobster
 
 pbsv安装
---------
+---------
 
 完整步骤
 
@@ -314,8 +331,8 @@ pbsv安装
    source activate mypy_py27
    conda install -c bioconda pbsv
 
-π集群ndel安装
---------------
+Pindel安装
+-----------
 
 完整步骤
 
@@ -328,7 +345,7 @@ pbsv安装
    conda install -c bioconda pindel
 
 PRISM安装
----------
+----------
 
 完整步骤
 
@@ -339,6 +356,111 @@ PRISM安装
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
    conda install -c conda-forge pyprism
+
+
+
+RetroSeq安装
+-------------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy_py27 python=2.7
+   source activate mypy_py27
+   conda install -c hcc retroseq
+
+
+
+Sniffles安装
+-------------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda sniffles
+
+
+
+SV2安装
+--------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy_py27 python=2.7
+   source activate mypy_py27
+   conda install -c bioconda sv2
+
+
+
+SvABA安装
+----------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda svaba
+
+
+
+SVDetect安装
+-------------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c imperial-college-research-computing svdetect
+
+
+
+Wham安装
+---------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda wham
+
+
+
+gsutil安装
+-----------
+
+完整步骤
+
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c conda-forge gsutil
 
 
 

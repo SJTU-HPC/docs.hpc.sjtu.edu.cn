@@ -1,5 +1,5 @@
-作业示例
-========
+作业示例（开发者）
+========================
 
 介绍不同并行环境的作业示例。
 
@@ -122,17 +122,10 @@ OpenMP 示例
 
    $ sbatch ompicc.slurm
 
-##
 
-.. raw:: html
-
-   <center>
 
 MPI示例
-
-.. raw:: html
-
-   </center>
+-------
 
 以mpihello.c为例，代码如下：
 
@@ -257,17 +250,8 @@ MPI示例
 
    $ sbatch -p cpu job_impi.slurm
 
-##
-
-.. raw:: html
-
-   <center>
-
-MPI + OpenMP混合示例
-
-.. raw:: html
-
-   </center>
+MPI+OpenMP混合示例
+------------------
 
 以hybridmpi.c为例，代码如下：
 
@@ -370,17 +354,10 @@ MPI + OpenMP混合示例
 
    $ sbatch -N 4 hybridmpi.slurm
 
-##
 
-.. raw:: html
 
-   <center>
-
-CUDA 示例
-
-.. raw:: html
-
-   </center>
+CUDA示例
+--------
 
 以cublashello.cu为例，代码如下：
 
@@ -492,17 +469,10 @@ CUDA 示例
 
    $ sbatch cublashello.slurm
 
-##
 
-.. raw:: html
-
-   <center>
 
 通过sbatch运行Intel LINPACK
-
-.. raw:: html
-
-   </center>
+----------------------------
 
 假如在多节点运行MPI作业，首先准备执行文件并输入数据：
 
@@ -567,46 +537,4 @@ CUDA 示例
 
    $ scancel 358
 
-.. raw:: html
 
-   <!-- ## <center>提交具有Spack依赖关系的作业</center>
-
-   以下是一个运行Space的应用程序(gromacs)的作业脚本示例。 
-   ```bash
-   #!/bin/bash
-
-   #SBATCH -J your_app
-   #SBATCH -p cpu
-   #SBATCH --mail-type=end
-   #SBATCH --mail-user=YOU@EMAIL.COM
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-
-   unlimit -s unlimited
-   unlimit -l unlimited
-
-    /* Spack */
-   if [ -d "$HOME/spack" ]; then
-       export SPACK_ROOT=$HOME/spack
-       source $SPACK_ROOT/share/spack/setup-env.sh
-   fi
-
-   /* Add your Spack apps here */
-   source <(spack module tcl loads gromacs+cuda %gcc@5.4.0 )
-
-   LAUNCH_YOUR_APP
-   ``` -->
-
-##
-
-提交作业到small分区
--------------------
-
-串行作业需要提交到名为串行的队列中，作业脚本和qos中的队列名称需要相应调整。
-
-bash #!/bin/bash
-
-#SBATCH -J Hello #SBATCH -p small #SBATCH -o %j.out #SBATCH -e %j.err
-#SBATCH -n 1
-
-hostname \``\`

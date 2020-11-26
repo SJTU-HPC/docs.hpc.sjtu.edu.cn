@@ -13,16 +13,14 @@ materials (metals, semiconductors) and coarse-grained or mesoscopic
 systems. It can be used to model atoms or, more generically, as a
 parallel particle simulator at the atomic, meso, or continuum scale.
 
-π集群 上的 LAMMPS
---------------------
+Pi 上的 LAMMPS
+--------------
 
-π集群 上有多种版本的 LAMMPS:
+Pi 上有多种版本的 LAMMPS:
 
 -  |cpu| `CPU版本 LAMMPS`_
 
 -  |gpu| `GPU版本 LAMMPS`_
-
--  |arm|
 
 .. _CPU版本 LAMMPS:
 
@@ -30,13 +28,13 @@ parallel particle simulator at the atomic, meso, or continuum scale.
 |cpu| CPU 版本
 ~~~~~~~~~~~~~~
 
-查看 π集群 上已编译的软件模块:
+查看 Pi 上已编译的软件模块:
 
 .. code:: bash
 
    module av lammps
 
-推荐使用 lammps/2020-cpu，经测试，该版本在 π集群 2.0
+推荐使用 lammps/2020-cpu，经测试，该版本在 Pi 2.0
 上运行速度最好，且安装有丰富的 LAMMPS package：
 
 ASPHERE BODY CLASS2 COLLOID COMPRESS CORESHELL DIPOLE GRANULAR KSPACE
@@ -159,7 +157,7 @@ slurm.test
 
 GPU 版本速度跟 intel CPU 版本基本相同
 
-π集群 上提供了 GPU 版本的 LAMMPS 2020。经测试，LJ 和 EAM 两 Benchmark
+Pi 上提供了 GPU 版本的 LAMMPS 2020。经测试，LJ 和 EAM 两 Benchmark
 算例与同等计算费用的 CPU 基本一样。建议感兴趣的用户针对自己的算例，测试
 CPU 和 GPU 计算效率，然后决定使用哪一种平台。
 
@@ -197,7 +195,7 @@ GPU 版 LAMMPS。脚本名称可设为 slurm.test
 
 GPU 版本速度跟 intel CPU 版本基本相同
 
-π集群 上提供了 GPU + kokkos 版本的 LAMMPS 15Jun2020。采用容器技术，使用
+Pi 上提供了 GPU + kokkos 版本的 LAMMPS 15Jun2020。采用容器技术，使用
 LAMMPS 官方提供给 NVIDIA 的镜像，针对 Tesla V100 的 GPU
 做过优化，性能很好。经测试，LJ 和 EAM 两 Benchmark 算例与同等计算费用的
 CPU 基本一样。建议感兴趣的用户针对自己的算例，测试 CPU 和 GPU

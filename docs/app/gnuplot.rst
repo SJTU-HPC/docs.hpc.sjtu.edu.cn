@@ -14,10 +14,10 @@ functions and data interactively, but has grown to support many
 non-interactive uses such as web scripting. It is also used as a
 plotting engine by third-party applications like Octave.
 
-π集群 上的 gnuplot
---------------------
+Pi 上的 gnuplot
+---------------
 
-gnuplot 需要在 HPC Studio 可视化平台上使用。π集群 登陆节点不支持 gnuplot
+gnuplot 需要在 HPC Studio 可视化平台上使用。Pi 登陆节点不支持 gnuplot
 显示。
 
 HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
@@ -59,11 +59,11 @@ HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
 
 1. 在 Studio 界面上点 “Delete” 删除该作业
 
-2. 或在 π集群 上用 squeue 查看作业，并用 scancel 终止该作业
+2. 或在 Pi 上用 squeue 查看作业，并用 scancel 终止该作业
 
-.. image:: ../img/gnuplot.gif
+.. image:: /img/gnuplot.*
 
 参考资料
 --------
 
--  `gnuplot 官网 <http://www.gnuplot.info/>`__
+-  gnuplot http://www.gnuplot.info/

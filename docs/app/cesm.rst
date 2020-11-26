@@ -52,7 +52,7 @@ Subversion 存储库的访问权限。注册完成后，可以将 CESM 项目下
 
 分别进行 ``curl,hdf5,netcdf,pnercdf`` 的编译和安装：
 
-（也可以通过 ``module av`` 查看 π集群 上已有的 module，直接调用）
+（也可以通过 ``module av`` 查看 Pi 上已有的 module，直接调用）
 
 .. code:: shell
 

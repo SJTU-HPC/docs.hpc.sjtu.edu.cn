@@ -18,9 +18,9 @@ import sphinx_material
 
 # -- Project information -----------------------------------------------------
 
-project = 'π集群 Documentation'
-copyright = '2020, SJTU HPC Team'
-author = 'SJTU HPC Team'
+project = '上海交大超算平台用户手册'
+copyright = '2020, 上海交通大学网络信息中心'
+author = '上海交通大学网络信息中心计算业务部'
 
 
 # -- General configuration ---------------------------------------------------
@@ -44,6 +44,7 @@ templates_path = ['_templates']
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
 language = 'zh_CN'
+html_search_language = 'zh'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -58,7 +59,7 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
-# -- HTML theme settings ------------------------------------------------
+# -- HTML theme settings -----------------------------------------------
 
 html_show_sourcelink = True
 html_sidebars = {
@@ -80,7 +81,7 @@ html_theme = 'sphinx_material'
 html_theme_options = {
 
     # Set the name of the project to appear in the navigation.
-    'nav_title': 'π集群 Documentation',
+    'nav_title': '超算平台用户手册',
 
     # Set you GA account ID to enable tracking
     'google_analytics_account': 'UA-XXXXX',
@@ -108,9 +109,63 @@ html_theme_options = {
 # Add doc prefix for atutlabeling
 autosectionlabel_prefix_document = True
 
+# Image Match Order for HTML Builder
+from sphinx.builders.html import StandaloneHTMLBuilder
+StandaloneHTMLBuilder.supported_image_types = [
+    'image/svg+xml',
+    'image/gif',
+    'image/png',
+    'image/jpeg',
+    'image/jpg'
+]
+
+# Image Match Order for HTML Builder
+from sphinx.builders.latex import LaTeXBuilder
+LaTeXBuilder.supported_image_types = [
+    'image/pdf',
+    'image/png',
+    'image/jpeg',
+    'image/jpg'
+]
+
+# Image Placeholder
 rst_prolog = """
 .. |cpu| image:: /img/cpu-icon.png
 .. |gpu| image:: /img/gpu-icon.png
 .. |arm| image:: /img/arm-icon.png
 .. |sig| image:: /img/singularity-icon.png
+.. |studio| image:: /img/studio-icon.png
 """
+
+# LaTeX PDF customization
+latex_engine = 'xelatex'
+latex_elements = {
+    # The paper size ('letterpaper' or 'a4paper').
+    #
+    # 'papersize': 'letterpaper',
+
+    # The font size ('10pt', '11pt' or '12pt').
+    #
+    'pointsize': '12pt',
+
+    'fncychap' : '\\usepackage[Bjornstrup]{fncychap}',
+
+    # Additional stuff for the LaTeX preamble.
+    # Reference: http://sychen.logdown.com/posts/2015/03/05/sphinx-pdf-chinese-support
+    'preamble': r"""
+    \usepackage{xeCJK}
+    \usepackage{fontspec}
+    \usepackage{indentfirst} % 中文首行缩进
+    \setlength{\parindent}{2em}
+    \setCJKmainfont{Adobe Song Std}
+    \setCJKmonofont[Scale=0.9]{Adobe Heiti Std}
+    \setCJKfamilyfont{song}{Adobe Song Std}
+    \setCJKfamilyfont{sf}{Adobe Song Std}
+    \XeTeXlinebreaklocale "zh"          % 設定斷行演算法為中文
+    \XeTeXlinebreakskip = 0pt plus 1pt  % 設定中文字距與英文字距
+    """,
+
+    # Latex figure (float) alignment
+    #
+    # 'figure_align': 'htbp',
+}

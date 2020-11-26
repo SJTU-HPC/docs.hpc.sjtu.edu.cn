@@ -16,10 +16,10 @@ Electronic Structure, Simulation, and Optimization. It is freely
 available to researchers around the world under the terms of the GNU
 General Public License.
 
-π集群 上的 Quantum ESPRESSO
------------------------------
+Pi 上的 Quantum ESPRESSO
+------------------------
 
-查看 π集群 上已编译的软件模块:
+查看 Pi 上已编译的软件模块:
 
 .. code:: bash
 
@@ -31,8 +31,8 @@ General Public License.
 
    $ module load quantum-espresso/6.6
 
-π集群 上使用 Quantum ESPRESSO
--------------------------------
+Pi 上使用 Quantum ESPRESSO
+--------------------------
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
@@ -52,7 +52,7 @@ General Public License.
    ulimit -l unlimited
 
    module purge
-   module load quantum-espresso/6.6
+   module load quantum-espresso
 
    srun --mpi=pmi2 pw.x -i test.in
 

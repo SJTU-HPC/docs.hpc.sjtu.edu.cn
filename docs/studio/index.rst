@@ -2,7 +2,31 @@
 可视化平台
 **********
 
-这里是引言，请用一段话介绍一下这部分的内容，会在Web和PDF文档出现。
+HPC Studio 可视化平台，集成 web shell、文件管理、作业提交、可视化应用等一站式服务。
+
+Studio 支持的应用如下，并持续增加:
+
+- RStudio
+
+- Jupyter
+
+- TensorBoard
+
+- Code Server
+
+- IGV
+
+- Octave
+
+- ParaView
+
+- Relion
+
+- VMD
+
+- Visit
+
+- OVITO
 
 .. toctree::
    :maxdepth: 1

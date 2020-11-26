@@ -9,10 +9,10 @@ Relion
 Relion 是由 MRC 的 Scheres 在 2012
 年发布的针对单颗粒冷冻电镜图片进行处理的框架。
 
-π集群 上的 Relion
--------------------
+Pi 上的 Relion
+--------------
 
-查看 π集群 上已编译的 GPU 版软件:
+查看 Pi 上已编译的 GPU 版软件:
 
 .. code:: bash
 

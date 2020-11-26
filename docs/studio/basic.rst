@@ -1,6 +1,6 @@
 .. _studiobasic:
 
-HPC Studio：图形化操作与远程桌面
+HPC Studio
 ================================
 
 登陆

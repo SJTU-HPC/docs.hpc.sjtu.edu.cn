@@ -8,7 +8,7 @@ NWChem aims to provide its users with computational chemistry tools that are sca
 
 ## Pi 上的 NWChem
 
-π集群 系统中已经预装 NWChem-6.8.1 (GNU+cpu 版本)，可用以下命令加载: 
+Pi2.0 系统中已经预装 NWChem-6.8.1 (GNU+cpu 版本)，可用以下命令加载: 
 
 ```bash
 $ module load nwchem/6.8.1-gcc-8.3.0-openblas-openmpi

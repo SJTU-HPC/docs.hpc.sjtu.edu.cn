@@ -202,7 +202,7 @@ sbatch cpu.slurm
 #SBATCH --time=00:30:00
 ```
 
-以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于π集群上的Python，您可以查阅我们的[Python文档](https://docs.hpc.sjtu.edu.cn/application/Python/)。
+以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于Pi上的Python，您可以查阅我们的[Python文档](https://docs.hpc.sjtu.edu.cn/application/Python/)。
 
 ```bash
 #!/bin/bash
@@ -333,4 +333,4 @@ $ sacct --format="JobId,AveRSS,MaxRSS" -P -j xxx
  - [SLURM Workload Manager](http://slurm.schedmd.com)
  - [ACCRE’s SLURM Documentation](http://www.accre.vanderbilt.edu/?page_id=2154)
  - [Introduction to SLURM (NCCS lunchtime series)](http://www.nccs.nasa.gov/images/intro-to-slurm-20131218.pdf)
- - [Slides for the HPC Seminar on Jan 7th, 2016: Use SLURM on SJTU π集群 Supercomputer](http://pi.sjtu.edu.cn/slides/slurm_20160107.pdf)
+ - [Slides for the HPC Seminar on Jan 7th, 2016: Use SLURM on SJTU Pi Supercomputer](http://pi.sjtu.edu.cn/slides/slurm_20160107.pdf)
