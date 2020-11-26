@@ -1,10 +1,12 @@
+.. _cuda:
+
 CUDA
 ====
 
 本文档向您展示如何使用CUDA，包含程序示例，编译，作业脚本示例。
 
-程序示例Hello_CUDA
-------------------
+程序示例
+--------
 
 加载cuda环境。
 
@@ -13,7 +15,7 @@ CUDA
    $ module purge
    $ module load cuda/10.0.130-gcc-4.8.5
 
-编辑 ``cublas.cu`` 文件，内容如下：
+编辑\ ``cublas.cu``\ 文件，内容如下：
 
 .. code:: cuda
 
@@ -87,8 +89,10 @@ CUDA
        return EXIT_SUCCESS;
    }
 
-程序示例：CuBLAS
-----------------
+.. _程序示例-1:
+
+程序示例
+--------
 
 使用cuda进行编译，编译时链接cublas动态库。
 

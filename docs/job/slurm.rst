@@ -11,7 +11,7 @@ Slurm 作业调度系统
 .. image:: ../img/slurm_pi.png
 
 Slurm概览
------------
+---------
 
 ======== ==============================
 Slurm    功能
@@ -24,7 +24,7 @@ sacct    已完成作业报告
 scancel  删除作业
 ======== ==============================
 
-``sinfo`` 查看集群状态
+``sinfo``\ ：查看集群状态
 -------------------------
 
 ===================== ================
@@ -63,7 +63,7 @@ dgx2    允许单作业GPU卡数为1~128，推荐每卡配比CPU为6，每CPU配
    dgx2        up  30-00:00:0      8   idle vol[01-08]
 
 
-``squeue`` 查看作业信息
+``squeue``\ ：查看队列中的作业信息
 ----------------------------------
 
 ======================= ==========================
@@ -107,7 +107,7 @@ squeue –help            查看所有的选项
    JOBID PARTITION     NAME     USER    STATE       TIME TIME_LIMI  NODES NODELIST(REASON)
    17923      dgx2     bash    hpcwj  RUNNING 1-13:00:53 30-00:00:00    1 vol05
 
-``SBATCH`` 作业提交
+``SBATCH``\ ：作业提交
 ----------------------
 
 准备作业脚本然后通过\ ``sbatch``\ 提交是Slurm的最常见用法。
@@ -212,7 +212,7 @@ Slurm具有丰富的参数集。 以下最常用的。
    #SBATCH --error=%j.err
    #SBATCH --time=00:30:00
 
-以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于Pi上的Python，您可以查阅我们的\ `Python文档 <https://docs.hpc.sjtu.edu.cn/application/Python/>`__\ 。
+以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于π集群上的Python，您可以查阅我们的\ `Python文档 <https://docs.hpc.sjtu.edu.cn/application/Python/>`__\ 。
 
 .. code:: bash
 
@@ -238,7 +238,7 @@ Slurm具有丰富的参数集。 以下最常用的。
 
    python < vec_${SLURM_ARRAY_TASK_ID}.py
 
-``srun`` 和 ``salloc``  交互式作业
+``srun`` and ``salloc``: 提交交互式作业
 ---------------------------------------
 
 ``srun``\ 可以启动交互式作业。该操作将阻塞，直到完成或终止。例如，在计算主机上运行\ ``hostname``\ 。
@@ -290,7 +290,7 @@ Slurm具有丰富的参数集。 以下最常用的。
 | scontrol –help                    | 查看所有选项                      |
 +-----------------------------------+-----------------------------------+
 
-``sacct`` 查看作业记录
+``sacct``: 查看本账号作业信息
 
 ====================== ====================================
 Slurm                  功能
@@ -323,6 +323,28 @@ sacct –help            查看所有选项
 
    $ sacct --format="JobId,AveRSS,MaxRSS" -P -j xxx
 
+``sreport``: 生成集群或作业信息
+-------------------------------
+
++-----------------------------------+-----------------------------------+
+| Slurm                             | 功能                              |
++===================================+===================================+
+| sreport cluster utilization       | 查看集群利用率报告                |
++-----------------------------------+-----------------------------------+
+| sreport user top                  | 根据过去24小时的                  |
+|                                   | 总CPU时间显示排名前10位的集群用户 |
++-----------------------------------+-----------------------------------+
+| sreport cluster                   | 显示自2019年                      |
+| AccountUtilizationByUser          | 11月1日起每位用户的帐户使用情况。 |
+| start=2019-11-01                  |                                   |
++-----------------------------------+-----------------------------------+
+| sreport job sizesbyaccount        | 显示按组运行的作业数              |
+| PrintJobCount                     |                                   |
++-----------------------------------+-----------------------------------+
+| sreport –help                     | 显示所有选项                      |
++-----------------------------------+-----------------------------------+
+
+默认情况下，\ ``sreport``\ 使用过去24小时的统计信息。
 
 Slurm环境变量
 -------------
@@ -351,5 +373,5 @@ $SLURM_SUBMIT_HOST     提交作业的主机名
    Documentation <http://www.accre.vanderbilt.edu/?page_id=2154>`__
 -  `Introduction to SLURM (NCCS lunchtime
    series) <http://www.nccs.nasa.gov/images/intro-to-slurm-20131218.pdf>`__
--  `Slides for the HPC Seminar on Jan 7th, 2016: Use SLURM on SJTU Pi
+-  `Slides for the HPC Seminar on Jan 7th, 2016: Use SLURM on SJTU π集群
    Supercomputer <http://pi.sjtu.edu.cn/slides/slurm_20160107.pdf>`__

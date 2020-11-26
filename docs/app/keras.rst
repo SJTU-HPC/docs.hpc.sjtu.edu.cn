@@ -12,8 +12,8 @@ was developed with a focus on enabling fast experimentation. Being able
 to go from idea to result with the least possible delay is key to doing
 good research.
 
-Pi上的Keras安装方法
-----------------------
+π集群上的Keras安装方法
+-------------------------
 
 .. code:: bash
 
@@ -23,8 +23,8 @@ Pi上的Keras安装方法
    source activate mypy
    conda install -c anaconda keras tensorflow-gpu
 
-Pi上的Slurm脚本 slurm.test
------------------------------
+π集群上的Slurm脚本 slurm.test
+-------------------------------
 
 在 dgx2 队列上，使用 1 张卡（gres=gpu:1），配合 6 核芯 (n = 6)
 
@@ -51,8 +51,8 @@ Pi上的Slurm脚本 slurm.test
 
    python ...
 
-Pi上提交作业
--------------
+π集群上提交作业
+-----------------
 
 .. code:: bash
 

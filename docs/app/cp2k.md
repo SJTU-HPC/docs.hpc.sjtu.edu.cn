@@ -8,7 +8,7 @@ CP2K is a quantum chemistry and solid state physics software package that can pe
 
 ## Pi 上的 CP2K
 
-Pi2.0 系统中已经预装 CP2K (GNU+cpu 版本)，可用以下命令加载: 
+π集群 系统中已经预装 CP2K (GNU+cpu 版本)，可用以下命令加载: 
 
 ```bash
 $ module load cp2k/6.1-gcc-8.3.0-openblas-openmpi

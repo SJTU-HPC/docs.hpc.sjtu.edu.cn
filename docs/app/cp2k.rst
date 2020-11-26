@@ -7,17 +7,17 @@ CP2K is a quantum chemistry and solid state physics software package
 that can perform atomistic simulations of solid state, liquid,
 molecular, periodic, material, crystal, and biological systems.
 
-Pi上的CP2K
-------------
+π集群上的CP2K
+-----------------------
 
-Pi2.0 系统中已经预装 CP2K (GNU+cpu 版本)，可用以下命令加载:
+π集群2.0 系统中已经预装 CP2K (GNU+cpu 版本)，可用以下命令加载:
 
 .. code:: bash
 
    $ module load cp2k/6.1-gcc-9.2.0-openblas-openmpi
 
-Pi上的Slurm脚本slurm.test
------------------------------
+π集群上的Slurm脚本slurm.test
+-------------------------------
 
 在 cpu 队列上，总共使用 40 核 (n = 40) 
 cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：

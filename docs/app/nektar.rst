@@ -10,10 +10,10 @@ Nektar++ is a spectral/hp element framework designed to support the
 construction of efficient high-performance scalable solvers for a wide
 range of partial differential equations.
 
-Pi上的Nektar++
-----------------
+π集群上的Nektar++
+-----------------------
 
-查看 Pi 上已编译的软件模块:
+查看 π集群 上已编译的软件模块:
 
 .. code:: bash
 
@@ -22,7 +22,7 @@ Pi上的Nektar++
 加载预安装的Nektar++
 ---------------------
 
-Pi 2.0 系统中已经预装 nektar-5.0.0 (intel 版本)，可以用以下命令加载:
+π集群 2.0 系统中已经预装 nektar-5.0.0 (intel 版本)，可以用以下命令加载:
 
 ::
 

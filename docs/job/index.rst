@@ -2,7 +2,7 @@
 作业
 ****
 
-Pi 集群通过 Slurm 调度系统运行作业。
+这里是引言，请用一段话介绍一下这部分的内容，会在Web和PDF文档出现。
 
 .. toctree::
    :maxdepth: 1
@@ -11,3 +11,4 @@ Pi 集群通过 Slurm 调度系统运行作业。
    jobsample1
    jobsample2
    dgx
+   reservation

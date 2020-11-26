@@ -8,7 +8,7 @@ SIESTA is both a method and its computer program implementation, to perform effi
 
 ## Pi 上的 SIESTA
 
-Pi2.0 系统中已经预装 SIESTA (Intel 版本)，可用以下命令加载: 
+π集群 系统中已经预装 SIESTA (Intel 版本)，可用以下命令加载: 
 
 ```bash
 $ module load siesta

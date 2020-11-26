@@ -305,7 +305,7 @@ small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192
 
 ### singularity 容器
 
-Pi 上已部署的 singularity 容器位于 `/lustre/share/img`
+π集群 上已部署的 singularity 容器位于 `/lustre/share/img`
 
 其中，gromacs/lammps/relion/pytorch/tensorflow/chroma 为 GPU 版本的 singularity
 

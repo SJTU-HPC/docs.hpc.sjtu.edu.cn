@@ -1,5 +1,10 @@
+.. _deepvariant:
+
 DeepVariant
 ===========
+
+简介
+----
 
 DeepVariant is an analysis pipeline that uses a deep neural network to
 call genetic variants from next-generation DNA sequencing data.
@@ -12,7 +17,7 @@ CPU 版本的 Singularity DeepVariant
 ----------------------------------
 
 CPU版安装
-^^^^^^^^^
+~~~~~~~~~~
 
 申请计算节点，然后制作 singularity 镜像
 
@@ -21,8 +26,8 @@ CPU版安装
    $ srun -p cpu -N 1 --exclusive --pty /bin/bash
    $ singularity build deepvariant.simg docker://google/deepvariant
 
-用SLURM脚本提交CPU版DeepVariant作业
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+用 slurm 脚本提交作业
+~~~~~~~~~~~~~~~~~~~~~
 
 使用 CPU 版本的 singluarity 镜像的 slurm.sh 如下：
 
@@ -50,8 +55,8 @@ CPU版安装
 
    $ sbatch slurm.sh
 
-交互式提交CPU版DeepVariant作业
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+交互式提交
+~~~~~~~~~~
 
 .. code:: bash
 
@@ -63,7 +68,7 @@ GPU 版本的 Singularity DeepVariant
 ----------------------------------
 
 GPU版安装
-^^^^^^^^^
+~~~~~~~~~~
 
 申请计算节点，然后制作 singularity 镜像
 
@@ -72,10 +77,10 @@ GPU版安装
    $ srun -p cpu -N 1 --exclusive --pty /bin/bash
    $ singularity build deepvariant.gpu.simg docker://google/deepvariant:0.10.0-gpu
 
-用SLURM脚本提交GPU版作业
-^^^^^^^^^^^^^^^^^^^^^^^^
+用 slurm 脚本提交作业
+~~~~~~~~~~~~~~~~~~~~~
 
-使用GPU版本的 singluarity 镜像的 slurm.sh 如下：
+使用 GPU 版本的 singluarity 镜像的 slurm.sh 如下：
 
 .. code:: bash
 
@@ -104,8 +109,8 @@ GPU版安装
 
    $ sbatch slurm.sh
 
-交互式提交GPU版deepvarant作业
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+交互式提交
+~~~~~~~~~~
 
 .. code:: bash
 
@@ -116,5 +121,6 @@ GPU版安装
 参考资料
 --------
 
--  DeepVariant官网 https://github.com/google/deepvariant
--  Pi上使用Singularity https://docs.hpc.sjtu.edu.cn/job/container/singularity/
+-  `DeepVariant 官网 <https://github.com/google/deepvariant>`__
+-  `π集群 上使用
+   Singularity <https://docs.hpc.sjtu.edu.cn/job/container/singularity/>`__

@@ -12,8 +12,8 @@ the results of molecular dynamics simulations. It also includes tools
 for working with volumetric data, sequence data, and arbitrary graphics
 objects.
 
-Pi 上的 VMD
------------
+π集群 上的 VMD
+----------------
 
 集群中已预置了编译优化的容器镜像，通过调用该镜像即可运行
 VMD，无需单独安装，目前版本为 ``vmd-1.9.3``\ 。该容器文件位于

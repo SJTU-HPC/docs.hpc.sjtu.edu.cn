@@ -11,10 +11,10 @@ solvers, and pre-/post-processing utilities for the solution of
 continuum mechanics problems, most prominently including computational
 fluid dynamics.
 
-Pi 上的 OpenFOAM
-----------------
+π集群 上的 OpenFOAM
+---------------------
 
-查看 Pi 上已编译的软件模块:
+查看 π集群 上已编译的软件模块:
 
 .. code:: bash
 
@@ -29,11 +29,9 @@ Pi 上的 OpenFOAM
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
 
-cpu 队列 slurm 脚本示例 OpenFoam
+!!! example “cpu 队列 slurm 脚本示例 OpenFoam” \``\` #!/bin/bash
 
-.. code:: bash
-
-   #!/bin/bash
+::
 
    #SBATCH --job-name=test           # 作业名
    #SBATCH --partition=cpu           # cpu 队列
@@ -49,8 +47,7 @@ cpu 队列 slurm 脚本示例 OpenFoam
    ulimit -l unlimited
 
    srun --mpi=pmi2 icoFoam -parallel
-
-
+   ```
 
 用下方语句提交作业
 
