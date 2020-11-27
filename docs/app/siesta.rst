@@ -16,7 +16,7 @@ calculations to highly accurate simulations matching the quality of
 other approaches, such as plane-wave methods.
 
 π 集群上的SIESTA
---------------
+---------------------
 
 π 集群系统中已经预装 SIESTA (Intel 版本)，可用以下命令加载:
 
@@ -25,7 +25,7 @@ other approaches, such as plane-wave methods.
    $ module load siesta
 
 π 集群上的Slurm脚本 slurm.test
------------------------------
+-----------------------------------
 
 在 cpu 队列上，总共使用 40 核 (n = 40) 
 cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：

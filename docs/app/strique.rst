@@ -11,7 +11,7 @@ states of short tandem repeats (STR) in Oxford Nanopore Technology (ONT)
 long read sequencing data.
 
 在 π 集群上安装 STRique
---------------------
+------------------------------
 
 首先申请计算节点，然后输入以下指令进行编译：
 
@@ -27,7 +27,7 @@ long read sequencing data.
    $ python setup.py install
 
 在 π 集群上运行的 Slurm 脚本示例：
--------------------------------
+---------------------------------------
 
 .. code:: bash
 

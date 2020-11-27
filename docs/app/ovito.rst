@@ -14,7 +14,7 @@ served in a growing number of computational simulation studies as a
 powerful tool to analyze, understand and illustrate simulation results.
 
 π 集群上使用 OVITO
----------------
+---------------------
 
 使用 OVITO 查看原子构型有两种方法：
 
@@ -23,12 +23,12 @@ powerful tool to analyze, understand and illustrate simulation results.
 二、在可视化平台的远程桌面里调用 π 集群上的 OVITO
 
 方法一：本地 OVITO 调用远程构型文件
------------------------------------
+-----------------------------------------
 
 特点：速度快、画质无损失、不计费
 
 本地电脑的 OVITO 加载 π 集群远程文件
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 点击 Ovito 顶上的 File -> Load Remote File
 
@@ -39,7 +39,7 @@ sftp://userXXX@login.hpc.sjtu.edu.cn/lustre/home/acct-userXXX/userXXX/SiVacancy.
 .. image:: /img/ovito2.*
 
 方法二：远程桌面运行 π 集群上的 OVITO
-----------------------------------
+-----------------------------------------
 
 特点：无需安装 OVITO、远程桌面按使用机时计费
 
@@ -61,7 +61,7 @@ HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
 5. 启动后，右上角会显示 1 node 16 core Running. 然后点击 Launch Desktop
 
 远程桌面启动 gnuplot
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 在远程桌面空白处右键单击，Open Terminal Here 打开终端
 
@@ -73,7 +73,7 @@ HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
 .. image:: /img/ovito.*
 
 结束后退出远程桌面
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
 
 远程桌面作业，使用完毕后需退出，否则会持续计费。两种退出方法：
 
