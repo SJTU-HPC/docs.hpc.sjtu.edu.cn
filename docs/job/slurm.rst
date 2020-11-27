@@ -248,19 +248,13 @@ Slurm 具有丰富的参数集。 以下最常用的。
    $ srun -N1 -n1  hostname
    cas006
 
-启动远程主机bash终端。
+启动远程主机bash终端：
 
 .. code:: bash
 
-    srun -p cpu -n 1 --exclusive --pty /bin/bash
-   hostname
-   cas005
-   free
-                 total        used        free      shared  buff/cache   available
-   Mem:      196466436     2650052   190927408      198180     2888976   191763544
-   Swap:      33554428           0    33554428
+   srun -p cpu -n 1 --exclusive --pty /bin/bash
 
-或者，可以通过\ ``salloc``\ 请求资源，然后在获取节点后登录到计算节点。
+或者，可以通过\ ``salloc``\ 请求资源，然后在获取节点后登录到计算节点：
 
 .. code:: bash
 
@@ -275,14 +269,9 @@ Slurm 具有丰富的参数集。 以下最常用的。
 +===================================+===================================+
 | scontrol show job JOB_ID          | 查看排队或正在运行的作业的信息    |
 +-----------------------------------+-----------------------------------+
-| scontrol -dd show job JOB_ID      | 查看批处理作业脚本                |
-+-----------------------------------+-----------------------------------+
 | scontrol hold JOB_ID              | 暂停JOB_ID                        |
 +-----------------------------------+-----------------------------------+
 | scontrol release JOB_ID           | 恢复JOB_ID                        |
-+-----------------------------------+-----------------------------------+
-| scontrol update JobID=JOB_ID      | 将工作时间更改                    |
-| Timelimit=1-12:00:00              | 为1天12小时(仅适用于未完成的作业) |
 +-----------------------------------+-----------------------------------+
 | scontrol update dependency=JOB_ID | 添加作业依赖性                    |
 |                                   | ，以便仅在JOB_ID完成后才开始作业  |
@@ -296,9 +285,6 @@ Slurm 具有丰富的参数集。 以下最常用的。
 Slurm                  功能
 ====================== ====================================
 sacct -l               查看详细的帐户作业信息
-sacct -A ACCOUNT_LIST  查看ACCOUNT_ID的账号作业信息
-sacct -u USER_NAME     查看USER_NAME的账号作业信息
-sacct –allusers        查看所有用户的工作账号作业信息
 sacct –states=R        查看具有特定状态的作业的账号作业信息
 sacct -S YYYY-MM-DD    在指定时间后选择处于任意状态的作业
 sacct –format=“LAYOUT” 使用给定的LAYOUT自定义sacct输出
