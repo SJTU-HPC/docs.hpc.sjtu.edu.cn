@@ -117,4 +117,4 @@ GPU版安装
 --------
 
 -  DeepVariant官网 https://github.com/google/deepvariant
--  Pi上使用Singularity https://docs.hpc.sjtu.edu.cn/job/container/singularity/
+

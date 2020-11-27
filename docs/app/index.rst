@@ -179,10 +179,10 @@ intel-mpi Intel MPI 2019.4   2019.4
 软件使用
 ================
 
-ENVIRONMENT MODULES可以帮助您在Pi上使用预构建的软件包。每个ENVIRONMENT
+ENVIRONMENT MODULES可以帮助您在 π 集群上使用预构建的软件包。每个ENVIRONMENT
 MODULES都是可以实时应用和不应用的一组环境设置。用户可以编写自己的模块。
 
-本文档将向您介绍ENVIRONMENT MODULES的基本用法以及Pi上可用的软件模块。
+本文档将向您介绍ENVIRONMENT MODULES的基本用法以及 π 集群上可用的软件模块。
 
 调用 module
 -------------------

@@ -19,7 +19,7 @@ General Public License.
 π 集群上的 Quantum ESPRESSO
 -------------------------------
 
-查看 Pi 上已编译的软件模块:
+查看 π 集群上已编译的软件模块:
 
 .. code:: bash
 

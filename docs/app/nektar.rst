@@ -11,7 +11,7 @@ construction of efficient high-performance scalable solvers for a wide
 range of partial differential equations.
 
 π 集群上的Nektar++
-----------------
+----------------------
 
 查看 π 集群上已编译的软件模块:
 

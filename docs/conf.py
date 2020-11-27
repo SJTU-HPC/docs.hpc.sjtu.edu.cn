@@ -142,7 +142,7 @@ latex_engine = 'xelatex'
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
+    'papersize': 'a4paper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
@@ -156,6 +156,7 @@ latex_elements = {
     \usepackage{xeCJK}
     \usepackage{fontspec}
     \usepackage{indentfirst} % 中文首行缩进
+	\let\cleardoublepage\clearpage
     \setlength{\parindent}{2em}
     \setCJKmainfont{Adobe Song Std}
     \setCJKmonofont[Scale=0.9]{Adobe Heiti Std}

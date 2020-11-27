@@ -13,7 +13,7 @@ to go from idea to result with the least possible delay is key to doing
 good research.
 
 π 集群上的Keras安装方法
-----------------------
+--------------------------
 
 .. code:: bash
 
@@ -24,7 +24,7 @@ good research.
    conda install -c anaconda keras tensorflow-gpu
 
 π 集群上的Slurm脚本 slurm.test
------------------------------
+---------------------------------
 
 在 dgx2 队列上，使用 1 张卡（gres=gpu:1），配合 6 核芯 (n = 6)
 
@@ -52,7 +52,7 @@ good research.
    python ...
 
 π 集群上提交作业
--------------
+------------------
 
 .. code:: bash
 

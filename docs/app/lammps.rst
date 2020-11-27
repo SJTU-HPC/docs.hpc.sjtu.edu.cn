@@ -14,7 +14,7 @@ systems. It can be used to model atoms or, more generically, as a
 parallel particle simulator at the atomic, meso, or continuum scale.
 
 π 集群上的 LAMMPS
---------------
+--------------------
 
 π 集群上有多种版本的 LAMMPS:
 
