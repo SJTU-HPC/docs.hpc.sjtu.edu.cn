@@ -223,7 +223,7 @@ Q 如何在论文中致谢交大高性能计算？
    （英文）The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao
 Tong University.
 
-8 医学院和附属医院如何申请 Jaccount 账号
+8 医学院和附属医院如何申请 jAccount 账号
 ----------------------------------------
 
 **A：** 请至
