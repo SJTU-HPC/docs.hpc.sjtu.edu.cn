@@ -89,7 +89,7 @@ CPU版GROMACS作业示例(双精度)
 GPU版Gromacs
 ------------
 
-Pi 集群已预置最新的 GPU GROMACS。脚本名称可设为 slurm.test
+π 集群已预置最新的 GPU GROMACS。脚本名称可设为 slurm.test
 
 .. code:: bash
 
@@ -120,7 +120,7 @@ Pi 集群已预置最新的 GPU GROMACS。脚本名称可设为 slurm.test
 GPU版Gromacs(MPI版)
 -------------------
 
-Pi 集群已预置最新的 GPU GROMACS MPI 版。脚本名称可设为 slurm.test
+π 集群已预置最新的 GPU GROMACS MPI 版。脚本名称可设为 slurm.test
 
 .. code:: bash
 

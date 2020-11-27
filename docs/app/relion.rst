@@ -6,13 +6,12 @@ Relion
 简介
 ----
 
-Relion 是由 MRC 的 Scheres 在 2012
-年发布的针对单颗粒冷冻电镜图片进行处理的框架。
+Relion 是由 MRC 的 Scheres 在 2012 年发布的针对单颗粒冷冻电镜图片进行处理的框架。
 
-Pi 上的 Relion
+π 集群上的 Relion
 --------------
 
-查看 Pi 上已编译的 GPU 版软件:
+查看 π 集群上已编译的 GPU 版软件:
 
 .. code:: bash
 
@@ -27,8 +26,7 @@ Pi 上的 Relion
 使用 GPU 版本的 Relion
 ----------------------
 
-在 dgx2 队列上使用 1 块 gpu，并配比 6 cpu 核心。脚本名称可设为
-slurm.test
+在 dgx2 队列上使用 1 块 gpu，并配比 6 cpu 核心。脚本名称可设为 slurm.test
 
 .. code:: bash
 
@@ -56,8 +54,7 @@ slurm.test
 使用 HPC Studio 启动可视化界面
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-参照\ `可视化平台 <../../login/HpcStudio/>`__\ ，登陆 HPC
-Studio，在顶栏选择 Relion：
+参照\ `可视化平台 <../../login/HpcStudio/>`__\ ，登陆 HPC Studio，在顶栏选择 Relion：
 
 |avater| |image1|
 

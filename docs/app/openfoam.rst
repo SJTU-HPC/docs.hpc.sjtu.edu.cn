@@ -11,10 +11,10 @@ solvers, and pre-/post-processing utilities for the solution of
 continuum mechanics problems, most prominently including computational
 fluid dynamics.
 
-Pi 上的 OpenFOAM
+π 集群上的 OpenFOAM
 ----------------
 
-查看 Pi 上已编译的软件模块:
+查看 π 集群上已编译的软件模块:
 
 .. code:: bash
 

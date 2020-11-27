@@ -66,10 +66,10 @@ Pi 上可用 miniconda 自行安装 PyTorch，也可用已预置的 NVIDIA 提�
 
    $ sbatch slurm.test
 
-使用 Pi 提供的 PyTorch
-----------------------
+使用 π 集群提供的 PyTorch
+----------------------------
 
-集群中已经预置了 `NVIDIA GPU CLOUD <https://ngc.nvidia.com/>`__
+π 集群中已经预置了 `NVIDIA GPU CLOUD <https://ngc.nvidia.com/>`__
 提供的优化镜像，通过调用该镜像即可运行 PyTorch
 作业，无需单独安装，目前版本为 ``pytorch/1.6.0``\ 。
 

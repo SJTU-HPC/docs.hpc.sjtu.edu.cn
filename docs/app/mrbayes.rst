@@ -11,7 +11,7 @@ wide range of phylogenetic and evolutionary models. MrBayes uses Markov
 chain Monte Carlo (MCMC) methods to estimate the posterior distribution
 of model parameters.
 
-Pi上的MrBayes
+π 集群上的MrBayes
 ---------------
 
 查看 Pi 上已编译的软件模块:
@@ -26,7 +26,7 @@ Pi上的MrBayes
 
    $ module load mrbayes/3.2.7a-gcc-8.3.0-openmpi
 
-Pi上的Slurm脚本 slurm.test
+π 集群上的Slurm脚本 slurm.test
 -----------------------------
 
 在 cpu 队列上，总共使用 16 核 (n = 16)
@@ -54,7 +54,7 @@ cpu 队列每个节点配有 40核，这里使用了 1 个节点：
 
 根据我们的测试，mrbayes最多只能使用16进程/节点的配置，请根据具体需要调整\ ``-n``\ 和\ ``--ntasks-per-node``\ 参数
 
-Pi上提交作业
+π 集群上提交作业
 -------------
 
 .. code:: bash

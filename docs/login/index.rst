@@ -57,8 +57,8 @@ Linux/Unix/Mac
 
 Linux / Unix / Mac 操作系统拥有自己的 SSH 客户端，包括 ssh, scp, sftp 等。
 
-通过 SSH 登录集群
------------------
+通过 SSH 登录 π 集群
+-------------------------
 
 Windows用户
 ^^^^^^^^^^^

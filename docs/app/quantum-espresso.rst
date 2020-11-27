@@ -16,7 +16,7 @@ Electronic Structure, Simulation, and Optimization. It is freely
 available to researchers around the world under the terms of the GNU
 General Public License.
 
-Pi 上的 Quantum ESPRESSO
+π 集群上的 Quantum ESPRESSO
 ------------------------
 
 查看 Pi 上已编译的软件模块:
@@ -31,7 +31,7 @@ Pi 上的 Quantum ESPRESSO
 
    $ module load quantum-espresso/6.6
 
-Pi 上使用 Quantum ESPRESSO
+π 集群上使用 Quantum ESPRESSO
 --------------------------
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40

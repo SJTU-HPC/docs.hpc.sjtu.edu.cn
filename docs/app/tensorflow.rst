@@ -9,10 +9,10 @@ TensorFlow
 TensorFlow
 是一个端到端开源机器学习平台。它拥有一个包含各种工具、库和社区资源的全面灵活生态系统，可以让研究人员推动机器学习领域的先进技术的发展，并让开发者轻松地构建和部署由机器学习提供支持的应用。
 
-Pi 上的 TensorFlow
+π 集群上的 TensorFlow
 ------------------
 
-Pi 上可以用 miniconda 自行安装 TensorFlow，也可以用已预置的 singularity
+π 集群上可以用 miniconda 自行安装 TensorFlow，也可以用已预置的 Singularity
 ``tensorflow-2.0.0`` 优化镜像。
 
 使用 miniconda 安装 TensorFlow
@@ -63,14 +63,13 @@ Pi 上可以用 miniconda 自行安装 TensorFlow，也可以用已预置的 sin
 
    $ sbatch tensorflow_conda.slurm
 
-使用 Pi 提供的 TensorFlow
+使用 π 提供的 TensorFlow
 -------------------------
 
 集群中已经预置了 `NVIDIA GPU CLOUD <https://ngc.nvidia.com/>`__
-提供的优化镜像，通过调用该镜像即可运行 TensorFlow
-作业，无需单独安装，目前版本为 ``tensorflow-2.2.0``\ 。
+提供的优化镜像，通过调用该镜像即可运行 TensorFlow 作业，无需单独安装，目前版本为 ``tensorflow-2.2.0``\ 。
 
-查看 Pi 上已编译的软件模块:
+查看 π 集群上已编译的软件模块:
 
 .. code:: bash
 
@@ -82,8 +81,7 @@ Pi 上可以用 miniconda 自行安装 TensorFlow，也可以用已预置的 sin
 
    module load tensorflow/2.2.0
 
-以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu
-核心。脚本名称可设为 slurm.test
+以下 Slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心。脚本名称可设为 slurm.test
 
 .. code:: bash
 

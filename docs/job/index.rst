@@ -2,7 +2,7 @@
 作业
 ****
 
-Pi 集群通过 Slurm 调度系统运行作业。
+π 集群通过 Slurm 调度系统运行作业。
 
 .. toctree::
    :maxdepth: 1
