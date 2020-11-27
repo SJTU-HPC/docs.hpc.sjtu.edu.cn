@@ -4,19 +4,19 @@ Slurm 作业调度系统
 `SLURM <http://slurm.schedmd.com/>`_ （Simple Linux Utility for Resource Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
 它是免费且开源的，根据\ `GPL通用公共许可证 <http://www.gnu.org/licenses/gpl.html>`__\ 发行。
 
-本文档将协助您通过SLURM管理作业。 在这里可以找到更多的工作样本。
+本文档将协助您通过 Slurm 管理作业。 在这里可以找到更多的工作样本。
 
 如果我们可以提供任何帮助，请随时联系 \ `HPC 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ 。
 
 .. image:: ../img/slurm_pi.png
 
-Slurm概览
+Slurm 概览
 -----------
 
 ======== ==============================
 Slurm    功能
 ======== ==============================
-sinfo    集群状态
+sinfo    π 集群状态
 squeue   排队作业状态
 sbatch   作业提交
 scontrol 查看和修改作业参数
@@ -24,7 +24,7 @@ sacct    已完成作业报告
 scancel  删除作业
 ======== ==============================
 
-``sinfo`` 查看集群状态
+``sinfo`` 查看 π 集群状态
 -------------------------
 
 ===================== ================
@@ -40,7 +40,7 @@ sinfo –help           查看所有选项
 
 \ ``drain``\ (节点故障)，\ ``alloc``\ (节点在用)，\ ``idle``\ (节点可用)，\ ``down``\ (节点下线)，\ ``mix``\ (节点部分占用，但仍有剩余资源）。
 
-集群设置以下队列，使用限制与说明如下
+π 集群设置以下队列，使用限制与说明如下
 
 ======= ====================================================================================================
 队列名   说明
@@ -110,14 +110,14 @@ squeue –help            查看所有的选项
 ``SBATCH`` 作业提交
 ----------------------
 
-准备作业脚本然后通过\ ``sbatch``\ 提交是Slurm的最常见用法。
-为了将作业脚本提交给作业系统，SLURM使用
+准备作业脚本然后通过\ ``sbatch``\ 提交是 Slurm 的最常见用法。
+为了将作业脚本提交给作业系统，Slurm 使用
 
 .. code:: bash
 
    $ sbatch jobscript.slurm
 
-Slurm具有丰富的参数集。 以下最常用的。
+Slurm 具有丰富的参数集。 以下最常用的。
 
 +---------------------------+-----------------------------------------+
 | Slurm                     | 含义                                    |
@@ -212,7 +212,7 @@ Slurm具有丰富的参数集。 以下最常用的。
    #SBATCH --error=%j.err
    #SBATCH --time=00:30:00
 
-以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于Pi上的Python，您可以查阅我们的\ `Python文档 <https://docs.hpc.sjtu.edu.cn/application/Python/>`__\ 。
+以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于 π 集群上的Python，您可以查阅我们的\ `Python文档 <https://docs.hpc.sjtu.edu.cn/application/Python/>`__\ 。
 
 .. code:: bash
 
@@ -351,5 +351,3 @@ $SLURM_SUBMIT_HOST     提交作业的主机名
    Documentation <http://www.accre.vanderbilt.edu/?page_id=2154>`__
 -  `Introduction to SLURM (NCCS lunchtime
    series) <http://www.nccs.nasa.gov/images/intro-to-slurm-20131218.pdf>`__
--  `Slides for the HPC Seminar on Jan 7th, 2016: Use SLURM on SJTU Pi
-   Supercomputer <http://pi.sjtu.edu.cn/slides/slurm_20160107.pdf>`__
