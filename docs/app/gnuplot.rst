@@ -15,7 +15,7 @@ non-interactive uses such as web scripting. It is also used as a
 plotting engine by third-party applications like Octave.
 
 π 集群上的 gnuplot
----------------
+---------------------
 
 gnuplot 需要在 HPC Studio 可视化平台上使用。π 集群登陆节点不支持 gnuplot
 显示。

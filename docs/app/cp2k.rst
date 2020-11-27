@@ -8,7 +8,7 @@ that can perform atomistic simulations of solid state, liquid,
 molecular, periodic, material, crystal, and biological systems.
 
 π 集群上的CP2K
-------------
+-----------------
 
 π 集群系统中已经预装 CP2K (GNU+cpu 版本)，可用以下命令加载:
 

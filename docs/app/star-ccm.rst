@@ -36,7 +36,7 @@ License服务器、License 服务器能否安装在虚拟机上；3)
    4. chmod 600 ~/.ssh/config
 
 π 集群上的 Slurm 脚本 slurm.test
------------------------------
+-------------------------------------
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
 核，所以这里使用了 2 个节点：
@@ -64,7 +64,7 @@ License服务器、License 服务器能否安装在虚拟机上；3)
    starccm+ -power -mpi intel -machinefile './machinefile' -np $SLURM_NTASKS -rsh ssh -cpubind -batch run -batch-report YOURsample.sim
 
 π 集群上提交作业
--------------
+-------------------
 
 .. code:: bash
 
