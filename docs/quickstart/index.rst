@@ -149,7 +149,6 @@ d) 简短版使用手册（Cheat Sheet）：https://hpc.sjtu.edu.cn/Item/docs/Pi
    ulimit -l unlimited
    ulimit -s unlimited
 
-   module purge
    module load gcc
 
    export OMP_NUM_THREADS=8
