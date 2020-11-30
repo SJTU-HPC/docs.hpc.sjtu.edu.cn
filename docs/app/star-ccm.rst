@@ -52,7 +52,6 @@ License服务器、License 服务器能否安装在虚拟机上；3)
    #SBATCH -n 80
    #SBATCH --ntasks-per-node=40
 
-   module purge
    module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
    ulimit -s unlimited

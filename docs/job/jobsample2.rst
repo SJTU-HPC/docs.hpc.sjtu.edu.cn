@@ -44,7 +44,7 @@ OpenMP 示例
 
 .. code:: bash
 
-   $ module purge; module load gcc 
+   $ module load gcc 
    $ gcc -fopenmp omp_hello.c -o omphello
 
 在本地运行4线程应用程序
@@ -69,7 +69,6 @@ OpenMP 示例
    ulimit -l unlimited
    ulimit -s unlimited
 
-   module purge
    module load gcc
 
    export OMP_NUM_THREADS=8
@@ -86,7 +85,7 @@ OpenMP 示例
 
 .. code:: bash
 
-   $ module purge; module load intel 
+   $ module load intel 
    $ icc -fopenmp omp_hello.c -o omphello
 
 在本地运行4线程应用程序
@@ -110,7 +109,6 @@ OpenMP 示例
    ulimit -l unlimited
    ulimit -s unlimited
 
-   module purge
    module load intel
 
    export OMP_NUM_THREADS=8
@@ -182,7 +180,7 @@ MPI示例
 
 .. code:: bash
 
-   $ module purge; module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
+   $ module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
    $ mpicc mpihello.c -o mpihello
 
 准备一个名为job_openmpi.slurm的作业脚本
@@ -201,7 +199,6 @@ MPI示例
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge
    module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
 
    srun --mpi=pmi2 ./mpihello
@@ -217,7 +214,7 @@ MPI示例
 
 .. code:: bash
 
-   $ module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
+   $ module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
    $ mpiicc mpihello.c -o mpihello
 
 准备一个名为job_impi.slurm的作业脚本
@@ -236,7 +233,6 @@ MPI示例
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge
    module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
@@ -287,7 +283,7 @@ MPI+OpenMP混合示例
 
 .. code:: bash
 
-   $ module purge && module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
+   $ module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
    $ mpicc -O3 -fopenmp hybridmpi.c -o hybridmpi
 
 准备一个名为hybridmpi.slurm的作业脚本
@@ -307,7 +303,6 @@ MPI+OpenMP混合示例
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge
    module load gcc/8.3.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0
 
    export OMP_NUM_THREADS=40
@@ -318,7 +313,7 @@ MPI+OpenMP混合示例
 
 .. code:: bash
 
-   $ module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
+   $ module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
    $ mpiicc -O3 -fopenmp hybridmpi.c -o hybridmpi
 
 准备一个名为hybridmpi.slurm的作业脚本
@@ -338,7 +333,7 @@ MPI+OpenMP混合示例
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
+   module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
    export I_MPI_DEBUG=5
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
@@ -438,7 +433,7 @@ CUDA示例
 
 .. code:: bash
 
-   $ module purge; module load gcc/8.3.0-gcc-4.8.5 cuda/10.1.243-gcc-8.3.0
+   $ module load gcc/8.3.0-gcc-4.8.5 cuda/10.1.243-gcc-8.3.0
    $ nvcc cublashello.cu -o cublashello -lcublas
 
 作业脚本cublashello.slurm如下：
@@ -457,7 +452,6 @@ CUDA示例
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge
    module load gcc/8.3.0-gcc-4.8.5 cuda/10.1.243-gcc-8.3.0
 
    ./cublashello
@@ -502,7 +496,6 @@ CUDA示例
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge
    module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so

@@ -17,7 +17,6 @@ good research.
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -46,7 +45,6 @@ good research.
    ulimit -l unlimited
    ulimit -s unlimited
 
-   module purge
    source activate mypy
 
    python ...

@@ -100,7 +100,6 @@ PyTorch 是一个 Python 优先的深度学习框架，也是使用 GPU 和 CPU
    #SBATCH --cpus-per-task=12
    #SBATCH --gres=gpu:2
 
-   module purge
    module load pytorch/1.6.0
 
    python -c 'import torch; print(torch.__version__); print(torch.zeros(10,10).cuda().shape)'

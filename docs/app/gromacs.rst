@@ -70,7 +70,6 @@ CPU版GROMACS作业示例(双精度)
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load gromacs/2020-cpu-double
 
    ulimit -s unlimited
@@ -103,7 +102,6 @@ GPU版Gromacs
    #SBATCH --cpus-per-task=1
    #SBATCH --gres=gpu:1
 
-   module purge
    module load gromacs/2020-gpu
 
    ulimit -s unlimited
@@ -134,7 +132,6 @@ GPU版Gromacs(MPI版)
    #SBATCH --cpus-per-task=1
    #SBATCH --gres=gpu:2
 
-   module purge
    module load gromacs/2020-dgx-mpi
 
    ulimit -s unlimited

@@ -51,7 +51,6 @@ General Public License.
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge
    module load quantum-espresso
 
    srun --mpi=pmi2 pw.x -i test.in

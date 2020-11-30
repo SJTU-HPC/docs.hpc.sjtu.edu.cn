@@ -47,7 +47,6 @@ cpu 队列每个节点配有 40核，这里使用了 1 个节点：
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge
    module load mrbayes/3.2.7a-gcc-8.3.0-openmpi
 
    srun --mpi=pmi2 mb your_input_file

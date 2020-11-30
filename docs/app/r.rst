@@ -12,7 +12,6 @@ R
 
 .. code:: bash
 
-   $ module purge
    $ module load miniconda3/4.7.12.1-gcc-4.8.5
 
 创建conda环境
@@ -56,7 +55,6 @@ R
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load miniconda3/4.7.12.1-gcc-4.8.5
    source activate R
 

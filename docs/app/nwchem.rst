@@ -38,7 +38,6 @@ Pi2.0 系统中已经预装 NWChem-6.8.1 (GNU+cpu 版本)，可用以下命令�
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load nwchem/6.8.1-gcc-8.3.0-openblas-openmpi
 
    ulimit -s unlimited

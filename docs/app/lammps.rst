@@ -65,7 +65,6 @@ USER-REAXC USER-SDPD USER-SPH USER-SMD USER-UEF USER-YAFF
    #SBATCH -N 2
    #SBATCH --ntasks-per-node=40
 
-   module purge
    module load lammps/2020-cpu
 
    ulimit -s unlimited
@@ -102,7 +101,6 @@ Lammps.
 
 .. code:: bash
 
-   $ module purge
    $ module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
 
 4. 编译 (以额外安装 MANYBODY 和 USER-MEAMC 包为例)
@@ -137,7 +135,6 @@ slurm.test
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so

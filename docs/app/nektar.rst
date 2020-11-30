@@ -45,7 +45,6 @@ nektar_cpu_intel.slurm 如下：
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load nektar/5.0.0-intel-19.0.4-impi
 
    ulimit -s unlimited

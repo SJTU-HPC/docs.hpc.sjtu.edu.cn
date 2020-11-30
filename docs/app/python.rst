@@ -12,7 +12,6 @@ Miniconda2
 
 .. code:: bash
 
-   $ module purge
    $ module load miniconda2/4.6.14-gcc-4.8.5
 
 创建 conda 环境来安装所需 Python 包。
@@ -47,7 +46,6 @@ Miniconda 3
 
 .. code:: bash
 
-   $ module purge
    $ module load miniconda3/4.6.14-gcc-4.8.5
 
 创建conda环境来安装所需Python包。
@@ -107,7 +105,6 @@ R拓展模块查询方法
    #SBATCH -e %j.err
    #SBATCH -n 2
 
-   module purge
    module load miniconda3/4.6.14-gcc-4.8.5
 
    source activate mypython3

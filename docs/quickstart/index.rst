@@ -124,7 +124,7 @@ d) 简短版使用手册（Cheat Sheet）：https://hpc.sjtu.edu.cn/Item/docs/Pi
 
 .. code:: bash
 
-   $ module purge; module load gcc 
+   $ module load gcc 
    $ gcc -fopenmp hello_world.c -o hello_world
 
 3. 在本地测试运行 4 线程应用程序

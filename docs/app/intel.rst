@@ -61,7 +61,7 @@ Intel编译套件是由Intel提供的编译器、MPI环境、MKL库等集成套�
 
 .. code:: bash
 
-   $ module purge; module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
+   $ module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
    $ mpiicc mpihello.c -o mpihello
 
 提交Intel+Intel-mpi应用
@@ -83,7 +83,6 @@ Intel编译套件是由Intel提供的编译器、MPI环境、MKL库等集成套�
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge
    module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so

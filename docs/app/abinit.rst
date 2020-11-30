@@ -44,7 +44,6 @@ cpu 队列每个节点配有 40核，所以这里使用了 2 个节点：
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load abinit
 
    srun --mpi=pmi2 abinit < example.in

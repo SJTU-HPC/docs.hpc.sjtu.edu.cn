@@ -194,7 +194,6 @@ module use [PATH]       将[PATH]下的文件添加到模块列表中
 module avail            列出所有模块
 module load [MODULE]    加载[MODULE]
 module unload [MODULE]  卸载[MODULE]
-module purge            卸载所有模块
 module whatis [MODULE]  显示有关[MODULE]的基本信息
 module info [MODULE]    显示有关[MODULE]的详细信息
 module display [MODULE] 显示有关[MODULE]的信息
@@ -222,14 +221,7 @@ module help             输出帮助信息
    gcc/9.2.0-gcc-4.8.5                            miniconda3/4.6.14-intel-19.0.4
    hisat2/2.1.0-intel-19.0.4                      ncbi-rmblastn/2.2.28-gcc-4.8.5
 
-``module purge/load/unload/list``: 完整的模块工作流程
-
-
-在开始新作业之前，先卸载所有已加载的模块是一个好习惯。
-
-.. code:: bash
-
-   $ mdoule purge
+``module load/unload/list``: 完整的模块工作流程
 
 可以一次加载或卸载多个模块。
 
@@ -289,7 +281,6 @@ conda 安装软件
 
 .. code:: bash
 
-   $ module purge
    $ module load miniconda3
 
 2. 创建 conda 环境来安装所需 Python 包（可指定 Python 版本，也可以不指定）
@@ -318,7 +309,6 @@ conda 安装的软件详细列表见 `生信软件安装 <bio.html>`_
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -340,7 +330,6 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load miniconda3
    source activate mypy
 

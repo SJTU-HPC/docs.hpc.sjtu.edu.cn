@@ -227,7 +227,6 @@ Slurm 具有丰富的参数集。 以下最常用的。
    #SBATCH --output=python_array_%A_%a.out
    #SBATCH --output=python_array_%A_%a.err
 
-   module purge
    module load miniconda2/4.6.14-gcc-4.8.5
 
    source activate YOUR_ENV_NAME

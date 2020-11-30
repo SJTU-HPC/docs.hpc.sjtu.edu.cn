@@ -45,7 +45,6 @@ MELT安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -58,7 +57,6 @@ Manta安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -71,7 +69,6 @@ Lumpy安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -84,7 +81,6 @@ Hydra-sv安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -98,7 +94,6 @@ VariationHunter安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -111,7 +106,6 @@ GRIDSS安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -124,7 +118,6 @@ GenomeSTRiP安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -138,7 +131,6 @@ FermiKit安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -151,7 +143,6 @@ ERDS安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -164,7 +155,6 @@ DELLY安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -177,7 +167,6 @@ CREST安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -195,7 +184,6 @@ Control-FREEC安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -208,7 +196,6 @@ CNVnator安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -221,7 +208,6 @@ CLEVER安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -234,7 +220,6 @@ BreakDancer安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -247,7 +232,6 @@ BICseq2安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -260,7 +244,6 @@ BatVI安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -273,7 +256,6 @@ BASIL-ANISE安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -286,7 +268,6 @@ MetaSV安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -299,7 +280,6 @@ MindTheGap安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -312,7 +292,6 @@ Mobster安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -325,7 +304,6 @@ pbsv安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -338,7 +316,6 @@ Pindel安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -351,7 +328,6 @@ PRISM安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -366,7 +342,6 @@ RetroSeq安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -381,7 +356,6 @@ Sniffles安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -396,7 +370,6 @@ SV2安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27
@@ -411,7 +384,6 @@ SvABA安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -426,7 +398,6 @@ SVDetect安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -441,7 +412,6 @@ Wham安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -456,7 +426,6 @@ gsutil安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -471,7 +440,6 @@ openslide-python安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -485,7 +453,6 @@ pandas安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -498,7 +465,6 @@ cdsapi安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -527,7 +493,6 @@ r-rgl安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -540,7 +505,6 @@ sra-tools安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -553,7 +517,6 @@ DESeq2安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -568,7 +531,6 @@ WGCNA安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -582,7 +544,6 @@ MAKER安装
 .. code:: bash
 
    srun -p small -n 4 --pty /bin/bash
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -596,7 +557,6 @@ AUGUSTUS安装
 .. code:: bash
 
    srun -p small -n 4 --pty /bin/bash
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -612,7 +572,6 @@ DeepGo安装
 
    srun -p small -n 4 --pty /bin/bash
    git clone https://github.com/bio-ontology-research-group/deepgo.git
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -628,7 +587,6 @@ km安装
 
    srun -p small -n 4 --pty /bin/bash
    git clone https://github.com/iric-soft/km.git
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy
@@ -642,7 +600,6 @@ Requests安装
 
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy
    source activate mypy

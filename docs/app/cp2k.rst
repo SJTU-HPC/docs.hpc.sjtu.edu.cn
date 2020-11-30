@@ -33,7 +33,6 @@ cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load cp2k/6.1-gcc-9.2.0-openblas-openmpi
    module load openmpi/3.1.5-gcc-9.2.0
    module load gcc/9.2.0-gcc-4.8.5

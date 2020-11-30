@@ -10,7 +10,6 @@ PERL
 
 .. code:: bash
 
-   $ module purge
    $ module load miniconda3/4.7.12.1-gcc-4.8.5
 
 创建conda环境
@@ -52,7 +51,6 @@ PERL
 
 .. code:: bash
 
-   $ module purge
    $ module load miniconda3/4.7.12.1-gcc-4.8.5
    $ source activate PERL
    $ cpan
@@ -78,7 +76,6 @@ PERL
 .. code:: bash
 
    #方法一：
-   $ module purge
    $ module load miniconda3/4.7.12.1-gcc-4.8.5
    $ source activate PERL
    $ instmodsh
@@ -108,7 +105,6 @@ Perl的SLURM作业示例
    #SBATCH -e %j.err
    #SBATCH -n 1
 
-   module purge
    module load miniconda3/4.7.12.1-gcc-4.8.5
    source activate PERL
 

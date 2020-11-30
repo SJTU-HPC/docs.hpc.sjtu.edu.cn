@@ -10,7 +10,6 @@ CUDA
 
 .. code:: bash
 
-   $ module purge
    $ module load cuda/10.0.130-gcc-4.8.5
 
 编辑 ``cublas.cu`` 文件，内容如下：

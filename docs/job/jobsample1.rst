@@ -230,7 +230,6 @@ cpu 队列 slurm 脚本示例 LAMMPS
    #SBATCH –output=%j.out 
    #SBATCH –error=%j.err
 
-   module purge
    module load lammps
 
    srun –mpi=pmi2 lmp -i YOUR_INPUT_FILE
@@ -252,7 +251,6 @@ cpu 队列 slurm 脚本示例 GROMACS
    #SBATCH –output=%j.out 
    #SBATCH –error=%j.err
 
-   module purge
    module load gromacs/2020-cpu
 
    srun –mpi=pmi2 gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
@@ -273,7 +271,6 @@ cpu 队列 slurm 脚本示例 Quantum ESPRESSO
    #SBATCH –output=%j.out 
    #SBATCH –error=%j.err
 
-   module purge
    module load quantum-espresso
 
    srun –mpi=pmi2 pw.x -i test.in
@@ -296,7 +293,6 @@ cpu 队列 slurm 脚本示例 OpenFoam
    #SBATCH –output=%j.out 
    #SBATCH –error=%j.err
 
-   module purge
    module load quantum-espresso
 
    srun –mpi=pmi2 icoFoam -parallel

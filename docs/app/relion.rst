@@ -40,7 +40,6 @@ Relion 是由 MRC 的 Scheres 在 2012 年发布的针对单颗粒冷冻电镜�
    #SBATCH --cpus-per-task=1
    #SBATCH --gres=gpu:1
 
-   module purge
    module load relion/3.0.8
 
    srun --mpi=pmi2 relion_refine_mpi (relion 的命令...)

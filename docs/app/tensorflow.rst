@@ -95,7 +95,6 @@ TensorFlow
    #SBATCH --cpus-per-task=12
    #SBATCH --gres=gpu:2
 
-   module purge
    module load tensorflow/2.2.0
 
    python -c 'import tensorflow as tf; \

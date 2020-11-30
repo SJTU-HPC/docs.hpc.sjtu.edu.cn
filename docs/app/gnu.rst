@@ -45,7 +45,7 @@ openmpi-3.1.5/gcc-9.2.0 module load openmpi/3.1.5-gcc-9.2.0
 
 .. code:: bash
 
-   $ module purge; module load gcc/8.3.0-gcc-4.8.5 openmpi-3.1.5/gcc-8.3.0
+   $ module load gcc/8.3.0-gcc-4.8.5 openmpi-3.1.5/gcc-8.3.0
    $ mpicc mpihello.c -o mpihello
 
 提交GCC+OpenMPI应用
@@ -67,7 +67,6 @@ openmpi-3.1.5/gcc-9.2.0 module load openmpi/3.1.5-gcc-9.2.0
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module purge
    module load gcc/8.3.0-gcc-4.8.5 openmpi-3.1.5/gcc-8.3.0
 
    srun --mpi=pmi2 ./mpihello

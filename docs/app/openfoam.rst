@@ -42,7 +42,6 @@ cpu 队列 slurm 脚本示例 OpenFoam
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-   module purge
    module load openfoam/8
 
    ulimit -s unlimited
