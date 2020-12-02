@@ -293,7 +293,7 @@ cpu 队列 slurm 脚本示例 OpenFoam
    #SBATCH –output=%j.out 
    #SBATCH –error=%j.err
 
-   module load quantum-espresso
+   module load openfoam
 
    srun –mpi=pmi2 icoFoam -parallel
 
