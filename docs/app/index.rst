@@ -315,7 +315,17 @@ conda 安装的软件详细列表见 `生信软件安装 <bio.html>`_
    source activate mypy
    conda install numpy
 
-软件安装完毕，下面示例 slurm 提交作业：
+软件安装完毕。
+
+下次调用 numpy，仅需使用如下语句：
+
+.. code:: bash
+
+   module load miniconda3
+   source activate mypy
+
+
+以下示例 slurm 提交作业：
 
 slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
 ``hello world``
