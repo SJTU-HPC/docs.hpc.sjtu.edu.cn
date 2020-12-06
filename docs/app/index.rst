@@ -305,15 +305,15 @@ conda 安装软件
 
 conda 安装的软件详细列表见 `生信软件安装 <bio.html>`_
 
-下面以其中一个软件为例，展示 conda 安装的完整示例：
+下面以 numpy 为例，展示 conda 安装方法：
 
 .. code:: bash
 
+   srun -p small -n 4 --pty /bin/bash
    module load miniconda3
    conda create -n mypy
    source activate mypy
-   conda install -c bioconda openslide-python
-   conda install libiconv
+   conda install numpy
 
 软件安装完毕，下面示例 slurm 提交作业：
 
