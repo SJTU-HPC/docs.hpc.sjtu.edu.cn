@@ -446,7 +446,7 @@ CUDA示例
    #SBATCH --partition=dgx2
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   #SBATCH -n 1
+   #SBATCH -N 1
    #SBATCH --gres=gpu:1
 
    ulimit -s unlimited

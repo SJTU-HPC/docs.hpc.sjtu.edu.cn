@@ -200,7 +200,7 @@ dgx2 队列 slurm 脚本示例：单节点，分配 2 块 GPU，GPU:CPU 配比 1
 
    #SBATCH –-job-name=test        # 作业名 
    #SBATCH –-partition=dgx2       # dgx2 队列
-   #SBATCH -n 1                    
+   #SBATCH -N 1                    
    #SBATCH –-ntasks-per-node=1
    #SBATCH –-cpus-per-task=12     # 1:6 的 GPU:CPU 配比  
    #SBATCH –-gres=gpu:2           # 2 块 GPU 
