@@ -447,6 +447,8 @@ CUDA示例
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
    #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1 
+   #SBATCH --cpus-per-task=6
    #SBATCH --gres=gpu:1
 
    ulimit -s unlimited

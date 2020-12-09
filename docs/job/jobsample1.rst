@@ -98,16 +98,16 @@ small
 
 small 队列 slurm 脚本示例
 
-::
+.. code:: bash
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test        # 作业名 
-   #SBATCH –-partition=small      # small 队列
+   #SBATCH --job-name=test        # 作业名 
+   #SBATCH --partition=small      # small 队列
    #SBATCH -n 20                 # 总核数需 <=39 
-   #SBATCH –-ntasks-per-node=20   # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err
+   #SBATCH --ntasks-per-node=20   # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err
 
 
 cpu
@@ -116,45 +116,45 @@ cpu
 cpu 队列 slurm 脚本示例：多节点（160 核）
 
 
-::
+.. code:: bash
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test        # 作业名 
-   #SBATCH –-partition=cpu        # cpu 队列
+   #SBATCH --job-name=test        # 作业名 
+   #SBATCH --partition=cpu        # cpu 队列
    #SBATCH -n 160                # 总核数 160 
-   #SBATCH –-ntasks-per-node=40   # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err
+   #SBATCH --ntasks-per-node=40   # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err
 
 
 cpu 队列 slurm 脚本示例：单节点（40 核）
 
-::
+.. code:: bash
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test        # 作业名 
-   #SBATCH –-partition=cpu        # cpu 队列
+   #SBATCH --job-name=test        # 作业名 
+   #SBATCH --partition=cpu        # cpu 队列
    #SBATCH -n 40                 # 总核数 40 
-   #SBATCH –-ntasks-per-node=40   # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err 
+   #SBATCH --ntasks-per-node=40   # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err 
 
 
 cpu 队列 slurm 脚本示例：单节点（20核），比如为了独占整个节点的大内存
 
-::
+.. code:: bash
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test        # 作业名 
-   #SBATCH –-partition=cpu        # cpu 队列
+   #SBATCH --job-name=test        # 作业名 
+   #SBATCH --partition=cpu        # cpu 队列
    #SBATCH -n 20                 # 总核数 20 
-   #SBATCH –-ntasks-per-node=20   # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err 
-   #SBATCH –-exclusive            # 独占节点（核数小于 40，cpu 队列必须加上此命令）
+   #SBATCH --ntasks-per-node=20   # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err 
+   #SBATCH --exclusive            # 独占节点（核数小于 40，cpu 队列必须加上此命令）
 
 
 huge
@@ -166,12 +166,12 @@ huge 队列 slurm 脚本示例：单节点（20 核，最高可用 80 核）
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test         # 作业名 
-   #SBATCH –-partition=huge        # huge 队列
+   #SBATCH --job-name=test         # 作业名 
+   #SBATCH --partition=huge        # huge 队列
    #SBATCH -n 20 # 总核数 20 
-   #SBATCH –-ntasks-per-node=20    # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err
+   #SBATCH --ntasks-per-node=20    # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err
 
 192c6t
 ~~~~~~
@@ -182,12 +182,12 @@ huge 队列 slurm 脚本示例：单节点（20 核，最高可用 80 核）
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test        # 作业名 
-   #SBATCH –-partition=192c6      # 192c6t 队列
+   #SBATCH --job-name=test        # 作业名 
+   #SBATCH --partition=192c6      # 192c6t 队列
    #SBATCH -n 96                 # 总核数 96 
-   #SBATCH –-ntasks-per-node=96   # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err
+   #SBATCH --ntasks-per-node=96   # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err
 
 dgx2
 ~~~~
@@ -198,14 +198,14 @@ dgx2 队列 slurm 脚本示例：单节点，分配 2 块 GPU，GPU:CPU 配比 1
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test        # 作业名 
-   #SBATCH –-partition=dgx2       # dgx2 队列
+   #SBATCH --job-name=test        # 作业名 
+   #SBATCH --partition=dgx2       # dgx2 队列
    #SBATCH -N 1                    
-   #SBATCH –-ntasks-per-node=1
-   #SBATCH –-cpus-per-task=12     # 1:6 的 GPU:CPU 配比  
-   #SBATCH –-gres=gpu:2           # 2 块 GPU 
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=12     # 1:6 的 GPU:CPU 配比  
+   #SBATCH --gres=gpu:2           # 2 块 GPU 
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err
 
 
 
@@ -223,12 +223,12 @@ cpu 队列 slurm 脚本示例 LAMMPS
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test         # 作业名 
-   #SBATCH –-partition=cpu         # cpu 队列
+   #SBATCH --job-name=test         # 作业名 
+   #SBATCH --partition=cpu         # cpu 队列
    #SBATCH -n 80                  # 总核数 80 
-   #SBATCH –-ntasks-per-node=40    # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err
+   #SBATCH --ntasks-per-node=40    # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err
 
    module load lammps
 
@@ -244,12 +244,12 @@ cpu 队列 slurm 脚本示例 GROMACS
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test         # 作业名 
-   #SBATCH –-partition=cpu         # cpu 队列
+   #SBATCH --job-name=test         # 作业名 
+   #SBATCH --partition=cpu         # cpu 队列
    #SBATCH -n 80                  # 总核数 80 
-   #SBATCH –-ntasks-per-node=40    # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err
+   #SBATCH --ntasks-per-node=40    # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err
 
    module load gromacs/2020-cpu
 
@@ -264,12 +264,12 @@ cpu 队列 slurm 脚本示例 Quantum ESPRESSO
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test         # 作业名 
-   #SBATCH –-partition=cpu         # cpu 队列
+   #SBATCH --job-name=test         # 作业名 
+   #SBATCH --partition=cpu         # cpu 队列
    #SBATCH -n 80                  # 总核数 80 
-   #SBATCH –-ntasks-per-node=40    # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err
+   #SBATCH --ntasks-per-node=40    # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err
 
    module load quantum-espresso
 
@@ -286,12 +286,12 @@ cpu 队列 slurm 脚本示例 OpenFoam
 
    #!/bin/bash
 
-   #SBATCH –-job-name=test         # 作业名 
-   #SBATCH –-partition=cpu         # cpu 队列
+   #SBATCH --job-name=test         # 作业名 
+   #SBATCH --partition=cpu         # cpu 队列
    #SBATCH -n 80                  # 总核数 80 
-   #SBATCH –-ntasks-per-node=40    # 每节点核数
-   #SBATCH –-output=%j.out 
-   #SBATCH –-error=%j.err
+   #SBATCH --ntasks-per-node=40    # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err
 
    module load openfoam
 
@@ -311,9 +311,9 @@ gpu 队列 slurm 脚本示例 TensorFlow
    #SBATCH -o %j.out 
    #SBATCH -e %j.err
    #SBATCH -N 1 
-   #SBATCH –-ntasks-per-node=1 
-   #SBATCH –-cpus-per-task=12
-   #SBATCH –-gres=gpu:2
+   #SBATCH --ntasks-per-node=1 
+   #SBATCH --cpus-per-task=12
+   #SBATCH --gres=gpu:2
 
    module load miniconda3 
    source activate tf-env
