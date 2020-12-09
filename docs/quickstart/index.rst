@@ -46,6 +46,10 @@ GPU 作业请至 dgx2 队列；
 
 3. 了解 π 集群使用方法，查看 \ `常见问题 <../faq/index.html>`__\ ;
 
+4. 简短版使用手册（Cheat Sheet）：`交大超算平台使用手册简短版 <https://hpc.sjtu.edu.cn/Item/docs/Pi_GetStarted.pdf>`__
+
+
+
 
 如何申请帐号？
 =========================
