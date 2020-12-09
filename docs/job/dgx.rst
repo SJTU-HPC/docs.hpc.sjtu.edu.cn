@@ -54,9 +54,10 @@ Sample中的\ ``cudaTensorCoreGemm``\ 。
 
    #SBATCH --job-name=dgx2_test
    #SBATCH --partition=dgx2
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1 
+   #SBATCH --cpus-per-task=6
    #SBATCH --gres=gpu:1
-   #SBATCH -n 1
-   #SBATCH --ntasks-per-node 1
    #SBATCH --mail-type=end
    #SBATCH --mail-user=YOU@EMAIL.COM
    #SBATCH --output=%j.out
@@ -74,9 +75,10 @@ Sample中的\ ``cudaTensorCoreGemm``\ 。
 
    #SBATCH --job-name=dgx2_test
    #SBATCH --partition=dgx2
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=6
    #SBATCH --gres=gpu:4
-   #SBATCH -n 4
-   #SBATCH --ntasks-per-node 4
    #SBATCH --mail-type=end
    #SBATCH --mail-user=YOU@EMAIL.COM
    #SBATCH --output=%j.out
