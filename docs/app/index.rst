@@ -156,6 +156,7 @@ AI 计算软件
 :ref:`gnu`      GNU编译器集合       5.5, 7.4, 8.3, 9.2, 9.3    9.3
 :ref:`intel`    Intel编译器套件     19.0.4, 19.0.5, 19.1.1     19.1.1
 :doc:`cuda`     NVIDIA CUDA SDK     9.0, 10.0, 10.1, 10.2      10.2
+:doc:`hpcsdk`   NVIDIA HPC SDK      20.11                      20.11
 jdk             Java开发套件        12.0                       12.0
 =============== =================== ========================= ========
 
@@ -364,6 +365,7 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
 -  `gnu <gnu.html>`__
 -  `gnuplot <gnuplot.html>`__
 -  `gromacs <gromacs.html>`__
+-  `hpcsdk <hpcsdk.html>`__
 -  `intel <intel.html>`__
 -  `keras <keras.html>`__
 -  `lammps <lammps.html>`__
@@ -399,6 +401,7 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    gnu
    gnuplot
    gromacs
+   hpcsdk
    intel
    keras
    lammps
