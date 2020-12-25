@@ -10,11 +10,14 @@ molecular, periodic, material, crystal, and biological systems.
 π 集群上的CP2K
 -----------------
 
-π 集群系统中已经预装 CP2K (GNU+cpu 版本)，可用以下命令加载:
+π 集群系统中已经预装 CP2K (GNU+cpu 版本)，可用以下命令查看和加载:
 
 .. code:: bash
 
-   $ module load cp2k/6.1-gcc-9.2.0-openblas-openmpi
+   $ module av cp2k
+   $ module load cp2k
+
+若不指定版本，将采用默认的 module（标记为 D）
 
 π 集群上的Slurm脚本slurm.test
 -----------------------------
@@ -33,7 +36,7 @@ cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module load cp2k/6.1-gcc-9.2.0-openblas-openmpi
+   module load cp2k
    module load openmpi/3.1.5-gcc-9.2.0
    module load gcc/9.2.0-gcc-4.8.5
 
