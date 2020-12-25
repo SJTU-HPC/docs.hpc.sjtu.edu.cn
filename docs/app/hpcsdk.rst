@@ -1,6 +1,11 @@
 NVIDIA HPC SDK
 ==================
 
+NVIDIA HPC SDK是适用于GPU平台的高性能计算编译器，库和工具套件。
+NVIDIA HPC SDK包括经过优化的编译器，库和软件工具，这些工具对于最大化开发人员的工作效率以及HPC应用程序的性能和可移植性至关重要。
+
+PGI编译器和工具链已迁移至NVIDIA HPC SDK。
+
 本文档向您展示如何使用NVIDIA HPC SDK，包含程序示例，编译，作业脚本示例。
 
 程序示例CUDA_Fortran
