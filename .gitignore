@@ -22,3 +22,5 @@ _build
 *.#*
 docs/reframe-tests-master*
 docs/_static/reframe-tests-master*
+.vscode
+.gitignore

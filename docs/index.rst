@@ -47,6 +47,12 @@
    :maxdepth: 2
    :hidden:
 
+   transport/index
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
    job/index
 
 .. toctree::
