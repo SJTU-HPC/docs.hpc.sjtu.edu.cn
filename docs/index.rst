@@ -41,13 +41,13 @@
    :maxdepth: 2
    :hidden:
 
-   studio/index
+   transport/index
 
 .. toctree::
    :maxdepth: 2
    :hidden:
 
-   transport/index
+   studio/index
 
 .. toctree::
    :maxdepth: 2
