@@ -1,26 +1,16 @@
+.. _label_transfer:
+
 ***********
 数据传输
 ***********
 
-超算平台提供了专门用于数据传输的节点，登录该节点后可以通过rsync，scp等方式将个人目录下的数据下载到本地，或者反向上传本地数据到超算平台。
+π 集群的登陆节点通过公网 IP 传输数据，理论速度上限约为 110 MB/s，但是考虑到登陆节点为大家共享使用，因此实际传输速度会偏低。对于数据传输，我们为您提供如下解决方案：
 
-登录方式
-=========
+少量数据传输，超算平台提供了专门用于数据传输的节点data.hpc.sjtu.edu.cn，可以直接使用 putty, filezilla 等客户端，或在本地使用 scp, rsync 命令向该节点发起传输请求（因安全策略升级，在 π 集群的终端上不支持 scp/rsync 的远程传输功能，所以需要从用户本地终端使用 scp/rsync 命令）；
 
-传输节点的公网域名为transport.hpc.sjtu.edu.cn，可以使用超算平台账号直接进行ssh登录：
+大量数据传输（如10TB-1PB） 强烈建议您联系我们，将硬盘等存储设备送至网络信息中心进行传输。
 
-.. code:: bash
-
-   $ ssh USER_NAME@transport.hpc.sjtu.edu.cn
-
-或者也可以先按照\ `登录章节 <https://docs.hpc.sjtu.edu.cn/login/index.html>`__\的方法先连接login节点，然后通过超算平台内部网络跳转到传输节点：
-
-.. code:: bash
-
-   # 已经登录login节点的情况下，传输节点内网域名为transport.pi.sjtu.edu.cn，pi部分的域名后缀可以缺省
-   $ ssh transport
-
-transport节点和login节点一样挂载了lustre文件系统，如果用户已经按照\ `免密码登录段落 <https://docs.hpc.sjtu.edu.cn/login/index.html#id9>`__\的方法将自己的ssh公钥添加到个人目录下，同样可以直接登录transport节点。
+数据量特别庞大（如超过 1PB） 请您与我们联系，由计算专员根据具体情况为您解决数据传输问题。
 
 .. _label_transfer_speed:
 
@@ -59,24 +49,26 @@ Linux/Unix/Mac用户
 
 .. code:: bash
 
-   # 示例：超算平台用户将个人目录~/math.dat文件下载到外部主机100.101.0.1，在外部主机上拥有账号exp_user01且个人目录为/home/exp_user01/
-   $ scp ~/math.dat exp_user01@100.101.0.1:/home/exp_user01/
+   # 假设超算用户expuser01在平台上个人目录为/lustre/home/acct-exp/expuser01
+   # 外部主机地址为100.101.0.1，该用户在外部主机上拥有账号local_user且个人目录为/home/local_user/
 
-   # 或者也可以不登录传输节点，直接在本地使用scp远程拷贝，指定传输节点的公网域名。示例：将本地目录/home/data上传至超算平台exp_user01的个人目录
-   $ scp -r /home/data exp_user01@transport.hpc.sjtu.edu.cn:~
+   # 示例1：该用户要将个人目录中的~/math.dat文件下载到外部主机上
+   $ scp expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/math.dat local_user@100.101.0.1:/home/local_user/
+
+   # 示例2：该用户将本地目录~/data的全部数据上传至超算平台个人目录下
+   $ scp -r local_user@100.101.0.1:/home/local_user/data expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
 
 如果需要传输的对象为包含大量文件的目录，或者目标环境上已经存在差异较小的历史版本，建议使用rsync拷贝数据，rsync会对比源地址和目标地址的内容差异，然后进行增量传输：
 
 .. code:: bash
 
-   # 示例：登录传输节点后从个人目录~/data下载数据到外部主机100.101.0.2，在外部主机上拥有账号exp_user02且个人目录为/home/exp_user02/
-   $ rsync --archive --partial --progress ~/data/ exp_user02@100.101.0.2:/home/exp_user02/download/
+   # 示例3：该用户将超算平台上个人目录~/data的数据下载到外部主机，请注意rsync不支持双远端传输，必须在目标主机上操作
+   $ rsync --archive --partial --progress expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/data/ ~/download/
    
-   # 示例：登录传输节点后，将外部主机100.102.0.2上的/home/share/exp02.dat文件上传到超算平台上，操作者在外部主机上拥有账号exp_user03
-   $ rsync --archive --partial --progress exp_user03@100.102.0.2:/home/share/exp02.dat ~/download/
-   
+   # 示例4：该用户将外部主机上的~/upload/exp04.dat文件上传到超算平台个人目录中
+   $ rsync --archive --partial --progress ~/upload/exp04.dat expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/   
    # 如果用户的外部环境CPU资源丰富而网络带宽相对较低，可以尝试--compress参数启用压缩传输
-   $ rsync --compress --archive --partial --progress exp_user03@100.102.0.2:/home/share/exp02.dat ~/download/
+   $ rsync --compress --archive --partial --progress ~/upload/exp04.dat expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
 
 多进程并发传输
 ---------------
@@ -87,19 +79,19 @@ scp，rsync本身都不支持多进程传输，因此需要利用外部指令并
 
 .. code:: bash
 
-   # 示例：并发5个rsync进程从个人目录~/data下载数据到外部主机100.101.0.3，在外部主机上拥有账号exp_user03且个人目录为/home/exp_user03/
-   $ ls ~/data/
-     001.dat 002.dat 003.dat 004.dat 005.dat
-   $ ls ~/data/ | xargs --max-args=1 --max-procs=5 --replace=% rsync --archive --partial ~/% exp_user03@100.101.0.3:/home/exp_user03/download/
+   # 示例：并发5个rsync进程从超算平台个人目录~/data下载数据到外部主机~/download/路径下
+   $ ssh expuser01@data.hpc.sjtu.edu.cn ls /lustre/home/acct-exp/expuser01/data/ > remote_list.txt
+   $ cat remote_list.txt
+     001.dat
+     002.dat
+     003.dat
+     004.dat
+     005.dat
+   $ cat remote_list.txt | xargs --max-args=1 --max-procs=5 --replace=% rsync --archive --partial expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/data/% ~/download/
 
-**注意：如果没有事先配置好免密码登录，rsync发起连接会要求用户输入密码，上述并发场合则会导致并发失败。** 示例中是从transport节点向100.101.0.3发起rsync传输，等同于发起一个 ``ssh exp_user03@100.101.0.3`` 的连接，因此需要在transport节点上生成个人ssh公钥，添加到100.101.0.3上exp_user03用户的信任公钥列表中。建议在并发操作之前先用rsync单独拷贝一个小文件进行测试，确认过程中没有手动交互的需求再进行正式的并发传输。
+**注意：如果没有事先配置好免密码登录，rsync发起连接会要求用户输入密码，上述并发场合则会导致并发失败。** 请参考 :ref:`label_no_password_login` 预先配置好密钥。建议在并发操作之前先用rsync单独拷贝一个小文件进行测试，确认过程中没有手动交互的需求再进行正式的并发传输。
 
-并发数量请控制在**10个进程以内**，因为目前超算网络最高支持1GB/s的传输速度，而单个ssh进程上限是100MB/s，10个并发进程就已经足够占用全部带宽。
-
-其他传输方式
--------------
-
-上述的winscp, scp, rsync都是最常用的传输工具，如果用户有特殊需求，可以尝试其他传输工具（例如sftp），或者自行编写程序进行数据传输。但请注意传输节点对网络端口做了限制，目前仅开放ssh使用的22端口，如果要使用其他传输方式，请检查其使用的端口号。
+并发数量请控制在 **10个进程以内** ，因为目前超算网络最高支持1GB/s的传输速度，而单个ssh进程上限是100MB/s，10个并发进程就已经足够占用全部带宽。
 
 使用限制
 =========
