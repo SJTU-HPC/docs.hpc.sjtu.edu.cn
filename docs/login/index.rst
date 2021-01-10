@@ -88,35 +88,9 @@ Linux / Unix / Mac 用户可以使用终端中的命令行工具登录。下列�
 通过 SSH 传输文件
 -----------------
 
-Windows 用户
-^^^^^^^^^^^^
+登录节点资源有限，不推荐在登录节点直接进行大批量的数据传输。超算平台提供了专门用于数据传输的节点，登录该节点后可以通过rsync，scp等方式将个人目录下的数据下载到本地，或者反向上传本地数据到个人目录。详情请参考具体请参考 :ref:`label_transfer` 。
 
-Windows 用户可以使用 WinSCP 在 π 群集和您自己的计算机之间传输文件。如下图所示，填写节点的地址，SSH 端口，SSH 用户名，SSH 密码，然后点击 Login 进行连接。 使用 WinSCP 的方法类似于使用 FTP 客户端 GUI，如下图所示：
-
-.. image:: ../img/winscp.png
-
-.. image:: ../img/winscp2.png
-
-
-Linux/Unix/Mac用户使用scp
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Linux/Unix/Mac 用户可以使用命令在 π 集群和自己的计算机之间传输数据。
-下列命令将文件夹 data 上传至 π 集群家目录。
-
-.. code:: bash
-
-   $ scp -r data YOUR_USERNAME@login.hpc.sjtu.edu.cn:~
-
-*提示：出于安全考虑， π 集群终端上已禁止使用 scp 命令。需要在本地计算机端使用 scp，向 π 集群发起命令上传或下载。*
-
-若要完成更复杂的数据传输操作，可以使用 sftp。它类似于 FTP 命令行客户端。
-
-.. code:: bash
-
-   $ sftp YOUR_USERNAME@TARGET_IP
-   Connected to TARGET_IP
-   sftp> ls 
+.. _label_no_password_login:
 
 无密码登录
 ----------
@@ -297,7 +271,7 @@ Windows SSH 客户端用户
 数据传输
 --------
 
-如果您需要传输小批量数据，直接通过登陆节点传输即可。但对于大批量数据，请发送邮件至 `hpc邮箱 <mailto:hpc@sjtu.edu.cn>`_ 预约硬盘传输，并将硬盘邮寄或携带至我们的办公室，具体联系方式我们会通过邮件回复您。
+如果您需要传输小批量数据，直接通过登陆节点传输即可。中等规模的数据传输请登录专用传输节点进行操作，具体请参考 :ref:`label_transfer` 。对于大批量数据，请发送邮件至 `hpc邮箱 <mailto:hpc@sjtu.edu.cn>`_ 预约硬盘传输，并将硬盘邮寄或携带至我们的办公室，具体联系方式我们会通过邮件回复您。
 
 
 
