@@ -21,7 +21,7 @@ import sphinx_material
 project = '上海交大超算平台用户手册'
 copyright = '2020, 上海交通大学网络信息中心'
 author = '上海交通大学网络信息中心计算业务部'
-record = True
+record = '沪交ICP备20190201'
 
 
 # -- General configuration ---------------------------------------------------

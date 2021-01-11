@@ -176,7 +176,9 @@
             {% endtrans %}<br/>
           {%- endif %}
           {%- if record %}
-            沪交ICP备20190201<br/>
+            {% trans record=record|e %}
+              {{ record }}.
+            {% endtrans %}<br/>
           {%- endif %}
           {%- if show_sphinx %}
             {% trans sphinx_version=sphinx_version|e %}Created using
