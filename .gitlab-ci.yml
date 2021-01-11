@@ -52,7 +52,7 @@ build_html_pages:
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
     - mkdir docs/_static || true
-    - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
+    # - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
     - make -C docs clean html
   artifacts:
     paths:
