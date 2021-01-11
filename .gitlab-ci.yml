@@ -3,7 +3,7 @@ variables:
 
 stages:
   - check raw html
-  # - build pdf
+  - build pdf
   - build html
   - deploy
 
@@ -18,41 +18,41 @@ fail_if_contain_raw_html:
   script:
     - ack '.*raw.*html' docs && false || true
 
-# build_latex_pdf:
-#   stage: build pdf
-#   image: sjtuhpc/texlive-sphinx
-#   tags:
-#     - docker
-#   before_script:
-#     - mkdir -p .build_cache
-#     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
-#   script:
-#     - make -C docs clean latexpdf
-#     - pdftk A=docs/img/cover.pdf B=docs/_build/latex/sphinx.pdf cat A1 B2-end output docs/_build/latex/merge.pdf
-#     - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/merge.pdf
-#     - mv docs/_build/latex/pi_small.pdf  docs/_build/latex/pi.pdf
-#   artifacts:
-#     paths:
-#       - docs/_build/latex/pi.pdf
-#   cache:
-#     key: ${CI_JOB_NAME}
-#     paths:
-#       - .build_cache
+build_latex_pdf:
+  stage: build pdf
+  image: sjtuhpc/texlive-sphinx
+  tags:
+    - docker
+  before_script:
+    - mkdir -p .build_cache
+    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
+  script:
+    - make -C docs clean latexpdf
+    - pdftk A=docs/img/cover.pdf B=docs/_build/latex/sphinx.pdf cat A1 B2-end output docs/_build/latex/merge.pdf
+    - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/merge.pdf
+    - mv docs/_build/latex/pi_small.pdf  docs/_build/latex/pi.pdf
+  artifacts:
+    paths:
+      - docs/_build/latex/pi.pdf
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - .build_cache
 
 build_html_pages:
   stage: build html
   image: sjtuhpc/texlive-sphinx
   tags:
     - docker
-  # needs:
-  #   - job: build_latex_pdf
-  #     artifacts: true
+  needs:
+    - job: build_latex_pdf
+      artifacts: true
   before_script:
     - mkdir -p .build_cache
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
     - mkdir docs/_static || true
-    # - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
+    - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
     - make -C docs clean html
   artifacts:
     paths:
