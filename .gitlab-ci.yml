@@ -71,11 +71,11 @@ deploy_to_jianwen_me:
   script:
     - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.jianwen.me/
 
-# deploy_html_to_hpc:
-#   stage: deploy
-#   tags:
-#     - shell.web.hpc.sjtu.edu.cn
-#   only:
-#     - master
-#   script:
-#     - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.hpc.sjtu.edu.cn/
+deploy_html_to_hpc:
+  stage: deploy
+  tags:
+    - shell.web.hpc.sjtu.edu.cn
+  only:
+    - master
+  script:
+    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.hpc.sjtu.edu.cn/
