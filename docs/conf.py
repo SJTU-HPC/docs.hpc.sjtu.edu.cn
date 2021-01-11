@@ -62,7 +62,7 @@ html_static_path = ['_static']
 
 # -- HTML theme settings -----------------------------------------------
 
-html_show_sourcelink = True
+html_show_sourcelink = False
 html_sidebars = {
     "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
 }
