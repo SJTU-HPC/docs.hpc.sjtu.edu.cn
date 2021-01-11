@@ -81,7 +81,6 @@ html_favicon = 'img/favicon.png'
 # of the sidebar.
 html_logo = 'img/logos.png'
 
-
 # Material theme options (see theme.conf for more information)
 html_theme_options = {
 
@@ -109,8 +108,7 @@ html_theme_options = {
     'globaltoc_collapse': True,
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
-    # theme coloe, #4000FF is Ultramarine blue
-    'theme_color':'#4000FF'
+    'color_primary': '#4000FF',
 }
 
 # Add doc prefix for atutlabeling
