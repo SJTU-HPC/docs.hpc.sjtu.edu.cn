@@ -105,6 +105,8 @@ html_theme_options = {
     'globaltoc_collapse': True,
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
+    # Set logo icon on the top left
+    'logo_icon': '&#xe869',
 }
 
 # Add doc prefix for atutlabeling
