@@ -169,22 +169,10 @@
               {% endtrans %}
             {%- endif %}
           </div>
-          <div class="md-footer-record__highlight">
-            {%- if hasdoc('record') %}
-              {% trans record=record|e %}
-                {{ record }}.
-              {% endtrans %}
-            {%- endif %}
-          </div>
           {%- endif %}
           {%- if last_updated %}
             {% trans last_updated=last_updated|e %}Last updated on
               {{ last_updated }}.
-            {% endtrans %}<br/>
-          {%- endif %}
-          {%- if record %}
-            {% trans record=record|e %}
-              {{ record }}.
             {% endtrans %}<br/>
           {%- endif %}
           {%- if show_sphinx %}
@@ -192,7 +180,8 @@
             <a href="http://www.sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.
             {% endtrans %} and
             <a href="https://github.com/bashtage/sphinx-material/">Material for
-              Sphinx</a>
+              Sphinx</a><br/>
+              沪交ICP备20190201
           {%- endif %}
         </div>
         {%- block extrafooter %}
