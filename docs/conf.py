@@ -75,7 +75,7 @@ html_theme = "sphinx_material"
 # a list of builtin themes.
 #
 html_theme = 'sphinx_material'
-html_favicon = 'pi.ico'
+html_favicon = 'img/pi.ico'
 
 
 # Material theme options (see theme.conf for more information)
