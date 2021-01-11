@@ -77,6 +77,10 @@ html_theme = "sphinx_material"
 html_theme = 'sphinx_material'
 html_favicon = 'img/favicon.png'
 
+# The name of an image file (relative to this directory) to place at the top
+# of the sidebar.
+html_logo = 'img/logos.png'
+
 
 # Material theme options (see theme.conf for more information)
 html_theme_options = {
@@ -105,8 +109,6 @@ html_theme_options = {
     'globaltoc_collapse': True,
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
-    # Set logo icon on the top left
-    'logo_icon': '&#xe869',
 }
 
 # Add doc prefix for atutlabeling
