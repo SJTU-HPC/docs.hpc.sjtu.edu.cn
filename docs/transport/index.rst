@@ -24,8 +24,9 @@
 
 即：
 
-**π 集群登陆、作业提交，请使用 ssh login.hpc.sjtu.edu.cn**
-**π 集群数据传输，推荐使用 scp data.hpc.sjtu.edu.cn local**
+**1. π 集群登陆、作业提交，请使用 ssh login.hpc.sjtu.edu.cn**
+
+**2. π 集群数据传输，推荐使用 scp data.hpc.sjtu.edu.cn local**
 
 传输节点使用限制
 ------------------
