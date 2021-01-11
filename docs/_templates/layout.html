@@ -175,6 +175,9 @@
               {{ last_updated }}.
             {% endtrans %}<br/>
           {%- endif %}
+          {%- if record %}
+            沪交ICP备20190201<br/>
+          {%- endif %}
           {%- if show_sphinx %}
             {% trans sphinx_version=sphinx_version|e %}Created using
             <a href="http://www.sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.
