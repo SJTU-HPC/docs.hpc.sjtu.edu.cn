@@ -44,9 +44,9 @@ build_html_pages:
   image: sjtuhpc/texlive-sphinx
   tags:
     - docker
-  needs:
-    - job: build_latex_pdf
-      artifacts: true
+  # needs:
+  #   - job: build_latex_pdf
+  #     artifacts: true
   before_script:
     - mkdir -p .build_cache
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
