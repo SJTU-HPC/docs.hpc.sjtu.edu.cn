@@ -21,6 +21,7 @@ import sphinx_material
 project = '上海交大超算平台用户手册'
 copyright = '2020, 上海交通大学网络信息中心'
 author = '上海交通大学网络信息中心计算业务部'
+record = '沪交ICP备20190201'
 
 
 # -- General configuration ---------------------------------------------------
@@ -61,7 +62,7 @@ html_static_path = ['_static']
 
 # -- HTML theme settings -----------------------------------------------
 
-html_show_sourcelink = True
+html_show_sourcelink = False
 html_sidebars = {
     "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
 }
@@ -75,8 +76,11 @@ html_theme = "sphinx_material"
 # a list of builtin themes.
 #
 html_theme = 'sphinx_material'
-html_favicon = 'pi.ico'
+html_favicon = 'img/favicon.png'
 
+# The name of an image file (relative to this directory) to place at the top
+# of the sidebar.
+html_logo = 'img/logos.png'
 
 # Material theme options (see theme.conf for more information)
 html_theme_options = {
@@ -105,6 +109,7 @@ html_theme_options = {
     'globaltoc_collapse': True,
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
+    'color_primary': '#4000FF',
 }
 
 # Add doc prefix for atutlabeling
