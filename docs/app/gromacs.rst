@@ -85,35 +85,6 @@ CPU版GROMACS作业示例(双精度)
 
 .. _GPU版本GROMACS:
 
-GPU版Gromacs
-------------
-
-π 集群已预置最新的 GPU GROMACS。脚本名称可设为 slurm.test
-
-.. code:: bash
-
-   #!/bin/bash
-   #SBATCH -J gromacs_gpu_test
-   #SBATCH -p dgx2
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=6
-   #SBATCH --cpus-per-task=1
-   #SBATCH --gres=gpu:1
-
-   module load gromacs/2020-gpu
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   srun --mpi=pmi2 gmx mdrun -deffnm benchmark -ntmpi 6 -ntomp 1
-
-使用如下指令提交：
-
-.. code:: bash
-
-   $ sbatch slurm.test
 
 GPU版Gromacs(MPI版)
 -------------------
@@ -137,7 +108,7 @@ GPU版Gromacs(MPI版)
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun --mpi=pmi2 gmx_mpi mdrun -deffnm benchmark -ntmpi 6 -ntomp 1
+   srun --mpi=pmi2 gmx_mpi mdrun -deffnm benchmark -ntomp 1
 
 使用如下指令提交：
 
