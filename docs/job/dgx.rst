@@ -30,8 +30,8 @@ Slurm                     含义
 -n [count]                总进程数
 –ntasks-per-node=[count]  每台节点上的进程数
 -p [partition]            作业队列
-–job-name=gpu:[gpus]      gpu数量
-–gres=[name]              作业名
+–job-name=[name]          作业名
+–gres=gpu:[gpus]          gpu数量
 –output=[file_name]       标准输出文件
 –error=[file_name]        标准错误文件
 –time=[dd-hh:mm:ss]       作业最大运行时长
