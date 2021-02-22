@@ -89,7 +89,7 @@ html_theme_options = {
     'nav_title': '超算平台用户手册',
 
     # Set you GA account ID to enable tracking
-    'google_analytics_account': 'UA-XXXXX',
+    'google_analytics_account': 'UA-190329530-1',
 
     # Specify a base_url used to generate sitemap.xml. If not
     # specified, then no sitemap will be built.
