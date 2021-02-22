@@ -20,7 +20,7 @@ d) π 可看作交通大学首字母J和T的组合。
 
 **A：** 请先阅读
 `网络信息中心高性能计算服务 <https://net.sjtu.edu.cn/wlfw/gxnjsfw.htm>`__\
-，填写 :download:`上海交通大学高性能计算申请表 <https://net.sjtu.edu.cn/application.docx>`_ 无需盖章直接发送至 `hpc
+，填写 `上海交通大学高性能计算申请表 <https://net.sjtu.edu.cn/application.docx>`_ 无需盖章直接发送至 `hpc
 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ ，账号申请人必须为在校教师（含博士后）。我们将会在两个工作日内开通账号并将账号信息发送至您的邮箱。
 
 另外，为帮助用户正确使用超算，请账号使用人先完成“新手上路”考核（B 站互动视频），共 10 小题（预计完成时间 5 分钟）。请正确回答所有问题后截图给我们，稍后我们会在两个工作日内开通账号。
