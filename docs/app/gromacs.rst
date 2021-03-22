@@ -40,18 +40,38 @@ CPU版GROMACS作业示例
 ^^^^^^^^^^^^^^^^^^^^
 
 在cpu队列上，总共使用40核(n = 40)。cpu 队列每个节点配有40核，所以这里使用了1个节点。脚本名称可设为 slurm.test
-
-准备内容如下的作业脚本 :download:`gromacs-2019_4-gcc-9_2_0-openmpi-1node.slurm </_static/sjtuhpc-checks/apps/gromacs/gromacs-2019_4-gcc-9_2_0-openmpi-1node.slurm>` 。
 这个作业脚本申请了40个CPU计算核心，由于 `cpu` 队列上每个节点上有40个计算核心，因此这是一个单节点Gromacs作业。
 
-.. include:: /_static/sjtuhpc-checks/apps/gromacs/gromacs-2019_4-gcc-9_2_0-openmpi-1node.slurm
-   :code: bash
+.. code:: bash
+
+    #!/bin/bash
+
+    #SBATCH -J gromacs_cpu_test
+    #SBATCH -p cpu
+    #SBATCH -n 40
+    #SBATCH --ntasks-per-node=40
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+
+    module load gromacs/2019.4-gcc-9.2.0-openmpi
+
+    ulimit -s unlimited
+    ulimit -l unlimited
+
+    srun --mpi=pmi2 gmx_mpi mdrun -s ./ion_channel.tpr -maxh 0.50 -resethway -noconfout -nsteps 10000
+    
+将 ``/lustre/share/benchmarks/gromacs`` 路径下的 ``ion_channel.tpr`` 文件拷贝到本地：
+
+.. code:: bash
+
+    $ cp /lustre/share/benchmarks/gromacs/ion_channel.tpr .
+    
 
 提交作业。
 
 .. code:: bash
 
-   $ sbatch gromacs-2019_4-gcc-9_2_0-openmpi-1node.slurm
+   $ sbatch slurm.test
 
 CPU版GROMACS作业示例(双精度)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -63,7 +83,7 @@ CPU版GROMACS作业示例(双精度)
 
    #!/bin/bash
 
-   #SBATCH -J gromacs_test
+   #SBATCH -J gromacs__cpu_double_test
    #SBATCH -p cpu
    #SBATCH -n 80
    #SBATCH --ntasks-per-node=40
@@ -77,6 +97,12 @@ CPU版GROMACS作业示例(双精度)
 
    srun --mpi=pmi2 gmx_mpi_d mdrun -s ./ion_channel.tpr -maxh 0.50 -resethway -noconfout -nsteps 10000
 
+将 ``/lustre/share/benchmarks/gromacs`` 路径下的 ``ion_channel.tpr`` 文件拷贝到本地：
+
+.. code:: bash
+
+    $ cp /lustre/share/benchmarks/gromacs/ion_channel.tpr .
+    
 用下方语句提交作业
 
 .. code:: bash
@@ -108,8 +134,14 @@ GPU版Gromacs(MPI版)
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun --mpi=pmi2 gmx_mpi mdrun -deffnm benchmark -ntomp 1
+   srun --mpi=pmi2 gmx_mpi mdrun -deffnm benchmark -ntomp 1 -s ./ion_channel.tpr
 
+将 ``/lustre/share/benchmarks/gromacs`` 路径下的 ``ion_channel.tpr`` 文件拷贝到本地：
+
+.. code:: bash
+
+    $ cp /lustre/share/benchmarks/gromacs/ion_channel.tpr .
+    
 使用如下指令提交：
 
 .. code:: bash
