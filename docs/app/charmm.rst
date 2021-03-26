@@ -1,16 +1,4 @@
-#
-
-.. raw:: html
-
-   <center>
-
-CHARMM
-
-.. raw:: html
-
-   </center>
-
---------------
+.. _charmm:
 
 CHARMM
 ======
