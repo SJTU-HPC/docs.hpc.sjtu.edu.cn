@@ -397,6 +397,7 @@ slurm 脚本示例：申请 small 队列的 2 个核，通过 python 打印
    bio
    abinit
    cesm
+   charmm
    cp2k
    cuda
    deepvariant
