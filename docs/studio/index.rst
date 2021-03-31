@@ -35,3 +35,4 @@ Studio 支持的应用如下，并持续增加:
    rdp
    jupyter
    rstudio
+   paraview
