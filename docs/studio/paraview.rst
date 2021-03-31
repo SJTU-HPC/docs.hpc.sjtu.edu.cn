@@ -81,6 +81,7 @@ Paraview的本地安装
 退出虚拟环境，加载环境变量：
 
 .. code:: bash
+   
    (pvgeoenv)$conda deactivate
    $ source ~/.bashrc
 
