@@ -219,7 +219,13 @@ enroot使用说明
 
 enroot是英伟达公司出的一款开源镜像构建/交互工具。在超算上使用enroot，普通用户不再需要特殊权限即可完成镜像的构建与修改。
 
-目前enroot只在GPU节点上进行了部署。如需使用enroot，请先申请GPU节点资源。
+目前enroot只在GPU节点上进行了部署。如需使用enroot，请先申请GPU节点资源。如只需进行镜像制作，可申请交互式作业，只需在 `srun` 命令中指定 `dgx2` 队列以及使用 `--gres` 选项指定所需的GPU数量。在 `dgx2` 上申请一个交互式作业的示例如下：
+
+.. code:: console
+    
+    $srun -p dgx2 -n 1 --gres=gpu:1 --pty /bin/bash
+
+更多关于如何申请GPU节点资源的文档请参考 :doc: `DGX-2使用文档 <../job/dgx.rst>`  
 
 创建镜像
 --------
