@@ -50,7 +50,7 @@ Subversion 存储库的访问权限。注册完成后，可以将 CESM 项目下
    $ export PATH=$CESM_ENV/bin:$PATH
    $ export LD_LIBRARY_PATH=$CESM_ENV/lib:$LD_LIBRARY_PATH
 
-分别进行 ``curl,hdf5,netcdf,pnercdf`` 的编译和安装：
+分别进行 ``curl, hdf5, netcdf, pnetcdf`` 的编译和安装：
 
 （也可以通过 ``module av`` 查看 π 集群上已有的 module，直接调用）
 
