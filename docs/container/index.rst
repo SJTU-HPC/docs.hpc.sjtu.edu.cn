@@ -223,9 +223,9 @@ enroot是英伟达公司出的一款开源镜像构建/交互工具。在超算�
 
 .. code:: console
     
-    $srun -p dgx2 -n 1 --gres=gpu:1 --pty /bin/bash
+    $ srun -p dgx2 -n 1 --gres=gpu:1 --pty /bin/bash
 
-更多关于如何申请GPU节点资源的文档请参考 :doc: `DGX-2使用文档 <../job/dgx.rst>`  
+更多关于如何申请GPU节点资源的文档请参考 :doc:`DGX-2使用文档 <../job/dgx>`  
 
 创建镜像
 --------
