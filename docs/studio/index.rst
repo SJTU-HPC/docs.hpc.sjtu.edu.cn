@@ -28,6 +28,8 @@ Studio 支持的应用如下，并持续增加:
 
 - OVITO
 
+- MATLAB
+
 .. toctree::
    :maxdepth: 1
 
@@ -36,3 +38,4 @@ Studio 支持的应用如下，并持续增加:
    jupyter
    rstudio
    paraview
+   matlab
