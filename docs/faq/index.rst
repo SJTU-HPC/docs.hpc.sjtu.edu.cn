@@ -6,16 +6,16 @@
 常见问题
 ========
 
-0. :doc:`index.html#id2`
-1. :doc:`index.html#id3`
-2. :doc:`index.html#id9`
-3. :doc:`index.html#id13`
-4. :doc:`index.html#id15`
-5. :doc:`index.html#id18`
-6. :doc:`index.html#id25`
-7. :doc:`index.html#id26`
-8. :doc:`index.html#id28`
-9. :doc:`index.html#jaccount`
+0. :doc:`faq/index.html#id2`
+1. :doc:`faq/index.html#id3`
+2. :doc:`faq/index.html#id9`
+3. :doc:`faq/index.html#id13`
+4. :doc:`faq/index.html#id15`
+5. :doc:`faq/index.html#id18`
+6. :doc:`faq/index.html#id25`
+7. :doc:`faq/index.html#id26`
+8. :doc:`faq/index.html#id28`
+9. :doc:`faq/index.html#jaccount`
 
 
 
