@@ -6,16 +6,16 @@
 常见问题
 ========
 
-0. :doc:`faq/index.html#id2`
-1. :doc:`faq/index.html#id3`
-2. :doc:`faq/index.html#id9`
-3. :doc:`faq/index.html#id13`
-4. :doc:`faq/index.html#id15`
-5. :doc:`faq/index.html#id18`
-6. :doc:`faq/index.html#id25`
-7. :doc:`faq/index.html#id26`
-8. :doc:`faq/index.html#id28`
-9. :doc:`faq/index.html#jaccount`
+\ `0. π 集群名为 π 有什么含义？ <https://docs.hpc.sjtu.edu.cn/faq/index.html#id2>`__\
+\ `1. 账号申请和登陆 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id3>`__\
+\ `2. 作业提交和运行 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id9>`__\
+\ `3. 作业出错 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id13>`__\
+\ `4. 软件安装 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id15>`__\
+\ `5. 收费和充值 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id18>`__\
+\ `6. 邮件支持 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id25>`__\
+\ `7. 集群通知 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id26>`__\
+\ `8. 致谢模版 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id28>`__\
+\ `9 医学院和附属医院申请 jAccount 账号 <https://docs.hpc.sjtu.edu.cn/faq/index.html#jaccount>`__\
 
 
 
@@ -198,12 +198,12 @@ sudo 就能在家目录中安装和使用软件，且使用sudo安装的软件�
 咨询时需要准备好 jAccount
 账号以及财务凭证号（财务入账后，财务网站页面会显示财务凭证号）
 
-5.4 Q：有没有机时奖励政策？
+5.5 Q：有没有机时奖励政策？
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **A：** 目前暂无奖励政策。在此之前已有的奖励机时仍然生效。
 
-5.5 Q:电子信息与电气工程学院优惠政策怎么申请？（仅适用于电院老师）
+5.6 Q:电子信息与电气工程学院优惠政策怎么申请？（仅适用于电院老师）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **A：** 申请电院优惠政策的老师，请参考
@@ -237,7 +237,7 @@ http://dzb.seiee.sjtu.edu.cn/dzb/info/15820.htm\
 Q 如何及时获取集群通知？
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**A：** 集群通知会实时发布在用户微信群。请发邮件`hpc 邮箱 <mailto:hpc@sjtu.edu.cn>`__给我们，将为您添加进用户微信群。
+**A：** 集群通知会实时发布在用户微信群。请发邮件 `hpc 邮箱 <mailto:hpc@sjtu.edu.cn>`__ 给我们，将为您添加进用户微信群。
 
 
 8. 致谢模版
@@ -253,7 +253,7 @@ Q 如何在论文中致谢交大高性能计算？
    （英文）The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao
 Tong University.
 
-9 医学院和附属医院如何申请 jAccount 账号
+9 医学院和附属医院申请 jAccount 账号
 ----------------------------------------
 
 **A：** 请至
