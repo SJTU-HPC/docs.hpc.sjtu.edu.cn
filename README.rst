@@ -28,19 +28,34 @@ Linux和Mac用户检查sphinx是否安装成功::
 在本地预览文档更新 
 ------------------
 
-重新编译HTML站点::
+生成HTML站点::
 
   $ make -C docs html
 
-重新编译PDF文档::
+查看HTML站点内容::
+
+  $ open docs/_build/html/index.html
+
+生成PDF文档::
 
   $ make -C docs latexpdf
 
-从仓库更新文档代码::
+查看PDF文档::
 
-  $ git pull origin
+  $ open docs/_build/latex/sphinx.pdf
 
-注意事项
----------
-使用make前请清除_build中的所有内容，否则可能因缓存内容导致错误。
+修改和同步代码
+--------------
 
+远程仓库的 ``master`` 分支是受保护的，无法直接推送更新，需要推送到新分支，然后再从新分支发起合并请求。
+
+新建本地分支，提交代码::
+
+  $ git checkout -b your_new_branch
+  $ git commit -m "Your commit message"
+
+推送更新到远程仓库::
+
+  $ git push origin your_new_branch
+
+最后在GitLab页面中发起合并请求。
