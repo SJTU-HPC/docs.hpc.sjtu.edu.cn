@@ -1,5 +1,3 @@
-.. _gromacs:
-
 OSU Benchmarks
 ==============
 
