@@ -89,7 +89,7 @@ OSU Benchmarks
 
     #!/bin/bash
     
-    #SBATCH --job-name=osu_latency
+    #SBATCH --job-name=osu_bw
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
     #SBATCH -n 2
@@ -103,7 +103,7 @@ OSU Benchmarks
     
     srun --mpi=pmi2 osu_mbw_mr
 
-提交到 ``arm128c256g`` 队列，随机测试两个ARM节点间的MPI通信延迟。
+提交到 ``arm128c256g`` 队列，随机测试两个ARM节点间的MPI通信带宽。
 
 .. code:: bash
 
