@@ -149,5 +149,5 @@ OSU Benchmarks
 参考资料
 --------
 
-- OSU Benchmarks gromacs官方网站 http://mvapich.cse.ohio-state.edu/benchmarks/
+- OSU Benchmarks http://mvapich.cse.ohio-state.edu/benchmarks/
 - DOWNLOAD, COMPILE AND RUN THE OSU BENCHMARK on AWS https://www.hpcworkshops.com/07-efa/04-complie-run-osu.html
