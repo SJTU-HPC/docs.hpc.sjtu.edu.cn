@@ -1,5 +1,3 @@
-.. _abinit:
-
 ABINIT
 ======
 
