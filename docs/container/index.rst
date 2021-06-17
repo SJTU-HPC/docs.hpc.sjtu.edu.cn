@@ -2,22 +2,51 @@
 容器
 ****
 
-π集群支持用户使用Singularity方法构建自己的容器应用。π集群上许多应用软件也是通过Singularity方法安装的。
+容器是一种Linux上广为采用的应用封装技术，它将可执行程序与依赖库打包成一个镜像文件，启动时与宿主节点共享操作系统内核。
+由于镜像文件同时携带可执行文件和依赖库，避免了两者不匹配造成的兼容性问题，还能在一个宿主Linux操作系统上支持多种不同的Linux发行版，譬如在CentOS发行版上运行Ubuntu的 ``apt-get`` 命令。
 
-在 π 集群上使用Singularity
-==========================
+π 超算集群采用基于 `Singularity <https://sylabs.io/singularity/>`__  的高性能计算容器技术，相比Docker等在云计算环境中使用的容器技术，Singularity 同时支持root用户和非root用户启动，且容器启动前后，用户上下文保持不变，这使得用户权限在容器内部和外部都是相同的。
+此外，Singularity 强调容器服务的便捷性、可移植性和可扩展性，而弱化了容器进程的高度隔离性，因此量级更轻，内核namespace更少，性能损失更小。
 
-高性能容器Singularity
----------------------
+您选择如下其中一种方法使用集群提供的Singularity容器镜像能力：
 
-Singularity 是劳伦斯伯克利国家实验室专门为大规模、跨节点HPC和DL工作负载而开发的容器化技术。具备轻量级、快速部署、方便迁移等诸多优势，且支持从Docker镜像格式转换为Singularity镜像格式。与Docker的不同之处在于：
+1. 使用Singularity加载集群预编译的镜像。
+2. 使用Singularity拉取远端镜像。
+3. 从零开始按需定制Singularity镜像。
 
-1. Singularity 同时支持root用户和非root用户启动，且容器启动前后，用户上下文保持不变，这使得用户权限在容器内部和外部都是相同的。
-2. Singularity 强调容器服务的便捷性、可移植性和可扩展性，而弱化了容器进程的高度隔离性，因此量级更轻，内核namespace更少，性能损失更小。
+.. TODO: 使用Singularity加载集群预编译的镜像
+.. TODO: ===================================
+.. TODO: 胡筱婧
 
-本文将向大家介绍在 π 集群上使用Singularity的方法。
+使用Singularity加载远端镜像
+---------------------------
 
-如果我们可以提供任何帮助，请随时联系\ `hpc邮箱 <hpc@sjtu.edu.cn>`__\ 。
+您可以使用 ``singularity pull`` 拉取远端预编译的镜像，从而直接使用外部预预编译镜像仓库提供的丰富软件资源。
+Singularity可以从Docker Hub(以 ``docker://`` 开头)、Singularity Hub(以 ``shub://`` 开头)等地址拉取镜像。
+如下命令从Docker Hub拉取CentOS 8标准镜像，保存成名为 ``cento8.sif`` 的镜像文件::
+
+.. code:: bash
+
+    $ singularity pull centos8.sif docker://centos:centos8
+
+查看生成的镜像文件
+
+.. code:: bash
+
+    $ ls centos8.sif
+    centos8.sif
+
+加载容器镜像，并且在容器环境中运行 ``cat`` 程序，查看容器内 ``/etc/redhat-release`` 文件的内容，然后在宿主环境中运行同样命令，对比结果::
+
+.. code:: bash
+    $ singularity exec centos.sif cat /etc/redhat-release
+    CentOS Linux release 8.3.2011
+    $ cat /etc/redhat-release
+    CentOS Linux release 7.7.1908 (Core)
+
+运行结果显示，我们成功在CentOS 7操作系统上加载了一个CentOS 8容器镜像。
+
+.. tip:: Singularity镜像文件(Singularity Image File, sif)是一种内容只读的文件格式，其文件内容不能被修改。
 
 镜像准备
 --------
