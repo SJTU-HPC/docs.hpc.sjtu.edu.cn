@@ -141,12 +141,43 @@ GPU版Gromacs(MPI版)
 .. code:: bash
 
     $ cp /lustre/share/benchmarks/gromacs/ion_channel.tpr .
-    
+
 使用如下指令提交：
 
 .. code:: bash
 
    $ sbatch slurm.test
+
+.. _ARM版本GROMACS:
+
+
+ARM版Gromacs
+------------
+
+示例脚本如下(gromacs.slurm):    
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH --job-name=test       
+   #SBATCH --partition=arm128c256g       
+   #SBATCH -N 2           
+   #SBATCH --ntasks-per-node=128
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module use /lustre/share/singularity/aarch64
+   module load gromacs/2021
+
+   mpirun -n $SLURM_NTASKS gmx_mpi mdrun -s benchMEM.tpr -nsteps 10000 -resethway
+
+
+使用如下指令提交：
+
+.. code:: bash
+
+   $ sbatch gromacs.slurm
 
 性能测试
 --------
