@@ -22,6 +22,8 @@ parallel particle simulator at the atomic, meso, or continuum scale.
 
 -  |gpu| `GPU版本 LAMMPS`_
 
+-  `ARM版本 LAMMPS`_
+
 .. _CPU版本 LAMMPS:
 
 
@@ -228,6 +230,37 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 .. code:: bash
 
    $ sbatch slurm.test
+
+.. _ARM版本 LAMMPS:
+
+ARM版本
+~~~~~~~
+
+脚本如下(lammps.slurm):
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=lmp_test
+   #SBATCH --partition=arm128c256g
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   #SBATCH -n 256
+   #SBATCH --ntasks-per-node=128
+
+   ulimit -s unlimited
+   ulimit -l unlimited
+
+   module load openmpi/3.1.6-gcc-9.3.0 lammps/20200303-gcc-9.3.0-openblas-openmpi
+
+   mpirun -n $SLURM_NTASKS lmp -in in.eam
+
+使用如下指令提交：
+
+.. code:: bash
+
+   $ sbatch lammps.slurm
 
 参考资料
 --------
