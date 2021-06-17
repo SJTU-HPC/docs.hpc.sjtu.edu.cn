@@ -37,8 +37,9 @@ Singularity可以从Docker Hub(以 ``docker://`` 开头)、Singularity Hub(以 `
     centos8.sif
 
 加载容器镜像，并且在容器环境中运行 ``cat`` 程序，查看容器内 ``/etc/redhat-release`` 文件的内容，然后在宿主环境中运行同样命令，对比结果::
-
+  
 .. code:: bash
+
     $ singularity exec centos.sif cat /etc/redhat-release
     CentOS Linux release 8.3.2011
     $ cat /etc/redhat-release
@@ -68,14 +69,16 @@ Singularity使用“镜像定义文件”(Definition File)描述镜像构建过�
 
 从登录节点跳转X86容器构建节点::
 
-.. console:: bash
+.. code:: console
+
    $ ssh build@container-x86
    $ hostname
    container-x86.pi.sjtu.edu.cn
 
 从登录节点跳转ARM容器构建节点::
 
-.. console:: bash
+.. code:: console
+
    $ ssh build@container-arm
    $ hostname
    container-arm.pi.sjtu.edu.cn
@@ -85,7 +88,7 @@ Singularity使用“镜像定义文件”(Definition File)描述镜像构建过�
 由于所有用户共享使用 ``build`` 用户，需要创建专属工作目录，在工作目录中构建镜像。
 我们使用 ``mktemp -d`` 命令在 ``/tmp`` 目录下创建名字带有随机字符的工作目录。
 
-.. console:: bash
+.. code:: console
 
    $ cd $(mktemp -d)
    $ pwd
