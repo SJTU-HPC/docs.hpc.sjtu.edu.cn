@@ -14,7 +14,7 @@ GATK是GenomeAnalysisToolkit的简称，是一系列用于分析高通量测序�
 ARM版GATK
 ------------
 
-示例脚本如下(gromacs.slurm):    
+示例脚本如下(gatk.slurm):    
 
 .. code:: bash
 
@@ -36,4 +36,4 @@ ARM版GATK
 
 .. code:: bash
 
-   $ sbatch gromacs.slurm
+   $ sbatch gatk.slurm
