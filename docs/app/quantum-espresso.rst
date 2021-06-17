@@ -71,7 +71,8 @@ ARM版 Quantum ESPRESSO
 ----------------------
 
 .. code:: bash
-      #!/bin/bash
+ 
+   #!/bin/bash
 
    #SBATCH --job-name=test       
    #SBATCH --partition=arm128c256g       
