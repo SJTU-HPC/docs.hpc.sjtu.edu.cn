@@ -244,6 +244,13 @@ Windows SSH 客户端用户
 ``Sending of null packets to keep session active`` ->
 ``Seconds between keepalives (0 to turn off)``\ 后的文本框中，输入对应的值，如 240。
 
+ARM节点登录
+==========
+
+有两种方式可登录 ARM 计算节点。请注意在使用结束后退出资源。
+
+使用 \ ``srun``\ 登录命令 
+
 
 Tmux
 ====
