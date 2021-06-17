@@ -2,10 +2,10 @@
 容器
 ****
 
-π 集群支持用户使用 Singularity 方法构建自己的容器应用。π 集群上许多应用软件也是通过 Singularity 方法安装的。
+π集群支持用户使用Singularity方法构建自己的容器应用。π集群上许多应用软件也是通过Singularity方法安装的。
 
 在 π 集群上使用Singularity
-=============================
+==========================
 
 高性能容器Singularity
 ---------------------
@@ -87,11 +87,6 @@ openfoam /lustre/share/img/openfoam-6.simg
    srun -n 1 -p dgx2 --gres=gpu:2 --pty singularity shell --nv /lustre/share/img/pytorch-19.10-py3.simg
    Singularity pytorch-19.10-py3.simg:~/u2cb_test> python -c "import torch;print(torch.__version__)"
    1.3.0a0+24ae9b5
-
-
-
-
-
 
 非特权用户容器构建
 ==================
@@ -213,229 +208,10 @@ Server，进行镜像查询，镜像交互，镜像删除的功能。
 
    (U2CB Server) > list def
 
-
-enroot使用说明
-==============
-
-enroot是英伟达公司出的一款开源镜像构建/交互工具。在超算上使用enroot，普通用户不再需要特殊权限即可完成镜像的构建与修改。
-
-目前enroot只在GPU节点上进行了部署。如需使用enroot，请先申请GPU节点资源。如只需进行镜像制作，可申请交互式作业，只需在 `srun` 命令中指定 `dgx2` 队列以及使用 `--gres` 选项指定所需的GPU数量。在 `dgx2` 上申请一个交互式作业的示例如下：
-
-.. code:: console
-    
-    $ srun -p dgx2 -n 1 --gres=gpu:1 --pty /bin/bash
-
-更多关于如何申请GPU节点资源的文档请参考 :doc:`DGX-2使用文档 <../job/dgx>`  
-
-创建镜像
---------
-
-从镜像库中下载基础镜像：
-
-.. code:: console
-
-   $ enroot import 'docker://centos:8'
-
-该命令会在当前路径下生成一个\ ``.sqsh``\ 文件：
-
-.. code:: console
-
-   $ ls
-   centos+8.sqsh
-
-根据该文件创建镜像：
-
-.. code:: console
-
-   $ enroot create --name centos8 centos+8.sqsh 
-
-其中\ ``--name``\ 后面的参数为自定义的镜像名，我们这里取为”centos8“。
-上述命令会在\ ``~/.local/share/enroot/``\ 路径下生成相应的文件夹：
-
-.. code:: sh
-
-   $ ls ~/.local/share/enroot/
-   centos8
-
-使用\ ``enroot list``\ 命令列出已经创建的镜像名：
-
-.. code:: console
-
-   $ enroot list
-   centos8
-
-启动镜像
---------
-
-使用普通用户启动镜像
-~~~~~~~~~~~~~~~~~~~~
-
-使用\ ``enroot start``\ 命令启动镜像：
-
-.. code:: console
-
-   $ enroot start --rw centos8
-
-此命令会以当前用户名进入镜像内的根目录：
-
-.. code:: console
-
-   $ pwd
-   /
-   $ whoami 
-   YOUR_USERNAME
-
-我们可以看到根目录下的所有路径，这些路径与原先的文件目录是分离的:
-
-.. code:: console
-
-   $ ls
-   bin  etc   lib    lost+found  media  opt   root  sbin  sys  usr
-   dev  home  lib64  lustre      mnt    proc  run   srv   tmp  var
-
-普通用户可以访问、更改这些目录。
-
-使用\ ``exit``\ 命令退出镜像：
-
-.. code:: console
-
-   $ exit
-   $ 
-
-使用root用户启动镜像
-~~~~~~~~~~~~~~~~~~~~
-
-使用root用户启动镜像，只需在\ ``enroot start``\ 命令中加入\ ``--root``\ 选项：
-
-.. code:: console
-
-   $ enroot start --rw --root centos8
-   # whoami
-   root
-
-此时可以使用root来运行大部分需要root权限的命令：
-
-.. code:: console
-
-   # yum install python3
-   ...
-   Installed:
-     platform-python-pip-9.0.3-18.el8.noarch                                       
-     python3-pip-9.0.3-18.el8.noarch                                               
-     python3-setuptools-39.2.0-6.el8.noarch                                        
-     python36-3.6.8-2.module_el8.3.0+562+e162826a.x86_64                           
-
-   Complete!
-
-   # python3
-   Python 3.6.8 (default, Aug 24 2020, 17:57:11) 
-   [GCC 8.3.1 20191121 (Red Hat 8.3.1-5)] on linux
-   Type "help", "copyright", "credits" or "license" for more information.
-   >>> 
-
-使用镜像执行命令
-~~~~~~~~~~~~~~~~
-
-我们可以在镜像中安装各种命令，在需要使用该命令的时候，使用\ ``enroot start --rw image_name command``\ 来调用该命令。
-
-调用结果是在\ **镜像环境**\ 中调用该命令的输出。
-
-.. code:: console
-
-   $ enroot start --rw centos8 ls
-   bin  etc   lib    lost+found  media  opt   root  sbin  sys  usr
-   dev  home  lib64  lustre      mnt    proc  run   srv   tmp  var
-   $ enroot start --rw centos8 python3
-   Python 3.6.8 (default, Aug 24 2020, 17:57:11) 
-   [GCC 8.3.1 20191121 (Red Hat 8.3.1-5)] on linux
-   Type "help", "copyright", "credits" or "license" for more information.
-   >>> 
-
-如果我们想用镜像环境中的python来跑一个本地的程序，由于镜像环境中的文件路径与本地不互通，因此python无法找到本地的\ ``.py``\ 文件：
-
-.. code:: console
-
-   $ enroot start --rw centos8 python3 hello.py
-   python3: can't open file 'hello.py': [Errno 2] No such file or directory
-
-我们可以通过挂载home目录来解决这个问题。
-
-挂载本地home目录
-----------------
-
-.. code:: console
-
-   $ export ENROOT_MOUNT_HOME=y
-   $ enroot start --rw centos8
-   $ cd ~
-   $ ls
-   anaconda3      nvidia+cuda+11.1.1-base-ubuntu20.04.sqsh  paraview5.6    test.py
-   centos+8.sqsh  ondemand                  singularities  work
-
-此时，提供\ ``.py``\ 文件的路径，即可使用镜像环境运行python程序：
-
-.. code:: sh
-
-   $ enroot start --rw centos8 python3 ~/singularities/hello.py
-   hello world!
-
-如需分离本地home目录，只要重置\ ``ENROOT_MOUNT_HOME``\ 变量，重新启动镜像即可：
-
-.. code:: console
-
-   $ unset ENROOT_MOUNT_HOME
-   $ enroot start --rw centos8
-   $ cd ~
-   $ ls
-   $
-
-在脚本中使用镜像
-----------------
-
-在脚本中使用镜像与在命令行中使用镜像一样。只要使用\ ``enroot start --rw image_name command``\ 即可在镜像环境中调用命令。
-
-示例脚本如下：
-
-.. code:: bash
-
-
-   #!/bin/bash
-
-   #SBATCH --job-name=dgx2_test
-   #SBATCH --partition=dgx2
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=1
-   #SBATCH --cpus-per-task=6
-   #SBATCH --gres=gpu:1
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-
-   export ENROOT_MOUNT_HOME=y
-   enroot start --rw centos8 python3 ~/singularities/hello.py
-
-将该脚本保存为\ ``hello.slurm``\ ，使用\ ``sbatch``\ 命令提交作业脚本：
-
-.. code:: console
-
-   $ sbatch hello
-   Submitted batch job 4620199
-
-打开输出文件即可看到程序的输出：
-
-.. code:: console
-
-   $ cat 4620199.out 
-   hello world!
-
 参考资料
 --------
 
--  `Singularity Quick
-   Start <https://sylabs.io/guides/3.4/user-guide/quick_start.html>`__
--  `Docker Hub <https://hub.docker.com/>`__
--  `NVIDIA GPU CLOUD <https://ngc.nvidia.com/>`__
--  `Fakeroot feature of
-   Singularity <https://sylabs.io/guides/3.5/user-guide/fakeroot.html>`__
--  `enroot官方文档 <https://github.com/NVIDIA/enroot>`__
-
-   
+- Singularity Quick Start https://sylabs.io/guides/3.4/user-guide/quick_start.html
+- Docker Hub https://hub.docker.com/
+- NVIDIA GPU CLOUD https://ngc.nvidia.com/
+- Fakeroot feature of Singularity https://sylabs.io/guides/3.5/user-guide/fakeroot.html
