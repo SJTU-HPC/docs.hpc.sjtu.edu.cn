@@ -248,8 +248,18 @@ ARM节点登录
 ===========
 
 有两种方式可登录 ARM 计算节点。请注意在使用结束后退出资源。
- 
+-  使用 \ ``srun``\ 登录命令：
 
+.. code:: bash
+
+   $ srun -p arm128c256g -n 4 --pty /bin/bash
+
+-  或使用 \ ``salloc``\ 命令登录
+
+.. code:: bash
+
+   $ salloc -p arm128c256g -n 4
+   $ ssh [分配的节点]
 
 Tmux
 ====
