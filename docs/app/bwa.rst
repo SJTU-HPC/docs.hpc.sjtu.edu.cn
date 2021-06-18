@@ -17,6 +17,32 @@ bwa的使用需要两中输入文件：
 Reference genome data（fasta格式 .fa, .fasta, .fna）
 Short reads data (fastaq格式 .fastaq, .fq)
 
+ARM版BWA
+--------
 
+ARM平台上运行脚本如下(bwa.slurm):    
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=test       
+   #SBATCH --partition=arm128c256g       
+   #SBATCH -N 1          
+   #SBATCH --ntasks-per-node=128
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module use /lustre/share/spack/modules/kunpeng920/linux-centos7-aarch64
+   module load bwa/0.7.17-gcc-9.3.0
+
+   bwa index ...
+   bwa mem ...
+
+使用如下指令提交：
+
+.. code:: bash
+
+   $ sbatch bwa.slurm
 
 参考链接：https://www.jianshu.com/p/19f58a07e6f4

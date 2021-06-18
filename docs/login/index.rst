@@ -244,6 +244,32 @@ Windows SSH 客户端用户
 ``Sending of null packets to keep session active`` ->
 ``Seconds between keepalives (0 to turn off)``\ 后的文本框中，输入对应的值，如 240。
 
+ARM节点登录
+===========
+
+ARM平台简介
+-----------
+
+该平台基于ARM CPU构建，共100个计算节点，与π 2.0共享文件系统，数据无需迁移，但由于CPU架构不同，计算应用和软件库都需要重新编译。
+
+单节点配备有128核（2.6 GHz）、256 GB内存（16通道DDR4-2933）、240 GB本地硬盘，节点间采用IB高速互联，挂载Lustre并行文件系统。
+
+采用SLURM作业调度，提交方式与π 2.0一致，即在原有集群上新增一个队列，新队列名称：arm128c256g。
+
+ARM节点登录方式
+---------------
+-  使用 \ ``srun``\ 登录命令：
+
+.. code:: bash
+
+   $ srun -p arm128c256g -n 4 --pty /bin/bash
+
+-  或使用 \ ``salloc``\ 命令登录
+
+.. code:: bash
+
+   $ salloc -p arm128c256g -n 4
+   $ ssh [分配的节点]
 
 Tmux
 ====

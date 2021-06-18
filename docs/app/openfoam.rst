@@ -29,6 +29,12 @@ fluid dynamics.
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
 
+.. _CPU版本OpenFoam:
+
+
+CPU版OpenFoam
+-------------
+
 cpu 队列 slurm 脚本示例 OpenFoam
 
 .. code:: bash
@@ -56,6 +62,37 @@ cpu 队列 slurm 脚本示例 OpenFoam
 .. code:: bash
 
    sbatch slurm.test
+
+.. _ARM版本OpenFoam:
+
+
+ARM版OpenFoam
+-------------
+
+arm128c256g队列 slurm 脚本示例 OpenFoam
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=test       
+   #SBATCH --partition=arm128c256g       
+   #SBATCH -N 2          
+   #SBATCH --ntasks-per-node=128
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module use /lustre/share/singularity/aarch64
+   module load openfoam/8
+
+   mpirun -n $SLURM_NTASKS icoFoam -parallel
+
+用下方语句提交作业
+
+.. code:: bash
+
+   sbatch slurm.test
+   
 
 参考链接
 --------
