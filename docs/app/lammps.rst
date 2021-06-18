@@ -18,17 +18,17 @@ parallel particle simulator at the atomic, meso, or continuum scale.
 
 π 集群上有多种版本的 LAMMPS:
 
--  |cpu| `CPU版本 LAMMPS`_
+-  `CPU版本 LAMMPS`_
 
--  |gpu| `GPU版本 LAMMPS`_
+-  `GPU版本 LAMMPS`_
 
 -  `ARM版本 LAMMPS`_
 
 .. _CPU版本 LAMMPS:
 
 
-|cpu| CPU 版本
-~~~~~~~~~~~~~~
+CPU 版本
+~~~~~~~~
 
 查看 π 集群 上已编译的软件模块:
 
@@ -80,8 +80,8 @@ USER-REAXC USER-SDPD USER-SPH USER-SMD USER-UEF USER-YAFF
 
    sbatch slurm.test
 
-|cpu| （进阶）CPU 版本自行编译
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+(进阶）CPU 版本自行编译
+~~~~~~~~~~~~~~~~~~~~~~~
 
 若对 lammps 版本有要求，或需要特定的 package，可自行编译 Intel 版本的
 Lammps.
@@ -150,8 +150,8 @@ slurm.test
 
 .. _GPU版本 LAMMPS:
 
-|gpu| GPU版本
-~~~~~~~~~~~~~
+GPU版本
+~~~~~~~
 
 GPU 版本速度跟 intel CPU 版本基本相同
 
@@ -188,8 +188,8 @@ GPU 版 LAMMPS。脚本名称可设为 slurm.test
 
    $ sbatch slurm.test
 
-|gpu| GPU 版本 LAMMPS + kokkos
-------------------------------
+GPU 版本 LAMMPS + kokkos
+------------------------
 
 GPU 版本速度跟 intel CPU 版本基本相同
 
