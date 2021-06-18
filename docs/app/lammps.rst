@@ -18,13 +18,13 @@ parallel particle simulator at the atomic, meso, or continuum scale.
 
 π 集群上有多种版本的 LAMMPS:
 
--  `CPU版本 LAMMPS`_
+-  `CPU版本LAMMPS_`
 
 -  `GPU版本 LAMMPS`_
 
 -  `ARM版本 LAMMPS`_
 
-.. _CPU版本 LAMMPS:
+.. _CPU版本LAMMPS:
 
 
 CPU 版本
