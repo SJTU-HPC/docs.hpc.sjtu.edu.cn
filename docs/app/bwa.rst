@@ -20,7 +20,7 @@ Short reads data (fastaq格式 .fastaq, .fq)
 ARM版Gromacs
 ------------
 
-示例脚本如下(gromacs.slurm):    
+ARM平台上运行脚本如下(bwa.slurm):    
 
 .. code:: bash
 
@@ -43,6 +43,6 @@ ARM版Gromacs
 
 .. code:: bash
 
-   $ sbatch gromacs.slurm
+   $ sbatch bwa.slurm
 
 参考链接：https://www.jianshu.com/p/19f58a07e6f4
