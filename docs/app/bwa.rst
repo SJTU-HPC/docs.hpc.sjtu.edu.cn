@@ -17,8 +17,8 @@ bwa的使用需要两中输入文件：
 Reference genome data（fasta格式 .fa, .fasta, .fna）
 Short reads data (fastaq格式 .fastaq, .fq)
 
-ARM版Gromacs
-------------
+ARM版BWA
+--------
 
 ARM平台上运行脚本如下(bwa.slurm):    
 
