@@ -18,13 +18,13 @@ parallel particle simulator at the atomic, meso, or continuum scale.
 
 π 集群上有多种版本的 LAMMPS:
 
-`CPU版本LAMMPS`_
+- `CPU版本 LAMMPS`_
 
-`GPU版本LAMMPS`_
+- `GPU版本 LAMMPS`_
 
-`ARM版本 LAMMPS`_
+- `ARM版本 LAMMPS`_
 
-.. _CPU版本LAMMPS:
+.. _CPU版本 LAMMPS:
 
 
 CPU 版本
@@ -148,7 +148,7 @@ slurm.test
    srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
 
 
-.. _GPU版本LAMMPS:
+.. _GPU版本 LAMMPS:
 
 GPU版本
 ~~~~~~~
