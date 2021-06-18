@@ -14,9 +14,51 @@
 2. 使用Singularity拉取远端镜像。
 3. 按需定制Singularity镜像。
 
-.. TODO: 使用Singularity加载集群预编译的镜像
-.. TODO: ===================================
-.. TODO: 胡筱婧
+使用Singularity加载集群预编译的镜像
+===================================
+π 集群拥有丰富的预编译镜像资源。针对不同的硬件架构，我们制作了不同的基础镜像与应用镜像。您可以访问我们的 `Docker Hub主页 <https://hub.docker.com/u/sjtuhpc>`_ 查看已经制作的镜像。
+
+目前我们在 Docker Hub 上开源的镜像仓库主要有：
+  - `x86平台基础镜像 <https://hub.docker.com/r/sjtuhpc/hpc-base-container>`_
+  - `x86平台应用镜像 <https://hub.docker.com/r/sjtuhpc/hpc-app-container>`_
+  - `ARM平台应用镜像 <https://hub.docker.com/r/sjtuhpc/arm64v8>`_
+
+Singularity可以从Docker Hub(以 ``docker://sjtuhpc/`` 开头)拉取π 集群预编译镜像。如下命令从Docker Hub拉取预编译的lammps镜像，保存成名为 ``lammps-intel-2020.sif`` 的镜像文件:
+
+.. code:: console
+
+    $ unset XDG_RUNTIME_DIR  
+    $ singularity pull lammps-intel-2020.sif docker://sjtuhpc/hpc-app-container:lammps-intel-2020
+
+查看生成的镜像文件
+
+.. code:: console
+
+    $ ls
+    lammps-intel-2020.sif
+    
+使用自己制作的镜像文件运行提交lammps作业：
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH --job-name=lmp_test
+    #SBATCH --partition=cpu
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
+    #SBATCH -N 2
+    #SBATCH --ntasks-per-node=40
+
+
+    ulimit -s unlimited
+    ulimit -l unlimited
+    
+    module load gcc/9.3.0-gcc-4.8.5
+    module  load openmpi
+    mpirun -n 80 singularity run YOUR_IMAGE_PATH lmp -i YOUR_INPUT_FILE
+
+
+.. tip:: π 集群预编译基础镜像根据操作系统、GCC版本、openmpi版本等，有不同的版本。x86平台预编译应用镜像以及ARM平台预编译应用镜像也拥有多个软件版本。请根据需要合理选择。
 
 使用Singularity拉取远端镜像
 ===========================
@@ -192,7 +234,7 @@ Singularity使用“镜像定义文件”(Definition File)描述镜像构建过�
 
 调用“容器化的Singularity”构建镜像，由于指令集的差异，使用的镜像标签也有x86和arm分别。
 
-.. tip:: 在 ``container-x86`` 上请使用 ``sjtuhpc/centos7-singularity:x86`` ，在 ``container-arm`` 上请使用 ``sjtuhpc/centos7-singularity:x86`` 。
+.. tip:: 在 ``container-x86`` 上请使用 ``sjtuhpc/centos7-singularity:x86`` ，在 ``container-arm`` 上请使用 ``sjtuhpc/centos7-singularity:arm`` 。
 
 在 ``container-x86`` 节点上上构建镜像，构建的镜像保存在当前目录 ``sample-x86.sif`` ：
 
