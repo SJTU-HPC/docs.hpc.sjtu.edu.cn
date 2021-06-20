@@ -28,6 +28,8 @@ Singularity可以从Docker Hub(以 ``docker://sjtuhpc/`` 开头)拉取π 集群�
 .. code:: console
 
     $ unset XDG_RUNTIME_DIR  
+    $ unset SINGULARITY_BIND
+    $ unset MODULEPATH
     $ singularity pull lammps-intel-2020.sif docker://sjtuhpc/hpc-app-container:lammps-intel-2020
 
 查看生成的镜像文件
@@ -299,3 +301,4 @@ Singularity使用“镜像定义文件”(Definition File)描述镜像构建过�
 - Singularity Quick Start https://sylabs.io/guides/3.4/user-guide/quick_start.html
 - Docker Hub https://hub.docker.com/
 - NVIDIA GPU CLOUD https://ngc.nvidia.com/
+- 更多 Singularity Definition Files 的例子请参考 https://github.com/SJTU-HPC/hpc-base-container/tree/dev/base/
