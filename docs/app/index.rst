@@ -312,6 +312,7 @@ AI 计算软件
    r
    siesta
    star-ccm
+   gerris
    strique
    tensorflow
    vmd
