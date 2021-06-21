@@ -25,11 +25,11 @@ Gerris是求解描述流体流动的偏微分方程的软件程序
    #SBATCH --mail-type=end
    #SBATCH --mail-user=********@163.com
    #SBATCH --exclusive
-   IMAGE_PATH=/lustre/home/acct-hpc/hpchgc/Gerris/test_install_in_singulatiry/gerris.sif
-   export PATH=$PATH:/lustre/home/acct-hpc/hpchgc/Gerris/openmpi-1.6.5-install/bin
-   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/lustre/home/acct-hpc/hpchgc/Gerris/openmpi-1.6.5-install/lib
-   export MPI_DIR="/lustre/home/acct-hpc/user/Gerris/openmpi-1.6.5-install"
-   mpirun -np 120 singularity exec -B /lustre/home/acct-hpc/user/Gerris/test_gerris_u2cb/test3:/mnt  $IMAGE_PATH /mnt/./run.sh
+   IMAGE_PATH=/lustre/home/acct-hpc/username/Gerris/test_install_in_singulatiry/gerris.sif
+   export PATH=$PATH:/lustre/home/acct-hpc/username/Gerris/openmpi-1.6.5-install/bin
+   export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/lustre/home/acct-hpc/username/Gerris/openmpi-1.6.5-install/lib
+   export MPI_DIR="/lustre/home/acct-hpc/username/Gerris/openmpi-1.6.5-install"
+   mpirun -np 120 singularity exec -B /lustre/home/acct-hpc/username/Gerris/test_gerris_u2cb/test3:/mnt  $IMAGE_PATH /mnt/./run.sh
 
 使用如下指令提交：
 
