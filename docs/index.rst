@@ -9,21 +9,28 @@
 `docs <https://docs.hpc.sjtu.edu.cn/>`_ 是上海交通大学超算平台用户文档，为用户提供快速上手指导和问题解答。若需获取更多HPC团队的动态和信息，请访问 `上海交通大学 HPC 站点 <https://hpc.sjtu.edu.cn/>`_ 。您可通过如下链接快速访问超算使用常见问题，或点击左侧访问完整文档内容。
 
 1. :doc:`quickstart/index`
-2. :doc:`accounts/index`
-3. `密码 <accounts/index.html#id7>`_ 
-4. :doc:`login/index`
-5. :doc:`studio/rdp`
-6. :doc:`job/index`
-7. :doc:`app/index`
-8. :doc:`app/gnu`
-9. :doc:`app/intel`
-10. :doc:`faq/index`
+2. :doc:`system/index`
+3. :doc:`accounts/index`
+4. `密码 <accounts/index.html#id7>`_ 
+5. :doc:`login/index`
+6. :doc:`studio/rdp`
+7. :doc:`job/index`
+8. :doc:`app/index`
+9. :doc:`app/gnu`
+10. :doc:`app/intel`
+11. :doc:`faq/index`
 
 .. toctree::
    :maxdepth: 2
    :hidden:
 
    quickstart/index
+
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   system/index
 
 .. toctree::
    :maxdepth: 2
