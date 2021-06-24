@@ -1,10 +1,14 @@
 .. _MindTheGap:
 
-MindTheGap 安装
+MindTheGap
 ========================
 
-完整步骤
+简介
+--------------
+暂无
 
+完整步骤
+--------------
 .. code:: bash
 
    module load miniconda3

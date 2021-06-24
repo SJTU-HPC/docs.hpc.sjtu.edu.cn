@@ -1,9 +1,17 @@
 .. _CREST:
 
-CREST 安装
+CREST
 ====================
 
+简介
+--------------
+
+Crest was introduced in the United States as "Fluoristan" in 1954, as it contained stannous fluoride.
+In 1955, the name of the product was changed to "Crest with Fluoristan." The composition of the tooth
+-paste had been developed by Joseph C. Muhler, Harry Day, and William H.
+
 完整步骤
+--------------
 
 .. code:: bash
 

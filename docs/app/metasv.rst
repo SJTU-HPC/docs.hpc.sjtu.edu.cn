@@ -1,9 +1,18 @@
 .. _MetaSV:
 
-MetaSV 安装
+MetaSV
 =======================
 
+
+简介
+---------------
+
+Structural variations (SVs) are large genomic rearrangements that vary significantly in
+size,making them challenging to detect with the relatively short reads from next-generation
+sequencing (NGS).
+
 完整步骤
+---------------
 
 .. code:: bash
 

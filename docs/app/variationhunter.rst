@@ -1,9 +1,15 @@
 .. _VariationHunter:
 
-VariationHunter 安装
+VariationHunter
 ========================
 
+简介
+--------------
+
+VariationHunter is a package of programs used to find structural variations using paired-end reads read mappings.
+
 完整步骤
+---------------
 
 .. code:: bash
 
