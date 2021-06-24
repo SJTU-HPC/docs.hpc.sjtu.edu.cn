@@ -1,9 +1,17 @@
 .. _Mobster:
 
-Mobster 安装
+Mobster
 ======================
 
+简介
+------------
+
+A mob/pair programming timer, inspired by the MobProgramming/MobTimer.Python. Runs great on
+Mac,Windows, and Linux. Learn all about mobbing at the MobTimer.Python github page, and at
+mobprogramming.org.
+
 完整步骤
+---------------
 
 .. code:: bash
 
