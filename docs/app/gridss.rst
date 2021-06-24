@@ -1,9 +1,18 @@
 .. _GRIDSS:
 
-GRIDSS 安装
+GRIDSS
 ===================
 
+简介
+---------------
+CSS Grid Layout is a two-dimensional layout system for the web. It lets you lay
+contentout in rows and columns, and has many features that make building complex
+layouts straightforward. This article will give you all you need to know to get
+started with page layout.
+
+
 完整步骤
+-------------
 
 .. code:: bash
 
