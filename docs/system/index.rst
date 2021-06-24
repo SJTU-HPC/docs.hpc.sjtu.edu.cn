@@ -8,7 +8,9 @@
 
 计算系统（Computing System）是 π 集群中负责提供计算资源、执行计算操作的节点集合。
 
-todo: 集群拓扑图
+整个 π 集群架构示意图如下：
+
+.. figure:: /img/system.png
 
 .. toctree::
    :maxdepth: 1
