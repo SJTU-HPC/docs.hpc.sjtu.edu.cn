@@ -62,3 +62,103 @@ Lustre最常用于高性能计算HPC，世界超级计算机TOP 10中的70%、TO
 
 作业使用示例
 ------------
+
+我们使用生信 WES 分析流程为例，该流程从测序文件开始，经 bwa 比对、samtools处理，然后用 GATK 检测变异（部分步骤）。 原代码如下：
+
+.. code:: bash
+
+    #!/bin/bash
+
+    #SBATCH --job-name=WES
+    #SBATCH --partition=cpu
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=40
+    #SBATCH --exclusive
+
+    echo "##### 加载相关软件 #####"
+    module load bwa samtools  
+    module load miniconda3 && source activate 10_24  # gatk-4.1.9.0
+
+    echo "##### 设置变量 #####"
+    REFDIR=$HOME/med/annotation/gatk/hg19  # 参考基因组和注释文件目录
+    SAMPLEDIR=$HOME/med/testnor  # 样本目录
+
+    WORKDIR=$HOME/WES_TEST  # 工作目录
+    TMPDIR=$WORKDIR/tmpdir  # 临时缓存目录
+    mkdir -p $WORKDIR
+    mkdir -p $TMPDIR
+
+    SampleID=test  # 样本名
+
+    cd $WORKDIR
+
+    echo "##### bwa 比对 #####"
+    bwa mem -M -t 40 \
+    ${REFDIR}/ucsc.hg19.fasta \
+    ${SAMPLEDIR}/${SampleID}_1.fastq.gz \
+    ${SAMPLEDIR}/${SampleID}_2.fastq.gz \
+    | gzip -3 > ${SampleID}_mem.sam
+
+    echo "##### samtools 生成bam #####"
+    samtools view -@ 40 -bS ${SampleID}_mem.sam \
+    | samtools sort -@ 40 > ${SampleID}_mem.sorted.bam
+
+    samtools index ${SampleID}_mem.sorted.bam
+
+    echo "##### gatk 检测变异 #####"
+    gatk ReorderSam \
+    -I ${SampleID}_mem.sorted.bam \
+    -O ${SampleID}_mem.sorted.reorder.bam \
+    -R ${REFDIR}/ucsc.hg19.fasta \
+    --TMP_DIR ${TMPDIR} \
+    --VALIDATION_STRINGENCY LENIENT \
+    --SEQUENCE_DICTIONARY ${REFDIR}/ucsc.hg19.dict \
+    --CREATE_INDEX true
+
+    gatk MarkDuplicates \
+    -I ${SampleID}_mem.sorted.reorder.bam \
+    -O ${SampleID}_mem.sorted.reorder.rmdup.bam \
+    --TMP_DIR ${TMPDIR} \
+    --REMOVE_DUPLICATES false \
+    --ASSUME_SORTED true \
+    --METRICS_FILE ${SampleID}_mem.sorted.reorder.markduplicates_metrics.txt \
+    --OPTICAL_DUPLICATE_PIXEL_DISTANCE 2500 \
+    --VALIDATION_STRINGENCY LENIENT \
+    --CREATE_INDEX true
+
+    gatk BaseRecalibrator \
+    -R ${REFDIR}/ucsc.hg19.fasta \
+    --tmp-dir ${TMPDIR} \
+    -L ${REFDIR}/hg19.interval_list.bed \
+    --known-sites ${REFDIR}/1000G_phase3_v4_20130502.hg19.sites.indels.vcf \
+    --known-sites ${REFDIR}/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf \
+    -I ${SampleID}_mem.sorted.reorder.rmdup.bam \
+    -O ${SampleID}_mem.sorted.reorder.rmdup.pre.table
+
+    gatk ApplyBQSR \
+    -R ${REFDIR}/ucsc.hg19.fasta \
+    --tmp-dir ${TMPDIR} \
+    -L ${REFDIR}/hg19.interval_list.bed \
+    -I ${SampleID}_mem.sorted.reorder.rmdup.bam \
+    -bqsr ${SampleID}_mem.sorted.reorder.rmdup.pre.table \
+    -O ${SampleID}_mem.sorted.reorder.rmdup.bqsr.bam
+
+    gatk BaseRecalibrator \
+    -R ${REFDIR}/ucsc.hg19.fasta \
+    --tmp-dir ${TMPDIR} \
+    --known-sites ${REFDIR}/1000G_phase3_v4_20130502.hg19.sites.indels.vcf \
+    --known-sites ${REFDIR}/Mills_and_1000G_gold_standard.indels.hg19.sites.vcf \
+    -I ${SampleID}_mem.sorted.reorder.rmdup.bqsr.bam \
+    -O ${SampleID}_mem.sorted.reorder.rmdup.post.table
+
+    gatk PrintReads \
+    -R ${REFDIR}/ucsc.hg19.fasta \
+    --tmp-dir ${TMPDIR} \
+    -L ${REFDIR}/hg19.interval_list.bed \
+    -I ${SampleID}_mem.sorted.reorder.rmdup.bqsr.bam \
+    -O ${SampleID}_mem.sorted.reorder.rmdup.recal.grp.bam
+
+
+过程中，会产生许多中间文件和临时文件。因此，可利用 $SCRATCH 作为临时目录，加快分析过程。只需要把脚本中的 ``WORKDIR=$HOME/WES_TEST`` 修改为 ``WORKDIR=$SCRATCH/WES_TEST``即可。
