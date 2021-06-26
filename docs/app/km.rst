@@ -1,9 +1,19 @@
 .. _km:
 
-km  安装
+km
 ==========================
 
+简介
+---------------
+
+Knowledge management is the systematic management of an organization's
+knowledge assets for creating value and meeting tactical & strategic
+requirements. It consists of the initiatives, processes, strategies,
+and systems that sustain and enhance the storage, assessment, sharing,
+refinement, and creation of knowledge.
+
 完整步骤
+----------------
 
 .. code:: bash
 
