@@ -1,7 +1,3 @@
-.. _faq:
-
-
-
 ========
 常见问题
 ========
@@ -26,7 +22,7 @@
 
 \ `9 医学院和附属医院申请 jAccount 账号 <https://docs.hpc.sjtu.edu.cn/faq/index.html#jaccount>`__\
 
-
+\ `10 如何重置 .bashrc 和 .bash_profile <https://docs.hpc.sjtu.edu.cn/faq/index.html#bashrc>`__\
 
 0. π 集群名为 π 有什么含义？
 ------------------------------
@@ -269,8 +265,45 @@ Tong University.
 `上海交通大学医学院网络信息中心 <https://www.shsmu.edu.cn/net/info/1054/1080.htm>`__
 页面了解和办理。
 
+如何重置 .bashrc 和 .bash_profile
+---------------------------------
 
+用户家目录下的 ``~/.bashrc`` 和 ``~/.bash_profile`` 记录bash shell配置，若配置不当可能会导致无法找到可执行文件、无法在Studio中启动RSession等问题，需要重置这两个配置文件的内容。
 
+重置 ``~/.bashrc`` 操作流程如下，首先登录集群，然后备份现有配置文件，再调用 ``vim`` 或其他文本编辑器打开文件：
 
+.. code:: bash
 
+  $ /bin/cp ~/.bashrc ~/.bashrc.bak
+  $ /bin/vim ~/.bashrc
 
+将 `~/.bashrc` 文件内容重置如下，保存后退出编辑器：
+
+.. code:: 
+
+  # .bashrc
+  
+  # Source global definitions
+  if [ -f /etc/bashrc ]; then
+          . /etc/bashrc
+  fi
+
+类似地，在命令行中使用 `/bin/cp ~/.bash_profile ~/.bash_profile.bak; /bin/vim ~/.bash_profile` 将文件内容重置如下：
+
+.. code:: bash
+   
+  # .bash_profile
+  
+  # Get the aliases and functions
+  if [ -f ~/.bashrc ]; then
+          . ~/.bashrc
+  fi
+  
+  # User specific environment and startup programs
+  
+  PATH=$PATH:$HOME/.local/bin:$HOME/bin
+  
+  export PATH
+
+最后重新登录集群，确认重置配置文件后，先前的问题是否解决。
+重置配置文件会导致您先前对bash shell的自定义配置失效，如果您仍需要保留这些自定义配置，建议您从bak备份文件中逐条转移这些配置，避免引入导致应用异常语句。
