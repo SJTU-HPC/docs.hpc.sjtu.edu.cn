@@ -1,10 +1,14 @@
 .. _BASIL-ANISE:
 
-BASIL-ANISE 安装
+BASIL-ANISE
 ======================
 
-完整步骤
+简介
+-------------
+暂无
 
+完整步骤
+-----------------
 .. code:: bash
 
    module load miniconda3

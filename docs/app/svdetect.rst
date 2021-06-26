@@ -1,9 +1,16 @@
 .. _SVDetect:
 
-SVDetect 安装
+SVDetect
 ====================
 
+简介
+----------------
+SVDetect is a application for the isolation and the type prediction of intra- and inter-chromosomal
+rearrangements from paired-end/mate-pair sequencing data provided by the high-throughput sequencing
+technologies.
+
 完整步骤
+------------------
 
 .. code:: bash
 

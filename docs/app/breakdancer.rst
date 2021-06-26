@@ -1,10 +1,15 @@
 .. _BreakDancer:
 
-BreakDancer 安装
+BreakDancer
 ======================
 
-完整步骤
+简介
+--------------
+BreakDancer包含两个互补的程序：BreakDancerMax和BreakDancerMini。
+BreakDancerMax根据二代测序read比对时，出现的异常比对，预测插入，缺失，倒位，染色体间或染色体内易位等五种结构突变。
 
+完整步骤
+------------------
 .. code:: bash
 
    module load miniconda3

@@ -1,9 +1,17 @@
 .. _WGCNA:
 
-WGCNA 安装
+WGCNA
 =================
 
+简介
+------------------
+
+Weighted correlation network analysis, also known as weighted gene co-expression network analysis (WGCNA),
+is a widely used data mining method especially for studying biological networks based on pairwise correla
+tions between variables.
+
 完整步骤
+--------------------
 
 .. code:: bash
 
