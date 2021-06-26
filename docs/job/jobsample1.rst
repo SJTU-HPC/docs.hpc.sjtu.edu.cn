@@ -49,7 +49,7 @@
 | 队列名        | 说明                              |
 +===============+===================================+
 | small         | 允许使用 CPU 核数为               |
-|               | 1~39，每核配比 4G                 |
+|               | 1~35，每核配比 4G                 |
 |               | 内                                |
 |               | 存，节点可共享使用；单节点配置为  |
 |               | 40 核，192G 内存                  |
@@ -70,7 +70,7 @@
 |               | 80 核，3T 内存                    |
 +---------------+-----------------------------------+
 | 192c6t        | 允许使用 CPU 核数为               |
-|               | 1~192，每核配比 31G               |
+|               | 96~192，每核配比 31G               |
 |               | 内                                |
 |               | 存，节点可共享使用；单节点配置为  |
 |               | 192 核，6T 内存                   |
@@ -104,7 +104,7 @@ small 队列 slurm 脚本示例
 
    #SBATCH --job-name=test        # 作业名 
    #SBATCH --partition=small      # small 队列
-   #SBATCH -n 20                 # 总核数需 <=39 
+   #SBATCH -n 20                 # 总核数需 <=35
    #SBATCH --ntasks-per-node=20   # 每节点核数
    #SBATCH --output=%j.out 
    #SBATCH --error=%j.err
@@ -232,7 +232,7 @@ cpu 队列 slurm 脚本示例 LAMMPS
 
    module load lammps
 
-   srun –mpi=pmi2 lmp -i YOUR_INPUT_FILE
+   srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
 
 
 GROMACS 作业示例
@@ -253,7 +253,7 @@ cpu 队列 slurm 脚本示例 GROMACS
 
    module load gromacs/2020-cpu
 
-   srun –mpi=pmi2 gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
+   srun --mpi=pmi2 gmx_mpi mdrun -deffnm -s test.tpr -ntomp 1
 
 Quantum ESPRESSO
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -273,7 +273,7 @@ cpu 队列 slurm 脚本示例 Quantum ESPRESSO
 
    module load quantum-espresso
 
-   srun –mpi=pmi2 pw.x -i test.in
+   srun --mpi=pmi2 pw.x -i test.in
 
 
 
@@ -295,7 +295,7 @@ cpu 队列 slurm 脚本示例 OpenFoam
 
    module load openfoam
 
-   srun –mpi=pmi2 icoFoam -parallel
+   srun --mpi=pmi2 icoFoam -parallel
 
 TensorFlow
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -353,7 +353,7 @@ cpu 队列 slurm 脚本示例 array
 作业状态邮件提醒
 ~~~~~~~~~~~~~~~~
 
-–mail-type= 指定状态发生时，发送邮件通知: ALL, BEGIN, END, FAIL
+--mail-type= 指定状态发生时，发送邮件通知: ALL, BEGIN, END, FAIL
 
 small 队列 slurm 脚本示例：邮件提醒
 
