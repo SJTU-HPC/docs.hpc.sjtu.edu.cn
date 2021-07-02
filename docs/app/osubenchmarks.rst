@@ -22,19 +22,19 @@ OSU Benchmarks
 .. code:: bash
 
     #!/bin/bash
-    
+
     #SBATCH --job-name=osu_latency
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
     #SBATCH -n 2
     #SBATCH --ntasks-per-node=1
     #SBATCH --exclusive
-    
+
     ulimit -l unlimited
     ulimit -s unlimited
-    
+
     module load osu-micro-benchmarks/5.6.3-gcc-9.3.0-openmpi
-    
+
     srun --mpi=pmi2 osu_latency
 
 提交到 ``arm128c256g`` 队列，随机测试两个ARM节点间的MPI通信延迟。
@@ -88,19 +88,19 @@ OSU Benchmarks
 .. code:: bash
 
     #!/bin/bash
-    
+
     #SBATCH --job-name=osu_bw
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
     #SBATCH -n 2
     #SBATCH --ntasks-per-node=1
     #SBATCH --exclusive
-    
+
     ulimit -l unlimited
     ulimit -s unlimited
-    
+
     module load osu-micro-benchmarks/5.6.3-gcc-9.3.0-openmpi
-    
+
     srun --mpi=pmi2 osu_mbw_mr
 
 提交到 ``arm128c256g`` 队列，随机测试两个ARM节点间的MPI通信带宽。
@@ -145,6 +145,58 @@ OSU Benchmarks
     1048576             12324.26          11753.33
     2097152             12335.56           5882.05
     4194304             12340.24           2942.14
+
+使用 ``osu_bcast`` 测量广播延迟
+--------------------------------------
+
+测试作业提交方式同上，脚本最后执行的程序修改为 ``osu_bcast`` ，示例如下：
+
+.. code:: bash
+
+    #!/bin/bash
+
+    #SBATCH --job-name=osu_bw
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
+    #SBATCH -n 4
+    #SBATCH --ntasks-per-node=1
+    #SBATCH --exclusive
+
+    ulimit -l unlimited
+    ulimit -s unlimited
+
+    module load osu-micro-benchmarks/5.6.3-gcc-9.3.0-openmpi
+
+    srun --mpi=pmi2 osu_bcast
+
+需要注意广播延迟和参与测试的节点数量正相关，如果需要对比性能，要保证测试作业所用的节点数一致。100G Infiniband MPI带宽、4节点的参考结果如下：
+
+.. code::
+
+    # OSU MPI Broadcast Latency Test v5.6.3
+    # Size       Avg Latency(us)
+    1                       2.35
+    2                       2.43
+    4                       2.38
+    8                       2.37
+    16                      2.42
+    32                      2.42
+    64                      2.59
+    128                     2.66
+    256                     3.11
+    512                     3.36
+    1024                    3.86
+    2048                    4.20
+    4096                    5.25
+    8192                    7.15
+    16384                  11.37
+    32768                  19.00
+    65536                  34.18
+    131072                 65.70
+    262144                132.38
+    524288                122.73
+    1048576               239.25
+
 
 参考资料
 --------
