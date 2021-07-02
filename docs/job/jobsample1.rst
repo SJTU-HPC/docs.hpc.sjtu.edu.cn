@@ -212,7 +212,22 @@ dgx2 队列 slurm 脚本示例：单节点，分配 2 块 GPU，GPU:CPU 配比 1
    #SBATCH --output=%j.out 
    #SBATCH --error=%j.err
 
+arm128c256g 队列 slurm 脚本示例：单节点60核
 
+.. code:: bash
+
+    #!/bin/bash
+
+    #SBATCH --job-name=test
+    #SBATCH --partition=arm128c256g
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=60
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
+
+    source /lustre/share/singularity/commercial-app/vasp/activate arm
+
+    mpirun -n $SLURM_NTASKS vasp_std
 
 常用软件作业示例
 ----------------
