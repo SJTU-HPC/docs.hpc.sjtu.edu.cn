@@ -212,6 +212,9 @@ dgx2 队列 slurm 脚本示例：单节点，分配 2 块 GPU，GPU:CPU 配比 1
    #SBATCH --output=%j.out 
    #SBATCH --error=%j.err
 
+arm128c256g
+~~~~~~~~~~~
+
 arm128c256g 队列 slurm 脚本示例：单节点60核
 
 .. code:: bash
