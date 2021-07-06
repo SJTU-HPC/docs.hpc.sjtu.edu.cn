@@ -35,9 +35,9 @@ ARM 应用支持
 
 由于 CPU 架构不同，原 π 2.0 的应用软件都需要重新编译。我们已在 ARM 超算上部署了首批主流计算软件。后续将会推出更多的适用 ARM 超算运行的应用。
 
-应用查看：在 ARM 登录节点或计算节点使用 \ ``module av``\ 命令；
+* 应用查看：(在 ARM 登录节点或计算节点) \ ``module av``\ 命令；
 
-应用加载：在 ARM 计算节点使用 \ ``module load``\ 命令；
+* 应用加载：(在 ARM 计算节点) \ ``module load``\ 命令；
 
 	
 ARM 作业示例
@@ -56,7 +56,6 @@ ARM 作业示例
 	#SBATCH --output=%j.out
 	#SBATCH --error=%j.err
 
-	module use XXX
 	module load XXX
 
 	mpirun -n $SLURM_NTASKS ...
@@ -70,7 +69,7 @@ ARM 作业示例
 ``squeue``\ 可用于检查作业状态。
 
 
-有两点需要注意：
+有两点需注意：
 
 * 并行命令采用 mpirun，暂不推荐 srun
 
