@@ -85,7 +85,7 @@ ARM 交互作业示例
 
 .. code:: bash
 
-   $ srun -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
+   $ srun -p arm128c256g -n 4 --pty /bin/bash
 
 
 ARM 超算软件编译
