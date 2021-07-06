@@ -11,3 +11,4 @@
    jobsample1
    jobsample2
    dgx
+   arm
