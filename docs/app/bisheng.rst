@@ -4,10 +4,10 @@ bisheng
 
 .. TODO: Guangchao
 
-Hyper-MPI是
+bisheng是
 
-Hyper-MPI使用方式
------------------
+bisheng编译器使用方式
+---------------------
 
 -  首先一定要用 \ ``ssh``\ 登录ARM节点
 
@@ -19,7 +19,7 @@ Hyper-MPI使用方式
 
 .. code:: bash
 
-   $ module load hmpi/4.0.3-gcc-9.3.0
+   $ module load bisheng/1.3.1-gcc-9.3.0
 
 参考资料
 ========
