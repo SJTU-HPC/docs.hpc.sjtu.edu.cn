@@ -39,7 +39,7 @@
 π 集群队列介绍
 --------------
 
-π 集群上现有 small, cpu, huge, 192c6t 和 dgx2 队列。
+π 集群上现有 small, cpu, huge, 192c6t, dgx2 和 arm128c256g 队列。
 
 ``scontrol show partition`` 查看集群队列介绍
 
@@ -80,6 +80,11 @@
 |               | CPU 配比 15G 内存；单节点配置为   |
 |               | 96 核，1.45T 内存，16>块 32G      |
 |               | 显存的 V100卡                     |
++---------------+-----------------------------------+
+| arm128c256g   |                                   |
+|               |                                   |
+|               |                                   |
+|               |                                   |
 +---------------+-----------------------------------+
 
 small, cpu, dgx2 队列允许的作业运行最长时间为 7 天。huge 和 192c6t 为 2天。
@@ -207,7 +212,25 @@ dgx2 队列 slurm 脚本示例：单节点，分配 2 块 GPU，GPU:CPU 配比 1
    #SBATCH --output=%j.out 
    #SBATCH --error=%j.err
 
+arm128c256g
+~~~~~~~~~~~
 
+arm128c256g 队列 slurm 脚本示例：单节点60核
+
+.. code:: bash
+
+    #!/bin/bash
+
+    #SBATCH --job-name=test
+    #SBATCH --partition=arm128c256g
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=60
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
+
+    source /lustre/share/singularity/commercial-app/vasp/activate arm
+
+    mpirun -n $SLURM_NTASKS vasp_std
 
 常用软件作业示例
 ----------------
