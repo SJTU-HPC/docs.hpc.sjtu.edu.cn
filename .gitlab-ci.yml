@@ -13,9 +13,13 @@ fail_if_contain_raw_html:
   tags:
     - docker
   before_script:
+    - pwd
     - apt-get update -y
     - apt-get install -y ack-grep
   script:
+    - ls /
+    - pwd
+    - ls
     - ack '.*raw.*html' docs && false || true
 
 build_latex_pdf:
@@ -24,6 +28,8 @@ build_latex_pdf:
   tags:
     - docker
   before_script:
+    - pwd
+    - ls
     - mkdir -p .build_cache
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
