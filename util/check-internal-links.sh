@@ -1,3 +1,3 @@
 #!/bin/bash
-grep -nr '\](/' --include="*md" docs
+grep -nr '\](/' --include="*rst" docs
 test $? = 1
