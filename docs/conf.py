@@ -76,11 +76,11 @@ html_theme = "sphinx_material"
 # a list of builtin themes.
 #
 html_theme = 'sphinx_material'
-html_favicon = 'img/favicon.png'
+html_favicon = 'favicon.png'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = 'img/logos.png'
+html_logo = 'logos.png'
 
 # Material theme options (see theme.conf for more information)
 html_theme_options = {
