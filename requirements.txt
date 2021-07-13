@@ -17,4 +17,6 @@ sphinx>=2.0
 sphinx_markdown_tables
 sphinx_material
 Sphinx-Substitution-Extensions
+sphinxcontrib-serializinghtml
+sphinxcontrib.htmlhelp
 jieba
