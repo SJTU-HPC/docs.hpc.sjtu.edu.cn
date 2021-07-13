@@ -11,8 +11,8 @@ GATK是GenomeAnalysisToolkit的简称，是一系列用于分析高通量测序�
 .. _ARM版本GATK:
 
 
-ARM版GATK
-------------
+ARM Spack版GATK
+-----------------
 
 示例脚本如下(gatk.slurm):    
 
@@ -37,3 +37,33 @@ ARM版GATK
 .. code:: bash
 
    $ sbatch gatk.slurm
+
+
+ARM 容器版GATK
+---------------
+
+使用容器版GTAK时，需要先指定GATK镜像的路径。然后使用 ``singularity exec 镜像路径 GTAK命令`` 的方式调用容器版GATK。
+
+示例脚本如下(gatk-container.slurm)：
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH --job-name=test       
+   #SBATCH --partition=arm128c256g       
+   #SBATCH -N 1          
+   #SBATCH --ntasks-per-node=128
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   export IMAGE_NAME=/lustre/share/singularity/aarch64/gatk/gatk-4.2.0.0.sif
+   singularity exec $IMAGE_NAME gatk --java-options "-Xmx128G" ...
+
+
+使用如下指令提交：
+
+.. code:: bash
+   
+   $ sbatch gatk-container.slurm
+
