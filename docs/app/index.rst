@@ -295,7 +295,6 @@ AI 计算软件
    module
    osubenchmarks
    hpl
-   bio
    abinit
    cesm
    wrf
