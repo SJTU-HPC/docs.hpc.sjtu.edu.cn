@@ -9,6 +9,17 @@ BCFtools主要是用来操作vcf和BCF文件的工具合集，包含有许多命
 
 .. _ARM版本BCFtools:
 
+CPU 版本 BCFtools conda安装方法
+------------------------------
+.. code:: bash
+
+   module purge
+   module load miniconda3
+   conda create -n mypy_py27 python=2.7
+   source activate mypy_py27
+   conda install -c bioconda manta
+
+
 CPU 版本BCFtools
 ----------------
 
