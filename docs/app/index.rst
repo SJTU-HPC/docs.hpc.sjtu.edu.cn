@@ -298,114 +298,114 @@ AI 计算软件
    osubenchmarks
    hpl
    abinit
-   cesm
-   wrf
-   cp2k
-   cuda
-   deepvariant
-   gnu
-   gnuplot
-   gromacs
-   hpcsdk
-   bisheng
-   gsl
-   eigen
-   intel
-   hyper-mpi
-   keras
-   lammps
-   mrbayes
-   nektar
-   nwchem
-   openfoam
-   ovito
-   octave
-   pytorch
-   python
-   perl
-   quantum-espresso
-   relion
-   r
-   siesta
-   star-ccm
-   gerris
-   strique
-   tensorflow
-   vmd
-   paraview
-   matlab
-   star
+   amber
+   augustus
+   basil-anise
+   batvi
    bcftools
    bedtools2
+   bicseq2
+   bisheng
    bismark
+   blast-plus
    bowtie
+   breakdancer
    bwa
    cdo
+   cdsapi
+   cesm
+   clever
+   cnvnator
+   control-freec
+   cp2k
+   crest
+   cuda
    cufflinks
+   deepgo
+   deepvariant
+   delly
+   deseq2
+   eigen
+   erds
    fastqc
+   fermikit
    gatk
    geant4
-   gmap-gsnap
-   graphmap
-   hisat2
-   lumpy-sv
-   megahit
-   metis
-   ncbi-rmblastn
-   picard
-   rna-seqc
-   salmon
-   samtools
-   soapdenovo2
-   sratoolkit
-   stringtie
-   tophat
-   vardictjava
-   vsearch
-   vasp
-   amber
-   jdk
-   melt
-   manta
-   lumpy
-   hydra-sv
-   variationhunter
-   gridss
    genomestrip
-   fermikit
-   erds
-   delly
-   crest
-   control-freec
-   cnvnator
-   clever
-   breakdancer
-   bicseq2
-   batvi
-   basil-anise
+   gerris
+   gmap-gsnap
+   gnu
+   gnuplot
+   graphmap
+   gridss
+   gromacs
+   gsl
+   gsutil
+   hisat2
+   hmmer
+   hpcsdk
+   hydra-sv
+   hyper-mpi
+   intel
+   jdk
+   keras
+   km
+   lammps
+   lumpy
+   lumpy-sv
+   maker
+   manta
+   matlab
+   megahit
+   melt
    metasv
+   metis
    mindthegap
    mobster
+   mrbayes
+   ncbi-rmblastn
+   nektar
+   nwchem
+   octave
+   openfoam
+   openslide-python
+   ovito
+   pandas
+   paraview
    pbsv
+   perl
+   picard
    pindel
    prism
+   python
+   pytorch
+   quantum-espresso
+   r
+   relion
    retroseq
+   rna-seqc
+   r-rgl
+   salmon
+   samtools
+   siesta
    sniffles
+   soapdenovo2
+   sratoolkit
+   sra-tools
+   star
+   star-ccm
+   stringtie
+   strique
    sv2
    svaba
    svdetect
-   wham
-   gsutil
-   openslide-python
-   pandas
-   cdsapi
-   r-rgl
-   sra-tools
-   deseq2
+   tensorflow
+   tophat
+   vardictjava
+   variationhunter
+   vasp
+   vmd
+   vsearch
    wgcna
-   maker
-   augustus
-   deepgo
-   km
-   hmmer
-   blast-plus
+   wham
+   wrf
