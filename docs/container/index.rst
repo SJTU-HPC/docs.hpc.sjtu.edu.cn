@@ -93,6 +93,8 @@ Singularity可以从Docker Hub(以 ``docker://`` 开头)、Singularity Hub(以 `
 
 .. tip:: Singularity镜像文件(Singularity Image File, sif)是一种内容只读的文件格式，其文件内容不能被修改。
 
+.. _dockerized_singularity:
+
 按需定制Singularity镜像
 =======================
 
