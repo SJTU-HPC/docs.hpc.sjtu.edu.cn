@@ -25,7 +25,8 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 提交OpenFOAM作业
 ----------------
 
-### CPU版OpenFoam(使用Spack预编译版本)
+CPU版OpenFoam(使用Spack预编译版本)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 准备作业脚本 ``openfoam.slurm`` ，内容如下：
 
@@ -53,7 +54,8 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
    $ sbatch openfoam.slurm
 
-### CPU版OpenFoam(使用容器)
+CPU版OpenFoam(使用容器)
+~~~~~~~~~~~~~~~~~~~~~~~
 
 准备作业脚本 ``openfoam.slurm`` ，内容如下：
 
@@ -84,7 +86,8 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
    $ sbatch openfoam.slurm
 
-### ARM版OpenFoam(使用Spack预编译版本)
+ARM版OpenFoam(使用Spack预编译版本)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 准备作业脚本 ``openfoam.slurm`` ，内容如下：
 
@@ -113,7 +116,8 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
    $ sbatch openfoam.slurm
 
 
-### ARM版OpenFoam(使用容器)
+ARM版OpenFoam(使用容器)
+~~~~~~~~~~~~~~~~~~~~~~~
 
 准备作业脚本 ``openfoam.slurm`` ，内容如下：
 
@@ -149,7 +153,8 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
 如果您需要从源代码构建OpenFOAM，我们强烈建议您使用超算平台提供的非特权容器构建方法(:ref:`dockerized_singularity`)，以确保编译过程能顺利完成。
 
-### 编译适用于CPU平台的OpenFOAM(构建容器)
+编译适用于CPU平台的OpenFOAM(构建容器)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 从登录节点跳转至容器构建X86节点：
 
@@ -186,7 +191,8 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
    $ scp 2012-gcc4-openmpi4-centos7.sif YOUR_USER_NAME@login1:~/
 
-### 编译适用于ARM平台的OpenFOAM(构建容器)
+编译适用于ARM平台的OpenFOAM(构建容器)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 从登录节点跳转至容器构建ARM节点：
 
@@ -222,7 +228,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
    $ scp 8-gcc8-openmpi4-centos8.sif YOUR_USER_NAME@login1:~/
 
-参考链接
+参考资料
 --------
 
 - Openfoam官方网站 https://openfoam.org/
