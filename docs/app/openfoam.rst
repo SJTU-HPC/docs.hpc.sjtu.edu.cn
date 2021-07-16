@@ -147,7 +147,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 编译OpenFOAM
 ------------
 
-如果您需要从源代码构建OpenFOAM，我们强烈建议您使用超算平台提供的非特权容器构建方法(:ref:`按需定制Singularity镜像`)，以确保编译过程能顺利完成。
+如果您需要从源代码构建OpenFOAM，我们强烈建议您使用超算平台提供的非特权容器构建方法(:ref:`dockerized_singularity`)，以确保编译过程能顺利完成。
 
 ### 编译适用于CPU平台的OpenFOAM(构建容器)
 
