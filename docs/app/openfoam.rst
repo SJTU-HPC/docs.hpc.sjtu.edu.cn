@@ -27,7 +27,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
 ### CPU版OpenFoam(使用Spack预编译版本)
 
-准备作业脚本 ``openfoam.slurm`` ，内容如下::
+准备作业脚本 ``openfoam.slurm`` ，内容如下：
 
 .. code:: bash
 
@@ -47,7 +47,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
    srun --mpi=pmi2 icoFoam -parallel
 
-使用 ``sbatch`` 提交作业::
+使用 ``sbatch`` 提交作业：
 
 .. code:: bash
 
@@ -55,7 +55,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
 ### CPU版OpenFoam(使用容器)
 
-准备作业脚本 ``openfoam.slurm`` ，内容如下::
+准备作业脚本 ``openfoam.slurm`` ，内容如下：
 
 .. code:: bash
 
@@ -78,7 +78,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
    singularity exec $IMAGE_NAME blockMesh
    mpirun -n $SLURM_NTASKS singularity exec $IMAGE_NAME simpleFoam -parallel
 
-使用 ``sbatch`` 提交作业::
+使用 ``sbatch`` 提交作业：
 
 .. code:: bash
 
@@ -86,7 +86,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
 ### ARM版OpenFoam(使用Spack预编译版本)
 
-准备作业脚本 ``openfoam.slurm`` ，内容如下::
+准备作业脚本 ``openfoam.slurm`` ，内容如下：
 
 .. code:: bash
 
@@ -106,7 +106,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
    srun --mpi=pmi2 icoFoam -parallel
 
-在ARM登录节点使用 ``sbatch`` 提交作业::
+在ARM登录节点使用 ``sbatch`` 提交作业：
 
 .. code:: bash
 
@@ -115,7 +115,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
 ### ARM版OpenFoam(使用容器)
 
-准备作业脚本 ``openfoam.slurm`` ，内容如下::
+准备作业脚本 ``openfoam.slurm`` ，内容如下：
 
 .. code:: bash
 
@@ -138,7 +138,7 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
    singularity exec $IMAGE_NAME blockMesh
    mpirun -n $SLURM_NTASKS singularity exec $IMAGE_NAME simpleFoam -parallel
 
-使用 ``sbatch`` 提交作业::
+使用 ``sbatch`` 提交作业：
 
 .. code:: bash
 
@@ -151,13 +151,13 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
 ### 编译适用于CPU平台的OpenFOAM(构建容器)
 
-从登录节点跳转至容器构建X86节点::
+从登录节点跳转至容器构建X86节点：
 
 .. code:: bash
 
    # ssh build@container-x86
 
-创建和进入临时工作目录::
+创建和进入临时工作目录：
 
 .. code:: bash
 
@@ -165,13 +165,13 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
    $ pwd
    /tmp/tmp.sr7C5813M9
   
-下载镜像定义文件，按需定制修改::
+下载镜像定义文件，按需定制修改：
 
 .. code:: bash
 
    $ wget https://raw.githubusercontent.com/SJTU-HPC/hpc-base-container/dev/base/openfoam/2012-gcc4-openmpi4-centos7.def
    
-构建Singularity容器镜像，大约会消耗2-3小时::
+构建Singularity容器镜像，大约会消耗2-3小时：
 
 .. code:: bash
 
@@ -188,26 +188,26 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
 ### 编译适用于ARM平台的OpenFOAM(构建容器)
 
-从登录节点跳转至容器构建ARM节点::
+从登录节点跳转至容器构建ARM节点：
 
 .. code:: bash
 
    # ssh build@container-arm
 
-创建和进入临时工作目录::
+创建和进入临时工作目录：
 
 .. code:: bash
 
    $ cd $(mktemp -d)
    $ pwd
   
-下载镜像定义文件，按需定制修改::
+下载镜像定义文件，按需定制修改：
 
 .. code:: bash
 
    $ wget https://raw.githubusercontent.com/SJTU-HPC/hpc-base-container/dev/base/openfoam/8-gcc8-openmpi4-centos8.def
    
-构建Singularity容器镜像，大约会消耗2-3小时::
+构建Singularity容器镜像，大约会消耗2-3小时：
 
 .. code:: bash
 
