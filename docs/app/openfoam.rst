@@ -19,6 +19,8 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 +------+-------+----------+--------------------------------------------------------------------+
 | 1912 | |arm| | Spack    | openfoam/1912-gcc-9.3.0-openmpi                                    |
 +------+-------+----------+--------------------------------------------------------------------+
+| 8    | |arm| | 容器     | /lustre/share/img/aarch64/openfoam/8-gcc8-openmpi4-centos8.sif     |
++------+-------+----------+--------------------------------------------------------------------+
 
 提交OpenFOAM作业
 ----------------
@@ -141,6 +143,84 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 .. code:: bash
 
    $ sbatch openfoam.slurm
+
+编译OpenFOAM
+------------
+
+如果您需要从源代码构建OpenFOAM，我们强烈建议您使用超算平台提供的非特权容器构建方法(:ref:`按需定制Singularity镜像`)，以确保编译过程能顺利完成。
+
+### 编译适用于CPU平台的OpenFOAM(构建容器)
+
+从登录节点跳转至容器构建X86节点::
+
+.. code:: bash
+
+   # ssh build@container-x86
+
+创建和进入临时工作目录::
+
+.. code:: bash
+
+   $ cd $(mktemp -d)
+   $ pwd
+   /tmp/tmp.sr7C5813M9
+  
+下载镜像定义文件，按需定制修改::
+
+.. code:: bash
+
+   $ wget https://raw.githubusercontent.com/SJTU-HPC/hpc-base-container/dev/base/openfoam/2012-gcc4-openmpi4-centos7.def
+   
+构建Singularity容器镜像，大约会消耗2-3小时::
+
+.. code:: bash
+
+   $ docker run --privileged --rm -v \
+     ${PWD}:/home/singularity \
+     sjtuhpc/centos7-singularity:x86 \
+     singularity build /home/singularity/2012-gcc4-openmpi4-centos7.sif /home/singularity/2012-gcc4-openmpi4-centos7.def
+
+将构建出的容器镜像传回家目录，参考上文的作业脚本(容器版)提交作业。
+
+.. code:: bash
+
+   $ scp 2012-gcc4-openmpi4-centos7.sif YOUR_USER_NAME@login1:~/
+
+### 编译适用于ARM平台的OpenFOAM(构建容器)
+
+从登录节点跳转至容器构建ARM节点::
+
+.. code:: bash
+
+   # ssh build@container-arm
+
+创建和进入临时工作目录::
+
+.. code:: bash
+
+   $ cd $(mktemp -d)
+   $ pwd
+  
+下载镜像定义文件，按需定制修改::
+
+.. code:: bash
+
+   $ wget https://raw.githubusercontent.com/SJTU-HPC/hpc-base-container/dev/base/openfoam/8-gcc8-openmpi4-centos8.def
+   
+构建Singularity容器镜像，大约会消耗2-3小时::
+
+.. code:: bash
+
+   $ docker run --privileged --rm -v \
+     ${PWD}:/home/singularity \
+     sjtuhpc/centos7-singularity:arm \
+     singularity build /home/singularity/8-gcc8-openmpi4-centos8.def /home/singularity/8-gcc8-openmpi4-centos8.def
+
+将构建出的容器镜像传回家目录，参考上文的作业脚本(容器版)提交作业。
+
+.. code:: bash
+
+   $ scp 8-gcc8-openmpi4-centos8.sif YOUR_USER_NAME@login1:~/
 
 参考链接
 --------
