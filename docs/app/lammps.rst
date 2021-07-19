@@ -252,11 +252,12 @@ ARM版本
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module load openmpi/3.1.6-gcc-9.3.0 lammps/20200303-gcc-9.3.0-openblas-openmpi
+   module load openmpi/4.0.3-gcc-9.3.0
+   module load lammps/20200303-gcc-9.3.0-openblas-openmpi
 
    mpirun -n $SLURM_NTASKS lmp -in in.eam
 
-使用如下指令提交：
+在 `ARM 节点 <../login/index.html#arm>`__\ 上使用如下指令提交（若在 π2.0 登录节点上提交将出错）：
 
 .. code:: bash
 
