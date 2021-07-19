@@ -67,6 +67,7 @@ CPU 版本 Slurm 脚本
    #SBATCH -N 2
    #SBATCH --ntasks-per-node=40
 
+   module purge
    module load lammps/2020-cpu
 
    ulimit -s unlimited
@@ -137,6 +138,7 @@ slurm.test
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
+   module purge
    module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
@@ -252,6 +254,7 @@ ARM版本
    ulimit -s unlimited
    ulimit -l unlimited
 
+   module purge
    module load openmpi/4.0.3-gcc-9.3.0
    module load lammps/20200303-gcc-9.3.0-openblas-openmpi
 
