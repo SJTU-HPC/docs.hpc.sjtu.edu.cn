@@ -33,3 +33,30 @@ ARM平台上运行脚本如下(vasp.slurm):
 .. code:: bash
 
    $ sbatch vasp.slurm
+
+ARM平台上使用容器运行VASP
+-------------------------
+
+运行脚本如下(vasp.slurm):
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH -J vasp_arm_singularity
+   #SBATCH -p arm128c256g
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=60
+   #SBATCH --exclusive
+   module load openmpi/4.0.3-gcc-9.3.0-vasp
+   VASP_PATH=/your/own/vasp 
+   IMAGE_PATH=$VASP_PATH/img
+   mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1 singularity exec -B $VASP_PATH/data:/mnt -B /lib64:/lib64 $IMAGE_PATH /mnt/./run.sh
+
+vasp.slurm脚本中run.sh中的内容如下所示：
+
+.. code:: bash
+
+   #!/bin/bash
+   vasp_std
