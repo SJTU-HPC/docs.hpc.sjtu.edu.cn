@@ -37,6 +37,12 @@ ARM平台上运行脚本如下(vasp.slurm):
 ARM平台上使用容器运行VASP
 -------------------------
 
+将共享目录下的vasp镜像拷贝到自己的用户目录下
+
+.. code:: bash
+
+   $ cp /lustre/share/singularity/aarch64/vasp/vasp.sif /your/own/vasp/img/
+
 运行脚本如下(vasp.slurm):
 
 .. code:: bash
