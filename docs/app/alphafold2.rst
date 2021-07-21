@@ -18,7 +18,7 @@ AlphaFold2 在 AI 平台的部署
 准备一：设置环境
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-在自己 home 下新建一系列文件夹，并将数据和镜像文件建立软链接：
+在自己 ``home`` 下新建一系列文件夹，并将数据和镜像文件建立软链接：
 
 .. code:: bash
 
@@ -30,12 +30,12 @@ AlphaFold2 在 AI 平台的部署
 	ln -s /scratch/share/AlphaFold/data/* $HOME/alphafold/all/data/
 	ln -s /scratch/share/AlphaFold/alphafold.sif $HOME/alphafold/img/
 
-准备二：run.sh 文件
+准备二：``run.sh`` 文件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-AlphaFold 需要 run.sh 文件。可参考下方内容，新建和调整 run.sh 文件。
+AlphaFold 需要 ``run.sh`` 文件。可参考下方内容，新建和调整 ``run.sh`` 文件。
 
-注意，通过 fasta_paths 参数传入 protein 的 fasta 文件，若有多条序列，每个 fasta 文件需要存放一条序列，文件之间使用逗号分割。
+注意，通过 ``fasta_paths`` 参数传入 ``protein`` 的 ``fasta`` 文件，若有多条序列，每个 ``fasta`` 文件需要存放一条序列，文件之间使用逗号分割。
 
 .. code:: bash
 
@@ -65,23 +65,23 @@ AlphaFold 需要 run.sh 文件。可参考下方内容，新建和调整 run.sh 
 方式一：交互模式
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-使用下方命令申请 1 张 GPU 卡（含 6 个 CPU）：
+使用下方命令申请 2 张 GPU 卡（含 12 个 CPU）：
 
 .. code:: bash
 
-    salloc --ntasks-per-node=1 --job-name=alpha-session -p dgx2 --gres=gpu:1 -N 1
+    salloc --ntasks-per-node=1 --job-name=alpha-session -p dgx2 --gres=gpu:2 -N 1
 
-再 ssh 登录到分配的 vol 开头的 GPU 节点（如信息 ``salloc: Nodes vol01 are ready for job``）：
+再 ssh 登录到分配的 ``vol`` 开头的 GPU 节点（如信息 ``salloc: Nodes vol01 are ready for job``）：
 
 .. code:: bash
 
     ssh vol01    # 具体节点号以屏幕显示为准
 
-接下来可在这张 GPU 卡上进行交互模式的软件测试。在命令行里输入下方内容运行 AlphaFold：
+接下来可在这两张 GPU 卡上进行交互模式的软件测试。在命令行里输入下方内容运行 AlphaFold：
 
 .. code:: bash
 
-    AlphaFold_PATH=$PWD/alphafold
+    AlphaFold_PATH=$HOME/alphafold
     IMAGE_PATH=$AlphaFold_PATH/img/alphafold.sif
     singularity exec --nv -B $AlphaFold_PATH/all:/mnt $IMAGE_PATH /mnt/run.sh
 
@@ -92,7 +92,7 @@ AlphaFold 需要 run.sh 文件。可参考下方内容，新建和调整 run.sh 
 
 调试完成后，推荐使用 sbatch 方式提交作业脚本进行计算。
 
-作业脚本示例（假设作业脚本名为 alpha.slurm）：
+作业脚本示例（假设作业脚本名为 ``alpha.slurm``）：
 
 .. code:: bash
 
@@ -101,12 +101,11 @@ AlphaFold 需要 run.sh 文件。可参考下方内容，新建和调整 run.sh 
     #SBATCH --partition=dgx2
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=6
-    #SBATCH --gres=gpu:1
+    #SBATCH --gres=gpu:2
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
     
-    AlphaFold_PATH=$PWD/alphafold
+    AlphaFold_PATH=$HOME/alphafold
     IMAGE_PATH=$AlphaFold_PATH/img/alphafold.sif
     singularity exec --nv -B $AlphaFold_PATH/all:/mnt $IMAGE_PATH /mnt/run.sh
 
@@ -121,7 +120,7 @@ AlphaFold 需要 run.sh 文件。可参考下方内容，新建和调整 run.sh 
 注意事项
 ----------------------
 
-调试时，推荐使用交互模式。调试全部结束后，请退出交互模式的计算节点，避免持续计费。可用 squeue 或 sacct 命令核查交互模式的资源使用情况。
+调试时，推荐使用交互模式。调试全部结束后，请退出交互模式的计算节点，避免持续计费。可用 ``squeue`` 或 ``sacct`` 命令核查交互模式的资源使用情况。
 
 欢迎邮件联系我们，反馈软件使用情况，或提出宝贵建议。
 
