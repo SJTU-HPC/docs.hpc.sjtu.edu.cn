@@ -37,8 +37,6 @@ AlphaFold 需要 run.sh 文件。可参考下方内容，新建和调整 run.sh 
 
 注意，通过 fasta_paths 参数传入 protein 的 fasta 文件，若有多条序列，每个 fasta 文件需要存放一条序列，文件之间使用逗号分割。
 
-参考下方内容，编写和修改运行所需的 run.sh 文件：
-
 .. code:: bash
 
     #!/bin/bash
@@ -62,7 +60,7 @@ AlphaFold 需要 run.sh 文件。可参考下方内容，新建和调整 run.sh 
 运行 AlphaFold2
 ---------------------
 
-选用下方两种方式之一来运行 AlphaFold2。交互模式适合参数调试，sbatch 模式适合正式作业。
+选用下方两种方式之一来运行 AlphaFold2。交互模式适合参数调试，sbatch 模式适合正式运行作业。
 
 方式一：交互模式
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
