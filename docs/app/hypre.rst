@@ -23,6 +23,7 @@ Hypre是运行在多核处理器上，借助目前性能较好的预处理矩阵
 我们使用Hypre仓库提供的示例代码 https://github.com/hypre-space/hypre/tree/master/src/examples ，首先下载这份代码，进入示例代码目录：
 
 .. code:: bash
+
    $ wget https://github.com/hypre-space/hypre/archive/refs/tags/v2.22.0.tar.gz
    $ tar xzvpf v2.22.0.tar.gz
    $ cd hypre-2.22.0/src/examples
@@ -33,6 +34,7 @@ Hypre是运行在多核处理器上，借助目前性能较好的预处理矩阵
 在这个示例中我们使用 ``hypre/2.18.0-gcc-9.2.0-openblas-openmpi`` 模块，这个模块使用GCC 9.2.0构建，还需要载入匹配的编译器和MPI库后才能：
 
 .. code:: bash
+
    $ module load hypre/2.20.0-gcc-9.2.0-openblas-openmpi gcc/9.2.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0 
    $ make
 
