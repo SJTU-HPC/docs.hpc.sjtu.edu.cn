@@ -22,11 +22,13 @@ AlphaFold2 在 AI 平台的部署
 
 .. code:: bash
 
-    mkdir -p alphafold
-    mkdir -p alphafold/img
-    mkdir -p alphafold/all
-    mkdir -p alphafold/all/data
-    mkdir -p alphafold/all/output
+	mkdir -p $HOME/alphafold
+	mkdir -p $HOME/alphafold/img
+	mkdir -p $HOME/alphafold/all
+	mkdir -p $HOME/alphafold/all/data
+	mkdir -p $HOME/alphafold/all/output
+	ln -s /scratch/share/AlphaFold/data/* $HOME/alphafold/all/data/
+	ln -s /scratch/share/AlphaFold/alphafold.sif $HOME/alphafold/img/
 
 准备二：run.sh 文件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
