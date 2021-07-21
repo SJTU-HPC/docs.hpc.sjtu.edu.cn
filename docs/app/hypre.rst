@@ -31,28 +31,69 @@ Hypre是运行在多核处理器上，借助目前性能较好的预处理矩阵
 在CPU平台上链接Hypre库
 ~~~~~~~~~~~~~~~~~~~~~~
 
-在这个示例中我们使用 ``hypre/2.18.0-gcc-9.2.0-openblas-openmpi`` 模块，这个模块使用GCC 9.2.0构建，还需要载入匹配的编译器和MPI库后才能：
+在这个示例中我们使用 ``hypre/2.18.0-gcc-9.2.0-openblas-openmpi`` 模块，这个模块使用GCC 9.2.0构建，还需要载入匹配的编译器和MPI库：
 
 .. code:: bash
 
    $ module load hypre/2.20.0-gcc-9.2.0-openblas-openmpi gcc/9.2.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0 
    $ make
 
-
-在Hypre库的源代码文件夹中，有一个 ``examples`` 文件夹存放了Hypre库的测试文件。
-
-进入该文件夹：
-
-.. code:: bash
-   
-   $ cd ~/hypre/src/examples
-   $ make
-
-该文件夹下将生成多个可执行测试文件。使用 ``mpirun`` 命令运行这些文件，对Hypre库进行测试：
+示例代码中 ``Makefile`` 的Hypre头文件路径由变量 ``CINCLUDES`` 控制，其默认值为上一层目录 ``../hypre/include`` ，这在实际部署中通常是一个无效的目录，需要修正。
+我们在编译时可修改Makefile，或者在调用 ``make`` 命令时，制定正确的头文件包含参数。
+使用其他构建系统时，也需要注意是否正确制定了头文件路径和库路径。
 
 .. code:: bash
 
-   $ mpirun -n 2 --mca mpi_cuda_support 0 ./ex1
+   $ export HYPRE_INCLUDE_PATH=`env | grep hypre | grep '^C_INCLUDE_PATH.*' | cut -d '=' -f 2 | cut -b2- | tr ':' '\n' | grep hypre`
+   $ echo $HYPRE_INCLUDE_PATH
+   /lustre/opt/cascadelake/linux-centos7-cascadelake/gcc-9.2.0/hypre-2.20.0-buqvtl35ccqjeafjiivykyloof7hzhnw/include
+
+编译Hypre示例程序：
+
+.. code:: bash
+
+   $ make CINCLUDES="-I${HYPRE_INCLUDE_PATH}"
+
+查看编译结果：
+
+.. code:: bash
+
+   $ ldd ex1 | grep -i 'mpi\|hypre'
+        libHYPRE-2.20.0.so => /lustre/opt/cascadelake/linux-centos7-cascadelake/gcc-9.2.0/hypre-2.20.0-buqvtl35ccqjeafjiivykyloof7hzhnw/lib/libHYPRE-2.20.0.so (0x00002b0cd6b3a000)
+        libmpi.so.40 => /lustre/opt/cascadelake/linux-centos7-cascadelake/gcc-9.2.0/openmpi-3.1.5-gtpczurejutqns55psqujgakh7vpzqot/lib/libmpi.so.40 (0x00002b0cd77a8000)
+        libopen-rte.so.40 => /lustre/opt/cascadelake/linux-centos7-cascadelake/gcc-9.2.0/openmpi-3.1.5-gtpczurejutqns55psqujgakh7vpzqot/lib/libopen-rte.so.40 (0x00002b0cd94f8000)
+        libopen-pal.so.40 => /lustre/opt/cascadelake/linux-centos7-cascadelake/gcc-9.2.0/openmpi-3.1.5-gtpczurejutqns55psqujgakh7vpzqot/lib/libopen-pal.so.40 (0x00002b0cd982d000)
+
+
+提交依赖Hypre库的作业
+---------------------
+
+准备作业脚本 ``samplehypre.slurm`` ，内容如下。
+这个作业使用了平台预编译的Hypre，若使用自编译Hypre，需要手动设置库路径。
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=samplehypre    # 作业名
+   #SBATCH --partition=cpu           # cpu队列
+   #SBATCH --ntasks-per-node=40      # 每节点核数
+   #SBATCH -n 40                     # 作业核心数40(一个节点)
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   ulimit -s unlimited
+   ulimit -l unlimited
+
+   module load hypre/2.20.0-gcc-9.2.0-openblas-openmpi gcc/9.2.0-gcc-4.8.5 openmpi/3.1.5-gcc-9.2.0 
+
+   sun --mpi=pmi2 ./ex1
+
+使用 ``sbatch`` 提交作业：
+
+.. code:: bash
+
+   $ sbatch samplehypre.slurm
 
 编译Hypre库
 -----------
