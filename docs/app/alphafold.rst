@@ -41,10 +41,10 @@ mkdir -p alphafold/all/output
 ln -s /lustre/opt/contribute/cascadelake/AlphaFold/alphafold/scripts/data/* alphafold/all/data
 ln -s /lustre/share/singularity/aarch64/alphafold/alphafold.sif alphafold/img/
 
-准备二：``run.sh`` 文件
+准备二：run.sh 文件
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-参考下方内容，编写和修改运行所需的 ``run.sh`` 文件：
+参考下方内容，编写和修改运行所需的 run.sh 文件：
 
 .. code:: bash
 
@@ -80,7 +80,7 @@ python run_alphafold.py \
 
 salloc --ntasks-per-node=1 --job-name=alpha-session -p dgx2 --gres=gpu:1 -N 1
 
-待屏幕显示分配的 DGX-2 节点后（如信息 ``salloc: Nodes vol01 are ready for job`` ），使用 ``ssh`` 登录到该节点：
+待屏幕显示分配的 DGX-2 节点后（如信息 salloc: Nodes vol01 are ready for job ），使用 ssh 登录到该节点：
 
 .. code:: bash
 
@@ -101,9 +101,9 @@ singularity exec --nv -B $AlphaFold_PATH/all:/mnt $IMAGE_PATH /mnt/run.sh
 方式二：sbatch 脚本提交模式
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-调试完成后，推荐使用 ``sbatch`` 方式提交作业脚本进行计算。
+调试完成后，推荐使用 sbatch 方式提交作业脚本进行计算。
 
-作业脚本示例（假设作业脚本名为 ``alpha.slurm``）：
+作业脚本示例（假设作业脚本名为 alpha.slurm）：
 
 .. code:: bash
 
