@@ -307,6 +307,7 @@ AI 计算软件
    openblas
    gsl
    abinit
+   alphafold
    amber
    augustus
    basil-anise
