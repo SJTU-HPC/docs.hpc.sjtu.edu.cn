@@ -15,47 +15,12 @@ AlphaFold2 在 AI 平台的部署
 使用前准备
 ---------------------------
 
-准备一：设置环境
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-在自己 ``home`` 下新建一系列文件夹，并将数据和镜像文件建立软链接：
+从集群公共文件夹里复制一份压缩文件到 ``home`` 下（若已存在 ``alphafold`` 的同名文件夹，需先将已存在的文件夹删除或挪走）
 
 .. code:: bash
 
-	mkdir -p $HOME/alphafold
-	mkdir -p $HOME/alphafold/img
-	mkdir -p $HOME/alphafold/all
-	mkdir -p $HOME/alphafold/all/data
-	mkdir -p $HOME/alphafold/all/output
-	ln -s /scratch/share/AlphaFold/data/* $HOME/alphafold/all/data/
-	ln -s /scratch/share/AlphaFold/alphafold.sif $HOME/alphafold/img/
-
-准备二：``run.sh`` 文件
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-AlphaFold 需要 ``run.sh`` 文件。可参考下方内容，新建和调整 ``run.sh`` 文件。
-
-注意，通过 ``fasta_paths`` 参数传入 ``protein`` 的 ``fasta`` 文件，若有多条序列，每个 ``fasta`` 文件需要存放一条序列，文件之间使用逗号分割。
-
-.. code:: bash
-
-    #!/bin/bash
-
-    cd /app/alphafold
-    python run_alphafold.py \
-    --preset=casp14   \
-    --fasta_paths=/mnt/N.fasta  \
-    --max_template_date=2020-05-14   \
-    --output_dir=/mnt/output_here  \
-    --model_names=model_1,model_2,model_3,model_4,model_5  \
-    --data_dir=/mnt/alphafold/scripts/data/ \
-    --uniref90_database_path=/mnt/alphafold/scripts/data/uniref90/uniref90.fasta \
-    --mgnify_database_path=/mnt/alphafold/scripts/data/mgnify/mgy_clusters.fa \
-    --uniclust30_database_path=/mnt/alphafold/scripts/data/uniclust30/uniclust30_2018_08/uniclust30_2018_08 \
-    --bfd_database_path=/mnt/alphafold/scripts/data/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt \
-    --pdb70_database_path=/mnt/alphafold/scripts/data/pdb70/pdb70 \
-    --template_mmcif_dir=/mnt/alphafold/scripts/data/pdb_mmcif/mmcif_files \
-    --obsolete_pdbs_path=/mnt/alphafold/scripts/data/pdb_mmcif/obsolete.dat
+    cp /scratch/share/AlphaFold/alphafold.tar.gz ~
+    tar xzvf alphafold.tar.gz
 
 运行 AlphaFold2
 ---------------------
@@ -65,25 +30,19 @@ AlphaFold 需要 ``run.sh`` 文件。可参考下方内容，新建和调整 ``r
 方式一：交互模式
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-使用下方命令申请 2 张 GPU 卡（含 12 个 CPU）：
+使用下方命令申请 2 张 GPU 卡（含 12 个 CPU），然后 ssh 登录到分配的 GPU 节点：
 
 .. code:: bash
 
     salloc --ntasks-per-node=1 --job-name=alpha-session -p dgx2 --gres=gpu:2 -N 1
+    ssh vol01    # 具体节点号以屏幕显示为准（如信息 ``salloc: Nodes vol01 are ready for job``）
 
-再 ssh 登录到分配的 ``vol`` 开头的 GPU 节点（如信息 ``salloc: Nodes vol01 are ready for job``）：
-
-.. code:: bash
-
-    ssh vol01    # 具体节点号以屏幕显示为准
 
 接下来可在这两张 GPU 卡上进行交互模式的软件测试。在命令行里输入下方内容运行 AlphaFold：
 
 .. code:: bash
 
-    AlphaFold_PATH=$HOME/alphafold
-    IMAGE_PATH=$AlphaFold_PATH/img/alphafold.sif
-    singularity exec --nv -B $AlphaFold_PATH/all:/mnt $IMAGE_PATH /mnt/run.sh
+    ./run.sh
 
 
 
@@ -105,9 +64,7 @@ AlphaFold 需要 ``run.sh`` 文件。可参考下方内容，新建和调整 ``r
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
     
-    AlphaFold_PATH=$HOME/alphafold
-    IMAGE_PATH=$AlphaFold_PATH/img/alphafold.sif
-    singularity exec --nv -B $AlphaFold_PATH/all:/mnt $IMAGE_PATH /mnt/run.sh
+    ./run.sh
 
 
 作业提交命令：
@@ -120,9 +77,13 @@ AlphaFold 需要 ``run.sh`` 文件。可参考下方内容，新建和调整 ``r
 注意事项
 ----------------------
 
-调试时，推荐使用交互模式。调试全部结束后，请退出交互模式的计算节点，避免持续计费。可用 ``squeue`` 或 ``sacct`` 命令核查交互模式的资源使用情况。
+* 根据需要，修改 ``run.sh`` 文件中的 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件和输出文件夹。
 
-欢迎邮件联系我们，反馈软件使用情况，或提出宝贵建议。
+* 调试时，推荐使用交互模式。调试全部结束后，请退出交互模式的计算节点，避免持续计费。可用 ``squeue`` 或 ``sacct`` 命令核查交互模式的资源使用情况。
+
+* 欢迎邮件联系我们，反馈软件使用情况，或提出宝贵建议。
+
+* 我们将在近期部署 RoseTTAFold，敬请关注。
 
 参考资料
 ----------------
