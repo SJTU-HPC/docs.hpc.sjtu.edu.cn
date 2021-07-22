@@ -30,15 +30,15 @@ AlphaFold2 在 AI 平台的部署
 方式一：交互模式
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-使用下方命令申请 2 张 GPU 卡（含 12 个 CPU），然后 ssh 登录到分配的 GPU 节点：
+使用下方命令申请 1 张 GPU 卡（含 6 个 CPU），然后 ssh 登录到分配的 GPU 节点：
 
 .. code:: bash
 
-    salloc --ntasks-per-node=1 --job-name=alpha-session -p dgx2 --gres=gpu:2 -N 1
+    salloc --ntasks-per-node=1 --job-name=alpha-session -p dgx2 --gres=gpu:1 -N 1
     ssh vol01    # 具体节点号以屏幕显示为准（如信息 ``salloc: Nodes vol01 are ready for job``）
 
 
-接下来可在这两张 GPU 卡上进行交互模式的软件测试。在命令行里输入下方内容运行 AlphaFold：
+接下来可在这张 GPU 卡上进行交互模式的软件测试。在命令行里输入下方内容运行 AlphaFold：
 
 .. code:: bash
 
@@ -59,7 +59,7 @@ AlphaFold2 在 AI 平台的部署
     #SBATCH --partition=dgx2
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --gres=gpu:2
+    #SBATCH --gres=gpu:1
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
     
