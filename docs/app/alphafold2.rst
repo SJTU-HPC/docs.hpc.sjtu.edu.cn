@@ -45,7 +45,6 @@ AlphaFold2 在 AI 平台的部署
     ./run.sh
 
 
-
 方式二：sbatch 脚本提交模式
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -78,6 +77,10 @@ AlphaFold2 在 AI 平台的部署
 ----------------------
 
 * 根据需要，修改 ``run.sh`` 文件中的 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件和输出文件夹。
+
+* 若遇到 ``permission denied`` 问题，请输入 ``chmod +x run.sh`` 修改成可执行权限。
+
+* 若整个文件夹不放在默认的 ``home`` 而放在其他路径里，可相应修改 ``config.sh`` 的 ``AlphaFold_PATH``，例如改成 ``AlphaFold_PATH=/lustre/home/acct-XXX/XXX/YYY/alphafold``。 
 
 * 调试时，推荐使用交互模式。调试全部结束后，请退出交互模式的计算节点，避免持续计费。可用 ``squeue`` 或 ``sacct`` 命令核查交互模式的资源使用情况。
 
