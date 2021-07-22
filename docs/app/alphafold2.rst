@@ -21,6 +21,9 @@ AlphaFold2 在 AI 平台的部署
 
     cp /scratch/share/AlphaFold/alphafold.tar.gz ~
     tar xzvf alphafold.tar.gz
+    cd alphafold/all
+
+根据需要，修改 ``run.sh`` 文件中的 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件和输出文件夹。
 
 运行 AlphaFold2
 ---------------------
@@ -75,8 +78,6 @@ AlphaFold2 在 AI 平台的部署
 
 注意事项
 ----------------------
-
-* 根据需要，修改 ``run.sh`` 文件中的 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件和输出文件夹。
 
 * 若遇到 ``permission denied`` 问题，请输入 ``chmod +x run.sh`` 修改成可执行权限。
 
