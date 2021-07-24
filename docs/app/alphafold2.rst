@@ -19,8 +19,7 @@ AlphaFold2 在 AI 平台的部署
 
 .. code:: bash
 
-    cp /scratch/share/AlphaFold/alphafold.tar.gz ~
-    tar xzvf alphafold.tar.gz
+    cp -r /scratch/share/AlphaFold/alphafold ~
     cd alphafold/all
 
 根据需要，修改 ``run.sh`` 文件中的 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件和输出文件夹。
