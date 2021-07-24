@@ -170,10 +170,10 @@ ARM版Gromacs
    module use /lustre/share/singularity/aarch64
    module load gromacs/2021
 
-   mpirun -n $SLURM_NTASKS gmx_mpi mdrun -s benchMEM.tpr -nsteps 10000 -resethway
+   srun --mpi=pmi2 gmx_mpi mdrun -s benchMEM.tpr -nsteps 10000 -resethway
 
 
-使用如下指令提交：
+在 `ARM 节点 <../login/index.html#arm>`__\ 上使用如下指令提交（若在 π2.0 登录节点上提交将出错）：
 
 .. code:: bash
 
