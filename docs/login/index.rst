@@ -259,19 +259,19 @@ ARM平台简介
 ARM节点登录方式
 ---------------
 
--  使用 \ ``ssh``\ 登录命令
+-  使用 \ ``ssh``\ 登录命令（限校内 IP，或使用 SJTU VPN）
 
 .. code:: bash
 
-   $ ssh -p 18022 username@202.120.58.248
+   $ ssh username@armlogin.hpc.sjtu.edu.cn
 
--  使用 \ ``srun``\ 登录命令
+-  使用 \ ``srun``\ 登录命令（由 π2.0 集群的登陆节点登陆到 ARM 计算节点）
 
 .. code:: bash
 
    $ srun -p arm128c256g -n 4 --pty /bin/bash
 
--  或使用 \ ``salloc``\ 命令登录
+-  或使用 \ ``salloc``\ 命令登录（由 π2.0 集群的登陆节点登陆到 ARM 计算节点）
 
 .. code:: bash
 
