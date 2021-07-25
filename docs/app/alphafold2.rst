@@ -25,7 +25,6 @@ AlphaFold2 版本
     >T1024 LmrP, , 408 residues|
     MKEFWNLDKNLQLRLGIVFLGAFSYGTVFSSMTIYYNQYLGSAITGILLALSAVATFVAGILAGFFADRNGRKPVMVFGTIIQLLGAALAIASNLPGHVNPWSTFIAFLLISFGYNFVITAGNAMIIDASNAENRKVVFMLDYWAQNLSVILGAALGAWLFRPAFEALLVILLLTVLVSFFLTTFVMTETFKPTVKVDEKAENIFQAYKTVLQDKTYMIFMGANIATTFIIMQFDNFLPVHLSNSFKTITFWGFEIYGQRMLTIYLILACVLVVLLMTTLNRLTKDWSHQKGFIWGSLFMAIGMIFSFLTTTFTPIFIAGIVYTLGEIVYTPSVQTLGADLMNPEKIGSYNGVAAIKMPIASILAGLLVSISPMIKAIGVSLVLALTEVLAIILVLVAVNRHQKTKLN
 
-
 运行 AlphaFold2
 ---------------------
 
@@ -54,12 +53,13 @@ AlphaFold2 版本
 
 .. code:: bash
 
-    run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/T1024.fasta --max_template_date=2020-05-14  -output_dir=/mnt/output
+    run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/T1024.fasta --max_template_date=2020-05-14 --output_dir=/mnt/output
 
+命令说明：
 
-根据需要，修改 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件，及结果文件夹。
+* 可修改 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件，及结果文件夹。``/mnt`` 为容器封装路径，保留即可。
 
-$PWD 指当前路径，也可以用绝对路径指定 AlphaFold 的主文件夹，以便从其他路径运行上述命令。 
+* $PWD 指当前路径，也可以用绝对路径指定 AlphaFold 的主文件夹，以便从其他路径运行上述命令。 
 
 
 方式二：sbatch 脚本提交模式
@@ -82,7 +82,7 @@ $PWD 指当前路径，也可以用绝对路径指定 AlphaFold 的主文件夹�
     
     module load alphafold
 
-    run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/T1024.fasta --max_template_date=2020-05-14  -output_dir=/mnt/output
+    run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/T1024.fasta --max_template_date=2020-05-14 --output_dir=/mnt/output
 
 
 作业提交命令：
