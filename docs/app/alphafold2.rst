@@ -59,7 +59,7 @@ AlphaFold2 版本
 
 根据需要，修改 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件，及结果文件夹。
 
-``$PWD``指 AlphaFold 主文件夹，可用绝对路径代替，以便从其他路径运行上述命令。 
+$PWD 指当前路径，也可以用绝对路径指定 AlphaFold 的主文件夹，以便从其他路径运行上述命令。 
 
 
 方式二：sbatch 脚本提交模式
