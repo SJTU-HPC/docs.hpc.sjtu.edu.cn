@@ -3,26 +3,28 @@ AlphaFold2
 
 AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高精确度的蛋白质 3D 模型。以往花费几周时间预测的蛋白质结构，AlphaFold2 在几小时内就能完成。
 
-AlphaFold2 在 AI 平台的部署
+AlphaFold2 版本
 ----------------------------------------
 
-交大 AI 平台部署了 AlphaFold2 镜像，镜像与参考数据路径如下：
+交大 AI 平台部署了 AlphaFold2 的 module，更新日期：2021 年 7 月 25 日
 
-* AlphaFold2 镜像：``/scratch/share/AlphaFold/alphafold.sif``
-* 参考数据库（2.2 TB）： ``/scratch/share/AlphaFold/data``
+.. code:: bash
+
+    alphafold/2-python-3.8
 
 
 使用前准备
 ---------------------------
 
-从集群公共文件夹里复制一份压缩文件到 ``home`` 下（若已存在 ``alphafold`` 的同名文件夹，需先将已存在的文件夹删除或挪走）
+* 新建文件夹，如 ``alphafold``。
+
+* 在文件夹里放置一个 ``fasta`` 文件。例如 ``T1024.fasta`` 文件（内容如下）：
 
 .. code:: bash
 
-    cp -r /scratch/share/AlphaFold/alphafold ~
-    cd alphafold/all
+    >T1024 LmrP, , 408 residues|
+    MKEFWNLDKNLQLRLGIVFLGAFSYGTVFSSMTIYYNQYLGSAITGILLALSAVATFVAGILAGFFADRNGRKPVMVFGTIIQLLGAALAIASNLPGHVNPWSTFIAFLLISFGYNFVITAGNAMIIDASNAENRKVVFMLDYWAQNLSVILGAALGAWLFRPAFEALLVILLLTVLVSFFLTTFVMTETFKPTVKVDEKAENIFQAYKTVLQDKTYMIFMGANIATTFIIMQFDNFLPVHLSNSFKTITFWGFEIYGQRMLTIYLILACVLVVLLMTTLNRLTKDWSHQKGFIWGSLFMAIGMIFSFLTTTFTPIFIAGIVYTLGEIVYTPSVQTLGADLMNPEKIGSYNGVAAIKMPIASILAGLLVSISPMIKAIGVSLVLALTEVLAIILVLVAVNRHQKTKLN
 
-根据需要，修改 ``run.sh`` 文件中的 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件和输出文件夹。
 
 运行 AlphaFold2
 ---------------------
@@ -40,11 +42,24 @@ AlphaFold2 在 AI 平台的部署
     ssh vol01    # 具体节点号以屏幕显示为准（如信息 ``salloc: Nodes vol01 are ready for job``）
 
 
-接下来可在这张 GPU 卡上进行交互模式的软件测试。在命令行里输入下方内容运行 AlphaFold：
+接下来可在这张 GPU 卡上进行交互模式的软件测试。
+
+调用 AlphaFold：
 
 .. code:: bash
 
-    ./run.sh
+    module load alphafold
+
+运行 AlphaFold:
+
+.. code:: bash
+
+    run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/T1024.fasta --max_template_date=2020-05-14  -output_dir=/mnt/output
+
+
+根据需要，修改 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件，及结果文件夹。
+
+``$PWD``指 AlphaFold 主文件夹，可用绝对路径代替，以便从其他路径运行上述命令。 
 
 
 方式二：sbatch 脚本提交模式
@@ -65,7 +80,9 @@ AlphaFold2 在 AI 平台的部署
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
     
-    ./run.sh
+    module load alphafold
+
+    run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/T1024.fasta --max_template_date=2020-05-14  -output_dir=/mnt/output
 
 
 作业提交命令：
@@ -78,15 +95,13 @@ AlphaFold2 在 AI 平台的部署
 注意事项
 ----------------------
 
-* 若遇到 ``permission denied`` 问题，请输入 ``chmod +x run.sh`` 修改成可执行权限。
-
-* 若整个文件夹不放在默认的 ``home`` 而放在其他路径里，可相应修改 ``config.sh`` 的 ``AlphaFold_PATH``，例如改成 ``AlphaFold_PATH=/lustre/home/acct-XXX/XXX/YYY/alphafold``。 
-
 * 调试时，推荐使用交互模式。调试全部结束后，请退出交互模式的计算节点，避免持续计费。可用 ``squeue`` 或 ``sacct`` 命令核查交互模式的资源使用情况。
 
 * 欢迎邮件联系我们，反馈软件使用情况，或提出宝贵建议。
 
-* 我们将在近期部署 RoseTTAFold，敬请关注。
+* 我们将紧随 AlphaFold 官方更新。
+
+* 我们近期也会部署 RoseTTAFold，敬请关注。
 
 参考资料
 ----------------
@@ -94,7 +109,5 @@ AlphaFold2 在 AI 平台的部署
 - AlphaFold GitHub: https://github.com/deepmind/alphafold
 - AlphaFold 主页: https://deepmind.com/research/case-studies/alphafold
 - AlphaFold Nature 论文: https://www.nature.com/articles/s41586-021-03819-2
-
-
 
 
