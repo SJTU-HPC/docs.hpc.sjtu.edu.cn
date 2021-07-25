@@ -45,7 +45,7 @@ AlphaFold2 版本
     
     module load alphafold
 
-    run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/T1024.fasta --max_template_date=2020-05-14 --output_dir=/mnt/output
+    run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/histone_H3.fasta --max_template_date=2020-05-14 --output_dir=/mnt/output
 
 说明：
 
