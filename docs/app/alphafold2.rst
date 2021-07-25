@@ -6,7 +6,7 @@ AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高
 AlphaFold2 版本
 ----------------------------------------
 
-交大 AI 平台部署了 AlphaFold2 的 module，更新日期：2021 年 7 月 25 日
+交大 AI 平台部署了 AlphaFold2 的 module，最新更新日期：2021 年 7 月 25 日
 
 .. code:: bash
 
@@ -30,45 +30,6 @@ AlphaFold2 版本
 运行 AlphaFold2
 ---------------------
 
-选用下方两种方式之一来运行 AlphaFold2。交互模式适合参数调试，sbatch 模式适合正式运行作业。
-
-方式一：交互模式
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-使用下方命令申请 1 张 GPU 卡（含 6 个 CPU），然后 ssh 登录到分配的 GPU 节点：
-
-.. code:: bash
-
-    salloc --ntasks-per-node=1 --job-name=alpha-session -p dgx2 --gres=gpu:1 -N 1
-    ssh vol01    # 具体节点号以屏幕显示为准（如信息 ``salloc: Nodes vol01 are ready for job``）
-
-
-接下来可在这张 GPU 卡上进行交互模式的软件测试。
-
-调用 AlphaFold：
-
-.. code:: bash
-
-    module load alphafold
-
-运行 AlphaFold:
-
-.. code:: bash
-
-    run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/histone_H3.fasta --max_template_date=2020-05-14 --output_dir=/mnt/output
-
-命令说明：
-
-* 可修改 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件，及结果文件夹。``/mnt`` 为容器封装路径，保留即可。
-
-* $PWD 指当前路径，也可以用绝对路径指定 AlphaFold 的主文件夹，以便从其他路径运行上述命令。 
-
-
-方式二：sbatch 脚本提交模式
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-调试完成后，推荐使用 sbatch 方式提交作业脚本进行计算。
-
 作业脚本示例（假设作业脚本名为 ``alpha.slurm``）：
 
 .. code:: bash
@@ -86,6 +47,14 @@ AlphaFold2 版本
 
     run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/T1024.fasta --max_template_date=2020-05-14 --output_dir=/mnt/output
 
+说明：
+
+* 可修改 ``--fasta_paths`` 和 ``--output_dir`` 参量，指定 ``fasta`` 文件，及结果文件夹。``/mnt`` 为容器封装路径，保留即可。
+
+* $PWD 指当前路径，也可以用绝对路径指定 AlphaFold 的主文件夹，以便从其他路径运行上述命令。 
+
+* 由于计算完成后 ``data`` 软链接会被删除，所以一个文件夹里建议最多同时运行一个作业。
+
 
 作业提交命令：
 
@@ -96,8 +65,6 @@ AlphaFold2 版本
 
 注意事项
 ----------------------
-
-* 调试时，推荐使用交互模式。调试全部结束后，请退出交互模式的计算节点，避免持续计费。可用 ``squeue`` 或 ``sacct`` 命令核查交互模式的资源使用情况。
 
 * 欢迎邮件联系我们，反馈软件使用情况，或提出宝贵建议。
 
