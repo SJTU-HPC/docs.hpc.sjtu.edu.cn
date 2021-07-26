@@ -39,7 +39,7 @@ cpu 队列每个节点配有 40核，这里使用了 1 个节点：
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module load bowtie
+   module load bowtie2
 
    bowtie2-build hsa.fa hsa
    bowtie2 -p 6 -3 5 --local -x hsa -1 example_1.fastq -2 example_2.fastq -S test.sam
