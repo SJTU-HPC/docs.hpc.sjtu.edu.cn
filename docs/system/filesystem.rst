@@ -7,6 +7,9 @@ Lustre最常用于高性能计算HPC，世界超级计算机TOP 10中的70%、TO
 
 π 集群中已上线多套 Lustre 文件系统，挂载在计算节点的不同目录：/lustre、/scratch。
 
+数据传输节点（data.hpc.sjtu.edu.cn）还多挂载了一个 /archive。
+
+
 主文件系统
 ==========
 
@@ -129,3 +132,38 @@ Lustre最常用于高性能计算HPC，世界超级计算机TOP 10中的70%、TO
     --CREATE_INDEX true
 
 过程中，会产生许多中间文件和临时文件。因此，可利用 $SCRATCH 作为临时目录，加快分析过程。只需要把脚本中的 ``WORKDIR=$HOME/WES_TEST`` 修改为 ``WORKDIR=$SCRATCH/WES_TEST`` 即可。
+
+
+归档文件系统
+============
+
+在 `data （data.hpc.sjtu.edu.cn）` 节点的目录 `/archive` 下挂载了挂挡存储，共 3P 容量，用来存储用户的不常用数据。
+
+归档文件系统特性
+----------------
+
+归档文件系统主要使用机械硬盘搭建，可提供大容量、高可用的存储供用户使用。搭建过程中，使用 RAID 保障硬盘级别的数据安全，使用 HA（High Availability） 保障服务器级别的高可用。归档文件系统作为主文件系统的一个补充，主要提供给用户存储不常用的数据（冷数据），从而释放主文件系统的存储空间、缓解主文件系统的存储压力。
+
+如何使用归档文件系统
+--------------------
+
+(1) 登录 `data` 节点
+
+.. code::
+
+    # ssh $USER@data.hpc.sjtu.edu.cn
+
+(2) 进入归档文件系统
+
+用户可以在以下路径找到 /archive 提供的个人存储空间: ``/archive/home/acct-xxxx/yyyy``
+
+其中 acct-xxxx 代表计费账号（课题组账号），yyyy 代表个人账号。
+
+为了快捷访问，我们已经为用户设置好环境变量，``cd $ARCHIVE`` 即可进入。
+
+
+(3) 将不常用文件移动到 `$ARCHIVE`
+
+.. code::
+
+    # mv $DATA $ARCHIVE
