@@ -17,7 +17,7 @@ RoseTTAFold 是一个 "三轨" 神经网络（"three-track" neural network），
 .. code:: bash
       
    $ mkdir ~/run_rosettafold   
-   $ cd ~/run_rosettafold                             //存放N.fasta文件的目录
+   $ cd ~/run_rosettafold                             //存放input.fasta文件的目录
    $ mkdir output                                     //程序运行结束后，数据最终的存放目录
    $ ls ~/run_rosettafold/RoseTTAFold/example/output  //临时文件生成目录
 
@@ -38,7 +38,7 @@ RoseTTAFold 是一个 "三轨" 神经网络（"three-track" neural network），
    #SBATCH --gres=gpu:1   
 
    module load rosettafold/1-python-3.8
-   run_pyrosetta ~/run_rosettafold N.fasta output
+   run_pyrosetta ~/run_rosettafold input.fasta output
 
 使用如下指令提交：
 
