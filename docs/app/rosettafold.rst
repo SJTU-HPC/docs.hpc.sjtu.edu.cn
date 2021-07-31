@@ -44,4 +44,4 @@ RoseTTAFold 是一个 "三轨" 神经网络（"three-track" neural network），
 
 .. code:: bash
    
-   $ sbatch gerris.slurm
+   $ sbatch rosettafold.slurm
