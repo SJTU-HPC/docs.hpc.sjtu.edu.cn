@@ -5,9 +5,9 @@ RoseTTAFold
 
 简介
 ----
-RoseTTAFold 是一个 "三轨" 神经网络（"three-track" neural network），这意味着它能同时考虑一维蛋白质中的氨基酸序列模式、二维蛋白质的氨基酸之间如何相互作用以及蛋白质可能出现的三维结构。
+RoseTTAFold 是一个 "三轨" 神经网络（"three-track" neural network），能同时考虑一维蛋白质中的氨基酸序列模式、二维蛋白质的氨基酸之间如何相互作用以及蛋白质可能出现的三维结构。
 
-在这种网络架构中，蛋白质的一维、二维和三维信息之间能够来回流动，互通有无，从而使神经网络能够综合所有信息，共同推理出蛋白质的化学组成部分和其折叠结构之间的关系。
+在这种网络架构中，蛋白质的一维、二维和三维信息之间能够来回流动，互通有无，使神经网络能够综合所有信息，共同推理出蛋白质的化学组成部分和其折叠结构之间的关系。
 
 运行RoseTTAFold的方式
 ---------------------
@@ -17,8 +17,8 @@ RoseTTAFold 是一个 "三轨" 神经网络（"three-track" neural network），
 .. code:: bash
       
    $ mkdir ~/run_rosettafold   
-   $ cd ~/run_rosettafold    //存放N.fasta文件的目录
-   $ mkdir output            //程序运行结束后，数据会拷贝到这个目录
+   $ cd ~/run_rosettafold                             //存放N.fasta文件的目录
+   $ mkdir output                                     //程序运行结束后，数据最终的存放目录
    $ ls ~/run_rosettafold/RoseTTAFold/example/output  //临时文件生成目录
 
 
