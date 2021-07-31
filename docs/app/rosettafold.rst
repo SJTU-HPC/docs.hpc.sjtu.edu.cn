@@ -17,8 +17,9 @@ RoseTTAFold 是一个 "三轨" 神经网络（"three-track" neural network），
 .. code:: bash
       
    $ mkdir ~/run_rosettafold   
-   $ cd ~/run_rosettafold      //存放N.fasta文件的目录
-   $ mkdir output
+   $ cd ~/run_rosettafold    //存放N.fasta文件的目录
+   $ mkdir output            //程序运行结束后，数据会拷贝到这个目录
+   $ ls ~/run_rosettafold/RoseTTAFold/example/output  //临时文件生成目录
 
 
 使用sbatch提交运行脚本(rosettafold.slurm):    
