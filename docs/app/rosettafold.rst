@@ -32,8 +32,10 @@ RoseTTAFold 是一个 "三轨" 神经网络（"three-track" neural network），
    #SBATCH -o %j.out
    #SBATCH -e %j.err
    #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
    #SBATCH --cpus-per-task=6
-   
+   #SBATCH --gres=gpu:1   
+
    module load rosettafold/1-python-3.8
    run_pyrosetta ~/run_rosettafold N.fasta output
 
