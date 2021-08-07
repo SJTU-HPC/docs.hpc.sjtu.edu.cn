@@ -45,6 +45,7 @@ RoseTTAFold 版本
     #SBATCH --gres=gpu:1
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
+    #SBATCH -x vol08
     
     module purge
     module load rosettafold/1-python-3.8
