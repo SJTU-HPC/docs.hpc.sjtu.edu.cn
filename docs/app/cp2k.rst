@@ -15,7 +15,10 @@ molecular, periodic, material, crystal, and biological systems.
 .. code:: bash
 
    $ module av cp2k
-   $ module load cp2k
+   $ module load cp2k/7.1-gcc-9.2.0-openblas-openmpi   # CPU版本
+   $ module load cp2k/6.1-gcc-8.3.0-openblas-openmpi   # GPU版本
+   $ module load cp2k/7.1-gcc-8.3.0-openblas-openmpi   # GPU版本
+
 
 若不指定版本，将采用默认的 module（标记为 D）
 
