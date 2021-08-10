@@ -5,43 +5,36 @@ FSL
 
 简介
 ----
-RoseTTAFold 是一个 "三轨" 神经网络（"three-track" neural network），能同时考虑一维蛋白质中的氨基酸序列模式、二维蛋白质的氨基酸之间如何相互作用以及蛋白质可能出现的三维结构。
+FSL是功能磁共振成像、核磁共振成像和DTI脑成像数据的综合分析工具库。
 
-在这种网络架构中，蛋白质的一维、二维和三维信息之间能够来回流动，互通有无，使神经网络能够综合所有信息，共同推理出蛋白质的化学组成部分和其折叠结构之间的关系。
+运行FSL的方式
+-------------
 
-运行RoseTTAFold的方式
----------------------
-
-构建运行目录：
-
-.. code:: bash
-      
-   $ mkdir ~/run_rosettafold   
-   $ cd ~/run_rosettafold                             //存放input.fasta文件的目录
-   $ mkdir output                                     //程序运行结束后，数据最终的存放目录
-   $ ls ~/run_rosettafold/RoseTTAFold/example/output  //临时文件生成目录
-
-
-使用sbatch提交运行脚本(rosettafold.slurm):    
+使用sbatch提交运行脚本(fsl.slurm):    
 
 .. code:: bash
 
    #!/bin/bash
 
-   #SBATCH -J rosettafold
-   #SBATCH -p dgx2
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
+   #SBATCH --job-name=fsl
+   #SBATCH --partition=cpu    
    #SBATCH -N 1
-   #SBATCH --ntasks-per-node=1
-   #SBATCH --cpus-per-task=6
-   #SBATCH --gres=gpu:1   
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
 
-   module load rosettafold/1-python-3.8
-   run_pyrosetta ~/run_rosettafold input.fasta output
+   module load fsl/6.0-fsl-gcc-4.8.5
+   fsl $PWD run.sh
+
+脚本run.sh示例如下（fsl.slurm、run.sh和数据要在同一目录下）:
+   
+.. code:: bash
+
+   #!/bin/bash
+   eddy_correct DWI.nii.gz DWI_eddy.nii.gz 0
 
 使用如下指令提交：
 
 .. code:: bash
    
-   $ sbatch rosettafold.slurm
+   $ sbatch fsl.slurm
