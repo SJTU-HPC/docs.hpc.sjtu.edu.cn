@@ -3,7 +3,7 @@
 HPC Studio
 ================================
 
-登陆
+登录
 ----
 
 在浏览器中，打开：https://studio.hpc.sjtu.edu.cn

@@ -93,7 +93,7 @@ Lammps.
 
    $ wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
 
-2. 由于登陆节点禁止运行作业和并行编译，请申请计算节点资源用来编译
+2. 由于登录节点禁止运行作业和并行编译，请申请计算节点资源用来编译
    lammps，并在编译结束后退出：
 
 .. code:: bash

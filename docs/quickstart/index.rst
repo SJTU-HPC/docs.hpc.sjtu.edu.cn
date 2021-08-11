@@ -38,9 +38,9 @@ GPU 作业请至 dgx2 队列；
 使用 π 集群需要什么？
 =========================
 
-您只需要一个 π 集群账号，然后在任何一个常见的浏览器上登陆 \ `可视化平台 HPC Studio <../studio/index.html>`__\ ，即可自由使用 π 集群。
+您只需要一个 π 集群账号，然后在任何一个常见的浏览器上登录 \ `可视化平台 HPC Studio <../studio/index.html>`__\ ，即可自由使用 π 集群。
 
-可视化平台 HPC Studio 使得登陆更便捷，无需安装客户端，大大提升使用体验。浏览器包含电脑端和移动端的 Chrome, Firefox, Edge, Safari 等。
+可视化平台 HPC Studio 使得登录更便捷，无需安装客户端，大大提升使用体验。浏览器包含电脑端和移动端的 Chrome, Firefox, Edge, Safari 等。
 
 当然您也可以通过 `SSH 客户端 <../login/ssh.html>`__\ 连接使用 π 集群。
 
@@ -171,7 +171,7 @@ d) 简短版使用手册（Cheat Sheet）：https://hpc.sjtu.edu.cn/Item/docs/Pi
 
 HPC Studio 可视化平台，集成 web shell、文件管理、作业提交、可视化应用等一站式服务。
 
-登陆方法：
+登录方法：
 
 在浏览器中打开：\ `HPC Studio 可视化平台 <https://studio.hpc.sjtu.edu.cn>`__\  
 

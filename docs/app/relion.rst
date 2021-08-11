@@ -53,7 +53,7 @@ Relion 是由 MRC 的 Scheres 在 2012 年发布的针对单颗粒冷冻电镜�
 使用 HPC Studio 启动可视化界面
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-参照\ `可视化平台 <../../login/HpcStudio/>`__\ ，登陆 HPC Studio，在顶栏选择 Relion：
+参照\ `可视化平台 <../../login/HpcStudio/>`__\ ，登录 HPC Studio，在顶栏选择 Relion：
 
 |avater| |image1|
 
