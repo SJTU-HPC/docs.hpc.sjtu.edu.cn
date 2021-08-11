@@ -21,7 +21,7 @@ objects.
 使用 HPC Studio 启动可视化界面
 ------------------------------
 
-参照\ `可视化平台 <../../login/HpcStudio/>`__\ ，登陆 HPC Studio，在顶栏选择 VMD：
+参照\ `可视化平台 <../../login/HpcStudio/>`__\ ，登录 HPC Studio，在顶栏选择 VMD：
 
 |avater| |image1|
 
