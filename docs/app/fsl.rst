@@ -39,7 +39,7 @@ FSL是功能磁共振成像、核磁共振成像和DTI脑成像数据的综合�
    
    $ sbatch fsl.slurm
 
-可视化运行方式(xmanager或者studio运行)
+可视化运行方式(studio运行)
 --------------------------------------
 
 .. code:: bash
