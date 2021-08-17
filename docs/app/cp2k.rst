@@ -27,15 +27,14 @@ MNDO等）和经典力场（AMBER，CHARMM等）。CP2K可以使用NEB或二聚�
 .. code:: bash
 
    $ module av cp2k
-   $ module load cp2k/7.1-gcc-9.2.0-openblas-openmpi   # CPU版本
-   $ module load cp2k/6.1-gcc-8.3.0-openblas-openmpi   # GPU版本
-   $ module load cp2k/7.1-gcc-8.3.0-openblas-openmpi   # GPU版本
+   $ module load cp2k/8.2-gcc-9.2.0-openblas   # CPU版本
+   $ module load cp2k/8.2-gcc-8.3.0-openblas   # GPU版本
 
 
 若不指定版本，将采用默认的 module（标记为 D）
 
-π 集群上的Slurm脚本slurm.test
--------------------------------
+π 集群上CPU版本cp2k示例脚本cp2k_cpu.slurm
+------------------------------------------------
 
 在 cpu 队列上，总共使用 40 核 (n = 40) 
 cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：
@@ -44,27 +43,59 @@ cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：
 
    #!/bin/bash
 
-   #SBATCH -J nechem_test
-   #SBATCH -p cpu
-   #SBATCH -n 40
+   #SBATCH --job-name=cp2k_cpu_test
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
    #SBATCH --ntasks-per-node=40
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
 
-   module load cp2k
-   module load openmpi/3.1.5-gcc-9.2.0
-   module load gcc/9.2.0-gcc-4.8.5
+   module purge
+   module load cp2k/8.2-gcc-9.2.0-openblas 
+   module load openmpi/4.0.5-gcc-9.2.0
 
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun --mpi=pmi2 cp2k.popt -i example.inp
+   INPUT_FILE=H2O-256.inp
+   mpirun --allow-run-as-root -np $SLURM_NTASKS -x OMP_NUM_THREADS=1 cp2k.psmp ${INPUT_FILE}
+
+
+π 集群上GPU版本cp2k示例脚本cp2k_gpu.slurm
+--------------------------------------------
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=cp2k_gpu_test
+   #SBATCH --partition=dgx2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=6
+   #SBATCH --cpus-per-task=1
+   #SBATCH --gres=gpu:1
+
+
+   module purge
+   module load cp2k/8.2-gcc-8.3.0-openblas
+   module load cuda/10.1.243-gcc-8.3.0
+   module load openmpi/4.0.5-gcc-8.3.0
+
+   ulimit -s unlimited
+   ulimit -l unlimited
+
+   INPUT_FILE=H2O-256.inp
+   mpirun --allow-run-as-root -np $SLURM_NTASKS --mca opal_common_ucx_opal_mem_hooks 1 -x OMP_NUM_THREADS=1 cp2k.psmp ${INPUT_FILE}
+
 
 并使用如下指令提交：
 
 .. code:: bash
 
-   $ sbatch slurm.test
+   $ sbatch cp2k_cpu.slurm
+   $ sbatch cp2k_gpu.slurm
 
 
 ARM集群上的cp2k
