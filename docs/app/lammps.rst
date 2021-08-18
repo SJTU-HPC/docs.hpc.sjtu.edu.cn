@@ -290,7 +290,7 @@ ARM版本
 
    module purge
    module load openmpi/4.0.3-gcc-9.3.0
-   module load lammps/20200303-gcc-9.3.0-openblas-openmpi
+   module load lammps/20210310-gcc-9.3.0-openblas-openmpi
 
    mpirun -n $SLURM_NTASKS lmp -in in.eam
 
