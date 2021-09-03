@@ -169,4 +169,6 @@ Lustre最常用于高性能计算HPC，世界超级计算机TOP 10中的70%、TO
 
 .. code::
 
-    # mv $DATA $ARCHIVE
+    # rsync -avh -P --append-verify $DATA $ARCHIVE
+
+推荐使用 rsync 移动数据，详细参数含义可使用 ``man rsync`` 命令查看。
