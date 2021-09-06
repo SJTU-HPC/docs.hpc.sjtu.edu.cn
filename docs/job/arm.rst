@@ -21,7 +21,7 @@ ARM 超算登录
 
 .. code:: bash
 
-	ssh -p 18022 username@202.120.58.248
+	ssh username@armlogin.hpc.sjtu.edu.cn
 	
 * 也可以从 π 2.0 上登录到 ARM 计算节点：
 
