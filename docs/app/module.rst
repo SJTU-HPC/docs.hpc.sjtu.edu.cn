@@ -6,19 +6,6 @@ module 命令
 
 π 集群软件以 module 形式供全局调用。常见的 module 命令如下
 
-======================= ================================
-命令                    功能
-======================= ================================
-module use [PATH]       将[PATH]下的文件添加到模块列表中
-module avail            列出所有模块
-module load [MODULE]    加载[MODULE]
-module unload [MODULE]  卸载[MODULE]
-module whatis [MODULE]  显示有关[MODULE]的基本信息
-module info [MODULE]    显示有关[MODULE]的详细信息
-module display [MODULE] 显示有关[MODULE]的信息
-module help             输出帮助信息
-======================= ================================
-
 ``module load [MODULE]``: 加载模块
 
 ``module avail`` 或 ``module av`` : 列出所有模块
@@ -26,6 +13,8 @@ module help             输出帮助信息
 ``module av intel``: 列出含有 intel 名字的所有模块
 
 ``module list``: 列出所有已加载的模块
+
+``module show [MODULE]``: 列出该模块的信息，如路径、环境变量等
 
 也可以一次加载或卸载多个模块。
 
@@ -37,6 +26,7 @@ module help             输出帮助信息
 如果您喜欢最新的稳定版本，则可以忽略版本号（默认加载带有 D 标识的版本）。
 
 下方两句命令效果一致：
+
 .. code:: bash
 
    $ module load gcc openmpi
