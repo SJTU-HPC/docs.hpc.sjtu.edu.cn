@@ -6,6 +6,8 @@ Tesla V100，深度学习张量计算能力可以达到16PFLOPS；通过搭载NV
 NVSwitch创新技术， GPU间带宽高达 2.4
 TB/s。AI计算平台采用可扩展架构，使得模型的复杂性和规模不受传统架构局限性的限制，从而可以应对众多复杂的人工智能挑战。
 
+AI 计算平台每块 V100 默认配置 6 个 CPU 核心。
+
 本文将向大家介绍DGX-2的使用方法。
 
 如果我们可以提供任何帮助，请随时联系\ `hpc邮箱 <hpc@sjtu.edu.cn>`__\ 。
@@ -16,7 +18,7 @@ DGX-2作业示例
 sbatch提交示例
 ~~~~~~~~~~~~~~
 
-准备作业脚本然后通过\ ``sbatch``\ 提交是Slurm的最常见用法。为了将作业脚本提交给作业系统，SLURM使用
+通过\ ``sbatch``\ 命令提交作业是最推荐的用法。
 
 .. code:: bash
 
@@ -45,7 +47,7 @@ Slurm                     含义
 ========================= ==================
 
 这是一个名为\ ``dgx.slurm``\ 的 **单机单卡**
-作业脚本，该脚本向dgx2队列申请1块GPU，并在作业完成时通知。在此示例作业中执行的为NVIDIA
+作业脚本，该脚本向dgx2队列申请1块GPU（默认配置6个CPU核心），并在作业完成时通知。在此示例作业中执行的为NVIDIA
 Sample中的\ ``cudaTensorCoreGemm``\ 。
 
 .. code:: bash
@@ -104,7 +106,7 @@ srun提交示例
 
 .. code:: bash
 
-   $ srun -n 1 -p dgx2 --gres=gpu:4 hostname
+   $ srun -n 1 -p dgx2 --gres=gpu:2 hostname
    vol01
 
 启动远程主机bash终端。
