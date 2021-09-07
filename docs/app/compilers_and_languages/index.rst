@@ -23,5 +23,6 @@
    perl
    r
    ../../studio/jupyter
+   ../../studio/matlab
    
 
