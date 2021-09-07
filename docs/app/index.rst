@@ -4,16 +4,15 @@
 
 π 集群有许多预建的软件模块，并且数量还在不断增长，欢迎您告诉我们您研究领域中流行的软件。
 
-软件按以下五大类别列出。也可以使用文档页面顶栏的搜索框查找软件。
+软件按以下五大类别列出。可以使用文档页面顶栏的搜索框查找软件。
 
-.. toctree::
-   :maxdepth: 1
 
-   compilers_and_languages/index
-   benchtools/index
-   ai/index
-   engineeringscience/index
-   bioinformatics/index
+1. :doc:`compilers_and_languages/index`
+2. :doc:`benchtools/index`
+3. :doc:`ai/index`
+4. :doc:`engineeringscience/index`
+5. :doc:`bioinformatics/index`
+
 
 
 各类别软件信息如下。
