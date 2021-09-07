@@ -1,4 +1,4 @@
-RStudio使用说明
+RStudio
 ===============
 
 登录HPC Studio平台后，在内置应用中选择RStudio Server，如下图

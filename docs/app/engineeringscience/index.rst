@@ -15,13 +15,12 @@
    gnuplot
    gromacs
    lammps
-   matlab
    nektar
    nwchem
    octave
    openfoam
    ovito
-   paraview
+   ../../studio/paraview
    quantum-espresso
    quickpic
    siesta
