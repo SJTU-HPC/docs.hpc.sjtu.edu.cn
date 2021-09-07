@@ -1,0 +1,90 @@
+************************
+生物信息计算软件
+************************
+
+
+
+.. toctree::
+   :maxdepth: 1
+
+   alphafold2
+   augustus
+   basil-anise
+   batvi
+   bcftools
+   bedtools2
+   bicseq2
+   bismark
+   blast-plus
+   bowtie
+   bowtie2
+   breakdancer
+   bwa
+   cd-hit
+   cdo
+   cdsapi
+   clever
+   cnvnator
+   control-freec
+   crest
+   cufflinks
+   deepgo
+   deepvariant
+   delly
+   deseq2
+   erds
+   fastqc
+   fermikit
+   fsl
+   gatk
+   geant4
+   genomestrip
+   gmap-gsnap
+   graphmap
+   gridss
+   gsutil
+   hisat2
+   hmmer
+   hydra-sv
+   km
+   lumpy-sv
+   lumpy
+   maker
+   manta
+   megahit
+   melt
+   metasv
+   metis
+   mindthegap
+   mobster
+   mrbayes
+   ncbi-rmblastn
+   openslide-python
+   pandas
+   pbsv
+   picard
+   pindel
+   prism
+   r-rgl
+   relion
+   retroseq
+   rna-seqc
+   rosettafold
+   salmon
+   samtools
+   sniffles
+   soapdenovo2
+   sra-tools
+   sratoolkit
+   stringtie
+   strique
+   sv2
+   svaba
+   svdetect
+   tophat
+   vardictjava
+   variationhunter
+   vsearch
+   wgcna
+   wham
+
