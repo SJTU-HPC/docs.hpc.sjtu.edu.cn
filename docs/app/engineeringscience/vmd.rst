@@ -21,7 +21,7 @@ objects.
 使用 HPC Studio 启动可视化界面
 ------------------------------
 
-参照\ `可视化平台 <../../login/HpcStudio/>`__\ ，登录 HPC Studio，在顶栏选择 VMD：
+参照\ `可视化平台 <../../../login/HpcStudio/>`__\ ，登录 HPC Studio，在顶栏选择 VMD：
 
 |avater| |image1|
 
@@ -31,5 +31,5 @@ objects.
 -  `VMD <https://www.ks.uiuc.edu/Research/vmd/>`__
 -  `Singularity文档 <https://sylabs.io/guides/3.5/user-guide/>`__
 
-.. |avater| image:: ../img/relion2.png
-.. |image1| image:: ../img/vmd.png
+.. |avater| image:: ../../img/relion2.png
+.. |image1| image:: ../../img/vmd.png

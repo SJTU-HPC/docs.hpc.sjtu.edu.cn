@@ -16,8 +16,8 @@
 6. :doc:`studio/rdp`
 7. :doc:`job/index`
 8. :doc:`app/index`
-9. :doc:`app/gnu`
-10. :doc:`app/intel`
+9. :doc:`app/compilers_and_languages/gnu`
+10. :doc:`app/compilers_and_languages/intel`
 11. :doc:`faq/index`
 
 .. toctree::
