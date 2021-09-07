@@ -9,11 +9,11 @@
 .. toctree::
    :maxdepth: 1
 
-   compilers_and_languages
-   benchtools
-   ai
-   engineeringscience
-   bioinformatics
+   compilers_and_languages/index
+   benchtools/index
+   ai/index
+   engineeringscience/index
+   bioinformatics/index
 
 
 各类别软件信息如下。
