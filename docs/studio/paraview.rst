@@ -1,4 +1,4 @@
-Paraview的使用说明
+Paraview
 ====================
 ParaView是对二维和三维数据进行分析和可视化的程序，它既是一个应用程序框架，也可以直接使用（Turn-Key）。
 ParaView支持并行，可以运行于单处理器的工作站，也可以运行于分布式存储器的大型计算机。 ParaView用C++编写，基于VTK（Visualization ToolKit）开发，图形用户界面用Qt开发，开源、跨平台。

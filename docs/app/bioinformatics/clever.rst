@@ -5,7 +5,7 @@ CLEVER
 
 简介
 ------------
-暂无
+The clever toolkit (CTK) is a suite of tools to analyze next-generation sequencing data and, in particular, to discover and genotype insertions and deletions from paired-end reads.
 
 
 完整步骤
