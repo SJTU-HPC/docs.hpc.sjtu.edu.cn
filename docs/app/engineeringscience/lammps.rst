@@ -84,37 +84,7 @@ CPU 版本 Slurm 脚本
 Intel加速CPU版本
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-调用spack安装lammps(Intel CPU加速版本）示例脚本（intel_lammps_spack.slurm）:
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=intel_test
-   #SBATCH --partition=cpu
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=40
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   module purge
-   module load intel-parallel-studio/cluster.2020.1-intel-19.1.1
-   module load lammps/20210310-intel-19.0.5-impi
-   
-   INPUT_FILE=in.eam
-   KMP_BLOCKTIME=0 mpirun -n $SLURM_NTASKS lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
-
-
-用下方语句提交作业:
-
-.. code:: bash
-   
-   sbatch intel_lammps_spack.slurm
-
-调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps_singularity.slurm）:
+调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps.slurm）:
 
 .. code:: bash
 
@@ -133,7 +103,7 @@ Intel加速CPU版本
    module purge
    module load oneapi/2021
    export INPUT_FILE=in.eam
-   export IMAGE_PATH=/lustre/share/singularity/modules/lammps/21-user-intel.sif
+   export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
    KMP_BLOCKTIME=0 mpirun -n 40 singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
 
 
@@ -141,7 +111,7 @@ Intel加速CPU版本
 
 .. code:: bash
    
-   sbatch intel_lammps_singularity.slurm
+   sbatch intel_lammps.slurm
 
 
 （进阶）CPU 版本自行编译
