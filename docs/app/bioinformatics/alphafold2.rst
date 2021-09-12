@@ -233,7 +233,7 @@ ColabFold 使用方法
 
 ParallelFold 为我们开发的适用于大规模计算的集群版，支持 CPU 计算与 GPU 计算分离。
 
-ParallelFold 优点是，对于成百上千个蛋白的批量计算，可以先在 cpu 或 small 节点上批量计算完成前面的 MSA 多序列比对，然后再将各蛋白所得的 feature.pkl 文件，交由 GPU 节点计算。这样既节省了 GPU 资源，又能加快计算速度。
+ParallelFold 可将原本全部运行于 GPU 的计算，分成 CPU 和 GPU 两阶段进行。对于成百上千个蛋白的大规模结构预测，先至 cpu 或 small 等 CPU 节点上批量完成前面的 MSA 多序列比对，再将各蛋白计算出来的 ``feature.pkl`` 文件，交由 GPU 节点计算。这样既能节省 GPU 资源，又能加快运算速度。
 
 我们的网站：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
@@ -245,7 +245,7 @@ ParallelFold 安装步骤
 
 * ParallelFold 使用与 AlphaFold 相同的 conda 环境，并依托于 AlphaFold 的主体文件夹。所以需要先按照上方“版本二：conda”的方法安装好 ``af10`` 环境，并复制“版本二：conda”方法安装好的整个 AlphaFold 文件夹，命名为 ``parallelfold``；
 
-* 从 `ParallelFold GitHub <https://github.com/Zuricho/ParallelFold>`__ 下载四个文件放于 ``parallelfold`` 文件夹里：run_alphafold.py run_alphafold.sh run_feature.py run_feature.sh，并将 sh 文件更改权限：
+* 从 `ParallelFold GitHub <https://github.com/Zuricho/ParallelFold>`__ 下载四个文件放于 ``parallelfold`` 文件夹里：``run_alphafold.py``、 ``run_alphafold.sh``、 ``run_feature.py``、 ``run_feature.sh``，并更改两个 ``sh`` 文件的权限：
 
 .. code:: bash
 
@@ -275,7 +275,7 @@ ParallelFold  使用方法
    
 
 
-欢迎邮件联系我们，反馈使用情况，或提出宝贵建议。
+欢迎邮件反馈使用情况，或提出宝贵建议。
 
 
 
@@ -284,6 +284,7 @@ ParallelFold  使用方法
 ----------------
 
 - AlphaFold GitHub: https://github.com/deepmind/alphafold
-- AlphaFold 主页: https://deepmind.com/research/case-studies/alphafold
 - AlphaFold Nature 论文: https://www.nature.com/articles/s41586-021-03819-2
+- ParallelFold GitHub https://github.com/Zuricho/ParallelFold
 - ColabFold GitHub: https://github.com/sokrypton/ColabFold
+- ParaFold 网站：https://parafold.sjtu.edu.cn
