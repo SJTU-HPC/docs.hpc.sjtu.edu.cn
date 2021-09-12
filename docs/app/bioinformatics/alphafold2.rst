@@ -5,6 +5,8 @@ AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高
 
 我们对 AlphaFold 持续优化，可至 ParaFold 网站了解我们的工作：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
+我们将于 9 月 15 日（周三）在闵行校区图书信息楼 9 楼举办《AlphaFold 使用与优化》专题培训，欢迎大家参加：`报名问卷 <https://wj.sjtu.edu.cn/q/KCZDA5VQ>`__ 
+
 AlphaFold2 四大版本
 ----------------------------------------
 
@@ -73,8 +75,7 @@ module 说明
 
 * 资源建议：对于 500AA 以下的蛋白，推荐使用 1 块 GPU 卡；对于更大的序列，推荐使用 2 块 GPU 卡。对于 1400AA 以上的序列，3 块或 4 块卡也无法加快计算，强烈建议使用下方的 conda 安装方法计算。
 
-* 2021年7月本文档的用法依然支持，路径含有 ``/mnt``，主程序名为 ``run_alphafold``（现为 ``run_af2``）：``run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/test.fasta --max_template_date=2021-05-14 --output_dir=/mnt/output``
-
+* 2021年7月本文档的用法依然支持，主程序名为 ``run_alphafold``，路径含有 ``/mnt``。现为 ``run_af2``，路径不再含有 ``/mnt``。
 
 版本二：conda
 ----------------------------------------
