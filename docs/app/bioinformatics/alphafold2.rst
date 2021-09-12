@@ -3,7 +3,7 @@ AlphaFold2
 
 AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高精确度的蛋白质 3D 模型。以往花费几周时间预测的蛋白质结构，AlphaFold2 在几小时内就能完成。
 
-我们对 AlphaFold 的支持和优化工作，可至 ParaFold 网站了解：`https://parafold.sjtu.edu.cn<https://parafold.sjtu.edu.cn/>`_
+我们对 AlphaFold 的支持和优化工作，可至 ParaFold 网站了解：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
 AlphaFold2 三种版本
 ----------------------------------------
@@ -247,9 +247,9 @@ ParallelFold 为我们开发的适用于大规模计算的集群版，支持 CPU
 
 ParallelFold 优点是，对于成百上千个蛋白的批量计算，可以先在 cpu 或 small 节点上批量计算完成前面的 MSA 多序列比对，然后再将各蛋白所得的 feature.pkl 文件，交由 GPU 节点计算。这样既节省了 GPU 资源，又能加快计算速度。
 
-我们的网站：`https://parafold.sjtu.edu.cn<https://parafold.sjtu.edu.cn/>`_
+我们的网站：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
-GitHub：`https://github.com/Zuricho/ParallelFold<https://github.com/Zuricho/ParallelFold>`_
+GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/ParallelFold>`_
 
 
 ParallelFold 安装步骤
@@ -257,7 +257,7 @@ ParallelFold 安装步骤
 
 1. ParallelFold 使用与 AlphaFold 相同的 conda 环境和 AlphaFold 文件；
 
-2. 从 `ParallelFold GitHub<https://github.com/Zuricho/ParallelFold>`_ 里下载四个文件：run_alphafold.py run_alphafold.sh run_feature.py run_feature.sh，并将 sh 文件更改权限：
+2. 从 `ParallelFold GitHub <https://github.com/Zuricho/ParallelFold>`__ 里下载四个文件：run_alphafold.py run_alphafold.sh run_feature.py run_feature.sh，并将 sh 文件更改权限：
 
 .. code:: bash
 
