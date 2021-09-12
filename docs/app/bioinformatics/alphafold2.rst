@@ -10,11 +10,11 @@ AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高
 AlphaFold2 四大版本
 ----------------------------------------
 
-交大 AI 平台提供四大 AlphaFold 版本
+交大 AI 平台提供 AlphaFold 四大版本：
 
-* module 版，最新更新日期：2021 年 9 月 12 日。加载即用，免除安装困难。可满足大部分计算需求；
+* module 版，更新日期：2021 年 9 月 12 日。加载即用，免除安装困难。可满足大部分计算需求；
 
-* conda 版，支持自定义模型、PTM计算、数据集路径、Recycling 次数等，支持实时更新；
+* conda 版，支持自主选择 model 模型、pTM 计算、Amber 优化、本地数据集、修改 Recycling 次数等；
 
 * ColabFold 版，快速计算，含有多种功能，由 Sergey Ovchinnikov 开发。可在交大 DGX-2 上通过 conda 安装使用；
 
@@ -43,7 +43,7 @@ module 使用前准备
 module 运行
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-作业脚本示例（假设作业脚本名为 ``alpha.slurm``）：
+作业脚本示例（假设作业脚本名为 ``sub.slurm``）：
 
 .. code:: bash
 
@@ -61,14 +61,7 @@ module 运行
 
     run_af2  $PWD --preset=casp14  test.fasta  --max_template_date=2021-09-12
 
-module 作业提交
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-采用下方语句提交 AlphaFold 作业
-
-.. code:: bash
-
-    sbatch alpha.slurm    
+然后使用 ``sbatch sub.slurm`` 语句提交作业。  
 
 module 说明
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -173,7 +166,7 @@ AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们�
 conda 使用
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-推荐在 ``$ALPHAFOLD`` 主文件夹下新建 ``input`` ``output`` ``task_file`` 三个文件夹。
+推荐在 ``$ALPHAFOLD`` 主文件夹下新建 ``input``、 ``output``、 ``task_file`` 三个文件夹。
 
 .. code:: bash
 
@@ -250,9 +243,9 @@ GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/Pa
 ParallelFold 安装步骤
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-* ParallelFold 使用与 AlphaFold 相同的 conda 环境和 AlphaFold 文件，所以需要先按照上方“版本二：conda”的方法安装好 ``af10`` 环境；
+* ParallelFold 使用与 AlphaFold 相同的 conda 环境，并依托于 AlphaFold 的主体文件夹。所以需要先按照上方“版本二：conda”的方法安装好 ``af10`` 环境，并复制“版本二：conda”方法安装好的整个 AlphaFold 文件夹，命名为 ``parallelfold``；
 
-* 从 `ParallelFold GitHub <https://github.com/Zuricho/ParallelFold>`__ 里下载四个文件：run_alphafold.py run_alphafold.sh run_feature.py run_feature.sh，并将 sh 文件更改权限：
+* 从 `ParallelFold GitHub <https://github.com/Zuricho/ParallelFold>`__ 下载四个文件放于 ``parallelfold`` 文件夹里：run_alphafold.py run_alphafold.sh run_feature.py run_feature.sh，并将 sh 文件更改权限：
 
 .. code:: bash
 
@@ -262,13 +255,13 @@ ParallelFold 安装步骤
 ParallelFold  使用方法
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-* 若进行完整计算，与正常的 AlphaFold 计算无异：
+* 若进行完整计算，与正常 AlphaFold 使用无异：
 
 .. code:: bash
 
     ./run_alphafold.sh -d /home/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27
 
-* 若只计算 CPU 部分，即批量在集群的 cpu 或 small 节点上计算 MSA：
+* 若只计算 CPU 部分，可使用下方语句，在 cpu, small, dgx2 等任何节点上使用 CPU 计算至 feature.pkl 文件生成，然后程序自动退出。此方法适用于大规模计算：
 
 .. code:: bash
 
