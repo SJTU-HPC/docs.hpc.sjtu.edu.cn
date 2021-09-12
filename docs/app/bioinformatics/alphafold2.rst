@@ -261,11 +261,17 @@ ParallelFold  使用方法
 
     ./run_alphafold.sh -d /home/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27
 
-* 若只计算 CPU 部分，可使用下方语句，在 cpu, small, dgx2 等任何节点上使用 CPU 计算至 feature.pkl 文件生成，然后程序自动退出。此方法适用于大规模计算：
+* 若只计算 CPU 部分，可使用下方语句，在 cpu, small, dgx2 等任何节点上使用 CPU 计算至 ``feature.pkl`` 文件生成，然后程序自动退出。此方法适用于大规模计算：
 
 .. code:: bash
 
     ./run_feature.sh -d /home/share/AlphaFold/data -o output -m model_1 -f input/test3.fasta -t 2021-07-27  
+   
+* ``run_alphafold.sh`` 会自动检测 ``feature.pkl`` 文件是否存在。若存在，就继续后面的 GPU 计算；若不存在，就从头开始算。所以，批量运用 ``run_feature.sh`` 在 CPU 算出 ``feature.pkl`` 文件之后，可再用 ``run_alphafold.sh`` 完成接下来的 GPU 计算。
+
+.. code:: bash
+
+    ./run_alphafold.sh -d /home/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27 
    
 
 
