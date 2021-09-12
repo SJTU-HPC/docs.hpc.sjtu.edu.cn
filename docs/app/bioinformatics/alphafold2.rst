@@ -3,14 +3,14 @@ AlphaFold2
 
 AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高精确度的蛋白质 3D 模型。以往花费几周时间预测的蛋白质结构，AlphaFold2 在几小时内就能完成。
 
-我们对 AlphaFold 的支持和优化工作，可至 ParaFold 网站了解：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
+我们对 AlphaFold 持续优化，可至 ParaFold 网站了解我们的工作：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
-AlphaFold2 三种版本
+AlphaFold2 四大版本
 ----------------------------------------
 
-交大 AI 平台提供四种 AlphaFold 版本
+交大 AI 平台提供四大 AlphaFold 版本
 
-* module 版，最新更新日期：2021 年 9 月 12 日。直接加载使用，免除安装困难。可满足大部分计算需求；
+* module 版，最新更新日期：2021 年 9 月 12 日。加载即用，免除安装困难。可满足大部分计算需求；
 
 * conda 版，支持自定义模型、PTM计算、数据集路径、Recycling 次数等，支持实时更新；
 
@@ -22,14 +22,9 @@ AlphaFold2 三种版本
 版本一：module
 ----------------------------------------
 
-部署了 AlphaFold2，最新更新日期：2021 年 9 月 12 日
+module 版为全局部署的 ``alphafold/2-python-3.8``，更新日期：2021 年 9 月 12 日
 
-.. code:: bash
-
-    alphafold/2-python-3.8
-
-
-使用前准备
+module 使用前准备
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 * 新建文件夹，如 ``alphafold``。
@@ -43,7 +38,7 @@ AlphaFold2 三种版本
     LLIRKLPFQRLVREIAQDFKTDLRFQSSAVMALQEACEAYLVGLFEDTNLCAIHAKRVTI
     MPKDIQLARRIRGERA
 
-运行
+module 运行
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 作业脚本示例（假设作业脚本名为 ``alpha.slurm``）：
@@ -64,15 +59,19 @@ AlphaFold2 三种版本
 
     run_af2  $PWD --preset=casp14  test.fasta  --max_template_date=2021-09-12
 
-作业提交命令：
+module 作业提交
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+采用下方语句提交 AlphaFold 作业
 
 .. code:: bash
 
     sbatch alpha.slurm    
 
-说明：
+module 说明
+~~~~~~~~~~~~~~~~~~~~~~~~
 
-* $PWD 指当前路径，也可以用绝对路径指定 AlphaFold 的主文件夹，以便从其他路径运行上述命令。 
+* 资源建议：对于 500AA 以下的蛋白，推荐使用 1 块 GPU 卡；对于更大的序列，推荐使用 2 块 GPU 卡。对于 1400AA 以上的序列，3 块或 4 块卡也无法加快计算，强烈建议使用下方的 conda 安装方法计算。
 
 * 2021年7月本文档的用法依然支持，路径含有 ``/mnt``，主程序名为 ``run_alphafold``（现为 ``run_af2``）：``run_alphafold $PWD --preset=casp14 --fasta_paths=/mnt/test.fasta --max_template_date=2021-05-14 --output_dir=/mnt/output``
 
@@ -87,7 +86,7 @@ conda 版的 AlphaFold 安装较为复杂，建议对 conda 较为熟悉的用�
 conda 安装步骤
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-AlphaFold 支持 cuda 10 和 11，由于 vol01-07 为 cuda 10（仅 vol08 为 cuda 11），所以接下来我们以 cuda 10 为例介绍安装。
+AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们以 cuda 10 为例介绍安装。
 
 1. 下载官方 AlphaFold
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -96,7 +95,7 @@ AlphaFold 支持 cuda 10 和 11，由于 vol01-07 为 cuda 10（仅 vol08 为 cu
 
     git clone https://github.com/deepmind/alphafold.git
 
-登陆节点可以使用 git clone https，计算节点不支持。也可先将 GitHub zip 文件下载至本地，再上传至集群。
+由于 git 访问不太稳定，推荐先将 GitHub zip 文件下载至本地，再上传至集群。
 
 然后下载 ``stereo_chemical_props.txt`` 文件，放至 ``$ALPHAFOLD/alphafold/common`` 文件夹：
 
@@ -105,7 +104,7 @@ AlphaFold 支持 cuda 10 和 11，由于 vol01-07 为 cuda 10（仅 vol08 为 cu
     wget https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
     mv stereo_chemical_props.txt $ALPHAFOLD/alphafold/common
 
-1. 申请 GPU 计算节点
+2. 申请 GPU 计算节点
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
@@ -117,7 +116,7 @@ AlphaFold 支持 cuda 10 和 11，由于 vol01-07 为 cuda 10（仅 vol08 为 cu
 
 ``ssh vol0X`` 登陆分配的 DGX-2 节点，注意用屏幕上显示的 vol 具体数字替换 ``0X`` 
 
-2. 创建 conda 环境
+3. 创建 conda 环境
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
@@ -130,7 +129,7 @@ AlphaFold 支持 cuda 10 和 11，由于 vol01-07 为 cuda 10（仅 vol08 为 cu
 
     source activate af10
 
-3. 安装依赖软件
+4. 安装依赖软件
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
@@ -148,7 +147,7 @@ AlphaFold 支持 cuda 10 和 11，由于 vol01-07 为 cuda 10（仅 vol08 为 cu
 
 注意，
 
-* conda install 系列全部完成后再使用 pip install，避免 pip 之后再 conda；
+* conda install 系列全部完成后再使用 pip install，避免在 pip install 后再使用 conda install；
   
 * 各软件版本敏感，如 TensorFlow 不可用 2.5、jaxlib 必须用 0.1.69。请尽量按上方推荐安装；
 
@@ -160,7 +159,7 @@ AlphaFold 支持 cuda 10 和 11，由于 vol01-07 为 cuda 10（仅 vol08 为 cu
     >>> import tensorflow as tf; print(tf.config.list_physical_devices("GPU"))
     >>> import jax; print(jax.devices())
 
-4. 一个补丁
+5. 打一个补丁
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
@@ -168,20 +167,20 @@ AlphaFold 支持 cuda 10 和 11，由于 vol01-07 为 cuda 10（仅 vol08 为 cu
     cd ~/.conda/envs/af10/lib/python3.8/site-packages/
     patch -p0 < $ALPHAFOLD/alphafold/docker/openmm.patch 
 
-``$ALPHAFOLD`` 替换成步骤 0 里下载 AlphaFold 的路径，确保 patch 语句里能找到 ``openmm.patch`` 文件
-
 至此，conda 安装结束。
 
 conda 使用
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-为了便于文件管理，推荐在 ``$ALPHAFOLD`` 主文件夹下新建 ``input`` ``output`` ``task_file`` 三个文件夹。然后将 fasta 文件放至 ``input`` 文件夹。
+推荐在 ``$ALPHAFOLD`` 主文件夹下新建 ``input`` ``output`` ``task_file`` 三个文件夹。
 
 .. code:: bash
 
     mkdir input output task_file
 
-作业提交脚本如下：
+然后将 fasta 文件放至 ``input`` 文件夹。
+
+新建一个 slurm 作业脚本，内容如下，命名为 ``sub.slurm``：
 
 .. code:: bash
 
@@ -205,26 +204,25 @@ conda 使用
     -t 2021-09-12 \
     -f input/test.fasta
 
+然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
 版本三：ColabFold
 ----------------------------------------
 
-ColabFold 为 Sergey Ovchinnikov 等人开发的适用于 Google Colab 的 AlphaFold 版本，使用 MMseqs2 替代 Jackhmmer，且不使用模版。
-
-ColaFold 计算迅速，短序列五六分钟即可算完。
+ColabFold 为 Sergey Ovchinnikov 等人开发的适用于 Google Colab 的 AlphaFold 版本，使用 MMseqs2 替代 Jackhmmer，且不使用模版。ColaFold 计算迅速，短序列五六分钟即可算完。
 
 ColabFold 安装步骤
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. ColabFold 使用与 AlphaFold 相同的 conda 环境，所以需要先按照上方“版本二：conda”的方法安装好 ``af10`` 环境；
+* ColabFold 使用与 AlphaFold 相同的 conda 环境，所以需要先按照上方“版本二：conda”的方法安装好 ``af10`` 环境；
 
-2. 在 ``af10`` 环境里再安装下方四个软件：
+* 在 ``af10`` 环境里再安装下方四个软件：
 
 .. code:: bash
 
     pip install jupyter matplotlib py3Dmol tqdm
 
-3. 将所需的 ColabFold 文件夹从集群 ``scratch`` 复制到本地：
+* 将所需的 ColabFold 文件夹从集群 ``scratch`` 复制到本地：
 
 .. code:: bash
 
@@ -233,11 +231,7 @@ ColabFold 安装步骤
 ColabFold 使用方法
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-修改 ``runner.py`` 第 153 行的 fasta 序列，然后提交作业：
-
-.. code:: bash
-
-    sbatch sub.slurm
+修改 ``runner.py`` 第 153 行的 fasta 序列，然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
     
 版本四：ParallelFold
@@ -255,9 +249,9 @@ GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/Pa
 ParallelFold 安装步骤
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. ParallelFold 使用与 AlphaFold 相同的 conda 环境和 AlphaFold 文件；
+* ParallelFold 使用与 AlphaFold 相同的 conda 环境和 AlphaFold 文件，所以需要先按照上方“版本二：conda”的方法安装好 ``af10`` 环境；
 
-2. 从 `ParallelFold GitHub <https://github.com/Zuricho/ParallelFold>`__ 里下载四个文件：run_alphafold.py run_alphafold.sh run_feature.py run_feature.sh，并将 sh 文件更改权限：
+* 从 `ParallelFold GitHub <https://github.com/Zuricho/ParallelFold>`__ 里下载四个文件：run_alphafold.py run_alphafold.sh run_feature.py run_feature.sh，并将 sh 文件更改权限：
 
 .. code:: bash
 
@@ -267,13 +261,13 @@ ParallelFold 安装步骤
 ParallelFold  使用方法
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. 若进行完整计算，与正常的 AlphaFold 计算无异：
+* 若进行完整计算，与正常的 AlphaFold 计算无异：
 
 .. code:: bash
 
     ./run_alphafold.sh -d /home/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27
 
-2. 若只计算 CPU 部分，即批量在集群的 cpu 或 small 节点上计算 MSA：
+* 若只计算 CPU 部分，即批量在集群的 cpu 或 small 节点上计算 MSA：
 
 .. code:: bash
 
