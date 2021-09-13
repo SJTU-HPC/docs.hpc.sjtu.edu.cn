@@ -82,8 +82,8 @@ conda 安装步骤
 
 AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们以 cuda 10 为例介绍安装。
 
-1. 下载 AlphaFold 所需文件
-^^^^^^^^^^^^^^^^^^^^^^^^
+1. 下载 AlphaFold 文件
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 首先，下载 AlphaFold GitHub 官方文件
 .. code:: bash
