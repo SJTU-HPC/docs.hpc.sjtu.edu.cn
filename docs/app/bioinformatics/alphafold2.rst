@@ -73,7 +73,7 @@ module 说明
 版本二：conda
 ----------------------------------------
 
-conda 方法更为灵活，支持自定义修改，如选取计算 5 CASP14 models 和 5 pTM models 的全部或不放、修改 Recycling 次数、选择是否 Amber 优化、设定 data 数据集位置等。
+conda 方法更为灵活，支持自定义，如选取计算 5 CASP14 models 和 5 pTM models 的全部或部分、修改 Recycling 次数、选择是否 Amber 优化、设定 data 数据集位置等。
 
 推荐使用“conda 安装方法一”，通过 ``conda clone`` 克隆出一个 AlphaFold 环境 ``af10``。该环境不仅适用于 AlphaFold，也适用于 ColabFold 和 ParallelFold，安装后可以在文件夹里直接使用。
 
