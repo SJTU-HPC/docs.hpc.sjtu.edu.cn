@@ -228,7 +228,7 @@ conda 安装方法二（推荐使用）
 
     cp -r /scratch/share/AlphaFold/conda_AlphaFold/ $PWD
 
-3. 进入该文件夹，解压两文件夹
+3. 进入该文件夹，解压两文件
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
@@ -243,6 +243,9 @@ conda 安装方法二（推荐使用）
 
     mv  afsue10 ~/.conda/envs
     rm -rf ~/.conda/envs/af10
+
+    module purge
+    module load miniconda3
     conda create -n af10 --clone afsue10
 
 5. 补丁 openmm.patch
