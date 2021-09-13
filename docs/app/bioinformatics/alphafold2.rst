@@ -75,9 +75,9 @@ module 说明
 
 conda 方法更为灵活，支持自定义修改，如选取计算 5 CASP14 models 和 5 pTM models 的全部或不放、修改 Recycling 次数、选择是否 Amber 优化、设定 data 数据集位置等。
 
-conda 版的 AlphaFold 安装较为复杂，建议对 conda 较为熟悉的用户尝试。如有问题，欢迎邮件联系我们。
+conda 版的 AlphaFold 安装较为复杂，推荐使用下方的“conda 安装方法二”，即直接使用 ``conda clone`` 克隆出一个 AlphaFold 环境 ``af10``。如有问题，欢迎邮件联系我们。
 
-conda 安装步骤
+conda 安装方法一
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们以 cuda 10 为例介绍安装。
@@ -208,6 +208,55 @@ conda 使用
     -f input/test.fasta
 
 然后使用 ``sbatch sub.slurm`` 语句提交作业。
+
+conda 安装方法二（推荐使用）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+由于 conda 安装依赖众多，安装有难度。我们提供第二种安装方法：conda clone
+
+1. 申请 ``small`` 交互模式计算节点 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    srun -p small -n 4 --pty /bin/bash
+
+2. 从 ``scratch`` 复制一个文件夹过来
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    cp -r /scratch/share/AlphaFold/conda_AlphaFold/ $PWD
+
+3. 进入该文件夹，解压两文件夹
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    tar xzvf hpc_conda.tar.gz
+    tar xzvf afsue10.tar.gz
+
+4. conda 克隆出一个新的 af10
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    mv  afsue10 ~/.conda/envs
+    rm -rf ~/.conda/envs/af10
+    conda create -n af10 --clone afsue10
+
+5. 补丁 openmm.patch
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    cd ~/.conda/envs/af10/lib/python3.8/site-packages/
+    patch -p0 < conda_AlphaFold/colabfold/docker/openmm.patch
+
+至此，适用于 AlphaFold & ColabFold & ParallelFold 的 af10 环境创建好了。
+
+可以直接在 hpc_conda 文件夹里使用。作业提交请使用文件夹下里的 slurm 脚本文件
+
 
 版本三：ColabFold
 ----------------------------------------
