@@ -75,10 +75,65 @@ module 说明
 
 conda 方法更为灵活，支持自定义修改，如选取计算 5 CASP14 models 和 5 pTM models 的全部或不放、修改 Recycling 次数、选择是否 Amber 优化、设定 data 数据集位置等。
 
-conda 版的 AlphaFold 安装较为复杂，推荐使用下方的“conda 安装方法二”，即直接使用 ``conda clone`` 克隆出一个 AlphaFold 环境 ``af10``。如有问题，欢迎邮件联系我们。
+推荐使用“conda 安装方法一”，通过 ``conda clone`` 克隆出一个 AlphaFold 环境 ``af10``。该环境不仅适用于 AlphaFold，也适用于 ColabFold 和 ParallelFold，安装后可以在文件夹里直接使用。
 
-conda 安装方法一
-~~~~~~~~~~~~~~~~~~~~~~~~
+“conda 安装方法二”介绍从头安装 conda 环境，难度较大，感兴趣的师生可以尝试。
+
+大家安装中若有问题，欢迎邮件联系我们。
+
+conda 安装方法一（推荐使用）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. 申请 ``small`` 交互模式计算节点 
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    srun -p small -n 4 --pty /bin/bash
+
+2. 从 ``scratch`` 复制一个文件夹过来
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    cp -r /scratch/share/AlphaFold/conda_AlphaFold/ $PWD
+
+3. 进入该文件夹，解压两文件
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    tar xzvf hpc_conda.tar.gz
+    tar xzvf afsue10.tar.gz
+
+4. conda 克隆出一个新的 af10
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    mv  afsue10 ~/.conda/envs
+    rm -rf ~/.conda/envs/af10
+
+    module purge
+    module load miniconda3
+    conda create -n af10 --clone afsue10
+
+5. 补丁 openmm.patch
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code:: bash
+
+    cd ~/.conda/envs/af10/lib/python3.8/site-packages/
+    patch -p0 < conda_AlphaFold/colabfold/docker/openmm.patch
+
+至此，适用于 AlphaFold & ColabFold & ParallelFold 的 af10 环境创建好了。
+
+可以直接在 hpc_conda 文件夹里使用。作业提交请使用文件夹下里的 slurm 脚本文件
+
+conda 安装方法二（具有一定难度）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+方法二介绍从头安装 AlphaFold 的 conda 环境。
 
 AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们以 cuda 10 为例介绍安装。
 
@@ -209,62 +264,16 @@ conda 使用
 
 然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
-conda 安装方法二（推荐使用）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-由于 conda 安装依赖众多，安装有难度。我们提供第二种安装方法：conda clone
-
-1. 申请 ``small`` 交互模式计算节点 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    srun -p small -n 4 --pty /bin/bash
-
-2. 从 ``scratch`` 复制一个文件夹过来
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    cp -r /scratch/share/AlphaFold/conda_AlphaFold/ $PWD
-
-3. 进入该文件夹，解压两文件
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    tar xzvf hpc_conda.tar.gz
-    tar xzvf afsue10.tar.gz
-
-4. conda 克隆出一个新的 af10
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    mv  afsue10 ~/.conda/envs
-    rm -rf ~/.conda/envs/af10
-
-    module purge
-    module load miniconda3
-    conda create -n af10 --clone afsue10
-
-5. 补丁 openmm.patch
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    cd ~/.conda/envs/af10/lib/python3.8/site-packages/
-    patch -p0 < conda_AlphaFold/colabfold/docker/openmm.patch
-
-至此，适用于 AlphaFold & ColabFold & ParallelFold 的 af10 环境创建好了。
-
-可以直接在 hpc_conda 文件夹里使用。作业提交请使用文件夹下里的 slurm 脚本文件
 
 
 版本三：ColabFold
 ----------------------------------------
 
 ColabFold 为 Sergey Ovchinnikov 等人开发的适用于 Google Colab 的 AlphaFold 版本，使用 MMseqs2 替代 Jackhmmer，且不使用模版。ColaFold 计算迅速，短序列五六分钟即可算完。
+
+* 若按照上方“conda 安装方法一” 完成了安装，可直接在 colab 文件夹中使用 ColabFold，无需再往下浏览。
+
+* 若按照上方“conda 安装方法二”自行从头安装的 conda，则需要按照下方操作，安装和使用 ColabFold：
 
 ColabFold 安装步骤
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -300,6 +309,9 @@ ParallelFold 可将原本全部运行于 GPU 的计算，分成 CPU 和 GPU 两�
 
 GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/ParallelFold>`_
 
+* 若按照上方“conda 安装方法一” 完成了安装，可直接在 alphafold 文件夹中使用 ParallelFold，无需再往下浏览。
+
+* 若按照上方“conda 安装方法二”自行从头安装的 conda，则需要按照下方操作，安装和使用 ParallelFold：
 
 ParallelFold 安装步骤
 ~~~~~~~~~~~~~~~~~~~~~~~~
