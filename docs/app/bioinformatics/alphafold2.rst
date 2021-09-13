@@ -245,7 +245,7 @@ conda 安装方法二（推荐使用）
     rm -rf ~/.conda/envs/af10
     conda create -n af10 --clone afsue10
 
-5. 打一个补丁
+5. 补丁 openmm.patch
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
