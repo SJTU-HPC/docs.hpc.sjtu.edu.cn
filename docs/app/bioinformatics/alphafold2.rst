@@ -82,21 +82,29 @@ conda 安装步骤
 
 AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们以 cuda 10 为例介绍安装。
 
-1. 下载官方 AlphaFold
-^^^^^^^^^^^^^^^^^^^^^^^^
+1. 下载 AlphaFold 文件
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+首先，下载 AlphaFold GitHub 官方文件
 .. code:: bash
 
     git clone https://github.com/deepmind/alphafold.git
 
-由于 git 访问不太稳定，推荐先将 GitHub zip 文件下载至本地，再上传至集群。
+由于 git 访问不太稳定，推荐先将 GitHub zip 文件下载至本地，再上传至集群。解压后得到的 AlphaFold 文件夹，我们在下方安装中称之为 ``$ALPHAFOLD`` 主文件夹（在主文件夹里 ``ls`` 命令可看到 ``LICENCE`` 文件）。
 
-然后下载 ``stereo_chemical_props.txt`` 文件，放至 ``$ALPHAFOLD/alphafold/common`` 文件夹：
+然后，下载 ``stereo_chemical_props.txt`` 文件，放至 ``$ALPHAFOLD/alphafold/common`` 文件夹：
 
 .. code:: bash
 
     wget https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
     mv stereo_chemical_props.txt $ALPHAFOLD/alphafold/common
+
+最后，下载 ``run_alphafold.sh`` 文件，放至 ``$ALPHAFOLD`` 主文件夹：
+
+.. code:: bash
+
+    wget https://github.com/Zuricho/Alphafold_local/blob/main/run_alphafold.sh
+    chmod +x run_alphafold.sh
 
 2. 申请 GPU 计算节点
 ^^^^^^^^^^^^^^^^^^^^^^^^
