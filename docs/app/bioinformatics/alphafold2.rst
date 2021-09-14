@@ -130,9 +130,9 @@ conda 安装方法一（推荐使用）
 
 可以直接在 ``hpc_conda`` 文件夹下的两个子文件夹里提交计算。
 
-``alphafold`` 文件夹集成了 AlphaFold 和 ParallelFold，默认使用 AlphaFold。将 fasta 文件放置于 ``input`` 文件夹，然后使用 ``sub_alphafold.slurm`` 语句提交作业。 
+*  ``alphafold`` 文件夹集成了 AlphaFold 和 ParallelFold，默认使用 AlphaFold。将 fasta 文件放置于 ``input`` 文件夹，然后使用 ``sub.slurm`` 语句提交作业。 
 
-``colabfold`` 文件夹为 ColabFold，修改 ``runner.py`` 第 153 行的 fasta 序列，然后使用 ``sbatch sub.slurm`` 语句提交作业。
+*  ``colabfold`` 文件夹为 ColabFold，修改 ``runner.py`` 第 153 行的 fasta 序列，然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
 conda 安装方法二（具有一定难度）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
