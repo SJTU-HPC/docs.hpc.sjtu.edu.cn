@@ -19,7 +19,7 @@ VASP的使用，需要先邮件联系我们，提供课题组拥有 VASP license
 使用mpirun命令运行vasp
 ----------------------
 
-ARM平台上使用mpirun命令运行vasp的脚本如下(vasp_mpirun.slurm):    
+ARM平台上使用mpirun命令单节点运行vasp的脚本如下(vasp_mpirun_1node.slurm):    
 
 .. code:: bash
 
@@ -41,7 +41,32 @@ ARM平台上使用mpirun命令运行vasp的脚本如下(vasp_mpirun.slurm):
 
 .. code:: bash
 
-   $ sbatch vasp_mpirun.slurm
+   $ sbatch vasp_mpirun_1node.slurm
+
+
+ARM平台上使用mpirun命令多节点运行vasp的脚本如下(vasp_mpirun_2nodes.slurm):    
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=test       
+   #SBATCH --partition=arm128c256g       
+   #SBATCH -N 2       
+   #SBATCH --ntasks-per-node=60
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load openmpi/4.0.3-gcc-9.3.0-vasp
+   IMAGE_PATH=/lustre/share/singularity/commercial-app/vasp/5.4.4-arm.sif
+   mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1  singularity exec  $IMAGE_PATH vasp_std
+
+
+使用如下指令提交：
+
+.. code:: bash
+
+   $ sbatch vasp_mpirun_2nodes.slurm
 
 
 .. tip:: 在运行VASP前或者提交脚本时，请务必指定 ``OMP_NUM_THREADS`` 环境变量的值（可以设置为默认值1），否则会影响VASP的运行速度。
