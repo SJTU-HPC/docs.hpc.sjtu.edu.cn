@@ -126,9 +126,13 @@ conda 安装方法一（推荐使用）
     cd ~/.conda/envs/af10/lib/python3.8/site-packages/
     patch -p0 < conda_AlphaFold/colabfold/docker/openmm.patch
 
-至此，适用于 AlphaFold & ColabFold & ParallelFold 的 af10 环境创建好了。
+至此，适用于 AlphaFold & ColabFold & ParallelFold 的 ``af10`` 环境创建好了。
 
-可以直接在 hpc_conda 文件夹里使用。作业提交请使用文件夹下里的 slurm 脚本文件
+可以直接在 ``hpc_conda`` 文件夹下的两个子文件夹里提交计算。
+
+``alphafold`` 文件夹集成了 AlphaFold 和 ParallelFold，默认使用 AlphaFold。将 fasta 文件放置于 ``input`` 文件夹，然后使用 ``sub_alphafold.slurm`` 语句提交作业。 
+
+``colabfold`` 文件夹为 ColabFold，修改 ``runner.py`` 第 153 行的 fasta 序列，然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
 conda 安装方法二（具有一定难度）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -271,6 +275,8 @@ conda 使用
 
 ColabFold 为 Sergey Ovchinnikov 等人开发的适用于 Google Colab 的 AlphaFold 版本，使用 MMseqs2 替代 Jackhmmer，且不使用模版。ColaFold 计算迅速，短序列五六分钟即可算完。
 
+ColabFold 本地部署方法参考 Yoshitaka Moriwaki 的 `localcolabfold <https://github.com/YoshitakaMo/localcolabfold>`__
+
 * 若按照上方“conda 安装方法一” 完成了安装，可直接在 colab 文件夹中使用 ColabFold，无需再往下浏览。
 
 * 若按照上方“conda 安装方法二”自行从头安装的 conda，则需要按照下方操作，安装和使用 ColabFold：
@@ -278,7 +284,7 @@ ColabFold 为 Sergey Ovchinnikov 等人开发的适用于 Google Colab 的 Alpha
 ColabFold 安装步骤
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-* ColabFold 使用与 AlphaFold 相同的 conda 环境，所以需要先按照上方“版本二：conda”的方法安装好 ``af10`` 环境；
+* ColabFold 使用与 AlphaFold 相同的 conda 环境，所以需要先按照上方 “版本二：conda” 的方法安装好 ``af10`` 环境；
 
 * 在 ``af10`` 环境里再安装下方四个软件：
 
@@ -301,13 +307,13 @@ ColabFold 使用方法
 版本四：ParallelFold
 ----------------------------------------
 
-ParallelFold 为我们开发的适用于大规模计算的集群版，支持 CPU 计算与 GPU 计算分离。
+ParallelFold 为交大钟博子韬 (`GitHub <https://github.com/Zuricho/ParallelFold>`_) 开发的适用于大规模计算的集群版，支持 CPU 计算与 GPU 计算分离。
 
-ParallelFold 可将原本全部运行于 GPU 的计算，分成 CPU 和 GPU 两阶段进行。对于成百上千个蛋白的大规模结构预测，先至 cpu 或 small 等 CPU 节点上批量完成前面的 MSA 多序列比对，再将各蛋白计算出来的 ``feature.pkl`` 文件，交由 GPU 节点计算。这样既能节省 GPU 资源，又能加快运算速度。
+ParallelFold 将原本全部运行于 GPU 的计算，分成 CPU 和 GPU 两阶段进行。对于成百上千个蛋白的大规模结构预测，先至 cpu 或 small 等 CPU 节点上批量完成前面的 MSA 多序列比对，再将各蛋白计算出来的 ``feature.pkl`` 文件，交由 GPU 节点计算。这样既能节省 GPU 资源，又能加快运算速度。
 
-我们的网站：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
+ParallelFold GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/ParallelFold>`_
 
-GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/ParallelFold>`_
+介绍网站：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
 * 若按照上方“conda 安装方法一” 完成了安装，可直接在 alphafold 文件夹中使用 ParallelFold，无需再往下浏览。
 
@@ -361,3 +367,4 @@ ParallelFold  使用方法
 - ParallelFold GitHub https://github.com/Zuricho/ParallelFold
 - ColabFold GitHub: https://github.com/sokrypton/ColabFold
 - ParaFold 网站：https://parafold.sjtu.edu.cn
+- localcolabfold GitHub:https://github.com/YoshitakaMo/localcolabfold
