@@ -307,13 +307,13 @@ ColabFold 使用方法
 版本四：ParallelFold
 ----------------------------------------
 
-ParallelFold 为我们开发的适用于大规模计算的集群版，支持 CPU 计算与 GPU 计算分离。
+ParallelFold 为交大钟博子韬 (`GitHub <https://github.com/Zuricho/ParallelFold>`_) 开发的适用于大规模计算的集群版，支持 CPU 计算与 GPU 计算分离。
 
-ParallelFold 可将原本全部运行于 GPU 的计算，分成 CPU 和 GPU 两阶段进行。对于成百上千个蛋白的大规模结构预测，先至 cpu 或 small 等 CPU 节点上批量完成前面的 MSA 多序列比对，再将各蛋白计算出来的 ``feature.pkl`` 文件，交由 GPU 节点计算。这样既能节省 GPU 资源，又能加快运算速度。
+ParallelFold 将原本全部运行于 GPU 的计算，分成 CPU 和 GPU 两阶段进行。对于成百上千个蛋白的大规模结构预测，先至 cpu 或 small 等 CPU 节点上批量完成前面的 MSA 多序列比对，再将各蛋白计算出来的 ``feature.pkl`` 文件，交由 GPU 节点计算。这样既能节省 GPU 资源，又能加快运算速度。
 
-我们的网站：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
+ParallelFold GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/ParallelFold>`_
 
-GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/ParallelFold>`_
+介绍网站：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
 * 若按照上方“conda 安装方法一” 完成了安装，可直接在 alphafold 文件夹中使用 ParallelFold，无需再往下浏览。
 
