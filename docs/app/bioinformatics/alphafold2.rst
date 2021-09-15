@@ -5,8 +5,6 @@ AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高
 
 我们对 AlphaFold 持续优化，可至 ParaFold 网站了解我们的工作：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
-我们将于 9 月 15 日（周三）在闵行校区图书信息楼 9 楼举办《AlphaFold 使用与优化》专题培训，欢迎大家参加：`报名问卷 <https://wj.sjtu.edu.cn/q/KCZDA5VQ>`__ 
-
 AlphaFold2 四大版本
 ----------------------------------------
 
@@ -249,7 +247,7 @@ conda 使用
     #!/bin/bash
     #SBATCH --job-name=alpha
     #SBATCH --partition=dgx2
-    #SBATCH -x vol08
+    #SBATCH -x vol04
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
     #SBATCH --cpus-per-task=6
