@@ -28,7 +28,7 @@ ARM平台上使用mpirun命令单节点运行vasp的脚本如下(vasp_mpirun_1no
    #SBATCH --job-name=test       
    #SBATCH --partition=arm128c256g       
    #SBATCH -N 1         
-   #SBATCH --ntasks-per-node=60
+   #SBATCH --ntasks-per-node=120
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
@@ -53,7 +53,7 @@ ARM平台上使用mpirun命令多节点运行vasp的脚本如下(vasp_mpirun_2no
    #SBATCH --job-name=test       
    #SBATCH --partition=arm128c256g       
    #SBATCH -N 2       
-   #SBATCH --ntasks-per-node=60
+   #SBATCH --ntasks-per-node=120
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
