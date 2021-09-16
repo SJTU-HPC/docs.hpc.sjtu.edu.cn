@@ -1,0 +1,15 @@
+td:nth-child(1) {
+    width: 18%;
+}
+td:nth-child(2) {
+    width: 48%;
+}
+td:nth-child(3) {
+    width: 13%;
+}
+td:nth-child(4) {
+    width: 13%;
+}
+td:nth-child(5) {
+    width: 6%;
+}

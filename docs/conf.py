@@ -60,6 +60,10 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
 
+html_css_files = [
+	'css/app.css',
+]
+
 # -- HTML theme settings -----------------------------------------------
 
 html_show_sourcelink = False
