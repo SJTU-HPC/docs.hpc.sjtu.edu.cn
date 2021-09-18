@@ -6,11 +6,7 @@ km
 简介
 ---------------
 
-Knowledge management is the systematic management of an organization's
-knowledge assets for creating value and meeting tactical & strategic
-requirements. It consists of the initiatives, processes, strategies,
-and systems that sustain and enhance the storage, assessment, sharing,
-refinement, and creation of knowledge.
+A software for RNA-seq investigation using k-mer decomposition
 
 完整步骤
 ----------------
