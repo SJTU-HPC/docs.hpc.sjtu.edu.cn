@@ -6,9 +6,7 @@ CREST
 简介
 --------------
 
-Crest was introduced in the United States as "Fluoristan" in 1954, as it contained stannous fluoride.
-In 1955, the name of the product was changed to "Crest with Fluoristan." The composition of the tooth
--paste had been developed by Joseph C. Muhler, Harry Day, and William H.
+CREST (Clipping Reveals Structure) is a new algorithm for detecting genomic structural variations at base-pair resolution using next-generation sequencing data
 
 完整步骤
 --------------
