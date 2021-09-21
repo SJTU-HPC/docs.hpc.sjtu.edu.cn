@@ -49,7 +49,7 @@ module 运行
     #SBATCH --job-name=alphafold
     #SBATCH --partition=dgx2
     #SBATCH -N 1
-    #SBATCH -x vol04
+    #SBATCH -x vol04,vol05
     #SBATCH --ntasks-per-node=1
     #SBATCH --cpus-per-task=6
     #SBATCH --gres=gpu:1          # use 1 GPU
@@ -248,7 +248,7 @@ conda 使用
     #!/bin/bash
     #SBATCH --job-name=alpha
     #SBATCH --partition=dgx2
-    #SBATCH -x vol04
+    #SBATCH -x vol04,vol05
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
     #SBATCH --cpus-per-task=6
