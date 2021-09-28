@@ -304,11 +304,12 @@ ARM版本
 .. _ARM版本 LAMMPS(bisheng+hypermpi):
 
 ARM版lammps(bisheng编译器+hypermpi)
--------------------------------------
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 脚本如下(lammps.slurm):
 
 .. code:: bash
+
    #!/bin/bash
 
    #SBATCH --job-name=lammps       
