@@ -306,18 +306,20 @@ ARM版本
 ARM版lammps(bisheng编译器+hypermpi)
 -------------------------------------
 
+脚本如下(lammps.slurm):
+
 .. code:: bash
    #!/bin/bash
 
-  #SBATCH --job-name=lammps       
-  #SBATCH --partition=arm128c256g       
-  #SBATCH -N 1
-  #SBATCH --ntasks-per-node=16
-  #SBATCH --output=%j.out
-  #SBATCH --error=%j.err
+   #SBATCH --job-name=lammps       
+   #SBATCH --partition=arm128c256g       
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=16
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
 
-  module load lammps/bisheng-1.3.3-lammps-2019
-  mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj
+   module load lammps/bisheng-1.3.3-lammps-2019
+   mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj
 
 .. code:: bash
 
