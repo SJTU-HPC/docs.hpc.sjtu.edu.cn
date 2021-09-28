@@ -299,6 +299,9 @@ ARM版本
 
    $ sbatch lammps.slurm
 
+bisheng编译器编译的lammps
+--------------------------
+
 参考资料
 --------
 
