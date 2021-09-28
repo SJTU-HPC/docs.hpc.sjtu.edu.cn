@@ -24,6 +24,8 @@ parallel particle simulator at the atomic, meso, or continuum scale.
 
 - `ARM版本 LAMMPS`_
 
+- `ARM版本 LAMMPS(bisheng+hypermpi)`_
+
 .. _CPU版本 LAMMPS:
 
 
@@ -294,6 +296,31 @@ ARM版本
    mpirun -n $SLURM_NTASKS lmp -in in.eam
 
 在 `ARM 节点 <../login/index.html#arm>`__\ 上使用如下指令提交（若在 π2.0 登录节点上提交将出错）：
+
+.. code:: bash
+
+   $ sbatch lammps.slurm
+
+.. _ARM版本 LAMMPS(bisheng+hypermpi):
+
+ARM版lammps(bisheng编译器+hypermpi)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+脚本如下(lammps.slurm):
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=lammps       
+   #SBATCH --partition=arm128c256g       
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=16
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load lammps/bisheng-1.3.3-lammps-2019
+   mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj
 
 .. code:: bash
 
