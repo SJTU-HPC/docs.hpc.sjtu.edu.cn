@@ -367,32 +367,27 @@ AI 计算软件
    module
 
 .. toctree::
-   :maxdepth: 2
-   :titlesonly:
+   :hidden:
 
    compilers_and_languages/index
 
 .. toctree::
-   :maxdepth: 2
-   :titlesonly:
+   :hidden:
 
    benchtools/index
 
 .. toctree::
-   :maxdepth: 2
-   :titlesonly:
+   :hidden:
 
    ai/index
 
 .. toctree::
-   :maxdepth: 2
-   :titlesonly:
+   :hidden:
 
    engineeringscience/index
 
 .. toctree::
-   :maxdepth: 2
-   :titlesonly:
+   :hidden:
 
    bioinformatics/index
 
