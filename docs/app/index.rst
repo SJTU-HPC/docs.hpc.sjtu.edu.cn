@@ -362,37 +362,37 @@ AI 计算软件
 
 .. toctree::
    :maxdepth: 1
-   :hidden:
+   :titlesonly:
 
    module
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
+   :titlesonly:
 
    compilers_and_languages/index
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
+   :titlesonly:
 
    benchtools/index
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
+   :titlesonly:
 
    ai/index
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
+   :titlesonly:
 
    engineeringscience/index
 
 .. toctree::
    :maxdepth: 2
-   :hidden:
+   :titlesonly:
 
    bioinformatics/index
 
