@@ -29,6 +29,10 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 +------+-------+----------+--------------------------------------------------------------------+
 | 2106 | |arm| | 容器     | /lustre/share/img/aarch64/openfoam/2106-gcc4-openmpi4-centos7.sif  |
 +------+-------+----------+--------------------------------------------------------------------+
+| 1912 | |arm| | 容器     | /lustre/share/img/aarch64/openfoam/1912.sif                        |
++------+-------+----------+--------------------------------------------------------------------+
+
+
 
 提交OpenFOAM作业
 ----------------
@@ -94,35 +98,6 @@ CPU版OpenFoam(使用容器)
 
    $ sbatch openfoam.slurm
 
-ARM版OpenFoam(使用Spack预编译版本)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-准备作业脚本 ``openfoam.slurm`` ，内容如下：
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=openfoam          # 作业名
-   #SBATCH --partition=arm128c256g      # arm128c256g队列                
-   #SBATCH --ntasks-per-node=128        # 每节点核数
-   #SBATCH -n 256                       # 作业核心数256(两个节点)
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   module load openfoam/1912-gcc-9.3.0-openmpi
-
-   srun --mpi=pmi2 icoFoam -parallel
-
-在ARM登录节点使用 ``sbatch`` 提交作业：
-
-.. code:: bash
-
-   $ sbatch openfoam.slurm
-
 
 ARM版OpenFoam(使用容器)
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -145,7 +120,7 @@ ARM版OpenFoam(使用容器)
    ulimit -s unlimited
    ulimit -l unlimited
 
-   export IMAGE_NAME=/lustre/share/img/x86/openfoam/8-gcc8-openmpi4-centos8.sif
+   export IMAGE_NAME=/lustre/share/img/aarch64/openfoam/8-gcc8-openmpi4-centos8.sif
 
    singularity exec $IMAGE_NAME blockMesh
    mpirun -n $SLURM_NTASKS singularity exec $IMAGE_NAME simpleFoam -parallel
