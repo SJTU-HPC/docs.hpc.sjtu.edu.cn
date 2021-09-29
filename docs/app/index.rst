@@ -6,21 +6,20 @@
 
 π集群使用Environment Module加载软件，您可参阅 :doc:`module` 文档。
 
-软件按以下五大类别列出，可以使用文档页面顶栏的搜索框查找软件。
+软件按以下类别列出，可以使用文档页面顶栏的搜索框查找软件。
 
-1. :ref:`first-table`
-2. :ref:`second-table`
-3. :ref:`third-table`
-4. :ref:`fourth-table`
-5. :ref:`fifth-table`
-6. :ref:`sixth-table`
+- :ref:`second-table`
+- :ref:`third-table`
+- :ref:`fourth-table`
+- :ref:`fifth-table`
+- :ref:`sixth-table`
 
 
 **编译器、MPI库、数学库、应用工具**
 
 .. _first-table:
 
-.. table:: 编译器、MPI库、数学库、应用工具
+.. table:: 编译器MPI库数学库应用工具
    :widths: 20 50 15 15 
 
    +-------------------------------------------+----------------------------------------------------------------------+----------+-----------------------+
