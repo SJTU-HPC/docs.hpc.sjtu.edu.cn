@@ -70,7 +70,7 @@
 
 .. toctree::
    :maxdepth: 2
-   :titlesonly:
+   :hidden:
 
    app/index
 
