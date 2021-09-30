@@ -120,10 +120,10 @@ ARM版OpenFoam(使用容器)
    ulimit -s unlimited
    ulimit -l unlimited
 
-   export IMAGE_NAME=/lustre/share/img/aarch64/openfoam/8-gcc8-openmpi4-centos8.sif
+   export IMAGE_NAME=/lustre/share/img/aarch64/openfoam/1912.sif
 
-   singularity exec $IMAGE_NAME blockMesh
-   mpirun -n $SLURM_NTASKS singularity exec $IMAGE_NAME simpleFoam -parallel
+   singularity run $IMAGE_PATH decomposePar
+   mpirun -n $SLURM_NTASKS singularity run  $IMAGE_PATH pimpleFoam -parallel
 
 使用 ``sbatch`` 提交作业：
 
