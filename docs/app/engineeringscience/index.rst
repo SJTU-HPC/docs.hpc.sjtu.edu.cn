@@ -30,3 +30,4 @@
    vasp
    vmd
    wrf
+   elphbolt
