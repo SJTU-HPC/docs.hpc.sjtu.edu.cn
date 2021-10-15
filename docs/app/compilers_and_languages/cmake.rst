@@ -23,6 +23,8 @@ demo.cpp内容如下
 
 .. code:: bash
 
+   #include <stdio.h>
+   #include <omp.h>
    int main()
    {
        return 0;
