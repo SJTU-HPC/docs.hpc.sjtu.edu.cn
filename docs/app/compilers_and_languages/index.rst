@@ -22,6 +22,7 @@
    python
    perl
    r
+   cmake
    ../../studio/jupyter
    ../../studio/matlab
    
