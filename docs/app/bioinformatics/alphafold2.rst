@@ -65,7 +65,7 @@ module 运行
 module 说明
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-* 资源建议：对于 1000AA 以下的蛋白，推荐使用 1 块 GPU 卡；对于更大的序列，推荐使用 2 块 GPU 卡。对于 1400AA 以上的序列，3 块或 4 块卡也无法加快计算，强烈建议使用下方的 conda 安装方法计算。原因：AlphaFold 计算时仅使用 1 块 GPU 卡，暂不支持多卡计算；对于大蛋白，多卡可提供更大的显存。可至我们的 ParaFold wiki 了解更多信息： `https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
+* 资源建议：对于 1000 AA 以下的蛋白，推荐使用 1 块 GPU 卡；对于更大的序列，推荐使用 2 块 GPU 卡。对于 1400AA 以上的序列，3 块或 4 块卡也无法加快计算，强烈建议使用下方的 conda 安装方法计算。原因：AlphaFold 计算时仅使用 1 块 GPU 卡，暂不支持多卡计算；对于大蛋白，多卡可提供更大的显存。可至我们的 ParaFold wiki 了解更多信息： `https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
 * 本文档7月介绍的用法依然支持，主程序名为 ``run_alphafold``，路径含有 ``/mnt``。现为 ``run_af2``，路径不再含有 ``/mnt``。
 
@@ -128,6 +128,61 @@ conda 安装方法一（推荐使用）
 至此，适用于 AlphaFold & ColabFold & ParallelFold 的 ``af10`` 环境创建好了。
 
 可以直接在 ``hpc_conda`` 文件夹下的两个子文件夹里提交计算。
+
+conda 使用 1 块 GPU 卡的脚本：
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH --job-name=alpha
+    #SBATCH --partition=dgx2
+    #SBATCH -x vol03,vol04,vol05
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=1
+    #SBATCH --cpus-per-task=6
+    #SBATCH --gres=gpu:1
+    #SBATCH --output=task_file/%j_%x.out
+    #SBATCH --error=task_file/%j_%x.err
+
+    module purge
+    module load miniconda3
+    module load cuda/10.1.243-gcc-4.8.5
+    source activate af10
+    export CUDA_VISIBLE_DEVICES=0
+
+    ./run_alphafold.sh -d /home/share/AlphaFold/data \
+    -o output -m model_1,model_2,model_3,model_4,model_5 \
+    -t 2021-09-12 \
+    -f input/test.fasta
+
+conda 同时使用 2 块 GPU 卡的脚本（适合长序列蛋白）：
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH --job-name=alpha
+    #SBATCH --partition=dgx2
+    #SBATCH -x vol03,vol04,vol05
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=1
+    #SBATCH --cpus-per-task=12
+    #SBATCH --gres=gpu:2
+    #SBATCH --output=task_file/%j_%x.out
+    #SBATCH --error=task_file/%j_%x.err
+
+    module purge
+    module load miniconda3
+    module load cuda/10.1.243-gcc-4.8.5
+    source activate af10
+    export CUDA_VISIBLE_DEVICES=0,1
+
+    ./run_alphafold.sh -d /home/share/AlphaFold/data \
+    -o output -m model_1,model_2,model_3,model_4,model_5 \
+    -t 2021-09-12 \
+    -f input/test.fasta
+
+
+* 若报错提醒缺少 ``absl``，可用命令补安装： ``pip install absl-py==0.13.0`` 
 
 *  ``alphafold`` 文件夹集成了 AlphaFold 和 ParallelFold，默认使用 AlphaFold。将 fasta 文件放置于 ``input`` 文件夹，然后使用 ``sub.slurm`` 语句提交作业。 
 
@@ -248,7 +303,7 @@ conda 使用
     #!/bin/bash
     #SBATCH --job-name=alpha
     #SBATCH --partition=dgx2
-    #SBATCH -x vol04,vol05
+    #SBATCH -x vol03,vol04,vol05
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
     #SBATCH --cpus-per-task=6
@@ -302,6 +357,28 @@ ColabFold 使用方法
 
 修改 ``runner.py`` 第 153 行的 fasta 序列，然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
+ColabFold 同时使用 2 块 GPU 卡的脚本：
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH --job-name=alpha
+    #SBATCH --partition=dgx2
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=1
+    #SBATCH --cpus-per-task=12
+    #SBATCH --gres=gpu:2
+    #SBATCH --output=task_file/%j_%x.out
+    #SBATCH --error=task_file/%j_%x.err
+
+    module purge
+    module load miniconda3
+    module load cuda/10.1.243-gcc-4.8.5
+    source activate af10
+    export CUDA_VISIBLE_DEVICES=0,1
+
+    python runner.py
+
     
 版本四：ParallelFold
 ----------------------------------------
@@ -343,13 +420,13 @@ ParallelFold  使用方法
 
 .. code:: bash
 
-    ./run_feature.sh -d /home/share/AlphaFold/data -o output -m model_1 -f input/test3.fasta -t 2021-07-27  
+    ./run_feature.sh -d /scratch/share/AlphaFold/data -o output -m model_1 -f input/test3.fasta -t 2021-07-27  
    
 * ``run_alphafold.sh`` 会自动检测 ``feature.pkl`` 文件是否存在。若存在，就继续后面的 GPU 计算；若不存在，就从头开始算。所以，批量运用 ``run_feature.sh`` 在 CPU 算出 ``feature.pkl`` 文件之后，可再用 ``run_alphafold.sh`` 完成接下来的 GPU 计算。
 
 .. code:: bash
 
-    ./run_alphafold.sh -d /home/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27 
+    ./run_alphafold.sh -d /scratch/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27 
    
 
 
