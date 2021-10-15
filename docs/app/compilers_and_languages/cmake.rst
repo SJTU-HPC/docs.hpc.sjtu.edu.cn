@@ -3,108 +3,87 @@
 CMAKE
 =====
 
-本文档向您展示如何使用Miniconda在家目录中建立自定义的R环境。
+CMake是一个跨平台的编译工具，能够输出各种各样的makefile或者project文件,并不直接构建出最终的软件，而是生成标准的Makefile文件,然后再使用Make进行编译。
 
-使用Miniconda 3环境安装R
+CMAKE使用方式如下
 ------------------------
 
-加载Miniconda 3
+编写CMakeLists.txt
 
 .. code:: bash
 
-   $ module load miniconda3/4.7.12.1-gcc-4.8.5
+   # CMake 最低版本号要求
+   cmake_minimum_required (VERSION 2.8)
+   # 项目信息
+   project (demo)
+   # 指定生成目标
+   add_executable(demo demo.cpp)
 
-创建conda环境
-
-.. code:: bash
-
-   $ conda create --name R
-
-激活R环境
-
-.. code:: bash
-
-   $ source activate R
-
-安装R
+demo.cpp内容如下
 
 .. code:: bash
 
-   $ conda install -c r r==3.6.0
+   int main()
+   {
+       return 0;
+   }
 
-通过conda（例如RMySQL）添加更多软件包。
-
-.. code:: bash
-
-   $ conda install -c conda-forge r-rmysql
-
-您可以在\ https://anaconda.org/\ 中搜索安装命令。
-
-使用conda环境中R提交slurm作业
------------------------------
-
-使用conda环境中R运行单节点作业脚本示例r_conda.slurm如下：
+使用方式如下所示
 
 .. code:: bash
 
-   #!/bin/bash
+   mkdir build
+   cd build
+   cmake ../
+   make
+   ./demo
 
-   #SBATCH -J R
-   #SBATCH -p small
-   #SBATCH -n 1
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
+使用OpenMP示例如下
+------------------------
 
-   module load miniconda3/4.7.12.1-gcc-4.8.5
-   source activate R
+CMakeLists.txt文件如下
 
-   R hello.r
+.. code:: bash
+ 
+   cmake_minimum_required(VERSION 3.3)
+   project(openmp)
 
-并使用如下指令提交：
+   OPTION (USE_OpenMP "Use OpenMP" ON)
+   IF(USE_OpenMP)
+       FIND_PACKAGE(OpenMP)
+   IF(OPENMP_FOUND)
+       SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
+       SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
+   ENDIF()
+   ENDIF()
+
+   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
+
+   set(SOURCE_FILES hello-omp.c)
+   add_executable(hello-omp ${SOURCE_FILES})
+   
+hello-omp.c如下所示
 
 .. code:: bash
 
-   $ sbatch r_conda.slurm
+   #include <stdio.h>
+   #include <omp.h>
+   int main()
+   {
+   #pragma omp parallel
+       {
+           int id = omp_get_thread_num();
+           printf("hello, from %d.\n", id);
+       }
+       return 0;
+   }
 
-在R交互终端中安装R模块
-----------------------
+执行如下命令
 
 .. code:: bash
 
-   $ R --version
-   R version 3.6.1 (2019-07-05) -- "Action of the Toes"
-   Copyright (C) 2019 The R Foundation for Statistical Computing
-   Platform: x86_64-conda_cos6-linux-gnu (64-bit)
-
-   R is free software and comes with ABSOLUTELY NO WARRANTY.
-   You are welcome to redistribute it under the terms of the
-   GNU General Public License versions 2 or 3.
-   For more information about these matters see
-   https://www.gnu.org/licenses/.
-
-   $ R
-   R version 3.6.1 (2019-07-05) -- "Action of the Toes"
-   Copyright (C) 2019 The R Foundation for Statistical Computing
-   Platform: x86_64-conda_cos6-linux-gnu (64-bit)
-
-   R is free software and comes with ABSOLUTELY NO WARRANTY.
-   You are welcome to redistribute it under certain conditions.
-   Type 'license()' or 'licence()' for distribution details.
-
-     Natural language support but running in an English locale
-
-   R is a collaborative project with many contributors.
-   Type 'contributors()' for more information and
-   'citation()' on how to cite R or R packages in publications.
-
-   Type 'demo()' for some demos, 'help()' for on-line help, or
-   'help.start()' for an HTML browser interface to help.
-   Type 'q()' to quit R.
-
-   > if (!requireNamespace("BiocManager", quietly = TRUE))
-   +     install.packages("BiocManager")
-   > BiocManager::install()
-   Bioconductor version 3.10 (BiocManager 1.30.10), R 3.6.1 (2019-07-05)
-   Old packages: 'boot', 'cluster', 'foreign', 'KernSmooth', 'MASS', 'mgcv',
-     'nlme', 'survival'               
-   ...
+   mkdir build
+   cd build
+   cmake ../
+   make
+   ./hello-omp
