@@ -30,6 +30,8 @@ Studio 支持的应用如下，并持续增加:
 
 - MATLAB
 
+- AlphaFold
+
 .. toctree::
    :maxdepth: 1
 
@@ -39,3 +41,4 @@ Studio 支持的应用如下，并持续增加:
    rstudio
    paraview
    matlab
+   alphafold-gui
