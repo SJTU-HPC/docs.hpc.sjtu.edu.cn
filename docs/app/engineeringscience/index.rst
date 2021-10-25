@@ -31,4 +31,3 @@
    vmd
    wrf
    elphbolt
-   gmx_mmpbsa
