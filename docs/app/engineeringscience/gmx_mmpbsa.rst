@@ -1,4 +1,4 @@
-.. _gmxmmpbsa:
+.. _gmx_mmpbsa:
 
 LAMMPS
 ======

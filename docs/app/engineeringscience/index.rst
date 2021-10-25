@@ -31,4 +31,4 @@
    vmd
    wrf
    elphbolt
-   gmxmmpbsa
+   gmx_mmpbsa
