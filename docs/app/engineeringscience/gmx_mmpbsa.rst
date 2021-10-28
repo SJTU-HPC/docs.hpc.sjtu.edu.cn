@@ -25,7 +25,7 @@ gmx_MMPBSA是一种基于AMBER的MMPBSA.py开发的新工具，旨在使用GROMA
 π 集群上使用gmx_MMPBSA
 -------------------------------
 
-一定要将数据、执行脚本gmx_MMPBSA.slurm和run1.sh放在同一目录下。
+该软件基于AmberTools和GROMACS安装，使用的版本为AmberTools20和GROMACS2019、GROMACS2021。在运行程序的时候一定要将数据、执行脚本gmx_MMPBSA.slurm和run1.sh放在同一目录下。
 
 CPU版gmx_MMPBSA(GROMACS2019)
 -----------------------------
