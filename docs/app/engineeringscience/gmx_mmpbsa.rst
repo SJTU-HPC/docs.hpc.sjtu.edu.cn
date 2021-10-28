@@ -27,8 +27,8 @@ gmx_MMPBSA是一种基于AMBER的MMPBSA.py开发的新工具，旨在使用GROMA
 
 一定要将数据、执行脚本gmx_MMPBSA.slurm和run1.sh放在同一目录下。
 
-CPU版gmx_MMPBSA
-----------------------
+CPU版gmx_MMPBSA(GROMACS2019)
+-----------------------------
 
 gmx_MMPBSA.slurm内容如下：
 
@@ -46,6 +46,34 @@ gmx_MMPBSA.slurm内容如下：
    module load gmx_MMPBSA/1.4.3-gcc-4.8.5-ambertools-20
 
    mpirun -np $SLURM_NTASKS gmx_MMPBSA 
+
+run1.sh脚本内容如下：
+
+.. code:: bash
+
+   #!/bin/bash
+
+   gmx_MMPBSA MPI -O -i mmpbsa.in -cs com.tpr -ci index.ndx -cg 1 13 -ct com_traj.xtc
+
+CPU版gmx_MMPBSA(GROMACS2021)
+-----------------------------
+
+gmx_MMPBSA.slurm内容如下：
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=gmx_MMPBSA       
+   #SBATCH --partition=cpu  
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=10
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load gmx_MMPBSA
+
+   mpirun -np $SLURM_NTASKS gmx_MMPBSA_9.3.0 
 
 run1.sh脚本内容如下：
 
