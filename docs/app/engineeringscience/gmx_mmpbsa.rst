@@ -45,7 +45,7 @@ gmx_MMPBSA.slurm内容如下：
 
    module load gmx_MMPBSA/1.4.3-gcc-4.8.5-ambertools-20
 
-   mpirun -np $SLURM_NTASKS gmx_MMPBSA 
+   mpirun -np $SLURM_NTASKS gmx_MMPBSA_GROMACS2019
 
 run1.sh脚本内容如下：
 
@@ -73,7 +73,7 @@ gmx_MMPBSA.slurm内容如下：
 
    module load gmx_MMPBSA
 
-   mpirun -np $SLURM_NTASKS gmx_MMPBSA_9.3.0 
+   mpirun -np $SLURM_NTASKS gmx_MMPBSA_GROMACS2021 
 
 run1.sh脚本内容如下：
 
