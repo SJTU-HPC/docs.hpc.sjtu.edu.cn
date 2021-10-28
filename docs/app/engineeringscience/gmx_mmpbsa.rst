@@ -43,7 +43,7 @@ gmx_MMPBSA.slurm内容如下：
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-   module load gmx_MMPBSA/1.4.3-gcc-4.8.5-ambertools-20
+   module load gmx_MMPBSA
 
    mpirun -np $SLURM_NTASKS gmx_MMPBSA_GROMACS2019
 
