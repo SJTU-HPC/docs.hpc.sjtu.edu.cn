@@ -23,11 +23,11 @@ TensorFlow
 .. code:: bash
 
    $ module load miniconda3
-   $ conda create -n tf-env
+   $ conda create -n tf-env python=3.6
    $ source activate tf-env
    $ conda install pip
    $ conda install cudatoolkit=10.1 cudnn
-   $ pip install tensorflow
+   $ pip install tensorflow=2.3.1
    # 如需使用，可以选择安装keras
    $ pip install keras
 
