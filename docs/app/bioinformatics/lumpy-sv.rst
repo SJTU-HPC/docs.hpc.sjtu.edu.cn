@@ -11,7 +11,7 @@ lumpy是目前比较流行的一款SV检测工具，它同时支持PEM与SR和RD
 
 
 ARM集群上的LUMPY-SV
-=========================
+-----------------------------
 
 ARM上的LUMPY-SV以容器的形式安装部署。镜像路径为 ``/lustre/share/img/aarch64/lumpy-sv/lumpy-sv.sif`` 。
 
