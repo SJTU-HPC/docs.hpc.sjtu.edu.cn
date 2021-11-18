@@ -17,7 +17,7 @@ AlphaFold2 四大版本
 * ColabFold 版，快速计算，含有多种功能，由 Sergey Ovchinnikov 开发。可在交大 DGX-2 上通过 conda 安装使用；
 
 * ParallelFold 版，支持 CPU、GPU 分离计算，适合大规模批量计算。
-  
+
 
 版本一：module
 ----------------------------------------
@@ -60,7 +60,7 @@ module 运行
 
     run_af2  $PWD --preset=casp14  test.fasta  --max_template_date=2021-09-12
 
-然后使用 ``sbatch sub.slurm`` 语句提交作业。  
+然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
 module 说明
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,7 +83,7 @@ conda 方法更为灵活，支持自定义，如选取计算 5 CASP14 models 和
 conda 安装方法一（推荐使用）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. 申请 ``small`` 交互模式计算节点 
+1. 申请 ``small`` 交互模式计算节点
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
@@ -182,9 +182,9 @@ conda 同时使用 2 块 GPU 卡的脚本（适合长序列蛋白）：
     -f input/test.fasta
 
 
-* 若报错提醒缺少 ``absl``，可用命令补安装： ``pip install absl-py==0.13.0`` 
+* 若报错提醒缺少 ``absl``，可用命令补安装： ``pip install absl-py==0.13.0``
 
-*  ``alphafold`` 文件夹集成了 AlphaFold 和 ParallelFold，默认使用 AlphaFold。将 fasta 文件放置于 ``input`` 文件夹，然后使用 ``sub.slurm`` 语句提交作业。 
+*  ``alphafold`` 文件夹集成了 AlphaFold 和 ParallelFold，默认使用 AlphaFold。将 fasta 文件放置于 ``input`` 文件夹，然后使用 ``sub.slurm`` 语句提交作业。
 
 *  ``colabfold`` 文件夹为 ColabFold，修改 ``runner.py`` 第 153 行的 fasta 序列，然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
@@ -230,7 +230,7 @@ AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们�
 
 ``-x vol08`` 意思是不使用 vol08，因为 vol01-07 的 cuda 10 才是我们需要的
 
-``ssh vol0X`` 登陆分配的 DGX-2 节点，注意用屏幕上显示的 vol 具体数字替换 ``0X`` 
+``ssh vol0X`` 登录分配的 DGX-2 节点，注意用屏幕上显示的 vol 具体数字替换 ``0X``
 
 3. 创建 conda 环境
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -264,7 +264,7 @@ AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们�
 注意，
 
 * conda install 系列全部完成后再使用 pip install，避免在 pip install 后再使用 conda install；
-  
+
 * 各软件版本敏感，如 TensorFlow 不可用 2.5、jaxlib 必须用 0.1.69。请尽量按上方推荐安装；
 
 * 检测是否安装成功（若 GPU 设备均找到，表明安装成功，否则无法正常使用 AlphaFold）：
@@ -281,7 +281,7 @@ AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们�
 .. code:: bash
 
     cd ~/.conda/envs/af10/lib/python3.8/site-packages/
-    patch -p0 < $ALPHAFOLD/alphafold/docker/openmm.patch 
+    patch -p0 < $ALPHAFOLD/alphafold/docker/openmm.patch
 
 至此，conda 安装结束。
 
@@ -379,7 +379,7 @@ ColabFold 同时使用 2 块 GPU 卡的脚本：
 
     python runner.py
 
-    
+
 版本四：ParallelFold
 ----------------------------------------
 
@@ -420,14 +420,14 @@ ParallelFold  使用方法
 
 .. code:: bash
 
-    ./run_feature.sh -d /scratch/share/AlphaFold/data -o output -m model_1 -f input/test3.fasta -t 2021-07-27  
-   
+    ./run_feature.sh -d /scratch/share/AlphaFold/data -o output -m model_1 -f input/test3.fasta -t 2021-07-27
+
 * ``run_alphafold.sh`` 会自动检测 ``feature.pkl`` 文件是否存在。若存在，就继续后面的 GPU 计算；若不存在，就从头开始算。所以，批量运用 ``run_feature.sh`` 在 CPU 算出 ``feature.pkl`` 文件之后，可再用 ``run_alphafold.sh`` 完成接下来的 GPU 计算。
 
 .. code:: bash
 
-    ./run_alphafold.sh -d /scratch/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27 
-   
+    ./run_alphafold.sh -d /scratch/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27
+
 
 
 欢迎邮件反馈使用情况，或提出宝贵建议。
