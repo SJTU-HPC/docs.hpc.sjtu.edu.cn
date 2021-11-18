@@ -31,7 +31,7 @@
 传输节点使用限制
 ------------------
 
-**传输节点仅用于批量数据传输，请勿在此节点上运行与数据传输无关的应用，如编译程序、管理作业、校验数据等。如果发现此类行为，中心将视情况取消相关账号使用传输节点的权利。**
+**传输节点仅用于批量数据传输，请勿在此节点上运行与数据传输无关的应用，如编译程序、管理作业、校验数据等。如果发现此类行为，中心将视情况取消相关帐号使用传输节点的权利。**
 
 .. _label_transfer_speed:
 
@@ -74,7 +74,7 @@ Linux/Unix/Mac用户
 .. code:: bash
 
    # 假设超算用户expuser01在平台上个人目录为/lustre/home/acct-exp/expuser01
-   # 外部主机地址为100.101.0.1，该用户在外部主机上拥有账号local_user且个人目录为/home/local_user/
+   # 外部主机地址为100.101.0.1，该用户在外部主机上拥有帐号local_user且个人目录为/home/local_user/
 
    # 示例1：该用户要将个人目录中的~/math.dat文件下载到外部主机上
    $ scp expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/math.dat local_user@100.101.0.1:/home/local_user/
@@ -88,9 +88,9 @@ Linux/Unix/Mac用户
 
    # 示例3：该用户将超算平台上个人目录~/data的数据下载到外部主机，请注意rsync不支持双远端传输，必须在目标主机上操作
    $ rsync --archive --partial --progress expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/data/ ~/download/
-   
+
    # 示例4：该用户将外部主机上的~/upload/exp04.dat文件上传到超算平台个人目录中
-   $ rsync --archive --partial --progress ~/upload/exp04.dat expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/   
+   $ rsync --archive --partial --progress ~/upload/exp04.dat expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
    # 如果用户的外部环境CPU资源丰富而网络带宽相对较低，可以尝试--compress参数启用压缩传输
    $ rsync --compress --archive --partial --progress ~/upload/exp04.dat expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
 
