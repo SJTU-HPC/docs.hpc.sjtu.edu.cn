@@ -20,7 +20,7 @@ CPU版本
 
 同Lammps已有功能相比，该版本新增三个功能：
 
-(1) 基于Random Batch Ewald (RBE)算法的三维周期/二维准周期平板系统静电求解器，特别适用于多核模拟；
+1. 基于Random Batch Ewald (RBE)算法的三维周期/二维准周期平板系统静电求解器，特别适用于多核模拟；
 调用方式：
 在Lammps的input文件中加入下面命令（需和pair/lj/cut/coul/long配合使用，这点和PPPM算法相同），
 
@@ -41,7 +41,7 @@ kspace_style    rbe 0.05 200 100
 
 如果希望处理二维周期且z方向是两块平板的系统，需要在input文件中定义平板的位置参数和kspace_modify slab 3,方法同LAMMPS官方文档中用PPPM算平板问题的方式一致。
 
-(2) 基于RBE2D算法的二维周期，Z方向具介电不匹配界面（Dielectric Interfaces）系统的静电求解器（包括界面带连续面电荷情形），特别适用于多核模拟，并且速度大幅超过其他处理Dielectric Interfaces的静电算法；
+2. 基于RBE2D算法的二维周期，Z方向具介电不匹配界面（Dielectric Interfaces）系统的静电求解器（包括界面带连续面电荷情形），特别适用于多核模拟，并且速度大幅超过其他处理Dielectric Interfaces的静电算法；
 
 调用方式：在Lammps的input文件中加入下面命令
 
@@ -61,7 +61,7 @@ kspace_style Rbed 0.079647 200 100 0.939 -0.939 0.08 -0.08
 
 表示使用RBE2D计算一个上下界面介电系数分别为0.939和-0.939、上下界面分别带密度为0.08和-0.08的连续面电荷的系统的静电相互作用。LJ截断半径和静电截断半径均为10，alpha选择0.079647，每次在傅里叶空间抽取200个样本，使用其中100CPU核进行采样。
 
-(3) 基于Langevin动力学提出的新NPT系综控温控压器，好处是系统收敛到平衡的速度比LAMMPS自带的“fix npt”更快，目前支持各向同性和各向异性两种控压方式。
+3. 基于Langevin动力学提出的新NPT系综控温控压器，好处是系统收敛到平衡的速度比LAMMPS自带的“fix npt”更快，目前支持各向同性和各向异性两种控压方式。
 
 调用方式：在Lammps的input文件中加入下面命令
 
