@@ -20,7 +20,7 @@ CPU版本
 
 同Lammps已有功能相比，该版本新增三个功能：
 
-1. 基于Random Batch Ewald (RBE)算法的三维周期/二维准周期平板系统静电求解器，特别适用于多核模拟；
+1. 基于Random Batch Ewald (RBE)算法的三维周期/二维准周期平板系统静电求解器，特别适用于多核模拟。
 调用方式：
 在Lammps的input文件中加入下面命令（需和pair/lj/cut/coul/long配合使用，这点和PPPM算法相同），
 
@@ -42,7 +42,7 @@ kspace_style    rbe 0.05 200 100
 如果希望处理二维周期且z方向是两块平板的系统，需要在input文件中定义平板的位置参数和kspace_modify slab 3,方法同LAMMPS官方文档中用PPPM算平板问题的方式一致。
 
 
-2. 基于RBE2D算法的二维周期，Z方向具介电不匹配界面（Dielectric Interfaces）系统的静电求解器（包括界面带连续面电荷情形），特别适用于多核模拟，并且速度大幅超过其他处理Dielectric Interfaces的静电算法；
+2. 基于RBE2D算法的二维周期，Z方向具介电不匹配界面（Dielectric Interfaces）系统的静电求解器（包括界面带连续面电荷情形），特别适用于多核模拟，并且速度大幅超过其他处理Dielectric Interfaces的静电算法。
 
 调用方式：在Lammps的input文件中加入下面命令
 
