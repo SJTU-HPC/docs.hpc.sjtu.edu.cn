@@ -22,7 +22,6 @@ CPU版本
 
 (1) 基于Random Batch Ewald (RBE)算法的三维周期/二维准周期平板系统静电求解器，特别适用于多核模拟；
 调用方式：
-
 在Lammps的input文件中加入下面命令（需和pair/lj/cut/coul/long配合使用，这点和PPPM算法相同），
 
 kspace_style rbe arg1 arg2 arg3
