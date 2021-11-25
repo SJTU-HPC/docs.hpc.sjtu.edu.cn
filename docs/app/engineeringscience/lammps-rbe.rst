@@ -21,33 +21,79 @@ CPU版本
 同Lammps已有功能相比，该版本新增三个功能：
 
 (1) 基于Random Batch Ewald (RBE)算法的三维周期/二维准周期平板系统静电求解器，特别适用于多核模拟；
-调用方式：在Lammps的input文件中加入下面命令（需和pair/lj/cut/coul/long配合使用，这点和PPPM算法相同），
+调用方式：
+
+在Lammps的input文件中加入下面命令（需和pair/lj/cut/coul/long配合使用，这点和PPPM算法相同），
+
 kspace_style rbe arg1 arg2 arg3
+
 其中kspace_style是Lammps固定指令，表示模拟中要计算静电相互作用；rbe是算法名称表示调用RBE算法计算静电；
-arg1=alpha，是RBE算法里用于控制近远场比例的参数，该参数的选择和Ewald以及PPPM算法相同。如果希望相对误差是1e-4，那么需选取使得erfc(r_cut*sqrt{alpha})≈1e-4的alpha, 其中r_cut是在pair/lj/cut/coul/long中选取的静电近场截断；arg2=batch_size，是在傅里叶空间中做随机采样得到的样本数量，一般为几十至数百（越大越准确，越小计算速度越快）；arg3=sampling_core，用于采样的CPU核的数量，需>1且<总MPI数量，一般可选取和用户使用的MPI数量相同或MPI数量一半。
-两个使用案例（假设使用200个CPU核）：
+arg1=alpha，是RBE算法里用于控制近远场比例的参数，该参数的选择和Ewald以及PPPM算法相同。如果希望相对误差是1e-4，那么需选取使得erfc(r_cut*sqrt{alpha})≈1e-4的alpha, 其中r_cut是在pair/lj/cut/coul/long中选取的静电近场截断；arg2=batch_size，是在傅里叶空间中做随机采样得到的样本数量，一般为几十至数百（越大越准确，越小计算速度越快）；arg3=sampling_core，用于采样的CPU核的数量，需>1且<总MPI数量，一般可选取和用户使用的MPI数量相同或MPI数量一半。两个使用案例（假设使用200个CPU核）：
+
 pair_style      lj/cut/coul/long 10.0 10.0
+
 kspace_style    rbe 0.07 500 100
+
 或调用intel的近场计算
+
 pair_style      lj/cut/coul/long/intel 12.0 12.0
+
 kspace_style    rbe 0.05 200 100
+
 如果希望处理二维周期且z方向是两块平板的系统，需要在input文件中定义平板的位置参数和kspace_modify slab 3,方法同LAMMPS官方文档中用PPPM算平板问题的方式一致。
 
 (2) 基于RBE2D算法的二维周期，Z方向具介电不匹配界面（Dielectric Interfaces）系统的静电求解器（包括界面带连续面电荷情形），特别适用于多核模拟，并且速度大幅超过其他处理Dielectric Interfaces的静电算法；
+
 调用方式：在Lammps的input文件中加入下面命令
+
 pair_style lj/cut/coul/long/rbed arg1 arg2 arg3 arg4
+
 kspace_style Rbed arg1 arg2 arg3 arg4 arg5 arg6 arg7
+
 pair_style和lj/cut/coul/long/rbed分别是Lammps固定指令（表示计算静电近场）和算法名称（表示使用RBE2D算法）；arg1=LJ_cut，是LJ相互作用的截断半径；arg2=Coul_cut，是静电相互作用的截断半径（需小于等于LJ截断半径，这点和LAMMPS原始设置相同）；arg3=gamma_top，arg4=gamma_down分别是上下界面的描绘介电不匹配程度的系数，取值范围都是[-1,+1]，定义分别为(ε_in-ε_top)/ (ε_in+ε_top)和(ε_in-ε_down)/ (ε_in+ε_down)，其中ε_in，ε_top和ε_down分别是盒子中间、盒子上方、盒子下方介质的相对介电常数。
+
 kspace_style和Rbed分别是Lammps固定指令（表示计算静电远场）和算法名称（表示使用RBE2D算法）；arg1=alpha， arg2=batch_size，arg3=sampling_core同(1)中rbe指令对它们的定义相同；arg4=gamma_top，arg5=gamma_down和lj/cut/coul/long/rbed中对它们的定义相同；arg6=sigma_top, arg7=sigma_down分别代表上下表面的面电荷密度，单位是e/（长度单位的平方）。
+
 一个使用案例（假设使用200个CPU核）：
+
 pair_style lj/cut/coul/long/rbed 10 10 0.939 -0.939
+
 kspace_style Rbed 0.079647 200 100 0.939 -0.939 0.08 -0.08
+
 表示使用RBE2D计算一个上下界面介电系数分别为0.939和-0.939、上下界面分别带密度为0.08和-0.08的连续面电荷的系统的静电相互作用。LJ截断半径和静电截断半径均为10，alpha选择0.079647，每次在傅里叶空间抽取200个样本，使用其中100CPU核进行采样。
 
 (3) 基于Langevin动力学提出的新NPT系综控温控压器，好处是系统收敛到平衡的速度比LAMMPS自带的“fix npt”更快，目前支持各向同性和各向异性两种控压方式。
+
 调用方式：在Lammps的input文件中加入下面命令
+
 fix ID group-ID baoab temp arg1 arg2 arg3 keyword arg4 arg5 arg6
+
 fix和temp是固定指令，baoab是控压算法名称，ID是用户为这条fix指定的名称，group-ID指定了这条fix能够作用的原子组的名称，ID和group-ID同LAMMPS本身对它们的设置相同，可参考LAMMPS官方文档中的fix指令说明；arg1=Tstart，arg2=Tstop分别设定了开始和结束时的外部温度；arg3=Tdamp是控温的阻尼系数，单位和时间单位相同，一般为5倍至100倍模拟的时间步长；keyword=iso or aniso表示控压是各向同性（三个方向耦合在一起，iso）或是各向异性（三个方向分别控压，aniso）进行；arg4=Pstart，arg5=Pstop分别设定了开始和结束时的外部压强；arg6=Pdamp是控压的阻尼系数，一般为数十至数百倍模拟的时间步长。
+
 一个使用案例（假设模拟时间步长为1fs）：
+
 fix 2 all baoab temp 298 298 5 iso 1.0 1.0 100
+
 表示使用Langevin动力学对所有原子做各向同性控压，开始和结束的外部温度和外部压强分别为298K和1bar，控温和控压阻尼系数分别为5fs和100fs。该fix指令的名字被设定为2。
+
+脚本如下(lammps-rbe.slurm):
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=lammps
+   #SBATCH --partition=small
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=20
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+
+   module load lammps-rbe
+
+   srun --mpi=pmi2 -n 20 lmp_intel_cpu_intelmpi -i in.spce-bulk-nvt
+
+.. code:: bash
+
+   $ sbatch lammps-rbe.slurm
