@@ -20,7 +20,7 @@ module 命令
 
 .. code:: bash
 
-   $ mdoule load gcc openmpi
+   $ module load gcc openmpi
    $ module unload gcc openmpi
 
 如果您喜欢最新的稳定版本，则可以忽略版本号（默认加载带有 D 标识的版本）。
