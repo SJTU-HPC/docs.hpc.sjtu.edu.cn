@@ -15,6 +15,7 @@
    gnuplot
    gromacs
    lammps
+   lammps-rbe
    nektar
    nwchem
    octave
