@@ -122,8 +122,8 @@ ARM版OpenFoam(使用容器)
 
    export IMAGE_NAME=/lustre/share/img/aarch64/openfoam/1912.sif
 
-   singularity run $IMAGE_PATH decomposePar
-   mpirun -n $SLURM_NTASKS singularity run  $IMAGE_PATH pimpleFoam -parallel
+   singularity run $IMAGE_NAME decomposePar
+   mpirun -n $SLURM_NTASKS singularity run  $IMAGE_NAME pimpleFoam -parallel
 
 使用 ``sbatch`` 提交作业：
 
