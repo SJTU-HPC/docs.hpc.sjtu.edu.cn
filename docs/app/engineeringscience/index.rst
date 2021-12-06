@@ -15,6 +15,7 @@
    gnuplot
    gromacs
    lammps
+   lammps-rbe
    nektar
    nwchem
    octave
@@ -30,3 +31,5 @@
    vasp
    vmd
    wrf
+   elphbolt
+   gmx_mmpbsa

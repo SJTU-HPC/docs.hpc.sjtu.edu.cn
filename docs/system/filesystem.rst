@@ -25,11 +25,11 @@ Lustre最常用于高性能计算HPC，世界超级计算机TOP 10中的70%、TO
 如何使用主文件系统
 ------------------
 
-用户通过个人账户登录计算节点（包括登录节点）之后，默认进入主文件系统，即 HOME 目录。可以在以下路径找到 /lustre 提供给用户的空间： 
+用户通过个人账户登录计算节点（包括登录节点）之后，默认进入主文件系统，即 HOME 目录。可以在以下路径找到 /lustre 提供给用户的空间：
 
 ``/lustre/home/acct-xxxx/yyyy``
 
-其中acct-xxxx代表计费账号（课题组账号），yyyy代表个人账号。
+其中acct-xxxx代表计费帐号（课题组帐号），yyyy代表个人帐号。
 
 通过 ``cd`` ``cd $HOME`` ``cd ~`` 等方式都可进入主目录。
 
@@ -56,10 +56,10 @@ Lustre最常用于高性能计算HPC，世界超级计算机TOP 10中的70%、TO
 如何使用全闪存文件系统
 ----------------------
 
-用户可以在以下路径找到 /scratch 提供的暂存空间： 
+用户可以在以下路径找到 /scratch 提供的暂存空间：
 ``/scratch/home/acct-xxxx/yyyy``
 
-其中acct-xxxx代表计费账号（课题组账号），yyyy代表个人账号。
+其中acct-xxxx代表计费帐号（课题组帐号），yyyy代表个人帐号。
 
 为了快捷访问，我们已经为用户设置好环境变量，``cd $SCRATCH`` 即可进入该临时工作目录。
 
@@ -81,7 +81,7 @@ Lustre最常用于高性能计算HPC，世界超级计算机TOP 10中的70%、TO
     #SBATCH --exclusive
 
     echo "##### 加载相关软件 #####"
-    module load bwa samtools  
+    module load bwa samtools
     module load miniconda3 && source activate 10_24  # gatk-4.1.9.0
 
     echo "##### 设置变量 #####"
@@ -160,7 +160,7 @@ Lustre最常用于高性能计算HPC，世界超级计算机TOP 10中的70%、TO
 
 用户可以在以下路径找到 /archive 提供的个人存储空间: ``/archive/home/acct-xxxx/yyyy``
 
-其中 acct-xxxx 代表计费账号（课题组账号），yyyy 代表个人账号。
+其中 acct-xxxx 代表计费帐号（课题组帐号），yyyy 代表个人帐号。
 
 为了快捷访问，我们已经为用户设置好环境变量，``cd $ARCHIVE`` 即可进入。
 

@@ -16,6 +16,7 @@
 
 使用Singularity加载集群预编译的镜像
 ===================================
+
 π 集群拥有丰富的预编译镜像资源。针对不同的硬件架构，我们制作了不同的基础镜像与应用镜像。您可以访问我们的 `Docker Hub主页 <https://hub.docker.com/u/sjtuhpc>`_ 查看已经制作的镜像。
 
 目前我们在 Docker Hub 上开源的镜像仓库主要有：
@@ -95,18 +96,132 @@ Singularity可以从Docker Hub(以 ``docker://`` 开头)、Singularity Hub(以 `
 
 .. _dockerized_singularity:
 
-按需定制Singularity镜像
-=======================
-
-Singularity使用“镜像定义文件”(Definition File)描述镜像构建过程。
-镜像定义文是一个文本文件，描述了构建镜像使用的基本镜像、构建过程执行的命令，其中不少命令通常需要root特权，如软件包管理命令 ``yum``, ``apt-get`` 等等。
-运行Singularity容器构建命令 ``singularity build`` ，以及构建过程中在镜像内部的系统相关命令，都需要root特权，因此构建容器的操作通常在您自管的、具有root特权的计算机上完成。
-在HPC等共享集群环境中，普通用户没有root权限，因而无法在集群上定制和构建镜像。
-
-
-在π超算集群上，我们采用“容器化的Singularity”，允许用户在一个受限的环境内以普通用户身份“模拟”root特权，编写自定义的镜像文件，从定义文件构建镜像，并将镜像传回集群使用。
+通过交互式Shell构建Singularity镜像
+==================================
 
 .. tip:: 构建Singularity容器镜像通常需要root特权，通常超算集群不支持这样的操作。π超算集群的“容器化的Singularity”允许用户编写、构建和传回自定义容器镜像。
+
+在π超算集群上，我们采用“容器化的Singularity”，允许用户在一个受限的环境内以普通用户身份“模拟”root特权，保存成Singularity镜像，并将镜像传回集群使用。
+
+首先从登录节点使用用户名 ``build`` 跳转到专门用于构建容器镜像的节点。
+需要注意的是，X86节点(用于 ``cpu`` ``small`` ``huge`` 等队列)和国产ARM节点(用于 ``arm128c256g`` 队列)的处理器指令集是不兼容的，需使用对应的镜像构建节点。
+
+.. tip:: 请选择与目标主机(x86或arm)相匹配的容器构建节点。
+
+从登录节点跳转X86容器构建节点：
+
+.. code:: console
+
+   $ ssh build@container-x86
+   $ hostname
+   container-x86.pi.sjtu.edu.cn
+
+从登录节点跳转ARM容器构建节点：
+
+.. code:: console
+
+   $ ssh build@container-arm
+   $ hostname
+   container-arm.pi.sjtu.edu.cn
+
+.. caution:: 出于安全考虑， ``container-x86`` 和 ``container-arm`` 节点每天 **23:59** 重启节点并清空数据，请及时转移容器构建节点上的数据。``build`` 为共享用户，请勿修改自己工作目录外的数据，以免影响其他用户的使用。
+
+由于所有用户共享使用 ``build`` 用户，需要创建专属工作目录，在工作目录中构建镜像。
+我们使用 ``mktemp -d`` 命令在 ``/tmp`` 目录下创建名字带有随机字符的工作目录。
+
+.. code:: console
+
+   $ cd $(mktemp -d)
+   $ pwd
+   /tmp/tmp.sr7C5813M9
+
+使用 ``docker`` 下载基础操作系统镜像。
+
+.. code:: console
+
+  $ docker pull centos:8
+
+使用 ``docker images`` 查看本地可用的基础镜像列表。
+
+.. code:: console
+
+  $ docker images
+  REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+  centos       8         5d0da3dc9764   4 weeks ago   231MB
+
+使用 ``docker run -it IMAGE_ID`` 从基础镜像创建容器(container)实例，并以 ``root`` 身份进入容器内。
+
+.. code:: console
+
+  $ docker run -it --name=MY_USERNAME_DATE 5d0da3dc9764 /bin/bash
+
+然后以 ``root`` 特权修改容器内容，例如安装软件等。
+
+.. code:: console
+
+  [root@68bdb5af0da9 /]# whoami
+  root
+  [root@68bdb5af0da9 /]# yum check-update
+  ...
+  [root@68bdb5af0da9 /]# yum install tree
+  ...
+  [root@68bdb5af0da9 /]# tree --version
+  tree v1.7.0 (c) 1996 - 2014 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro
+
+操作结束后退出容器，回到 ``build`` 用户身份下。
+
+.. code:: console
+
+  [root@68bdb5af0da9 /]# exit
+  [build@container-x86 ~]$ whoami
+  build
+
+使用 ``docker ps -a`` 查看与先前定义名字对应的container ID，在这个示例中是 ``MY_USERNAME_DATE`` 。
+
+.. code:: console
+
+  [build@container-x86 ~]$ docker ps -a
+  CONTAINER ID   IMAGE          COMMAND        CREATED         STATUS                     PORTS     NAMES
+  515e913f12cb   5d0da3dc9764   "/bin/bash"    4 seconds ago   Exited (0) 2 seconds ago             MY_USERNAME_DATE
+
+使用 ``docker commit CONTAINER_ID IMG_NAME`` 提交容器变更。
+
+.. code:: console
+
+  $ docker commit 515e913f12cb my_username_app_img
+
+此时使用 ``docker images`` 可以在容器镜像列表中看到刚刚提交的容器变更。
+
+.. code:: console
+
+  $ docker images
+  REPOSITORY            TAG       IMAGE ID       CREATED              SIZE
+  my_username_app_img   latest    c26c43a0cc9b   About a minute ago   279MB
+
+将Docker容器保存为可在超算平台上使用的Singularity镜像。
+
+.. code:: console
+
+  $ SINGULARITY_NOHTTPS=1 singularity build my_username_app_img.sif docker-daemon://my_username_app_img:latest
+  INFO:    Starting build...
+  INFO:    Creating SIF file...
+  INFO:    Build complete: my_username_app_img.sif
+
+使用 ``scp sample-x86.sif YOUR_USERNAME@login1:~/`` 将Singularity镜像文件复制到超算集群家目录后，可以使用 ``singularity`` 命令测试镜像文件，从 ``/etc/redhat-release`` 内容和 ``tree`` 命令版本看，确实进入了与宿主操作系统不一样的运行环境。
+
+.. code:: console
+
+  $ singularity exec my_username_app_img.sif cat /etc/redhat-release
+  CentOS Linux release 8.4.2105
+  $ singularity exec my_username_app_img.sif tree --version
+  tree v1.7.0 (c) 1996 - 2014 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro 
+
+通过Definition File构建Singularity镜像
+======================================
+
+Singularity还可以使用“镜像定义文件”(Definition File)描述镜像构建过程。镜像定义文是一个文本文件，描述了构建镜像使用的基本镜像、构建过程执行的命令，如软件包管理命令 ``yum``, ``apt-get`` 等等。
+
+.. tip:: 上一节交互式操作的命令操作过程，就是镜像定义文件的主要内容。
 
 首先从登录节点使用用户名 ``build`` 跳转到专门用于构建容器镜像的节点。
 需要注意的是，X86节点(用于 ``cpu`` ``small`` ``huge`` 等队列)和国产ARM节点(用于 ``arm128c256g`` 队列)的处理器指令集是不兼容的，需使用对应的镜像构建节点。
@@ -296,6 +411,309 @@ Singularity使用“镜像定义文件”(Definition File)描述镜像构建过�
     mpirun -n $SLURM_NTASKS singularity exec $IMAGE_NAME snappyHexMesh -overwrite -parallel
     mpirun -n $SLURM_NTASKS singularity exec $IMAGE_NAME potentialFoam -parallel
     mpirun -n $SLURM_NTASKS singularity exec $IMAGE_NAME simpleFoam -parallel
+
+
+
+AI平台容器编译
+===========================
+与x86平台容器编译方式类似，在AI平台也有三种容器构建方式：
+
+1. 使用Singularity加载AI平台预编译的镜像。
+2. 使用Singularity拉取远端镜像。
+3. 按需定制Singularity镜像。
+
+拉取AI平台预编译的镜像
+-------------------------
+
+AI平台的基础与应用镜像分别托管在以下Docker Hub仓库：
+  - `x86平台基础镜像 <https://hub.docker.com/r/sjtuhpc/hpc-base-container>`_
+  - `x86平台应用镜像 <https://hub.docker.com/r/sjtuhpc/hpc-app-container>`_
+
+如该镜像的tag带有gpu字样，则该镜像为AI平台预编译镜像，此时可用 ``singularity pull`` 命令拉去该镜像到本地直接使用。
+
+以下示例拉取预编译的GPU版gromacs镜像到本地：
+
+.. code:: console
+
+    $ unset XDG_RUNTIME_DIR  
+    $ unset SINGULARITY_BIND
+    $ unset MODULEPATH
+    $ singularity pull docker://sjtuhpc/hpc-app-container:gromacs-gpu-2019
+
+
+查看生成的镜像文件
+
+.. code:: console
+
+    $ ls
+    gromacs-gpu-2019.sif
+    
+使用自己制作的镜像文件运行提交gromacs作业：
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH -J gromacs_gpu_test
+    #SBATCH -p dgx2
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=12
+    #SBATCH --cpus-per-task=1
+    #SBATCH --gres=gpu:2
+    
+    srun --mpi=pmi2 singularity run --nv gromacs-gpu-2019.sif gmx_mpi mdrun -deffnm benchmark -ntomp 1 -s ./ion_channel.tpr
+
+
+使用Singularity拉取外部预编译应用镜像
+---------------------------------------------
+
+您可以使用 ``singularity pull`` 拉取远端预编译的镜像，从而直接使用外部预预编译镜像仓库提供的丰富软件资源。
+Singularity可以从Docker Hub(以 ``docker://`` 开头)、Singularity Hub(以 ``shub://`` 开头)等地址拉取镜像。
+如下命令从Docker Hub拉取NGC构建的Pytorch镜像，保存成名为 ``pytorch_21.10-py3.sif`` 的镜像文件：
+
+.. code:: console
+
+    $ singularity pull docker://nvcr.io/nvidia/pytorch:21.10-py3
+
+查看生成的镜像文件
+
+.. code:: console
+
+    $ ls centos8.sif
+    pytorch_21.10-py3.sif
+
+申请GPU节点资源，加载容器镜像，并且在容器环境中运行 ``python -c "import torch"`` 命令查看有无报错：
+
+.. code:: console
+
+    $ singularity run --nv  pytorch_21.10-py3.sif python -c "import torch"
+
+没有报错说明镜像中的pytorch已经加载成功。
+
+
+通过交互式Shell构建AI应用镜像
+--------------------------------------
+
+.. tip:: 构建Singularity容器镜像通常需要root特权，通常超算集群不支持这样的操作。π超算集群的“容器化的Singularity”允许用户编写、构建和传回自定义容器镜像。
+
+在π超算集群上，我们采用“容器化的Singularity”，允许用户在一个受限的环境内以普通用户身份“模拟”root特权，保存成Singularity镜像，并将镜像传回集群使用。
+
+从登录节点跳转X86容器构建节点：
+
+.. code:: console
+
+   $ ssh build@container-x86
+   $ hostname
+   container-x86.pi.sjtu.edu.cn
+
+.. caution:: 出于安全考虑， ``container-x86`` 和 ``container-arm`` 节点每天 **23:59** 重启节点并清空数据，请及时转移容器构建节点上的数据。``build`` 为共享用户，请勿修改自己工作目录外的数据，以免影响其他用户的使用。
+
+由于所有用户共享使用 ``build`` 用户，需要创建专属工作目录，在工作目录中构建镜像。
+我们使用 ``mktemp -d`` 命令在 ``/tmp`` 目录下创建名字带有随机字符的工作目录。
+
+.. code:: console
+
+   $ cd $(mktemp -d)
+   $ pwd
+   /tmp/tmp.sr7C5813M9
+
+使用 ``docker`` 下载基础操作系统镜像。
+
+.. code:: console
+
+  $ docker pull centos:8
+
+使用 ``docker images`` 查看本地可用的基础镜像列表。
+
+.. code:: console
+
+  $ docker images
+  REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
+  centos       8         5d0da3dc9764   4 weeks ago   231MB
+
+使用 ``docker run -it IMAGE_ID`` 从基础镜像创建容器(container)实例，并以 ``root`` 身份进入容器内。
+
+.. code:: console
+
+  $ docker run -it --name=MY_USERNAME_DATE 5d0da3dc9764 /bin/bash
+
+然后以 ``root`` 特权修改容器内容，例如安装软件等。
+
+.. code:: console
+
+  [root@68bdb5af0da9 /]# whoami
+  root
+  [root@68bdb5af0da9 /]# yum check-update
+  ...
+  [root@68bdb5af0da9 /]# yum install tree
+  ...
+  [root@68bdb5af0da9 /]# tree --version
+  tree v1.7.0 (c) 1996 - 2014 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro
+
+操作结束后退出容器，回到 ``build`` 用户身份下。
+
+.. code:: console
+
+  [root@68bdb5af0da9 /]# exit
+  [build@container-x86 ~]$ whoami
+  build
+
+使用 ``docker ps -a`` 查看与先前定义名字对应的container ID，在这个示例中是 ``MY_USERNAME_DATE`` 。
+
+.. code:: console
+
+  [build@container-x86 ~]$ docker ps -a
+  CONTAINER ID   IMAGE          COMMAND        CREATED         STATUS                     PORTS     NAMES
+  515e913f12cb   5d0da3dc9764   "/bin/bash"    4 seconds ago   Exited (0) 2 seconds ago             MY_USERNAME_DATE
+
+使用 ``docker commit CONTAINER_ID IMG_NAME`` 提交容器变更。
+
+.. code:: console
+
+  $ docker commit 515e913f12cb my_username_app_img
+
+此时使用 ``docker images`` 可以在容器镜像列表中看到刚刚提交的容器变更。
+
+.. code:: console
+
+  $ docker images
+  REPOSITORY            TAG       IMAGE ID       CREATED              SIZE
+  my_username_app_img   latest    c26c43a0cc9b   About a minute ago   279MB
+
+将Docker容器保存为可在超算平台上使用的Singularity镜像。
+
+.. code:: console
+
+  $ SINGULARITY_NOHTTPS=1 singularity build my_username_app_img.sif docker-daemon://my_username_app_img:latest
+  INFO:    Starting build...
+  INFO:    Creating SIF file...
+  INFO:    Build complete: my_username_app_img.sif
+
+使用 ``scp sample-x86.sif YOUR_USERNAME@login1:~/`` 将Singularity镜像文件复制到超算集群家目录后，可以使用 ``singularity`` 命令测试镜像文件，从 ``/etc/redhat-release`` 内容和 ``tree`` 命令版本看，确实进入了与宿主操作系统不一样的运行环境。
+
+.. code:: console
+
+  $ singularity exec my_username_app_img.sif cat /etc/redhat-release
+  CentOS Linux release 8.4.2105
+  $ singularity exec my_username_app_img.sif tree --version
+  tree v1.7.0 (c) 1996 - 2014 by Steve Baker, Thomas Moore, Francesc Rocher, Florian Sesser, Kyosuke Tokoro 
+
+
+通过Definition File构建AI应用镜像
+-----------------------------------------
+Singularity还可以使用“镜像定义文件”(Definition File)描述镜像构建过程。镜像定义文件是一个文本文件，描述了构建镜像使用的基本镜像、构建过程执行的命令，如软件包管理命令 ``yum``, ``apt-get`` 等等。
+
+从登录节点跳转X86容器构建节点：
+
+.. code:: console
+
+   $ ssh build@container-x86
+   $ hostname
+   container-x86.pi.sjtu.edu.cn
+
+
+.. caution:: 出于安全考虑， ``container-x86`` 和 ``container-arm`` 节点每天 **23:59** 重启节点并清空数据，请及时转移容器构建节点上的数据。``build`` 为共享用户，请勿修改自己工作目录外的数据，以免影响其他用户的使用。
+
+由于所有用户共享使用 ``build`` 用户，需要创建专属工作目录，在工作目录中构建镜像。
+我们使用 ``mktemp -d`` 命令在 ``/tmp`` 目录下创建名字带有随机字符的工作目录。
+
+.. code:: console
+
+   $ cd $(mktemp -d)
+   $ pwd
+   /tmp/tmp.sr7C5813M9
+
+我们准备一个镜像定义文件 ``sample.def`` ，内容如下::
+
+    BootStrap: docker
+    From: sjtuhpc/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0
+    Stage: build
+    %post
+        . /.singularity.d/env/10-docker*.sh
+
+    %post
+        yum install -y \
+            epel-release
+        yum install -y \
+            cmake3 \
+            make \
+            wget
+        ln -s /usr/bin/cmake3 /usr/bin/cmake
+        rm -rf /var/cache/yum/*
+
+    # Gromacs version 2020
+    %post
+        mkdir -p /var/tmp && wget -q -nc --no-check-certificate -P /var/tmp http://ftp.gromacs.org/pub/gromacs/gromacs-2019.6.tar.gz
+        mkdir -p /var/tmp && tar -x -f /var/tmp/gromacs-2019.6.tar.gz -C /var/tmp -z
+        mkdir -p /var/tmp/gromacs-2019.6/build && cd /var/tmp/gromacs-2019.6/build
+        cmake -DCMAKE_INSTALL_PREFIX=/opt/gromacs -D CUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda \
+              -D CMAKE_BUILD_TYPE=Release -D GMX_SIMD=AVX_512 \
+              -D GMX_BUILD_OWN_FFTW=ON -D GMX_GPU=ON -D GMX_MPI=ON -D GMX_OPENMP=ON \
+              -D GMX_PREFER_STATIC_LIBS=ON /var/tmp/gromacs-2019.6
+        cmake --build /var/tmp/gromacs-2019.6/build --target all -- -j$(nproc)
+        cmake --build /var/tmp/gromacs-2019.6/build --target install -- -j$(nproc)
+        rm -rf /var/tmp/gromacs-2019.6 /var/tmp/gromacs-2019.6.tar.gz
+    %environment 
+        export LD_LIBRARY_PATH=/opt/gromacs/lib64:$LD_LIBRARY_PATH \
+        epxort PATH=/opt/gromacs/bin:$PATH
+
+
+    BootStrap: docker
+    From: sjtuhpc/hpc-base-container:gcc-8.cuda-10.2.ompi-4.0
+    %post
+        . /.singularity.d/env/10-docker*.sh
+
+    # Gromacs version 2020
+    %files from build
+        /opt/gromacs /opt/gromacs
+    %environment
+        export LD_LIBRARY_PATH=/opt/gromacs/lib64:$LD_LIBRARY_PATH
+        export PATH=/opt/gromacs/bin:$PATH
+    
+构建的镜像保存在当前目录 ``sample-x86.sif`` ：
+
+.. code:: console
+
+    $ docker run --privileged --rm -v \
+         ${PWD}:/home/singularity \
+         sjtuhpc/centos7-singularity:x86 \
+         singularity build /home/singularity/sample-x86.sif /home/singularity/sample.def
+
+
+在镜像构建过程中“模拟”了root特权，因此生成镜像文文件属主是root：
+
+.. code:: console
+
+    $  ls -alh *.sif
+    -rwxr-xr-x 1 root root 475M Jun  3 22:43 sample-x86.sif
+
+将构建出的镜像从 ``container`` 节点传回登录节点的家目录中：
+
+.. code:: console
+
+   $ scp sample-x86.sif YOUR_USERNAME@login1:~/
+
+
+然后编写作业脚本提交到作业调度系统。
+下面这个作业脚本示例使用刚才构建的Gromacs GPU版镜像:
+
+.. code:: console
+
+    #!/bin/bash
+    #SBATCH -J gromacs_gpu_test
+    #SBATCH -p dgx2
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=12
+    #SBATCH --cpus-per-task=1
+    #SBATCH --gres=gpu:2
+    
+    srun --mpi=pmi2 singularity run --nv sample-x86.sif gmx_mpi mdrun -deffnm benchmark -ntomp 1 -s ./ion_channel.tpr
+
+
+
 
 参考资料
 ========

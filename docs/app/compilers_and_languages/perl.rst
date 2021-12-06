@@ -46,8 +46,8 @@ PERL
     [local::lib] 
    ...
 
-拓展模块下载示例
-----------------
+拓展模块cpan安装示例
+--------------------
 
 .. code:: bash
 
@@ -61,6 +61,7 @@ PERL
    cpan> install Encode
 
 手动拓展模块下载示例(不推荐)
+----------------------------
 
 .. code:: bash
 
@@ -69,6 +70,15 @@ PERL
    $ cd Net-Server-0.97
    $ perl Makefile.PL
    $ make test
+
+拓展模块conda安装示例(推荐)
+----------------------------
+
+.. code:: bash
+
+   $ source activate PERL # 进入创建的conda环境
+   $ conda install -c bioconda perl-pdf-api2
+   $ perl -MPDF::API2 -e '' # 无报错说明模块安装成功
 
 查看已下载的perl拓展模块
 ------------------------
