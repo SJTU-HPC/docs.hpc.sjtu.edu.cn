@@ -66,6 +66,8 @@ build_html_pages:
   needs:
     - job: build_latex_pdf
       artifacts: true
+    - job: build_minimanual_pdf
+      artifacts: true
   before_script:
     - mkdir -p .build_cache
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
@@ -84,6 +86,9 @@ build_html_pages:
      
 deploy_to_jianwen_me:
   stage: deploy
+  needs:
+    - job: build_html_pages:
+      artifacts: true
   tags:
     - shell.web.hpc.sjtu.edu.cn
   only:
