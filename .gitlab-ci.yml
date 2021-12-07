@@ -87,7 +87,7 @@ build_html_pages:
 deploy_to_jianwen_me:
   stage: deploy
   needs:
-    - job: build_html_pages:
+    - job: build_html_pages
       artifacts: true
   tags:
     - shell.web.hpc.sjtu.edu.cn
