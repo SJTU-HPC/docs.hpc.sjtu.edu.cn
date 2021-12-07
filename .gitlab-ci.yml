@@ -84,20 +84,6 @@ build_html_pages:
     paths:
       - .build_cache
      
-deploy_to_jianwen_me:
-  stage: deploy
-  needs:
-    - job: build_html_pages
-      artifacts: true
-  tags:
-    - shell.web.hpc.sjtu.edu.cn
-  only:
-    - branches
-  except:
-    - master
-  script:
-    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.jianwen.me/
-
 deploy_html_to_hpc:
   stage: deploy
   tags:
