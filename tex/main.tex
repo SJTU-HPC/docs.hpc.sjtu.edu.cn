@@ -1,15 +1,15 @@
 \documentclass[cn, 12pt, hang, black, chinese]{elegantbook}
 
-\title{ElegantBook：优美的 \LaTeX{} 书籍模板}
-\subtitle{Elegant\LaTeX{} 经典之作}
+\title{上海交通大学校级超算平台简明使用手册}
+% \subtitle{Elegant\LaTeX{} 经典之作}
 
-\author{Ethan Deng \& Liam Huang}
-\institute{Elegant\LaTeX{} Program}
-\date{May 2, 2021}
-\version{4.1}
-\bioinfo{自定义}{信息}
+\author{上海交通大学网络信息中心}
+\institute{计算业务部}
+\date{2021年12月}
+\version{1.2}
+% \bioinfo{自定义}{信息}
 
-\extrainfo{各人自扫门前雪，休管他人瓦上霜。—— 陈元靓}
+% \extrainfo{各人自扫门前雪，休管他人瓦上霜。—— 陈元靓}
 
 \setcounter{tocdepth}{3}
 
@@ -28,36 +28,37 @@
 \maketitle
 \frontmatter
 
-\chapter*{特别声明}
+\chapter*{用户需知}
 
-\markboth{Introduction}{前言}
+\markboth{Introduction}{用户需知}
 
-自 2019 年 Elegant\LaTeX{} 系列模板上线 GitHub、CTAN 以来，受到很多用户的喜爱。
-
-2020 年，我打算做 Elegant\LaTeX{} 的最后一个版本，也就是原定计划 ElegantBook 4.x 版本为 Elegant\LaTeX{} 系列模板的终止符。基于我想把 4.x 做成一个最终版本，我计划了很多事情，包括将代码转为 dtx，将三个模板的文档打包进 dtx 里面，然后重新设计封面，补充各种页面，增加元素等等。我想的很多，但是做起来并不是很顺利，中间也发生了很多事情，不想解释。直至今年 4 月，我决定，不论如何，先把 4.1 发布出来。
-
-\vskip 0.5cm
-
-另外，在临近 Elegant\LaTeX{} 模板告别之际，我想和各位用户说：多分享，多奉献。
-
-\vskip 0.5cm
-
-\underline{如果你无法认同我的想法，建议直接删除本模板。}
-
-\vskip 1.5cm
-
-\begin{flushright}
-Ethan Deng\\
-May 2, 2021
-\end{flushright}
+\begin{enumerate}
+\item 帐号负责人必须为交大及附属医院在职教师及博士后。
+\item 请妥善保管帐号，一人一号，不得外借。一个主帐号可免费申请四个子帐号，若申请超过 四个子帐号，需额外付费。
+\item 本计算平台仅为教学和科研目的服务，严禁用于军工等涉密课题。
+\item 用户在申请帐号前请仔细阅读相关管理办法，确保在使用过程中遵守相关规章制度，维护 平台环境，不得用于与教学或科研无关的事宜(例如挖矿)。禁止主观破坏集群环境的行为。 一经发现，将立即终止服务。
+\item 用户须自行备份重要的数据及相关文件。
+\item 更详细的平台使用方式，请查看用户使用文档： \href{https://docs.hpc.sjtu.edu.cn}{https://docs.hpc.sjtu.edu.cn} 。
+\item 获取技术支持，请联系 \href{mailto:computing@sjtu.edu.cn}{computing@sjtu.edu.cn} 。
+\end{enumerate}
 
 \tableofcontents
 
 \mainmatter
 
-\chapter{Elegant\LaTeX{} 系列模板介绍}
+\chapter{超算平台硬件配置}
+
+\section{计算系统}
+
+\section{存储系统}
 
 Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。
+
+\chapter{登陆超算平台}
+
+\section{SSH命令行登陆}
+
+\section{HPC Studio可视化登陆}
 
 我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
 \begin{itemize}
