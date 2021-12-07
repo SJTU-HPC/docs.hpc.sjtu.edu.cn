@@ -18,6 +18,25 @@ fail_if_contain_raw_html:
   script:
     - ack '.*raw.*html' docs && false || true
 
+build_minimanual_pdf:
+  stage: build pdf
+  image: sjtuhpc/texlive-sphinx
+  tags:
+    - docker
+  before_script:
+    - mkdir -p .build_cache
+    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
+  script:
+    - make -C tex all
+  artifacts:
+    paths:
+      - tex/main.pdf
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - .build_cache
+
+
 build_latex_pdf:
   stage: build pdf
   image: sjtuhpc/texlive-sphinx
@@ -53,6 +72,7 @@ build_html_pages:
   script:
     - mkdir docs/_static || true
     - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
+    - cp tex/main.pdf docs/_static/hpcminimanual.pdf
     - make -C docs clean html
   artifacts:
     paths:
