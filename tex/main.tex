@@ -50,9 +50,41 @@
 
 \section{计算系统}
 
+\begin{tabule}
+\small
+\begin{tabular}{ |c|c|c|c|c| }
+ \hline
+ 队列 & 架构 & 参数 & 描述 & 数量 \\
+ \hline \hline
+ \makecell[l]{small,cpu,\\ debug} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20\\ cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{由 656 台双路节点 x86 服务器组成，\\每台服务器配备 40 核（2.5GHz）、\\192G 内存（12通道 DDR4 2666），\\共计 26240 个 CPU 核、48T 内存。\\ 双精度理论峰值性能达到了 \\2.1 PFLOPS} & 656\\
+ \hline
+ \makecell[l]{huge} & x86 & \makecell[l]{CPU: 4 x Intel Xeon Scalable\\ SkyLake 6148(2.4GHz, 20 cores)\\Mem: 48 x Hynix 64GB DDR4\\ ECC REG 2666} & \makecell[l]{每台拥有 80 核、3T 内存（48 通道\\ DDR4 2666），共计 160 核、6T 内存} & 2\\
+ \hline
+ \makecell[l]{192c6t} & x86 & \makecell[l]{CPU: 8 x Intel Xeon Platinum\\ 8260(2.4GHz，24 cores)\\Mem: 98 x Samsung 64GB DDR4 \\2666} & \makecell[l]{拥有 192 核、6T 内存（98 通道 \\DDR4 2666）} & 1\\
+ \hline
+ \makecell[l]{arm128c256g} & arm & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426(2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备 128 核（2.6 GHz）、\\256 GB 内存（16 通道\\ DDR4-2933）、240 GB 本地硬盘，\\节点间采用 IB 高速互联} & 100\\
+ \hline
+ \makecell[l]{dgx2} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2\\服务器组成，每台 DGX-2 配置\\ 16 块 Tesla V100 GPU 加速卡，\\2 颗 Intel 至强铂金 8168 CPU，\\1.5 TB DDR4 内存，\\30 TB NVMe SSD \\和 512GB HBM2 显存。\\其双精度计算能力达到\\ 1 PFLOPS（千万亿次），\\张量计算能力达到 16 PFLOPS} & 8\\
+ \hline
+\end{tabular}
+\begin{tabule}
+
 \section{存储系统}
 
-Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模板方便用户使用。目前由 \href{https://github.com/ElegantLaTeX/ElegantNote}{ElegantNote}，\href{https://github.com/ElegantLaTeX/ElegantBook}{ElegantBook}，\href{https://github.com/ElegantLaTeX/ElegantPaper}{ElegantPaper} 组成，分别用于排版笔记，书籍和工作论文。强烈推荐使用最新正式版本！本文将介绍本模板的一些设置内容以及基本使用方法。如果您有其他问题，建议或者意见，欢迎在 GitHub 上给我们提交 \href{https://github.com/ElegantLaTeX/ElegantBook/issues}{issues} 或者邮件联系我们。
+\begin{tabule}
+\small
+\begin{tabular}{ |c|c|c|c| }
+ \hline
+ 名称 & 类别 & 配置 & 容量 \\
+ \hline \hline
+ lustre & 主文件系统 & \makecell[l]{使用 HDD 盘搭建，旨在提供大容量、高可用、\\较高性能的存储供用户使用。搭建过程中，使用\\ RAID 保障硬盘级别的数据安全，使用 HA\\（High Availability） 保障服务器级别的\\高可用。} & 14P\\
+ \hline
+ scratch & 全闪存文件系统 & \makecell[l]{使用全套的 SSD（NVMe协议） 硬盘搭建，\\旨在提供高性能的存储供用户使用，可更好地支持\\ IO 密集型作业。对系统来说，单客户端\\最大读带宽达 5.7GB/s，最大写带宽达\\ 10GB/s；4k 小文件读 IOPS 达 170k，\\写 IOPS 达 126k。但同时，由于成本问题，\\系统提供的容量较小；在搭建时也未设置高可用\\和数据备份，存在数据存储安全性不高等问题。} & 108T\\
+ \hline
+ archive & 归档文件系统 & \makecell[l]{使用机械硬盘搭建，可提供大容量、高可用的\\存储供用户使用。搭建过程中，使用 RAID \\保障硬盘级别的数据安全，使用 HA\\（High Availability） 保障服务器级别的高可用。\\归档文件系统作为主文件系统的一个补充，\\主要提供给用户存储不常用的数据（冷数据），\\从而释放主文件系统的存储空间、缓解主文件\\系统的存储压力。} & 3P\\
+ \hline
+\end{tabular}
+\begin{tabule}
 
 \chapter{登陆超算平台}
 
@@ -68,7 +100,7 @@ Elegant\LaTeX{} 项目组致力于打造一系列美观、优雅、简便的模�
   \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
   \item 微博：Elegant\LaTeX{}
   \item 微信公众号：Elegant\LaTeX{}
-  \item 用户 QQ 群：692108391 
+  \item 用户 QQ 群：692108391
   \item 邮件：\email{elegantlatex2e@gmail.com}
 \end{itemize}
 
@@ -117,7 +149,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 通过命令行（管理员权限）输入下面的命令对 tlmgr 自身和全部宏包进行更新。
 
 \begin{lstlisting}
-  tlmgr update --self 
+  tlmgr update --self
   tlmgr update --all
 \end{lstlisting}
 
@@ -140,7 +172,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 \section{语言模式}
 本模板内含两套基础语言环境 \lstinline{lang=cn}、\lstinline{lang=en}。改变语言环境会改变图表标题的引导词（图，表），文章结构词（比如目录，参考文献等），以及定理环境中的引导词（比如定理，引理等）。不同语言模式的启用如下：
 \begin{lstlisting}
-\documentclass[cn]{elegantbook} 
+\documentclass[cn]{elegantbook}
 \documentclass[lang=cn]{elegantbook}
 \end{lstlisting}
 
@@ -171,7 +203,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 \section{颜色主题}
 
-本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为 
+本模板内置 5 组颜色主题，分别为 \textcolor{structure1}{\lstinline{green}}\footnote{为原先默认主题。}、\textcolor{structure2}{\lstinline{cyan}}、\textcolor{structure3}{\lstinline{blue}}（默认）、\textcolor{structure4}{\lstinline{gray}}、\textcolor{structure5}{\lstinline{black}}。另外还有一个自定义的选项  \lstinline{nocolor}。调用颜色主题 \lstinline{green} 的方法为
 \begin{lstlisting}
 \documentclass[green]{elegantbook} %or
 \documentclass[color=green]{elegantbook}
@@ -182,18 +214,18 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
   \centering
   \begin{tabular}{ccccccc}
   \toprule
-    & \textcolor{structure1}{green} 
-    & \textcolor{structure2}{cyan} 
+    & \textcolor{structure1}{green}
+    & \textcolor{structure2}{cyan}
     & \textcolor{structure3}{blue}
-    & \textcolor{structure4}{gray} 
-    & \textcolor{structure5}{black} 
+    & \textcolor{structure4}{gray}
+    & \textcolor{structure5}{black}
     & 主要使用的环境\\
   \midrule
     structure & \ccr{structure1}
     & \ccr{structure2}
-    & \ccr{structure3} 
-    & \ccr{structure4} 
-    & \ccr{structure5} 
+    & \ccr{structure3}
+    & \ccr{structure4}
+    & \ccr{structure5}
     & chapter \ section \ subsection \\
     main      & \ccr{main1}
     & \ccr{main2}
@@ -220,8 +252,8 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 如果需要自定义颜色的话请选择 \lstinline{nocolor} 选项或者使用 \lstinline{color=none}，然后在导言区定义 structurecolor、main、second、third 颜色，具体方法如下：
 \begin{lstlisting}[tabsize=4]]
 \definecolor{structurecolor}{RGB}{0,0,0}
-\definecolor{main}{RGB}{70,70,70}    
-\definecolor{second}{RGB}{115,45,2}    
+\definecolor{main}{RGB}{70,70,70}
+\definecolor{second}{RGB}{115,45,2}
 \definecolor{third}{RGB}{0,80,80}
 \end{lstlisting}
 
@@ -245,7 +277,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
   \end{tabular}
 \end{table}
 
-另外，额外增加一个 \lstinline{\bioinfo} 命令，有两个选项，分别是信息标题以及信息内容。比如需要显示{\kaishu User Name：111520}，则可以使用 
+另外，额外增加一个 \lstinline{\bioinfo} 命令，有两个选项，分别是信息标题以及信息内容。比如需要显示{\kaishu User Name：111520}，则可以使用
 \begin{lstlisting}
 \bioinfo{User Name}{115520}
 \end{lstlisting}
@@ -321,7 +353,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 \begin{theorem}[theorem name] \label{thm:theorem-label}
   The content of theorem.
 \end{theorem}
-% or 
+% or
 \begin{theorem} \label{thm:theorem-withou-name}
   The content of theorem without name.
 \end{theorem}
@@ -345,10 +377,10 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
      \end{tabular}%
    \label{tab:theorem-class}%
  \end{table}%
- 
+
 % \subsection{算法环境}
 
- 
+
 % \begin{algorithm}\label{alg:test}
 %   \Input{A bitmap $I$ of size $w \times l$}
 %   \Output{A partition of the bitmap}
@@ -404,7 +436,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
         \begin{itemize}
           \item first item of nestiii;
           \item second item of nestiii.
-        \end{itemize}   
+        \end{itemize}
       \end{itemize}
   \end{itemize}
 \end{minipage}
@@ -418,7 +450,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
         \begin{enumerate}
           \item first item of nestiii;
           \item second item of nestiii.
-        \end{enumerate}   
+        \end{enumerate}
       \end{enumerate}
   \end{enumerate}
 \end{minipage}
@@ -431,7 +463,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 为了方便文献样式修改，模板引入了 \lstinline{bibstyle} 和 \lstinline{citestyle} 选项，默认均为数字格式（numeric），如果需要设置为国标 GB7714-2015，需要使用：
 \begin{lstlisting}
-  \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook} 
+  \documentclass[citestyle=gb7714-2015, bibstyle=gb7714-2015]{elegantbook}
 \end{lstlisting}
 
 如果需要添加排序方式，可以在导言区加入
@@ -443,7 +475,7 @@ Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议�
 
 \section{添加序章}
 
-如果你想在第一章前面添序章，不改变原本章节序号，可以在第一章内容前面使用 
+如果你想在第一章前面添序章，不改变原本章节序号，可以在第一章内容前面使用
 \begin{lstlisting}
 \chapter*{Introduction}
 \markboth{Introduction}{Introduction}
@@ -677,7 +709,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 
 我们将通过三个步骤定义可测函数的积分。首先定义非负简单函数的积分。以下设 $E$ 是 $\mathcal{R}^n$ 中的可测集。
 
-\begin{definition}[可积性] \label{def:int} 
+\begin{definition}[可积性] \label{def:int}
 设 $ f(x)=\sum\limits_{i=1}^{k} a_i \chi_{A_i}(x)$ 是 $E$ 上的非负简单函数，其中 $\{A_1,A_2,\ldots,A_k\}$ 是 $E$ 上的一个可测分割，$a_1,a_2,\ldots,a_k$ 是非负实数。定义 $f$ 在 $E$ 上的积分为 $\int_{a}^b f(x)$
 \begin{equation}
    \label{inter}
@@ -702,7 +734,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
    \label{ex:1}
    I(t) = \int_{\mathcal{R}^1} f(x+t)g(x)dx \quad t \in \mathcal{R}^1
 \end{equation}
-是 $\mathcal{R}^1$ 上的连续函数。 
+是 $\mathcal{R}^1$ 上的连续函数。
 \end{exercise}
 
 \begin{solution}
@@ -713,7 +745,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
 即 $D(x)$ 在 $[0,1]$ 上是 Lebesgue 可积的并且积分值为零。但 $D(x)$ 在 $[0,1]$ 上不是 Riemann 可积的。
 \end{proof}
 
-\begin{theorem}[Fubini 定理] \label{thm:fubi} 
+\begin{theorem}[Fubini 定理] \label{thm:fubi}
 （1）若 $f(x,y)$ 是 $\mathcal{R}^p\times\mathcal{R}^q$ 上的非负可测函数，则对几乎处处的 $x\in \mathcal{R}^p$，$f(x,y)$ 作为 $y$ 的函数是 $\mathcal{R}^q$ 上的非负可测函数，$g(x)=\int_{\mathcal{R}^q}f(x,y) dy$ 是 $\mathcal{R}^p$ 上的非负可测函数。并且
 \begin{equation}
    \label{eq:461}
@@ -934,7 +966,7 @@ Lebesgue 积分有几种不同的定义方式。我们将采用逐步定义非�
   \item 颜色名字重命名。
 \end{change}
 
-\nocite{*} 
+\nocite{*}
 \printbibliography
 \appendix
 
