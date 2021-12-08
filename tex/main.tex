@@ -50,9 +50,9 @@
 
 \section{计算系统}
 
-\begin{tabule}
+\begin{table1}
 \small
-\begin{tabular}{ |c|c|c|c|c| }
+\begin{tabular}{ |l|c|l|l|c| }
  \hline
  队列 & 架构 & 参数 & 描述 & 数量 \\
  \hline \hline
@@ -67,12 +67,11 @@
  \makecell[l]{dgx2} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2\\服务器组成，每台 DGX-2 配置\\ 16 块 Tesla V100 GPU 加速卡，\\2 颗 Intel 至强铂金 8168 CPU，\\1.5 TB DDR4 内存，\\30 TB NVMe SSD \\和 512GB HBM2 显存。\\其双精度计算能力达到\\ 1 PFLOPS（千万亿次），\\张量计算能力达到 16 PFLOPS} & 8\\
  \hline
 \end{tabular}
-\begin{tabule}
+\end{table1}
 
 \section{存储系统}
 
-\begin{tabule}
-\small
+\begin{table2}
 \begin{tabular}{ |c|c|c|c| }
  \hline
  名称 & 类别 & 配置 & 容量 \\
@@ -84,83 +83,180 @@
  archive & 归档文件系统 & \makecell[l]{使用机械硬盘搭建，可提供大容量、高可用的\\存储供用户使用。搭建过程中，使用 RAID \\保障硬盘级别的数据安全，使用 HA\\（High Availability） 保障服务器级别的高可用。\\归档文件系统作为主文件系统的一个补充，\\主要提供给用户存储不常用的数据（冷数据），\\从而释放主文件系统的存储空间、缓解主文件\\系统的存储压力。} & 3P\\
  \hline
 \end{tabular}
-\begin{tabule}
+\end{table2}
 
-\chapter{登陆超算平台}
+\chapter{HPC和AI平台帐号申请及登录方式}
 
-\section{SSH命令行登陆}
+\section{HPC和AI平台帐号申请}
 
-\section{HPC Studio可视化登陆}
+\subsection*{谁能申请主帐号？}
+交大及附属医院在职教职工（含博士后）均能申请超算主帐号；一个主帐号下面可以免费开通4个子帐号；主帐号需绑定jAccount帐号，用于充值缴费。
 
-我们的联系方式如下，建议加入用户 QQ 群提问，这样能更快获得准确的反馈，加群时请备注 \LaTeX{} 或者 Elegant\LaTeX{} 相关内容。
-\begin{itemize}
-  \item 官网：\href{https://elegantlatex.org/}{https://elegantlatex.org/}
-  \item GitHub 网址：\href{https://github.com/ElegantLaTeX/}{https://github.com/ElegantLaTeX/}
-  \item CTAN 地址：\href{https://ctan.org/pkg/elegantbook}{https://ctan.org/pkg/elegantbook}
-  \item 下载地址：\href{https://github.com/ElegantLaTeX/ElegantBook/releases}{正式发行版}，\href{https://github.com/ElegantLaTeX/ElegantBook/archive/master.zip}{最新版}
-  \item 微博：Elegant\LaTeX{}
-  \item 微信公众号：Elegant\LaTeX{}
-  \item 用户 QQ 群：692108391
-  \item 邮件：\email{elegantlatex2e@gmail.com}
-\end{itemize}
-
-
-\section{ElegantBook 更新说明}
-
-此次为 4.x 第一个版本，在 3.x 基础上，主要更新了定理以及参考文献的支持方式，具体内容有：
-
+\subsection*{如何申请超算帐号？}
 \begin{enumerate}
-  \item \textbf{重要改动}：由原先的 \hologo{BibTeX} 改为 biblatex 编译方式（后端为 \lstinline{biber}），请注意两者之间的差异；
-  \item \textbf{重要改进}：修改对于定理写法兼容方式，提高数学公式代码的兼容性；
-  \item 页面设置改动，默认页面更宽；方便书写和阅读；
-  \item 支持目录文字以及页码跳转；
-  \item 不再维护 \hologo{pdfLaTeX} 中文支持方式，请务必使用 \hologo{XeLaTeX} 编译中文文稿。
-  \item 增加多语言选项，法语 \lstinline{lang=fr}、德语 \lstinline{lang=de}、荷兰语 \lstinline{lang=nl}、匈牙利语 \lstinline{lang=hu}、西班牙语 \lstinline{lang=es}、蒙古语 \lstinline{lang=mn} 等。
+\item 登录“我的数字交大”或者“交我办”APP，在“服务大厅”的“交我算”类别下，选择“HPC和AI平台帐号申请”，选择申请的帐号类型，并按照申请表单填写内容.
+\item 帐号负责人提交申请，需要由帐号负责人审核。审核人审批后，流程流转到网络信息中心计算业务部处理。
+\item 帐号负责人提交或审核后，会以邮件形式反馈申请结果。
 \end{enumerate}
 
-\begin{note}
-如果你使用旧版本切换到新版本时，遇到问题时，请核对文档中是否有 \lstinline{pageanchor} 字样。如果有，请删除文档中的 \lstinline|\hypersetup{pageanchor=true}|，并且在 \lstinline{\maketitle} 和 \lstinline{\tableofcontents} 之间添加 \lstinline{\frontmatter}。2.x 版本的用户请仔细查看\href{https://github.com/ElegantLaTeX/ElegantBook/wiki/convert}{跨版本转换}。
-\end{note}
+\subsection*{主帐号与子帐号的关系？}
+超算主帐号与子帐号均为独立帐号，仅在计费关系上存在关联。若课题组有数据或软件共享需求，可发邮件给我们，我们将建立 acct-XXX/share 文件夹，主帐号和子帐号均可在此文件夹下读写。
 
-\section{模板安装与更新}
+\section{登录HPC和AI平台集群}
 
-你可以通过免安装的方式使用本模板，包括在线使用和本地（文件夹内）使用两种方式，也可以通过 \TeX{} 发行版安装使用。
+\subsection*{ssh登录}
+\begin{enumerate}
+\item x86登录节点（3个: login1,login2,login3）：支持公网直接访问。\\IP地址（或主机名）：login.hpc.sjtu.edu.cn\\端口号：22
+\item arm登录节点（1个: kplogin）：内测期间需使用校内IP。\\IP地址（或主机名）：armlogin.hpc.sjtu.edu.cn\\端口号： 22
+\end{enumerate}
+*注意：\textcolor{red}{每个帐号在单个 login 节点上 session 个数不能超过4个。}
 
-\subsection{在线使用模板}
+\subsection*{HPC Studio登录}
+在浏览器中打开\href{https://studio.hpc.sjtu.edu.cn}{https://studio.hpc.sjtu.edu.cn}，直接使用超算帐号和密码登录。HPC Studio是可视化平台，提供了web shell、远程桌面、可视化软件、文件管理、作业提交等一站式服务。
 
-我们把三套模板全部上传到 \href{https://www.overleaf.com/}{Overleaf} 上了，网络便利的用户可以直接通过 Overleaf 在线使用我们的模板。使用 Overleaf 的好处是无需安装 \TeX{} Live 2020，可以随时随地访问自己的文件。查找模板，请在 Overleaf 模板库里面搜索 \lstinline{elegantlatex} 即可，你也可以直接访问\href{https://www.overleaf.com/latex/templates?addsearch=elegantlatex}{搜索结果}。选择适当的模板之后，将其 \lstinline{Open as Template}，即可把模板存到自己账户下，然后可以自由编辑以及与别人一起协作。更多关于 Overleaf 的介绍和使用，请参考 Overleaf 的\href{https://www.overleaf.com/learn}{官方文档}。
+\chapter{作业提交和查询}
 
-\begin{remark}
-Overleaf 上，中文需要使用 \hologo{XeLaTeX} 进行编译，英文建议使用 \hologo{pdfLaTeX} 编译。
-\end{remark}
+\section{作业调度系统}
+超算使用SLURM作业调度系统。SLURM （Simple Linux Utility for Resource Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
 
-\subsection{本地免安装使用}
+\subsection*{SLURM常用命令}
 
-\textbf{免安装}使用方法如下，从 GitHub 或者 CTAN 下载最新版，严格意义上只需要类文件 \lstinline{elegantbook.cls}。然后将模板文件放在你的工作目录下即可使用。这样使用的好处是，无需安装，简便；缺点是，当模板更新之后，你需要手动替换 \lstinline{cls} 文件。
+\begin{tabular}{ |l|l| }
+ \hline
+ 命令 & 功能 \\
+ \hline \hline
+ sinfo & 查看集群节点状态 \\
+ \hline
+ squeue & 查看排队作业状态 \\
+ \hline
+ sbatch & 提交作业 \\
+ \hline
+ scontrol & 查看作业参数 \\
+ \hline
+ sacct & 查看作业报告 \\
+ \hline
+ scancel & 取消作业 \\
+ \hline
+\end{tabular}
 
-\subsection{发行版安装使用}
+\subsection*{节点状态}
+drain(节点故障)，alloc(节点在用)，idle(节点可用)，down(节点下线)，mix(节点部分占用，但仍有剩余资源）
 
-本模板测试环境为 Win10 和 TeX Live 2021，如果你刚安装 \TeX{} Live 2021 用户，安装后建议升级全部宏包，升级方法：使用 cmd 运行 \lstinline{tlmgr update --all}，如果 tlmgr 需要更新，请使用 cmd 运行 \lstinline{tlmgr update --self}，如果更新过程中出现了中断，请改用 \lstinline{tlmgr update --self --all --reinstall-forcibly-removed} 更新。
+\section{队列说明}
 
-\subsection{更新问题}
+\subsection*{debug}
+测试队列；每个作业可申请1-80核；最长运行时间20分钟；节点为共享使用；计算节点使用范围：cas[011-014]
 
-如果使用 \lstinline{tlshell} 无法更新模板，请使用命令行全部更新全部宏包或者使用免安装的方法使用本模板。
+\subsection*{small}
+小规模作业队列；每个作业可申请\textcolor{red}{1-20}核；最长运行时间7天；节点为共享使用；计算节点使用范围：cas[500-636]
 
-通过命令行（管理员权限）输入下面的命令对 tlmgr 自身和全部宏包进行更新。
+\subsection*{cpu}
+cpu队列；每个作业可申请40- 24000核；最长运行时间7天；节点为独占使用；计算节点使用范围：cas[001-500]\\*注意：small和cpu队列的计算资源比例会根据实际需求动态调整
 
+\subsection*{huge}
+大内存作业队列；每个作业可申请\textcolor{red}{6-80}核；最长运行时间2天；节点为共享使用；计算节点使用范围：huge[1-2]
+
+\subsection*{192c6t}
+大内存作业队列；每个作业可申请\textcolor{red}{48-192}核；最长运行时间2天；节点为共享使用；计算节点使用范围：mass01
+
+\subsection*{arm128c256t}
+国产平台arm节点作业队列；每个作业可申请1-12800核；最长运行时间3天；节点为共享使用；计算节点使用范围：kp[001-100]
+
+\subsection*{dgx2}
+gpu队列；每个作业可申请1-128卡；推荐每卡配比CPU为6；最长运行时间3天；节点为共享使用；计算节点使用范围：vol[01-08]
+
+\section{交互式作业}
+
+交互式作业主要用于软件安装、程序调试等需要交互式操作的任务。作业运行建议使用sbatch作业提交的方式，更利于报错定位和计算资源使用情况查询。以下为超算两种交互式作业的方式：
+
+\subsection*{srun交互式作业}
+启动远程主机bash终端：
 \begin{lstlisting}
-  tlmgr update --self
-  tlmgr update --all
+  srun -p small -n 4--pty /bin/bash
 \end{lstlisting}
 
-更多的内容请参考 \href{https://tex.stackexchange.com/questions/55437/how-do-i-update-my-tex-distribution}{How do I update my \TeX{} distribution?}
+\subsection*{salloc交互式作业}
+通过salloc请求资源，然后在获取节点后登录到计算节点：
+\begin{lstlisting}
+  salloc -N 1 -n 4 -p small
+  ssh casxxx
+\end{lstlisting}
 
-\subsection{其他发行版本}
+\section{作业脚本提交}
 
-由于宏包版本问题，本模板不支持 C\TeX{} 套装，请务必安装 TeX Live。更多关于 \TeX{} Live 的安装使用以及 C\TeX{} 与 \TeX{} Live 的兼容、系统路径问题，请参考官方文档以及啸行的\href{https://github.com/OsbertWang/install_latex/releases}{一份简短的安装 \LaTeX{} 的介绍}。
+\subsection*{脚本示例}
+\begin{lstlisting}
+  #!/bin/bash
+\end{lstlisting}
 
+\subsection*{module常用命令}
+module是通过模块文件动态管理环境的工具，超算通过module预部署了上百种模块，包含了编译器、数学库、各个学科的常用软件，供用户直接加载使用。\\\\  
+\begin{tabular}{ |l|l| }
+ \hline
+ 命令 & 功能 \\
+ \hline \hline
+ module avail & 查看预部署软件模块 \\
+ \hline
+ module load & 加载相应软件模块 \\
+ \hline
+ module list & 列出已加载软件模块 \\
+ \hline
+ module purge & 清除所有已加载软件模块 \\
+ \hline
+ module show & 列出软件模块具体路径 \\
+ \hline
+\end{tabular}
 
-\section{关于提交}
+\subsection*{作业提交}
+\begin{lstlisting}
+  sbatch sample.slurm
+\end{lstlisting}
+
+\section{作业查询}
+
+\subsection*{作业状态查询}
+\begin{tabular}{ |l|l| }
+ \hline
+ 命令 & 功能 \\
+ \hline \hline
+ squeue & 查看正在排队或正在运行的作业状态 \\
+ \hline
+ sacct & 显示过去24小时的帐号作业信息 \\
+ \hline
+\end{tabular}
+
+\subsection*{作业状态}
+R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CANCELLED(已取消) ，FAILED(运行失败)
+
+\section{作业延长}
+如作业运行时间可能超过默认最长运行时间，可提前1-2日发送用户名、作业号、预计运行时间至computing@sjtu.edu.cn申请延长。\\
+*注意：\textcolor{red}{作业运行时间（包含延长时间）不得超过14天。}
+
+\chapter{数据传输}
+
+\section{传输节点选择}
+\begin{enumerate}
+\item 少量数据传输：login 节点和 data 节点均可，但推荐使用 data 节点。
+\item 大量数据传输：强烈推荐 data 节点。原因：1. 不占用 login 节点资源；2. 多进程或多用户同时传输不会受限于 CPU。
+\end{enumerate}
+
+\section{数据传输节点}
+
+\subsection*{使用data数据传输节点}
+\begin{lstlisting}
+  scp data.hpc.sjtu.edu.cn local
+\end{lstlisting}
+
+\subsection*{数据传输节点使用限制}
+传输节点仅用于批量数据传输，请勿在此节点上运行与数据传输无关的应用，如编译程序、管理作业、校验数据等。如果发现此类行为，中心将视情况取消相关帐号使用传输节点的权利。
+
+\subsection*{传输速度}
+
+超算平台内部网络链路的带宽均不低于10Gbps，可以支持1GB/s的并行传输速度。但请注意包括rsync，scp，winscp等工具在内，大部分传输方式都是基于ssh通信的，而单个ssh连接支持的最大传输速度约100~150MB/s，在不使用额外手段多进程并发的情况下，以上工具均无法突破这一速度上限。
+
+\chapter{其他常用事项}
+
+\section{超算计费系统}
 
 出于某些因素的考虑，Elegant\LaTeX{} 项目自 2019 年 5 月 20 日开始，\textbf{不再接受任何非作者预约性质的提交}（pull request)！如果你想改进模板，你可以给我们提交 issues，或者可以在遵循协议（LPPL-1.3c）的情况下，克隆到自己仓库下进行修改。
 
