@@ -129,7 +129,6 @@ e. 预测基因的迭代训练
 
 重训练以优化结果
 """"""""""""""""""
-
 .. code:: bash
    
    # 很有可能的一种情况是，我们第一次的训练结果没有已有训练的效果好，所以我们需要进行循环训练找到最优参数；（运行会非常费时间，而且最终的效果一般只能提高准确度几个百分点，慎重使用）
@@ -145,7 +144,6 @@ e. 预测基因的迭代训练
    
 氨基酸序列的提取
 """"""""""""""""""
-
 .. code:: bash
    
    # 从 firsttest.out 中提取氨基酸序列
@@ -154,14 +152,14 @@ e. 预测基因的迭代训练
 
 参考资料
 ---------------
-AUGUSTUS official website: http://bioinf.uni-greifswald.de/augustus/
+- AUGUSTUS official website: http://bioinf.uni-greifswald.de/augustus/
 
-bioconda augustus：https://anaconda.org/bioconda/augustus
+- bioconda augustus：https://anaconda.org/bioconda/augustus
 
-使用MAKER进行基因注释(高级篇之AUGUSTUS模型训练）：https://www.jianshu.com/p/679bd6bb0ea4
+- 使用MAKER进行基因注释(高级篇之AUGUSTUS模型训练）：https://www.jianshu.com/p/679bd6bb0ea4
 
-Augustus指南（Trainning 部分）：https://www.cnblogs.com/southern-xyx/p/4497497.html
+- Augustus指南（Trainning 部分）：https://www.cnblogs.com/southern-xyx/p/4497497.html
 
-Augustus Training and Prediction：https://www.cnblogs.com/southern-xyx/p/4497497.html
+- Augustus Training and Prediction：https://www.cnblogs.com/southern-xyx/p/4497497.html
 
-Augustus 进行基因注释：https://www.cnblogs.com/zhanmaomao/p/12359964.html
+- Augustus 进行基因注释：https://www.cnblogs.com/zhanmaomao/p/12359964.html
