@@ -56,15 +56,15 @@
  \hline
  队列 & 架构 & 参数 & 描述 & 数量 \\
  \hline \hline
- \makecell[l]{small,cpu,\\ debug} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20\\ cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{由 656 台双路节点 x86 服务器组成，\\每台服务器配备 40 核（2.5GHz）、\\192G 内存（12通道 DDR4 2666），\\共计 26240 个 CPU 核、48T 内存。\\ 双精度理论峰值性能达到了 \\2.1 PFLOPS} & 656\\
+ \makecell[l]{small,cpu,\\ debug} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20\\ cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{由 656 台双路节点 x86 服务器\\组成，每台服务器配备 40 核\\（2.5GHz）、192G 内存（12通道 \\DDR4 2666），共计 26240 个 \\CPU 核、48T 内存。 双精度理论\\峰值性能达到了 2.1 PFLOPS} & 656\\
  \hline
- \makecell[l]{huge} & x86 & \makecell[l]{CPU: 4 x Intel Xeon Scalable\\ SkyLake 6148(2.4GHz, 20 cores)\\Mem: 48 x Hynix 64GB DDR4\\ ECC REG 2666} & \makecell[l]{每台拥有 80 核、3T 内存（48 通道\\ DDR4 2666），共计 160 核、6T 内存} & 2\\
+ \makecell[l]{huge} & x86 & \makecell[l]{CPU: 4 x Intel Xeon Scalable\\ SkyLake 6148(2.4GHz, 20 cores)\\Mem: 48 x Hynix 64GB DDR4\\ ECC REG 2666} & \makecell[l]{每台拥有 80 核、3T 内存（48 通道\\ DDR4 2666），共计 160 核、\\6T 内存} & 2\\
  \hline
  \makecell[l]{192c6t} & x86 & \makecell[l]{CPU: 8 x Intel Xeon Platinum\\ 8260(2.4GHz，24 cores)\\Mem: 98 x Samsung 64GB DDR4 \\2666} & \makecell[l]{拥有 192 核、6T 内存（98 通道 \\DDR4 2666）} & 1\\
  \hline
  \makecell[l]{arm128c256g} & arm & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426(2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备 128 核（2.6 GHz）、\\256 GB 内存（16 通道\\ DDR4-2933）、240 GB 本地硬盘，\\节点间采用 IB 高速互联} & 100\\
  \hline
- \makecell[l]{dgx2} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2\\服务器组成，每台 DGX-2 配置\\ 16 块 Tesla V100 GPU 加速卡，\\2 颗 Intel 至强铂金 8168 CPU，\\1.5 TB DDR4 内存，\\30 TB NVMe SSD \\和 512GB HBM2 显存。\\其双精度计算能力达到\\ 1 PFLOPS（千万亿次），\\张量计算能力达到 16 PFLOPS} & 8\\
+ \makecell[l]{dgx2} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2服务器\\组成，每台 DGX-2 配置 16 块 \\Tesla V100 GPU 加速卡，2 颗 \\Intel 至强铂金 8168 CPU，1.5 TB \\DDR4 内存，30 TB NVMe SSD \\和 512GB HBM2 显存。其双精度\\计算能力达到1 PFLOPS（千万\\亿次），张量计算能力达到 \\16 PFLOPS} & 8\\
  \hline
 \end{tabular}
 \end{table1}
