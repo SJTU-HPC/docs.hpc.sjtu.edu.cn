@@ -18,7 +18,7 @@ fail_if_contain_raw_html:
   script:
     - ack '.*raw.*html' docs && false || true
 
-build_minimanual_pdf:
+build_briefmanual_pdf:
   stage: build pdf
   image: sjtuhpc/texlive-sphinx
   tags:
@@ -66,7 +66,7 @@ build_html_pages:
   needs:
     - job: build_latex_pdf
       artifacts: true
-    - job: build_minimanual_pdf
+    - job: build_briefmanual_pdf
       artifacts: true
   before_script:
     - mkdir -p .build_cache
@@ -74,7 +74,7 @@ build_html_pages:
   script:
     - mkdir docs/_static || true
     - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
-    - cp tex/main.pdf docs/_static/hpcminimanual.pdf
+    - cp tex/main.pdf docs/_static/hpcbriefmanual.pdf
     - make -C docs clean html
   artifacts:
     paths:
