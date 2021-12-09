@@ -1,0 +1,302 @@
+\documentclass[cn, 12pt, hang, black, chinese]{elegantbook}
+
+\title{上海交通大学校级超算平台简明使用手册}
+% \subtitle{Elegant\LaTeX{} 经典之作}
+
+\author{上海交通大学网络信息中心}
+\institute{计算业务部}
+\date{2021年12月}
+\version{1.2}
+% \bioinfo{自定义}{信息}
+
+% \extrainfo{各人自扫门前雪，休管他人瓦上霜。—— 陈元靓}
+
+\setcounter{tocdepth}{3}
+
+\logo{sjtulogo.png}
+\cover{building.jpg}
+
+% 本文档命令
+\usepackage{array}
+\newcommand{\ccr}[1]{\makecell{{\color{#1}\rule{1cm}{1cm}}}}
+
+\definecolor{customcolor}{RGB}{32,178,170}
+\colorlet{coverlinecolor}{customcolor}
+
+\begin{document}
+
+\maketitle
+\frontmatter
+
+\chapter*{用户需知}
+
+\markboth{Introduction}{用户需知}
+
+\begin{enumerate}
+\item 帐号负责人必须为交大及附属医院在职教师及博士后。
+\item 请妥善保管帐号，一人一号，不得外借。一个主帐号可免费申请四个子帐号，若申请超过 四个子帐号，需额外付费。
+\item 本计算平台仅为教学和科研目的服务，严禁用于军工等涉密课题。
+\item 用户在申请帐号前请仔细阅读相关管理办法，确保在使用过程中遵守相关规章制度，维护 平台环境，不得用于与教学或科研无关的事宜(例如挖矿)。禁止主观破坏集群环境的行为。 一经发现，将立即终止服务。
+\item 用户须自行备份重要的数据及相关文件。
+\item 更详细的平台使用方式，请查看用户使用文档： \href{https://docs.hpc.sjtu.edu.cn}{https://docs.hpc.sjtu.edu.cn} 。
+\item 获取技术支持，请联系 \href{mailto:computing@sjtu.edu.cn}{computing@sjtu.edu.cn} 。
+\end{enumerate}
+
+\tableofcontents
+
+\mainmatter
+
+\chapter{超算平台硬件配置}
+
+\section{计算系统}
+
+\begin{table1}
+\small
+\begin{tabular}{ |l|c|l|l|c| }
+ \hline
+ 队列 & 架构 & 参数 & 描述 & 数量 \\
+ \hline \hline
+ \makecell[l]{small,cpu,\\ debug} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20\\ cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{由 656 台双路节点 x86 服务器\\组成，每台服务器配备 40 核\\（2.5GHz）、192G 内存（12通道 \\DDR4 2666），共计 26240 个 \\CPU 核、48T 内存。 双精度理论\\峰值性能达到了 2.1 PFLOPS} & 656\\
+ \hline
+ \makecell[l]{huge} & x86 & \makecell[l]{CPU: 4 x Intel Xeon Scalable\\ SkyLake 6148(2.4GHz, 20 cores)\\Mem: 48 x Hynix 64GB DDR4\\ ECC REG 2666} & \makecell[l]{每台拥有 80 核、3T 内存（48 通道\\ DDR4 2666），共计 160 核、\\6T 内存} & 2\\
+ \hline
+ \makecell[l]{192c6t} & x86 & \makecell[l]{CPU: 8 x Intel Xeon Platinum\\ 8260(2.4GHz，24 cores)\\Mem: 98 x Samsung 64GB DDR4 \\2666} & \makecell[l]{拥有 192 核、6T 内存（98 通道 \\DDR4 2666）} & 1\\
+ \hline
+ \makecell[l]{arm128c256g} & arm & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426(2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备 128 核（2.6 GHz）、\\256 GB 内存（16 通道\\ DDR4-2933）、240 GB 本地硬盘，\\节点间采用 IB 高速互联} & 100\\
+ \hline
+ \makecell[l]{dgx2} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2服务器\\组成，每台 DGX-2 配置 16 块 \\Tesla V100 GPU 加速卡，2 颗 \\Intel 至强铂金 8168 CPU，1.5 TB \\DDR4 内存，30 TB NVMe SSD \\和 512GB HBM2 显存。其双精度\\计算能力达到1 PFLOPS（千万\\亿次），张量计算能力达到 \\16 PFLOPS} & 8\\
+ \hline
+\end{tabular}
+\end{table1}
+
+\section{存储系统}
+
+\begin{table2}
+\begin{tabular}{ |c|c|c|c| }
+ \hline
+ 名称 & 类别 & 配置 & 容量 \\
+ \hline \hline
+ lustre & 主文件系统 & \makecell[l]{使用 HDD 盘搭建，旨在提供大容量、高可用、\\较高性能的存储供用户使用。搭建过程中，使用\\ RAID 保障硬盘级别的数据安全，使用 HA\\（High Availability） 保障服务器级别的\\高可用。} & 14P\\
+ \hline
+ scratch & 全闪存文件系统 & \makecell[l]{使用全套的 SSD（NVMe协议） 硬盘搭建，\\旨在提供高性能的存储供用户使用，可更好地支持\\ IO 密集型作业。对系统来说，单客户端\\最大读带宽达 5.7GB/s，最大写带宽达\\ 10GB/s；4k 小文件读 IOPS 达 170k，\\写 IOPS 达 126k。但同时，由于成本问题，\\系统提供的容量较小；在搭建时也未设置高可用\\和数据备份，存在数据存储安全性不高等问题。} & 108T\\
+ \hline
+ archive & 归档文件系统 & \makecell[l]{使用机械硬盘搭建，可提供大容量、高可用的\\存储供用户使用。搭建过程中，使用 RAID \\保障硬盘级别的数据安全，使用 HA\\（High Availability） 保障服务器级别的高可用。\\归档文件系统作为主文件系统的一个补充，\\主要提供给用户存储不常用的数据（冷数据），\\从而释放主文件系统的存储空间、缓解主文件\\系统的存储压力。} & 3P\\
+ \hline
+\end{tabular}
+\end{table2}
+
+\chapter{HPC和AI平台帐号申请及登录方式}
+
+\section{HPC和AI平台帐号申请}
+
+\subsection*{谁能申请主帐号？}
+交大及附属医院在职教职工（含博士后）均能申请超算主帐号；一个主帐号下面可以免费开通4个子帐号；主帐号需绑定jAccount帐号，用于充值缴费。
+
+\subsection*{如何申请超算帐号？}
+\begin{enumerate}
+\item 登录“我的数字交大”或者“交我办”APP，在“服务大厅”的“交我算”类别下，选择“HPC和AI平台帐号申请”，选择申请的帐号类型，并按照申请表单填写内容.
+\item 帐号负责人提交申请，需要由帐号负责人审核。审核人审批后，流程流转到网络信息中心计算业务部处理。
+\item 帐号负责人提交或审核后，会以邮件形式反馈申请结果。
+\end{enumerate}
+
+\subsection*{主帐号与子帐号的关系？}
+超算主帐号与子帐号均为独立帐号，仅在计费关系上存在关联。若课题组有数据或软件共享需求，可发邮件给我们，我们将建立 acct-XXX/share 文件夹，主帐号和子帐号均可在此文件夹下读写。
+
+\section{登录HPC和AI平台集群}
+
+\subsection*{ssh登录}
+\begin{enumerate}
+\item x86登录节点（3个: login1,login2,login3）：支持公网直接访问。\\IP地址（或主机名）：login.hpc.sjtu.edu.cn\\端口号：22
+\item arm登录节点（1个: kplogin）：内测期间需使用校内IP。\\IP地址（或主机名）：armlogin.hpc.sjtu.edu.cn\\端口号： 22
+\end{enumerate}
+*注意：\textcolor{red}{每个帐号在单个 login 节点上 session 个数不能超过4个。}
+
+\subsection*{HPC Studio登录}
+在浏览器中打开\href{https://studio.hpc.sjtu.edu.cn}{https://studio.hpc.sjtu.edu.cn}，直接使用超算帐号和密码登录。HPC Studio是可视化平台，提供了web shell、远程桌面、可视化软件、文件管理、作业提交等一站式服务。
+
+\chapter{作业提交和查询}
+
+\section{作业调度系统}
+超算使用SLURM作业调度系统。SLURM （Simple Linux Utility for Resource Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
+
+\subsection*{SLURM常用命令}
+
+\begin{tabular}{ |l|l| }
+ \hline
+ 命令 & 功能 \\
+ \hline \hline
+ sinfo & 查看集群节点状态 \\
+ \hline
+ squeue & 查看排队作业状态 \\
+ \hline
+ sbatch & 提交作业 \\
+ \hline
+ scontrol & 查看作业参数 \\
+ \hline
+ sacct & 查看作业报告 \\
+ \hline
+ scancel & 取消作业 \\
+ \hline
+\end{tabular}
+
+\subsection*{节点状态}
+drain(节点故障)，alloc(节点在用)，idle(节点可用)，down(节点下线)，mix(节点部分占用，但仍有剩余资源）
+
+\section{队列说明}
+
+\subsection*{debug}
+测试队列；每个作业可申请1-80核；最长运行时间20分钟；节点为共享使用；计算节点使用范围：cas[011-014]
+
+\subsection*{small}
+小规模作业队列；每个作业可申请\textcolor{red}{1-20}核；最长运行时间7天；节点为共享使用；计算节点使用范围：cas[500-636]
+
+\subsection*{cpu}
+cpu队列；每个作业可申请40- 24000核；最长运行时间7天；节点为独占使用；计算节点使用范围：cas[001-500]\\*注意：small和cpu队列的计算资源比例会根据实际需求动态调整
+
+\subsection*{huge}
+大内存作业队列；每个作业可申请\textcolor{red}{6-80}核；最长运行时间2天；节点为共享使用；计算节点使用范围：huge[1-2]
+
+\subsection*{192c6t}
+大内存作业队列；每个作业可申请\textcolor{red}{48-192}核；最长运行时间2天；节点为共享使用；计算节点使用范围：mass01
+
+\subsection*{arm128c256t}
+国产平台arm节点作业队列；每个作业可申请1-12800核；最长运行时间3天；节点为共享使用；计算节点使用范围：kp[001-100]
+
+\subsection*{dgx2}
+gpu队列；每个作业可申请1-128卡；推荐每卡配比CPU为6；最长运行时间3天；节点为共享使用；计算节点使用范围：vol[01-08]
+
+\section{交互式作业}
+
+交互式作业主要用于软件安装、程序调试等需要交互式操作的任务。作业运行建议使用sbatch作业提交的方式，更利于报错定位和计算资源使用情况查询。以下为超算两种交互式作业的方式：
+
+\subsection*{srun交互式作业}
+启动远程主机bash终端：
+\begin{lstlisting}
+  srun -p small -n 4--pty /bin/bash
+\end{lstlisting}
+
+\subsection*{salloc交互式作业}
+通过salloc请求资源，然后在获取节点后登录到计算节点：
+\begin{lstlisting}
+  salloc -N 1 -n 4 -p small
+  ssh casxxx
+\end{lstlisting}
+
+\section{作业脚本提交}
+
+\subsection*{脚本示例}
+\begin{lstlisting}
+  #!/bin/bash
+
+  #SBATCH --job-name=test                 #job name
+  #SBATCH --partition=small               #partition name
+  #SBATCH -n 20                           #cores
+  #SBATCH --ntasks-per-node=20            #cores per node
+  #SBATCH --output=%j.out                 #output
+  #SBATCH --error=%j.err                  #error
+  #SBATCH --mail-type=end                 #email notification
+  #SBATCH --mail-user=XX@sjtu.edu.cn      #email address
+\end{lstlisting}
+
+\subsection*{module常用命令}
+module是通过模块文件动态管理环境的工具，超算通过module预部署了上百种模块，包含了编译器、数学库、各个学科的常用软件，供用户直接加载使用。\\\\
+\begin{tabular}{ |l|l| }
+ \hline
+ 命令 & 功能 \\
+ \hline \hline
+ module avail & 查看预部署软件模块 \\
+ \hline
+ module load & 加载相应软件模块 \\
+ \hline
+ module list & 列出已加载软件模块 \\
+ \hline
+ module purge & 清除所有已加载软件模块 \\
+ \hline
+ module show & 列出软件模块具体路径 \\
+ \hline
+\end{tabular}
+
+\subsection*{作业提交}
+\begin{lstlisting}
+  sbatch sample.slurm
+\end{lstlisting}
+
+\section{作业查询}
+
+\subsection*{作业状态查询}
+\begin{tabular}{ |l|l| }
+ \hline
+ 命令 & 功能 \\
+ \hline \hline
+ squeue & 查看正在排队或正在运行的作业状态 \\
+ \hline
+ sacct & 显示过去24小时的帐号作业信息 \\
+ \hline
+\end{tabular}
+
+\subsection*{作业状态}
+R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CANCELLED(已取消) ，FAILED(运行失败)
+
+\section{作业延长}
+如作业运行时间可能超过默认最长运行时间，可提前1-2日发送用户名、作业号、预计运行时间至computing@sjtu.edu.cn申请延长。\\
+*注意：\textcolor{red}{作业运行时间（包含延长时间）不得超过14天。}
+
+\chapter{数据传输}
+
+\section{传输节点选择}
+\begin{enumerate}
+\item 少量数据传输：login 节点和 data 节点均可，但推荐使用 data 节点。
+\item 大量数据传输：强烈推荐 data 节点。原因：1. 不占用 login 节点资源；2. 多进程或多用户同时传输不会受限于 CPU。
+\end{enumerate}
+
+\section{数据传输节点}
+
+\subsection*{使用data数据传输节点}
+\begin{lstlisting}
+  scp data.hpc.sjtu.edu.cn local
+\end{lstlisting}
+
+\subsection*{数据传输节点使用限制}
+传输节点仅用于批量数据传输，请勿在此节点上运行与数据传输无关的应用，如编译程序、管理作业、校验数据等。如果发现此类行为，中心将视情况取消相关帐号使用传输节点的权利。
+
+\subsection*{传输速度}
+
+超算平台内部网络链路的带宽均不低于10Gbps，可以支持1GB/s的并行传输速度。但请注意包括rsync，scp，winscp等工具在内，大部分传输方式都是基于ssh通信的，而单个ssh连接支持的最大传输速度约100~150MB/s，在不使用额外手段多进程并发的情况下，以上工具均无法突破这一速度上限。
+
+\chapter{其他常用事项}
+
+\section{机时查询}
+\subsection*{超算计费系统(\href{https://account.hpc.sjtu.edu.cn/}{https://account.hpc.sjtu.edu.cn/})}
+超算用户可以使用超算帐号密码登录计费系统查询作业详单和计费情况。主帐号可以查询本帐号和所有子帐号的消费情况，子帐号仅可查询自己帐号的消费情况。超算帐号内如有计费，将优先消费积分。需要注意的是，超算的计费模式为作业完成后的第二天凌晨入账。
+
+\section{HPC和AI平台资讯}
+\subsection*{微信公众号/视频号：交我算}
+关注“交我算”微信公众号和视频号，超算最新服务、新闻资讯、教学视频一网打尽。(扫描二维码，关注公众号)
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=0.4\textwidth]{wechat.jpg}
+\end{figure}
+
+\subsection*{用户微信群}
+超算运维通知和实时资讯主要发布于用户微信群，加群方式会在开通帐号时告知。
+
+\section{其他常见问题}
+\begin{enumerate}[itemsep=1.3ex]
+  \item \question{我为什么连不上$\pi$集群？}
+    集群支持公网直接访问，无需校园 VPN。若遇到连接问题，请先检查网络，或在其它设备或客户端上尝试。\\i.请首先保证网络畅通；\\ii.查看“交我算”微信公众号和用户微信群，是否有$\pi$集群下线停机通知。$\pi$集群通知会及时发布在公众号和用户微信群里。若需加入用户微信群，请发邮件至 hpc邮箱；\\iii.$\pi$集群登录节点设置了 fail2ban 服务，多次输入密码错误后会被临时封禁 1 小时。如果您需要重置密码，请使用或抄送帐号负责人邮箱发送邮件到 hpc邮箱，邮件中注明帐号，我们将会在 1 个工作日内响应您的申请；\\iv.如果您在登录节点运行计算密集的作业，将会被程序自动查杀，您的帐号会被加入到黑名单，并在30-120 分钟内无法登录。
+  \item \question{什么我的作业运行结果是作业运行结果是node$\_$fail，该怎么处理？}
+    node$\_$fail是提示由于计算节点故障导致作业运行失败。您重新提交作业即可。失败作业的机时系统会自动返还，无须发邮件告诉我们。
+  \item \question{如何在超算上安装开源软件？}
+    超算软件安装，请依次判断适用哪种情况：\\i.若未安装，请先考虑是否能用conda 方法 安装；\\ii.考虑在自己家目录下使用源码安装，遇到问题，请将可复现的步骤，发至hpc邮箱获取帮助；\\iii.软件还有容器安装 的方法；\\iv.我们也将对常用开源软件进行评估，以便全局部署。欢迎邮件联系我们。
+  \item \question{超算上是否提供商业软件？}
+    目前暂不提供商业软件，不过您可以自行购买后安装。以下是注意事项：\\i.商业软件License通常需要使用专用的License服务器，在购买商业软件并尝试在$\pi$集群上部署License服务器前，请与我们以及软件厂商进行充分沟通；\\ii.不要把License绑定到$\pi$集群的登录节点；\\iii.请购买浮动授权，即计算程序可以在$\pi$集群上的任意一个节点启动，通常需要安装特定的License服务器；\\iv.询问License服务器是否可以部署在虚拟机上，这样我们可以专门开一台虚拟机运行您的License服务器；\\v.与厂商充分沟通License服务器安装模式、授权数量、使用限制、更换MAC地址的费用以及厂商具备基本的技术支持能力。如果需要了解$\pi$集群的软硬件信息，可以在交流过程中抄送hpc邮箱。
+  \item \question{如何收费？}
+    请使用交大校内邮箱发送邮件至 hpc 邮箱咨询。
+  \item \question{如何缴费？}
+    校内转账可在“我的数字交大”网页，或“交我算”APP里完成。如有任何财务问题，请联系网络信息中心基础部王老师，电话 34206060-8011，邮箱 \href{mailto:stwangecho@sjtu.edu.cn}{stwangecho@sjtu.edu.cn}
+  \item \question{欠费后将有什么影响？}
+    欠费后使用ssh登录计算节点时，将会收到“欠费提醒”，并且无法申请新的计算资源；已提交作业将会继续运行。欠费用户在使用HPC Studio时，暂无“欠费提醒”，如遇到申请session长时间排队的情况，请先检查是否欠费。
+\end{enumerate}
+
+\end{document}

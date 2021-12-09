@@ -18,6 +18,25 @@ fail_if_contain_raw_html:
   script:
     - ack '.*raw.*html' docs && false || true
 
+build_briefmanual_pdf:
+  stage: build pdf
+  image: sjtuhpc/texlive-sphinx
+  tags:
+    - docker
+  before_script:
+    - mkdir -p .build_cache
+    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
+  script:
+    - make -C tex all
+  artifacts:
+    paths:
+      - tex/main.pdf
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - .build_cache
+
+
 build_latex_pdf:
   stage: build pdf
   image: sjtuhpc/texlive-sphinx
@@ -47,12 +66,15 @@ build_html_pages:
   needs:
     - job: build_latex_pdf
       artifacts: true
+    - job: build_briefmanual_pdf
+      artifacts: true
   before_script:
     - mkdir -p .build_cache
     - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
   script:
     - mkdir docs/_static || true
     - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
+    - cp tex/main.pdf docs/_static/hpcbriefmanual.pdf
     - make -C docs clean html
   artifacts:
     paths:
@@ -62,17 +84,6 @@ build_html_pages:
     paths:
       - .build_cache
      
-deploy_to_jianwen_me:
-  stage: deploy
-  tags:
-    - shell.web.hpc.sjtu.edu.cn
-  only:
-    - branches
-  except:
-    - master
-  script:
-    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.jianwen.me/
-
 deploy_html_to_hpc:
   stage: deploy
   tags:
