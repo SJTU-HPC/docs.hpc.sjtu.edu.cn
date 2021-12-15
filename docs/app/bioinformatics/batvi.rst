@@ -9,6 +9,7 @@ BatVI
 
 安装
 ----------------
+
 通过conda安装
 ^^^^^^^^^^^^^^^^^^^^^^^^
 .. code:: bash
@@ -107,6 +108,7 @@ RUNNING THE PROGRAM
 
 病毒整合脚本
 """"""""""""""""""
+
 .. code:: bash 
 
    call_integratons.sh <processing_directory> [ options ]
@@ -194,7 +196,7 @@ Example数据下载可使用网址: biogpu.ddns.comp.nus.edu.sg/~ksung/batvi/tes
   
 - A directory can be prepared for a fresh run of BatVI with the command 'clean_run.sh '.
 
-注意事项
+参考
 ----------------
 
 - BatVI official website: https://www.comp.nus.edu.sg/~bioinfo/batvi/index.html
