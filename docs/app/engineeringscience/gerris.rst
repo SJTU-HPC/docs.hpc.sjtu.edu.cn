@@ -26,7 +26,7 @@ Gerris是求解描述流体流动的偏微分方程的软件程序
    #SBATCH --exclusive
 
    IMAGE_PATH=/lustre/share/img/x86/gerris/gerris-mpi.sif
-   module load openmpi/1.6.5-gcc-4.9.2
+   module load openmpi/1.6.5
    mpirun -np 120 singularity exec Gerris3D YOUR_DATA_FILE
 
 运行串行版Gerris脚本如下(gerris.slurm):
