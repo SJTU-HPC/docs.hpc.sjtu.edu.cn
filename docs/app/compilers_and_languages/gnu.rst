@@ -13,15 +13,17 @@ Definition）的权利。在本节中，GNU将代指那些基于GNU许可的开�
 
 π 集群系统中已经预装不同版本的gcc，可以用以下命令加载:
 
-========= ===============================
-版本      加载方式
-========= ===============================
-gcc-5.5.0 module load gcc/5.5.0-gcc-4.8.5
-gcc-7.4.0 module load gcc/7.4.0-gcc-4.8.5
-gcc-8.3.0 module load gcc/8.3.0-gcc-4.8.5
-gcc-9.2.0 module load gcc/9.2.0-gcc-4.8.5
-gcc-9.3.0 module load gcc/9.3.0-gcc-4.8.5
-========= ===============================
+========== ===============================
+版本       加载方式
+========== ===============================
+gcc-5.5.0  module load gcc/5.5.0
+gcc-7.4.0  module load gcc/7.4.0
+gcc-8.3.0  module load gcc/8.3.0
+gcc-9.2.0  module load gcc/9.2.0
+gcc-9.3.0  module load gcc/9.3.0
+gcc-10.2.0 module load gcc/10.2.0
+gcc-11.2.0 module load gcc/11.2.0
+========== ===============================
 
 不同版本的OpenMPI，可以用以下命令加载：
 

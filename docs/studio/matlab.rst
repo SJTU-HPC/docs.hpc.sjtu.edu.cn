@@ -45,3 +45,30 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 .. image:: ../img/matlab03.png
 .. image:: ../img/matlab04.png
 .. image:: ../img/matlab05.png
+
+自定义添加MATLAB插件
+-------------------------
+
+首先拷贝集群上的镜像到本地
+
+.. code:: shell
+
+   cp /lustre/share/img/matlab_latest.sif ~/
+
+接下来需要在镜像中添加基础编译环境（该操作可以在build@container-x86中操作）
+
+.. code:: shell
+
+   Bootstrap:localimage
+   From:/home/singularity/matlab_latest.sif
+
+   %post
+       echo y | apt-get update -y
+       echo y | apt-get install gcc -y
+       echo y | apt-get install g++ -y
+
+最后在添加自定义的库时，需要先进入容器
+
+.. code:: shell
+
+   singularity shell matlab_latest_self.sif
