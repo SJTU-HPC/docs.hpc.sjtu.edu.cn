@@ -58,6 +58,7 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 接下来需要在镜像中添加基础编译环境（该操作可以在build@container-x86中操作）
 
 .. code:: shell
+
    Bootstrap:localimage
    From:/home/singularity/matlab_latest.sif
 
@@ -69,4 +70,5 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 最后在添加自定义的库时，需要先进入容器
 
 .. code:: shell
+
    singularity shell matlab_latest_self.sif
