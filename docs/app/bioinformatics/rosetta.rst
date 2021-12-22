@@ -23,3 +23,44 @@ Rosetta的重要作用如下所示：
 
    srun -p small -n 2 --pty /bin/bash
    module load rosetta/3.12
+
+1. 对输入结构进行预处理（refine）
+
+.. code:: bash
+
+   relax.mpi.linuxgccrelease -``in``:file:s input_files/from_rcsb/1qys.pdb @flag_input_relax
+
+2. local dock
+
+.. code:: bash
+   
+   docking_protocol.mpi.linuxgccrelease @flag_local_docking
+
+3. 对得到的对接结果进行local refine
+
+.. code:: bash
+
+   docking_protocol.mpi.linuxgccrelease @flag_local_refine
+
+4. global dock
+
+.. code:: bash
+
+   docking_protocol.mpi.linuxgccrelease @flag_global_docking
+
+5. Docking flexible proteins
+
+.. code:: bash
+
+   docking_prepack_protocol.mpi.linuxgccrelease @flag_ensemble_prepack
+
+prepack运行后，就可以执行柔性对接了，对接命令为：
+
+.. code:: bash
+
+   docking_protocol.mpi.linuxgccrelease @flag_ensemble_docking
+
+参考资料
+----------------
+
+- Rosetta:https://www.rosettacommons.org/ 
