@@ -8,6 +8,8 @@ LAMMPS-RBE
 
 LAMMPS-RBE是由上海交通大学上海应用数学中心团队基于LAMMPS二次开发的自研软件。该版本在长程力模拟中引入了先进的Random Batch Ewald算法，RBE使用基于动理学或连续介质理论的路径, 研究复杂环境中微纳系统的多体效应，并结合分子动力学进行多尺度建模和数学分析。LAMMPS-RBE突破了传统分子动力学在 CPU集群上可扩展性差的问题，可以使百万级别粒子以上的大尺度体系的计算成本降低一个数量级。
 
+详细算法解释可以参阅: https://math.sjtu.edu.cn/faculty/xuzl/RBE.pdf
+
 π 集群上的 LAMMPS-RBE
 ----------------------
 
@@ -21,8 +23,7 @@ CPU版本
 同Lammps已有功能相比，该版本新增三个功能：
 
 1. 基于Random Batch Ewald (RBE)算法的三维周期/二维准周期平板系统静电求解器，特别适用于多核模拟。
-调用方式：
-在Lammps的input文件中加入下面命令（需和pair/lj/cut/coul/long配合使用，这点和PPPM算法相同），
+调用方式：在Lammps的input文件中加入下面命令（需和pair/lj/cut/coul/long配合使用，这点和PPPM算法相同），
 
 kspace_style rbe arg1 arg2 arg3
 
@@ -75,7 +76,9 @@ fix 2 all baoab temp 298 298 5 iso 1.0 1.0 100
 
 表示使用Langevin动力学对所有原子做各向同性控压，开始和结束的外部温度和外部压强分别为298K和1bar，控温和控压阻尼系数分别为5fs和100fs。该fix指令的名字被设定为2。
 
--------------------------使用脚本如下(lammps-rbe.slurm):
+
+作业脚本如下(lammps-rbe.slurm):
+-------------------------------
 
 .. code:: bash
 
