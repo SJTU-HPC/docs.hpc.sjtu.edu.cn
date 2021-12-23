@@ -96,3 +96,9 @@ fix 2 all baoab temp 298 298 5 iso 1.0 1.0 100
 .. code:: bash
 
    $ sbatch lammps-rbe.slurm
+
+
+参考资料
+--------
+
+- 详细算法解释可以参阅: https://math.sjtu.edu.cn/faculty/xuzl/RBE.pdf
