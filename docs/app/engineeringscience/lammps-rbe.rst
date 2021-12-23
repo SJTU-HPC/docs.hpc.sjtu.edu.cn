@@ -8,7 +8,7 @@ LAMMPS-RBE
 
 LAMMPS-RBE是由上海交通大学上海应用数学中心团队基于LAMMPS二次开发的自研软件。该版本在长程力模拟中引入了先进的Random Batch Ewald算法，RBE使用基于动理学或连续介质理论的路径, 研究复杂环境中微纳系统的多体效应，并结合分子动力学进行多尺度建模和数学分析。LAMMPS-RBE突破了传统分子动力学在 CPU集群上可扩展性差的问题，可以使百万级别粒子以上的大尺度体系的计算成本降低一个数量级。
 
-- 详细算法解释可以参阅: https://math.sjtu.edu.cn/faculty/xuzl/RBE.pdf
+详细算法解释可以参阅: https://math.sjtu.edu.cn/faculty/xuzl/RBE.pdf
 
 π 集群上的 LAMMPS-RBE
 ----------------------
