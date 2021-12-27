@@ -12,7 +12,7 @@ WRF模式适用范围很广，从中小尺度到全球尺度的数值预报和�
 CPU版WRF(4.3.1)
 ----------------
 
-WPS前期处理数据所需要的geo等地理包路径为：
+WPS前期处理数据所需要的geo等数据的路径为：
 
 .. code:: bash
 
@@ -25,6 +25,8 @@ WPS前期处理数据所需要的geo等地理包路径为：
 
    srun -p cpu -n 40 --pty /bin/bash
    cd $HOME
+   mkdir wrf
+   cd wrf
    cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/packet_1/WPS-4.3.1 ./
    cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/packet_1/WRF-master ./
 
