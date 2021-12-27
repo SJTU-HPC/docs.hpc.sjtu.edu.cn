@@ -255,7 +255,7 @@ ARM版OpenFoam(使用容器)
      -doc              display application documentation in browser
      -help             print the usage
 
-每次重新进入OpenFOAM6环境中，输入如下命令,然后根据需要添加自定义功能模块
+每次重新进入OpenFOAM6环境中，输入如下命令，然后根据需要添加自定义功能模块
 
 .. code:: bash
 
