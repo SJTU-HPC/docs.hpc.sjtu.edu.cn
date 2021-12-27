@@ -31,5 +31,6 @@
    vasp
    vmd
    wrf
+   cmaq
    elphbolt
    gmx_mmpbsa
