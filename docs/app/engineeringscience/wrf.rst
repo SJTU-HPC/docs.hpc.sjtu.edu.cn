@@ -15,12 +15,14 @@ CPU版WRF(4.3.1)
 WPS前期处理数据所需要的geo等地理包路径为：
 
 .. code:: bash
+
    [user@login3 ~]$ls /scratch/share/stu/cheng2021/
    combine.obsgrid  EMIS  fnl_data  geo_data_WRF4
 
 复制WPS和WRF环境到本地，并导入相应模块
 
 .. code:: bash
+
    srun -p cpu -n 40 --pty /bin/bash
    cd $HOME
    cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/packet_1/WPS-4.3.1 ./
