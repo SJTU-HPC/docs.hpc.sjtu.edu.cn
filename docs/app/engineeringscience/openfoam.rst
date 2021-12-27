@@ -211,6 +211,57 @@ ARM版OpenFoam(使用容器)
 
    $ scp 8-gcc8-openmpi4-centos8.sif YOUR_USER_NAME@login1:~/
 
+编译OpenFOAM6，添加相应的自定义功能模块，此处的镜像只包含OpenFOAM6编译所依赖的基础环境
+----------------------------------------------------------------------------------------
+
+.. code:: bash
+
+   cd $HOME
+   mkdir OpenFOAM
+   cd OpenFOAM
+   cp /lustre/opt/contribute/cascadelake/openfoam/img/OpenFOAM-6.tar.gz ./
+   cp /lustre/opt/contribute/cascadelake/openfoam/img/ThirdParty-6.tar.gz ./
+   tar xf OpenFOAM-6.tar.gz
+   tar xf ThirdParty-6.tar.gz
+   echo "alias of6='source \$HOME/OpenFOAM/OpenFOAM-6/etc/bashrc WM_LABEL_SIZE=64 FOAMY_HEX_MESH=yes'" >> ~/.bashrc
+   singularity shell /lustre/opt/contribute/cascadelake/openfoam/img/openfoam6_base.sif
+   ln -s /usr/bin/mpicc.openmpi OpenFOAM-6/bin/mpicc
+   ln -s /usr/bin/mpirun.openmpi OpenFOAM-6/bin/mpirun
+   source $HOME/OpenFOAM/OpenFOAM-6/etc/bashrc WM_LABEL_SIZE=64 FOAMY_HEX_MESH=yes
+   source ~/.bashrc
+   of6
+   cd $WM_THIRD_PARTY_DIR
+   export QT_SELECT=qt4
+   ./makeParaView -python -mpi -python-lib /usr/lib/x86_64-linux-gnu/libpython2.7.so.1.0 > log.makePV 2>&1
+   wmRefresh
+   cd $WM_PROJECT_DIR
+   export QT_SELECT=qt4
+   ./Allwmake -j 4 > log.make 2>&1
+   ./Allwmake -j 4 > log.make 2>&1
+
+编译成功时，输入icoFoam -help会显示如下信息
+
+.. code:: bash
+
+   Usage: icoFoam [OPTIONS]
+   options:
+     -case <dir>       specify alternate case directory, default is the cwd
+     -noFunctionObjects
+                       do not execute functionObjects
+     -parallel         run in parallel
+     -roots <(dir1 .. dirN)>
+                       slave root directories for distributed running
+     -srcDoc           display source code in browser
+     -doc              display application documentation in browser
+     -help             print the usage
+
+每次重新进入OpenFOAM6环境中，输入如下命令，然后根据需要添加自定义功能模块
+
+.. code:: bash
+
+   singularity shell /lustre/opt/contribute/cascadelake/openfoam/img/openfoam6_base.sif
+   of6
+
 参考资料
 --------
 
