@@ -16,7 +16,7 @@ WPS前期处理数据所需要的geo包的路径为：
 
 .. code:: bash
 
-   /scratch/share/stu/cheng2021/geo_data_WRF4
+   /lustre/opt/contribute/cascadelake/wrf_cmaq/geo 
 
 复制WPS和WRF环境到本地，并导入相应模块
 
