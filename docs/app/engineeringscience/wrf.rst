@@ -12,12 +12,11 @@ WRF模式适用范围很广，从中小尺度到全球尺度的数值预报和�
 CPU版WRF(4.3.1)
 ----------------
 
-WPS前期处理数据所需要的geo等数据的路径为：
+WPS前期处理数据所需要的geo包的路径为：
 
 .. code:: bash
 
-   [user@login3 ~]$ls /scratch/share/stu/cheng2021/
-   combine.obsgrid  EMIS  fnl_data  geo_data_WRF4
+   /scratch/share/stu/cheng2021/geo_data_WRF4
 
 复制WPS和WRF环境到本地，并导入相应模块
 
