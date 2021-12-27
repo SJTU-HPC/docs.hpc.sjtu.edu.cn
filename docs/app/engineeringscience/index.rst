@@ -33,4 +33,3 @@
    wrf
    elphbolt
    gmx_mmpbsa
-   cmaq
