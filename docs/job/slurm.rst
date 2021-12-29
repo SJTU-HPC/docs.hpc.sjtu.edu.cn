@@ -10,7 +10,7 @@ Slurm 作业调度系统
 
 .. image:: ../img/slurm_pi.png
 
-.. note:: 由于跨系统文本编码的问题，我们强烈建议您只用英文字符和数字命名文件夹和目录，并且不要使用特殊字符，以确保作业能顺利运行。不推荐的字符包括：中文字符、空格、tab、*(星号)、&、$、[、] 等。
+.. tip:: 由于跨系统文本编码的问题，我们强烈建议您只用英文字符和数字命名文件夹和目录，并且不要使用特殊字符，以确保作业能顺利运行。
 
 Slurm 概览
 -----------
@@ -328,4 +328,3 @@ $SLURM_SUBMIT_HOST     提交作业的主机名
    Documentation <http://www.accre.vanderbilt.edu/?page_id=2154>`__
 -  `Introduction to SLURM (NCCS lunchtime
    series) <http://www.nccs.nasa.gov/images/intro-to-slurm-20131218.pdf>`__
-
