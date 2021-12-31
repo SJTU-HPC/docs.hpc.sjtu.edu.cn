@@ -6,12 +6,10 @@ chimera
 简介
 ---------------
 
-This package facilitates the characterisation of fusion products events. <br>
-It allows to import fusiondata results from the following fusion finders:<br>
-chimeraScan, bellerophontes, deFuse, FusionFinder,FusionHunter, mapSplice,<br>
-tophat-fusion, FusionMap, STAR, Rsubread, fusionCatcher.<br>
-
-
+This package facilitates the characterisation of fusion products events. 
+It allows to import fusiondata results from the following fusion finders:
+chimeraScan, bellerophontes, deFuse, FusionFinder,FusionHunter, mapSplice,
+tophat-fusion, FusionMap, STAR, Rsubread, fusionCatcher.
 
 完整步骤
 -----------------
