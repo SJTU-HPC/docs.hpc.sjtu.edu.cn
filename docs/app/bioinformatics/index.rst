@@ -28,6 +28,7 @@
    control-freec
    crest
    cufflinks
+   chimera
    deepgo
    deepvariant
    delly
