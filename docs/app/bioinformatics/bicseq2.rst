@@ -7,10 +7,7 @@ BICseq2
 简介
 --------------------
 
-BICseq2 是一种为高通量测序 (HTS) 数据标准化
-和基因组中的拷贝数变异 (CNV) 检测
-而开发的算法。
-无论是否存在对照基因组，BICseq2 都可以进行CNV的检测。
+BICseq2 是一种为高通量测序 (HTS) 数据标准化和基因组中的拷贝数变异 (CNV) 检测而开发的算法。无论是否存在对照基因组，BICseq2 都可以进行CNV的检测。
 
    BICseq2 is an algorithm developed for the normalization of  high-throughput
    sequencing (HTS) data and detect copy number variations (CNV) in the genome.
