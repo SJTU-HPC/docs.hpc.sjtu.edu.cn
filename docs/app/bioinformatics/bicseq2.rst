@@ -68,18 +68,19 @@ BICseq2-norm
 参数解释
 """"""""""""""""""""
 
-  - --help
-  - -l=<int>: read length
-  - -s=<int>: fragment size
-  - -p=<float>: a subsample percentage: default 0.0002.
-  - -b=<int>: bin the expected and observed as <int> bp bins; Default 100.
-  - --gc_bin: if specified, report the GC-content in the bins
-  - --NoMapBin: if specified, do NOT bin the reads according to the mappability
-  - --bin_only: only bin the reads without normalization
-  - --fig=<string>: plot the read count VS GC figure in the specified file (in pdf format)
-  - --title=<string>: title of the figure
-  - --tmp=<string>: the tmp directory
-
+.. code:: bash
+   
+   --help
+   -l=<int>: read length
+   -s=<int>: fragment size
+   -p=<float>: a subsample percentage: default 0.0002.
+   -b=<int>: bin the expected and observed as <int> bp bins; Default 100.
+   --gc_bin: if specified, report the GC-content in the bins
+   --NoMapBin: if specified, do NOT bin the reads according to the mappability
+   --bin_only: only bin the reads without normalization
+   --fig=<string>: plot the read count VS GC figure in the specified file (in pdf format)
+   --title=<string>: title of the figure
+   --tmp=<string>: the tmp directory
 
 BICseq2-seg
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -121,17 +122,19 @@ BICseq2-seg.pl [options] <configFile> <output>
 参数解释
 """"""""""""""""""""
 
-  - --lambda=<float>: the (positive) penalty used for BICseq2
-  - --tmp=<string>: the tmp directory
-  - --help: pring this message
-  - --fig=<string>: plot the CNV profile in a png file
-  - --title=<string>: the title of the figure
-  - --nrm: do not remove likely germline CNVs (with a matched normal) or segments with bad mappability (without a matched normal)
-  - --bootstrap: perform bootstrap test to assign confidence (only for one sample case)
-  - --noscale: do not automatically adjust the lambda parameter according to the noise level in the data
-  - --strict: if specified, use a more stringent method to ajust the lambda parameter
-  - --control: the data has a control genome
-  - --detail: if specified, print the detailed segmentation result (for multiSample only)
+.. code:: bash
+   
+   --lambda=<float>: the (positive) penalty used for BICseq2
+   --tmp=<string>: the tmp directory
+   --help: pring this message
+   --fig=<string>: plot the CNV profile in a png file
+   --title=<string>: the title of the figure
+   --nrm: do not remove likely germline CNVs (with a matched normal) or segments with bad mappability (without a matched normal)
+   --bootstrap: perform bootstrap test to assign confidence (only for one sample case)
+   --noscale: do not automatically adjust the lambda parameter according to the noise level in the data
+   --strict: if specified, use a more stringent method to ajust the lambda parameter
+   --control: the data has a control genome
+   --detail: if specified, print the detailed segmentation result (for multiSample only)
 
 参考连接
 --------------------
