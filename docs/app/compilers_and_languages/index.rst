@@ -9,6 +9,8 @@
 
    gnu
    intel
+   intel_mpi
+   intel_vtune
    cuda
    openblas
    eigen
