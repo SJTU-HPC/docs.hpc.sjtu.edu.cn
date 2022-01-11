@@ -5,12 +5,12 @@ AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高
 
 我们对 AlphaFold 持续优化，可至 ParaFold 网站了解我们的工作：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
-AlphaFold2 四大版本
+AlphaFold2 五大版本
 ----------------------------------------
 
-交大 AI 平台提供 AlphaFold 四大版本：
+交大 AI 平台提供 AlphaFold 五大版本：
 
-* module 版，更新日期：2021 年 9 月 12 日。加载即用，免除安装困难。可满足大部分计算需求；
+* module 版（π 集群部署），更新日期：2021 年 9 月 12 日。加载即用，免除安装困难。可满足大部分计算需求；
 
 * conda 版，支持自主选择 model 模型、pTM 计算、Amber 优化、本地数据集、修改 Recycling 次数等；
 
@@ -18,14 +18,16 @@ AlphaFold2 四大版本
 
 * ParallelFold 版，支持 CPU、GPU 分离计算，适合大规模批量计算。
 
+* module 版（思源一号集群部署），更新日期：2022 年 1 月 11 日。加载即用，免除安装困难。可满足大部分计算需求；
 
-版本一：module
+
+版本一：module（π 集群部署）
 ----------------------------------------
 
 module 版为全局部署的 ``alphafold/2-python-3.8``，更新日期：2021 年 9 月 12 日
 
-module 使用前准备
-~~~~~~~~~~~~~~~~~~~~~~~~
+module（π 集群部署） 使用前准备
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * 新建文件夹，如 ``alphafold``。
 
@@ -38,7 +40,7 @@ module 使用前准备
     LLIRKLPFQRLVREIAQDFKTDLRFQSSAVMALQEACEAYLVGLFEDTNLCAIHAKRVTI
     MPKDIQLARRIRGERA
 
-module 运行
+module（π 集群部署）运行
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 作业脚本示例（假设作业脚本名为 ``sub.slurm``）：
@@ -433,12 +435,155 @@ ParallelFold  使用方法
 欢迎邮件反馈使用情况，或提出宝贵建议。
 
 
+版本五：module（思源一号部署）
+----------------------------------------
+
+module 版为全局部署的 ``alphafold/2.1.1``，更新日期：2022 年 1 月 11 日。
+
+module（思源一号部署） 使用前准备
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* 新建文件夹，如 ``alphafold``。
+
+* 在文件夹里放置一个 ``fasta`` 文件。例如 ``test.fasta`` 文件（内容如下）：
+
+.. code:: bash
+
+    >sp|P68431|H31_HUMAN Histone H3.1 OS=Homo sapiens OX=9606 GN=H3C1 PE=1 SV=2
+    MARTKQTARKSTGGKAPRKQLATKAARKSAPATGGVKKPHRYRPGTVALREIRRYQKSTE
+    LLIRKLPFQRLVREIAQDFKTDLRFQSSAVMALQEACEAYLVGLFEDTNLCAIHAKRVTI
+    MPKDIQLARRIRGERA
+
+* 新建一个output目录来存放alphafold运行后生成的结果文件。
+
+* 指定alphafold数据库的位置。你可以根据 `指导 <https://github.com/deepmind/alphafold#genetic-databases>`_ 使用alphafold官方提供的 `脚本 <https://github.com/deepmind/alphafold/tree/main/scripts>`_ 下载自己的数据库，或者使用思源一号上提供的公共数据库 ``/dssg/share/data/alphafold``。
+
+module（思源一号部署）运行
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+作业脚本示例（假设作业脚本名为 ``sub.slurm``）：
+
+.. code:: bash
+
+    #!/bin/bash
+
+    #SBATCH -J run_af
+    #SBATCH -p a100
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=1
+    #SBATCH --cpus-per-task=6
+    #SBATCH --gres=gpu:1
+
+    module purge
+    module use /dssg/share/imgs/ai
+    module load alphafold/2.1.1
+
+    python /app/alphafold/run_alphafold.py \
+        --fasta_paths=${YOU_FASTA_FILE_DIR} \
+        --max_template_date=2020-05-14 \
+        --bfd_database_path=${YOUR_DATA_DIR}/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt   \
+        --data_dir=${YOUR_DATA_DIR} \
+        --output_dir=${YOU_OUTPUT_DIR} \
+        --uniclust30_database_path=${YOUR_DATA_DIR}/uniclust30/uniclust30_2018_08/uniclust30_2018_08  \
+        --uniref90_database_path=${YOUR_DATA_DIR}/uniref90/uniref90.fasta \
+        --mgnify_database_path=${YOUR_DATA_DIR}/mgnify/mgy_clusters.fa \
+        --template_mmcif_dir=${YOUR_DATA_DIR}/pdb_mmcif/mmcif_files \
+        --obsolete_pdbs_path=${YOUR_DATA_DIR}/pdb_mmcif/obsolete.dat \
+        --pdb70_database_path=${YOUR_DATA_DIR}/pdb70/pdb70
+
+
+
+然后使用 ``sbatch sub.slurm`` 语句提交作业。
+
+作业结束后，在output目录下，将会生成结果文件：
+ 
+.. code:: console
+
+    $ ls output/
+    test
+    $ ls output/test/
+    features.pkl  ranked_2.pdb        relaxed_model_1.pdb  relaxed_model_5.pdb  result_model_4.pkl     unrelaxed_model_2.pdb
+    msas          ranked_3.pdb        relaxed_model_2.pdb  result_model_1.pkl   result_model_5.pkl     unrelaxed_model_3.pdb
+    ranked_0.pdb  ranked_4.pdb        relaxed_model_3.pdb  result_model_2.pkl   timings.json           unrelaxed_model_4.pdb
+    ranked_1.pdb  ranking_debug.json  relaxed_model_4.pdb  result_model_3.pkl   unrelaxed_model_1.pdb  unrelaxed_model_5.pdb
+
+其中 ``timeing.json`` 文件如下：
+
+.. code:: json
+
+    {
+    "features": 753.6367030143738,
+    "process_features_model_1": 3.5992894172668457,
+    "predict_and_compile_model_1": 91.63071537017822,
+    "relax_model_1": 17.6469509601593,
+    "process_features_model_2": 1.630582571029663,
+    "predict_and_compile_model_2": 78.4410469532013,
+    "relax_model_2": 10.14763593673706,
+    "process_features_model_3": 1.4803566932678223,
+    "predict_and_compile_model_3": 53.823184967041016,
+    "relax_model_3": 10.031121969223022,
+    "process_features_model_4": 1.5136051177978516,
+    "predict_and_compile_model_4": 53.68487882614136,
+    "relax_model_4": 10.274491548538208,
+    "process_features_model_5": 1.5406882762908936,
+    "predict_and_compile_model_5": 52.84224605560303,
+    "relax_model_5": 8.701589107513428
+    }
+
+   
+
+构建自己的 Alphafold 镜像
+--------------------------
+
+交大镜像平台提供了Alphafold-2.1.1的 `docker 镜像 <https://hub.sjtu.edu.cn/repository/x86/alphafold>`_。
+
+使用 ``singularity pull`` 命令可以下载该镜像：
+
+.. code:: console
+
+    singularity pull docker://sjtu.edu.cn/x86/alphafold:<tag>
+
+镜像将被保存为 ``alphafold_<tag>.sif`` 文件。
+
+镜像脚本示例如下：
+
+.. code:: bash
+    
+    #!/bin/bash
+
+    #SBATCH -J run_af
+    #SBATCH -p a100
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=1
+    #SBATCH --cpus-per-task=6
+    #SBATCH --gres=gpu:1
+
+    module purge
+    
+    singularity run --nv ${YOUR_IMAGE_PATH} python /app/alphafold/run_alphafold.py 
+        --fasta_paths=${YOU_FASTA_FILE_DIR}  \
+        --max_template_date=2020-05-14      \
+        --bfd_database_path=${YOUR_DATA_DIR}/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt  \
+        --data_dir=${YOUR_DATA_DIR} \
+        --output_dir=${YOU_OUTPUT_DIR} \
+        --uniclust30_database_path=${YOUR_DATA_DIR}/uniclust30/uniclust30_2018_08/uniclust30_2018_08 \
+         --uniref90_database_path=${YOUR_DATA_DIR}/uniref90/uniref90.fasta \
+         --mgnify_database_path=${YOUR_DATA_DIR}/mgnify/mgy_clusters.fa \
+         --template_mmcif_dir=${YOUR_DATA_DIR}/pdb_mmcif/mmcif_files \
+         --obsolete_pdbs_path=${YOUR_DATA_DIR}/pdb_mmcif/obsolete.dat \
+         --pdb70_database_path=${YOUR_DATA_DIR}/pdb70/pdb70
+
 
 
 参考资料
 ----------------
 
 - AlphaFold GitHub: https://github.com/deepmind/alphafold
+- 交大Alphafold镜像：https://hub.sjtu.edu.cn/repository/x86/alphafold
 - AlphaFold Nature 论文: https://www.nature.com/articles/s41586-021-03819-2
 - ParallelFold GitHub https://github.com/Zuricho/ParallelFold
 - ColabFold GitHub: https://github.com/sokrypton/ColabFold
