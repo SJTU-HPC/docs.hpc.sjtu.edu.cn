@@ -32,7 +32,7 @@ ARM平台上使用mpirun命令单节点运行vasp的脚本如下(vasp_mpirun_1no
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-   module load openmpi/4.0.3-gcc-9.3.0-vasp
+   module load openmpi/4.0.3-gcc-9.3.0
    IMAGE_PATH=/lustre/share/singularity/commercial-app/vasp/5.4.4-arm.sif
    mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1  singularity exec  $IMAGE_PATH vasp_std
 
@@ -57,7 +57,7 @@ ARM平台上使用mpirun命令多节点运行vasp的脚本如下(vasp_mpirun_2no
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-   module load openmpi/4.0.3-gcc-9.3.0-vasp
+   module load openmpi/4.0.3-gcc-9.3.0
    IMAGE_PATH=/lustre/share/singularity/commercial-app/vasp/5.4.4-arm.sif
    mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1  singularity exec  $IMAGE_PATH vasp_std
 
