@@ -85,6 +85,29 @@ hpl.slurm脚本内容如下
 .. code::
    sbatch hpl.slurm
 
+运行结果如下所示
+
+.. code::
+
+        ================================================================================
+        T/V                N    NB     P     Q               Time                 Gflops
+        --------------------------------------------------------------------------------
+        WR11R2L4      234240   384     8     8            2420.15             3.5404e+03
+        HPL_pdgesv() start time Tue Jan 11 21:19:09 2022
+
+        HPL_pdgesv() end time   Tue Jan 11 21:59:35 2022
+
+        --VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV-
+        Max aggregated wall time rfact . . . :               6.75
+        + Max aggregated wall time pfact . . :               2.18
+        + Max aggregated wall time mxswp . . :               1.34
+        Max aggregated wall time update  . . :            2412.51
+        + Max aggregated wall time laswp . . :             198.74
+        Max aggregated wall time up tr sv  . :               0.68
+        --------------------------------------------------------------------------------
+        ||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   1.13372865e-03 ...... PASSED
+        ================================================================================
+
 测试ARM平台的HPL性能
 --------------------
 
