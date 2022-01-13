@@ -40,7 +40,7 @@ HPL.dat内容如下所示
    1            # of NBs
    256          NBs
    0            PMAP process mapping (0=Row-,1=Column-major)
-   3            # of process grids (P x Q)
+   1            # of process grids (P x Q)
    4            Ps
    10           Qs
    16.0         threshold
@@ -63,6 +63,21 @@ HPL.dat内容如下所示
    1            Equilibration (0=no,1=yes)
    8            memory alignment in double (> 0)
 
+hpl.slurm脚本内容如下
+
+.. code::
+
+   #!/bin/bash
+   #SBATCH --job-name=hpl
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load hpl/2.3-intel-2021.4.0
+   mpirun -np $SLURM_NTASKS xhpl
 
 测试ARM平台的HPL性能
 --------------------
