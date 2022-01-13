@@ -83,6 +83,7 @@ hpl.slurm脚本内容如下
 提交上述脚本
 
 .. code::
+
    sbatch hpl.slurm
 
 运行结果如下所示
