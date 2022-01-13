@@ -19,16 +19,18 @@ HPL（The High-Performance Linpack Benchmark）是测试高性能计算集群系
 测试HPC平台的HPL性能
 --------------------
 
-拷贝HPL.dat到本地
+添加HPL.dat内容
 
 .. code::
+
    mkdir ~/hpl
    cd ~/hpl
-   cp /lustre/opt/contribute/cascadelake/hpl/hpl-2.3/bin/Linux_Intel64/HPL.dat ./
+   touch HPL.dat
 
 HPL.dat内容如下所示
 
 .. code::
+
    HPLinpack benchmark input file
    Innovative Computing Laboratory, University of Tennessee
    HPL.out      output file name (if any)
