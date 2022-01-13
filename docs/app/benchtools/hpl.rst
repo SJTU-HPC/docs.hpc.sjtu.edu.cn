@@ -35,14 +35,14 @@ HPL.dat内容如下所示
    Innovative Computing Laboratory, University of Tennessee
    HPL.out      output file name (if any)
    6            device out (6=stdout,7=stderr,file)
-   4            # of problems sizes (N)
-   29 30 34 35  Ns
-   4            # of NBs
-   1 2 3 4      NBs
+   1            # of problems sizes (N)
+   150272       Ns
+   1            # of NBs
+   256          NBs
    0            PMAP process mapping (0=Row-,1=Column-major)
    3            # of process grids (P x Q)
-   2 1 4        Ps
-   2 4 1        Qs
+   4            Ps
+   10           Qs
    16.0         threshold
    3            # of panel fact
    0 1 2        PFACTs (0=left, 1=Crout, 2=Right)
