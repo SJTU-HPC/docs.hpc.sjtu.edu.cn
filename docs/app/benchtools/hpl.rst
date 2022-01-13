@@ -26,6 +26,7 @@ HPL（The High-Performance Linpack Benchmark）是测试高性能计算集群系
    mkdir ~/hpl
    cd ~/hpl
    touch HPL.dat
+   touch hpl.slurm
 
 HPL.dat内容如下所示
 
@@ -78,6 +79,11 @@ hpl.slurm脚本内容如下
 
    module load hpl/2.3-intel-2021.4.0
    mpirun -np $SLURM_NTASKS xhpl
+
+提交上述脚本
+
+.. code::
+   sbatch hpl.slurm
 
 测试ARM平台的HPL性能
 --------------------
