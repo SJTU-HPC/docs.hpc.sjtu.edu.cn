@@ -10,15 +10,22 @@ Intel-MPI
 
 可以用以下命令加载集群中已安装的Intel组件:
 
-+-----------------+--------------------------+--------------------------+
-| 版本            | 加载方式                 | 组件说明                 |
-+=================+==========================+==========================+        
-| intel-mpi-2019. | module load              | Intel MPI库，由gcc编译   |
-| 4.243/gcc-9.2.0 | intel-mpi/2019.4.243     |                          |
-+-----------------+--------------------------+--------------------------+
-| intel-mpi-2019. | module load              | Intel MPI库，由gcc编译   |
-| 6.154/gcc-9.2.0 | intel-mpi/2019.6.154     |                          |
-+-----------------+--------------------------+--------------------------+
++---------------------+----------------------------------+--------------------------+
+| 版本                | 加载方式                         | 组件说明                 |
++=====================+==================================+==========================+        
+| intel-mpi-2021.4.0  | module load                      | Intel MPI库              |
+|                     | intel-oneapi-mpi/2021.4.0        |                          |
+|                     | module load                      |                          |
+|                     | intel-oneapi-compilers/2021.4.0  |                          |      
++---------------------+----------------------------------+--------------------------+
+| intel-mpi-2019.     | module load                      | Intel MPI库              |
+| 4.243               | intel-mpi/2019.4.243             |                          |
++---------------------+----------------------------------+--------------------------+
+| intel-mpi-2019.     | module load                      | Intel MPI库              |
+| 6.154               | intel-mpi/2019.6.154             |                          |
++---------------------+----------------------------------+--------------------------+
+
+
 
 在使用intel-mpi的时候，请尽量保持编译器版本与后缀中的编译器版本一致，如intel-mpi-2019.4.243/intel-19.0.4和intel-19.0.4
 另外我们建议直接使用Intel全家桶
@@ -70,19 +77,17 @@ Intel-MPI
    #!/bin/bash
 
    #SBATCH --job-name=mpihello
-   #SBATCH --partition=cpu
+   #SBATCH --partition=small
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   #SBATCH -n 80
-   #SBATCH --ntasks-per-node=40
+   #SBATCH -n 2
 
    ulimit -s unlimited
    ulimit -l unlimited
 
    module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
-   export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
+   mpiicc mpihello.c -o mpihello
 
    mpirun -np 2 ./mpihello
 
