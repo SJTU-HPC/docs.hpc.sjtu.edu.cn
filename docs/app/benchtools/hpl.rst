@@ -16,6 +16,98 @@ HPL（The High-Performance Linpack Benchmark）是测试高性能计算集群系
 
 浮点计算峰值是指计算机每秒可以完成的浮点计算次数，包括理论浮点峰值和实测浮点峰值。理论浮点峰值是该计算机理论上每秒可以完成的浮点计算次数，主要由CPU的主频决定。理论浮点峰值＝CPU主频×CPU核数×CPU每周期执行浮点运算的次数。本文将为您介绍如何利用HPL测试实测浮点峰值。
 
+测试HPC平台的HPL性能
+--------------------
+
+添加HPL.dat内容
+
+.. code::
+
+   mkdir ~/hpl
+   cd ~/hpl
+   touch HPL.dat
+   touch hpl.slurm
+
+HPL.dat内容如下所示
+
+.. code::
+
+   HPLinpack benchmark input file
+   Innovative Computing Laboratory, University of Tennessee
+   HPL.out      output file name (if any)
+   6            device out (6=stdout,7=stderr,file)
+   1            # of problems sizes (N)
+   150272       Ns
+   1            # of NBs
+   256          NBs
+   0            PMAP process mapping (0=Row-,1=Column-major)
+   1            # of process grids (P x Q)
+   4            Ps
+   10           Qs
+   16.0         threshold
+   3            # of panel fact
+   0 1 2        PFACTs (0=left, 1=Crout, 2=Right)
+   2            # of recursive stopping criterium
+   2 4          NBMINs (>= 1)
+   1            # of panels in recursion
+   2            NDIVs
+   3            # of recursive panel fact.
+   0 1 2        RFACTs (0=left, 1=Crout, 2=Right)
+   1            # of broadcast
+   0            BCASTs (0=1rg,1=1rM,2=2rg,3=2rM,4=Lng,5=LnM)
+   1            # of lookahead depth
+   0            DEPTHs (>=0)
+   2            SWAP (0=bin-exch,1=long,2=mix)
+   64           swapping threshold
+   0            L1 in (0=transposed,1=no-transposed) form
+   0            U  in (0=transposed,1=no-transposed) form
+   1            Equilibration (0=no,1=yes)
+   8            memory alignment in double (> 0)
+
+hpl.slurm脚本内容如下
+
+.. code::
+
+   #!/bin/bash
+   #SBATCH --job-name=hpl
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load hpl/2.3-intel-2021.4.0
+   mpirun -np $SLURM_NTASKS xhpl
+
+提交上述脚本
+
+.. code::
+
+   sbatch hpl.slurm
+
+运行结果如下所示
+
+.. code::
+
+        ================================================================================
+        T/V                N    NB     P     Q               Time                 Gflops
+        --------------------------------------------------------------------------------
+        WR11R2L4      234240   384     8     8            2420.15             3.5404e+03
+        HPL_pdgesv() start time Tue Jan 11 21:19:09 2022
+
+        HPL_pdgesv() end time   Tue Jan 11 21:59:35 2022
+
+        --VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV--VVV-
+        Max aggregated wall time rfact . . . :               6.75
+        + Max aggregated wall time pfact . . :               2.18
+        + Max aggregated wall time mxswp . . :               1.34
+        Max aggregated wall time update  . . :            2412.51
+        + Max aggregated wall time laswp . . :             198.74
+        Max aggregated wall time up tr sv  . :               0.68
+        --------------------------------------------------------------------------------
+        ||Ax-b||_oo/(eps*(||A||_oo*||x||_oo+||b||_oo)*N)=   1.13372865e-03 ...... PASSED
+        ================================================================================
 
 测试ARM平台的HPL性能
 --------------------
