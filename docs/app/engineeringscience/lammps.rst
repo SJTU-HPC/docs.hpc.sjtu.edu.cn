@@ -139,7 +139,7 @@ Lammps.
 
 .. code:: bash
 
-   $ module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
+   $ module load intel-parallel-studio/cluster.2019.5
 
 4. 编译 (以额外安装 MANYBODY 和 USER-MEAMC 包为例)
 
@@ -174,7 +174,7 @@ slurm.test
    #SBATCH -e %j.err
 
    module purge
-   module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
+   module load intel-parallel-studio/cluster.2019.5
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
    export I_MPI_FABRICS=shm:ofi
