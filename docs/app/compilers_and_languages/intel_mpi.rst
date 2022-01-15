@@ -91,9 +91,6 @@ Intel-MPI
 
    mpirun -np 2 ./mpihello
 
-若采用 intel 2018，脚本中 export I_MPI_FABRICS=shm:ofi
-这行需改为 export I_MPI_FABRICS=shm:tmi
-
 最后，将作业提交到SLURM
 
 .. code:: bash

@@ -143,12 +143,8 @@ SIMD（单指令多数据）
    module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
 
    srun ./mpihello
-
-若采用 intel 2018，脚本中 export I_MPI_FABRICS=shm:ofi
-这行需改为 export I_MPI_FABRICS=shm:tmi
 
 最后，将作业提交到SLURM
 

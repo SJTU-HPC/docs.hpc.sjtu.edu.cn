@@ -44,7 +44,6 @@ cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：
    module load siesta/4.0.1-intel-19.0.4-impi
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
 
    ulimit -s unlimited
    ulimit -l unlimited

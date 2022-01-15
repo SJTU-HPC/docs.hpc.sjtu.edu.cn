@@ -1,5 +1,5 @@
 作业示例（开发者）
-========================
+=================
 
 介绍不同并行环境的作业示例。
 
@@ -210,7 +210,7 @@ MPI示例
    $ sbatch job_openmpi.slurm
 
 使用Intel编译器构建MPI应用
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
@@ -236,7 +236,6 @@ MPI示例
    module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
 
    srun ./mpihello
 
@@ -337,7 +336,6 @@ MPI+OpenMP混合示例
 
    export I_MPI_DEBUG=5
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
 
    export OMP_NUM_THREADS=40
    srun ./hybridmpi
@@ -501,7 +499,6 @@ CUDA示例
    module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
    export I_MPI_DEBUG=100
 
    srun ./xhpl_intel64
@@ -531,5 +528,4 @@ CUDA示例
 .. code:: bash
 
    $ scancel 358
-
 

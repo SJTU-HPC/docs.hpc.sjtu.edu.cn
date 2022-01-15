@@ -177,7 +177,6 @@ slurm.test
    module load intel-parallel-studio/cluster.2019.4-intel-19.0.4
 
    export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
 
    ulimit -s unlimited
    ulimit -l unlimited
