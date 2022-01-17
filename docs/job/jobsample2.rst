@@ -132,7 +132,7 @@ MPI示例
    #include <mpi.h>
    #include <stdio.h>
    #include <stdlib.h>
-   #include <netdb.h>
+   #include <unistd.h>
 
    #define MAX_HOSTNAME_LENGTH 256
 
@@ -254,7 +254,7 @@ MPI+OpenMP混合示例
 .. code:: c
 
    #include <stdio.h>
-   #include "mpi.h"
+   #include <mpi.h>
    #include <omp.h>
 
    int main(int argc, char *argv[]) {
