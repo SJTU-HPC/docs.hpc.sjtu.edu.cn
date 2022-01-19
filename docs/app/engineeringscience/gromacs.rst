@@ -36,6 +36,12 @@ GROMACS
 
    $ module load gromacs/2020-cpu
 
+测试算例
+---------
+
+.. code:: bash
+
+   cp /lustre/share/benchmarks/gromacs/ion_channel.tpr .
 
 使用CPU版Gromacs
 ----------------
@@ -63,12 +69,6 @@ CPU版GROMACS作业示例
     ulimit -l unlimited
 
     srun --mpi=pmi2 gmx_mpi mdrun -s ./ion_channel.tpr -maxh 0.50 -resethway -noconfout -nsteps 10000
-    
-将 ``/lustre/share/benchmarks/gromacs`` 路径下的 ``ion_channel.tpr`` 文件拷贝到本地：
-
-.. code:: bash
-
-    $ cp /lustre/share/benchmarks/gromacs/ion_channel.tpr .
     
 
 提交作业。
@@ -101,12 +101,6 @@ CPU版GROMACS作业示例(双精度)
 
    srun --mpi=pmi2 gmx_mpi_d mdrun -s ./ion_channel.tpr -maxh 0.50 -resethway -noconfout -nsteps 10000
 
-将 ``/lustre/share/benchmarks/gromacs`` 路径下的 ``ion_channel.tpr`` 文件拷贝到本地：
-
-.. code:: bash
-
-    $ cp /lustre/share/benchmarks/gromacs/ion_channel.tpr .
-    
 用下方语句提交作业
 
 .. code:: bash
@@ -140,11 +134,6 @@ GPU版Gromacs(MPI版)
 
    srun --mpi=pmi2 gmx_mpi mdrun -deffnm benchmark -ntomp 1 -s ./ion_channel.tpr
 
-将 ``/lustre/share/benchmarks/gromacs`` 路径下的 ``ion_channel.tpr`` 文件拷贝到本地：
-
-.. code:: bash
-
-    $ cp /lustre/share/benchmarks/gromacs/ion_channel.tpr .
 
 使用如下指令提交：
 
@@ -203,6 +192,8 @@ Gromacs在CPU上的性能测试
 +----------------------------------+------------+------------+-----------+
 | 模块                             | 1节点性能  | 2节点性能  | 4节点性能 |
 +==================================+============+============+===========+
+| gromacs/2019.4-gcc-9.2.0-openmpi | 43.130     | 67.735     | 114.890   |
++----------------------------------+------------+------------+-----------+
 | gromacs/2020-cpu                 | 43.286     | 71.488     | 118.507   |
 +----------------------------------+------------+------------+-----------+
 | gromacs/2020.2-gcc-9.2.0-openmpi | 43.491     | 71.401     | 115.569   |
