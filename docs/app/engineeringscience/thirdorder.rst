@@ -18,6 +18,17 @@ You can use thirdorder after entering image.
    singularity shell /lustre/opt/contribute/cascadelake/thirdorder/thirdorder.sif
    python /work/thirdorder/thirdorder_espresso.py scf.in
 
+following results show that you can use thirdorder correctly.
+-------------------------------------------------------------
+
+.. code:: bash
+
+   Singularity> python /work/thirdorder/thirdorder_espresso.py scf.in
+   Usage:
+   /work/thirdorder/thirdorder_espresso.py unitcell.in sow na nb nc cutoff[nm/-integer] supercell_template.in
+   /work/thirdorder/thirdorder_espresso.py unitcell.in reap na nb nc cutoff[nm/-integer]
+   Singularity>
+
 Usage
 -----
 
