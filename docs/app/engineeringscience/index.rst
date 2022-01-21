@@ -34,3 +34,4 @@
    elphbolt
    gmx_mmpbsa
    cmaq
+   thirdorder
