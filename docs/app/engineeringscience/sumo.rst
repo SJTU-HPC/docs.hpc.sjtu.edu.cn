@@ -129,11 +129,9 @@ SUMO(GUI) 使用方法
 参考资料
 --------
 
--  `SUMO 官网 <https://sumo.dlr.de/docs/index.html >`__
--  `参考视频教程 <https://www.bilibili.com/video/BV1H7411F76Bfrom=search&seid=18074238600246103248 >`__
--  `Relion 官网 <http://www2.mrc-lmb.cam.ac.uk/relion>`__
--  `Singularity 文档 <https://sylabs.io/guides/3.5/user-guide/>`__
-      
+-  `SUMO 官网 <https://sumo.dlr.de/docs/index.html>`__
+-  `SUMO参考视频教程 <https://www.bilibili.com/video/BV1H7411F76Bfrom=search&seid=18074238600246103248>`__
+
 
 .. |image1| image:: ../../img/SUMO1.png
 .. |image2| image:: ../../img/SUMO2.png
