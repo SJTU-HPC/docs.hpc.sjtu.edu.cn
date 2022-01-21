@@ -6,8 +6,8 @@ SUMO
 简介
 ---------------
 
-SUMO，全称Simulation of Urban Mobility，是开源、微观、多模态的交通仿真软件，发展始于2000年。<br>
-它纯粹是微观的，可以针对每辆车进行单独控制，因此非常适合交通控制模型的开发。<br>
+SUMO，全称Simulation of Urban Mobility，是开源、微观、多模态的交通仿真软件，发展始于2000年。
+它纯粹是微观的，可以针对每辆车进行单独控制，因此非常适合交通控制模型的开发。
 
 
 SUMO(GUI) 使用方法  
@@ -18,18 +18,21 @@ SUMO(GUI) 使用方法
    1. 用pi集群帐号登录 https://studio.hpc.sjtu.edu.cn/ 平台
    2. 在网站通过  Interactive Apps -> Desktop -> Launch 进入桌面(注意使用GPU桌面)
    3. 打开终端，通过命令行来调用软件
+
       module purge
       module load sumo/1.10.0-sumo
       sumo-gui 
+
    4. 从下图可知，一次模拟我们需要rou.xml 和net.xml 两个文件。其中rou.xml用来表述交通需求，net.xml用来表述道路信息。
       而道路信息又由下面四个文件通过netconvert命令生成:
+
       nod.xml 用来描述节点信息
       edg.xml 用来描述边的信息
       typ.xml 用来描述预定义的边的类型（类似于做一个封装）
       con.xml 用来描述边到边的合并形式
 
-      |image1|
-
+|image1|
+.. code:: bash
       Building network using xml
 
       编写nod.xml
@@ -81,8 +84,8 @@ SUMO(GUI) 使用方法
       如果没有 con.xml 或者 typ.xml 则忽略对应的参数。
       使用sumo-gui查看net结果如下
 
-      |image2|
-
+|image2|
+.. code:: bash
       Build Demand Model
 
       举个简单的例子exa.rou.xml:
@@ -109,12 +112,12 @@ SUMO(GUI) 使用方法
     </time>
       </configuration>
 
-      然后在shell中run<br>
-      sumo-gui -c exa.sumocfg <br>
-      或者直接打开 sumo-gui 选择 open simulation，打开 exa.sumocfg 文件即可。<br>
-      对于稍微复杂的情况，建议直接使用netedit软件以图形界面的方式生成net.xml道路信息文件。<br>
-      参考视频地址: https://www.bilibili.com/video/BV1H7411F76Bfrom=search&seid=18074238600246103248 <br>
-      官方网站地址: https://sumo.dlr.de/docs/index.html <br>
+      然后在shell中run
+      sumo-gui -c exa.sumocfg 
+      或者直接打开 sumo-gui 选择 open simulation，打开 exa.sumocfg 文件即可。
+      对于稍微复杂的情况，建议直接使用netedit软件以图形界面的方式生成net.xml道路信息文件。
+      参考视频地址: https://www.bilibili.com/video/BV1H7411F76Bfrom=search&seid=18074238600246103248 
+      官方网站地址: https://sumo.dlr.de/docs/index.html 
 
 .. |image1| image:: ../../img/SUMO1.png
 .. |image2| image:: ../../img/SUMO2.png
