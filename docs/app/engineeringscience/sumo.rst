@@ -31,7 +31,7 @@ SUMO(GUI) 使用方法
       typ.xml 用来描述预定义的边的类型（类似于做一个封装）
       con.xml 用来描述边到边的合并形式
 
-   |image1|
+|image1|
 
 ---------------------------
 
@@ -89,6 +89,10 @@ SUMO(GUI) 使用方法
       使用sumo-gui查看net结果如下
 
 |image2|
+
+---------------------------
+
+.. code:: bash
 
       Build Demand Model
 
