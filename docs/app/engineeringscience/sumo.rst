@@ -122,10 +122,16 @@ SUMO(GUI) 使用方法
 
       然后在shell中run
       sumo-gui -c exa.sumocfg 
+      
       或者直接打开 sumo-gui 选择 open simulation，打开 exa.sumocfg 文件即可。
       对于稍微复杂的情况，建议直接使用netedit软件以图形界面的方式生成net.xml道路信息文件。
-      参考视频地址: https://www.bilibili.com/video/BV1H7411F76Bfrom=search&seid=18074238600246103248 
-      官方网站地址: https://sumo.dlr.de/docs/index.html 
+
+参考资料
+--------
+
+-  `SUMO 官网 <https://sumo.dlr.de/docs/index.html >`__
+-  `参考视频教程 <https://www.bilibili.com/video/BV1H7411F76Bfrom=search&seid=18074238600246103248 >`__
+      
 
 .. |image1| image:: ../../img/SUMO1.png
 .. |image2| image:: ../../img/SUMO2.png
