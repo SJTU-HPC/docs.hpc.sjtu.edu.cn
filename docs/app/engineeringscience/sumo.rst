@@ -18,14 +18,12 @@ SUMO(GUI) 使用方法
    1. 用pi集群帐号登录 https://studio.hpc.sjtu.edu.cn/ 平台
    2. 在网站通过  Interactive Apps -> Desktop -> Launch 进入桌面(注意使用GPU桌面)
    3. 打开终端，通过命令行来调用软件
-
       module purge
       module load sumo/1.10.0-sumo
       sumo-gui 
 
    4. 从下图可知，一次模拟我们需要rou.xml 和net.xml 两个文件。其中rou.xml用来表述交通需求，net.xml用来表述道路信息。
       而道路信息又由下面四个文件通过netconvert命令生成:
-
       nod.xml 用来描述节点信息
       edg.xml 用来描述边的信息
       typ.xml 用来描述预定义的边的类型（类似于做一个封装）
@@ -33,11 +31,10 @@ SUMO(GUI) 使用方法
 
 |image1|
 
----------------------------
 
-.. code:: bash
-
-      **Building network using xml**
+**Building network using xml**
+------------------------------------
+.. code:: bash   
 
       编写nod.xml
       贴出官网的例子,exa.nod.xml :
@@ -82,7 +79,10 @@ SUMO(GUI) 使用方法
    <connection from="2si" to="1o" fromLane="2" toLane="0"/>
       </connections>
 
-      **生成 net.xml**
+**生成 net.xml**
+---------------------------
+.. code:: bash    
+
       使用 netconvert 生成 exa.net.xml
       netconvert --node-files=exa.nod.xml --edge-files=exa.edg.xml \  --connection-files=exa.con.xml --type-files=exa.typ.xml \  --output-file=exa.net.xml
       如果没有 con.xml 或者 typ.xml 则忽略对应的参数。
@@ -90,11 +90,10 @@ SUMO(GUI) 使用方法
 
 |image2|
 
+**Build Demand Model**
 ---------------------------
 
 .. code:: bash
-
-      **Build Demand Model**
 
       举个简单的例子exa.rou.xml:
       <routes>
@@ -106,7 +105,10 @@ SUMO(GUI) 使用方法
     <flow depart="1" id="flow_w_e" route="route_we" type="BCar" begin="0" end="3600" probability="0.3" />
       </routes>
 
-      **Simulation**
+**Simulation**
+---------------------------
+
+.. code:: bash
 
       首先我们需要编写exa.sumocfg:
       <configuration>
@@ -122,7 +124,6 @@ SUMO(GUI) 使用方法
 
       然后在shell中run
       sumo-gui -c exa.sumocfg 
-
       或者直接打开 sumo-gui 选择 open simulation，打开 exa.sumocfg 文件即可。
       对于稍微复杂的情况，建议直接使用netedit软件以图形界面的方式生成net.xml道路信息文件。
 
