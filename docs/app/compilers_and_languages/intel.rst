@@ -105,23 +105,98 @@ SIMD（单指令多数据）
 
 
 
-使用Intel+Intel-mpi编译应用
+使用Intel编译应用
 ---------------------------
 
-这里，我们演示如何使用系统中的Intel和Intel-mpi编译MPI代码，所使用的MPI代码可以在\ ``/lustre/share/samples/MPI/mpihello.c``\ 中找到。
-在使用intel-mpi的时候，请尽量保持编译器版本与后缀中的编译器版本一致，如intel-mpi-2019.4.243/intel-19.0.4和intel-19.0.4
+这里，我们演示如何使用系统中的Intel编译器。
 另外我们建议直接使用Intel全家桶。
 
-
-
-加载和编译：
+C 代码用例 hello.c
 
 .. code:: bash
 
-   $ module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
-   $ mpiicc mpihello.c -o mpihello
+   #include <stdio.h>
+   #include <time.h>
+   #include <omp.h>
 
-提交Intel+Intel-mpi应用
+   int main()
+   {
+       clock_t start,end;
+       int i,j,k,count;
+       count = 0;
+       printf("\n");
+       start = clock();
+       //   #pragma omp parallel for                 // 与 -qopenmp 对应
+       for(i=1;i<5000;i++) { 
+          for(j=1;j<5000;j++) {
+              for (k=1;k<5000;k++) { 
+                 count++;
+              }
+          }
+       }
+       end = clock();
+       printf("time = %f \n",(double)(end - start));
+    }
+
+
+
+
+加载、编译、运行：
+
+.. code:: bash
+
+   $ module load intel/19.0.4
+   $ icc hello.c -o hello
+   $ ./hello 
+   
+
+打印结果为:
+
+.. code:: bash
+
+   time = 33090000.000000
+
+增加优化选项 -Ofast
+
+.. code:: bash    
+  
+   $  icc hello.c -Ofast -o hello
+
+   time = 20000.000000
+
+可能计算结果会变慢，这是因为增加‘-Ofast’，会开启一系列的优化选项，可以选择降低指令等级 ‘-O3’、‘-O2’ 等。具体可以参看文末文档。
+
+.. code:: bash
+
+   $ icc hello.c -O3 hello
+
+   time = 50000.000000
+
+   $ icc hello.c -O2 hello
+
+   time = 33050000.000000
+
+
+
+增加openmp并行优化：
+
+.. code:: bash
+
+   $ icc hello.c -qopenmp -O3 -o hello
+
+   time = 310000.000000
+
+增加向量化优化选项:
+
+.. code:: bash 
+
+   $  icc hello.c -qopenmp -O3 -march=core-avx2 -o hello
+   time 270000.000000
+
+
+注：可以看到优化效果有正优化也有负优化，添加优化选项前可以查阅相关知识。以上是对C语言的编译执行过程，对于C++而言，请使用icpc编译指令。  
+
+提交C代码
 -----------------------
 
 准备一个名为job_impi.slurm的作业脚本
@@ -130,27 +205,23 @@ SIMD（单指令多数据）
 
    #!/bin/bash
 
-   #SBATCH --job-name=mpihello
+   #SBATCH --job-name=hello
    #SBATCH --partition=cpu
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   #SBATCH -n 80
-   #SBATCH --ntasks-per-node=40
+   #SBATCH -N 1
+
 
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module load intel-parallel-studio/cluster.2019.5-intel-19.0.5
+   module load intel/19.0.4
 
-   export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
 
-   srun ./mpihello
 
-若采用 intel 2018，脚本中 export I_MPI_FABRICS=shm:ofi
-这行需改为 export I_MPI_FABRICS=shm:tmi
+   srun ./hello
 
-最后，将作业提交到SLURM
+将作业提交到SLURM
 
 .. code:: bash
 
@@ -159,5 +230,5 @@ SIMD（单指令多数据）
 参考资料
 --------
 
--  `intel-parallel-studio <https://software.intel.com/zh-cn/parallel-studio-xe/>`__
--  `参考文档 <https://wiki.uiowa.edu/display/hpcdocs/Compiling+Software/>`__
+-  `一篇比较详细的intel程序优化教程 <https://blog.csdn.net/gengshenghong/article/details/7034748/>`__
+-  `intel-compiler相关文档 <https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-setup/using-the-command-line/using-compiler-options.html/>`__
