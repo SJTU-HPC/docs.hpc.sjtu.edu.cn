@@ -11,6 +11,8 @@ A Python script to help create input files for computing anhamonic interatomic f
 Use thirdorder in Singularity
 -----------------------------
 
+You can use thirdorder after entering image.
+
 .. code:: bash
 
    singularity shell /lustre/opt/contribute/cascadelake/thirdorder/thirdorder.sif
@@ -53,6 +55,27 @@ Let us assume that such POSCAR is in the current directory and that thirdorder_v
 
    thirdorder_vasp.py sow 4 4 4 -3
 
+This creates a file called 3RD.SPOSCAR with the undisplaced supercell coordinates and 144 files with names following the pattern 3RD.POSCAR.*. It is the latter that need to be input to VASP. This step is completely system-dependent, but suppose that in ~/vaspinputs we have the required INCAR, POTCAR and KPOINTS files as well as a runvasp.sh script that can be passed to qsub. We can run a command sequence like:
+
+.. code:: bash
+
+   for i in 3RD.POSCAR.*;do
+      s=$(echo $i|cut -d"." -f3) &&
+      d=job-$s &&
+      mkdir $d &&
+      cp $i $d/POSCAR &&
+      cp ~/vaspinputs/INCAR ~/vaspinputs/POTCAR ~/vaspinputs/KPOINTS $d &&
+      cp ~/vaspinputs/runvasp.sh $d &&
+      (cd $d && qsub runvasp.sh)
+   done
+
+Some time later, after all these jobs have finished successfully, we only need to feed all the vasprun.xml files in the right order to thirdorder_vasp.py, this time in reap mode:
+
+.. code:: bash
+
+   find job* -name vasprun.xml|sort -n|thirdorder_vasp.py reap 4 4 4 -3
+
+If everything goes according to plan, a FORCE_CONSTANTS_3RD file will be created at the end of this run. Naturally, it is important to choose the same parameters for the sow and reap steps.
 
 result
 -----------------
