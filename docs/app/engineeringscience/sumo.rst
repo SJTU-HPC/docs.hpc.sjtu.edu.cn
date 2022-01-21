@@ -32,7 +32,7 @@ SUMO(GUI) 使用方法
       con.xml 用来描述边到边的合并形式
 
 |image1|
-.. code:: bash
+
       Building network using xml
 
       编写nod.xml
@@ -85,7 +85,7 @@ SUMO(GUI) 使用方法
       使用sumo-gui查看net结果如下
 
 |image2|
-.. code:: bash
+
       Build Demand Model
 
       举个简单的例子exa.rou.xml:
