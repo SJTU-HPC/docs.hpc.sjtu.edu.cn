@@ -37,7 +37,7 @@ SUMO(GUI) 使用方法
 
 .. code:: bash
 
-   Building network using xml
+      **Building network using xml**
 
       编写nod.xml
       贴出官网的例子,exa.nod.xml :
@@ -82,7 +82,7 @@ SUMO(GUI) 使用方法
    <connection from="2si" to="1o" fromLane="2" toLane="0"/>
       </connections>
 
-      生成 net.xml
+      **生成 net.xml**
       使用 netconvert 生成 exa.net.xml
       netconvert --node-files=exa.nod.xml --edge-files=exa.edg.xml \  --connection-files=exa.con.xml --type-files=exa.typ.xml \  --output-file=exa.net.xml
       如果没有 con.xml 或者 typ.xml 则忽略对应的参数。
@@ -94,7 +94,7 @@ SUMO(GUI) 使用方法
 
 .. code:: bash
 
-      Build Demand Model
+      **Build Demand Model**
 
       举个简单的例子exa.rou.xml:
       <routes>
@@ -106,7 +106,7 @@ SUMO(GUI) 使用方法
     <flow depart="1" id="flow_w_e" route="route_we" type="BCar" begin="0" end="3600" probability="0.3" />
       </routes>
 
-      Simulation
+      **Simulation**
 
       首先我们需要编写exa.sumocfg:
       <configuration>
