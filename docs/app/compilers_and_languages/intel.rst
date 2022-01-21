@@ -154,7 +154,7 @@ C 代码用例 hello.c
 
 .. code:: bash
 
-   time = 500000.000000
+   time = 33090000.000000
 
 增加优化选项 -Ofast
 
@@ -164,7 +164,19 @@ C 代码用例 hello.c
 
    time = 20000.000000
 
-可能计算结果会变慢，这是因为增加‘-Ofast’，会开启一系列的优化选项（具体可以百度一下，这些优化选项是可以选择性开启的），测试代码计算过于简单，增加优化选项后反而变慢了，所以优化选项选择性增加。
+可能计算结果会变慢，这是因为增加‘-Ofast’，会开启一系列的优化选项，可以选择降低指令等级 ‘-O3’、‘-O2’ 等。具体可以参看文末文档。
+
+.. code:: bash
+
+   $ icc hello.c -O3 hello
+
+   time = 50000.000000
+
+   $ icc hello.c -O2 hello
+
+   time = 33050000.000000
+
+
 
 增加openmp并行优化：
 
@@ -218,5 +230,5 @@ C 代码用例 hello.c
 参考资料
 --------
 
--  `intel-parallel-studio <https://software.intel.com/zh-cn/parallel-studio-xe/>`__
--  `参考文档 <https://wiki.uiowa.edu/display/hpcdocs/Compiling+Software/>`__
+-  `一篇比较详细的intel程序优化教程 <https://blog.csdn.net/gengshenghong/article/details/7034748/>`__
+-  `intel-compiler相关文档 <https://www.intel.com/content/www/us/en/develop/documentation/cpp-compiler-developer-guide-and-reference/top/compiler-setup/using-the-command-line/using-compiler-options.html/>`__
