@@ -20,9 +20,9 @@ A Python script to help create input files for computing anhamonic interatomic f
 
    Singularity> python /work/thirdorder/thirdorder_espresso.py scf.in
    Usage:
-	   /work/thirdorder/thirdorder_espresso.py unitcell.in sow na nb nc cutoff[nm/-integer] supercell_template.in
-	   /work/thirdorder/thirdorder_espresso.py unitcell.in reap na nb nc cutoff[nm/-integer]
-Singularity>
+   /work/thirdorder/thirdorder_espresso.py unitcell.in sow na nb nc cutoff[nm/-integer] supercell_template.in
+   /work/thirdorder/thirdorder_espresso.py unitcell.in reap na nb nc cutoff[nm/-integer]
+   Singularity>
 
 参考资料
 --------
