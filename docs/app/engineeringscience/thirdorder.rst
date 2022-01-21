@@ -18,7 +18,7 @@ You can use thirdorder after entering image.
    singularity shell /lustre/opt/contribute/cascadelake/thirdorder/thirdorder.sif
    python /work/thirdorder/thirdorder_espresso.py scf.in
 
-following results show that you can use thirdorder correctly.
+Following results show that you can use thirdorder correctly.
 -------------------------------------------------------------
 
 .. code:: bash
@@ -88,16 +88,6 @@ Some time later, after all these jobs have finished successfully, we only need t
 
 If everything goes according to plan, a FORCE_CONSTANTS_3RD file will be created at the end of this run. Naturally, it is important to choose the same parameters for the sow and reap steps.
 
-result
------------------
-
-.. code:: bash
-
-   Singularity> python /work/thirdorder/thirdorder_espresso.py scf.in
-   Usage:
-   /work/thirdorder/thirdorder_espresso.py unitcell.in sow na nb nc cutoff[nm/-integer] supercell_template.in
-   /work/thirdorder/thirdorder_espresso.py unitcell.in reap na nb nc cutoff[nm/-integer]
-   Singularity>
 
 reference
 ----------
