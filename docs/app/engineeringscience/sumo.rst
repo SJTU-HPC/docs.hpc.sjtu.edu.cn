@@ -32,8 +32,9 @@ SUMO(GUI) 使用方法
       con.xml 用来描述边到边的合并形式
 
 |image1|
+.. code:: bash
 
-      Building network using xml
+   Building network using xml
 
       编写nod.xml
       贴出官网的例子,exa.nod.xml :
