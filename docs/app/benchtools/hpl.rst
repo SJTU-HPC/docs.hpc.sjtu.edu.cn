@@ -4,8 +4,6 @@ HPL
 简介
 ----
 
-HPL是什么。
-
 +------------------+-------------+
 | 模块名           | 平台        |
 +==================+=============+
@@ -178,8 +176,63 @@ hpl.slurm脚本内容如下
     cp `which xhpl` ./
     srun --mpi=pmi2 xhpl
 
-使用Intel预编译HPL程序测试LINPACK性能
--------------------------------------
+使用Intel预编译程序测试HPL性能
+---------------------------
+
+.. tip:: Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再由MPI进程启动与Socket核心数匹配的计算线程。由于Intel HPL不使用OpenMP库，因此无法通过OMP环境变量控制计算线程数。
+
+### 运行单节点Intel HPL性能测试
+
+这个例子以方式在1个双路Intel 6248节点上运行HPL 测试，每个CPU Socket启动1个MPI进程，共启动2个MPI进程。
+
+首先，载入Intel套件模块。
+
+.. code:: bash
+
+   $ module purge; module load intel-parallel-studio/cluster.2020.1
+
+然后，复制 ``HPL.dat`` 数据文件。
+
+.. code:: bash
+
+   $ cp $MKLROOT/benchmarks/mp_linpack/HPL.dat ./
+
+提高 ``HPL.dat`` 中的问题规模 ``Ns`` 。建议调整至占用整机内存90%左右。这里使用sed将Ns替换为经验值 ``150000`` 。
+
+.. code:: bash
+
+   $ sed -i -e 's/.*Ns.*/150000\ Ns/' HPL.dat
+
+调整HPL.dat的 ``Ps`` 和 ``Qs`` 值，使其乘积等于MPI进程总数。
+这里使用sed将 ``Ps`` 和 ``Qs`` 值分别设置为2、1，乘积等于线程总数2。
+
+.. code:: bash
+
+   $ sed -i -e 's/.*\ Ps.*/2\ Ps/' HPL.dat
+   $ sed -i -e 's/.*\ Qs.*/1\ Qs/' HPL.dat
+
+编写如下SLURM作业脚本 ``hpl.slurm`` ，使用 ``-n`` 指定MPI进程总数、 ``--ntasks-per-node`` 指定每节点启动的MPI进程数、 ``--cpus-per-task`` 指定每个MPI进程使用的CPU核心数。
+
+.. code:: bash
+
+    #!/bin/bash
+
+    #SBATCH --job-name=hplonenode
+    #SBATCH --partition=cpu
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
+    #SBATCH -n 2
+    #SBATCH --ntasks-per-node=2
+    #SBATCH --cpus-per-task=20
+    #SBATCH --exclusive
+
+    ulimit -s unlimited
+    ulimit -l unlimited
+
+    module load intel-parallel-studio/cluster.2020.1
+
+    mpirun $MKLROOT/benchmarks/mp_linpack/xhpl_intel64_dynamic
+
 
 ### 使用纯MPI运行LINPACK
 
