@@ -24,7 +24,7 @@ HPL（The High-Performance Linpack Benchmark）是测试高性能计算集群系
    mkdir ~/hpl
    cd ~/hpl
    touch HPL.dat
-   touch hpl.slurm
+   touch hpl.lurm
 
 HPL.dat内容如下所示
 
@@ -177,11 +177,12 @@ hpl.slurm脚本内容如下
     srun --mpi=pmi2 xhpl
 
 使用Intel预编译程序测试HPL性能
----------------------------
+------------------------------
 
 .. tip:: Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再由MPI进程启动与Socket核心数匹配的计算线程。由于Intel HPL不使用OpenMP库，因此无法通过OMP环境变量控制计算线程数。
 
-### 运行单节点Intel HPL性能测试
+运行单节点Intel HPL性能测试
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 这个例子以方式在1个双路Intel 6248节点上运行HPL 测试，每个CPU Socket启动1个MPI进程，共启动2个MPI进程。
 
@@ -191,17 +192,18 @@ hpl.slurm脚本内容如下
 
    $ module purge; module load intel-parallel-studio/cluster.2020.1
 
-然后，复制 ``HPL.dat`` 数据文件。
+然后，复制Intel HPL算例目录：
 
 .. code:: bash
 
-   $ cp $MKLROOT/benchmarks/mp_linpack/HPL.dat ./
+   $ cp -r $MKLROOT/benchmarks/mp_linpack ./
+   $ cd mp_linpack
 
-提高 ``HPL.dat`` 中的问题规模 ``Ns`` 。建议调整至占用整机内存90%左右。这里使用sed将Ns替换为经验值 ``150000`` 。
+提高算例输入文件 ``HPL.dat`` 中的问题规模 ``Ns`` 。建议调整至占用整机内存90%左右。这里使用sed将Ns替换为经验值 ``100000`` 。
 
 .. code:: bash
 
-   $ sed -i -e 's/.*Ns.*/150000\ Ns/' HPL.dat
+   $ sed -i -e 's/.*Ns.*/100000\ Ns/' HPL.dat
 
 调整HPL.dat的 ``Ps`` 和 ``Qs`` 值，使其乘积等于MPI进程总数。
 这里使用sed将 ``Ps`` 和 ``Qs`` 值分别设置为2、1，乘积等于线程总数2。
@@ -231,43 +233,12 @@ hpl.slurm脚本内容如下
 
     module load intel-parallel-studio/cluster.2020.1
 
-    mpirun $MKLROOT/benchmarks/mp_linpack/xhpl_intel64_dynamic
+    ./runme_intel64_dynamic
 
+运行多节点Intel HPL性能测试
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### 使用纯MPI运行LINPACK
-
-这个例子以纯MPI方式在4个双路Intel 6248节点上运行LINPACK，共启动160个MPI进程。
-
-首先，载入Intel套件模块。
-
-.. code:: bash
-
-   $ module purge; module load intel-parallel-studio/cluster.2020.1
-
-然后，复制 ``HPL.dat`` 数据文件。
-
-.. code:: bash
-
-   $ cp $MKLROOT/benchmarks/mp_linpack/HPL.dat ./
-
-提高 ``HPL.dat`` 中的问题规模 ``Ns`` ，建议调整至占用整机内存90%左右。这里使用sed将Ns替换为经验值 ``100000`` 。
-
-.. code:: bash
-
-   $ sed -e -i 's/.*\ Ns.*/100000\ Ns/' HPL.dat
-
-调整HPL.dat的 ``Ps`` 和 ``Qs`` 值，使其乘积等于MPI进程数。
-这里使用sed将 ``Ps`` 和 ``Qs`` 值分别设置为16、10。
-
-
-.. code:: bash
-
-   $ sed -i -e 's/.*\ Ps.*/16\ Ps/' HPL.dat
-   $ sed -i -e 's/.*\ Qs.*/10\ Qs/' HPL.dat
-
-### 使用MPI+OpenMP混合模式运行LINPACK
-
-这个例子以纯MPI方式在4个双路Intel 6248节点上运行LINPACK，共启动8个MPI进程，每个MPI进程启动10个OpenMP线程。
+.. TODO: 广超
 
 参考资料
 --------
