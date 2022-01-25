@@ -127,6 +127,7 @@ d) 简短版使用手册（Cheat Sheet）：https://hpc.sjtu.edu.cn/Item/docs/Pi
 
 .. code:: bash
 
+   $ module purge
    $ module load gcc
    $ gcc -fopenmp hello_world.c -o hello_world
 
@@ -163,7 +164,7 @@ d) 简短版使用手册（Cheat Sheet）：https://hpc.sjtu.edu.cn/Item/docs/Pi
 
    $ sbatch hello_world.slurm
 
-
+.. tip:: 编译和作业提交都需要登录到 π 集群，参考本节 `使用 π 集群需要什么？ <https://docs.hpc.sjtu.edu.cn/quickstart/index.html#id5>`_。
 
 登录可视化计算平台
 ==================

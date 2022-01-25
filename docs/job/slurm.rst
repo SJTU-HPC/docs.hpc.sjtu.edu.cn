@@ -207,7 +207,7 @@ Slurm 具有丰富的参数集。 以下最常用的。
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于 π 集群上的Python，您可以查阅我们的\ `Python文档 <https://docs.hpc.sjtu.edu.cn/application/Python/>`__\ 。
+以下作业启动一个3任务序列（从0到2），每个任务需要1个CPU内核。关于 π 集群上的Python，您可以查阅我们的\ `Python文档 <https://docs.hpc.sjtu.edu.cn/app/compilers_and_languages/python.html>`__\ 。
 
 .. code:: bash
 
