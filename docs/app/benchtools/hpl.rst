@@ -88,7 +88,29 @@ Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再
 运行多节点Intel HPL性能测试
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. TODO: 广超
+该运行实例在2个双路Intel 6248节点上运行HPL 测试，每个CPU Socket启动1个MPI进程，共启动4个MPI进程。
+
+首先，载入Intel套件模块。
+
+.. code:: bash
+
+   $ module purge; module load intel-parallel-studio/cluster.2020.1
+
+然后，复制Intel HPL算例目录
+
+.. code:: bash
+
+   $ cp -r $MKLROOT/benchmarks/mp_linpack ./
+   $ cd mp_linpack
+
+计算节点内存为180G，将输入文件 ``HPL.dat`` 中的问题规模 ``Ns`` 调整至内存空间的90%左右。这里使用sed将Ns替换为175718。
+
+.. code:: bash
+
+   $ sed -i -e 's/.*Ns.*/175718\ Ns/' HPL.dat
+
+调整HPL.dat的 ``Ps`` 和 ``Qs`` 值，使其乘积等于MPI进程总数。
+这里使用sed将 ``Ps`` 和 ``Qs`` 值分别设置为2、2，乘积等于线程总数2。
 
 参考资料
 --------
