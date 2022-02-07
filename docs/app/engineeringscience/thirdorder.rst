@@ -15,6 +15,9 @@ You can use thirdorder after entering image.
 
 .. code:: bash
 
+   mkdir thirdorder_test
+   cd thirdorder_test
+   cp /lustre/share/benchmarks/thirdorder/scf.in ./
    singularity shell /lustre/opt/contribute/cascadelake/thirdorder/thirdorder.sif
    python /work/thirdorder/thirdorder_espresso.py scf.in
 
