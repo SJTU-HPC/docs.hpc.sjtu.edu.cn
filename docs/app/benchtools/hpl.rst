@@ -220,6 +220,4 @@ ARM平台测试HPL性能
 --------
 
 - Running the Intel Distribution for LINPACK Benchmark https://www.intel.com/content/www/us/en/develop/documentation/onemkl-linux-developer-guide/top/intel-oneapi-math-kernel-library-benchmarks/intel-distribution-for-linpack-benchmark-1/run-the-intel-distribution-for-linpack-benchmark.html
-- OSU Benchmarks gromacs官方网站 http://mvapich.cse.ohio-state.edu/benchmarks/
-- DOWNLOAD, COMPILE AND RUN THE OSU BENCHMARK on AWS https://www.hpcworkshops.com/07-efa/04-complie-run-osu.html
 - HOW DO I TUNE MY HPL.DAT FILE? https://www.advancedclustering.com/act_kb/tune-hpl-dat-file/
