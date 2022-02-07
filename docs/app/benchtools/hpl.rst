@@ -145,6 +145,77 @@ Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再
    
    ./runme_intel64_dynamic
 
+使用 ``sbatch hpl.slurm`` 提交后，主要运行结果如下，Intel 6248双节点HPL性能约为4.35Tflops。
+
+.. code:: bash
+
+   ================================================================================
+   T/V                N    NB     P     Q               Time                 Gflops
+   --------------------------------------------------------------------------------
+   WR00C2R2      175718   256     2     2             830.63            4.35466e+03
+
+ARM平台测试HPL性能
+------------------
+
+首先，复制算例到本地。
+
+.. code:: bash
+
+   $ mkdir arm_hpl
+   $ cd arm_hpl
+   $ cp /lustre/opt/kunpeng920/linux-centos7-aarch64/gcc-9.3.0/hpl-2.3-svu3iccgwr6whf7b2fcj7mbkaipbffye/bin/ ./
+
+然后，将输入文件 ``HPL.dat`` 中的问题规模 ``Ns`` 调整至内存空间256G的80%左右。
+这里使用sed将Ns替换为147840。
+
+.. code:: bash
+
+   $ sed -i -e 's/.*Ns.*/147840\ Ns/' HPL.dat
+
+将 ``NB`` 更改为经验值384。
+
+.. code:: bash
+
+   $ sed -i -e 's/.*NBs.*/384\ NBs/' HPL.dat
+
+接下来，将将 ``Ps`` 和 ``Qs`` 值分别设置为8、16，乘积等于CPU总核数128。
+
+.. code:: bash
+
+   $ sed -i -e 's/.*\ Ps.*/8\ Ps/' HPL.dat
+   $ sed -i -e 's/.*\ Qs.*/16\ Qs/' HPL.dat
+
+使用 ``sbatch hpl.slurm`` 提交作业，其中 ``N`` 代表节点总数， ``ntasks-per-node`` 代表每个节点使用的总核数。
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH --job-name=arm_hpl       
+   #SBATCH --partition=arm128c256g       
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=128
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+    
+   export OMP_NUM_THREADS=1
+   module load openmpi/4.0.3-gcc-9.2.0
+   module load hpl/2.3-gcc-9.3.0-openblas-openmpi
+   ulimit -s unlimited
+   ulimit -l unlimited
+   mpirun -np $SLURM_NTASKS xhpl
+
+运行结果如下所示：
+
+.. code:: bash
+
+   ================================================================================
+   T/V                N    NB     P     Q               Time                 Gflops
+   --------------------------------------------------------------------------------
+   WR00L2L2      147840   384     8    16            2489.13             8.6545e+02
+
+
 参考资料
 --------
 
