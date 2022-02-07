@@ -163,7 +163,7 @@ ARM平台测试HPL性能
 
    $ mkdir arm_hpl
    $ cd arm_hpl
-   $ cp /lustre/opt/kunpeng920/linux-centos7-aarch64/gcc-9.3.0/hpl-2.3-svu3iccgwr6whf7b2fcj7mbkaipbffye/bin/ ./
+   $ cp -r /lustre/opt/kunpeng920/linux-centos7-aarch64/gcc-9.3.0/hpl-2.3-svu3iccgwr6whf7b2fcj7mbkaipbffye/bin/* ./
 
 然后，将输入文件 ``HPL.dat`` 中的问题规模 ``Ns`` 调整至内存空间256G的80%左右。
 这里使用sed将Ns替换为147840。
