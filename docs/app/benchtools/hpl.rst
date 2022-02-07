@@ -112,6 +112,39 @@ Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再
 调整HPL.dat的 ``Ps`` 和 ``Qs`` 值，使其乘积等于MPI进程总数。
 这里使用sed将 ``Ps`` 和 ``Qs`` 值分别设置为2、2，乘积等于线程总数2。
 
+.. code:: bash
+
+   $ sed -i -e 's/.*\ Ps.*/2\ Ps/' HPL.dat
+   $ sed -i -e 's/.*\ Qs.*/2\ Qs/' HPL.dat
+
+将runme_intel64_dynamic中的MPI总数改为4
+
+.. code:: bash
+    
+   sed -i 's/MPI_PROC_NUM=2/MPI_PROC_NUM=4/' runme_intel64_dynamic
+
+编写如下SLURM作业脚本 ``hpl.slurm`` ，使用 ``-n`` 指定MPI进程总数， ``--ntasks-per-node`` 指定每节点启动的MPI进程数， ``--cpus-per-task`` 指定每个MPI进程使用的CPU核心数。
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH --job-name=hpl2node
+   #SBATCH --partition=cpu
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   #SBATCH -n 4
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --cpus-per-task=20
+   #SBATCH --exclusive
+   
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   module load intel-parallel-studio/cluster.2020.1
+   
+   ./runme_intel64_dynamic
+
 参考资料
 --------
 
