@@ -9,4 +9,4 @@
 
    hpl
    osubenchmarks
-
+   hpcg
