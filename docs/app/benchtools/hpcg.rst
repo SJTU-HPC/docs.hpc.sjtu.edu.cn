@@ -34,7 +34,7 @@ HPCG运行脚本(使用2个计算节点，单节点使用2个进程，一个进�
    module load oneapi/2021.4.0
    export OMP_NUM_THREADS=32
    export KMP_AFFINITY=granularity=fine,compact,1,0
-   export problem_size=192
+   export problem_size=224
    export run_time_in_seconds=60
    
    mpiexec.hydra -genvall -n 4 -ppn 2 bin/xhpcg_avx  -n$problem_size -t$run_time_in_seconds
