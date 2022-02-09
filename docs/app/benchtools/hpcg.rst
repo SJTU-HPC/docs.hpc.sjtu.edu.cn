@@ -17,7 +17,7 @@ HPCG
 HPCG基准程序有两个重要的参数, ``problem_size`` 和 ``run_time_in_seconds`` 。
 problem_size应该设置的足够大，可使应用运行至少占用存储空间的25%；run_time_in_seconds官方规定应设置为1800s，但是为了更快的得到结果，可以设置的小一些。
 
-使用如下脚本运行HPCG(使用2个计算节点，单节点使用2个进程，一个进程使用32个线程)
+HPCG运行脚本(使用2个计算节点，单节点使用2个进程，一个进程使用32个线程)
 
 .. code:: bash
 
@@ -39,6 +39,21 @@ problem_size应该设置的足够大，可使应用运行至少占用存储空�
    
    mpiexec.hydra -genvall -n 4 -ppn 2 bin/xhpcg_avx  -n$problem_size -t$run_time_in_seconds
 
-运行结果如下所示：
+使用如下命令提交作业
+
+.. code:: bash
+
+   sbatch run_hyper.slurm
+
+运行结束后，将产生如下文件，n224-4p-32t_V3.1_2022-02-09_16-43-22.txt，其中224代表问题规模，4代表使用的进程，32代表1个进程包含的线程数。
+
+.. code:: bash
+
+   Final Summary =
+   Final Summary ::HPCG result is VALID with a GFLOP/s rating of=59.2941
+   Final Summary ::    HPCG 2.4 Rating (for historical value) is=59.4924
+   Final Summary ::Reference version of ComputeDotProduct used=Performance results are most likely suboptimal
+   Final Summary ::Results are valid but execution time (sec) is=69.9931
+   Final Summary ::     Official results execution time (sec) must be at least=1800
 
 
