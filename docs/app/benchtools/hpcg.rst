@@ -13,6 +13,7 @@ HPCG
 
    module load oneapi/2021.4.0
    cp -r $MKLROOT/benchmarks/hpcg ./
+   cd hpcg
 
 HPCG基准程序有两个重要的参数, ``problem_size`` 和 ``run_time_in_seconds`` 。
 problem_size应该设置的足够大，可使应用运行至少占用存储空间的25%；run_time_in_seconds官方规定应设置为1800s，但是为了更快的得到结果，可以设置的小一些。
