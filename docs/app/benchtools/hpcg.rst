@@ -35,7 +35,7 @@ HPCG运行脚本(使用2个计算节点，单节点使用2个进程，一个进�
    module load oneapi/2021.4.0
    export OMP_NUM_THREADS=32
    export KMP_AFFINITY=granularity=fine,compact,1,0
-   export problem_size=224
+   export problem_size=192
    export run_time_in_seconds=60
    
    mpiexec.hydra -genvall -n 4 -ppn 2 bin/xhpcg_avx  -n$problem_size -t$run_time_in_seconds
@@ -46,15 +46,14 @@ HPCG运行脚本(使用2个计算节点，单节点使用2个进程，一个进�
 
    sbatch run_hyper.slurm
 
-运行结束后，将产生如下文件，n224-4p-32t_V3.1_2022-02-09_16-43-22.txt，其中224代表问题规模，4代表使用的进程，32代表1个进程包含的线程数。
+运行结束后，将产生如下文件，n192-4p-32t_V3.1_2022-02-09_16-43-22.txt，其中192代表问题规模，4代表使用的进程，32代表1个进程包含的线程数。
 
 .. code:: bash
 
    Final Summary =
-   Final Summary ::HPCG result is VALID with a GFLOP/s rating of=59.2941
-   Final Summary ::    HPCG 2.4 Rating (for historical value) is=59.4924
+   Final Summary ::HPCG result is VALID with a GFLOP/s rating of=109.132
+   Final Summary ::    HPCG 2.4 Rating (for historical value) is=109.691
    Final Summary ::Reference version of ComputeDotProduct used=Performance results are most likely suboptimal
-   Final Summary ::Results are valid but execution time (sec) is=69.9931
+   Final Summary ::Results are valid but execution time (sec) is=65.1121
    Final Summary ::     Official results execution time (sec) must be at least=1800
-
 
