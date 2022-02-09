@@ -18,7 +18,7 @@ HPCG
 HPCG基准程序有两个重要的参数, ``problem_size`` 和 ``run_time_in_seconds`` 。
 problem_size应该设置的足够大，可使应用运行至少占用存储空间的25%；run_time_in_seconds官方规定应设置为1800s，但是为了更快的得到结果，可以设置的小一些。
 
-HPCG运行脚本(使用2个计算节点，单节点使用2个进程，一个进程使用32个线程)
+HPCG运行脚本(使用2个计算节点，每个节点使用2个进程，一个进程使用32个线程)
 
 .. code:: bash
 
@@ -28,7 +28,6 @@ HPCG运行脚本(使用2个计算节点，单节点使用2个进程，一个进�
    #SBATCH -n 4
    #SBATCH --ntasks-per-node=2
    #SBATCH --cpus-per-task=32
-   #SBATCH --exclusive
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
    
