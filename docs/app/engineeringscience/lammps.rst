@@ -13,6 +13,14 @@ materials (metals, semiconductors) and coarse-grained or mesoscopic
 systems. It can be used to model atoms or, more generically, as a
 parallel particle simulator at the atomic, meso, or continuum scale.
 
+算例下载
+---------
+
+.. code:: bash
+
+   mkdir ~/lammps && cd ~/lammps
+   wget https://lammps.sandia.gov/inputs/in.lj.txt
+
 π 集群上的 LAMMPS
 --------------------
 
@@ -25,14 +33,6 @@ parallel particle simulator at the atomic, meso, or continuum scale.
 - `ARM版本 LAMMPS`_
 
 - `ARM版本 LAMMPS(bisheng+hypermpi)`_
-
-下载数据
----------
-
-.. code:: bash
- 
-   mkdir ~/lammps && cd ~/lammps
-   wget https://lammps.sandia.gov/inputs/in.lj.txt
 
 .. _CPU版本 LAMMPS:
 
