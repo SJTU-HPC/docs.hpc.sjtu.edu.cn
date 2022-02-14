@@ -6,12 +6,7 @@ LAMMPS
 简介
 ----
 
-LAMMPS is a large scale classical molecular dynamics code, and stands
-for Large-scale Atomic/Molecular Massively Parallel Simulator. LAMMPS
-has potentials for soft materials (biomolecules, polymers), solid-state
-materials (metals, semiconductors) and coarse-grained or mesoscopic
-systems. It can be used to model atoms or, more generically, as a
-parallel particle simulator at the atomic, meso, or continuum scale.
+LAMMPS是一个大规模经典分子动力学代码，代表大规模原子/分子大规模并行模拟器。LAMMPS在软材料（生物分子、聚合物）、固态材料（金属、半导体）和粗颗粒或介观系统方面具有潜力。它可以用来模拟原子，或者更一般地说，作为原子、介观或连续尺度上的并行粒子模拟。
 
 算例下载
 ---------
@@ -54,12 +49,6 @@ SHOCK SNAP SPIN SRD VORONOI USER-BOCS USER-CGDNA USER-CGSDK USER-COLVARS
 USER-DIFFRACTION USER-DPD USER-DRUDE USER-EFF USER-FEP USER-MEAMC
 USER-MESODPD USER-MISC USER-MOFFF USER-OMP USER-PHONON USER-REACTION
 USER-REAXC USER-SDPD USER-SPH USER-SMD USER-UEF USER-YAFF
-
-调用该模块:
-
-.. code:: bash
-
-   module load lammps/2020-cpu
 
 CPU 版本 Slurm 脚本
 ~~~~~~~~~~~~~~~~~~~
