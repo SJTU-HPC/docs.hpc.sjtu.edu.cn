@@ -26,6 +26,7 @@
    clever
    cnvnator
    control-freec
+   colabfold
    crest
    cufflinks
    chimera
