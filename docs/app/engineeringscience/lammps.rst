@@ -72,7 +72,7 @@ CPU 版本 Slurm 脚本
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
+   srun --mpi=pmi2 lmp -i in.lj.txt
 
 用下方语句提交作业
 
