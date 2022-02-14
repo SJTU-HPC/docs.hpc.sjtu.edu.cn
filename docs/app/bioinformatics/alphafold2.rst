@@ -1,49 +1,99 @@
 AlphaFold2
 =============
 
-AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高精确度的蛋白质 3D 模型。以往花费几周时间预测的蛋白质结构，AlphaFold2 在几小时内就能完成。
+AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高精确度的蛋白质 3D 模型。以往花费几周时间预测的蛋白质结构，AlphaFold2 在几小时内就能完成
 
 我们对 AlphaFold 持续优化，可至 ParaFold 网站了解我们的工作：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
-AlphaFold2 五大版本
+AlphaFold2 四大版本
 ----------------------------------------
 
-交大 AI 平台提供 AlphaFold 五大版本：
+交大计算平台提供 AlphaFold2 四大版本，这四个版本在思源一号和 π 集群上都可使用，且都支持复合体计算：
 
-* module 版（π 集群部署），更新日期：2021 年 9 月 12 日。加载即用，免除安装困难。可满足大部分计算需求；
+* module，加载即用，免除安装困难。可满足大部分计算需求
 
-* conda 版，支持自主选择 model 模型、pTM 计算、Amber 优化、本地数据集、修改 Recycling 次数等；
+* ParaFold，支持 CPU、GPU 分离计算，适合大规模批量计算
 
-* ColabFold 版，快速计算，含有多种功能，由 Sergey Ovchinnikov 开发。可在交大 DGX-2 上通过 conda 安装使用；
-
-* ParallelFold 版，支持 CPU、GPU 分离计算，适合大规模批量计算。
-
-* module 版（思源一号集群部署），更新日期：2022 年 1 月 11 日。加载即用，免除安装困难。可满足大部分计算需求；
+* ColabFold，快速计算，含有多种功能，由 Sergey Ovchinnikov 等人开发
 
 
-版本一：module（π 集群部署）
+使用前准备
 ----------------------------------------
-
-module 版为全局部署的 ``alphafold/2-python-3.8``，更新日期：2021 年 9 月 12 日
-
-module（π 集群部署） 使用前准备
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * 新建文件夹，如 ``alphafold``。
 
 * 在文件夹里放置一个 ``fasta`` 文件。例如 ``test.fasta`` 文件（内容如下）：
 
+（单体 fasta 文件示例）
+
 .. code:: bash
 
-    >sp|P68431|H31_HUMAN Histone H3.1 OS=Homo sapiens OX=9606 GN=H3C1 PE=1 SV=2
-    MARTKQTARKSTGGKAPRKQLATKAARKSAPATGGVKKPHRYRPGTVALREIRRYQKSTE
-    LLIRKLPFQRLVREIAQDFKTDLRFQSSAVMALQEACEAYLVGLFEDTNLCAIHAKRVTI
-    MPKDIQLARRIRGERA
+    >2LHC_1|Chain A|Ga98|artificial gene (32630)
+    PIAQIHILEGRSDEQKETLIREVSEAISRSLDAPLTSVRVIITEMAKGHFGIGGELASK
 
-module（π 集群部署）运行
-~~~~~~~~~~~~~~~~~~~~~~~~
+（复合体 fasta 文件示例）
+
+.. code:: bash
+
+    >2MX4
+    PTRTVAISDAAQLPHDYCTTPGGTLFSTTPGGTRIIYDRKFLLDR
+    >2MX4
+    PTRTVAISDAAQLPHDYCTTPGGTLFSTTPGGTRIIYDRKFLLDR
+    >2MX4
+    PTRTVAISDAAQLPHDYCTTPGGTLFSTTPGGTRIIYDRKFLLDR
+
+版本一：module
+----------------------------------------
+
+module 版本加载后即可使用，支持复合体计算
+
+module 在思源一号上运行
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 作业脚本示例（假设作业脚本名为 ``sub.slurm``）：
+
+**单体**
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH --job-name=colabfold
+    #SBATCH --partition=a100
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=1
+    #SBATCH --cpus-per-task=6
+    #SBATCH --gres=gpu:1          # use 1 GPU
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
+
+    module purge
+    module load alphafold
+
+    af2.1 \
+    --fasta_paths=test.fasta \
+    --max_template_date=2020-05-14 \
+    --model_preset=monomer \
+    --output_dir=output
+
+然后使用 ``sbatch sub.slurm`` 语句提交作业。
+
+**复合体**
+
+.. code:: bash
+
+    （slurm 脚本开头的 12 行内容跟上方一样，请自行补齐）
+
+    af2.1 \
+    --fasta_paths=test.fasta \
+    --max_template_date=2020-05-14 \
+    --model_preset=multimer \
+    --is_prokaryote_list=false \
+    --output_dir=output 
+
+module 在 π 集群上运行
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**单体**
 
 .. code:: bash
 
@@ -58,272 +108,122 @@ module（π 集群部署）运行
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
+    module purge
     module load alphafold
 
-    run_af2  $PWD --preset=casp14  test.fasta  --max_template_date=2021-09-12
+    af2.1 \
+    --fasta_paths=ha.fasta \
+    --max_template_date=2020-05-14 \
+    --model_preset=monomer \
+    --output_dir=output
 
 然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
-module 说明
+**复合体**
+
+.. code:: bash
+
+    （slurm 脚本开头的 13 行内容跟上方一样，请自行补齐）
+
+    af2.1 \
+    --fasta_paths=test.fasta \
+    --max_template_date=2020-05-14 \
+    --model_preset=multimer \
+    --is_prokaryote_list=false \
+    --output_dir=output 
+
+
+module 使用说明
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-* 资源建议：对于 1000 AA 以下的蛋白，推荐使用 1 块 GPU 卡；对于更大的序列，推荐使用 2 块 GPU 卡。对于 1400AA 以上的序列，3 块或 4 块卡也无法加快计算，强烈建议使用下方的 conda 安装方法计算。原因：AlphaFold 计算时仅使用 1 块 GPU 卡，暂不支持多卡计算；对于大蛋白，多卡可提供更大的显存。可至我们的 ParaFold wiki 了解更多信息： `https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
+* 单体计算可选用 monomer, monomer_ptm, 或 monomer_casp14
+  
+* 需严格按照推荐的参数内容和顺序运行（调换参数顺序或增删参数条目均可能导致报错）。若需使用更多模式，请换用另外三个版本的 AlphaFold
 
-* 本文档7月介绍的用法依然支持，主程序名为 ``run_alphafold``，路径含有 ``/mnt``。现为 ``run_af2``，路径不再含有 ``/mnt``。
+* 更多使用方法及讨论，请见水源文档 `AlphaFold & ColabFold <https://notes.sjtu.edu.cn/s/ielJnqiwX/>`__
 
-版本二：conda
+版本二：ParaFold
 ----------------------------------------
 
-conda 方法更为灵活，支持自定义，如选取计算 5 CASP14 models 和 5 pTM models 的全部或部分、修改 Recycling 次数、选择是否 Amber 优化、设定 data 数据集位置等。
+ParaFold 为交大开发的适用于大规模计算的 AlphaFold 集群版，可选 CPU 与 GPU 分离计算，并支持 Amber 选择、module 选择、Recycling 次数指定等多个实用功能。ParaFold 并不改变 AlphaFold 计算内容和参数本身，所以在计算结果及精度上与 AlphaFold 完全一致
 
-推荐使用“conda 安装方法一”，通过 ``conda clone`` 克隆出一个 AlphaFold 环境 ``af10``。该环境不仅适用于 AlphaFold，也适用于 ColabFold 和 ParallelFold，安装后可以在文件夹里直接使用。
+ParaFold 将原本全部运行于 GPU 的计算，分拆为 CPU 和 GPU 两阶段进行。先至 CPU 节点完成 MSA 计算，再用 GPU 节点完成模型预测。这样既能节省 GPU 资源，又能加快运算速度
 
-“conda 安装方法二”介绍从头安装 conda 环境，难度较大，感兴趣的师生可以尝试。
+ParaFold GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/ParallelFold>`_ 
 
-大家安装中若有问题，欢迎邮件联系我们。
+介绍网站：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
-conda 安装方法一（推荐使用）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. 申请 ``small`` 交互模式计算节点
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ParaFold 在思源一号上运行
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. code:: bash
-
-    srun -p small -n 4 --pty /bin/bash
-
-2. 从 ``scratch`` 复制一个文件夹过来
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+下载 ParaFold (又名 ParallelFold)
 
 .. code:: bash
 
-    cp -r /scratch/share/AlphaFold/conda_AlphaFold/ $PWD
+    git clone https://github.com/Zuricho/ParallelFold.git
+    cd ParallelFold
 
-3. 进入该文件夹，解压两文件
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    tar xzvf hpc_conda.tar.gz
-    tar xzvf afsue10.tar.gz
-
-4. conda 克隆出一个新的 af10
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    mv  afsue10 ~/.conda/envs
-    rm -rf ~/.conda/envs/af10
-
-    module purge
-    module load miniconda3
-    conda create -n af10 --clone afsue10
-
-5. 补丁 openmm.patch
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    cd ~/.conda/envs/af10/lib/python3.8/site-packages/
-    patch -p0 < conda_AlphaFold/colabfold/docker/openmm.patch
-
-至此，适用于 AlphaFold & ColabFold & ParallelFold 的 ``af10`` 环境创建好了。
-
-可以直接在 ``hpc_conda`` 文件夹下的两个子文件夹里提交计算。
-
-conda 使用 1 块 GPU 卡的脚本：
+使用下方``sub.slurm``脚本直接运行：
 
 .. code:: bash
 
     #!/bin/bash
-    #SBATCH --job-name=alpha
-    #SBATCH --partition=dgx2
-    #SBATCH -x vol03,vol04,vol05
+    #SBATCH --job-name=parafold
+    #SBATCH --partition=a100
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
     #SBATCH --cpus-per-task=6
-    #SBATCH --gres=gpu:1
-    #SBATCH --output=task_file/%j_%x.out
-    #SBATCH --error=task_file/%j_%x.err
+    #SBATCH --gres=gpu:1          # use 1 GPU
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
 
     module purge
-    module load miniconda3
-    module load cuda/10.1.243-gcc-4.8.5
-    source activate af10
-    export CUDA_VISIBLE_DEVICES=0
 
-    ./run_alphafold.sh -d /home/share/AlphaFold/data \
-    -o output -m model_1,model_2,model_3,model_4,model_5 \
-    -t 2021-09-12 \
-    -f input/test.fasta
+    singularity run --nv /dssg/share/imgs/ai/fold/1.0.sif \
+    ./run_alphafold.sh \
+    -d /dssg/share/data/alphafold \
+    -o output \
+    -p monomer \
+    -i input/GA98.fasta \
+    -t 2021-07-27 \
+    -m model_1 -f
 
-conda 同时使用 2 块 GPU 卡的脚本（适合长序列蛋白）：
+
+
+ParaFold 在 π 集群上运行
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+下载 ParaFold
+
+.. code:: bash
+
+    git clone https://github.com/Zuricho/ParallelFold.git
+    cd ParallelFold
+
+使用下方``sub.slurm``脚本直接运行：
 
 .. code:: bash
 
     #!/bin/bash
-    #SBATCH --job-name=alpha
+    #SBATCH --job-name=parafold
     #SBATCH --partition=dgx2
-    #SBATCH -x vol03,vol04,vol05
-    #SBATCH -N 1
-    #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=12
-    #SBATCH --gres=gpu:2
-    #SBATCH --output=task_file/%j_%x.out
-    #SBATCH --error=task_file/%j_%x.err
-
-    module purge
-    module load miniconda3
-    module load cuda/10.1.243-gcc-4.8.5
-    source activate af10
-    export CUDA_VISIBLE_DEVICES=0,1
-
-    ./run_alphafold.sh -d /home/share/AlphaFold/data \
-    -o output -m model_1,model_2,model_3,model_4,model_5 \
-    -t 2021-09-12 \
-    -f input/test.fasta
-
-
-* 若报错提醒缺少 ``absl``，可用命令补安装： ``pip install absl-py==0.13.0``
-
-*  ``alphafold`` 文件夹集成了 AlphaFold 和 ParallelFold，默认使用 AlphaFold。将 fasta 文件放置于 ``input`` 文件夹，然后使用 ``sub.slurm`` 语句提交作业。
-
-*  ``colabfold`` 文件夹为 ColabFold，修改 ``runner.py`` 第 153 行的 fasta 序列，然后使用 ``sbatch sub.slurm`` 语句提交作业。
-
-conda 安装方法二（具有一定难度）
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-方法二介绍从头安装 AlphaFold 的 conda 环境。
-
-AlphaFold 支持 cuda 10 和 11，vol01-07 为 cuda 10，所以接下来我们以 cuda 10 为例介绍安装。
-
-1. 下载 AlphaFold 文件
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-首先，下载 AlphaFold GitHub 官方文件
-
-.. code:: bash
-
-    git clone https://github.com/deepmind/alphafold.git
-
-由于 git 访问不太稳定，推荐先将 GitHub zip 文件下载至本地，再上传至集群。解压后得到的 AlphaFold 文件夹，我们在下方安装中称之为 ``$ALPHAFOLD`` 主文件夹（在主文件夹里 ``ls`` 命令可看到 ``LICENCE`` 文件）。
-
-然后，下载 ``stereo_chemical_props.txt`` 文件，放至 ``$ALPHAFOLD/alphafold/common`` 文件夹：
-
-.. code:: bash
-
-    wget https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
-    mv stereo_chemical_props.txt $ALPHAFOLD/alphafold/common
-
-最后，下载 ``run_alphafold.sh`` 文件，放至 ``$ALPHAFOLD`` 主文件夹：
-
-.. code:: bash
-
-    wget https://github.com/Zuricho/Alphafold_local/blob/main/run_alphafold.sh
-    chmod +x run_alphafold.sh
-
-2. 申请 GPU 计算节点
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    salloc --ntasks-per-node=1 -p dgx2 --gres=gpu:1 -N 1 --cpus-per-task=6 -x vol08
-    ssh vol0X
-
-``-x vol08`` 意思是不使用 vol08，因为 vol01-07 的 cuda 10 才是我们需要的
-
-``ssh vol0X`` 登录分配的 DGX-2 节点，注意用屏幕上显示的 vol 具体数字替换 ``0X``
-
-3. 创建 conda 环境
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    module purge
-    module load miniconda3
-    module load cuda
-
-    conda create -y -n af10 python=3.8
-
-    source activate af10
-
-4. 安装依赖软件
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    conda install -y cudatoolkit=10.1 cudnn==7.6.4
-
-    conda install -y -c conda-forge openmm==7.5.1 pdbfixer
-    conda install -y -c bioconda hmmer hhsuite kalign2
-
-    pip install absl-py==0.13.0 biopython==1.79 chex==0.0.7 dm-haiku==0.0.4 dm-tree==0.1.6 immutabledict==2.0.0 jax==0.2.14 ml-collections==0.1.0 numpy==1.19.5 scipy==1.7.0 tensorflow==2.3.0
-
-    pip install tensorflow-gpu==2.3
-
-    pip install --upgrade jax jaxlib==0.1.69+cuda101 -f https://storage.googleapis.com/jax-releases/jax_releases.html
-
-注意，
-
-* conda install 系列全部完成后再使用 pip install，避免在 pip install 后再使用 conda install；
-
-* 各软件版本敏感，如 TensorFlow 不可用 2.5、jaxlib 必须用 0.1.69。请尽量按上方推荐安装；
-
-* 检测是否安装成功（若 GPU 设备均找到，表明安装成功，否则无法正常使用 AlphaFold）：
-
-.. code:: bash
-
-    python
-    >>> import tensorflow as tf; print(tf.config.list_physical_devices("GPU"))
-    >>> import jax; print(jax.devices())
-
-5. 打一个补丁
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code:: bash
-
-    cd ~/.conda/envs/af10/lib/python3.8/site-packages/
-    patch -p0 < $ALPHAFOLD/alphafold/docker/openmm.patch
-
-至此，conda 安装结束。
-
-conda 使用
-^^^^^^^^^^^^^^^^^^^^^^^^
-
-推荐在 ``$ALPHAFOLD`` 主文件夹下新建 ``input``、 ``output``、 ``task_file`` 三个文件夹。
-
-.. code:: bash
-
-    mkdir input output task_file
-
-然后将 fasta 文件放至 ``input`` 文件夹。
-
-新建一个 slurm 作业脚本，内容如下，命名为 ``sub.slurm``：
-
-.. code:: bash
-
-    #!/bin/bash
-    #SBATCH --job-name=alpha
-    #SBATCH --partition=dgx2
-    #SBATCH -x vol03,vol04,vol05
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
     #SBATCH --cpus-per-task=6
-    #SBATCH --gres=gpu:1
-    #SBATCH --output=task_file/%j_%x.out
-    #SBATCH --error=task_file/%j_%x.err
+    #SBATCH --gres=gpu:1          # use 1 GPU
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
 
     module purge
-    module load miniconda3
-    source activate af10
-
-    ./run_alphafold.sh -d /home/share/AlphaFold/data \
-    -o output -m model_1,model_2 \
-    -t 2021-09-12 \
-    -f input/test.fasta
-
-然后使用 ``sbatch sub.slurm`` 语句提交作业。
-
+    singularity run --nv /lustre/share/img/ai/fold.sif \
+    ./run_alphafold.sh \
+    -d /scratch/share/AlphaFold/data \
+    -o output \
+    -p monomer_ptm \
+    -i input/GA98.fasta \
+    -t 2021-07-27 \
+    -m model_1 -f
 
 
 版本三：ColabFold
@@ -331,213 +231,12 @@ conda 使用
 
 ColabFold 为 Sergey Ovchinnikov 等人开发的适用于 Google Colab 的 AlphaFold 版本，使用 MMseqs2 替代 Jackhmmer，且不使用模版。ColaFold 计算迅速，短序列五六分钟即可算完。
 
-ColabFold 本地部署方法参考 Yoshitaka Moriwaki 的 `localcolabfold <https://github.com/YoshitakaMo/localcolabfold>`__
+ColabFold 使用请至交大超算文档页面： :doc:`colabfold` 
 
-* 若按照上方“conda 安装方法一” 完成了安装，可直接在 colab 文件夹中使用 ColabFold，无需再往下浏览。
-
-* 若按照上方“conda 安装方法二”自行从头安装的 conda，则需要按照下方操作，安装和使用 ColabFold：
-
-ColabFold 安装步骤
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-* ColabFold 使用与 AlphaFold 相同的 conda 环境，所以需要先按照上方 “版本二：conda” 的方法安装好 ``af10`` 环境；
-
-* 在 ``af10`` 环境里再安装下方四个软件：
-
-.. code:: bash
-
-    pip install jupyter matplotlib py3Dmol tqdm
-
-* 将所需的 ColabFold 文件夹从集群 ``scratch`` 复制到本地：
-
-.. code:: bash
-
-    cp -r /scratch/share/AlphaFold/colabfold $PWD
-
-ColabFold 使用方法
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-修改 ``runner.py`` 第 153 行的 fasta 序列，然后使用 ``sbatch sub.slurm`` 语句提交作业。
-
-ColabFold 同时使用 2 块 GPU 卡的脚本：
-
-.. code:: bash
-
-    #!/bin/bash
-    #SBATCH --job-name=alpha
-    #SBATCH --partition=dgx2
-    #SBATCH -N 1
-    #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=12
-    #SBATCH --gres=gpu:2
-    #SBATCH --output=task_file/%j_%x.out
-    #SBATCH --error=task_file/%j_%x.err
-
-    module purge
-    module load miniconda3
-    module load cuda/10.1.243-gcc-4.8.5
-    source activate af10
-    export CUDA_VISIBLE_DEVICES=0,1
-
-    python runner.py
-
-
-版本四：ParallelFold
-----------------------------------------
-
-ParallelFold 为交大钟博子韬 (`GitHub <https://github.com/Zuricho/ParallelFold>`_) 开发的适用于大规模计算的集群版，支持 CPU 计算与 GPU 计算分离。
-
-ParallelFold 将原本全部运行于 GPU 的计算，分成 CPU 和 GPU 两阶段进行。对于成百上千个蛋白的大规模结构预测，先至 cpu 或 small 等 CPU 节点上批量完成前面的 MSA 多序列比对，再将各蛋白计算出来的 ``feature.pkl`` 文件，交由 GPU 节点计算。这样既能节省 GPU 资源，又能加快运算速度。
-
-ParallelFold GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/ParallelFold>`_
-
-介绍网站：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
-
-* 若按照上方“conda 安装方法一” 完成了安装，可直接在 alphafold 文件夹中使用 ParallelFold，无需再往下浏览。
-
-* 若按照上方“conda 安装方法二”自行从头安装的 conda，则需要按照下方操作，安装和使用 ParallelFold：
-
-ParallelFold 安装步骤
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-* ParallelFold 使用与 AlphaFold 相同的 conda 环境，并依托于 AlphaFold 的主体文件夹。所以需要先按照上方“版本二：conda”的方法安装好 ``af10`` 环境，并复制“版本二：conda”方法安装好的整个 AlphaFold 文件夹，命名为 ``parallelfold``；
-
-* 从 `ParallelFold GitHub <https://github.com/Zuricho/ParallelFold>`__ 下载四个文件放于 ``parallelfold`` 文件夹里：``run_alphafold.py``、 ``run_alphafold.sh``、 ``run_feature.py``、 ``run_feature.sh``，并更改两个 ``sh`` 文件的权限：
-
-.. code:: bash
-
-    chmod +x run_feature.sh
-    chmod +x run_alphafold.sh
-
-ParallelFold  使用方法
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-* 若进行完整计算，与正常 AlphaFold 使用无异：
-
-.. code:: bash
-
-    ./run_alphafold.sh -d /home/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27
-
-* 若只计算 CPU 部分，可使用下方语句，在 cpu, small, dgx2 等任何节点上使用 CPU 计算至 ``feature.pkl`` 文件生成，然后程序自动退出。此方法适用于大规模计算：
-
-.. code:: bash
-
-    ./run_feature.sh -d /scratch/share/AlphaFold/data -o output -m model_1 -f input/test3.fasta -t 2021-07-27
-
-* ``run_alphafold.sh`` 会自动检测 ``feature.pkl`` 文件是否存在。若存在，就继续后面的 GPU 计算；若不存在，就从头开始算。所以，批量运用 ``run_feature.sh`` 在 CPU 算出 ``feature.pkl`` 文件之后，可再用 ``run_alphafold.sh`` 完成接下来的 GPU 计算。
-
-.. code:: bash
-
-    ./run_alphafold.sh -d /scratch/share/AlphaFold/data -o output -m model_1,model_2,model_3,model_4,model_5 -f input/test.fasta -t 2021-07-27
-
-
-
-欢迎邮件反馈使用情况，或提出宝贵建议。
-
-
-版本五：module（思源一号部署）
-----------------------------------------
-
-module 版为全局部署的 ``alphafold/2.1.1``，更新日期：2022 年 1 月 11 日。
-
-module（思源一号部署） 使用前准备
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* 新建文件夹，如 ``alphafold``。
-
-* 在文件夹里放置一个 ``fasta`` 文件。例如 ``test.fasta`` 文件（内容如下）：
-
-.. code:: bash
-
-    >sp|P68431|H31_HUMAN Histone H3.1 OS=Homo sapiens OX=9606 GN=H3C1 PE=1 SV=2
-    MARTKQTARKSTGGKAPRKQLATKAARKSAPATGGVKKPHRYRPGTVALREIRRYQKSTE
-    LLIRKLPFQRLVREIAQDFKTDLRFQSSAVMALQEACEAYLVGLFEDTNLCAIHAKRVTI
-    MPKDIQLARRIRGERA
-
-* 新建一个output目录来存放alphafold运行后生成的结果文件。
-
-* 指定alphafold数据库的位置。你可以根据 `指导 <https://github.com/deepmind/alphafold#genetic-databases>`_ 使用alphafold官方提供的 `脚本 <https://github.com/deepmind/alphafold/tree/main/scripts>`_ 下载自己的数据库，或者使用思源一号上提供的公共数据库 ``/dssg/share/data/alphafold``。
-
-module（思源一号部署）运行
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-作业脚本示例（假设作业脚本名为 ``sub.slurm``）：
-
-.. code:: bash
-
-    #!/bin/bash
-
-    #SBATCH -J run_af
-    #SBATCH -p a100
-    #SBATCH -o %j.out
-    #SBATCH -e %j.err
-    #SBATCH -N 1
-    #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=6
-    #SBATCH --gres=gpu:1
-
-    module purge
-    module use /dssg/share/imgs/ai
-    module load alphafold/2.1.1
-
-    python /app/alphafold/run_alphafold.py \
-        --fasta_paths=${YOU_FASTA_FILE_DIR} \
-        --max_template_date=2020-05-14 \
-        --bfd_database_path=${YOUR_DATA_DIR}/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt   \
-        --data_dir=${YOUR_DATA_DIR} \
-        --output_dir=${YOU_OUTPUT_DIR} \
-        --uniclust30_database_path=${YOUR_DATA_DIR}/uniclust30/uniclust30_2018_08/uniclust30_2018_08  \
-        --uniref90_database_path=${YOUR_DATA_DIR}/uniref90/uniref90.fasta \
-        --mgnify_database_path=${YOUR_DATA_DIR}/mgnify/mgy_clusters.fa \
-        --template_mmcif_dir=${YOUR_DATA_DIR}/pdb_mmcif/mmcif_files \
-        --obsolete_pdbs_path=${YOUR_DATA_DIR}/pdb_mmcif/obsolete.dat \
-        --pdb70_database_path=${YOUR_DATA_DIR}/pdb70/pdb70
-
-
-
-然后使用 ``sbatch sub.slurm`` 语句提交作业。
-
-作业结束后，在output目录下，将会生成结果文件：
- 
-.. code:: console
-
-    $ ls output/
-    test
-    $ ls output/test/
-    features.pkl  ranked_2.pdb        relaxed_model_1.pdb  relaxed_model_5.pdb  result_model_4.pkl     unrelaxed_model_2.pdb
-    msas          ranked_3.pdb        relaxed_model_2.pdb  result_model_1.pkl   result_model_5.pkl     unrelaxed_model_3.pdb
-    ranked_0.pdb  ranked_4.pdb        relaxed_model_3.pdb  result_model_2.pkl   timings.json           unrelaxed_model_4.pdb
-    ranked_1.pdb  ranking_debug.json  relaxed_model_4.pdb  result_model_3.pkl   unrelaxed_model_1.pdb  unrelaxed_model_5.pdb
-
-其中 ``timeing.json`` 文件如下：
-
-.. code:: json
-
-    {
-    "features": 753.6367030143738,
-    "process_features_model_1": 3.5992894172668457,
-    "predict_and_compile_model_1": 91.63071537017822,
-    "relax_model_1": 17.6469509601593,
-    "process_features_model_2": 1.630582571029663,
-    "predict_and_compile_model_2": 78.4410469532013,
-    "relax_model_2": 10.14763593673706,
-    "process_features_model_3": 1.4803566932678223,
-    "predict_and_compile_model_3": 53.823184967041016,
-    "relax_model_3": 10.031121969223022,
-    "process_features_model_4": 1.5136051177978516,
-    "predict_and_compile_model_4": 53.68487882614136,
-    "relax_model_4": 10.274491548538208,
-    "process_features_model_5": 1.5406882762908936,
-    "predict_and_compile_model_5": 52.84224605560303,
-    "relax_model_5": 8.701589107513428
-    }
-
-   
-
-构建自己的 Alphafold 镜像
+构建自己的 AlphaFold 镜像
 --------------------------
 
-交大镜像平台提供了Alphafold-2.1.1的 `docker 镜像 <https://hub.sjtu.edu.cn/repository/x86/alphafold>`_。
+交大镜像平台提供了AlphaFold-2.1.1的 `docker 镜像 <https://hub.sjtu.edu.cn/repository/x86/alphafold>`_。
 
 使用 ``singularity pull`` 命令可以下载该镜像：
 
@@ -581,11 +280,11 @@ module（思源一号部署）运行
 
 参考资料
 ----------------
-
-- AlphaFold GitHub: https://github.com/deepmind/alphafold
-- 交大Alphafold镜像：https://hub.sjtu.edu.cn/repository/x86/alphafold
-- AlphaFold Nature 论文: https://www.nature.com/articles/s41586-021-03819-2
-- ParallelFold GitHub https://github.com/Zuricho/ParallelFold
-- ColabFold GitHub: https://github.com/sokrypton/ColabFold
 - ParaFold 网站：https://parafold.sjtu.edu.cn
+- AlphaFold GitHub: https://github.com/deepmind/alphafold
+- AlphaFold Nature 论文: https://www.nature.com/articles/s41586-021-03819-2
+- ParaFold GitHub https://github.com/Zuricho/ParallelFold
+- ColabFold GitHub: https://github.com/sokrypton/ColabFold
 - localcolabfold GitHub:https://github.com/YoshitakaMo/localcolabfold
+- 交大Alphafold镜像：https://hub.sjtu.edu.cn/repository/x86/alphafold
+
