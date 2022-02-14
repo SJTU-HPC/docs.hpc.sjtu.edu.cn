@@ -26,6 +26,14 @@ parallel particle simulator at the atomic, meso, or continuum scale.
 
 - `ARM版本 LAMMPS(bisheng+hypermpi)`_
 
+下载数据
+---------
+
+.. code:: bash
+ 
+   mkdir ~/lammps && cd ~/lammps
+   wget https://lammps.sandia.gov/inputs/in.lj.txt
+
 .. _CPU版本 LAMMPS:
 
 
