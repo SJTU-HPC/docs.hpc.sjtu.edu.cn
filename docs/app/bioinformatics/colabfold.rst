@@ -12,21 +12,25 @@ ColabFold 安装
 申请 CPU 计算节点，以交互模式安装。conda 安装都需要至计算节点：
 
 .. code:: bash
+
     srun -p 64c512g -n 8 --pty /bin/bash
 
 假设在个人 home 文件夹下建立 colab 文件夹：
 
 .. code:: bash
+
     mkdir ~/colab; cd colab
 
 下载 localcolabfold：
 
 .. code:: bash
+
     git clone https://github.com/YoshitakaMo/localcolabfold.git
 
 接下来一键安装全部软件 (这里预计半小时以上)：
 
 .. code:: bash
+
     cd localcolabfold
     ./install_colabbatch_linux.sh
 
@@ -48,11 +52,13 @@ ColabFold 在思源一号上有两种运行方法：
 申请 GPU 计算节点：
 
 .. code:: bash
+
     srun -p a100 --gres=gpu:1 --pty /bin/bash
 
 激活 conda 环境：
 
 .. code:: bash
+
     export PATH="~/colab/localcolabfold/colabfold_batch/bin:$PATH"
     module load miniconda3
     source activate ~/localcolabfold/colabfold_batch/colabfold-conda
@@ -60,11 +66,13 @@ ColabFold 在思源一号上有两种运行方法：
 在包含 ``test.fasta`` 的文件夹里运行：
 
 .. code:: bash
+
     colabfold_batch --amber --num-recycle 1 test.fasta output
 
 其中，``test.fasta`` 文件内容示例：
 
 .. code:: bash
+    
     >2LHC_1|Chain A|Ga98|artificial gene (32630)
     PIAQIHILEGRSDEQKETLIREVSEAISRSLDAPLTSVRVIITEMAKGHFGIGGELASK
 
