@@ -3,14 +3,14 @@ AlphaFold2
 
 AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高精确度的蛋白质 3D 模型。以往花费几周时间预测的蛋白质结构，AlphaFold2 在几小时内就能完成
 
-我们对 AlphaFold 持续优化，可至 ParaFold 网站了解我们的工作：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
+我们对 AlphaFold 进行持续优化，欢迎了解我们的优化工作：`ParaFold: Paralleling AlphaFold for Large-Scale Predictions <https://arxiv.org/abs/2111.06340>`__
 
-AlphaFold2 四大版本
+AlphaFold2 三大版本
 ----------------------------------------
 
-交大计算平台提供 AlphaFold2 三大版本，这三个版本在思源一号和 π 集群上均可使用，且都支持复合体计算：
+交大计算平台提供 AlphaFold2 三大版本：module 标准版、ParaFold、ColabFold。三个版本在思源一号和 π 集群上均可使用，且都支持复合体计算：
 
-* module，加载即用，免除安装困难。可满足大部分计算需求
+* module 标准版，加载即用，免除安装困难。可满足大部分计算需求
 
 * ParaFold，支持 CPU、GPU 分离计算，适合大规模批量计算
 
@@ -42,10 +42,10 @@ AlphaFold2 四大版本
     >2MX4
     PTRTVAISDAAQLPHDYCTTPGGTLFSTTPGGTRIIYDRKFLLDR
 
-版本一：module
+版本一：module 标准版
 ----------------------------------------
 
-module 版本加载后即可使用，支持复合体计算
+module 标准版加载后即可使用，支持复合体计算
 
 module 在思源一号上运行
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -163,6 +163,7 @@ ParaFold 在思源一号上运行
 
     git clone https://github.com/Zuricho/ParallelFold.git
     cd ParallelFold
+    chmod +x run_alphafold.sh
 
 使用下方``sub.slurm``脚本直接运行：
 
@@ -281,11 +282,12 @@ ColabFold 使用请至交大超算文档页面： :doc:`colabfold`
 
 参考资料
 ----------------
+- ParaFold GitHub https://github.com/Zuricho/ParallelFold
+- ParaFold 论文：https://arxiv.org/abs/2111.06340
 - ParaFold 网站：https://parafold.sjtu.edu.cn
 - AlphaFold GitHub: https://github.com/deepmind/alphafold
-- AlphaFold Nature 论文: https://www.nature.com/articles/s41586-021-03819-2
-- ParaFold GitHub https://github.com/Zuricho/ParallelFold
+- AlphaFold 论文: https://www.nature.com/articles/s41586-021-03819-2
 - ColabFold GitHub: https://github.com/sokrypton/ColabFold
-- localcolabfold GitHub:https://github.com/YoshitakaMo/localcolabfold
-- 交大Alphafold镜像：https://hub.sjtu.edu.cn/repository/x86/alphafold
+- LocalColabFold GitHub: https://github.com/YoshitakaMo/localcolabfold
+- 交大AlphaFold镜像：https://hub.sjtu.edu.cn/repository/x86/alphafold
 
