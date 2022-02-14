@@ -8,7 +8,7 @@ AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高
 AlphaFold2 四大版本
 ----------------------------------------
 
-交大计算平台提供 AlphaFold2 四大版本，这四个版本在思源一号和 π 集群上都可使用，且都支持复合体计算：
+交大计算平台提供 AlphaFold2 三大版本，这三个版本在思源一号和 π 集群上均可使用，且都支持复合体计算：
 
 * module，加载即用，免除安装困难。可满足大部分计算需求
 
@@ -147,7 +147,7 @@ module 使用说明
 
 ParaFold 为交大开发的适用于大规模计算的 AlphaFold 集群版，可选 CPU 与 GPU 分离计算，并支持 Amber 选择、module 选择、Recycling 次数指定等多个实用功能。ParaFold 并不改变 AlphaFold 计算内容和参数本身，所以在计算结果及精度上与 AlphaFold 完全一致
 
-ParaFold 将原本全部运行于 GPU 的计算，分拆为 CPU 和 GPU 两阶段进行。先至 CPU 节点完成 MSA 计算，再用 GPU 节点完成模型预测。这样既能节省 GPU 资源，又能加快运算速度
+ParaFold (又名 ParallelFold) 将原本全部运行于 GPU 的计算，分拆为 CPU 和 GPU 两阶段进行。先至 CPU 节点完成 MSA 计算，再用 GPU 节点完成模型预测。这样既能节省 GPU 资源，又能加快运算速度
 
 ParaFold GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Zuricho/ParallelFold>`_ 
 
@@ -157,7 +157,7 @@ ParaFold GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Z
 ParaFold 在思源一号上运行
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-下载 ParaFold (又名 ParallelFold)
+下载 ParaFold
 
 .. code:: bash
 
@@ -200,6 +200,7 @@ ParaFold 在 π 集群上运行
 
     git clone https://github.com/Zuricho/ParallelFold.git
     cd ParallelFold
+    chmod +x run_alphafold.sh
 
 使用下方``sub.slurm``脚本直接运行：
 

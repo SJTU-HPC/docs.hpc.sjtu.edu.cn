@@ -5,6 +5,7 @@ ColabFold 是 Sergey Ovchinnikov 等人开发的快速蛋白结构预测软件�
 
 ColabFold 支持本地安装使用，Yoshitaka Moriwaki 开发维护的 `LocalColabFold <https://github.com/YoshitakaMo/localcolabfold>`__ 可以很容易在交大思源一号上安装。下面将介绍以 LocalColabFold 形式在思源一号上安装和使用 ColabFold
 
+交大计算平台同时也部署了 AlphaFold 和 ParaFold，欢迎查看：:doc:`alphafold2` 
 
 ColabFold 安装
 ----------------------------------------
@@ -72,7 +73,7 @@ ColabFold 在思源一号上有两种运行方法：
 其中，``test.fasta`` 文件内容示例：
 
 .. code:: bash
-    
+
     >2LHC_1|Chain A|Ga98|artificial gene (32630)
     PIAQIHILEGRSDEQKETLIREVSEAISRSLDAPLTSVRVIITEMAKGHFGIGGELASK
 
