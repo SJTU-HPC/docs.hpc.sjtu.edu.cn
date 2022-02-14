@@ -6,12 +6,15 @@ LAMMPS
 简介
 ----
 
-LAMMPS is a large scale classical molecular dynamics code, and stands
-for Large-scale Atomic/Molecular Massively Parallel Simulator. LAMMPS
-has potentials for soft materials (biomolecules, polymers), solid-state
-materials (metals, semiconductors) and coarse-grained or mesoscopic
-systems. It can be used to model atoms or, more generically, as a
-parallel particle simulator at the atomic, meso, or continuum scale.
+LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分子的并行模拟。LAMMPS在软材料（生物分子、聚合物）、固态材料（金属、半导体）和粗颗粒或介观系统方面具有重要作用。可用来模拟原子，或者更一般地说，作为原子、介观或连续尺度上的并行粒子模拟器。
+
+算例下载
+---------
+
+.. code:: bash
+
+   mkdir ~/lammps && cd ~/lammps
+   wget https://lammps.sandia.gov/inputs/in.lj.txt
 
 π 集群上的 LAMMPS
 --------------------
@@ -47,12 +50,6 @@ USER-DIFFRACTION USER-DPD USER-DRUDE USER-EFF USER-FEP USER-MEAMC
 USER-MESODPD USER-MISC USER-MOFFF USER-OMP USER-PHONON USER-REACTION
 USER-REAXC USER-SDPD USER-SPH USER-SMD USER-UEF USER-YAFF
 
-调用该模块:
-
-.. code:: bash
-
-   module load lammps/2020-cpu
-
 CPU 版本 Slurm 脚本
 ~~~~~~~~~~~~~~~~~~~
 
@@ -75,13 +72,46 @@ CPU 版本 Slurm 脚本
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
+   srun --mpi=pmi2 lmp -i in.lj.txt
 
 用下方语句提交作业
 
 .. code:: bash
 
    sbatch slurm.test
+
+运行结果如下所示
+~~~~~~~~~~~~~~~~
+
+.. code:: bash
+  
+   Step Temp E_pair E_mol TotEng Press 
+          0         1.44   -6.7733681            0   -4.6134356   -5.0197073 
+       1000   0.70325873   -5.6750827            0   -4.6202276    0.7112587 
+   Loop time of 0.406384 on 80 procs for 1000 steps with 32000 atoms
+
+   Performance: 1063034.783 tau/day, 2460.729 timesteps/s
+   99.3% CPU use with 80 MPI tasks x 1 OpenMP threads
+
+   MPI task timing breakdown:
+   Section |  min time  |  avg time  |  max time  |%varavg| %total
+   ---------------------------------------------------------------
+   Pair    | 0.20289    | 0.21419    | 0.23319    |   1.2 | 52.71
+   Neigh   | 0.030254   | 0.03149    | 0.03288    |   0.3 |  7.75
+   Comm    | 0.13335    | 0.15382    | 0.16657    |   1.6 | 37.85
+   Output  | 0.0014399  | 0.0014513  | 0.0017256  |   0.1 |  0.36
+   Modify  | 0.0034878  | 0.0036702  | 0.0045726  |   0.2 |  0.90
+   Other   |            | 0.001763   |            |       |  0.43
+
+   Nlocal:    400 ave 425 max 384 min
+   Histogram: 5 8 14 16 16 10 5 4 1 1
+   Nghost:    1651.6 ave 1680 max 1618 min
+   Histogram: 4 3 5 10 14 9 12 12 7 4
+   Neighs:    14996.7 ave 16163 max 13997 min
+   Histogram: 2 4 8 17 21 9 9 5 2 3
+
+   Total # of neighbors = 1199738
+   Ave neighs/atom = 37.4918
 
 Intel加速CPU版本
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
