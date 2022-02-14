@@ -95,36 +95,33 @@ CPU 版本 Slurm 脚本
 
 .. code:: bash
   
-   Step Temp E_pair E_mol TotEng Press
-          0         1.44   -6.7733681            0   -4.6134356   -5.0197073
-        100    0.7574531   -5.7585055            0   -4.6223613   0.20726105
-   Loop time of 0.106574 on 20 procs for 100 steps with 32000 atoms
+   Step Temp E_pair E_mol TotEng Press 
+          0         1.44   -6.7733681            0   -4.6134356   -5.0197073 
+       1000   0.70325873   -5.6750827            0   -4.6202276    0.7112587 
+   Loop time of 0.406384 on 80 procs for 1000 steps with 32000 atoms
 
-   Performance: 405354.017 tau/day, 938.319 timesteps/s
-   99.6% CPU use with 20 MPI tasks x 1 OpenMP threads
+   Performance: 1063034.783 tau/day, 2460.729 timesteps/s
+   99.3% CPU use with 80 MPI tasks x 1 OpenMP threads
 
    MPI task timing breakdown:
    Section |  min time  |  avg time  |  max time  |%varavg| %total
    ---------------------------------------------------------------
-   Pair    | 0.07144    | 0.075445   | 0.081143   |   1.0 | 70.79
-   Neigh   | 0.0097473  | 0.010667   | 0.01115    |   0.4 | 10.01
-   Comm    | 0.012596   | 0.018828   | 0.023833   |   2.2 | 17.67
-   Output  | 3.6828e-05 | 6.5521e-05 | 0.00012466 |   0.0 |  0.06
-   Modify  | 0.0012133  | 0.0012771  | 0.0013888  |   0.1 |  1.20
-   Other   |            | 0.0002915  |            |       |  0.27
+   Pair    | 0.20289    | 0.21419    | 0.23319    |   1.2 | 52.71
+   Neigh   | 0.030254   | 0.03149    | 0.03288    |   0.3 |  7.75
+   Comm    | 0.13335    | 0.15382    | 0.16657    |   1.6 | 37.85
+   Output  | 0.0014399  | 0.0014513  | 0.0017256  |   0.1 |  0.36
+   Modify  | 0.0034878  | 0.0036702  | 0.0045726  |   0.2 |  0.90
+   Other   |            | 0.001763   |            |       |  0.43
 
-   Nlocal:    1600 ave 1634 max 1587 min
-   Histogram: 3 7 3 3 1 2 0 0 0 1
-   Nghost:    3809.85 ave 3823 max 3772 min
-   Histogram: 1 0 0 0 1 2 1 4 6 5
-   Neighs:    60141.7 ave 62972 max 58683 min
-   Histogram: 4 0 5 4 4 1 0 1 0 1
+   Nlocal:    400 ave 425 max 384 min
+   Histogram: 5 8 14 16 16 10 5 4 1 1
+   Nghost:    1651.6 ave 1680 max 1618 min
+   Histogram: 4 3 5 10 14 9 12 12 7 4
+   Neighs:    14996.7 ave 16163 max 13997 min
+   Histogram: 2 4 8 17 21 9 9 5 2 3
 
-   Total # of neighbors = 1202833
-   Ave neighs/atom = 37.5885
-   Neighbor list builds = 5
-   Dangerous builds not checked
-   Total wall time: 0:00:00
+   Total # of neighbors = 1199738
+   Ave neighs/atom = 37.4918
 
 Intel加速CPU版本
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
