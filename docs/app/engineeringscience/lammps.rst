@@ -92,6 +92,7 @@ CPU 版本 Slurm 脚本
    sbatch slurm.test
 
 运行结果如下所示
+~~~~~~~~~~~~~~~~
 
 .. code:: bash
   
