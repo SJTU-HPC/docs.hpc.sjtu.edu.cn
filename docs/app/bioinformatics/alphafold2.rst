@@ -138,7 +138,7 @@ module 使用说明
 
 * 单体计算可选用 monomer, monomer_ptm, 或 monomer_casp14
   
-* 需严格按照推荐的参数内容和顺序运行（调换参数顺序或增删参数条目均可能导致报错）。若需使用更多模式，请换用另外三个版本的 AlphaFold
+* 需严格按照推荐的参数内容和顺序运行（调换参数顺序或增删参数条目均可能导致报错）。若需使用更多模式，请换用 ParaFold 或 ColabFold，或自行配置 conda 环境使用 AlphaFold
 
 * 更多使用方法及讨论，请见水源文档 `AlphaFold & ColabFold <https://notes.sjtu.edu.cn/s/ielJnqiwX/>`__
 
