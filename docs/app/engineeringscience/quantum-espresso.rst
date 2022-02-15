@@ -71,6 +71,23 @@ CPU版 Quantum ESPRESSO
 
    $ sbatch slurm.test
 
+运行结果如下所示：
+------------------
+
+.. code:: bash
+
+   PWSCF        :  17m37.92s CPU  17m51.67s WALL
+
+   tree out
+   out/
+       ├── ausurf.save
+       │   ├── Au.pbe-nd-van.UPF
+       │   ├── charge-density.dat
+       │   ├── data-file-schema.xml
+       │   ├── wfc1.dat
+       │   └── wfc2.dat
+       └── ausurf.xml
+
 .. _ARM版本Quantum ESPRESSO:
            
 
