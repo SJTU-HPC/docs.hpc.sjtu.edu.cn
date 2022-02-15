@@ -10,7 +10,7 @@ AlphaFold2 三大版本
 
 交大计算平台提供 AlphaFold2 三大版本：module 标准版、ParaFold、ColabFold。三个版本在思源一号和 π 集群上均可使用，且都支持复合体计算：
 
-* module 标准版，加载即用，免除安装困难。可满足大部分计算需求
+* module 标准版，加载即用，可满足大部分计算需求
 
 * ParaFold，支持 CPU、GPU 分离计算，适合大规模批量计算
 

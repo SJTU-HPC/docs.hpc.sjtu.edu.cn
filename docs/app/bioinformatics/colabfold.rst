@@ -62,7 +62,7 @@ ColabFold 在思源一号上有两种运行方法：
 
     export PATH="~/colab/localcolabfold/colabfold_batch/bin:$PATH"
     module load miniconda3
-    source activate ~/localcolabfold/colabfold_batch/colabfold-conda
+    source activate ~/colab/localcolabfold/colabfold_batch/colabfold-conda
 
 在包含 ``test.fasta`` 的文件夹里运行：
 
@@ -97,7 +97,7 @@ ColabFold 在思源一号上有两种运行方法：
     module purge
     export PATH="~/colab/localcolabfold/colabfold_batch/bin:$PATH"
     module load miniconda3
-    source activate ~/localcolabfold/colabfold_batch/colabfold-conda
+    source activate ~/colab/localcolabfold/colabfold_batch/colabfold-conda
 
     colabfold_batch --amber --num-recycle 1 test.fasta output
 
@@ -110,5 +110,5 @@ ColabFold 在思源一号上有两种运行方法：
 
 - AlphaFold GitHub: https://github.com/deepmind/alphafold
 - ColabFold GitHub: https://github.com/sokrypton/ColabFold
-- LocalColabFold GitHub:https://github.com/YoshitakaMo/localcolabfold
+- LocalColabFold GitHub: https://github.com/YoshitakaMo/localcolabfold
 - ParaFold 网站：https://parafold.sjtu.edu.cn
