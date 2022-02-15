@@ -31,6 +31,12 @@ General Public License.
 
    $ module load quantum-espresso/6.6
 
+算例下载
+---------
+
+.. code:: bash
+   wget https://repository.prace-ri.eu/git/UEABS/ueabs/-/raw/master/quantum_espresso/test_cases/small/ausurf.in
+
 .. _CPU版本Quantum ESPRESSO:
         
 
