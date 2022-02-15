@@ -31,6 +31,13 @@ General Public License.
 
    $ module load quantum-espresso/6.6
 
+算例下载
+---------
+
+.. code:: bash
+
+   wget https://repository.prace-ri.eu/git/UEABS/ueabs/-/raw/master/quantum_espresso/test_cases/small/ausurf.in
+
 .. _CPU版本Quantum ESPRESSO:
         
 
@@ -56,13 +63,30 @@ CPU版 Quantum ESPRESSO
 
    module load quantum-espresso
 
-   srun --mpi=pmi2 pw.x -i test.in
+   srun --mpi=pmi2 pw.x -i ausurf.in
 
 使用如下指令提交：
 
 .. code:: bash
 
    $ sbatch slurm.test
+
+运行结果如下所示：
+------------------
+
+.. code:: bash
+
+   PWSCF        :  17m37.92s CPU  17m51.67s WALL
+
+   tree out
+   out/
+       ├── ausurf.save
+       │   ├── Au.pbe-nd-van.UPF
+       │   ├── charge-density.dat
+       │   ├── data-file-schema.xml
+       │   ├── wfc1.dat
+       │   └── wfc2.dat
+       └── ausurf.xml
 
 .. _ARM版本Quantum ESPRESSO:
            
