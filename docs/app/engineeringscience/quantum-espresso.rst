@@ -63,7 +63,7 @@ CPU版 Quantum ESPRESSO
 
    module load quantum-espresso
 
-   srun --mpi=pmi2 pw.x -i test.in
+   srun --mpi=pmi2 pw.x -i ausurf.in
 
 使用如下指令提交：
 
