@@ -52,8 +52,6 @@ module 在思源一号上运行
 
 作业脚本示例（假设作业脚本名为 ``sub.slurm``）：
 
-**单体**
-
 .. code:: bash
 
     #!/bin/bash
@@ -67,28 +65,25 @@ module 在思源一号上运行
     #SBATCH --error=%j.err
 
     module purge
-    module load alphafold
+    module use /dssg/share/imgs/ai/
+    module load alphafold/2.1.1
 
-    af2.1 \
+    singularity run --nv /dssg/share/imgs/ai/alphafold/2.1.1.sif python /app/alphafold/run_alphafold.py \
+    --data_dir=/dssg/share/data/alphafold \
+    --bfd_database_path=/dssg/share/data/alphafold/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt  \
+    --uniclust30_database_path=/dssg/share/data/alphafold/uniclust30/uniclust30_2020_06/UniRef30_2020_06 \
+    --uniref90_database_path=/dssg/share/data/alphafold/uniref90/uniref90.fasta \
+    --mgnify_database_path=/dssg/share/data/alphafold/mgnify/mgy_clusters.fa \
+    --pdb70_database_path=/dssg/share/data/alphafold/pdb70/pdb70 \
+    --template_mmcif_dir=/dssg/share/data/alphafold/pdb_mmcif/mmcif_files \
+    --obsolete_pdbs_path=/dssg/share/data/alphafold/pdb_mmcif/obsolete.dat \
     --fasta_paths=test.fasta \
     --max_template_date=2020-05-14 \
     --model_preset=monomer \
-    --output_dir=output
+    --output_dir=output 
 
 然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
-**复合体**
-
-.. code:: bash
-
-    （slurm 脚本开头的 12 行内容跟上方一样，请自行补齐）
-
-    af2.1 \
-    --fasta_paths=test.fasta \
-    --max_template_date=2020-05-14 \
-    --model_preset=multimer \
-    --is_prokaryote_list=false \
-    --output_dir=output 
 
 module 在 π 集群上运行
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -138,7 +133,7 @@ module 使用说明
 
 * 单体计算可选用 monomer, monomer_ptm, 或 monomer_casp14
   
-* 需严格按照推荐的参数内容和顺序运行（调换参数顺序或增删参数条目均可能导致报错）。若需使用更多模式，请换用 ParaFold 或 ColabFold，或自行配置 conda 环境使用 AlphaFold
+* 需严格按照推荐的参数内容和顺序运行（调换参数顺序或增删参数条目均可能导致报错）。若需使用更多模式，请换用另外三个版本的 AlphaFold
 
 * 更多使用方法及讨论，请见水源文档 `AlphaFold & ColabFold <https://notes.sjtu.edu.cn/s/ielJnqiwX/>`__
 
@@ -165,7 +160,7 @@ ParaFold 在思源一号上运行
     cd ParallelFold
     chmod +x run_alphafold.sh
 
-使用下方``sub.slurm``脚本直接运行：
+使用下方 ``sub.slurm`` 脚本直接运行：
 
 .. code:: bash
 
@@ -203,7 +198,7 @@ ParaFold 在 π 集群上运行
     cd ParallelFold
     chmod +x run_alphafold.sh
 
-使用下方``sub.slurm``脚本直接运行：
+使用下方 ``sub.slurm`` 脚本直接运行：
 
 .. code:: bash
 
