@@ -89,7 +89,7 @@ ColabFold 在思源一号上有两种运行方法：
     #SBATCH --partition=a100
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=6
+    #SBATCH --cpus-per-task=8
     #SBATCH --gres=gpu:1          # use 1 GPU
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err

@@ -59,7 +59,7 @@ module 在思源一号上运行
     #SBATCH --partition=a100
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=6
+    #SBATCH --cpus-per-task=8
     #SBATCH --gres=gpu:1          # use 1 GPU
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
@@ -133,7 +133,7 @@ module 使用说明
 
 * 单体计算可选用 monomer, monomer_ptm, 或 monomer_casp14
   
-* 需严格按照推荐的参数内容和顺序运行（调换参数顺序或增删参数条目均可能导致报错）。若需使用更多模式，请换用另外三个版本的 AlphaFold
+* π 集群上的 AlphaFold module 需严格按照推荐的参数内容和顺序运行（调换参数顺序或增删参数条目均可能导致报错）。若需使用更多模式，请换用思源一号 module 版本，或使用 ParaFold
 
 * 更多使用方法及讨论，请见水源文档 `AlphaFold & ColabFold <https://notes.sjtu.edu.cn/s/ielJnqiwX/>`__
 
@@ -169,7 +169,7 @@ ParaFold 在思源一号上运行
     #SBATCH --partition=a100
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=6
+    #SBATCH --cpus-per-task=8
     #SBATCH --gres=gpu:1          # use 1 GPU
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
@@ -255,7 +255,7 @@ ColabFold 使用请至交大超算文档页面： :doc:`colabfold`
     #SBATCH -e %j.err
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=6
+    #SBATCH --cpus-per-task=8
     #SBATCH --gres=gpu:1
 
     module purge
