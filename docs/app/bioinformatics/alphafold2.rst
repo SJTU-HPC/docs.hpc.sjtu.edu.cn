@@ -107,7 +107,7 @@ module 在 π 集群上运行
     module load alphafold
 
     af2.1 \
-    --fasta_paths=ha.fasta \
+    --fasta_paths=test.fasta \
     --max_template_date=2020-05-14 \
     --model_preset=monomer \
     --output_dir=output
