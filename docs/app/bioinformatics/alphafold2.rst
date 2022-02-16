@@ -14,7 +14,7 @@ AlphaFold2 三大版本
 
 * ParaFold，支持 CPU、GPU 分离计算，适合大规模批量计算
 
-* ColabFold，快速计算，含有多种功能，由 Sergey Ovchinnikov 等人开发
+* ColabFold，快速计算，含多种功能，由 Sergey Ovchinnikov 等人开发
 
 
 使用前准备
@@ -107,7 +107,7 @@ module 在 π 集群上运行
     module load alphafold
 
     af2.1 \
-    --fasta_paths=ha.fasta \
+    --fasta_paths=test.fasta \
     --max_template_date=2020-05-14 \
     --model_preset=monomer \
     --output_dir=output
