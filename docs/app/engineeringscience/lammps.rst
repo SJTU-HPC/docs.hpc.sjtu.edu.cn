@@ -18,6 +18,8 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
 +--------+---------+----------+-----------------------------------------+
 | 2020   | |cpu|   | 容器     | lammps/2020-cpu                         |
 +--------+---------+----------+-----------------------------------------+
+| 2020   | |cpu|   | 容器     | 直接使用镜像                            |
++--------+---------+----------+-----------------------------------------+
 | 2020   | |gpu|   | 容器     | lammps/2020-dgx                         |
 +--------+---------+----------+-----------------------------------------+
 | 2020   | |gpu|   | 容器     | lammps/2020-dgx-kokkos                  |
@@ -38,8 +40,6 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
 π 集群上的 LAMMPS
 --------------------
 
-π 集群上有多种版本的 LAMMPS:
-
 - `CPU版本 LAMMPS`_
 
 - `GPU版本 LAMMPS`_
@@ -51,17 +51,11 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
 .. _CPU版本 LAMMPS:
 
 
-CPU 版本
-~~~~~~~~
+一. CPU 版本
+~~~~~~~~~~~~~
 
-查看 π 集群 上已编译的软件模块:
-
-.. code:: bash
-
-   module av lammps
-
-CPU 版本 Slurm 脚本
-~~~~~~~~~~~~~~~~~~~
+1.CPU 版本 Slurm 脚本
+~~~~~~~~~~~~~~~~~~~~~
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
@@ -123,7 +117,7 @@ CPU 版本 Slurm 脚本
    Total # of neighbors = 1199738
    Ave neighs/atom = 37.4918
 
-Intel加速CPU版本
+2. Intel加速CPU版本
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps.slurm）:
@@ -156,32 +150,32 @@ Intel加速CPU版本
    sbatch intel_lammps.slurm
 
 
-（进阶）CPU 版本自行编译
+3. CPU 版本自行编译
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 若对 lammps 版本有要求，或需要特定的 package，可自行编译 Intel 版本的
 Lammps.
 
-1. 从官网下载 lammps，推荐安装最新的稳定版：
+a) 从官网下载 lammps，推荐安装最新的稳定版：
 
 .. code:: bash
 
    $ wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
 
-2. 由于登录节点禁止运行作业和并行编译，请申请计算节点资源用来编译
+b) 由于登录节点禁止运行作业和并行编译，请申请计算节点资源用来编译
    lammps，并在编译结束后退出：
 
 .. code:: bash
 
    $ srun -p small -n 8 --pty /bin/bash
 
-3. 加载 Intel 模块：
+c) 加载 Intel 模块：
 
 .. code:: bash
 
    $ module load intel-parallel-studio/cluster.2019.5
 
-4. 编译 (以额外安装 MANYBODY 和 USER-MEAMC 包为例)
+d) 编译 (以额外安装 MANYBODY 和 USER-MEAMC 包为例)
 
 .. code:: bash
 
@@ -195,7 +189,7 @@ Lammps.
    $ make ps                        #查看计划安装的包列表 
    $ make -j 8 intel_cpu_intelmpi   #开始编译
 
-5. 测试脚本
+e) 测试脚本
 
 编译成功后，将在 src 文件夹下生成 lmp_intel_cpu_intelmpi.
 后续调用，请给该文件的路径，比如
@@ -227,8 +221,11 @@ slurm.test
 
 .. _GPU版本 LAMMPS:
 
-GPU版本
-~~~~~~~
+三. GPU版本
+~~~~~~~~~~~~
+
+1. GPU版本脚本
+~~~~~~~~~~~~~~~
 
 GPU 版本速度跟 intel CPU 版本基本相同
 
@@ -265,8 +262,8 @@ GPU 版 LAMMPS。脚本名称可设为 slurm.test
 
    $ sbatch slurm.test
 
-GPU 版本 LAMMPS + kokkos
-------------------------
+2. GPU 版本 LAMMPS + kokkos
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 GPU 版本速度跟 intel CPU 版本基本相同
 
@@ -310,8 +307,11 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 
 .. _ARM版本 LAMMPS:
 
-ARM版本
-~~~~~~~
+四. ARM版本
+~~~~~~~~~~~~
+
+1. ARM脚本
+~~~~~~~~~~~
 
 脚本如下(lammps.slurm):
 
@@ -341,10 +341,8 @@ ARM版本
 
    $ sbatch lammps.slurm
 
-.. _ARM版本 LAMMPS(bisheng+hypermpi):
-
-ARM版lammps(bisheng编译器+hypermpi)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2. ARM版lammps(bisheng编译器+hypermpi)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 脚本如下(lammps.slurm):
 
