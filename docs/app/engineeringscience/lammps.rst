@@ -52,8 +52,43 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
 
 
 一. CPU 版本
-~~~~~~~~~~~~~
+-------------
 
+1. 思源一号上的调用脚本
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=lmp_test
+   #SBATCH --partition=64c512g
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=64
+   
+   module purge
+   module load oneapi
+   module load lammps/20210310-intel-2021.4.0
+   
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   mpirun lmp -i in.lj.txt
+
+运行结果如下所示
+~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+   Step Temp E_pair E_mol TotEng Press 
+          0         1.44   -6.7733681            0   -4.6134356   -5.0197073 
+      40000   0.69567179   -5.6686654            0   -4.6251903   0.73582061 
+   Loop time of 6.25411 on 128 procs for 40000 steps with 32000 atoms
+
+   Performance: 2762981.774 tau/day, 6395.791 timesteps/s
+   100.0% CPU use with 128 MPI tasks x 1 OpenMP threads
+  
 1.CPU 版本 Slurm 脚本
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -91,31 +126,11 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
   
    Step Temp E_pair E_mol TotEng Press 
           0         1.44   -6.7733681            0   -4.6134356   -5.0197073 
-       1000   0.70325873   -5.6750827            0   -4.6202276    0.7112587 
-   Loop time of 0.406384 on 80 procs for 1000 steps with 32000 atoms
-
-   Performance: 1063034.783 tau/day, 2460.729 timesteps/s
-   99.3% CPU use with 80 MPI tasks x 1 OpenMP threads
-
-   MPI task timing breakdown:
-   Section |  min time  |  avg time  |  max time  |%varavg| %total
-   ---------------------------------------------------------------
-   Pair    | 0.20289    | 0.21419    | 0.23319    |   1.2 | 52.71
-   Neigh   | 0.030254   | 0.03149    | 0.03288    |   0.3 |  7.75
-   Comm    | 0.13335    | 0.15382    | 0.16657    |   1.6 | 37.85
-   Output  | 0.0014399  | 0.0014513  | 0.0017256  |   0.1 |  0.36
-   Modify  | 0.0034878  | 0.0036702  | 0.0045726  |   0.2 |  0.90
-   Other   |            | 0.001763   |            |       |  0.43
-
-   Nlocal:    400 ave 425 max 384 min
-   Histogram: 5 8 14 16 16 10 5 4 1 1
-   Nghost:    1651.6 ave 1680 max 1618 min
-   Histogram: 4 3 5 10 14 9 12 12 7 4
-   Neighs:    14996.7 ave 16163 max 13997 min
-   Histogram: 2 4 8 17 21 9 9 5 2 3
-
-   Total # of neighbors = 1199738
-   Ave neighs/atom = 37.4918
+      40000   0.69605629   -5.6690032            0   -4.6249514    0.7424604 
+   Loop time of 13.3113 on 80 procs for 40000 steps with 32000 atoms
+   
+   Performance: 1298148.809 tau/day, 3004.974 timesteps/s
+   99.7% CPU use with 80 MPI tasks x 1 OpenMP threads
 
 2. Intel加速CPU版本
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -222,7 +237,7 @@ slurm.test
 .. _GPU版本 LAMMPS:
 
 三. GPU版本
-~~~~~~~~~~~~
+-----------
 
 1. GPU版本脚本
 ~~~~~~~~~~~~~~~
@@ -308,7 +323,7 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 .. _ARM版本 LAMMPS:
 
 四. ARM版本
-~~~~~~~~~~~~
+-----------
 
 1. ARM脚本
 ~~~~~~~~~~~
