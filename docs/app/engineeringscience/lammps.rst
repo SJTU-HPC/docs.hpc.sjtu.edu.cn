@@ -150,7 +150,7 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    
    module purge
    module load oneapi/2021
-   export INPUT_FILE=in.eam
+   export INPUT_FILE=in.lj.txt
    export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
    KMP_BLOCKTIME=0 mpirun -n 40 singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
    
@@ -227,7 +227,7 @@ slurm.test
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
+   srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i in.lj.txt
 
 
 .. _GPU版本 LAMMPS:
@@ -265,7 +265,7 @@ GPU 版 LAMMPS。脚本名称可设为 slurm.test
 
    module load lammps/2020-dgx
 
-   srun --mpi=pmi2 lmp -in in.eam
+   srun --mpi=pmi2 lmp -in in.lj.txt
 
 使用如下指令提交：
 
@@ -305,7 +305,7 @@ GPU kokkos 版的 LAMMPS。脚本名称可设为 slurm.test
 
    module load lammps/2020-dgx-kokkos
 
-   srun --mpi=pmi2 lmp -k on g 2 t 12  -sf kk -pk kokkos comm device -in in.eam
+   srun --mpi=pmi2 lmp -k on g 2 t 12  -sf kk -pk kokkos comm device -in in.lj.txt
 
 其中，g 2 t 12 意思是使用 2 张 GPU 和 12 个线程。-sf kk -pk kokkos comm
 device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
@@ -344,7 +344,7 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
    module load openmpi/4.0.3-gcc-9.3.0
    module load lammps/20210310-gcc-9.3.0-openblas-openmpi
 
-   mpirun -n $SLURM_NTASKS lmp -in in.eam
+   mpirun -n $SLURM_NTASKS lmp -in in.lj.txt
 
 在 `ARM 节点 <../login/index.html#arm>`__\ 上使用如下指令提交（若在 π2.0 登录节点上提交将出错）：
 
@@ -369,7 +369,7 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
    #SBATCH --error=%j.err
 
    module load lammps/bisheng-1.3.3-lammps-2019
-   mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj
+   mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj.txt
 
 .. code:: bash
 
@@ -429,6 +429,16 @@ ARM
 +--------------+---------+---------+
 | Loop time    | 19.8993 | 14.4088 |
 +--------------+---------+---------+
+
+建议
+~~~~
+
+通过分析上述结果，速度最快的版本为思源一号和π2.0部署的intel加速版,我们推荐您使用这两个版本。
+
+.. code:: bash
+
+   module load lammps/20210310-intel-2021.4.0
+   /lustre/share/singularity/modules/lammps/20-user-intel.sif
 
 参考资料
 --------
