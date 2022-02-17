@@ -76,7 +76,6 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    mpirun lmp -i in.lj.txt
    
 运行结果如下所示
-~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
@@ -118,10 +117,22 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
 
    sbatch slurm.test
 
+运行结果如下所示
+
+.. code:: bash
+
+   Step Temp E_pair E_mol TotEng Press 
+          0         1.44   -6.7733681            0   -4.6134356   -5.0197073 
+      40000   0.69605629   -5.6690032            0   -4.6249514    0.7424604 
+   Loop time of 13.3113 on 80 procs for 40000 steps with 32000 atoms
+   
+   Performance: 1298148.809 tau/day, 3004.974 timesteps/s
+   99.7% CPU use with 80 MPI tasks x 1 OpenMP threads
+
 3. Intel加速版
 ~~~~~~~~~~~~~~~
 
-调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps.slurm）:
+调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps.slurm）
 
 .. code:: bash
 
@@ -221,7 +232,7 @@ slurm.test
 
 .. _GPU版本 LAMMPS:
 
-三. GPU版本
+二. GPU版本
 -----------
 
 1. GPU版本脚本
@@ -307,7 +318,7 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 
 .. _ARM版本 LAMMPS:
 
-四. ARM版本
+三. ARM版本
 -----------
 
 1. ARM脚本
