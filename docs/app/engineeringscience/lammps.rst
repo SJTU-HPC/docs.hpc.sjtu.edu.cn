@@ -16,7 +16,7 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    mkdir ~/lammps && cd ~/lammps
    wget https://lammps.sandia.gov/inputs/in.lj.txt
 
-以下为思源一号、π集群和国产平台上部署的LAMMPS版本与上述数据测试时的性能表现（步数___in.lj.txt最后一行参数__改为40000）
+以下为思源一号、π集群和国产平台上部署的LAMMPS版本与上述数据测试时的性能表现（步数 ``in.lj.txt最后一行参数`` 改为40000）
 
 思源一号：
 
