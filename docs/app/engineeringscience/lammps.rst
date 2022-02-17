@@ -50,7 +50,6 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
 
 .. _CPU版本 LAMMPS:
 
-
 一. CPU 版本
 -------------
 
@@ -66,7 +65,7 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    #SBATCH --error=%j.err
    #SBATCH -N 2
    #SBATCH --ntasks-per-node=64
-   
+      
    module purge
    module load oneapi
    module load lammps/20210310-intel-2021.4.0
@@ -75,7 +74,7 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    ulimit -l unlimited
    
    mpirun lmp -i in.lj.txt
-
+   
 运行结果如下所示
 ~~~~~~~~~~~~~~~~
 
@@ -85,11 +84,11 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
           0         1.44   -6.7733681            0   -4.6134356   -5.0197073 
       40000   0.69567179   -5.6686654            0   -4.6251903   0.73582061 
    Loop time of 6.25411 on 128 procs for 40000 steps with 32000 atoms
-
+   
    Performance: 2762981.774 tau/day, 6395.791 timesteps/s
    100.0% CPU use with 128 MPI tasks x 1 OpenMP threads
-  
-1.CPU 版本 Slurm 脚本
+   
+2. π2.0上的Slurm 脚本
 ~~~~~~~~~~~~~~~~~~~~~
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
@@ -104,13 +103,13 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    #SBATCH --error=%j.err
    #SBATCH -N 2
    #SBATCH --ntasks-per-node=40
-
+   
    module purge
    module load lammps/2020-cpu
-
+   
    ulimit -s unlimited
    ulimit -l unlimited
-
+   
    srun --mpi=pmi2 lmp -i in.lj.txt
 
 用下方语句提交作业
@@ -132,8 +131,8 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    Performance: 1298148.809 tau/day, 3004.974 timesteps/s
    99.7% CPU use with 80 MPI tasks x 1 OpenMP threads
 
-2. Intel加速CPU版本
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+3. Intel加速版
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps.slurm）:
 
@@ -147,17 +146,16 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    #SBATCH --ntasks-per-node=40
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-
+   
    ulimit -s unlimited
    ulimit -l unlimited
-
+   
    module purge
    module load oneapi/2021
    export INPUT_FILE=in.eam
    export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
    KMP_BLOCKTIME=0 mpirun -n 40 singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
-
-
+   
 用下方语句提交作业:
 
 .. code:: bash
@@ -165,8 +163,8 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    sbatch intel_lammps.slurm
 
 
-3. CPU 版本自行编译
-~~~~~~~~~~~~~~~~~~~~~~~~
+4. CPU 版本自行编译
+~~~~~~~~~~~~~~~~~~~
 
 若对 lammps 版本有要求，或需要特定的 package，可自行编译 Intel 版本的
 Lammps.
@@ -240,7 +238,7 @@ slurm.test
 -----------
 
 1. GPU版本脚本
-~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~
 
 GPU 版本速度跟 intel CPU 版本基本相同
 
@@ -278,7 +276,7 @@ GPU 版 LAMMPS。脚本名称可设为 slurm.test
    $ sbatch slurm.test
 
 2. GPU 版本 LAMMPS + kokkos
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 GPU 版本速度跟 intel CPU 版本基本相同
 
@@ -326,7 +324,7 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 -----------
 
 1. ARM脚本
-~~~~~~~~~~~
+~~~~~~~~~~
 
 脚本如下(lammps.slurm):
 
@@ -357,7 +355,7 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
    $ sbatch lammps.slurm
 
 2. ARM版lammps(bisheng编译器+hypermpi)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 脚本如下(lammps.slurm):
 
@@ -384,4 +382,3 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 
 -  `LAMMPS 官网 <https://lammps.sandia.gov/>`__
 -  `NVIDIA GPU CLOUD <ngc.nvidia.com>`__
-
