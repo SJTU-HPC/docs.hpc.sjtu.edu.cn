@@ -48,6 +48,9 @@ Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和�
 思源一号上的Quantum ESPRESSO
 ----------------------------
 
+基于intel编译器编译的版本
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. code:: bash
 
    #!/bin/bash
@@ -61,6 +64,29 @@ Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和�
    
    module load oneapi
    module load quantum-espresso/6.7-intel-2021.4.0
+   
+   export OMP_NUM_THREADS=1
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   mpirun pw.x -i ausurf.in
+
+基于GCC编译的版本
+~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=1node_qe_gcc
+   #SBATCH --partition=64c512g
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load openmpi/4.1.1-gcc-11.2.0
+   module load quantum-espresso/6.7-gcc-11.2.0-openblas-openmpi
    
    export OMP_NUM_THREADS=1
    ulimit -s unlimited
@@ -101,7 +127,6 @@ pi集群
    $ sbatch slurm.test
 
 运行结果如下所示：
-------------------
 
 .. code:: bash
 
