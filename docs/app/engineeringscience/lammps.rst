@@ -38,8 +38,8 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    mkdir ~/lammps && cd ~/lammps
    wget https://lammps.sandia.gov/inputs/in.lj.txt
 
-π 集群上的 LAMMPS
---------------------
+集群上的 LAMMPS
+---------------
 
 - `CPU版本 LAMMPS`_
 

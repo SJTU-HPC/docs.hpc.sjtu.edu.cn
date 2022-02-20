@@ -6,30 +6,25 @@ Quantum ESPRESSO
 简介
 ----
 
-Quantum ESPRESSO is an integrated suite of computer codes for
-electronic-structure calculations and materials modeling at the
-nanoscale. It is based on density-functional theory, plane waves, and
-pseudopotentials (both norm-conserving and ultrasoft).
+Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和超软）开发，可用于纳米级电子结构计算和材料建模的开源软件包。
 
-Quantum ESPRESSO stands for opEn Source Package for Research in
-Electronic Structure, Simulation, and Optimization. It is freely
-available to researchers around the world under the terms of the GNU
-General Public License.
+根据GNU通用公共许可证的条款，全世界的研究人员均可免费使用。
 
-π 集群上的 Quantum ESPRESSO
--------------------------------
+可用的版本
+----------
 
-查看 π 集群上已编译的软件模块:
++--------+---------+----------+-----------------------------------------------------------+
+| 版本   | 平台    | 构建方式 | 模块名                                                    |
++========+=========+==========+===========================================================+
+| 6.7    | |cpu|   | spack    | quantum-espresso/6.7-intel-2021.4.0 思源一号              |
++--------+---------+----------+-----------------------------------------------------------+
+| 6.7    | |cpu|   | spack    | quantum-espresso/6.7-gcc-11.2.0-openblas-openmpi 思源一号 |
++--------+---------+----------+-----------------------------------------------------------+
+| 6.6    | |cpu|   | 容器     | quantum-espresso/6.6                                      |
++--------+---------+----------+-----------------------------------------------------------+
+| 6.4.1  | |cpu|   | spack    | quantum-espresso/6.4.1-intel-19.0.4-impi                  |
++--------+---------+----------+-----------------------------------------------------------+
 
-.. code:: bash
-
-   $ module avail espresso
-
-调用该模块:
-
-.. code:: bash
-
-   $ module load quantum-espresso/6.6
 
 算例下载
 ---------
@@ -37,9 +32,43 @@ General Public License.
 .. code:: bash
 
    wget https://repository.prace-ri.eu/git/UEABS/ueabs/-/raw/master/quantum_espresso/test_cases/small/ausurf.in
+   wget https://repository.prace-ri.eu/git/UEABS/ueabs/-/raw/master/quantum_espresso/test_cases/small/Au.pbe-nd-van.UPF
 
-.. _CPU版本Quantum ESPRESSO:
-        
+集群上的Quantum ESPRESSO
+------------------------
+
+- `思源一号`_
+ 
+- `pi集群`_
+
+- `ARM集群`_
+
+.. _思源一号:
+
+思源一号上的Quantum ESPRESSO
+----------------------------
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=1node_qe
+   #SBATCH --partition=64c512g
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load oneapi
+   module load quantum-espresso/6.7-intel-2021.4.0
+   
+   export OMP_NUM_THREADS=1
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   mpirun pw.x -i ausurf.in
+
+.. _pi集群:
 
 CPU版 Quantum ESPRESSO
 ----------------------
@@ -88,11 +117,11 @@ CPU版 Quantum ESPRESSO
        │   └── wfc2.dat
        └── ausurf.xml
 
-.. _ARM版本Quantum ESPRESSO:
+.. _ARM集群:
            
 
-ARM版 Quantum ESPRESSO
-----------------------
+ARM集群
+-------
 
 .. code:: bash
  
