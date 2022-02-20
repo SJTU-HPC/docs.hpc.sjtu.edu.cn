@@ -6,7 +6,7 @@ Quantum ESPRESSO
 简介
 ----
 
-Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和超软）开发，可用于纳米级电子结构计算和材料建模的开源软件包。
+Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和超软）开发，是用于纳米级电子结构计算和材料建模的开源软件包。
 
 根据GNU通用公共许可证的条款，全世界的研究人员均可免费使用。
 
@@ -71,6 +71,28 @@ Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和�
    
    mpirun pw.x -i ausurf.in
 
+使用如下脚本提交作业
+
+.. code:: bash
+
+   sbatch qe_intel.slurm
+
+运行结果如下所示
+
+.. code:: bash
+
+   PWSCF        :   3m50.28s CPU   3m53.80s WALL
+
+   tree out
+   out/
+   ├── ausurf.save
+   │   ├── Au.pbe-nd-van.UPF
+   │   ├── charge-density.dat
+   │   ├── data-file-schema.xml
+   │   ├── wfc1.dat
+   │   └── wfc2.dat
+   └── ausurf.xml
+
 基于GCC编译的版本
 ~~~~~~~~~~~~~~~~~
 
@@ -79,7 +101,7 @@ Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和�
    #!/bin/bash
    #SBATCH --job-name=1node_qe_gcc
    #SBATCH --partition=64c512g
-   #SBATCH -N 1
+   #SBATCH -N 2
    #SBATCH --ntasks-per-node=64
    #SBATCH --exclusive
    #SBATCH --output=%j.out
@@ -93,6 +115,30 @@ Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和�
    ulimit -l unlimited
    
    mpirun pw.x -i ausurf.in
+
+使用如下命令提交作业
+
+.. code:: bash
+
+   sbatch qe_gcc.slurm
+
+运行结果如下所示：
+
+.. code:: bash
+
+   PWSCF        :   5m18.95s CPU   5m26.66s WALL
+
+   tree out
+   out/
+   ├── ausurf.save
+   │   ├── Au.pbe-nd-van.UPF
+   │   ├── charge-density.dat
+   │   ├── data-file-schema.xml
+   │   ├── wfc1.dat
+   │   └── wfc2.dat
+   └── ausurf.xml
+   
+   1 directory, 6 files
 
 .. _pi集群:
 
