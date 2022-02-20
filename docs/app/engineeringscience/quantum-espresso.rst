@@ -128,15 +128,15 @@ ARM集群
 
    #SBATCH --job-name=test       
    #SBATCH --partition=arm128c256g       
-   #SBATCH -N 2          
-   #SBATCH --ntasks-per-node=128
+   #SBATCH -N 1          
+   #SBATCH --ntasks-per-node=64
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
    module use /lustre/share/singularity/aarch64
    module load quantum-espresso/6.6
 
-   mpirun -n $SLURM_NTASKS pw.x -i test.in
+   srun --mpi=pmi2 pw.x -i ausurf.in
 
 使用如下指令提交：
 
