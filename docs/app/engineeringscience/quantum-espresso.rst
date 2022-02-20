@@ -70,8 +70,8 @@ Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和�
 
 .. _pi集群:
 
-CPU版 Quantum ESPRESSO
-----------------------
+pi集群
+-------
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
@@ -117,8 +117,7 @@ CPU版 Quantum ESPRESSO
        │   └── wfc2.dat
        └── ausurf.xml
 
-.. _ARM集群:
-           
+.. _ARM集群:       
 
 ARM集群
 -------
