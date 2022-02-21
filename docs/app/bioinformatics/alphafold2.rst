@@ -67,6 +67,9 @@ module 在思源一号上运行
     #SBATCH --error=%j.err
 
     module purge
+
+    export SINGULARITY_BIND="/dssg"
+    
     module use /dssg/share/imgs/ai/
     module load alphafold/2.1.1
 
@@ -177,6 +180,8 @@ ParaFold 在思源一号上运行
     #SBATCH --error=%j.err
 
     module purge
+
+    export SINGULARITY_BIND="/dssg"
 
     singularity run --nv /dssg/share/imgs/ai/fold/1.0.sif \
     ./run_alphafold.sh \
@@ -318,6 +323,8 @@ ColabFold 使用请至交大超算文档页面： :doc:`colabfold`
     #SBATCH --gres=gpu:1
 
     module purge
+
+    export SINGULARITY_BIND="/dssg"
     
     singularity run --nv ${YOUR_IMAGE_PATH} python /app/alphafold/run_alphafold.py 
         --fasta_paths=${YOU_FASTA_FILE_DIR}  \
