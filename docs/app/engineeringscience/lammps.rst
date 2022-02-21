@@ -153,7 +153,7 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
 
    export INPUT_FILE=in.lj.txt
    export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
-   
+
    mpirun singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
    
 用下方语句提交作业:
@@ -163,11 +163,11 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    sbatch intel_lammps.slurm
 
 
-1. CPU 版本自行编译
+4. CPU 版本自行编译
 ~~~~~~~~~~~~~~~~~~~
 
 若对 lammps 版本有要求，或需要特定的 package，可自行编译 Intel 版本的
-Lammps.
+Lammps. 下面以在 π 集群为例介绍 lammps 的自行安装
 
 a) 从官网下载 lammps，推荐安装最新的稳定版：
 
