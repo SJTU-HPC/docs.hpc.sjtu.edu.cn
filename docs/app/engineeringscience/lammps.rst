@@ -38,8 +38,8 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    mkdir ~/lammps && cd ~/lammps
    wget https://lammps.sandia.gov/inputs/in.lj.txt
 
-π 集群上的 LAMMPS
---------------------
+集群上的 LAMMPS
+---------------
 
 - `CPU版本 LAMMPS`_
 
@@ -152,7 +152,7 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    module load oneapi/2021
    export INPUT_FILE=in.lj.txt
    export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
-   KMP_BLOCKTIME=0 mpirun -n 40 singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
+   KMP_BLOCKTIME=0 mpirun singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
    
 用下方语句提交作业:
 
@@ -369,7 +369,7 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
    #SBATCH --error=%j.err
 
    module load lammps/bisheng-1.3.3-lammps-2019
-   mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj.txt
+   mpirun -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj.txt
 
 .. code:: bash
 

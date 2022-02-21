@@ -6,30 +6,25 @@ Quantum ESPRESSO
 简介
 ----
 
-Quantum ESPRESSO is an integrated suite of computer codes for
-electronic-structure calculations and materials modeling at the
-nanoscale. It is based on density-functional theory, plane waves, and
-pseudopotentials (both norm-conserving and ultrasoft).
+Quantum ESPRESSO基于密度泛函理论、平面波和赝势（范数守恒和超软）开发，是用于纳米级电子结构计算和材料建模的开源软件包。
 
-Quantum ESPRESSO stands for opEn Source Package for Research in
-Electronic Structure, Simulation, and Optimization. It is freely
-available to researchers around the world under the terms of the GNU
-General Public License.
+根据GNU通用公共许可证的条款，全世界的研究人员均可免费使用。
 
-π 集群上的 Quantum ESPRESSO
--------------------------------
+可用的版本
+----------
 
-查看 π 集群上已编译的软件模块:
++--------+---------+----------+-----------------------------------------------------------+
+| 版本   | 平台    | 构建方式 | 模块名                                                    |
++========+=========+==========+===========================================================+
+| 6.7    | |cpu|   | spack    | quantum-espresso/6.7-intel-2021.4.0 思源一号              |
++--------+---------+----------+-----------------------------------------------------------+
+| 6.7    | |cpu|   | spack    | quantum-espresso/6.7-gcc-11.2.0-openblas-openmpi 思源一号 |
++--------+---------+----------+-----------------------------------------------------------+
+| 6.6    | |cpu|   | 容器     | quantum-espresso/6.6                                      |
++--------+---------+----------+-----------------------------------------------------------+
+| 6.4.1  | |cpu|   | spack    | quantum-espresso/6.4.1-intel-19.0.4-impi                  |
++--------+---------+----------+-----------------------------------------------------------+
 
-.. code:: bash
-
-   $ module avail espresso
-
-调用该模块:
-
-.. code:: bash
-
-   $ module load quantum-espresso/6.6
 
 算例下载
 ---------
@@ -37,12 +32,118 @@ General Public License.
 .. code:: bash
 
    wget https://repository.prace-ri.eu/git/UEABS/ueabs/-/raw/master/quantum_espresso/test_cases/small/ausurf.in
+   wget https://repository.prace-ri.eu/git/UEABS/ueabs/-/raw/master/quantum_espresso/test_cases/small/Au.pbe-nd-van.UPF
 
-.. _CPU版本Quantum ESPRESSO:
-        
+集群上的Quantum ESPRESSO
+------------------------
 
-CPU版 Quantum ESPRESSO
-----------------------
+- `思源一号`_
+ 
+- `pi集群`_
+
+- `ARM集群`_
+
+.. _思源一号:
+
+思源一号上的Quantum ESPRESSO
+----------------------------
+
+基于intel编译器编译的版本
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=1node_qe
+   #SBATCH --partition=64c512g
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load oneapi
+   module load quantum-espresso/6.7-intel-2021.4.0
+   
+   export OMP_NUM_THREADS=1
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   mpirun pw.x -i ausurf.in
+
+使用如下脚本提交作业
+
+.. code:: bash
+
+   sbatch qe_intel.slurm
+
+运行结果如下所示
+
+.. code:: bash
+
+   PWSCF        :   3m50.28s CPU   3m53.80s WALL
+
+   tree out
+   out/
+   ├── ausurf.save
+   │   ├── Au.pbe-nd-van.UPF
+   │   ├── charge-density.dat
+   │   ├── data-file-schema.xml
+   │   ├── wfc1.dat
+   │   └── wfc2.dat
+   └── ausurf.xml
+
+基于GCC编译器编译的版本
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=1node_qe_gcc
+   #SBATCH --partition=64c512g
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load openmpi/4.1.1-gcc-11.2.0
+   module load quantum-espresso/6.7-gcc-11.2.0-openblas-openmpi
+   
+   export OMP_NUM_THREADS=1
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   mpirun pw.x -i ausurf.in
+
+使用如下命令提交作业
+
+.. code:: bash
+
+   sbatch qe_gcc.slurm
+
+运行结果如下所示：
+
+.. code:: bash
+
+   PWSCF        :   5m18.95s CPU   5m26.66s WALL
+
+   tree out
+   out/
+   ├── ausurf.save
+   │   ├── Au.pbe-nd-van.UPF
+   │   ├── charge-density.dat
+   │   ├── data-file-schema.xml
+   │   ├── wfc1.dat
+   │   └── wfc2.dat
+   └── ausurf.xml
+   
+   1 directory, 6 files
+
+.. _pi集群:
+
+pi集群
+-------
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
@@ -72,7 +173,6 @@ CPU版 Quantum ESPRESSO
    $ sbatch slurm.test
 
 运行结果如下所示：
-------------------
 
 .. code:: bash
 
@@ -88,11 +188,10 @@ CPU版 Quantum ESPRESSO
        │   └── wfc2.dat
        └── ausurf.xml
 
-.. _ARM版本Quantum ESPRESSO:
-           
+.. _ARM集群:       
 
-ARM版 Quantum ESPRESSO
-----------------------
+ARM集群
+-------
 
 .. code:: bash
  
@@ -100,21 +199,73 @@ ARM版 Quantum ESPRESSO
 
    #SBATCH --job-name=test       
    #SBATCH --partition=arm128c256g       
-   #SBATCH -N 2          
-   #SBATCH --ntasks-per-node=128
+   #SBATCH -N 1          
+   #SBATCH --ntasks-per-node=64
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
    module use /lustre/share/singularity/aarch64
    module load quantum-espresso/6.6
 
-   mpirun -n $SLURM_NTASKS pw.x -i test.in
+   srun --mpi=pmi2 pw.x -i ausurf.in
 
 使用如下指令提交：
 
 .. code:: bash
 
    $ sbatch slurm.test
+
+运行结果
+---------
+
+思源一号
+~~~~~~~~
+
++--------------------------------------------+
+|    quantum-espresso/6.7-intel-2021.4.0     |
++===========+==========+==========+==========+
+| 核数      | 64       | 128      | 192      |
++-----------+----------+----------+----------+
+| CPU time  | 5m32.13s | 3m49.22s | 3m41.00s |
++-----------+----------+----------+----------+
+
++--------------------------------------------------+
+| quantum-espresso/6.7-gcc-11.2.0-openblas-openmpi |
++===========+============+============+============+
+| 核数      | 64         | 128        | 192        |
++-----------+------------+------------+------------+
+| CPU time  | 6m44.78s   | 5m18.95s   | 5m31.64s   |
++-----------+------------+------------+------------+
+
+集群pi
+~~~~~~~
+
++-----------------------------------------------+
+|             quantum-espresso/6.6              |
++===========+===========+===========+===========+
+| 核数      | 40        | 80        | 120       |
++-----------+-----------+-----------+-----------+
+| CPU time  | 19m27.24s | 17m39.15s | 15m25.99s |
++-----------+-----------+-----------+-----------+
+
++-----------------------------------------------+
+|   quantum-espresso/6.4.1-intel-19.0.4-impi    |
++===========+===========+===========+===========+
+| 核数      | 40        | 80        | 120       |
++-----------+-----------+-----------+-----------+
+| CPU time  | 25m55.89s | 22m11.84s | 24m28.29s |
++-----------+-----------+-----------+-----------+
+
+国产集群ARM
+~~~~~~~~~~~~
+
++-----------------------------------------------+
+|       module load quantum-espresso/6.6        |
++===========+===========+===========+===========+
+| 核数      | 64        | 96        | 128       |
++-----------+-----------+-----------+-----------+
+| CPU time  | 3h42m     | 7h48m     | 2h29m     |
++-----------+-----------+-----------+-----------+
 
 参考资料
 --------
