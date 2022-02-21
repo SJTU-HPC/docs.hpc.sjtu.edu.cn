@@ -6,7 +6,7 @@ LAMMPS
 简介
 ----
 
-LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分子的并行模拟。LAMMPS在软材料（生物分子、聚合物）、固态材料（金属、半导体）和粗颗粒或介观系统方面具有重要作用。可用来模拟原子，或者更一般地说，作为原子、介观或连续尺度上的并行粒子模拟器。
+LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观体系计算中均有重要应用。
 
 可用的版本
 ----------
@@ -150,9 +150,11 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    
    module purge
    module load oneapi/2021
+
    export INPUT_FILE=in.lj.txt
    export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
-   KMP_BLOCKTIME=0 mpirun singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
+   
+   mpirun singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
    
 用下方语句提交作业:
 
@@ -161,7 +163,7 @@ LAMMPS是一个大规模经典分子动力学代码，用于大规模原子/分�
    sbatch intel_lammps.slurm
 
 
-4. CPU 版本自行编译
+1. CPU 版本自行编译
 ~~~~~~~~~~~~~~~~~~~
 
 若对 lammps 版本有要求，或需要特定的 package，可自行编译 Intel 版本的
@@ -184,9 +186,9 @@ c) 加载 Intel 模块：
 
 .. code:: bash
 
-   $ module load intel-parallel-studio/cluster.2019.5
+   $ module load intel-parallel-studio/cluster.2020.1
 
-d) 编译 (以额外安装 MANYBODY 和 USER-MEAMC 包为例)
+d) 编译 (以额外安装 MANYBODY 和 Intel 加速包为例)
 
 .. code:: bash
 
@@ -195,7 +197,7 @@ d) 编译 (以额外安装 MANYBODY 和 USER-MEAMC 包为例)
    $ cd src
    $ make                           #查看编译选项
    $ make package                   #查看包
-   $ make yes-user-meamc            #"make yes-"后面接需要安装的 package 名字
+   $ make yes-intel                 #"make yes-"后面接需要安装的 package 名字
    $ make yes-manybody
    $ make ps                        #查看计划安装的包列表 
    $ make -j 8 intel_cpu_intelmpi   #开始编译
@@ -219,15 +221,12 @@ slurm.test
    #SBATCH -e %j.err
 
    module purge
-   module load intel-parallel-studio/cluster.2019.5
-
-   export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
+   module load intel-parallel-studio/cluster.2020.1
 
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i in.lj.txt
+   srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i in.lj.txt
 
 
 .. _GPU版本 LAMMPS:
