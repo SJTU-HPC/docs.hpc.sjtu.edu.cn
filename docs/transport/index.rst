@@ -116,3 +116,33 @@ scp，rsync本身都不支持多进程传输，因此需要利用外部指令并
 **注意：如果没有事先配置好免密码登录，rsync发起连接会要求用户输入密码，上述并发场合则会导致并发失败。** 请参考 :ref:`label_no_password_login` 预先配置好密钥。建议在并发操作之前先用rsync单独拷贝一个小文件进行测试，确认过程中没有手动交互的需求再进行正式的并发传输。
 
 并发数量请控制在 **10个进程以内** ，因为目前超算网络最高支持1GB/s的传输速度，而单个ssh进程上限是100MB/s，10个并发进程就已经足够占用全部带宽。
+
+思源一号传输方式
+===============
+
+从本地传输数据到思源1号
+---------------
+.. code:: bash
+
+   $ scp -r data.tar.gz username@sylogin1.hpc.sjtu.edu.cn:~
+
+从闵行超算传送数据到思源1号
+---------------
+
+方式一：使用scp跨节点传输，可以并发多个scp进程来突破cpu单核心的性能瓶颈
+.. code:: bash
+
+   $ ssh user@202.120.58.247
+   $ scp -r xucg.tar.gz user@111.186.43.1:~/target/directory/
+
+或者使用rsync，适合目的地已经有大部分数据，仅做增量更新的情况
+.. code:: bash
+
+   $ ssh user@202.120.58.247
+   $ rsync -avr --progress README.md user@111.186.43.1:/dssg/home/acct-hpc/user/
+
+方式二：在202.120.58.247上直接复制/移动文件，此节点上预置环境变量$HOME指向闵行存储家目录，$SIYUANHOME指向思源存储家目录，登录时默认路径为闵行存储家目录。此方法虽然操作简便，但不支持多线程传输，请勿并发多个cp进程。传输速度基本等同于方式一中的单个scp进程。
+.. code:: bash
+
+   $ ssh user@202.120.58.247
+   $ cp example.dat $SIYUANHOME/data/
