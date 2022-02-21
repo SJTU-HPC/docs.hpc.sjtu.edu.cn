@@ -57,7 +57,7 @@ module 在思源一号上运行
 .. code:: bash
 
     #!/bin/bash
-    #SBATCH --job-name=colabfold
+    #SBATCH --job-name=alphafold
     #SBATCH --partition=a100
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
@@ -73,7 +73,7 @@ module 在思源一号上运行
     singularity run --nv /dssg/share/imgs/ai/alphafold/2.1.1.sif python /app/alphafold/run_alphafold.py \
     --data_dir=/dssg/share/data/alphafold \
     --bfd_database_path=/dssg/share/data/alphafold/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt  \
-    --uniclust30_database_path=/dssg/share/data/alphafold/uniclust30/uniclust30_2020_06/UniRef30_2020_06 \
+    --uniclust30_database_path=/dssg/share/data/alphafold/uniclust30/uniclust30_2018_08/uniclust30_2018_08 \
     --uniref90_database_path=/dssg/share/data/alphafold/uniref90/uniref90.fasta \
     --mgnify_database_path=/dssg/share/data/alphafold/mgnify/mgy_clusters.fa \
     --pdb70_database_path=/dssg/share/data/alphafold/pdb70/pdb70 \
