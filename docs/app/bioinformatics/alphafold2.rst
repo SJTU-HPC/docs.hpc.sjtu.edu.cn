@@ -5,6 +5,8 @@ AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高
 
 我们对 AlphaFold 进行持续优化，欢迎了解我们的优化工作：`ParaFold: Paralleling AlphaFold for Large-Scale Predictions <https://arxiv.org/abs/2111.06340>`__
 
+下面将介绍 AlphaFold2, ParaFold, ColabFold 在思源一号和 π 集群的使用，以及如何在 A100 上自行构建 conda 环境，和建立标准镜像
+
 AlphaFold2 三大版本
 ----------------------------------------
 
@@ -55,7 +57,7 @@ module 在思源一号上运行
 .. code:: bash
 
     #!/bin/bash
-    #SBATCH --job-name=colabfold
+    #SBATCH --job-name=alphafold
     #SBATCH --partition=a100
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
@@ -71,7 +73,7 @@ module 在思源一号上运行
     singularity run --nv /dssg/share/imgs/ai/alphafold/2.1.1.sif python /app/alphafold/run_alphafold.py \
     --data_dir=/dssg/share/data/alphafold \
     --bfd_database_path=/dssg/share/data/alphafold/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt  \
-    --uniclust30_database_path=/dssg/share/data/alphafold/uniclust30/uniclust30_2020_06/UniRef30_2020_06 \
+    --uniclust30_database_path=/dssg/share/data/alphafold/uniclust30/uniclust30_2018_08/uniclust30_2018_08 \
     --uniref90_database_path=/dssg/share/data/alphafold/uniref90/uniref90.fasta \
     --mgnify_database_path=/dssg/share/data/alphafold/mgnify/mgy_clusters.fa \
     --pdb70_database_path=/dssg/share/data/alphafold/pdb70/pdb70 \
@@ -229,6 +231,63 @@ ParaFold 在 π 集群上运行
 ColabFold 为 Sergey Ovchinnikov 等人开发的适用于 Google Colab 的 AlphaFold 版本，使用 MMseqs2 替代 Jackhmmer，且不使用模版。ColaFold 计算迅速，短序列五六分钟即可算完。
 
 ColabFold 使用请至交大超算文档页面： :doc:`colabfold` 
+
+
+构建自己的 conda 环境
+--------------------------
+
+交大计算平台已全局部署适用于 AlphaFold, ParaFold 和 ColabFold 的 fold 镜像。同时也支持大家根据需求，自行创建 conda 环境。
+
+下面介绍在思源一号 A100 上安装 conda 环境的方法。
+
+1. 安装名为 localcolab 的 conda 环境：
+
+.. code:: console
+
+    srun -p 64c512g -n 8 --pty /bin/bash
+
+    module purge
+    module load miniconda3
+    conda create -n localcolab python=3.7 -y
+    source activate localcolab
+
+    conda install python=3.7 cudnn==8.2.1.32 cudatoolkit==11.1.1 openmm==7.5.1 pdbfixer -y
+    conda install -c conda-forge -c bioconda kalign3=3.2.2 hhsuite=3.3.0 -y
+    conda install -y -c bioconda hmmer==3.3.2 hhsuite==3.3.0 kalign3=3.2.2
+
+    pip install absl-py==0.13.0 biopython==1.79 chex==0.1.0 dm-haiku==0.0.4 dm-tree==0.1.6 immutabledict==2.2.1  ml-collections==0.1.1 pandas==1.3.5 tensorflow_cpu==2.7.1
+    pip install https://storage.googleapis.com/jax-releases/cuda111/jaxlib-0.1.72+cuda111-cp37-none-manylinux2010_x86_64.whl
+    pip install jax==0.2.25
+    
+
+2. 打补丁 ``openmm``：
+
+.. code:: console
+
+    # patch to openmm
+    cd ~/.conda/envs/localcolab/lib/python3.7/site-packages
+    wget -qnc https://raw.githubusercontent.com/deepmind/alphafold/main/docker/openmm.patch --no-check-certificate
+    patch -s -p0 < openmm.patch
+
+至此 conda 环境安装完成。
+
+3. 在此 conda 环境里运行 ``ParaFold``：
+
+.. code:: console
+
+    salloc --ntasks-per-node=1 -p a100 --cpus-per-task=8 --gres=gpu:1 
+    ssh gpuXX
+
+    git clone https://github.com/Zuricho/ParallelFold.git
+    cd ParallelFold
+    chmod +x run_alphafold.sh
+
+    module load miniconda3
+    source activate localcolab
+
+    ./run_alphafold.sh -d /dssg/share/data/alphafold -o output -p monomer -i input/GA98.fasta -t 2021-07-27 -m model_1 -f
+
+
 
 构建自己的 AlphaFold 镜像
 --------------------------
