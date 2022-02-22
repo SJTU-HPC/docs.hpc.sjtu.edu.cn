@@ -12,3 +12,4 @@
    jobsample2
    dgx
    arm
+   siyuan
