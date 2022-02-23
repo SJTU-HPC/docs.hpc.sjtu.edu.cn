@@ -38,6 +38,12 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    mkdir ~/lammps && cd ~/lammps
    wget https://lammps.sandia.gov/inputs/in.lj.txt
 
+`in.lj.txt` 文件的最后一行步数设置为 `40000`
+
+.. code:: bash
+
+   run		40000
+
 集群上的 LAMMPS
 ---------------
 
@@ -86,7 +92,7 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    
    Performance: 2762981.774 tau/day, 6395.791 timesteps/s
    100.0% CPU use with 128 MPI tasks x 1 OpenMP threads
-   
+
 2. π2.0上的Slurm 脚本
 ~~~~~~~~~~~~~~~~~~~~~
 
@@ -374,8 +380,8 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 
    $ sbatch lammps.slurm
 
-运行结果
---------
+运行结果(时间单位为：s)
+-----------------------
 
 思源一号
 ~~~~~~~~
@@ -432,12 +438,12 @@ ARM
 建议
 ~~~~
 
-通过分析上述结果，速度最快的版本为思源一号和π2.0部署的intel加速版,我们推荐您使用这两个版本。
+通过分析上述结果，我们推荐您使用如下两个版本提交作业。
 
 .. code:: bash
 
-   module load lammps/20210310-intel-2021.4.0
-   /lustre/share/singularity/modules/lammps/20-user-intel.sif
+   module load lammps/20210310-intel-2021.4.0                   思源一号   
+   /lustre/share/singularity/modules/lammps/20-user-intel.sif   π2.0
 
 参考资料
 --------
