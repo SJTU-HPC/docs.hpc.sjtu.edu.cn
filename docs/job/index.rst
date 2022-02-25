@@ -13,3 +13,4 @@
    dgx
    arm
    siyuan
+   resource
