@@ -90,3 +90,4 @@
    wgcna
    wham
    rosetta
+   hic_breakfinder
