@@ -6,14 +6,32 @@
 存储
 ----
 
-运行作业存储分配策略
-~~~~~~~~~~~~~~~~~~~~
+存储分配策略
+~~~~~~~~~~~~
 
 +--------+--------------------------------------------+
-| 平台   | 存储分配策略                               |
+| 集群   | 存储分配策略                               |
 +========+============================================+
 | π2.0   | 每核配比4G内存；单节点配置为40核，180G内存 |
 +--------+--------------------------------------------+
+
+可使用 ``seff jobid`` 命令查看单核所能使用的最高存储空间
+
+.. code:: bash
+
+   [hpc@login2 data]$ seff 9709905
+   Job ID: 9709905
+   Cluster: sjtupi
+   User/Group: hpchgc/hpchgc
+   State: RUNNING
+   Nodes: 1
+   Cores per node: 40
+   CPU Utilized: 00:00:00
+   CPU Efficiency: 0.00% of 02:22:40 core-walltime
+   Job Wall-clock time: 00:03:34
+   Memory Utilized: 0.00 MB (estimated maximum)
+   Memory Efficiency: 0.00% of 160.00 GB (4.00 GB/core)              //(4.00 GB/core)
+   WARNING: Efficiency statistics may be misleading for RUNNING jobs.
 
 作业运行中的存储占用
 ~~~~~~~~~~~~~~~~~~~~
@@ -24,7 +42,7 @@
 
    [hpc@login2 test]$ squeue 
                 JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-              9709875       cpu  80cores      hpc  R       0:02      1 cas478
+              9709875       cpu  40cores      hpc  R       0:02      1 cas478
 
 然后进入相关节点
 
@@ -48,7 +66,7 @@
    98.6 654312 pw.x -i ausurf.in
    98.6 652196 pw.x -i ausurf.in
 
-``RSS`` 表示单核所占用的存储空间，单位为MB。
+``RSS`` 表示单核所占用的存储空间，单位为MB，上述分析可得单核上运行作业占用的存储空间大约为650MB。
 
 如果需要动态监测存储资源的使用，可进入计算节点后，输入top命令
 
