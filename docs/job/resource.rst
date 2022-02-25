@@ -71,12 +71,6 @@
 如果需要动态监测存储资源的使用，可进入计算节点后，输入top命令
 
 .. code:: bash
-
-   top - 10:33:29 up 84 days, 52 min,  1 user,  load average: 14.43, 16.82, 24.25
-   Tasks: 754 total,  41 running, 713 sleeping,   0 stopped,   0 zombie
-   %Cpu(s): 98.9 us,  1.1 sy,  0.0 ni,  0.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st
-   KiB Mem : 19649038+total, 16052179+free, 27783672 used,  8184924 buff/cache
-   KiB Swap: 33554428 total, 33187480 free,   366948 used. 16633760+avail Mem 
    
       PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND                                                                    
    428410 hpchgc    20   0 5989.9m 662.5m 168.6m R 100.0  0.3   0:22.67 pw.x                                                                       
