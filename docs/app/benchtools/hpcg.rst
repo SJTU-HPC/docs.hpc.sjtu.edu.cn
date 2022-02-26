@@ -124,3 +124,17 @@ HPCG运行脚本
    Final Summary ::Reference version of ComputeDotProduct used=Performance results are most likely suboptimal
    Final Summary ::Results are valid but execution time (sec) is=62.6445
    Final Summary ::     Official results execution time (sec) must be at least=1800
+
+运行结果
+--------
+
+思源一号
+~~~~~~~~
+
++-------------------------------------------+
+|  problem_size:192  run_time_in_seconds:60 |
++============+==============+===============+
+| 核数       | 64           | 128           |
++------------+--------------+---------------+
+| GFOLP/s    | 56.09485     | 112.07949     |
++------------+--------------+---------------+
