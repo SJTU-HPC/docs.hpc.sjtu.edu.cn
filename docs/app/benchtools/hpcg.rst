@@ -21,8 +21,6 @@ HPCG(High Performance Conjugate Gradient)基准测试程序作为超级计算机
 导入HPCG环境
 ------------
 
-可直接使用intel编译器自带的HPCG进行性能测试
-
 +--------+----------------+----------+-----------------+
 | 版本   | 平台           | 构建方式 | 模块名          |
 +========+================+==========+=================+
@@ -33,6 +31,7 @@ HPCG(High Performance Conjugate Gradient)基准测试程序作为超级计算机
 
 .. code:: bash
 
+   mkdir ~/HPCG && cd ~/HPCG
    module load oneapi/2021.4.0
    cp -r $MKLROOT/benchmarks/hpcg ./
    cd hpcg
