@@ -83,3 +83,44 @@ HPCG运行脚本
    Final Summary ::Results are valid but execution time (sec) is=65.1121
    Final Summary ::     Official results execution time (sec) must be at least=1800
 
+在思源一号上运行
+----------------
+
+HPCG运行脚本
+(每个计算节点上共有两个CPU Socket，每个CPU Socket启动1个进程，每个计算节点启动2个进程)
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=2nodes_hpcg
+   #SBATCH --partition=cpu
+   #SBATCH -n 4
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --cpus-per-task=20
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load oneapi/2021.4.0
+   export OMP_NUM_THREADS=20
+   export KMP_AFFINITY=granularity=fine,compact,1,0
+   export problem_size=192
+   export run_time_in_seconds=60
+
+   mpiexec.hydra -genvall bin/xhpcg_avx  -n$problem_size -t$run_time_in_seconds
+
+使用如下命令提交作业
+
+.. code:: bash
+
+   sbatch run_hyper.slurm
+
+运行结束后，将产生如下文件，n192-4p-20t_V3.1_2022-02-26_16-34-36.txt，其中192代表问题规模，4代表使用的进程，32>代表1个进程包含的线程数。
+
+.. code:: bash
+
+   Final Summary =
+   Final Summary ::HPCG result is VALID with a GFLOP/s rating of=74.4941
+   Final Summary ::    HPCG 2.4 Rating (for historical value) is=74.829
+   Final Summary ::Reference version of ComputeDotProduct used=Performance results are most likely suboptimal
+   Final Summary ::Results are valid but execution time (sec) is=62.6445
+   Final Summary ::     Official results execution time (sec) must be at least=1800
