@@ -4,9 +4,7 @@ HPCG
 简介
 ----
 
-高性能共轭梯度（HPCG）基准程序旨在创建一个新的HPC系统排名指标。HPCG可以作为高性能LINPACK（HPL）基准的补充，该基准目前用于排名500强计算系统。HPL的计算和数据访问模式仍然代表着一些重要的可扩展应用，但并非必须。
-
-HPCG程序可有效评估下述基本操作的性能：
+HPCG(High Performance Conjugate Gradient)基准测试程序作为超级计算机系统的性能评估指标之一，可有效评估超算系统在下述基本操作中的性能表现：
 
 ``Sparse matrix-vector multiplication``
 
@@ -20,8 +18,28 @@ HPCG程序可有效评估下述基本操作的性能：
 
 ``Driven by multigrid preconditioned conjugate gradient algorithm that exercises the key kernels on a nested set of coarse grids``
 
-数据获取
---------
+导入HPCG环境
+------------
+
+可直接使用intel编译器自带的HPCG进行性能测试
+
++--------+----------------+----------+-----------------+
+| 版本   | 平台           | 构建方式 | 模块名          |
++========+================+==========+=================+
+| 3.1    | 思源一号 |cpu| | spack    | oneapi/2021.4.0 |
++--------+----------------+----------+-----------------+
+| 3.1    | π2.0     |cpu| | spack    | oneapi/2021.4.0 |
++--------+----------------+----------+-----------------+
+
+.. code:: bash
+
+   module load oneapi/2021.4.0
+   cp -r $MKLROOT/benchmarks/hpcg ./
+   cd hpcg
+
+HPCG运行的重要参数
+------------------
+
 
 HPCG基准程序不需要直接读取数据，仅需改变两个重要的参数 ``problem_size`` 和 ``run_time_in_seconds`` ，这两个参数均可在运行脚本中指定。
 problem_size应该设置的足够大，可使应用运行至少占用存储空间的25%；run_time_in_seconds官方规定应设置为1800s，但是
