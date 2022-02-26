@@ -83,8 +83,8 @@ HPCG运行脚本
    Final Summary ::Results are valid but execution time (sec) is=65.1121
    Final Summary ::     Official results execution time (sec) must be at least=1800
 
-在思源一号上运行
-----------------
+在π2.0上运行
+-------------
 
 HPCG运行脚本
 (每个计算节点上共有两个CPU Socket，每个CPU Socket启动1个进程，每个计算节点启动2个进程)
