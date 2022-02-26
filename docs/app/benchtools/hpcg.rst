@@ -6,15 +6,19 @@ HPCG
 
 高性能共轭梯度（HPCG）基准程序旨在创建一个新的HPC系统排名指标。HPCG可以作为高性能LINPACK（HPL）基准的补充，该基准目前用于排名500强计算系统。HPL的计算和数据访问模式仍然代表着一些重要的可扩展应用，但并非必须。
 
-HPCG程序可有效衡量下述基本操作的性能：
+HPCG程序可有效评估下述操作的基本操作：
 
-``稀疏矩阵向量乘法``
+``Sparse matrix-vector multiplication``
 
-``矢量更新``
+``Vector updates``
 
-``局部对称高斯-赛德尔平滑器``
+``Global dot products``
 
-``稀疏三角形求解``
+``Local symmetric Gauss-Seidel smoother``
+
+``Sparse triangular solve (as part of the Gauss-Seidel smoother)``
+
+``Driven by multigrid preconditioned conjugate gradient algorithm that exercises the key kernels on a nested set of coarse grids``
 
 如何在思源一号上导入HPCG环境
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
