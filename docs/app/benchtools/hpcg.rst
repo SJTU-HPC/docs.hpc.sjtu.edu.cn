@@ -55,6 +55,7 @@ HPCG运行脚本
    #SBATCH -n 4
    #SBATCH --ntasks-per-node=2
    #SBATCH --cpus-per-task=32
+   #SBATCH --exclusive
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
    
@@ -97,6 +98,7 @@ HPCG运行脚本
    #SBATCH -n 4
    #SBATCH --ntasks-per-node=2
    #SBATCH --cpus-per-task=20
+   #SBATCH --exclusive
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
