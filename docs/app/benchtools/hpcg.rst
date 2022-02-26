@@ -39,21 +39,13 @@ HPCG(High Performance Conjugate Gradient)基准测试程序作为超级计算机
 HPCG运行的重要参数
 ------------------
 
+ ``problem_size`` 和 ``run_time_in_seconds`` 在 ``hpcg/bin/hpcg.dat`` 中的默认值为 ``192``, ``60`` ，这两个参数均可在运行脚本中指定。
 
-HPCG基准程序不需要直接读取数据，仅需改变两个重要的参数 ``problem_size`` 和 ``run_time_in_seconds`` ，这两个参数均可在运行脚本中指定。
-problem_size应该设置的足够大，可使应用运行至少占用存储空间的25%；run_time_in_seconds官方规定应设置为1800s，但是
-为了更快的得到结果，可以设置的小一些
+在思源一号上运行
+----------------
 
-如何在思源一号上导入HPCG环境
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. code:: bash
-
-   module load oneapi/2021.4.0
-   cp -r $MKLROOT/benchmarks/hpcg ./
-   cd hpcg
-
-HPCG运行脚本(使用2个计算节点，每个节点使用2个进程，一个进程使用32个线程)
+HPCG运行脚本
+(每个计算节点上共有两个CPU Socket，每个CPU Socket启动1个进程，每个计算节点启动2个进程)
 
 .. code:: bash
 
@@ -72,7 +64,7 @@ HPCG运行脚本(使用2个计算节点，每个节点使用2个进程，一个�
    export problem_size=192
    export run_time_in_seconds=60
    
-   mpiexec.hydra -genvall -n 4 -ppn 2 bin/xhpcg_avx  -n$problem_size -t$run_time_in_seconds
+   mpiexec.hydra -genvall bin/xhpcg_avx  -n$problem_size -t$run_time_in_seconds
 
 使用如下命令提交作业
 
