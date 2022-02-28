@@ -46,6 +46,12 @@ HPL（The High-Performance Linpack Benchmark）是测试高性能计算集群系
    ├── xhpl_intel64_dynamic
    └── xhpl_intel64_dynamic_outputs.txt
 
+- `π2.0`_
+- `思源一号`_
+- `ARM集群`_
+
+.. _π2.0:
+
 HPL基准测试
 -----------
 
@@ -113,6 +119,13 @@ Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再
 .. code::bash
 
    jiji
+
+.. _思源一号:
+
+思源一号
+--------
+
+.. _ARM集群:
 
 ARM平台测试HPL性能
 ------------------
