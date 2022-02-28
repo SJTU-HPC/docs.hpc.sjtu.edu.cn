@@ -100,57 +100,6 @@ Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再
    
    ./runme_intel64_dynamic
 
-
-
-首先，载入Intel套件模块。
-
-.. code:: bash
-
-   $ module purge; module load intel-parallel-studio/cluster.2020.1
-
-然后，复制Intel HPL算例目录：
-
-.. code:: bash
-
-   $ cp -r $MKLROOT/benchmarks/mp_linpack ./
-   $ cd mp_linpack
-
-提高算例输入文件 ``HPL.dat`` 中的问题规模 ``Ns`` 。建议调整至占用整机内存90%左右。这里使用sed将Ns替换为经验值 ``100000`` 。
-
-.. code:: bash
-
-   $ sed -i -e 's/.*Ns.*/100000\ Ns/' HPL.dat
-
-调整HPL.dat的 ``Ps`` 和 ``Qs`` 值，使其乘积等于MPI进程总数。
-这里使用sed将 ``Ps`` 和 ``Qs`` 值分别设置为2、1，乘积等于线程总数2。
-
-.. code:: bash
-
-   $ sed -i -e 's/.*\ Ps.*/2\ Ps/' HPL.dat
-   $ sed -i -e 's/.*\ Qs.*/1\ Qs/' HPL.dat
-
-编写如下SLURM作业脚本 ``hpl.slurm`` ，使用 ``-n`` 指定MPI进程总数、 ``--ntasks-per-node`` 指定每节点启动的MPI进程数、 ``--cpus-per-task`` 指定每个MPI进程使用的CPU核心数。
-
-.. code:: bash
-
-    #!/bin/bash
-
-    #SBATCH --job-name=hplonenode
-    #SBATCH --partition=cpu
-    #SBATCH --output=%j.out
-    #SBATCH --error=%j.err
-    #SBATCH -n 2
-    #SBATCH --ntasks-per-node=2
-    #SBATCH --cpus-per-task=20
-    #SBATCH --exclusive
-
-    ulimit -s unlimited
-    ulimit -l unlimited
-
-    module load intel-parallel-studio/cluster.2020.1
-
-    ./runme_intel64_dynamic
-
 使用 ``-n`` 指定MPI进程总数， ``--ntasks-per-node`` 指定每节点启动的MPI进程数， ``--cpus-per-task`` 指定每个MPI进程使用的CPU核心数
 
 使用如下命令提交脚本：
