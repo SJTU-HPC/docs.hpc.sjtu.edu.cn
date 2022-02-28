@@ -6,52 +6,87 @@ NWChem
 简介
 ----
 
-NWChem aims to provide its users with computational chemistry tools that
-are scalable both in their ability to treat large scientific
-computational chemistry problems efficiently, and in their use of
-available parallel computing resources from high-performance parallel
-supercomputers to conventional workstation clusters.
+NWChem provides many methods for computing the properties of molecular and periodic systems using standard quantum mechanical descriptions of the electronic wavefunction or density. Its classical molecular dynamics capabilities provide for the simulation of macromolecules and solutions, including the computation of free energies using a variety of force fields. These approaches may be combined to perform mixed quantum-mechanics and molecular-mechanics simulations.
 
-π 集群上的NWChem
--------------------
+NWChem software can handle:
 
-Pi2.0 系统中已经预装 NWChem-6.8.1 (GNU+cpu 版本)，可用以下命令加载:
+.. hlist::
+   :columns: 2
 
-.. code:: bash
+   - Biomolecules, nanostructures, and solid-state
+   - From quantum to classical, and all combinations
+   - Ground and excited-states
+   - Gaussian basis functions or plane-waves
+   - Scaling from one to thousands of processors
+   - Properties and relativistic effects
 
-   $ module load nwchem/6.8.1-gcc-8.3.0-openblas-openmpi
+可用的版本
+----------
 
-π 集群上的Slurm脚本 slurm.test
----------------------------------
++--------+---------+----------+-----------------------------------------------------------+
+| 版本   | 平台    | 构建方式 | 模块名                                                    |
++========+=========+==========+===========================================================+
+| 6.8.1  | |cpu|   | Spack    | nwchem/6.8.1-intel-19.0.4-impi                            |
++--------+---------+----------+-----------------------------------------------------------+
 
-在 cpu 队列上，总共使用 40 核 (n = 40) cpu 队列每个节点配有 40
-核，所以这里使用了 1 个节点：
+算例下载
+--------
 
-.. code:: bash
+.. code-block:: bash
+
+   wget https://nwchemgit.github.io/c240_631gs.nw
+
+编辑文件，:abbr:`删除 (sed -i '6d' c240_631gs.nw)` 第6行的 ``scratch_dir /scratch`` 
+
+运行示例
+--------
+
+.. code-block:: bash
+   :linenos:
+   :emphasize-lines: 3,7,15
 
    #!/bin/bash
+   #SBATCH --job-name=nwchem
+   #SBATCH --partition=small
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=10
 
-   #SBATCH -J nechem_test
-   #SBATCH -p cpu
-   #SBATCH -n 40
-   #SBATCH --ntasks-per-node=40
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-
-   module load nwchem/6.8.1-gcc-8.3.0-openblas-openmpi
-
-   ulimit -s unlimited
    ulimit -l unlimited
+   ulimit -s unlimited
 
-   srun --mpi=pmi2 nwchem
+   module load intel/19.0.4
+   module load nwchem/6.8.1-intel-19.0.4-impi
 
-并使用如下指令提交：
+   mpirun -np $SLURM_NTASKS nwchem c240_631gs.nw > c240_631gs.out
+
+.. warning:: 
+   
+   软件运行需要库环境，加载时会自动创建 ``~/.nwchemrc`` 文件。
+
+使用如下脚本提交作业
 
 .. code:: bash
 
-   $ sbatch slurm.test
+   sbatch test.slurm
+
+运行结果见 ``c240_631gs.out``
+
+运行时间
+--------
+
+**π2.0**
+
++---------------+---------------+---------------+
+| nwchem/6.8.1-intel-19.0.4-impi                |
++===============+===============+===============+
+| 核数          | 10            | 20            |
++---------------+---------------+---------------+
+| CPU_time      | 1h50m37s      | 54m44s        |
++---------------+---------------+---------------+
 
 参考资料
 --------
 
--  `NWChem 官网 <https://nwchemgit.github.io/>`__
+-  `NWChem 文档 <https://nwchemgit.github.io/>`__
