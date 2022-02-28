@@ -30,7 +30,7 @@ HPL（The High-Performance Linpack Benchmark）是测试高性能计算集群系
 
 文件目录结构如下所示：
 
-.. code::bash
+.. code:: bash
 
    [hpc@login3 80cores]$ tree mp_linpack/
    mp_linpack/
