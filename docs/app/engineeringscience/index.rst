@@ -35,3 +35,4 @@
    gmx_mmpbsa
    cmaq
    thirdorder
+   gift-bte
