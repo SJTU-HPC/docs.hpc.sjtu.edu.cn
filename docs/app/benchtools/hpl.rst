@@ -28,6 +28,24 @@ HPL（The High-Performance Linpack Benchmark）是测试高性能计算集群系
    cp -r $MKLROOT/benchmarks/mp_linpack ./
    cd mp_linpack/
 
+文件目录结构如下所示：
+
+.. code::bash
+
+   [hpc@login3 80cores]$ tree mp_linpack/
+   mp_linpack/
+   ├── build.sh
+   ├── COPYRIGHT
+   ├── HPL.dat
+   ├── HPL_main.c
+   ├── libhpl_intel64.a
+   ├── readme.txt
+   ├── runme_intel64_dynamic
+   ├── runme_intel64_prv
+   ├── run.slurm
+   ├── xhpl_intel64_dynamic
+   └── xhpl_intel64_dynamic_outputs.txt
+
 HPL基准测试
 -----------
 
@@ -36,10 +54,53 @@ HPL基准测试
 
 Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再由MPI进程启动与Socket核心数匹配的计算线程。由于Intel HPL不使用OpenMP库，因此无法通过OMP环境变量控制计算线程数。
 
-运行单节点Intel HPL性能测试
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+π2.0上计算节点配置信息：双路Intel 6248节点，每个CPU Socket启动1个MPI进程，共启动2个MPI进程。
 
-这个例子以方式在1个双路Intel 6248节点上运行HPL 测试，每个CPU Socket启动1个MPI进程，共启动2个MPI进程。
+首先需要配置文件内容：
+
+计算节点内存为180G，将输入文件 ``HPL.dat`` 中的问题规模 ``Ns`` 调整至内存空间的80%左右 ``0.8*sqrt(mem*1024*1024*1024*nodes/8)`` 。本算例使用了两个节点，这里使用sed>将Ns替换为176640。
+
+.. code:: bash
+
+   $ sed -i -e 's/.*Ns.*/176640\ Ns/' HPL.dat
+
+调整HPL.dat的 ``Ps`` 和 ``Qs`` 值，使其乘积等于MPI进程总数。
+这里使用sed将 ``Ps`` 和 ``Qs`` 值分别设置为2、2，乘积等于线程总数2。
+
+.. code:: bash
+
+   $ sed -i -e 's/.*\ Ps.*/2\ Ps/' HPL.dat
+   $ sed -i -e 's/.*\ Qs.*/2\ Qs/' HPL.dat
+
+将runme_intel64_dynamic中的MPI总数改为4
+
+.. code:: bash
+
+   sed -i 's/MPI_PROC_NUM=2/MPI_PROC_NUM=4/' runme_intel64_dynamic
+
+提交如下运行脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH --job-name=hpl2node
+   #SBATCH --partition=cpu
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   #SBATCH -n 4
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --cpus-per-task=20
+   #SBATCH --exclusive
+   
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   module load oneapi
+   
+   ./runme_intel64_dynamic
+
+
 
 首先，载入Intel套件模块。
 
@@ -90,85 +151,19 @@ Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再
 
     ./runme_intel64_dynamic
 
-使用 ``sbatch hpl.slurm`` 提交后，主要运行结果如下，Intel 6248单节点HPL性能约为1.96Tflops。
+使用 ``-n`` 指定MPI进程总数， ``--ntasks-per-node`` 指定每节点启动的MPI进程数， ``--cpus-per-task`` 指定每个MPI进程使用的CPU核心数
+
+使用如下命令提交脚本：
 
 .. code:: bash
 
-   ================================================================================
-   T/V                N    NB     P     Q               Time                 Gflops
-   --------------------------------------------------------------------------------
-   WC00C2R100000      100000   192     2     1             339.99            1.96090e+03
-   HPL_pdgesv() start time Sun Jan 23 22:00:41 2022
+   sbatch run.slurm
 
+运行结果如下所示：
 
-运行多节点Intel HPL性能测试
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. code::bash
 
-该运行实例在2个双路Intel 6248节点上运行HPL 测试，每个CPU Socket启动1个MPI进程，共启动4个MPI进程。
-
-首先，载入Intel套件模块。
-
-.. code:: bash
-
-   $ module purge; module load intel-parallel-studio/cluster.2020.1
-
-然后，复制Intel HPL算例目录
-
-.. code:: bash
-
-   $ cp -r $MKLROOT/benchmarks/mp_linpack ./
-   $ cd mp_linpack
-
-计算节点内存为180G，将输入文件 ``HPL.dat`` 中的问题规模 ``Ns`` 调整至内存空间的90%左右。这里使用sed将Ns替换为175718。
-
-.. code:: bash
-
-   $ sed -i -e 's/.*Ns.*/175718\ Ns/' HPL.dat
-
-调整HPL.dat的 ``Ps`` 和 ``Qs`` 值，使其乘积等于MPI进程总数。
-这里使用sed将 ``Ps`` 和 ``Qs`` 值分别设置为2、2，乘积等于线程总数2。
-
-.. code:: bash
-
-   $ sed -i -e 's/.*\ Ps.*/2\ Ps/' HPL.dat
-   $ sed -i -e 's/.*\ Qs.*/2\ Qs/' HPL.dat
-
-将runme_intel64_dynamic中的MPI总数改为4
-
-.. code:: bash
-    
-   sed -i 's/MPI_PROC_NUM=2/MPI_PROC_NUM=4/' runme_intel64_dynamic
-
-编写如下SLURM作业脚本 ``hpl.slurm`` ，使用 ``-n`` 指定MPI进程总数， ``--ntasks-per-node`` 指定每节点启动的MPI进程数， ``--cpus-per-task`` 指定每个MPI进程使用的CPU核心数。
-
-.. code:: bash
-
-   #!/bin/bash
-   
-   #SBATCH --job-name=hpl2node
-   #SBATCH --partition=cpu
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   #SBATCH -n 4
-   #SBATCH --ntasks-per-node=2
-   #SBATCH --cpus-per-task=20
-   #SBATCH --exclusive
-   
-   ulimit -s unlimited
-   ulimit -l unlimited
-   
-   module load intel-parallel-studio/cluster.2020.1
-   
-   ./runme_intel64_dynamic
-
-使用 ``sbatch hpl.slurm`` 提交后，主要运行结果如下，Intel 6248双节点HPL性能约为4.35Tflops。
-
-.. code:: bash
-
-   ================================================================================
-   T/V                N    NB     P     Q               Time                 Gflops
-   --------------------------------------------------------------------------------
-   WR00C2R2      175718   256     2     2             830.63            4.35466e+03
+   jiji
 
 ARM平台测试HPL性能
 ------------------
