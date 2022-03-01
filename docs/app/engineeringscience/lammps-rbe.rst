@@ -23,6 +23,16 @@ LAMMPS-RBE是由上海交通大学上海应用数学中心团队基于LAMMPS二�
 | 7Aug2019 | |cpu| | 容器     | lammps-rbe/20190807-oneapi-2021.4-impi π2.0                |
 +----------+-------+----------+------------------------------------------------------------+
 
+算例获取
+--------
+
+.. code:: bash
+
+   mkdir ~/lammps-rbe && cd ~/lammps-rbe
+   cp -r /lustre/share/benchmarks/lammps-rbe/lammps-rbe.tar.gz .
+   tar xf lammps-rbe.tar.gz
+   cd RBE_Example/
+
 不同集群上的 LAMMPS-RBE
 -----------------------
 
