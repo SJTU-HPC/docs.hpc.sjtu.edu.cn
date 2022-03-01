@@ -32,7 +32,17 @@ LAMMPS-RBE是由上海交通大学上海应用数学中心团队基于LAMMPS二�
    cp -r /lustre/share/benchmarks/lammps-rbe/lammps-rbe.tar.gz .
    tar xf lammps-rbe.tar.gz
    cd RBE_Example/
-    
+
+数据的目录结构如下所示：
+
+.. code:: bash
+
+   [hpc@login2 Lammps-RBE]$ tree RBE_Example/
+   RBE_Example/
+   ├── in.spce-bulk-nvt
+   ├── lmp.data
+   └── lmp.slurm
+
 注意：
 本文算例步数设置为40000，即文件 ``in.spce-bulk-nvt`` 最后一行内容为： ``run 40000``
 
@@ -49,29 +59,76 @@ LAMMPS-RBE是由上海交通大学上海应用数学中心团队基于LAMMPS二�
 π2.0
 ----
 
+源码编译版本
+~~~~~~~~~~~~
 
-作业脚本如下(lammps-rbe.slurm):
--------------------------------
+lammps-rbe/20190807-intel-parallel-studio-2020.1-impi
+
+作业脚本如下所示：
 
 .. code:: bash
 
    #!/bin/bash
+   
+   #SBATCH -J lammps 
+   #SBATCH -p cpu
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=40  
+   #SBATCH --exclusive
+   #SBATCH -o RBE.out
+   #SBATCH -e %j.err  
+   
+   module load lammps-rbe/20190807-intel-parallel-studio-2020.1-impi
+   mpirun lmp_intel_cpu_intelmpi -i in.spce-bulk-nvt
 
-   #SBATCH --job-name=lammps
-   #SBATCH --partition=small
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=20
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-
-
-   module load lammps-rbe
-
-   srun --mpi=pmi2 -n 20 lmp_intel_cpu_intelmpi -i in.spce-bulk-nvt
+提交作业：
 
 .. code:: bash
 
    $ sbatch lammps-rbe.slurm
+
+运行结果如下：
+
+.. code:: bash
+
+   [hpc@login2 80cores_intel]$ tail -n 1 RBE_BAOBAO.log 
+   Total wall time: 0:03:28
+
+容器版本
+~~~~~~~~
+
+lammps-rbe/20190807-oneapi-2021.4-impi π2.0
+
+运行脚本如下：
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH -J lammps 
+   #SBATCH -p cpu
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=40  
+   #SBATCH --exclusive
+   #SBATCH -o RBE.out
+   #SBATCH -e %j.err  
+   
+   module load lammps-rbe/20190807-oneapi-2021.4-impi
+   mpirun lammps-rbe -i in.spce-bulk-nvt
+
+提交上述作业
+
+.. code:: bash
+
+   sbatch lammps-rbe.slurm
+
+运行结果如下所示：
+
+.. code:: bash
+
+   [hpc@login2 80cores]$ tail -n 1 RBE_BAOBAO.log 
+   Total wall time: 0:04:26
+
 
 新增功能
 --------
