@@ -35,6 +35,7 @@ LAMMPS-RBE是由上海交通大学上海应用数学中心团队基于LAMMPS二�
     
 注意：
 本文算例步数设置为40000，即文件 ``in.spce-bulk-nvt`` 最后一行内容为： ``run 40000``
+
 运行核数要和文件 ``in.spce-bulk-nvt`` 中的参数 ``kspace_style	rbe 0.07 200 80`` 最后一个数字保持一致，即为： ``80``
 
 不同集群上的 LAMMPS-RBE
