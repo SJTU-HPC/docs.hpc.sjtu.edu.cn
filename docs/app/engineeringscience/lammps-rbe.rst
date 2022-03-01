@@ -8,7 +8,9 @@ LAMMPS-RBE
 
 LAMMPS-RBE是由上海交通大学上海应用数学中心团队基于LAMMPS二次开发的自研软件。该版本在长程力模拟中引入了先进的Random Batch Ewald算法，RBE使用基于动理学或连续介质理论的路径, 研究复杂环境中微纳系统的多体效应，并结合分子动力学进行多尺度建模和数学分析。LAMMPS-RBE突破了传统分子动力学在 CPU集群上可扩展性差的问题，可以使百万级别粒子以上的大尺度体系的计算成本降低一个数量级。
 
-ji详细算法解释可以参阅: https://math.sjtu.edu.cn/faculty/xuzl/RBE.pdf
+详细算法解释可以参阅: https://math.sjtu.edu.cn/faculty/xuzl/RBE.pdf
+
+
 
 π 集群上的 LAMMPS-RBE
 ----------------------
@@ -19,6 +21,33 @@ ji详细算法解释可以参阅: https://math.sjtu.edu.cn/faculty/xuzl/RBE.pdf
 
 CPU版本
 ~~~~~~~
+
+
+作业脚本如下(lammps-rbe.slurm):
+-------------------------------
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=lammps
+   #SBATCH --partition=small
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=20
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+
+   module load lammps-rbe
+
+   srun --mpi=pmi2 -n 20 lmp_intel_cpu_intelmpi -i in.spce-bulk-nvt
+
+.. code:: bash
+
+   $ sbatch lammps-rbe.slurm
+
+新增功能
+--------
 
 同Lammps已有功能相比，该版本新增三个功能：
 
@@ -75,27 +104,3 @@ fix和temp是固定指令，baoab是控压算法名称，ID是用户为这条fix
 fix 2 all baoab temp 298 298 5 iso 1.0 1.0 100
 
 表示使用Langevin动力学对所有原子做各向同性控压，开始和结束的外部温度和外部压强分别为298K和1bar，控温和控压阻尼系数分别为5fs和100fs。该fix指令的名字被设定为2。
-
-
-作业脚本如下(lammps-rbe.slurm):
--------------------------------
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=lammps
-   #SBATCH --partition=small
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=20
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-
-
-   module load lammps-rbe
-
-   srun --mpi=pmi2 -n 20 lmp_intel_cpu_intelmpi -i in.spce-bulk-nvt
-
-.. code:: bash
-
-   $ sbatch lammps-rbe.slurm
