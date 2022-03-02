@@ -6,23 +6,14 @@ gnuplot
 简介
 ----
 
-Gnuplot is a command-driven interactive function plotting program. It
-can be used to plot functions and data points in both two- and
-three-dimensional plots in many different formats. It was originally
-created to allow scientists and students to visualize mathematical
-functions and data interactively, but has grown to support many
-non-interactive uses such as web scripting. It is also used as a
-plotting engine by third-party applications like Octave.
+Gnuplot 是一款小巧而强大的开源科研绘图工具。绘图质量高且快，易学易用，仅需少量代码，就可得到用于发表的高质量图片，中英文参考文档丰富。Gnuplot可做简单的数据处理和分析，比如统计和多参数函数拟合。
 
 π 集群上的 gnuplot
 ---------------------
 
-gnuplot 需要在 HPC Studio 可视化平台上使用。π 集群登录节点不支持 gnuplot
-显示。
+Gnuplot 需要在 HPC Studio 可视化平台的“远程桌面”里使用。π 集群登录节点不支持 Gnuplot 图形显示。
 
 HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
-
-浏览器需为 chrome, firefox 或 edge。
 
 使用 gnuplot
 ------------
@@ -52,7 +43,25 @@ HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
    $ gnuplot
    gnuplot> p x    (以绘制 y = x 函数为例)
 
+另一个稍复杂的官方 demo 示例：
+
+.. code:: bash
+
+   $ gnuplot
+   gnuplot> set title "Iteration within plot command"
+            set xrange [0:3]
+            set label 1 "plot for [n=2:10] sin(x*n)/n" at graph .95, graph .92 right
+            plot for [n=2:10] sin(x*n)/n notitle lw (13-n)/2
+
+.. image:: /img/gnuplot1.*
+
 结束后退出远程桌面
+
+绘图操作见动图：
+
+.. image:: /img/gnuplot.*
+
+
 ~~~~~~~~~~~~~~~~~~
 
 远程桌面作业，使用完毕后需退出，否则会持续计费。两种退出方法：
@@ -61,7 +70,7 @@ HPC Studio 可视化平台通过浏览器访问：https://studio.hpc.sjtu.edu.cn
 
 2. 或在 π 集群上用 squeue 查看作业，并用 scancel 终止该作业
 
-.. image:: /img/gnuplot.*
+
 
 参考资料
 --------
