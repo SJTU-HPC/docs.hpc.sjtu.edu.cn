@@ -151,7 +151,7 @@ Intel HPL使用时建议在每一个NUMA Socket启动一个MPI进程，然后再
    #SBATCH --error=%j.err
    #SBATCH -n 4
    #SBATCH --ntasks-per-node=2
-   #SBATCH --cpus-per-task=20
+   #SBATCH --cpus-per-task=32
    #SBATCH --exclusive
    
    ulimit -s unlimited
