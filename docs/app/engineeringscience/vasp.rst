@@ -184,14 +184,6 @@ VASP 算例及测试
 
 以 64 原子的 Si AIMD 熔化为例，各使用 40 核，思源一号与 π 2.0 的测试结果：
 
-运行结果显示：
-
-* 思源一号推荐使用 OMP_NUM_THREADS=1
-  
-* π 2.0 推荐使用 OMP_NUM_THREADS=2
-
-* 思源一号 VASP 计算速度明显优于 π 2.0
-
 ================== =============== ===============
 OMP_NUM_THREADS      思源一号 40核   π 2.0 40核
 ================== =============== ===============
@@ -200,13 +192,31 @@ OMP_NUM_THREADS      思源一号 40核   π 2.0 40核
 4                  39              39
 ================== =============== ===============
 
-VASP 运行需要最基本的 ``INCAR``, ``POSCAR``, ``POTCAR``, ``KPOINT``S 四个文件。全部文件已放置在思源一号共享文件夹：
+测试结果说明：
+
+* 思源一号推荐使用 OMP_NUM_THREADS=1
+  
+* π 2.0 推荐使用 OMP_NUM_THREADS=2
+
+* 思源一号 VASP 计算速度明显优于 π 2.0
+
+本示例相关说明：
+
+1. VASP 运行需要最基本的 ``INCAR``, ``POSCAR``, ``POTCAR``, ``KPOINTS`` 四个文件。全部文件已放置在思源一号共享文件夹：
 
 .. code:: bash
 
    /dssg/share/sample/vasp
 
-下面是示例的 ``INCAR`` 文件内容：
+2. VASP 运行方法：
+      
+.. code:: bash
+
+   cp -r /dssg/share/sample/vasp ~
+   cd vasp
+   sbatch slurm.sub
+
+3. 下面是该示例的 ``INCAR`` 文件内容：
 
 .. code:: bash
 
