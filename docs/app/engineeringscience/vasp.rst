@@ -194,21 +194,21 @@ OMP_NUM_THREADS      思源一号 40核   π 2.0 40核
 
 测试结果说明：
 
-* 思源一号推荐使用 OMP_NUM_THREADS=1
+* 思源一号推荐使用 ``OMP_NUM_THREADS=1``
   
-* π 2.0 推荐使用 OMP_NUM_THREADS=2
+* π 2.0 推荐使用 ``OMP_NUM_THREADS=2``
 
 * 思源一号 VASP 计算速度明显优于 π 2.0
 
 本示例相关说明：
 
-1. VASP 运行需要最基本的 ``INCAR``, ``POSCAR``, ``POTCAR``, ``KPOINTS`` 四个文件。全部文件已放置在思源一号共享文件夹：
+1. VASP 运行需要最基本的 ``INCAR``, ``POSCAR``, ``POTCAR``, ``KPOINTS`` 四个文件。全部文件已放置于思源一号共享文件夹：
 
 .. code:: bash
 
    /dssg/share/sample/vasp
 
-2. VASP 运行方法：
+2. VASP 算例运行方法：
       
 .. code:: bash
 
