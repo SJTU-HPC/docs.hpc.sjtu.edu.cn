@@ -10,7 +10,7 @@ VASP 全称 Vienna Ab-initio Simulation Package，是维也纳大学 Hafner 小�
 
 VASP 使用需要得到 VASP 官方授权。请自行购买 VASP license 许可，下载和安装。如需协助安装或使用，请发邮件联系我们，附上课题组拥有 VASP license 的证明。
 
-本文档将介绍如何使用集群上已部署到 VASP 5.4.4 和 6.2.1，以及如何自行编译 VASP
+本文档将介绍如何使用集群上已部署的 VASP 5.4.4 和 6.2.1，以及如何自行编译 VASP。
 
 集群上的 VASP
 ---------------
@@ -177,6 +177,66 @@ VASP 在集群上使用 intel 套件自行编译十分容易。下面以思源�
    ulimit -s unlimited
 
    mpirun ~/vasp_std
+
+
+VASP 算例及测试
+---------------------
+
+以 64 原子的 Si AIMD 熔化为例，各使用 40 核，思源一号与 π 2.0 的测试结果：
+
+运行结果显示：
+
+* 思源一号推荐使用 OMP_NUM_THREADS=1
+  
+* π 2.0 推荐使用 OMP_NUM_THREADS=2
+
+* 思源一号 VASP 计算速度明显优于 π 2.0
+
+================== =============== ===============
+OMP_NUM_THREADS      思源一号 40核   π 2.0 40核
+================== =============== ===============
+1                  19              94
+2                  23              31
+4                  39              39
+================== =============== ===============
+
+VASP 运行需要最基本的 ``INCAR``, ``POSCAR``, ``POTCAR``, ``KPOINT``S 四个文件。全部文件已放置在思源一号共享文件夹：
+
+.. code:: bash
+
+   /dssg/share/sample/vasp
+
+下面是示例的 ``INCAR`` 文件内容：
+
+.. code:: bash
+
+   SYSTEM = cd Si
+
+   ! ab initio
+   ISMEAR = 0        ! Gaussian smearing
+   SIGMA  = 0.1      ! smearing in eV
+
+   LREAL  = Auto     ! projection operators in real space
+
+   ALGO   = VeryFast ! RMM-DIIS for electronic relaxation
+   PREC   = Low      ! precision
+   ISYM   = 0        ! no symmetry imposed
+
+   ! MD
+   IBRION = 0        ! MD (treat ionic dgr of freedom)
+   NSW    = 60       ! no of ionic steps
+   POTIM  = 3.0      ! MD time step in fs
+
+   MDALGO = 2        ! Nosé-Hoover thermostat
+   SMASS  = 1.0      ! Nosé mass
+
+   TEBEG  = 2000     ! temperature at beginning
+   TEEND  = 2000     ! temperature at end
+   ISIF   = 2        ! update positions; cell shape and volume fixed
+
+   NCORE = 4
+
+
 
 
 参考资料
