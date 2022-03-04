@@ -24,17 +24,15 @@ Gnuplot 需要在 HPC Studio 可视化平台的“远程桌面”里使用。π 
 
 2) 顶栏 ``Interactive Apps`` 下拉菜单，选择第一个 ``Desktop``
 
-3) Desktop 里第一个 ``Desktop Instance Size`` 选择最基本的
-   ``1core``（画图所需资源少，1 core 够用），然后点击 ``Launch``
+3) Desktop 里第一个 ``Desktop Instance Size`` ，选择最基本的 ``1core`` ，然后点击 ``Launch``
 
-4) 等待几秒，甚或更长时间，取决于 small 队列可用资源量。Studio
-   的远程桌面以一个正常的 small 队列作业启动
+4) 等待几秒，甚或更长时间，取决于 small 队列可用资源量。Studio    的远程桌面以一个正常的 small 队列作业启动
 
-5) 启动后，右上角会显示 ``1 node 1 core Running``. 然后点击 ``Launch Desktop``
+5) 启动后，右上角会显示 ``1 node 1 core Running`` . 然后点击 ``Launch Desktop``
 
-2. 在远程桌面里调用 Gnuplot
+6. 在远程桌面里调用 Gnuplot
 
-在远程桌面空白处，右键单击，``Open Terminal Here`` 打开终端，输入 ``gnuplot`` 命令：
+在远程桌面空白处，右键单击， ``Open Terminal Here`` 打开终端，输入 ``gnuplot`` 命令：
 
 .. code:: bash
 
