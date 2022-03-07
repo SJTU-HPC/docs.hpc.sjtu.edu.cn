@@ -1,3 +1,5 @@
+.. _matlab:
+
 MATLAB
 ===============
 
@@ -7,36 +9,42 @@ MATLAB
 MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析、无线通信、深度学习、图像处理与计算机视觉、
 信号处理、量化金融与风险管理、机器人，控制系统等领域。
 
-π 集群上的MATLAB
+可用的版本
 ----------------
++----------+----------------+----------+-------------------------------------------------+
+|版本      |平台            |构建方式  |名称                                             |
++==========+================+==========+=================================================+
+| 2021a    |  |cpu|         | 容器     |/lustre/share/img/matlab_latest.sif              |
++----------+----------------+----------+-------------------------------------------------+
+| 2021a    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_latest.sif思源平台|
++----------+----------------+----------+-------------------------------------------------+
 
-π 集群上的CPU及GPU平台均支持MATLAB软件。
-
-由于MATLAB是可视化软件，因此需要启动HPC Studio的可视化远程桌面来运行。
-
-如果不需要使用GPU卡，那么可以启动 CPU 队列的可视化远程桌面，最大可以使用40核CPU。如果需要使用GPU卡，那么需要启动DGX-2队列的可视化远程桌面。
 
 
-启动CPU远程桌面
--------------------------
+π 集群上的MATLAB
+------------------------
+π 集群上的CPU及GPU平台均支持MATLAB软件，在闵行超算及思源超算均有提供。
+MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命令行调用。
+
+- `可视化平台使用MATLAB`_
+- `命令行使用MATLAB`_
+
+
+.. _可视化平台使用MATLAB:
+
+可视化平台使用MATLAB
+-----------------------
+
+可视化平台只能使用闵行超算上部署的MATLAB。
+
+1. 启动远程桌面
 
 使用hpc帐号登录HPC studio（https://studio.hpc.sjtu.edu.cn）后，点击"Interactive Apps >> Desktop"。选择需要的核数，session时长（默认1核、1小时），点击"Launch"启动远程桌面。待选项卡显示作业在RUNNING的状态时,点击"Launch Desktop"即可进入远程桌面。
 
 .. image:: ../img/matlab01.png
 .. image:: ../img/matlab02.png
 
-
-启动GPU远程桌面
--------------------------
-
-使用hpc帐号登录HPC studio（https://studio.hpc.sjtu.edu.cn）后，点击"Interactive Apps >> Desktop"。选择 gpu-desktop，session时长（默认2小时），点击"Launch"启动远程桌面。待选项卡显示作业在RUNNING的状态时,点击"Launch Desktop"即可进入远程桌面。
-
-.. image:: ../img/matlab01.png
-.. image:: ../img/matlab06.png
-
-
-启动MATLAB
--------------------------
+2. 启动MATLAB
 
 远程桌面中点击右键，选择Open Terminal Here打开终端，在终端中使用命令 "singularity run /lustre/share/img/matlab_latest.sif matlab"
 
@@ -45,6 +53,73 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 .. image:: ../img/matlab03.png
 .. image:: ../img/matlab04.png
 .. image:: ../img/matlab05.png
+
+
+
+.. _命令行使用MATLAB:
+
+命令行使用MATLAB
+---------------------
+
+1. 算例下载
+
+.. code:: console
+   
+   cd ~
+   git clone https://github.com/SJTU-HPC/HPCTesting.git
+
+
+2. 脚本提交
+
+-  闵行超算提交CPU脚本
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH -J matlab_test
+    #SBATCH -p small
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -n 1
+    #SBATCH --ntasks-per-node=1
+
+    IMAGE_PATH=/lustre/share/img/matlab_latest.sif
+
+    ulimit -s unlimited
+    ulimit -l unlimited
+    cd ~/HPCTesting/matlab
+    singularity exec $IMAGE_PATH matlab -r test
+
+
+
+-  张江超算提交CPU脚本
+
+.. code:: console
+
+    #!/bin/bash
+    #SBATCH -J matlab_test
+    #SBATCH -p 
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -n 64c512g
+    #SBATCH --ntasks-per-node=1
+
+    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_latest.sif
+    
+    # 张江超算需配置代理服务器
+    export http_proxy=192.168.0.38:27000
+    export https_proxy=192.168.0.38:27000
+    ulimit -s unlimited
+    ulimit -l unlimited
+    cd ~/HPCTesting/matlab
+    singularity exec $IMAGE_PATH matlab -r test
+
+
+使用sbatch命令提交脚本，脚本运行完毕后，在本地将生成一张名为 `1.png` 的图片，如程序运行无误，该图片的内容与本地 `result.png` 内容一致：
+
+.. image:: ../img/matlab_result.png
+
+
 
 自定义添加MATLAB插件
 -------------------------
