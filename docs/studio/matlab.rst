@@ -87,7 +87,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
     ulimit -s unlimited
     ulimit -l unlimited
-    cd ~/HPCTesting/matlab
+    cd ~/HPCTesting/matlab/case1
     singularity exec $IMAGE_PATH matlab -r test
 
 
@@ -111,7 +111,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     export https_proxy=192.168.0.38:27000
     ulimit -s unlimited
     ulimit -l unlimited
-    cd ~/HPCTesting/matlab
+    cd ~/HPCTesting/matlab/case1
     singularity exec $IMAGE_PATH matlab -r test
 
 
