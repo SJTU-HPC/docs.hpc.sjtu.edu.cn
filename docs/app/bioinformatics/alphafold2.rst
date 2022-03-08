@@ -61,7 +61,7 @@ module 在思源一号上运行
     #SBATCH --partition=a100
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=8
+    #SBATCH --cpus-per-task=16
     #SBATCH --gres=gpu:1          # use 1 GPU
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
@@ -171,7 +171,7 @@ ParaFold 在思源一号上运行
     #SBATCH --partition=a100
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=8
+    #SBATCH --cpus-per-task=16
     #SBATCH --gres=gpu:1          # use 1 GPU
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
@@ -275,7 +275,7 @@ ColabFold 使用请至交大超算文档页面： :doc:`colabfold`
 
 .. code:: console
 
-    salloc --ntasks-per-node=1 -p a100 --cpus-per-task=8 --gres=gpu:1 
+    salloc --ntasks-per-node=1 -p a100 --cpus-per-task=16 --gres=gpu:1 
     ssh gpuXX
 
     git clone https://github.com/Zuricho/ParallelFold.git
@@ -314,7 +314,7 @@ ColabFold 使用请至交大超算文档页面： :doc:`colabfold`
     #SBATCH -e %j.err
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=8
+    #SBATCH --cpus-per-task=16
     #SBATCH --gres=gpu:1
 
     module purge
