@@ -109,8 +109,7 @@ ARM VASP
    #SBATCH -o %j.out
    #SBATCH -e %j.err
    #SBATCH -N 1
-   #SBATCH --ntasks-per-node=64
-   #SBATCH --exclusive
+   #SBATCH --ntasks-per-node=128
 
    module purge
    module load openmpi/4.0.3-gcc-9.2.0
