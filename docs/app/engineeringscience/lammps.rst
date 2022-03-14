@@ -20,15 +20,10 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
 +--------+---------+----------+-----------------------------------------+
 | 2020   | |cpu|   | 容器     | 直接使用镜像                            |
 +--------+---------+----------+-----------------------------------------+
-| 2020   | |gpu|   | 容器     | lammps/2020-dgx                         |
-+--------+---------+----------+-----------------------------------------+
 | 2020   | |gpu|   | 容器     | lammps/2020-dgx-kokkos                  |
 +--------+---------+----------+-----------------------------------------+
 | 2019   | |arm|   | 容器     | lammps/bisheng-1.3.3-lammps-2019        |
 +--------+---------+----------+-----------------------------------------+
-| 2021   | |arm|   | spack    | 20210310-gcc-9.3.0-openblas-openmpi     |
-+--------+---------+----------+-----------------------------------------+
-
 
 算例下载
 ---------
@@ -94,7 +89,7 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    100.0% CPU use with 128 MPI tasks x 1 OpenMP threads
 
 2. π2.0上的Slurm 脚本
-~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
 核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
@@ -240,45 +235,7 @@ slurm.test
 二. GPU版本
 -----------
 
-1. GPU版本脚本
-~~~~~~~~~~~~~~
-
-GPU 版本速度跟 intel CPU 版本基本相同
-
-π 集群 上提供了 GPU 版本的 LAMMPS 2020。经测试，LJ 和 EAM 两 Benchmark
-算例与同等计算费用的 CPU 基本一样。建议感兴趣的用户针对自己的算例，测试
-CPU 和 GPU 计算效率，然后决定使用哪一种平台。
-
-以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心，使用
-GPU 版 LAMMPS。脚本名称可设为 slurm.test
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=lmp_test
-   #SBATCH --partition=dgx2
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=12
-   #SBATCH --cpus-per-task=1
-   #SBATCH --gres=gpu:2
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   module load lammps/2020-dgx
-
-   srun --mpi=pmi2 lmp -in in.lj.txt
-
-使用如下指令提交：
-
-.. code:: bash
-
-   $ sbatch slurm.test
-
-2. GPU 版本 LAMMPS + kokkos
+1. GPU 版本 LAMMPS + kokkos
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 GPU 版本速度跟 intel CPU 版本基本相同
@@ -326,38 +283,7 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 三. ARM版本
 -----------
 
-1. ARM脚本
-~~~~~~~~~~
-
-脚本如下(lammps.slurm):
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=lmp_test
-   #SBATCH --partition=arm128c256g
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   #SBATCH -n 256
-   #SBATCH --ntasks-per-node=128
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   module purge
-   module load openmpi/4.0.3-gcc-9.3.0
-   module load lammps/20210310-gcc-9.3.0-openblas-openmpi
-
-   mpirun -n $SLURM_NTASKS lmp -in in.lj.txt
-
-在 `ARM 节点 <../login/index.html#arm>`__\ 上使用如下指令提交（若在 π2.0 登录节点上提交将出错）：
-
-.. code:: bash
-
-   $ sbatch lammps.slurm
-
-2. ARM版lammps(bisheng编译器+hypermpi)
+1. ARM版lammps(bisheng编译器+hypermpi)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 脚本如下(lammps.slurm):
