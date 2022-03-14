@@ -287,7 +287,7 @@ GROMACS
    mpirun gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
 
 运行结果如下所示(单位：ns/day，越高越好)
--------------------
+-----------------------------------------
 
 1.GROMACS 思源一号
 ~~~~~~~~~~~~~~~~~~
