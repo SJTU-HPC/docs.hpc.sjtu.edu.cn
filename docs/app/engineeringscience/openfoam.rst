@@ -34,107 +34,132 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 
 
 
-提交OpenFOAM作业
-----------------
+OpenFOAM基本使用
+--------------------------------
 
-CPU版OpenFoam(使用Spack预编译版本)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+以pi2.0上的OpenFoam7为例：
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-准备作业脚本 ``openfoam.slurm`` ，内容如下：
+1.从OpenFoam7的安装目录中将tutorials目录整个复制到自己(本人hpcpzz，用户根据自己的实际情况进行修改即可)的目录下openfoamTest目录中：
+
+.. code:: bash
+   
+   mkdir openfoamTest
+   cp -r /lustre/opt/cascadelake/linux-centos7-skylake_avx512/gcc-7.4.0/openfoam-org-7-hf7fehnzmia4muicuqvlcaki7y2iqx2x/tutorials   /lustre/home/acct-hpc/hpcpzz/openfoamTest  
+
+2.为了运行cavity(方腔流动)算例，执行以下命令进入相对应目录：
+
+.. code:: bash
+
+   cd /lustre/home/acct-hpc/hpcpzz/openfoamTest/tutorials/incompressible/icoFoam/cavity/cavity
+
+3.此时可以看到以下0、constant、system三个目录(一个典型的openfoam算例均包含这三个目录)：
+
+.. code:: bash
+
+  ├── 0
+  │   ├── p
+  │   └── U
+  ├── constant
+  │   └── transportProperties
+  └── system
+    ├── blockMeshDict
+    ├── controlDict
+    ├── fvSchemes
+    └── fvSolution
+
+
+0 目录主要包含待求解问题的边界条件和初始条件；
+constant 目录主要包含物性参数、湍流模型参数、更高级的物理模型等；
+system 目录主要包含计算时间和数值求解格式等计算参数。
+
+这三个目录包含了待求解问题所必须指定的所有物理参数和计算参数，用户可根据自己的需求进行合理修改以提高计算结果的准确性。
+
+4.在此目录下编写以下openfoam.slurm脚本
 
 .. code:: bash
 
    #!/bin/bash
 
    #SBATCH --job-name=openfoam       # 作业名
-   #SBATCH --partition=cpu           # cpu队列
-   #SBATCH --ntasks-per-node=40      # 每节点核数
-   #SBATCH -n 80                     # 作业核心数80(两个节点)
+   #SBATCH --partition=small         # small队列
+   #SBATCH --ntasks-per-node=4       # 每节点核数
+   #SBATCH -n 4                      # 作业核心数4
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module load openfoam/1912-gcc-7.4.0-openmpi
+   module load openfoam-org/7-gcc-7.4.0-openmpi
 
-   srun --mpi=pmi2 icoFoam -parallel
+   blockMesh
+   icoFoam
 
-使用 ``sbatch`` 提交作业：
-
-.. code:: bash
-
-   $ sbatch openfoam.slurm
-
-CPU版OpenFoam(使用容器)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-准备作业脚本 ``openfoam.slurm`` ，内容如下：
+5.使用 ``sbatch`` 提交作业：
 
 .. code:: bash
 
-   #!/bin/bash
+   sbatch openfoam.slurm
 
-   #SBATCH --job-name=openfoam       # 作业名
-   #SBATCH --partition=cpu           # cpu队列
-   #SBATCH --ntasks-per-node=40      # 每节点核数
-   #SBATCH -n 80                     # 作业核心数80(两个节点)
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-
-   module load openmpi/3.1.5-gcc-4.8.5
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   export IMAGE_NAME=/lustre/share/img/x86/openfoam/2106-gcc4-openmpi4-centos7.sif
-
-   singularity exec $IMAGE_NAME blockMesh
-   mpirun -n $SLURM_NTASKS singularity exec $IMAGE_NAME simpleFoam -parallel
-
-使用 ``sbatch`` 提交作业：
+6.运行结束后会看到constant目录下多出了一个polyMesh目录，该目录保存了计算用的网格信息；而同级目录下多出了0.1、0.2、0.3、0.4、0.5这五个目录，这几个目录记录了在五个不同时刻的物理场的计算结果。
 
 .. code:: bash
 
-   $ sbatch openfoam.slurm
+  ├── 0
+  │   ├── p
+  │   └── U
+  ├── 0.1
+  │   ├── p
+  │   ├── phi
+  │   ├── U
+  │   └── uniform
+  │       └── time
+  ├── 0.2
+  │   ├── p
+  │   ├── phi
+  │   ├── U
+  │   └── uniform
+  │       └── time
+  ├── 0.3
+  │   ├── p
+  │   ├── phi
+  │   ├── U
+  │   └── uniform
+  │       └── time
+  ├── 0.4
+  │   ├── p
+  │   ├── phi
+  │   ├── U
+  │   └── uniform
+  │       └── time
+  ├── 0.5
+  │   ├── p
+  │   ├── phi
+  │   ├── U
+  │   └── uniform
+  │       └── time
+  ├── constant
+  │   ├── polyMesh
+  │   │   ├── boundary
+  │   │   ├── faces
+  │   │   ├── neighbour
+  │   │   ├── owner
+  │   │   └── points
+  │   └── transportProperties
+  ├── openfoam.slurm
+  └── system
+    ├── blockMeshDict
+    ├── controlDict
+    ├── fvSchemes
+    └── fvSolution
 
 
-ARM版OpenFoam(使用容器)
-~~~~~~~~~~~~~~~~~~~~~~~
-
-准备作业脚本 ``openfoam.slurm`` ，内容如下：
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=openfoam          # 作业名
-   #SBATCH --partition=arm128c256g      # arm128c256g队列                
-   #SBATCH --ntasks-per-node=128        # 每节点核数
-   #SBATCH -n 256                       # 作业核心数256(两个节点)
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-
-   module load openmpi/4.0.3-gcc-9.3.0
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   export IMAGE_NAME=/lustre/share/img/aarch64/openfoam/1912.sif
-
-   singularity run $IMAGE_NAME decomposePar
-   mpirun -n $SLURM_NTASKS singularity run  $IMAGE_NAME pimpleFoam -parallel
-
-使用 ``sbatch`` 提交作业：
-
-.. code:: bash
-
-   $ sbatch openfoam.slurm
 
 编译OpenFOAM
 ------------
 
-如果您需要从源代码构建OpenFOAM，我们强烈建议您使用超算平台提供的非特权容器构建方法(:ref:`dockerized_singularity`)，以确保编译过程能顺利完成。
+如果您需要从源代码构建OpenFOAM，我们强烈建议您使用超算平台提供的非特权容器构建方法，以确保编译过程能顺利完成。
 
 编译适用于CPU平台的OpenFOAM(构建容器)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
