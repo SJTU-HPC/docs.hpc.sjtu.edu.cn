@@ -32,7 +32,7 @@ Octave是一种采用高级编程语言的主要用于数值分析的软件。Oc
 
 .. code:: bash
 
-   $ sbatch octave_singularity.slurm
+   sbatch octave_singularity.slurm
 
 使用singularity容器提交Octave交互式作业
 ---------------------------------------
