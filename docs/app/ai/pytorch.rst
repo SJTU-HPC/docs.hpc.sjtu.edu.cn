@@ -185,6 +185,87 @@ PyTorch 是一个 Python 优先的深度学习框架，也是使用 GPU 和 CPU
    $ sbatch slurm.test
 
 
+Pytorch性能测试
+---------------------
+算例下载：
+
+.. code:: console
+
+   $ git clone https://github.com/SJTU-HPC/HPCTesting.git
+   $ cd HPCTesting/pytorch-gpu-benchmark
+
+DGX-2运行脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH -p dgx2
+   #SBATCH -n 1
+   #SBATCH --ntasks-per-node 1
+   #SBATCH --cpus-per-task 6 
+   #SBATCH --gres gpu:1
+   #SBATCH -N 1
+
+   singularity  run --nv   /lustre/share/singularity/modules/pytorch/1.6.0.sif python benchmark_models.py --folder v100 -w 10 -n 5  -b 12 -g 1 && &>/dev/null 
+
+
+A100运行脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH -p a100
+   #SBATCH -n 1
+   #SBATCH --ntasks-per-node 1
+   #SBATCH --cpus-per-task 6 
+   #SBATCH --gres gpu:1
+   #SBATCH -N 1
+
+   singularity  run --nv   /dssg/share/imgs/pytorch/1.6.0.sif python benchmark_models.py --folder a100 -w 10 -n 5  -b 12 -g 1 && &>/dev/null 
+
+
+DGX-2测试结果将被放在 ``v100`` 文件夹内，A100测试结果将被放在 ``a100`` 文件夹内，均为CSV格式。
+
+
+单卡测试:
+
+resnet18,resnet34,resnet50,resnet101,resnet152,resnext50_32x4d,resnext101_32x8d,wide_resnet50_2,wide_resnet101_2模型的平均batch耗时如下：
+
++--------------------------------------+
+| pytorch                              |
++=========+=========+=========+========+
+|partition| mode    |precision|ms/batch|
++---------+---------+---------+--------+
+| v100    | train   | double  |     188|
++---------+---------+---------+--------+
+| v100    | train   | float   |  84    |
++---------+---------+---------+--------+
+| v100    | train   | half    |     52 |
++---------+---------+---------+--------+
+| v100    |inference| half    |   57   |
++---------+---------+---------+--------+
+| v100    |inference| half    |    28  |
++---------+---------+---------+--------+
+| v100    |inference| half    |    15  |
++---------+---------+---------+--------+
+| a100    | train   | double  |    161 |
++---------+---------+---------+--------+
+| a100    | train   | float   |   47   |
++---------+---------+---------+--------+
+| a100    | train   | half    |    37  |
++---------+---------+---------+--------+
+| a100    |inference| half    |     45 |
++---------+---------+---------+--------+
+| a100    |inference| half    |    14  |
++---------+---------+---------+--------+
+| a100    |inference| half    |     10 |
++---------+---------+---------+--------+
+
+
+建议
+----------------
+A100 显卡的内存为40GB，而V100显卡内存为32GB。从测试结果也可以看出，A100无论是训练还是推理，在单精度、双精度、半精度的计算速度均大幅领先于 V100，推荐大家使用思源平台的 A100队列提交pytorch作业。
 
 
 参考资料
