@@ -240,8 +240,7 @@ GROMACS
    ulimit -l unlimited
    srun --mpi=pmi2 gmx_mpi_d mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
 
-
-- `三. ARM GROMACS`_
+.. _ARM GROMACS:
 
 三. ARM GROMACS
 --------------------
