@@ -21,6 +21,8 @@ GROMACS
 +--------+-------+----------+----------------------------------------------------------+
 | 2020   | |cpu| | 容器     | gromacs/2020-cpu-double                                  |
 +--------+-------+----------+----------------------------------------------------------+
+| 2022   | |arm| | 源码     | gromacs/2022-gcc-9.3.0                                   |
++--------+-------+----------+----------------------------------------------------------+
 
 算例下载
 ---------
@@ -35,7 +37,7 @@ GROMACS
 数据目录如下所示：
 
 .. code:: bash
-   
+      
    [hpc@login2 water-cut1.0_GMX50_bare]$ tree 0768/
    0768/
    ├── conf.gro
@@ -48,18 +50,20 @@ GROMACS
 集群上的GROMACS
 ----------------
 
-- `思源一号 GROMACS`_
+- `一. 思源一号 GROMACS`_
 
-- `π2.0 GROMACS`_
+- `二. π2.0 GROMACS`_
+
+- `三. ARM GROMACS`_
 
 
-.. _思源一号 GROMACS:
+.. _一. 思源一号 GROMACS:
 
-思源一号 GROMACS
-----------------
+一. 思源一号 GROMACS
+--------------------
 
-GCC编译的版本
-~~~~~~~~~~~~~
+1.GCC编译的版本
+~~~~~~~~~~~~~~~~
 
 预处理数据
 
@@ -153,11 +157,11 @@ GCC编译的版本
 
 .. _π2.0 GROMACS:
 
-π2.0 GROMACS
--------------
+二. π2.0 GROMACS
+------------------
 
-gromacs/2019.4-gcc-9.2.0-openmpi
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.gromacs/2019.4-gcc-9.2.0-openmpi
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 提交预处理脚本
 
@@ -181,7 +185,7 @@ gromacs/2019.4-gcc-9.2.0-openmpi
 提交运行作业脚本
 
 .. code:: bash
-      
+         
    #!/bin/bash
 
    #SBATCH -J gromacs_cpu_test
@@ -195,8 +199,8 @@ gromacs/2019.4-gcc-9.2.0-openmpi
    ulimit -l unlimited
    srun --mpi=pmi2 gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
 
-gromacs/2020-cpu-double 
-~~~~~~~~~~~~~~~~~~~~~~~~
+2.gromacs/2020-cpu-double 
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 提交预处理脚本
 
@@ -235,12 +239,58 @@ gromacs/2020-cpu-double
    ulimit -s unlimited
    ulimit -l unlimited
    srun --mpi=pmi2 gmx_mpi_d mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
-  
-运行结果如下所示
------------------
 
-GROMACS 思源一号
-~~~~~~~~~~~~~~~~
+.. _ARM GROMACS:
+
+三. ARM GROMACS
+--------------------
+
+1.module load gromacs/2022-gcc-9.3.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+提交预处理脚本
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #!/bin/bash
+   
+   #SBATCH --job-name=test
+   #SBATCH --partition=arm128c256g
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load gromacs/2022-gcc-9.3.0
+   
+   gmx_mpi grompp -f pme.mdp
+
+提交运行作业脚本
+
+.. code:: bash
+         
+   #!/bin/bash
+
+   #SBATCH --job-name=test
+   #SBATCH --partition=arm128c256g
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=128
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module purge all
+   module load gromacs/2022-gcc-9.3.0
+   export OMP_NUM_THREADS=1
+   mpirun gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
+
+运行结果如下所示
+-------------------
+
+1.GROMACS 思源一号
+~~~~~~~~~~~~~~~~~~
 
 +-------------------------------------------------+
 | gromacs/2021.3-gcc-11.2.0-cuda-openblas-openmpi |
@@ -253,8 +303,8 @@ GROMACS 思源一号
 +--------+-------------+------------+-------------+
 
 
-GROMACS π2.0
-~~~~~~~~~~~~~
+2.GROMACS π2.0
+~~~~~~~~~~~~~~~~
 
 +-----------------------------------------+
 |      gromacs/2019.4-gcc-9.2.0-openmpi   |
@@ -275,6 +325,19 @@ GROMACS π2.0
 +---------+----------+----------+----------+
 | ns/day  |  4.441   | 8.388    | 16.701   |
 +---------+----------+----------+----------+
+
+3.GROMACS ARM
+~~~~~~~~~~~~~~~~
+
++---------------------------------------------+
+|           gromacs/2022-gcc-9.3.0            |
++=========+===========+===========+===========+
+| 核数    | 128       | 256       | 512       |
++---------+-----------+-----------+-----------+
+| Time    | 14265.182 | 14303.079 | 14433.687 |
++---------+-----------+-----------+-----------+
+| ns/day  |  7.754    | 15.466    | 30.650    |
++---------+-----------+-----------+-----------+
 
 参考资料
 --------
