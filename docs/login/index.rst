@@ -298,7 +298,7 @@ CPU 采用双路 Intel Xeon ICX Platinum 8358 32 核，主频 2.6GHz，共 936 �
 
 .. code:: bash
 
-   $ ssh username@sylogin1.hpc.sjtu.edu.cn
+   $ ssh username@sylogin.hpc.sjtu.edu.cn
 
 
 Tmux
