@@ -106,14 +106,14 @@ srun提交示例
 
 .. code:: bash
 
-   $ srun -n 1 -p dgx2 --gres=gpu:2 hostname
+   $ srun -N 1 -n 1 -p dgx2 --gres=gpu:2 hostname
    vol01
 
 启动远程主机bash终端。
 
 .. code:: bash
 
-   $ srun -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
+   $ srun -N 1 -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
    $ hostname
    vol01
 
@@ -124,7 +124,7 @@ GPU程序调试
 
 .. code:: bash
 
-   $ srun -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
+   $ srun -N 1 -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
    $ module load cuda
    $ cuda-gdb ./your_app
 
