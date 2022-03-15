@@ -17,7 +17,7 @@ range of partial differential equations.
 
 .. code:: bash
 
-   $ module avail Nektar
+   module avail Nektar
 
 加载预安装的Nektar++
 ---------------------
@@ -26,32 +26,32 @@ range of partial differential equations.
 
 ::
 
-   $ module load nektar/5.0.0-intel-19.0.4-impi
+   module load nektar/5.0.0-intel-19.0.4-impi
 
 Nektar++使用说明
 -----------------------------
 
-在这里，我们通过求解一个二维方形区域的对流扩散方程来来演示Nektar++的使用方法。该问题的具体定义如下：
+在这里，我们通过求解一个二维方形区域的对流方程来演示Nektar++的使用方法。该问题的定义如下：
 
 |image1|
 
-(1)  从Nektar++官网 https://www.nektar.info/ 的 GETTING STARTED->Tutorials->Basics->Advection-Diffusion->Introduction->Goals板块下载所需要的数据文件basics-advection-diffusion.tar.gz 并解压；
+(1) 从Nektar++官网 https://www.nektar.info/ 的GETTING STARTED->Tutorials->Basics->Advection-Diffusion->Introduction->Goals板块下载所需要的数据文件basics-advection-diffusion.tar.gz并解压；
  
-(2) 解压之后会得到两个文件夹 completed 以及 tutorial；
+(2) 解压之后会得到两个目录completed以及tutorial；
 
-(3) 进入 completed 文件夹会看到如下几个文件：
+(3) 进入completed目录会看到如下几个文件：
 
-  ADR_conditions.xml  
+  1. ADR_conditions.xml  
 
-  ADR_mesh.geo  
+  2. ADR_mesh.geo  
 
-  ADR_mesh.msh 
+  3. ADR_mesh.msh 
 
-  ADR_mesh.xml 
+  4. ADR_mesh.xml 
 
-  ADR_mesh_aligned.fld
+  5. ADR_mesh_aligned.fld
 
-  ADR_mesh_aligned.xml  
+  6. ADR_mesh_aligned.xml  
 
 这几个文件定义了求解本问题所需要的几何信息、网格信息以及初始和边界条件。
 
@@ -68,8 +68,8 @@ Nektar++使用说明
 
    #SBATCH -J Nektar_test
    #SBATCH -p small
-   #SBATCH -n 4
-   #SBATCH --ntasks-per-node=4
+   #SBATCH -n 1
+   #SBATCH --ntasks-per-node=1
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
@@ -84,7 +84,7 @@ Nektar++使用说明
 
 .. code:: bash
 
-   $ sbatch Nektar_run.slurm
+   sbatch Nektar_run.slurm
 
 (6) 然后即可在.out或者.err文件中看到如下结果：
 
