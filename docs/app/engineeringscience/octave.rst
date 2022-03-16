@@ -45,28 +45,28 @@ Octave是一种采用高级编程语言的主要用于数值分析的软件。Oc
 
 使用HPC Studio启动Octave可视化界面
 ----------------------------------
-1. 用pi集群帐号登录 https://studio.hpc.sjtu.edu.cn/ 平台;
+1. 用pi集群帐号登录  `HPC Studio <https://studio.hpc.sjtu.edu.cn/>`__ 平台;
 2. 在Interactive Apps面板中点击如下图所示Octave选项申请Octave GUI 界面(要排一会儿队，请耐心等待)：
  
 |image1|
 
-3.申请成功后会看到如下界面：
+3. 申请成功后会看到如下界面：
 
 |image2|
 
-4.Octave的语法和Matlab几乎完全相同，我们可以在右侧Command Window窗口中进行简单的数学运算，如下图所示：
+4. Octave的语法和Matlab几乎完全相同，我们可以在右侧Command Window窗口中进行简单的数学运算，如下图所示：
 
 |image3|
 
-5.如果要编写脚本进行比较复杂的计算的话(绘图或者是其他)，可以点击左上角File->New->New Script选项，然后在弹出的Editor窗口进行脚本编写，如下图所示：
+5. 如果要编写脚本进行比较复杂的计算的话(绘图或者是其他)，可以点击左上角File->New->New Script选项，然后在弹出的Editor窗口进行脚本编写，如下图所示：
 
 |image4|
 
-6.编写完成之后，点击如下图所示按钮保存为.m文件并运行：
+6. 编写完成之后，点击如下图所示按钮保存为.m文件并运行：
 
 |image5|
 
-7.结果如图所示：
+7. 结果如图所示：
 
 |image6|
 

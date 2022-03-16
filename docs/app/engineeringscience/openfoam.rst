@@ -37,23 +37,23 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 OpenFOAM基本使用
 --------------------------------
 
-以pi2.0上的OpenFoam7为例：
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1.从OpenFoam7的安装目录中将tutorials目录整个复制到自己(本人hpcpzz，用户根据自己的实际情况进行修改即可)的目录下openfoamTest目录中：
+
+
+1. 以pi2.0上的OpenFoam7为例。从OpenFoam7的安装目录中将tutorials目录整个复制到自己(本人hpcpzz，用户根据自己的实际情况进行修改即可)的目录下openfoamTest目录中：
 
 .. code:: bash
    
    mkdir openfoamTest
-   cp -r /lustre/opt/cascadelake/linux-centos7-skylake_avx512/gcc-7.4.0/openfoam-org-7-hf7fehnzmia4muicuqvlcaki7y2iqx2x/tutorials   /lustre/home/acct-hpc/hpcpzz/openfoamTest  
+   cp -rv $FOAM_PROJECT_DIR/tutorials   /lustre/home/acct-hpc/hpcpzz/openfoamTest  
 
-2.为了运行cavity(方腔流动)算例，执行以下命令进入相对应目录：
+2. 为了运行cavity(方腔流动)算例，执行以下命令进入相对应目录：
 
 .. code:: bash
 
    cd /lustre/home/acct-hpc/hpcpzz/openfoamTest/tutorials/incompressible/icoFoam/cavity/cavity
 
-3.此时可以看到以下0、constant、system三个目录(一个典型的openfoam算例均包含这三个目录)：
+3. 此时可以看到以下0、constant、system三个目录(一个典型的openfoam算例均包含这三个目录)：
 
 .. code:: bash
 
@@ -69,13 +69,12 @@ OpenFOAM基本使用
     └── fvSolution
 
 
-0 目录主要包含待求解问题的边界条件和初始条件；
-constant 目录主要包含物性参数、湍流模型参数、更高级的物理模型等；
-system 目录主要包含计算时间和数值求解格式等计算参数。
+*其中 0目录主要包含待求解问题的边界条件和初始条件；
+constant目录主要包含物性参数、湍流模型参数、更高级的物理模型等；
+system目录主要包含计算时间和数值求解格式等计算参数。
+这三个目录包含了待求解问题所必须指定的所有物理参数和计算参数，用户可根据自己的需求进行合理修改以提高计算结果的准确性。*
 
-这三个目录包含了待求解问题所必须指定的所有物理参数和计算参数，用户可根据自己的需求进行合理修改以提高计算结果的准确性。
-
-4.在此目录下编写以下openfoam.slurm脚本
+4. 在此目录下编写以下openfoam.slurm脚本：
 
 .. code:: bash
 
@@ -96,13 +95,13 @@ system 目录主要包含计算时间和数值求解格式等计算参数。
    blockMesh
    icoFoam
 
-5.使用 ``sbatch`` 提交作业：
+5. 使用 ``sbatch`` 提交作业：
 
 .. code:: bash
 
    sbatch openfoam.slurm
 
-6.运行结束后会看到constant目录下多出了一个polyMesh目录，该目录保存了计算用的网格信息；而同级目录下多出了0.1、0.2、0.3、0.4、0.5这五个目录，这几个目录记录了在五个不同时刻的物理场的计算结果。
+6. 运行结束后会看到constant目录下多出了一个polyMesh目录，该目录保存了计算用的网格信息；而同级目录下多出了0.1、0.2、0.3、0.4、0.5这五个目录，这几个目录记录了在五个不同时刻的物理场的计算结果：
 
 .. code:: bash
 
@@ -153,6 +152,7 @@ system 目录主要包含计算时间和数值求解格式等计算参数。
     ├── controlDict
     ├── fvSchemes
     └── fvSolution
+
 
 
 
