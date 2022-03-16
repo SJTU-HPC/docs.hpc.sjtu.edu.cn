@@ -35,11 +35,16 @@ Nektar++使用说明
 
 |image1|
 
-(1) 从Nektar++官网 https://www.nektar.info/ 的GETTING STARTED->Tutorials->Basics->Advection-Diffusion->Introduction->Goals板块下载所需要的数据文件basics-advection-diffusion.tar.gz并解压；
+
+其中，:math:`x_b  和  y_b  代表计算域边界，V_x=2，V_y=3，\kappa=2\pi`。
+
+(1) 从 `Nektar 官网 <https://www.nektar.info/>`__ 的GETTING STARTED->Tutorials->Basics->Advection-Diffusion->Introduction->Goals板块下载所需要的数据文件basics-advection-diffusion.tar.gz并解压；
  
 (2) 解压之后会得到两个目录completed以及tutorial；
 
 (3) 进入completed目录会看到如下几个文件：
+
+.. code:: bash
 
   1. ADR_conditions.xml  
 
@@ -53,7 +58,7 @@ Nektar++使用说明
 
   6. ADR_mesh_aligned.xml  
 
-这几个文件定义了求解本问题所需要的几何信息、网格信息以及初始和边界条件。
+*这几个文件定义了求解本问题所需要的几何信息、网格信息以及初始和边界条件。*
 
 
 
@@ -137,8 +142,33 @@ Nektar++使用说明
   L 2 error (variable u) : 0.00863475 
   L inf error (variable u) : 0.0390366
 
+在自己的目录下自行安装Nektar++
+------------------------------------------
+
+1. 执行以下从命令从GitHub上下载Nektar++源码：
+
+.. code:: bash
+
+   git clone http://gitlab.nektar.info/nektar/nektar.git nektar++
+
+2. 下载完成后进入nektar++目录并通过源码编译安装(编译之前需要配置很多可选的编译选项，用户根据自己的具体情况自行选择即可)：
+
+.. code:: bash
+
+  cd nektar++
+  mkdir build && cd build
+  ccmake ../
+  make
+  make install
+
+
+
+
+
 参考资料
 --------
+
+
 
 -  `Nektar 官网 <https://www.nektar.info/>`__
 

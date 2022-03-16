@@ -15,8 +15,8 @@ SUMO(GUI)使用方法
 
 
 
-1. 用pi集群帐号登录https://studio.hpc.sjtu.edu.cn/平台
-2. 在网站通过Interactive Apps->Desktop->Launch进入桌面(注意使用GPU桌面)
+1. 用pi集群帐号登录  `HPC Studio <https://studio.hpc.sjtu.edu.cn/>`__ 平台;
+2. 在网站通过Interactive Apps->Desktop->Launch进入桌面(注意使用GPU桌面);
 3. 打开终端，通过以下命令来调用软件：
 
 .. code:: bash
@@ -40,7 +40,7 @@ SUMO(GUI)使用方法
 具体案例
 ------------------------------------
 
-1.编写exa.nod.xml文件:
+1. 编写exa.nod.xml文件:
      
 .. code:: bash   
 
@@ -57,7 +57,7 @@ SUMO(GUI)使用方法
    <node id="m4" x="0.0" y="+250.0" type="priority"/> <!-- def. of node "m4" -->
       </nodes> <!-- The closing tag -->
 
-2.编写exa.edg.xml文件:
+2. 编写exa.edg.xml文件:
 
 .. code:: bash      
 
@@ -76,9 +76,9 @@ SUMO(GUI)使用方法
    <edge id="4o" from="0" to="4" priority="1" numLanes="1" speed="11.11"/>
       </edges>
 
-3.编写exa.typ.xml文件。这里就不详细描述了，因为就类似于建立一个type类供edge使用。
+3. 编写exa.typ.xml文件。这里就不详细描述了，因为就类似于建立一个type类供edge使用。
 
-4.编写exa.con.xml文件：
+4. 编写exa.con.xml文件：
 
 .. code:: bash 
      
@@ -89,18 +89,18 @@ SUMO(GUI)使用方法
    <connection from="2si" to="1o" fromLane="2" toLane="0"/>
       </connections>
 
-5.使用netconvert命令生成exa.net.xml：
+5. 使用netconvert命令生成exa.net.xml：
 
 .. code:: bash    
 
       
       netconvert --node-files=exa.nod.xml --edge-files=exa.edg.xml \  --connection-files=exa.con.xml --type-files=exa.typ.xml \  --output-file=exa.net.xml
 
-如果没有con.xml或者typ.xml则忽略对应的参数。使用sumo-gui查看net结果如下：
+*如果没有con.xml或者typ.xml则忽略对应的参数。使用sumo-gui查看net结果如下：*
 
 |image2|
 
-6.编写exa.rou.xml文件:
+6. 编写exa.rou.xml文件:
 
 .. code:: bash
 
@@ -115,7 +115,7 @@ SUMO(GUI)使用方法
       </routes>
 
 
-7.编写exa.sumocfg文件:
+7. 编写exa.sumocfg文件:
 
 .. code:: bash
 
@@ -131,19 +131,19 @@ SUMO(GUI)使用方法
     </time>
       </configuration>
 
-8.在命令行中执行以下命令：
+8. 在命令行中执行以下命令：
 
 .. code:: bash
 
       sumo-gui -c exa.sumocfg 
 
-或者直接打开sumo-gui选择open simulation，打开exa.sumocfg文件即可。
-
-对于较为复杂的情况，建议直接使用netedit软件以图形界面的方式生成net.xml道路信息文件。
+*或者直接打开sumo-gui选择open simulation，打开exa.sumocfg文件即可。
+对于较为复杂的情况，建议直接使用netedit软件以图形界面的方式生成net.xml道路信息文件。*
 
 参考资料
 --------
 
+-  `SUMO 知乎学习笔记 <https://zhuanlan.zhihu.com/p/78262100>`__
 -  `SUMO 官网 <https://sumo.dlr.de/docs/index.html>`__
 -  `SUMO参考视频教程 <https://www.bilibili.com/video/BV1H7411F76B?from=search&seid=7433094760012566668&spm_id_from=333.337.0.0>`__
 
