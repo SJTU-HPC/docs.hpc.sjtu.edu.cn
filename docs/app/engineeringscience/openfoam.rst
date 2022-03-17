@@ -37,21 +37,27 @@ OpenFOAM（英文Open Source Field Operation and Manipulation的缩写，意为�
 OpenFOAM基本使用
 --------------------------------
 
+pi2.0上的openfoam-org7(Spack构建)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-
-1. 以pi2.0上的OpenFoam7为例。从OpenFoam7的安装目录中将tutorials目录整个复制到自己(本人hpcpzz，用户根据自己的实际情况进行修改即可)的目录下openfoamTest目录中：
+1. 从openfoam-org7的安装目录中将tutorials目录整个复制到自己目录下openfoamTest1目录中：
 
 .. code:: bash
+
+   module purge
+   module load openfoam-org/7-gcc-7.4.0-openmpi
+   mkdir openfoamTest1
+   cd openfoamTest1
+   cp -rv $FOAM_PROJECT_DIR/tutorials  ./
    
-   mkdir openfoamTest
-   cp -rv $FOAM_PROJECT_DIR/tutorials   /lustre/home/acct-hpc/hpcpzz/openfoamTest  
+     
 
-2. 为了运行cavity(方腔流动)算例，执行以下命令进入相对应目录：
+2. 运行cavity算例(单核串行)，执行以下命令进入相对应目录：
 
 .. code:: bash
 
-   cd /lustre/home/acct-hpc/hpcpzz/openfoamTest/tutorials/incompressible/icoFoam/cavity/cavity
+   cd ./tutorials/incompressible/icoFoam/cavity/cavity
 
 3. 此时可以看到以下0、constant、system三个目录(一个典型的openfoam算例均包含这三个目录)：
 
@@ -82,8 +88,8 @@ system目录主要包含计算时间和数值求解格式等计算参数。
 
    #SBATCH --job-name=openfoam       # 作业名
    #SBATCH --partition=small         # small队列
-   #SBATCH --ntasks-per-node=4       # 每节点核数
-   #SBATCH -n 4                      # 作业核心数4
+   #SBATCH --ntasks-per-node=1       # 每节点核数
+   #SBATCH -n 1                      # 作业核心数4
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
@@ -153,6 +159,82 @@ system目录主要包含计算时间和数值求解格式等计算参数。
     ├── fvSchemes
     └── fvSolution
 
+
+思源一号上的openfoam-org7(Spack构建)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. 从openfoam-org7的安装目录中将tutorials目录整个复制到自己目录下openfoamTest1目录中：
+
+.. code:: bash
+   
+   module purge
+   module load openfoam-org/7-gcc-11.2.0-openmpi
+   mkdir openfoamTest1
+   cd openfoamTest1
+   cp -rv $FOAM_TUTORIALS  ./
+
+2. 为了运行motorBike算例(多核并行)，执行以下命令进入相对应目录：
+
+.. code:: bash
+
+   cd ./tutorials/incompressible//simpleFoam/motorBike
+
+
+3. 在此目录下编写以下openfoam.slurm脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=openfoam      # 作业名
+   #SBATCH --partition=64c512g      # 64c512g队列
+   #SBATCH --ntasks-per-node=6      # 每节点核数
+   #SBATCH -n 6                     # 作业核心数8
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   module load openmpi/4.1.1-gcc-11.2.0
+  
+   cp $FOAM_TUTORIALS/resources/geometry/motorBike.obj.gz constant/triSurface/ 
+   surfaceFeatures 
+   blockMesh 
+   decomposePar -copyZero 
+   mpirun -np 6 snappyHexMesh -overwrite -parallel 
+   mpirun -np 6 patchSummary -parallel 
+   mpirun -np 6 potentialFoam -parallel 
+   mpirun -np 6 simpleFoam -parallel 
+   reconstructParMesh -constant 
+   reconstructPar -latestTime
+
+4. 使用 ``sbatch`` 提交作业：
+
+.. code:: bash
+
+   sbatch openfoam.slurm
+
+5. 运行结束后即可在该目录下看到如下结果：
+
+.. code:: bash
+
+    0
+    500
+    9953216.err
+    9953216.out
+    Allclean
+    Allrun
+    constant
+    postProcessing
+    processor0
+    processor1
+    processor2
+    processor3
+    processor4
+    processor5
+    openfoam.slurm
+    system
 
 
 
