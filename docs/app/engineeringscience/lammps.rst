@@ -64,10 +64,10 @@ module load lammps/20210310-intel-2021.4.0-omp
    #!/bin/bash
    #SBATCH --job-name=lmp_test
    #SBATCH --partition=64c512g
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
    #SBATCH -N 1
    #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
       
    module load lammps/20210310-intel-2021.4.0-omp
    
