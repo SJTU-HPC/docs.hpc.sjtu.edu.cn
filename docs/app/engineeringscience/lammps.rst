@@ -57,6 +57,8 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
 1. 思源一号上的调用脚本
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+module load lammps/20210310-intel-2021.4.0-omp
+
 .. code:: bash
 
    #!/bin/bash
@@ -64,21 +66,33 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    #SBATCH --partition=64c512g
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   #SBATCH -N 2
+   #SBATCH -N 1
    #SBATCH --ntasks-per-node=64
       
    module load lammps/20210310-intel-2021.4.0-omp
    
    mpirun lmp -pk intel 0 omp 1 -sf intel -i in.lj.txt
-   
-运行结果如下所示
+  
+module load lammps/20210310-intel-2021.4.0-omp
 
 .. code:: bash
 
-   Loop time of 3.85844 on 128 procs for 40000 steps with 32000 atoms
+   #!/bin/bash
+   #SBATCH --job-name=lmp_test
+   #SBATCH --partition=64c512g
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
 
-   Performance: 4478490.783 tau/day, 10366.877 timesteps/s
-   99.8% CPU use with 128 MPI tasks x 1 OpenMP threads
+   module purge
+   module load oneapi
+   module load lammps/20210310-intel-2021.4.0
+
+   ulimit -s unlimited
+   ulimit -l unlimited
+   export OMP_NUM_THREADS=1
+   mpirun lmp -i in.lj.txt
 
 2. π2.0上的Slurm 脚本
 ~~~~~~~~~~~~~~~~~~~~~~
