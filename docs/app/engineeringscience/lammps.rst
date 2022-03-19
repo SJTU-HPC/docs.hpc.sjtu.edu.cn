@@ -73,7 +73,7 @@ module load lammps/20210310-intel-2021.4.0-omp
    
    mpirun lmp -pk intel 0 omp 1 -sf intel -i in.lj.txt
   
-module load lammps/20210310-intel-2021.4.0-omp
+module load lammps/20210310-intel-2021.4.0
 
 .. code:: bash
 
