@@ -35,8 +35,6 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 可视化平台使用MATLAB
 -----------------------
 
-可视化平台只能使用闵行超算上部署的MATLAB。
-
 1. 启动远程桌面
 
 使用hpc帐号登录HPC studio（https://studio.hpc.sjtu.edu.cn）后，点击"Interactive Apps >> Desktop"。选择需要的核数，session时长（默认1核、1小时），点击"Launch"启动远程桌面。待选项卡显示作业在RUNNING的状态时,点击"Launch Desktop"即可进入远程桌面。
@@ -44,9 +42,14 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 .. image:: ../img/matlab01.png
 .. image:: ../img/matlab02.png
 
+除了从闵行超算启动远程桌面外，思源超算也支持启动远程桌面，在选定核数的同时可以同时选定平台：
+
+.. image:: ../img/matlab02_1.png
+
+
 2. 启动MATLAB
 
-远程桌面中点击右键，选择Open Terminal Here打开终端，在终端中使用命令 "singularity run /lustre/share/img/matlab_latest.sif matlab"
+远程桌面中点击右键，选择Open Terminal Here打开终端，在终端中使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` , 思源平台需使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_latest matlab`` 。
 
 启动后即可使用MATLAB R2021a
 
@@ -71,7 +74,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 2. 脚本提交
 
--  闵行超算提交CPU脚本
+-  闵行超算提交单核CPU脚本
 
 .. code:: bash
 
@@ -92,23 +95,20 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 
 
--  张江超算提交CPU脚本
+-  张江超算提交单核CPU脚本
 
-.. code:: console
+.. code:: bash
 
     #!/bin/bash
     #SBATCH -J matlab_test
-    #SBATCH -p 
+    #SBATCH -p 64c512g
     #SBATCH -o %j.out
     #SBATCH -e %j.err
-    #SBATCH -n 64c512g
+    #SBATCH -n 1
     #SBATCH --ntasks-per-node=1
 
     IMAGE_PATH=/dssg/share/imgs/matlab/matlab_latest.sif
     
-    # 张江超算需配置代理服务器
-    export http_proxy=192.168.0.38:27000
-    export https_proxy=192.168.0.38:27000
     ulimit -s unlimited
     ulimit -l unlimited
     cd ~/HPCTesting/matlab/case1
@@ -119,6 +119,65 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../img/matlab_result.png
 
+-  闵行超算提交多核CPU脚本
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH -J matlab_test
+    #SBATCH -p small
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -n 40
+    #SBATCH --cpus-per-task 1
+
+    IMAGE_PATH=/lustre/share/img/matlab_latest.sif
+
+    ulimit -s unlimited
+    ulimit -l unlimited
+    cd ~/HPCTesting/matlab/case2
+    singularity exec $IMAGE_PATH matlab -r multicore
+
+
+-  张江超算提交多核CPU脚本
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH -J matlab_test
+    #SBATCH -p 64c512g
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -n 1
+    #SBATCH --cpus-per-task 64
+
+    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_latest.sif
+    
+    ulimit -s unlimited
+    ulimit -l unlimited
+    cd ~/HPCTesting/matlab/case2
+    singularity exec $IMAGE_PATH matlab -r multicore
+
+
+单节点性能对比
+-------------------------------------------
+
+算例为路径 ``~/HPCTesting/matlab/case2`` 。
+
+运行时间
+
++----------+----------------+----------+
+|版本      |平台            |时间(s)   |
++==========+================+==========+
+| 2021a    |  思源          |  105     |
++----------+----------------+----------+
+| 2021a    |  闵行          | 176      |
++----------+----------------+----------+
+
+建议
+----------------------------------------------------
+
+思源超算单节点拥有更多核心、更大内存。在运行多核心任务时推荐使用思源平台。
 
 
 自定义添加MATLAB插件
