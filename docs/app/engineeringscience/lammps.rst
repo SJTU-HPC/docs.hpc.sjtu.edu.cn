@@ -16,125 +16,89 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
 +========+=========+==========+=============================================+
 | 2021   | |cpu|   | spack    | lammps/20210310-intel-2021.4.0-omp 思源一号 |
 +--------+---------+----------+---------------------------------------------+
-| 2020   | |cpu|   | 容器     | lammps/2020-cpu                             |
-+--------+---------+----------+---------------------------------------------+
 | 2020   | |cpu|   | 容器     | 直接使用镜像                                |
-+--------+---------+----------+---------------------------------------------+
-| 2020   | |gpu|   | 容器     | lammps/2020-dgx-kokkos                      |
 +--------+---------+----------+---------------------------------------------+
 | 2019   | |arm|   | 容器     | lammps/bisheng-1.3.3-lammps-2019            |
 +--------+---------+----------+---------------------------------------------+
 
-算例下载
----------
+算例内容如下： `in.lj.txt` 
+----------------------------
 
 .. code:: bash
 
-   mkdir ~/lammps && cd ~/lammps
-   wget https://lammps.sandia.gov/inputs/in.lj.txt
+   # 3d Lennard-Jones melt
 
-`in.lj.txt` 文件的最后一行步数设置为 `40000`
+   variable     x index 4
+   variable     y index 4
+   variable     z index 4
+   
+   variable     xx equal 20*$x
+   variable     yy equal 20*$y
+   variable     zz equal 20*$z
+   
+   units                lj
+   atom_style   atomic
+   
+   lattice              fcc 0.8442
+   region               box block 0 ${xx} 0 ${yy} 0 ${zz}
+   create_box   1 box
+   create_atoms 1 box
+   mass         1 1.0
+   
+   velocity     all create 1.44 87287 loop geom
+   
+   pair_style   lj/cut 2.5
+   pair_coeff   1 1 1.0 1.0 2.5
+   
+   neighbor     0.3 bin
+   neigh_modify delay 0 every 20 check no
+   
+   fix          1 all nve
+   
+   run          10000
 
-.. code:: bash
-
-   run          40000
 
 集群上的 LAMMPS
 ---------------
 
-- `CPU版本 LAMMPS`_
+- `思源一号 LAMMPS`_
 
-- `GPU版本 LAMMPS`_
+- `π2.0 LAMMPS`_
 
-- `ARM版本 LAMMPS`_
+- `ARM LAMMPS`_
 
 
-.. _CPU版本 LAMMPS:
+.. _思源一号 LAMMPS:
 
-一. CPU 版本
--------------
+一. 思源一号 LAMMPS
+---------------------
 
-1. 思源一号上的调用脚本
-~~~~~~~~~~~~~~~~~~~~~~~~
+1. Intel编译器编译的版本
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-module load lammps/20210310-intel-2021.4.0-omp
+脚本如下所示
 
 .. code:: bash
 
    #!/bin/bash
    #SBATCH --job-name=lmp_test
    #SBATCH --partition=64c512g
-   #SBATCH -N 1
+   #SBATCH -N 2
    #SBATCH --ntasks-per-node=64
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
       
    module load lammps/20210310-intel-2021.4.0-omp
    
-   mpirun lmp -pk intel 0 omp 1 -sf intel -i in.lj.txt
-  
-module load lammps/20210310-intel-2021.4.0
+   mpirun lmp -pk intel 0 omp 1 -sf intel -i in.lj
 
-.. code:: bash
+.. _π2.0 LAMMPS:
 
-   #!/bin/bash
-   #SBATCH --job-name=lmp_test
-   #SBATCH --partition=64c512g
-   #SBATCH -N 2
-   #SBATCH --ntasks-per-node=64
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
+二. π2.0 LAMMPS
+----------------
 
-   module purge
-   module load oneapi
-   module load lammps/20210310-intel-2021.4.0
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-   export OMP_NUM_THREADS=1
-   mpirun lmp -i in.lj.txt
-
-2. π2.0上的Slurm 脚本
-~~~~~~~~~~~~~~~~~~~~~~
-
-在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
-核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
-
-.. code:: bash
-
-   #!/bin/bash
-   #SBATCH --job-name=lmp_test
-   #SBATCH --partition=cpu
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   #SBATCH -N 2
-   #SBATCH --ntasks-per-node=40
-   
-   module purge
-   module load lammps/2020-cpu
-   
-   ulimit -s unlimited
-   ulimit -l unlimited
-   
-   srun --mpi=pmi2 lmp -i in.lj.txt
-
-用下方语句提交作业
-
-.. code:: bash
-
-   sbatch slurm.test
-
-运行结果如下所示
-
-.. code:: bash
-
-   Loop time of 13.3113 on 80 procs for 40000 steps with 32000 atoms
-   
-   Performance: 1298148.809 tau/day, 3004.974 timesteps/s
-   99.7% CPU use with 80 MPI tasks x 1 OpenMP threads
-
-3. Intel加速版
-~~~~~~~~~~~~~~~
+1. Intel编译器部署的版本
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps.slurm）
 
@@ -144,7 +108,7 @@ module load lammps/20210310-intel-2021.4.0
 
    #SBATCH --job-name=intel_test
    #SBATCH --partition=cpu
-   #SBATCH -N 1
+   #SBATCH -N 2
    #SBATCH --ntasks-per-node=40
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
@@ -155,19 +119,12 @@ module load lammps/20210310-intel-2021.4.0
    module purge
    module load oneapi/2021
 
-   export INPUT_FILE=in.lj.txt
+   export INPUT_FILE=in.lj
    export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
 
    mpirun singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
-   
-用下方语句提交作业:
 
-.. code:: bash
-      
-   sbatch intel_lammps.slurm
-
-
-4. CPU 版本自行编译
+2. CPU 版本自行编译
 ~~~~~~~~~~~~~~~~~~~
 
 若对 lammps 版本有要求，或需要特定的 package，可自行编译 Intel 版本的
@@ -230,61 +187,12 @@ slurm.test
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i in.lj.txt
+   srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i in.lj
 
+.. _ARM LAMMPS:
 
-.. _GPU版本 LAMMPS:
-
-二. GPU版本
------------
-
-1. GPU 版本 LAMMPS + kokkos
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-GPU 版本速度跟 intel CPU 版本基本相同
-
-π 集群上提供了 GPU + kokkos 版本的 LAMMPS 15Jun2020。采用容器技术，使用
-LAMMPS 官方提供给 NVIDIA 的镜像，针对 Tesla V100 的 GPU
-做过优化，性能很好。经测试，LJ 和 EAM 两 Benchmark 算例与同等计算费用的
-CPU 基本一样。建议感兴趣的用户针对自己的算例，测试 CPU 和 GPU
-计算效率，然后决定使用哪一种平台。
-
-以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心，使用
-GPU kokkos 版的 LAMMPS。脚本名称可设为 slurm.test
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=lmp_test
-   #SBATCH --partition=dgx2
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=2
-   #SBATCH --cpus-per-task=6
-   #SBATCH --gres=gpu:2
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   module load lammps/2020-dgx-kokkos
-
-   srun --mpi=pmi2 lmp -k on g 2 t 12  -sf kk -pk kokkos comm device -in in.lj.txt
-
-其中，g 2 t 12 意思是使用 2 张 GPU 和 12 个线程。-sf kk -pk kokkos comm
-device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
-
-使用如下指令提交：
-
-.. code:: bash
-
-   $ sbatch slurm.test
-
-.. _ARM版本 LAMMPS:
-
-三. ARM版本
------------
+三. ARM LAMMPS
+---------------
 
 1. ARM版lammps(bisheng编译器+hypermpi)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -298,18 +206,18 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
    #SBATCH --job-name=lammps       
    #SBATCH --partition=arm128c256g       
    #SBATCH -N 1
-   #SBATCH --ntasks-per-node=16
+   #SBATCH --ntasks-per-node=96
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
    module load lammps/bisheng-1.3.3-lammps-2019
-   mpirun -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj.txt
+   mpirun -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj
 
 .. code:: bash
 
    $ sbatch lammps.slurm
 
-运行结果(单位为：timesteps/s,越高越好)
+运行结果(单位为：s,越低越好)
 ---------------------------------------
 
 思源一号
@@ -318,40 +226,21 @@ device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
 +------------------------------------------------+
 |     lammps/20210310-intel-2021.4.0-omp         |
 +=============+==========+===========+===========+
-| 核数        | 64       | 128       | 256       |
+| 核数        | 64       | 128       | 192       |
 +-------------+----------+-----------+-----------+
-| Performance | 7890.438 | 10366.877 | 12598.343 |
+| Wall time   | 0:01:26  | 0:00:46   | 0:00:36   |
 +-------------+----------+-----------+-----------+
 
 π2.0
 ~~~~~
 
-+----------------------------------------------+
-|              lammps/2020-cpu                 |
-+=============+==========+==========+==========+
-| 核数        | 40       | 80       | 160      |
-+-------------+----------+----------+----------+
-| Performance | 1861.775 | 3023.928 | 5057.443 |
-+-------------+----------+----------+----------+
-
 +-----------------------------------------------+
 |                intel加速版本                  |          
 +=============+==========+===========+==========+
-| 核数        | 40       | 80        | 160      |
+| 核数        | 40       | 80        | 120      |
 +-------------+----------+-----------+----------+
-| Performance | 4391.882 | 6403.898  | 9131.615 |
+| Wall time   | 0:02:37  | 0:01:16   | 0:00:52  |
 +-------------+----------+-----------+----------+
-
-AI集群
-~~~~~~
-
-+----------------------------------------------+
-|            lammps/2020-dgx-kokkos            |
-+=============+==========+==========+==========+
-| 核数:GPU    | 6:1      | 12:2     | 18:3     |
-+-------------+----------+----------+----------+
-| Performance | 4212.983 | 1139.140 | 1166.863 |
-+-------------+----------+----------+----------+
 
 ARM
 ~~~
@@ -361,7 +250,7 @@ ARM
 +==============+==========+==========+
 | 核数         | 64       | 96       |
 +--------------+----------+----------+
-|  Performance | 2010.122 | 2776.084 |
+|  Wall time   | 0:07:26  | 0:04:43  |
 +--------------+----------+----------+
 
 建议
