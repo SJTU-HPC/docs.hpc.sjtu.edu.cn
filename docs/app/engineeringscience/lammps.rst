@@ -119,7 +119,7 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    module purge
    module load oneapi/2021
 
-   export INPUT_FILE=in.lj.txt
+   export INPUT_FILE=in.lj
    export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
 
    mpirun singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
@@ -187,7 +187,7 @@ slurm.test
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i in.lj.txt
+   srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i in.lj
 
 .. _ARM LAMMPS:
 
@@ -211,7 +211,7 @@ slurm.test
    #SBATCH --error=%j.err
 
    module load lammps/bisheng-1.3.3-lammps-2019
-   mpirun -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj.txt
+   mpirun -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj
 
 .. code:: bash
 
