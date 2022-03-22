@@ -42,7 +42,6 @@ NWChem software can handle:
 --------
 
 .. code-block:: bash
-   :linenos:
    :emphasize-lines: 3,7,15
 
    #!/bin/bash
