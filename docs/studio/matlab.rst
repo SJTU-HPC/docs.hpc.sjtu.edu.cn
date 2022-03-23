@@ -49,7 +49,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 2. 启动MATLAB
 
-远程桌面中点击右键，选择Open Terminal Here打开终端，在终端中使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` , 思源平台需使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_latest matlab`` 。
+远程桌面中点击右键，选择Open Terminal Here打开终端，在终端中使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` , 思源平台需使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_latest.sif matlab`` 。
 
 启动后即可使用MATLAB R2021a
 
