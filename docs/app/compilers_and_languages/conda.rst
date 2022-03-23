@@ -41,10 +41,11 @@ Conda作为软件包管理器，可以帮助用户查找和安装软件包。如
 思源一号集群 Conda
 ^^^^^^^^^^^^^^^^^^
 
-在思源一号集群上使用如下命令:    
+在思源一号集群上使用如下命令:
 
 .. code-block:: bash
 
+   srun -p 64c512g -n 4 --pty /bin/bash
    module purge
    module load miniconda3/4.10.3
    which conda
@@ -58,6 +59,7 @@ ARM 集群 Conda
 
 .. code-block:: bash
 
+   srun -p arm128c256g -n 4 --pty /bin/bash
    module purge
    module load conda4aarch64/1.0.0-gcc-4.8.5
    which conda
@@ -71,6 +73,7 @@ ARM 集群 Conda
 
 .. code-block:: bash
 
+   srun -p small -n 4 --pty /bin/bash
    module purge
    module load miniconda3/4.8.2-gcc-4.8.5
    which conda
