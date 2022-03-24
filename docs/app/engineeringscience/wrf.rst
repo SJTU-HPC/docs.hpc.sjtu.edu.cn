@@ -12,18 +12,20 @@ WRF模式适用范围很广，从中小尺度到全球尺度的数值预报和�
 
 WPS是预处理WRF运行数据的工具。
 
-
-思源一号上获取算例 
+算例位置 
 ------------------
 
 .. code:: bash
 
-   cp -r /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/wrf-4.2/wrf_data/* ./ 
+   思源一号:/dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/wrf-4.2/wrf_data
+   π2.0:   /lustre/opt/contribute/cascadelake/wrf_cmaq/wrf_data
    
 算例目录
 
+思源一号
+
 .. code:: bash
-      
+         
    [hpc@node234 wrf-4.2]$ tree wrf_data/
    wrf_data/
    ├── fnl_20161006_00_00.grib2
@@ -35,28 +37,54 @@ WPS是预处理WRF运行数据的工具。
    ├── fnl_20161007_12_00.grib2
    ├── fnl_20161007_18_00.grib2
    └── fnl_20161008_00_00.grib2
-
+   
    0 directories, 9 files
    
-模拟2016年10月06日00点至2016年10月08日0点的气象数据
-   
-思源一号上geog_data_path的位置
---------------------------------
-   
+π2.0
+
 .. code:: bash
-      
-   /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/geo/geog/
+           
+   [hpc@case016 wrf_cmaq]$ tree     
+   /lustre/opt/contribute/cascadelake/wrf_cmaq/wrf_data
+   ├── fnl_20161006_00_00.grib2
+   ├── fnl_20161006_06_00.grib2
+   ├── fnl_20161006_12_00.grib2
+   ├── fnl_20161006_18_00.grib2
+   ├── fnl_20161007_00_00.grib2
+   ├── fnl_20161007_06_00.grib2
+   ├── fnl_20161007_12_00.grib2
+   ├── fnl_20161007_18_00.grib2
+   └── fnl_20161008_00_00.grib2
+   
+   0 directories, 9 files
+
+两个集群上的数据均是模拟2016年10月06日00点至2016年10月08日0点的气象数据
+   
+geog_data_path的位置
+--------------------
+
+.. code:: bash
+
+   思源一号: /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/geo/geog
+   π2.0   : /lustre/opt/contribute/cascadelake/wrf_cmaq/geo
 
 思源一号上软件使用方式
 -------------------------
 
-- `自定义编译WRF和WPS`_
-- `使用预编译的WRF和WPS`_
+- `自定义编译WRF和WPS 思源一号`_
+- `使用预编译的WRF和WPS 思源一号`_
 
-.. _自定义编译WRF和WPS:
 
-自定义编译WRF和WPS
----------------------
+π2.0上软件使用方式
+-------------------------
+
+- `使用预编译的WRF和WPS π2.0`_
+
+
+.. _自定义编译WRF和WPS 思源一号:
+
+自定义编译WRF和WPS 思源一号
+----------------------------------------
 
 思源一号上已部署所依赖的库及版本
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -67,7 +95,8 @@ WPS是预处理WRF运行数据的工具。
    libpng-1.6.37 
    netcdf-c-4.8.1
    netcdf-fortran-4.5.3         
-   zlib-1.2.11 jasper-1.900.29         
+   zlib-1.2.11 
+   jasper-1.900.29         
    
 自定义编译WRF
 ~~~~~~~~~~~~~
@@ -140,7 +169,7 @@ WPS是预处理WRF运行数据的工具。
 导入如下环境变量
 
 .. code:: bash
-      
+         
    export WRF_DIR=../WRF-4.2.1/
    export JASPERLIB=$DIR/wrf_libs_intel/lib/
    export JASPERINC=$DIR/wrf_libs_intel/include/
@@ -201,13 +230,13 @@ WPS是预处理WRF运行数据的工具。
    
    Enter selection [1-40] :
 
-.. _使用预编译的WRF和WPS:
+.. _使用预编译的WRF和WPS 思源一号:
 
-使用预编译的WRF和WPS
-----------------------
+使用预编译的WRF和WPS 思源一号
+--------------------------------
 
-可用版本
-~~~~~~~~~
+思源一号可用版本
+~~~~~~~~~~~~~~~~~
 
 +--------+---------+----------+---------------------------------------------+
 | 版本   | 平台    | 构建方式 | 模块名                                      |
@@ -511,11 +540,314 @@ WRF运行
    ulimit -s unlimited
    mpirun wrf.exe
 
+.. _使用预编译的WRF和WPS π2.0:
+
+使用预编译的WRF和WPS π2.0
+----------------------------
+
+π2.0 可用版本
+~~~~~~~~~~~~~~~
+
++-------+-------+----------+--------------------------+
+| 版本  | 平台  | 构建方式 | 模块名                   |
++=======+=======+==========+==========================+
+| 4.3.1 | |cpu| | 源码     | wrf_cmaq/5.3.3-wrf-4.3.1 |
++-------+-------+----------+--------------------------+
+
+先用WPS处理数据 π2.0
+~~~~~~~~~~~~~~~~~~~~~~
+
+1. 由于WPS处理数据需要复杂的文件依赖关系，可先拷贝WPS目录中的文件到本地
+
+.. code:: bash
+
+   mkdir ~/data && cd ~/data
+   mkdir WRF && cd WRF
+   cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/packet_1/WPS-4.3.1 ./
+ 
+2. 拷贝数据到WPS目录中进行数据处理
+
+.. code:: bash
+
+   cd ../WPS-4.2.1
+   cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/wrf_data* ./
+   
+3. namelist.wps文件内容设置如下：
+
+.. code:: bash
+
+   &share
+   wrf_core = 'ARW',
+   max_dom = 1,
+   start_date = '2016-10-06_00:00:00'
+   end_date   = '2016-10-08_00:00:00'
+   interval_seconds = 21600
+   io_form_geogrid = 2,
+  /
+
+  &geogrid
+   parent_id         =   1,
+   parent_grid_ratio =   1,
+   i_parent_start    =   1,
+   j_parent_start    =   1,
+   e_we              =  515,
+   e_sn              =  515,
+   !
+   !!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   ! The default datasets used to produce the MAXSNOALB and ALBEDO12M
+   ! fields have changed in WPS v4.0. These fields are now interpolated
+   ! from MODIS-based datasets.
+   !
+   ! To match the output given by the default namelist.wps in WPS v3.9.1,
+   ! the following setting for geog_data_res may be used:
+   !
+   ! geog_data_res = 'maxsnowalb_ncep+albedo_ncep+default',     'maxsnowalb_ncep+albedo_ncep+default', 
+   !
+   !!!!!!!!!!!!!!!!!!!!!!!!!!!! IMPORTANT NOTE !!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   !
+   geog_data_res = 'default','default',
+   dx = 12000,
+   dy = 12000,
+   map_proj = 'lambert',
+   ref_lat   =  31.00,
+   ref_lon   = 120.00,
+   ref_x = 351
+   ref_y = 208
+   truelat1  =  30.0,
+   truelat2  =  60.0,
+   stand_lon = 120.0,
+   geog_data_path = '/lustre/opt/contribute/cascadelake/wrf_cmaq/geo/'
+  /
+
+  &ungrib
+   out_format = 'WPS',
+   prefix = 'FILE',
+  /
+
+  &metgrid
+   fg_name = 'FILE'
+   io_form_metgrid = 2, 
+  /
+  
+4. 运行geogrid.exe程序定义模型投影、区域范围，嵌套关系，对地表参数进行插值。
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=test
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   
+   geogrid.exe 
+   
+5.根据模拟时期选择文件
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=test
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   
+   link_grib.csh fnl_2016100*
+   cp ungrib/Variable_Tables/Vtable.GFS Vtable
+
+6.从grib数据中提取所需要的气象参数
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=test
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   
+   ungrib.exe 
+   
+7.将气象参数插值到模拟区域
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=test
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   
+   metgrid.exe 
+
+WRF运行 π2.0
+~~~~~~~~~~~~~
+
+1. 由于WRF运行数据需要复杂的文件依赖关系，可先拷贝WRF目录中必要的文件到本地
+
+.. code:: bash
+
+   cd ~/data
+   cd WRF
+   mkdir WRF-4.3.1 && cd WRF-4.3.1
+   cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/packet_1/WRF-master/run/* ./
+
+2. 拷贝WPS生成的met文件到WRF-4.3.1目录
+
+.. code:: bash
+
+   cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/packet_1/WPS-4.3.1/met_d* ./
+   
+3. namelist.input文件内容设置如下，参数需要与wps的namelist.wps参数一致：
+
+.. code:: bash
+
+    &time_control
+    run_days                            = 2,
+    run_hours                           = 0,
+    run_minutes                         = 0,
+    run_seconds                         = 0,
+    start_year                          = 2016,
+    start_month                         = 10,
+    start_day                           = 06,
+    start_hour                          = 00,
+    end_year                            = 2016,
+    end_month                           = 10,
+    end_day                             = 08,
+    end_hour                            = 00,
+    interval_seconds                    = 21600
+    input_from_file                     = .true.,.true.,
+    history_interval                    = 60,   60,
+    frames_per_outfile                  = 12,   12,
+    restart                             = .false.,
+    restart_interval                    = 5000,
+    io_form_history                     = 2
+    io_form_restart                     = 2
+    io_form_input                       = 2
+    io_form_boundary                    = 2
+    /
+
+    &domains
+    time_step                           = 60,
+    time_step_fract_num                 = 0,
+    time_step_fract_den                 = 1,
+    max_dom                             = 1,
+    e_we                                = 515,    112,
+    e_sn                                = 515,    97,
+    e_vert                              = 33,    33,
+    p_top_requested                     = 5000,
+    num_metgrid_levels                  = 32,
+    num_metgrid_soil_levels             = 4,
+    dx                                  = 12000,
+    dy                                  = 12000,
+    grid_id                             = 1,     2,
+    parent_id                           = 0,     1,
+    i_parent_start                      = 1,     31,
+    j_parent_start                      = 1,     17,
+    parent_grid_ratio                   = 1,     3,
+    parent_time_step_ratio              = 1,     3,
+    feedback                            = 1,
+    smooth_option                       = 0
+    /
+
+    &physics
+    physics_suite                       = 'tropical'
+    mp_physics                          = 6,    -1,
+    cu_physics                          = 16,    -1,
+    ra_lw_physics                       = 4,    -1,
+    ra_sw_physics                       = 4,    -1,
+    bl_pbl_physics                      = 8,    8,
+    sf_sfclay_physics                   = 1,    1,
+    sf_surface_physics                  = 2,    -1,
+    radt                                = 12,    30,
+    bldt                                = 0,     0,
+    cudt                                = 5,     5,
+    icloud                              = 1,
+    num_land_cat                        = 21,
+    sf_urban_physics                    = 0,     0,     0,
+    /
+
+    &fdda
+    /
+
+    &dynamics
+    hybrid_opt                          = 2, 
+    w_damping                           = 0,
+    diff_opt                            = 1,      1,
+    km_opt                              = 4,      4,
+    diff_6th_opt                        = 0,      0,
+    diff_6th_factor                     = 0.12,   0.12,
+    base_temp                           = 290.
+    damp_opt                            = 3,
+    zdamp                               = 5000.,  5000.,
+    dampcoef                            = 0.2,    0.2,
+    khdif                               = 0,      0,
+    kvdif                               = 0,      0,
+    non_hydrostatic                     = .true., .true.,
+    moist_adv_opt                       = 1,      1,     
+    scalar_adv_opt                      = 1,      1,     
+    gwd_opt                             = 0,      1,
+    /
+
+    &bdy_control
+    spec_bdy_width                      = 5,
+    specified                           = .true.
+    /
+
+    &grib2
+    /
+
+    &namelist_quilt
+    nio_tasks_per_group = 0,
+    nio_groups = 1,
+    /
+   
+
+4. 运行real.exe程序，脚本如下：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=test
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   ulimit -s unlimited
+   real.exe
+  
+5. 运行wrf.exe程序，脚本如下，该部分是最终也是最耗时的执行程序。
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=test
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   ulimit -s unlimited
+   mpirun wrf.exe
+
 运行结果(单位为：秒，越低越好)
----------------------------------------
+------------------------------
 
 思源一号上预编译WRF
-~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 +------------------------------------------------+
 |              wrf/4.2.1-oneapi-2021.4.0         |
@@ -525,6 +857,16 @@ WRF运行
 | Exec time   | 0:36:21  | 0:18:05   | 0:10:44   |
 +-------------+----------+-----------+-----------+
 
+π2.0上预编译WRF
+~~~~~~~~~~~~~~~~~~~~
+
++------------------------------------------------+
+|           wrf_cmaq/5.3.3-wrf-4.3.1             |
++=============+==========+===========+===========+
+| 核数        | 40       | 80        | 160       |
++-------------+----------+-----------+-----------+
+| Exec time   | 1:10:28  | 0:42:22   | 0:26:01   |
++-------------+----------+-----------+-----------+
 
 参考资料
 --------
