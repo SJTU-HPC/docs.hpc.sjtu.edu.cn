@@ -173,6 +173,7 @@ ParaFold 在思源一号上运行
     #SBATCH --ntasks-per-node=1
     #SBATCH --cpus-per-task=16
     #SBATCH --gres=gpu:1          # use 1 GPU
+    #SBATCH -x gpu01,gpu03,gpu05
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
@@ -185,7 +186,7 @@ ParaFold 在思源一号上运行
     -p monomer \
     -i input/GA98.fasta \
     -t 2021-07-27 \
-    -m model_1 -f
+    -m model_1,model_2,model_3,model_4,model_5
 
 
 
