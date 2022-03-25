@@ -59,7 +59,7 @@ geog_data_path的位置
    思源一号 : /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/geo/geog
    π2.0    : /lustre/opt/contribute/cascadelake/wrf_cmaq/geo
 
-思源一号上软件使用方式
+集群上的WRF和WPS
 -----------------------
 
 - `思源一号上的WRF和WPS`_
