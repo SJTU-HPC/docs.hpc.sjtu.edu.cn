@@ -31,39 +31,39 @@ range of partial differential equations.
 Nektar++使用说明
 -----------------------------
 
-在这里，我们通过求解一个二维方形区域的对流方程来演示Nektar++的使用方法。该问题的定义如下：
+1. 在这里，我们通过求解一个二维方形区域的对流方程(单核串行)来演示Nektar++的使用方法。该问题的定义如下：
 
 |image1|
 
 
 其中，:math:`x_b  和  y_b  代表计算域边界，V_x=2，V_y=3，\kappa=2\pi`。
 
-(1) 从 `Nektar 官网 <https://www.nektar.info/>`__ 的GETTING STARTED->Tutorials->Basics->Advection-Diffusion->Introduction->Goals板块下载所需要的数据文件basics-advection-diffusion.tar.gz并解压；
+1.1 从 `Nektar 官网 <https://www.nektar.info/>`__ 的GETTING STARTED->Tutorials->Basics->Advection-Diffusion->Introduction->Goals板块下载所需要的数据文件basics-advection-diffusion.tar.gz并解压；
  
-(2) 解压之后会得到两个目录completed以及tutorial；
+1.2 解压之后会得到两个目录completed以及tutorial；
 
-(3) 进入completed目录会看到如下几个文件：
+1.3 进入completed目录会看到如下几个文件：
 
 .. code:: bash
 
-  1. ADR_conditions.xml  
+   ADR_conditions.xml  
 
-  2. ADR_mesh.geo  
+   ADR_mesh.geo  
 
-  3. ADR_mesh.msh 
+   ADR_mesh.msh 
 
-  4. ADR_mesh.xml 
+   ADR_mesh.xml 
 
-  5. ADR_mesh_aligned.fld
+   ADR_mesh_aligned.fld
 
-  6. ADR_mesh_aligned.xml  
+   ADR_mesh_aligned.xml  
 
 *这几个文件定义了求解本问题所需要的几何信息、网格信息以及初始和边界条件。*
 
 
 
 
-(4) 在此目录下编写如下Nektar_run.slurm脚本：
+1.4 在此目录下编写如下Nektar_run.slurm脚本：
 
 
 
@@ -85,13 +85,13 @@ Nektar++使用说明
 
    ADRSolver ADR_mesh_aligned.xml ADR_conditions.xml
 
-(5) 使用如下指令提交：
+1.5 使用如下指令提交：
 
 .. code:: bash
 
    sbatch Nektar_run.slurm
 
-(6) 然后即可在.out或者.err文件中看到如下结果：
+1.6 然后即可在.out或者.err文件中看到如下结果：
 
 .. code:: bash
 
@@ -142,8 +142,86 @@ Nektar++使用说明
   L 2 error (variable u) : 0.00863475 
   L inf error (variable u) : 0.0390366
 
+
+
+2. 可压缩圆柱绕流(多核并行)。
+
+2.1 从 `Nektar 官网 <https://www.nektar.info/>`__ 的GETTING STARTED->Tutorials->Compressible Flow Solver->Subsonic Cylinder->Introduction->Goals板块下载所需要的数据文件cfs-CylinderSubsonic_NS.tar.gz并解压；
+ 
+2.2 解压之后会得到两个目录completed以及tutorial；
+
+2.3 在tutorial目录下编写以下Nektar_run.slurm脚本：
+
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH -J Nektar_test
+   #SBATCH -p cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --exclusive
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+
+   module load nektar/5.0.0-intel-19.0.4-impi
+   module load openmpi/3.1.5-gcc-9.2.0 
+
+   ulimit -s unlimited
+   ulimit -l unlimited
+
+   mpirun -np 32 CompressibleFlowSolver CylinderSubsonic_NS.xml
+
+2.4 使用如下指令提交：
+
+.. code:: bash
+
+   sbatch Nektar_run.slurm
+
+2.5 作业运行完毕后即可在.out或者.err文件中看到如下结果(部分)：
+
+.. code:: bash
+
+  =======================================================================
+	        EquationType: NavierStokesCFE
+	        Session Name: CylinderSubsonic_NS
+	        Spatial Dim.: 2
+	  Max SEM Exp. Order: 3
+	      Expansion Dim.: 2
+	      Riemann Solver: HLLC
+	      Advection Type: 
+	     Projection Type: Discontinuous Galerkin
+	      Diffusion Type: 
+	           Advection: explicit
+	       AdvectionType: WeakDG
+	           Diffusion: explicit
+	           Time Step: 1e-05
+	        No. of Steps: 60000
+	 Checkpoints (steps): 400
+	    Integration Type: RungeKutta
+  =======================================================================
+  =======================================================================
+	        EquationType: NavierStokesCFE
+	        Session Name: CylinderSubsonic_NS
+	        Spatial Dim.: 2
+	  Max SEM Exp. Order: 3
+	      Expansion Dim.: 2
+	      Riemann Solver: HLLC
+	      Advection Type: 
+	     Projection Type: Discontinuous Galerkin
+	      Diffusion Type: 
+  =======================================================================
+
+
+
+
+
+
 在自己的目录下自行安装Nektar++
 ------------------------------------------
+
+
 
 1. 执行以下从命令从GitHub上下载Nektar++源码：
 
