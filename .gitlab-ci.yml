@@ -25,7 +25,7 @@ build_briefmanual_pdf:
     - docker
   before_script:
     - mkdir -p .build_cache
-    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
+    - pip3 install --cache-dir=.build_cache -r requirements.txt
   script:
     - make -C tex all
   artifacts:
@@ -44,7 +44,7 @@ build_latex_pdf:
     - docker
   before_script:
     - mkdir -p .build_cache
-    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
+    - pip3 install --cache-dir=.build_cache -r requirements.txt
   script:
     - make -C docs clean latexpdf
     - pdftk A=docs/img/cover.pdf B=docs/_build/latex/sphinx.pdf cat A1 B2-end output docs/_build/latex/merge.pdf
@@ -70,7 +70,7 @@ build_html_pages:
       artifacts: true
   before_script:
     - mkdir -p .build_cache
-    - pip3 install --upgrade --cache-dir=.build_cache -r requirements.txt
+    - pip3 install --cache-dir=.build_cache -r requirements.txt
   script:
     - mkdir docs/_static || true
     - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
