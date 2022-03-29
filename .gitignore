@@ -25,3 +25,4 @@ docs/_static/reframe-tests-master*
 .vscode
 .gitignore
 *.swp
+*.bak
