@@ -93,9 +93,25 @@ Conda常用命令
    conda remove -n env4test bwa     # 删除虚拟环境中的bwa包
    conda remove -n env4test --all   # 删除虚拟环境env4test(包括其中的所有的包)
 
+通过pip安装Python扩展包
+------------------------
+
+以安装 ``PyMuPDF`` 为例，如果 ``Conda`` 中找不到相关的 ``Python`` 包或者没有需要的版本，可以用 ``pip`` 安装。
+
+.. code-block:: bash
+
+   source activate env4test         # 激活虚拟环境env4test
+   conda search pymupdf             # 找不到相关的包
+   conda search -c tc06580 pymupdf  # 指定源搜索，只有1.17.0版本的
+   which pip                        # 确定有安装pip，一般conda创建的Python环境都会有pip的
+   pip install pymupdf              # 使用pip安装Python扩展包
+   pip list | grep -i pymupdf       # 安装成功，当前为1.19.4版本
+
 .. tip:: 
    
    建议特定的一个或几个软件创建一个单独的环境，方便管理与使用。
+   
+   可以到Anaconda页面搜索是否有对应软件的源 https://anaconda.org/search
 
 参考资料
 --------
