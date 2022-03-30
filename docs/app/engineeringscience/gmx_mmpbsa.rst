@@ -68,7 +68,7 @@ run1.sh脚本内容如下：
    #!/bin/bash
    gmx_MMPBSA MPI -O -i mmpbsa.in -cs com.tpr -ci index.ndx -cg 1 13 -ct com_traj.xtc
 
-务必将gmx_MMPBSA.slurm和run1.sh放在同一目录下。
+只有将gmx_MMPBSA.slurm、run1.sh和数据放在同一目录下才可正常运行。
 
 使用如下命令提交：
 
@@ -104,7 +104,7 @@ run1.sh脚本内容如下：
    #!/bin/bash
    gmx_MMPBSA MPI -O -i mmpbsa.in -cs com.tpr -ci index.ndx -cg 1 13 -ct com_traj.xtc
 
-务必将gmx_MMPBSA.slurm和run1.sh放在同一目录下。
+只有将gmx_MMPBSA.slurm、run1.sh和数据放在同一目录下才可正常运行。
 
 使用如下命令提交：
 
