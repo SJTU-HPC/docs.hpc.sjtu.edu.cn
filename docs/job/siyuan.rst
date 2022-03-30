@@ -55,6 +55,8 @@ CPU 采用双路 Intel Xeon ICX Platinum 8358 32 核，主频 2.6GHz，共 936 �
 
 	mpirun -n $SLURM_NTASKS ...
 
+注意：如申请节点小于64核，使用\ ``--exclusive``\ 即表示独占单个节点全部计算资源
+
 用以下方式提交作业（请注意，思源一号作业请在思源一号的登录节点或计算节点提交）：
 
 .. code:: bash
