@@ -185,9 +185,62 @@ TensorFlow
 
 使用如下指令提交：
 
-.. code:: bash
+.. code:: console
 
    $ sbatch slurm.test
+
+
+
+算例测试
+-------------------
+超算中心提供了用来测试tensorflow的算例。
+
+使用命令
+
+.. code:: console
+
+   $ cd ~
+   $ git clone https://github.com/SJTU-HPC/HPCTesting.git
+
+
+在闵行超算上，使用如下脚本来提交该算例作业：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH -p dgx2
+   #SBATCH -N 1
+   #SBATCH -n 1
+   #SBATCH --ntasks-per-node 1
+   #SBATCH --cpus-per-task 6 
+   #SBATCH --gres gpu:1
+
+   cd ~/HPCTesting/tensorflow/case1
+   singularity  run --nv   /lustre/share/singularity/modules/tensorflow/2.2.0.sif python tf_test.py
+
+
+在张江超算上，使用如下脚本来提交该算例作业：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH -p a100
+   #SBATCH -N 1
+   #SBATCH -n 1
+   #SBATCH --ntasks-per-node 1
+   #SBATCH --cpus-per-task 6 
+   #SBATCH --gres gpu:1
+
+   cd ~/HPCTesting/tensorflow/case1
+   singularity  run --nv /dssg/share/imgs/tensorflow/2.2.0.sif python tf_test.py
+
+将以上脚本保存为 ``test.slurm`` ，使用 ``sbatch test.slurm`` 来交作业。
+
+结果如下
+
+.. code:: console
+
+   Accuracy: mean=98.653 std=0.106, n=5
 
 参考资料
 --------
