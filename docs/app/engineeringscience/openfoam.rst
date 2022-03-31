@@ -89,7 +89,7 @@ system目录主要包含计算时间和数值求解格式等计算参数。
    #SBATCH --job-name=openfoam       # 作业名
    #SBATCH --partition=small         # small队列
    #SBATCH --ntasks-per-node=1       # 每节点核数
-   #SBATCH -n 1                      # 作业核心数4
+   #SBATCH -n 1                      # 作业核心数
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
@@ -189,7 +189,7 @@ system目录主要包含计算时间和数值求解格式等计算参数。
    #SBATCH --job-name=openfoam      # 作业名
    #SBATCH --partition=64c512g      # 64c512g队列
    #SBATCH --ntasks-per-node=6      # 每节点核数
-   #SBATCH -n 6                     # 作业核心数8
+   #SBATCH -n 6                     # 作业核心数
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
@@ -236,6 +236,83 @@ system目录主要包含计算时间和数值求解格式等计算参数。
     openfoam.slurm
     system
 
+
+
+思源一号上的openfoam2106(Spack构建)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. 从openfoam2106的安装目录中将tutorials目录整个复制到自己目录下openfoamTest1目录中：
+
+.. code:: bash
+   
+   module purge
+   module load openfoam/2106-gcc-8.3.1-openmpi
+   mkdir openfoamTest1
+   cd openfoamTest1
+   cp -rv $FOAM_TUTORIALS  ./
+
+2. 为了运行motorBike算例(多核并行)，执行以下命令进入相对应目录：
+
+.. code:: bash
+
+   cd ./tutorials/incompressible//simpleFoam/motorBike
+
+
+3. 在此目录下编写以下openfoam.slurm脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=openfoam      # 作业名
+   #SBATCH --partition=64c512g      # 64c512g队列
+   #SBATCH --ntasks-per-node=6      # 每节点核数
+   #SBATCH -n 6                     # 作业核心数
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   module load openmpi/4.1.1-gcc-8.3.1
+   
+   ./Allclean
+   ./Allrun
+
+4. 使用 ``sbatch`` 提交作业：
+
+.. code:: bash
+
+   sbatch openfoam.slurm
+
+5. 运行结束后即可在该目录下看到如下结果：
+
+.. code:: bash
+
+ 0.orig
+ 500
+ Allclean
+ Allrun
+ constant
+ log.blockMesh
+ log.checkMesh
+ log.decomposePar
+ log.patchSummary
+ log.potentialFoam
+ log.reconstructPar
+ log.reconstructParMesh
+ log.simpleFoam
+ log.snappyHexMesh
+ log.surfaceFeatureExtract
+ log.topoSet
+ openfoam.slurm
+ postProcessing
+ processor0
+ processor1
+ processor2
+ processor3
+ processor4
+ processor5
+ system
 
 
 编译OpenFOAM
