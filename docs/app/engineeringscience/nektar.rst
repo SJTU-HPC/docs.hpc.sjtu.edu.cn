@@ -31,8 +31,8 @@ range of partial differential equations.
 Nektar++使用说明
 -----------------------------
 
-1. 在这里，我们通过求解一个二维方形区域的对流方程(单核串行)来演示Nektar++的使用方法。该问题的定义如下：
-
+1. 求解二维方形区域的对流方程(单核串行)：
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 |image1|
 
 
@@ -145,7 +145,7 @@ Nektar++使用说明
 
 
 2. 可压缩圆柱绕流(多核并行)。
-
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 2.1 从 `Nektar 官网 <https://www.nektar.info/>`__ 的GETTING STARTED->Tutorials->Compressible Flow Solver->Subsonic Cylinder->Introduction->Goals板块下载所需要的数据文件cfs-CylinderSubsonic_NS.tar.gz并解压；
  
 2.2 解压之后会得到两个目录completed以及tutorial；
