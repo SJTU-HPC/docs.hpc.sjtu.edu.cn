@@ -66,7 +66,7 @@ run1.sh脚本内容如下：
 .. code:: bash
 
    #!/bin/bash
-   gmx_MMPBSA MPI -O -i mmpbsa.in -cs com.tpr -ci index.ndx -cg 1 13 -ct com_traj.xtc
+   gmx_MMPBSA MPI -O -i mmpbsa.in -cs com.tpr -ci index.ndx -cg 1 13 -ct com_traj.xtc -nogui
 
 给run1.sh增加可执行权限
 
@@ -107,8 +107,8 @@ run1.sh脚本内容如下：
 
 .. code:: bash
 
-   #!/bin/bash
-   gmx_MMPBSA MPI -O -i mmpbsa.in -cs com.tpr -ci index.ndx -cg 1 13 -ct com_traj.xtc
+   #!/bin/bash 
+   gmx_MMPBSA MPI -O -i mmpbsa.in -cs com.tpr -ci index.ndx -cg 1 13 -ct com_traj.xtc -nogui
 
 给run1.sh增加可执行权限
 
