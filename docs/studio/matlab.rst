@@ -28,7 +28,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 - `可视化平台使用MATLAB`_
 - `命令行使用MATLAB`_
-
+- `使用GPU版本的MATLAB`_
 
 .. _可视化平台使用MATLAB:
 
@@ -157,6 +157,56 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     ulimit -l unlimited
     cd ~/HPCTesting/matlab/case2
     singularity exec $IMAGE_PATH matlab -r multicore
+
+
+
+.. _使用GPU版本的MATLAB:
+
+使用GPU版本的MATLAB需要CUDA11，因此该版本只能在思源平台使用。
+
+可视化平台使用MATLAB GPU版
+---------------------------------
+
+1. 启动远程桌面
+
+使用hpc帐号登录HPC studio（https://studio.hpc.sjtu.edu.cn）后，点击"Interactive Apps >> Desktop"。选择需要的核数，session时长（默认1核、1小时），点击"Launch"启动远程桌面。待选项卡显示作业在RUNNING的状态时,点击"Launch Desktop"即可进入远程桌面。
+
+.. image:: ../img/matlab01.png
+
+选定核数的时候选择思源平台的一张GPU卡：
+
+.. image:: ../img/matlab-siyuan-gpu.png
+
+2. 启动GPU版本MATLAB
+
+在窗口中启动终端（terminal），在终端输入 ``singularity run --nv /dssg/share/imgs/matlab/matlab_latest.sif`` ，即可启动GPU版本matlab。
+
+.. image:: ../img/matlab-siyuan-gpu-01.png
+
+.. image:: ../img/matlab-siyuan-gpu-02.png
+
+
+提交MATLAB GPU版脚本
+--------------------------
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH -J matlab_test
+    #SBATCH -p a100
+    #SBATCH -o %j.out
+    #SBATCH -e %j.err
+    #SBATCH -n 1
+    #SBATCH -N 1
+    #SBATCH --cpus-per-task 6
+    #SBATCH --gres gpu:1
+
+    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_latest.sif
+    
+    ulimit -s unlimited
+    ulimit -l unlimited
+    
+    singularity run --nv  $IMAGE_PATH matlab -r $YOUR_SCRIPT_FILE
 
 
 单节点性能对比
