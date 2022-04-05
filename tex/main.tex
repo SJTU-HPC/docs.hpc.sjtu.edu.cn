@@ -56,6 +56,12 @@
  \hline
  队列 & 架构 & 参数 & 描述 & 数量 \\
  \hline \hline
+ \makecell[l]{64c512g} & x86 & \makecell[l]{CPU: 2 x Intel Xeon ICX\\ Platinum 8358 (2.6GHz,\\ 32 cores)\\
+Mem: 16 x 32GB TruDDR4\\ 3200 MHz (2Rx8 1.2V)\\ RDIMM} & \makecell[l]{CPU 采用双路 Intel Xeo\\ ICX Platinum 8358 32 核，\\ 主频 2.6GHz。} & 938\\
+ \hline
+ \makecell[l]{a100} & x86 & \makecell[l]{CPU: 2 x Intel Xeon ICX\\ Platinum 8358 (2.6GHz,\\ 32 cores)\\
+GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100\\ 4-GPU。} & 92块\\
+ \hline
  \makecell[l]{small,cpu,\\ debug} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20\\ cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{由 656 台双路节点 x86 服务器\\组成，每台服务器配备 40 核\\（2.5GHz）、192G 内存（12通道 \\DDR4 2666），共计 26240 个 \\CPU 核、48T 内存。 双精度理论\\峰值性能达到了 2.1 PFLOPS} & 656\\
  \hline
  \makecell[l]{huge} & x86 & \makecell[l]{CPU: 4 x Intel Xeon Scalable\\ SkyLake 6148(2.4GHz, 20 cores)\\Mem: 48 x Hynix 64GB DDR4\\ ECC REG 2666} & \makecell[l]{每台拥有 80 核、3T 内存（48 通道\\ DDR4 2666），共计 160 核、\\6T 内存} & 2\\
@@ -76,6 +82,8 @@
  \hline
  名称 & 类别 & 配置 & 容量 \\
  \hline \hline
+ gpfs & 思源一号主文件系统 & \makecell[l]{4台DSS-G Server节点，每台配置2块300G HDD，\\ 用于安装操作系统，安装并配置GPFS集群，创建\\ 文件系统，文件系统metadata采用3副本冗余，\\ 文件系统data采用8+2p冗余。} & 10P\\
+ \hline
  lustre & 主文件系统 & \makecell[l]{使用 HDD 盘搭建，旨在提供大容量、高可用、\\较高性能的存储供用户使用。搭建过程中，使用\\ RAID 保障硬盘级别的数据安全，使用 HA\\（High Availability） 保障服务器级别的\\高可用。} & 14P\\
  \hline
  scratch & 全闪存文件系统 & \makecell[l]{使用全套的 SSD（NVMe协议） 硬盘搭建，\\旨在提供高性能的存储供用户使用，可更好地支持\\ IO 密集型作业。对系统来说，单客户端\\最大读带宽达 5.7GB/s，最大写带宽达\\ 10GB/s；4k 小文件读 IOPS 达 170k，\\写 IOPS 达 126k。但同时，由于成本问题，\\系统提供的容量较小；在搭建时也未设置高可用\\和数据备份，存在数据存储安全性不高等问题。} & 108T\\
@@ -102,11 +110,12 @@
 \subsection*{主帐号与子帐号的关系？}
 超算主帐号与子帐号均为独立帐号，仅在计费关系上存在关联。若课题组有数据或软件共享需求，可发邮件给我们，我们将建立 acct-XXX/share 文件夹，主帐号和子帐号均可在此文件夹下读写。
 
-\section{登录HPC和AI平台集群}
+\section{登录平台集群}
 
 \subsection*{ssh登录}
 \begin{enumerate}
-\item x86登录节点（3个: login1,login2,login3）：支持公网直接访问。\\IP地址（或主机名）：login.hpc.sjtu.edu.cn\\端口号：22
+\item 思源一号登录节点（2个: sylogin1,sylogin2）：支持公网直接访问。\\IP地址（或主机名）：sylogin.hpc.sjtu.edu.cn\\端口号：22
+\item Pi集群登录节点（3个: login1,login2,login3）：支持公网直接访问。\\IP地址（或主机名）：login.hpc.sjtu.edu.cn\\端口号：22
 \item arm登录节点（1个: kplogin）：内测期间需使用校内IP。\\IP地址（或主机名）：armlogin.hpc.sjtu.edu.cn\\端口号： 22
 \end{enumerate}
 *注意：\textcolor{red}{每个帐号在单个 login 节点上 session 个数不能超过4个。}
@@ -143,6 +152,12 @@
 drain(节点故障)，alloc(节点在用)，idle(节点可用)，down(节点下线)，mix(节点部分占用，但仍有剩余资源）
 
 \section{队列说明}
+
+\subsection*{64c512g}
+思源一号CPU队列；每个作业可申请1-60000核；最长运行时间7天；节点为共享使用；计算节点使用范围：node[001-938]
+
+\subsection*{a100}
+思源一号GPU队列；每个作业可申请1-92卡；每卡配比CPU上限为16；最长运行时间7天；节点为共享使用；计算节点使用范围：gpu[01-23]
 
 \subsection*{debug}
 测试队列；每个作业可申请1-80核；最长运行时间20分钟；节点为共享使用；计算节点使用范围：cas[011-014]
@@ -248,13 +263,20 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 \item 少量数据传输：login 节点和 data 节点均可，但推荐使用 data 节点。
 \item 大量数据传输：强烈推荐 data 节点。原因：1. 不占用 login 节点资源；2. 多进程或多用户同时传输不会受限于 CPU。
 \end{enumerate}
+目前集群包含两个存储池，其中lustre存储用于small,cpu,huge,192c6t,dgx2,arm128c256g以及相应的debug队列，应当在login,kplogin,data系列节点上查看、使用存放的数据；gpfs存储用于64c512g,a100以及相应的debug队列，应当在sylogin,sydata节点上查看、使用存放的数据。
 
 \section{数据传输节点}
 
 \subsection*{使用data数据传输节点}
+需要在思源一号64c512g，a100队列上进行计算的作业相关数据，从本地或者外部服务器传输到超算平台，使用
+\begin{lstlisting}
+  scp sydata.hpc.sjtu.edu.cn local
+\end{lstlisting}
+需要在其他队列上进行计算的作业相关数据，从本地或者外部服务器传输到超算平台，使用
 \begin{lstlisting}
   scp data.hpc.sjtu.edu.cn local
 \end{lstlisting}
+超算平台两个存储系统之间进行数据搬运，例如原本用于small队列的作业数据搬运到思源64c512g队列使用，可以任选data或者sydata节点。
 
 \subsection*{数据传输节点使用限制}
 传输节点仅用于批量数据传输，请勿在此节点上运行与数据传输无关的应用，如编译程序、管理作业、校验数据等。如果发现此类行为，中心将视情况取消相关帐号使用传输节点的权利。
@@ -283,14 +305,14 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 
 \section{其他常见问题}
 \begin{enumerate}[itemsep=1.3ex]
-  \item \question{我为什么连不上$\pi$集群？}
-    集群支持公网直接访问，无需校园 VPN。若遇到连接问题，请先检查网络，或在其它设备或客户端上尝试。\\i.请首先保证网络畅通；\\ii.查看“交我算”微信公众号和用户微信群，是否有$\pi$集群下线停机通知。$\pi$集群通知会及时发布在公众号和用户微信群里。若需加入用户微信群，请发邮件至 hpc邮箱；\\iii.$\pi$集群登录节点设置了 fail2ban 服务，多次输入密码错误后会被临时封禁 1 小时。如果您需要重置密码，请使用或抄送帐号负责人邮箱发送邮件到 hpc邮箱，邮件中注明帐号，我们将会在 1 个工作日内响应您的申请；\\iv.如果您在登录节点运行计算密集的作业，将会被程序自动查杀，您的帐号会被加入到黑名单，并在30-120 分钟内无法登录。
+  \item \question{我为什么连不上集群？}
+    集群支持公网直接访问，无需校园 VPN。若遇到连接问题，请先检查网络，或在其它设备或客户端上尝试。\\i.请首先保证网络畅通；\\ii.查看“交我算”微信公众号和用户微信群，是否有集群下线停机通知。集群通知会及时发布在公众号和用户微信群里。若需加入用户微信群，请发邮件至 hpc邮箱；\\iii.集群登录节点设置了 fail2ban 服务，多次输入密码错误后会被临时封禁 1 小时。如果您需要重置密码，请使用或抄送帐号负责人邮箱发送邮件到 hpc邮箱，邮件中注明帐号，我们将会在 1 个工作日内响应您的申请；\\iv.如果您在登录节点运行计算密集的作业，将会被程序自动查杀，您的帐号会被加入到黑名单，并在30-120 分钟内无法登录。
   \item \question{什么我的作业运行结果是作业运行结果是node$\_$fail，该怎么处理？}
     node$\_$fail是提示由于计算节点故障导致作业运行失败。您重新提交作业即可。失败作业的机时系统会自动返还，无须发邮件告诉我们。
   \item \question{如何在超算上安装开源软件？}
     超算软件安装，请依次判断适用哪种情况：\\i.若未安装，请先考虑是否能用conda 方法 安装；\\ii.考虑在自己家目录下使用源码安装，遇到问题，请将可复现的步骤，发至hpc邮箱获取帮助；\\iii.软件还有容器安装 的方法；\\iv.我们也将对常用开源软件进行评估，以便全局部署。欢迎邮件联系我们。
   \item \question{超算上是否提供商业软件？}
-    目前暂不提供商业软件，不过您可以自行购买后安装。以下是注意事项：\\i.商业软件License通常需要使用专用的License服务器，在购买商业软件并尝试在$\pi$集群上部署License服务器前，请与我们以及软件厂商进行充分沟通；\\ii.不要把License绑定到$\pi$集群的登录节点；\\iii.请购买浮动授权，即计算程序可以在$\pi$集群上的任意一个节点启动，通常需要安装特定的License服务器；\\iv.询问License服务器是否可以部署在虚拟机上，这样我们可以专门开一台虚拟机运行您的License服务器；\\v.与厂商充分沟通License服务器安装模式、授权数量、使用限制、更换MAC地址的费用以及厂商具备基本的技术支持能力。如果需要了解$\pi$集群的软硬件信息，可以在交流过程中抄送hpc邮箱。
+    目前暂不提供商业软件，不过您可以自行购买后安装。以下是注意事项：\\i.商业软件License通常需要使用专用的License服务器，在购买商业软件并尝试在集群上部署License服务器前，请与我们以及软件厂商进行充分沟通；\\ii.不要把License绑定到集群的登录节点；\\iii.请购买浮动授权，即计算程序可以在集群上的任意一个节点启动，通常需要安装特定的License服务器；\\iv.询问License服务器是否可以部署在虚拟机上，这样我们可以专门开一台虚拟机运行您的License服务器；\\v.与厂商充分沟通License服务器安装模式、授权数量、使用限制、更换MAC地址的费用以及厂商具备基本的技术支持能力。如果需要了解集群的软硬件信息，可以在交流过程中抄送hpc邮箱。
   \item \question{如何收费？}
     请使用交大校内邮箱发送邮件至 hpc 邮箱咨询。
   \item \question{如何缴费？}
