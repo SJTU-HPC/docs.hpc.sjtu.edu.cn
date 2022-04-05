@@ -54,7 +54,7 @@ ColabFold 在思源一号上有两种运行方法：
 
 .. code:: bash
 
-    srun -p a100 --gres=gpu:1 --pty /bin/bash
+    srun -p a100 -N 1 -n 1 --cpus-per-task=16 --gres=gpu:1 --pty /bin/bash
 
 激活 conda 环境：
 
@@ -89,13 +89,17 @@ ColabFold 在思源一号上有两种运行方法：
     #SBATCH --partition=a100
     #SBATCH -N 1
     #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=8
+    #SBATCH --cpus-per-task=16
     #SBATCH --gres=gpu:1          # use 1 GPU
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
     module purge
     export PATH="~/colab/localcolabfold/colabfold_batch/bin:$PATH"
+    export https_proxy=http://proxy2.pi.sjtu.edu.cn:3128
+    export http_proxy=http://proxy2.pi.sjtu.edu.cn:3128
+    export no_proxy=puppet,proxy,172.16.0.133,pi.sjtu.edu.cn
+
     module load miniconda3
     source activate ~/colab/localcolabfold/colabfold_batch/colabfold-conda
 
