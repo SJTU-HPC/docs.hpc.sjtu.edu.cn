@@ -54,7 +54,7 @@ ColabFold 在思源一号上有两种运行方法：
 
 .. code:: bash
 
-    srun -p a100 --gres=gpu:1 --pty /bin/bash
+    srun -p a100 -N 1 -n 1 --cpus-per-task=16 --gres=gpu:1 --pty /bin/bash
 
 激活 conda 环境：
 
