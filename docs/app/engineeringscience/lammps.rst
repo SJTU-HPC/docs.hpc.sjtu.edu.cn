@@ -6,7 +6,7 @@ LAMMPS
 简介
 ----
 
-LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观体系计算中均有重要应用。
+LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观体系计算中均有重要应用，并行效率高，广泛应用于材料、物理、化学等模拟。
 
 可用的版本
 ----------
@@ -20,42 +20,6 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
 +--------+---------+----------+---------------------------------------------+
 | 2019   | |arm|   | 容器     | lammps/bisheng-1.3.3-lammps-2019            |
 +--------+---------+----------+---------------------------------------------+
-
-算例内容如下： `in.lj` 
-----------------------------
-
-.. code:: bash
-
-   # 3d Lennard-Jones melt
-
-   variable     x index 4
-   variable     y index 4
-   variable     z index 4
-   
-   variable     xx equal 20*$x
-   variable     yy equal 20*$y
-   variable     zz equal 20*$z
-   
-   units                lj
-   atom_style   atomic
-   
-   lattice              fcc 0.8442
-   region               box block 0 ${xx} 0 ${yy} 0 ${zz}
-   create_box   1 box
-   create_atoms 1 box
-   mass         1 1.0
-   
-   velocity     all create 1.44 87287 loop geom
-   
-   pair_style   lj/cut 2.5
-   pair_coeff   1 1 1.0 1.0 2.5
-   
-   neighbor     0.3 bin
-   neigh_modify delay 0 every 20 check no
-   
-   fix          1 all nve
-   
-   run          10000
 
 
 集群上的 LAMMPS
@@ -73,24 +37,121 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
 一. 思源一号 LAMMPS
 ---------------------
 
-1. Intel编译器编译的版本
+1. 全局部署版本 20210310
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-脚本如下所示
+本版本支持 intel 加速。对于大部分势函数（eam, lj 等），均推荐使用 intel 加速，计算速度可提升数倍。具体测评和支持范围请见官方文档：`LAMMPS INTEL package <https://docs.lammps.org/Speed_intel.html>`__
+
+使用 intel 加速的 slurm 脚本示例：
 
 .. code:: bash
 
    #!/bin/bash
    #SBATCH --job-name=lmp_test
    #SBATCH --partition=64c512g
-   #SBATCH -N 2
+   #SBATCH -N 2 
    #SBATCH --ntasks-per-node=64
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-      
+
+   module purge   
    module load lammps/20210310-intel-2021.4.0-omp
    
-   mpirun lmp -pk intel 0 omp 1 -sf intel -i in.lj
+   mpirun lmp -pk intel 0 omp 2 -sf intel -i in.lj
+
+
+若体系不支持 intel package，请使用如下 slurm 脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=lmp_test
+   #SBATCH --partition=64c512g
+   #SBATCH -N 2 
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module purge   
+   module load lammps/20210310-intel-2021.4.0-omp
+   
+   mpirun lmp -i in.lj
+
+2. 自行编译 LAMMPS
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+LAMMPS 自行编译十分容易。下面以在思源一号上为例介绍 LAMMPS 安装
+
+a) 申请计算节点资源用来编译 LAMMPS，并请注意在全部编译结束后退出：
+
+.. code:: bash
+
+   srun -p 64c512g -n 4 --pty /bin/bash
+   
+   
+b) 从官网下载 LAMMPS，推荐安装最新稳定版：
+
+.. code:: bash
+
+   wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
+
+c) 加载 Intel oneapi 模块：
+
+.. code:: bash
+
+   module load intel-oneapi-compilers/2021.4.0
+   module load intel-oneapi-mpi/2021.4.0
+   module load intel-oneapi-mkl/2021.4.0
+   module load intel-oneapi-tbb/2021.4.0
+
+d) 编译 (以额外安装 MANYBODY, MEAM 和 Intel 加速包为例)
+
+.. code:: bash
+
+   $ tar xvf lammps-stable.tar.gz
+   $ cd lammps-XXXXXX
+   $ cd src
+   $ make                                  #查看编译选项
+   $ make package                          #查看可用的包
+   $ make yes-intel yes-manybody yes-meam  #添加所需的包
+   $ make ps                               #查看计划安装的包列表 
+   $ make -j 4 oneapi                      #开始编译
+
+e) 环境设置
+
+编译成功后，src 文件夹下将生成可执行文件 lmp_oneapi
+
+为了便于后续调用，一个简单的方法是将该文件移至 ~/bin 文件夹：
+
+.. code:: bash
+
+   $ mkdir ~/bin
+   $ cp lmp_oneapi ~/bin
+
+至此安装和设置完成。如下是计算时所需的 slurm 脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+
+	#SBATCH --job-name=lmp
+	#SBATCH --partition=64c512g
+	#SBATCH -N 2
+	#SBATCH --ntasks-per-node=64
+	#SBATCH --output=%j.out
+	#SBATCH --error=%j.err
+
+	module load intel-oneapi-compilers/2021.4.0
+	module load intel-oneapi-mpi/2021.4.0
+	module load intel-oneapi-mkl/2021.4.0
+	module load intel-oneapi-tbb/2021.4.0
+
+	mpirun lmp -i in.lj
+
+
+
+
+
 
 .. _π2.0 LAMMPS:
 
@@ -262,6 +323,45 @@ ARM
 
    module load lammps/20210310-intel-2021.4.0-omp               思源一号   
    /lustre/share/singularity/modules/lammps/20-user-intel.sif   π2.0
+
+
+算例内容如下： `in.lj` 
+----------------------------
+
+.. code:: bash
+
+   # 3d Lennard-Jones melt
+
+   variable     x index 4
+   variable     y index 4
+   variable     z index 4
+   
+   variable     xx equal 20*$x
+   variable     yy equal 20*$y
+   variable     zz equal 20*$z
+   
+   units                lj
+   atom_style   atomic
+   
+   lattice              fcc 0.8442
+   region               box block 0 ${xx} 0 ${yy} 0 ${zz}
+   create_box   1 box
+   create_atoms 1 box
+   mass         1 1.0
+   
+   velocity     all create 1.44 87287 loop geom
+   
+   pair_style   lj/cut 2.5
+   pair_coeff   1 1 1.0 1.0 2.5
+   
+   neighbor     0.3 bin
+   neigh_modify delay 0 every 20 check no
+   
+   fix          1 all nve
+   
+   run          10000
+
+
 
 参考资料
 --------
