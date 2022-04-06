@@ -16,14 +16,14 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 +==========+================+==========+=================================================+
 | 2021a    |  |cpu|         | 容器     |/lustre/share/img/matlab_latest.sif              |
 +----------+----------------+----------+-------------------------------------------------+
-| 2021a    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_latest.sif思源一号|
+| 2021a    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_latest.sif思源平台|
 +----------+----------------+----------+-------------------------------------------------+
 
 
 
-MATLAB
+超算上的MATLAB
 ------------------------
-MATLAB软件在π 超算及思源一号均有提供。
+超算上的CPU及GPU平台均支持MATLAB软件，在π 超算及思源一号均有提供。
 MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命令行调用。
 
 - `可视化平台使用MATLAB`_
@@ -42,14 +42,14 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 .. image:: ../img/matlab01.png
 .. image:: ../img/matlab02.png
 
-除了从π 超算启动远程桌面外，思源一号也支持启动远程桌面，在选定核数的同时可以同时选定平台：
+除了从闵行超算启动远程桌面外，思源超算也支持启动远程桌面，在选定核数的同时可以同时选定平台：
 
 .. image:: ../img/matlab02_1.png
 
 
 2. 启动MATLAB
 
-远程桌面中点击右键，选择Open Terminal Here打开终端，在终端中使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` , 思源一号需使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_latest.sif matlab`` 。
+远程桌面中点击右键，选择Open Terminal Here打开终端，在终端中使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` , 思源平台需使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_latest.sif matlab`` 。
 
 启动后即可使用MATLAB R2021a
 
@@ -74,7 +74,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 2. 脚本提交
 
--  π 超算提交单核CPU脚本
+-  闵行超算提交单核CPU脚本
 
 .. code:: bash
 
@@ -95,7 +95,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 
 
--  思源一号提交单核CPU脚本
+-  张江超算提交单核CPU脚本
 
 .. code:: bash
 
@@ -119,7 +119,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../img/matlab_result.png
 
--  π 超算提交多核CPU脚本
+-  闵行超算提交多核CPU脚本
 
 .. code:: bash
 
@@ -139,7 +139,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     singularity exec $IMAGE_PATH matlab -r multicore
 
 
--  思源一号提交多核CPU脚本
+-  张江超算提交多核CPU脚本
 
 .. code:: bash
 
@@ -173,7 +173,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../img/matlab01.png
 
-选定核数的时候选择思源一号的一张GPU卡：
+选定核数的时候选择思源平台的一张GPU卡：
 
 .. image:: ../img/matlab-siyuan-gpu.png
 
@@ -227,7 +227,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 建议
 ----------------------------------------------------
 
-思源一号单节点拥有更多核心、更大内存。在运行多核心任务时推荐使用思源一号。
+思源超算单节点拥有更多核心、更大内存。在运行多核心任务时推荐使用思源平台。
 
 
 自定义添加MATLAB插件
