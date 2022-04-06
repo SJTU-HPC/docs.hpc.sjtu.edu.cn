@@ -23,7 +23,7 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 
 MATLAB
 ------------------------
-MATLAB软件在π 超算及思源一号均有提供，支持CPU和GPU。
+MATLAB软件在π超算及思源一号均有提供，支持CPU和GPU。
 MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命令行调用。
 
 - `可视化平台使用MATLAB`_
