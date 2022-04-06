@@ -5,8 +5,8 @@
 
 \author{上海交通大学网络信息中心}
 \institute{计算业务部}
-\date{2021年12月}
-\version{1.0}
+\date{2022年4月}
+\version{1.1}
 % \bioinfo{自定义}{信息}
 
 % \extrainfo{各人自扫门前雪，休管他人瓦上霜。—— 陈元靓}
@@ -56,11 +56,11 @@
  \hline
  队列 & 架构 & 参数 & 描述 & 数量 \\
  \hline \hline
- \makecell[l]{64c512g} & x86 & \makecell[l]{CPU: 2 x Intel Xeon ICX\\ Platinum 8358 (2.6GHz,\\ 32 cores)\\
-Mem: 16 x 32GB TruDDR4\\ 3200 MHz (2Rx8 1.2V)\\ RDIMM} & \makecell[l]{CPU 采用双路 Intel Xeo\\ ICX Platinum 8358 32 核，\\ 主频 2.6GHz。} & 938\\
+ \makecell[l]{64c512g} & x86 & \makecell[l]{CPU: 2 x Intel Xeon ICX Platinum\\ 8358 (2.6GHz, 32 cores)\\
+Mem: 16 x 32GB TruDDR4 3200\\ MHz (2Rx8 1.2V) RDIMM} & \makecell[l]{由 938 台双路节点 x86 服务器组\\ 成，每台服务器配备 64核\\（2.6GHz）、512G 内存，共计 60032\\ 个CPU 核、469T 内存。双精度理\\ 论峰值性能达到了6 PFLOPS，是目\\ 前国内高校第一的超算集群} & 938\\
  \hline
- \makecell[l]{a100} & x86 & \makecell[l]{CPU: 2 x Intel Xeon ICX\\ Platinum 8358 (2.6GHz,\\ 32 cores)\\
-GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100\\ 4-GPU。} & 92块\\
+ \makecell[l]{a100} & x86 & \makecell[l]{CPU: 2 x Intel Xeon ICX Platinum\\ 8358 (2.6GHz,32 cores)\\
+GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100\\ 4-GPU。单节点配置为64核，\\ 512G内存} & 92块\\
  \hline
  \makecell[l]{small,cpu,\\ debug} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20\\ cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{由 656 台双路节点 x86 服务器\\组成，每台服务器配备 40 核\\（2.5GHz）、192G 内存（12通道 \\DDR4 2666），共计 26240 个 \\CPU 核、48T 内存。 双精度理论\\峰值性能达到了 2.1 PFLOPS} & 656\\
  \hline
@@ -70,7 +70,7 @@ GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100\\ 4-G
  \hline
  \makecell[l]{arm128c256g} & arm & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426(2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备 128 核（2.6 GHz）、\\256 GB 内存（16 通道\\ DDR4-2933）、240 GB 本地硬盘，\\节点间采用 IB 高速互联} & 100\\
  \hline
- \makecell[l]{dgx2} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2服务器\\组成，每台 DGX-2 配置 16 块 \\Tesla V100 GPU 加速卡，2 颗 \\Intel 至强铂金 8168 CPU，1.5 TB \\DDR4 内存，30 TB NVMe SSD \\和 512GB HBM2 显存。其双精度\\计算能力达到1 PFLOPS（千万\\亿次），张量计算能力达到 \\16 PFLOPS} & 8\\
+ \makecell[l]{dgx2} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2服务器\\组成，每台 DGX-2 配置 16 块 \\Tesla V100 GPU 加速卡，2 颗 \\Intel 至强铂金 8168 CPU，1.5 TB \\DDR4 内存，30 TB NVMe SSD \\和 512GB HBM2 显存。其张量\\ 计算能力达到16 PFLOPS} & 8\\
  \hline
 \end{tabular}
 \end{table1}
@@ -82,7 +82,7 @@ GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100\\ 4-G
  \hline
  名称 & 类别 & 配置 & 容量 \\
  \hline \hline
- gpfs & 思源一号主文件系统 & \makecell[l]{4台DSS-G Server节点，每台配置2块300G HDD，\\ 用于安装操作系统，安装并配置GPFS集群，创建\\ 文件系统，文件系统metadata采用3副本冗余，\\ 文件系统data采用8+2p冗余。} & 10P\\
+ gpfs & 思源一号主文件系统 & \makecell[l]{4台DSS-G Server节点，每台配置2块300G HDD，\\ 用于安装操作系统，安装配置GPFS集群，及创建\\ 文件系统。文件系统metadata采用3副本冗余，\\ 文件系统data采用8+2p冗余。} & 10P\\
  \hline
  lustre & 主文件系统 & \makecell[l]{使用 HDD 盘搭建，旨在提供大容量、高可用、\\较高性能的存储供用户使用。搭建过程中，使用\\ RAID 保障硬盘级别的数据安全，使用 HA\\（High Availability） 保障服务器级别的\\高可用。} & 14P\\
  \hline
@@ -93,22 +93,22 @@ GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100\\ 4-G
 \end{tabular}
 \end{table2}
 
-\chapter{HPC和AI平台帐号申请及登录方式}
+\chapter{交我算平台帐号申请及登录方式}
 
-\section{HPC和AI平台帐号申请}
+\section{交我算平台帐号申请}
 
 \subsection*{谁能申请主帐号？}
-交大及附属医院在职教职工（含博士后）均能申请超算主帐号；一个主帐号下面可以免费开通4个子帐号；主帐号需绑定jAccount帐号，用于充值缴费。
+交大及附属医院在职教职工（含博士后）均能申请主帐号；一个主帐号下面可以免费开通4个子帐号；主帐号需绑定jAccount帐号，用于充值缴费。
 
-\subsection*{如何申请超算帐号？}
+\subsection*{如何申请交我算帐号？}
 \begin{enumerate}
-\item 登录“我的数字交大”或者“交我办”APP，在“服务大厅”的“交我算”类别下，选择“HPC和AI平台帐号申请”，选择申请的帐号类型，并按照申请表单填写内容.
+\item 登录“我的数字交大”或者“交我办”APP，在“服务大厅”的“交我算”类别下，选择“交我算帐号申请”，选择申请的帐号类型，并按照申请表单填写内容.
 \item 帐号负责人提交申请，需要由帐号负责人审核。审核人审批后，流程流转到网络信息中心计算业务部处理。
 \item 帐号负责人提交或审核后，会以邮件形式反馈申请结果。
 \end{enumerate}
 
 \subsection*{主帐号与子帐号的关系？}
-超算主帐号与子帐号均为独立帐号，仅在计费关系上存在关联。若课题组有数据或软件共享需求，可发邮件给我们，我们将建立 acct-XXX/share 文件夹，主帐号和子帐号均可在此文件夹下读写。
+交我算主帐号与子帐号均为独立帐号，仅在计费关系上存在关联。若课题组有数据或软件共享需求，可发邮件给我们，我们将建立 acct-XXX/share 文件夹，主帐号和子帐号均可在此文件夹下读写。
 
 \section{登录平台集群}
 
@@ -121,7 +121,7 @@ GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100\\ 4-G
 *注意：\textcolor{red}{每个帐号在单个 login 节点上 session 个数不能超过4个。}
 
 \subsection*{HPC Studio登录}
-在浏览器中打开\href{https://studio.hpc.sjtu.edu.cn}{https://studio.hpc.sjtu.edu.cn}，直接使用超算帐号和密码登录。HPC Studio是可视化平台，提供了web shell、远程桌面、可视化软件、文件管理、作业提交等一站式服务。
+在浏览器中打开\href{https://studio.hpc.sjtu.edu.cn}{https://studio.hpc.sjtu.edu.cn}，直接使用交我算帐号和密码登录。HPC Studio是可视化平台，提供了web shell、远程桌面、可视化软件、文件管理、作业提交等一站式服务。
 
 \chapter{作业提交和查询}
 
@@ -154,7 +154,7 @@ drain(节点故障)，alloc(节点在用)，idle(节点可用)，down(节点下�
 \section{队列说明}
 
 \subsection*{64c512g}
-思源一号CPU队列；每个作业可申请1-60000核；最长运行时间7天；节点为共享使用；计算节点使用范围：node[001-938]
+思源一号CPU队列；每个作业可申请\textcolor{red}{1-60000}核；最长运行时间7天；节点为共享使用；计算节点使用范围：node[001-938]
 
 \subsection*{a100}
 思源一号GPU队列；每个作业可申请1-92卡；每卡配比CPU上限为16；最长运行时间7天；节点为共享使用；计算节点使用范围：gpu[01-23]
@@ -166,7 +166,7 @@ drain(节点故障)，alloc(节点在用)，idle(节点可用)，down(节点下�
 小规模作业队列；每个作业可申请\textcolor{red}{1-20}核；最长运行时间7天；节点为共享使用；计算节点使用范围：cas[500-636]
 
 \subsection*{cpu}
-cpu队列；每个作业可申请40- 24000核；最长运行时间7天；节点为独占使用；计算节点使用范围：cas[001-500]\\*注意：small和cpu队列的计算资源比例会根据实际需求动态调整
+cpu队列；每个作业可申请40-24000核；最长运行时间7天；节点为独占使用；计算节点使用范围：cas[001-500]\\*注意：small和cpu队列的计算资源比例会根据实际需求动态调整
 
 \subsection*{huge}
 大内存作业队列；每个作业可申请\textcolor{red}{6-80}核；最长运行时间2天；节点为共享使用；计算节点使用范围：huge[1-2]
@@ -263,7 +263,8 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 \item 少量数据传输：login 节点和 data 节点均可，但推荐使用 data 节点。
 \item 大量数据传输：强烈推荐 data 节点。原因：1. 不占用 login 节点资源；2. 多进程或多用户同时传输不会受限于 CPU。
 \end{enumerate}
-目前集群包含两个存储池，其中lustre存储用于small,cpu,huge,192c6t,dgx2,arm128c256g以及相应的debug队列，应当在login,kplogin,data系列节点上查看、使用存放的数据；gpfs存储用于64c512g,a100以及相应的debug队列，应当在sylogin,sydata节点上查看、使用存放的数据。
+
+    目前集群包含两个存储池，其中lustre存储用于small,cpu,huge,192c6t,dgx2,arm128c256g以及相应的debug队列，应当在login,kplogin,data系列节点上查看、使用存放的数据；gpfs存储用于64c512g,a100以及相应的debug队列，应当在sylogin,sydata节点上查看、使用存放的数据。
 
 \section{数据传输节点}
 
@@ -272,11 +273,11 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 \begin{lstlisting}
   scp sydata.hpc.sjtu.edu.cn local
 \end{lstlisting}
-需要在其他队列上进行计算的作业相关数据，从本地或者外部服务器传输到超算平台，使用
+    需要在其他队列上进行计算的作业相关数据，从本地或者外部服务器传输到超算平台，使用
 \begin{lstlisting}
   scp data.hpc.sjtu.edu.cn local
 \end{lstlisting}
-超算平台两个存储系统之间进行数据搬运，例如原本用于small队列的作业数据搬运到思源64c512g队列使用，可以任选data或者sydata节点。
+    超算平台两个存储系统之间进行数据搬运，例如原本用于small队列的作业数据搬运到思源64c512g队列使用，可以任选data或者sydata节点。
 
 \subsection*{数据传输节点使用限制}
 传输节点仅用于批量数据传输，请勿在此节点上运行与数据传输无关的应用，如编译程序、管理作业、校验数据等。如果发现此类行为，中心将视情况取消相关帐号使用传输节点的权利。
@@ -288,12 +289,12 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 \chapter{其他常用事项}
 
 \section{机时查询}
-\subsection*{超算计费系统(\href{https://account.hpc.sjtu.edu.cn/}{https://account.hpc.sjtu.edu.cn/})}
-超算用户可以使用超算帐号密码登录计费系统查询作业详单和计费情况。主帐号可以查询本帐号和所有子帐号的消费情况，子帐号仅可查询自己帐号的消费情况。超算帐号内如有计费，将优先消费积分。需要注意的是，超算的计费模式为作业完成后的第二天凌晨入账。
+\subsection*{交我算计费系统(\href{https://account.hpc.sjtu.edu.cn/}{https://account.hpc.sjtu.edu.cn/})}
+用户可以使用交我算帐号密码登录计费系统查询作业详单和计费情况。主帐号可以查询本帐号和所有子帐号的消费情况，子帐号仅可查询自己帐号的消费情况。帐号内如有计费，将优先消费积分。需要注意的是，交我算的计费模式为作业完成后的第二天凌晨入账。
 
-\section{HPC和AI平台资讯}
+\section{交我算平台资讯}
 \subsection*{微信公众号/视频号：交我算}
-关注“交我算”微信公众号和视频号，超算最新服务、新闻资讯、教学视频一网打尽。(扫描二维码，关注公众号)
+关注“交我算”微信公众号和视频号，平台最新服务、新闻资讯、教学视频一网打尽。(扫描二维码，关注公众号)
 
 \begin{figure}[!htb]
 \centering
@@ -301,7 +302,7 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 \end{figure}
 
 \subsection*{用户微信群}
-超算运维通知和实时资讯主要发布于用户微信群，加群方式会在开通帐号时告知。
+交我算运维通知和实时资讯主要发布于用户微信群，加群方式会在开通帐号时告知。
 
 \section{其他常见问题}
 \begin{enumerate}[itemsep=1.3ex]
