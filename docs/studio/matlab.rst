@@ -21,9 +21,9 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 
 
 
-π 集群上的MATLAB
+超算上的MATLAB
 ------------------------
-π 集群上的CPU及GPU平台均支持MATLAB软件，在闵行超算及思源超算均有提供。
+超算上的CPU及GPU平台均支持MATLAB软件，在π 超算及思源一号均有提供。
 MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命令行调用。
 
 - `可视化平台使用MATLAB`_
@@ -42,14 +42,14 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 .. image:: ../img/matlab01.png
 .. image:: ../img/matlab02.png
 
-除了从闵行超算启动远程桌面外，思源超算也支持启动远程桌面，在选定核数的同时可以同时选定平台：
+除了从π 超算启动远程桌面外，思源一号也支持启动远程桌面，在选定核数的同时可以同时选定平台：
 
 .. image:: ../img/matlab02_1.png
 
 
 2. 启动MATLAB
 
-远程桌面中点击右键，选择Open Terminal Here打开终端，在终端中使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` , 思源平台需使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_latest.sif matlab`` 。
+远程桌面中点击右键，选择Open Terminal Here打开终端，在终端中使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` , 思源一号需使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_latest.sif matlab`` 。
 
 启动后即可使用MATLAB R2021a
 
@@ -74,7 +74,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 2. 脚本提交
 
--  闵行超算提交单核CPU脚本
+π 超算提交单核CPU脚本
 
 .. code:: bash
 
@@ -95,7 +95,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 
 
--  张江超算提交单核CPU脚本
+思源一号提交单核CPU脚本
 
 .. code:: bash
 
@@ -119,7 +119,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../img/matlab_result.png
 
--  闵行超算提交多核CPU脚本
+π 超算提交多核CPU脚本
 
 .. code:: bash
 
@@ -139,7 +139,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     singularity exec $IMAGE_PATH matlab -r multicore
 
 
--  张江超算提交多核CPU脚本
+思源一号提交多核CPU脚本
 
 .. code:: bash
 
@@ -162,7 +162,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. _使用GPU版本的MATLAB:
 
-使用GPU版本的MATLAB需要CUDA11，因此该版本只能在思源平台使用。
+使用GPU版本的MATLAB需要CUDA11，因此该版本只能在思源一号使用。
 
 可视化平台使用MATLAB GPU版
 ---------------------------------
@@ -173,7 +173,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../img/matlab01.png
 
-选定核数的时候选择思源平台的一张GPU卡：
+选定核数的时候选择思源一号的一张GPU卡：
 
 .. image:: ../img/matlab-siyuan-gpu.png
 
@@ -221,7 +221,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 +==========+================+==========+
 | 2021a    |  思源          |  105     |
 +----------+----------------+----------+
-| 2021a    |  闵行          | 176      |
+| 2021a    |  π 超算        | 176      |
 +----------+----------------+----------+
 
 建议
