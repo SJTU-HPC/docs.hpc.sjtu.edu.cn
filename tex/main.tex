@@ -52,25 +52,25 @@
 
 \begin{table1}
 \small
-\begin{tabular}{ |l|c|l|l|c| }
+\begin{tabular}{ |c|l|l|l|c| }
  \hline
- 队列 & 平台 & 参数 & 描述 & 数量 \\
+ 平台 & 队列 & 参数 & 描述 & 数量 \\
  \hline \hline
- \makecell[l]{64c512g} & 思源一号 & \makecell[l]{CPU: 2 x Intel Xeon ICX Platinum\\ 8358 (2.6GHz, 32 cores)\\
+ 思源一号 & \makecell[l]{64c512g} & \makecell[l]{CPU: 2 x Intel Xeon ICX Platinum\\ 8358 (2.6GHz, 32 cores)\\
 Mem: 16 x 32GB TruDDR4 3200\\ MHz (2Rx8 1.2V) RDIMM} & \makecell[l]{由 938 台双路节点 x86 服务器组\\ 成，每台服务器配备 64核\\（2.6GHz）、512G 内存，共计 60032\\ 个CPU核。双精度理论峰值性能\\ 达到了6 PFLOPS，是目前国内\\ 高校第一的超算集群。} & 938\\
  \hline
- \makecell[l]{a100} & 思源一号 & \makecell[l]{CPU: 2 x Intel Xeon ICX Platinum\\ 8358 (2.6GHz,32 cores)\\
+ 思源一号 & \makecell[l]{a100} & \makecell[l]{CPU: 2 x Intel Xeon ICX Platinum\\ 8358 (2.6GHz,32 cores)\\
 GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100,\\ 共92块GPU卡。单节点配置为\\ 64核，512G内存。} & 92卡\\
  \hline
- \makecell[l]{small,cpu,\\ debug} & Pi 2.0 & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20\\ cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{由 656 台双路节点 x86 服务器\\组成，每台服务器配备 40 核\\（2.5GHz）、192G 内存（12通道 \\DDR4 2666），共计 26240 个 \\CPU 核。 双精度理论峰值性能\\ 达到了 2.1 PFLOPS。} & 656\\
+ Pi 2.0 & \makecell[l]{small,cpu,\\ debug}  & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20\\ cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{由 656 台双路节点 x86 服务器\\组成，每台服务器配备 40 核\\（2.5GHz）、192G 内存（12通道 \\DDR4 2666），共计 26240 个 \\CPU 核。 双精度理论峰值性能\\ 达到了 2.1 PFLOPS。} & 656\\
  \hline
- \makecell[l]{huge} & Pi 2.0 & \makecell[l]{CPU: 4 x Intel Xeon Scalable\\ SkyLake 6148(2.4GHz, 20 cores)\\Mem: 48 x Hynix 64GB DDR4\\ ECC REG 2666} & \makecell[l]{每台拥有 80 核、3T 内存（48 通道\\ DDR4 2666），共计 160 核、\\6T 内存。} & 2\\
+ Pi 2.0 & \makecell[l]{huge} & \makecell[l]{CPU: 4 x Intel Xeon Scalable\\ SkyLake 6148(2.4GHz, 20 cores)\\Mem: 48 x Hynix 64GB DDR4\\ ECC REG 2666} & \makecell[l]{每台拥有 80 核、3T 内存（48 通道\\ DDR4 2666），共计 160 核、\\6T 内存。} & 2\\
  \hline
- \makecell[l]{192c6t} & Pi 2.0 & \makecell[l]{CPU: 8 x Intel Xeon Platinum\\ 8260(2.4GHz，24 cores)\\Mem: 98 x Samsung 64GB DDR4 \\2666} & \makecell[l]{拥有 192 核、6T 内存（98 通道 \\DDR4 2666）。} & 1\\
+ Pi 2.0  & \makecell[l]{192c6t} & \makecell[l]{CPU: 8 x Intel Xeon Platinum\\ 8260(2.4GHz，24 cores)\\Mem: 98 x Samsung 64GB DDR4 \\2666} & \makecell[l]{拥有 192 核、6T 内存（98 通道 \\DDR4 2666）。} & 1\\
  \hline
- \makecell[l]{arm128c\\256g} & ARM & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426(2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备 128 核（2.6 GHz）、\\256 GB 内存（16 通道\\ DDR4-2933）、240 GB 本地硬盘，\\节点间采用 IB 高速互联。} & 100\\
+ ARM & \makecell[l]{arm128c\\256g} & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426(2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备 128 核（2.6 GHz）、\\256 GB 内存（16 通道\\ DDR4-2933）、240 GB 本地硬盘，\\节点间采用 IB 高速互联。} & 100\\
  \hline
- \makecell[l]{dgx2} & AI & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2服务器\\组成，每台 DGX-2 配置 16 块 \\Tesla V100 GPU 加速卡，2 颗 \\Intel 至强铂金 8168 CPU，1.5 TB \\DDR4 内存，30 TB NVMe SSD \\和 512GB HBM2 显存。其张量\\ 计算能力达到16 PFLOPS。} & 128卡\\
+  AI & \makecell[l]{dgx2} & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2服务器\\组成，每台 DGX-2 配置 16 块 \\Tesla V100 GPU 加速卡，2 颗 \\Intel 至强铂金 8168 CPU，1.5 TB \\DDR4 内存，30 TB NVMe SSD \\和 512GB HBM2 显存。其张量\\ 计算能力达到16 PFLOPS。} & 128卡\\
  \hline
 \end{tabular}
 \end{table1}
