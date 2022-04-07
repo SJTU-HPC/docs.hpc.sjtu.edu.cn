@@ -68,7 +68,7 @@ GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100,\\ �
  \hline
  \makecell[l]{192c6t} & Pi 2.0 & \makecell[l]{CPU: 8 x Intel Xeon Platinum\\ 8260(2.4GHz，24 cores)\\Mem: 98 x Samsung 64GB DDR4 \\2666} & \makecell[l]{拥有 192 核、6T 内存（98 通道 \\DDR4 2666）。} & 1\\
  \hline
- \makecell[l]{arm128c256g} & ARM & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426(2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备 128 核（2.6 GHz）、\\256 GB 内存（16 通道\\ DDR4-2933）、240 GB 本地硬盘，\\节点间采用 IB 高速互联。} & 100\\
+ \makecell[l]{arm128c\\256g} & ARM & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426(2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备 128 核（2.6 GHz）、\\256 GB 内存（16 通道\\ DDR4-2933）、240 GB 本地硬盘，\\节点间采用 IB 高速互联。} & 100\\
  \hline
  \makecell[l]{dgx2} & AI & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2服务器\\组成，每台 DGX-2 配置 16 块 \\Tesla V100 GPU 加速卡，2 颗 \\Intel 至强铂金 8168 CPU，1.5 TB \\DDR4 内存，30 TB NVMe SSD \\和 512GB HBM2 显存。其张量\\ 计算能力达到16 PFLOPS。} & 128卡\\
  \hline
@@ -110,7 +110,7 @@ GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100,\\ �
 \subsection*{主帐号与子帐号的关系？}
 交我算主帐号与子帐号均为独立帐号，仅在计费关系上存在关联。若课题组有数据或软件共享需求，可发邮件给我们，我们将建立 acct-XXX/share 文件夹，主帐号和子帐号均可在此文件夹下读写。
 
-\section{登录平台集群}
+\section{登录集群}
 
 \subsection*{ssh登录}
 \begin{enumerate}
@@ -126,7 +126,7 @@ GPU: 4 x NVIDIA HGX A100\\ 40GB} & \makecell[l]{GPU 采用 NVIDIA HGX A100,\\ �
 \chapter{作业提交和查询}
 
 \section{作业调度系统}
-超算使用SLURM作业调度系统。SLURM （Simple Linux Utility for Resource Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
+集群使用SLURM作业调度系统。SLURM （Simple Linux Utility for Resource Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
 
 \subsection*{SLURM常用命令}
 
@@ -269,12 +269,12 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 \section{数据传输节点}
 
 \subsection*{使用data数据传输节点}
-需要在思源一号64c512g，a100队列上进行计算的作业相关数据，从本地或者外部服务器传输到超算平台，使用
+需要在思源一号64c512g，a100队列上进行计算的作业相关数据，从本地或者外部服务器传输到集群，使用
 \begin{lstlisting}
   scp sydata.hpc.sjtu.edu.cn local
 \end{lstlisting}
 
-    需要在其他队列上进行计算的作业相关数据，从本地或者外部服务器传输到超算平台，使用
+    需要在其他队列上进行计算的作业相关数据，从本地或者外部服务器传输到集群，使用
 \begin{lstlisting}
   scp data.hpc.sjtu.edu.cn local
 \end{lstlisting}
@@ -292,7 +292,7 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 
 \section{机时查询}
 \subsection*{交我算平台计费系统(\href{https://account.hpc.sjtu.edu.cn/}{https://account.hpc.sjtu.edu.cn/})}
-用户可以使用交我算帐号密码登录计费系统查询作业详单和计费情况。主帐号可以查询本帐号和所有子帐号的消费情况，子帐号仅可查询自己帐号的消费情况。帐号内如有计费，将优先消费积分。需要注意的是，交我算的计费模式为作业完成后的第二天凌晨入账。
+用户可以使用交我算帐号密码登录计费系统查询作业详单和计费情况。主帐号可以查询本帐号和所有子帐号的消费情况，子帐号仅可查询自己帐号的消费情况。帐号内如有计费，将优先消费积分。需要注意的是，平台的计费模式为作业完成后的第二天凌晨入账。
 
 \section{交我算平台资讯}
 \subsection*{微信公众号/视频号：交我算}
