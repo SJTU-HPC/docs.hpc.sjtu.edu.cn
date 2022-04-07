@@ -134,19 +134,23 @@ e) 环境设置
 
    #!/bin/bash
 
-	#SBATCH --job-name=lmp
-	#SBATCH --partition=64c512g
-	#SBATCH -N 2
-	#SBATCH --ntasks-per-node=64
-	#SBATCH --output=%j.out
-	#SBATCH --error=%j.err
+   #SBATCH --job-name=lmp
+   #SBATCH --partition=64c512g
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
 
-	module load intel-oneapi-compilers/2021.4.0
-	module load intel-oneapi-mpi/2021.4.0
-	module load intel-oneapi-mkl/2021.4.0
-	module load intel-oneapi-tbb/2021.4.0
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   module purge
+   module load intel-oneapi-compilers/2021.4.0
+   module load intel-oneapi-mpi/2021.4.0
+   module load intel-oneapi-mkl/2021.4.0
+   module load intel-oneapi-tbb/2021.4.0
 
-	mpirun lmp -i in.lj
+   mpirun lmp -i in.lj
 
 
 
