@@ -1,17 +1,55 @@
 .. _gnu:
 
-GNU Compiler
+GNU Compiler Collection
 =========================
 
-GNU通用公共许可协议（英语：GNU General Public License，缩写GNU GPL 或
-GPL），是被广泛使用的自由软件许可证，给予了终端用户运行、学习、共享和修改软件的自由。许可证最初由自由软件基金会的理查德·斯托曼为GNU项目所撰写，并授予计算机程序的用户自由软件定义（The
-Free Software
-Definition）的权利。在本节中，GNU将代指那些基于GNU许可的开源软件，特别是GCC和OpenMPI。
+GNU(GNU Compiler Collection)，缩写为"GCC"，即"GNU编译器套件"，可将其理解成是多个编译器的集合。
+支持的语言包括C、C++、Fortran、Ada、Object-C和Java等。
 
-加载预安装的GNU
----------------
+判断GCC支持的编译语言方法
+--------------------------
 
-π 集群系统中已经预装不同版本的gcc，可以用以下命令加载:
+.. code:: bash
+
+   [hpc@node499 ~]$ gcc --version
+   gcc (GCC) 8.3.1 20191121 (Red Hat 8.3.1-5)
+   
+   [hpc@node499 ~]$ g++ --version
+   g++ (GCC) 8.3.1 20191121 (Red Hat 8.3.1-5)
+   
+   [hpc@node499 ~]$ gfortran --version
+   GNU Fortran (GCC) 8.3.1 20191121 (Red Hat 8.3.1-5)
+
+集群平台上的GCC
+----------------
+
+- `思源一号上的GCC`_
+
+- `π2.0上的GCC`_
+
+- `ARM上的GCC`_
+
+.. _思源一号上的GCC:
+
+思源一号上的GCC
+------------------------
+
+========== ===============================
+版本       加载方式
+========== ===============================
+gcc-8.3.1  module load gcc/8.3.1
+gcc-8.5.0  module load gcc/8.5.0
+gcc-9.3.0  module load gcc/9.3.0
+gcc-10.3.0 module load gcc/10.3.0
+gcc-11.2.0 module load gcc/11.2.0
+========== ===============================
+
+思源一号上的GCC默认版本为: 8.3.1。
+
+.. _π2.0上的GCC:
+
+π2.0上的GCC
+---------------------
 
 ========== ===============================
 版本       加载方式
@@ -25,59 +63,22 @@ gcc-10.2.0 module load gcc/10.2.0
 gcc-11.2.0 module load gcc/11.2.0
 ========== ===============================
 
-不同版本的OpenMPI，可以用以下命令加载：
+π2.0上的GCC默认版本为: 4.8.5。
 
-======================= ===================================
-版本                    加载方式
-======================= ===================================
-openmpi-3.1.5/gcc-4.8.5 module load openmpi/3.1.5-gcc-4.8.5
-openmpi-3.1.5/gcc-7.4.0 module load openmpi/3.1.5-gcc-7.4.0
-openmpi-3.1.5/gcc-8.3.0 module load openmpi/3.1.5-gcc-8.3.0
-openmpi-3.1.5/gcc-9.2.0 module load openmpi/3.1.5-gcc-9.2.0
-======================= ===================================
+.. _ARM上的GCC:
 
-* 在同时使用openmpi和gcc的时候，请尽量保持gcc版本与OpenMPI后缀中的编译器版本一致，如gcc-8.3.0和openmpi-3.1.5/gcc-8.3.0
+ARM上的GCC
+------------------
 
-使用GCC+OpenMPI编译应用
------------------------
+========== ===============================
+版本       加载方式
+========== ===============================
+gcc-8.4.0  module load gcc/8.4.0
+gcc-8.5.0  module load gcc/8.5.0
+gcc-9.3.0  module load gcc/9.3.0
+========== ===============================
 
-这里，我们演示如何使用系统中的OpenMPI和GCC编译MPI代码，所使用的MPI代码可以在\ ``/lustre/share/samples/MPI/mpihello.c``\ 中找到。
-
-加载和编译：
-
-.. code:: bash
-
-   $ module load gcc/8.3.0-gcc-4.8.5 openmpi-3.1.5/gcc-8.3.0
-   $ mpicc mpihello.c -o mpihello
-
-提交GCC+OpenMPI应用
--------------------
-
-准备一个名为job_openmpi.slurm的作业脚本
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=mpihello
-   #SBATCH --partition=cpu
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   #SBATCH -n 80
-   #SBATCH --ntasks-per-node=40
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   module load gcc/8.3.0-gcc-4.8.5 openmpi-3.1.5/gcc-8.3.0
-
-   srun --mpi=pmi2 ./mpihello
-
-最后，将作业提交到SLURM
-
-.. code:: bash
-
-   $ sbatch job_openmpi.slurm
+AR平台上的GCC默认版本为: 4.8.5。
 
 参考资料
 --------
