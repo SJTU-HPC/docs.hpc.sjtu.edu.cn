@@ -22,15 +22,15 @@ Conda作为软件包管理器，可以帮助用户查找和安装软件包。如
 +-----------+---------+----------+---------------------------------------+
 | 4.5.12    | |arm|   | Spack    | `conda4aarch64/1.0.0-gcc-4.8.5`_      |
 +-----------+---------+----------+---------------------------------------+
-| 4.7.12.1  | |cpu|   | Spack    | miniconda2/4.7.12.1-gcc-4.8.5         |
+| 4.7.12.1  | |cpu|   | Spack    | miniconda2/4.7.12.1                   |
 +-----------+---------+----------+---------------------------------------+
-| 4.6.14    | |cpu|   | Spack    | miniconda2/4.6.14-gcc-4.8.5           |
+| 4.6.14    | |cpu|   | Spack    | miniconda2/4.6.14                     |
 +-----------+---------+----------+---------------------------------------+
-| 4.8.2     | |cpu|   | Spack    | `miniconda3/4.8.2-gcc-4.8.5`_         |
+| 4.8.2     | |cpu|   | Spack    | `miniconda3/4.8.2`_                   |
 +-----------+---------+----------+---------------------------------------+
-| 4.7.12.1  | |cpu|   | Spack    | miniconda3/4.7.12.1-gcc-4.8.5         |
+| 4.7.12.1  | |cpu|   | Spack    | miniconda3/4.7.12.1                   |
 +-----------+---------+----------+---------------------------------------+
-| 4.6.14    | |cpu|   | Spack    | miniconda3/4.6.14-gcc-4.8.5           |
+| 4.6.14    | |cpu|   | Spack    | miniconda3/4.6.14                     |
 +-----------+---------+----------+---------------------------------------+
 
 运行示例
@@ -64,7 +64,7 @@ ARM 集群 Conda
    module load conda4aarch64/1.0.0-gcc-4.8.5
    which conda
 
-.. _miniconda3/4.8.2-gcc-4.8.5:
+.. _miniconda3/4.8.2:
 
 π 集群 Conda
 ^^^^^^^^^^^^^
@@ -75,7 +75,7 @@ ARM 集群 Conda
 
    srun -p small -n 4 --pty /bin/bash
    module purge
-   module load miniconda3/4.8.2-gcc-4.8.5
+   module load miniconda3/4.8.2
    which conda
 
 Conda常用命令
@@ -92,6 +92,26 @@ Conda常用命令
    conda install bwa -c bioconda -n env4test # 指定从bioconda源中下载安装bwa，安装在env4test虚拟环境中
    conda remove -n env4test bwa     # 删除虚拟环境中的bwa包
    conda remove -n env4test --all   # 删除虚拟环境env4test(包括其中的所有的包)
+
+迁移Conda环境到思源一号
+------------------------
+
+迁移Conda环境需要导出环境到文件中，用 ``conda env create`` 从配置文件中来创建同样的环境。以从 π 集群迁移Conda环境到思源一号为例，需要用到 π 集群（旧环境）、sydata节点（数据互通）、思源一号（新环境）。
+
+.. code-block:: bash
+
+   $ π 集群
+   conda env list                   # 查看当前存在哪些虚拟环境
+   source activate pymol            # 激活用户环境
+   conda list                       # 查看环境的包和软件
+   conda env export > pymol.yaml    # 导出环境到配置文件
+   $ sydata 节点                    # 数据互通
+   scp user@data.hpc.sjtu.edu.cn:~/pymol.yaml ~/pymol.yaml
+   $ 思源一号
+   srun -p 64c512g -n 4 --pty /bin/bash
+   module load miniconda3/4.10.3    # 加载Conda
+   conda env list                   # 查看当前存在哪些虚拟环境
+   conda env create -f pymol.yaml   # 从配置文件创建环境
 
 通过pip安装Python扩展包
 ------------------------
