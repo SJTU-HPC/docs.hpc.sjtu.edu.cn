@@ -22,7 +22,9 @@ Keras 是一个用 Python 编写的高级神经网络 API，它能够以 TensorF
    module load miniconda3
    conda create -n mypy
    source activate mypy
-   conda install -c anaconda keras tensorflow-gpu
+   conda install cudatoolkit=11.0
+   pip install keras tensorflow-gpu==2.8.0
+
 
 π 集群上的Slurm脚本 slurm.test
 ---------------------------------
@@ -85,6 +87,64 @@ Keras 是一个用 Python 编写的高级神经网络 API，它能够以 TensorF
 .. code:: bash
 
    $ sbatch slurm.test
+
+
+算例测试
+-------------------
+超算中心提供了用来测试keras的算例。
+
+使用命令
+
+.. code:: console
+
+   $ cd ~
+   $ git clone https://github.com/SJTU-HPC/HPCTesting.git
+   $ cd HPCTesting/keras/case1
+   $ conda env create -f environment.yml
+   $ curl -O https://download.microsoft.com/download/3/E/1/3E1C3F21-ECDB-4869-8368-6DEBA77B919F/kagglecatsanddogs_3367a.zip
+   $ unzip -q kagglecatsanddogs_3367a.zip
+
+
+在π 超算上，使用如下脚本来提交该算例作业：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH -p dgx2
+   #SBATCH -N 1
+   #SBATCH -n 1
+   #SBATCH --ntasks-per-node 1
+   #SBATCH --cpus-per-task 6 
+   #SBATCH --gres gpu:1
+
+   cd ~/HPCTesting/keras/case1
+   module purge
+   module load miniconda3
+   source activate kerastest
+   export LD_LIBRARY_PATH=~/.conda/envs/kerastest/lib/:$LD_LIBRARY_PATH
+   python image_classification_from_scratch.py
+
+
+在思源一号上，使用如下脚本来提交该算例作业：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH -p a100
+   #SBATCH -N 1
+   #SBATCH -n 1
+   #SBATCH --ntasks-per-node 1
+   #SBATCH --cpus-per-task 6 
+   #SBATCH --gres gpu:1
+
+   cd ~/HPCTesting/keras/case1
+   module purge
+   module load miniconda3
+   source activate kerastest
+   export LD_LIBRARY_PATH=~/.conda/envs/kerastest/lib/:$LD_LIBRARY_PATH
+   python image_classification_from_scratch.py
+
+将以上脚本保存为 ``test.slurm`` ，使用 ``sbatch test.slurm`` 来交作业。
 
 参考资料
 --------
