@@ -185,7 +185,7 @@ PyTorch 是一个 Python 优先的深度学习框架，也是使用 GPU 和 CPU
    $ sbatch slurm.test
 
 
-Pytorch性能测试
+Pytorch单卡性能测试
 ---------------------
 算例下载：
 
@@ -206,7 +206,7 @@ DGX-2运行脚本：
    #SBATCH --gres gpu:1
    #SBATCH -N 1
 
-   singularity  run --nv   /lustre/share/singularity/modules/pytorch/1.6.0.sif python benchmark_models.py --folder v100 -w 10 -n 5  -b 12 -g 1 && &>/dev/null 
+   singularity  run --nv   /lustre/share/singularity/modules/pytorch/1.6.0.sif python benchmark_models.py --folder v100 -w 10 -n 5  -b 32 -g 1 && &>/dev/null 
 
 
 A100运行脚本：
@@ -222,13 +222,13 @@ A100运行脚本：
    #SBATCH --gres gpu:1
    #SBATCH -N 1
 
-   singularity  run --nv   /dssg/share/imgs/pytorch/1.6.0.sif python benchmark_models.py --folder a100 -w 10 -n 5  -b 12 -g 1 && &>/dev/null 
+   singularity  run --nv   /dssg/share/imgs/pytorch/1.6.0.sif python benchmark_models.py --folder a100 -w 10 -n 5  -b 32 -g 1 && &>/dev/null 
 
 
 DGX-2测试结果将被放在 ``v100`` 文件夹内，A100测试结果将被放在 ``a100`` 文件夹内，均为CSV格式。
 
 
-单卡测试:
+单卡测试结果:
 
 resnet18,resnet34,resnet50,resnet101,resnet152,resnext50_32x4d,resnext101_32x8d,wide_resnet50_2,wide_resnet101_2模型的平均batch耗时如下：
 
@@ -237,31 +237,107 @@ resnet18,resnet34,resnet50,resnet101,resnet152,resnext50_32x4d,resnext101_32x8d,
 +=========+=========+=========+========+
 |partition| mode    |precision|ms/batch|
 +---------+---------+---------+--------+
-| v100    | train   | double  |     188|
+| v100    | train   | double  |   471  |
 +---------+---------+---------+--------+
-| v100    | train   | float   |  84    |
+| v100    | train   | float   |  180   |
 +---------+---------+---------+--------+
-| v100    | train   | half    |     52 |
+| v100    | train   | half    |     91 |
 +---------+---------+---------+--------+
-| v100    |inference| half    |   57   |
+| v100    |inference| double  |    148 |
 +---------+---------+---------+--------+
-| v100    |inference| half    |    28  |
+| v100    |inference| float   |    63  |
 +---------+---------+---------+--------+
-| v100    |inference| half    |    15  |
+| v100    |inference| half    |    26  |
 +---------+---------+---------+--------+
-| a100    | train   | double  |    161 |
+| a100    | train   | double  |   350  |
 +---------+---------+---------+--------+
-| a100    | train   | float   |   47   |
+| a100    | train   | float   |    78  |
 +---------+---------+---------+--------+
-| a100    | train   | half    |    37  |
+| a100    | train   | half    |     60 |
 +---------+---------+---------+--------+
-| a100    |inference| half    |     45 |
+| a100    |inference| double  |   107  |
 +---------+---------+---------+--------+
-| a100    |inference| half    |    14  |
+| a100    |inference| float   |    25  |
 +---------+---------+---------+--------+
-| a100    |inference| half    |     10 |
+| a100    |inference| half    |     16 |
 +---------+---------+---------+--------+
 
+Pytorch双卡性能测试
+---------------------
+算例下载：
+
+.. code:: console
+
+   $ git clone https://github.com/SJTU-HPC/HPCTesting.git
+   $ cd HPCTesting/pytorch-gpu-benchmark
+
+DGX-2运行脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH -p dgx2
+   #SBATCH -n 2
+   #SBATCH --ntasks-per-node 2
+   #SBATCH --cpus-per-task 6 
+   #SBATCH --gres gpu:2
+   #SBATCH -N 1
+
+   singularity  run --nv   /lustre/share/singularity/modules/pytorch/1.6.0.sif python benchmark_models.py --folder v100 -w 10 -n 5  -b 16 -g 1 && &>/dev/null 
+
+
+A100运行脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH -p a100
+   #SBATCH -n 2
+   #SBATCH --ntasks-per-node 2
+   #SBATCH --cpus-per-task 6 
+   #SBATCH --gres gpu:2
+   #SBATCH -N 1
+
+   singularity  run --nv   /dssg/share/imgs/pytorch/1.6.0.sif python benchmark_models.py --folder a100 -w 10 -n 5  -b 16 -g 1 && &>/dev/null 
+
+
+DGX-2测试结果将被放在 ``v100`` 文件夹内，A100测试结果将被放在 ``a100`` 文件夹内，均为CSV格式。
+
+
+双卡测试结果:
+
+resnet18,resnet34,resnet50,resnet101,resnet152,resnext50_32x4d,resnext101_32x8d,wide_resnet50_2,wide_resnet101_2模型的平均batch耗时如下：
+
++--------------------------------------+
+| pytorch                              |
++=========+=========+=========+========+
+|partition| mode    |precision|ms/batch|
++---------+---------+---------+--------+
+| v100    | train   | double  |     289|
++---------+---------+---------+--------+
+| v100    | train   | float   |    134 |
++---------+---------+---------+--------+
+| v100    | train   | half    |     79 |
++---------+---------+---------+--------+
+| v100    |inference| double  |    102 |
++---------+---------+---------+--------+
+| v100    |inference| float   |    56  |
++---------+---------+---------+--------+
+| v100    |inference| half    |     38 |
++---------+---------+---------+--------+
+| a100    | train   | double  |   213  |
++---------+---------+---------+--------+
+| a100    | train   | float   |    68  |
++---------+---------+---------+--------+
+| a100    | train   | half    |   57   |
++---------+---------+---------+--------+
+| a100    |inference| double  |    69  |
++---------+---------+---------+--------+
+| a100    |inference| float   |  30    |
++---------+---------+---------+--------+
+| a100    |inference| half    |   25   |
++---------+---------+---------+--------+
 
 建议
 ----------------
