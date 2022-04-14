@@ -1,14 +1,14 @@
-DGX-2使用文档
+AI平台使用文档
 =============
 
-交大AI计算平台是国内高校计算力能最强的人工智能计算平台。该平台由8台DGX-2组成，每台DGX-2配备16块NVIDIA
+交大AI计算平台是国内高校计算力能最强的人工智能计算平台。平台拥有两种GPU计算资源。思源一号GPU 采用 NVIDIA HGX A100 4-GPU，共 23 个计算节点；Pi超算有8台DGX-2，每台DGX-2配备16块NVIDIA
 Tesla V100，深度学习张量计算能力可以达到16PFLOPS；通过搭载NVIDIA
 NVSwitch创新技术， GPU间带宽高达 2.4
 TB/s。AI计算平台采用可扩展架构，使得模型的复杂性和规模不受传统架构局限性的限制，从而可以应对众多复杂的人工智能挑战。
 
-AI 计算平台每块 V100 默认配置 6 个 CPU 核心。
+AI 计算平台每块 V100 默认配置 6 个 CPU 核心；A100 默认配置16个CPU核心。
 
-本文将向大家介绍DGX-2的使用方法。
+本文将向大家介绍AI平台的使用方法。
 
 如果我们可以提供任何帮助，请随时联系\ `hpc邮箱 <hpc@sjtu.edu.cn>`__\ 。
 
@@ -127,6 +127,35 @@ GPU程序调试
    $ srun -N 1 -n 1 -p dgx2 --gres=gpu:1 --pty /bin/bash
    $ module load cuda
    $ cuda-gdb ./your_app
+
+A100作业示例
+-------------
+
+注意：提交a100队列作业请使用思源一号登录节点（sylogin）提交。
+
+这是一个名为\ ``a00.slurm``\ 的 **单机单卡**
+作业脚本，该脚本向a100队列申请1块GPU（默认配置16个CPU核心），并在作业完成时通知。在此示例作业中执行的为NVIDIA
+Sample中的\ ``cudaTensorCoreGemm``\ 。
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=a100_test
+   #SBATCH --partition=a100
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1 
+   #SBATCH --cpus-per-task=16
+   #SBATCH --gres=gpu:1
+   #SBATCH --mail-type=end
+   #SBATCH --mail-user=YOU@EMAIL.COM
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load gcc cuda
+
+   ./cudaTensorCoreGemm
+
 
 参考资料
 --------
