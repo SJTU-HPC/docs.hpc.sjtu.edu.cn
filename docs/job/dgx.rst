@@ -81,7 +81,7 @@ DGX-2 使用
    ./cudaTensorCoreGemm
 
 DGX-2 交互模式
--------------
+------------------
 
 使用如下命令申请一卡 GPU，默认配置 6 CPU 核心。该交互模式适用于调试和安装：
 
@@ -109,7 +109,7 @@ GPU 利用率查看，需先登录正在使用的 GPU 计算节点，然后输�
 
 
 参考资料
---------
+-----------
 
 -  `DGX-2 User
    Guide <https://docs.nvidia.com/dgx/pdf/dgx2-user-guide.pdf>`__
