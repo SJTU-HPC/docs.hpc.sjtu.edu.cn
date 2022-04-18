@@ -78,7 +78,7 @@ Amber 编译方法
    source activate amber
    source $YOUR_AMBER_PATH/amber20/amber.sh
 
-   mpirun -n $SLURM_NTASKS pmemd.cuda...
+   pmemd.cuda...
 
 
 ARM 版 AMBER

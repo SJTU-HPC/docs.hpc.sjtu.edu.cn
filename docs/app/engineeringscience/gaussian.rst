@@ -11,24 +11,6 @@ GAUSSIAN 是一个量子化学软件包，它是目前应用最广泛的计算�
 GAUSSIAN 使用需要授权。请先确认是否拥有使用许可。
 
 
-GAUSSIAN 安装方法
------------------------
-
-以下介绍在思源一号上安装 GAUSSIAN。
-
-.. code:: bash
-
-   srun -p 64c512g -N 1 -n 8 --pty /bin/bash     # 申请计算节点编译
-
-   export g16root=/dssg/home/acct-XXX/XXX
-   export GAUSS_SCRDIR=/dssg/home/acct-XXX/XXX/tmp
-   source /dssg/home/acct-XXX/XXX/g16/bsd/g16.profile
-
-   tar -xjvf G16-A03-AVX2.tbz
-   cd g16
-   ./bsd/install
-
-
 作业脚本示例（假设作业脚本名为 `test.slurm` ）：
 
 .. code:: bash
