@@ -158,7 +158,7 @@ ssh-copy-id 将本地主机的公钥 id_rsa.pub添加到远程主机的信任列
 
    $ chmod 600 ~/.ssh/config
 
-然后，您只需输入以下内容即可登录 π 群集：
+然后，您只需输入以下内容即可登录群集：
 
 .. code:: bash
 
@@ -172,7 +172,7 @@ ssh-copy-id 将本地主机的公钥 id_rsa.pub添加到远程主机的信任列
 
 .. code:: bash
 
-   （在 π 集群上）$ rm -f ~/.ssh/authorized_keys           # 清除服务器上原有的 authorized_keys
+   （在超算集群上）$ rm -f ~/.ssh/authorized_keys             # 清除服务器上原有的 authorized_keys
    （在自己电脑上）$ rm  ~/.ssh/id*                           # 清除本地 .ssh 文件夹中的密钥对
    （在自己电脑上）$ ssh-keygen -t rsa                        # 在本地重新生成密钥对。第二个问题，设置密码短语 (passphrase)，并记住密码短语
    （在自己电脑上）$ ssh-keygen -R sylogin.hpc.sjtu.edu.cn    # 清理本地 known_hosts 里关于 π 集群的条目
