@@ -33,7 +33,7 @@ Bismark可以高效地分析BS-Seq数据，方便地进行读段比对和甲基�
 
    srun -p 64c512g -n 4 --pty /bin/bash
    module purge
-   module load samtools/1.13-gcc-11.2.0
+   module load bismark/0.23.0-gcc-11.2.0
    bismark --help
 
 .. _bismark/0.19.0-intel-19.0.4:
