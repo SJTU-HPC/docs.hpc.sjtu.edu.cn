@@ -15,6 +15,7 @@ Amber 是分子动力学软件，用于蛋白质、核酸、糖等生物大分�
 Amber 编译方法
 -----------------------
 
+以下介绍在思源一号上编译 Amber20 的 cuda 版
 
 .. code:: bash
 
@@ -32,7 +33,11 @@ Amber 编译方法
 
    cd amber20_src/build/
 
-将 `amber20_src/build/run_cmake` 第 42 行  `-DCUDA=FALSE` 改为 `-DCUDA=TRUE`
+接下来修改 `amber20_src/build/run_cmake` 文件：
+
+* 第 42 行  `-DCUDA=FALSE` 改为 `-DCUDA=TRUE`
+
+* 第 43 行  `-DDOWNLOAD_MINICONDA=TRUE` 改为 `-DDOWNLOAD_MINICONDA=FALSE`
 
 然后编译：
 
@@ -42,11 +47,15 @@ Amber 编译方法
    ./run_cmake -j 8
    make install
    
-编译完成后，激活即可运行
+编译完成后，将激活命令添加至 `~/.bashrc` 文件，或将激活命令写入作业脚本里：
 
 .. code:: bash
 
-   source ../../amber20/amber.sh
+   vi ~/.bashrc
+
+   （将下面一行添加至 ~/.bashrc 文件：）
+   source $YOUR_AMBER_PATH/amber20/amber.sh
+
 
 
 作业脚本示例：
@@ -69,7 +78,7 @@ Amber 编译方法
    source activate amber
    source $YOUR_AMBER_PATH/amber20/amber.sh
 
-   pmemd.cuda...
+   mpirun -n $SLURM_NTASKS pmemd.cuda...
 
 
 ARM 版 AMBER

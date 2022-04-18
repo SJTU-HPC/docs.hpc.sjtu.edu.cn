@@ -67,25 +67,12 @@ SSH 登录
 登录方法二：客户端登录
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Windows
-^^^^^^^
-
 Windows 推荐使用 Putty 免费客户端，下载后双击即可运行使用。可至 \ `Putty 官网 <https://www.putty.org>`__\
-下载。
+下载。Linux / Unix / Mac 操作系统拥有自己的 SSH 客户端，包括 ssh, scp, sftp 等。
 
 
-Linux/Unix/Mac
-^^^^^^^^^^^^^^
+下面介绍 Windows 用户使用 Putty 客户端登录思源一号。
 
-Linux / Unix / Mac 操作系统拥有自己的 SSH 客户端，包括 ssh, scp, sftp 等。
-
-SSH 登录 π 集群
-----------------------------
-
-下面介绍通过 SSH 登录
-
-Windows用户
-^^^^^^^^^^^^^^^^^
 
 启动客户端 Putty，填写登录节点地址 sylogin.hpc.sjtu.edu.cn （适用于思源一号），或  login.hpc.sjtu.edu.cn （适用于 π 集群），端口号采用默认值 22，然后点 Open 按钮，如下图所示：
 
@@ -98,14 +85,6 @@ Windows用户
 
 *提示：输入密码时，不显示字符，请照常进行操作，然后按回车键登录。*
 
-Linux/Unix/Mac用户使用SSH
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Linux / Unix / Mac 用户可以使用终端中的命令行工具登录。下列语句指出了该节点的IP地址、用户名和SSH端口。
-
-.. code:: bash
-
-   $ ssh YOUR_USERNAME@TARGET_IP
 
 通过 SSH 传输文件
 -----------------
