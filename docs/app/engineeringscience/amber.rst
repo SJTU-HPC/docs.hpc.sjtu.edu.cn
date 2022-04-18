@@ -20,6 +20,9 @@ Amber 编译方法
 
    srun -p 64c512g -N 1 -n 8 --pty /bin/bash     # 申请计算节点编译
 
+   tar xvfj AmberTools20.tar.bz2                 # 解压缩
+   tar xvfj Amber20.tar.bz2
+
    module load miniconda3
    conda create -n amber
    source activate amber
@@ -27,25 +30,47 @@ Amber 编译方法
    pip3 install matplotlib
    pip3 install tk
 
-   tar xvf amber20.tar.gz
-   cd amber20
-   make veryclean
+   cd amber20_src/build/
 
-将 `amber20_src/build/run_cmake` 按下方修改
+将 `amber20_src/build/run_cmake` 第 42 行  `-DCUDA=FALSE` 改为 `-DCUDA=TRUE`
 
-.. code:: bash
-
-   cmake $AMBER_PREFIX/amber20_src \
-    -DCMAKE_INSTALL_PREFIX=$AMBER_PREFIX/amber20 \
-    -DCOMPILER=GNU \
-    -DMPI=FALSE -DCUDA=TRUE -DINSTALL_TESTS=TRUE \
-    -DDOWNLOAD_MINICONDA=FALSE -DMINICONDA_USE_PY3=TRUE \
-    2>&1 | tee cmake.log
+然后编译：
 
 .. code:: bash
 
    module load cuda
    ./run_cmake -j 8
+   make install
+   
+编译完成后，激活即可运行
+
+.. code:: bash
+
+   source ../../amber20/amber.sh
+
+
+作业脚本示例：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=amber
+   #SBATCH --partition=a100
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=16
+   #SBATCH --gres=gpu:1          # use 1 GPU
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module purge
+   module load miniconda3
+   module load cuda
+   source activate amber
+   source $YOUR_AMBER_PATH/amber20/amber.sh
+
+   pmemd.cuda...
+
 
 ARM 版 AMBER
 -------------
