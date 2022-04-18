@@ -13,6 +13,7 @@
    cp2k
    gerris
    gnuplot
+   gaussian
    gromacs
    lammps
    lammps-rbe
