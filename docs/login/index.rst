@@ -85,9 +85,9 @@ SSH 登录 π 集群
 下面介绍通过 SSH 登录
 
 Windows用户
-^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
-启动客户端 Putty，填写登录节点地址 `sylogin.hpc.sjtu.edu.cn`（适用于思源一号），或 `login.hpc.sjtu.edu.cn`（适用于 π 集群），端口号采用默认值 22，然后点 Open 按钮，如下图所示：
+启动客户端 Putty，填写登录节点地址 sylogin.hpc.sjtu.edu.cn （适用于思源一号），或  login.hpc.sjtu.edu.cn （适用于 π 集群），端口号采用默认值 22，然后点 Open 按钮，如下图所示：
 
 .. image:: ../img/putty1.png
 
