@@ -1,12 +1,12 @@
 .. _samtools:
 
-SAMtools
+Samtools
 =========
 
 简介
 ----
 
-SAMtools是一个用于操作SAM(Sequence Alignment/Map)和BAM文件的工具合集，包含许多命令。
+Samtools是一个用于操作SAM(Sequence Alignment/Map)和BAM文件的工具合集，包含许多命令。
 
 可用的版本
 ----------
@@ -30,7 +30,7 @@ SAMtools是一个用于操作SAM(Sequence Alignment/Map)和BAM文件的工具合
 使用 Conda 安装 SAMtools
 --------------------------
 
-推荐使用 ``Conda`` 在用户目录部署特定的 ``SAMtools`` 软件，以思源一号为例：
+推荐使用 ``Conda`` 在用户目录部署特定的 ``Samtools`` 软件，以思源一号为例：
 
 .. code-block:: bash
 
@@ -39,7 +39,7 @@ SAMtools是一个用于操作SAM(Sequence Alignment/Map)和BAM文件的工具合
    module load miniconda3/4.10.3
    conda create -n biotools                 # 创建新的环境
    source activate biotools                 # 激活环境
-   conda install -c bioconda samtools=1.13  # 安装SAMtools
+   conda install -c bioconda samtools=1.13  # 安装Samtools
    samtools --help
 
 示例文件
@@ -136,7 +136,7 @@ SAM 文件比对信息
 
 上述11列信息，是 ``SAM`` 文件必要的组成部分。除此之外，每行可以追加可选信息。该部分信息以 ``TAG:TYPE:VALUE`` 形式存储。详细介绍可参考 `官方文档 <http://www.htslib.org/doc/samtools.html>`__。
 
-SAMtools 常用命令
+Samtools 常用命令
 ------------------
 
 .. code-block:: bash
@@ -151,4 +151,4 @@ SAMtools 常用命令
 参考资料
 --------
 
--  `SAMtools 文档 <http://www.htslib.org/doc/samtools.html>`__
+-  `Samtools 文档 <http://www.htslib.org/doc/samtools.html>`__
