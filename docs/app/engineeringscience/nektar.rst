@@ -10,28 +10,12 @@ Nektar++ is a spectral/hp element framework designed to support the
 construction of efficient high-performance scalable solvers for a wide
 range of partial differential equations.
 
-π 集群上的Nektar++
-----------------------
 
-查看 π 集群上已编译的软件模块:
-
-.. code:: bash
-
-   module avail Nektar
-
-加载预安装的Nektar++
----------------------
-
-π 集群系统中已经预装 nektar-5.0.0 (intel 版本)，可以用以下命令加载:
-
-::
-
-   module load nektar/5.0.0-intel-19.0.4-impi
 
 Nektar++使用说明
 -----------------------------
 
-1. 求解二维方形区域的对流方程(单核串行)
+1. 求解二维方形区域的对流方程(pi2.0上单核串行)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 |image1|
 
@@ -144,7 +128,7 @@ Nektar++使用说明
 
 
 
-2. 可压缩圆柱绕流(多核并行)
+2. 可压缩圆柱绕流(pi2.0上多核并行)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 1. 从 `Nektar 官网 <https://www.nektar.info/>`__ 的GETTING STARTED->Tutorials->Compressible Flow Solver->Subsonic Cylinder->Introduction->Goals板块下载所需要的数据文件cfs-CylinderSubsonic_NS.tar.gz并解压；
  
@@ -230,7 +214,9 @@ Nektar++使用说明
   #SBATCH --exclusive
   #SBATCH --output=%j.out
   #SBATCH --error=%j.err
+
   module load openmpi/4.1.1-gcc-8.5.0
+
   IMAGE_PATH=/dssg/share/imgs/nektar++/nek.sif
   mpirun -np 2 singularity exec $IMAGE_PATH ADRSolver ADR_mesh_aligned.xml ADR_conditions.xml
 
