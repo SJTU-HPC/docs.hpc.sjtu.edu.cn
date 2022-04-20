@@ -10,15 +10,209 @@ LAMMPS-RBE是由上海交通大学上海应用数学中心团队基于LAMMPS二�
 
 详细算法解释可以参阅: https://math.sjtu.edu.cn/faculty/xuzl/RBE.pdf
 
-π 集群上的 LAMMPS-RBE
-----------------------
+新增功能细节描述在本文底部。
 
-- `CPU版本 LAMMPS-RBE`_
+可用的版本
+----------
 
-.. _CPU版本 LAMMPS-RBE:
++----------+-------+----------+------------------------------------------------------------+
+| 版本     | 平台  | 构建方式 | 模块名                                                     |
++==========+=======+==========+============================================================+
+| 7Aug2019 | |cpu| | 源码     | lammps-rbe/20190807-oneapi-2021.4 思源一号                 |
++----------+-------+----------+------------------------------------------------------------+
+| 7Aug2019 | |cpu| | 源码     | lammps-rbe/20190807-intel-parallel-studio-2020.1-impi π2.0 |
++----------+-------+----------+------------------------------------------------------------+
+| 7Aug2019 | |cpu| | 容器     | lammps-rbe/20190807-oneapi-2021.1-impi π2.0                |
++----------+-------+----------+------------------------------------------------------------+
 
-CPU版本
-~~~~~~~
+算例获取
+--------
+
+π2.0上数据获取
+~~~~~~~~~~~~~~
+
+.. code:: bash
+
+   mkdir ~/lammps-rbe && cd ~/lammps-rbe
+   cp -r /lustre/share/benchmarks/lammps-rbe/lammps-rbe.tar.gz .
+   tar xf lammps-rbe.tar.gz
+   cd RBE_Example/
+
+思源一号上数据获取
+~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+   mkdir ~/lammps-rbe && cd ~/lammps-rbe
+   cp -r /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/lammps-rbe-2019.8.4/Lammps-RBE/RBE_Example ./
+   cd  RBE_Example/
+
+数据的目录结构如下所示：
+
+.. code:: bash
+
+   [hpc@login2 Lammps-RBE]$ tree RBE_Example/
+   RBE_Example/
+   ├── in.spce-bulk-nvt
+   └── lmp.data
+ 
+注意：
+本文算例步数设置为40000，即文件 ``in.spce-bulk-nvt`` 最后一行内容为： ``run 40000``
+
+运行核数要和文件 ``in.spce-bulk-nvt`` 中的参数 ``kspace_style	rbe 0.07 200 80`` 最后一个数字保持一致，比如本例中为： ``80``
+
+不同集群上的 LAMMPS-RBE
+-----------------------
+
+- `思源一号 LAMMPS-RBE`_
+
+- `π2.0 LAMMPS-RBE`_
+
+.. _思源一号 LAMMPS-RBE:
+
+思源一号
+--------
+
+作业脚本如下所示：
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH -J lammps-rbe
+   #SBATCH -p 64c512g
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --exclusive
+   #SBATCH -o RBE.out
+   #SBATCH -e %j.err
+   
+   module load lammps-rbe/20190807-oneapi-2021.4
+   mpirun lmp_intel_cpu_intelmpi -i in.spce-bulk-nvt
+
+提交上述脚本
+
+.. code:: bash
+
+   sbatch lammps-rbe.slurm
+
+运行结果如下所示：
+
+.. code:: bash
+
+   [hpc@node738 bte]$ tail -n 1 RBE_BAOBAO.log 
+   Total wall time: 0:02:01
+
+.. _π2.0 LAMMPS-RBE:
+
+π2.0
+----
+
+源码编译版本
+~~~~~~~~~~~~
+
+lammps-rbe/20190807-intel-parallel-studio-2020.1-impi
+
+作业脚本如下所示：
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH -J lammps 
+   #SBATCH -p cpu
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=40  
+   #SBATCH --exclusive
+   #SBATCH -o RBE.out
+   #SBATCH -e %j.err  
+   
+   module load lammps-rbe/20190807-intel-parallel-studio-2020.1-impi
+   mpirun lmp_intel_cpu_intelmpi -i in.spce-bulk-nvt
+
+提交作业：
+
+.. code:: bash
+
+   $ sbatch lammps-rbe.slurm
+
+运行结果如下：
+
+.. code:: bash
+
+   [hpc@login2 80cores_intel]$ tail -n 1 RBE_BAOBAO.log 
+   Total wall time: 0:03:28
+
+容器版本
+~~~~~~~~
+
+lammps-rbe/20190807-oneapi-2021.1-impi π2.0
+
+运行脚本如下：
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH -J lammps 
+   #SBATCH -p cpu
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=40  
+   #SBATCH --exclusive
+   #SBATCH -o RBE.out
+   #SBATCH -e %j.err  
+   
+   module load lammps-rbe/20190807-oneapi-2021.1-impi
+   mpirun lammps-rbe -i in.spce-bulk-nvt
+
+提交上述作业
+
+.. code:: bash
+
+   sbatch lammps-rbe.slurm
+
+运行结果如下所示：
+
+.. code:: bash
+
+   [hpc@login2 80cores]$ tail -n 1 RBE_BAOBAO.log 
+   Total wall time: 0:04:26
+
+运行结果
+--------
+
+思源一号上的结果
+~~~~~~~~~~~~~~~~
+
++-------------------------------------------------------+
+|           lammps-rbe/20190807-oneapi-2021.4           |
++==============+============+=============+=============+
+| 核数         | 64         | 128         | 256         |
++--------------+------------+-------------+-------------+
+| wall time    | 0:03:10    | 0:02:02     | 0:01:26     |
++--------------+------------+-------------+-------------+
+
+π2.0上的结果
+~~~~~~~~~~~~
+
++-------------------------------------------------------+
+| lammps-rbe/20190807-intel-parallel-studio-2020.1-impi |
++==============+============+=============+=============+
+| 核数         | 40         | 80          | 160         |
++--------------+------------+-------------+-------------+
+| wall time    | 0:06:09    | 0:03:28     | 0:02:09     |
++--------------+------------+-------------+-------------+
+
++-------------------------------------------------------+
+|         lammps-rbe/20190807-oneapi-2021.1-impi        |
++==============+============+=============+=============+
+| 核数         | 40         | 80          | 160         |
++--------------+------------+-------------+-------------+
+| wall time    | 0:06:17    | 0:04:26     | 0:03:48     |
++--------------+------------+-------------+-------------+
+
+新增功能
+--------
 
 同Lammps已有功能相比，该版本新增三个功能：
 
@@ -75,27 +269,3 @@ fix和temp是固定指令，baoab是控压算法名称，ID是用户为这条fix
 fix 2 all baoab temp 298 298 5 iso 1.0 1.0 100
 
 表示使用Langevin动力学对所有原子做各向同性控压，开始和结束的外部温度和外部压强分别为298K和1bar，控温和控压阻尼系数分别为5fs和100fs。该fix指令的名字被设定为2。
-
-
-作业脚本如下(lammps-rbe.slurm):
--------------------------------
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=lammps
-   #SBATCH --partition=small
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=20
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-
-
-   module load lammps-rbe
-
-   srun --mpi=pmi2 -n 20 lmp_intel_cpu_intelmpi -i in.spce-bulk-nvt
-
-.. code:: bash
-
-   $ sbatch lammps-rbe.slurm

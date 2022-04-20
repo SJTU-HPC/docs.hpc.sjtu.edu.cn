@@ -4,9 +4,45 @@ ParaView是对二维和三维数据进行分析和可视化的程序，它既是
 ParaView支持并行，可以运行于单处理器的工作站，也可以运行于分布式存储器的大型计算机。 ParaView用C++编写，基于VTK（Visualization ToolKit）开发，图形用户界面用Qt开发，开源、跨平台。
 ParaView用户可以迅速的建立起可视化环境利用定量或者是定性的手段去分析数据。利用它的批量处理能力可以在三维或者是在报表中交互进行“数据挖掘”。
 
-登录HPC
-Studio平台后，可以在内置应用中选择\ ``Paraview``。
 
+Paraview的基本使用
+--------------------------
+
+1. 首先根据 `OpenFOAM 使用说明文档 <https://docs.hpc.sjtu.edu.cn/app/engineeringscience/openfoam.html>`__ 的步骤运行cavity算例，运行成功后在对应cavity目录下会得到如下目录：
+
+.. code:: bash
+
+ 0
+ 0.1
+ 0.2
+ 0.3
+ 0.4
+ 0.5
+ constant
+ system
+
+2. 在cavity目录下新建mycase.foam文件(内容为空)：
+
+.. code:: bash
+ 
+  touch mycase.foam
+  
+3. 用pi集群帐号登录  `HPC Studio <https://studio.hpc.sjtu.edu.cn/>`__ 平台。然后在Interactive Apps面板中点击如下图所示ParaView选项申请Paraview GUI 界面(要排一会儿队，请耐心等待)：
+
+
+|image1|
+
+4. 申请成功后会看到如下界面：
+
+|image2|
+
+5. 点击左上角 File->Open，打开刚才在 cavity 目录中新建的 mycase.foam 文件。然后点击左下部 Properties->Apply 按钮，如下图所示：
+
+|image3|
+
+6. 结果如图所示(运行cavity算例得到的压强场分布)：
+
+|image4|
 
 Paraview的插件配置
 --------------------------
@@ -128,3 +164,9 @@ desktop中的终端。由于5.6版本的paraview不能正确检测MESA的版本�
 参考资料
 -----------------------
 - PVGeo官方配置教程 \ https://pvgeo.org/overview/getting-started.html\ 。
+
+
+.. |image1| image:: ../img/paraview1.png
+.. |image2| image:: ../img/paraview2.png
+.. |image3| image:: ../img/paraview3.png
+.. |image4| image:: ../img/paraview4.png

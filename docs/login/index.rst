@@ -2,70 +2,79 @@
 登录
 ****
 
-获取 π 集群帐号后，可通过浏览器登录 \ `可视化平台 HPC Studio <../studio/index.html>`__\ ，也可通过传统的 SSH 登录。下面将介绍 SSH 登录方法。
+获取集群帐号后，可通过浏览器登录 \ `可视化平台 HPC Studio <../studio/index.html>`__\ ，也可通过传统的 SSH 登录。下面将介绍 SSH 登录方法。
 
-通过 SSH 登录 π 集群
+通过 SSH 登录集群
 ==========================
-
-本文将向大家介绍如何通过 SSH 远程登录到 π 集群上。在阅读本文档之前，您需要具备 Linux/Unix、终端、MS-DOS、SSH
-远程登录的相关知识，或者您可以阅读参考资料理解这些概念。
 
 本文主要内容：
 
--  使用 SSH 登录 π 集群的注意事项；
+-  使用 SSH 登录集群的注意事项；
 -  首次登录准备，如信息采集、客户端下载、SSH 登录、SSH 文件传输、无密码登录等；
 -  故障排除和反馈。
-
-按照文档的操作说明将有助于您完成工作，谢谢您的配合！
 
 注意事项
 --------
 
--   π 集群帐号仅限于同一课题组的成员使用，请勿将帐号借给他人使用。
--  请妥善保管好您的帐号密码，不要告知他人。 π 集群管理员不会要求您提供密码。
+-  集群帐号仅限于同一课题组的成员使用，请勿将帐号借给他人使用。
+-  请妥善保管好您的帐号密码，不要告知他人。集群管理员不会要求您提供密码。
 -  恶意的 SSH 客户端软件会窃取您的密码，请在官网下载正版授权 SSH 客户端软件。
--  登录 π 集群后，请不要跳转到其他登录节点。任务完成后请关闭 SSH 会话。
+-  登录集群后，请不要跳转到其他登录节点。任务完成后请关闭 SSH 会话。
 -  若无法登录，请检查输入密码或确认 IP 地址是否正确。您可以参考故障排除和反馈，将诊断信息发送给 \ `HPC 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ 。
 
-准备
-----
+SSH 登录
+-------------------
 
-通过 SSH 登录 π 集群，需要在客户端输入登录节点 IP 地址（或主机名），SSH 端口，SSH 用户名和密码。帐号开通后您会收到以下内容的邮件：
+帐号开通后您会收到含有以下内容的邮件，包含帐号用户名和密码用于登录集群。登录集群有两种方式：SSH 命令行登录、SSH 客户端登录。
 
 ::
 
-   SSH login node: login.hpc.sjtu.edu.cn
    Username: YOUR_USERNAME
    Password: YOUR_PASSWORD
 
-登录节点 IP 地址（或主机名）为 login.hpc.sjtu.edu.cn
+登录方法一：命令行登录
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-SSH 端口为 22
 
-下载客户端
-----------
+* 思源一号
 
-Windows
-^^^^^^^
+.. code:: bash
+
+   $ ssh username@sylogin.hpc.sjtu.edu.cn
+
+* π 集群
+
+.. code:: bash
+
+   $ ssh username@login.hpc.sjtu.edu.cn
+
+* ARM 集群（限校内 IP，或使用 SJTU VPN）
+  
+.. code:: bash
+
+   $ ssh username@armlogin.hpc.sjtu.edu.cn
+
+
+说明：
+
+* 登录节点 IP 地址（或主机名）分别为 sylogin.hpc.sjtu.edu.cn（思源一号）、login.hpc.sjtu.edu.cn（π 集群）、armlogin.hpc.sjtu.edu.cn（ARM）
+
+* 思源一号和 π 集群通过上述命令登录，会自动分配到多个登录节点之一，如 sylogin1, sylogin2, login1, login2, login3。也可以手动指定这五个具体的登录节点之一登录，如 ssh username@sylogin1.hpc.sjtu.edu.cn
+
+* SSH 端口均为默认值 22
+
+
+登录方法二：客户端登录
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Windows 推荐使用 Putty 免费客户端，下载后双击即可运行使用。可至 \ `Putty 官网 <https://www.putty.org>`__\
-下载。
+下载。Linux / Unix / Mac 操作系统拥有自己的 SSH 客户端，包括 ssh, scp, sftp 等。
 
 
-Linux/Unix/Mac
-^^^^^^^^^^^^^^
+下面介绍 Windows 用户使用 Putty 客户端登录思源一号。
 
-Linux / Unix / Mac 操作系统拥有自己的 SSH 客户端，包括 ssh, scp, sftp 等。
 
-SSH 登录 π 集群
-----------------------------
-
-下面介绍通过 SSH 登录
-
-Windows用户
-^^^^^^^^^^^
-
-启动客户端 Putty，填写登录节点地址 login.hpc.sjtu.edu.cn，端口号采用默认值 22，然后点 Open 按钮，如下图所示：
+启动客户端 Putty，填写登录节点地址 sylogin.hpc.sjtu.edu.cn （适用于思源一号），或  login.hpc.sjtu.edu.cn （适用于 π 集群），端口号采用默认值 22，然后点 Open 按钮，如下图所示：
 
 .. image:: ../img/putty1.png
 
@@ -76,14 +85,6 @@ Windows用户
 
 *提示：输入密码时，不显示字符，请照常进行操作，然后按回车键登录。*
 
-Linux/Unix/Mac用户使用SSH
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Linux / Unix / Mac 用户可以使用终端中的命令行工具登录。下列语句指出了该节点的IP地址、用户名和SSH端口。
-
-.. code:: bash
-
-   $ ssh YOUR_USERNAME@TARGET_IP
 
 通过 SSH 传输文件
 -----------------
@@ -130,7 +131,7 @@ ssh-copy-id 将本地主机的公钥 id_rsa.pub添加到远程主机的信任列
 
 .. code:: bash
 
-   （在 π 集群上）$ chmod 600 ~/.ssh/authorized_keys
+   （在集群上）$ chmod 600 ~/.ssh/authorized_keys
 
 .. image:: ../img/sshfile.png
 
@@ -157,7 +158,7 @@ ssh-copy-id 将本地主机的公钥 id_rsa.pub添加到远程主机的信任列
 
    $ chmod 600 ~/.ssh/config
 
-然后，您只需输入以下内容即可登录 π 群集：
+然后，您只需输入以下内容即可登录群集：
 
 .. code:: bash
 
@@ -171,10 +172,10 @@ ssh-copy-id 将本地主机的公钥 id_rsa.pub添加到远程主机的信任列
 
 .. code:: bash
 
-   （在 π 集群上）$ rm -f ~/.ssh/authorized_keys           # 清除服务器上原有的 authorized_keys
+   （在超算集群上）$ rm -f ~/.ssh/authorized_keys             # 清除服务器上原有的 authorized_keys
    （在自己电脑上）$ rm  ~/.ssh/id*                           # 清除本地 .ssh 文件夹中的密钥对
    （在自己电脑上）$ ssh-keygen -t rsa                        # 在本地重新生成密钥对。第二个问题，设置密码短语 (passphrase)，并记住密码短语
-   （在自己电脑上）$ ssh-keygen -R login.hpc.sjtu.edu.cn      # 清理本地 known_hosts 里关于 π 集群的条目
+   （在自己电脑上）$ ssh-keygen -R sylogin.hpc.sjtu.edu.cn    # 清理本地 known_hosts 里关于 π 集群的条目
    （在自己电脑上）$ ssh-copy-id YOUR_USERNAME@TARGET_IP      # 将本地新的公钥发给服务器，存在服务器的 authorized_keys 文件里
 
 SSH 重置 known_hosts
@@ -184,7 +185,7 @@ SSH 重置 known_hosts
 
 .. code:: bash
 
-   （在自己电脑上）$ ssh-keygen -R login.hpc.sjtu.edu.cn
+   （在自己电脑上）$ ssh-keygen -R sylogin.hpc.sjtu.edu.cn
 
 调试 SSH 登录问题
 -----------------
@@ -195,13 +196,13 @@ SSH 重置 known_hosts
 
 2. 若在登录节点运行计算密集的作业，程序会被自动查杀，您的帐号会被加入到黑名单，并在 30-120 分钟内无法登录。
 
-若需重置密码，请使用或抄送帐号负责人邮箱发送邮件到  \ `HPC 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ ，我们将会在 1 个工作日内响应您的申请。 
+若需重置密码，请使用或抄送帐号负责人邮箱发送邮件到  \ `HPC 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ ，我们将会在 1 个工作日内响应您的申请。
 
 排查登录问题，还可以使用 ping 命令检查您的电脑和 π 集群连接状态。
 
 .. code:: bash
 
-   $ ping login.hpc.sjtu.edu.cn
+   $ ping sylogin.hpc.sjtu.edu.cn
 
 
 登录常掉线的问题
@@ -217,7 +218,7 @@ Mac/Linux用户
 .. code:: bash
 
    Host pi-sjtu-login:
-       HostName login.hpc.sjtu.edu.cn
+       HostName sylogin.hpc.sjtu.edu.cn
        ServerAliveInterval 240
 
 其中 ServerAliveInterval 后的值即为阈值，单位为秒，用户可根据需要自行调整。
@@ -277,6 +278,7 @@ ARM节点登录方式
 
    $ salloc -p arm128c256g -n 4
    $ ssh [分配的节点]
+
 
 Tmux
 ====

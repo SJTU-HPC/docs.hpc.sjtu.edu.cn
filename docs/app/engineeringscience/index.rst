@@ -13,6 +13,7 @@
    cp2k
    gerris
    gnuplot
+   gaussian
    gromacs
    lammps
    lammps-rbe
@@ -35,3 +36,4 @@
    gmx_mmpbsa
    cmaq
    thirdorder
+   gift-bte

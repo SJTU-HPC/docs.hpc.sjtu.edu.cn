@@ -26,6 +26,7 @@
    clever
    cnvnator
    control-freec
+   colabfold
    crest
    cufflinks
    chimera
@@ -89,3 +90,4 @@
    wgcna
    wham
    rosetta
+   hic_breakfinder

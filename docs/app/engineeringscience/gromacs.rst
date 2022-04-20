@@ -9,204 +9,376 @@ GROMACS
 GROMACS
 是一种分子动力学应用程序，可以模拟具有数百至数百万个粒子的系统的牛顿运动方程。GROMACS旨在模拟具有许多复杂键合相互作用的生化分子，例如蛋白质，脂质和核酸。
 
-调用GROMACS模块
----------------
+可用的版本
+----------
 
-超算平台提供了多个预编译的Gromacs模块，可用 ``module load`` 指令加载特定模块。
++--------+-------+----------+----------------------------------------------------------+
+| 版本   | 平台  | 构建方式 | 模块名                                                   |
++========+=======+==========+==========================================================+
+| 2021.3 | |cpu| | spack    | gromacs/2021.3-intel-2021.4.0 思源一号                   |
++--------+-------+----------+----------------------------------------------------------+
+| 2021.3 | |cpu| | spack    | gromacs/2021.3-gcc-11.2.0-cuda-openblas-openmpi 思源一号 |
++--------+-------+----------+----------------------------------------------------------+
+| 2019.4 | |cpu| | spack    | gromacs/2019.4-gcc-9.2.0-openmpi                         |
++--------+-------+----------+----------------------------------------------------------+
+| 2020   | |cpu| | 容器     | gromacs/2020-cpu-double                                  |
++--------+-------+----------+----------------------------------------------------------+
+| 2022   | |arm| | 源码     | gromacs/2022-gcc-9.3.0                                   |
++--------+-------+----------+----------------------------------------------------------+
 
-+----------------------------------+-------+----------+-----------+
-| 模块名                           | 平台  | 容器部署 | 单/双精度 |
-+==================================+=======+==========+===========+
-| gromacs/2020-cpu                 | |cpu| | 是       | 单精度    |
-+----------------------------------+-------+----------+-----------+
-| gromacs/2020-cpu-double          | |cpu| | 是       | 双精度    |
-+----------------------------------+-------+----------+-----------+
-| gromacs/2020-dgx                 | |gpu| | 是       | 单精度    |
-+----------------------------------+-------+----------+-----------+
-| gromacs/2019.2-gcc-9.2.0-openmpi | |cpu| | 否       | 单精度    |
-+----------------------------------+-------+----------+-----------+
-| gromacs/2021                     | |arm| | 是       | 单精度    |
-+----------------------------------+-------+----------+-----------+
-| gromacs/2019                     | |arm| | 是       | 单精度    |
-+----------------------------------+-------+----------+-----------+
-
-调用某个版本的 gromacs 模块:
-
-.. code:: bash
-
-   $ module load gromacs/2020-cpu
-
-测试算例
+算例下载
 ---------
 
 .. code:: bash
 
-   cp /lustre/share/benchmarks/gromacs/ion_channel.tpr .
+   mkdir ~/gromacs && cd ~/gromacs
+   wget -c https://ftp.gromacs.org/pub/benchmarks/water_GMX50_bare.tar.gz
+   tar xf water_GMX50_bare.tar.gz
+   cd water-cut1.0_GMX50_bare/0768/    
 
-使用CPU版Gromacs
+数据目录如下所示：
+
+.. code:: bash
+         
+   [hpc@login2 water-cut1.0_GMX50_bare]$ tree 0768/
+   0768/
+   ├── conf.gro
+   ├── pme.mdp
+   ├── rf.mdp
+   └── topol.top
+   
+   0 directories, 4 files
+
+集群上的GROMACS
 ----------------
 
-CPU版GROMACS作业示例
-^^^^^^^^^^^^^^^^^^^^
+- `一. 思源一号 GROMACS`_
 
-在cpu队列上，总共使用40核(n = 40)。cpu 队列每个节点配有40核，所以这里使用了1个节点。脚本名称可设为 slurm.test
-这个作业脚本申请了40个CPU计算核心，由于 `cpu` 队列上每个节点上有40个计算核心，因此这是一个单节点Gromacs作业。
+- `二. π2.0 GROMACS`_
 
-.. code:: bash
+- `三. ARM GROMACS`_
 
-    #!/bin/bash
 
-    #SBATCH -J gromacs_cpu_test
-    #SBATCH -p cpu
-    #SBATCH -n 40
-    #SBATCH --ntasks-per-node=40
-    #SBATCH -o %j.out
-    #SBATCH -e %j.err
+.. _一. 思源一号 GROMACS:
 
-    module load gromacs/2019.4-gcc-9.2.0-openmpi
+一. 思源一号 GROMACS
+--------------------
 
-    ulimit -s unlimited
-    ulimit -l unlimited
+1.INTEL编译的版本
+~~~~~~~~~~~~~~~~~~
 
-    srun --mpi=pmi2 gmx_mpi mdrun -s ./ion_channel.tpr -maxh 0.50 -resethway -noconfout -nsteps 10000
-    
-
-提交作业。
-
-.. code:: bash
-
-   $ sbatch slurm.test
-
-CPU版GROMACS作业示例(双精度)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
-核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
+预处理数据
 
 .. code:: bash
 
    #!/bin/bash
 
-   #SBATCH -J gromacs__cpu_double_test
-   #SBATCH -p cpu
-   #SBATCH -n 80
-   #SBATCH --ntasks-per-node=40
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
+   #SBATCH --job-name=64_gromacs       
+   #SBATCH --partition=64c512g  
+   #SBATCH -N 1 
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load oneapi
+   module load gromacs/2021.3-intel-2021.4.0
+   gmx_mpi grompp -f pme.mdp 
 
-   module load gromacs/2020-cpu-double
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   srun --mpi=pmi2 gmx_mpi_d mdrun -s ./ion_channel.tpr -maxh 0.50 -resethway -noconfout -nsteps 10000
-
-用下方语句提交作业
-
-.. code:: bash
-
-   $ sbatch slurm.test
-
-.. _GPU版本GROMACS:
-
-
-GPU版Gromacs(MPI版)
--------------------
-
-π 集群已预置最新的 GPU GROMACS MPI 版。脚本名称可设为 slurm.test
+提交作业脚本
 
 .. code:: bash
 
    #!/bin/bash
-   #SBATCH -J gromacs_gpu_test
-   #SBATCH -p dgx2
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=12
-   #SBATCH --cpus-per-task=1
-   #SBATCH --gres=gpu:2
 
-   module load gromacs/2020-dgx-mpi
+   #SBATCH --job-name=64_gromacs       
+   #SBATCH --partition=64c512g  
+   #SBATCH -N 2 
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load oneapi
+   module load gromacs/2021.3-intel-2021.4.0
+   mpirun gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
 
-   ulimit -s unlimited
-   ulimit -l unlimited
+2.GCC编译的版本
+~~~~~~~~~~~~~~~~
 
-   srun --mpi=pmi2 gmx_mpi mdrun -deffnm benchmark -ntomp 1 -s ./ion_channel.tpr
-
-
-使用如下指令提交：
-
-.. code:: bash
-
-   $ sbatch slurm.test
-
-.. _ARM版本GROMACS:
-
-
-ARM版Gromacs
-------------
-
-GROMACS—2021
-^^^^^^^^^^^^
-
-示例脚本如下(gromacs.slurm):    
+预处理数据
 
 .. code:: bash
 
    #!/bin/bash
    
-   #SBATCH --job-name=test       
-   #SBATCH --partition=arm128c256g       
-   #SBATCH -N 2           
-   #SBATCH --ntasks-per-node=128
+   #SBATCH --job-name=64_gromacs
+   #SBATCH --partition=64c512g
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=64
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
+   
+   module load gcc/11.2.0
+   module load openmpi/4.1.1-gcc-11.2.0
+   module load gromacs/2021.3-gcc-11.2.0-cuda-openblas-openmpi
+   gmx_mpi grompp -f pme.mdp 
 
-   module use /lustre/share/singularity/aarch64
-   module load gromacs/2021
-
-   srun --mpi=pmi2 gmx_mpi mdrun -s benchMEM.tpr -nsteps 10000 -resethway
-
-
-在 `ARM 节点 <../login/index.html#arm>`__\ 上使用如下指令提交（若在 π2.0 登录节点上提交将出错）：
+提交预处理作业脚本。
 
 .. code:: bash
 
-   $ sbatch gromacs.slurm
+   $ sbatch pre.slurm
 
-GROMACS-2019
-^^^^^^^^^^^^
+运行结果如下所示：
 
-性能测试
---------
+.. code:: bash
 
-本测试中使用到的测试算例均可以在
-``/lustre/share/benchmarks/gromacs``\ 找到，用户可自行取用测试。测试时，需将上述目录复制到家目录下。
+   [hpchgc@login water]$ tree 0768
+   0768
+   ├── 9854405.err
+   ├── 9854405.out
+   ├── conf.gro
+   ├── mdout.mdp
+   ├── pme.mdp
+   ├── pre.slurm
+   ├── rf.mdp
+   ├── topol.top
+   └── topol.tpr
 
-Gromacs在CPU上的性能测试
-^^^^^^^^^^^^^^^^^^^^^^^^
+提交作业脚本
 
-使用 ``ion_channel.tpr`` 算例，不同Gromacs模块在单节点、2节点、4节点性能如下表所示，性能单位为 ``ns/day`` ，越高越好。
+.. code:: bash
 
-+----------------------------------+------------+------------+-----------+
-| 模块                             | 1节点性能  | 2节点性能  | 4节点性能 |
-+==================================+============+============+===========+
-| gromacs/2019.4-gcc-9.2.0-openmpi | 43.130     | 67.735     | 114.890   |
-+----------------------------------+------------+------------+-----------+
-| gromacs/2020-cpu-double          | 43.286     | 71.488     | 118.507   |
-+----------------------------------+------------+------------+-----------+
-| gromacs/2020.2-gcc-9.2.0-openmpi | 43.491     | 71.401     | 115.569   |
-+----------------------------------+------------+------------+-----------+
-| gromacs/2019.2-gcc-9.2.0-openmpi | 42.874     | 68.497     | 115.347   |
-+----------------------------------+------------+------------+-----------+
+   #!/bin/bash
 
-Gromacs在GPU上的性能测试
-^^^^^^^^^^^^^^^^^^^^^^^^
+   #SBATCH --job-name=64_gromacs
+   #SBATCH --partition=64c512g
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load gcc/11.2.0
+   module load openmpi/4.1.1-gcc-11.2.0
+   module load gromacs/2021.3-gcc-11.2.0-cuda-openblas-openmpi
+   mpirun gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
+   
+提交上述作业
+
+.. code:: bash
+
+   sbatch gromacs.slurm
+   
+运行结果如下所示：
+
+.. code:: bash
+
+   [hpchgc@sylogin1 64cores]$ tail -n 20 9853399.err
+   vol 0.94  imb F  2% pme/F 0.92 step 10000, remaining wall clock time:     0 s
+
+
+   Dynamic load balancing report:
+    DLB was permanently on during the run per user request.
+    Average load imbalance: 2.0%.
+    The balanceable part of the MD step is 85%, load imbalance is computed from this.
+    Part of the total run time spent waiting due to load imbalance: 1.7%.
+    Steps where the load balancing was limited by -rdd, -rcon and/or -dds: X 0 % Y 0 %
+    Average PME mesh/force load: 0.923
+    Part of the total run time spent waiting due to PP/PME imbalance: 2.4 %
+
+
+                  Core t (s)   Wall t (s)        (%)
+          Time:     3052.051       47.699     6398.5
+                    (ns/day)    (hour/ns)
+   Performance:       18.117        1.325
+   
+   GROMACS reminds you: "The Stingrays Must Be Fat This Year" (Red Hot Chili Peppers)
+  
+
+.. _π2.0 GROMACS:
+
+二. π2.0 GROMACS
+------------------
+
+1.gromacs/2019.4-gcc-9.2.0-openmpi
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+提交预处理脚本
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH -J gromacs_cpu_test
+   #SBATCH -p cpu
+   #SBATCH -n 40
+   #SBATCH --ntasks-per-node=40
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+
+   module load gromacs/2019.4-gcc-9.2.0-openmpi
+
+   ulimit -s unlimited
+   ulimit -l unlimited
+   gmx_mpi grompp -f pme.mdp
+
+提交运行作业脚本
+
+.. code:: bash
+            
+   #!/bin/bash
+
+   #SBATCH -J gromacs_cpu_test
+   #SBATCH -p cpu
+   #SBATCH -n 40
+   #SBATCH --ntasks-per-node=40
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+   module load gromacs/2019.4-gcc-9.2.0-openmpi
+   ulimit -s unlimited
+   ulimit -l unlimited
+   srun --mpi=pmi2 gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
+
+2.gromacs/2020-cpu-double 
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+提交预处理脚本
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH -J gromacs_cpu_test
+   #SBATCH -p cpu
+   #SBATCH -n 40
+   #SBATCH --ntasks-per-node=40
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+   
+   module load gromacs/2019.4-gcc-9.2.0-openmpi
+   
+   ulimit -s unlimited
+   ulimit -l unlimited
+   gmx_mpi grompp -f pme.mdp
+
+提交运行作业脚本
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH -J gromacs_cpu_test
+   #SBATCH -p cpu
+   #SBATCH -n 40
+   #SBATCH --ntasks-per-node=40
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+   
+   module load gromacs/2020-cpu-double
+   
+   ulimit -s unlimited
+   ulimit -l unlimited
+   srun --mpi=pmi2 gmx_mpi_d mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
+
+.. _ARM GROMACS:
+
+三. ARM GROMACS
+--------------------
+
+1.module load gromacs/2022-gcc-9.3.0
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+提交预处理脚本
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #!/bin/bash
+   
+   #SBATCH --job-name=test
+   #SBATCH --partition=arm128c256g
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load gromacs/2022-gcc-9.3.0
+   
+   gmx_mpi grompp -f pme.mdp
+
+提交运行作业脚本
+
+.. code:: bash
+            
+   #!/bin/bash
+
+   #SBATCH --job-name=test
+   #SBATCH --partition=arm128c256g
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=128
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module purge all
+   module load gromacs/2022-gcc-9.3.0
+   export OMP_NUM_THREADS=1
+   mpirun gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
+
+运行结果如下所示(单位：ns/day，越高越好)
+-----------------------------------------
+
+1.GROMACS 思源一号
+~~~~~~~~~~~~~~~~~~
+
++------------------------------------------------------+
+|         gromacs/2021.3-intel-2021.4.0                |
++=============+=============+============+=============+
+| 核数        | 64          | 128        | 192         |
++-------------+-------------+------------+-------------+
+| Performance |  17.724     | 35.250     | 53.321      |
++-------------+-------------+------------+-------------+
+
++------------------------------------------------------+
+|      gromacs/2021.3-gcc-11.2.0-cuda-openblas-openmpi |
++=============+=============+============+=============+
+| 核数        | 64          | 128        | 192         |
++-------------+-------------+------------+-------------+
+| Performance |  10.6259    | 32.798     | 55.635      |
++-------------+-------------+------------+-------------+
+
+
+2.GROMACS π2.0
+~~~~~~~~~~~~~~~~
+
++----------------------------------------------+
+|           gromacs/2019.4-gcc-9.2.0-openmpi   |
++=============+==========+==========+==========+
+| 核数        | 40       | 80       | 120      |
++-------------+----------+----------+----------+
+| Performance |  8.444   | 17.192   | 34.440   |
++-------------+----------+----------+----------+
+
++-----------------------------------------------+
+|            gromacs/2020-cpu-double            |
++==============+==========+==========+==========+
+| 核数         | 40       | 80       | 120      |
++--------------+----------+----------+----------+
+| Performance  |  4.441   | 8.388    | 16.701   |
++--------------+----------+----------+----------+
+
+3.GROMACS ARM
+~~~~~~~~~~~~~~~~
+
++--------------------------------------------------+
+|                gromacs/2022-gcc-9.3.0            |
++==============+===========+===========+===========+
+| 核数         | 128       | 256       | 512       |
++--------------+-----------+-----------+-----------+
+| Performance  |  7.754    | 15.466    | 30.650    |
++--------------+-----------+-----------+-----------+
 
 参考资料
 --------
 
 - gromacs官方网站 http://www.gromacs.org/
-
-- Singularity文档 https://sylabs.io/guides/3.5/user-guide/

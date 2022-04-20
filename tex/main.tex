@@ -1,12 +1,11 @@
 \documentclass[cn, 12pt, hang, black, chinese]{elegantbook}
 
-\title{上海交通大学校级超算平台简明使用手册}
+\title{上海交通大学交我算HPC+AI平台简明使用手册}
 % \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{上海交通大学网络信息中心}
-\institute{计算业务部}
-\date{2021年12月}
-\version{1.0}
+\date{2022年4月}
+\version{1.1}
 % \bioinfo{自定义}{信息}
 
 % \extrainfo{各人自扫门前雪，休管他人瓦上霜。—— 陈元靓}
@@ -46,25 +45,36 @@
 
 \mainmatter
 
-\chapter{超算平台硬件配置}
+\chapter{交我算HPC+AI平台硬件配置}
 
 \section{计算系统}
 
 \begin{table1}
 \small
-\begin{tabular}{ |l|c|l|l|c| }
+\centering
+\begin{tabular}{ |c|c|c|l|l|l| }
  \hline
- 队列 & 架构 & 参数 & 描述 & 数量 \\
+ 平台 & \makecell[l]{节点\\类型}& 节点数 & 队列 & 参数 & 描述  \\
  \hline \hline
- \makecell[l]{small,cpu,\\ debug} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20\\ cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{由 656 台双路节点 x86 服务器\\组成，每台服务器配备 40 核\\（2.5GHz）、192G 内存（12通道 \\DDR4 2666），共计 26240 个 \\CPU 核、48T 内存。 双精度理论\\峰值性能达到了 2.1 PFLOPS} & 656\\
+\multirow{2}{*}[-3em]{\makecell[l]{思源\\一号}} & CPU & 938个 &\makecell[l]{64c512g} & \makecell[l]{CPU: 2 x Intel Xeon ICX Platinum\\ 8358 (2.6GHz, 32 cores)\\
+Mem: 16 x 32GB TruDDR4 3200\\ MHz (2Rx8 1.2V) RDIMM} & \makecell[l]{单节点配备64核、512G \\内存，共计 60032 个\\CPU核。双精度理论峰值\\性能达到了5 PFLOPS。} \\
+ \cline{2-6}
+ & GPU & \makecell[l]{23个（4\\卡/节点）}& \makecell[l]{a100} & \makecell[l]{CPU: 2 x Intel Xeon ICX Platinum\\ 8358 (2.6GHz, 32 cores)\\
+GPU: 4 x NVIDIA HGX A100 40GB} & \makecell[l]{单节点配备64核、512G\\内存，4块40G显存\\A100卡。} \\
  \hline
- \makecell[l]{huge} & x86 & \makecell[l]{CPU: 4 x Intel Xeon Scalable\\ SkyLake 6148(2.4GHz, 20 cores)\\Mem: 48 x Hynix 64GB DDR4\\ ECC REG 2666} & \makecell[l]{每台拥有 80 核、3T 内存（48 通道\\ DDR4 2666），共计 160 核、\\6T 内存} & 2\\
+
+ \multirow{3}{*}[-5.8em]{ Pi 2.0}  & CPU & 656个 & \makecell[l]{small,cpu,\\ debug}  & \makecell[l]{CPU: 2 x Intel Xeon Scalable\\ Cascade Lake 6248(2.5GHz, 20 cores)；\\Mem:12 x Samsung 16GB DDR4\\ ECC REG 2666} & \makecell[l]{单节点配备40核、192G\\内存，共计26240个CPU \\核。双精度理论峰值性能\\达到2.1PFLOPS。}\\
+  \cline{2-6}
+  
+ & \multirow{2}{*}[-3em]{大内存} & 2个 & \makecell[l]{huge} & \makecell[l]{CPU: 4 x Intel Xeon Scalable\\ SkyLake 6148 (2.4GHz, 20 cores)\\Mem: 48 x Hynix 64GB DDR4\\ ECC REG 2666} & \makecell[l]{单节点配备 80核、3T内\\存，共计160核、6T内存。} \\
+ \cline{3-6}
+ 
+&  & 1个 & \makecell[l]{192c6t} &\makecell[l]{CPU: 8 x Intel Xeon Platinum\\ 8260(2.4GHz，24 cores)\\Mem: 98 x Samsung 64GB DDR4 \\2666} & \makecell[l]{单节点配备192核、6T\\内存。} \\
  \hline
- \makecell[l]{192c6t} & x86 & \makecell[l]{CPU: 8 x Intel Xeon Platinum\\ 8260(2.4GHz，24 cores)\\Mem: 98 x Samsung 64GB DDR4 \\2666} & \makecell[l]{拥有 192 核、6T 内存（98 通道 \\DDR4 2666）} & 1\\
+ ARM & ARM & 100个 &\makecell[l]{arm128c\\256g} & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426 (2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备128核、256G\\内存、240G本地硬盘。}\\
  \hline
- \makecell[l]{arm128c256g} & arm & \makecell[l]{CPU: 2 x HiSilicon Kunpeng \\920-6426(2600MHz, 64cores)\\Mem: 16 x Samsung 16GB DDR4 \\2933} & \makecell[l]{单节点配备 128 核（2.6 GHz）、\\256 GB 内存（16 通道\\ DDR4-2933）、240 GB 本地硬盘，\\节点间采用 IB 高速互联} & 100\\
- \hline
- \makecell[l]{dgx2} & x86 & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168(2.7GHz，\\24 cores)\\Mem: 1.5 TB DDR4 ECC \\REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{由 8 台 NVIDIA DGX-2服务器\\组成，每台 DGX-2 配置 16 块 \\Tesla V100 GPU 加速卡，2 颗 \\Intel 至强铂金 8168 CPU，1.5 TB \\DDR4 内存，30 TB NVMe SSD \\和 512GB HBM2 显存。其双精度\\计算能力达到1 PFLOPS（千万\\亿次），张量计算能力达到 \\16 PFLOPS} & 8\\
+  AI & GPU & \makecell[l]{8个（16\\卡/节点）}
+&\makecell[l]{dgx2} & \makecell[l]{CPU: 2 x Intel Xeon Scalable \\Cascade Lake 8168 (2.7GHz，24 cores)\\Mem: 1.5 TB DDR4 ECC REG 2666\\GPU: 16 x NVIDIA Tesla V100} & \makecell[l]{单节点配备48核、1.5T\\内存，16 块 Tesla V100\\卡。张量计算能力达到16\\ PFLOPS。}\\
  \hline
 \end{tabular}
 \end{table1}
@@ -76,6 +86,8 @@
  \hline
  名称 & 类别 & 配置 & 容量 \\
  \hline \hline
+ gpfs & 思源一号主文件系统 & \makecell[l]{4台DSS-G Server节点，每台配置2块300G HDD，\\ 用于安装操作系统，安装配置GPFS集群，及创建\\ 文件系统。文件系统metadata采用3副本冗余，\\ 文件系统data采用8+2p冗余。} & 10P\\
+ \hline
  lustre & 主文件系统 & \makecell[l]{使用 HDD 盘搭建，旨在提供大容量、高可用、\\较高性能的存储供用户使用。搭建过程中，使用\\ RAID 保障硬盘级别的数据安全，使用 HA\\（High Availability） 保障服务器级别的\\高可用。} & 14P\\
  \hline
  scratch & 全闪存文件系统 & \makecell[l]{使用全套的 SSD（NVMe协议） 硬盘搭建，\\旨在提供高性能的存储供用户使用，可更好地支持\\ IO 密集型作业。对系统来说，单客户端\\最大读带宽达 5.7GB/s，最大写带宽达\\ 10GB/s；4k 小文件读 IOPS 达 170k，\\写 IOPS 达 126k。但同时，由于成本问题，\\系统提供的容量较小；在搭建时也未设置高可用\\和数据备份，存在数据存储安全性不高等问题。} & 108T\\
@@ -85,39 +97,40 @@
 \end{tabular}
 \end{table2}
 
-\chapter{HPC和AI平台帐号申请及登录方式}
+\chapter{交我算平台帐号申请及登录方式}
 
-\section{HPC和AI平台帐号申请}
+\section{交我算平台帐号申请}
 
 \subsection*{谁能申请主帐号？}
-交大及附属医院在职教职工（含博士后）均能申请超算主帐号；一个主帐号下面可以免费开通4个子帐号；主帐号需绑定jAccount帐号，用于充值缴费。
+交大及附属医院在职教职工（含博士后）均能申请主帐号；一个主帐号下面可以免费开通4个子帐号；主帐号需绑定jAccount帐号，用于充值缴费。
 
-\subsection*{如何申请超算帐号？}
+\subsection*{如何申请交我算帐号？}
 \begin{enumerate}
-\item 登录“我的数字交大”或者“交我办”APP，在“服务大厅”的“交我算”类别下，选择“HPC和AI平台帐号申请”，选择申请的帐号类型，并按照申请表单填写内容.
+\item 登录“我的数字交大”或者“交我办”APP，在“服务大厅”的“交我算”类别下，选择“交我算帐号申请”，选择申请的帐号类型，并按照申请表单填写内容.
 \item 帐号负责人提交申请，需要由帐号负责人审核。审核人审批后，流程流转到网络信息中心计算业务部处理。
 \item 帐号负责人提交或审核后，会以邮件形式反馈申请结果。
 \end{enumerate}
 
 \subsection*{主帐号与子帐号的关系？}
-超算主帐号与子帐号均为独立帐号，仅在计费关系上存在关联。若课题组有数据或软件共享需求，可发邮件给我们，我们将建立 acct-XXX/share 文件夹，主帐号和子帐号均可在此文件夹下读写。
+交我算主帐号与子帐号均为独立帐号，仅在计费关系上存在关联。若课题组有数据或软件共享需求，可发邮件给我们，我们将建立 acct-XXX/share 文件夹，主帐号和子帐号均可在此文件夹下读写。
 
-\section{登录HPC和AI平台集群}
+\section{登录集群}
 
 \subsection*{ssh登录}
 \begin{enumerate}
-\item x86登录节点（3个: login1,login2,login3）：支持公网直接访问。\\IP地址（或主机名）：login.hpc.sjtu.edu.cn\\端口号：22
-\item arm登录节点（1个: kplogin）：内测期间需使用校内IP。\\IP地址（或主机名）：armlogin.hpc.sjtu.edu.cn\\端口号： 22
+\item 思源一号登录节点（2个: sylogin1,sylogin2）：支持公网直接访问。\\IP地址（或主机名）：sylogin.hpc.sjtu.edu.cn\\端口号：22
+\item Pi2.0及AI平台登录节点（3个: login1,login2,login3）：支持公网直接访问。\\IP地址（或主机名）：login.hpc.sjtu.edu.cn\\端口号：22
+\item ARM平台登录节点（1个: kplogin）：内测期间需使用校内IP。\\IP地址（或主机名）：armlogin.hpc.sjtu.edu.cn\\端口号： 22
 \end{enumerate}
 *注意：\textcolor{red}{每个帐号在单个 login 节点上 session 个数不能超过4个。}
 
 \subsection*{HPC Studio登录}
-在浏览器中打开\href{https://studio.hpc.sjtu.edu.cn}{https://studio.hpc.sjtu.edu.cn}，直接使用超算帐号和密码登录。HPC Studio是可视化平台，提供了web shell、远程桌面、可视化软件、文件管理、作业提交等一站式服务。
+在浏览器中打开\href{https://studio.hpc.sjtu.edu.cn}{https://studio.hpc.sjtu.edu.cn}，直接使用交我算帐号和密码登录。HPC Studio是可视化平台，提供了web shell、远程桌面、可视化软件、文件管理、作业提交等一站式服务。
 
 \chapter{作业提交和查询}
 
 \section{作业调度系统}
-超算使用SLURM作业调度系统。SLURM （Simple Linux Utility for Resource Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
+集群使用SLURM作业调度系统。SLURM （Simple Linux Utility for Resource Management）是一种可扩展的工作负载管理器，已被全世界的国家超级计算机中心广泛采用。
 
 \subsection*{SLURM常用命令}
 
@@ -144,14 +157,20 @@ drain(节点故障)，alloc(节点在用)，idle(节点可用)，down(节点下�
 
 \section{队列说明}
 
+\subsection*{64c512g}
+思源一号cpu队列；每个作业可申请\textcolor{red}{1-60000}核；最长运行时间7天；节点为共享使用；计算节点使用范围：node[001-938]
+
+\subsection*{a100}
+思源一号gpu队列；每个作业可申请1-92卡；每卡配比CPU上限为16；最长运行时间7天；节点为共享使用；计算节点使用范围：gpu[01-23]
+
 \subsection*{debug}
-测试队列；每个作业可申请1-80核；最长运行时间20分钟；节点为共享使用；计算节点使用范围：cas[011-014]
+small/cpu测试队列；每个作业可申请1-80核；最长运行时间20分钟；节点为共享使用；计算节点使用范围：cas[011-014]
 
 \subsection*{small}
 小规模作业队列；每个作业可申请\textcolor{red}{1-20}核；最长运行时间7天；节点为共享使用；计算节点使用范围：cas[500-636]
 
 \subsection*{cpu}
-cpu队列；每个作业可申请40- 24000核；最长运行时间7天；节点为独占使用；计算节点使用范围：cas[001-500]\\*注意：small和cpu队列的计算资源比例会根据实际需求动态调整
+cpu队列；每个作业可申请40-24000核；最长运行时间7天；节点为独占使用；计算节点使用范围：cas[001-500]\\*注意：small和cpu队列的计算资源比例会根据实际需求动态调整
 
 \subsection*{huge}
 大内存作业队列；每个作业可申请\textcolor{red}{6-80}核；最长运行时间2天；节点为共享使用；计算节点使用范围：huge[1-2]
@@ -199,7 +218,7 @@ gpu队列；每个作业可申请1-128卡；推荐每卡配比CPU为6；最长�
 \end{lstlisting}
 
 \subsection*{module常用命令}
-module是通过模块文件动态管理环境的工具，超算通过module预部署了上百种模块，包含了编译器、数学库、各个学科的常用软件，供用户直接加载使用。\\\\
+module是通过模块文件动态管理环境的工具，集群通过module预部署了上百种模块，包含了编译器、数学库、各个学科的常用软件，供用户直接加载使用。\\\\
 \begin{tabular}{ |l|l| }
  \hline
  命令 & 功能 \\
@@ -249,29 +268,39 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 \item 大量数据传输：强烈推荐 data 节点。原因：1. 不占用 login 节点资源；2. 多进程或多用户同时传输不会受限于 CPU。
 \end{enumerate}
 
+    目前集群包含两个存储池，其中lustre存储用于small,cpu,huge,192c6t,dgx2,arm128c256g以及相应的debug队列，应当在login,kplogin,data系列节点上查看、使用存放的数据；gpfs存储用于64c512g,a100以及相应的debug队列，应当在sylogin,sydata节点上查看、使用存放的数据。
+
 \section{数据传输节点}
 
 \subsection*{使用data数据传输节点}
+需要在思源一号64c512g，a100队列上进行计算的作业相关数据，从本地或者外部服务器传输到集群，使用
+\begin{lstlisting}
+  scp sydata.hpc.sjtu.edu.cn local
+\end{lstlisting}
+
+    需要在其他队列上进行计算的作业相关数据，从本地或者外部服务器传输到集群，使用
 \begin{lstlisting}
   scp data.hpc.sjtu.edu.cn local
 \end{lstlisting}
+
+    集群两个存储系统之间进行数据搬运，例如原本用于small队列的作业数据搬运到思源64c512g队列使用，可以任选data或者sydata节点。
 
 \subsection*{数据传输节点使用限制}
 传输节点仅用于批量数据传输，请勿在此节点上运行与数据传输无关的应用，如编译程序、管理作业、校验数据等。如果发现此类行为，中心将视情况取消相关帐号使用传输节点的权利。
 
 \subsection*{传输速度}
 
-超算平台内部网络链路的带宽均不低于10Gbps，可以支持1GB/s的并行传输速度。但请注意包括rsync，scp，winscp等工具在内，大部分传输方式都是基于ssh通信的，而单个ssh连接支持的最大传输速度约100~150MB/s，在不使用额外手段多进程并发的情况下，以上工具均无法突破这一速度上限。
+集群内部网络链路的带宽均不低于10Gbps，可以支持1GB/s的并行传输速度。但请注意包括rsync，scp，winscp等工具在内，大部分传输方式都是基于ssh通信的，而单个ssh连接支持的最大传输速度约100~150MB/s，在不使用额外手段多进程并发的情况下，以上工具均无法突破这一速度上限。
 
 \chapter{其他常用事项}
 
 \section{机时查询}
-\subsection*{超算计费系统(\href{https://account.hpc.sjtu.edu.cn/}{https://account.hpc.sjtu.edu.cn/})}
-超算用户可以使用超算帐号密码登录计费系统查询作业详单和计费情况。主帐号可以查询本帐号和所有子帐号的消费情况，子帐号仅可查询自己帐号的消费情况。超算帐号内如有计费，将优先消费积分。需要注意的是，超算的计费模式为作业完成后的第二天凌晨入账。
+\subsection*{交我算平台计费系统(\href{https://account.hpc.sjtu.edu.cn/}{https://account.hpc.sjtu.edu.cn/})}
+用户可以使用交我算帐号密码登录计费系统查询作业详单和计费情况。主帐号可以查询本帐号和所有子帐号的消费情况，子帐号仅可查询自己帐号的消费情况。帐号内如有计费，将优先消费积分。需要注意的是，平台的计费模式为作业完成后的第二天凌晨入账。
 
-\section{HPC和AI平台资讯}
+\section{交我算平台资讯}
 \subsection*{微信公众号/视频号：交我算}
-关注“交我算”微信公众号和视频号，超算最新服务、新闻资讯、教学视频一网打尽。(扫描二维码，关注公众号)
+关注“交我算”微信公众号和视频号，平台最新服务、新闻资讯、教学视频一网打尽。(扫描二维码，关注公众号)
 
 \begin{figure}[!htb]
 \centering
@@ -279,18 +308,18 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 \end{figure}
 
 \subsection*{用户微信群}
-超算运维通知和实时资讯主要发布于用户微信群，加群方式会在开通帐号时告知。
+交我算运维通知和实时资讯主要发布于用户微信群，加群方式会在开通帐号时告知。
 
 \section{其他常见问题}
 \begin{enumerate}[itemsep=1.3ex]
-  \item \question{我为什么连不上$\pi$集群？}
-    集群支持公网直接访问，无需校园 VPN。若遇到连接问题，请先检查网络，或在其它设备或客户端上尝试。\\i.请首先保证网络畅通；\\ii.查看“交我算”微信公众号和用户微信群，是否有$\pi$集群下线停机通知。$\pi$集群通知会及时发布在公众号和用户微信群里。若需加入用户微信群，请发邮件至 hpc邮箱；\\iii.$\pi$集群登录节点设置了 fail2ban 服务，多次输入密码错误后会被临时封禁 1 小时。如果您需要重置密码，请使用或抄送帐号负责人邮箱发送邮件到 hpc邮箱，邮件中注明帐号，我们将会在 1 个工作日内响应您的申请；\\iv.如果您在登录节点运行计算密集的作业，将会被程序自动查杀，您的帐号会被加入到黑名单，并在30-120 分钟内无法登录。
+  \item \question{我为什么连不上集群？}
+    集群支持公网直接访问，无需校园 VPN。若遇到连接问题，请先检查网络，或在其它设备或客户端上尝试。\\i.请首先保证网络畅通；\\ii.查看“交我算”微信公众号和用户微信群，是否有集群下线停机通知。集群通知会及时发布在公众号和用户微信群里。若需加入用户微信群，请发邮件至 hpc邮箱；\\iii.集群登录节点设置了 fail2ban 服务，多次输入密码错误后会被临时封禁 1 小时。如果您需要重置密码，请使用或抄送帐号负责人邮箱发送邮件到 hpc邮箱，邮件中注明帐号，我们将会在 1 个工作日内响应您的申请；\\iv.如果您在登录节点运行计算密集的作业，将会被程序自动查杀，您的帐号会被加入到黑名单，并在30-120 分钟内无法登录。
   \item \question{什么我的作业运行结果是作业运行结果是node$\_$fail，该怎么处理？}
     node$\_$fail是提示由于计算节点故障导致作业运行失败。您重新提交作业即可。失败作业的机时系统会自动返还，无须发邮件告诉我们。
-  \item \question{如何在超算上安装开源软件？}
-    超算软件安装，请依次判断适用哪种情况：\\i.若未安装，请先考虑是否能用conda 方法 安装；\\ii.考虑在自己家目录下使用源码安装，遇到问题，请将可复现的步骤，发至hpc邮箱获取帮助；\\iii.软件还有容器安装 的方法；\\iv.我们也将对常用开源软件进行评估，以便全局部署。欢迎邮件联系我们。
-  \item \question{超算上是否提供商业软件？}
-    目前暂不提供商业软件，不过您可以自行购买后安装。以下是注意事项：\\i.商业软件License通常需要使用专用的License服务器，在购买商业软件并尝试在$\pi$集群上部署License服务器前，请与我们以及软件厂商进行充分沟通；\\ii.不要把License绑定到$\pi$集群的登录节点；\\iii.请购买浮动授权，即计算程序可以在$\pi$集群上的任意一个节点启动，通常需要安装特定的License服务器；\\iv.询问License服务器是否可以部署在虚拟机上，这样我们可以专门开一台虚拟机运行您的License服务器；\\v.与厂商充分沟通License服务器安装模式、授权数量、使用限制、更换MAC地址的费用以及厂商具备基本的技术支持能力。如果需要了解$\pi$集群的软硬件信息，可以在交流过程中抄送hpc邮箱。
+  \item \question{如何在集群上安装开源软件？}
+    集群软件安装，请依次判断适用哪种情况：\\i.若未安装，请先考虑是否能用conda 方法 安装；\\ii.考虑在自己家目录下使用源码安装，遇到问题，请将可复现的步骤，发至hpc邮箱获取帮助；\\iii.软件还有容器安装 的方法；\\iv.我们也将对常用开源软件进行评估，以便全局部署。欢迎邮件联系我们。
+  \item \question{集群上是否提供商业软件？}
+    目前暂不提供商业软件，不过您可以自行购买后安装。以下是注意事项：\\i.商业软件License通常需要使用专用的License服务器，在购买商业软件并尝试在集群上部署License服务器前，请与我们以及软件厂商进行充分沟通；\\ii.不要把License绑定到集群的登录节点；\\iii.请购买浮动授权，即计算程序可以在集群上的任意一个节点启动，通常需要安装特定的License服务器；\\iv.询问License服务器是否可以部署在虚拟机上，这样我们可以专门开一台虚拟机运行您的License服务器；\\v.与厂商充分沟通License服务器安装模式、授权数量、使用限制、更换MAC地址的费用以及厂商具备基本的技术支持能力。如果需要了解集群的软硬件信息，可以在交流过程中抄送hpc邮箱。
   \item \question{如何收费？}
     请使用交大校内邮箱发送邮件至 hpc 邮箱咨询。
   \item \question{如何缴费？}
@@ -298,7 +327,7 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
   \item \question{欠费后将有什么影响？}
     欠费后使用ssh登录计算节点时，将会收到“欠费提醒”，并且无法申请新的计算资源；已提交作业将会继续运行。欠费用户在使用HPC Studio时，暂无“欠费提醒”，如遇到申请session长时间排队的情况，请先检查是否欠费。
   \item \question{遇到作业长时间排队怎么办？}
-    学期末为超算使用高峰期，如遇长时间排队可以先查看集群使用率和空闲节点情况，错峰提交作业或者调整作业申请计算资源量。以下为三种查看集群使用情况的方法：\\i.top页面--查看实时利用率以及top10用户：\href{https://account.hpc.sjtu.edu.cn/top/}{https://account.hpc.sjtu.edu.cn/top/}\\ii.status监控系统--查看信息更丰富的集群实时使用情况：\href{https://status.hpc.sjtu.edu.cn/}{https://status.hpc.sjtu.edu.cn/}\\iii.sinfo命令--shell中查看集群节点情况
+    学期末为集群使用高峰期，如遇长时间排队可以先查看集群使用率和空闲节点情况，错峰提交作业或者调整作业申请计算资源量。以下为三种查看集群使用情况的方法：\\i.top页面--查看实时利用率以及top10用户：\href{https://account.hpc.sjtu.edu.cn/top/}{https://account.hpc.sjtu.edu.cn/top/}\\ii.status监控系统--查看信息更丰富的集群实时使用情况：\href{https://status.hpc.sjtu.edu.cn/}{https://status.hpc.sjtu.edu.cn/}\\iii.sinfo命令--shell中查看集群节点情况
 \end{enumerate}
 
 \end{document}

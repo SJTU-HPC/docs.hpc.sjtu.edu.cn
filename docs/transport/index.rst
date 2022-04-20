@@ -4,9 +4,14 @@
 数据传输
 ***********
 
+目前超算集群包含两个存储池，其中 **lustre** 存储用于 ``small, cpu, huge, 192c6t, dgx2, arm128c256g`` 以及相应的debug队列，应当在 ``login, kplogin, data`` 系列节点上查看、使用存放的数据； **gpfs** 存储用于 ``64c512g, a100`` 以及相应的debug队列，应当在 ``sylogin, sydata`` 节点上查看、使用存放的数据。使用时请注意自己home目录的实际路径，例如：
+
+  * 在login2节点上个人家目录 ``~`` 下执行 ``pwd`` 看到的是 /lustre 开头的路径，说明此时使用的是lustre存储
+  * 在sylogin1节点上个人家目录 ``~`` 下执行 ``pwd`` 看到的是 /dssg 开头的路径，说明此时使用的是gpfs存储
+
 π 集群的登录节点通过公网 IP 传输数据，理论速度上限约为 110 MB/s，但是考虑到登录节点为大家共享使用，因此实际传输速度会偏低。对于数据传输，我们为您提供如下解决方案：
 
-1. 少量数据传输，超算平台提供了专门用于数据传输的节点 (data.hpc.sjtu.edu.cn)，可以直接使用 putty, filezilla 等客户端，或在本地使用 scp, rsync 命令向该节点发起传输请求（因安全策略升级，在 π 集群的终端上不支持 scp/rsync 的远程传输功能，所以需要从用户本地终端使用 scp/rsync 命令）。
+1. 少量数据传输，超算平台提供了专门用于数据传输的节点 (data.hpc.sjtu.edu.cn, sydata.hpc.sjtu.edu.cn)，可以直接使用 putty, filezilla 等客户端，或在本地使用 scp, rsync 命令向该节点发起传输请求（因安全策略升级，在 π 集群的终端上不支持 scp/rsync 的远程传输功能，所以需要从用户本地终端使用 scp/rsync 命令）。
 
 2. 1TB-1PB数据传输，强烈建议您联系我们，将硬盘等存储设备送至网络信息中心进行传输。
 
@@ -19,14 +24,11 @@
 -------------
 
 1. **少量数据传输**：login 节点和 data 节点均可，但推荐使用 data 节点。
+2. **大量数据传输**：强烈推荐使用对应的 data 节点。不占用 login 节点资源并且多进程或多用户同时传输不会受限于 CPU。
 
-2. **大量数据传输**：强烈推荐 data 节点。原因：1. 不占用 login 节点资源；2. 多进程或多用户同时传输不会受限于 CPU。
-
-即：
-
-**1. π 集群登录、作业提交，请使用 ssh login.hpc.sjtu.edu.cn**
-
-**2. π 集群数据传输，推荐使用 scp data.hpc.sjtu.edu.cn local**
+  * 需要在64c512g，a100队列上进行计算的作业相关数据，从本地或者外部服务器传输到超算平台，使用 sydata.hpc.sjtu.edu.cn 。
+  * 需要在其他队列上进行计算的作业相关数据，从本地或者外部服务器传输到超算平台，使用 data.hpc.sjtu.edu.cn 。
+  * 超算平台两个存储系统之间进行数据搬运，例如原本用于small队列的作业数据搬运到思源64c512g队列使用，可以任选 data 或者 sydata 节点。
 
 传输节点使用限制
 ------------------
@@ -73,26 +75,42 @@ Linux/Unix/Mac用户
 
 .. code:: bash
 
-   # 假设超算用户expuser01在平台上个人目录为/lustre/home/acct-exp/expuser01
+   # 假设超算用户expuser01在平台上个人目录为/lustre/home/acct-exp/expuser01和/dssg/home/acct-exp/expuser01
    # 外部主机地址为100.101.0.1，该用户在外部主机上拥有帐号local_user且个人目录为/home/local_user/
 
-   # 示例1：该用户要将个人目录中的~/math.dat文件下载到外部主机上
+   # 示例1：该用户要将lustre个人目录中的~/math.dat文件下载到外部主机上
    $ scp expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/math.dat local_user@100.101.0.1:/home/local_user/
 
-   # 示例2：该用户将本地目录~/data的全部数据上传至超算平台个人目录下
+   # 示例2：该用户要将lustre个人目录中的~/math.dat文件下载到外部主机上(注意和示例2的区别，这里使用的是sydata节点)
+   $ scp expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/math.dat local_user@100.101.0.1:/home/local_user/
+
+   # 示例3：该用户将本地目录~/data的全部数据上传至超算平台lustre目录下
    $ scp -r local_user@100.101.0.1:/home/local_user/data expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
+
+   # 示例4：该用户将本地目录~/data的全部数据上传至超算平台dssg目录下(注意和示例3的区别，这里使用的是sydata节点)
+   $ scp -r local_user@100.101.0.1:/home/local_user/data expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/
+
 
 如果需要传输的对象为包含大量文件的目录，或者目标环境上已经存在差异较小的历史版本，建议使用rsync拷贝数据，rsync会对比源地址和目标地址的内容差异，然后进行增量传输：
 
 .. code:: bash
 
-   # 示例3：该用户将超算平台上个人目录~/data的数据下载到外部主机，请注意rsync不支持双远端传输，必须在目标主机上操作
+   # 示例5：该用户将超算平台上lustre目录~/data的数据下载到外部主机，请注意rsync不支持双远端传输，必须在目标主机上操作
    $ rsync --archive --partial --progress expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/data/ ~/download/
 
-   # 示例4：该用户将外部主机上的~/upload/exp04.dat文件上传到超算平台个人目录中
-   $ rsync --archive --partial --progress ~/upload/exp04.dat expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
+   # 示例6：该用户将外部主机上的~/upload/exp04.dat文件上传到超算平台dssg目录中(使用sydata节点)
+   $ rsync --archive --partial --progress ~/upload/exp04.dat expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/
    # 如果用户的外部环境CPU资源丰富而网络带宽相对较低，可以尝试--compress参数启用压缩传输
-   $ rsync --compress --archive --partial --progress ~/upload/exp04.dat expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
+   $ rsync --compress --archive --partial --progress ~/upload/exp04.dat expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/
+
+如果是在lustre和dssg直接跨存储池搬运数据，可以任选data或者sydata节点发起传输：
+
+.. code:: bash
+
+   # 示例7: 该用户将lustre个人目录下的数据搬运到dssg个人目录下(选用sydata进行操作)
+   $ ssh expuser01@sydata.hpc.sjtu.edu.cn
+   $ scp expuser01@data.hpc.sjtu.edu.cn:~/math.dat ~/math.dat
+   # 注意指令中两个~符号代表的绝对路径有区别，在data节点上~代表/lustre/home/acct-exp/expuser01，在sydata上~代表/dssg/home/acct-exp/expuser01。
 
 多进程并发传输
 ---------------
@@ -103,7 +121,7 @@ scp，rsync本身都不支持多进程传输，因此需要利用外部指令并
 
 .. code:: bash
 
-   # 示例：并发5个rsync进程从超算平台个人目录~/data下载数据到外部主机~/download/路径下
+   # 示例：并发5个rsync进程从超算平台lustre目录~/data下载数据到外部主机~/download/路径下
    $ ssh expuser01@data.hpc.sjtu.edu.cn ls /lustre/home/acct-exp/expuser01/data/ > remote_list.txt
    $ cat remote_list.txt
      001.dat

@@ -6,87 +6,166 @@ LAMMPS
 简介
 ----
 
-LAMMPS is a large scale classical molecular dynamics code, and stands
-for Large-scale Atomic/Molecular Massively Parallel Simulator. LAMMPS
-has potentials for soft materials (biomolecules, polymers), solid-state
-materials (metals, semiconductors) and coarse-grained or mesoscopic
-systems. It can be used to model atoms or, more generically, as a
-parallel particle simulator at the atomic, meso, or continuum scale.
+LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观体系计算中均有重要应用，并行效率高，广泛应用于材料、物理、化学等模拟。
 
-π 集群上的 LAMMPS
---------------------
+可用的版本
+----------
 
-π 集群上有多种版本的 LAMMPS:
-
-- `CPU版本 LAMMPS`_
-
-- `GPU版本 LAMMPS`_
-
-- `ARM版本 LAMMPS`_
-
-- `ARM版本 LAMMPS(bisheng+hypermpi)`_
-
-.. _CPU版本 LAMMPS:
++--------+---------+----------+---------------------------------------------+
+| 版本   | 平台    | 构建方式 | 模块名                                      |
++========+=========+==========+=============================================+
+| 2021   | |cpu|   | 源码     | lammps/20210310-intel-2021.4.0-omp 思源一号 |
++--------+---------+----------+---------------------------------------------+
+| 2020   | |cpu|   | 容器     | 直接使用镜像                                |
++--------+---------+----------+---------------------------------------------+
+| 2019   | |arm|   | 容器     | lammps/bisheng-1.3.3-lammps-2019            |
++--------+---------+----------+---------------------------------------------+
 
 
-CPU 版本
-~~~~~~~~
+集群上的 LAMMPS
+---------------
 
-查看 π 集群 上已编译的软件模块:
+- `思源一号 LAMMPS`_
 
-.. code:: bash
+- `π2.0 LAMMPS`_
 
-   module av lammps
+- `ARM LAMMPS`_
 
-推荐使用 lammps/2020-cpu，经测试，该版本在 π 集群上运行速度最好，且安装有丰富的 LAMMPS package：
 
-ASPHERE BODY CLASS2 COLLOID COMPRESS CORESHELL DIPOLE GRANULAR KSPACE
-MANYBODY MC MISC MLIAP MOLECULE OPT PERI POEMS PYTHON QEQ REPLICA RIGID
-SHOCK SNAP SPIN SRD VORONOI USER-BOCS USER-CGDNA USER-CGSDK USER-COLVARS
-USER-DIFFRACTION USER-DPD USER-DRUDE USER-EFF USER-FEP USER-MEAMC
-USER-MESODPD USER-MISC USER-MOFFF USER-OMP USER-PHONON USER-REACTION
-USER-REAXC USER-SDPD USER-SPH USER-SMD USER-UEF USER-YAFF
+.. _思源一号 LAMMPS:
 
-调用该模块:
+一. 思源一号 LAMMPS
+---------------------
 
-.. code:: bash
+1. 全局部署版本 20210310
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   module load lammps/2020-cpu
+本版本支持 intel 加速。对于大部分势函数（eam, lj 等），均推荐使用 intel 加速，计算速度可提升数倍。具体测评和支持范围请见官方文档：`LAMMPS INTEL package <https://docs.lammps.org/Speed_intel.html>`__
 
-CPU 版本 Slurm 脚本
-~~~~~~~~~~~~~~~~~~~
-
-在 cpu 队列上，总共使用 80 核 (n = 80) cpu 队列每个节点配有 40
-核，所以这里使用了 2 个节点。脚本名称可设为 slurm.test
+使用 intel 加速的 slurm 脚本示例：
 
 .. code:: bash
 
    #!/bin/bash
    #SBATCH --job-name=lmp_test
-   #SBATCH --partition=cpu
+   #SBATCH --partition=64c512g
+   #SBATCH -N 2 
+   #SBATCH --ntasks-per-node=64
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   #SBATCH -N 2
-   #SBATCH --ntasks-per-node=40
 
-   module purge
-   module load lammps/2020-cpu
+   module purge   
+   module load lammps/20210310-intel-2021.4.0-omp
+   
+   mpirun lmp -pk intel 0 omp 2 -sf intel -i in.lj
 
-   ulimit -s unlimited
-   ulimit -l unlimited
 
-   srun --mpi=pmi2 lmp -i YOUR_INPUT_FILE
-
-用下方语句提交作业
+若体系不支持 intel package，请使用如下 slurm 脚本：
 
 .. code:: bash
 
-   sbatch slurm.test
+   #!/bin/bash
+   #SBATCH --job-name=lmp_test
+   #SBATCH --partition=64c512g
+   #SBATCH -N 2 
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
 
-Intel加速CPU版本
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   module purge   
+   module load lammps/20210310-intel-2021.4.0-omp
+   
+   mpirun lmp -i in.lj
 
-调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps.slurm）:
+2. 自行编译 LAMMPS
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+LAMMPS 自行编译十分容易。下面以在思源一号上为例介绍 LAMMPS 安装
+
+a) 申请计算节点资源用来编译 LAMMPS，并请注意在全部编译结束后退出：
+
+.. code:: bash
+
+   srun -p 64c512g -n 4 --pty /bin/bash
+   
+   
+b) 从官网下载 LAMMPS，推荐安装最新稳定版：
+
+.. code:: bash
+
+   wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
+
+c) 加载 Intel oneapi 模块：
+
+.. code:: bash
+
+   module load intel-oneapi-compilers/2021.4.0
+   module load intel-oneapi-mpi/2021.4.0
+   module load intel-oneapi-mkl/2021.4.0
+   module load intel-oneapi-tbb/2021.4.0
+
+d) 编译 (以额外安装 MANYBODY, MEAM 和 Intel 加速包为例)
+
+.. code:: bash
+
+   $ tar xvf lammps-stable.tar.gz
+   $ cd lammps-XXXXXX
+   $ cd src
+   $ make                                  #查看编译选项
+   $ make package                          #查看可用的包
+   $ make yes-intel yes-manybody yes-meam  #添加所需的包
+   $ make ps                               #查看计划安装的包列表 
+   $ make -j 4 oneapi                      #开始编译
+
+e) 环境设置
+
+编译成功后，src 文件夹下将生成可执行文件 lmp_oneapi
+
+为了便于后续调用，一个简单的方法是将该文件移至 ~/bin 文件夹：
+
+.. code:: bash
+
+   $ mkdir ~/bin
+   $ cp lmp_oneapi ~/bin
+
+至此安装和设置完成。如下是计算时所需的 slurm 脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=lmp
+   #SBATCH --partition=64c512g
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   module purge
+   module load intel-oneapi-compilers/2021.4.0
+   module load intel-oneapi-mpi/2021.4.0
+   module load intel-oneapi-mkl/2021.4.0
+   module load intel-oneapi-tbb/2021.4.0
+
+   mpirun lmp -i in.lj
+
+
+
+
+
+
+.. _π2.0 LAMMPS:
+
+二. π2.0 LAMMPS
+----------------
+
+1. Intel编译器部署的版本
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps.slurm）
 
 .. code:: bash
 
@@ -94,54 +173,48 @@ Intel加速CPU版本
 
    #SBATCH --job-name=intel_test
    #SBATCH --partition=cpu
-   #SBATCH -N 1
+   #SBATCH -N 2
    #SBATCH --ntasks-per-node=40
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-
+   
    ulimit -s unlimited
    ulimit -l unlimited
-
-   module purge
-   module load oneapi/2021
-   export INPUT_FILE=in.eam
-   export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
-   KMP_BLOCKTIME=0 mpirun -n 40 singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 1 -sf intel -i ${INPUT_FILE} 
-
-
-用下方语句提交作业:
-
-.. code:: bash
    
-   sbatch intel_lammps.slurm
+   module purge
+   module load oneapi
 
+   export INPUT_FILE=in.lj
+   export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
 
-（进阶）CPU 版本自行编译
-~~~~~~~~~~~~~~~~~~~~~~~~
+   mpirun singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 2 -sf intel -i ${INPUT_FILE} 
+
+2. CPU 版本自行编译
+~~~~~~~~~~~~~~~~~~~
 
 若对 lammps 版本有要求，或需要特定的 package，可自行编译 Intel 版本的
-Lammps.
+Lammps. 下面以在 π 集群为例介绍 lammps 的自行安装
 
-1. 从官网下载 lammps，推荐安装最新的稳定版：
+a) 从官网下载 lammps，推荐安装最新的稳定版：
 
 .. code:: bash
 
    $ wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
 
-2. 由于登录节点禁止运行作业和并行编译，请申请计算节点资源用来编译
+b) 由于登录节点禁止运行作业和并行编译，请申请计算节点资源用来编译
    lammps，并在编译结束后退出：
 
 .. code:: bash
 
    $ srun -p small -n 8 --pty /bin/bash
 
-3. 加载 Intel 模块：
+c) 加载 Intel 模块：
 
 .. code:: bash
 
-   $ module load intel-parallel-studio/cluster.2019.5
+   $ module load intel-parallel-studio/cluster.2020.1
 
-4. 编译 (以额外安装 MANYBODY 和 USER-MEAMC 包为例)
+d) 编译 (以额外安装 MANYBODY 和 Intel 加速包为例)
 
 .. code:: bash
 
@@ -150,12 +223,12 @@ Lammps.
    $ cd src
    $ make                           #查看编译选项
    $ make package                   #查看包
-   $ make yes-user-meamc            #"make yes-"后面接需要安装的 package 名字
+   $ make yes-intel                 #"make yes-"后面接需要安装的 package 名字
    $ make yes-manybody
    $ make ps                        #查看计划安装的包列表 
    $ make -j 8 intel_cpu_intelmpi   #开始编译
 
-5. 测试脚本
+e) 测试脚本
 
 编译成功后，将在 src 文件夹下生成 lmp_intel_cpu_intelmpi.
 后续调用，请给该文件的路径，比如
@@ -174,137 +247,20 @@ slurm.test
    #SBATCH -e %j.err
 
    module purge
-   module load intel-parallel-studio/cluster.2019.5
-
-   export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
-   export I_MPI_FABRICS=shm:ofi
+   module load intel-parallel-studio/cluster.2020.1
 
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i YOUR_INPUT_FILE
+   srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i in.lj
 
+.. _ARM LAMMPS:
 
-.. _GPU版本 LAMMPS:
+三. ARM LAMMPS
+---------------
 
-GPU版本
-~~~~~~~
-
-GPU 版本速度跟 intel CPU 版本基本相同
-
-π 集群 上提供了 GPU 版本的 LAMMPS 2020。经测试，LJ 和 EAM 两 Benchmark
-算例与同等计算费用的 CPU 基本一样。建议感兴趣的用户针对自己的算例，测试
-CPU 和 GPU 计算效率，然后决定使用哪一种平台。
-
-以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心，使用
-GPU 版 LAMMPS。脚本名称可设为 slurm.test
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=lmp_test
-   #SBATCH --partition=dgx2
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=12
-   #SBATCH --cpus-per-task=1
-   #SBATCH --gres=gpu:2
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   module load lammps/2020-dgx
-
-   srun --mpi=pmi2 lmp -in in.eam
-
-使用如下指令提交：
-
-.. code:: bash
-
-   $ sbatch slurm.test
-
-GPU 版本 LAMMPS + kokkos
-------------------------
-
-GPU 版本速度跟 intel CPU 版本基本相同
-
-π 集群上提供了 GPU + kokkos 版本的 LAMMPS 15Jun2020。采用容器技术，使用
-LAMMPS 官方提供给 NVIDIA 的镜像，针对 Tesla V100 的 GPU
-做过优化，性能很好。经测试，LJ 和 EAM 两 Benchmark 算例与同等计算费用的
-CPU 基本一样。建议感兴趣的用户针对自己的算例，测试 CPU 和 GPU
-计算效率，然后决定使用哪一种平台。
-
-以下 slurm 脚本，在 dgx2 队列上使用 2 块 gpu，并配比 12 cpu 核心，使用
-GPU kokkos 版的 LAMMPS。脚本名称可设为 slurm.test
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=lmp_test
-   #SBATCH --partition=dgx2
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=2
-   #SBATCH --cpus-per-task=6
-   #SBATCH --gres=gpu:2
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   module load lammps/2020-dgx-kokkos
-
-   srun --mpi=pmi2 lmp -k on g 2 t 12  -sf kk -pk kokkos comm device -in in.eam
-
-其中，g 2 t 12 意思是使用 2 张 GPU 和 12 个线程。-sf kk -pk kokkos comm
-device 是 LAMMPS 的 kokkos 设置，可以用这些默认值
-
-使用如下指令提交：
-
-.. code:: bash
-
-   $ sbatch slurm.test
-
-.. _ARM版本 LAMMPS:
-
-ARM版本
-~~~~~~~
-
-脚本如下(lammps.slurm):
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=lmp_test
-   #SBATCH --partition=arm128c256g
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   #SBATCH -n 256
-   #SBATCH --ntasks-per-node=128
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   module purge
-   module load openmpi/4.0.3-gcc-9.3.0
-   module load lammps/20210310-gcc-9.3.0-openblas-openmpi
-
-   mpirun -n $SLURM_NTASKS lmp -in in.eam
-
-在 `ARM 节点 <../login/index.html#arm>`__\ 上使用如下指令提交（若在 π2.0 登录节点上提交将出错）：
-
-.. code:: bash
-
-   $ sbatch lammps.slurm
-
-.. _ARM版本 LAMMPS(bisheng+hypermpi):
-
-ARM版lammps(bisheng编译器+hypermpi)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. ARM版lammps(bisheng编译器+hypermpi)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 脚本如下(lammps.slurm):
 
@@ -315,20 +271,104 @@ ARM版lammps(bisheng编译器+hypermpi)
    #SBATCH --job-name=lammps       
    #SBATCH --partition=arm128c256g       
    #SBATCH -N 1
-   #SBATCH --ntasks-per-node=16
+   #SBATCH --ntasks-per-node=96
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
    module load lammps/bisheng-1.3.3-lammps-2019
-   mpirun -np $SLURM_NTASKS -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj
+   mpirun -x OMP_NUM_THREADS=1 lmp_aarch64_arm_hypermpi -in in.lj
 
 .. code:: bash
 
    $ sbatch lammps.slurm
+
+运行结果(单位为：秒，越低越好)
+---------------------------------------
+
+思源一号
+~~~~~~~~
+
++------------------------------------------------+
+|     lammps/20210310-intel-2021.4.0-omp         |
++=============+==========+===========+===========+
+| 核数        | 64       | 128       | 192       |
++-------------+----------+-----------+-----------+
+| Wall time   | 0:01:26  | 0:00:46   | 0:00:36   |
++-------------+----------+-----------+-----------+
+
+π2.0
+~~~~~
+
++-----------------------------------------------+
+|                intel加速版本                  |          
++=============+==========+===========+==========+
+| 核数        | 40       | 80        | 120      |
++-------------+----------+-----------+----------+
+| Wall time   | 0:02:37  | 0:01:16   | 0:00:52  |
++-------------+----------+-----------+----------+
+
+ARM
+~~~
+
++------------------------------------+
+| lammps/bisheng-1.3.3-lammps-2019   |
++==============+==========+==========+
+| 核数         | 64       | 96       |
++--------------+----------+----------+
+|  Wall time   | 0:07:26  | 0:04:43  |
++--------------+----------+----------+
+
+建议
+~~~~
+
+通过分析上述结果，我们推荐您使用如下两个版本提交作业。
+
+.. code:: bash
+
+   module load lammps/20210310-intel-2021.4.0-omp               思源一号   
+   /lustre/share/singularity/modules/lammps/20-user-intel.sif   π2.0
+
+
+算例内容如下： `in.lj` 
+----------------------------
+
+.. code:: bash
+
+   # 3d Lennard-Jones melt
+
+   variable     x index 4
+   variable     y index 4
+   variable     z index 4
+   
+   variable     xx equal 20*$x
+   variable     yy equal 20*$y
+   variable     zz equal 20*$z
+   
+   units                lj
+   atom_style   atomic
+   
+   lattice              fcc 0.8442
+   region               box block 0 ${xx} 0 ${yy} 0 ${zz}
+   create_box   1 box
+   create_atoms 1 box
+   mass         1 1.0
+   
+   velocity     all create 1.44 87287 loop geom
+   
+   pair_style   lj/cut 2.5
+   pair_coeff   1 1 1.0 1.0 2.5
+   
+   neighbor     0.3 bin
+   neigh_modify delay 0 every 20 check no
+   
+   fix          1 all nve
+   
+   run          10000
+
+
 
 参考资料
 --------
 
 -  `LAMMPS 官网 <https://lammps.sandia.gov/>`__
 -  `NVIDIA GPU CLOUD <ngc.nvidia.com>`__
-
