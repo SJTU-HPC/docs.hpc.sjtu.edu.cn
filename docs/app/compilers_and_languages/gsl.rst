@@ -14,6 +14,9 @@ gsl（GNU Scientific Library）是专门为应用数学和科学技术领域的�
 GSL使用说明
 -----------------------------
 
+pi2.0上的GSL
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 1. 创建gsltest目录并进入该目录：
 
 .. code::
@@ -71,7 +74,7 @@ GSL使用说明
 
   #!/bin/bash
 
-  #SBATCH --job-name=eigentest    
+  #SBATCH --job-name=gsltest    
   #SBATCH --partition=small     
   #SBATCH --ntasks-per-node=1     
   #SBATCH -n 1                     
