@@ -125,6 +125,7 @@ Conda常用命令
    conda search -c tc06580 pymupdf  # 指定源搜索，只有1.17.0版本的
    which pip                        # 确定有安装pip，一般conda创建的Python环境都会有pip的
    pip install pymupdf              # 使用pip安装Python扩展包
+   pip install -r requirements.txt  # 使用pip批量安装requirements.txt中的软件包
    pip list | grep -i pymupdf       # 安装成功，当前为1.19.4版本
 
 .. tip:: 
