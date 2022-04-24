@@ -10,7 +10,7 @@ Eigen库是一个开源的矩阵运算库，其利用C++模板编程的思想，
 
 
 
-eigen使用说明
+Eigen使用说明
 -----------------------------
 
 思源一号上的Eigen
@@ -32,13 +32,13 @@ eigen使用说明
   using Eigen::MatrixXd;
   int main()
   {
-  MatrixXd m(2,2);
-  m(0,0) = 3;
-  m(1,0) = 2.5;
-  m(0,1) = -1;
-  m(1,1) = m(1,0) + m(0,1);
-  std::cout << m << std::endl;
-  return 0;
+      MatrixXd m(2,2);
+      m(0,0) = 3;
+      m(1,0) = 2.5;
+      m(0,1) = -1;
+      m(1,1) = m(1,0) + m(0,1);
+      std::cout << m << std::endl;
+      return 0;
   }
 
 3. 在该目录下创建如下作业提交脚本eigentest.slurm:
@@ -95,13 +95,13 @@ pi2.0上的Eigen
   using Eigen::MatrixXd;
   int main()
   {
-  MatrixXd m(2,2);
-  m(0,0) = 3;
-  m(1,0) = 2.5;
-  m(0,1) = -1;
-  m(1,1) = m(1,0) + m(0,1);
-  std::cout << m << std::endl;
-  return 0;
+      MatrixXd m(2,2);
+      m(0,0) = 3;
+      m(1,0) = 2.5;
+      m(0,1) = -1;
+      m(1,1) = m(1,0) + m(0,1);
+      std::cout << m << std::endl;
+      return 0;
   }
 
 3. 在该目录下创建如下作业提交脚本eigentest.slurm:
@@ -148,3 +148,5 @@ pi2.0上的Eigen
 ========
 
 -  `Eigen 官网 <https://eigen.tuxfamily.org/index.php?title=Main_Page>`__
+-  `Eigen 介绍及简单使用 <https://eigen.tuxfamily.org/index.php?title=Main_Page>`__
+
