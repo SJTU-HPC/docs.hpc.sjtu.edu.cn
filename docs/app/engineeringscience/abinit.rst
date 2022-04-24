@@ -4,54 +4,78 @@ ABINIT
 简介
 ----
 
-ABINIT is a DFT code based on pseudopotentials and a planewave basis,
-which calculates the total energy, charge density and electronic
-structure for molecules and periodic solids. In addition to many other
-features, it provides the time dependent DFT, or many-body perturbation
-theory (GW approximation) to compute the excited states.
+ABINIT是一个软件套件，可用于计算材料的光学、机械、振动和其他可观察特性的模拟。从密度泛函理论的量子方程开始，可以使用基于DFT的微扰理论和多体格林函数（GW 和 DMFT）建立高级应用程序。
+ABINIT可以计算具有任何化学成分的分子、纳米结构和固体，并附带几个完整且强大的原子势表。
 
-π 集群上的 ABINIT
------------------------------
+可用版本
+--------
 
-查看 π 集群上已编译的软件模块:
++-------+-------+----------+-------------------------------------------------------+
+| 版本  | 平台  | 构建方式 | 模块名                                                |
++=======+=======+==========+=======================================================+
+| 9.4.2 | |cpu| | spack    | abinit/9.4.2-gcc-8.3.1-hdf5-openblas-openmpi 思源一号 |
++-------+-------+----------+-------------------------------------------------------+
 
-.. code:: bash
-
-   $ module avail abinit
-
-调用该模块:
+算例位置
+----------
 
 .. code:: bash
 
-   $ module load abinit/8.10.3-gcc-9.2.0-openblas-openmpi
+   /dssg/share/sample/abinit/abinit-9.6.2.tar.gz
 
-π 集群上的 Slurm 脚本 slurm.test
---------------------------------------------
+集群上的ABINIT
+-------------------
 
-在 cpu 队列上，总共使用 80 核 (n = 80)
-cpu 队列每个节点配有 40核，所以这里使用了 2 个节点：
+- `思源一号上运行ABINIT`_
+
+.. _思源一号上运行ABINIT:
+
+思源一号上运行ABINIT
+---------------------
+
+拷贝算例到本地
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. code:: bash
+
+   mkdir ~/abinit && cd ~/abinit
+   cp -r /dssg/share/sample/abinit/abinit-9.6.2.tar.gz ./
+   tar xf abinit-9.6.2.tar.gz
+
+运行脚本
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
    #!/bin/bash
-
-   #SBATCH -J abinit_test
-   #SBATCH -p cpu
-   #SBATCH -n 80
-   #SBATCH --ntasks-per-node=40
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-
+   #SBATCH --job-name=abinit
+   #SBATCH --partition=64c512g 
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=64
+   #SBATCH --exclusive
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   export ABI_HOME=~/abinit/abinit-9.6.2
+   export ABI_TESTS=$ABI_HOME/tests/
+   export ABI_PSPDIR=$ABI_TESTS/Psps_for_tests/
    module load abinit
+   module load openmpi/4.1.1-gcc-8.3.1 
+   mpirun -np 8 abinit tbs_1.abi
 
-   srun --mpi=pmi2 abinit < example.in
 
-π 集群上提交作业
+运行结果如下所示：
 -------------------
 
-.. code:: bash
+思源一号上ABINIT的运行时间
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   $ sbatch slurm.test
++----------------------------------------------------------+
+|      abinit/9.4.2-gcc-8.3.1-hdf5-openblas-openmpi        | 
++=============+==========+===========+===========+=========+
+| 核数        | 1        | 2         | 4         | 8       |
++-------------+----------+-----------+-----------+---------+
+| Exec time   | 0:00:29  | 0:00:16   | 0:00:11   | 0:00:07 |  
++-------------+----------+-----------+-----------+---------+
 
 参考资料
 --------
