@@ -119,6 +119,26 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../img/matlab_result.png
 
+
+
+在代码中使用 `parpool` 函数，可以定义当前matlab代码使用的线程数。
+
+示例代码：
+
+.. code:: matlab
+    
+    function value = multicore()
+        pc = parcluster('local')
+        parpool(pc, 40)
+        n = 2000;
+        y = zeros(n,1);
+        parfor i = 1:n
+            y(i) = max(svd(randn(i)));
+        end
+    end
+
+ 将当前代码保存为 `multicore.m`.
+
 π 超算提交多核CPU脚本
 
 .. code:: bash
