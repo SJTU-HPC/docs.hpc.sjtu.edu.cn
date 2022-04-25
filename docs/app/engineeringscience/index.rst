@@ -22,6 +22,7 @@
    octave
    openfoam
    ovito
+   psi4
    ../../studio/paraview
    quantum-espresso
    quickpic
