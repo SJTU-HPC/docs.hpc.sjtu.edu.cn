@@ -34,14 +34,8 @@ GSL使用说明
   int main (void)
   {
         double a_data[] = { 1.0, 0.6, 0.0,
-                0.0, 1.5, 1.0,
-                0.0, 1.0, 1.0 };
-        /*
-         * Inverse is
-         *    1  -1.2   1.2
-         *    0   2.0  -2.0
-         *    0  -2.0   3.0
-         */
+                            0.0, 1.5, 1.0,
+                            0.0, 1.0, 1.0 };
         double inva[9];
         int s, i, j;
 
@@ -74,7 +68,7 @@ GSL使用说明
 
   #!/bin/bash
 
-  #SBATCH --job-name=eigentest      
+  #SBATCH --job-name=gsltest      
   #SBATCH --partition=64c512g      
   #SBATCH --ntasks-per-node=1     
   #SBATCH -n 1                     
@@ -133,14 +127,8 @@ pi2.0上的GSL
   int main (void)
   {
         double a_data[] = { 1.0, 0.6, 0.0,
-                0.0, 1.5, 1.0,
-                0.0, 1.0, 1.0 };
-        /*
-         * Inverse is
-         *    1  -1.2   1.2
-         *    0   2.0  -2.0
-         *    0  -2.0   3.0
-         */
+                            0.0, 1.5, 1.0,
+                            0.0, 1.0, 1.0 };
         double inva[9];
         int s, i, j;
 
