@@ -68,7 +68,7 @@ GSL使用说明
 
   #!/bin/bash
 
-  #SBATCH --job-name=eigentest      
+  #SBATCH --job-name=gsltest      
   #SBATCH --partition=64c512g      
   #SBATCH --ntasks-per-node=1     
   #SBATCH -n 1                     

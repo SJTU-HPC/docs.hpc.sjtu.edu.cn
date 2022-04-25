@@ -14,6 +14,7 @@
    cuda
    openblas
    eigen
+   fftw
    gsl
    hpcsdk
    hypre
