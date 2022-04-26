@@ -186,12 +186,9 @@ e) 环境设置
    ulimit -l unlimited
    
    module purge
-   module load oneapi
+   module load lammps/20201029-oneapi-21.4.0
 
-   export INPUT_FILE=in.lj
-   export IMAGE_PATH=/lustre/share/singularity/modules/lammps/20-user-intel.sif
-
-   mpirun singularity run  $IMAGE_PATH  lmp -pk intel 0 omp 2 -sf intel -i ${INPUT_FILE} 
+   lmp -pk intel 0 omp 2 -sf intel -i in.lj
 
 2. CPU 版本自行编译
 ~~~~~~~~~~~~~~~~~~~
