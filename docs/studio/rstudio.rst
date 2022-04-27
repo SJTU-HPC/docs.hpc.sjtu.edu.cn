@@ -1,24 +1,54 @@
-RStudio
-===============
+.. _rstudio:
 
-登录HPC Studio平台后，在内置应用中选择RStudio Server，如下图
+RStudio
+=========
+
+简介
+----
+
+RStudio是一个集成开发环境，主要支持R编程语言，专用于统计计算和图形。它包括一个控制台，支持代码执行的语法编辑器，以及用于绘制，调试和管理工作区的工具。
+
+可用的版本
+----------
+
++-----------+----------+-------------+
+| R版本     | 平台     | RStudio版本 |
++===========+==========+=============+
+| 4.1.3     | |studio| | 2022.02.1   |
++-----------+----------+-------------+
+| 4.0.2     | |studio| | 1.2.5042    |
++-----------+----------+-------------+
+| 3.6.3     | |studio| | 1.2.5042    |
++-----------+----------+-------------+
+
+如何使用
+----------
+
+用超算的账号及密码登录 `HPC Studio <https://studio.hpc.sjtu.edu.cn/>`_ ，在内置应用中选择 ``RStudio Server`` ，如下图：
 
 .. image:: ../img/RStudio_1.png
+  :width: 900px
 
-点击后会出现下图的选项卡，里面定义好了所需的选项卡，可以自定义时间，该时间为作业时间，时间自行定义。设置完成后launch即可完成提交。
+点击后会出现相关的选项卡，可以设置作业时间，资源情况，软件版本。设置完成后 ``Launch`` 即可运行：
 
 .. image:: ../img/RStudio_2.png
+  :width: 900px
 
-待选项卡从等待变成Running后，如下图所示，可使用Connect to RStudio
-Server打开Rstudio平台进行开发。
+.. tip::
+
+   \*-pi 为 π 集群的资源，\*-sy为思源一号的资源。
+
+待界面从等待变成 ``Running`` 后，可使用 ``Connect to RStudio Server`` 连接到 ``Rstudio Server`` ：
 
 .. image:: ../img/RStudio_3.png
+  :width: 900px
 
-该RStduio Server提供了基本与本地的desktop版本相同的功能，所需的R依赖包自行下载。
+运行示例
+----------
 
-.. image:: ../img/RStudio_4.png
+所需的 ``R`` 依赖包需要自行下载：
 
-上图代码示例::
+.. code-block:: R
 
    library(ggplot2)
    library(dplyr)
@@ -37,3 +67,7 @@ Server打开Rstudio平台进行开发。
         axis.text.y = element_text(size = 12,colour="black"),
         axis.line.y = element_line(size=0.25),
         axis.text.x=element_text (size = 13,colour="black",angle = myAngle))
+
+.. image:: ../img/RStudio_4.png
+  :width: 900px
+
