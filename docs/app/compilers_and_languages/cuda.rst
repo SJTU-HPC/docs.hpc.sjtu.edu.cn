@@ -1,16 +1,35 @@
 CUDA
 ====
 
+思源超算及闵行超算上均部署有CUDA套件。
+
++----------+------------------------------------+
+| 版本     | 加载方式                           |
++==========+====================================+        
+| 10.1.243 | module load cuda/10.1.243 思源一号 |
++----------+------------------------------------+
+| 11.3.1   | module load cuda/11.3.1   思源一号 |
++----------+------------------------------------+
+| 11.4.0   | module load cuda/11.4.0   思源一号 |
++----------+------------------------------------+
+| 11.5.0   | module load cuda/11.5.0   思源一号 |
++----------+------------------------------------+
+| 8.0.61   | module load cuda/8.0.61-gcc-4.8.5  |
++----------+------------------------------------+
+| 9.0.176  | module load  uda/9.0.176-gcc-4.8.5 |
++----------+------------------------------------+
+| 9.2.88   | module load cuda/9.2.88-gcc-4.8.5  |
++----------+------------------------------------+
+| 10.0.130 | module load cuda/10.0.130-gcc-4.8.5|
++----------+------------------------------------+
+| 10.1.243 | module load cuda/10.1.243-gcc-4.8.5|
++----------+------------------------------------+
+
 本文档向您展示如何使用CUDA，包含程序示例，编译，作业脚本示例。
 
-程序示例Hello_CUDA
+
+程序示例 CuBLAS
 ------------------
-
-加载cuda环境。
-
-.. code:: bash
-
-   $ module load cuda/10.0.130-gcc-4.8.5
 
 编辑 ``cublas.cu`` 文件，内容如下：
 
@@ -86,19 +105,59 @@ CUDA
        return EXIT_SUCCESS;
    }
 
-程序示例：CuBLAS
-----------------
+将以上程序保存为 `cublas.cu`。
 
 使用cuda进行编译，编译时链接cublas动态库。
 
+在思源平台上的编译命令如下：
+
 .. code:: bash
 
+   $ module load cuda/11.3.1
    $ nvcc cublas.cu -o cublas -lcublas
 
-作业脚本示例
-------------
+在闵行超算上的编译命令如下：
 
-这是一个名为\ ``dgx.slurm``\ 的 **单机单卡**
+.. code:: bash
+
+   $ module load cuda/11.3.1
+   $ nvcc cublas.cu -o cublas -lcublas
+
+
+A100队列作业脚本示例
+--------------------------
+
+这是一个名为 ``a100.slurm`` 的 **单机单卡**
+作业脚本，该脚本向a100队列申请1块GPU，并在作业完成时通知。
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=cuda_test
+   #SBATCH --partition=a100
+   #SBATCH --gres=gpu:1
+   #SBATCH -n 1
+   #SBATCH --ntasks-per-node 1
+   #SBATCH --mail-type=end
+   #SBATCH --mail-user=YOU@EMAIL.COM
+   #SBATCH --output=cublas.out
+   #SBATCH --error=cublas.err
+
+   module load cuda/11.3.1
+
+   ./cublas
+
+用以下方式提交作业：
+
+.. code:: bash
+
+   $ sbatch a100.slurm
+
+DGX2队列作业脚本示例
+-----------------------
+
+这是一个名为 ``dgx.slurm`` 的 **单机单卡**
 作业脚本，该脚本向dgx2队列申请1块GPU，并在作业完成时通知。
 
 .. code:: bash
@@ -125,7 +184,8 @@ CUDA
 
    $ sbatch dgx.slurm
 
-预期结果：
+预期结果
+----------------------
 
 .. code:: bash
 
