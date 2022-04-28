@@ -2,7 +2,7 @@
 登录
 ****
 
-获取集群帐号后，可通过浏览器登录 \ `可视化平台 HPC Studio <../studio/index.html>`__\ ，也可通过传统的 SSH 登录。下面将介绍 SSH 登录方法。
+获取交我算帐号后，可通过浏览器登录 \ `可视化平台 HPC Studio <../studio/index.html>`__\ ，也可通过传统的 SSH 登录。下面将介绍 SSH 登录方法。
 
 通过 SSH 登录集群
 ==========================
@@ -16,8 +16,8 @@
 注意事项
 --------
 
--  集群帐号仅限于同一课题组的成员使用，请勿将帐号借给他人使用。
--  请妥善保管好您的帐号密码，不要告知他人。集群管理员不会要求您提供密码。
+-  交我算帐号仅限于同一课题组的成员使用，请勿将帐号借给他人使用。
+-  请妥善保管好您的帐号密码，不要告知他人。管理员不会要求您提供密码。
 -  恶意的 SSH 客户端软件会窃取您的密码，请在官网下载正版授权 SSH 客户端软件。
 -  登录集群后，请不要跳转到其他登录节点。任务完成后请关闭 SSH 会话。
 -  若无法登录，请检查输入密码或确认 IP 地址是否正确。您可以参考故障排除和反馈，将诊断信息发送给 \ `HPC 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ 。
@@ -42,13 +42,13 @@ SSH 登录
 
    $ ssh username@sylogin.hpc.sjtu.edu.cn
 
-* π 集群
+* π 2.0 和 AI 平台
 
 .. code:: bash
 
    $ ssh username@login.hpc.sjtu.edu.cn
 
-* ARM 集群（限校内 IP，或使用 SJTU VPN）
+* ARM 平台（限校内 IP，或使用 SJTU VPN）
   
 .. code:: bash
 
@@ -57,9 +57,9 @@ SSH 登录
 
 说明：
 
-* 登录节点 IP 地址（或主机名）分别为 sylogin.hpc.sjtu.edu.cn（思源一号）、login.hpc.sjtu.edu.cn（π 集群）、armlogin.hpc.sjtu.edu.cn（ARM）
+* 登录节点 IP 地址（或主机名）分别为 sylogin.hpc.sjtu.edu.cn（思源一号）、login.hpc.sjtu.edu.cn（π 2.0 和 AI）、armlogin.hpc.sjtu.edu.cn（ARM）
 
-* 思源一号和 π 集群通过上述命令登录，会自动分配到多个登录节点之一，如 sylogin1, sylogin2, login1, login2, login3。也可以手动指定这五个具体的登录节点之一登录，如 ssh username@sylogin1.hpc.sjtu.edu.cn
+* 思源一号和 π 2.0/AI 集群通过上述命令登录，会自动分配到多个登录节点之一，如 sylogin1, sylogin2, login1, login2, login3。也可以手动指定这五个具体的登录节点之一登录，如 ssh username@sylogin1.hpc.sjtu.edu.cn
 
 * SSH 端口均为默认值 22
 
@@ -74,7 +74,7 @@ Windows 推荐使用 Putty 免费客户端，下载后双击即可运行使用�
 下面介绍 Windows 用户使用 Putty 客户端登录思源一号。
 
 
-启动客户端 Putty，填写登录节点地址 sylogin.hpc.sjtu.edu.cn （适用于思源一号），或  login.hpc.sjtu.edu.cn （适用于 π 集群），端口号采用默认值 22，然后点 Open 按钮，如下图所示：
+启动客户端 Putty，填写登录节点地址 sylogin.hpc.sjtu.edu.cn （适用于思源一号），或  login.hpc.sjtu.edu.cn （适用于 π 2.0 和 AI 集群），端口号采用默认值 22，然后点 Open 按钮，如下图所示：
 
 .. image:: ../img/putty1.png
 
@@ -89,7 +89,7 @@ Windows 推荐使用 Putty 免费客户端，下载后双击即可运行使用�
 通过 SSH 传输文件
 -----------------
 
-登录节点资源有限，不推荐在登录节点直接进行大批量的数据传输。超算平台提供了专门用于数据传输的节点，登录该节点后可以通过rsync，scp等方式将个人目录下的数据下载到本地，或者反向上传本地数据到个人目录。详情请参考具体请参考 :ref:`label_transfer` 。
+登录节点资源有限，不推荐在登录节点直接进行大批量的数据传输。交我算HPC+AI平台平台提供了专门用于数据传输的节点，登录该节点后可以通过rsync，scp等方式将个人目录下的数据下载到本地，或者反向上传本地数据到个人目录。详情请参考具体请参考 :ref:`label_transfer` 。
 
 .. _label_no_password_login:
 
@@ -98,9 +98,9 @@ Windows 推荐使用 Putty 免费客户端，下载后双击即可运行使用�
 
 *提示：“无密码登录”仅适用于使用 SSH 命令行工具的 Linux/ UNIX / Mac 用户*
 
-“无密码登录”使您无需输入用户名和密码即可登录，它还可以作为服务器的别名来简化使用。无密码登录需要建立从远程主机（群集的登录节点）到本地主机（您自己的计算机）的SSH信任关系。建立信任关系后，双方将通过 SSH 密钥对进行身份验证。
+“无密码登录”使您无需输入用户名和密码即可登录，它还可以作为服务器的别名来简化使用。无密码登录需要建立从远程主机（集群的登录节点）到本地主机（您自己的计算机）的SSH信任关系。建立信任关系后，双方将通过 SSH 密钥对进行身份验证。
 
-首先，您需要在本地主机上生成的 SSH 密钥对。为安全期间，π 集群要求使用密码短语 (passphrase) 来保护密钥对。使用密码短语来保护密钥对，每次双方身份验证时都需要输入密码。
+首先，您需要在本地主机上生成的 SSH 密钥对。为安全起见，集群要求使用密码短语 (passphrase) 来保护密钥对。使用密码短语来保护密钥对，每次双方身份验证时都需要输入密码。
 
 .. code:: bash
 
@@ -158,24 +158,24 @@ ssh-copy-id 将本地主机的公钥 id_rsa.pub添加到远程主机的信任列
 
    $ chmod 600 ~/.ssh/config
 
-然后，您只需输入以下内容即可登录群集：
+然后，您只需输入以下内容即可登录集群：
 
 .. code:: bash
 
     $ ssh hpc
 
 *当 SSH 密钥对发生泄漏，请立即清理本地电脑 .ssh
-文件夹里的密钥对，并重新在本地生成密钥对（生成时请设置密码短语）。另外请删除 π 集群上的 ~/.ssh/authorized_keys 文件。*
+文件夹里的密钥对，并重新在本地生成密钥对（生成时请设置密码短语）。另外请删除集群上的 ~/.ssh/authorized_keys 文件。*
 
 如何重新生成密钥对
 ----------------------------------------------------
 
 .. code:: bash
 
-   （在超算集群上）$ rm -f ~/.ssh/authorized_keys             # 清除服务器上原有的 authorized_keys
+   （在集群上）$ rm -f ~/.ssh/authorized_keys             # 清除服务器上原有的 authorized_keys
    （在自己电脑上）$ rm  ~/.ssh/id*                           # 清除本地 .ssh 文件夹中的密钥对
    （在自己电脑上）$ ssh-keygen -t rsa                        # 在本地重新生成密钥对。第二个问题，设置密码短语 (passphrase)，并记住密码短语
-   （在自己电脑上）$ ssh-keygen -R sylogin.hpc.sjtu.edu.cn    # 清理本地 known_hosts 里关于 π 集群的条目
+   （在自己电脑上）$ ssh-keygen -R sylogin.hpc.sjtu.edu.cn    # 清理本地 known_hosts 里关于集群的条目
    （在自己电脑上）$ ssh-copy-id YOUR_USERNAME@TARGET_IP      # 将本地新的公钥发给服务器，存在服务器的 authorized_keys 文件里
 
 SSH 重置 known_hosts
@@ -190,7 +190,7 @@ SSH 重置 known_hosts
 调试 SSH 登录问题
 -----------------
 
-有多种原因可能会阻止您登录到 π 集群。
+有多种原因可能会阻止您登录到集群。
 
 1. 连续多次错输密码会被临时封禁 1 小时。集群登录节点设置了 fail2ban 服务，多次输入密码错误后会被临时封禁 1 小时。
 
@@ -198,7 +198,7 @@ SSH 重置 known_hosts
 
 若需重置密码，请使用或抄送帐号负责人邮箱发送邮件到  \ `HPC 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ ，我们将会在 1 个工作日内响应您的申请。
 
-排查登录问题，还可以使用 ping 命令检查您的电脑和 π 集群连接状态。
+排查登录问题，还可以使用 ping 命令检查您的电脑和集群连接状态。
 
 .. code:: bash
 
@@ -245,40 +245,6 @@ Windows SSH 客户端用户
 ``Sending of null packets to keep session active`` ->
 ``Seconds between keepalives (0 to turn off)``\ 后的文本框中，输入对应的值，如 240。
 
-ARM节点登录
-===========
-
-ARM平台简介
------------
-
-该平台基于ARM CPU构建，共100个计算节点，与π 2.0共享文件系统，数据无需迁移，但由于CPU架构不同，计算应用和软件库都需要重新编译。
-
-单节点配备有128核（2.6 GHz）、256 GB内存（16通道DDR4-2933）、240 GB本地硬盘，节点间采用IB高速互联，挂载Lustre并行文件系统。
-
-采用SLURM作业调度，提交方式与π 2.0一致，即在原有集群上新增一个队列，新队列名称：arm128c256g。
-
-ARM节点登录方式
----------------
-
--  使用 \ ``ssh``\ 登录命令（限校内 IP，或使用 SJTU VPN）
-
-.. code:: bash
-
-   $ ssh username@armlogin.hpc.sjtu.edu.cn
-
--  使用 \ ``srun``\ 登录命令（由 π2.0 集群的登录节点登录到 ARM 计算节点）
-
-.. code:: bash
-
-   $ srun -p arm128c256g -n 4 --pty /bin/bash
-
--  或使用 \ ``salloc``\ 命令登录（由 π2.0 集群的登录节点登录到 ARM 计算节点）
-
-.. code:: bash
-
-   $ salloc -p arm128c256g -n 4
-   $ ssh [分配的节点]
-
 
 Tmux
 ====
@@ -320,7 +286,7 @@ Tmux就是这样一款会话与窗口的“解绑”工具。
 安装
 ^^^^^^^^^^^^^^^^^^^
 
-π 集群中已经默认安装了Tmux，无须操作。如果您需要在自己的服务器上安装Tmux，请参考以下指令：
+集群中已经默认安装了Tmux，无须操作。如果您需要在自己的服务器上安装Tmux，请参考以下指令：
 
 .. code:: bash
 
