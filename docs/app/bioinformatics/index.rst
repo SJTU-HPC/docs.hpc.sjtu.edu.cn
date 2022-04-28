@@ -22,8 +22,11 @@
    bwa
    cd-hit
    cdo
+   celldex
+   cellphonedb
    cdsapi
    clever
+   cnvkit
    cnvnator
    control-freec
    colabfold
@@ -34,6 +37,7 @@
    deepvariant
    delly
    deseq2
+   doubletfinder
    erds
    fastqc
    fermikit
@@ -45,6 +49,7 @@
    graphmap
    gridss
    gsutil
+   harmony
    hisat2
    hmmer
    hydra-sv
@@ -57,8 +62,10 @@
    melt
    metasv
    metis
+   mfuzz
    mindthegap
    mobster
+   monocle3
    mrbayes
    ncbi-rmblastn
    openslide-python
@@ -74,10 +81,12 @@
    rosettafold
    salmon
    samtools
+   seurat
    sniffles
    soapdenovo2
    sra-tools
    sratoolkit
+   star-fusion
    stringtie
    strique
    sv2
