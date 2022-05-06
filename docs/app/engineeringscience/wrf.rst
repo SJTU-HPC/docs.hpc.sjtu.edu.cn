@@ -673,7 +673,7 @@ WRF运行
 
 .. code:: bash
 
-   cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/packet_1/WPS-4.3.1/met_d* ./
+   cp -r  ~/data/WRF/WPS-4.3.1/met_em.d*  ./
    
 3. namelist.input文件内容设置如下，参数需要与wps的namelist.wps参数一致：
 
