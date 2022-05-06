@@ -536,8 +536,8 @@ WRF运行
 
 .. code:: bash
 
-   cd ../WPS-4.2.1
-   cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/wrf_data* ./
+   cd WPS-4.3.1
+   cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/wrf_data/* ./
    
 3. namelist.wps文件内容设置如下：
 
