@@ -4,7 +4,7 @@
 module 命令
 -------------
 
-π 集群软件以 module 形式供全局调用。常见的 module 命令如下
+集群软件以 module 形式供全局调用。常见的 module 命令如下
 
 ``module load [MODULE]``: 加载模块
 
