@@ -45,13 +45,12 @@ $ scp -r [源文件路径] [目标路径]
 
 $ rsync --archive --partial --progress [源文件路径] [目标路径]
 
-如果传输的对象为少量大文件，且目标环境上没有数据的历史版本，所有需要传输的文件都是首次传输，可以使用scp直接拷贝文件。
 
-如果[源文件路径]或[目标路径]位于思源一号集群上，则路径需使用以下格式：
+**如果[源文件路径]或[目标路径]位于思源一号集群上，则路径需使用以下格式：**
 
 [用户名]@sydata.hpc.sjtu.edu.cn:[思源一号上的路径]
 
-如果[源文件路径]或[目标路径]位于本地，则不需要加[用户名]@主机名，可直接写文件路径。
+**如果[源文件路径]或[目标路径]位于本地，则不需要加[用户名]@主机名，可直接写文件路径。**
 
 .. code:: bash
 
@@ -59,7 +58,7 @@ $ rsync --archive --partial --progress [源文件路径] [目标路径]
    # 本地个人目录为/home/local_user/
 
    # 示例1：将本地目录~/data的全部数据上传至思源一号dssg目录下
-   $ scp -r /home/local_user/data expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/
+   $ scp -r /home/local_user/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/
 
    # 示例2：将dssg目录中的~/math.dat文件下载到本地
    $ scp expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/math.dat /home/local_user/
@@ -84,7 +83,7 @@ $ rsync --archive --partial --progress [源文件路径] [目标路径]
 .. code:: bash
 
    # 示例4：将本地目录~/data的全部数据上传至lustre目录下
-   $ scp -r /home/local_user/data expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
+   $ scp -r /home/local_user/data/ expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
 
    # 示例5：将lustre目录~/data的数据下载到本地，请注意rsync不支持双远端传输，必须在目标主机上操作
    $ rsync --archive --partial --progress expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/data/ ~/download/
@@ -104,7 +103,7 @@ $ rsync -avr --progress [源文件路径] [目标路径]
 
    # 示例6: 该用户将lustre个人目录下的数据~/data搬运到dssg个人目录下
    $ ssh expuser01@data.hpc.sjtu.edu.cn
-   $ scp -r /lustre/home/acct-exp/expuser01/data expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data
+   $ scp -r /lustre/home/acct-exp/expuser01/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data
 
 传输方案
 ===========
