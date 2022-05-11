@@ -4,7 +4,7 @@
 数据传输
 ***********
 
-目前超算集群包含两个存储池，其中 **lustre** 存储用于 ``small, cpu, huge, 192c6t, dgx2, arm128c256g`` 以及相应的debug队列，应当在 ``login, kplogin, data`` 系列节点上查看、使用存放的数据； **gpfs** 存储用于 ``64c512g, a100`` 以及相应的debug队列，应当在 ``sylogin, sydata`` 节点上查看、使用存放的数据。使用时请注意自己home目录的实际路径。
+目前交我算HPC+AI集群包含两个存储池，其中 **lustre** 存储用于 ``small, cpu, huge, 192c6t, dgx2, arm128c256g`` 以及相应的debug队列，应当在 ``login, kplogin, data`` 系列节点上查看、使用存放的数据； **gpfs** 存储用于 ``64c512g, a100`` 以及相应的debug队列，应当在 ``sylogin, sydata`` 节点上查看、使用存放的数据。使用时请注意自己home目录的实际路径。
 
 推荐使用 data 节点进行数据传输，不占用 login 节点资源并且多进程或多用户同时传输不会受限于 CPU。**data节点仅用于批量数据传输，请勿在此节点上运行与数据传输无关的应用，如编译程序、管理作业、校验数据等。如果发现此类行为，中心将视情况取消相关帐号使用传输节点的权利。**
 
@@ -54,17 +54,17 @@ $ rsync --archive --partial --progress [源文件路径] [目标路径]
 
 .. code:: bash
 
-   # 假设用户expuser01在平台上个人目录为/dssg/home/acct-exp/expuser01
-   # 本地个人目录为/home/local_user/
+   # 假设用户expuser01在思源一号平台上个人目录为/dssg/home/acct-exp/expuser01
+   # 本地个人目录为/home/local_user/（个人目录可以用~代替）
 
    # 示例1：将本地目录~/data的全部数据上传至思源一号dssg目录下
    $ scp -r /home/local_user/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/
 
-   # 示例2：将dssg目录中的~/math.dat文件下载到本地
+   # 示例2：将dssg目录中的~/math.dat文件下载到本地个人目录
    $ scp expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/math.dat /home/local_user/
 
-   # 示例3：将dssg目录~/data的数据下载到本地，请注意rsync不支持双远端传输，必须在目标主机（这里即为本地）上操作
-   $ rsync --archive --partial --progress expuser01@data.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data/ ~/download/
+   # 示例3：将dssg目录~/data的数据下载到本地~/download目录，请注意rsync不支持双远端传输，必须在目标主机（这里即为本地）上操作
+   $ rsync --archive --partial --progress expuser01@data.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data/ /home/local_user/download/
 
 本地向π 2.0/AI/ARM集群传输
 ==========================
@@ -82,11 +82,13 @@ $ rsync --archive --partial --progress [源文件路径] [目标路径]
 
 .. code:: bash
 
+   # 假设用户expuser01在π 2.0集群上个人目录为/lustre/home/acct-exp/expuser01
+
    # 示例4：将本地目录~/data的全部数据上传至lustre目录下
    $ scp -r /home/local_user/data/ expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/
 
-   # 示例5：将lustre目录~/data的数据下载到本地，请注意rsync不支持双远端传输，必须在目标主机上操作
-   $ rsync --archive --partial --progress expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/data/ ~/download/
+   # 示例5：将lustre目录~/data的数据下载到本地~/download目录，请注意rsync不支持双远端传输，必须在目标主机上操作
+   $ rsync --archive --partial --progress expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/data/ /home/local_user/download/
 
 思源一号与π 2.0/AI/ARM集群互传
 ================================
@@ -101,9 +103,9 @@ $ rsync -avr --progress [源文件路径] [目标路径]
 
 .. code:: bash
 
-   # 示例6: 该用户将lustre个人目录下的数据~/data搬运到dssg个人目录下
+   # 示例6: 该用户将lustre个人目录下的数据~/data搬运到dssg个人目录~/data下
    $ ssh expuser01@data.hpc.sjtu.edu.cn
-   $ scp -r /lustre/home/acct-exp/expuser01/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data
+   $ scp -r /lustre/home/acct-exp/expuser01/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data/
 
 传输方案
 ===========
