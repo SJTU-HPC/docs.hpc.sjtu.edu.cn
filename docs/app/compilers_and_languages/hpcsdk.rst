@@ -8,14 +8,33 @@ PGI编译器和工具链已迁移至NVIDIA HPC SDK。
 
 本文档向您展示如何使用NVIDIA HPC SDK，包含程序示例，编译，作业脚本示例。
 
+可用版本
+---------------------
+
++----------+--------------------------------------------------+
+| 版本     | 加载方式                                         |
++==========+==================================================+        
+| 21.9     | module load nvhpc/21.9-gcc-11.2.0       思源一号 |
++----------+--------------------------------------------------+
+| 21.11    | module load nvhpc/20.11-gcc-4.8.5       闵行超算 |
++----------+--------------------------------------------------+
+
+
 程序示例CUDA_Fortran
 --------------------------------
 
-加载NVIDIA HPC SDK环境。
+思源超算加载NVIDIA HPC SDK环境。
+
+.. code:: bash
+
+   $ module load nvhpc/21.9-gcc-11.2.0
+
+闵行超算加载NVIDIA HPC SDK环境。
 
 .. code:: bash
 
    $ module load nvhpc/20.11-gcc-4.8.5
+
 
 编辑 ``deviceQuery.cuf`` 文件，内容如下：
 
@@ -89,8 +108,42 @@ PGI编译器和工具链已迁移至NVIDIA HPC SDK。
 
    $ nvfortran  -O2 -o deviceQuery.out deviceQuery.cuf
 
-作业脚本示例
-------------
+
+
+A100队列提交作业脚本示例
+-----------------------------
+
+这是一个名为\ ``a100.slurm``\ 的 **单机单卡**
+作业脚本，该脚本向a100队列申请1块GPU，并在作业完成时通知。
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=a100_test
+   #SBATCH --partition=a100
+   #SBATCH --gres=gpu:1
+   #SBATCH -n 1
+   #SBATCH --ntasks-per-node 1
+   #SBATCH --mail-type=end
+   #SBATCH --mail-user=YOU@EMAIL.COM
+   #SBATCH --output=cublas.out
+   #SBATCH --error=cublas.err
+
+   module load nvhpc/21.9-gcc-11.2.0
+
+   ./deviceQuery.out
+
+用以下方式提交作业：
+
+.. code:: bash
+
+   $ sbatch a100.slurm
+
+
+
+DGX2队列提交作业脚本示例
+-----------------------------
 
 这是一个名为\ ``dgx.slurm``\ 的 **单机单卡**
 作业脚本，该脚本向dgx2队列申请1块GPU，并在作业完成时通知。
