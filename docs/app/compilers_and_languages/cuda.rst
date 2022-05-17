@@ -1,7 +1,7 @@
 CUDA
 ====
 
-思源超算及闵行超算上均部署有CUDA套件。
+思源一号平台及AI平台上均部署有CUDA套件。
 
 +----------+------------------------------------+
 | 版本     | 加载方式                           |
@@ -16,7 +16,7 @@ CUDA
 +----------+------------------------------------+
 | 8.0.61   | module load cuda/8.0.61-gcc-4.8.5  |
 +----------+------------------------------------+
-| 9.0.176  | module load  uda/9.0.176-gcc-4.8.5 |
+| 9.0.176  | module load cuda/9.0.176-gcc-4.8.5 |
 +----------+------------------------------------+
 | 9.2.88   | module load cuda/9.2.88-gcc-4.8.5  |
 +----------+------------------------------------+
@@ -116,15 +116,15 @@ CUDA
    $ module load cuda/11.3.1
    $ nvcc cublas.cu -o cublas -lcublas
 
-在闵行超算上的编译命令如下：
+在AI平台上的编译命令如下：
 
 .. code:: bash
 
-   $ module load cuda/11.3.1
+   $ module load cuda/10.0.130-gcc-4.8.5
    $ nvcc cublas.cu -o cublas -lcublas
 
 
-A100队列作业脚本示例
+a100队列作业脚本示例
 --------------------------
 
 这是一个名为 ``a100.slurm`` 的 **单机单卡**
@@ -137,7 +137,7 @@ A100队列作业脚本示例
    #SBATCH --job-name=cuda_test
    #SBATCH --partition=a100
    #SBATCH --gres=gpu:1
-   #SBATCH -n 1
+   #SBATCH -N 1
    #SBATCH --ntasks-per-node 1
    #SBATCH --mail-type=end
    #SBATCH --mail-user=YOU@EMAIL.COM
@@ -167,7 +167,7 @@ DGX2队列作业脚本示例
    #SBATCH --job-name=dgx2_test
    #SBATCH --partition=dgx2
    #SBATCH --gres=gpu:1
-   #SBATCH -n 1
+   #SBATCH -N 1
    #SBATCH --ntasks-per-node 1
    #SBATCH --mail-type=end
    #SBATCH --mail-user=YOU@EMAIL.COM
