@@ -13,7 +13,7 @@ Intel编译器套件包含以下语言：
 集群上的Intel编译器
 ---------------------
 
-+-----------------+---------------------------- +----------+
++-----------------+-----------------------------+----------+
 | 版本            | 加载方式                    | 平台     |
 +=================+=============================+==========+
 | intel-21.4.0    | module load oneapi/2021.4.0 | 思源一号 |
@@ -28,8 +28,8 @@ Intel编译器套件包含以下语言：
    module load oneapi/2021.4.0
    module list
    Currently Loaded Modules:
-     1) intel-oneapi-compilers/2021.4.0   2) intel-oneapi-mpi/2021.4.0   
-     3) intel-oneapi-mkl/2021.4.0         4) intel-oneapi-tbb/2021.4.0
+   1) intel-oneapi-compilers/2021.4.0   2) intel-oneapi-mpi/2021.4.0   
+   3) intel-oneapi-mkl/2021.4.0         4) intel-oneapi-tbb/2021.4.0
 
 
 
