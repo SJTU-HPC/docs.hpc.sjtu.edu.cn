@@ -154,7 +154,7 @@ e) 环境设置
    module load intel-oneapi-mkl/2021.4.0
    module load intel-oneapi-tbb/2021.4.0
 
-   mpirun lmp -i in.lj
+   mpirun lmp_oneapi -i in.lj
 
 
 
