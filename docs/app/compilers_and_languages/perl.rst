@@ -10,7 +10,7 @@ PERL
 
 .. code:: bash
 
-   $ module load miniconda3/4.7.12.1-gcc-4.8.5
+   $ module load miniconda3
 
 创建conda环境
 
@@ -51,7 +51,7 @@ PERL
 
 .. code:: bash
 
-   $ module load miniconda3/4.7.12.1-gcc-4.8.5
+   $ module load miniconda3
    $ source activate PERL
    $ cpan
    cpan> install XML::LibXML
@@ -86,7 +86,7 @@ PERL
 .. code:: bash
 
    #方法一：
-   $ module load miniconda3/4.7.12.1-gcc-4.8.5
+   $ module load miniconda3
    $ source activate PERL
    $ instmodsh
    > l
@@ -115,7 +115,7 @@ Perl的SLURM作业示例
    #SBATCH -e %j.err
    #SBATCH -n 1
 
-   module load miniconda3/4.7.12.1-gcc-4.8.5
+   module load miniconda3
    source activate PERL
 
    perl hello.pl
