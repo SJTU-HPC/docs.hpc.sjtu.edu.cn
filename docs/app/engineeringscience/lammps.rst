@@ -119,18 +119,18 @@ d) 编译 (以额外安装 MANYBODY, MEAM 和 Intel 加速包为例)
    $ make package                          #查看可用的包
    $ make yes-intel yes-manybody yes-meam  #添加所需的包
    $ make ps                               #查看计划安装的包列表 
-   $ make -j 4 oneapi                      #开始编译
+   $ make -j 4 intel_cpu_intelmpi          #开始编译
 
 e) 环境设置
 
-编译成功后，src 文件夹下将生成可执行文件 lmp_oneapi
+编译成功后，src 文件夹下将生成可执行文件 lmp_intel_cpu_intelmpi
 
 为了便于后续调用，一个简单的方法是将该文件移至 ~/bin 文件夹：
 
 .. code:: bash
 
    $ mkdir ~/bin
-   $ cp lmp_oneapi ~/bin
+   $ cp lmp_intel_cpu_intelmpi ~/bin
 
 至此安装和设置完成。如下是计算时所需的 slurm 脚本：
 
