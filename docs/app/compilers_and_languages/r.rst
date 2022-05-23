@@ -24,7 +24,7 @@ R使用说明
   module load miniconda3/4.10.3
   conda create --name R_test
   source activate R_test
-  conda install r-base=3.6.0
+  conda install -c conda-forge r-base=4.1.3
   R
 
 2. 在R终端执行R语句，比如：
@@ -46,7 +46,7 @@ R使用说明
   module load miniconda3/4.7.12.1
   conda create --name R_test
   source activate R_test
-  conda install r-base=3.6.0
+  conda install -c conda-forge r-base=4.1.3
   R
 
 2. 在R终端执行R语句，比如：
