@@ -79,30 +79,13 @@ Eigen使用说明
 pi2.0上的Eigen
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. 先创建一个目录eigentest并进入该目录：
+1. 此步骤和上文完全相同；
 
-.. code::
-        
-    mkdir eigentest
-    cd eigentest
 
-2. 在该目录下创建如下测试文件myeigen.cpp：
 
-.. code::
-        
-  #include <iostream>
-  #include <Eigen/Dense>
-  using Eigen::MatrixXd;
-  int main()
-  {
-      MatrixXd m(2,2);
-      m(0,0) = 3;
-      m(1,0) = 2.5;
-      m(0,1) = -1;
-      m(1,1) = m(1,0) + m(0,1);
-      std::cout << m << std::endl;
-      return 0;
-  }
+2. 此步骤和上文完全相同；
+
+
 
 3. 在该目录下创建如下作业提交脚本eigentest.slurm:
 
