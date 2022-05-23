@@ -12,7 +12,7 @@ Miniconda2
 
 .. code:: bash
 
-   $ module load miniconda2/4.6.14-gcc-4.8.5
+   $ module load miniconda2
 
 创建 conda 环境来安装所需 Python 包。
 
@@ -46,7 +46,7 @@ Miniconda 3
 
 .. code:: bash
 
-   $ module load miniconda3/4.6.14-gcc-4.8.5
+   $ module load miniconda3
 
 创建conda环境来安装所需Python包。
 
@@ -75,7 +75,7 @@ Miniconda 3
 
 .. code:: bash
 
-   $ module load miniconda3/4.6.14-gcc-4.8.5 
+   $ module load miniconda3
    $ source activate /lustre/opt/condaenv/life_sci
 
 conda拓展模块查询方法
@@ -105,7 +105,7 @@ R拓展模块查询方法
    #SBATCH -e %j.err
    #SBATCH -n 2
 
-   module load miniconda3/4.6.14-gcc-4.8.5
+   module load miniconda3
 
    source activate mypython3
 
