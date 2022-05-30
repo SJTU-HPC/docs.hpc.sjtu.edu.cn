@@ -28,7 +28,6 @@
    quickpic
    siesta
    star-ccm
-   star
    sumo
    vasp
    vmd
