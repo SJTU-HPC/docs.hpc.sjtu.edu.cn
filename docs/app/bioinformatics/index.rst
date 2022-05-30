@@ -100,3 +100,4 @@
    wham
    rosetta
    hic_breakfinder
+   star
