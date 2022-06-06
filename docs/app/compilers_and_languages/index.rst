@@ -9,9 +9,11 @@
 
    gnu
    intel
+   intel_mkl
    intel_mpi
    intel_vtune
    cuda
+   open_mpi
    openblas
    eigen
    fftw
