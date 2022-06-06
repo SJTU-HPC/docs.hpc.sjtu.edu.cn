@@ -196,7 +196,7 @@ Intel mkl使用说明
   Example completed. 
 
 
-pi2.0上的Eigen
+pi2.0上的Intel mkl
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 1. 此步骤和上文完全相同；
