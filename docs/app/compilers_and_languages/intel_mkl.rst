@@ -213,7 +213,7 @@ pi2.0上的Intel mkl
 
   #!/bin/bash
 
-  #SBATCH --job-name=eigentest    
+  #SBATCH --job-name=intelmkltest    
   #SBATCH --partition=small     
   #SBATCH --ntasks-per-node=1     
   #SBATCH -n 1                     
