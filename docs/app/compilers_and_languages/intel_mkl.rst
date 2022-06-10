@@ -1,6 +1,6 @@
 .. _intel_mkl:
 
-Intel_mkl
+Intel mkl
 ==========
 
 简介
