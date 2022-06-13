@@ -66,7 +66,6 @@ module 在思源一号上运行
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
-    module purge
     module use /dssg/share/imgs/ai/
     module load alphafold/2.1.1
 
@@ -105,7 +104,6 @@ module 在 π 集群上运行
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
-    module purge
     module load alphafold
 
     af2.1 \
@@ -177,7 +175,6 @@ ParaFold 在思源一号上运行
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
-    module purge
 
     singularity run --nv /dssg/share/imgs/ai/fold/1.0.sif \
     ./run_alphafold.sh \
@@ -215,7 +212,6 @@ ParaFold 在 π 集群上运行
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
-    module purge
     singularity run --nv /lustre/share/img/ai/fold.sif \
     ./run_alphafold.sh \
     -d /scratch/share/AlphaFold/data \
@@ -247,7 +243,6 @@ ColabFold 使用请至交大超算文档页面： :doc:`colabfold`
 
     srun -p 64c512g -n 8 --pty /bin/bash
 
-    module purge
     module load miniconda3
     conda create -n localcolab python=3.7 -y
     source activate localcolab
@@ -261,7 +256,7 @@ ColabFold 使用请至交大超算文档页面： :doc:`colabfold`
     pip install jax==0.2.25
     
 
-2. 打补丁 ``openmm``：
+1. 打补丁 ``openmm``：
 
 .. code:: console
 
@@ -317,8 +312,6 @@ ColabFold 使用请至交大超算文档页面： :doc:`colabfold`
     #SBATCH --ntasks-per-node=1
     #SBATCH --cpus-per-task=16
     #SBATCH --gres=gpu:1
-
-    module purge
     
     singularity run --nv ${YOUR_IMAGE_PATH} python /app/alphafold/run_alphafold.py 
         --fasta_paths=${YOU_FASTA_FILE_DIR}  \

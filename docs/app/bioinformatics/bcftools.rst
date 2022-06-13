@@ -13,7 +13,6 @@ CPU 版本 BCFtools conda安装方法
 --------------------------------------------------
 .. code:: bash
 
-   module purge
    module load miniconda3
    conda create -n mypy_py27 python=2.7
    source activate mypy_py27

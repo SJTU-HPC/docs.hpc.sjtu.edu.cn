@@ -32,7 +32,6 @@ Bismark可以高效地分析BS-Seq数据，方便地进行读段比对和甲基�
 .. code-block:: bash
 
    srun -p 64c512g -n 4 --pty /bin/bash
-   module purge
    module load bismark/0.23.0-gcc-11.2.0
    bismark --help
 
@@ -46,7 +45,6 @@ Bismark可以高效地分析BS-Seq数据，方便地进行读段比对和甲基�
 .. code-block:: bash
 
    srun -p small -n 4 --pty /bin/bash
-   module purge
    module load bismark/0.19.0-intel-19.0.4
    bismark --help
 
@@ -61,7 +59,6 @@ Bismark可以高效地分析BS-Seq数据，方便地进行读段比对和甲基�
 .. code-block:: bash
 
    srun -p 64c512g -n 4 --pty /bin/bash
-   module purge
    module load miniconda3/4.10.3
    conda create -n biotools                 # 创建新的环境
    source activate biotools                 # 激活环境

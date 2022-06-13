@@ -24,7 +24,6 @@ GAUSSIAN 是一个量子化学软件包，它是目前应用最广泛的计算�
    #SBATCH --output=test.out
    #SBATCH --error=%j.err
 
-   module purge
    g16 test.gjf
 
 

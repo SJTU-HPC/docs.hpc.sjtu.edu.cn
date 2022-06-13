@@ -47,7 +47,6 @@ RoseTTAFold 版本
     #SBATCH --error=%j.err
     #SBATCH -x vol08
     
-    module purge
     module load rosettafold/1-python-3.8
 
     run_pyrosetta $PWD test.fasta output

@@ -21,7 +21,6 @@ SUMO(GUI)使用方法
 
 .. code:: bash
 
-      module purge
       module load sumo/1.10.0-sumo
       sumo-gui 
 

@@ -15,7 +15,6 @@ CPU 版本 cd-hit 安装方法
 .. code:: bash
 
    srun -p small -n 4 --pty /bin/bash
-   module purge
    module load miniconda3
    conda create -n cdhit
    source activate cdhit

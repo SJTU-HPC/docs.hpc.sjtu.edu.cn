@@ -320,7 +320,6 @@ GROMACS
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
    
-   module purge all
    module load gromacs/2022-gcc-9.3.0
    export OMP_NUM_THREADS=1
    mpirun gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr

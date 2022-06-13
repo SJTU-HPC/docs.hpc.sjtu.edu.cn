@@ -94,7 +94,6 @@ ColabFold 在思源一号上有两种运行方法：
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
 
-    module purge
     export PATH="~/colab/localcolabfold/colabfold_batch/bin:$PATH"
     export https_proxy=http://proxy2.pi.sjtu.edu.cn:3128
     export http_proxy=http://proxy2.pi.sjtu.edu.cn:3128

@@ -204,7 +204,6 @@ Hypre库的编译需要OpenMPI。请根据自己的需要选择合适的OpenMPI�
 
 .. code:: bash
     
-   $ module purge
    $ module load openmpi/3.1.5-gcc-8.3.0
 
 进入Hypre的github中clone源代码
