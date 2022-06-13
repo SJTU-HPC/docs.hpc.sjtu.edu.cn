@@ -118,7 +118,6 @@ Keras 是一个用 Python 编写的高级神经网络 API，它能够以 TensorF
    #SBATCH --gres gpu:1
 
    cd ~/HPCTesting/keras/case1
-   module purge
    module load miniconda3
    source activate kerastest
    export LD_LIBRARY_PATH=~/.conda/envs/kerastest/lib/:$LD_LIBRARY_PATH
@@ -138,7 +137,6 @@ Keras 是一个用 Python 编写的高级神经网络 API，它能够以 TensorF
    #SBATCH --gres gpu:1
 
    cd ~/HPCTesting/keras/case1
-   module purge
    module load miniconda3
    source activate kerastest
    export LD_LIBRARY_PATH=~/.conda/envs/kerastest/lib/:$LD_LIBRARY_PATH

@@ -25,7 +25,7 @@ CPU 版本 Hisat2
     #SBATCH --ntasks-per-node=40
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
-    module purge
+    
     module load hisat2/2.1.0-intel-19.0.4
     hisat2-build –p 4 genome.fa genome
 
@@ -48,7 +48,7 @@ ARM 版本 Hisat2
     #SBATCH --ntasks-per-node=128
     #SBATCH --output=%j.out
     #SBATCH --error=%j.err
-    module purge
+    
     module use /lustre/share/spack/modules/kunpeng920/linux-centos7-aarch64
     module load hisat2/2.1.0-gcc-9.3.0
     hisat2-build –p 4 genome.fa genome

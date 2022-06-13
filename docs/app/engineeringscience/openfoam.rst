@@ -47,7 +47,6 @@ OpenFOAM基本使用
 
 .. code:: bash
    
-   module purge
    module load openfoam-org/7-gcc-11.2.0-openmpi
    mkdir openfoamTest1
    cd openfoamTest1
@@ -124,7 +123,6 @@ OpenFOAM基本使用
 
 .. code:: bash
    
-   module purge
    module load openfoam/2106-gcc-8.3.1-openmpi
    mkdir openfoamTest1
    cd openfoamTest1
@@ -203,7 +201,6 @@ pi2.0上的openfoam-org7(Spack构建)
 
 .. code:: bash
 
-   module purge
    module load openfoam-org/7-gcc-7.4.0-openmpi
    mkdir openfoamTest1
    cd openfoamTest1

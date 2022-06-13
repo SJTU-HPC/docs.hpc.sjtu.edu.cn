@@ -72,7 +72,6 @@ Amber 编译方法
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-   module purge
    module load miniconda3
    module load cuda
    source activate amber

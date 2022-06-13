@@ -50,7 +50,6 @@ cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-   module purge
    module load cp2k/8.2-gcc-9.2.0-openblas 
    module load openmpi/4.0.5-gcc-9.2.0
 
@@ -78,7 +77,6 @@ cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：
    #SBATCH --gres=gpu:1
 
 
-   module purge
    module load cp2k/8.2-gcc-8.3.0-openblas
    module load cuda/10.1.243-gcc-8.3.0
    module load openmpi/4.0.5-gcc-8.3.0

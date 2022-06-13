@@ -41,7 +41,6 @@ Apache TVM是一个开源的机器学习编译框架。旨在帮助机器学习�
    #SBATCH --cpus-per-task 6
 
 
-   module purge
    IMAGE_PATH=/dssg/share/imgs/tvm/0.9.dev0.sif
 
    singularity run --nv --env TVM_LOG_DEBUG=1 $IMAGE_PATH python ...
@@ -60,7 +59,6 @@ Apache TVM是一个开源的机器学习编译框架。旨在帮助机器学习�
    #SBATCH --gres gpu:1
 
 
-   module purge
    IMAGE_PATH=/lustre/share/img/tvm-0.9.dev0.sif
 
    singularity run --nv --env TVM_LOG_DEBUG=1 $IMAGE_PATH python ...
@@ -112,7 +110,6 @@ A100测试脚本：
    #SBATCH --cpus-per-task 6
 
 
-   module purge
    IMAGE_PATH=/dssg/share/imgs/tvm/0.9.dev0.sif
 
    singularity run --nv --env TVM_LOG_DEBUG=1 $IMAGE_PATH python test.py
@@ -131,7 +128,6 @@ DGX2测试脚本：
    #SBATCH --gres gpu:1
 
 
-   module purge
    IMAGE_PATH=/lustre/share/img/tvm-0.9.dev0.sif
 
    singularity run --nv --env TVM_LOG_DEBUG=1 $IMAGE_PATH python test.py

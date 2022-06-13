@@ -35,7 +35,7 @@ Samtools是一个用于操作SAM(Sequence Alignment/Map)和BAM文件的工具合
 .. code-block:: bash
 
    srun -p 64c512g -n 4 --pty /bin/bash
-   module purge
+   
    module load miniconda3/4.10.3
    conda create -n biotools                 # 创建新的环境
    source activate biotools                 # 激活环境
@@ -63,7 +63,6 @@ Samtools是一个用于操作SAM(Sequence Alignment/Map)和BAM文件的工具合
 .. code-block:: bash
 
    srun -p 64c512g -n 4 --pty /bin/bash
-   module purge
    module load samtools/1.13-gcc-11.2.0
    samtools --help
 
@@ -77,7 +76,6 @@ ARM 集群 SAMtools
 .. code-block:: bash
 
    srun -p arm128c256g -n 4 --pty /bin/bash
-   module purge
    module load samtools/1.10-gcc-9.3.0
    samtools --help
 
@@ -91,7 +89,6 @@ ARM 集群 SAMtools
 .. code-block:: bash
 
    srun -p small -n 4 --pty /bin/bash
-   module purge
    module load samtools/1.9-gcc-9.2.0
    samtools --help
 

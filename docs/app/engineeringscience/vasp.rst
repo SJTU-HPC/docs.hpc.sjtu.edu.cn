@@ -45,7 +45,6 @@ VASP 使用需要得到 VASP 官方授权。请自行购买 VASP license 许可�
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load vasp/6.2.1-intel-2021.4.0-cuda-11.5.0
 
    ulimit -s unlimited
@@ -81,8 +80,6 @@ slurm 里，若使用 CPU 节点，须确保 ``OMP_NUM_THREADS * ntasks-per-node
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
-
    module use /lustre/share/singularity/commercial-app
    module load vasp/5.4.4-intel
 
@@ -111,7 +108,6 @@ ARM VASP
    #SBATCH -N 1
    #SBATCH --ntasks-per-node=128
 
-   module purge
    module load openmpi/4.0.3-gcc-9.2.0
    mpirun singularity exec /lustre/share/singularity/commercial-app/vasp/5.4.4-arm.sif vasp_std
 
@@ -126,7 +122,6 @@ VASP 在集群上使用 intel 套件自行编译十分容易。下面以思源�
 
    srun -p 64c512g -n 4 --pty /bin/bash       # 申请计算节点
 
-   module purge
    module load intel-oneapi-compilers/2021.4.0
    module load intel-oneapi-mpi/2021.4.0
    module load intel-oneapi-mkl/2021.4.0
@@ -168,7 +163,6 @@ VASP 在集群上使用 intel 套件自行编译十分容易。下面以思源�
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load intel-oneapi-compilers/2021.4.0
    module load intel-oneapi-mpi/2021.4.0
    module load intel-oneapi-mkl/2021.4.0

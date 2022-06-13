@@ -56,7 +56,6 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-   module purge   
    module load lammps/20220324-intel-2021.4.0-omp
    # or 
    # module load lammps/20210310-intel-2021.4.0-omp
@@ -76,7 +75,6 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-   module purge   
    module load lammps/20210310-intel-2021.4.0-omp
    
    mpirun lmp -i in.lj
@@ -148,7 +146,6 @@ e) 环境设置
    ulimit -s unlimited
    ulimit -l unlimited
    
-   module purge
    module load intel-oneapi-compilers/2021.4.0
    module load intel-oneapi-mpi/2021.4.0
    module load intel-oneapi-mkl/2021.4.0
@@ -185,7 +182,6 @@ e) 环境设置
    ulimit -s unlimited
    ulimit -l unlimited
    
-   module purge
    module load lammps/20201029-oneapi-21.4.0
 
    lmp -pk intel 0 omp 2 -sf intel -i in.lj
@@ -247,7 +243,6 @@ slurm.test
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module purge
    module load intel-parallel-studio/cluster.2020.1
 
    ulimit -s unlimited
