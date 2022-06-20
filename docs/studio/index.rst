@@ -42,3 +42,4 @@ Studio 支持的应用如下，并持续增加:
    paraview
    matlab
    alphafold-gui
+   faq

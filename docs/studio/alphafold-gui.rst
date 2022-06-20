@@ -28,7 +28,7 @@ AlphaFold-GUI
 
 
 参考资料
-========
+------------
 
 - AlphaFold Operation Manual  https://docs.hpc.sjtu.edu.cn/app/bioinformatics/alphafold2.html?highlight=alpha
 
