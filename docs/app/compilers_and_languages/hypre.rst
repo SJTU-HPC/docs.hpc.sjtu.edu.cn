@@ -229,8 +229,9 @@ Hypre库的编译需要OpenMPI。请根据自己的需要选择合适的OpenMPI�
 
 
 参考资料
-========
+---------
 
 -  `Hypre github主页 <https://github.com/hypre-space/hypre>`__
 -  `Hypre与Petsc安装文档及性能测试 <https://www.jianshu.com/p/6bfadd9d6d64>`__
+
 
