@@ -20,9 +20,13 @@
 
 \ `8. 致谢模版 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id28>`__\
 
-\ `9 医学院和附属医院申请 jAccount 帐号 <https://docs.hpc.sjtu.edu.cn/faq/index.html#jaccount>`__\
+\ `9. 医学院和附属医院申请 jAccount 帐号 <https://docs.hpc.sjtu.edu.cn/faq/index.html#jaccount>`__\
 
-\ `10 如何重置 .bashrc 和 .bash_profile <https://docs.hpc.sjtu.edu.cn/faq/index.html#bashrc>`__\
+\ `10. 如何重置 .bashrc 和 .bash_profile <https://docs.hpc.sjtu.edu.cn/faq/index.html#bashrc>`__\
+
+\ `11. 运行程序时提示缺少 xxx.so 文件或者编译/运行程序时显示任务被kill <https://docs.hpc.sjtu.edu.cn/faq/index.html#faq11>`__\
+
+
 
 0. π 2.0 集群名有什么含义？
 ------------------------------
@@ -154,9 +158,13 @@ d) 与厂商充分沟通 License 服务器安装模式、授权数量、使用�
 
 **A：**
 有别于独占的个人电脑和工作站，高性能计算用户共享软硬件设施，使用 sudo 特权操作极有可能影响其他用户的程序和数据，因此普通用户禁止使用 sudo。通常普通用户无需
-sudo 就能在家目录中安装和使用软件，且使用sudo安装的软件会被错误安装在本地文件系统上而不能在计算节点上运行。请参考 \ `应用软件 <../app>`__
-了解当前集群提供的软件模块或通过\ `hpc 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ 告诉我们需要安装的软件。对于需要sudo 安装的商业软件，请参考 FAQ 4.2
-由软件厂商工程师工程师联系我们指定安装方案。
+sudo 就能在家目录中安装和使用软件，且使用sudo安装的软件会被错误安装在本地文件系统上而不能在计算节点上运行。
+
+请参考 \ `应用软件 <../app>`__\ 了解当前集群提供的软件模块或通过\ `hpc 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ 告诉我们需要安装的软件。
+
+普通用户也可以使用容器的方式安装，容器内用户拥有“模拟root权限”，具体请见 \ `容器 <https://docs.hpc.sjtu.edu.cn/container/index.html>`__\ 。
+
+对于需要sudo 安装的商业软件，请参考 FAQ 4.2 由软件厂商工程师工程师联系我们指定安装方案。
 
 5. 收费和充值
 -----------------
@@ -249,17 +257,17 @@ Q 如何在论文中致谢交大高性能计算？
    （英文）The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao
 Tong University.
 
-9 医学院和附属医院申请 jAccount 帐号
-----------------------------------------
+9. 医学院和附属医院申请 jAccount 帐号
+-------------------------------------------
 
 **A：** 请至
 `上海交通大学医学院网络信息中心 <https://www.shsmu.edu.cn/net/info/1054/1080.htm>`__
 页面了解和办理。
 
-如何重置 .bashrc 和 .bash_profile
----------------------------------
+10. 如何重置 .bashrc 和 .bash_profile
+--------------------------------------------------
 
-用户家目录下的 ``~/.bashrc`` 和 ``~/.bash_profile`` 记录bash shell配置，若配置不当可能会导致无法找到可执行文件、无法在Studio中启动RSession等问题，需要重置这两个配置文件的内容。
+**A：** 用户家目录下的 ``~/.bashrc`` 和 ``~/.bash_profile`` 记录bash shell配置，若配置不当可能会导致无法找到可执行文件、无法在Studio中启动RSession等问题，需要重置这两个配置文件的内容。
 
 重置 ``~/.bashrc`` 操作流程如下，首先登录集群，然后备份现有配置文件，再调用 ``vim`` 或其他文本编辑器打开文件：
 
@@ -298,3 +306,10 @@ Tong University.
 
 最后重新登录集群，确认重置配置文件后，先前的问题是否解决。
 重置配置文件会导致您先前对bash shell的自定义配置失效，如果您仍需要保留这些自定义配置，建议您从bak备份文件中逐条转移这些配置，避免引入导致应用异常语句。
+
+11. 运行程序时提示缺少 xxx.so 文件或者编译/运行程序时显示任务被kill
+----------------------------------------------------------------------------------------------
+
+**A：** 请确认报错时执行的操作是否是在登录节点，如果是在登录节点出现上述报错，请申请计算节点后再做尝试。
+
+

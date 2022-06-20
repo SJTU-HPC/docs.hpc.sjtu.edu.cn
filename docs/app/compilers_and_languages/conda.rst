@@ -131,6 +131,27 @@ Conda常用命令
    
    可以到Anaconda页面搜索是否有对应软件的源 https://anaconda.org/search
 
+
+常见问题
+----------------
+
+1. 在一个conda环境中同时安装软件A与软件B，存在conflict问题
+
+**A：** 建议用户创建新的环境进行安装。
+
+2. 软件运行提示缺少 xxx.so 库
+
+**A：** conda search 查找不同的版本及build信息，conda install 指定版本及build进行安装测试。
+
+3. 安装的软件版本不支持GPU或者不支持python
+
+**A：**
+
+(1) conda list 查看已安装的版本及build信息，确认build是GPU或python。
+(2) conda install 指定版本、源及build进行安装测试。
+
+
+   
 参考资料
 --------
 
