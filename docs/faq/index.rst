@@ -24,7 +24,7 @@
 
 \ `10. 如何重置 .bashrc 和 .bash_profile <https://docs.hpc.sjtu.edu.cn/faq/index.html#bashrc>`__\
 
-\ `11. 运行程序时提示缺少 xxx.so 文件或者编译/运行程序时显示任务被kill <https://docs.hpc.sjtu.edu.cn/faq/index.html#faq11>`__\
+\ `11. 运行程序时提示缺少 xxx.so 文件或者编译/运行程序时显示任务被kill <https://docs.hpc.sjtu.edu.cn/faq/index.html#xxx-so-kill>`__\
 
 
 

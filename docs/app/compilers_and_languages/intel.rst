@@ -38,8 +38,7 @@ Intel编译器套件包含以下语言：
 
 1. 编译/运行程序时提示“license has expired”
 
-**A：**
-License过期不影响原有软件运行，新编译软件建议使用最新部署的intel编译器套件进行编译 \ ``module load oneapi/2021.4.0``\ 。
+A：License过期不影响原有软件运行，新编译软件建议使用最新部署的intel编译器套件进行编译 \ ``module load oneapi/2021.4.0``\ 。
 
 
 
