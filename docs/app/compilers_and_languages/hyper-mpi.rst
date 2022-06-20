@@ -21,5 +21,3 @@ Hyper-MPI使用方式
 
    $ module load hmpi/4.0.3-gcc-9.3.0
 
-参考资料
-========

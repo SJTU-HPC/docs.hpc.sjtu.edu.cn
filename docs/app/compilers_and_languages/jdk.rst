@@ -140,7 +140,7 @@ pi2.0上的JDK
 
 
 参考资料
-========
+---------
 
 -  `Linux下编译运行java文件 <https://www.jianshu.com/p/033dcc32e8cd>`__
 -  `菜鸟教程 java <https://www.runoob.com/java/java-array.html>`__

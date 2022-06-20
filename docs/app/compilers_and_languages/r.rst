@@ -65,7 +65,7 @@ R使用说明
 
 
 参考资料
-========
+---------
 
 -  `Anaconda 官网 <https://anaconda.org/>`__
 -  `如何使用conda安装R和R包 <https://www.jianshu.com/p/b9eb874fc8f4>`__
