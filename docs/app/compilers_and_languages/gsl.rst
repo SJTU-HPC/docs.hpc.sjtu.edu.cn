@@ -158,7 +158,7 @@ pi2.0上的GSL
 
 
 参考资料
-========
+----------
 
 
 -  `GSL官方文档 <https://www.gnu.org/software/gsl/doc/html/index.html>`__
