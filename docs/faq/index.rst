@@ -26,6 +26,7 @@
 
 \ `11. 运行程序时提示缺少 xxx.so 文件或者编译/运行程序时显示任务被kill <https://docs.hpc.sjtu.edu.cn/faq/index.html#xxx-so-kill>`__\
 
+\ `12. 计算节点网络代理设置 <https://docs.hpc.sjtu.edu.cn/faq/index.html#proxy>`__\
 
 
 0. π 2.0 集群名有什么含义？
@@ -254,7 +255,7 @@ Q 如何在论文中致谢交大高性能计算？
 
    （中文）本论文的计算结果得到了上海交通大学高性能计算中心的支持和帮助；
 
-   （英文）The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao
+   （英文）The computations in this paper were run on the π 2.0 (or Siyuan Mark-I) cluster supported by the Center for High Performance Computing at Shanghai Jiao
 Tong University.
 
 9. 医学院和附属医院申请 jAccount 帐号
@@ -311,5 +312,71 @@ Tong University.
 ----------------------------------------------------------------------------------------------
 
 **A：** 请确认报错时执行的操作是否是在登录节点，如果是在登录节点出现上述报错，请申请计算节点后再做尝试。
+
+12. 计算节点网络代理设置
+------------------------
+
+12.1 Q 计算节点不能访问互联网/不能下载数据 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**A：** 计算节点是通过proxy节点代理进行网络访问的，因此一些软件需要特定的代理设置。需要找到软件的配置文件，修改软件的代理设置。
+
+a) git、wget、curl等软件支持通用变量，代理参数设置为：
+
+.. code:: bash
+
+ # 思源一号计算节点通用代理设置
+ https_proxy=http://proxy2.pi.sjtu.edu.cn:3128
+ http_proxy=http://proxy2.pi.sjtu.edu.cn:3128
+ no_proxy=puppet,proxy,172.16.0.133,pi.sjtu.edu.cn
+
+  # π2.0计算节点通用代理设置
+ http_proxy=http://proxy.pi.sjtu.edu.cn:3004/
+ https_proxy=http://proxy.pi.sjtu.edu.cn:3004/
+ no_proxy=puppet
+
+b) Python、MATLAB、Rstudio、fasterq-dump等软件需要查询软件官网确定配置参数：
+
+.. code:: bash
+
+ ### fasterq-dump文件，配置文件路径 ~/.ncbi/user-settings.mkfg
+
+ # 思源一号节点代理设置
+ /tools/prefetch/download_to_cache = "true"
+ /http/proxy/enabled = "true"
+ /http/proxy/path = "http:/proxy2.pi.sjtu.edu.cn:3128"
+
+ # π2.0节点代理设置
+ /tools/prefetch/download_to_cache = "true"
+ /http/proxy/enabled = "true"
+ /http/proxy/path = "http://proxy.pi.sjtu.edu.cn:3004"
+
+ ### Python需要在代码里面指定代理设置，不同Python包代理参数可能不同
+
+ # 思源一号节点代理设置
+ proxies = {
+     'http': 'http://proxy2.pi.sjtu.edu.cn:3128',
+     'https': 'http://proxy2.pi.sjtu.edu.cn:3128',
+ }
+ # π2.0节点代理设置
+ proxies = {
+     'http': 'http://proxy.pi.sjtu.edu.cn:3004',
+     'https': 'http://proxy.pi.sjtu.edu.cn:3004',
+ }
+
+ ### MATLAB
+
+ # 思源一号节点代理设置
+ proxy2.pi.sjtu.edu.cn:3128
+
+ # π2.0节点代理设置
+ proxy.hpc.sjtu.edu.cn:3004
+
+
+
+
+
+
+
 
 
