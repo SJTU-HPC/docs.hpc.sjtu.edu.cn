@@ -24,10 +24,6 @@
 
 \ `10. 如何重置 .bashrc 和 .bash_profile <https://docs.hpc.sjtu.edu.cn/faq/index.html#bashrc>`__\
 
-\ `11. 运行程序时提示缺少 xxx.so 文件或者编译/运行程序时显示任务被kill <https://docs.hpc.sjtu.edu.cn/faq/index.html#xxx-so-kill>`__\
-
-\ `12. 计算节点网络代理设置 <https://docs.hpc.sjtu.edu.cn/faq/index.html#proxy>`__\
-
 
 0. π 2.0 集群名有什么含义？
 ------------------------------
@@ -118,6 +114,68 @@ node_fail是提示由于计算节点故障导致作业运行失败。您重新�
 
 **A：**
 登录节点用于文件编辑、作业提交、小型应用编译、文件下载等轻量级工作。而科学计算、大文件校验等计算密集型任务，会占用较多计算资源，影响其他用户正常使用。我们为了保障用户体验，在登录节点设置了任务检测服务，查杀不正常占用登录节点资源的任务，若被检测到您的帐号不当使用登录节点，您的帐号将会被封禁30-120分钟。请务必将这些任务提交到计算节点进行。
+
+3.3 Q：运行程序时提示缺少 xxx.so 文件或者编译/运行程序时显示任务被kill
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**A：** 请确认报错时执行的操作是否是在登录节点，如果是在登录节点出现上述报错，请申请计算节点后再做尝试。
+
+3.4 Q：计算节点不能访问互联网/不能下载数据 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**A：** 计算节点是通过proxy节点代理进行网络访问的，因此一些软件需要特定的代理设置。需要找到软件的配置文件，修改软件的代理设置。
+
+a) git、wget、curl等软件支持通用变量，代理参数设置为：
+
+.. code:: bash
+
+ # 思源一号计算节点通用代理设置
+ https_proxy=http://proxy2.pi.sjtu.edu.cn:3128
+ http_proxy=http://proxy2.pi.sjtu.edu.cn:3128
+ no_proxy=puppet,proxy,172.16.0.133,pi.sjtu.edu.cn
+
+  # π2.0计算节点通用代理设置
+ http_proxy=http://proxy.pi.sjtu.edu.cn:3004/
+ https_proxy=http://proxy.pi.sjtu.edu.cn:3004/
+ no_proxy=puppet
+
+b) Python、MATLAB、Rstudio、fasterq-dump等软件需要查询软件官网确定配置参数：
+
+.. code:: bash
+
+ ### fasterq-dump文件，配置文件路径 ~/.ncbi/user-settings.mkfg
+
+ # 思源一号节点代理设置
+ /tools/prefetch/download_to_cache = "true"
+ /http/proxy/enabled = "true"
+ /http/proxy/path = "http:/proxy2.pi.sjtu.edu.cn:3128"
+
+ # π2.0节点代理设置
+ /tools/prefetch/download_to_cache = "true"
+ /http/proxy/enabled = "true"
+ /http/proxy/path = "http://proxy.pi.sjtu.edu.cn:3004"
+
+ ### Python需要在代码里面指定代理设置，不同Python包代理参数可能不同
+
+ # 思源一号节点代理设置
+ proxies = {
+     'http': 'http://proxy2.pi.sjtu.edu.cn:3128',
+     'https': 'http://proxy2.pi.sjtu.edu.cn:3128',
+ }
+ # π2.0节点代理设置
+ proxies = {
+     'http': 'http://proxy.pi.sjtu.edu.cn:3004',
+     'https': 'http://proxy.pi.sjtu.edu.cn:3004',
+ }
+
+ ### MATLAB
+
+ # 思源一号节点代理设置
+ proxy2.pi.sjtu.edu.cn:3128
+
+ # π2.0节点代理设置
+ proxy.hpc.sjtu.edu.cn:3004
+
 
 4. 软件安装
 ----------------
@@ -307,75 +365,6 @@ Tong University.
 
 最后重新登录集群，确认重置配置文件后，先前的问题是否解决。
 重置配置文件会导致您先前对bash shell的自定义配置失效，如果您仍需要保留这些自定义配置，建议您从bak备份文件中逐条转移这些配置，避免引入导致应用异常语句。
-
-11. 运行程序时提示缺少 xxx.so 文件或者编译/运行程序时显示任务被kill
-----------------------------------------------------------------------------------------------
-
-**A：** 请确认报错时执行的操作是否是在登录节点，如果是在登录节点出现上述报错，请申请计算节点后再做尝试。
-
-12. 计算节点网络代理设置
-------------------------
-
-12.1 Q 计算节点不能访问互联网/不能下载数据 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**A：** 计算节点是通过proxy节点代理进行网络访问的，因此一些软件需要特定的代理设置。需要找到软件的配置文件，修改软件的代理设置。
-
-a) git、wget、curl等软件支持通用变量，代理参数设置为：
-
-.. code:: bash
-
- # 思源一号计算节点通用代理设置
- https_proxy=http://proxy2.pi.sjtu.edu.cn:3128
- http_proxy=http://proxy2.pi.sjtu.edu.cn:3128
- no_proxy=puppet,proxy,172.16.0.133,pi.sjtu.edu.cn
-
-  # π2.0计算节点通用代理设置
- http_proxy=http://proxy.pi.sjtu.edu.cn:3004/
- https_proxy=http://proxy.pi.sjtu.edu.cn:3004/
- no_proxy=puppet
-
-b) Python、MATLAB、Rstudio、fasterq-dump等软件需要查询软件官网确定配置参数：
-
-.. code:: bash
-
- ### fasterq-dump文件，配置文件路径 ~/.ncbi/user-settings.mkfg
-
- # 思源一号节点代理设置
- /tools/prefetch/download_to_cache = "true"
- /http/proxy/enabled = "true"
- /http/proxy/path = "http:/proxy2.pi.sjtu.edu.cn:3128"
-
- # π2.0节点代理设置
- /tools/prefetch/download_to_cache = "true"
- /http/proxy/enabled = "true"
- /http/proxy/path = "http://proxy.pi.sjtu.edu.cn:3004"
-
- ### Python需要在代码里面指定代理设置，不同Python包代理参数可能不同
-
- # 思源一号节点代理设置
- proxies = {
-     'http': 'http://proxy2.pi.sjtu.edu.cn:3128',
-     'https': 'http://proxy2.pi.sjtu.edu.cn:3128',
- }
- # π2.0节点代理设置
- proxies = {
-     'http': 'http://proxy.pi.sjtu.edu.cn:3004',
-     'https': 'http://proxy.pi.sjtu.edu.cn:3004',
- }
-
- ### MATLAB
-
- # 思源一号节点代理设置
- proxy2.pi.sjtu.edu.cn:3128
-
- # π2.0节点代理设置
- proxy.hpc.sjtu.edu.cn:3004
-
-
-
-
-
 
 
 
