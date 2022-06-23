@@ -171,7 +171,7 @@ cpu 队列每个节点配有 40核，所以这里使用了 1 个节点：
 ARM集群上的cp2k
 -------------------
 
-ARM集群中已经预装了CP2K，可在 `ARM 节点 <../login/index.html#arm>`__\ 。
+ARM集群中已经预装了CP2K，可在 `ARM 节点 <../login/index.html#arm>`__\ 查看调用。
 
 ARM集群上Slurm脚本 cp2k.slurm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
