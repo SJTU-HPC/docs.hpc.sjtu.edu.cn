@@ -68,7 +68,7 @@ ColabFold 在思源一号上有两种运行方法：
 
 .. code:: bash
 
-    colabfold_batch --amber --num-recycle 1 test.fasta output
+    colabfold_batch --num-recycle 1 test.fasta output
 
 其中，``test.fasta`` 文件内容示例：
 
@@ -102,7 +102,7 @@ ColabFold 在思源一号上有两种运行方法：
     module load miniconda3
     source activate ~/colab/localcolabfold/colabfold_batch/colabfold-conda
 
-    colabfold_batch --amber --num-recycle 1 test.fasta output
+    colabfold_batch --num-recycle 1 test.fasta output
 
 然后使用 ``sbatch sub.slurm`` 语句提交作业
 
