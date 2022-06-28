@@ -271,7 +271,7 @@ ColabFold 使用请至交大超算文档页面： :doc:`colabfold`
 
 .. code:: console
 
-    salloc --ntasks-per-node=1 -p a100 --cpus-per-task=16 --gres=gpu:1 
+    salloc --ntasks-per-node=1 -p a100 --cpus-per-task=16 --gres=gpu:1 -N 1
     ssh gpuXX
 
     git clone https://github.com/Zuricho/ParallelFold.git
