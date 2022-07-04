@@ -22,7 +22,9 @@
 **Windows 用户**
 
 
-Windows 用户可以使用 WinSCP 在集群和您自己的计算机之间传输文件。如下图所示，填写思源一号节点的地址，SSH 端口，SSH 用户名，SSH 密码，然后点击 Login 进行连接。 使用 WinSCP 的方法类似于使用 FTP 客户端 GUI，如下图所示：
+Windows 用户可以使用 WinSCP 在集群和您自己的计算机之间传输文件。可至 \ `WinSCP 官网 <https://winscp.net/eng/index.php>`__\下载。
+
+如下图所示，填写思源一号节点的地址，SSH 端口，SSH 用户名，SSH 密码，然后点击 Login 进行连接。 使用 WinSCP 的方法类似于使用 FTP 客户端 GUI，如下图所示：
 
 .. image:: img/winscp01.png
    :alt: winscp example
