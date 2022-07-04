@@ -9,6 +9,7 @@
 
    abinit
    amber
+   cantera
    cesm
    cp2k
    gerris
