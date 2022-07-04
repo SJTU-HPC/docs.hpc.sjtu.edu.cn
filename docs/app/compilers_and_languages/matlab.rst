@@ -38,12 +38,12 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 使用hpc帐号登录HPC studio（https://studio.hpc.sjtu.edu.cn）后，点击"Interactive Apps >> Desktop"。选择需要的核数，session时长（默认1核、1小时），点击"Launch"启动远程桌面。待选项卡显示作业在RUNNING的状态时,点击"Launch Desktop"即可进入远程桌面。
 
-.. image:: ../img/matlab01.png
-.. image:: ../img/matlab02.png
+.. image:: ../../img/matlab01.png
+.. image:: ../../img/matlab02.png
 
 除了从π 超算启动远程桌面外，思源一号也支持启动远程桌面，在选定核数的同时可以同时选定平台：
 
-.. image:: ../img/matlab02_1.png
+.. image:: ../../img/matlab02_1.png
 
 
 2. 启动MATLAB
@@ -52,9 +52,9 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 启动后即可使用MATLAB R2021a
 
-.. image:: ../img/matlab03.png
-.. image:: ../img/matlab04.png
-.. image:: ../img/matlab05.png
+.. image:: ../../img/matlab03.png
+.. image:: ../../img/matlab04.png
+.. image:: ../../img/matlab05.png
 
 
 
@@ -116,7 +116,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 使用sbatch命令提交脚本，脚本运行完毕后，在本地将生成一张名为 `1.png` 的图片，如程序运行无误，该图片的内容与本地 `result.png` 内容一致：
 
-.. image:: ../img/matlab_result.png
+.. image:: ../../img/matlab_result.png
 
 
 
@@ -193,19 +193,19 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 使用hpc帐号登录HPC studio（https://studio.hpc.sjtu.edu.cn）后，点击"Interactive Apps >> Desktop"。选择需要的核数，session时长（默认1核、1小时），点击"Launch"启动远程桌面。待选项卡显示作业在RUNNING的状态时,点击"Launch Desktop"即可进入远程桌面。
 
-.. image:: ../img/matlab01.png
+.. image:: ../../img/matlab01.png
 
 选定核数的时候选择思源一号的一张GPU卡：
 
-.. image:: ../img/matlab-siyuan-gpu.png
+.. image:: ../../img/matlab-siyuan-gpu.png
 
 2. 启动GPU版本MATLAB
 
 在窗口中启动终端（terminal），在终端输入 ``singularity run --nv /dssg/share/imgs/matlab/matlab_latest.sif`` ，即可启动GPU版本matlab。
 
-.. image:: ../img/matlab-siyuan-gpu-01.png
+.. image:: ../../img/matlab-siyuan-gpu-01.png
 
-.. image:: ../img/matlab-siyuan-gpu-02.png
+.. image:: ../../img/matlab-siyuan-gpu-02.png
 
 
 提交MATLAB GPU版脚本
@@ -257,7 +257,7 @@ MATLAB代理设置
 
 使用过程中如果遇到 ``Unable to open the requested feature.`` 等网络问题或者不能正常使用 ``Live Editor`` 功能，可以通过设置代理解决。
 
-.. image:: ../img/matlab-sy-proxy.jpeg
+.. image:: ../../img/matlab-sy-proxy.jpeg
 
 **π 超算代理设置**
 

@@ -40,6 +40,6 @@ Studio 支持的应用如下，并持续增加:
    jupyter
    rstudio
    paraview
-   matlab
    alphafold-gui
    faq
+   ../app/compilers_and_languages/matlab

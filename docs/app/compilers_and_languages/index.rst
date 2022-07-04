@@ -6,7 +6,7 @@
 
 .. toctree::
    :maxdepth: 1
-
+ 
    gnu
    intel
    intel_mkl
@@ -28,7 +28,6 @@
    perl
    r
    cmake
+   matlab
    ../../studio/jupyter
-   ../../studio/matlab
-   
 
