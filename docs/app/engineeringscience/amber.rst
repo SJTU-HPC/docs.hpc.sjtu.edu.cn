@@ -18,6 +18,14 @@ Amber 是分子动力学软件，用于蛋白质、核酸、糖等生物大分�
    思源  ：/dssg/share/sample/amber
    π2.0 ：/lustre/share/sample/amber
 
+算例结构如下
+
+.. code:: bash
+
+   tree amber:
+   ├── inpcrd
+   ├── mdin
+   └── prmtop
 
 集群上的Amber
 --------------------
@@ -45,7 +53,7 @@ amber_GPU.slurm内容如下：
    #SBATCH --error=%j.err
    
    module load amber/2022-cuda-11.5.119
-   pmemd.cuda -O -i mdin.GPU -o mdout -p prmtop -c inpcrd 
+   pmemd.cuda -O -i mdin -o mdout -p prmtop -c inpcrd 
 
 amber_MPI.slurm内容如下：
 
@@ -62,7 +70,7 @@ amber_MPI.slurm内容如下：
    #SBATCH --error=%j.err
    
    module load  amber/2022-intel-2021.4.0
-   mpirun pmemd.MPI -O -i mdin.GPU -o mdout -p prmtop -c inpcrd
+   mpirun pmemd.MPI -O -i mdin -o mdout -p prmtop -c inpcrd
 
 .. _π2.0 Amber:
 
@@ -83,7 +91,7 @@ amber_GPU.slurm内容如下：
    #SBATCH --error=%j.err
    
    module load amber/2022-cuda-10.1.243
-   pmemd.cuda -O -i mdin.GPU -o mdout -p prmtop -c inpcrd 
+   pmemd.cuda -O -i mdin -o mdout -p prmtop -c inpcrd 
 
 amber_MPI.slurm内容如下：
 
@@ -98,7 +106,7 @@ amber_MPI.slurm内容如下：
    #SBATCH --error=%j.err
    
    module load amber/2022-intel-2021.4.0
-   mpirun pmemd.MPI -O -i mdin.GPU -o mdout -p prmtop -c inpcrd
+   mpirun pmemd.MPI -O -i mdin -o mdout -p prmtop -c inpcrd
 
 运行结果(单位为：s)
 ---------------------
