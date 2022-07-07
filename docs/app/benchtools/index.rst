@@ -10,3 +10,4 @@
    hpl
    osubenchmarks
    hpcg
+   reframe
