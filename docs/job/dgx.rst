@@ -47,7 +47,7 @@ A100 交互模式
 
 .. code:: bash
 
-   $ srun -p dgx2 -N 1 -n 1 --gres=gpu:1 --cpus-per-task=6 --pty /bin/bash
+   $ srun -p a100 -N 1 -n 1 --gres=gpu:1 --cpus-per-task=16 --pty /bin/bash
    $ module load cuda
 
 
