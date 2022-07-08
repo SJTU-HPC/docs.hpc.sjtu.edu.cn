@@ -9,6 +9,7 @@
 
    abinit
    amber
+   calculix
    cantera
    cesm
    cp2k
