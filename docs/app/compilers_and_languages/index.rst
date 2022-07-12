@@ -29,5 +29,6 @@
    r
    cmake
    matlab
+   matlab_pct
    ../../studio/jupyter
 
