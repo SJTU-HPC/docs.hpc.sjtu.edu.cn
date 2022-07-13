@@ -112,7 +112,7 @@ d) 编译 (以额外安装 MANYBODY, MEAM, RIGID 和 Intel 加速包为例)
    $ make package                                    #查看可用的包
    $ make yes-intel yes-manybody yes-meam yes-rigid  #添加所需的包
    $ make ps                                         #查看计划安装的包列表 
-   $ make -j 4 lmp_oneapi                            #开始编译
+   $ make -j 4 oneapi                            #开始编译
 
 e) 环境设置
 
@@ -213,7 +213,7 @@ d) 编译 (以额外安装 MANYBODY 和 Intel 加速包为例)
    $ make yes-intel                 #"make yes-"后面接需要安装的 package 名字
    $ make yes-manybody
    $ make ps                        #查看计划安装的包列表 
-   $ make -j 8 lmp_oneapi    #开始编译
+   $ make -j 8 oneapi    #开始编译
 
 e) 测试脚本
 
