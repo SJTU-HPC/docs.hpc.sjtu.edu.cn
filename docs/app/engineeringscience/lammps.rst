@@ -14,9 +14,9 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
 +--------+---------+----------+---------------------------------------------+
 | 版本   | 平台    | 构建方式 | 模块名                                      |
 +========+=========+==========+=============================================+
-| 2021   | |cpu|   | 源码     | lammps/20210310-intel-2021.4.0-omp 思源一号 |
-+--------+---------+----------+---------------------------------------------+
 | 2022   | |cpu|   | 源码     | lammps/20220324-intel-2021.4.0-omp 思源一号 |
++--------+---------+----------+---------------------------------------------+
+| 2021   | |cpu|   | 源码     | lammps/20210310-intel-2021.4.0-omp 思源一号 |
 +--------+---------+----------+---------------------------------------------+
 | 2020   | |cpu|   | 容器     | 直接使用镜像                                |
 +--------+---------+----------+---------------------------------------------+
@@ -57,13 +57,11 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    #SBATCH --error=%j.err
 
    module load lammps/20220324-intel-2021.4.0-omp
-   # or 
-   # module load lammps/20210310-intel-2021.4.0-omp
    
    mpirun lmp -pk intel 0 omp 2 -sf intel -i in.lj
 
 
-若体系不支持 intel package，请使用如下 slurm 脚本：
+注意：若体系不支持 intel package，请使用如下 slurm 脚本：
 
 .. code:: bash
 
@@ -75,11 +73,11 @@ LAMMPS 是大规模原子分子并行计算代码，在原子、分子及介观�
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
 
-   module load lammps/20210310-intel-2021.4.0-omp
+   module load lammps/20220324-intel-2021.4.0-omp
    
    mpirun lmp -i in.lj
 
-2. 自行编译 LAMMPS
+1. 自行编译 LAMMPS
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 LAMMPS 自行编译十分容易。下面以在思源一号上为例介绍 LAMMPS 安装
@@ -101,34 +99,31 @@ c) 加载 Intel oneapi 模块：
 
 .. code:: bash
 
-   module load intel-oneapi-compilers/2021.4.0
-   module load intel-oneapi-mpi/2021.4.0
-   module load intel-oneapi-mkl/2021.4.0
-   module load intel-oneapi-tbb/2021.4.0
+   module load oneapi/2021.4.0
 
-d) 编译 (以额外安装 MANYBODY, MEAM 和 Intel 加速包为例)
+d) 编译 (以额外安装 MANYBODY, MEAM, RIGID 和 Intel 加速包为例)
 
 .. code:: bash
 
    $ tar xvf lammps-stable.tar.gz
    $ cd lammps-XXXXXX
    $ cd src
-   $ make                                  #查看编译选项
-   $ make package                          #查看可用的包
-   $ make yes-intel yes-manybody yes-meam  #添加所需的包
-   $ make ps                               #查看计划安装的包列表 
-   $ make -j 4 intel_cpu_intelmpi          #开始编译
+   $ make                                            #查看编译选项
+   $ make package                                    #查看可用的包
+   $ make yes-intel yes-manybody yes-meam yes-rigid  #添加所需的包
+   $ make ps                                         #查看计划安装的包列表 
+   $ make -j 4 lmp_oneapi                            #开始编译
 
 e) 环境设置
 
-编译成功后，src 文件夹下将生成可执行文件 lmp_intel_cpu_intelmpi
+编译成功后，src 文件夹下将生成可执行文件 lmp_oneapi
 
 为了便于后续调用，一个简单的方法是将该文件移至 ~/bin 文件夹：
 
 .. code:: bash
 
    $ mkdir ~/bin
-   $ cp lmp_intel_cpu_intelmpi ~/bin
+   $ cp lmp_oneapi ~/bin
 
 至此安装和设置完成。如下是计算时所需的 slurm 脚本：
 
@@ -146,16 +141,11 @@ e) 环境设置
    ulimit -s unlimited
    ulimit -l unlimited
    
-   module load intel-oneapi-compilers/2021.4.0
-   module load intel-oneapi-mpi/2021.4.0
-   module load intel-oneapi-mkl/2021.4.0
-   module load intel-oneapi-tbb/2021.4.0
+   module load oneapi/2021.4.0
 
-   mpirun lmp_oneapi -i in.lj
-
-
-
-
+   mpirun lmp_oneapi -pk intel 0 omp 2 -sf intel -i in.lj
+   # 若势函数等体系不支持intel加速，则使用下方语句：
+   # mpirun lmp_oneapi -i in.lj
 
 
 .. _π2.0 LAMMPS:
@@ -184,7 +174,7 @@ e) 环境设置
    
    module load lammps/20201029-oneapi-21.4.0
 
-   lmp -pk intel 0 omp 2 -sf intel -i in.lj
+   srun --mpi=pmi2 lmp -pk intel 0 omp 2 -sf intel -i in.lj
 
 2. CPU 版本自行编译
 ~~~~~~~~~~~~~~~~~~~
@@ -205,11 +195,11 @@ b) 由于登录节点禁止运行作业和并行编译，请申请计算节点�
 
    $ srun -p small -n 8 --pty /bin/bash
 
-c) 加载 Intel 模块：
+c) 加载 Intel oneapi 模块：
 
 .. code:: bash
 
-   $ module load intel-parallel-studio/cluster.2020.1
+   module load oneapi/2021
 
 d) 编译 (以额外安装 MANYBODY 和 Intel 加速包为例)
 
@@ -223,32 +213,32 @@ d) 编译 (以额外安装 MANYBODY 和 Intel 加速包为例)
    $ make yes-intel                 #"make yes-"后面接需要安装的 package 名字
    $ make yes-manybody
    $ make ps                        #查看计划安装的包列表 
-   $ make -j 8 intel_cpu_intelmpi   #开始编译
+   $ make -j 8 lmp_oneapi    #开始编译
 
 e) 测试脚本
 
-编译成功后，将在 src 文件夹下生成 lmp_intel_cpu_intelmpi.
+编译成功后，将在 src 文件夹下生成 lmp_oneapi 
 后续调用，请给该文件的路径，比如
-``~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi``\ 。脚本名称可设为
+``~/lammps-3Mar20/src/lmp_oneapi``\ 。脚本名称可设为
 slurm.test
 
 .. code:: bash
 
    #!/bin/bash
 
-   #SBATCH -J lammps_test
+   #SBATCH -J lammps
    #SBATCH -p cpu
    #SBATCH -n 40
    #SBATCH --ntasks-per-node=40
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module load intel-parallel-studio/cluster.2020.1
-
    ulimit -s unlimited
    ulimit -l unlimited
 
-   srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_intel_cpu_intelmpi -i in.lj
+   module load oneapi/2021
+
+   srun --mpi=pmi2 ~/lammps-3Mar20/src/lmp_oneapi -i in.lj
 
 .. _ARM LAMMPS:
 
