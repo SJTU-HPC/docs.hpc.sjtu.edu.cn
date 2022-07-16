@@ -39,3 +39,4 @@
    cmaq
    thirdorder
    gift-bte
+   damask
