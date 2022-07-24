@@ -219,7 +219,7 @@ ParaFold 在 π 集群上运行
     -p monomer_ptm \
     -i input/GA98.fasta \
     -t 2021-07-27 \
-    -m model_1 -f
+    -m model_1
 
 
 版本三：ColabFold
