@@ -5,21 +5,26 @@ BCFtools
 
 简介
 ----------------
-BCFtools主要是用来操作vcf和BCF文件的工具合集，包含有许多命令。
+BCFtools主要是用来操作vcf和BCF文件的工具合集，包含有许多命令。用户可使用集群上已经部署的版本，也可自行编译。
 
-.. _ARM版本BCFtools:
+.. _CPU版本BCFtools:
 
-CPU 版本 BCFtools conda安装方法
+CPU 版本 BCFtools 源码安装方法
 --------------------------------------------------
 .. code:: bash
 
-   module load miniconda3
-   conda create -n mypy_py27 python=2.7
-   source activate mypy_py27
-   conda install -c bioconda manta
+    srun -p 64c512g -n 4 --pty /bin/bash
+    mkdir ${HOME}/01.application/09.bcftools && cd ${HOME}/01.application/09.bcftools
+    wget https://github.com/samtools/bcftools/releases/download/1.15.1/bcftools-1.15.1.tar.bz2
+    tar -jxvf  bcftools-1.15.1.tar.bz2
+    cd bcftools-1.15.1/
+    ./configure --prefix=${HOME}/01.application/09.bcftools/
+    make
+    make install
+    export PATH=${HOME}/01.application/09.bcftools/bin/:$PATH
 
 
-CPU 版本BCFtools
+π2 版本BCFtools
 --------------------------------------------
 
 示例脚本如下(bcftools.slurm):    
