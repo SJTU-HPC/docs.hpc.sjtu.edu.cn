@@ -102,3 +102,4 @@
    hic_breakfinder
    star
    easyfuse
+   metawrap
