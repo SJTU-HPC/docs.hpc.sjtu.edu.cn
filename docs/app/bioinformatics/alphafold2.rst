@@ -83,8 +83,39 @@ module 在思源一号上运行
     --model_preset=monomer \
     --output_dir=output 
 
-然后使用 ``sbatch sub.slurm`` 语句提交作业。
+思源一号上调用AlphaFold2.2.0的multimer模块的脚本
 
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=alphafold
+   #SBATCH --partition=a100
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=16
+   #SBATCH --gres=gpu:1          
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   export DOWNLOAD_DIR=/dssg/share/data/alphafold
+   singularity exec --nv /dssg/share/imgs/ai/alphafold/2.2.0.sif python /app/alphafold/run_alphafold.py  \
+   --use_gpu_relax \
+   --data_dir=$DOWNLOAD_DIR  \
+   --uniref90_database_path=$DOWNLOAD_DIR/uniref90/uniref90.fasta  \
+   --mgnify_database_path=$DOWNLOAD_DIR/mgnify/mgy_clusters_2018_12.fa  \
+   --bfd_database_path=$DOWNLOAD_DIR/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt  \
+   --uniclust30_database_path=$DOWNLOAD_DIR/uniclust30/uniclust30_2020_06/UniRef30_2020_06 \
+   --pdb_seqres_database_path=$DOWNLOAD_DIR/pdb_seqres/pdb_seqres.txt  \
+   --template_mmcif_dir=$DOWNLOAD_DIR/pdb_mmcif/mmcif_files  \
+   --obsolete_pdbs_path=$DOWNLOAD_DIR/pdb_mmcif/obsolete.dat \
+   --uniprot_database_path=$DOWNLOAD_DIR/uniprot/uniprot.fasta \
+   --model_preset=multimer \
+   --max_template_date=2022-1-1 \
+   --db_preset=full_dbs \
+   --output_dir=output \
+   --fasta_paths=x.fasta
+
+然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
 module 在 π 集群上运行
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
