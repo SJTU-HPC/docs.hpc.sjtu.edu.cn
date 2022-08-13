@@ -61,7 +61,7 @@
 |               | 显存的 A100卡                     |
 +---------------+-----------------------------------+
 | small         | 允许使用 CPU 核数为               |
-|               | 1~35，每核配比 4G                 |
+|               | 1~20，每核配比 4G                 |
 |               | 内                                |
 |               | 存，节点可共享使用；单节点配置为  |
 |               | 40 核，192G 内存                  |
@@ -123,7 +123,7 @@ small 队列 slurm 脚本示例
 
    #SBATCH --job-name=test        # 作业名 
    #SBATCH --partition=small      # small 队列
-   #SBATCH -n 20                 # 总核数需 <=35
+   #SBATCH -n 20                 # 总核数需 <=20
    #SBATCH --ntasks-per-node=20   # 每节点核数
    #SBATCH --output=%j.out 
    #SBATCH --error=%j.err
