@@ -14,7 +14,11 @@ EasyFuse是预测临床肿瘤样本特异性基因融合的新工具，包含了
 +-----------+---------+----------+---------------------------------------------------------+
 | 版本      | 平台    | 构建方式 | 路径                                                    |
 +===========+=========+==========+=========================================================+
-| 1.3.5     | |cpu|   | 容器     | /dssg/share/sample/easyfuse/easyfuse_1.3.5.sif 思源一号 |
+| 1.3.6     | |cpu|   | 容器     | /dssg/share/imgs/easyfuse/easyfuse_1.3.6.sif 思源一号   |
++-----------+---------+----------+---------------------------------------------------------+
+| 1.3.5     | |cpu|   | 容器     | /dssg/share/imgs/easyfuse/easyfuse_1.3.5.sif 思源一号   |
++-----------+---------+----------+---------------------------------------------------------+
+| 1.3.6     | |cpu|   | 容器     | /lustre/share/img/x86/easyfuse/easyfuse_1.3.6.sif       |
 +-----------+---------+----------+---------------------------------------------------------+
 | 1.3.5     | |cpu|   | 容器     | /lustre/share/img/x86/easyfuse/easyfuse_1.3.5.sif       |
 +-----------+---------+----------+---------------------------------------------------------+
@@ -54,6 +58,32 @@ EasyFuse是预测临床肿瘤样本特异性基因融合的新工具，包含了
 ^^^^^^^^^^^^^^^^^
 
 输入的 ``/lustre/share/samples/easyfuse`` 为demo数据。
+
+EasyFuse@1.3.6
+"""""""""""""""
+
+.. code-block:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=esayFuse_demo
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   mkdir -p output
+
+   singularity exec \
+   --containall \
+   -B /lustre/share/samples/easyfuse_ref:/ref \
+   -B /lustre/share/samples/easyfuse:/data \
+   -B $PWD/output:/output \
+   /lustre/share/img/x86/easyfuse/easyfuse_1.3.6.sif \
+   python /code/easyfuse/processing.py -i /data/ -o /output
+
+EasyFuse@1.3.5
+"""""""""""""""
 
 .. code-block:: bash
 
