@@ -31,4 +31,5 @@
    matlab
    matlab_pct
    ../../studio/jupyter
+   glibc
 
