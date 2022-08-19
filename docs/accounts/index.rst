@@ -85,7 +85,8 @@
 “交我算”帐号与交大统一身份认证jAccount绑定，附属医院教职工可以使用jAccount，通过交大“一门式服务”APP“交我办”（或网页版my.sjtu.edu.cn）提交“交我算”帐号申请。如您尚未开通jAccount，可以通过所在单位的联络人在“交我办”上发起jAccount帐号代申请，通过后您便可自行申请“交我算”帐号。
 
 以下是附属医院教职工“交我算”帐号申请及充值流程图：
-.. image:: ../img/hospital account flowchart.png
+
+.. image:: ../img/hospital_account_flowchart.png
 
 第一步：申请jAccount帐号
 ---------------------------
@@ -128,7 +129,7 @@ jAccount申请入口（二选一，“交我办”APP或网页版my.sjtu.edu.cn�
 
 * 由帐号负责人发起，将合同内相关内容填好并盖单位公章，然后将6份合同原件寄给网络信息中心王思婷老师 （上海市闵行区东川路800号上海交通大学网络信息中心101室，34206060-8011）
 
-合同下载：`计算平台技术服务合同 </hpc.sjtu.edu.cn/Item/docs/computing_service_contract_sjtu_version.docx>`_
+* 合同下载：`计算平台技术服务合同 </hpc.sjtu.edu.cn/Item/docs/computing_service_contract_sjtu_version.docx>`_
 
 * 6份合同盖好交大公章后，其中3份合同原件将回寄给帐号负责人。
 
@@ -136,13 +137,13 @@ jAccount申请入口（二选一，“交我办”APP或网页版my.sjtu.edu.cn�
 
 * 帐号负责人于所在医院申请财务报销和转账，并将费用转入：
 
-账户名称：上海交通大学
+  账户名称：上海交通大学
 
-银行账号：439059226890
+  银行账号：439059226890
 
-开户银行：中国银行上海市上海交通大学支行
+  开户银行：中国银行上海市上海交通大学支行
 
-联行号：104290050144
+  联行号：104290050144
 
 * 附属医院财务报销如需提供测试报告，请帐号负责人发邮件至hpc@sjtu.edu.cn申请。
 
