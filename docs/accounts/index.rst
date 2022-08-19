@@ -95,7 +95,7 @@
 
 各医院联络人名单如下：
 
-.. image:: ../img/hospital_contact.png
+.. image:: ../img/hospital_contact.jpg
 
 jAccount申请入口（二选一，“交我办”APP或网页版my.sjtu.edu.cn）图示：
 
