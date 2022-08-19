@@ -93,15 +93,18 @@
 通过所在单位联络人在“交我办”APP（或网页版my.sjtu.edu.cn）上代为申请jAccount。经所在单位人事干事或领导审批完成后即开通jAccount，且自动开通与jAccount同命名的交大邮箱。
 
 各医院联络人名单如下：
-.. image:: ../img/hospital contact.png
+
+.. image:: ../img/hospital_contact.png
 
 jAccount申请入口（二选一，“交我办”APP或网页版my.sjtu.edu.cn）图示：
 
 1. “交我办”APP-“网络服务”-“jAccount帐号申请”
-.. image:: ../img/hospital jaccount 1.jpg
+
+.. image:: ../img/hospital_jaccount_1.jpg
 
 2. 网页版（或my.sjtu.edu.cn）-“网络服务”-“jAccount帐号申请”
-.. image:: ../img/hospital jaccount 2.png
+
+.. image:: ../img/hospital_jaccount_2.png
 
 第二步：申请交我算帐号
 ---------------------------
@@ -111,44 +114,49 @@ jAccount申请入口（二选一，“交我办”APP或网页版my.sjtu.edu.cn�
 交我算帐号申请入口（二选一，“交我办”APP或网页版my.sjtu.edu.cn）图示：
 
 1. “交我办”APP-“交我算”-“交我算帐号申请”
-.. image:: ../img/hospital hpc account 1.jpg
+
+.. image:: ../img/hospital_hpc_account_1.png
 
 2. 网页版（或my.sjtu.edu.cn）-“交我算”-“交我算帐号申请”
-.. image:: ../img/hospital hpc account 2.jpg
+
+.. image:: ../img/hospital_hpc_account_2.png
 
 第三步：充值缴费
 ---------------------------
 
 1. 签订合同及合同盖章
 
-a) 由帐号负责人发起，将合同内相关内容填好并盖单位公章，然后将6份合同原件寄给网络信息中心王思婷老师 （上海市闵行区东川路800号上海交通大学网络信息中心101室，34206060-8011）
+* 由帐号负责人发起，将合同内相关内容填好并盖单位公章，然后将6份合同原件寄给网络信息中心王思婷老师 （上海市闵行区东川路800号上海交通大学网络信息中心101室，34206060-8011）
 
-合同下载：`计算平台技术服务合同 </_static/hpcmanual.pdf>`_
+合同下载：`计算平台技术服务合同 </hpc.sjtu.edu.cn/Item/docs/computing_service_contract_sjtu_version.docx>`_
 
-b) 6份合同盖好交大公章后，其中3份合同原件将回寄给帐号负责人。
+* 6份合同盖好交大公章后，其中3份合同原件将回寄给帐号负责人。
 
 2. 转账汇款
 
-a) 帐号负责人于所在医院申请财务报销和转账，并将费用转入：
+* 帐号负责人于所在医院申请财务报销和转账，并将费用转入：
 
 账户名称：上海交通大学
+
 银行账号：439059226890
+
 开户银行：中国银行上海市上海交通大学支行
+
 联行号：104290050144
 
-b) 附属医院财务报销如需提供测试报告，请帐号负责人发邮件至hpc@sjtu.edu.cn申请。
+* 附属医院财务报销如需提供测试报告，请帐号负责人发邮件至hpc@sjtu.edu.cn申请。
 
 3. 开具发票 
 
-a) 汇款到账后，请帐号负责人联系网络信息中心王思婷老师 (stwangecho@sjtu.edu.cn)，并提供汇款信息备注及开票信息。
+* 汇款到账后，请帐号负责人联系网络信息中心王老师 stwangecho@sjtu.edu.cn，并提供汇款信息备注及开票信息。
 
-b) 网络信息中心确认汇款到账后，将开具电子发票并邮件发送至帐号负责人。
+* 网络信息中心确认汇款到账后，将开具电子发票并邮件发送至帐号负责人。
 
 4. 财务入账
 
-a) 帐号负责人确认"交我算"帐号用户名及jAccount后，由网络信息中心办理手动充值入账。
+* 帐号负责人确认"交我算"帐号用户名及jAccount后，由网络信息中心办理手动充值入账。
 
-b) 帐号负责人确认计费系统到账。
+* 帐号负责人确认计费系统到账。
 
 充值过程中有任何问题，请联系网络信息中心王老师 stwangecho@sjtu.edu.cn，电话 34206060-8011。
 
