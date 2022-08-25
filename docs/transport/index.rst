@@ -147,17 +147,19 @@ scp，rsync本身都不支持多进程传输，因此需要利用外部指令并
 提高数据传输速度的技巧(从lustre目录到archive目录)
 =================================================
 
+利用rsync命令并发多个scp进程可有效提高数据传输的速度
+
 .. code:: bash
 
-   # 示例：并发5个scp进程从 pi 2.0 集群lustre目录/lustre/home/acct-hpc/expuser01/img/传送数据至归档存储/archive/home/acct-hpc/expuser01/sif/目录下
+   # 示例：并发5个scp进程从 pi 2.0 集群lustre目录/lustre/home/acct-hpc/expuser01/img/传送文件数据至归档存储/archive/home/acct-hpc/expuser01/sif/目录下
    ssh expuser01@data.hpc.sjtu.edu.cn
    find /lustre/home/acct-hpc/expuser01/img -type f | xargs -P 5 -I {} scp {} hpc@data.hpc.sjtu.edu.cn:/archive/home/acct-hpc/expuser01/sif/
 
-以传送47GB的数据为例，添加 ``time`` 命令可统计传送时间，
+上述命令启动5个scp进程并发传送47GB的文件数据，添加 ``time`` 命令可统计传送时间，
 
 比如 ``time scp -r /lustre/home/acct-hpc/expuser01/img/* hpchgc@data.hpc.sjtu.edu.cn:/archive/home/acct-hpc/expuser01/sif/`` 
 
-结果如下所示
+使用1、5个进程从lustre目录传送47GB的数据至archive目录所用时间如下所示
 
 +--------+--------+
 | 进程数 | 时间   |
