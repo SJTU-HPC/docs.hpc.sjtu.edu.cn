@@ -129,7 +129,7 @@ jAccount申请入口（二选一，“交我办”APP或网页版my.sjtu.edu.cn�
 
 * 由帐号负责人发起，将合同内相关内容填好并盖单位公章，然后将6份合同原件寄给网络信息中心王思婷老师 （上海市闵行区东川路800号上海交通大学网络信息中心101室，34206060-8011）
 
-* 合同下载：`计算平台技术服务合同 <hpc.sjtu.edu.cn/Item/docs/computing_service_contract_sjtu_version.docx>`_
+* 合同下载：`计算平台技术服务合同 <https://hpc.sjtu.edu.cn/Item/docs/computing_service_contract_sjtu_version.docx>`_
 
 * 6份合同盖好交大公章后，其中3份合同原件将回寄给帐号负责人。
 
