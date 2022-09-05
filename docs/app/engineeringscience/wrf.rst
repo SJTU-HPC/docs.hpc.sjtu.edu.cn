@@ -238,7 +238,7 @@ geog_data_path的位置
 
 .. code:: bash
 
-   cd ../WPS-4.2.1
+   cd WPS-4.2
    cp -r /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/wrf-4.2/wrf_data/* ./
    
 3. namelist.wps文件内容设置如下：
@@ -375,7 +375,7 @@ WRF运行
 
 .. code:: bash
 
-   cp -r /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/wrf-4.2/WPS-4.2/met_d* ./
+   cp -r ../WPS-4.2/met_em.d01.2016-10-0* ./
    
 3. namelist.input文件内容设置如下，参数需要与wps的namelist.wps参数一致：
 
