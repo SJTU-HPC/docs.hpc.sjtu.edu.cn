@@ -247,7 +247,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../../img/matlab_studio_desktop_terminal.png
 
-在终端中使用命令 ``singularity run /dssg/share/img/matlab/matlab_latest.sif matlab`` , π 超算需使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` 。
+在终端中使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_latest.sif matlab`` , π 超算需使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` 。
 
 启动后即可使用MATLAB R2022a
 
