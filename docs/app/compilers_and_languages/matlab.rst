@@ -16,13 +16,16 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 +==========+================+==========+=================================================+
 | 2022a    |  |cpu|         | 容器     |/lustre/share/img/matlab_latest.sif              |
 +----------+----------------+----------+-------------------------------------------------+
-| 2022a    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_latest.sif思源平台|
+| 2022a    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_latest.sif思源    |
++----------+----------------+----------+-------------------------------------------------+
+| 2022b    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_r2022b.sif思源    |
 +----------+----------------+----------+-------------------------------------------------+
 | 2021a    |  |cpu|         | 容器     |/lustre/share/img/matlab_r2021a.sif              |
 +----------+----------------+----------+-------------------------------------------------+
-| 2021a    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_r2021a.sif思源平台|
+| 2022b    |  |cpu|         | 容器     |/lustre/share/img/matlab_r2022b.sif              |
 +----------+----------------+----------+-------------------------------------------------+
-
+| 2021a    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_r2021a.sif思源    |
++----------+----------------+----------+-------------------------------------------------+
 
 超算上的MATLAB
 ------------------------
@@ -56,13 +59,13 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. code:: console
 
-    $ singularity run /dssg/share/imgs/matlab/matlab_latest.sif matlab
+    $ singularity run /dssg/share/imgs/matlab/matlab_r2022b.sif matlab
     MATLAB is selecting SOFTWARE OPENGL rendering.
 
                                 < M A T L A B (R) >
                     Copyright 1984-2022 The MathWorks, Inc.
-                R2022a Update 2 (9.12.0.1956245) 64-bit (glnxa64)
-                                    May 11, 2022
+                R2022b Update 1 (9.13.0.2080170) 64-bit (glnxa64) 
+                                    September 28, 2022
 
     
     To get started, type doc.
@@ -112,7 +115,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH -n 1
     #SBATCH --ntasks-per-node=1
 
-    IMAGE_PATH=/lustre/share/img/matlab_latest.sif
+    IMAGE_PATH=/lustre/share/img/matlab_r2022b.sif
 
     ulimit -s unlimited
     ulimit -l unlimited
@@ -133,7 +136,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH -n 1
     #SBATCH --ntasks-per-node=1
 
-    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_latest.sif
+    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_r2022b.sif
     
     ulimit -s unlimited
     ulimit -l unlimited
@@ -158,7 +161,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH -n 40
     #SBATCH --cpus-per-task 1
 
-    IMAGE_PATH=/lustre/share/img/matlab_latest.sif
+    IMAGE_PATH=/lustre/share/img/matlab_r2022b.sif
 
     ulimit -s unlimited
     ulimit -l unlimited
@@ -178,7 +181,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH -n 1
     #SBATCH --cpus-per-task 64
 
-    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_latest.sif
+    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_r2022b.sif
     
     ulimit -s unlimited
     ulimit -l unlimited
@@ -247,7 +250,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../../img/matlab_studio_desktop_terminal.png
 
-在终端中使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_latest.sif matlab`` , π 超算需使用命令 ``singularity run /lustre/share/img/matlab_latest.sif matlab`` 。
+在终端中使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_r2022b.sif matlab`` , π 超算需使用命令 ``singularity run /lustre/share/img/matlab_r2022b.sif matlab`` 。
 
 启动后即可使用MATLAB R2022a
 
@@ -279,7 +282,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 2. 启动GPU版本MATLAB
 
-在窗口中启动终端（terminal），在终端输入 ``singularity run --nv /dssg/share/imgs/matlab/matlab_latest.sif`` ，即可启动GPU版本matlab。
+在窗口中启动终端（terminal），在终端输入 ``singularity run --nv /dssg/share/imgs/matlab/matlab_r2022b.sif`` ，即可启动GPU版本matlab。
 
 .. image:: ../../img/matlab_studio_desktop_gpu_command.png
 
@@ -301,12 +304,12 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH --cpus-per-task 6
     #SBATCH --gres gpu:1
 
-    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_latest.sif
+    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_r2022b.sif
     
     ulimit -s unlimited
     ulimit -l unlimited
     
-    singularity run --nv  $IMAGE_PATH matlab -r $YOUR_SCRIPT_FILE
+    singularity run --nv $IMAGE_PATH matlab -r $YOUR_SCRIPT_FILE
 
 
 MATLAB Parallel Computing Toolbox
