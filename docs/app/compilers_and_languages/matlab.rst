@@ -208,7 +208,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 2. 申请资源，选择 MATLAB 版本
 
-点击 MATLAB 图标后会跳转至资源选择界面，该页面上可选择申请的时长、可视化桌面的分辨率、平台资源以及MATLAB版本（默认为2022a）。
+点击 MATLAB 图标后会跳转至资源选择界面，该页面上可选择申请的时长、可视化桌面的分辨率、平台资源以及MATLAB版本。
 
 .. image:: ../../img/matlab_studio_resources.png
 
@@ -252,7 +252,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 在终端中使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_r2022b.sif matlab`` , π 超算需使用命令 ``singularity run /lustre/share/img/matlab_r2022b.sif matlab`` 。
 
-启动后即可使用MATLAB R2022a
+启动后即可使用MATLAB R2022b
 
 .. image:: ../../img/matlab_studio_desktop_terminal_command.png
 
