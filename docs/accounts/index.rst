@@ -93,10 +93,6 @@
 
 通过所在单位联络人在“交我办”APP（或网页版my.sjtu.edu.cn）上代为申请jAccount。经所在单位人事干事或领导审批完成后即开通jAccount，且自动开通与jAccount同命名的交大邮箱。
 
-各医院联络人名单如下：
-
-.. image:: ../img/hospital_contact.jpg
-
 jAccount申请入口（二选一，“交我办”APP或网页版my.sjtu.edu.cn）图示：
 
 1. “交我办”APP-“网络服务”-“jAccount帐号申请”
