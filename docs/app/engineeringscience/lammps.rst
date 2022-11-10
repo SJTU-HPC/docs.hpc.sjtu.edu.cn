@@ -89,11 +89,13 @@ a) 申请计算节点资源用来编译 LAMMPS，并请注意在全部编译结�
    srun -p 64c512g -n 4 --pty /bin/bash
    
    
-b) 从官网下载 LAMMPS，推荐安装最新稳定版：
+b) 从官网获得最新的 LAMMPS，推荐下载最新的版本
 
 .. code:: bash
 
    wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
+   or
+   cp /dssg/share/sample/lammps/lammps-stable.tar.gz ./
 
 c) 加载 Intel oneapi 模块：
 
@@ -187,6 +189,8 @@ a) 从官网下载 lammps，推荐安装最新的稳定版：
 .. code:: bash
 
    $ wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
+   $ or
+   $ cp /lustre/share/samples/lammps/lammps-stable.tar.gz ./
 
 b) 由于登录节点禁止运行作业和并行编译，请申请计算节点资源用来编译
    lammps，并在编译结束后退出：
