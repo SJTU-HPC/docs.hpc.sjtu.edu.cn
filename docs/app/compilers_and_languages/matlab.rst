@@ -319,8 +319,6 @@ MATLAB Parallel Computing Toolbox
 
 集群上部署的 MATLAB 镜像均已安装  Parallel  Computing Toolbox 并获取相关授权，打开 MATLAB 即可使用相应功能。
 
-目前集群上配置的 MATLAB 镜像仅支持单节点并行。因此，在 π 超算上最多可40核并行，在思源超算上最多可64核并行.
-
 了解更多 MATLAB Parallel Computing Toolbox 在超算上的使用，请跳转至文档 :ref:`matlab_pct`.
 
 
