@@ -43,3 +43,4 @@
    damask
    roms
    proj
+   gamess
