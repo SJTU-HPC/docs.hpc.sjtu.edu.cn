@@ -159,7 +159,7 @@ Gamess程序需要依靠rungms文件来调用可执行文件gamess.00.x，在编
    set USERSCR=~/app/gamess/scr
    set GMSPATH=~/app/gamess
 
-6. 验证
+7. 验证
 ~~~~~~~
 
 使用软件自带的测试示例进行测试，在当前路径下运行runall文件，并执行检查命令checktst
