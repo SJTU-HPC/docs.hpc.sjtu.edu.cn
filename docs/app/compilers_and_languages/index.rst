@@ -33,3 +33,4 @@
    ../../studio/jupyter
    glibc
    spooles
+   dealii
