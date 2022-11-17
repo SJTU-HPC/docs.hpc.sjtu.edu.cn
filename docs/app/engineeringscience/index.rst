@@ -44,3 +44,4 @@
    roms
    proj
    gamess
+   deepmd-kit
