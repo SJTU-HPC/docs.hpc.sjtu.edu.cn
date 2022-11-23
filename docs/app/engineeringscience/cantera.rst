@@ -243,5 +243,5 @@ Cantera使用说明
 -----------
 
 -  `Cantera 官网 <https://cantera.org/>`__
--  `安装 Cantera 并运行一个官方示例 <https://blog.csdn.net/weixin_43940314/article/details/114497829>`__
+-  `安装 Cantera 知乎 <https://zhuanlan.zhihu.com/p/546180253>`__
 
