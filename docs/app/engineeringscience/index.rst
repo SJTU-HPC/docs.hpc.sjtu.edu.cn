@@ -45,3 +45,4 @@
    proj
    gamess
    deepmd-kit
+   chroma
