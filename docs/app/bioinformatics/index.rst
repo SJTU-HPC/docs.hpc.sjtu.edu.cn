@@ -103,3 +103,4 @@
    star
    easyfuse
    metawrap
+   pangenie
