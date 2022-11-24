@@ -152,7 +152,7 @@ pi2.0上的OpenMPI
 参考资料
 ---------
 
--  `OpenMPI 入门教程 <https://blog.csdn.net/weixin_43996701/article/details/117705178?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-117705178-blog-117704832.pc_relevant_paycolumn_v3&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-117705178-blog-117704832.pc_relevant_paycolumn_v3&utm_relevant_index=1>`__
+-  `OpenMPI 入门教程 <https://zhuanlan.zhihu.com/p/399150417>`__
 
 
 

@@ -162,7 +162,6 @@ pi2.0上的GSL
 
 
 -  `GSL官方文档 <https://www.gnu.org/software/gsl/doc/html/index.html>`__
--  `GSL安装和使用教程 <https://blog.csdn.net/m0_37649216/article/details/120233852>`__
 
 
 
