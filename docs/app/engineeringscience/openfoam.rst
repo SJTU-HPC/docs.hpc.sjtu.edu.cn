@@ -314,140 +314,234 @@ system目录主要包含计算时间和数值求解格式等计算参数。
     ├── fvSchemes
     └── fvSolution
 
-编译OpenFOAM
-------------
 
-如果您需要从源代码构建OpenFOAM，我们强烈建议您使用超算平台提供的非特权容器构建方法，以确保编译过程能顺利完成。
+自行构建OpenFOAM镜像
+------------------------------------
 
-编译适用于CPU平台的OpenFOAM(构建容器)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+以OpenFOAM-org7为例
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-从登录节点跳转至容器构建X86节点：
-
-.. code:: bash
-
-   # ssh build@container-x86
-
-创建和进入临时工作目录：
+1. 从pi2.0登录节点跳转至容器构建节点(只能从pi2.0跳转，思源一号不行)：
 
 .. code:: bash
 
-   $ cd $(mktemp -d)
-   $ pwd
-   /tmp/tmp.sr7C5813M9
+    ssh build@container-x86
+
+2. 创建和进入临时工作目录：
+
+.. code:: bash
+
+    cd $(mktemp -d)
+
   
-下载镜像定义文件，按需定制修改：
+3. 创建如下镜像定义文件openfoam7-gcc4-openmpi4-centos7.def，可按需修改：
 
 .. code:: bash
 
-   $ wget https://raw.githubusercontent.com/SJTU-HPC/hpc-base-container/dev/base/openfoam/2012-gcc4-openmpi4-centos7.def
+   Bootstrap: docker
+   From: centos:7
+
+   %help
+      This recipe provides an OpenFOAM-7 environment installed 
+      with GCC 4 and OpenMPI-4 on CentOS 7.
+
+   %labels
+      Author Fatih Ertinaz
+
+   %post
+      ### Install prerequisites
+      yum groupinstall -y 'Development Tools'
+      yum install -y wget git openssl-devel libuuid-devel
+
+      ### Install OpenMPI
+      # Why openmpi-4.x is needed: https://github.com/hpcng/singularity/issues/2590
+      vrs=4.0.3
+      wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-${vrs}.tar.gz
+      tar xf openmpi-${vrs}.tar.gz && rm -f openmpi-${vrs}.tar.gz
+      cd openmpi-${vrs}
+      ./configure --prefix=/opt/openmpi-${vrs}
+      make all install
+      make all clean
+
+      ### Update environment - OpenMPI
+      export MPI_DIR=/opt/openmpi-${vrs}
+      export MPI_BIN=$MPI_DIR/bin
+      export MPI_LIB=$MPI_DIR/lib
+      export MPI_INC=$MPI_DIR/include
+
+      export PATH=$MPI_BIN:$PATH
+      export LD_LIBRARY_PATH=$MPI_LIB:$LD_LIBRARY_PATH
+
+      ### OpenFOAM version
+      pkg=OpenFOAM
+      vrs=7
+
+      ### Install under /opt
+      base=/opt/$pkg
+      mkdir -p $base && cd $base
+
+      ### Download OF
+      wget -O - http://spack.pi.sjtu.edu.cn/mirror/openfoam-org/openfoam-org-7.0.tar.gz | tar xz
+      mv $pkg-$vrs-version-$vrs $pkg-$vrs
+
+      ## Download ThirdParty
+      wget -O - http://spack.pi.sjtu.edu.cn/mirror/openfoam-org/ThirdParty-7.tar.gz | tar xz
+      mv ThirdParty-$vrs-version-$vrs ThirdParty-$vrs
+
+      ### Change dir to OpenFOAM-version
+      cd $pkg-$vrs
+    
+      ### Get rid of unalias otherwise singularity fails
+      sed -i 's,FOAM_INST_DIR=$HOME\/$WM_PROJECT,FOAM_INST_DIR='"$base"',g' etc/bashrc
+      sed -i 's/alias wmUnset/#alias wmUnset/' etc/config.sh/aliases
+      sed -i '77s/else/#else/' etc/config.sh/aliases
+      sed -i 's/unalias wmRefresh/#unalias wmRefresh/' etc/config.sh/aliases
+
+      ### Compile and install
+      . etc/bashrc 
+      ./Allwmake -j$(nproc) 2>&1 | tee log.Allwmake
+
+      ### Clean-up environment
+      rm -rf platforms/$WM_OPTIONS/applications
+      rm -rf platforms/$WM_OPTIONS/src
+
+      cd $base/ThirdParty-$vrs
+      rm -rf build
+      rm -rf gcc-* gmp-* mpfr-* binutils-* boost* ParaView-* qt-*
+
+      strip $FOAM_APPBIN/*
+
+      ### Source bashrc at runtime
+      echo '. /opt/OpenFOAM/OpenFOAM-7/etc/bashrc' >> $SINGULARITY_ENVIRONMENT
+
+   %environment
+      export MPI_DIR=/opt/openmpi-4.0.3
+      export MPI_BIN=$MPI_DIR/bin
+      export MPI_LIB=$MPI_DIR/lib
+      export MPI_INC=$MPI_DIR/include
+
+      export PATH=$MPI_BIN:$PATH
+      export LD_LIBRARY_PATH=$MPI_LIB:$LD_LIBRARY_PATH
+
+   %test
+      . /opt/OpenFOAM/OpenFOAM-7/etc/bashrc
+      icoFoam -help
+
+   %runscript
+      echo
+      echo "OpenFOAM installation is available under $WM_PROJECT_DIR"
+      echo
    
-构建Singularity容器镜像，大约会消耗2-3小时：
+4. 执行以下命令构建镜像，大约会消耗2-3小时：
 
 .. code:: bash
 
-   $ docker run --privileged --rm -v \
+     docker run --privileged --rm -v \
      ${PWD}:/home/singularity \
      sjtuhpc/centos7-singularity:x86 \
-     singularity build /home/singularity/2012-gcc4-openmpi4-centos7.sif /home/singularity/2012-gcc4-openmpi4-centos7.def
+     singularity build /home/singularity/openfoam7-gcc4-openmpi4-centos7.sif /home/singularity/openfoam7-gcc4-openmpi4-centos7.def
 
-将构建出的容器镜像传回家目录，参考上文的作业脚本(容器版)提交作业。
-
-.. code:: bash
-
-   $ scp 2012-gcc4-openmpi4-centos7.sif YOUR_USER_NAME@login1:~/
-
-编译适用于ARM平台的OpenFOAM(构建容器)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-从登录节点跳转至容器构建ARM节点：
+5. 将构建出的容器镜像传回自己家目录的根目录(用户需根据自身具体情况将hpcpzz@login2进行修改，和自己对应起来)：
 
 .. code:: bash
 
-   # ssh build@container-arm
+   scp ./openfoam7-gcc4-openmpi4-centos7.sif hpcpzz@login2:~/
 
-创建和进入临时工作目录：
-
-.. code:: bash
-
-   $ cd $(mktemp -d)
-   $ pwd
-  
-下载镜像定义文件，按需定制修改：
+6. 回到自己的家目录，测试镜像是否能够正常使用：
 
 .. code:: bash
 
-   $ wget https://raw.githubusercontent.com/SJTU-HPC/hpc-base-container/dev/base/openfoam/8-gcc8-openmpi4-centos8.def
-   
-构建Singularity容器镜像，大约会消耗2-3小时：
+   singularity exec ./openfoam7-gcc4-openmpi4-centos7.sif blockMesh
+
+7. 得到以下结果则表示镜像构建成功：
 
 .. code:: bash
 
-   $ docker run --privileged --rm -v \
-     ${PWD}:/home/singularity \
-     sjtuhpc/centos7-singularity:arm \
-     singularity build /home/singularity/8-gcc8-openmpi4-centos8.def /home/singularity/8-gcc8-openmpi4-centos8.def
+   /*---------------------------------------------------------------------------*\
+    =========                 |
+    \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+     \\    /   O peration     | Website:  https://openfoam.org
+       \\  /    A nd           | Version:  7
+        \\/     M anipulation  |
+   \*---------------------------------------------------------------------------*/
+   Build  : 7
+   Exec   : /opt/OpenFOAM/OpenFOAM-7/platforms/linux64GccDPInt32Opt/bin/blockMesh
+   Date   : Nov 25 2022
+   Time   : 13:30:41
+   Host   : "cas332.pi.sjtu.edu.cn"
+   PID    : 174880
+   I/O    : uncollated
+   Case   : /lustre/home/acct-hpc/hpcpzz
+   nProcs : 1
+   fileModificationChecking : Monitoring run-time modified files using timeStampMaster (fileModificationSkew 10)
+   allowSystemOperations : Allowing user-supplied system call operations
 
-将构建出的容器镜像传回家目录，参考上文的作业脚本(容器版)提交作业。
+   // * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+   Create time
 
-.. code:: bash
 
-   $ scp 8-gcc8-openmpi4-centos8.sif YOUR_USER_NAME@login1:~/
 
-编译OpenFOAM6，添加相应的自定义功能模块，此处的镜像只包含OpenFOAM6编译所依赖的基础环境
+   --> FOAM FATAL ERROR: 
+   cannot find file "/lustre/home/acct-hpc/hpcpzz/system/controlDict"
+
+      From function virtual Foam::autoPtr<Foam::ISstream> Foam::fileOperations::uncollatedFileOperation::readStream(Foam::regIOobject&, const Foam::fileName&, const Foam::word&, bool) const
+      in file global/fileOperations/uncollatedFileOperation/uncollatedFileOperation.C at line 538.
+
+   FOAM exiting
+
+
+
+在自己的目录下自行源码编译OpenFOAM
 ----------------------------------------------------------------------------------------
 
-.. code:: bash
+以OpenFOAM-org10为例
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   cd $HOME
-   mkdir OpenFOAM
-   cd OpenFOAM
-   cp /lustre/opt/contribute/cascadelake/openfoam/img/OpenFOAM-6.tar.gz ./
-   cp /lustre/opt/contribute/cascadelake/openfoam/img/ThirdParty-6.tar.gz ./
-   tar xf OpenFOAM-6.tar.gz
-   tar xf ThirdParty-6.tar.gz
-   echo "alias of6='source \$HOME/OpenFOAM/OpenFOAM-6/etc/bashrc WM_LABEL_SIZE=64 FOAMY_HEX_MESH=yes'" >> ~/.bashrc
-   singularity shell /lustre/opt/contribute/cascadelake/openfoam/img/openfoam6_base.sif
-   ln -s /usr/bin/mpicc.openmpi OpenFOAM-6/bin/mpicc
-   ln -s /usr/bin/mpirun.openmpi OpenFOAM-6/bin/mpirun
-   source $HOME/OpenFOAM/OpenFOAM-6/etc/bashrc WM_LABEL_SIZE=64 FOAMY_HEX_MESH=yes
-   source ~/.bashrc
-   of6
-   cd $WM_THIRD_PARTY_DIR
-   export QT_SELECT=qt4
-   ./makeParaView -python -mpi -python-lib /usr/lib/x86_64-linux-gnu/libpython2.7.so.1.0 > log.makePV 2>&1
-   wmRefresh
-   cd $WM_PROJECT_DIR
-   export QT_SELECT=qt4
-   ./Allwmake -j 4 > log.make 2>&1
-   ./Allwmake -j 4 > log.make 2>&1
-
-编译成功时，输入icoFoam -help会显示如下信息
+1. 从登录节点申请计算资源：
 
 .. code:: bash
 
-   Usage: icoFoam [OPTIONS]
-   options:
-     -case <dir>       specify alternate case directory, default is the cwd
-     -noFunctionObjects
-                       do not execute functionObjects
-     -parallel         run in parallel
-     -roots <(dir1 .. dirN)>
-                       slave root directories for distributed running
-     -srcDoc           display source code in browser
-     -doc              display application documentation in browser
-     -help             print the usage
+   srun -p cpu -N 1 --ntasks-per-node=40  --pty /bin/bash
+   或者
+   srun -p 64c512g -n 10 --pty /bin/bash
 
-每次重新进入OpenFOAM6环境中，输入如下命令，然后根据需要添加自定义功能模块
+2. 加载编译所需模块：
 
 .. code:: bash
 
-   singularity shell /lustre/opt/contribute/cascadelake/openfoam/img/openfoam6_base.sif
-   of6
+   module load gcc
+   module load openmpi
+
+3. 执行以下命令源码编译openfoam10 (其中10为版本号，用户可根据自身需求改为7，8，9)：
+
+.. code:: bash
+
+   cd $HOME 
+   mkdir OpenFOAM 
+   cd OpenFOAM 
+   git clone https://github.com/OpenFOAM/OpenFOAM-10.git 
+   git clone https://github.com/OpenFOAM/ThirdParty-10.git 
+   source OpenFOAM-10/etc/bashrc 
+   cd OpenFOAM-10 
+   ./Allwmake -j 
+   sed -i '$a source $HOME/OpenFOAM/OpenFOAM-10/etc/bashrc' $HOME/.bashrc
+
+4. 测试是否编译成功:
+
+.. code:: bash
+
+   cd $HOME/OpenFOAM/OpenFOAM-10/tutorials/multiphase/interFoam/RAS/DTCHull
+   ./Allrun
+
+
+
+
 
 参考资料
 --------
 
-- Openfoam官方网站 https://openfoam.org/
-- OpenFOAM中文维基页面  
-- Singularity文档 https://sylabs.io/guides/
+-  `Openfoam-org 官网 <https://openfoam.org/>`__
+-  `Openfoam-org github 地址 <https://github.com/OpenFOAM?tab=repositories/>`__
+
+
+
