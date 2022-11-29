@@ -146,5 +146,4 @@ CHROMA是一款格点量子色动力学（LQCD）数值模拟软件包，它是�
 参考资料
 --------
 
-- Chroma https://jeffersonlab.github.io/chroma
-Creating a new branch is quick.
+- CHROMA https://jeffersonlab.github.io/chroma
