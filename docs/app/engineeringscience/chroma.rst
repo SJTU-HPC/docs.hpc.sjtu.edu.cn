@@ -6,7 +6,7 @@ CHROMA
 简介
 ----
 
-Chroma是一款格点量子色动力学（LQCD）数值模拟软件包，它是一个为解决夸克和胶子理论而设计的物理应用程序，其属于美国USQCD合作组在美国SciDac经费的支持下开发的USQCD软件集中的子模块。Chroma整合了QCD基本线性代数操作、多线程/进程QCD信息传递、QCD文件IO、稀疏矩阵求解等众多模块，并通过XML交互协议提供人机接口。
+CHROMA是一款格点量子色动力学（LQCD）数值模拟软件包，它是一个为解决夸克和胶子理论而设计的物理应用程序，其属于美国USQCD合作组在美国SciDac经费的支持下开发的USQCD软件集中的子模块。Chroma整合了QCD基本线性代数操作、多线程/进程QCD信息传递、QCD文件IO、稀疏矩阵求解等众多模块，并通过XML交互协议提供人机接口。
 
 可用的版本
 ----------
@@ -146,4 +146,4 @@ Chroma是一款格点量子色动力学（LQCD）数值模拟软件包，它是�
 参考资料
 --------
 
-- Chroma https://jeffersonlab.github.io/chroma
+- CHROMA https://jeffersonlab.github.io/chroma
