@@ -46,3 +46,4 @@
    gamess
    deepmd-kit
    chroma
+   flash
