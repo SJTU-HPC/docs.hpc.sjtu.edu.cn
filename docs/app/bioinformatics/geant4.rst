@@ -50,7 +50,7 @@ Geant4(GEometry ANd Tracking，几何和跟踪)是由CERN(欧洲核子研究组�
 制作Geant4可执行程序
 --------------------------
 
-本文档使用cmake构建示例Geant4应用程序，其中源文件与脚本位于 /(path_to_source_code)/examples/basic/B1路径下
+本文档使用cmake构建示例Geant4应用程序，其中源文件与脚本位于(path_to_your_installation)/share/Geant4-11.0.3/examples/basic/B1路径下
 
 - 建立用于编译的目录B1_example_build并编译示例
 
@@ -58,7 +58,7 @@ Geant4(GEometry ANd Tracking，几何和跟踪)是由CERN(欧洲核子研究组�
 
     mkdir B1_example_build
     cd B1_example_build
-    cmake -DGeant4_DIR=/(path_to_your_installation)/lib64/Geant4-11.0.3 /(path_to_source_code)/examples/basic/B1 #cmake后第一个参数为以编译的Geant4程序， 第二个参数为B1源代码所在路径
+    cmake -DGeant4_DIR=/(path_to_your_installation)/lib64/Geant4-11.0.3 /(path_to_your_installation)/share/Geant4-11.0.3/examples/basic/B1
     make -j
 
 - 执行应用程序exampleB1。经过上一步编译后将得到名称为exampleB1的可执行文件，然后执行该文件
