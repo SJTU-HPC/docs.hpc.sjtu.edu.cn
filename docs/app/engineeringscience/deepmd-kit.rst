@@ -18,7 +18,7 @@ DeePMD-kit是一种基于机器学习的分子动力学模拟方法，该方法�
 
    srun -p small -n 4 --pty /bin/bash #申请计算资源
    module load miniconda3 #加载模块
-    conda create -n deepmd deepmd-kit=*=*gpu libdeepmd=*=*gpu lammps-dp cudatoolkit=11.3 horovod -c https://conda.deepmodeling.org #创建名为deepmd的环境
+   conda create -n deepmd deepmd-kit=*=*gpu libdeepmd=*=*gpu lammps-dp cudatoolkit=11.3 horovod -c https://conda.deepmodeling.org #创建名为deepmd的环境
    source activate deepmd #激活deepmd环境
 
 测试
