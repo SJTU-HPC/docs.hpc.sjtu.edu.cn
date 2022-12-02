@@ -26,8 +26,7 @@ Geant4(GEometry ANd Tracking，几何和跟踪)是由CERN(欧洲核子研究组�
     git clone https://github.com/Geant4/geant4.git
     cd geant4
 
-- 编译
-假定解压后的源文件所在路径为(path_to_source_code)，软件需要安装到路径(path_to_your_installation)
+- 编译。假定解压后的源文件所在路径为(path_to_source_code)，软件需要安装到路径(path_to_your_installation)
 
 .. code:: bash
 
@@ -62,8 +61,7 @@ Geant4(GEometry ANd Tracking，几何和跟踪)是由CERN(欧洲核子研究组�
     cmake -DGeant4_DIR=/(path_to_your_installation)/lib64/Geant4-11.0.3 /(path_to_source_code)/examples/basic/B1 #cmake后第一个参数为以编译的Geant4程序， 第二个参数为B1源代码所在路径
     make -j
 
-- 执行应用程序exampleB1
-经过上一步编译后将得到名称为exampleB1的可执行文件，然后执行该文件
+- 执行应用程序exampleB1。经过上一步编译后将得到名称为exampleB1的可执行文件，然后执行该文件
 
 .. code:: bash
 
