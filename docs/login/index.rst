@@ -46,7 +46,7 @@ SSH 登录
 
 .. code:: bash
 
-   $ ssh username@login.hpc.sjtu.edu.cn
+   $ ssh username@pilogin.hpc.sjtu.edu.cn
 
 * ARM 平台（限校内 IP，或使用 SJTU VPN）
   
@@ -57,9 +57,9 @@ SSH 登录
 
 说明：
 
-* 登录节点 IP 地址（或主机名）分别为 sylogin.hpc.sjtu.edu.cn（思源一号）、login.hpc.sjtu.edu.cn（π 2.0 和 AI）、armlogin.hpc.sjtu.edu.cn（ARM）
+* 登录节点 IP 地址（或主机名）分别为 sylogin.hpc.sjtu.edu.cn（思源一号）、pilogin.hpc.sjtu.edu.cn（π 2.0 和 AI）、armlogin.hpc.sjtu.edu.cn（ARM）
 
-* 思源一号和 π 2.0/AI 集群通过上述命令登录，会自动分配到多个登录节点之一，如 sylogin1, sylogin2, login1, login2, login3。也可以手动指定这五个具体的登录节点之一登录，如 ssh username@sylogin1.hpc.sjtu.edu.cn
+* 通过上述命令登录，会自动分配到多个登录节点之一。
 
 * SSH 端口均为默认值 22
 
@@ -74,7 +74,7 @@ Windows 推荐使用 Putty 免费客户端，下载后双击即可运行使用�
 下面介绍 Windows 用户使用 Putty 客户端登录思源一号。
 
 
-启动客户端 Putty，填写登录节点地址 sylogin.hpc.sjtu.edu.cn （适用于思源一号），或  login.hpc.sjtu.edu.cn （适用于 π 2.0 和 AI 集群），端口号采用默认值 22，然后点 Open 按钮，如下图所示：
+启动客户端 Putty，填写登录节点地址 sylogin.hpc.sjtu.edu.cn （适用于思源一号），或  pilogin.hpc.sjtu.edu.cn （适用于 π 2.0 和 AI 集群），端口号采用默认值 22，然后点 Open 按钮，如下图所示：
 
 .. image:: ../img/putty1.png
 
@@ -527,7 +527,7 @@ SSH免密登录集群
 .. code:: bash
 
    Host x86
-     HostName login.hpc.sjtu.edu.cn
+     HostName pilogin.hpc.sjtu.edu.cn
      User $YOUR_USERNAME
      Port 22
 
