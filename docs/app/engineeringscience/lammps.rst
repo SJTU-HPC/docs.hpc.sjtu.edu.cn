@@ -94,8 +94,6 @@ b) 从官网获得最新的 LAMMPS，推荐下载最新的版本
 .. code:: bash
 
    wget https://lammps.sandia.gov/tars/lammps-stable.tar.gz
-   or
-   cp /dssg/share/sample/lammps/lammps-stable.tar.gz ./
 
 c) 加载 Intel oneapi 模块：
 
