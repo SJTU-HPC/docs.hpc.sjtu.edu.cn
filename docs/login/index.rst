@@ -59,7 +59,7 @@ SSH 登录
 
 * 登录节点 IP 地址（或主机名）分别为 sylogin.hpc.sjtu.edu.cn（思源一号）、pilogin.hpc.sjtu.edu.cn（π 2.0 和 AI）、armlogin.hpc.sjtu.edu.cn（ARM）
 
-* 通过上述命令登录，会自动分配到多个登录节点之一。
+* 通过上述命令登录，会自动分配到多个登录节点之一
 
 * SSH 端口均为默认值 22
 
