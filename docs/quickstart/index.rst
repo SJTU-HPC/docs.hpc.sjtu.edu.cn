@@ -88,11 +88,12 @@ b) HPC 网站：https://hpc.sjtu.edu.cn
 
 c) 简短版使用手册（Cheat Sheet）：https://hpc.sjtu.edu.cn/Item/docs/Pi_GetStarted.pdf
 
-可参阅的视频：
+参考教学视频
+=============
 
-a) `交我算简介 <https://vshare.sjtu.edu.cn/play/28ce02466c35836b7738fd60ce159289>`_ 
+a) `2022 春季用户培训之交我算简介 <https://vshare.sjtu.edu.cn/play/28ce02466c35836b7738fd60ce159289>`_ 
 
-b) `交我算新手上路 <https://vshare.sjtu.edu.cn/play/8120ee2c8228e693ca78f0190b2e0e24>`_
+b) `2022 春季用户培训之交我算新手上路 <https://vshare.sjtu.edu.cn/play/8120ee2c8228e693ca78f0190b2e0e24>`_
 
 
 提交 Hello world 单节点作业
