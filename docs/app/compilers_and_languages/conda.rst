@@ -110,6 +110,9 @@ Conda常用命令
    conda env list                   # 查看当前存在哪些虚拟环境
    conda env create -f pymol.yaml   # 从配置文件创建环境
 
+参考教学视频
+`思源一号Conda环境迁移 <https://vshare.sjtu.edu.cn/play/6761cf62659cba810143d4621f5026db>`_
+
 通过pip安装Python扩展包
 ------------------------
 
