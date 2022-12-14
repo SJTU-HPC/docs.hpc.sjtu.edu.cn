@@ -121,3 +121,7 @@ Number of hours 默认是 1，然后点击 launch 即可进入桌面选项卡。
 .. image:: ../img/ondemand_desktop4.png
 
 .. image:: ../img/ondemand_desktop5.png
+
+参考教学视频
+------------
+`2022 春季用户培训之HPC Studio <https://vshare.sjtu.edu.cn/play/f8e22f383e28d22acd6d556f913886b7>`__
