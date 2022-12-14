@@ -76,3 +76,8 @@ CPU 采用双路 Intel Xeon ICX Platinum 8358 32 核，主频 2.6GHz，共 936 �
 .. code:: bash
 
    $ srun -p 64c512g -n 4 --pty /bin/bash
+
+参考教学视频
+------------------
+`思源一号专题培训之思源一号介绍 <https://vshare.sjtu.edu.cn/play/878f22035abbbf257485c880bf49c280>`_
+`思源一号专题培训之使用指导 <https://vshare.sjtu.edu.cn/play/468f6be31619d71e474b3ad26cf2c712>`_
