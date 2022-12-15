@@ -33,7 +33,7 @@ Geant4(GEometry ANd Tracking，几何和跟踪)是由CERN(欧洲核子研究组�
     mkdir B1_example_build
     cd B1_example_build
     cmake /path_to_geant4/share/Geant4-11.0.3/examples/basic/B1
-    make -j128
+    make -j32
 
 - 执行应用程序exampleB1。经过上一步编译后将得到名称为exampleB1的可执行文件，执行该文件并得到可视化窗口
 
@@ -71,14 +71,14 @@ Geant4(GEometry ANd Tracking，几何和跟踪)是由CERN(欧洲核子研究组�
         -DGEANT4_USE_OPENGL_X11=ON \
         -DGEANT4_USE_RAYTRACER_X11=ON \
         /path_to_source_code ## 指定源文件目录
-    make -j128 && make install
+    make -j32 && make install
 
 - 激活Geant4数据集。在安装目录(/path_to_your_installation)进行数据集编译
 
 .. code:: bash
 
     cmake -DGEANT4_INSTALL_DATA=ON .
-    make -j128 && make install
+    make -j32 && make install
 
 - 激活环境变量
 
@@ -93,7 +93,7 @@ Geant4(GEometry ANd Tracking，几何和跟踪)是由CERN(欧洲核子研究组�
     mkdir B1_example_build
     cd B1_example_build
     cmake /(path_to_your_installation)/share/Geant4-11.0.3/examples/basic/B1
-    make -j128
+    make -j32
     ./exampleB1
 
 - 得到可视化窗口
