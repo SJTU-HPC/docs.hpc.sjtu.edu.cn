@@ -69,7 +69,7 @@ GROMACS
 1.INTEL编译的版本
 ~~~~~~~~~~~~~~~~~~
 
-预处理数据
+预处理数据-CPU版本
 
 .. code:: bash
 
@@ -104,7 +104,7 @@ GROMACS
    module load gromacs/2021.2-intel-2021.4.0-cuda
    gmx_mpi grompp -f pme.mdp 
 
-提交作业脚本
+提交作业脚本-CPU版本
 
 .. code:: bash
 
