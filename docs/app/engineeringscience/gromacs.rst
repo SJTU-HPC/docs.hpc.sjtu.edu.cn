@@ -19,6 +19,8 @@ GROMACS
 +--------+-------+----------+----------------------------------------------------------+
 | 2021.3 | |cpu| | spack    | gromacs/2021.3-gcc-11.2.0-cuda-openblas-openmpi 思源一号 |
 +--------+-------+----------+----------------------------------------------------------+
+| 2021.2 | |cpu| | spack    | gromacs/2021.2-intel-2021.4.0-cuda 思源一号              |
++--------+-------+----------+----------------------------------------------------------+
 | 2019.4 | |cpu| | spack    | gromacs/2019.4-gcc-9.2.0-openmpi                         |
 +--------+-------+----------+----------------------------------------------------------+
 | 2020   | |cpu| | 容器     | gromacs/2020-cpu-double                                  |
@@ -84,6 +86,24 @@ GROMACS
    module load gromacs/2021.3-intel-2021.4.0
    gmx_mpi grompp -f pme.mdp 
 
+预处理数据-GPU版本
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=gpu_gromacs       
+   #SBATCH --partition=a100
+   #SBATCH -N 1 
+   #SBATCH --ntasks-per-node=16
+   #SBATCH --gres=gpu:1 
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load oneapi
+   module load gromacs/2021.2-intel-2021.4.0-cuda
+   gmx_mpi grompp -f pme.mdp 
+
 提交作业脚本
 
 .. code:: bash
@@ -100,6 +120,24 @@ GROMACS
    module load oneapi
    module load gromacs/2021.3-intel-2021.4.0
    mpirun gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
+
+提交作业脚本-GPU版本
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=gpu_gromacs       
+   #SBATCH --partition=a100
+   #SBATCH -N 1 
+   #SBATCH --ntasks-per-node=16
+   #SBATCH --gres=gpu:1 
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load oneapi
+   module load gromacs/2021.2-intel-2021.4.0-cuda
+   mpirun -n 1 gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 16 -gpu_id 0 -s topol.tpr 
 
 2.GCC编译的版本
 ~~~~~~~~~~~~~~~~
@@ -346,6 +384,13 @@ GROMACS
 | Performance |  10.6259    | 32.798     | 55.635      |
 +-------------+-------------+------------+-------------+
 
++-----------------------------------------+
+|      gromacs/2021.2-intel-2021.4.0-cuda |
++=====================+===================+
+| 卡数                |  1块A100          |
++---------------------+-------------------+
+| Performance         |  37.081           |
++---------------------+-------------------+
 
 2.GROMACS π2.0
 ~~~~~~~~~~~~~~~~
