@@ -4,8 +4,8 @@
 % \subtitle{Elegant\LaTeX{} 经典之作}
 
 \author{上海交通大学网络信息中心}
-\date{2022年4月}
-\version{1.1}
+\date{2022年12月}
+\version{1.2}
 % \bioinfo{自定义}{信息}
 
 % \extrainfo{各人自扫门前雪，休管他人瓦上霜。—— 陈元靓}
@@ -118,11 +118,11 @@ GPU: 4 x NVIDIA HGX A100 40GB} & \makecell[l]{单节点配备64核、512G\\内�
 
 \subsection*{ssh登录}
 \begin{enumerate}
-\item 思源一号登录节点（2个: sylogin1,sylogin2）：支持公网直接访问。\\IP地址（或主机名）：sylogin.hpc.sjtu.edu.cn\\端口号：22
-\item Pi2.0及AI平台登录节点（3个: login1,login2,login3）：支持公网直接访问。\\IP地址（或主机名）：login.hpc.sjtu.edu.cn\\端口号：22
-\item ARM平台登录节点（1个: kplogin）：内测期间需使用校内IP。\\IP地址（或主机名）：armlogin.hpc.sjtu.edu.cn\\端口号： 22
+\item 思源一号登录节点\\主机名：sylogin.hpc.sjtu.edu.cn\\端口号：22\\支持公网直接访问。
+\item Pi2.0及AI平台登录节点\\主机名：pilogin.hpc.sjtu.edu.cn\\端口号：22\\支持公网直接访问。
+\item ARM平台登录节点\\主机名：armlogin.hpc.sjtu.edu.cn\\端口号：22\\需使用校内IP。
 \end{enumerate}
-*注意：\textcolor{red}{每个帐号在单个 login 节点上 session 个数不能超过4个。}
+*注意：\textcolor{red}{每个帐号在单个 login 节点上 session 个数不能超过8个。}
 
 \subsection*{HPC Studio登录}
 在浏览器中打开\href{https://studio.hpc.sjtu.edu.cn}{https://studio.hpc.sjtu.edu.cn}，直接使用交我算帐号和密码登录。HPC Studio是可视化平台，提供了web shell、远程桌面、可视化软件、文件管理、作业提交等一站式服务。
@@ -264,11 +264,11 @@ R (正在运行)，PD (正在排队)，CG (即将完成)，CD (已完成) ，CAN
 
 \section{传输节点选择}
 \begin{enumerate}
-\item 少量数据传输：login 节点和 data 节点均可，但推荐使用 data 节点。
-\item 大量数据传输：强烈推荐 data 节点。原因：1. 不占用 login 节点资源；2. 多进程或多用户同时传输不会受限于 CPU。
+\item 少量数据传输：登录节点和 data 节点均可，但推荐使用 data 节点。
+\item 大量数据传输：强烈推荐 data 节点。原因：1. 不占用登录节点资源；2. 多进程或多用户同时传输不会受限于 CPU。
 \end{enumerate}
 
-    目前集群包含两个存储池，其中lustre存储用于small,cpu,huge,192c6t,dgx2,arm128c256g以及相应的debug队列，应当在login,kplogin,data系列节点上查看、使用存放的数据；gpfs存储用于64c512g,a100以及相应的debug队列，应当在sylogin,sydata节点上查看、使用存放的数据。
+    目前集群包含两个存储池，其中lustre存储用于small,cpu,huge,192c6t,dgx2,arm128c256g以及相应的debug队列，应当在pilogin,kplogin,data系列节点上查看、使用存放的数据；gpfs存储用于64c512g,a100以及相应的debug队列，应当在sylogin,sydata节点上查看、使用存放的数据。
 
 \section{数据传输节点}
 
