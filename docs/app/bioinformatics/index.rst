@@ -103,4 +103,5 @@
    star
    easyfuse
    metawrap
+   gate
    pangenie
