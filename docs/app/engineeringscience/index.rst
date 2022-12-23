@@ -23,6 +23,7 @@
    nwchem
    octave
    openfoam
+   osiris
    ovito
    psi4
    pysph
