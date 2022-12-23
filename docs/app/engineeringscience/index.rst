@@ -22,6 +22,7 @@
    nektar
    nwchem
    octave
+   openRadioss
    openfoam
    ovito
    psi4
