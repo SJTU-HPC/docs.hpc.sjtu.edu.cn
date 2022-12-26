@@ -113,6 +113,36 @@ Conda常用命令
 参考教学视频
 `思源一号Conda环境迁移 <https://vshare.sjtu.edu.cn/play/6761cf62659cba810143d4621f5026db>`_
 
+Conda创建Python环境
+------------------------
+
+Conda可以方便的创建特定版本的环境，以Python为例。首先申请交互的计算资源，再使用Conda创建Python为3.7的环境，如下：
+
+.. code-block:: bash
+
+   srun -p 64c512g -n 4 --pty /bin/bash
+   module load miniconda3/4.10.3
+   conda create --name mypython python==3.7
+
+新建一个 ``hello_python.slurm`` 的文件，内容为：
+
+.. code-block:: bash
+
+   #!/bin/bash
+   #SBATCH -J hello-python
+   #SBATCH -p 64c512g
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+   #SBATCH -n 1
+
+   module load miniconda3/4.10.3
+   source ~/.bashrc  # 如果显示的路径不是预期的，需要这一行
+   source activate mypython
+   which python
+   python -c "print('hello world')"
+
+``sbatch hello_python.slurm`` 提交作业，即可用新建的Python环境输出结果了。
+
 通过pip安装Python扩展包
 ------------------------
 
