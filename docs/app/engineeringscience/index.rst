@@ -24,6 +24,7 @@
    octave
    openRadioss
    openfoam
+   osiris
    ovito
    psi4
    pysph
