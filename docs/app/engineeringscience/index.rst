@@ -49,3 +49,4 @@
    deepmd-kit
    chroma
    flash
+   colmap
