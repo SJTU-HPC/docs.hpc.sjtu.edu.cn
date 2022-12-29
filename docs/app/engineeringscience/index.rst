@@ -50,3 +50,4 @@
    chroma
    flash
    colmap
+   pymultinest
