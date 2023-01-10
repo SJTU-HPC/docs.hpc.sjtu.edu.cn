@@ -318,7 +318,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 1.首先，进入可视化终端界面
 
-通过HPC Studio ```https://studio.hpc.sjtu.edu.cn``` 打开matlab可视化终端
+通过HPC Studio ``https://studio.hpc.sjtu.edu.cn`` 打开matlab可视化终端
 
 .. image:: ../../img/matlab_parallel_1.png
 
@@ -352,7 +352,7 @@ Matlab提供的Monitor Jobs功能可有效显示作业的运行信息，运行�
 
 4.最后，提交运行作业
 
-作业脚本命名为 ```parallel_example.n``` ，内容如下所示
+作业脚本命名为 ``parallel_example.n`` ，内容如下所示
 
 .. code:: bash
 
@@ -379,6 +379,7 @@ Matlab提供的Monitor Jobs功能可有效显示作业的运行信息，运行�
 .. code:: bash
 
    j=c.batch(@parallel_example, 1, {}, 'AutoAddClientPath', false, 'Pool', 1)
+   #括号内最后一个数字代表申请的总核数-1
 
 输入用户在集群上的登录密码即可申请到相应的资源（仅在当前session中输入一次密码即可，后面无需输入）
 
