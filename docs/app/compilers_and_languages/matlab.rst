@@ -40,7 +40,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 - `可视化平台部署的 MATLAB`_
 - `可视化平台桌面启动 MATLAB`_
 - `使用GPU版本的 MATLAB`_
-
+- `多节点并行版的 MATLAB`_
 
 
 .. _命令行交互式使用 MATLAB:
@@ -311,6 +311,96 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     
     singularity run --nv $IMAGE_PATH matlab -r $YOUR_SCRIPT_FILE
 
+.. _多节点并行版的 MATLAB:
+
+多节点并行版的 MATLAB
+^^^^^^^^^^^^^^^^^^^^^^
+
+1.首先，进入可视化终端界面
+
+通过HPC Studio ```https://studio.hpc.sjtu.edu.cn``` 打开matlab可视化终端
+
+.. image:: ../../img/matlab_parallel_1.png
+
+.. code:: bash
+
+   cd
+   mkdir matlab
+   cd matlab
+   module load matlab/r2022a
+   matlab
+
+2.然后，导入SlurmProfile
+
+SlurmProfile的存放路径为：
+
+.. code:: bash
+
+   /lustre/opt/contribute/cascadelake/matlab/R2022a-new/ParSlurmProfile/SlurmParForUser.mlsettings
+
+.. image:: ../../img/matlab_parallel_2.1.png
+
+更改username为个人账号
+
+.. image:: ../../img/matlab_parallel_2.2.png
+
+3.接下来，打开Monitor jobs功能
+
+Matlab提供的Monitor Jobs功能可有效显示作业的运行信息，运行作业前可打开
+
+.. image:: ../../img/matlab_parallel_3.png
+
+4.最后，提交运行作业
+
+作业脚本命名为 ```parallel_example.n``` ，内容如下所示
+
+.. code:: bash
+
+   function t = parallel_example
+   
+   t0 = tic;
+   parfor idx = 1:32
+           A(idx) = idx;
+           pause (2)
+   end
+   
+   t=toc(t0);
+
+指定Slurm调度的分区等信息
+
+.. code:: bash
+
+   c=parcluster 
+   c.AdditionalProperties.AdditionalSubmitArgs=['--partition=cpu --nodes=2 --exclusive'] 
+   c.saveProfile 
+
+提交作业信息（每个节点仅使用一核运行作业）
+
+.. code:: bash
+
+   j=c.batch(@parallel_example, 1, {}, 'AutoAddClientPath', false, 'Pool', 1)
+
+输入用户在集群上的登录密码即可申请到相应的资源（仅在当前session中输入一次密码即可，后面无需输入）
+
+.. image:: ../../img/matlab_parallel_4.png
+
+.. code:: bash
+
+   fetchOutputs(j)   #该操作在运行作业结束时输入
+
+.. image:: ../../img/matlab_sy_proxy.png
+
+5.运行结果为（单位：秒）
+
++--------+----------+
+| 节点数 | 计算时间 |
++========+==========+
+| 2      | 65       |
++--------+----------+
+| 4      | 22       |
++--------+----------+
+| 6      | 14       |
++--------+----------+
 
 MATLAB Parallel Computing Toolbox
 -----------------------------------------
