@@ -352,7 +352,7 @@ Matlab提供的Monitor Jobs功能可有效显示作业的运行信息，运行�
 
 4.最后，提交运行作业
 
-作业脚本命名为 ``parallel_example.n`` ，内容如下所示
+作业脚本命名为 ``parallel_example.m`` ，内容如下所示
 
 .. code:: bash
 
