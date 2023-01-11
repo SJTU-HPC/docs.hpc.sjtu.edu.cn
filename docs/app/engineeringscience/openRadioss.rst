@@ -35,7 +35,7 @@ OpenRadioss安装以及说明
     module load gcc/9.3.0
 
 
-3.  从https://github.com/OpenRadioss/OpenRadioss/releases下载Source code(tar.gz)到自己本地计算机并上传到刚才创建的目录下(可借助filezilla或者超算可视化平台传输文件)：
+3.  从  `OpenRadioss官网 <https://www.openradioss.org/>`__  下载Source code(tar.gz)到自己本地计算机并上传到刚才创建的目录下(可借助filezilla或者超算可视化平台传输文件)：
 
 
 4. 解压上传的压缩文件并进入该目录：
