@@ -23,6 +23,7 @@
    nwchem
    octave
    openRadioss
+   whiskythc
    openfoam
    osiris
    ovito
