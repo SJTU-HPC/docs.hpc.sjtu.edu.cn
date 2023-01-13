@@ -1,4 +1,4 @@
-roma:
+.. _chroma:
 
 CHROMA
 =======
