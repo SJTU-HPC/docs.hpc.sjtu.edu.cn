@@ -1,91 +1,189 @@
 .. _cmake:
 
-CMAKE
-=====
+CMake
+====================
+
+简介
+--------
 
 CMake是一个跨平台的编译工具，能够输出各种各样的makefile或者project文件,并不直接构建出最终的软件，而是生成标准的Makefile文件,然后再使用Make进行编译。
 
-CMAKE使用方式如下
-------------------------
 
-编写CMakeLists.txt
 
-.. code:: bash
+CMake使用说明
+-----------------------------
 
-   # CMake 最低版本号要求
-   cmake_minimum_required (VERSION 2.8)
-   # 项目信息
-   project (demo)
-   # 指定生成目标
-   add_executable(demo demo.cpp)
+在思源一号上使用CMake
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-demo.cpp内容如下
+1. 首先在自己的家目录下新建一个目录作为测试目录,并进入该目录：
 
-.. code:: bash
+.. code::
 
-   #include <stdio.h>
-   #include <omp.h>
-   int main()
-   {
-       return 0;
-   }
+    mkdir cmaketest
+    cd  cmaketest
 
-使用方式如下所示
 
-.. code:: bash
+2. 申请计算资源并加载所需模块：
 
-   mkdir build
-   cd build
-   cmake ../
-   make
-   ./demo
+.. code::
 
-使用OpenMP示例如下
-------------------------
+    sallc -p 64c512g -n 10 
+    # salloc: Nodes nodexxx are ready for job
+    ssh nodexxx
 
-CMakeLists.txt文件如下
+    module purge
+    module load openmpi/4.1.1-gcc-11.2.0 
+    module load gcc/11.2.0
+    module load cmake/3.17.1-gcc-11.2.0
 
-.. code:: bash
- 
-   cmake_minimum_required(VERSION 3.3)
-   project(openmp)
 
-   OPTION (USE_OpenMP "Use OpenMP" ON)
-   IF(USE_OpenMP)
-       FIND_PACKAGE(OpenMP)
-   IF(OPENMP_FOUND)
-       SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-       SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-   ENDIF()
-   ENDIF()
+3. 在当前目录下编写如下测试文件cmaketest.cpp：
 
-   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fopenmp")
+.. code::
 
-   set(SOURCE_FILES hello-omp.c)
-   add_executable(hello-omp ${SOURCE_FILES})
-   
-hello-omp.c如下所示
+    #include "mpi.h"
+    #include <iostream>
+    using namespace std;
 
-.. code:: bash
+    int say_hello( int argc, char ** argv );
 
-   #include <stdio.h>
-   #include <omp.h>
-   int main()
-   {
-   #pragma omp parallel
-       {
-           int id = omp_get_thread_num();
-           printf("hello, from %d.\n", id);
-       }
-       return 0;
-   }
+    int say_hello( int argc, char ** argv )
+    {
+        int myid, numprocs;
+        int namelen;
+        char processor_name[ MPI_MAX_PROCESSOR_NAME ];
+        MPI_Init( &argc, &argv );
+        MPI_Comm_rank(MPI_COMM_WORLD,&myid);
+        MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
+        MPI_Get_processor_name( processor_name, & namelen );
+        cout << "Hello World! Process " << myid << " of " << numprocs << " on " << processor_name << "\n";
+        MPI_Finalize();
 
-执行如下命令
+        return 0;
+    }
 
-.. code:: bash
+    int main( int argc, char ** argv )
+    {
+        say_hello( argc, argv );
 
-   mkdir build
-   cd build
-   cmake ../
-   make
-   ./hello-omp
+        return 0;
+    }
+
+
+4. 在当前目录下编写如下CMakeLists.txt文件：
+
+.. code::
+
+    cmake_minimum_required(VERSION 3.15)
+
+    message(STATUS "The CMAKE_VERSION is ${CMAKE_VERSION}.")
+
+    project(cmaketest)
+
+    find_package(MPI REQUIRED)
+
+    message(STATUS "PROJECT_NAME is ${PROJECT_NAME}")
+
+    include_directories ("${MPI_CXX_INCLUDE_DIRS}")
+
+    add_executable(${PROJECT_NAME} cmaketest.cpp )
+
+    target_link_libraries(${PROJECT_NAME} ${MPI_LIBRARIES})
+
+
+
+5. 执行以下命令编译源文件。如果编译成功，在build目录下会生成cmaketest可执行文件：
+
+.. code::
+
+  mkdir build
+  cd build
+  cmake ../
+  make
+
+
+6. 调用MPI运行可执行文件:
+
+.. code::
+
+  mpirun -np 10 ./cmaketest
+
+
+7. 此时可以在终端看到如下输出结果：
+
+.. code::
+
+    Hello World! Process 1 of 10 on node466.pi.sjtu.edu.cn
+    Hello World! Process 5 of 10 on node466.pi.sjtu.edu.cn
+    Hello World! Process 6 of 10 on node466.pi.sjtu.edu.cn
+    Hello World! Process 7 of 10 on node466.pi.sjtu.edu.cn
+    Hello World! Process 8 of 10 on node466.pi.sjtu.edu.cn
+    Hello World! Process 9 of 10 on node466.pi.sjtu.edu.cn
+    Hello World! Process 0 of 10 on node466.pi.sjtu.edu.cn
+    Hello World! Process 2 of 10 on node466.pi.sjtu.edu.cn
+    Hello World! Process 4 of 10 on node466.pi.sjtu.edu.cn
+    Hello World! Process 3 of 10 on node466.pi.sjtu.edu.cn
+
+
+
+
+
+在pi2.0上使用CMake
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. 此步骤和上文完全相同；
+
+2. 申请计算资源并加载所需模块：
+
+.. code::
+
+  salloc -p cpu -N  1 --ntasks-per-node 40  --exclusive
+  #salloc: Nodes casxxx are ready for job
+  ssh casxxx
+
+  module purge
+  module load gcc/9.2.0
+  module load cmake/3.18.4-gcc-9.2.0
+  module load openmpi/3.1.5-gcc-9.2.0
+
+
+3. 此步骤和上文完全相同；
+
+4. 此步骤和上文完全相同；
+
+5. 此步骤和上文完全相同；
+
+6. 此步骤和上文完全相同；
+
+7. 此步骤和上文完全相同；
+
+
+
+
+参考资料
+----------------
+
+-  `CMake官网 <https://cmake.org/>`__
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
