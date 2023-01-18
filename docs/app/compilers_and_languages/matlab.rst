@@ -332,76 +332,32 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 2.然后，导入SlurmProfile
 
-SlurmProfile的存放路径为：
+输入如下命令:
 
 .. code:: bash
 
-   /lustre/opt/contribute/cascadelake/matlab/R2022a-new/ParSlurmProfile/SlurmParForUser.mlsettings
+   profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2022a-new/ParSlurmProfile/SlurmParForUser.mlsettings');
+   parallel.defaultClusterProfile(profile_master);   
 
-.. image:: ../../img/matlab_parallel_2.1.png
+3.接下来，运行作业
 
-更改username为个人账号
-
-.. image:: ../../img/matlab_parallel_2.2.png
-
-3.接下来，打开Monitor jobs功能
-
-Matlab提供的Monitor Jobs功能可有效显示作业的运行信息，运行作业前可打开
-
-.. image:: ../../img/matlab_parallel_3.png
-
-4.最后，提交运行作业
-
-作业脚本命名为 ``parallel_example.m`` ，内容如下所示
+作业脚本路径如下所示，具体功能为素因素分解，使用的核数为1、4、8、32、40、80和160核，生成的图片为不同核数的计算时间与使用1核时的加速比。
 
 .. code:: bash
 
-   function t = parallel_example
-   
-   t0 = tic;
-   parfor idx = 1:32
-           A(idx) = idx;
-           pause (2)
-   end
-   
-   t=toc(t0);
+   /lustre/share/samples/matlab/composite_speedup.m
 
-指定Slurm调度的分区等信息
+输入：
 
 .. code:: bash
+ 
+   composite_speedup
 
-   c=parcluster 
-   c.AdditionalProperties.AdditionalSubmitArgs=['--partition=cpu --nodes=2 --exclusive'] 
-   c.saveProfile 
+注：第一次申请资源池时，会要求输入在集群上的账号和密码，然后在整个matlab session中均有效。
 
-提交作业信息（每个节点仅使用一核运行作业）
+4.运行结果为
 
-.. code:: bash
-
-   j=c.batch(@parallel_example, 1, {}, 'AutoAddClientPath', false, 'Pool', 1)
-   #括号内最后一个数字代表申请的总核数-1
-
-输入用户在集群上的登录密码即可申请到相应的资源（仅在当前session中输入一次密码即可，后面无需输入）
-
-.. image:: ../../img/matlab_parallel_4.1.png
-
-.. code:: bash
-
-   fetchOutputs(j)   #该操作在运行作业结束时输入,用来提取运行时间
-
-.. image:: ../../img/matlab_parallel_4.2.png
-
-5.运行结果为（单位：秒）
-
-+--------+----------+
-| 节点数 | 计算时间 |
-+========+==========+
-| 2      | 65       |
-+--------+----------+
-| 4      | 22       |
-+--------+----------+
-| 6      | 14       |
-+--------+----------+
+.. image:: ../../img/matlab_parallel_2.png
 
 MATLAB Parallel Computing Toolbox
 -----------------------------------------
