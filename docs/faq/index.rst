@@ -313,7 +313,7 @@ Q 如何在论文中致谢交大高性能计算？
 
    （中文）本论文的计算结果得到了上海交通大学高性能计算中心的支持和帮助；
 
-   （英文）The computations in this paper were run on the π 2.0 (or Siyuan Mark-I) cluster supported by the Center for High Performance Computing at Shanghai Jiao
+   （英文）The computations in this paper were run on the π 2.0 (or the Siyuan-1) cluster supported by the Center for High Performance Computing at Shanghai Jiao
 Tong University.
 
 9. 医学院和附属医院申请 jAccount 帐号
