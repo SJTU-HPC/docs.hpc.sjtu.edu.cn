@@ -55,19 +55,20 @@ Rosetta的重要作用如下所示：
 一. 思源一号 Rosetta
 --------------------
 
-申请计算节点并导入rosetta软件
-
-.. code:: bash
-
-   srun -p 64c512g -n 2 --pty /bin/bash
-   module load rosetta/3.12
-
-
 1. 对输入结构进行预处理（refine） 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=64c512g 
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load rosetta/3.12 
    mpirun relax.mpi.linuxgccrelease -in:file:s input_files/1qys.pdb -nstruct 2 -relax:constrain_relax_to_start_coords -relax:ramp_constraints false -ex1 -ex2 -use_input_sc -flip_HNQ -no_optH false
 
 输入与参数说明
@@ -87,7 +88,16 @@ Rosetta的重要作用如下所示：
 2.1 局部对接
 """"""""""""""""""""""""""""""
 .. code:: bash
-   
+  
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=64c512g 
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load rosetta/3.12 
    mpirun docking_protocol.mpi.linuxgccrelease -in:file:s input_files/col_complex.pdb -in:file:native input_files/1v74.pdb -nstruct 1 -partners A_B -dock_pert 3 8 -ex1 -ex2aro -out:path:all output_files -out:suffix _local_dock
 
 输入与参数说明
@@ -107,6 +117,15 @@ Rosetta的重要作用如下所示：
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=64c512g 
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load rosetta/3.12
    mpirun docking_protocol.mpi.linuxgccrelease -in:file:s input_files/1v74.pdb -nstruct 1 -docking_local_refine -use_input_sc -ex1 -ex2aro -out:file:fullatom -out:path:all output_files -out:suffix _local_refine
 
 3. 全局对接
@@ -116,6 +135,15 @@ Rosetta的重要作用如下所示：
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=64c512g 
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load rosetta/3.12
    mpirun docking_protocol.mpi.linuxgccrelease -in:file:s input_files/col_complex.pdb -in:file:native input_files/1v74.pdb -unboundrot input_files/col_complex.pdb -nstruct 1 -partners A_B -dock_pert 3 8 -spin -randomize1 -randomize2 -ex1 -ex2aro -out:path:all output_files -out:suffix _global_dock
 
 输入与参数说明
@@ -135,6 +163,15 @@ Rosetta假设蛋白骨架为柔性的进行对接。Rosetta假设蛋白-蛋白�
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=64c512g 
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load rosetta/3.12
    ls input_files/COL_D_ensemble/*.pdb > COL_D_ensemblelist
    ls input_files/IMM_D_ensemble/*.pdb > IMM_D_ensemblelist
    mpirun docking_prepack_protocol.mpi.linuxgccrelease -in:file:s input_files/col_complex.pdb -in:file:native input_files/1v74.pdb -unboundrot input_files/col_complex.pdb -nstruct 1 -partners A_B -ensemble1 COL_D_ensemblelist -ensemble2 IMM_D_ensemblelist -ex1 -ex2aro -out:path:all output_files -out:suffix _ensemble_dock
@@ -144,6 +181,15 @@ Rosetta假设蛋白骨架为柔性的进行对接。Rosetta假设蛋白-蛋白�
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=64c512g 
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load rosetta/3.12
    mpirun docking_prepack_protocol.mpi.linuxgccrelease -in:file:s input_files/col_complex.pdb -in:file:native input_files/1v74.pdb -unboundrot input_files/col_complex.pdb -nstruct 1 -partners A_B -dock_pert 3 8 -ensemble1 COL_D_ensemblelist -ensemble2 IMM_D_ensemblelist -ex1 -ex2aro -out:path:all output_files -out:suffix _ensemble_dock
 
 .. _π2.0 Rosetta:
@@ -153,16 +199,20 @@ Rosetta假设蛋白骨架为柔性的进行对接。Rosetta假设蛋白-蛋白�
 
 申请计算节点并导入rosetta软件
 
-.. code:: bash
-
-   srun -p small -n 2 --pty /bin/bash
-   module load rosetta/3.12
-
 1. 对输入结构进行预处理（refine） _π2.0_
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=small
+   #SBATCH -N 1 
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load rosetta/3.12
    mpirun relax.mpi.linuxgccrelease -in:file:s input_files/1qys.pdb -nstruct 2 -relax:constrain_relax_to_start_coords -relax:ramp_constraints false -ex1 -ex2 -use_input_sc -flip_HNQ -no_optH false
 
 输入与参数说明
@@ -183,6 +233,15 @@ Rosetta假设蛋白骨架为柔性的进行对接。Rosetta假设蛋白-蛋白�
 """"""""""""""""""""""""""""""
 .. code:: bash
    
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=small
+   #SBATCH -N 1 
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load rosetta/3.12
    mpirun docking_protocol.mpi.linuxgccrelease -in:file:s input_files/col_complex.pdb -in:file:native input_files/1v74.pdb -nstruct 1 -partners A_B -dock_pert 3 8 -ex1 -ex2aro -out:path:all output_files -out:suffix _local_dock
 
 输入与参数说明
@@ -202,6 +261,15 @@ Rosetta假设蛋白骨架为柔性的进行对接。Rosetta假设蛋白-蛋白�
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=small
+   #SBATCH -N 1 
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load rosetta/3.12
    mpirun docking_protocol.mpi.linuxgccrelease -in:file:s input_files/1v74.pdb -nstruct 1 -docking_local_refine -use_input_sc -ex1 -ex2aro -out:file:fullatom -out:path:all output_files -out:suffix _local_refine
 
 3. 全局对接 _π2.0_
@@ -211,6 +279,15 @@ Rosetta假设蛋白骨架为柔性的进行对接。Rosetta假设蛋白-蛋白�
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=small
+   #SBATCH -N 1 
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load rosetta/3.12
    mpirun docking_protocol.mpi.linuxgccrelease -in:file:s input_files/col_complex.pdb -in:file:native input_files/1v74.pdb -unboundrot input_files/col_complex.pdb -nstruct 1 -partners A_B -dock_pert 3 8 -spin -randomize1 -randomize2 -ex1 -ex2aro -out:path:all output_files -out:suffix _global_dock
 
 输入与参数说明
@@ -230,6 +307,15 @@ Rosetta假设蛋白骨架为柔性的进行对接。Rosetta假设蛋白-蛋白�
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=small
+   #SBATCH -N 1 
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load rosetta/3.12
    ls input_files/COL_D_ensemble/*.pdb > COL_D_ensemblelist
    ls input_files/IMM_D_ensemble/*.pdb > IMM_D_ensemblelist
    mpirun docking_prepack_protocol.mpi.linuxgccrelease -in:file:s input_files/col_complex.pdb -in:file:native input_files/1v74.pdb -unboundrot input_files/col_complex.pdb -nstruct 1 -partners A_B -ensemble1 COL_D_ensemblelist -ensemble2 IMM_D_ensemblelist -ex1 -ex2aro -out:path:all output_files -out:suffix _ensemble_dock
@@ -239,6 +325,15 @@ Rosetta假设蛋白骨架为柔性的进行对接。Rosetta假设蛋白-蛋白�
 
 .. code:: bash
 
+   #!/bin/bash
+   #SBATCH --job-name=rosetta
+   #SBATCH --partition=small
+   #SBATCH -N 1 
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load rosetta/3.12
    mpirun docking_prepack_protocol.mpi.linuxgccrelease -in:file:s input_files/col_complex.pdb -in:file:native input_files/1v74.pdb -unboundrot input_files/col_complex.pdb -nstruct 1 -partners A_B -dock_pert 3 8 -ensemble1 COL_D_ensemblelist -ensemble2 IMM_D_ensemblelist -ex1 -ex2aro -out:path:all output_files -out:suffix _ensemble_dock
 
 运行结果
