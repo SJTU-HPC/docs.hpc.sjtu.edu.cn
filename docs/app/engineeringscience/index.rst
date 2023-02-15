@@ -13,6 +13,7 @@
    cantera
    cesm
    cp2k
+   cplex
    gerris
    gnuplot
    gaussian
