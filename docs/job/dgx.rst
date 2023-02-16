@@ -47,6 +47,10 @@ a100队列
    $ srun -p a100 -N 1 -n 1 --gres=gpu:1 --cpus-per-task=16 --pty /bin/bash
    $ module load cuda
 
+.. tip::
+
+   在登录节点 `srun` 执行交互作业时可能会断连导致作业中断，建议在 `HPC Studio <https://studio.hpc.sjtu.edu.cn/>`_ 申请1核心的远程桌面（cpu节点即可），选择好时间，在计算节点来执行 `srun`。
+
 debuga100队列
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
