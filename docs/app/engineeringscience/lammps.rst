@@ -161,7 +161,7 @@ e) 环境设置
 
    #!/bin/bash
 
-   #SBATCH --job-name=intel_test
+   #SBATCH --job-name=lammps_pi
    #SBATCH --partition=cpu
    #SBATCH -N 2
    #SBATCH --ntasks-per-node=40
