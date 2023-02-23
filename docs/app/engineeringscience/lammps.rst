@@ -156,25 +156,10 @@ e) 环境设置
 1. Intel编译器部署的版本
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-调用镜像封装lammps(Intel CPU加速版本）示例脚本（intel_lammps.slurm）
 
 .. code:: bash
 
-   #!/bin/bash
-
-   #SBATCH --job-name=intel_test
-   #SBATCH --partition=cpu
-   #SBATCH -N 2
-   #SBATCH --ntasks-per-node=40
-   #SBATCH --output=%j.out
-   #SBATCH --error=%j.err
-   
-   ulimit -s unlimited
-   ulimit -l unlimited
-   
-   module load lammps/20201029-oneapi-21.4.0
-
-   srun --mpi=pmi2 lmp -pk intel 0 omp 2 -sf intel -i in.lj
+   正在更新
 
 2. CPU 版本自行编译
 ~~~~~~~~~~~~~~~~~~~
