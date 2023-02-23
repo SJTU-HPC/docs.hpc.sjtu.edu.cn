@@ -159,7 +159,21 @@ e) 环境设置
 
 .. code:: bash
 
-   正在更新
+   #!/bin/bash
+
+   #SBATCH --job-name=intel_test
+   #SBATCH --partition=cpu
+   #SBATCH -N 2
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   ulimit -s unlimited
+   ulimit -l unlimited
+   
+   module load lammps/20220324-oneapi-2021.4.0
+
+   mpirun lmp -pk intel 0 omp 2 -sf intel -i in.lj
 
 2. CPU 版本自行编译
 ~~~~~~~~~~~~~~~~~~~
