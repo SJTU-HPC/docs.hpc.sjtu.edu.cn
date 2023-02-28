@@ -15,11 +15,15 @@ GROMACS
 +--------+-------+----------+----------------------------------------------------------+
 | 版本   | 平台  | 构建方式 | 模块名                                                   |
 +========+=======+==========+==========================================================+
+| 2022.3 | |gpu| | spack    | gromacs/2022.3-intel-2021.4.0-cuda 思源一号              |
++--------+-------+----------+----------------------------------------------------------+
 | 2021.3 | |cpu| | spack    | gromacs/2021.3-intel-2021.4.0 思源一号                   |
 +--------+-------+----------+----------------------------------------------------------+
 | 2021.3 | |cpu| | spack    | gromacs/2021.3-gcc-11.2.0-cuda-openblas-openmpi 思源一号 |
 +--------+-------+----------+----------------------------------------------------------+
-| 2021.2 | |cpu| | spack    | gromacs/2021.2-intel-2021.4.0-cuda 思源一号              |
+| 2021.2 | |gpu| | spack    | gromacs/2021.2-intel-2021.4.0-cuda 思源一号              |
++--------+-------+----------+----------------------------------------------------------+
+| 2021.6 | |cpu| | spack    | gromacs/2021.6-gcc-9.2.0-openmpi-4.0.5                   |
 +--------+-------+----------+----------------------------------------------------------+
 | 2019.4 | |cpu| | spack    | gromacs/2019.4-gcc-9.2.0-openmpi                         |
 +--------+-------+----------+----------------------------------------------------------+
@@ -101,7 +105,8 @@ GROMACS
    #SBATCH --error=%j.err
    
    module load oneapi
-   module load gromacs/2021.2-intel-2021.4.0-cuda
+   module load gromacs/2022.3-intel-2021.4.0-cuda
+   module load cuda/11.5.0
    gmx_mpi grompp -f pme.mdp 
 
 提交作业脚本-CPU版本
@@ -136,7 +141,8 @@ GROMACS
    #SBATCH --error=%j.err
    
    module load oneapi
-   module load gromacs/2021.2-intel-2021.4.0-cuda
+   module load gromacs/2022.3-intel-2021.4.0-cuda
+   module load cuda/11.5.0
    mpirun -n 1 gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 16 -gpu_id 0 -s topol.tpr 
 
 2.GCC编译的版本
@@ -237,8 +243,8 @@ GROMACS
 二. π2.0 GROMACS
 ------------------
 
-1.gromacs/2019.4-gcc-9.2.0-openmpi
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1.gromacs/2021.6-gcc-9.2.0-openmpi-openmpi-4.0.5
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 提交预处理脚本
 
@@ -253,11 +259,13 @@ GROMACS
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module load gromacs/2019.4-gcc-9.2.0-openmpi
+   module load gromacs/2021.6-gcc-9.2.0-openmpi-4.0.5
+   module load openmpi/4.0.5-gcc-9.2.0
+   module load gcc/9.2.0
 
    ulimit -s unlimited
    ulimit -l unlimited
-   gmx_mpi grompp -f pme.mdp
+   gmx_mpi grompp -f pme.mdp 
 
 提交运行作业脚本
 
@@ -271,10 +279,14 @@ GROMACS
    #SBATCH --ntasks-per-node=40
    #SBATCH -o %j.out
    #SBATCH -e %j.err
-   module load gromacs/2019.4-gcc-9.2.0-openmpi
+
+   module load gromacs/2021.6-gcc-9.2.0-openmpi-4.0.5
+   module load openmpi/4.0.5-gcc-9.2.0
+   module load gcc/9.2.0
+
    ulimit -s unlimited
    ulimit -l unlimited
-   srun --mpi=pmi2 gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
+   mpirun gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 1 -s topol.tpr
 
 2.gromacs/2020-cpu-double 
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -385,7 +397,7 @@ GROMACS
 +-------------+-------------+------------+-------------+
 
 +-----------------------------------------+
-|      gromacs/2021.2-intel-2021.4.0-cuda |
+|      gromacs/2022.3-intel-2021.4.0-cuda |
 +=====================+===================+
 | 卡数                |  1块A100          |
 +---------------------+-------------------+
@@ -396,11 +408,11 @@ GROMACS
 ~~~~~~~~~~~~~~~~
 
 +----------------------------------------------+
-|           gromacs/2019.4-gcc-9.2.0-openmpi   |
+|     gromacs/2021.6-gcc-9.2.0-openmpi-4.0.5   |
 +=============+==========+==========+==========+
 | 核数        | 40       | 80       | 120      |
 +-------------+----------+----------+----------+
-| Performance |  8.444   | 17.192   | 34.440   |
+| Performance |  8.584   | 17.266   | 30.913   |
 +-------------+----------+----------+----------+
 
 +-----------------------------------------------+
