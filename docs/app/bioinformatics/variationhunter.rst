@@ -7,13 +7,16 @@ VariationHunter
 --------------
 
 VariationHunter is a package of programs used to find structural variations using paired-end reads read mappings.
+目前，VariationHunter已经停止更新，推荐使用tardis进行结构变异预测。
 
 完整步骤
 ---------------
 
 .. code:: bash
 
-   module load miniconda3
-   conda create -n mypy_py27 python=2.7
-   source activate mypy_py27
-   conda install -c bioconda tardis
+  git clone https://github.com/BilkentCompGen/tardis.git --recursive
+  cd tardis
+  make libs
+  make
+  ./tardis -h
+

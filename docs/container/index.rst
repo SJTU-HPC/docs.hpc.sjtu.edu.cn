@@ -155,6 +155,14 @@ Singularity可以从Docker Hub(以 ``docker://`` 开头)、Singularity Hub(以 `
 
   $ docker run -it --name=MY_USERNAME_DATE 5d0da3dc9764 /bin/bash
 
+因为centos停止维护，初次进入镜像需要修改yum源，才可以正常使用yum命令。
+
+.. code:: console
+
+   $ sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS*.repo
+   $ sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS*.repo
+   $ yum mackcache
+
 然后以 ``root`` 特权修改容器内容，例如安装软件等。
 
 .. code:: console
@@ -207,7 +215,7 @@ Singularity可以从Docker Hub(以 ``docker://`` 开头)、Singularity Hub(以 `
   INFO:    Creating SIF file...
   INFO:    Build complete: my_username_app_img.sif
 
-使用 ``scp sample-x86.sif YOUR_USERNAME@login1:~/`` 将Singularity镜像文件复制到超算集群家目录后，可以使用 ``singularity`` 命令测试镜像文件，从 ``/etc/redhat-release`` 内容和 ``tree`` 命令版本看，确实进入了与宿主操作系统不一样的运行环境。
+使用 ``scp my_username_app_img.sif YOUR_USERNAME@pilogin1:~/`` 将Singularity镜像文件复制到超算集群家目录后，可以使用 ``singularity`` 命令测试镜像文件，从 ``/etc/redhat-release`` 内容和 ``tree`` 命令版本看，确实进入了与宿主操作系统不一样的运行环境。
 
 .. code:: console
 

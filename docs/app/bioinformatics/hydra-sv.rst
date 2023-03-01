@@ -16,7 +16,18 @@ Hydra-sv
 
 .. code:: bash
 
-   module load miniconda3
-   conda create -n mypy_py27 python=2.7
-   source activate mypy_py27
-   conda install -c conda-forge hydra
+  wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/hydra-sv/Hydra.v0.5.3.tar.gz
+  wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/hydra-sv/bedpeToBed12.py
+  wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/hydra-sv/hydraFrequency.py
+  tar -zxvf Hydra.v0.5.3.tar.gz
+  cd Hydra-Version-0.5.3
+  make clean 
+  make all
+
+使用方法
+
+.. code:: bash
+
+  cd bin
+  ./hydra -h
+
