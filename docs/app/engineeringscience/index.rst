@@ -53,3 +53,4 @@
    flash
    colmap
    pymultinest
+   lorene
