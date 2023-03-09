@@ -15,6 +15,8 @@ GROMACS
 +--------+-------+----------+----------------------------------------------------------+
 | 版本   | 平台  | 构建方式 | 模块名                                                   |
 +========+=======+==========+==========================================================+
+| 2022.2 | |gpu| | spack    | gromacs/2022.2-intel-2021.4.0-cuda 思源一号              |
++--------+-------+----------+----------------------------------------------------------+
 | 2022.3 | |gpu| | spack    | gromacs/2022.3-intel-2021.4.0-cuda 思源一号              |
 +--------+-------+----------+----------------------------------------------------------+
 | 2021.3 | |cpu| | spack    | gromacs/2021.3-intel-2021.4.0 思源一号                   |
@@ -105,7 +107,7 @@ GROMACS
    #SBATCH --error=%j.err
    
    module load oneapi
-   module load gromacs/2022.3-intel-2021.4.0-cuda
+   module load gromacs/2022.2-intel-2021.4.0-cuda
    module load cuda/11.5.0
    gmx_mpi grompp -f pme.mdp 
 
@@ -135,13 +137,14 @@ GROMACS
    #SBATCH --job-name=gpu_gromacs       
    #SBATCH --partition=a100
    #SBATCH -N 1 
-   #SBATCH --ntasks-per-node=16
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=16
    #SBATCH --gres=gpu:1 
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
    
    module load oneapi
-   module load gromacs/2022.3-intel-2021.4.0-cuda
+   module load gromacs/2022.2-intel-2021.4.0-cuda
    module load cuda/11.5.0
    mpirun -n 1 gmx_mpi mdrun -dlb yes -v -nsteps 10000 -resethway -noconfout -pin on -ntomp 16 -gpu_id 0 -s topol.tpr 
 
