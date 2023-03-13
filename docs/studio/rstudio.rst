@@ -14,6 +14,8 @@ RStudio是一个集成开发环境，主要支持R编程语言，专用于统计
 +-----------+----------+-------------+
 | R版本     | 平台     | RStudio版本 |
 +===========+==========+=============+
+| 4.2.2     | |studio| | 2022.12.0   |
++-----------+----------+-------------+
 | 4.1.3     | |studio| | 2022.02.1   |
 +-----------+----------+-------------+
 | 4.0.2     | |studio| | 1.2.5042    |
@@ -24,21 +26,21 @@ RStudio是一个集成开发环境，主要支持R编程语言，专用于统计
 如何使用
 ----------
 
-用超算的账号及密码登录 `HPC Studio <https://studio.hpc.sjtu.edu.cn/>`_ ，在内置应用中选择 ``RStudio Server`` ，如下图：
+使用超算的账号及密码登录 `HPC Studio <https://studio.hpc.sjtu.edu.cn/>`_ ，在导航栏 ``Interactive Apps`` 中选择 ``RStudio Server`` ，如下图：
 
 .. image:: ../img/RStudio_1.png
   :width: 900px
 
-点击后会出现相关的选项卡，可以设置作业时间，资源情况，软件版本。设置完成后 ``Launch`` 即可运行：
+点击后会出现相关的启动界面，可以设置作业时间，资源情况，软件版本。设置完成后 ``Launch`` 即可运行：
 
 .. image:: ../img/RStudio_2.png
   :width: 900px
 
 .. tip::
 
-   \*-pi 为 π 集群的资源，\*-sy为思源一号的资源。
+   π2.0 集群和思源一号的数据不互通，注意区分。
 
-待界面从等待变成 ``Running`` 后，可使用 ``Connect to RStudio Server`` 连接到 ``Rstudio Server`` ：
+待界面从排队变成 ``Running`` 后，可通过 ``Connect to RStudio Server`` 连接到 ``Rstudio Server`` ：
 
 .. image:: ../img/RStudio_3.png
   :width: 900px
@@ -46,27 +48,31 @@ RStudio是一个集成开发环境，主要支持R编程语言，专用于统计
 运行示例
 ----------
 
-所需的 ``R`` 依赖包需要自行下载：
+所需的 ``R`` 依赖包需要自行安装：
 
 .. code-block:: R
 
-   library(ggplot2)
-   library(dplyr)
-   diamonds< -cbind(diamonds,Cou=rep(1,nrow(diamonds)))
-   sum_clarity<-aggregate(Cou~clarity,diamonds,sum)
-   sort_clarity<-arrange(sum_clarity,desc(Cou))
-   diamonds$clarity<- factor(diamonds$clarity, levels = sort_clarity$clarity)
-   myAngle <-seq(-20,-340,length.out = 8)
-   ggplot(diamonds,aes(x=clarity,fill=color))+
-   geom_bar(width=1.0,colour="black",size=0.25)+
-   coord_polar(theta = "x",start=0)+
-   scale_fill_brewer(palette="GnBu")+guides(fill=guide_legend(reverse=TRUE,title=NULL))+ ylim(c(0,12000))+
-   theme_light()+
-   theme( panel.background = element_blank(),
-        panel.grid.major = element_line(colour = "grey80",size=.25),
-        axis.text.y = element_text(size = 12,colour="black"),
-        axis.line.y = element_line(size=0.25),
-        axis.text.x=element_text (size = 13,colour="black",angle = myAngle))
+   # Upload library
+   library(circlize)
+   circos.par("track.height" = 0.4)
+
+   # Create data
+   data = data.frame(
+     factor = sample(letters[1:8], 1000, replace = TRUE),
+     x = rnorm(1000),
+     y = runif(1000)
+   )
+
+   # Step1: Initialise the chart giving factor and x-axis.
+   circos.initialize( factors=data$factor, x=data$x )
+
+   # Step 2: Build the regions.
+   circos.trackPlotRegion(factors = data$factor, y = data$y, panel.fun = function(x, y) {
+     circos.axis()
+   })
+
+   # Step 3: Add points
+   circos.trackPoints(data$factor, data$x, data$y, col="#69b3a2")
 
 .. image:: ../img/RStudio_4.png
   :width: 900px
