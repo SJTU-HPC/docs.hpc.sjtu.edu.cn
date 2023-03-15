@@ -31,6 +31,7 @@ CCMpred需要使用CUDA，因此安装需要在具有gpu资源的节点上进行
     make
 
 安装完成后，可执行程序在/bin中，执行方式如下（以查看帮助文档为例）：
+
 .. code:: bash
 
     ./bin/ccmpred -h
