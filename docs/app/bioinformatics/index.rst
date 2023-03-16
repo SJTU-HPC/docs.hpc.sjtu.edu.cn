@@ -20,6 +20,7 @@
    bowtie2
    breakdancer
    bwa
+   ccmpred
    cd-hit
    cdo
    celldex
