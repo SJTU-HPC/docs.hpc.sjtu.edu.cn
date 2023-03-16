@@ -161,7 +161,7 @@ Singularity可以从Docker Hub(以 ``docker://`` 开头)、Singularity Hub(以 `
 
    $ sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS*.repo
    $ sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS*.repo
-   $ yum mackcache
+   $ yum makecache
 
 然后以 ``root`` 特权修改容器内容，例如安装软件等。
 
