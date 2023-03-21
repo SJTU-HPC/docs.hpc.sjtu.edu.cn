@@ -88,6 +88,11 @@ OpenFOAM基本使用
    reconstructParMesh -constant 
    reconstructPar -latestTime
 
+.. caution::
+
+   某些情况下，当并行核数达到一定数目时，直接运行大规模并行作业可能会出现报错，这是超算集群上各节点之间的连接方式造成的.这时需要修改一下MPI的默认执行方式，比如说将 mpirun -np 6 simpleFoam -parallel 改为 mpirun -np 6 -mca btl self,vader,tcp simpleFoam -parallel.
+
+
 4. 使用 ``sbatch`` 提交作业：
 
 .. code:: bash
@@ -204,7 +209,7 @@ pi2.0上的openfoam-org7(Spack构建)
    module load openfoam-org/7-gcc-7.4.0-openmpi
    mkdir openfoamTest1
    cd openfoamTest1
-   cp -rv $FOAM_PROJECT_DIR/tutorials  ./
+   cp -rv $FOAM_TUTORIALS  ./
    
      
 
@@ -251,7 +256,7 @@ system目录主要包含计算时间和数值求解格式等计算参数。
    ulimit -s unlimited
    ulimit -l unlimited
 
-   module load openfoam-org/7-gcc-7.4.0-openmpi
+   #module load openfoam-org/7-gcc-7.4.0-openmpi
 
    blockMesh
    icoFoam
@@ -501,9 +506,9 @@ system目录主要包含计算时间和数值求解格式等计算参数。
 
 .. code:: bash
 
-   srun -p cpu -N 1 --ntasks-per-node=40  --pty /bin/bash
+   srun -p cpu -N 1 --ntasks-per-node=40  --pty /bin/bash(思源一号)
    或者
-   srun -p 64c512g -n 10 --pty /bin/bash
+   srun -p 64c512g -n 10 --pty /bin/bash(pi2.0)
 
 2. 加载编译所需模块：
 
