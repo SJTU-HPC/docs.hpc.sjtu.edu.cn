@@ -129,7 +129,7 @@ AlphaFold2.3.1计算复合体
    --uniref90_database_path=$DOWNLOAD_DIR/uniref90/uniref90.fasta  \
    --mgnify_database_path=$DOWNLOAD_DIR/mgnify/mgy_clusters.fa  \
    --bfd_database_path=$DOWNLOAD_DIR/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt  \
-   --uniref30_database_path=$DOWNLOAD_DIR/uniref30/UniRef30_2021_03
+   --uniref30_database_path=$DOWNLOAD_DIR/uniref30/UniRef30_2021_03 \
    --pdb_seqres_database_path=$DOWNLOAD_DIR/pdb_seqres/pdb_seqres.txt  \
    --template_mmcif_dir=$DOWNLOAD_DIR/pdb_mmcif/mmcif_files  \
    --obsolete_pdbs_path=$DOWNLOAD_DIR/pdb_mmcif/obsolete.dat \
@@ -267,7 +267,7 @@ AlphaFold2.3.1 计算复合体
    --uniref90_database_path=$DOWNLOAD_DIR/uniref90/uniref90.fasta  \
    --mgnify_database_path=$DOWNLOAD_DIR/mgnify/mgy_clusters.fa  \
    --bfd_database_path=$DOWNLOAD_DIR/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt  \
-   --uniref30_database_path=$DOWNLOAD_DIR/uniref30/UniRef30_2021_03
+   --uniref30_database_path=$DOWNLOAD_DIR/uniref30/UniRef30_2021_03 \
    --pdb_seqres_database_path=$DOWNLOAD_DIR/pdb_seqres/pdb_seqres.txt  \
    --template_mmcif_dir=$DOWNLOAD_DIR/pdb_mmcif/mmcif_files  \
    --obsolete_pdbs_path=$DOWNLOAD_DIR/pdb_mmcif/obsolete.dat \
