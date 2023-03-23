@@ -10,9 +10,9 @@ AlphaFold2 基于深度神经网络预测蛋白质形态，能够快速生成高
 AlphaFold2 三大版本
 ----------------------------------------
 
-交大计算平台提供 AlphaFold2 三大版本：module 标准版、ParaFold、ColabFold。三个版本在思源一号和 π 集群上均可使用，且都支持复合体计算：
+交大计算平台提供 AlphaFold2 三大版本：基础运行版、ParaFold、ColabFold。三个版本在思源一号和 π 集群上均可使用，且都支持复合体计算：
 
-* module 标准版，加载即用，可满足大部分计算需求
+* 基础运行版，可满足大部分计算需求
 
 * ParaFold，支持 CPU、GPU 分离计算，适合大规模批量计算
 
@@ -44,15 +44,104 @@ AlphaFold2 三大版本
     >2MX4
     PTRTVAISDAAQLPHDYCTTPGGTLFSTTPGGTRIIYDRKFLLDR
 
-版本一：module 标准版
+版本一：基础运行版
 ----------------------------------------
 
-module 标准版加载后即可使用，支持复合体计算
+可用的版本
+~~~~~~~~~~~~
 
-module 在思源一号上运行
++---------+----------+
+| 版本    |  平台    |
++=========+==========+
+| 2.3.1   | 思源一号 |
++---------+----------+
+| 2.2.0   | 思源一号 |
++---------+----------+
+| 2.1.1   | 思源一号 |
++---------+----------+
+| 2.3.1   | pi 2.0   |
++---------+----------+
+| 2.1.1   | pi 2.0   |
++---------+----------+
+
+运行平台
+~~~~~~~~~~
+
+- `一. 思源一号 AlphaFold`_
+- `二. π2.0 AlphaFold`_
+
+.. _一. 思源一号 AlphaFold:
+
+思源一号 AlphaFold
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-作业脚本示例（假设作业脚本名为 ``sub.slurm``）：
+AlphaFold2.3.1计算单体
+###########################
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=alphafold
+   #SBATCH --partition=a100
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=16
+   #SBATCH --gres=gpu:1          # use 1 GPU
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   export DOWNLOAD_DIR=/dssg/share/data/alphafold
+   singularity exec --nv /dssg/share/imgs/ai/alphafold/alphafold-2.3.1.sif python /app/alphafold/run_alphafold.py \
+   --use_gpu_relax \
+   --data_dir=$DOWNLOAD_DIR \
+   --uniref90_database_path=$DOWNLOAD_DIR/uniref90/uniref90.fasta \
+   --mgnify_database_path=$DOWNLOAD_DIR/mgnify/mgy_clusters.fa \  
+   --bfd_database_path=$DOWNLOAD_DIR/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt \
+   --pdb70_database_path=$DOWNLOAD_DIR/pdb70/pdb70 \
+   --uniref30_database_path=$DOWNLOAD_DIR/uniref30/UniRef30_2021_03 \
+   --template_mmcif_dir=$DOWNLOAD_DIR/pdb_mmcif/mmcif_files \
+   --obsolete_pdbs_path=$DOWNLOAD_DIR/pdb_mmcif/obsolete.dat \
+   --model_preset=monomer \
+   --max_template_date=2022-10-1 \
+   --db_preset=full_dbs \
+   --output_dir=output \
+   --fasta_paths=monomer.fasta
+
+AlphaFold2.3.1计算复合体
+##############################
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=alphafold
+   #SBATCH --partition=a100
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=16
+   #SBATCH --gres=gpu:1          # use 1 GPU
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   export DOWNLOAD_DIR=/dssg/share/data/alphafold
+   singularity exec --nv  /dssg/share/imgs/ai/alphafold/alphafold-2.3.1.sif python /app/alphafold/run_alphafold.py  \
+   --use_gpu_relax \
+   --data_dir=$DOWNLOAD_DIR  \
+   --uniref90_database_path=$DOWNLOAD_DIR/uniref90/uniref90.fasta  \
+   --mgnify_database_path=$DOWNLOAD_DIR/mgnify/mgy_clusters.fa  \
+   --bfd_database_path=$DOWNLOAD_DIR/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt  \
+   --uniref30_database_path=$DOWNLOAD_DIR/uniref30/UniRef30_2021_03
+   --pdb_seqres_database_path=$DOWNLOAD_DIR/pdb_seqres/pdb_seqres.txt  \
+   --template_mmcif_dir=$DOWNLOAD_DIR/pdb_mmcif/mmcif_files  \
+   --obsolete_pdbs_path=$DOWNLOAD_DIR/pdb_mmcif/obsolete.dat \
+   --uniprot_database_path=$DOWNLOAD_DIR/uniprot/uniprot.fasta \
+   --model_preset=multimer \
+   --max_template_date=2022-10-1 \
+   --db_preset=full_dbs \
+   --output_dir=output \
+   --fasta_paths=multimer.fasta
+
+AlphaFold2.1.1 计算单体
+##############################
 
 .. code:: bash
 
@@ -83,7 +172,8 @@ module 在思源一号上运行
     --model_preset=monomer \
     --output_dir=output 
 
-思源一号上调用AlphaFold2.2.0的multimer模块的脚本
+AlphaFold2.2.0计算复合体
+##############################
 
 .. code:: bash
 
@@ -115,10 +205,81 @@ module 在思源一号上运行
    --output_dir=output \
    --fasta_paths=x.fasta
 
-然后使用 ``sbatch sub.slurm`` 语句提交作业。
 
-module 在 π 集群上运行
+.. _二. π2.0 AlphaFold:
+
+π2.0 AlphaFold
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+AlphaFold2.3.1 计算单体
+#######################
+
+.. code:: bash
+
+   由于资源紧张，以下脚本还未测试
+   #!/bin/bash
+   #SBATCH --job-name=alphafold_monomer
+   #SBATCH --partition=dgx2
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=6
+   #SBATCH --gres=gpu:1          # use 1 GPU
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   export DOWNLOAD_DIR=/scratch/share/AlphaFold/data
+   singularity exec --nv /lustre/share/img/ai/alphafold/alphafold-2.3.1.sif python /app/alphafold/run_alphafold.py \
+   --use_gpu_relax \
+   --data_dir=$DOWNLOAD_DIR \
+   --uniref90_database_path=$DOWNLOAD_DIR/uniref90/uniref90.fasta \
+   --mgnify_database_path=$DOWNLOAD_DIR/mgnify/mgy_clusters.fa \  
+   --bfd_database_path=$DOWNLOAD_DIR/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt \
+   --pdb70_database_path=$DOWNLOAD_DIR/pdb70/pdb70 \
+   --uniref30_database_path=$DOWNLOAD_DIR/uniref30/UniRef30_2021_03 \
+   --template_mmcif_dir=$DOWNLOAD_DIR/pdb_mmcif/mmcif_files \
+   --obsolete_pdbs_path=$DOWNLOAD_DIR/pdb_mmcif/obsolete.dat \
+   --model_preset=monomer \
+   --max_template_date=2022-10-1 \
+   --db_preset=full_dbs \
+   --output_dir=output \
+   --fasta_paths=monomer.fasta
+
+AlphaFold2.3.1 计算复合体
+##########################
+
+.. code:: bash
+
+   由于资源紧张，以下脚本还未测试
+   #!/bin/bash
+   #SBATCH --job-name=alphafold
+   #SBATCH --partition=dgx2
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=6
+   #SBATCH --gres=gpu:1          # use 1 GPU
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   export DOWNLOAD_DIR=/scratch/share/AlphaFold/data
+   singularity exec --nv  /lustre/share/img/ai/alphafold/alphafold-2.3.1.sif python /app/alphafold/run_alphafold.py  \
+   --use_gpu_relax \
+   --data_dir=$DOWNLOAD_DIR  \
+   --uniref90_database_path=$DOWNLOAD_DIR/uniref90/uniref90.fasta  \
+   --mgnify_database_path=$DOWNLOAD_DIR/mgnify/mgy_clusters.fa  \
+   --bfd_database_path=$DOWNLOAD_DIR/bfd/bfd_metaclust_clu_complete_id30_c90_final_seq.sorted_opt  \
+   --uniref30_database_path=$DOWNLOAD_DIR/uniref30/UniRef30_2021_03
+   --pdb_seqres_database_path=$DOWNLOAD_DIR/pdb_seqres/pdb_seqres.txt  \
+   --template_mmcif_dir=$DOWNLOAD_DIR/pdb_mmcif/mmcif_files  \
+   --obsolete_pdbs_path=$DOWNLOAD_DIR/pdb_mmcif/obsolete.dat \
+   --uniprot_database_path=$DOWNLOAD_DIR/uniprot/uniprot.fasta \
+   --model_preset=multimer \
+   --max_template_date=2022-10-1 \
+   --db_preset=full_dbs \
+   --output_dir=output \
+   --fasta_paths=multimer.fasta
+
+AlphaFold2.1.1计算单体
+#######################
 
 **单体**
 
@@ -144,6 +305,9 @@ module 在 π 集群上运行
     --output_dir=output
 
 然后使用 ``sbatch sub.slurm`` 语句提交作业。
+
+AlphaFold2.1.1计算复合体
+##########################
 
 **复合体**
 
