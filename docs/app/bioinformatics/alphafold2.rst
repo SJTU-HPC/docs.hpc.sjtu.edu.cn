@@ -216,7 +216,6 @@ AlphaFold2.3.1 计算单体
 
 .. code:: bash
 
-   由于资源紧张，以下脚本还未测试
    #!/bin/bash
    #SBATCH --job-name=alphafold_monomer
    #SBATCH --partition=dgx2
@@ -249,7 +248,6 @@ AlphaFold2.3.1 计算复合体
 
 .. code:: bash
 
-   由于资源紧张，以下脚本还未测试
    #!/bin/bash
    #SBATCH --job-name=alphafold
    #SBATCH --partition=dgx2
