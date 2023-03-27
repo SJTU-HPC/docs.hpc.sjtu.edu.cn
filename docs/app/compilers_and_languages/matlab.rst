@@ -265,8 +265,6 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 使用GPU版本的 MATLAB
 ^^^^^^^^^^^^^^^^^^^^
 
-使用GPU版本的MATLAB需要CUDA11，因此该版本只能在思源一号使用。
-
 可视化平台使用MATLAB GPU版
 """"""""""""""""""""""""""""""
 
@@ -292,6 +290,8 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 提交MATLAB GPU版脚本
 """""""""""""""""""""""
 
+**思源一号**
+
 .. code:: bash
 
     #!/bin/bash
@@ -301,7 +301,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH -e %j.err
     #SBATCH -n 1
     #SBATCH -N 1
-    #SBATCH --cpus-per-task 6
+    #SBATCH --cpus-per-task 16
     #SBATCH --gres gpu:1
 
     IMAGE_PATH=/dssg/share/imgs/matlab/matlab_r2022b.sif
@@ -310,6 +310,27 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     ulimit -l unlimited
     
     singularity run --nv $IMAGE_PATH matlab -r $YOUR_SCRIPT_FILE
+
+**pi2.0**
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH -J matlab_test
+   #SBATCH -p dgx2
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+   #SBATCH -n 1
+   #SBATCH -N 1
+   #SBATCH --cpus-per-task 6
+   #SBATCH --gres gpu:1
+
+   IMAGE_PATH=/lustre/share/img/matlab_r2022b.sif
+   
+   ulimit -s unlimited
+   ulimit -l unlimited
+  
+   singularity run --nv $IMAGE_PATH matlab -r $YOUR_SCRIPT_FILE
 
 .. _多节点并行版的 MATLAB:
 
