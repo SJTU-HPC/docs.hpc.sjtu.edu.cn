@@ -11,29 +11,25 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 
 可用的版本
 ----------------
-+----------+----------------+----------+-------------------------------------------------+
-|版本      |平台            |构建方式  |名称                                             |
-+==========+================+==========+=================================================+
-| 2022a    |  |cpu|         | 容器     |/lustre/share/img/matlab_latest.sif              |
-+----------+----------------+----------+-------------------------------------------------+
-| 2022a    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_latest.sif思源    |
-+----------+----------------+----------+-------------------------------------------------+
-| 2022b    |  |cpu|         | 容器     |/lustre/share/img/matlab_r2022b.sif              |
-+----------+----------------+----------+-------------------------------------------------+
-| 2022b    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_r2022b.sif思源    |
-+----------+----------------+----------+-------------------------------------------------+
-| 2021a    |  |cpu|         | 容器     |/lustre/share/img/matlab_r2021a.sif              |
-+----------+----------------+----------+-------------------------------------------------+
-| 2021a    |  |cpu|         | 容器     |/dssg/share/imgs/matlab/matlab_r2021a.sif思源    |
-+----------+----------------+----------+-------------------------------------------------+
 
-超算上的MATLAB
++----------+---------------------------+
+| 集群平台 | 模块名                    |
++==========+===========================+
+| 思源一号 | module load matlab/r2022a |
++----------+---------------------------+
+| pi 2.0   | module load matlab/r2022a |
++----------+---------------------------+
+
+算例下载
+--------
+
+.. code:: bash
+
+   cd ~
+   git clone https://github.com/SJTU-HPC/HPCTesting.git
+
+使用MATLAB的方式
 ------------------------
-超算上的CPU及GPU平台均支持MATLAB软件，在π 超算及思源一号均有提供。
-
-超算上的 MATLAB 授权由网络授权服务器自动检查，超算用户无需用户名密码登录，打开即可使用。
-
-MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命令行调用。
 
 - `命令行交互式使用 MATLAB`_
 - `提交 MATLAB 脚本`_
@@ -44,7 +40,6 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 
 .. _命令行交互式使用 MATLAB:
-
 
 命令行交互式使用 MATLAB
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -59,7 +54,8 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. code:: console
 
-    $ singularity run /dssg/share/imgs/matlab/matlab_r2022b.sif matlab
+    $ module load matlab
+    $ matlab
     MATLAB is selecting SOFTWARE OPENGL rendering.
 
                                 < M A T L A B (R) >
@@ -93,16 +89,6 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 提交 MATLAB 脚本
 ^^^^^^^^^^^^^^^^^^^^
 
-1. 算例下载
-
-.. code:: console
-   
-   cd ~
-   git clone https://github.com/SJTU-HPC/HPCTesting.git
-
-
-2. 脚本提交
-
 π 超算提交单核CPU脚本
 
 .. code:: bash
@@ -115,12 +101,9 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH -n 1
     #SBATCH --ntasks-per-node=1
 
-    IMAGE_PATH=/lustre/share/img/matlab_r2022b.sif
-
-    ulimit -s unlimited
-    ulimit -l unlimited
+    module load matlab/r2022a
     cd ~/HPCTesting/matlab/case1
-    singularity exec $IMAGE_PATH matlab -r test
+    matlab -r test
 
 
 
@@ -136,12 +119,9 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH -n 1
     #SBATCH --ntasks-per-node=1
 
-    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_r2022b.sif
-    
-    ulimit -s unlimited
-    ulimit -l unlimited
+    module load matlab/r2022a
     cd ~/HPCTesting/matlab/case1
-    singularity exec $IMAGE_PATH matlab -r test
+    matlab -r test
 
 
 使用sbatch命令提交脚本，脚本运行完毕后，在本地将生成一张名为 `1.png` 的图片，如程序运行无误，该图片的内容与本地 `result.png` 内容一致：
@@ -155,16 +135,13 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
     #!/bin/bash
     #SBATCH -J matlab_test
-    #SBATCH -p small
+    #SBATCH -p cpu
     #SBATCH -o %j.out
     #SBATCH -e %j.err
     #SBATCH -n 40
     #SBATCH --cpus-per-task 1
 
-    IMAGE_PATH=/lustre/share/img/matlab_r2022b.sif
-
-    ulimit -s unlimited
-    ulimit -l unlimited
+    module load matlab/r2022a
     cd ~/HPCTesting/matlab/case2
     singularity exec $IMAGE_PATH matlab -r multicore
 
@@ -181,10 +158,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH -n 1
     #SBATCH --cpus-per-task 64
 
-    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_r2022b.sif
-    
-    ulimit -s unlimited
-    ulimit -l unlimited
+    module load matlab/r2022a
     cd ~/HPCTesting/matlab/case2
     singularity exec $IMAGE_PATH matlab -r multicore
 
@@ -218,11 +192,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../../img/matlab_studio_session.png
 
-
-
 .. image:: ../../img/matlab_studio_running.png
-
-
 
 .. _可视化平台桌面启动 MATLAB:
 
@@ -250,14 +220,11 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../../img/matlab_studio_desktop_terminal.png
 
-在终端中使用命令 ``singularity run /dssg/share/imgs/matlab/matlab_r2022b.sif matlab`` , π 超算需使用命令 ``singularity run /lustre/share/img/matlab_r2022b.sif matlab`` 。
+在终端中使用命令 ``module load matlab/r2022a && matlab`` , π 超算和思源一号使用的命令一致。
 
-启动后即可使用MATLAB R2022b
-
-.. image:: ../../img/matlab_studio_desktop_terminal_command.png
+启动后即可使用MATLAB R2022a
 
 .. image:: ../../img/matlab_studio_running.png
-
 
 
 .. _使用GPU版本的MATLAB:
@@ -280,9 +247,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 2. 启动GPU版本MATLAB
 
-在窗口中启动终端（terminal），在终端输入 ``singularity run --nv /dssg/share/imgs/matlab/matlab_r2022b.sif`` ，即可启动GPU版本matlab。
-
-.. image:: ../../img/matlab_studio_desktop_gpu_command.png
+在窗口中启动终端（terminal），在终端输入 ``module load matlab/r2022a && matlab`` ，即可启动GPU版本matlab。
 
 .. image:: ../../img/matlab_studio_desktop_gpu_running.png
 
@@ -304,12 +269,9 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
     #SBATCH --cpus-per-task 16
     #SBATCH --gres gpu:1
 
-    IMAGE_PATH=/dssg/share/imgs/matlab/matlab_r2022b.sif
+    module load matlab/r2022a    
     
-    ulimit -s unlimited
-    ulimit -l unlimited
-    
-    singularity run --nv $IMAGE_PATH matlab -r $YOUR_SCRIPT_FILE
+    matlab -r $YOUR_SCRIPT_FILE
 
 **pi2.0**
 
@@ -325,17 +287,15 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
    #SBATCH --cpus-per-task 6
    #SBATCH --gres gpu:1
 
-   IMAGE_PATH=/lustre/share/img/matlab_r2022b.sif
-   
-   ulimit -s unlimited
-   ulimit -l unlimited
-  
-   singularity run --nv $IMAGE_PATH matlab -r $YOUR_SCRIPT_FILE
+   module load matlab/r2022a 
+   matlab -r $YOUR_SCRIPT_FILE
 
 .. _多节点并行版的 MATLAB:
 
 多节点并行版的 MATLAB
 ^^^^^^^^^^^^^^^^^^^^^^
+
+**pi2.0**
 
 1.首先，进入可视化终端界面
 
@@ -357,7 +317,7 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. code:: bash
 
-   profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2022a-new/ParSlurmProfile/SlurmParForUser.mlsettings');
+   profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2022a/ParSlurmProfile/SlurmParForUser.mlsettings');
    parallel.defaultClusterProfile(profile_master);   
 
 3.接下来，运行作业
@@ -380,37 +340,6 @@ MATLAB既可被可视化调用（需启动HPC Studio Desktop），也可从命�
 
 .. image:: ../../img/matlab_parallel_2.png
 
-MATLAB Parallel Computing Toolbox
------------------------------------------
-
-利用 Parallel Computing Toolbox™，可以使用多核处理器、GPU 和计算机集群来解决计算问题和数据密集型问题。利用并行 for 循环、特殊数组类型和并行化数值算法等高级别构造，无需进行 CUDA 或 MPI 编程即可对 MATLAB® 应用程序进行并行化。 通过该工具箱可以使用 MATLAB 和其他工具箱中支持并行的函数。你可以将该工具箱与 Simulink 配合使用，并行运行一个模型的多个仿真。程序和模型可以在交互模式和批处理模式下运行。
-
-集群上部署的 MATLAB 镜像均已安装  Parallel  Computing Toolbox 并获取相关授权，打开 MATLAB 即可使用相应功能。
-
-了解更多 MATLAB Parallel Computing Toolbox 在超算上的使用，请跳转至文档 :ref:`matlab_pct`.
-
-
-
-单节点性能对比
---------------------------
-
-算例为路径 ``~/HPCTesting/matlab/case2`` 。
-
-运行时间
-
-+----------+----------------+----------+
-|版本      |平台            |时间(s)   |
-+==========+================+==========+
-| 2021a    |  思源          |  105     |
-+----------+----------------+----------+
-| 2021a    |  π 超算        | 176      |
-+----------+----------------+----------+
-
-建议
--------------------------
-
-思源超算单节点拥有更多核心、更大内存。在运行多核心任务时推荐使用思源平台。
-
 
 MATLAB代理设置
 -------------------------
@@ -426,31 +355,3 @@ MATLAB代理设置
 **思源一号代理设置**
 
 ``proxy2.pi.sjtu.edu.cn:3128``
-
-
-自定义添加MATLAB插件
--------------------------
-
-首先拷贝集群上的镜像到本地
-
-.. code:: shell
-
-   cp /lustre/share/img/matlab_latest.sif ~/
-
-接下来需要在镜像中添加基础编译环境（该操作可以在build@container-x86中操作）
-
-.. code:: shell
-
-   Bootstrap:localimage
-   From:/home/singularity/matlab_latest.sif
-
-   %post
-       echo y | apt-get update -y
-       echo y | apt-get install gcc -y
-       echo y | apt-get install g++ -y
-
-最后在添加自定义的库时，需要先进入容器
-
-.. code:: shell
-
-   singularity shell matlab_latest_self.sif
