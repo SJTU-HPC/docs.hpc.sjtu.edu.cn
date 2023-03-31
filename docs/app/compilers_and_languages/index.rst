@@ -12,6 +12,7 @@
    intel_mkl
    intel_mpi
    intel_vtune
+   cublas
    cuda
    open_mpi
    openblas
