@@ -17,7 +17,11 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 +==========+===========================+
 | 思源一号 | module load matlab/r2022a |
 +----------+---------------------------+
+| 思源一号 | module load matlab/r2022b |
++----------+---------------------------+
 | pi 2.0   | module load matlab/r2022a |
++----------+---------------------------+
+| pi 2.0   | module load matlab/r2022b |
 +----------+---------------------------+
 
 算例下载
@@ -54,19 +58,15 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 
 .. code:: console
 
-    $ module load matlab
+    $ module load matlab/r2022b
     $ matlab
     MATLAB is selecting SOFTWARE OPENGL rendering.
 
-                                < M A T L A B (R) >
-                    Copyright 1984-2022 The MathWorks, Inc.
-                R2022b Update 1 (9.13.0.2080170) 64-bit (glnxa64) 
-                                    September 28, 2022
+                                        < M A T L A B (R) >
+                              Copyright 1984-2022 The MathWorks, Inc.
+                         R2022b Update 5 (9.13.0.2193358) 64-bit (glnxa64)
+                                         February 10, 2023
 
-    
-    To get started, type doc.
-    For product information, visit www.mathworks.com.
-    
     >> 
 
 在此交互式窗口内，可以执行 MATLAB 命令：
