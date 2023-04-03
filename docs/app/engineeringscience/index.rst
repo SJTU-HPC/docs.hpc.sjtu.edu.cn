@@ -11,6 +11,7 @@
    amber
    calculix
    cantera
+   casm
    cesm
    cp2k
    cplex
