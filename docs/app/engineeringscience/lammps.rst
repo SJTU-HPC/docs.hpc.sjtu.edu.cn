@@ -175,7 +175,7 @@ e) 环境设置
    ulimit -s unlimited
    ulimit -l unlimited
    
-   module load lammps/20230328-oneapi-2021.4.0-omp
+   module load lammps/20230328-intel-2021.4.0-omp
 
    mpirun lmp -pk intel 0 omp 2 -sf intel -i in.lj
 
@@ -291,7 +291,7 @@ slurm.test
 ~~~~~
 
 +-----------------------------------------------+
-|    lammps/20230328-oneapi-2021.4.0-omp        |          
+|    lammps/20230328-intel-2021.4.0-omp         |          
 +=============+==========+===========+==========+
 | 核数        | 40       | 80        | 120      |
 +-------------+----------+-----------+----------+
