@@ -90,6 +90,26 @@ slurm 里，若使用 CPU 节点，须确保 ``OMP_NUM_THREADS * ntasks-per-node
 
    srun --mpi=pmi2 vasp_std
 
+另外，模块 ``vasp/5.4.4-intel-2021.4.0`` 的使用方法如下所示
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH -J vasp
+   #SBATCH -p cpu
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --exclusive
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+
+   module purge
+   module load vasp/5.4.4-intel-2021.4.0
+
+   ulimit -s unlimited
+
+   mpirun vasp_std
+
 .. _ARM VASP:
 
 ARM VASP
