@@ -72,6 +72,7 @@
    openslide-python
    pandas
    pbsv
+   pga
    picard
    pindel
    prism
