@@ -73,6 +73,7 @@
    pandas
    pbsv
    pga
+   percolate
    picard
    pindel
    prism
