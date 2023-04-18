@@ -8,6 +8,7 @@
    :maxdepth: 1
  
    gnu
+   armadillo
    intel
    intel_mkl
    intel_mpi
