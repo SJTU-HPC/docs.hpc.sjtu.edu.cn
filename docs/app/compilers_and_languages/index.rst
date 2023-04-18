@@ -14,6 +14,7 @@
    intel_vtune
    cublas
    cuda
+   cusparse
    open_mpi
    openblas
    eigen
