@@ -17,6 +17,7 @@
    cuda
    cusparse
    cusolver
+   cufft
    open_mpi
    openblas
    eigen
