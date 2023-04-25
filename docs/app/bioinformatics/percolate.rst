@@ -13,3 +13,11 @@ Percolator是一种使用半监督机器的算法。学习提高正确和不正�
 
     singularity exec /dssg/share/imgs/percolator/percolator_3.05.sif percolator -h
 
+完整步骤
+-----------------
+.. code:: bash
+
+   module load miniconda3
+   conda create -n mypy
+   source activate mypy
+   conda install -c bioconda percolate
