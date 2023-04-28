@@ -19,6 +19,7 @@
    cusolver
    cufft
    open_mpi
+   mpi4py
    openblas
    eigen
    fftw
