@@ -341,19 +341,74 @@ ParaFold GitHub：`https://github.com/Zuricho/ParallelFold <https://github.com/Z
 
 介绍网站：`https://parafold.sjtu.edu.cn <https://parafold.sjtu.edu.cn/>`__
 
+ParaFold可用版本
+~~~~~~~~~~~~~~~~~
+
++------+----------+
+| 版本 | 平台     |
++======+==========+
+| 2.0  | 思源一号 |
++------+----------+
+| 1.0  | 思源一号 |
++------+----------+
+| 1.0  | pi 2.0   |
++------+----------+
+
 
 ParaFold 在思源一号上运行
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-下载 ParaFold
+ParaFold2.0计算单体运行脚本
+#############################
 
 .. code:: bash
 
-    git clone https://github.com/Zuricho/ParallelFold.git
-    cd ParallelFold
-    chmod +x run_alphafold.sh
+   #!/bin/bash
+   #SBATCH --job-name=parafold
+   #SBATCH --partition=a100
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=16
+   #SBATCH --gres=gpu:1          # use 1 GPU
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   singularity run --nv /dssg/share/imgs/parafold/2.0.sif \
+      /app/ParallelFold/run_alphafold.sh \
+      -d /dssg/share/data/alphafold \
+      -o output \
+      -p monomer \
+      -i input/GA98.fasta \
+      -t 2021-07-27 \
+      -m model_1,model_2,model_3,model_4,model_5
+    
+ParaFold2.0计算多体运行脚本
+############################
 
-使用下方 ``sub.slurm`` 脚本直接运行：
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=parafold
+   #SBATCH --partition=a100
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=1
+   #SBATCH --cpus-per-task=16
+   #SBATCH --gres=gpu:1          # use 1 GPU
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   singularity run --nv /dssg/share/imgs/parafold/2.0.sif \
+      /app/ParallelFold/run_alphafold.sh \
+      -d /dssg/share/data/alphafold \
+      -o output \
+      -p multimer \
+      -i monomer.fasta \
+      -m model_1_multimer_v3,model_2_multimer_v3,model_3_multimer_v3,model_4_multimer_v3,model_5_multimer_v3 \
+      -u 0,1 -i multimer.fasta \
+      -t 2022-01-01 -r
+
+ParaFold1.0计算单体运行脚本
+############################
 
 .. code:: bash
 
