@@ -25,7 +25,7 @@
 
 `docs <https://docs.hpc.sjtu.edu.cn/>`_ 为HPC和AI平台使用文档，为用户提供快速上手指导和问题解答。可访问 `上海交通大学 HPC 站点 <https://hpc.sjtu.edu.cn/>`_ 获取HPC和AI平台更多信息。
 
-0. `English Documentation <en/index>`_
+0. :doc:`en/index`
 1. :doc:`quickstart/index`
 2. :doc:`system/index`
 3. :doc:`accounts/index`
