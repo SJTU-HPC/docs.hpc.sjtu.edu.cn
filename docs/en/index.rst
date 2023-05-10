@@ -4,10 +4,6 @@ English Documentation
 
 Shanghai Jiaotong University Counting On Me platform is a university-level platform which provides HPC & AI computing service. It was established in 2013 and aims to provide technical support for large-scale scientific and engineering computing needs in the university.
 
-******************
-Getting Started
-******************
-
 Computing Resources
 ============================
 **Siyuan-1**
@@ -41,8 +37,64 @@ HPC account is NOT your jAccount. Apply for an HPC account in ‘交我算’ in
 **Login**
 
 1. `Connecting with SSH <https://docs.hpc.sjtu.edu.cn/login/index.html#ssh>`_
+
+Siyuan-1: ssh username@sylogin.hpc.sjtu.edu.cn
+
+Pi2.0 & AI: ssh username@pilogin.hpc.sjtu.edu.cn
+
+ARM (SJTU network ONLY): ssh username@armlogin.hpc.sjtu.edu.cn
+
+For Windows users, you may need an SSH client like Putty.
+
+
 2. Login using `HPC Studio <https://docs.hpc.sjtu.edu.cn/studio/basic.html>`_
 
+Data Storage
+===============
+
+The platform has two file systems: ``lustre``and ``dssg``. Different partitions use different file systems.
+
+* ``lustre``: small, cpu, huge, 192c6t, dgx2, arm128c256g
+
+* ``dssg``: 64c512g, a100
+
+**Data Transfer Nodes**
+
+Please use data transfer nodes for data transfers. Data transfer nodes hostnames:
+
+* Siyuan-1: sydata.hpc.sjtu.edu.cn
+
+* Pi 2.0/AI/ARM: data.hpc.sjtu.edu.cn
+
+**External Data Transfer**
+
+For Windows users, you may use \ `WinSCP <https://winscp.net/eng/index.php>`__\  to transfer data between your PC and the cluster. Use your password, username and the data transfer node hostname to login. And then you will be able to drag your files for data transfers.
+
+For Linux/Unix/Mac users, you may use either ``scp`` or ``rsync`` command to transfer data.
+
+1. New data: $ scp -r [local/path] username@hostname:[target/path]
+
+2. Changes made to existing data: $ rsync --archive --partial --progress [local/path] username@hostname:[target/path]
+
+.. code:: bash
+
+   # Suppose the home directory of user expuser01 in Siyuan-1 is /dssg/home/acct-exp/expuser01
+   # His/her local directory is /home/local_user/
+
+   # Example 1: upload all files in ~/data folder to Siyuan-1 cluster
+   $ scp -r /home/local_user/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/
+
+   # Example 2: download ~/math.dat file in Siyuan-1 to the local directory
+   $ scp expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/math.dat /home/local_user/
+
+**Transferring Data between Clusters**
+
+You can use either ``data`` or ``sydata`` data transfer node to transfer data between two file systems. For example, you can ssh data.hpc.sjtu.edu.cn from Pi 2.0 cluster, and then transfer data using either ``scp`` or ``rsync`` command.
+
+.. code:: bash
+
+   # Example 3: transfer data in lustre home directory ~/data to dssg home directory ~/data
+   $ scp -r /lustre/home/acct-exp/expuser01/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data/
 
 Running Jobs
 ===============
