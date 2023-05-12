@@ -1,5 +1,5 @@
 ============================================================
-English Documentation
+Getting Started
 ============================================================
 
 Shanghai Jiaotong University Counting On Me platform is a university-level platform which provides HPC & AI computing service. It was established in 2013 and aims to provide technical support for large-scale scientific and engineering computing needs in the university.
@@ -32,19 +32,21 @@ HPC Account
 ===============
 **How to Apply**
 
-HPC account is NOT your jAccount. Apply for an HPC account in ‘交我算’ in `my.sjtu.edu.cn <my.sjtu.edu.cn>`_. Your application will be processed in 2 business days.
+HPC account is NOT your jAccount. Apply for an HPC account in ‘交我算’ in `my.sjtu.edu.cn <https://my.sjtu.edu.cn>`_ as shown. Your application will be processed in 2 business days. The owner of the main account MUST be faculty members, postdocs, or employees of affiliated hospitals. You may also apply for sub-accounts. Sharing accounts is NOT recommended.
+
+.. image:: ../img/application_en.png
 
 **Login**
 
 1. `Connecting with SSH <https://docs.hpc.sjtu.edu.cn/login/index.html#ssh>`_
 
-Siyuan-1: ssh username@sylogin.hpc.sjtu.edu.cn
+* Siyuan-1: ``ssh username@sylogin.hpc.sjtu.edu.cn``
 
-Pi2.0 & AI: ssh username@pilogin.hpc.sjtu.edu.cn
+* Pi2.0 & AI: ``ssh username@pilogin.hpc.sjtu.edu.cn``
 
-ARM (SJTU network ONLY): ssh username@armlogin.hpc.sjtu.edu.cn
+* ARM: ``ssh username@armlogin.hpc.sjtu.edu.cn``
 
-For Windows users, you may need an SSH client like Putty.
+Notice: For Windows users, you may need an SSH client like Putty.
 
 
 2. Login using `HPC Studio <https://docs.hpc.sjtu.edu.cn/studio/basic.html>`_
@@ -52,7 +54,7 @@ For Windows users, you may need an SSH client like Putty.
 Data Storage
 ===============
 
-The platform has two file systems: ``lustre``and ``dssg``. Different partitions use different file systems.
+The platform has two file systems: ``lustre`` and ``dssg``. Different partitions use different file systems.
 
 * ``lustre``: small, cpu, huge, 192c6t, dgx2, arm128c256g
 
@@ -138,3 +140,10 @@ Notifications
 
 - Running any classified jobs is prohibited
 - For any questions, contact us：hpc[AT]sjtu.edu.cn
+
+
+.. toctree::
+   :maxdepth: 3
+   :hidden:
+
+
