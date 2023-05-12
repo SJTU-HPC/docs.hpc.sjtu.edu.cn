@@ -55,3 +55,4 @@
    colmap
    pymultinest
    lorene
+   boltztrap
