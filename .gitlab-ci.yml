@@ -71,6 +71,7 @@ build_html_pages:
   before_script:
     - mkdir -p .build_cache
     - pip3 install --cache-dir=.build_cache -r requirements.txt
+    - pip3 install sphinx-rtd-dark-mode
   script:
     - mkdir docs/_static || true
     - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
