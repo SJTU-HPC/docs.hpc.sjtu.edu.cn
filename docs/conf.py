@@ -14,7 +14,6 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-import sphinx_material
 
 # -- Project information -----------------------------------------------------
 
@@ -30,10 +29,10 @@ record = '沪交ICP备20190201'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx-prompt',
     'sphinx_copybutton',
     'sphinx_substitution_extensions',
-    'sphinx.ext.autosectionlabel'
+    'sphinx.ext.autosectionlabel',
+    'sphinx_immaterial'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -44,8 +43,8 @@ templates_path = ['_templates']
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = 'zh_CN'
-html_search_language = 'zh'
+# language = 'zh_CN'
+# html_search_language = 'zh'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -71,15 +70,11 @@ html_sidebars = {
     "**": ["logo-text.html", "globaltoc.html", "localtoc.html", "searchbox.html"]
 }
 
-extensions.append("sphinx_material")
-html_theme_path = sphinx_material.html_theme_path()
-html_context = sphinx_material.get_html_context()
-html_theme = "sphinx_material"
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_material'
+html_theme = 'sphinx_immaterial'
 html_favicon = 'favicon.png'
 
 # The name of an image file (relative to this directory) to place at the top
@@ -88,32 +83,32 @@ html_logo = 'logos.png'
 
 # Material theme options (see theme.conf for more information)
 html_theme_options = {
-
-    # Set the name of the project to appear in the navigation.
-    'nav_title': '超算平台用户手册',
-
-    # Set you GA account ID to enable tracking
-    'google_analytics_account': 'UA-190329530-1',
-
-    # Specify a base_url used to generate sitemap.xml. If not
-    # specified, then no sitemap will be built.
-    'base_url': 'https://project.github.io/project',
-
-    # Set the color and the accent color
-    'color_primary': 'blue',
-    'color_accent': 'light-blue',
-
     # Set the repo location to get a badge with stats
     'repo_url': 'https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn',
     'repo_name': 'SJTU HPC Docs',
 
     # Visible levels of the global TOC; -1 means unlimited
-    'globaltoc_depth': 3,
     # If False, expand all TOC entries
     'globaltoc_collapse': True,
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
-    'color_primary': '#4000FF',
+
+    # Light and dark mode
+    'palette': [{ 'media': '(prefers-color-scheme: light)',
+                 'scheme': 'default',
+                 'toggle': {
+                    'icon': 'material/lightbulb-outline',
+                    'name': 'Switch to dark mode',
+                 },
+                },
+                { 'media': '(prefers-color-scheme: dark)',
+                  'scheme': 'slate',
+                  'toggle': {
+                    'icon': 'material/lightbulb',
+                    'name': 'Switch to light mode',
+                 },
+                },
+               ]
 }
 
 # Add doc prefix for atutlabeling
