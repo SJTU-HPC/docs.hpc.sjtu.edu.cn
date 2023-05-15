@@ -94,6 +94,9 @@ html_theme_options = {
     # If True, show hidden TOC entries
     'globaltoc_includehidden': True,
 
+    # Do not download google fonts
+    "font": False,
+
     # Light and dark mode
     'palette': [{ 'media': '(prefers-color-scheme: light)',
                  'scheme': 'default',
