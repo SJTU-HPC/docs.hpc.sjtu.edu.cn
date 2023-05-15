@@ -88,6 +88,11 @@ html_theme_options = {
     'repo_url': 'https://github.com/SJTU-HPC/docs.hpc.sjtu.edu.cn',
     'repo_name': 'SJTU HPC Docs',
 
+    "analytics": {
+                    "provider": "google",
+                    "property": "UA-190329530-1"
+                 },
+
     # Visible levels of the global TOC; -1 means unlimited
     # If False, expand all TOC entries
     'globaltoc_collapse': True,
