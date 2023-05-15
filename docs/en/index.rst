@@ -2,7 +2,7 @@
 Getting Started
 ============================================================
 
-Shanghai Jiaotong University Counting On Me platform is a university-level platform which provides HPC & AI computing service. It was established in 2013 and aims to provide technical support for large-scale scientific and engineering computing needs in the university.
+Shanghai Jiao Tong University Counting On Me platform is a university-level platform which provides HPC & AI computing service. It was established in 2013 and aims to provide technical support for large-scale scientific and engineering computing needs in the university.
 
 Computing Resources
 ============================
@@ -54,11 +54,19 @@ Notice: For Windows users, you may need an SSH client like Putty.
 Data Storage
 ===============
 
-The platform has two file systems: ``lustre`` and ``dssg``. Different partitions use different file systems.
+The platform has two file systems: ``lustre`` and ``dssg``. Both ``lustre`` and ``dssg`` are distributed, scalable high-performance parallel file systems, that can support PB-level storage capacity and large aggregated I/O throughput.
+
+Different partitions use different file systems：
 
 * ``lustre``: small, cpu, huge, 192c6t, dgx2, arm128c256g
 
 * ``dssg``: 64c512g, a100
+
+Your home directory is different on different file system as well.
+
+* ``lustre``: /lustre/home/acct-accountname/username
+
+* ``dssg``: /dssg/home/acct-accountname/username
 
 **Data Transfer Nodes**
 
@@ -74,9 +82,9 @@ For Windows users, you may use \ `WinSCP <https://winscp.net/eng/index.php>`__\ 
 
 For Linux/Unix/Mac users, you may use either ``scp`` or ``rsync`` command to transfer data.
 
-1. New data: $ scp -r [local/path] username@hostname:[target/path]
+1. New data: ``$ scp -r [local/path] username@hostname:[target/path]``
 
-2. Changes made to existing data: $ rsync --archive --partial --progress [local/path] username@hostname:[target/path]
+2. Changes made to existing data: ``$ rsync --archive --partial --progress [local/path] username@hostname:[target/path]``
 
 .. code:: bash
 
@@ -104,6 +112,28 @@ Running Jobs
 SLURM (Simple Linux Utility for Resource Management) is a scalable workload manager. The platform uses Slurm for cluster management and job scheduling.
 
 * `Common SLURM commands <https://docs.hpc.sjtu.edu.cn/job/slurm.html>`_
+
+Here is a typical slurm script example.
+
+.. code:: bash
+
+	#!/bin/bash
+
+	#SBATCH --job-name=test                #job name
+	#SBATCH --partition=64c512g            #partition name
+	#SBATCH -N 1                           #number of nodes
+	#SBATCH --ntasks-per-node=64           #number of tasks (1 core = 1 task by default)
+	#SBATCH --output=%j.out                #output file
+	#SBATCH --error=%j.err                 #error file
+
+	module load XXX                        #load modules
+
+	mpirun -n $SLURM_NTASKS ...
+
+
+
+Suppose your script file name is example.slurm. You may submit your job by using the command ``sbatch example.slurm``.
+
 * `Variety of script templates <https://docs.hpc.sjtu.edu.cn/job/jobsample1.html>`_
 
 
@@ -132,7 +162,15 @@ Userful links
 Acknowledgement
 ======================================
 
-Acknowledgment templates：`https://hpc.sjtu.edu.cn/Item/Science.htm <https://hpc.sjtu.edu.cn/Item/Science.htm>`_ 
+Acknowledgment templates：
+
+* Siyuan-1
+
+The computations in this paper were run on the Siyuan-1 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
+
+* π 2.0
+
+The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
 
 
 Notifications
