@@ -27,41 +27,47 @@ OpenMPI使用说明
 
 .. code::
 
-  // This is a mpi-openmp-hybrid parallel program to calculate the value of pi ！！
+    #include "stdio.h"
+    #include "mpi.h"
+    #include "omp.h"
+    #include "math.h"
 
-  #include "stdio.h"
-  #include "mpi.h"
-  #include "omp.h"
-  #include "math.h"
-  #define NUM_THREADS 8
-  long int n=10000000;
-  int main(int argc,char*argv[])
-  {
-    int my_rank,numprocs;
-    long int i,my_n,my_first_i,my_last_i;
-    double my_pi=0.0,pi,h,x;
-    MPI_Init(&argc,&argv);
-    MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
-    MPI_Comm_rank(MPI_COMM_WORLD,&my_rank);
-    h=1.0/n;
-    my_n=n/numprocs;
-    my_first_i=my_rank*my_n;
-    my_last_i=my_first_i+my_n;
-    omp_set_num_threads(NUM_THREADS);
-     #pragma omp parallel for reduction(+:my_pi)private(x,i)
-    for(i=my_first_i;i<my_last_i;i++)
+    #define NUM_THREADS 8
+    long int n = 10000000;
+
+    int main(int argc, char *argv[])
     {
-        x=(i+0.5)*h;
-        my_pi=my_pi+4.0/(1.0+x*x);
+        int my_rank, numprocs;
+        long int i, my_n, my_first_i, my_last_i;
+        double my_pi = 0.0, pi, h, x;
+
+        MPI_Init(&argc, &argv);
+        MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
+        MPI_Comm_rank(MPI_COMM_WORLD, &my_rank);
+        h = 1.0 / n;
+        my_n = n / numprocs;
+        my_first_i = my_rank * my_n;
+        my_last_i = my_first_i + my_n;
+
+        omp_set_num_threads(NUM_THREADS);
+    #pragma omp parallel for reduction(+ : my_pi) private(x, i)
+        for (i = my_first_i; i < my_last_i; i++)
+        {
+            x = (i + 0.5) * h;
+            my_pi = my_pi + 4.0 / (1.0 + x * x);
+        }
+
+        MPI_Reduce(&my_pi, &pi, 1, MPI_DOUBLE, MPI_SUM, 0, MPI_COMM_WORLD);
+
+        if (my_rank == 0)
+        {
+            printf("Approximation of pi:%15.13f\n", pi * h);
+        }
+
+        MPI_Finalize();
+
+        return 0;
     }
-    MPI_Reduce(&my_pi,&pi,1,MPI_DOUBLE,MPI_SUM,0,MPI_COMM_WORLD);
-    if(my_rank==0)
-    {
-        printf("Approximation of pi:%15.13f\n",pi*h);
-    }
-    MPI_Finalize();
-    return 0;
-  }
 
 
 
@@ -81,6 +87,7 @@ OpenMPI使用说明
   ulimit -s unlimited
   ulimit -l unlimited
 
+  module load gcc
   module load openmpi/4.1.1-gcc-8.3.1
 
   mpicc openmpitest.c -o openmpitest -fopenmp
@@ -126,6 +133,7 @@ pi2.0上的OpenMPI
   ulimit -s unlimited
   ulimit -l unlimited
 
+  module load gcc
   module load openmpi/3.1.5-gcc-9.2.0
 
   mpicc openmpitest.c -o openmpitest -fopenmp

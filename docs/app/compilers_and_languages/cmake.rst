@@ -28,9 +28,7 @@ CMake使用说明
 
 .. code::
 
-    sallc -p 64c512g -n 10 
-    # salloc: Nodes nodexxx are ready for job
-    ssh nodexxx
+    srun -p 64c512g -n 10 --pty /bin/bash
 
     module purge
     module load openmpi/4.1.1-gcc-11.2.0 
@@ -46,26 +44,24 @@ CMake使用说明
     #include <iostream>
     using namespace std;
 
-    int say_hello( int argc, char ** argv );
-
-    int say_hello( int argc, char ** argv )
+    int say_hello(int argc, char **argv)
     {
         int myid, numprocs;
         int namelen;
-        char processor_name[ MPI_MAX_PROCESSOR_NAME ];
-        MPI_Init( &argc, &argv );
-        MPI_Comm_rank(MPI_COMM_WORLD,&myid);
-        MPI_Comm_size(MPI_COMM_WORLD,&numprocs);
-        MPI_Get_processor_name( processor_name, & namelen );
+        char processor_name[MPI_MAX_PROCESSOR_NAME];
+        MPI_Init(&argc, &argv);
+        MPI_Comm_rank(MPI_COMM_WORLD, &myid);
+        MPI_Comm_size(MPI_COMM_WORLD, &numprocs);
+        MPI_Get_processor_name(processor_name, &namelen);
         cout << "Hello World! Process " << myid << " of " << numprocs << " on " << processor_name << "\n";
         MPI_Finalize();
 
         return 0;
     }
 
-    int main( int argc, char ** argv )
+    int main(int argc, char **argv)
     {
-        say_hello( argc, argv );
+        say_hello(argc, argv);
 
         return 0;
     }
@@ -138,9 +134,7 @@ CMake使用说明
 
 .. code::
 
-  salloc -p cpu -N  1 --ntasks-per-node 40  --exclusive
-  #salloc: Nodes casxxx are ready for job
-  ssh casxxx
+  srun -p cpu -N 1 --ntasks-per-node 40    --pty /bin/bash
 
   module purge
   module load gcc/9.2.0
