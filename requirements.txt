@@ -20,3 +20,4 @@ Sphinx-Substitution-Extensions
 sphinxcontrib-serializinghtml
 sphinxcontrib.htmlhelp
 jieba
+sphinx-prompt
