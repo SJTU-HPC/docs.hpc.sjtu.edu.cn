@@ -381,7 +381,7 @@ cpu 队列 slurm 脚本示例 array
    #SBATCH -n 1                      # 总核数 1
    #SBATCH --ntasks-per-node=1       # 每节点核数
    #SBATCH --output=array_%A_%a.out
-   #SBATCH --output=array_%A_%a.err
+   #SBATCH --error=array_%A_%a.err
    #SBATCH --array=1-20%10           # 总共 20 个子任务，每次最多同时运行 10 个
 
    echo $SLURM_ARRAY_TASK_ID
