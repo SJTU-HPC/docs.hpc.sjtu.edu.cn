@@ -150,7 +150,7 @@ Top Documentation Pages
 8. `Q&A <https://docs.hpc.sjtu.edu.cn/faq/index.html>`_ - Common questions
 
 
-Userful links
+Useful Links
 ======================================
 
 1. HPC Home Page：`https://hpc.sjtu.edu.cn/ <https://hpc.sjtu.edu.cn/>`_ 
