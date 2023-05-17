@@ -1,13 +1,17 @@
-======================================
-上海交大交我算HPC+AI平台用户文档
-======================================
-
-上海交通大学交我算平台是校级计算公共服务平台，成立于 2013 年，旨在对校内大规模科学与工程计算需求提供技术支撑。
+上海交通大学的校级计算平台“交我算”由网络信息中心负责建设及管理，全面支撑学校的教学、科研和管理的计算需求。“交我算”有两层含义，既表明它是上海交通大学的校级计算平台，又寓意师生的计算需求可以放心的交给“我”（网络信息中心）来算。
 
 欢迎致谢交我算平台
 ======================================
 
-致谢模板及优秀论文见平台成果展示：`https://hpc.sjtu.edu.cn/Item/Science.htm <https://hpc.sjtu.edu.cn/Item/Science.htm>`_ 
+致谢模版:
+
+* 思源一号
+
+The computations in this paper were run on the Siyuan-1 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
+
+* π 2.0
+
+The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
 
 交我算HPC+AI平台
 ===================
