@@ -1,9 +1,12 @@
+引言
+======================================
+
 上海交通大学的校级计算平台“交我算”由网络信息中心负责建设及管理，全面支撑学校的教学、科研和管理的计算需求。“交我算”有两层含义，既表明它是上海交通大学的校级计算平台，又寓意师生的计算需求可以放心的交给“我”（网络信息中心）来算。
 
 欢迎致谢交我算平台
 ======================================
 
-致谢模版:
+**致谢模版:**
 
 * 思源一号
 
@@ -13,7 +16,7 @@ The computations in this paper were run on the Siyuan-1 cluster supported by the
 
 The computations in this paper were run on the π 2.0 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
 
-交我算HPC+AI平台
+交我算平台计算资源
 ===================
 
 - “思源一号”高性能计算平台。2022年新上线的“思源一号”集群总算力 6 PFLOPS（每秒千万亿次），是目前国内高校第一的超算集群，TOP500 榜单排名第132位。CPU 采用双路 Intel Xeon ICX Platinum 8358 32 核，主频 2.6GHz，共938个计算节点；GPU采用NVIDIA HGX A100, 共92块GPU卡。计算节点之间使用Mellanox 100 Gbps Infiniband HDR 高速互联，并行存储的聚合存储能力达10 PB。
@@ -24,7 +27,7 @@ The computations in this paper were run on the π 2.0 cluster supported by the C
 
 - ARM 平台。ARM 平台于2021年上线，基于 ARM 处理器构建，是国内首台基于 ARM 处理器的校级超算。共 100 个计算节点，与 π 2.0和AI平台实现共享登录、共享 Lustre 文件系统和共享 Slurm 作业调度系统。ARM 超算单节点配备 128 核（2.6 GHz）、256 GB 内存（16 通道 DDR4-2933）、240 GB 本地硬盘。
 
-文档使用
+常用文档
 ===================
 
 `docs <https://docs.hpc.sjtu.edu.cn/>`_ 为HPC和AI平台使用文档，为用户提供快速上手指导和问题解答。可访问 `上海交通大学 HPC 站点 <https://hpc.sjtu.edu.cn/>`_ 获取HPC和AI平台更多信息。
