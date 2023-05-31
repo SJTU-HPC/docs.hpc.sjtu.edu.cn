@@ -20,6 +20,9 @@
    cufft
    open_mpi
    mpi4py
+   numba
+   cupy
+   pycuda
    openblas
    eigen
    fftw
