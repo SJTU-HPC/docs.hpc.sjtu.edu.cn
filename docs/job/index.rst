@@ -7,6 +7,7 @@
 .. toctree::
    :maxdepth: 1
 
+   partition
    slurm
    jobsample1
    jobsample2
