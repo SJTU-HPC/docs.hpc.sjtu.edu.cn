@@ -4,34 +4,6 @@
 
 HPC Studio 可视化平台，集成 web shell、文件管理、作业提交、可视化应用等一站式服务。
 
-Studio 支持的应用如下，并持续增加:
-
-- RStudio
-
-- Jupyter
-
-- TensorBoard
-
-- Code Server
-
-- IGV
-
-- Octave
-
-- ParaView
-
-- Relion
-
-- VMD
-
-- Visit
-
-- OVITO
-
-- MATLAB
-
-- AlphaFold
-
 .. toctree::
    :maxdepth: 1
 
@@ -41,5 +13,7 @@ Studio 支持的应用如下，并持续增加:
    rstudio
    paraview
    alphafold-gui
-   faq
    ../app/compilers_and_languages/matlab
+   faq
+   
+此外，Studio 还支持TensorBoard，Code Server，IGV，Octave，Relion，VMD，Visit，OVITO等应用，并将持续增加。
