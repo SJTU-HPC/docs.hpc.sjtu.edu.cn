@@ -175,6 +175,8 @@ ssh-copy-id 将本地主机的公钥 id_rsa.pub添加到远程主机的信任列
 SSH 重置 known_hosts
 --------------------
 
+.. image:: ../img/knownhosts.png
+
 若遇到上方图片中的问题，请重置 known_hosts，命令如下：
 
 .. code:: bash
