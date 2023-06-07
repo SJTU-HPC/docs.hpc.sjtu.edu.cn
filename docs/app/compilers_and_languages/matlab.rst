@@ -297,46 +297,87 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 
 **pi2.0**
 
-1.首先，进入可视化终端界面
+1. 首先，进入可视化终端界面
 
-通过HPC Studio ``https://studio.hpc.sjtu.edu.cn`` 打开matlab可视化终端
+通过 HPC Studio ``https://studio.hpc.sjtu.edu.cn`` 打开远程桌面
 
 .. image:: ../../img/matlab_parallel_1.png
 
+在桌面打开终端，创建 MATLAB 工作目录（可选），加载 MATLAB 环境：
+
 .. code:: bash
 
-   cd
-   mkdir matlab
-   cd matlab
+   cd ~
+   mkdir matlab && cd matlab
    module load matlab/r2022a
    matlab
 
-2.然后，导入SlurmProfile
+2. 打开 MATLAB 后，导入 SlurmProfile。SlumProfile 中记录了多节点并行运行的 parpool 设置，导入的配置可以在 Cluster Profile Manager 中确认。
 
-输入如下命令:
+在 MATLAB 下方的命令行窗口输入命令:
 
-.. code:: bash
+.. code:: matlab
 
    profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2022a/ParSlurmProfile/SlurmParForUser.mlsettings');
-   parallel.defaultClusterProfile(profile_master);   
+   parallel.defaultClusterProfile(profile_master);
 
-3.接下来，运行作业
+在 MATLAB 界面选择 Home -> Parallel -> Create and Manage Clusters，在 Cluster Profile Manager 中查看导入的配置：
 
-作业脚本路径如下所示，具体功能为素因素分解，使用的核数为1、4、8、32、40、80和160核，生成的图片为不同核数的计算时间与使用1核时的加速比。
+.. image:: ../../img/matlab_studio_cluster_profile_manager.png
+
+3.（可选）调整并行池的大小
+
+默认 SlurmProfile 的最大 Worker 数目为 600，如果您需要调整这一数值，可以按照以下的 GUI 方式或者命令行方式操作，下面的示例将并行池大小调整为 800 worker。
+
+GUI 方式调整并行池大小：
+
+- 在 Cluster Profile Manager 中选择要修改的 SlurmProfile -> Edit，修改 NumWorkers 为需要的值，然后保存。
+- 如果需要导出修改之后的配置，选择 Cluster Profile Manager -> Export，将配置保存为文件，下次使用时导入即可。
+
+.. image:: ../../img/matlab_adjust_parpool_gui.png
+
+命令行方式调整并行池大小，需要在 MATLAB 命令行窗口输入：
+
+.. code:: matlab
+
+  p=parcluster();
+  p.NumWorkers
+  p.NumWorkers=800
+  p.saveProfile
+
+.. image:: ../../img/matlab_adjust_parpool_cmd.png
+
+在调整并行池大小之后，可以尝试启动并行池来验证修改后的配置，使用以下的 GUI 方式或者命令行方式操作：
+
+GUI 方式启动并行池：
+
+点击 MATLAB 左下角的并行池图标，选择启动并行池，同时可以查看并行池运行状态
+
+.. image:: ../../img/matlab_start_parpool_gui.png
+
+命令行方式启动并行池：
+
+在 MATLAB 命令行窗口输入： ``parpool('SlurmParForUser',600)``，这里的 ``SlurmParForUser`` 可能需要替换成您自定义的名字。
+
+**注意：启动并行池时，系统将按照设置的工作核心数申请资源。例如 NumWorkers 为 1000 时，系统将在启动并行池时申请到 1000 核的资源，请注意您的作业费用消耗。**
+
+4. 接下来，运行作业
+
+示例作业脚本路径如下所示，具体功能为素因素分解，使用的核数为 1、4、8、32、40、80 和 160 核，生成的图片为不同核数的计算时间与使用1核时的加速比。
 
 .. code:: bash
 
-   /lustre/share/samples/matlab/composite_speedup.m
+  /lustre/share/samples/matlab/composite_speedup.m
 
-输入：
+在 MATLAB 命令行窗口输入：
 
 .. code:: bash
- 
-   composite_speedup
 
-注：第一次申请资源池时，会要求输入在集群上的账号和密码，然后在整个matlab session中均有效。
+  composite_speedup
 
-4.运行结果为
+**注意：第一次申请资源池时，会要求输入在集群上的账号和密码，然后在整个 matlab session 中均有效。**
+
+5. 运行结果为
 
 .. image:: ../../img/matlab_parallel_2.png
 
