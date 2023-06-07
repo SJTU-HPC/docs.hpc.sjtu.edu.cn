@@ -143,7 +143,7 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 
     module load matlab/r2022a
     cd ~/HPCTesting/matlab/case2
-    singularity exec $IMAGE_PATH matlab -r multicore
+    matlab -r multicore
 
 
 思源一号提交多核CPU脚本
@@ -160,7 +160,7 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 
     module load matlab/r2022a
     cd ~/HPCTesting/matlab/case2
-    singularity exec $IMAGE_PATH matlab -r multicore
+    matlab -r multicore
 
 
 
