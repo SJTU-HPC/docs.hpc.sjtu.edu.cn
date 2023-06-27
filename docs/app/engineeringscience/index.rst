@@ -9,6 +9,7 @@
 
    abinit
    amber
+   basilisk
    calculix
    cantera
    casm
