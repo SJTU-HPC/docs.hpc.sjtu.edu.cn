@@ -21,3 +21,4 @@ sphinxcontrib-serializinghtml
 sphinxcontrib.htmlhelp
 jieba
 sphinx-prompt
+pydantic==1.10.8
