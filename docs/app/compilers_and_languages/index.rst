@@ -37,7 +37,6 @@
    perl
    r
    cmake
-   matlab
    ../../studio/jupyter
    glibc
    spooles
