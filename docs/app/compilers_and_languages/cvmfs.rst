@@ -16,7 +16,14 @@ CernVM-FS 的安装以及使用说明
 
 CernVM-FS 已经在思源一号以及 Pi2.0 集群安装，可以直接使用。如果您需要使用的应用未添加到 CernVM-FS 的仓库，请通过邮件与我们联系。下面以 root 应用为例，演示 CernVM-FS 中应用的使用。
 
-1. 选择合适的修改环境变量的脚本并执行
+1. CernVM-FS 使用 autofs 自动挂载远端文件系统，如果本地 /cvmfs 目录下面为空，需要手动触发挂载动作
+
+.. code:: bash
+
+  ll /cvmfs/sft.cern.ch
+  ll /cvmfs/sw.hsf.org
+
+2. 选择合适的修改环境变量的脚本并执行
 
 .. code:: bash
 
@@ -25,13 +32,13 @@ CernVM-FS 已经在思源一号以及 Pi2.0 集群安装，可以直接使用。
    # Pi2.0 的 OS 版本为 CentOS 7
    source /cvmfs/sft.cern.ch/lcg/views/LCG_98python3/x86_64-centos7-gcc8-opt/setup.sh
 
-2. 检查 root 环境变量是否生效
+3. 检查 root 环境变量是否生效
 
 .. code:: bash
 
    root --help
 
-3. 检查 root 是否正常使用
+4. 检查 root 是否正常使用
 
 .. code:: bash
 
@@ -39,7 +46,7 @@ CernVM-FS 已经在思源一号以及 Pi2.0 集群安装，可以直接使用。
    cp /cvmfs/sft.cern.ch/lcg/views/LCG_100/x86_64-centos8-gcc10-opt/tutorials/basic.C .
    cp /cvmfs/sft.cern.ch/lcg/views/LCG_100/x86_64-centos8-gcc10-opt/tutorials/tree/ntuple1.C .
 
-4. 运行 root，调用之前从 tutorials 复制的测试文件
+5. 运行 root，调用之前从 tutorials 复制的测试文件
 
 .. code:: bash
 
