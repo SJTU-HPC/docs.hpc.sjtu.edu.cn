@@ -14,4 +14,5 @@
    dgx
    arm
    siyuan
+   ascend
    resource
