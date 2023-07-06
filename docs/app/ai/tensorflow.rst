@@ -78,7 +78,7 @@ TensorFlow使用教程
    python tf_test.py   
 
 
-1.2 思源一号上自定义构建TensorFlow环境
+1.2 思源一号上自定义构建TensorFlow 2.x环境
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 使用 miniconda 安装 TensorFlow
@@ -125,6 +125,23 @@ TensorFlow使用教程
    source activate tf-env
 
    python tf_test.py
+
+1.3 思源一号上自定义构建TensorFlow 1.x环境
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+使用 pip 安装NVIDIA A100 GPU上优化的TensorFlow 1.x
+
+.. code:: bash
+
+   cd
+   mkdir tensorflow
+   cd tensorflow
+   cp /dssg/share/sample/tensorflow/tf_test.py ./
+   module load miniconda3
+   conda create -n tf-env python=3.8.5
+   source activate tf-env
+   pip install --user nvidia-pyindex
+   pip install --user nvidia-tensorflow[horovod]
 
 .. _π2.0 TensorFlow:
 
