@@ -16,11 +16,11 @@
 连接昇腾节点
 ------------
 
-1. ssh方式(限校内IP，或使用SJTU VPN)
+1. ssh方式(从pilogin或sylogin使用超算账号登录)
 
 .. code:: shell
 
-   ssh username@202.120.58.248
+   ssh username@ascend  # username替换为超算账号
 
 安装Miniconda
 -------------
@@ -404,32 +404,42 @@ PyTorch模型迁移
 MEGA-Fold蛋白质结构预测推理
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. 下载\ `MindScience套件 <https://gitee.com/mindspore/mindscience>`__\ 并进入MEGA-Protein目录
+1. `安装昇思MindSpore框架 <#安装昇思MindSpore>`__
+
+2. 下载\ `MindScience套件 <https://gitee.com/mindspore/mindscience>`__
 
 .. code:: shell
 
    git clone https://gitee.com/mindspore/mindscience.git
-   cd ./mindscience/MindSPONGE/applications/MEGAProtein/ 
 
-2. 配置数据库检索路径
+3. 安装MindSpore SPONGE 计算生物领域套件
+
+.. code:: shell
+
+   cd ./mindscience/MindSPONGE/
+   pip install -r requirements.txt
+   pip install mindsponge-ascend
+
+4. 配置数据库检索路径
 
 根据数据库安装情况配置config/data.yaml中数据库搜索的相关配置database_search
 
 .. code:: shell
 
+   cd ./applications/MEGAProtein/
    vim ./config/data.yaml
 
    # configuration for template search
-   hhsearch_binary_path: "/home/data/megaprotein/hh-suite/build/bin/hhsearch" HHsearch可执行文件路径
-   kalign_binary_path: "/home/data/megaprotein/kalign/kalign" kalign可执行文件路径
-   pdb70_database_path: "/home/data/megaprotein/pdb70/pdb70" {pdb70文件夹}/pdb70
-   mmcif_dir: "/home/data/megaprotein/pdb_mmcif/mmcif_files" mmcif文件夹
-   obsolete_pdbs_path: "/home/data/megaprotein/pdb_mmcif/obsolete.dat" PDB IDs的映射文件路径
+   hhsearch_binary_path: "/home/megaprotein/hhsuite/bin/hhsearch" HHsearch可执行文件路径
+   kalign_binary_path: "/home/megaprotein/kalign/kalign" kalign可执行文件路径
+   pdb70_database_path: "/home/megaprotein/pdb70/pdb70" {pdb70文件夹}/pdb70
+   mmcif_dir: "/scratch/share/AlphaFold/data/pdb_mmcif/mmcif_files" mmcif文件夹
+   obsolete_pdbs_path: "/scratch/share/AlphaFold/data/pdb_mmcif/obsolete.dat" PDB IDs的映射文件路径
    max_template_date: "2100-01-01" 模板搜索截止时间，该时间点之后的模板会被过滤掉，默认值"2100-01-01"
    # configuration for Multiple Sequence Alignment
-   mmseqs_binary: "/home/data/mmseqs/bin/mmseqs" MMseqs2可执行文件路径
-   uniref30_path: "/home/data/megaprotein/uniref30/uniref30_2103/uniref30_2103_db" {uniref30文件夹}/uniref30_2103_db
-   database_envdb_dir: "/home/data/megaprotein/colabfold_envdb_202108/colabfold_envdb_202108_db" {colabfold_envdb文件夹}/colabfold_envdb_202108_db
+   mmseqs_binary: "/home/megaprotein/mmseqs/bin/mmseqs" MMseqs2可执行文件路径
+   uniref30_path: "/home/megaprotein/uniref30_2103/uniref30_2103_db" {uniref30文件夹}/uniref30_2103_db
+   database_envdb_dir: "/home/megaprotein/colabfold_envdb_202108/colabfold_envdb_202108_db" {colabfold_envdb文件夹}/colabfold_envdb_202108_db
    a3m_result_path: "./a3m_result/" mmseqs2检索结果(msa)的保存路径，默认值"./a3m_result/"
 
 3. 运行推理程序
