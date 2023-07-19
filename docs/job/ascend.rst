@@ -9,50 +9,30 @@
 参数：
 
 -  CPU: 4 × HUAWEI Kunpeng 920 5250 (2.6GHz, 48 cores)
--  NPU: Ascend 910A 32GB
+-  NPU: 8 × Ascend 910A 32GB
 -  架构：Arm
 -  系统: Centos Linux 8
 
 连接昇腾节点
 ------------
 
-1. ssh方式(从pilogin或sylogin使用超算账号登录)
+ssh方式(从π 2.0登录Ascend计算节点)
 
 .. code:: shell
 
    ssh username@ascend  # username替换为超算账号
 
-安装Miniconda
--------------
+使用昇腾上安装的Miniconda
+-------------------------
 
-1. 下载\ `Miniconda3 Linux-aarch64
-   64-bit <https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh>`__\ 。
+1. 激活Conda
 
 .. code:: shell
 
    mkdir Ascend
-   cd ./Ascend
-   wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-aarch64.sh
-
-2. 执行Miniconda3安装脚本。
-
-.. code:: shell
-
-   chmod +x ./Miniconda3-latest-Linux-aarch64.sh
-   ./Miniconda3-latest-Linux-aarch64.sh
-
-安装过程中注意:
-
--  建议安装路径为~/Ascend/miniconda3。
--  ``Do you wish the installer to initialize Miniconda3 by running conda init?``\ 建议选择\ ``no``\ 。
-
-3. 激活conda并创建一个虚拟环境。
-
-.. code:: shell
-
-   source ~/Ascend/miniconda3/bin/activate
-   conda create -n test python=3.7
-   conda activate test
+   cd Ascend
+   export PATH=/lustre/opt/contribute/ascend/miniconda3/bin:$PATH
+   source activate
 
 准备开发环境
 ------------
@@ -74,18 +54,15 @@
    pip3 install requests
    pip3 install absl-py
 
+.. tip::
+
+   使用conda安装虚拟环境时，由于在虚拟环境下安装了Python，也需要安装上述依赖，否则会报错缺少相关依赖文件。
+
 2. 设置环境变量
 
 .. code:: shell
 
-   #修改.bashrc文件
-   vim ~/.bashrc
-   #在文件最后一行添加环境变量
    source /usr/local/Ascend/ascend-toolkit/set_env.sh
-   #保存文件并退出
-   :wq!
-   #使环境变量生效
-   source ~/.bashrc
 
 安装深度学习框架
 ----------------
@@ -93,87 +70,108 @@
 安装PyTorch
 ~~~~~~~~~~~
 
-PyTorch配套的Python版本是：Python3.7.x（3.7.5 -
-3.7.11）、Python3.8.x（3.8.0 - 3.8.11）、Python3.9.x（3.9.0 - 3.9.2）。
+PyTorch配套支持的Python版本是：Python3.7.x（3.7.5
+-3.7.11）、Python3.8.x（3.8.0 - 3.8.11）、Python3.9.x（3.9.0 - 3.9.2）。
 
-1. 下载官方torch包。
+1. 创建虚拟环境，安装PyTorch环境依赖
 
 .. code:: shell
 
-   # 安装1.8.1版本
+   conda create -n pytorch-env python=3.7
+   source activate pytorch-env
+   pip3 install pyyaml
+   pip3 install wheel
+   pip3 install typing_extensions
+
+2. 下载官方torch包。
+
+.. code:: shell
+
+   # 如需下载1.8.1版本PyTorch，使用以下命令
    wget https://repo.huaweicloud.com/kunpeng/archive/Ascend/PyTorch/torch-1.8.1-cp37-cp37m-linux_aarch64.whl
-   # 安装1.11.0版本
+   # 如需下载1.11.0版本PyTorch，使用以下命令
    wget https://repo.huaweicloud.com/kunpeng/archive/Ascend/PyTorch/torch-1.11.0-cp37-cp37m-linux_aarch64.whl
 
-2. 安装torch
+3. 安装torch
 
 .. code:: shell
 
-   # 安装1.8.1版本
+   # 如需安装1.8.1版本PyTorch，使用以下命令
    pip3 install torch-1.8.1-cp37-cp37m-linux_aarch64.whl
-   # 安装1.11.0版本
+   # 如需安装1.11.0版本PyTorch，使用以下命令
    pip3 install torch-1.11.0-cp37-cp37m-linux_aarch64.whl
 
-3. 下载PyTorch插件torch_npu。
+4. 下载PyTorch插件torch_npu。
 
 .. code:: shell
 
-   # 安装1.8.1版本
+   # 如需安装1.8.1版本PyTorch插件，使用以下命令
    wget https://gitee.com/ascend/pytorch/releases/download/v5.0.rc1-pytorch1.8.1/torch_npu-1.8.1.post1-cp37-cp37m-linux_aarch64.whl
-   # 安装1.11.0版本
+   # 如需安装1.11.0版本PyTorch插件，使用以下命令
    wget https://gitee.com/ascend/pytorch/releases/download/v5.0.rc1-pytorch1.11.0/torch_npu-1.11.0-cp37-cp37m-linux_aarch64.whl
    #如果下载whl包时出现ERROR: cannot verify gitee.com's certificate报错，可在下载命令后加上--no-check-certificate参数避免此问题。样例代码如下所示。
    wget https://gitee.com/ascend/pytorch/releases/download/v5.0.rc1-pytorch1.11.0/torch_npu-1.11.0-cp37-cp37m-linux_aarch64.whl --no-check-certificate
 
-4. 安装torch_npu插件
+5. 安装torch_npu插件
 
 .. code:: shell
 
-   # 安装1.8.1版本
+   # 如需安装1.8.1版本PyTorch配套插件，使用以下命令
    pip3 install torch_npu-1.8.1.post1-cp37-cp37m-linux_aarch64.whl
-   # 安装1.11.0版本
+   # 如需安装1.8.1版本PyTorch配套插件，使用以下命令
    pip3 install torch_npu-1.11.0-cp37-cp37m-linux_aarch64.whl
 
-5. 安装对应版本的torchvision
+6. 安装对应版本的torchvision
 
 .. code:: shell
 
-   #PyTorch 1.8.1需安装0.9.1版本，PyTorch 1.11.0需安装0.12.0版本
+   # 如需安装1.8.1版本PyTorch配套torchvision，使用以下命令
    pip3 install torchvision==0.9.1
+   # 如需安装1.8.1版本PyTorch配套torchvision，使用以下命令
+   pip3 install torchvision==0.12.0
 
-6. 安装深度学习加速库Apex
+7. 安装深度学习加速库Apex
 
 .. code:: shell
 
-   #安装1.8.1版本
+   # 如需安装1.8.1版本PyTorch配套Apex，使用以下命令
    pip3 install apex --no-index --find-links https://ascend-repo.obs.cn-east-2.myhuaweicloud.com/MindX/OpenSource/pytorch1_8_1/index.html --trusted-host ascend-repo.obs.cn-east-2.myhuaweicloud.com
-   #安装1.11.0版本
+   # 如需安装1.11.0版本PyTorch配套Apex，使用以下命令
    pip3 install apex --no-index --find-links https://ascend-repo.obs.cn-east-2.myhuaweicloud.com/MindX/OpenSource/pytorch1_11_0/index.html --trusted-host ascend-repo.obs.cn-east-2.myhuaweicloud.com
+
+8. 执行以下命令验证，若返回True则说明安装成功
+
+.. code:: shell
+
+   python3 -c "import torch;import torch_npu;print(torch_npu.npu.is_available())"
 
 安装TensorFlow
 ~~~~~~~~~~~~~~
 
-1. 配置环境变量
+1. 配置环境变量，创建虚拟环境
 
 .. code:: shell
 
-   #修改.bashrc文件
-   vim ~/.bashrc
-   #在文件最后一行添加环境变量
    source /usr/local/Ascend/tfplugin/set_env.sh
-   #保存并退出文件
-   :wq!
-   #使环境变量生效
-   source ~/.bashrc
+   conda create -n tensorflow-env python=3.7
+   source activate tensorflow-env
 
-2. 安装TensorFlow1.15
+2. 安装TensorFlow
 
 .. code:: shell
 
-   #安装TensorFlow1.15
+   # 如需安装TensorFlow1.15版本，使用以下命令
    pip3 install tensorflow==1.15.0 --no-index --find-links  https://ascend-repo.obs.cn-east-2.myhuaweicloud.com/MindX/OpenSource/python/index.html --trusted-host ascend-repo.obs.cn-east-2.myhuaweicloud.com
-   #安装TensorFlow2.6.5
+   # 如需安装TensorFlow2.6.5版本，使用以下命令
    pip3 install tensorflow==2.6.5 --no-index --find-links  https://ascend-repo.obs.cn-east-2.myhuaweicloud.com/MindX/OpenSource/python/index.html --trusted-host ascend-repo.obs.cn-east-2.myhuaweicloud.com
+
+3. 执行以下命令验证安装效果
+
+.. code:: shell
+
+   python3 -c "import tensorflow as tf; print(tf.reduce_sum(tf.random.normal([1000, 1000])))"
+
+若返回张量则表示安装成功。
 
 安装昇思MindSpore
 ~~~~~~~~~~~~~~~~~
@@ -183,9 +181,7 @@ PyTorch配套的Python版本是：Python3.7.x（3.7.5 -
 .. code:: shell
 
    conda create -n mindspore_py37 python=3.7 -y
-   conda activate mindspore_py37
-   #升级pip
-   python -m pip install -U pip
+   source activate mindspore_py37
 
 2. 更新pip
 
@@ -224,40 +220,33 @@ PyTorch配套的Python版本是：Python3.7.x（3.7.5 -
 说明MindSpore安装成功。
 
 运行样例
-~~~~~~~~
+--------
+
+运行PyTorch样例
+~~~~~~~~~~~~~~~
 
 1. 获取模型脚本并进入模型代码所在目录。
 
 .. code:: shell
 
    git clone https://gitee.com/ascend/ModelZoo-PyTorch.git
-   cd ModelZoo-PyTorch/PyTorch/contrib/cv/classification/MobileNetV3_large_100_for_PyTorch
+   cd ModelZoo-PyTorch/PyTorch/built-in/cv/classification/MobileNetV3-Large_ID1784_for_PyTorch
+   conda activate pytorch-env
 
-2. 配置虚拟环境
-
-.. code:: shell
-
-   conda create -n benchmark python=3.7
-   conda activate benchmark
-
-3. 安装PyTorch框架
-
-见\ `安装PyTorch <#安装PyTorch>`__\ 小节
-
-4. 安装依赖
+2. 安装依赖
 
 .. code:: shell
 
-   cd ModelZoo-PyTorch/PyTorch/contrib/cv/classification/MobileNetV3_large_100_for_PyTorch
+   pip install -r 1.8_requirements.txt
 
-5. 获取数据集
+3. 获取数据集
 
 .. code:: shell
 
-   cd /home/tiny-imagenet-200.zip ./
+   cp /lustre/share/scidata/tiny-imagenet-200.zip ./
    unzip tiny-imagenet-200.zip
 
-6. 运行训练脚本
+4. 运行训练脚本
 
 .. code:: shell
 
@@ -329,7 +318,7 @@ PyTorch模型迁移
    │   │   ├── modelarts_path_manager.py    // 启用ModelArts参数，会生成该路径映射适配层代码文件
    │   │   ├── path_mapping_config.py       // 启用ModelArts参数，会生成该路径映射配置文件
 
-关于迁移工具的高级功能，请见昇腾文档\ `《分析迁移工具》 <https://www.hiascend.com/document/detail/zh/canncommercial/63RC1/devtools/auxiliarydevtool/atlasfmkt_16_0001.html>`__\ 中的“msFmkTransplt”章节。
+关于迁移工具的高级功能，请见昇腾文档\ `《分析迁移工具》 <https://www.hiascend.com/document/detail/zh/canncommercial/63RC1/devtools/auxiliarydevtool/atlasfmkt_16_0001.html>`__\ 中的”msFmkTransplt”章节。
 
 迁移单卡脚本为多卡脚本
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -404,7 +393,11 @@ PyTorch模型迁移
 MEGA-Fold蛋白质结构预测推理
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. `安装昇思MindSpore框架 <#安装昇思MindSpore>`__
+1. 激活mindspore_py37环境
+
+.. code:: shell
+
+   conda activate mindspore_py37
 
 2. 下载\ `MindScience套件 <https://gitee.com/mindspore/mindscience>`__
 
@@ -429,6 +422,10 @@ MEGA-Fold蛋白质结构预测推理
    cd ./applications/MEGAProtein/
    vim ./config/data.yaml
 
+相关参数配置如下：
+
+.. code:: shell
+
    # configuration for template search
    hhsearch_binary_path: "/home/megaprotein/hhsuite/bin/hhsearch" HHsearch可执行文件路径
    kalign_binary_path: "/home/megaprotein/kalign/kalign" kalign可执行文件路径
@@ -442,7 +439,13 @@ MEGA-Fold蛋白质结构预测推理
    database_envdb_dir: "/home/megaprotein/colabfold_envdb_202108/colabfold_envdb_202108_db" {colabfold_envdb文件夹}/colabfold_envdb_202108_db
    a3m_result_path: "./a3m_result/" mmseqs2检索结果(msa)的保存路径，默认值"./a3m_result/"
 
-3. 运行推理程序
+5. 下载模型权重
+
+.. code:: shell
+
+   wget https://download.mindspore.cn/mindscience/mindsponge/MEGAFold/checkpoint/MEGA_Fold_1.ckpt
+
+6. 运行推理程序
 
 .. code:: shell
 
@@ -450,9 +453,9 @@ MEGA-Fold蛋白质结构预测推理
    --data_config ./config/data.yaml \ #数据预处理参数配置
    --model_config ./config/model.yaml \ #模型超参配置
    --run_platform Ascend \ #运行后端，Ascend或者GPU，默认Ascend
-   --input_path INPUT_FILE_PATH \ #输入文件目录，可包含多个.fasta/.pkl文件
+   --input_path ./examples/pkl/ \ #输入文件目录，可包含多个.fasta/.pkl文件
    --use_pkl \ #使用pkl数据作为输入，默认False
-   --checkpoint_path CHECKPOINT_PATH \模型权重文件路径
+   --checkpoint_path ./MEGA_Fold_1.ckpt \模型权重文件路径
 
 参考资料
 --------
