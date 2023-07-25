@@ -83,7 +83,7 @@ PyG将被安装到名为 ```pyg-gpu-a100``` 的Conda环境中。
 
     $ wget https://codeload.github.com/pyg-team/pytorch_geometric/tar.gz/refs/tags/2.3.1 -O pyg-2.3.1.tar.gz
     $ tar xzvpf pyg-2.3.1.tar.gz
-    $ pytorch_geometric-2.3.1/examples
+    $ cd pytorch_geometric-2.3.1/examples
 
 运行名为 ```dna`` 的算例，该算例做运行200个Epoch训练，耗时约1分钟。
 
