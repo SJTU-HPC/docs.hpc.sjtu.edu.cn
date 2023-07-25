@@ -11,4 +11,5 @@ AI 计算
    pytorch
    keras
    tvm
+   pyg
 
