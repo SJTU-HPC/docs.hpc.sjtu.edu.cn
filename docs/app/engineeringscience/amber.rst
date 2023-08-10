@@ -6,9 +6,13 @@ Amber
 简介
 ----
 
-Amber 是分子动力学软件，用于蛋白质、核酸、糖等生物大分子的计算模拟。Amber 为商业软件，需购买授权使用。
+Amber 是分子动力学软件，用于蛋白质、核酸、糖等生物大分子的计算模拟。
 
-如需使用集群上的 Amber，请发邮件至 hpc 邮箱，附上课题组购买 Amber 的证明，并抄送超算帐号负责人。
+Amber 为商业软件，根据 \ `Amber官网 <https://ambermd.org/GetAmber.php>`__\ ，非商业性使用的用户在官网登记，阅读并同意non-commerical license后即可下载软件安装包。
+
+如需使用集群上的 Amber，请下载\ `non-commerical license <https://hpc.sjtu.edu.cn/Item/docs/AMBER_Software_License.pdf>`__\，按照下面模板发送邮件至 hpc 邮箱。
+
+邮件模板： 我是超算账号xxx使用人，已经阅读了附件的License，同意该许可，并确认所有使用均为非商业性使用。
 
 算例存放位置
 --------------
