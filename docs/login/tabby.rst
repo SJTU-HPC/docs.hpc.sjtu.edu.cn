@@ -113,7 +113,7 @@ SFTP功能
 
 .. image:: ../img/tabby_fail-3.png
 
-* 帐号被冻结
+* 账号被冻结
 
 .. image:: ../img/tabby_fail-4.png
 
