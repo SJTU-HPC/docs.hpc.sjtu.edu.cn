@@ -2,7 +2,7 @@
 登录交我算集群
 *******************
 
-获取交我算帐号后，可通过浏览器登录 \ `可视化平台 HPC Studio <../studio/index.html>`__\ ，也可通过传统的 SSH 登录。下面将介绍 SSH 登录方法。
+获取交我算账号后，可通过浏览器登录 \ `可视化平台 HPC Studio <../studio/index.html>`__\ ，也可通过传统的 SSH 登录。下面将介绍 SSH 登录方法。
 
 .. toctree::
    :maxdepth: 1
