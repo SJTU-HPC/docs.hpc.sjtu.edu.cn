@@ -64,6 +64,15 @@ ssh方式(从π 2.0登录Ascend计算节点)
 
    source /usr/local/Ascend/ascend-toolkit/set_env.sh
 
+.. tip::
+
+   若要进行多卡训练，需要使用新版的CANN软件。目前集群已经安装了7.0.RC1.alpha001版本的CANN，使用时需设置
+
+   .. code:: shell
+      
+      source /opt/Ascend/ascend-toolkit/set_env.sh
+
+
 安装深度学习框架
 ----------------
 
@@ -118,7 +127,7 @@ PyTorch配套支持的Python版本是：Python3.7.x（3.7.5
 
    # 如需安装1.8.1版本PyTorch配套插件，使用以下命令
    pip3 install torch_npu-1.8.1.post1-cp37-cp37m-linux_aarch64.whl
-   # 如需安装1.8.1版本PyTorch配套插件，使用以下命令
+   # 如需安装1.11.0版本PyTorch配套插件，使用以下命令
    pip3 install torch_npu-1.11.0-cp37-cp37m-linux_aarch64.whl
 
 6. 安装对应版本的torchvision
@@ -127,7 +136,7 @@ PyTorch配套支持的Python版本是：Python3.7.x（3.7.5
 
    # 如需安装1.8.1版本PyTorch配套torchvision，使用以下命令
    pip3 install torchvision==0.9.1
-   # 如需安装1.8.1版本PyTorch配套torchvision，使用以下命令
+   # 如需安装1.11.0版本PyTorch配套torchvision，使用以下命令
    pip3 install torchvision==0.12.0
 
 7. 安装深度学习加速库Apex
@@ -358,7 +367,7 @@ PyTorch模型迁移
 .. code:: shell
 
    #两卡训练示例脚本
-   source env_npu.sh
+   source /opt/Ascend/ascend-toolkit/set_env.sh
    cur_path=`pwd`
    if [ $(uname -m) = "aarch64" ]
    then
