@@ -12,4 +12,4 @@ AI 计算
    keras
    tvm
    pyg
-
+   detectron2
