@@ -134,7 +134,7 @@ ARM VASP
 自行编译 VASP
 -------------------
 
-VASP 在集群上使用 intel 套件自行编译十分容易。下面以思源一号为例，介绍安装和使用方法。
+VASP 在集群上使用 intel 套件自行编译十分容易。下面以思源一号为例，介绍CPU版本的安装和使用方法。
 
 1. 先申请计算节点，然后加载 intel 套件
 
@@ -191,6 +191,71 @@ VASP 在集群上使用 intel 套件自行编译十分容易。下面以思源�
 
    mpirun ~/vasp_std
 
+VASP-GPU版本编译安装
+
+由于VASP为商业软件，需要用户自行申请license、在官网自行下载源码包。
+下面介绍如何在思源一号上的a100节点上，编译安装GPU版本VASP，本文以6.3.0为例编译nvhpc+acc版本，其他版本请参考vasp官网。
+
+1. 先申请计算节点，然后加载编译环境
+
+.. code:: bash
+
+   srun -n 16 --gres=gpu:1 -p a100 --pty /bin/bash       # 申请计算节点
+
+   module load nvhpc/23.3-gcc-11.2.0
+   module load oneapi/2021.4.0
+   module unload intel-oneapi-mpi/2021.4.0
+   module load gcc/11.2.0 cuda/11.8.0 
+
+2. 解压缩 VASP 安装包，进入 ``vasp.x.x.x`` 文件夹，可看到 ``arch``, ``src`` 等文件夹。
+
+.. code:: bash
+
+   cp arch/makefile.include.nvhpc_acc makefile.include
+   ＃　修改makefile.include文件
+   ＃　删除或注释 BLAS and LAPACK，scaLAPACK，FFTW，新增　MKL 设置
+   ＃ Intel MKL (FFTW, BLAS, LAPACK, and scaLAPACK
+   MKLROOT    ?= /dssg/opt/icelake/linux-centos8-icelake/gcc-8.5.0/intel-oneapi-mkl-2021.4.0-r7h6alnulyzgb6iqvxhovmwrajvwbqxf/mkl/2021.4.0/
+   LLIBS      += -Mmkl -L${MKLROOT}/lib/intel64 -lmkl_scalapack_lp64 -lmkl_blacs_openmpi_lp64
+   INCS       += -I$(MKLROOT)/include/fftw
+   
+3. 输入 ``make`` 开始编译
+
+.. code:: bash
+
+   make
+
+请注意，为了避免编译出错，推荐直接使用 make，不要添加 -jN (若一定要使用，请使用完整的命令： ``make DEPS=1 -jN`` )
+
+编译完成后，bin 文件夹里将出现三个绿色的文件： ``vasp_std``, ``vasp_gam``, ``vasp_ncl``
+
+可将 ``vasp_std`` 复制到 ``home/bin`` 里，后续可以直接调用：
+
+.. code:: bash
+
+   mkdir ~/bin       # 若 home 下未曾建过 bin，则新建一个；若已有，请略过此句
+   cp vasp_std ~/bin
+
+4. 作业脚本
+   
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH -J vasp-gpu
+   #SBATCH -p a100
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=16
+   #SBATCH --gres=gpu:1
+
+   module load nvhpc/23.3-gcc-11.2.0
+   module load oneapi/2021.4.0
+   module unload intel-oneapi-mpi/2021.4.0
+   module load gcc/11.2.0 cuda/11.8.0
+   ulimit -s unlimited
+   ulimit -l unlimited
+
+   mpirun -np 1 ~/bin/vasp_std
 
 VASP 算例及测试
 ---------------------
