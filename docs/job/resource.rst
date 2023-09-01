@@ -100,3 +100,148 @@
    Job Wall-clock time: 00:09:46
    Memory Utilized: 23.33 GB
    Memory Efficiency: 14.58% of 160.00 GB
+
+GPU INFO
+---------
+
+下面介绍如何通过JOB ID获取GPU信息以及如何获取CUDA_VISIBLE_DEVICES变量并在程序中利用该变量
+
+NVIDIA显卡的UUID（Universally Unique Identifier，通用唯一标识符）和BUS ID（总线标识符）是两个重要的标识符。
+
+UUID（Universally Unique
+Identifier）：UUID是一个128位的唯一标识符，用于在系统中识别每个独立的NVIDIA显卡设备。每个显卡设备都有一个唯一的UUID，可以通过调用相关命令或API来获取它。UUID在不同系统和环境中是持久的，即使重新启动系统或重新插拔显卡，UUID也不会改变。
+
+BUS ID（总线标识符）：BUS ID是用于标识系统中不同物理或逻辑总线上的NVIDIA显卡设备的标识符。BUS ID提供了关于显卡设备如何连接到系统总线的信息，如PCI总线等。BUS ID通常采用“domain:bus:device.function”的形式表示，其中domain表示域，bus表示总线编号，device表示设备编号，function表示设备的功能编号。BUS ID主要用于管理和配置显卡设备，以及确定显卡在系统中的位置。
+
+通过JOB ID获取GPU信息 
+------------------------
+下面介绍如何通过jobid查询UUID及BUSID信息：
+
+脚本文件
+~~~~~~~~
+
+将下面脚本保存至\ ``getGPUInfo``\ 的文本中
+
+.. code:: bash
+
+   #!/bin/bash
+   JOBID=$1
+   GPUNUMS=`scontrol show jobs ${JOBID}|grep "gres:gpu" |awk -F ':' '{print $3}'`
+   GPUHOST=`scontrol show jobs ${JOBID}|grep "NodeList="|sed -n '2p'|awk -F '=' '{print $2}'`
+   echo JobID: ${JOBID}
+   echo NodeHost: ${GPUHOST}
+   echo GPUNums: ${GPUNUMS}
+   echo Information of allocate GPUs:
+   ssh ${GPUHOST} "echo UUID: && nvidia-smi -L"
+   ssh ${GPUHOST} "echo BUS_ID: && nvidia-smi -q|grep 'Bus Id'|sed -e 's/^.*: //' -e 's/ $//'"
+   
+执行脚本加JOB ID
+~~~~~~~~~~~~~~~~
+
+针对正在运行的作业，执行脚本加作业ID可获取正在运行作业的节点中的GPU信息
+
+.. code:: bash
+
+   $ chmod +x getGPUInfo
+   $ ./getGPUInfo 27180318
+   JobID: 27180318
+   NodeHost: gpu09
+   GPUNums: 4
+   Information of allocate GPUs:
+   UUID:
+   GPU 0: NVIDIA A100-SXM4-40GB (UUID: GPU-5cd88acf-5391-8562-cd34-b543319224b4)
+   GPU 1: NVIDIA A100-SXM4-40GB (UUID: GPU-7bc1435d-37b5-d4b8-6ac1-df72927a54e0)
+   GPU 2: NVIDIA A100-SXM4-40GB (UUID: GPU-4dedf87e-d147-83cc-c5bd-ec16324afa15)
+   GPU 3: NVIDIA A100-SXM4-40GB (UUID: GPU-2bf8c199-1e4a-31cd-470b-4ba6329d9a60)
+   BUS_ID:
+   00000000:31:00.0
+   00000000:4B:00.0
+   00000000:CA:00.0
+   00000000:E3:00.0
+
+获取CUDA_VISIBLE_DEVICES
+------------------------
+
+CUDA_VISIBLE_DEVICES是一个环境变量，用于在使用CUDA编程时指定可见的GPU设备。它可以用来控制程序所使用的GPU设备的数量和顺序。
+
+当用户申请有GPU卡的任务时，slurm系统会根据用户申请的GPU熟练来设置CUDA_VISIBLE_DEVICES环境变量，只有相应编号的GPU设备会对程序可见，其他GPU设备则不可使用。
+
+srun交互式作业
+~~~~~~~~~~~~~~
+
+在srun申请交互式作业后，可在shell中直接输出\ ``$CUDA_VISIBLE_DEVICES``\ 变量
+
+.. code:: bash
+
+   $  srun -n 8 -p dgx2 --gres=gpu:2 --pty /bin/bash
+   srun: job 27182411 queued and waiting for resources
+   srun: job 27182411 has been allocated resources
+   $ echo $CUDA_VISIBLE_DEVICES
+   0,1
+
+作业脚本
+~~~~~~~~
+
+也可以在作业脚本最前面输出\ ``$CUDA_VISIBLE_DEVICES``\ 变量
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH -J test
+   #SBATCH -n 8
+   #SBATCH --gres=gpu:2
+   #SBATCH -p dgx2
+
+   echo $CUDA_VISIBLE_DEVICES
+   ···
+
+案例测试
+~~~~~~~~
+
+以下是一个简单的torch程序，展示了根据\ ``$CUDA_VISIBLE_DEVICES``\ 变量，设置程序使用的GPU
+
+.. code:: bash
+
+   $ cat pytorch_test.py
+   import torch
+   from torch import nn
+   from torch.optim import Adam
+   from torch.nn.parallel import DataParallel
+   import os
+   class DEMO_model(nn.Module):
+           def __init__(self, in_size, out_size):
+                   super().__init__()
+                   self.fc = nn.Linear(in_size, out_size)
+           def forward(self, inp):
+                   outp = self.fc(inp)
+                   print(inp.shape, outp.device)
+                   return outp
+   model = DEMO_model(10, 5).to('cuda')
+
+   os.system("echo CUDA_VISIBLE_DEVICES: $CUDA_VISIBLE_DEVICES")
+   device_ids = os.environ.get('CUDA_VISIBLE_DEVICES')
+   device_ids = device_ids.split(',')
+   device_ids = [int(number) for number in device_ids]
+   model = DataParallel(model, device_ids=device_ids) 
+   adam = Adam(model.parameters())
+   # 进行训练
+   for i in range(1):
+           x = torch.rand([128, 10])
+           y = model(x) 
+           loss = torch.norm(y)
+           loss.backward()
+           adam.step()
+
+执行程序，需要加载torch环境
+
+.. code:: bash
+
+   $ srun -n 8 -p dgx2 --gres=gpu:2 -w vol08 --pty /bin/bash
+   $ module load miniconda3
+   $ source activate
+   (base) $ conda activate pytorch-env
+   (pytorch-env) $ python pytorch_test.py
+   CUDA_VISIBLE_DEVICES: 0,1
+   torch.Size([64, 10]) cuda:0
+   torch.Size([64, 10]) cuda:1
+
