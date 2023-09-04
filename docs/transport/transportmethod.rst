@@ -94,3 +94,67 @@ $ rsync -avr --progress [源文件路径] [目标路径]
    # 示例6: 该用户将lustre个人目录下的数据~/data搬运到dssg个人目录~/data下
    $ ssh expuser01@data.hpc.sjtu.edu.cn
    $ scp -r /lustre/home/acct-exp/expuser01/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data/
+
+π 2.0/思源一号集群向冷存储传输
+==============================
+
+冷存储系统挂载在 ``data`` 节点和 ``sydata`` 节点的 ``/archive`` 下，可以将不常用的数据转移到冷存储。
+
+数据传输
+--------
+
+``rsync`` 支持增量传输、断点续传、文件校验等功能，建议用 ``rsync`` 命令拷贝数据。
+
+假设用户 expuser01 需要将 Lustre 个人目录下的数据
+``$HOME/data/`` 搬运到冷存储下的个人目录
+``$ARCHIVE/data``\ ，需要执行的命令为：
+
+.. code:: bash
+
+   # -a 表示保存所有元数据，-r 表示包含子目录，--progress 表示显示进展，其余可用参数见 rsync 文档
+   rsync -ar --progress $HOME/data/ $ARCHIVE/data
+
+数据校验
+--------
+
+数据传输可能受网络波动影响，建议在数据传输完成之后，通过数据校验确认数据完整。对于思源一号集群，向冷存储的传输受网络波动影响可能性更大，强烈建议完成数据校验。
+
+对于少量文件，可以用 md5sum 校验。对于多级目录结构，可以用 md5deep 工具。
+
+**md5sum 校验**
+
+``md5sum``
+可以生成文件校验码，来发现文件传输（网络传输、复制、本地不同设备间的传输）异常造成的文件内容不一致的情况。一般文件越大，生成 md5 校验和的时间越长。
+
+.. code:: bash
+
+   # 传输之前，对 txt 文件生成 md5 校验码
+   ls *.txt | xargs -i -P 5 md5sum {} > file.md5
+
+   # 通过 rsync 传输
+   # ...
+
+   # 传输之后，生成 md5 校验码
+   # ...
+
+   # 传输完成后，比较传输前后 md5 校验码
+   diff file1.md5 file2.md5
+
+**md5deep 校验**
+
+``md5deep`` 比 ``md5sum`` 命令更加丰富，可以递归地检查整个目录树，为子目录中的每个文件生成 md5 值。
+
+假设用户 expuser01 需要为 ``$HOME/data/`` 下的子目录的每个文件生成 md5 值，需要执行以下命令：
+
+.. code:: bash
+
+   cd $HOME/data/
+
+   # 传输之前，对子目录的每个文件生成 md5 值
+   md5deep -rl ./* > file.md5deep
+
+   # 通过 rsync 传输数据
+   # ...
+
+   # 传输之后校验数据，和 md5 值不匹配的文件会被输出
+   md5deep -rx file.md5deep $ARCHIVE/data/
