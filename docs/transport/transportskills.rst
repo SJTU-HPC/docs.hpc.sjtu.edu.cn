@@ -50,22 +50,4 @@ scp，rsync本身都不支持多进程传输，因此需要利用外部指令并
 | 5      | 3m47s  |
 +--------+--------+
 
-通过sshfs挂载家目录
-===================
-
-.. code:: bash
-
-   # 假设用户expuser01在π 2.0集群上个人目录为/lustre/home/acct-exp/expuser01 ；思源一号的家目录为/dssg/home/acct-exp/expuser01
-
-   # 示例1：在linux系统环境挂载π 2.0集群上的个人家目录（需要先安装sshfs软件）
-   # sshfs -p 22 -o allow_other expuser01@data.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/ /mountpoint
-
-   # 示例2：在linux系统环境挂载思源一号集群上的个人家目录（需要先安装sshfs软件）
-   # sshfs -p 22 -o allow_other expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/ /mountpoint
-
-   # 示例3：在windows系统环境挂载π 2.0集群上的个人家目录（需要先安装WinFSP：https://github.com/billziss-gh/winfsp ，再安装sshfs-win：https://github.com/billziss-gh/sshfs-win ）
-   # 在Windows的文件资源管理器中点击『映射网络驱动器』： 添加 \\sshfs\expuser01@202.120.58.253 后点击『连接』
-
-   # 示例4：在windows系统环境挂载思源一号集群上的个人家目录（需要先安装WinFSP：https://github.com/billziss-gh/winfsp ，再安装sshfs-win：https://github.com/billziss-gh/sshfs-win ）
-   # 在Windows的文件资源管理器中点击『映射网络驱动器』： 添加 \\sshfs\expuser01@111.186.43.4 后点击『连接』
 
