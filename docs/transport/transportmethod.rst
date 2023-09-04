@@ -105,6 +105,29 @@ $ rsync -avr --progress [源文件路径] [目标路径]
 
 ``rsync`` 支持增量传输、断点续传、文件校验等功能，建议用 ``rsync`` 命令拷贝数据。
 
+**使用 tmux 会话**
+
+如果直接在命令行执行数据传输命令，网络不稳定可能导致传输中断，因此建议先开启 tmux 会话，再传输数据。相应的命令为：
+
+.. code:: bash
+
+   # 开启 tmux 会话，将其命名为 transport
+   tmux new -s transport
+
+   # 分离会话
+   tmux detach
+
+   # 查看所有的 tmux 会话
+   tmux ls
+
+   # 回到名为 transport 会话
+   tmux attach -t transport
+
+   # 彻底关闭 transport 会话
+   tmux kill-session -t transport
+
+**使用 rsync 传输数据**
+
 假设用户 expuser01 需要将 Lustre 个人目录下的数据
 ``$HOME/data/`` 搬运到冷存储下的个人目录
 ``$ARCHIVE/data``\ ，需要执行的命令为：
@@ -119,12 +142,36 @@ $ rsync -avr --progress [源文件路径] [目标路径]
 
 数据传输可能受网络波动影响，建议在数据传输完成之后，通过数据校验确认数据完整。对于思源一号集群，向冷存储的传输受网络波动影响可能性更大，强烈建议完成数据校验。
 
-对于少量文件，可以用 md5sum 校验。对于多级目录结构，可以用 md5deep 工具。
+对于少量文件，可以用 md5sum 校验。对于多级目录结构，可以用 md5deep
+工具。
+
+**md5deep 校验（推荐）**
+
+``md5deep`` 比 ``md5sum``
+命令更加丰富，可以递归地检查整个目录树，为子目录中的每个文件生成 md5
+值。
+
+假设用户 expuser01 需要为 ``$HOME/data/``
+下的子目录的每个文件生成 md5 值，需要执行以下命令：
+
+.. code:: bash
+
+   cd $HOME/data/
+
+   # 传输之前，对子目录的每个文件生成 md5 值
+   md5deep -rl ./* > file.md5deep
+
+   # 通过 rsync 传输数据
+   # ...
+
+   # 传输之后校验数据，和 md5 值不匹配的文件会被输出
+   md5deep -rx file.md5deep $ARCHIVE/data
 
 **md5sum 校验**
 
 ``md5sum``
-可以生成文件校验码，来发现文件传输（网络传输、复制、本地不同设备间的传输）异常造成的文件内容不一致的情况。一般文件越大，生成 md5 校验和的时间越长。
+可以生成文件校验码，来发现文件传输（网络传输、复制、本地不同设备间的传输）异常造成的文件内容不一致的情况。一般文件越大，生成
+md5 校验和的时间越长。
 
 .. code:: bash
 
@@ -140,21 +187,15 @@ $ rsync -avr --progress [源文件路径] [目标路径]
    # 传输完成后，比较传输前后 md5 校验码
    diff file1.md5 file2.md5
 
-**md5deep 校验**
+清理存储空间
+------------
 
-``md5deep`` 比 ``md5sum`` 命令更加丰富，可以递归地检查整个目录树，为子目录中的每个文件生成 md5 值。
+在完成数据传输、数据校验之后，可以清理原文件占用的存储空间。
 
-假设用户 expuser01 需要为 ``$HOME/data/`` 下的子目录的每个文件生成 md5 值，需要执行以下命令：
+.. danger::
+    下面的命令将直接删除对应路径下所有的内容，删除之后无法恢复数据，请确认路径正确后再执行！
 
 .. code:: bash
 
-   cd $HOME/data/
-
-   # 传输之前，对子目录的每个文件生成 md5 值
-   md5deep -rl ./* > file.md5deep
-
-   # 通过 rsync 传输数据
-   # ...
-
-   # 传输之后校验数据，和 md5 值不匹配的文件会被输出
-   md5deep -rx file.md5deep $ARCHIVE/data/
+   # 假设原文件存储位置在 /lustre/home/acct-exp/expuser01/data/
+   rm -rf /lustre/home/acct-exp/expuser01/data/
