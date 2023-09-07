@@ -50,4 +50,13 @@ scp，rsync本身都不支持多进程传输，因此需要利用外部指令并
 | 5      | 3m47s  |
 +--------+--------+
 
+提高数据传输速度的技巧(使用bbcp工具)
+============================================
+
+和 ``scp``、``rsync`` 命令相比，``bbcp`` 可以更高效地通过网络传输数据。data 节点和 sydata 节点都已经安装 ``bbcp`` 工具，可以直接使用
+
+.. code:: bash
+
+    # 示例：将 pi 2.0 集群 lustre 目录 /lustre/home/acct-hpc/expuser01/data/ 下的文件数据传送至归档存储 /archive/home/acct-hpc/expuser01/data/ 目录
+    bbcp -P 2 -w 2M -s 10 -r $HOME/expuser01/data/ $ARCHIVE/expuser01/data/
 
