@@ -9,6 +9,7 @@
 
    alphafold2
    augustus
+   aspera
    basil-anise
    batvi
    bcftools

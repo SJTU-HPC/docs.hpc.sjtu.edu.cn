@@ -164,7 +164,7 @@ BUS ID（总线标识符）：BUS ID是用于标识系统中不同物理或逻�
 
 CUDA_VISIBLE_DEVICES是一个环境变量，用于在使用CUDA编程时指定可见的GPU设备。它可以用来控制程序所使用的GPU设备的数量和顺序。
 
-当用户申请有GPU卡的任务时，slurm系统会根据用户申请的GPU熟练来设置CUDA_VISIBLE_DEVICES环境变量，只有相应编号的GPU设备会对程序可见，其他GPU设备则不可使用。
+当用户申请有GPU卡的任务时，slurm系统会根据用户申请的GPU数量来设置CUDA_VISIBLE_DEVICES环境变量，只有相应编号的GPU设备会对程序可见，其他GPU设备则不可使用。
 
 srun交互式作业
 ~~~~~~~~~~~~~~
