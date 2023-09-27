@@ -81,6 +81,7 @@
    r-rgl
    relion
    retroseq
+   rfdiffusion
    rna-seqc
    rosettafold
    salmon
