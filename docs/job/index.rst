@@ -16,3 +16,4 @@
    siyuan
    ascend
    resource
+   kos
