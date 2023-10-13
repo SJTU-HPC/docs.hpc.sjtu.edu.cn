@@ -42,3 +42,4 @@
    glibc
    spooles
    dealii
+   nvitop
