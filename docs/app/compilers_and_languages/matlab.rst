@@ -19,9 +19,17 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 +----------+---------------------------+
 | 思源一号 | module load matlab/r2022b |
 +----------+---------------------------+
+| 思源一号 | module load matlab/r2023a |
++----------+---------------------------+
+| 思源一号 | module load matlab/r2023b |
++----------+---------------------------+
 | pi 2.0   | module load matlab/r2022a |
 +----------+---------------------------+
 | pi 2.0   | module load matlab/r2022b |
++----------+---------------------------+
+| pi 2.0   | module load matlab/r2023a |
++----------+---------------------------+
+| pi 2.0   | module load matlab/r2023b |
 +----------+---------------------------+
 
 算例下载
@@ -318,7 +326,14 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 
 .. code:: matlab
 
+   # 若在 Pi 2.0 上使用 Matlab R2022a，导入下面的并行配置
    profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2022a/ParSlurmProfile/SlurmParForUser.mlsettings');
+   # 若在 Pi 2.0 上使用 Matlab R2023a，导入下面的并行配置
+   profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2023a/ParSlurmProfile/R2023a-SlurmParForUser.mlsettings');
+   # 若在思源一号上使用 Matlab R2023a，导入下面的并行配置
+   profile_master = parallel.importProfile('/dssg/opt/icelake/linux-centos8-icelake/contribute/matlab/R2023a/ParSlurmProfile/R2023a-SlurmParForUser.mlsettings');
+
+   # 根据选择的集群和 Matlab 版本导入并行配置后，将其设置为默认
    parallel.defaultClusterProfile(profile_master);
 
 在 MATLAB 界面选择 Home -> Parallel -> Create and Manage Clusters，在 Cluster Profile Manager 中查看导入的配置：
