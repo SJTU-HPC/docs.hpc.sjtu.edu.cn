@@ -20,7 +20,7 @@ ssh方式(从π 2.0登录Ascend计算节点)
 
 .. code:: shell
 
-   ssh username@ascend  # username替换为超算账号
+   ssh username@ascend01  # username替换为超算账号
 
 使用昇腾上安装的Miniconda
 -------------------------
@@ -66,12 +66,26 @@ ssh方式(从π 2.0登录Ascend计算节点)
 
 .. tip::
 
-   若要进行多卡训练，需要使用新版的CANN软件。目前集群已经安装了7.0.RC1.alpha001版本的CANN，使用时需设置
+   若要进行多卡训练，需要使用新版的CANN软件。目前集群已经安装了7.0.RC1.alpha003版本的CANN，使用时需设置
 
    .. code:: shell
       
       source /opt/Ascend/ascend-toolkit/set_env.sh
+   
+   查看集群使用状况使用如下命令
 
+   .. code:: shell
+
+      npu-smi info
+   
+
+   可以根据集群使用状况，使用以下命令指定使用的NPU卡号
+
+   .. code:: shell
+
+      export ASCEND_RT_VISIBLE_DEVICES=0
+
+   由于测试集群目前暂未配置slurm操作系统，为防止出现资源挤占，每天晚上11点会清理未释放的进程，请注意保存测试结果。
 
 安装深度学习框架
 ----------------
