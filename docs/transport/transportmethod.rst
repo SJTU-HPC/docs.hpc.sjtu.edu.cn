@@ -83,7 +83,15 @@ $ rsync --archive --partial --progress [源文件路径] [目标路径]
 思源一号与π 2.0/AI/ARM集群互传
 ================================
 
-如果是在lustre和dssg直接跨存储池搬运数据，可以任选data或者sydata节点发起传输。例如通过登录π2.0集群数据传输节点data.hpc.sjtu.edu.cn，使用scp或rsync命令进行传输：
+要提高集群之间互传数据的效率，需要选择合适的传输节点。
+
+* 如果需要在Pi超算和思源一号互传数据，需要选择data或者sydata节点发起传输
+
+* 如果需要从Pi超算向冷存储搬运数据，需要选择data节点发起传输
+
+* 如果需要从思源一号向冷存储搬运数据，需要选择sydata节点发起传输
+
+例如通过登录π2.0集群数据传输节点data.hpc.sjtu.edu.cn，使用scp或rsync命令进行传输：
 
 $ scp -r [源文件路径] [目标路径]
 
@@ -93,6 +101,12 @@ $ rsync -avr --progress [源文件路径] [目标路径]
 
 .. code:: bash
 
-   # 示例6: 该用户将lustre个人目录下的数据~/data搬运到dssg个人目录~/data下
+   # 示例6: 该用户在data节点上将lustre个人目录下的数据~/data搬运到dssg个人目录~/data下
    $ ssh expuser01@data.hpc.sjtu.edu.cn
    $ scp -r /lustre/home/acct-exp/expuser01/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data/
+
+   # 示例7：该用户在sydata节点上将lustre个人目录~/data下的数据搬运到dssg个人目录~/data下
+   $ ssh expuser01@sydata.hpc.sjtu.edu.cn
+   $ scp -r expuser01@sydata.hpc.sjtu.edu.cn:/lustre/home/acct-exp/expuser01/data/ /dssg/home/acct-exp/expuser01/data/
+
+从Pi超算和思源一号向冷存储搬运数据的具体操作请参考：:ref:`archiveusage`
