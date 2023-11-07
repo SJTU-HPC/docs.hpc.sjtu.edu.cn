@@ -11,3 +11,4 @@
    osubenchmarks
    hpcg
    minife
+   ior
