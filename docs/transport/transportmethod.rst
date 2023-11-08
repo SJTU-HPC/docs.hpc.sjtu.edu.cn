@@ -103,7 +103,7 @@ $ rsync -avr --progress [源文件路径] [目标路径]
 
    # 示例6: 该用户在data节点上将lustre个人目录下的数据~/data搬运到dssg个人目录~/data下
    $ ssh expuser01@data.hpc.sjtu.edu.cn
-   $ scp -r /lustre/home/acct-exp/expuser01/data/ expuser01@sydata.hpc.sjtu.edu.cn:/dssg/home/acct-exp/expuser01/data/
+   $ scp -r /lustre/home/acct-exp/expuser01/data/ /dssg/home/acct-exp/expuser01/data/
 
    # 示例7：该用户在sydata节点上将lustre个人目录~/data下的数据搬运到dssg个人目录~/data下
    $ ssh expuser01@sydata.hpc.sjtu.edu.cn
