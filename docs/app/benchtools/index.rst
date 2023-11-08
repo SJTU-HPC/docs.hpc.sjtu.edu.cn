@@ -12,3 +12,4 @@
    hpcg
    minife
    ior
+   mdtest
