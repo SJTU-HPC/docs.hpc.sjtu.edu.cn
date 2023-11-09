@@ -1,0 +1,125 @@
+io500
+=======
+
+简介
+~~~~
+
+IO500（I/O500）是一种广泛用于评估和基准测试高性能计算和超级计算机系统的工具和方法。它是HPC领域（High-Performance
+Computing，高性能计算）中的一种性能基准测试套件，旨在测量存储和I/O（输入/输出）性能，特别是在大规模并行计算环境中。
+IO500测试涵盖了多个存储和I/O方面的性能指标，包括：
+
+1. MDtest：用于测试元数据（Metadata）操作性能，例如文件和目录的创建和删除。
+2. IOR：用于测试大文件读取和写入性能。
+3. Find：用于测试查找文件性能，例如通过文件名或通配符搜索文件。
+4. HDF5 IOR：用于测试HDF5格式数据的读取和写入性能。
+5. IOR-Easy：用于测试简化操作的大文件读取和写入性能。
+
+IO500的目标是提供一个全面的性能测试套件，以帮助评估存储系统在大规模高性能计算环境中的性能。它不仅仅是一个性能测量工具，还提供了一种标准化方法，使不同系统的性能可以进行比较。这对于研究人员、工程师和系统管理员来说非常有价值，因为它有助于确定哪种存储架构和配置对于特定的计算工作负载是最有效的。
+
+编译安装 
+~~~~~~~~~~~~
+以思源一号集群为例 下载io500源码
+执行prepare.sh将编译安装io500所需要的软件依赖
+
+::
+
+   srun -n 1 -p 64c512g --pty /bin/bash
+   module load oneapi
+   git clone https://github.com/IO500/io500.git -b io500-sc23
+   cd io500
+   ./prepare.sh
+
+修改io500.sh
+~~~~~~~~~~~~~~
+
+修改现有的io500.sh脚本以包含调度程序所需的信息。由于io500测试需要大量存储空间，下面仅以1节点，2核心作为io500使用示例参考，提供足够的执行时间（通常
+2 小时足以完整运行）并根据需要调整保留的资源。
+注意：如果需要对集群进行整体评测需要增加节点数以及核心数，io500榜单常见节点数为10节点及以上。
+
+::
+
+   #!/bin/bash
+   #SBATCH --nodes=1 --ntasks-per-node=2 --exclusive -p 64c512g
+   module load oneapi
+
+   io500_ini="$1"          # You can set the ini file here
+   io500_mpirun="mpirun"
+   io500_mpiargs="-np 2"
+
+   ......
+
+生成ini文件
+~~~~~~~~~~~~
+
+::
+
+   ./io500 --list > myconfig.ini
+
+运行
+~~~~
+
+直接或通过批处理作业提交下面命令
+
+::
+
+   sbatch io500.sh myconfig.ini
+
+结果
+~~~~
+
+结果目录包含带时间戳的输出目录，重复运行相同的 io500
+不会消除以前运行的结果。 每个目录中有两个重要的摘要文件：
+
+-  *result_summary.txt* -
+   一个简单、人类可读的文件，包含单独的性能测量值和 IO500 分数
+-  *result.txt* - 机器可读的结果摘要
+
+检查结果输出，并验证$resultdir/result_summary.txt
+中的所有结果均未标记为[INVALID]，例如，由于运行时间低于 300
+秒或其他错误。 末尾还必须有 SCORE行，并且不能将其标记为[INVALID] ####
+思源一号测试结果
+----------------------
+
+::
+
+   IO500 version io500-sc23_v1 (standard)
+   [RESULT]       ior-easy-write        2.858210 GiB/s : time 312.975 seconds
+   [RESULT]    mdtest-easy-write        6.200877 kIOPS : time 313.991 seconds
+   [      ]            timestamp        0.000000 kIOPS : time 0.000 seconds
+   [RESULT]       ior-hard-write        0.706375 GiB/s : time 762.340 seconds
+   [RESULT]    mdtest-hard-write        2.465601 kIOPS : time 301.321 seconds
+   [RESULT]                 find       20.338138 kIOPS : time 132.172 seconds
+   [RESULT]        ior-easy-read        1.300786 GiB/s : time 687.671 seconds
+   [RESULT]     mdtest-easy-stat        2.593817 kIOPS : time 749.219 seconds
+   [RESULT]        ior-hard-read        0.936611 GiB/s : time 574.939 seconds
+   [RESULT]     mdtest-hard-stat        1.608079 kIOPS : time 461.415 seconds
+   [RESULT]   mdtest-easy-delete        1.755264 kIOPS : time 1106.908 seconds
+   [RESULT]     mdtest-hard-read        1.465098 kIOPS : time 506.317 seconds
+   [RESULT]   mdtest-hard-delete        0.884044 kIOPS : time 838.717 seconds
+   [SCORE ] Bandwidth 1.252344 GiB/s : IOPS 2.714576 kiops : TOTAL 1.843796
+
+Pi2.0测试结果
+--------------------
+
+::
+
+   IO500 version io500-sc23_v1 (standard)
+   [RESULT]       ior-easy-write        1.236917 GiB/s : time 322.573 seconds
+   [RESULT]    mdtest-easy-write        4.289295 kIOPS : time 306.952 seconds
+   [      ]            timestamp        0.000000 kIOPS : time 0.001 seconds
+   [RESULT]       ior-hard-write        0.595349 GiB/s : time 303.371 seconds
+   [RESULT]    mdtest-hard-write        1.402383 kIOPS : time 429.585 seconds
+   [RESULT]                 find       30.659287 kIOPS : time 62.570 seconds
+   [RESULT]        ior-easy-read        0.675851 GiB/s : time 590.341 seconds
+   [RESULT]     mdtest-easy-stat        1.423461 kIOPS : time 922.849 seconds
+   [RESULT]        ior-hard-read        0.087374 GiB/s : time 2067.057 seconds
+   [RESULT]     mdtest-hard-stat        2.580531 kIOPS : time 233.987 seconds
+   [RESULT]   mdtest-easy-delete        7.656550 kIOPS : time 172.455 seconds
+   [RESULT]     mdtest-hard-read        0.785820 kIOPS : time 765.853 seconds
+   [RESULT]   mdtest-hard-delete        4.326086 kIOPS : time 139.970 seconds
+   [SCORE ] Bandwidth 0.456654 GiB/s : IOPS 3.394612 kiops : TOTAL 1.245055
+
+参考链接
+~~~~~~~~
+
+1. https://io500.org/
