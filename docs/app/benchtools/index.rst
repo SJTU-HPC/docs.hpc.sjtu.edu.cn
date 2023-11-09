@@ -13,3 +13,4 @@
    minife
    ior
    mdtest
+   io500
