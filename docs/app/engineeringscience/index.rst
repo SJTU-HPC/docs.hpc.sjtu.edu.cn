@@ -23,6 +23,7 @@
    lammps
    lammps-rbe
    nektar
+   neper-fepx
    nwchem
    octave
    openRadioss
@@ -57,3 +58,4 @@
    pymultinest
    lorene
    boltztrap
+
