@@ -14,6 +14,11 @@
 2. 使用Singularity拉取远端镜像。
 3. 按需定制Singularity镜像。
 
+专题培训
+==========
+
+-  `容器化技术简介及conda介绍 <https://jbox.sjtu.edu.cn/l/u1bfbt>`__
+
 使用Singularity加载集群预编译的镜像
 ===================================
 
