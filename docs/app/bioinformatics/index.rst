@@ -110,3 +110,5 @@
    metawrap
    gate
    pangenie
+   clustalo
+
