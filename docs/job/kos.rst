@@ -1,12 +1,18 @@
-KOS队列使用
-============
+新CPU队列（KOS系统）使用
+========================
+原CPU队列变更
+---------------
+原CPU队列名称变更为centos队列，登录节点名称变更为oldlogin，如果需要在原CPU队列（centos系统）提交作业，请至oldlogin登录节点提交作业，并将脚本内指定队列名称更换为centos。
+
+centos队列大约将于12月12日正式下线，请用户尽快适配自己的应用至新CPU队列（KOS系统）。在新CPU队列（KOS系统）上编译应用请参考下文的编译应用内容。
+ 
 KOS系统简介
 -------------
 
-Pi集群cpu队列目前采用的是CentOS
+Pi集群原先采用的是CentOS
 7操作系统，该系统版本将于2024年6月底停止维护，这将使得Pi集群超算系统面临安全隐患，为应对
 CentOS
-7即将全面停服带来的安全风险，我们计划将Pi集群计算节点的操作系统从CentOS
+7即将全面停服带来的安全风险，我们将Pi集群计算节点的操作系统从CentOS
 7替换为浪潮信息的国产KOS系统。
 
 KOS系统是浪潮信息基于Linux
@@ -14,24 +20,24 @@ Kernel、OpenAnolis等开源技术自主研发的一款服务器操作系统，�
 CentOS
 迁移和替换能力，可满足云计算、大数据、分布式存储、人工智能、边缘计算等应用场景需求。
 
-下文将介绍如何在Pi集群上使用KOS系统节点，已部署的应用列表，应用测试结果对比，应用的使用文档，以及如何自行编译应用。
+下文将介绍如何在Pi集群上使用新CPU队列（KOS系统）节点，已部署的应用列表，应用测试结果对比，应用的使用文档，以及如何自行编译应用。
 
-如何使用KOS系统队列
----------------------
+如何使用新CPU队列（KOS系统）
+--------------------------------
 
-登录KOS登陆节点
+登录登陆节点
 ~~~~~~~~~~~~~~~~~
 -  使用ssh软件工具登录
 
 ::
 
-   host: koslogin.hpc.sjtu.edu.cn
+   host: pilogin.hpc.sjtu.edu.cn
 
-申请KOS队列
-~~~~~~~~~~~~~~~~~
+申请CPU队列（KOS系统）
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-| kos队列名称为：kos
-| kos队列使用方法与原CPU队列基本一致，只需要将作业脚本或srun命令中的队列名称从cpu改为kos
+| 新CPU队列（KOS系统）队列名称为：cpu
+| 新CPU队列（KOS系统）队列使用方法与原CPU队列基本一致
 
 slurm脚本
 ^^^^^^^^^^
@@ -40,7 +46,7 @@ slurm脚本
 
    #!/bin/bash
    #SBATCH --job-name=test
-   #SBATCH --partition=kos
+   #SBATCH --partition=cpu
    #SBATCH -N 1
    #SBATCH --ntasks-per-node=1
 
@@ -51,14 +57,14 @@ srun交互式作业
 
 ::
 
-   srun -n 1 -p kos --pty /bin/bash
+   srun -n 1 -p cpu --pty /bin/bash
 
 已部署应用列表
 ---------------
 
-可以通过module avail查询kos队列上已部署的编译器，应用等
+可以通过module avail查询新CPU队列（KOS系统）上已部署的编译器，应用等
 
-modulefile路径
+新CPU队列（KOS系统）modulefile路径：
 
 ::
 
@@ -292,12 +298,14 @@ relion选择的测试算例为人类去铁铁蛋白（apo­ferritin）电镜图�
 编译应用
 ---------
 
-因为系统版本升级，用户原有编译软件需要重新编译才能使用，编译方式和原先系统流程基本一致，根据需要使用的编译器调用对应模块即可，下面以fftw为例，介绍如何在kos系统上使用gcc和intel两种编译器编译软件。
-### 先申请计算节点用于编译
+因为系统版本升级，用户原有编译软件需要重新编译才能使用，编译方式和原先系统流程基本一致，根据需要使用的编译器调用对应模块即可，下面以fftw为例，介绍如何在新CPU队列（KOS系统）上使用gcc和intel两种编译器编译软件。
+
+先申请计算节点用于编译
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
-   srun -n 1 -p kos --pty /bin/bash
+   srun -n 1 -p cpu --pty /bin/bash
 
 gcc+openmpi
 ~~~~~~~~~~~~
@@ -318,8 +326,8 @@ intel-oneapi
 
 ::
 
-   module load intel-oneapi-compilers/2021.4.0-gcc-8.5.0
-   module load intel-oneapi-mpi/2021.4.0-gcc-8.5.0
+   module load intel-oneapi-compilers/2021.4.0
+   module load intel-oneapi-mpi/2021.4.0
 
    wget https://fftw.org/pub/fftw/fftw-3.3.8.tar.gz
    tar -xvf fftw-3.3.8.tar.gz
