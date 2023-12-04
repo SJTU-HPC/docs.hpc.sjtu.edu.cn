@@ -15,5 +15,6 @@
    arm
    siyuan
    ascend
+   ascend-910b
    resource
    kos
