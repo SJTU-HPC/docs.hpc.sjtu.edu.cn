@@ -35,6 +35,7 @@
    crest
    cufflinks
    chimera
+   cellranger
    deepgo
    deepvariant
    delly
@@ -69,6 +70,7 @@
    mobster
    monocle3
    mrbayes
+   minimap2
    ncbi-rmblastn
    openslide-python
    pandas
