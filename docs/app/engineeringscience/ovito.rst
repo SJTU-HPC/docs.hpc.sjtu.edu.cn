@@ -8,6 +8,29 @@ OVITO
 
 OVITO 是一款专业实用、功能强大的原子分子可视化及分析软件。界面美观，功能齐全，操作简单，支持超大规模原子快速显示。LAMMPS 的 dump 构型、VASP 的 POSCAR， XDATCAR 等构型均可由 OVITO 查看和编辑。
 
+安装教程
+--------------------
+
+安装OVITO的Python模块方法：
+
+.. code:: bash
+
+   srun -n 4 -p cpu --pty /bin/bash #申请计算资源
+   module load miniconda3
+   source activate
+   conda create -n ovito python=3.8.18
+   conda activate ovito
+   conda clean --index-cache
+   conda install --strict-channel-priority -c https://conda.ovito.org -c conda-forge ovito==3.9.4
+
+运行OVITO的Python模块方法:
+
+.. code:: bash
+
+   module load miniconda3
+   source activate ovito
+   ovitos test.py
+
 π 集群上使用 OVITO
 ---------------------
 

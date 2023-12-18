@@ -44,6 +44,30 @@ Spack安装参考
 
    spack install quantum-espresso@7.1%intel@2021.4.0 +libxc ^intel-oneapi-mpi
 
+Intel编译器安装方法：
+------------------------
+
+1. 编译QE
+
+.. code:: bash
+
+   srun -p 64c512g -n 8 --pty /bin/bash
+   module load oneapi/2021.4.0
+   tar -zxvf qe-7.2-ReleasePack.tar.gz && cd qe-7.2
+   ./configure MPIF90=mpiifort CC=mpiicc F90=ifort F77=mpiifort --prefix=/path/to/qe.7.2 #用绝对路径指定编译后执行文件位置
+   make all install -j 
+   make all install
+
+2. 编译EPW，需要先下载wannier90安装包：
+
+.. code:: bash
+
+   cp ./wannier90-3.1.0.tar.gz qe-7.2/archive/v3.1.0.tar.gz
+   cd qe-7.2/EPW
+   make epw
+
+3. 编译完成后将qe.7.2/bin添加到环境变量，使用QE之前先调用oneapi/2021.4.0
+
 算例下载
 ---------
 

@@ -110,6 +110,31 @@ slurm 里，若使用 CPU 节点，须确保 ``OMP_NUM_THREADS * ntasks-per-node
 
    mpirun vasp_std
 
+KOS VASP
+..................
+
+Pi集群上使用KOS系统的队列的slurm 脚本：
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH -J vasp
+   #SBATCH -p cpu
+   #SBATCH --ntasks-per-node=40
+   #SBATCH --exclusive
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+
+   module purge
+   module load vasp/5.4.4-intel-2021.4.0-kos #vasp/5.4.4-kos
+   module load vasp/6.3.2-intel-2021.4.0-kos #vasp/6.3.2-kos
+
+   ulimit -s unlimited
+
+   mpirun vasp_std
+
+
 .. _ARM VASP:
 
 ARM VASP
