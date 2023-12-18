@@ -18,6 +18,70 @@ gmx_MMPBSA是一种基于AMBER的MMPBSA.py开发的新工具，旨在使用GROMA
 +--------+---------+----------+------------------------------------------------------+
 | 2020   | |cpu|   | 容器     | gmx_MMPBSA/1.4.3-gcc-9.3.0-ambertools-20-gromacs2021 |
 +--------+---------+----------+------------------------------------------------------+
+| 1.6.2  | |cpu|   | conda    | /lustre/share/conda_env/gmxMMPBSA                    |
++--------+---------+----------+------------------------------------------------------+
+
+安装方法
+----------------
+
+conda安装gmx_MMPBSA
+
+1. env.yml
+   
+.. code:: bash
+
+   name:
+   channels:
+     - conda-forge
+     - bioconda
+     - defaults
+   dependencies:
+     - python=3.9
+     - ambertools=21.12
+     - mpi4py=3.1.3
+     - compilers=1.2.0
+     - gromacs==2022.4
+     - git
+     - pip
+     - pip: 
+       - pyqt5==5.15.6
+       - gmx-mmpbsa
+       - git+https://github.com/Valdes-Tresanco-MS/ParmEd.git@v3.4
+       - pandas==1.2.2
+       - seaborn<0.12
+       - scipy>=1.6.1
+       - matplotlib>=3.5.1
+       - tqdm
+
+2.安装命令：
+
+.. code:: bash
+
+   srun -p small -n 4 --pty /bin/bash
+   module load miniconda3/22.11.1
+   source activate
+   conda env create -n gmxMMPBSA --file env.yml
+   conda activate gmxMMPBSA
+   conda install -c conda-forge ocl-icd-system
+
+3. 使用conda安装的gmx_MMPBSA的计算脚本，该方法只需要计算脚本不需要run1.sh
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH --job-name=gmx_MMPBSA      
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load miniconda3/22.11.1
+   source activate gmxMMPBSA
+
+   mpirun -np 2 gmx_MMPBSA -O -i mmpbsa.in -cs com.tpr -ci index.ndx -cg 3 4 -ct com_traj.xtc -nogui
+
 
 算例获取方式
 -------------
@@ -123,6 +187,36 @@ run1.sh脚本内容如下：
 .. code:: bash
 
    $ sbatch gmx_MMPBSA.slurm
+
+π2.0-KOS平台 gmx_MMPBSA（版本：1.6.2）
+----------------------------------------------------
+
+gmx_MMPBSA.slurm内容如下：
+
+.. code:: bash
+
+   #!/bin/bash
+   
+   #SBATCH --job-name=gmx_MMPBSA      
+   #SBATCH --partition=cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=2
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   
+   module load miniconda3/22.11.1
+   source activate /lustre/share/conda_env/gmxMMPBSA
+
+   mpirun -np 2 gmx_MMPBSA -O -i mmpbsa.in -cs com.tpr -ci index.ndx -cg 3 4 -ct com_traj.xtc -nogui
+
+该版本只需要gmx_MMPBSA.slurm和数据文件，不需要run1.sh即可正常运行。
+
+使用如下命令提交：
+
+.. code:: bash
+
+   $ sbatch gmx_MMPBSA.slurm
+
 
 运行结果
 ---------

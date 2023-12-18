@@ -95,7 +95,7 @@ BLAST+预编译文件安装步骤
 
    $ blastn -version
 
-Clustalo运行示例
+BLAST+运行示例
 ----------------
 
 官网下载基因组并解压

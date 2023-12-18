@@ -111,4 +111,5 @@
    gate
    pangenie
    clustalo
+   spaceranger
 

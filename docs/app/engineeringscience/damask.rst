@@ -24,6 +24,40 @@ DAMASK 是一个统一的多物理晶体塑性模拟包。连续体力学边值�
 | 3.0.0-alpha5 | |cpu| | spack    | damask/3.0.0-alpha5-gcc-8.3.0-openblas                        |
 +--------------+-------+----------+---------------------------------------------------------------+
 
+安装方式
+----------------
+
+使用conda安装方法：
+
+.. code:: bash
+
+   srun -p small -n 4 --pty /bin/bash
+   module load miniconda3
+   source activate
+   conda create -n damask python=3.8.18
+   conda activate damask
+   conda install -c conda-forge damask=3.0.0a8
+   conda install -c conda-forge ucx
+
+使用conda安装的damask的计算脚本：
+
+.. code:: bash
+
+   #SBATCH -J damask
+   #SBATCH -p cpu
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=32
+   #SBATCH -o %j.out
+   #SBATCH -e %j.err
+
+   module load miniconda3
+   source activate damask
+
+   export UCX_NET_DEVICES=mlx5_0:1
+   export OMPI_MCA_btl=^openib
+
+   mpiexec --mca pml ucx --mca osc ucx DAMASK_grid --load shearXY.yaml --geom 20grains32x32x32.vti --material material.yaml
+
 算例获取方式
 -------------
 
