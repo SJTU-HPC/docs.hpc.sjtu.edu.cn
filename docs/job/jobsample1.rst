@@ -40,23 +40,6 @@
 各队列作业示例
 --------------
 
-small
-~~~~~~~~~~
-
-small 队列 slurm 脚本示例
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=test        # 作业名 
-   #SBATCH --partition=small      # small 队列
-   #SBATCH -n 20                 # 总核数需 <=20
-   #SBATCH --ntasks-per-node=20   # 每节点核数
-   #SBATCH --output=%j.out 
-   #SBATCH --error=%j.err
-
-
 cpu
 ~~~~~~~~
 
@@ -75,7 +58,7 @@ cpu 队列 slurm 脚本示例：多节点（160 核）
    #SBATCH --error=%j.err
 
 
-cpu 队列 slurm 脚本示例：单节点（40 核）
+cpu 队列 slurm 脚本示例：单节点满核（40 核）
 
 .. code:: bash
 
@@ -88,6 +71,18 @@ cpu 队列 slurm 脚本示例：单节点（40 核）
    #SBATCH --output=%j.out 
    #SBATCH --error=%j.err 
 
+cpu 队列 slurm 脚本示例：单节点不满核（20核），共享使用节点
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=test        # 作业名 
+   #SBATCH --partition=cpu        # cpu 队列
+   #SBATCH -n 20                 # 总核数 20 
+   #SBATCH --ntasks-per-node=20   # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err 
 
 cpu 队列 slurm 脚本示例：单节点（20核），比如为了独占整个节点的大内存
 
@@ -101,7 +96,7 @@ cpu 队列 slurm 脚本示例：单节点（20核），比如为了独占整个�
    #SBATCH --ntasks-per-node=20   # 每节点核数
    #SBATCH --output=%j.out 
    #SBATCH --error=%j.err 
-   #SBATCH --exclusive            # 独占节点（核数小于 40，cpu 队列必须加上此命令）
+   #SBATCH --exclusive            # 独占节点（独占整个节点的大内存，按照满核计费）
 
 
 huge
@@ -305,7 +300,7 @@ cpu 队列 slurm 脚本示例 array
    #!/bin/bash
    
    #SBATCH --job-name=test           # 作业名
-   #SBATCH --partition=small         # small 队列
+   #SBATCH --partition=cpu           # cpu 队列
    #SBATCH -n 1                      # 总核数 1
    #SBATCH --ntasks-per-node=1       # 每节点核数
    #SBATCH --output=array_%A_%a.out
@@ -320,14 +315,14 @@ cpu 队列 slurm 脚本示例 array
 
 --mail-type= 指定状态发生时，发送邮件通知: ALL, BEGIN, END, FAIL
 
-small 队列 slurm 脚本示例：邮件提醒
+cpu 队列 slurm 脚本示例：邮件提醒
 
 .. code:: bash
 
    #!/bin/bash
 
    #SBATCH --job-name=test           
-   #SBATCH --partition=small         
+   #SBATCH --partition=cpu         
    #SBATCH -n 20                     
    #SBATCH --ntasks-per-node=20
    #SBATCH --output=%j.out

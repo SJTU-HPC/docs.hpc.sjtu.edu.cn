@@ -226,20 +226,20 @@ Slurm 具有丰富的参数集。 以下最常用的。
 
 .. code:: bash
 
-   $ srun -N 1 -n 4 -p small hostname
+   $ srun -N 1 -n 4 -p cpu hostname
    cas006
 
 启动远程主机bash终端：
 
 .. code:: bash
 
-   srun -p small -n 4 --exclusive --pty /bin/bash
+   srun -p cpu -n 4 --pty /bin/bash
 
 或者，可以通过\ ``salloc``\ 请求资源，然后在获取节点后登录到计算节点：
 
 .. code:: bash
 
-   salloc -N 1 -n 4 -p small
+   salloc -N 1 -n 4 -p cpu
    ssh casxxx
 
 ``scontrol``: 查看和修改作业参数
