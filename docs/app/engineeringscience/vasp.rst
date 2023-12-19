@@ -159,19 +159,18 @@ ARM VASP
 自行编译 VASP
 -------------------
 
-VASP 在集群上使用 intel 套件自行编译十分容易。下面以思源一号为例，介绍CPU版本的安装和使用方法。
+VASP 在集群上使用 intel 套件自行编译十分容易，下面介绍CPU版本的安装和使用方法。
 
 1. 先申请计算节点，然后加载 intel 套件
 
 .. code:: bash
 
-   srun -p 64c512g -n 4 --pty /bin/bash       # 申请计算节点
+   srun -p 64c512g -n 4 --pty /bin/bash       # 思源集群申请计算节点
+   srun -p cpu -n 4 --pty /bin/bash           # Pi2.0集群申请计算节点
 
-   module load intel-oneapi-compilers/2021.4.0
-   module load intel-oneapi-mpi/2021.4.0
-   module load intel-oneapi-mkl/2021.4.0
+   module load oneapi/2021.4.0                # 加载intel套件
 
-2. 解压缩 VASP 安装包，进入 ``vasp.x.x.x`` 文件夹（可看到 ``arch``, ``src`` 等文件夹）
+1. 解压缩 VASP 安装包，进入 ``vasp.x.x.x`` 文件夹（可看到 ``arch``, ``src`` 等文件夹）
 
 .. code:: bash
 
@@ -208,9 +207,7 @@ VASP 在集群上使用 intel 套件自行编译十分容易。下面以思源�
    #SBATCH -o %j.out
    #SBATCH -e %j.err
 
-   module load intel-oneapi-compilers/2021.4.0
-   module load intel-oneapi-mpi/2021.4.0
-   module load intel-oneapi-mkl/2021.4.0
+   module load oneapi/2021.4.0
 
    ulimit -s unlimited
 
