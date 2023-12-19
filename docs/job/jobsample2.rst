@@ -60,7 +60,7 @@ OpenMP 示例
    #!/bin/bash
 
    #SBATCH --job-name=Hello_OpenMP
-   #SBATCH --partition=small
+   #SBATCH --partition=cpu
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
    #SBATCH -n 8
@@ -101,7 +101,7 @@ OpenMP 示例
    #!/bin/bash
 
    #SBATCH --job-name=Hello_OpenMP
-   #SBATCH --partition=small
+   #SBATCH --partition=cpu
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
    #SBATCH -n 8
