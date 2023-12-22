@@ -13,7 +13,7 @@ Gift-ΒΤΕ 是对介观尺度的声子导热问题进行数值计算的C++软�
 +========+=========+==========+=================================+
 | 1.0    | |cpu|   | 源码     | bte/1.0-openmpi-3.1.5  π2.0     |
 +--------+---------+----------+---------------------------------+
-| 1.0    | |cpu|   | 源码     | bte/1.0-intel-2021.4.0  π2.0 kos|
+| 1.0    | |cpu|   | 源码     | bte/1.0-openmpi-4.1.5   π2.0 kos|
 +--------+---------+----------+---------------------------------+
 
 
@@ -24,14 +24,12 @@ Gift-ΒΤΕ 是对介观尺度的声子导热问题进行数值计算的C++软�
    srun -p cpu -n 4 --pty /bin/bash
    git clone https://github.com/Gift-BTE-developer/Gift-BTE.git
    mv GiftBTE bte
-   module load oneapi/2021.4.0
+   module load openmpi/4.1.5-gcc-8.5.0
    module load cmake/3.26.3-gcc-8.5.0
    cd bte
-   cmake -B cpu-build -S. -DCMAKE_BUILD_TYPE=Release -DCMAKE_Fortran_COMPILER=ifort
+   cmake -B cpu-build -S. -DCMAKE_BUILD_TYPE=Release
    cd cpu-build
    make
-
-make过程中可能会产生几个警告，无需在意，可以顺利完成编译。
 
 kos系统下bte运行脚本
 -----------------------
@@ -48,7 +46,7 @@ kos系统下bte运行脚本
    #SBATCH --error=%j.err
 
    module purge
-   module load bte/1.0-intel-2021.4.0
+   module load bte/1.0-openmpi-4.1.5
 
    mpirun -np 16 BTE_CPU
 
@@ -152,4 +150,7 @@ kos系统下bte运行脚本
 | 时间 milliseconds | 637674  | 618820  | 509080  |
 +-------------------+---------+---------+---------+
 
+参考资料
+--------
 
+-  `Gift-BTE官网 <https://bte.sjtu.edu.cn/about.html>`__

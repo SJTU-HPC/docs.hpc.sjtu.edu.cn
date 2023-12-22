@@ -114,4 +114,5 @@
    pangenie
    clustalo
    spaceranger
+   vcflib
 
