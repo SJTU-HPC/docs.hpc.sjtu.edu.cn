@@ -6,7 +6,7 @@ OpenRadioss
 简介
 ----
 
-OpenRadioss is the publicly available open-source code base that a worldwide community of researchers, software developers, and industry leaders are enhancing every day. OpenRadioss is changing the game by empowering users to make rapid contributions that tackle the latest challenges brought on by rapidly evolving technologies like battery development, lightweight materials and composites, human body models and biomaterials, autonomous driving and flight, as well as the desire to give passengers the safest environment possible via virtual testing.
+OpenRadioss是一个公开的开源代码库，由全球研究人员、软件开发人员和行业领导者组成的社区每天都在增强它。OpenRadioss正在改变行业规则，让用户能够快速做出贡献，应对快速发展的技术带来的最新挑战，如电池开发、轻质材料和复合材料、人体模型和生物材料、自动驾驶和飞行，以及通过虚拟测试为乘客提供尽可能安全的环境的愿望。有了OpenRadioss，科学家和技术人员可以在专业维护下将研究重点放在稳定的代码库上，该代码库受益于现有有限元功能的大型库以及提供给贡献者的持续集成和持续开发工具。
 
 
 
@@ -93,6 +93,40 @@ OpenRadioss安装以及说明
   cd ../engine
   ./build_script.sh -arch=linux64_gf -mpi=ompi  -mpi-root=/lustre/opt/cascadelake/linux-centos7-cascadelake/gcc-9.2.0/openmpi-4.0.5-vpswzpisyoc6gl6e5isbal66yykxdc6k -mpi-include=/lustre/opt/cascadelake/linux-centos7-cascadelake/gcc-9.2.0/openmpi-4.0.5-vpswzpisyoc6gl6e5isbal66yykxdc6k/include -mpi-libdir=/lustre/opt/cascadelake/linux-centos7-cascadelake/gcc-9.2.0/openmpi-4.0.5-vpswzpisyoc6gl6e5isbal66yykxdc6k/lib
 
+在pi2.0 kos系统上自行安装OpenRadioss
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+1. 下载并解压源代码文件，申请计算节点
+
+.. code::
+        
+  wget https://github.com/OpenRadioss/OpenRadioss/archive/refs/tags/latest-20231220.tar.gz
+  tar zxvf latest-20231220.tar.gz
+  cd OpenRadioss-latest-20231220/
+  srun -p cpu -n 8 --pty /bin/bash #申请计算节点
+
+2. 加载编译所需模块：
+
+.. code::
+        
+  module load openmpi/4.1.5-gcc-8.5.0
+  module load netcdf-fortran/4.5.2-gcc-8.5.0-openmpi
+  module load cmake/3.26.3-gcc-8.5.0
+  module load python/3.10.10-gcc-8.5.0
+
+3. 第一步编译
+  
+.. code::
+
+  cd starter
+  ./build_script.sh -arch=linux64_gf
+
+4. 第二步编译
+
+.. code::
+
+  cd ../engine
+  ./build_script.sh -arch=linux64_gf -mpi=ompi  -mpi-root=/lustre/opt/cascadelake/linux-rhel8-skylake_avx512/gcc-8.5.0/openmpi-4.1.5-sjnibarr4bwsceb3ncopdeyfigesuzfk/ -mpi-include=/lustre/opt/cascadelake/linux-rhel8-skylake_avx512/gcc-8.5.0/openmpi-4.1.5-sjnibarr4bwsceb3ncopdeyfigesuzfk/include -mpi-libdir=/lustre/opt/cascadelake/linux-rhel8-skylake_avx512/gcc-8.5.0/openmpi-4.1.5-sjnibarr4bwsceb3ncopdeyfigesuzfk/lib
 
 
 参考资料
