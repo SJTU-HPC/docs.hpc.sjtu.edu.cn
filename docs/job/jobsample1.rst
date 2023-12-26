@@ -43,8 +43,7 @@
 cpu
 ~~~~~~~~
 
-cpu 队列 slurm 脚本示例：多节点（160 核）
-
+cpu 队列 slurm 脚本示例：单节点不满核（例如20核），共享使用节点
 
 .. code:: bash
 
@@ -52,11 +51,24 @@ cpu 队列 slurm 脚本示例：多节点（160 核）
 
    #SBATCH --job-name=test        # 作业名 
    #SBATCH --partition=cpu        # cpu 队列
-   #SBATCH -n 160                # 总核数 160 
-   #SBATCH --ntasks-per-node=40   # 每节点核数
+   #SBATCH -n 20                 # 总核数 20 
+   #SBATCH --ntasks-per-node=20   # 每节点核数
    #SBATCH --output=%j.out 
-   #SBATCH --error=%j.err
+   #SBATCH --error=%j.err 
 
+cpu 队列 slurm 脚本示例：独占单节点不满核（20核），比如为了独占整个节点的大内存
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=test        # 作业名 
+   #SBATCH --partition=cpu        # cpu 队列
+   #SBATCH -n 20                 # 总核数 20 
+   #SBATCH --ntasks-per-node=20   # 每节点核数
+   #SBATCH --output=%j.out 
+   #SBATCH --error=%j.err 
+   #SBATCH --exclusive            # 独占节点（独占整个节点的大内存，按照满核计费）
 
 cpu 队列 slurm 脚本示例：单节点满核（40 核）
 
@@ -71,7 +83,8 @@ cpu 队列 slurm 脚本示例：单节点满核（40 核）
    #SBATCH --output=%j.out 
    #SBATCH --error=%j.err 
 
-cpu 队列 slurm 脚本示例：单节点不满核（20核），共享使用节点
+cpu 队列 slurm 脚本示例：多节点（160 核）
+
 
 .. code:: bash
 
@@ -79,25 +92,10 @@ cpu 队列 slurm 脚本示例：单节点不满核（20核），共享使用节�
 
    #SBATCH --job-name=test        # 作业名 
    #SBATCH --partition=cpu        # cpu 队列
-   #SBATCH -n 20                 # 总核数 20 
-   #SBATCH --ntasks-per-node=20   # 每节点核数
+   #SBATCH -n 160                # 总核数 160 
+   #SBATCH --ntasks-per-node=40   # 每节点核数
    #SBATCH --output=%j.out 
-   #SBATCH --error=%j.err 
-
-cpu 队列 slurm 脚本示例：单节点（20核），比如为了独占整个节点的大内存
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH --job-name=test        # 作业名 
-   #SBATCH --partition=cpu        # cpu 队列
-   #SBATCH -n 20                 # 总核数 20 
-   #SBATCH --ntasks-per-node=20   # 每节点核数
-   #SBATCH --output=%j.out 
-   #SBATCH --error=%j.err 
-   #SBATCH --exclusive            # 独占节点（独占整个节点的大内存，按照满核计费）
-
+   #SBATCH --error=%j.err
 
 huge
 ~~~~~~~~~
