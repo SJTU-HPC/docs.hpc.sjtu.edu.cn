@@ -35,10 +35,47 @@ CPU 采用双路 Intel Xeon ICX Platinum 8358 32 核，主频 2.6GHz，共 936 �
 * 应用加载：(在 思源一号计算节点) \ ``module load``\ 命令；
 
 
-思源一号 作业示例
+思源一号 脚本示例
 ------------------
 
-以下是一个名为\ ``siyuan.slurm``\ 的 **单节点** 作业脚本，该脚本申请1个思源一号CPU节点（64核）。
+思源一号slurm脚本示例：单节点不满核（例如20核），共享使用节点
+
+.. code:: bash
+
+	#!/bin/bash
+
+	#SBATCH --job-name=test
+	#SBATCH --partition=64c512g
+	#SBATCH -N 1
+	#SBATCH --ntasks-per-node=20
+	#SBATCH --output=%j.out
+	#SBATCH --error=%j.err
+
+	module load XXX
+
+	mpirun -n $SLURM_NTASKS ...
+
+思源一号slurm脚本示例：单节点不满核（例如20核），独占使用节点
+
+.. code:: bash
+
+	#!/bin/bash
+
+	#SBATCH --job-name=test
+	#SBATCH --partition=64c512g
+	#SBATCH -N 1
+	#SBATCH --ntasks-per-node=20
+	#SBATCH --output=%j.out
+	#SBATCH --error=%j.err
+	#SBATCH --exclusive            # 独占节点
+
+	module load XXX
+
+	mpirun -n $SLURM_NTASKS ...
+
+注意：如使用 \ ``--exclusive`` \ 即表示独占节点64核全部计算资源，**无论程序实际运行核数，均按64核进行计费**。
+
+思源一号slurm脚本示例：单节点满核（64核）
 
 .. code:: bash
 
@@ -55,7 +92,22 @@ CPU 采用双路 Intel Xeon ICX Platinum 8358 32 核，主频 2.6GHz，共 936 �
 
 	mpirun -n $SLURM_NTASKS ...
 
-注意：如使用 \ ``--exclusive`` \ 即表示独占节点64核全部计算资源，**无论程序实际运行核数，均按64核进行计费**。
+思源一号slurm脚本示例：多节点满核（例如4节点256核）
+
+.. code:: bash
+
+	#!/bin/bash
+
+	#SBATCH --job-name=test
+	#SBATCH --partition=64c512g
+	#SBATCH -N 4
+	#SBATCH --ntasks-per-node=64
+	#SBATCH --output=%j.out
+	#SBATCH --error=%j.err
+
+	module load XXX
+
+	mpirun -n $SLURM_NTASKS ...
 
 用以下方式提交作业（请注意，思源一号作业请在思源一号的登录节点或计算节点提交）：
 
@@ -64,9 +116,6 @@ CPU 采用双路 Intel Xeon ICX Platinum 8358 32 核，主频 2.6GHz，共 936 �
    $ sbatch siyuan.slurm
 
 ``squeue``\ 可用于检查作业状态。
-
-
-
 
 思源一号交互作业示例
 ~~~~~~~~~~~~~~~~~~~~~~~~
