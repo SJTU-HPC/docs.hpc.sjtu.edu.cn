@@ -9,7 +9,7 @@ stages:
 
 fail_if_contain_raw_html:
   stage: check raw html
-  image: sjtuhpc/texlive-sphinx
+  image: sjtuhpc/texlive-sphinx:focal
   tags:
     - docker
   before_script:
@@ -20,7 +20,7 @@ fail_if_contain_raw_html:
 
 build_briefmanual_pdf:
   stage: build pdf
-  image: sjtuhpc/texlive-sphinx
+  image: sjtuhpc/texlive-sphinx:focal
   tags:
     - docker
   before_script:
@@ -39,7 +39,7 @@ build_briefmanual_pdf:
 
 build_latex_pdf:
   stage: build pdf
-  image: sjtuhpc/texlive-sphinx
+  image: sjtuhpc/texlive-sphinx:focal
   tags:
     - docker
   before_script:
@@ -60,7 +60,7 @@ build_latex_pdf:
 
 build_html_pages:
   stage: build html
-  image: sjtuhpc/texlive-sphinx
+  image: sjtuhpc/texlive-sphinx:focal
   tags:
     - docker
   needs:
