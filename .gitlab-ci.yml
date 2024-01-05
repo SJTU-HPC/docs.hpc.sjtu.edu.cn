@@ -12,9 +12,6 @@ fail_if_contain_raw_html:
   image: sjtuhpc/texlive-sphinx:focal
   tags:
     - docker
-  before_script:
-    - apt-get update -y
-    - apt-get install -y ack-grep
   script:
     - ack '.*raw.*html' docs && false || true
 
