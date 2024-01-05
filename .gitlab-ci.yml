@@ -20,6 +20,9 @@ build_briefmanual_pdf:
   image: sjtuhpc/texlive-sphinx:focal
   tags:
     - docker
+  before_script:
+    - mkdir -p .build_cache
+    - pip3 install --cache-dir=.build_cache -r requirements.txt
   script:
     - make -C tex all
   artifacts:
