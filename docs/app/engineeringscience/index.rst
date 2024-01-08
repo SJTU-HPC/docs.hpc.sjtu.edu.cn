@@ -59,3 +59,5 @@
    lorene
    boltztrap
    croco
+   openseespy
+   wanniertools
