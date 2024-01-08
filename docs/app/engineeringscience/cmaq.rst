@@ -16,6 +16,14 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
 +=======+=======+==========+=====================================+
 | 5.3.2 | |cpu| | 源码     | cmaq/5.3.2-oneapi-2021.4.0 思源一号 |
 +-------+-------+----------+-------------------------------------+
+| 5.4   | |cpu| | 源码     | cmaq/5.4-oneapi-2021.4.0   思源一号 |
++-------+-------+----------+-------------------------------------+
+| 5.3.3 | |cpu| | 源码     | cmaq/5.3.3-intel-2021.4.0   Pi2.0   |
++-------+-------+----------+-------------------------------------+
+| 5.4   | |cpu| | 源码     | cmaq/5.4-intel-2021.4.0     Pi2.0   |
++-------+-------+----------+-------------------------------------+
+| 5.4   | |cpu| | 源码     | cmaq/5.4-intel-2021.4.0      ARM    |
++-------+-------+----------+-------------------------------------+
 
 算例获取路径 
 ---------------
@@ -23,19 +31,23 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
 .. code:: bash
 
    /dssg/share/sample/cmaq/CMAQv5.3.2_Benchmark_2Day_Input.tar.gz
+   /dssg/share/sample/cmaq/CMAQv5.4_2018_12NE3_Benchmark_2Day_Input.tar.gz
+   /lustre/share/samples/cmaq/CMAQv5.3.2_Benchmark_2Day_Input.tar.gz  
+   /lustre/share/samples/cmaq/CMAQv5.4_2018_12NE3_Benchmark_2Day_Input.tar.gz
    
 集群上的CMAQ
 -----------------------
 
 - `思源一号上的CMAQ`_
-
+- `Pi2.0上的CMAQ`_
+- `ARM上的CMAQ`_
+  
 .. _思源一号上的CMAQ:
 
 思源一号上的CMAQ
 ---------------------
 
 可执行文件所在的目录
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
 
@@ -44,6 +56,13 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
    
    BCON_v532.exe、ICON_v532.exe、mcip.exe
    /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project/PREP
+
+您还可以 module show cmaq获取文件安装目录
+
+.. code:: bash
+
+   module avail cmaq
+   module show cmaq/5.3.2-oneapi-2021.4.0
 
 
 运行CMAQ的流程
@@ -101,6 +120,36 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
    setenv INPDIR /dssg/home/acct-hpc/hpchgc/data/cmaq/cmaq_test2/CMAQ_Project/data/2016_12SE1 
    csh run_cctm_Bench_2016_12SE1.csh
    
+.. _Pi2.0上的CMAQ:
+
+Pi2.0上的CMAQ
+---------------------
+
+可执行文件所在的目录
+
+.. code:: bash
+
+   CCTM_v54.exe
+   /lustre/opt/cascadelake/linux-rhel8-skylake_avx512/intel-2021.4.0/wrf_cmaq/cmaq-5.4/CMAQ-CMAQv5.4_14Oct2022/CCTM/scripts/BLD_CCTM_v54_intel
+   
+   BCON_v54.exe、ICON_v54.exe、mcip.exe
+   /lustre/opt/cascadelake/linux-rhel8-skylake_avx512/intel-2021.4.0/wrf_cmaq/cmaq-5.4/CMAQ-CMAQv5.4_14Oct2022/PREP
+
+.. _ARM上的CMAQ:
+
+ARM上的CMAQ
+---------------------
+
+可执行文件所在的目录
+
+.. code:: bash
+
+   CCTM_v54.exe
+   /lustre/opt/linux-openeuler22-aarch64/linux-centos8-aarch64/gcc-10.3.1/cmaq/CMAQ-CMAQv5.4_14Oct2022/CCTM/scripts/BLD_CCTM_v54_gcc
+   
+   BCON_v54.exe、ICON_v54.exe、mcip.exe
+   /lustre/opt/linux-openeuler22-aarch64/linux-centos8-aarch64/gcc-10.3.1/cmaq/CMAQ-CMAQv5.4_14Oct2022/PREP
+
 运行结果(单位为：秒，越低越好)
 ------------------------------
 
@@ -113,6 +162,29 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
 | 核数        | 64       | 128       | 256       |
 +-------------+----------+-----------+-----------+
 | Exec time   | 0:06:41  | 0:05:18   | 0:04:26   |
++-------------+----------+-----------+-----------+
+
+
+Pi2.0上CMAQ的运行时间
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
++------------------------------------------------+
+|              cmaq/5.4-intel-2021.4.0           |
++=============+==========+===========+===========+
+| 核数        | 64       | 128       | 256       |
++-------------+----------+-----------+-----------+
+| Exec time   | 0:11:37  | 0:07:57   | 0:04:55   |
++-------------+----------+-----------+-----------+
+
+ARM上CMAQ的运行时间
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
++------------------------------------------------+
+|              cmaq/5.4-gcc-10.3.1               |
++=============+==========+===========+===========+
+| 核数        | 32       | 64        | 128       |
++-------------+----------+-----------+-----------+
+| Exec time   | 0:38:44  | 0:23:06   | 0:17:00   |
 +-------------+----------+-----------+-----------+
 
 参考资料
