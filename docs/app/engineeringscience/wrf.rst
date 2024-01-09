@@ -20,9 +20,23 @@ WPS是预处理WRF运行数据的工具。
 +========+=========+==========+=============================================+
 | 4.2.1  | |cpu|   | 源码     | wrf/4.2.1-oneapi-2021.4.0 思源一号          |
 +--------+---------+----------+---------------------------------------------+
-| 4.2    | |cpu|   | 源码     | wps/4.2-oneapi-2021.4.0 思源一号            |
+| 4.5.1  | |cpu|   | 源码     | wrf/4.5.1-oneapi-2021.4.0 思源一号          |
 +--------+---------+----------+---------------------------------------------+
-| 4.3.1  | |cpu|   | 源码     | wrf_cmaq/5.3.3-wrf-4.3.1                    |
+| 4.2    | |cpu|   | 源码     | wps/4.2-oneapi-2021.4.0   思源一号          |
++--------+---------+----------+---------------------------------------------+
+| 4.5    | |cpu|   | 源码     | wps/4.5-oneapi-2021.4.0   思源一号          |
++--------+---------+----------+---------------------------------------------+
+| 4.3.1  | |cpu|   | 源码     | wrf/4.3.1-intel-2021.4.0   Pi2.0            |
++--------+---------+----------+---------------------------------------------+
+| 4.5.1  | |cpu|   | 源码     | wrf/4.5.1-intel-2021.4.0   Pi2.0            |
++--------+---------+----------+---------------------------------------------+
+| 4.4    | |cpu|   | 源码     | wps/4.4-intel-2021.4.0     Pi2.0            |
++--------+---------+----------+---------------------------------------------+
+| 4.5    | |cpu|   | 源码     | wps/4.5-intel-2021.4.0     Pi2.0            |
++--------+---------+----------+---------------------------------------------+
+| 4.5.1  | |cpu|   | 源码     | wrf/4.5.1-gcc-10.3.0-openmpi ARM            |
++--------+---------+----------+---------------------------------------------+
+| 4.5    | |cpu|   | 源码     | wps/4.5-gcc-10.3.1           ARM            |
 +--------+---------+----------+---------------------------------------------+
 
 算例位置 
@@ -32,6 +46,7 @@ WPS是预处理WRF运行数据的工具。
 
    思源一号 : /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/wrf-4.2/wrf_data
    π2.0    : /lustre/opt/contribute/cascadelake/wrf_cmaq/wrf_data
+   ARM     : 同π2.0
    
 算例目录
 
@@ -120,25 +135,25 @@ geog_data_path的位置
    Please select from among the following Linux x86_64 options:
 
      1. (serial)   2. (smpar)   3. (dmpar)   4. (dm+sm)   PGI (pgf90/gcc)
-     5. (serial)   6. (smpar)   7. (dmpar)   8. (dm+sm)   PGI (pgf90/pgcc): SGI MPT
-     9. (serial)  10. (smpar)  11. (dmpar)  12. (dm+sm)   PGI (pgf90/gcc): PGI accelerator
-    13. (serial)  14. (smpar)  15. (dmpar)  16. (dm+sm)   INTEL (ifort/icc)
-                                            17. (dm+sm)   INTEL (ifort/icc): Xeon Phi (MIC architecture)
-    18. (serial)  19. (smpar)  20. (dmpar)  21. (dm+sm)   INTEL (ifort/icc): Xeon (SNB with AVX mods)
-    22. (serial)  23. (smpar)  24. (dmpar)  25. (dm+sm)   INTEL (ifort/icc): SGI MPT
-    26. (serial)  27. (smpar)  28. (dmpar)  29. (dm+sm)   INTEL (ifort/icc): IBM POE
-    30. (serial)               31. (dmpar)                PATHSCALE (pathf90/pathcc)
-    32. (serial)  33. (smpar)  34. (dmpar)  35. (dm+sm)   GNU (gfortran/gcc)
-    36. (serial)  37. (smpar)  38. (dmpar)  39. (dm+sm)   IBM (xlf90_r/cc_r)
-    40. (serial)  41. (smpar)  42. (dmpar)  43. (dm+sm)   PGI (ftn/gcc): Cray XC CLE
-    44. (serial)  45. (smpar)  46. (dmpar)  47. (dm+sm)   CRAY CCE (ftn $(NOOMP)/cc): Cray XE and XC
-    48. (serial)  49. (smpar)  50. (dmpar)  51. (dm+sm)   INTEL (ftn/icc): Cray XC
-    52. (serial)  53. (smpar)  54. (dmpar)  55. (dm+sm)   PGI (pgf90/pgcc)
-    56. (serial)  57. (smpar)  58. (dmpar)  59. (dm+sm)   PGI (pgf90/gcc): -f90=pgf90
-    60. (serial)  61. (smpar)  62. (dmpar)  63. (dm+sm)   PGI (pgf90/pgcc): -f90=pgf90
-    64. (serial)  65. (smpar)  66. (dmpar)  67. (dm+sm)   INTEL (ifort/icc): HSW/BDW
-    68. (serial)  69. (smpar)  70. (dmpar)  71. (dm+sm)   INTEL (ifort/icc): KNL MIC
-    72. (serial)  73. (smpar)  74. (dmpar)  75. (dm+sm)   FUJITSU (frtpx/fccpx): FX10/FX100 SPARC64 IXfx/Xlfx
+     2. (serial)   6. (smpar)   7. (dmpar)   8. (dm+sm)   PGI (pgf90/pgcc): SGI MPT
+     3. (serial)  10. (smpar)  11. (dmpar)  12. (dm+sm)   PGI (pgf90/gcc): PGI accelerator
+    1.  (serial)  14. (smpar)  15. (dmpar)  16. (dm+sm)   INTEL (ifort/icc)
+                                            1.  (dm+sm)   INTEL (ifort/icc): Xeon Phi (MIC architecture)
+    2.  (serial)  19. (smpar)  20. (dmpar)  21. (dm+sm)   INTEL (ifort/icc): Xeon (SNB with AVX mods)
+    3.  (serial)  23. (smpar)  24. (dmpar)  25. (dm+sm)   INTEL (ifort/icc): SGI MPT
+    4.  (serial)  27. (smpar)  28. (dmpar)  29. (dm+sm)   INTEL (ifort/icc): IBM POE
+    5.  (serial)               31. (dmpar)                PATHSCALE (pathf90/pathcc)
+    6.  (serial)  33. (smpar)  34. (dmpar)  35. (dm+sm)   GNU (gfortran/gcc)
+    7.  (serial)  37. (smpar)  38. (dmpar)  39. (dm+sm)   IBM (xlf90_r/cc_r)
+    8.  (serial)  41. (smpar)  42. (dmpar)  43. (dm+sm)   PGI (ftn/gcc): Cray XC CLE
+    9.  (serial)  45. (smpar)  46. (dmpar)  47. (dm+sm)   CRAY CCE (ftn $(NOOMP)/cc): Cray XE and XC
+    10. (serial)  49. (smpar)  50. (dmpar)  51. (dm+sm)   INTEL (ftn/icc): Cray XC
+    11. (serial)  53. (smpar)  54. (dmpar)  55. (dm+sm)   PGI (pgf90/pgcc)
+    12. (serial)  57. (smpar)  58. (dmpar)  59. (dm+sm)   PGI (pgf90/gcc): -f90=pgf90
+    13. (serial)  61. (smpar)  62. (dmpar)  63. (dm+sm)   PGI (pgf90/pgcc): -f90=pgf90
+    14. (serial)  65. (smpar)  66. (dmpar)  67. (dm+sm)   INTEL (ifort/icc): HSW/BDW
+    15. (serial)  69. (smpar)  70. (dmpar)  71. (dm+sm)   INTEL (ifort/icc): KNL MIC
+    16. (serial)  73. (smpar)  74. (dmpar)  75. (dm+sm)   FUJITSU (frtpx/fccpx): FX10/FX100 SPARC64 IXfx/Xlfx
 
    Enter selection [1-75] : 
 
@@ -607,7 +622,7 @@ WRF运行
    #SBATCH --ntasks-per-node=40
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   module load wrf/4.3.1-intel-2021.4.0
    
    geogrid.exe 
    
@@ -622,7 +637,7 @@ WRF运行
    #SBATCH --ntasks-per-node=40
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   module load wrf/4.3.1-intel-2021.4.0
    
    link_grib.csh fnl_2016100*
    cp ungrib/Variable_Tables/Vtable.GFS Vtable
@@ -638,7 +653,7 @@ WRF运行
    #SBATCH --ntasks-per-node=40
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   module load wrf/4.3.1-intel-2021.4.0
    
    ungrib.exe 
    
@@ -653,7 +668,7 @@ WRF运行
    #SBATCH --ntasks-per-node=40
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   module load wrf/4.3.1-intel-2021.4.0
    
    metgrid.exe 
 
@@ -791,7 +806,7 @@ WRF运行
    #SBATCH --ntasks-per-node=40
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   module load wrf/4.3.1-intel-2021.4.0
    ulimit -s unlimited
    real.exe
   
@@ -806,9 +821,163 @@ WRF运行
    #SBATCH --ntasks-per-node=40
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
-   module load wrf_cmaq/5.3.3-wrf-4.3.1
+   module load wrf/4.3.1-intel-2021.4.0
    ulimit -s unlimited
    mpirun wrf.exe
+
+ARM上运行WRF
+~~~~~~~~~~~~~~~~
+
+1. 由于WRF运行数据需要复杂的文件依赖关系，可先拷贝WRF目录中必要的文件到本地
+
+.. code:: bash
+
+   cd ~/data
+   cd WRF
+   mkdir WRF-4.3.1 && cd WRF-4.3.1
+   cp -r /lustre/opt/contribute/cascadelake/wrf_cmaq/packet_1/WRF-master/run/* ./
+
+2. 拷贝WPS生成的met文件到WRF-4.3.1目录
+
+.. code:: bash
+
+   cp -r  ~/data/WRF/WPS-4.3.1/met_em.d*  ./
+   
+3. namelist.input文件内容设置如下，参数需要与wps的namelist.wps参数一致：
+
+.. code:: bash
+
+    &time_control
+    run_days                            = 2,
+    run_hours                           = 0,
+    run_minutes                         = 0,
+    run_seconds                         = 0,
+    start_year                          = 2016,
+    start_month                         = 10,
+    start_day                           = 06,
+    start_hour                          = 00,
+    end_year                            = 2016,
+    end_month                           = 10,
+    end_day                             = 08,
+    end_hour                            = 00,
+    interval_seconds                    = 21600
+    input_from_file                     = .true.,.true.,
+    history_interval                    = 60,   60,
+    frames_per_outfile                  = 12,   12,
+    restart                             = .false.,
+    restart_interval                    = 5000,
+    io_form_history                     = 2
+    io_form_restart                     = 2
+    io_form_input                       = 2
+    io_form_boundary                    = 2
+    /
+
+    &domains
+    time_step                           = 60,
+    time_step_fract_num                 = 0,
+    time_step_fract_den                 = 1,
+    max_dom                             = 1,
+    e_we                                = 515,    112,
+    e_sn                                = 515,    97,
+    e_vert                              = 33,    33,
+    p_top_requested                     = 5000,
+    num_metgrid_levels                  = 32,
+    num_metgrid_soil_levels             = 4,
+    dx                                  = 12000,
+    dy                                  = 12000,
+    grid_id                             = 1,     2,
+    parent_id                           = 0,     1,
+    i_parent_start                      = 1,     31,
+    j_parent_start                      = 1,     17,
+    parent_grid_ratio                   = 1,     3,
+    parent_time_step_ratio              = 1,     3,
+    feedback                            = 1,
+    smooth_option                       = 0
+    /
+
+    &physics
+    physics_suite                       = 'tropical'
+    mp_physics                          = 6,    -1,
+    cu_physics                          = 16,    -1,
+    ra_lw_physics                       = 4,    -1,
+    ra_sw_physics                       = 4,    -1,
+    bl_pbl_physics                      = 8,    8,
+    sf_sfclay_physics                   = 1,    1,
+    sf_surface_physics                  = 2,    -1,
+    radt                                = 12,    30,
+    bldt                                = 0,     0,
+    cudt                                = 5,     5,
+    icloud                              = 1,
+    num_land_cat                        = 21,
+    sf_urban_physics                    = 0,     0,     0,
+    /
+
+    &fdda
+    /
+
+    &dynamics
+    hybrid_opt                          = 2, 
+    w_damping                           = 0,
+    diff_opt                            = 1,      1,
+    km_opt                              = 4,      4,
+    diff_6th_opt                        = 0,      0,
+    diff_6th_factor                     = 0.12,   0.12,
+    base_temp                           = 290.
+    damp_opt                            = 3,
+    zdamp                               = 5000.,  5000.,
+    dampcoef                            = 0.2,    0.2,
+    khdif                               = 0,      0,
+    kvdif                               = 0,      0,
+    non_hydrostatic                     = .true., .true.,
+    moist_adv_opt                       = 1,      1,     
+    scalar_adv_opt                      = 1,      1,     
+    gwd_opt                             = 0,      1,
+    /
+
+    &bdy_control
+    spec_bdy_width                      = 5,
+    specified                           = .true.
+    /
+
+    &grib2
+    /
+
+    &namelist_quilt
+    nio_tasks_per_group = 0,
+    nio_groups = 1,
+    /
+   
+
+4. 运行real.exe程序，脚本如下：
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=test
+   #SBATCH --partition=arm128c256g
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=128
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   module load wrf/4.5.1-gcc-10.3.1
+   ulimit -s unlimited
+   real.exe
+  
+5. 运行wrf.exe程序，脚本如下，该部分是最终也是最耗时的执行程序。
+
+.. code:: bash
+
+   #!/bin/bash
+   #SBATCH --job-name=test
+   #SBATCH --partition=arm128c256g
+   #SBATCH -N 1
+   #SBATCH --ntasks-per-node=128
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+   module load wrf/4.5.1-gcc-10.3.1
+   ulimit -s unlimited
+   mpirun wrf.exe
+
 
 运行结果(单位为：秒，越低越好)
 ------------------------------
@@ -828,11 +997,22 @@ WRF运行
 ~~~~~~~~~~~~~~~~~~~~
 
 +------------------------------------------------+
-|           wrf_cmaq/5.3.3-wrf-4.3.1             |
+|           wrf/4.3.1-intel-2021.4.0             |
 +=============+==========+===========+===========+
 | 核数        | 40       | 80        | 160       |
 +-------------+----------+-----------+-----------+
 | Exec time   | 1:10:28  | 0:42:22   | 0:26:01   |
++-------------+----------+-----------+-----------+
+
+ARM上WRF的运行时间
+~~~~~~~~~~~~~~~~~~~~
+
++------------------------------------------------+
+|           wrf/4.5.1-gcc-10.3.1                 |
++=============+==========+===========+===========+
+| 核数        | 64       | 128       | 256       |
++-------------+----------+-----------+-----------+
+| Exec time   | 1:48:51  | 1:00:02   | 0:50:49   |
 +-------------+----------+-----------+-----------+
 
 参考资料
