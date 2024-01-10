@@ -61,3 +61,5 @@
    croco
    openseespy
    wanniertools
+   namd
+   xerus
