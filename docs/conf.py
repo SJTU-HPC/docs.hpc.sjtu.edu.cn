@@ -121,6 +121,9 @@ html_theme_options = {
                ]
 }
 
+# Add Last Update to the webpage
+html_last_updated_fmt = ""
+
 # Add doc prefix for atutlabeling
 autosectionlabel_prefix_document = True
 
