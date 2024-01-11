@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = '上海交大超算平台用户手册'
-copyright = '2020, 上海交通大学网络信息中心'
+copyright = '2024, 上海交通大学网络信息中心'
 author = '上海交通大学网络信息中心计算业务部'
 record = '沪交ICP备20190201'
 
@@ -120,6 +120,9 @@ html_theme_options = {
                 },
                ]
 }
+
+# Add Last Update to the webpage
+html_last_updated_fmt = ""
 
 # Add doc prefix for atutlabeling
 autosectionlabel_prefix_document = True
