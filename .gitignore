@@ -26,3 +26,4 @@ docs/_static/reframe-tests-master*
 .gitignore
 *.swp
 *.bak
+.auctex-auto
