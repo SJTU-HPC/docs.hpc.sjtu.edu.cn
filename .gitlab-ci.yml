@@ -23,7 +23,7 @@ build_briefmanual_pdf:
   before_script:
     - mkdir -p .build_cache
   script:
-    - make -C tex all
+    - make -C tex main.pdf
   artifacts:
     paths:
       - tex/main.pdf
@@ -32,8 +32,7 @@ build_briefmanual_pdf:
     paths:
       - .build_cache
 
-
-build_latex_pdf:
+build_cover:
   stage: build pdf
   image: sjtuhpc/texlive-sphinx:focal
   tags:
@@ -41,8 +40,28 @@ build_latex_pdf:
   before_script:
     - mkdir -p .build_cache
   script:
+    - make -C tex cover.pdf
+  artifacts:
+    paths:
+      - tex/cover.pdf
+  cache:
+    key: ${CI_JOB_NAME}
+    paths:
+      - .build_cache
+
+build_latex_pdf:
+  stage: build pdf
+  image: sjtuhpc/texlive-sphinx:focal
+  tags:
+    - docker
+  needs:
+    - job: build_cover
+      artifacts: true
+  before_script:
+    - mkdir -p .build_cache
+  script:
     - make -C docs clean latexpdf
-    - pdftk A=docs/img/cover.pdf B=docs/_build/latex/sphinx.pdf cat A1 B2-end output docs/_build/latex/merge.pdf
+    - pdftk A=tex/cover.pdf B=docs/_build/latex/sphinx.pdf cat A1 B2-end output docs/_build/latex/merge.pdf
     - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/merge.pdf
     - mv docs/_build/latex/pi_small.pdf  docs/_build/latex/pi.pdf
   artifacts:

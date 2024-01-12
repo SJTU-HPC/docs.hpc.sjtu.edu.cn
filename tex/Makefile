@@ -9,12 +9,15 @@ LATEXMK_OPT_BASE = -xelatex -gg -silent
 LATEXMK_OPT = $(LATEXMK_OPT_BASE) -f
 LATEXMK_OPT_PVC = $(LATEXMK_OPT_BASE) -pvc
 
-all: $(THESIS).pdf
+all: $(THESIS).pdf cover.pdf
 
 .PHONY : all cleanall pvc view wordcount git zip
 
 $(THESIS).pdf : $(THESIS).tex *.tex $(TEMPLATE) Makefile
 	-latexmk $(LATEXMK_OPT) $(THESIS)
+
+cover.pdf : cover.tex $(TEMPLATE) Makefile
+	-latexmk $(LATEXMK_OPT) cover
 
 pvc :
 	latexmk $(LATEXMK_OPT_PVC) $(THESIS)
