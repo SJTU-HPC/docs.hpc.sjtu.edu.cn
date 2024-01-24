@@ -303,8 +303,6 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 多节点并行版的 MATLAB
 ^^^^^^^^^^^^^^^^^^^^^^
 
-**pi2.0**
-
 1. 首先，进入可视化终端界面
 
 通过 HPC Studio ``https://studio.hpc.sjtu.edu.cn`` 打开远程桌面
@@ -330,6 +328,8 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
    profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2022a/ParSlurmProfile/SlurmParForUser.mlsettings');
    # 若在 Pi 2.0 上使用 Matlab R2023a，导入下面的并行配置
    profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2023a/ParSlurmProfile/R2023a-SlurmParForUser.mlsettings');
+   # 若在思源一号上使用 Matlab R2022a，导入下面的并行配置
+   profile_master = parallel.importProfile('/dssg/opt/icelake/linux-centos8-icelake/contribute/matlab/R2022a/ParSlurmProfile/R2022a-SlurmParForUser.mlsettings');
    # 若在思源一号上使用 Matlab R2023a，导入下面的并行配置
    profile_master = parallel.importProfile('/dssg/opt/icelake/linux-centos8-icelake/contribute/matlab/R2023a/ParSlurmProfile/R2023a-SlurmParForUser.mlsettings');
 
@@ -342,7 +342,8 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 
 3.（可选）调整并行池的大小
 
-默认 SlurmProfile 的最大 Worker 数目为 600，如果您需要调整这一数值，可以按照以下的 GUI 方式或者命令行方式操作，下面的示例将并行池大小调整为 800 worker。
+默认 SlurmProfile 的最大 worker 数目为 200 （ Pi 2.0 ）或 320（思源），如果您需要调整这一数值，具体可以按照以下的 GUI 方式或者命令行方式操作，建议将最大 worker 数设为计算节点总核心数的倍数，Pi 2.0 节点为 40 核，思源一号节点为 64 核。
+下面以思源一号为例，将并行池大小调整为 640 worker。
 
 GUI 方式调整并行池大小：
 
@@ -357,12 +358,12 @@ GUI 方式调整并行池大小：
 
   p=parcluster();
   p.NumWorkers
-  p.NumWorkers=800
+  p.NumWorkers=640
   p.saveProfile
 
 .. image:: ../../img/matlab_adjust_parpool_cmd.png
 
-在调整并行池大小之后，可以尝试启动并行池来验证修改后的配置，使用以下的 GUI 方式或者命令行方式操作：
+4. 启动并行池
 
 GUI 方式启动并行池：
 
@@ -372,11 +373,11 @@ GUI 方式启动并行池：
 
 命令行方式启动并行池：
 
-在 MATLAB 命令行窗口输入： ``parpool('SlurmParForUser',600)``，这里的 ``SlurmParForUser`` 可能需要替换成您自定义的名字。
+在 MATLAB 命令行窗口输入： ``parpool('SlurmParForUser',320)``，这里的 ``SlurmParForUser`` 可能需要替换成您自定义的名字。
 
 **注意：启动并行池时，系统将按照设置的工作核心数申请资源。例如 NumWorkers 为 1000 时，系统将在启动并行池时申请到 1000 核的资源，请注意您的作业费用消耗。**
 
-4. 接下来，运行作业
+5. 接下来，运行作业
 
 示例作业脚本路径如下所示，具体功能为素因素分解，使用的核数为 1、4、8、32、40、80 和 160 核，生成的图片为不同核数的计算时间与使用1核时的加速比。
 
@@ -392,7 +393,7 @@ GUI 方式启动并行池：
 
 **注意：第一次申请资源池时，会要求输入在集群上的账号和密码，然后在整个 matlab session 中均有效。**
 
-5. 运行结果为
+6. 运行结果为
 
 .. image:: ../../img/matlab_parallel_2.png
 
