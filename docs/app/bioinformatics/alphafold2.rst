@@ -438,6 +438,9 @@ ParaFold1.0计算单体运行脚本
 ParaFold 在 π 集群上运行
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+ParaFold1.0脚本
+############################
+
 下载 ParaFold
 
 .. code:: bash
@@ -469,6 +472,29 @@ ParaFold 在 π 集群上运行
     -t 2021-07-27 \
     -m model_1
 
+ParaFold2.0示例脚本
+############################
+
+.. code:: bash
+
+    #!/bin/bash
+    #SBATCH --job-name=parafold
+    #SBATCH --partition=dgx2
+    #SBATCH -N 1
+    #SBATCH --ntasks-per-node=1
+    #SBATCH --cpus-per-task=6
+    #SBATCH --gres=gpu:1          # use 1 GPU
+    #SBATCH --output=%j.out
+    #SBATCH --error=%j.err
+
+    singularity run --nv /lustre/share/img/ai/parafold2.sif \
+    /app/ParallelFold/run_alphafold.sh \
+    -d /scratch/share/AlphaFold/data \
+    -o output \
+    -p monomer_ptm \
+    -i /app/ParallelFold/input/mono_set1/GA98.fasta \
+    -t 2024-01-29 \
+    -m model_1
 
 版本三：ColabFold
 ----------------------------------------
