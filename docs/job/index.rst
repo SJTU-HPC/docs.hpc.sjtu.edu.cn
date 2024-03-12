@@ -18,3 +18,4 @@
    ascend-910b
    resource
    kos
+   rocky
