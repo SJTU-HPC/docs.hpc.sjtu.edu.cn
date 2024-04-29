@@ -204,7 +204,7 @@ b) 由于登录节点禁止运行作业和并行编译，请申请计算节点�
 
 .. code:: bash
 
-   $ srun -p small -n 8 --pty /bin/bash
+   $ srun -p cpu -n 8 --pty /bin/bash
 
 c) 加载 Intel oneapi 模块：
 
