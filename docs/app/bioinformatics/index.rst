@@ -48,6 +48,7 @@
    gatk
    geant4
    genomestrip
+   genozip
    gmap-gsnap
    graphmap
    gridss
