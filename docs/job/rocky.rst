@@ -1,7 +1,7 @@
 Rocky 队列使用
 ==================
 
-Rocky 队列开放测试
+Rocky 队列开放
 ------------------
 
 CentOS 8 操作系统已于 2021 年 12 月停止维护，为应对安全风险，计划将思源一号集群的操作系统从 CentOS 8 替换到生命周期健康的 Rocky Linux。
@@ -25,8 +25,6 @@ CentOS 8 操作系统已于 2021 年 12 月停止维护，为应对安全风险�
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 部署 Rocky Linux 操作系统的 CPU 节点队列为 ``64c512g_rocky``，使用方法和 ``64c512g`` 队列基本一致。
-为了尽可能使更多用户有机会测试应用，队列进行了一定的限制：每个主账号下所有子账号能使用的cpu核数≤384核（6节点），作业时间限制为三天。
-申请资源时需要指定使用 ``rocky`` 的 qos。
 
 **slurm 脚本**
 
@@ -35,7 +33,6 @@ CentOS 8 操作系统已于 2021 年 12 月停止维护，为应对安全风险�
     #!/bin/bash
     #SBATCH --job-name=test
     #SBATCH --partition=64c512g_rocky
-    #SBATCH --qos=rocky
     #SBATCH --nodes 1
     #SBATCH --ntasks-per-node=1
 
@@ -45,4 +42,4 @@ CentOS 8 操作系统已于 2021 年 12 月停止维护，为应对安全风险�
 
 .. code:: bash
 
-    srun -q rocky -p 64c512g_rocky -n 1 --pty /bin/bash
+    srun -p 64c512g_rocky -n 1 --pty /bin/bash
