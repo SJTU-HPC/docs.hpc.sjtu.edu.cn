@@ -13,3 +13,4 @@ AI 计算
    tvm
    pyg
    detectron2
+   ollama
