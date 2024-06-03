@@ -60,9 +60,9 @@ ColabFold 在思源一号上有两种运行方法：
 
 .. code:: bash
 
-    export PATH="~/colab/localcolabfold/colabfold_batch/bin:$PATH"
+    export PATH="~/colab/localcolabfold/localcolabfold/colabfold-conda/bin:$PATH"
     module load miniconda3
-    source activate ~/colab/localcolabfold/colabfold_batch/colabfold-conda
+    source activate ~/colab/localcolabfold/localcolabfold/colabfold-conda
 
 在包含 ``test.fasta`` 的文件夹里运行：
 
