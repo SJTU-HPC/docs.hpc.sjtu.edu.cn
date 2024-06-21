@@ -51,6 +51,32 @@ a100队列
 
    在登录节点 `srun` 执行交互作业时可能会断连导致作业中断，建议在 `HPC Studio <https://studio.hpc.sjtu.edu.cn/>`_ 申请1核心的远程桌面（cpu节点即可），选择好时间，在计算节点来执行 `srun`。
 
+这是一个 **多机多卡** 作业脚本，该脚本向 `a100` 队列申请 2 个节点共 8 块 GPU，并在作业
+完成时邮件通知。
+
+.. code:: bash
+
+   #!/bin/bash
+
+   #SBATCH --job-name=test
+   #SBATCH --partition=a100
+   #SBATCH --nodes=2                 #该参数为节点数量
+   #SBATCH --ntasks-per-node=4       #该参数为每节点进程数
+   #SBATCH --cpus-per-task=16        #该参数为每进程cpu核心数
+   #SBATCH --gres=gpu:4              #该参数为每节点GPU卡数
+   #SBATCH --mail-type=end
+   #SBATCH --mail-user=YOU@EMAIL.COM
+   #SBATCH --output=%j.out
+   #SBATCH --error=%j.err
+
+   module load gcc openmpi cuda
+
+   mpirun -np 8 ./jacobi
+
+.. attention::
+
+   如果需要调用多机多卡,上述作业脚本参数只需要修改节点数量即可,另外运行的程序必须支持跨节点操作,如果程序只支持单机调用GPU,则不是申请几张卡就可以直接同时调用.
+
 debuga100队列
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
