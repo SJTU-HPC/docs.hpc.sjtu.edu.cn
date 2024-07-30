@@ -402,9 +402,9 @@ ParaFold2.0计算多体运行脚本
       -d /dssg/share/data/alphafold \
       -o output \
       -p multimer \
-      -i monomer.fasta \
+      -i multimer.fasta \
       -m model_1_multimer_v3,model_2_multimer_v3,model_3_multimer_v3,model_4_multimer_v3,model_5_multimer_v3 \
-      -u 0,1 -i multimer.fasta \
+      -u 0 \
       -t 2022-01-01 -r
 
 ParaFold1.0计算单体运行脚本
