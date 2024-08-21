@@ -63,3 +63,4 @@
    wanniertools
    namd
    xerus
+   packmol
