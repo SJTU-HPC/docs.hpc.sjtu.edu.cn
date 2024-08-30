@@ -11,7 +11,7 @@
    :maxdepth: 1
 
    accountapplication
-   password
+   security
    recharge
    hospitalaccount
 
