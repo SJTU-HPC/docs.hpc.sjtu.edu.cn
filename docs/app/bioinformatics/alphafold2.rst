@@ -226,7 +226,7 @@ AlphaFold2.3.1 计算单体
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
    
-   export DOWNLOAD_DIR=/scratch/share/AlphaFold/data
+   export DOWNLOAD_DIR=/lustre/share/scidata/AlphaFold/data
    singularity exec --nv /lustre/share/img/ai/alphafold/alphafold-2.3.1.sif python /app/alphafold/run_alphafold.py \
    --use_gpu_relax \
    --data_dir=$DOWNLOAD_DIR \
@@ -258,7 +258,7 @@ AlphaFold2.3.1 计算复合体
    #SBATCH --output=%j.out
    #SBATCH --error=%j.err
    
-   export DOWNLOAD_DIR=/scratch/share/AlphaFold/data
+   export DOWNLOAD_DIR=/lustre/share/scidata/AlphaFold/data
    singularity exec --nv  /lustre/share/img/ai/alphafold/alphafold-2.3.1.sif python /app/alphafold/run_alphafold.py  \
    --use_gpu_relax \
    --data_dir=$DOWNLOAD_DIR  \
