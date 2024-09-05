@@ -59,7 +59,8 @@ sydata.hpc.sjtu.edu.cn       数据传输  否         用于在本地和/dssg/h
 #. 如果您没有保存过密码，根据命令行提示完成传统账号密码认证。登录成功后您可以选择保存密码，以便在后续登录时跳过此步骤。
 #. 如果登录后您看到如下提示，请参阅 `账号安全信息管理 <https://docs.hpc.sjtu.edu.cn/accounts/security.html>`_ 的相关章节，及时关联jAccount/邮箱。
 
-**图片占位**
+.. figure:: ../img/ssh_console_01.png
+    :align: center
 
 以XShell为代表的图形界面客户端进行SSH登录
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
