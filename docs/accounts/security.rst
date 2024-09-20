@@ -28,11 +28,11 @@
     > ssh exampleuser@pilogin.hpc.sjtu.edu.cn
     If you are SJTU user, authenticate with jaccount password; otherwise use HPC password:
 
-    Please link your jaccount through https://mfa.hpc.sjtu.edu.cn as soon as possible!
+    Please link your jaccount through https://my.hpc.sjtu.edu.cn as soon as possible!
 
-这说明您的账号缺少身份信息，尚未关联jAccount，请按照提示前往 `超算账号管理平台 <https://mfa.hpc.sjtu.edu.cn>`_ 补充关联信息。
+这说明您的账号缺少身份信息，尚未关联jAccount，请按照提示前往 `超算账号管理平台 <https://my.hpc.sjtu.edu.cn>`_ 补充关联信息。
 
-如下图所示，缺少身份信息的旧账号首次登录 `超算账号管理平台 <https://mfa.hpc.sjtu.edu.cn>`_ 请使用您的超算账号密码，已经关联jAccount的账号可以选择 **交我办APP** 扫码登录。
+如下图所示，缺少身份信息的旧账号首次登录 `超算账号管理平台 <https://my.hpc.sjtu.edu.cn>`_ 请使用您的超算账号密码，已经关联jAccount的账号可以选择 **交我办APP** 扫码登录。
 
 .. figure:: ../img/myhpc_login.png
     :align: center
@@ -55,7 +55,7 @@
 
 新用户完成账号创建之后，我们会发送一封邮件给您，邮件中包含了您账号的独立密码。请您务必保管好账号密码不外泄。另外，我们强烈建议您收到账号密码后立即 **重置独立密码** 。建议使用 openssl rand -base64 6 命令或者在线密码生成器（如 `Strong Random Password Generator <https://passwordsgenerator.net/>`_ ）获得足够强度的随机密码， 并使用 SSH 公钥登录和密码管理器(如 `KeePass <https://keepass.info/>`_) 降低记忆难度。
 
-您可以在 `超算账号管理平台 <https://mfa.hpc.sjtu.edu.cn>`_ 的 ``个人主页`` 维护超算账号独立密码，如下图所示。 **修改密码要求您的账号已经关联过jAccount/邮箱，修改时系统将向您原本的jAccount/邮箱发送询问授权的通知，只有确认授权后才能完成密码更新。**
+您可以在 `超算账号管理平台 <https://my.hpc.sjtu.edu.cn>`_ 的 ``个人主页`` 维护超算账号独立密码，如下图所示。 **修改密码要求您的账号已经关联过jAccount/邮箱，修改时系统将向您原本的jAccount/邮箱发送询问授权的通知，只有确认授权后才能完成密码更新。**
 
 .. figure:: ../img/myhpc_password.png
     :align: center
@@ -65,7 +65,7 @@
 
 如果您需要重置的是jAccount密码，请在 ``交我办`` 发起对应的申请流程。
 
-如果您需要重置的是超算账号独立密码，建议按照上一节的说明在 `超算账号管理平台 <https://mfa.hpc.sjtu.edu.cn>`_ 中进行操作。或者也可以发送邮件至 `HPC邮箱 <mailto:hpc@sjtu.eud.cn>`_ 申请人工协助。
+如果您需要重置的是超算账号独立密码，建议按照上一节的说明在 `超算账号管理平台 <https://my.hpc.sjtu.edu.cn>`_ 中进行操作。或者也可以发送邮件至 `HPC邮箱 <mailto:hpc@sjtu.eud.cn>`_ 申请人工协助。
 
 密码规范
 -------------
@@ -80,7 +80,7 @@
 申请免密证书
 ==================
 
-如果您不希望在SSH登录时手动输入密码，您可以在 `超算账号管理平台 <https://mfa.hpc.sjtu.edu.cn>`_ 申请免密证书。
+如果您不希望在SSH登录时手动输入密码，您可以在 `超算账号管理平台 <https://my.hpc.sjtu.edu.cn>`_ 申请免密证书。
 
 免密证书是基于个人公钥签发的，如果您没有SSH公私钥或者不了解相关内容，请选择一键生成方式，如下图所示，平台将为您自动生成新的公私钥文件：
 
