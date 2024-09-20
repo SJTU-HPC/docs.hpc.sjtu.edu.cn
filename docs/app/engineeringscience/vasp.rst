@@ -8,30 +8,34 @@ VASP
 
 VASP 全称 Vienna Ab-initio Simulation Package，是维也纳大学 Hafner 小组开发的进行电子结构计算和量子力学-分子动力学模拟软件包。它是目前材料模拟和计算物质科学研究中最流行的商用软件之一。
 
-VASP 使用需要得到 VASP 官方授权。请自行购买 VASP license 许可，下载和安装。如需协助安装或使用，请发邮件联系我们，附上课题组拥有 VASP license 的证明。
+.. attention::
 
-本文档将介绍如何使用集群上已部署的 VASP 5.4.4 和 6.2.1，以及如何自行编译 VASP。
+   1. VASP 使用需要得到 VASP 官方授权，请自行购买 VASP license 许可，下载和安装。
+   2. 若课题组已购买 VASP ，可发送邮件提供课题组的 VASP license 证明，并注明需要使用的集群名称以及集群上具体的VASP模块名称，我们将添加该 VASP module 的使用权限。
+   3. 如果需要编译第三方插件或者需要修改源码版本的VASP，请提前参考VASP官网或者第三方插件官网确认需要安装的VASP版本是否支持。
 
-集群上的 VASP
----------------
+本文档将介绍如何使用集群上已部署的 VASP ，以及如何自行编译 VASP。
 
-- `思源一号 VASP`_
-
-- `π2.0 VASP`_
-
-- `ARM VASP`_
-
-
-.. _思源一号 VASP:
+集群上可用的VASP版本
+-----------------------
++--------+---------+----------+----------+-----------------------------------------------------+
+| 版本   | 平台    | 构建方式 | 集群     | 模块名                                              |
++========+=========+==========+==========+=====================================================+
+| 5.4.4  | |cpu|   | 源码     | 思源一号 |vasp/5.4.4-intel-2021.4.0                            |
++--------+---------+----------+----------+-----------------------------------------------------+
+| 6.2.1  | |gpu|   | 源码     | 思源一号 |vasp/6.2.1-intel-2021.4.0-cuda-11.5.0                |
++--------+---------+----------+----------+-----------------------------------------------------+
+| 6.3.2  | |cpu|   | 源码     | 思源一号 |vasp/6.3.2-vtst-intel-2021.4.0                       |
++--------+---------+----------+----------+-----------------------------------------------------+
+| 5.4.4  | |cpu|   | 源码     | Pi 2.0   |vasp/5.4.4-intel-2021.4.0                            |
++--------+---------+----------+----------+-----------------------------------------------------+
+| 6.3.2  | |cpu|   | 源码     | Pi 2.0   |vasp/6.3.2-intel-2021.4.0                            |
++--------+---------+----------+----------+-----------------------------------------------------+
 
 思源一号 VASP
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-若已拥有 VASP license，请邮件联系我们，提供课题组拥有 VASP license 的证明，并注明是 VASP5 还是 VASP6，我们将添加该 VASP module 的使用权限
-
-经测试，思源一号使用默认的 ``OMP_NUM_THREADS=1`` 速度比其它设置更好，故无需额外设置该参数
-
-下面 slurm 脚本以 vasp 6.2.1 为例。若使用 vasp 5.4.4，请将 ``module load`` 那行换成 ``module load vasp/5.4.4-intel-2021.4.0``
+下面 slurm 脚本以 vasp 6.3.2 为例。若使用其他模块，比如 vasp 5.4.4，请将 ``module load`` 那行换成 ``module load vasp/5.4.4-intel-2021.4.0``
 
 .. code:: bash
 
@@ -44,27 +48,18 @@ VASP 使用需要得到 VASP 官方授权。请自行购买 VASP license 许可�
    #SBATCH --exclusive
    #SBATCH -o %j.out
    #SBATCH -e %j.err
-
-   module load vasp/6.2.1-intel-2021.4.0-cuda-11.5.0
+   
+   module purge
+   module load vasp/6.3.2-intel-2021.4.0
 
    ulimit -s unlimited
+   ulimit -l unlimited
 
-   mpirun vasp_std
+   mpirun -np $SLURM_NPROCS vasp_std
 
-.. _π2.0 VASP:
 
 π2.0 VASP
 ~~~~~~~~~~~~~~~~~~~~~~~~
-
-若已拥有 VASP license，请邮件联系我们，提供课题组拥有 VASP license 的证明，并注明是 VASP5 还是 VASP6，我们将添加该 VASP module 的使用权限
-
-请注意，π2.0 上推荐使用 ``OMP_NUM_THREADS=2`` ，速度较默认的 ``OMP_NUM_THREADS=1`` 提升近 20%
-
-slurm 里，若使用 CPU 节点，须确保 ``OMP_NUM_THREADS * ntasks-per-node = 总核数`` 。例如：
-
-* 1 个 CPU 节点， ``OMP_NUM_THREADS=2`` ， ``ntasks-per-node=20``
-  
-* 2 个 CPU 节点， ``OMP_NUM_THREADS=2`` ， ``ntasks-per-node=40``
 
 下面 slurm 脚本以 vasp 5.4.4 为例：
 
@@ -75,29 +70,6 @@ slurm 里，若使用 CPU 节点，须确保 ``OMP_NUM_THREADS * ntasks-per-node
    #SBATCH -J vasp
    #SBATCH -p cpu
    #SBATCH -N 1
-   #SBATCH --ntasks-per-node=20
-   #SBATCH --exclusive
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-
-   module use /lustre/share/singularity/commercial-app
-   module load vasp/5.4.4-intel
-
-   ulimit -s unlimited
-   ulimit -l unlimited
-
-   export OMP_NUM_THREADS=2
-
-   srun --mpi=pmi2 vasp_std
-
-另外，模块 ``vasp/5.4.4-intel-2021.4.0`` 的使用方法如下所示
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH -J vasp
-   #SBATCH -p cpu
    #SBATCH --ntasks-per-node=40
    #SBATCH --exclusive
    #SBATCH -o %j.out
@@ -107,54 +79,9 @@ slurm 里，若使用 CPU 节点，须确保 ``OMP_NUM_THREADS * ntasks-per-node
    module load vasp/5.4.4-intel-2021.4.0
 
    ulimit -s unlimited
+   ulimit -l unlimited
 
-   mpirun vasp_std
-
-KOS VASP
-..................
-
-Pi集群上使用KOS系统的队列的slurm 脚本：
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH -J vasp
-   #SBATCH -p cpu
-   #SBATCH --ntasks-per-node=40
-   #SBATCH --exclusive
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-
-   module purge
-   module load vasp/5.4.4-intel-2021.4.0-kos #vasp/5.4.4-kos
-   module load vasp/6.3.2-intel-2021.4.0-kos #vasp/6.3.2-kos
-
-   ulimit -s unlimited
-
-   mpirun vasp_std
-
-
-.. _ARM VASP:
-
-ARM VASP
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-若已拥有 VASP license，请邮件联系我们，提供课题组拥有 VASP license 的证明，并注明是 VASP5 还是 VASP6，我们将添加该 VASP module 的使用权限  
-
-.. code:: bash
-
-   #!/bin/bash
-
-   #SBATCH -J vasp_arm
-   #SBATCH -p arm128c256g
-   #SBATCH -o %j.out
-   #SBATCH -e %j.err
-   #SBATCH -N 1
-   #SBATCH --ntasks-per-node=128
-
-   module load openmpi/4.0.3-gcc-9.2.0
-   mpirun singularity exec /lustre/share/singularity/commercial-app/vasp/5.4.4-arm.sif vasp_std
+   mpirun -np $SLURM_NPROCS vasp_std
 
 自行编译 VASP
 -------------------
@@ -186,12 +113,12 @@ VASP 在集群上使用 intel 套件自行编译十分容易，下面介绍CPU�
 
 编译完成后，bin 文件夹里将出现三个绿色的文件： ``vasp_std``, ``vasp_gam``, ``vasp_ncl``
 
-可将 ``vasp_std`` 复制到 ``home/bin`` 里，后续可以直接调用：
+可将 ``vasp_std`` 复制到 ``$HOME/bin`` 里，后续可以直接调用：
 
 .. code:: bash
 
-   mkdir ~/bin       # 若 home 下未曾建过 bin，则新建一个；若已有，请略过此句
-   cp vasp_std ~/bin
+   mkdir -p ~/bin       # 若 home 下未曾建过 bin，则新建一个；若已有，请略过此句
+   cp bin/vasp_std ~/bin
 
 4. 使用
    
@@ -206,12 +133,14 @@ VASP 在集群上使用 intel 套件自行编译十分容易，下面介绍CPU�
    #SBATCH --exclusive
    #SBATCH -o %j.out
    #SBATCH -e %j.err
-
+   
+   module purge
    module load oneapi/2021.4.0
 
    ulimit -s unlimited
+   ulimit -l unlimited
 
-   mpirun ~/vasp_std
+   mpirun -np $SLURM_NPROCS ~/bin/vasp_std
 
 VASP-GPU版本编译安装
 
@@ -255,8 +184,8 @@ VASP-GPU版本编译安装
 
 .. code:: bash
 
-   mkdir ~/bin       # 若 home 下未曾建过 bin，则新建一个；若已有，请略过此句
-   cp vasp_std ~/bin
+   mkdir -p ~/bin       # 若 home 下未曾建过 bin，则新建一个；若已有，请略过此句
+   cp bin/vasp_std ~/bin
 
 4. 作业脚本
    
@@ -279,29 +208,10 @@ VASP-GPU版本编译安装
 
    mpirun -np 1 ~/bin/vasp_std
 
-VASP 算例及测试
+VASP 算例
 ---------------------
 
-以 64 原子的 Si AIMD 熔化为例，各使用 40 核，思源一号与 π 2.0 的测试结果：
-
-===================== ===================== =====================
-      setting             思源一号 40核          π 2.0 40核
-OMP_NUM_THREADS       CPU time used (sec)   CPU time used (sec)
-===================== ===================== =====================
-1                     19                    94
-2                     23                    31
-4                     39                    39
-===================== ===================== =====================
-
-测试结果说明：
-
-* 思源一号推荐使用 ``OMP_NUM_THREADS=1``
-  
-* π 2.0 推荐使用 ``OMP_NUM_THREADS=2``
-
-* 思源一号 VASP 计算速度明显优于 π 2.0
-
-本示例相关说明：
+以 64 原子的 Si AIMD 熔化为例，本示例相关说明：
 
 1. VASP 运行需要最基本的 ``INCAR``, ``POSCAR``, ``POTCAR``, ``KPOINTS`` 四个文件。全部文件已放置于思源一号共享文件夹：
 
@@ -315,7 +225,7 @@ OMP_NUM_THREADS       CPU time used (sec)   CPU time used (sec)
 
    cp -r /dssg/share/sample/vasp ~
    cd vasp
-   sbatch slurm.sub
+   sbatch run.slurm
 
 3. 下面是该示例的 ``INCAR`` 文件内容：
 
