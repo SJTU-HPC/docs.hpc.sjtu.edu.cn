@@ -64,3 +64,4 @@
    namd
    xerus
    packmol
+   lobster
