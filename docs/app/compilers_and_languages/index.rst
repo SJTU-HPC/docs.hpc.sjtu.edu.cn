@@ -43,3 +43,4 @@
    spooles
    dealii
    nvitop
+   latex
