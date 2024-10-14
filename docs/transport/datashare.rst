@@ -50,7 +50,7 @@
 
 1. 用户可以自行设置共享文件夹的权限吗？
 
-可以，在申请建立共享文件夹之后，主账号负责人可以自行设置共享文件夹的权限，将数据共享给其他账号。具体可参考以下命令。
+可以，在申请建立共享文件夹之后，主账号负责人可以自行设置共享文件夹的权限，将数据共享给其他账号。以下示例假设主账号用户expuser01在PI的个人目录为 ``/lustre/home/acct-exp/expuser01`` ，思源一号个人目录 ``/dssg/home/acct-exp/expuser01`` ，在其项目组下设立共享文件夹 ``share``。
 
 .. warning::
 
@@ -58,15 +58,25 @@
 
 .. code:: bash
 
-    # 假设主账号用户expuser01在思源一号个人目录/dssg/home/acct-exp/expuser01，共享文件夹路径为/dssg/home/acct-exp/share
     # 查看共享文件夹的ACL权限，rwx代表读写权限，r-x代表只读权限
-    getfacl /dssg/home/acct-exp/share
+    # 在data, sylogin, sydata等节点访问/dssg存储时
+    mmgetacl /dssg/home/acct-exp/share
+    # 在data, pilogin, armlogin等节点访问/lustre存储时
+    getfacl /lustre/home/acct-exp/share
 
-    # 添加子账号expuser02的只读权限
-    setfacl -m u:expuser02:r-x /dssg/home/acct-exp/share
-
-    # 添加子账号expuser03的读写权限
-    setfacl -m u:expuser03:rwx /dssg/home/acct-exp/share
+    # 授予子账号expuser02只读权限，expuser03读写权限
+    # 在data, sylogin, sydata等节点访问/dssg存储时，请准备一个文本文件作为指令输入，一次性描述您期望的最终权限配置。
+    vim input.txt
+        user::rwxc
+        group::r-x-
+        other::r-x-
+        mask::rwxc
+        user:expuser02:r-xc
+        user:expuser03:rwxc
+    mmputacl -i input.txt /dssg/home/acct-exp/share
+    # 在data, pilogin, armlogin等节点访问/lustre存储时，您需要逐个添加、删除目标用户的权限。
+    setfacl -m u:expuser02:r-x /lustre/home/acct-exp/share
+    setfacl -m u:expuser03:rwx /lustre/home/acct-exp/share
 
 2. 如何将共享文件夹中的文件设置成只读？
 
@@ -83,4 +93,10 @@
 
 3. 用户可以自行设置家目录下文件的ACL权限来共享数据吗？
 
-不建议这样做。为保证数据安全，如有数据共享需求，请使用共享文件夹。
+以 ``/lustre/home/acct-exp/expuser01/hello.txt`` 为例，其他用户要访问 ``hello.txt`` ，需要有权限进入其上层父目录 ``expuser01`` ，即 ``expuser01`` 的家目录。默认情况下超算平台为用户家目录设置的权限为 ``rwx------`` ，因此仅对 ``hello.txt`` 添加ACL配置还不足以让其他用户访问到此文件。如果确实需要共享家目录中的数据，您还需要对家目录本身添加对象用户的进入权限x，例如：
+
+.. code:: bash
+
+    setfacl -m u:expuser02:r-x /lustre/home/acct-exp/expuser01
+
+**在您决定打开家目录的大门之前，您应当仔细检查家目录中各个文件的权限配置，请确保其他不希望共享的文件没有other域授权，私有数据的权限位不应多于 rwxr-x---**
