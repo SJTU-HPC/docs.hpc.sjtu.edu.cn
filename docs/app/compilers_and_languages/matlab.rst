@@ -329,7 +329,7 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 .. code:: matlab
 
    # 若在 Pi 2.0 上使用 Matlab R2022a，导入下面的并行配置
-   profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2022a/ParSlurmProfile/SlurmParForUser.mlsettings');
+   profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2022a/ParSlurmProfile/R2022a-SlurmParForUser.mlsettings');
    # 若在 Pi 2.0 上使用 Matlab R2023a，导入下面的并行配置
    profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2023a/ParSlurmProfile/R2023a-SlurmParForUser.mlsettings');
    # 若在 Pi 2.0 上使用 Matlab R2024a，导入下面的并行配置
@@ -348,6 +348,11 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 在 MATLAB 界面选择 Home -> Parallel -> Create and Manage Clusters，在 Cluster Profile Manager 中查看导入的配置：
 
 .. image:: ../../img/matlab_studio_cluster_profile_manager.png
+
+.. note::
+    超算登录方式更新后（https://docs.hpc.sjtu.edu.cn/login/sshlogin.html），需要重新导入对应集群版本的 SlurmProfile。或者在 Cluster Profile Manager 的 Slurm 插件设置中新增一条，名称为 ``AuthenticationMode``，值为 ``Multifactor``。
+
+.. image:: ../../img/matlab_studio_cluster_profile_plugin_setting.png
 
 3.（可选）调整并行池的大小
 
@@ -376,7 +381,7 @@ GUI 方式调整并行池大小：
 
 GUI 方式启动并行池：
 
-点击 MATLAB 左下角的并行池图标，选择启动并行池，同时可以查看并行池运行状态
+点击 MATLAB 左下角的并行池图标，选择启动并行池，同时可以查看并行池运行状态。第一次申请资源池时，会要求输入在集群上的账号和密码，然后在整个 matlab session 中均有效。
 
 .. image:: ../../img/matlab_start_parpool_gui.png
 
@@ -399,8 +404,6 @@ GUI 方式启动并行池：
 .. code:: bash
 
   composite_speedup
-
-**注意：第一次申请资源池时，会要求输入在集群上的账号和密码，然后在整个 matlab session 中均有效。**
 
 6. 运行结果为
 
