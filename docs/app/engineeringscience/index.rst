@@ -65,3 +65,4 @@
    xerus
    packmol
    lobster
+   libgd
