@@ -93,16 +93,21 @@ geog_data_path的位置
 
 .. code:: bash
 
-   hdf5-1.12.0             
+   hdf5-1.10.5             
    libpng-1.6.37 
-   netcdf-c-4.8.1
+   netcdf-c-4.8.0
    netcdf-fortran-4.5.3         
-   zlib-1.2.11 
-   jasper-1.900.29
+   zlib-1.2.13
+   jasper-1.900.1
 
 
 自定义编译WRF
 >>>>>>>>>>>>>
+申请计算节点用于编译
+
+.. code:: bash
+
+   srun -n 20 -p 64c512g --pty /bin/bash
 
 编译WRF前导入所需的环境变量
 
@@ -113,59 +118,75 @@ geog_data_path的位置
    export FC=ifort
    export F90=ifort
    export CXX=icpc
-   export DIR=/dssg/home/acct-hpc/hpchgc/software/wrf/WRF_4.1.1_Intel/library
-   export LD_LIBRARY_PATH=$DIR/wrf_libs_intel/lib:$LD_LIBRARY_PATH
-   export LDFLAGS=-L$DIR/wrf_libs_intel/lib
-   export CPPFLAGS=-I$DIR/wrf_libs_intel/include
-   export NETCDF=$DIR/wrf_libs_intel/
-   export HDF5=$DIR/wrf_libs_intel/
-   export NETCDF=$DIR/wrf_libs_intel/
-   export HDF5=$DIR/wrf_libs_intel/
+   export CPP="icpc -E"
+   export DIR=/dssg/share/sample/wrf/WRF_4.1.1_Intel/wrflibs
+   export PATH=$DIR/netcdf/bin:$DIR/hdf5-1.10.5/bin:$DIR/libpng-1.6.37/bin:$DIR/zlib-1.2.13/bin:$PATH
+   export LD_LIBRARY_PATH=$DIR/netcdf/lib:$DIR/hdf5-1.10.5/lib:$DIR/libpng-1.6.37/lib64:$DIR/zlib-1.2.13/lib:$LD_LIBRARY_PATH
+   export NETCDF=$DIR/netcdf
+   export HDF5=$DIR/hdf5-1.10.5
+
+拷贝WRF源码并进行configure配置选择
 
 .. code:: bash
 
-   tar xvf v4.2.1.tar.gz
-   cd WRF-4.2.1/
+   cp /dssg/share/sample/wrf/WRF_4.1.1_Intel/src/v4.2.2.tar.gz .
+   tar xvf v4.2.2.tar.gz
+   cd WRF-4.2.2/
    ./configure 
    
-可根据所需选择相应的参数，思源一号上的预编译版本选择的是20号，使用intel编译器编译WRF，并可以多节点并行运行。
+可根据所需选择相应的参数，使用intel编译器编译WRF，可以选择15，可以多节点并行运行。
 
 .. code:: bash
 
    Please select from among the following Linux x86_64 options:
 
-     1. (serial)   2. (smpar)   3. (dmpar)   4. (dm+sm)   PGI (pgf90/gcc)
-     2. (serial)   6. (smpar)   7. (dmpar)   8. (dm+sm)   PGI (pgf90/pgcc): SGI MPT
-     3. (serial)  10. (smpar)  11. (dmpar)  12. (dm+sm)   PGI (pgf90/gcc): PGI accelerator
-    1.  (serial)  14. (smpar)  15. (dmpar)  16. (dm+sm)   INTEL (ifort/icc)
-                                            1.  (dm+sm)   INTEL (ifort/icc): Xeon Phi (MIC architecture)
-    2.  (serial)  19. (smpar)  20. (dmpar)  21. (dm+sm)   INTEL (ifort/icc): Xeon (SNB with AVX mods)
-    3.  (serial)  23. (smpar)  24. (dmpar)  25. (dm+sm)   INTEL (ifort/icc): SGI MPT
-    4.  (serial)  27. (smpar)  28. (dmpar)  29. (dm+sm)   INTEL (ifort/icc): IBM POE
-    5.  (serial)               31. (dmpar)                PATHSCALE (pathf90/pathcc)
-    6.  (serial)  33. (smpar)  34. (dmpar)  35. (dm+sm)   GNU (gfortran/gcc)
-    7.  (serial)  37. (smpar)  38. (dmpar)  39. (dm+sm)   IBM (xlf90_r/cc_r)
-    8.  (serial)  41. (smpar)  42. (dmpar)  43. (dm+sm)   PGI (ftn/gcc): Cray XC CLE
-    9.  (serial)  45. (smpar)  46. (dmpar)  47. (dm+sm)   CRAY CCE (ftn $(NOOMP)/cc): Cray XE and XC
-    10. (serial)  49. (smpar)  50. (dmpar)  51. (dm+sm)   INTEL (ftn/icc): Cray XC
-    11. (serial)  53. (smpar)  54. (dmpar)  55. (dm+sm)   PGI (pgf90/pgcc)
-    12. (serial)  57. (smpar)  58. (dmpar)  59. (dm+sm)   PGI (pgf90/gcc): -f90=pgf90
-    13. (serial)  61. (smpar)  62. (dmpar)  63. (dm+sm)   PGI (pgf90/pgcc): -f90=pgf90
-    14. (serial)  65. (smpar)  66. (dmpar)  67. (dm+sm)   INTEL (ifort/icc): HSW/BDW
-    15. (serial)  69. (smpar)  70. (dmpar)  71. (dm+sm)   INTEL (ifort/icc): KNL MIC
-    16. (serial)  73. (smpar)  74. (dmpar)  75. (dm+sm)   FUJITSU (frtpx/fccpx): FX10/FX100 SPARC64 IXfx/Xlfx
-
-   Enter selection [1-75] : 
-
-根据个人所需可选择mpi进行编译，思源一号部署的预编译版本的更改参数如下：
+    1. (serial)   2. (smpar)   3. (dmpar)   4. (dm+sm)   PGI (pgf90/gcc)
+    2. (serial)   6. (smpar)   7. (dmpar)   8. (dm+sm)   PGI (pgf90/pgcc): SGI MPT
+    3. (serial)  10. (smpar)  11. (dmpar)  12. (dm+sm)   PGI (pgf90/gcc): PGI accelerator
+   1.  (serial)  14. (smpar)  15. (dmpar)  16. (dm+sm)   INTEL (ifort/icc)
+                                           1.  (dm+sm)   INTEL (ifort/icc): Xeon Phi (MIC architecture)
+   2.  (serial)  19. (smpar)  20. (dmpar)  21. (dm+sm)   INTEL (ifort/icc): Xeon (SNB with AVX mods)
+   3.  (serial)  23. (smpar)  24. (dmpar)  25. (dm+sm)   INTEL (ifort/icc): SGI MPT
+   4.  (serial)  27. (smpar)  28. (dmpar)  29. (dm+sm)   INTEL (ifort/icc): IBM POE
+   5.  (serial)               31. (dmpar)                PATHSCALE (pathf90/pathcc)
+   6.  (serial)  33. (smpar)  34. (dmpar)  35. (dm+sm)   GNU (gfortran/gcc)
+   7.  (serial)  37. (smpar)  38. (dmpar)  39. (dm+sm)   IBM (xlf90_r/cc_r)
+   8.  (serial)  41. (smpar)  42. (dmpar)  43. (dm+sm)   PGI (ftn/gcc): Cray XC CLE
+   9.  (serial)  45. (smpar)  46. (dmpar)  47. (dm+sm)   CRAY CCE (ftn $(NOOMP)/cc): Cray XE and XC
+   10. (serial)  49. (smpar)  50. (dmpar)  51. (dm+sm)   INTEL (ftn/icc): Cray XC
+   11. (serial)  53. (smpar)  54. (dmpar)  55. (dm+sm)   PGI (pgf90/pgcc)
+   12. (serial)  57. (smpar)  58. (dmpar)  59. (dm+sm)   PGI (pgf90/gcc): -f90=pgf90
+   13. (serial)  61. (smpar)  62. (dmpar)  63. (dm+sm)   PGI (pgf90/pgcc): -f90=pgf90
+   14. (serial)  65. (smpar)  66. (dmpar)  67. (dm+sm)   INTEL (ifort/icc): HSW/BDW
+   15. (serial)  69. (smpar)  70. (dmpar)  71. (dm+sm)   INTEL (ifort/icc): KNL MIC
+   16. (serial)  73. (smpar)  74. (dmpar)  75. (dm+sm)   FUJITSU (frtpx/fccpx): FX10/FX100 SPARC64 IXfx/Xlfx   
+   
+修改configure.wrf
 
 .. code:: bash
 
-   更改文件configure.wrf的参数
+   DM_FC               = mpiifort
+   DM_CC               = mpiicc
 
-   DM_FC           =       mpiifort
-   DM_CC           =       mpiicc
+编译em_real
+
+.. code:: bash
+
+   ./compile em_real 2>&1 | tee -a compile.log
+
+编译完成输出
+
+.. code:: bash
+
+   --->                  Executables successfully built                  <---
+ 
+   -rwxrwxr-x 1 hpcxdy hpcxdy 48398000 Oct 22 10:19 main/ndown.exe
+   -rwxrwxr-x 1 hpcxdy hpcxdy 48388496 Oct 22 10:19 main/real.exe
+   -rwxrwxr-x 1 hpcxdy hpcxdy 47734360 Oct 22 10:19 main/tc.exe
+   -rwxrwxr-x 1 hpcxdy hpcxdy 52544272 Oct 22 10:18 main/wrf.exe
    
+   ==========================================================================
+
 自定义编译WPS
 >>>>>>>>>>>>>>>
    
@@ -173,22 +194,24 @@ geog_data_path的位置
 
 .. code:: bash
                
-   export WRF_DIR=../WRF-4.2.1/
-   export JASPERLIB=$DIR/wrf_libs_intel/lib/
-   export JASPERINC=$DIR/wrf_libs_intel/include/
+   export WRF_DIR=../WRF-4.2.2/
+   export JASPERLIB=$DIR/jasper-1.900.1/lib/
+   export JASPERINC=$DIR/jasper-1.900.1/include/
     
-    
+拷贝WPS源码
+
 .. code:: bash
 
+   cp /dssg/share/sample/wrf/src/v4.2.tar.gz .
    tar xvf v4.2.tar.gz
    cd WPS-4.2/
    ./configure
    
-根据个人所需选择所需版本，思源一号上部署的预编译版本选择的19号，可多节点并行运行。（一般情况下选择17串行版即可满足计算所需）
+根据个人所需选择所需版本，选择20多节点并行运行。
 
 .. code:: bash
 
-   Please select from among the following supported platforms.
+      Please select from among the following supported platforms.
 
       1.  Linux x86_64, gfortran    (serial)
       2.  Linux x86_64, gfortran    (serial_NO_GRIB2)
@@ -199,39 +222,50 @@ geog_data_path的位置
       7.  Linux x86_64, PGI compiler   (dmpar)
       8.  Linux x86_64, PGI compiler   (dmpar_NO_GRIB2)
       9.  Linux x86_64, PGI compiler, SGI MPT   (serial)
-     10.  Linux x86_64, PGI compiler, SGI MPT   (serial_NO_GRIB2)
-     11.  Linux x86_64, PGI compiler, SGI MPT   (dmpar)
-     12.  Linux x86_64, PGI compiler, SGI MPT   (dmpar_NO_GRIB2)
-     13.  Linux x86_64, IA64 and Opteron    (serial)
-     14.  Linux x86_64, IA64 and Opteron    (serial_NO_GRIB2)
-     15.  Linux x86_64, IA64 and Opteron    (dmpar)
-     16.  Linux x86_64, IA64 and Opteron    (dmpar_NO_GRIB2)
-     17.  Linux x86_64, Intel compiler    (serial)
-     18.  Linux x86_64, Intel compiler    (serial_NO_GRIB2)
-     19.  Linux x86_64, Intel compiler    (dmpar)
-     20.  Linux x86_64, Intel compiler    (dmpar_NO_GRIB2)
-     21.  Linux x86_64, Intel compiler, SGI MPT    (serial)
-     22.  Linux x86_64, Intel compiler, SGI MPT    (serial_NO_GRIB2)
-     23.  Linux x86_64, Intel compiler, SGI MPT    (dmpar)
-     24.  Linux x86_64, Intel compiler, SGI MPT    (dmpar_NO_GRIB2)
-     25.  Linux x86_64, Intel compiler, IBM POE    (serial)
-     26.  Linux x86_64, Intel compiler, IBM POE    (serial_NO_GRIB2)
-     27.  Linux x86_64, Intel compiler, IBM POE    (dmpar)
-     28.  Linux x86_64, Intel compiler, IBM POE    (dmpar_NO_GRIB2)
-     29.  Linux x86_64 g95 compiler     (serial)
-     30.  Linux x86_64 g95 compiler     (serial_NO_GRIB2)
-     31.  Linux x86_64 g95 compiler     (dmpar)
-     32.  Linux x86_64 g95 compiler     (dmpar_NO_GRIB2)
-     33.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (serial)
-     34.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (serial_NO_GRIB2)
-     35.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (dmpar)
-     36.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (dmpar_NO_GRIB2)
-     37.  Cray XC CLE/Linux x86_64, Intel compiler   (serial)
-     38.  Cray XC CLE/Linux x86_64, Intel compiler   (serial_NO_GRIB2)
-     39.  Cray XC CLE/Linux x86_64, Intel compiler   (dmpar)
-     40.  Cray XC CLE/Linux x86_64, Intel compiler   (dmpar_NO_GRIB2)
-   
-   Enter selection [1-40] :
+      10.  Linux x86_64, PGI compiler, SGI MPT   (serial_NO_GRIB2)
+      11.  Linux x86_64, PGI compiler, SGI MPT   (dmpar)
+      12.  Linux x86_64, PGI compiler, SGI MPT   (dmpar_NO_GRIB2)
+      13.  Linux x86_64, IA64 and Opteron    (serial)
+      14.  Linux x86_64, IA64 and Opteron    (serial_NO_GRIB2)
+      15.  Linux x86_64, IA64 and Opteron    (dmpar)
+      16.  Linux x86_64, IA64 and Opteron    (dmpar_NO_GRIB2)
+      17.  Linux x86_64, Intel compiler    (serial)
+      18.  Linux x86_64, Intel compiler    (serial_NO_GRIB2)
+      19.  Linux x86_64, Intel compiler    (dmpar)
+      20.  Linux x86_64, Intel compiler    (dmpar_NO_GRIB2)
+      21.  Linux x86_64, Intel compiler, SGI MPT    (serial)
+      22.  Linux x86_64, Intel compiler, SGI MPT    (serial_NO_GRIB2)
+      23.  Linux x86_64, Intel compiler, SGI MPT    (dmpar)
+      24.  Linux x86_64, Intel compiler, SGI MPT    (dmpar_NO_GRIB2)
+      25.  Linux x86_64, Intel compiler, IBM POE    (serial)
+      26.  Linux x86_64, Intel compiler, IBM POE    (serial_NO_GRIB2)
+      27.  Linux x86_64, Intel compiler, IBM POE    (dmpar)
+      28.  Linux x86_64, Intel compiler, IBM POE    (dmpar_NO_GRIB2)
+      29.  Linux x86_64 g95 compiler     (serial)
+      30.  Linux x86_64 g95 compiler     (serial_NO_GRIB2)
+      31.  Linux x86_64 g95 compiler     (dmpar)
+      32.  Linux x86_64 g95 compiler     (dmpar_NO_GRIB2)
+      33.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (serial)
+      34.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (serial_NO_GRIB2)
+      35.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (dmpar)
+      36.  Cray XE/XC CLE/Linux x86_64, Cray compiler   (dmpar_NO_GRIB2)
+      37.  Cray XC CLE/Linux x86_64, Intel compiler   (serial)
+      38.  Cray XC CLE/Linux x86_64, Intel compiler   (serial_NO_GRIB2)
+      39.  Cray XC CLE/Linux x86_64, Intel compiler   (dmpar)
+      40.  Cray XC CLE/Linux x86_64, Intel compiler   (dmpar_NO_GRIB2)
+
+修改configure.wps
+
+.. code:: bash
+
+   DM_FC               = mpiifort
+   DM_CC               = mpiicc
+
+编译安装
+
+.. code:: bash
+
+   ./compile
 
 
 
