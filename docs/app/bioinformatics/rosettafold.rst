@@ -110,6 +110,7 @@ RoseTTAFold 版本
     #SBATCH --error=%j.err
     #SBATCH -x vol08
 
+    module load miniconda3
     source activate /lustre/share/conda_env/RoseTTAFold
     export RoseTTAFold=/lustre/opt/contribute/cascadelake/RoseTTAFold/data/RoseTTAFold_1.1
 
