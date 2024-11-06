@@ -65,10 +65,18 @@
 
   $ docker run -it --name=MY_USERNAME_DATE 5d0da3dc9764 /bin/bash
 
-因为centos停止维护，初次进入镜像需要修改yum源，才可以正常使用yum命令。
+在容器内需要配置代理才能访问网络。
 
 .. code:: console
 
+   $ export http_proxy=http://proxy.pi.sjtu.edu.cn:3004/
+   $ export https_proxy=http://proxy.pi.sjtu.edu.cn:3004/
+   $ export no_proxy=puppet,proxy
+
+因为centos停止维护，初次进入镜像需要修改yum源，才可以正常使用yum命令。
+
+.. code:: console
+   
    $ sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS*.repo
    $ sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS*.repo
    $ yum makecache
