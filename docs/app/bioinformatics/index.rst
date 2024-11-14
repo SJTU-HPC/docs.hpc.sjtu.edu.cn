@@ -116,4 +116,5 @@
    clustalo
    spaceranger
    vcflib
+   alphafold3
 
