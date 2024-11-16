@@ -95,7 +95,7 @@ A100-40GB
       --bind /dssg/share/data/alphafold3/database:/root/public_databases \
       /dssg/share/imgs/ai/alphafold/alphafold3-a100.sif \  
       /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
-      --json_path=/root/af_input/fold_input.json \  #fold_input.json为输入文件名称
+      --json_path=/root/af_input/fold_input.json \
       --model_dir=/root/models \
       --db_dir=/root/public_databases \
       --output_dir=/root/af_output
@@ -124,7 +124,7 @@ A800-80GB
       --bind /dssg/share/data/alphafold3/database:/root/public_databases \
       /dssg/share/imgs/ai/alphafold/alphafold3-a800.sif \
       /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
-      --json_path=/root/af_input/fold_input.json \   #fold_input.json为输入文件名称
+      --json_path=/root/af_input/fold_input.json \
       --model_dir=/root/models \
       --db_dir=/root/public_databases \
       --output_dir=/root/af_output
