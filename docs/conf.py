@@ -92,7 +92,7 @@ html_theme_options = {
 
     "analytics": {
                     "provider": "google",
-                    "property": "UA-190329530-1"
+                    "property": "G-VGHWLGCC9B"
                  },
 
     # Visible levels of the global TOC; -1 means unlimited
