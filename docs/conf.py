@@ -102,6 +102,7 @@ html_theme_options = {
     'globaltoc_includehidden': True,
 
     # Do not download google fonts
+    # See "Extension error" https://github.com/jbms/sphinx-immaterial/issues/216
     "font": False,
 
     # Light and dark mode
