@@ -44,3 +44,4 @@
    dealii
    nvitop
    latex
+   jobtop
