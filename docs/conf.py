@@ -78,7 +78,7 @@ html_sidebars = {
 #
 html_theme = 'sphinx_immaterial'
 html_favicon = 'favicon.png'
-html_title = '上海交大超算平台用户手册 Documentation'
+html_title = '上海交大超算平台用户手册'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
