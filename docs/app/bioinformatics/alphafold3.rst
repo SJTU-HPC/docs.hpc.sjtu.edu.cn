@@ -48,7 +48,7 @@ AlphaFold3 是由谷歌 DeepMind 和 Isomorphic Labs 团队开发的人工智能
 - 在运行文件夹中创建输入文件夹 ``input`` 和输出文件夹 ``output``
 - 在 ``input`` 文件夹中放置输入 JSON 文件，例如 fold_input.json，自定义输入 JSON 文件可参考官方文档 `https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md <https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md>`_ 
 
-单体蛋白质结构预测 JSON 文件示例
+蛋白质结构预测 JSON 文件示例
 --------------------------------
 
 .. code-block:: json
