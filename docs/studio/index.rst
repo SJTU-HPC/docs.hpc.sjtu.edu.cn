@@ -11,6 +11,7 @@ HPC Studio 可视化平台，集成 web shell、文件管理、作业提交、�
    rdp
    jupyter
    rstudio
+   deepseek
    paraview
    alphafold-gui
    ../app/compilers_and_languages/matlab
