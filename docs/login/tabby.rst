@@ -23,7 +23,7 @@ Tabby (前身是 Terminus) 是一个基于TypeScript开发，可高度配置的�
 下载和安装
 ---------------
 
-定制版Tabby支持多平台，包括Windows/Mac O/Linux系统Intel或Arm架构。jBox下载好后安装即可。\ `jBox下载地址 <https://jbox.sjtu.edu.cn/l/k1GShy>`__\
+定制版Tabby支持多平台，包括Windows/Mac O/Linux系统Intel或Arm架构，下载好后安装即可。\ `下载地址 <https://pan.sjtu.edu.cn/web/share/b0c929f118ec099fed4b73ca8524bbf7>`__\
 
 .. image:: ../img/available_versions.png
 
