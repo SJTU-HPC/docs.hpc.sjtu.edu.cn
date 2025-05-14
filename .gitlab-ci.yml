@@ -7,22 +7,21 @@ stages:
   - build html
   - deploy
 
-fail_if_contain_raw_html:
+pre_check:
   stage: check raw html
-  image: sjtuhpc/texlive-sphinx:focal
   tags:
-    - docker
+    - sphinx
   script:
     - ack '.*raw.*html' docs && false || true
+    - rm -rf /tmp/doc_cache
+    - mkdir -p /tmp/doc_cache
 
 build_briefmanual_pdf:
   stage: build pdf
-  image: sjtuhpc/texlive-sphinx:focal
   tags:
-    - docker
-  before_script:
-    - mkdir -p .build_cache
+    - sphinx
   script:
+    - source /opt/sphinx/bin/activate
     - make -C tex main.pdf
   artifacts:
     paths:
@@ -30,16 +29,14 @@ build_briefmanual_pdf:
   cache:
     key: ${CI_JOB_NAME}
     paths:
-      - .build_cache
+      - /tmp/doc_cache
 
 build_cover:
   stage: build pdf
-  image: sjtuhpc/texlive-sphinx:focal
   tags:
-    - docker
-  before_script:
-    - mkdir -p .build_cache
+    - sphinx
   script:
+    - source /opt/sphinx/bin/activate
     - make -C tex cover.pdf
   artifacts:
     paths:
@@ -47,19 +44,17 @@ build_cover:
   cache:
     key: ${CI_JOB_NAME}
     paths:
-      - .build_cache
+      - /tmp/doc_cache
 
 build_latex_pdf:
   stage: build pdf
-  image: sjtuhpc/texlive-sphinx:focal
   tags:
-    - docker
+    - sphinx
   needs:
     - job: build_cover
       artifacts: true
-  before_script:
-    - mkdir -p .build_cache
   script:
+    - source /opt/sphinx/bin/activate
     - make -C docs clean latexpdf
     - pdftk A=tex/cover.pdf B=docs/_build/latex/sphinx.pdf cat A1 B2-end output docs/_build/latex/merge.pdf
     - gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/ebook -dNOPAUSE -dQUIET -dBATCH -sOutputFile=docs/_build/latex/pi_small.pdf docs/_build/latex/merge.pdf
@@ -70,21 +65,19 @@ build_latex_pdf:
   cache:
     key: ${CI_JOB_NAME}
     paths:
-      - .build_cache
+      - /tmp/doc_cache
 
 build_html_pages:
   stage: build html
-  image: sjtuhpc/texlive-sphinx:focal
   tags:
-    - docker
+    - sphinx
   needs:
     - job: build_latex_pdf
       artifacts: true
     - job: build_briefmanual_pdf
       artifacts: true
-  before_script:
-    - mkdir -p .build_cache
   script:
+    - source /opt/sphinx/bin/activate
     - mkdir docs/_static || true
     - cp docs/_build/latex/pi.pdf docs/_static/hpcmanual.pdf
     - cp tex/main.pdf docs/_static/hpcbriefmanual.pdf
@@ -95,7 +88,7 @@ build_html_pages:
   cache:
     key: ${CI_JOB_NAME}
     paths:
-      - .build_cache
+      - /tmp/doc_cache
      
 deploy_html_to_hpc:
   stage: deploy
