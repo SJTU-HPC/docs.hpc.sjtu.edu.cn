@@ -15,8 +15,6 @@ AlphaFold3 是由谷歌 DeepMind 和 Isomorphic Labs 团队开发的人工智能
 +--------------+--------------+---------+
 | V100-32GB    | Pi2.0(待更新)| v3.0.0  |
 +--------------+--------------+---------+
-| K100_AI-64GB | Pi2.0        | v3.0.0  |
-+--------------+--------------+---------+
 
 
 版本区别
@@ -210,53 +208,6 @@ AlphaFold3运行分为 `data_pipeline` 和 `inference` 两个阶段， `data_pip
         --output_dir=/root/af_output
 
 
-在国产DCU平台上运行AlphaFold3
---------------------------------
-平台基于K100_AI计算卡，提供k100队列用于测试，硬件参数如下：
-
-- CPU：2 × Hygon C86 7490 (2.2GHz, 64 cores)
-- DCU：8 × K100_AI 64GB
-- 架构：x86
-- 系统：Rocky Linux 9.4
-
-运行AlphaFold3示例脚本如下：
-
-.. code:: bash
-
-    #!/bin/bash
-    #SBATCH --job-name=k100test
-    #SBATCH --partition=k100
-    #SBATCH -N 1
-    #SBATCH --ntasks-per-node=1
-    #SBATCH --cpus-per-task=16
-    #SBATCH --output=%j.out
-    #SBATCH --error=%j.err
-
-    unset APPTAINER_BIND
-    export TF_CPP_MIN_LOG_LEVEL=2
-    export PYTHONPATH=/usr/local:${PYTHONPATH}
-    free_dcu=$(/opt/hyhal/set_k100.sh)
-    export ROCR_VISIBLE_DEVICES=$free_dcu
-    echo "已设置ROCR_VISIBLE_DEVICES=$ROCR_VISIBLE_DEVICES"
-
-    INPUT_DIR=./input
-    MODEL_PATH=/home/aftest/alphafold3/models
-    OUTPUT_PATH=./output
-    DB_DIR=/home/aftest/alphafold3/public_databases
-    singularity exec \
-            -B /opt/hyhal \
-            -B /opt/share \
-            -B /home/aftest/alphafold3 \
-            /opt/share/alphafold3-deepmind_jax0423-py311-dtk2404-ubuntu2204.sif \
-            python /opt/share/alphafold3-code/run_alphafold.py \
-                --input_dir=$INPUT_DIR \
-                --model_dir=$MODEL_PATH \
-                --output_dir=$OUTPUT_PATH \
-                --run_data_pipeline=true \
-                --db_dir=$DB_DIR \
-                --flash_attention_implementation=xla
-
-使用sbatch af3_k100.slurm命令，从π 2.0提交作业。
 
 data_pipeline性能测试
 ---------------------
