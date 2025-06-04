@@ -25,6 +25,10 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 +----------+---------------------------+
 | 思源一号 | module load matlab/r2024a |
 +----------+---------------------------+
+| 思源一号 | module load matlab/r2024b |
++----------+---------------------------+
+| 思源一号 | module load matlab/r2025a |
++----------+---------------------------+
 | pi 2.0   | module load matlab/r2022a |
 +----------+---------------------------+
 | pi 2.0   | module load matlab/r2022b |
@@ -34,6 +38,10 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 | pi 2.0   | module load matlab/r2023b |
 +----------+---------------------------+
 | pi 2.0   | module load matlab/r2024a |
++----------+---------------------------+
+| pi 2.0   | module load matlab/r2024b |
++----------+---------------------------+
+| pi 2.0   | module load matlab/r2025a |
 +----------+---------------------------+
 
 算例下载
@@ -334,6 +342,8 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
    profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2023a/ParSlurmProfile/R2023a-SlurmParForUser.mlsettings');
    # 若在 Pi 2.0 上使用 Matlab R2024a，导入下面的并行配置
    profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2024a/ParSlurmProfile/R2024a-SlurmParForUser.mlsettings');
+   # 若在 Pi 2.0 上使用 Matlab R2025a，导入下面的并行配置
+   profile_master = parallel.importProfile('/lustre/opt/contribute/cascadelake/matlab/R2025a/ParSlurmProfile/R2025a-SlurmParForUser.mlsettings');
 
    # 若在思源一号上使用 Matlab R2022a，导入下面的并行配置
    profile_master = parallel.importProfile('/dssg/opt/icelake/linux-centos8-icelake/contribute/matlab/R2022a/ParSlurmProfile/R2022a-SlurmParForUser.mlsettings');
@@ -341,6 +351,8 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
    profile_master = parallel.importProfile('/dssg/opt/icelake/linux-centos8-icelake/contribute/matlab/R2023a/ParSlurmProfile/R2023a-SlurmParForUser.mlsettings');
    # 若在思源一号上使用 Matlab R2024a，导入下面的并行配置
    profile_master = parallel.importProfile('/dssg/opt/icelake/linux-centos8-icelake/contribute/matlab/R2024a/ParSlurmProfile/R2024a-SlurmParForUser.mlsettings');
+   # 若在思源一号上使用 Matlab R2025a，导入下面的并行配置
+   profile_master = parallel.importProfile('/dssg/opt/icelake/linux-centos8-icelake/contribute/matlab/R2025a/ParSlurmProfile/R2025a-SlurmParForUser.mlsettings');
 
    # 根据选择的集群和 Matlab 版本导入并行配置后，将其设置为默认
    parallel.defaultClusterProfile(profile_master);
@@ -350,9 +362,13 @@ MATLAB是美国MathWorks公司出品的商业数学软件，用于数据分析�
 .. image:: ../../img/matlab_studio_cluster_profile_manager.png
 
 .. note::
-    超算登录方式更新后（https://docs.hpc.sjtu.edu.cn/login/sshlogin.html），需要重新导入对应集群版本的 SlurmProfile。或者在 Cluster Profile Manager 的 Slurm 插件设置中新增一条，名称为 ``AuthenticationMode``，值为 ``Multifactor``。
+    对于2024a及以后的版本，导入对应集群版本的 SlurmProfile之后，需要在 Cluster Profile Manager 的插件设置中，将 ``Username`` 的值修改为您的超算账号名。
+
+    对于2023a及以前的版本，由于超算登录方式更新（https://docs.hpc.sjtu.edu.cn/login/sshlogin.html），需要重新导入对应集群版本的 SlurmProfile。或者在 Cluster Profile Manager 的 Slurm 插件设置中新增一条，名称为 ``AuthenticationMode``，值为 ``Multifactor``。
 
 .. image:: ../../img/matlab_studio_cluster_profile_plugin_setting.png
+
+.. image:: ../../img/matlab_studio_cluster_profile_plugin_setting_old.png
 
 3.（可选）调整并行池的大小
 
