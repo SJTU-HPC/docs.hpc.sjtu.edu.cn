@@ -97,4 +97,4 @@ deploy_html_to_hpc:
   only:
     - master
   script:
-    - rsync -avr --progress --delete docs/_build/html/ /var/lib/www/docs.hpc.sjtu.edu.cn/
+    - rsync -avr --delete docs/_build/html/ /var/lib/www/docs.hpc.sjtu.edu.cn/
