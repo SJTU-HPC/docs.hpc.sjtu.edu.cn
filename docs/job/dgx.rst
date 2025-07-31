@@ -5,7 +5,7 @@ GPU 节点使用文档
 
 * a100 (思源一号)：包含 23 个 GPU 计算节点，每个节点为 NVIDIA HGX A100 4-GPU，每块 A100 默认配置 16 个 CPU 核心。
 
-* DGX-2 (AI 计算平台）：AI 平台的 `dgx2` 队列含 DGX-2 8 台，每台 DGX-2 配备 16 块 NVIDIA Tesla V100，每块 V100 默认配置 6 个 CPU 核心。通过搭载NVIDIA NVSwitch创新技术， GPU间带宽高达 2.4 TB/s。
+* DGX-2 (AI 计算平台）：AI 平台的 `dgx2` 队列含 DGX-2 8 台，每台 DGX-2 配备 16 块 NVIDIA Tesla V100，96 CPU 核心,因此每块 V100 最多可申请 6 个 CPU 核心。通过搭载NVIDIA NVSwitch创新技术， GPU间带宽高达 2.4 TB/s。
 
 本文档将介绍两种 GPU 节点使用方法（作业提交模式、交互模式）及 GPU 利用率查看方法。
 
