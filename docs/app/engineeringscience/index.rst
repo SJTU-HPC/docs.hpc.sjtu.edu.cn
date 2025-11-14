@@ -7,6 +7,7 @@
 .. toctree::
    :maxdepth: 1
 
+   abacus
    abinit
    amber
    basilisk
@@ -20,6 +21,7 @@
    gnuplot
    gaussian
    gromacs
+   gpumd
    lammps
    lammps-rbe
    nektar
