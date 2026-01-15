@@ -8,6 +8,10 @@
 
 **致谢模版:**
 
+* 致远一号
+
+The computations in this paper were run on the Zhiyuan-1 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
+
 * 思源一号
 
 The computations in this paper were run on the Siyuan-1 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
@@ -18,6 +22,7 @@ The computations in this paper were run on the π 2.0 cluster supported by the C
 
 交我算平台计算资源
 ===================
+- “致远一号”国产千卡智算平台。“致远一号”国产于2025年建成上线，台硬件配置包括1024张华为昇腾910B加速卡，FP16峰值算力313P，配合Pacific分布式存储与BurstBuffer架构，总存储容量13.6PB。计算方面，配备101台CPU节点，形成5000+ vCPU的通用计算池；云服务支持IaaS、PaaS、SaaS全栈功能，具备异构算力调度与云化弹性部署，能够满足教学、科研和管理等多样化需求。
 
 - “思源一号”高性能计算平台。2022年新上线的“思源一号”集群总算力 6 PFLOPS（每秒千万亿次），是目前国内高校第一的超算集群，TOP500 榜单排名第132位。CPU 采用双路 Intel Xeon ICX Platinum 8358 32 核，主频 2.6GHz，共938个计算节点；GPU采用NVIDIA HGX A100, 共92块GPU卡。计算节点之间使用Mellanox 100 Gbps Infiniband HDR 高速互联，并行存储的聚合存储能力达10 PB。
 
