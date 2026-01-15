@@ -8,6 +8,10 @@
 
 **致谢模版:**
 
+* 致远一号
+
+The computations in this paper were run on the Zhiyuan-1 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
+
 * 思源一号
 
 The computations in this paper were run on the Siyuan-1 cluster supported by the Center for High Performance Computing at Shanghai Jiao Tong University.
