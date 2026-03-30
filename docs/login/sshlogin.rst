@@ -56,11 +56,24 @@ sydata.hpc.sjtu.edu.cn       数据传输  否         用于在本地和/dssg/h
 假设您的超算账号为 **user01** ，需要登录的入口为 **pilogin.hpc.sjtu.edu.cn** 。
 
 1. 在客户端的命令行窗口发起ssh连接： ``ssh user01@pilogin.hpc.sjtu.edu.cn`` 。
-#. 如果您没有保存过密码，根据命令行提示完成传统账号密码认证。登录成功后您可以选择保存密码，以便在后续登录时跳过此步骤。
-#. 如果登录后您看到如下提示，请参阅 `账号安全信息管理 <https://docs.hpc.sjtu.edu.cn/accounts/security.html>`_ 的相关章节，及时关联jAccount/邮箱。
+2. 如果您没有保存过密码，根据命令行提示完成账号密码认证。登录成功后您可以选择保存密码，以便在后续登录时跳过此步骤。 **如果您从校外登录，根据账号类型可能被拒绝登录或被要求进行动态授权。** 根据您绑定jAccount/Email时选择的通信渠道，平台会以对应的交我办消息或邮件形式询问您是否允许本次登录。下图为邮件信息进行动态授权的示例：
+
+.. figure:: ../img/ssh_console_02.png
+    :align: center
+
+    提示需要进行额外的动态授权
+
+.. figure:: ../img/ssh_console_03.png
+    :align: center
+
+    通过Email进行动态授权
+
+3. 如果登录后您看到如下提示，请参阅 `账号安全信息管理 <https://docs.hpc.sjtu.edu.cn/accounts/security.html>`_ 的相关章节，及时关联jAccount/邮箱。
 
 .. figure:: ../img/ssh_console_01.png
     :align: center
+
+    在使用旧HPC密码登录时可能出现的提示
 
 以XShell为代表的图形界面客户端进行SSH登录
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -72,20 +85,29 @@ sydata.hpc.sjtu.edu.cn       数据传输  否         用于在本地和/dssg/h
 .. figure:: ../img/ssh_gui_01.png
     :align: center
 
-2. 新建ssh连接时请在身份验证方法中勾选Keyboard Interactive方式。您也可以在这里预先填好密码。设置完成后保存连接。
+2. 新建ssh连接时请在身份验证方法中勾选Keyboard Interactive方式。您也可以在这里预先填好密码。但请注意预存密码可能导致您无法看到密码输入窗口的提示信息，例如下一步示例中的动态认证提示。设置完成后保存连接。
 
 .. figure:: ../img/ssh_gui_02.png
     :align: center
 
-3. 打开上一步建立好的连接，如果在前面已经输入了密码，客户端会自动完成传统密码认证，您将跳过此步骤；否则客户端会弹窗要求您输入密码。
+3. 打开上一步建立好的连接，如果在前面已经输入了密码，客户端会自动完成传统密码认证，您将跳过此步骤；否则客户端会弹窗要求您输入密码。 **如果您从校外登录，根据账号类型可能被拒绝登录或被要求进行动态授权。** 根据您绑定jAccount/Email时选择的通信渠道，平台会以对应的交我办消息或邮件形式询问您是否允许本次登录。下图为邮件信息进行动态授权的示例：
 
-.. figure:: ../img/ssh_gui_03.png
+.. figure:: ../img/ssh_gui_05.png
     :align: center
+
+    提示需要进行额外的动态授权
+
+.. figure:: ../img/ssh_gui_06.png
+    :align: center
+
+    通过交我办APP进行动态授权
 
 4. 如果登录后您看到如下提示，请参阅 `账号安全信息管理 <https://docs.hpc.sjtu.edu.cn/accounts/security.html>`_ 的相关章节，及时关联jAccount/邮箱。
 
 .. figure:: ../img/ssh_gui_04.png
     :align: center
+
+    在使用旧HPC密码登录时可能出现的提示
 
 .. _label_no_password_login:
 
