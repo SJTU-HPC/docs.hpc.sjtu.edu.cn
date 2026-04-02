@@ -1,5 +1,4 @@
-{# 继承原有 footer #}
-{% extends "!footer.html" %}
+{% extends "!layout.html" %}
 
 {% block footer %}
 {{ super() }}
@@ -15,7 +14,6 @@
 </div>
 
 <script>
-  // GoatCounter 公开 API，获取全站总计
   fetch("https://docshpc.goatcounter.com/counter/TOTAL.json")
     .then(function(r) { return r.json(); })
     .then(function(data) {
