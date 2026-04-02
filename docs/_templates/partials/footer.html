@@ -1,8 +1,7 @@
-{% extends "!layout.html" %}
+{% extends "!partials/footer.html" %}
+{# the '!' in "!partials/footer.html" is important #}
 
-{% block footer %}
-{{ super() }}
-
+{% block extracopyright %}
 {# GoatCounter 统计脚本 #}
 <script data-goatcounter="https://docshpc.goatcounter.com/count"
         async src="//gc.zgo.at/count.js"></script>
@@ -14,6 +13,7 @@
 </div>
 
 <script>
+  // GoatCounter 公开 API，获取全站总计
   fetch("https://docshpc.goatcounter.com/counter/TOTAL.json")
     .then(function(r) { return r.json(); })
     .then(function(data) {
