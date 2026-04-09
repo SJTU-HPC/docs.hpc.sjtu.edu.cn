@@ -178,6 +178,7 @@ latex_elements = {
     \usepackage{indentfirst} % 中文首行缩进
 	\let\cleardoublepage\clearpage
     \setlength{\parindent}{2em}
+    \setlength{\headheight}{25pt}
     \setCJKmainfont{Adobe Song Std}
     \setCJKmonofont[Scale=0.9]{Adobe Heiti Std}
     \setCJKfamilyfont{song}{Adobe Song Std}
