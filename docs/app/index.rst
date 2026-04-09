@@ -10,11 +10,11 @@
 
 软件按以下类别列出，可以使用文档页面顶栏的搜索框查找软件。
 
-- :ref:`second-table`
-- :ref:`third-table`
-- :ref:`fourth-table`
-- :ref:`fifth-table`
-- :ref:`sixth-table`
+- :ref:`app/index:second-table`
+- :ref:`app/index:third-table`
+- :ref:`app/index:fourth-table`
+- :ref:`app/index:fifth-table`
+- :ref:`app/index:sixth-table`
 
 
 **编译器、MPI库、数学库、应用工具**
@@ -104,9 +104,8 @@
 
 **基准测试**
 
-.. _second-table:
-
 .. table:: 基准测试
+   :name: app/index:second-table
    :widths: 20 50 15 15 
 
    +-------------------------------------------+----------------------------------------------------------------------+----------+-----------------------+
@@ -130,9 +129,8 @@
 
 **原子分子软件**
 
-.. _third-table:
-
 .. table:: 原子分子软件
+   :name: app/index:third-table
    :widths: 20 50 15 15  
 
    +-------------------------------------------+----------------------------------------------------------------------+----------+-----------------------+
@@ -191,9 +189,8 @@
 
 **工程计算软件**
 
-.. _fourth-table:
-
 .. table:: 工程计算软件
+   :name: app/index:fourth-table
    :widths: 20 50 15 15 
 
    +-------------------------------------------+----------------------------------------------------------------------+----------------+-----------------+
@@ -253,9 +250,8 @@
 
 **AI计算软件**
 
-.. _fifth-table:
-
 .. table:: AI计算软件
+   :name: app/index:fifth-table
    :widths: 20 50 15 15 
 
 
@@ -274,9 +270,8 @@
 
 **生信计算软件**
 
-.. _sixth-table:
-
 .. table:: 生信计算软件
+   :name: app/index:sixth-table
    :widths: 20 50 15 15 
 
 
