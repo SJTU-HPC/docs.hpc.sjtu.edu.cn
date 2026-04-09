@@ -190,4 +190,7 @@ latex_elements = {
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
+
+    # Wrap long lines in code blocks
+    'sphinxsetup': "verbatimforcewraps",
 }
