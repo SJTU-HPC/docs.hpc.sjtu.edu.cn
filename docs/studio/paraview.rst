@@ -1,3 +1,5 @@
+.. _studio-paraview:
+
 Paraview
 ====================
 ParaView是对二维和三维数据进行分析和可视化的程序，它既是一个应用程序框架，也可以直接使用（Turn-Key）。

@@ -1,4 +1,5 @@
 .. _tvm:
+.. _app-ai-tvm:
 
 Apache TVM
 =============

@@ -1,3 +1,5 @@
+.. _app-benchtools-hpcg:
+
 HPCG
 ====
 
