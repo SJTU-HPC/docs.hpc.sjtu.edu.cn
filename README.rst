@@ -3,7 +3,7 @@ Pi超算集群用户文档
 
 本仓库维护π超算集群用户文档。本文档使用 `reStructuredText(rst) <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_ 书写，并会被 `Sphinx <https://www.sphinx-doc.org>`_ 编译为Web站点或PDF文档。
 Sphinx是一个将rst文档编译为HTML、PDF、eBook等出版物的python包，用于本文档网页渲染。
-本站使用的Web主题是 `Material for Sphinx <https://bashtage.github.io/sphinx-material/>`_ 。
+本站使用的Web主题是 `Sphinx-Immaterial <https://sphinx-immaterial.readthedocs.io/>`_ 。
 
 使用预编译容器镜像构建文档(推荐)
 --------------------------------
