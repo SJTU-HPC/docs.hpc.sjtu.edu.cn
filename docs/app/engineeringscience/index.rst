@@ -35,7 +35,6 @@
    ovito
    psi4
    pysph
-   ../../studio/paraview
    quantum-espresso
    quickpic
    siesta

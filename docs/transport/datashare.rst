@@ -65,7 +65,7 @@
     getfacl /lustre/home/acct-exp/share
 
     # 授予子账号expuser02只读权限，expuser03读写权限
-    # 在data, sylogin, sydata等节点访问/dssg存储时，请准备一个文本文件作为指令输入，一次性描述您期望的最终权限配置。
+    # 在data, sylogin, sydata访问/dssg时，请准备一个文本文件描述您期望的权限配置。
     vim input.txt
         user::rwxc
         group::r-x-
@@ -74,7 +74,8 @@
         user:expuser02:r-xc
         user:expuser03:rwxc
     mmputacl -i input.txt /dssg/home/acct-exp/share
-    # 在data, pilogin, armlogin等节点访问/lustre存储时，您需要逐个添加、删除目标用户的权限。
+
+    # 在data, pilogin, armlogin访问/lustre存储时，您需要逐个添加、删除目标用户的权限。
     setfacl -m u:expuser02:r-x /lustre/home/acct-exp/share
     setfacl -m u:expuser03:rwx /lustre/home/acct-exp/share
 

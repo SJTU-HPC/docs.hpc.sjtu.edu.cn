@@ -1,3 +1,5 @@
+.. _studio-jupyter:
+
 Jupyter
 ================
 

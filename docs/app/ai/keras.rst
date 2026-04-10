@@ -1,4 +1,5 @@
 .. _keras:
+.. _app-ai-keras:
 
 Keras
 =====

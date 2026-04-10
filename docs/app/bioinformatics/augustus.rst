@@ -73,38 +73,66 @@ e. 预测基因的迭代训练
 数据集的训练
 """"""""""""""""""
 
+
+格式转换：基于选取物种的GFF3以及ref.fa 文件将其转换为Genbank格式。
+
 .. code:: bash
 
-   # 格式转换；基于选取物种的GFF3以及ref.fa 文件将其转换为Genbank格式
    perl ~/miniconda2/bin/gff2gbSmallDNA.pl ./Spinach_genome/spinach_gene_v1.gff3 ./Spinach_genome/spinach_genome_v1.fa 1000 genes.raw.gb
 
-   # 尝试训练，捕捉错误
+尝试训练，捕捉错误。
+
+.. code:: bash
+
    etraining --species=generic --stopCodonExcludedFromCDS=false genes.raw.gb 2> train.err
 
-   # 过滤掉可能错误的基因结构
+过滤掉可能错误的基因结构。
+
+.. code:: bash
+
    cat train.err | perl -pe 's/.*in sequence (\S+): .*/$1/' >badgenes.lst
    filterGenes.pl badgenes.lst genes.raw.gb > genes.gb
 
-   # 提取上一步过滤后的genes.db中的蛋白
+提取上一步过滤后的genes.db中的蛋白。
+
+.. code:: bash
+
    grep '/gene' genes.gb |sort |uniq  |sed 's/\/gene=//g' |sed 's/\"//g' |awk '{print $1}' >geneSet.lst
    python extract_pep.py geneSet.lst Spinach_genome/spinach_pep_v1.fa
 
-   # 将得到的蛋白序列进行建库，自身blastp比对。根据比对结果，如果基因间identity >= 70%，则只保留其中之一，再次得到一个过滤后的gff文件，gene_filter.gff3
+将得到的蛋白序列进行建库，自身blastp比对。
+根据比对结果，如果基因间identity >= 70%，则只保留其中之一，再次得到一个过滤后的gff文件，gene_filter.gff3。
+
+.. code:: bash
+
    makeblastdb -in geneSet.lst.fa -dbtype prot -parse_seqids -out geneSet.lst.fa
    blastp -db geneSet.lst.fa -query geneSet.lst.fa -out geneSet.lst.fa.blastp -evalue 1e-5 -outfmt 6 -num_threads 8
    python delete_high_identity_gene.py geneSet.lst.fa.blastp Spinach_genome/spinach_gene_v1.gff3
 
-   # 将得到的gene_filter.gff3 转换为genbank 格式文件
+将得到的gene_filter.gff3 转换为genbank 格式文件。
+
+.. code:: bash
+
    perl ~/miniconda2/bin/gff2gbSmallDNA.pl  gene_filter.gff3  ./Spinach_genome/spinach_genome_v1.fa 1000 genes.gb.filter
 
-   # 将上一步过滤后的文件随机分成两份，测试集和训练集。其中训练集的数目根据gb的LOCUS数目决定，至少要有200（100 为测试集的基因数目，其余为训练集）
+将上一步过滤后的文件随机分成两份，测试集和训练集。其中训练集的数目根据gb的LOCUS数目决定，至少要有200（100 为测试集的基因数目，其余为训练集）。
+
+.. code:: bash
+
+   perl ~/miniconda2/bin/gff2gbSmallDNA.pl  gene_filter.gff3  ./Spinach_genome/spinach_genome_v1.fa 1000 genes.gb.filter
    randomSplit.pl genes.gb.filter 100
 
-   # 初始化HMM参数设置（在相应～/minicode/config/species/relative name中形成参数,若之前已经存在该物种名字，则需要删除），并进行训练
+初始化HMM参数设置（在相应 `~/minicode/config/species/relative name` 中形成参数,若之前已经存在该物种名字，则需要删除），并进行训练。
+
+.. code:: bash
+
    new_species.pl --species=spinach
    etraining --species=spinach genes.gb.filter.train
 
-   # 用测试数据集检验预测效果，这里可以比较我们训练的结果，和近缘已训练物种的训练效果
+用测试数据集检验预测效果，这里可以比较我们训练的结果，和近缘已训练物种的训练效果。
+
+.. code:: bash
+
    augustus --species=spinach genes.gb.filter.test | tee firsttest.out
    augustus --species=arabidopsis genes.gb.filter.test | tee firsttest_ara.out
 
@@ -129,17 +157,21 @@ e. 预测基因的迭代训练
 
 重训练以优化结果
 """"""""""""""""""
+
+很有可能的一种情况是，我们第一次的训练结果没有已有训练的效果好，所以我们需要进行循环训练找到最优参数；（运行会非常费时间，而且最终的效果一般只能提高准确度几个百分点，慎重使用）。
+
 .. code:: bash
-   
-   # 很有可能的一种情况是，我们第一次的训练结果没有已有训练的效果好，所以我们需要进行循环训练找到最优参数；（运行会非常费时间，而且最终的效果一般只能提高准确度几个百分点，慎重使用）
+
    optimize_augustus.pl --species=spinach genes.gb.filter.train
 
-   # 再次进行训练，并检验，进行前后比较
+再次进行训练，并检验，进行前后比较。
+
+.. code:: bash
+
    etraining --species=spinach genes.gb.filter.train
    augustus --species=spinach genes.gb.filter.test | tee secondtest.out
 
-   # 如果此时你的gene level的sensitivity还是低于20%说明Trainning set不够大，请添加数据；
-   # 如果你获得了满意的Trainning结果，请开始prediction吧
+如果此时你的gene level的sensitivity还是低于20%说明Training set不够大，请添加数据；如果你获得了满意的Training结果，请开始prediction吧。
 
    
 氨基酸序列的提取
@@ -152,6 +184,7 @@ e. 预测基因的迭代训练
 
 参考资料
 ---------------
+
 - AUGUSTUS official website: http://bioinf.uni-greifswald.de/augustus/
 
 - bioconda augustus：https://anaconda.org/bioconda/augustus

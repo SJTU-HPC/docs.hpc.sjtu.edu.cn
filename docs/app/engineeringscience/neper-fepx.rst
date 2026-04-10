@@ -140,7 +140,7 @@ Step1-Create microstructure
    neper -T -n 50 -reg 1 -morpho gg -o simulation
    neper -V simulation.tess -datacellcol id -print Image_Polycrystal
 
-运行完成后生成simulation.tess和Image_Polycrystal.png，如图1所示。
+运行完成后生成 simulation.tess 和 Image_Polycrystal.png ，如图1所示。
 |image1|
 
 Step2-Create mesh
@@ -151,7 +151,7 @@ Step2-Create mesh
    neper -M simulation.tess -order 2 -part 4
    neper -V simulation.tess,simulation.msh -dataelsetcol id -print Image_Mesh
 
-运行完成后生成simulation.msh和Image_Mesh.png，如图2所示。
+运行完成后生成 simulation.msh 和 Image_Mesh.png 图2所示。
 |image2|
 
 Step-3 Apply material properties, BC and simulate;将 “simulation.config” 文件复制到当前文件夹

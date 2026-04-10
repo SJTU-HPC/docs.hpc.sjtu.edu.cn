@@ -1,4 +1,5 @@
 .. _pytorch:
+.. _app-ai-pytorch:
 
 PyTorch
 =======

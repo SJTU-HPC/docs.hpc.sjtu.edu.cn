@@ -1,4 +1,5 @@
 .. _tensorflow:
+.. _app-ai-tensorflow:
 
 TensorFlow
 ==========
