@@ -51,18 +51,20 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
 
 .. code:: bash
 
-   CCTM_v532.exe
-   /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project/CCTM
-   
-   BCON_v532.exe、ICON_v532.exe、mcip.exe
-   /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project/PREP
+   $ find /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project/CCTM/ -name '*.exe'
+   /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project/CCTM/scripts/BLD_CCTM_v532_intel/CCTM_v532.exe
+
+   $ find /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project/PREP -name '*.exe'
+   /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project/PREP/mcip/src/mcip.exe
+   /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project/PREP/bcon/scripts/BLD_BCON_v532_intel/BCON_v532.exe
+   /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project/PREP/icon/scripts/BLD_ICON_v532_intel/ICON_v532.exe
 
 您还可以 module show cmaq获取文件安装目录
 
 .. code:: bash
 
-   module avail cmaq
-   module show cmaq/5.3.2-oneapi-2021.4.0
+   $ module avail cmaq
+   $ module show cmaq/5.3.2-oneapi-2021.4.0
 
 
 运行CMAQ的流程
@@ -70,8 +72,7 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
 
 此处使用CMAQ的核心可执行文件CCTM_v532.exe。
 
-首先拷贝CMAQ_Project到本地
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+首先拷贝CMAQ_Project到本地。
 
 .. code:: bash
 
@@ -79,8 +80,7 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
    cd ~/cmaq
    cp -r /dssg/opt/icelake/linux-centos8-icelake/oneapi-2021.4.0/wrf_cmaq/cmaq/CMAQ_Project ./
    
-然后将算例解压到CMAQ_Project下的data目录
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+然后将算例解压到CMAQ_Project下的data目录。
 
 .. code:: bash
 
@@ -89,8 +89,7 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
    tar xf CMAQv5.3.2_Benchmark_2Day_Input.tar.gz
    mv CMAQv5.3.2_Benchmark_2Day_Input/* ./
    
-接下来根据运行核数修改可执行文件的内部参数
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+接下来根据运行核数修改可执行文件的内部参数。
 
 修改的可执行文件为：~/cmaq/CMAQ_Project/CCTM/scripts/run_cctm_Bench_2016_12SE1.csh
 
@@ -101,10 +100,7 @@ CMAQ（The Community Multiscale Air Quality Modeling System）是美国环境保
    set END_DATE   = "2016-07-02"
    ### 运行时间为：7月1日-7月2日
    
-执行脚本设置如下
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
-脚本的位置应在： ~/cmaq/CMAQ_Project/CCTM/scripts/
+执行脚本设置如下，脚本的位置应在： `~/cmaq/CMAQ_Project/CCTM/scripts/` 。
 
 .. code:: bash
 
