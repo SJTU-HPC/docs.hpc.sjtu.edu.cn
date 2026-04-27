@@ -99,7 +99,7 @@ A100-40GB
       --bind $PWD/output:/root/af_output \
       --bind /dssg/share/data/alphafold3/models:/root/models \
       --bind /dssg/share/data/alphafold3/database:/root/public_databases \
-      /dssg/home/acct-hpc/hpccyf/alphafold3/images/alphafold3-3.0.2.sif \
+      /dssg/share/imgs/ai/alphafold/alphafold3-3.0.2.sif \
       /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
       --json_path=/root/af_input/2PV7.json \
       --model_dir=/root/models \
@@ -129,7 +129,7 @@ A800-80GB
       --bind $PWD/output:/root/af_output \
       --bind /dssg/share/data/alphafold3/models:/root/models \
       --bind /dssg/share/data/alphafold3/database:/root/public_databases \
-      /dssg/home/acct-hpc/hpccyf/alphafold3/images/alphafold3-3.0.2.sif \
+      /dssg/share/imgs/ai/alphafold/alphafold3-3.0.2.sif \
       /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
       --json_path=/root/af_input/2PV7.json \
       --model_dir=/root/models \
@@ -169,7 +169,7 @@ AlphaFold3运行分为 `data_pipeline` 和 `inference` 两个阶段， `data_pip
         --bind $PWD/output:/root/af_output \
         --bind /dssg/share/data/alphafold3/models:/root/models \
         --bind /dssg/share/data/alphafold3/database:/root/public_databases \
-        /dssg/home/acct-hpc/hpccyf/alphafold3/images/alphafold3-3.0.2.sif \
+        /dssg/share/imgs/ai/alphafold/alphafold3-3.0.2.sif \
         /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
         --norun_inference \
         --jackhmmer_n_cpu=$SLURM_NTASKS \
@@ -203,7 +203,7 @@ AlphaFold3运行分为 `data_pipeline` 和 `inference` 两个阶段， `data_pip
         --bind $PWD/output:/root/af_output \
         --bind /dssg/share/data/alphafold3/models:/root/models \
         --bind /dssg/share/data/alphafold3/database:/root/public_databases \
-        /dssg/home/acct-hpc/hpccyf/alphafold3/images/alphafold3-3.0.2.sif \
+        /dssg/share/imgs/ai/alphafold/alphafold3-3.0.2.sif \
         /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
         --norun_data_pipeline \
         --json_path=/root/af_input/2PV7_data.json \
