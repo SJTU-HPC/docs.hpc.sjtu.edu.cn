@@ -9,11 +9,9 @@ AlphaFold3 是由谷歌 DeepMind 和 Isomorphic Labs 团队开发的人工智能
 +--------------+--------------+---------+
 | 硬件         | 平台         | 版本    |
 +--------------+--------------+---------+
-| A100-40GB    | 思源一号     | v3.0.1  |
+| A100-40GB    | 思源一号     | v3.0.2  |
 +--------------+--------------+---------+
-| A800-80GB    | 思源一号     | v3.0.1  |
-+--------------+--------------+---------+
-| V100-32GB    | Pi2.0(待更新)| v3.0.0  |
+| A800-80GB    | 思源一号     | v3.0.2  |
 +--------------+--------------+---------+
 
 
@@ -43,13 +41,15 @@ AlphaFold3 是由谷歌 DeepMind 和 Isomorphic Labs 团队开发的人工智能
   )
 
 3. A100-40GB上最大能够处理4352个tokens的输入，与A800-80GB相比，计算精度一致，但吞吐量更小。
+4. v3.0.2 版本统一使用 alphafold3-3.0.2.sif 镜像，并通过环境变量 AF3_A100_MEMORY_PROFILE 区分不同显存配置：A100-40GB 使用 40gb，A800-80GB 使用 80gb，从而在保持相同镜像入口的同时适配不同 GPU 规格。
+
 
 使用前准备
 ----------
 
 - 新建运行文件夹，如 ``alphafold``
 - 在运行文件夹中创建输入文件夹 ``input`` 和输出文件夹 ``output``
-- 在 ``input`` 文件夹中放置输入 JSON 文件，例如 fold_input.json，自定义输入 JSON 文件可参考官方文档 `https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md <https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md>`_ 
+- 在 ``input`` 文件夹中放置输入 JSON 文件，例如 2PV7.json，自定义输入 JSON 文件可参考官方文档 `https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md <https://github.com/google-deepmind/alphafold3/blob/main/docs/input.md>`_ 
 
 蛋白质结构预测 JSON 文件示例
 --------------------------------
@@ -94,13 +94,14 @@ A100-40GB
 
   singularity exec \
       --nv \
+      --env AF3_A100_MEMORY_PROFILE=40gb \
       --bind $PWD/input:/root/af_input \
       --bind $PWD/output:/root/af_output \
       --bind /dssg/share/data/alphafold3/models:/root/models \
       --bind /dssg/share/data/alphafold3/database:/root/public_databases \
-      /dssg/share/imgs/ai/alphafold/alphafold3-a100.sif \  
+      /dssg/home/acct-hpc/hpccyf/alphafold3/images/alphafold3-3.0.2.sif \
       /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
-      --json_path=/root/af_input/fold_input.json \
+      --json_path=/root/af_input/2PV7.json \
       --model_dir=/root/models \
       --db_dir=/root/public_databases \
       --output_dir=/root/af_output
@@ -123,13 +124,14 @@ A800-80GB
 
   singularity exec \
       --nv \
+      --env AF3_A100_MEMORY_PROFILE=80gb \
       --bind $PWD/input:/root/af_input \
       --bind $PWD/output:/root/af_output \
       --bind /dssg/share/data/alphafold3/models:/root/models \
       --bind /dssg/share/data/alphafold3/database:/root/public_databases \
-      /dssg/share/imgs/ai/alphafold/alphafold3-a800.sif \
+      /dssg/home/acct-hpc/hpccyf/alphafold3/images/alphafold3-3.0.2.sif \
       /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
-      --json_path=/root/af_input/fold_input.json \
+      --json_path=/root/af_input/2PV7.json \
       --model_dir=/root/models \
       --db_dir=/root/public_databases \
       --output_dir=/root/af_output
@@ -162,11 +164,12 @@ AlphaFold3运行分为 `data_pipeline` 和 `inference` 两个阶段， `data_pip
 
     /usr/bin/time -v singularity exec \
         --nv \
+        --env AF3_A100_MEMORY_PROFILE=40gb \
         --bind $PWD/input:/root/af_input \
         --bind $PWD/output:/root/af_output \
         --bind /dssg/share/data/alphafold3/models:/root/models \
         --bind /dssg/share/data/alphafold3/database:/root/public_databases \
-        /dssg/share/imgs/ai/alphafold/alphafold3-a100.sif \
+        /dssg/home/acct-hpc/hpccyf/alphafold3/images/alphafold3-3.0.2.sif \
         /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
         --norun_inference \
         --jackhmmer_n_cpu=$SLURM_NTASKS \
@@ -195,11 +198,12 @@ AlphaFold3运行分为 `data_pipeline` 和 `inference` 两个阶段， `data_pip
 
     singularity exec \
         --nv \
+        --env AF3_A100_MEMORY_PROFILE=40gb \
         --bind $PWD/input:/root/af_input \
         --bind $PWD/output:/root/af_output \
         --bind /dssg/share/data/alphafold3/models:/root/models \
         --bind /dssg/share/data/alphafold3/database:/root/public_databases \
-        /dssg/share/imgs/ai/alphafold/alphafold3-a800.sif \
+        /dssg/home/acct-hpc/hpccyf/alphafold3/images/alphafold3-3.0.2.sif \
         /alphafold3_venv/bin/python /app/alphafold/run_alphafold.py \
         --norun_data_pipeline \
         --json_path=/root/af_input/2PV7_data.json \
