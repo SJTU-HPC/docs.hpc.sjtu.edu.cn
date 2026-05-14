@@ -8,6 +8,7 @@
    :maxdepth: 1
 
    alphafold2
+   alphagenome
    augustus
    aspera
    basil-anise
