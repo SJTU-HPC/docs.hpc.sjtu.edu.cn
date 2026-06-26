@@ -10,6 +10,7 @@
    transportmethod
    archiveusage
    transportskills
+   offlinemigration
    remoteaccessdata
    faq
    scidatausage
