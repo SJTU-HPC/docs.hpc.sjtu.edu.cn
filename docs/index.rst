@@ -41,14 +41,11 @@ The computations in this paper were run on the π 2.0 cluster supported by the C
 1. :doc:`quickstart/index`
 2. :doc:`system/index`
 3. :doc:`accounts/index`
-4. `密码 <accounts/index.html#id7>`_ 
-5. :doc:`login/index`
-6. :doc:`studio/rdp`
-7. :doc:`job/index`
-8. :doc:`app/index`
-9. :doc:`app/compilers_and_languages/gnu`
-10. :doc:`app/compilers_and_languages/intel`
-11. :doc:`faq/index`
+4. :doc:`login/index`
+5. :doc:`studio/rdp`
+6. :doc:`job/index`
+7. :doc:`app/index`
+8. :doc:`faq/index`
 
 注意事项
 ===================
