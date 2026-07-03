@@ -14,17 +14,15 @@
 
 \ `4. 软件安装 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id15>`__\
 
-\ `5. 收费和充值 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id18>`__\
+\ `5. 邮件支持 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id25>`__\
 
-\ `6. 邮件支持 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id25>`__\
+\ `6. 集群通知 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id26>`__\
 
-\ `7. 集群通知 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id26>`__\
+\ `7. 致谢模版 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id28>`__\
 
-\ `8. 致谢模版 <https://docs.hpc.sjtu.edu.cn/faq/index.html#id28>`__\
+\ `8. 医学院和附属医院申请 jAccount 账号 <https://docs.hpc.sjtu.edu.cn/faq/index.html#jaccount>`__\
 
-\ `9. 医学院和附属医院申请 jAccount 账号 <https://docs.hpc.sjtu.edu.cn/faq/index.html#jaccount>`__\
-
-\ `10. 如何重置 .bashrc 和 .bash_profile <https://docs.hpc.sjtu.edu.cn/faq/index.html#bashrc>`__\
+\ `9. 如何重置 .bashrc 和 .bash_profile <https://docs.hpc.sjtu.edu.cn/faq/index.html#bashrc>`__\
 
 
 0. π 2.0 集群名有什么含义？
@@ -212,53 +210,10 @@ sudo 就能在家目录中安装和使用软件，且使用sudo安装的软件�
 
 对于需要sudo 安装的商业软件，请参考 FAQ 4.2 由软件厂商工程师工程师联系我们指定安装方案。
 
-5. 收费和充值
------------------
-
-5.1 Q：如何收费？
-~~~~~~~~~~~~~~~~~
-
-**A：** 请发送邮件至 `hpc 邮箱 <mailto:hpc@sjtu.edu.cn>`__\ 咨询。
-
-5.2 Q: 如何缴费？
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**A：** 校内转账可在“我的数字交大”网页，或“交我算”APP里完成，具体操作请见：
-
-\ `计算服务费 校内经费转账说明 <https://net.sjtu.edu.cn/info/1244/2392.htm>`__\
-
-如有任何财务问题，请联系网络信息中心基础部杨老师，电话 34206060-8017，邮箱 yjqedith@sjtu.edu.cn
-
-
-5.3 Q：如何查看账户余额？
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**A：** 您可以使用主账号或子账号登录 \ `计费系统 <https://account.hpc.sjtu.edu.cn>`__\  查看。也可以使用账号负责人 jAccount 登录 \ `计算账单页面 <https://net.sjtu.edu.cn/wlfw/tyzd.htm>`__\。
-
-
-5.4 Q：财务办理充值，仍未到账
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**A：**
-关于充值未到账，可咨询网络信息中心基础部杨老师，电话 34206060-8017，邮箱 yjqedith@sjtu.edu.cn
-
-咨询时请提供：
-
-*  拟充入的 jAccount
-
-*  充值金额
-
-*  财务凭证号（财务入账后，财务网站页面会显示财务凭证号）
-
-5.5 Q：有没有机时奖励政策？
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-**A：** 目前暂无奖励政策。
-
-6. 邮件支持
+5. 邮件支持
 ----------------
 
-6.1 Q 向 `hpc 邮箱 <mailto:hpc@sjtu.edu.cn>`__ 发送的邮件多久才能收到回复？
+5.1 Q 向 `hpc 邮箱 <mailto:hpc@sjtu.edu.cn>`__ 发送的邮件多久才能收到回复？
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **A：** 根据邮件内容不同，下面是用户支持响应周期：  
@@ -274,7 +229,7 @@ sudo 就能在家目录中安装和使用软件，且使用sudo安装的软件�
 5. 编译不包含在 Spack 或自行开发的软件包：1~2周内。
 
 
-7. 集群通知
+6. 集群通知
 ----------------
 
 Q 如何及时获取集群通知？
@@ -283,7 +238,7 @@ Q 如何及时获取集群通知？
 **A：** 集群通知会实时发布在用户微信群。请发邮件 `hpc 邮箱 <mailto:hpc@sjtu.edu.cn>`__ 给我们，将为您添加进用户微信群。
 
 
-8. 致谢模版
+7. 致谢模版
 ----------------
 
 Q 如何在论文中致谢交大高性能计算？
@@ -296,14 +251,14 @@ Q 如何在论文中致谢交大高性能计算？
    （英文）The computations in this paper were run on the π 2.0 (or the Siyuan-1) cluster supported by the Center for High Performance Computing at Shanghai Jiao
 Tong University.
 
-9. 医学院和附属医院申请 jAccount 账号
+8. 医学院和附属医院申请 jAccount 账号
 -------------------------------------------
 
 **A：** 请至
 `附属医院账号申请及充值流程 <https://docs.hpc.sjtu.edu.cn/accounts/hospitalaccount.html>`__
 页面了解和办理。
 
-10. 如何重置 .bashrc 和 .bash_profile
+9. 如何重置 .bashrc 和 .bash_profile
 --------------------------------------------------
 
 **A：** 用户家目录下的 ``~/.bashrc`` 和 ``~/.bash_profile`` 记录bash shell配置，若配置不当可能会导致无法找到可执行文件、无法在Studio中启动RSession等问题，需要重置这两个配置文件的内容。
