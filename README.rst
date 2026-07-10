@@ -10,9 +10,9 @@ Sphinx是一个将rst文档编译为HTML、PDF、eBook等出版物的python包�
 
 我们推荐您使用预编译容器镜像构建本文档集合，包括一份简版手册、一份完整版手册和一个网站::
 
-  docker run --rm -it -v ${PWD}:/data sjtuhpc/texlive-sphinx:focal make -C tex all
-  docker run --rm -it -v ${PWD}:/data sjtuhpc/texlive-sphinx:focal make -C docs clean latexpdf
-  docker run --rm -it -v ${PWD}:/data sjtuhpc/texlive-sphinx:focal make -C docs clean html
+  docker run --rm -it -v ${PWD}:/data sjtuhpc/texlive-sphinx:latest make -C tex all
+  docker run --rm -it -v ${PWD}:/data sjtuhpc/texlive-sphinx:latest make -C docs clean latexpdf
+  docker run --rm -it -v ${PWD}:/data sjtuhpc/texlive-sphinx:latest make -C docs clean html
 
 预编译镜像的Dockerfile见 https://github.com/SJTU-HPC/texlive-sphinx 。
 
