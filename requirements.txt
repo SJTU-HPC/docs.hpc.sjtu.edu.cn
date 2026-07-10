@@ -13,7 +13,7 @@ pandas
 python-slugify[unidecode]
 recommonmark
 sphinx-copybutton
-sphinx>=2.0
+sphinx==8.2.3
 sphinx_markdown_tables
 sphinx-immaterial>=0.12.6
 Sphinx-Substitution-Extensions
