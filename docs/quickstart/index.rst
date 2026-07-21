@@ -79,23 +79,26 @@ GPU 作业请至 dgx2 队列或思源一号a100队列；
 
 测试题：https://f.kdocs.cn/ew/3aYIdZR9/
 
-参考视频：https://vshare.sjtu.edu.cn/play/26809b70229c549722c5afd0cf868f77
-
 
 可参阅的资料：
 
 a) 用户文档：https://docs.hpc.sjtu.edu.cn
 
-b) HPC 网站：https://hpc.sjtu.edu.cn
+b) 交我算AI助手：https://chat.hpc.sjtu.edu.cn
 
-c) 简短版使用手册（Cheat Sheet）：https://hpc.sjtu.edu.cn/Item/docs/Pi_GetStarted.pdf
+c) HPC 网站：https://hpc.sjtu.edu.cn
+
 
 参考教学视频
 =============
 
-a) `2022 春季用户培训之交我算简介 <https://vshare.sjtu.edu.cn/play/28ce02466c35836b7738fd60ce159289>`_ 
+a) `交我算简介及超算集群新手指导 <https://www.bilibili.com/video/BV1LZ2LBQEgV/>`_ 
 
-b) `2022 春季用户培训之交我算新手上路 <https://vshare.sjtu.edu.cn/play/8120ee2c8228e693ca78f0190b2e0e24>`_
+b) `交我算超算软件和模块管理 <https://www.bilibili.com/video/BV1jZ2LBQENf/>`_
+
+c) `交我算数据存储与管理 <https://www.bilibili.com/video/BV19A2jBEEdj/>`_
+
+d) `HPC Studio可视化平台 <https://www.bilibili.com/video/BV1GA2jBEEoi/>`_
 
 
 提交 Hello world 单节点作业
