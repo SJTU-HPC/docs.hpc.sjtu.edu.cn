@@ -103,8 +103,11 @@ Pi 2.0 和思源一号的用户级配置都位于 ``~/.config/opencode/opencode.
 
 .. code-block:: bash
 
+   # 加载集群部署的opencode
    module load opencode
+   # 进入开发项目目录
    cd /path/to/your/project
+   # 启动opencode
    opencode
 
 进入终端界面后输入 ``/models``，选择 ``sjtu-llm`` 下当前可用的模型。
@@ -156,7 +159,7 @@ Pi 2.0
    cd /path/to/your/project
    opencode
 
-在思源一号登录节点调用 ``opencode`` 时，集群提供的包装程序会申请调试资源，并在计算节点上启动 OpenCode。终端出现以下信息时，表示作业正在正常排队，请等待资源分配：
+在登录节点调用 ``opencode`` 时，集群提供的包装程序会申请调试资源，并在计算节点上启动 OpenCode。终端出现以下信息时，表示作业正在正常排队，请等待资源分配：
 
 .. code-block:: text
 
